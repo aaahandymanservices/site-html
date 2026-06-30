@@ -123,7 +123,7 @@
                 </div>
                 <div class="service-card bg-white p-8 rounded-3xl shadow">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🚿</div>
-                    <h3 class="text-2xl font-semibold mb-3">Minor Plumbing Repairs</h3>
+                    <h3 class="text-2xl font-semibold mb-3">Plumbing Repairs</h3>
                     <p class="text-gray-600">Faucets, showerheads, drains, and minor plumbing fixes.</p>
                 </div>
                 <div class="service-card bg-white p-8 rounded-3xl shadow">
@@ -133,8 +133,8 @@
                 </div>
                 <div class="service-card bg-white p-8 rounded-3xl shadow">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">💡</div>
-                    <h3 class="text-2xl font-semibold mb-3">Minor Electrical Services</h3>
-                    <p class="text-gray-600">Outlets, fixtures, ceiling fans, and safe minor electrical repairs. (No rewiring or box work)</p>
+                    <h3 class="text-2xl font-semibold mb-3">Electrical Services</h3>
+                    <p class="text-gray-600">Outlets, lighting, ceiling fans, and safe electrical repairs.</p>
                 </div>
                 <div class="service-card bg-white p-8 rounded-3xl shadow">
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🪵</div>
@@ -305,6 +305,27 @@
                             <input type="tel" name="phone" class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
                         </div>
                         <div>
+                            <label class="block text-sm uppercase tracking-widest mb-2">Service / Project Type</label>
+                            <div class="relative">
+                                <select name="service" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg text-white appearance-none cursor-pointer pr-12">
+                                    <option value="" disabled selected class="bg-gray-800 text-gray-400">Select a Service...</option>
+                                    <option value="Carpentry & Trim" class="bg-gray-800 text-white">Carpentry & Trim</option>
+                                    <option value="Doors & Installation" class="bg-gray-800 text-white">Doors & Installation</option>
+                                    <option value="Plumbing Repairs" class="bg-gray-800 text-white">Plumbing Repairs</option>
+                                    <option value="Drywall Work" class="bg-gray-800 text-white">Drywall Work</option>
+                                    <option value="Electrical Services" class="bg-gray-800 text-white">Electrical Services</option>
+                                    <option value="Flooring Solutions" class="bg-gray-800 text-white">Flooring Solutions</option>
+                                    <option value="Painting" class="bg-gray-800 text-white">Painting</option>
+                                    <option value="Decks & Fences" class="bg-gray-800 text-white">Decks & Fences</option>
+                                    <option value="Maintenance & Cleaning" class="bg-gray-800 text-white">Maintenance & Cleaning</option>
+                                    <option value="Other" class="bg-gray-800 text-white">Other (Specify in details below)</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-6 pointer-events-none text-gray-400">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
                             <label class="block text-sm uppercase tracking-widest mb-2">Message / Project Details</label>
                             <textarea name="message" rows="6" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-3xl focus:outline-none focus:border-red-500 text-lg resize-y"></textarea>
                         </div>
@@ -326,6 +347,11 @@
             </div>
             <p class="text-sm">&copy; 2026 AAA Handyman Services. All Rights Reserved. Locally serving Waterford & Oakland County, MI.</p>
             <p class="mt-2 text-xs">URL: <a href="https://aaahandyman.services" class="hover:text-white">aaahandyman.services</a></p>
+            <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
+                <a href="https://aaahandymanservices-privacy.netlify.app/" target="_blank" rel="noopener" class="hover:text-white transition">Privacy Policy</a>
+                <span class="text-gray-600">|</span>
+                <a href="https://aaahandymanservices-terms.netlify.app/" target="_blank" rel="noopener" class="hover:text-white transition">Terms of Service</a>
+            </div>
             <div class="mt-6 flex justify-center gap-6">
                 <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="text-3xl hover:text-red-500 transition"><i class="fab fa-facebook-f"></i></a>
             </div>
