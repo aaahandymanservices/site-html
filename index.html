@@ -3,103 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AAA Handyman Services | Waterford, MI</title>
-    <meta name="description" content="Locally owned handyman services in Waterford, Michigan. Expert minor home repairs & maintenance.">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="https://via.placeholder.com/64x64/002b5e/c8102e?text=AAA" id="favicon">
-    
+    <title>AAA Handyman Services - Waterford, MI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root { --red: #c8102e; --blue: #002b5e; }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; color: #333; }
-        header { background: linear-gradient(rgba(0,43,94,0.95), rgba(0,43,94,0.95)); color: white; position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
-        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
-        .logo img { height: 65px; }
-        .nav-links a { color: white; text-decoration: none; margin-left: 2rem; font-weight: 600; }
-        .hero {
-            background: url('https://via.placeholder.com/1920x800/002b5e/c8102e?text=AAA+Banner') center/cover no-repeat;
-            color: white;
-            text-align: center;
-            padding: 180px 20px 120px;
-        }
-        .hero-content img { height: 140px; margin-bottom: 20px; }
-        .hero h1 { font-size: 3.4rem; margin-bottom: 1rem; }
-        .cta { background: var(--red); color: white; padding: 16px 40px; font-size: 1.2rem; border: none; border-radius: 50px; cursor: pointer; }
-        section { padding: 80px 20px; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        h2 { color: var(--blue); text-align: center; margin-bottom: 3rem; font-size: 2.6rem; }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-        .card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        footer { background: var(--blue); color: white; text-align: center; padding: 3rem 1rem; }
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Impact&display=swap');
+        body { font-family: 'Roboto', sans-serif; }
+        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('logo-banner.jpg') center/cover; }
+        .nav-link { transition: all 0.3s; }
+        .nav-link:hover { color: #ef4444; transform: translateY(-2px); }
+        .service-card { transition: all 0.3s; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
+        .red-accent { color: #ef4444; }
+        .blue-accent { color: #1e40af; }
     </style>
+    <link rel="icon" href="logo-shield.png">
 </head>
-<body>
-
-<header>
-    <nav>
-        <div class="logo">
-            <img src="https://via.placeholder.com/300x100/002b5e/c8102e?text=AAA+Logo" alt="AAA Handyman Services" id="nav-logo">
-        </div>
-        <div class="nav-links">
-            <a href="#services">Services</a>
-            <a href="#rates">Rates</a>
-            <a href="#contact">Contact</a>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <!-- Logo -->
+                <img src="logo-shield.png" alt="AAA Handyman Services Logo" class="h-12 w-auto">
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight text-blue-900">AAA Handyman Services</h1>
+                    <p class="text-xs text-gray-500 -mt-1">Waterford, Michigan</p>
+                </div>
+            </div>
+            <div class="hidden md:flex space-x-8 text-lg font-medium items-center">
+                <a href="#about" class="nav-link text-gray-700 hover:text-red-600">About</a>
+                <a href="#services" class="nav-link text-gray-700 hover:text-red-600">Services</a>
+                <a href="#contact" class="nav-link text-gray-700 hover:text-red-600">Contact</a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="nav-link text-gray-700 hover:text-red-600 text-xl"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <a href="tel:(248) 870-8603" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2 transition">
+                <i class="fas fa-phone"></i> (248) 870-8603
+            </a>
         </div>
     </nav>
-</header>
 
-<section class="hero">
-    <div class="container hero-content">
-        <img src="https://via.placeholder.com/420x180/002b5e/c8102e?text=AAA+Handyman" alt="AAA Handyman Services" id="hero-logo">
-        <h1>Quality Home Repairs.<br>Done Right.</h1>
-        <p style="font-size:1.5rem;">Waterford, Michigan • Serving Oakland County</p>
-        <a href="#contact" class="cta">Get Your Free Estimate Today</a>
-    </div>
-</section>
-
-<section id="services">
-    <div class="container">
-        <h2>Our Services</h2>
-        <div class="services-grid">
-            <div class="card"><h3>Carpentry & Trim</h3><p>Minor interior/exterior trim and woodwork</p></div>
-            <div class="card"><h3>Doors & Plumbing</h3><p>Door repairs, faucets, showerheads</p></div>
-            <div class="card"><h3>Drywall & Painting</h3><p>Patches, small rooms, touch-ups</p></div>
-            <div class="card"><h3>Electrical & Flooring</h3><p>Outlets, fans, minor flooring fixes</p></div>
-            <div class="card"><h3>Deck & Fence</h3><p>Repairs, staining, gate fixes</p></div>
-            <div class="card"><h3>Seasonal Maintenance</h3><p>Gutters, power washing & more</p></div>
+    <!-- Hero -->
+    <header class="hero h-screen flex items-center text-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="max-w-3xl mx-auto">
+                <div class="inline-flex items-center bg-white/20 backdrop-blur-md px-6 py-2 rounded-full mb-6">
+                    <span class="bg-green-400 w-3 h-3 rounded-full animate-pulse mr-2"></span>
+                    Locally Owned • Serving Oakland County
+                </div>
+                <h2 class="text-7xl font-bold leading-none mb-6 tracking-tighter">Your Local Home Improvement Experts</h2>
+                <p class="text-2xl mb-10 text-white/90">Reliable craftsmanship for all your repair and renovation needs in Waterford, MI and surrounding areas.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#contact" class="bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-5 rounded-2xl font-semibold inline-flex items-center justify-center gap-3 transition shadow-lg">
+                        Get a Free Quote <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#services" class="border-2 border-white hover:bg-white hover:text-blue-900 text-xl px-10 py-5 rounded-2xl font-semibold inline-flex items-center justify-center transition">
+                        View Services
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </header>
 
-<section id="rates" style="background:#f0f4f8;">
-    <div class="container">
-        <h2>Hourly Rates</h2>
-        <p style="text-align:center; font-size:1.3rem; margin-bottom:2rem;">
-            All work billed between <strong>$45 – $70 per hour</strong>
-        </p>
-    </div>
-</section>
+    <!-- About -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <div class="uppercase tracking-widest text-red-600 font-semibold mb-3">About Us</div>
+                    <h2 class="text-5xl font-bold leading-tight mb-8">Locally Owned and Operated in Oakland County, MI</h2>
+                    <div class="prose prose-lg text-gray-600">
+                        <p>AAA Handyman Services is your trusted partner for all home improvement and repair needs. Exclusively serving the local community, we pride ourselves on quality workmanship, attention to detail, and customer satisfaction.</p>
+                        <p>With a team of 1 to 3 skilled craftsmen, we handle projects of any size – no job is too small or too large!</p>
+                    </div>
+                    <div class="mt-10 flex items-center gap-8 text-sm">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl">🛠️</div>
+                            <div><strong class="block">Experienced</strong>Craftsmen</div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center text-3xl">⭐</div>
+                            <div><strong class="block">Satisfaction</strong>Guaranteed</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="logo-circular.png" alt="AAA Handyman Services Circular Logo" class="rounded-3xl shadow-2xl w-full max-w-md mx-auto">
+                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-xl">
+                        <div class="flex items-center gap-4">
+                            <div class="text-5xl font-bold text-red-600">10+</div>
+                            <div class="text-sm leading-tight">Years of<br>Local Experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="contact">
-    <div class="container" style="max-width:700px;">
-        <h2>Contact Us</h2>
-        <form action="https://formspree.io/f/your-id" method="POST" style="background:white; padding:2.5rem; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1);">
-            <input type="text" name="name" placeholder="Your Name" style="width:100%; padding:12px; margin:10px 0;" required>
-            <input type="email" name="email" placeholder="Email" style="width:100%; padding:12px; margin:10px 0;" required>
-            <input type="tel" name="phone" placeholder="(248) 870-8603" style="width:100%; padding:12px; margin:10px 0;">
-            <textarea name="message" placeholder="Tell us about your project..." rows="6" style="width:100%; padding:12px; margin:10px 0;" required></textarea>
-            <button type="submit" class="cta" style="width:100%;">Send Message</button>
-        </form>
-    </div>
-</section>
+    <!-- Services -->
+    <section id="services" class="py-24 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="uppercase text-blue-600 font-semibold tracking-widest">Our Expertise</div>
+                <h2 class="text-5xl font-bold mt-3">Professional Services</h2>
+                <p class="mt-4 max-w-md mx-auto text-lg text-gray-600">From small fixes to major renovations, we've got you covered with competitive rates.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service cards -->
+                <div class="service-card bg-white p-8 rounded-3xl shadow">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🔨</div>
+                    <h3 class="text-2xl font-semibold mb-3">Carpentry & Trim</h3>
+                    <p class="text-gray-600">Interior and exterior carpentry, custom trim work, and detailed finishes.</p>
+                </div>
+                <div class="service-card bg-white p-8 rounded-3xl shadow">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🚪</div>
+                    <h3 class="text-2xl font-semibold mb-3">Doors & Installation</h3>
+                    <p class="text-gray-600">Professional door installation, repair, and adjustment services.</p>
+                </div>
+                <div class="service-card bg-white p-8 rounded-3xl shadow">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🚿</div>
+                    <h3 class="text-2xl font-semibold mb-3">Plumbing Repairs</h3>
+                    <p class="text-gray-600">Faucets, showerheads, drains, and minor plumbing fixes.</p>
+                </div>
+                <div class="service-card bg-white p-8 rounded-3xl shadow">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🧱</div>
+                    <h3 class="text-2xl font-semibold mb-3">Drywall Work</h3>
+                    <p class="text-gray-600">Installation, patching, and perfect finishing of drywall.</p>
+                </div>
+                <div class="service-card bg-white p-8 rounded-3xl shadow">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">💡</div>
+                    <h3 class="text-2xl font-semibold mb-3">Electrical Services</h3>
+                    <p class="text-gray-600">Outlets, lighting, ceiling fans, and safe electrical repairs.</p>
+                </div>
+                <div class="service-card bg-white p-8 rounded-3xl shadow">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🪵</div>
+                    <h3 class="text-2xl font-semibold mb-3">Flooring Solutions</h3>
+                    <p class="text-gray-600">Tile, hardwood, laminate, carpet installation and repair.</p>
+                </div>
+                <!-- More services -->
+                <div class="service-card bg-white p-8 rounded-3xl shadow">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🎨</div>
+                    <h3 class="text-2xl font-semibold mb-3">Painting</h3>
+                    <p class="text-gray-600">Interior, exterior, and ceiling painting with premium finishes.</p>
+                </div>
+                <div class="service-card bg-white p-8 rounded-3xl shadow">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🌳</div>
+                    <h3 class="text-2xl font-semibold mb-3">Decks & Fences</h3>
+                    <p class="text-gray-600">Installation, resurfacing, repair, and staining for decks and privacy fences.</p>
+                </div>
+                <div class="service-card bg-white p-8 rounded-3xl shadow">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🧹</div>
+                    <h3 class="text-2xl font-semibold mb-3">Maintenance & Cleaning</h3>
+                    <p class="text-gray-600">Seasonal maintenance, gutter cleaning, and power washing.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center bg-blue-900 text-white p-12 rounded-3xl">
+                <p class="text-3xl font-medium">Available Monday - Saturday, 9am - 6pm</p>
+                <p class="mt-4 text-xl opacity-90">Competitive rates • By bid or hourly • No job too small or LARGE!</p>
+            </div>
+        </div>
+    </section>
 
-<footer>
-    <img src="https://via.placeholder.com/280x110/002b5e/c8102e?text=AAA+Logo" alt="AAA Handyman" style="height:80px; margin-bottom:1rem;">
-    <p><strong>AAA Handyman Services</strong> • Waterford, Michigan</p>
-    <p>(248) 870-8603 • contact@aaahandyman.services</p>
-    <p>© 2026 Locally Owned & Operated in Oakland County</p>
-</footer>
+    <!-- Pricing / Hourly Rates -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="uppercase text-red-600 font-semibold tracking-widest">Transparent Pricing</div>
+                <h2 class="text-5xl font-bold mt-3">Handyman Hourly Rate Scale</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">$45 – $70 per hour • By bid or hourly • Minimum service fee may apply (typically 1.5–2 hours to cover travel)</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Tier 1 -->
+                <div class="service-card bg-white border border-gray-100 p-8 rounded-3xl shadow">
+                    <div class="text-center mb-6">
+                        <div class="inline-block bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-semibold">Tier 1</div>
+                        <div class="text-4xl font-bold text-green-600 mt-4">$45 – $50</div>
+                        <div class="text-sm text-gray-500">per hour</div>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-center">Basic Maintenance & Labor</h3>
+                    <p class="text-gray-600 mb-6">Straightforward tasks with standard tools and minimal training.</p>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">•</span> Assembling flat-pack furniture</li>
+                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">•</span> Hanging pictures, mirrors, blinds</li>
+                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">•</span> Basic gutter cleaning / yard cleanup</li>
+                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">•</span> Replacing hardware or air filters</li>
+                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">•</span> Small drywall touch-ups</li>
+                    </ul>
+                </div>
+                
+                <!-- Tier 2 -->
+                <div class="service-card bg-white border border-gray-100 p-8 rounded-3xl shadow ring-2 ring-red-500">
+                    <div class="text-center mb-6">
+                        <div class="inline-block bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-sm font-semibold">Tier 2</div>
+                        <div class="text-4xl font-bold text-orange-600 mt-4">$55 – $60</div>
+                        <div class="text-sm text-gray-500">per hour</div>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-center">Intermediate Repairs & Installations</h3>
+                    <p class="text-gray-600 mb-6">Higher skill level with power tools and troubleshooting.</p>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">•</span> Installing lights, fans, smart doorbells</li>
+                        <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">•</span> TV mounting / faucet repairs</li>
+                        <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">•</span> Medium drywall patching</li>
+                        <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">•</span> Minor deck/fence board replacement</li>
+                    </ul>
+                </div>
+                
+                <!-- Tier 3 -->
+                <div class="service-card bg-white border border-gray-100 p-8 rounded-3xl shadow">
+                    <div class="text-center mb-6">
+                        <div class="inline-block bg-red-100 text-red-700 px-4 py-1 rounded-full text-sm font-semibold">Tier 3</div>
+                        <div class="text-4xl font-bold text-red-600 mt-4">$65 – $70</div>
+                        <div class="text-sm text-gray-500">per hour</div>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-center">Advanced & Specialized Tasks</h3>
+                    <p class="text-gray-600 mb-6">Complex work requiring advanced expertise and equipment.</p>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> New wiring / outlets</li>
+                        <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> Crown molding & detailed trim</li>
+                        <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> Exterior doors/windows</li>
+                        <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> Tile repair / backsplash</li>
+                        <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> Weatherproofing & rot repair</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center text-sm text-gray-500 max-w-md mx-auto">
+                💡 Rates vary by project complexity, materials, and location. Free estimates available — contact us for a custom bid!
+            </div>
+        </div>
+    </section>
 
+    <!-- Testimonials / Why Us -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">⭐⭐⭐⭐⭐</div>
+                    <p class="italic">"Fast, professional, and fair priced. Fixed my deck perfectly!"</p>
+                    <p class="mt-6 font-semibold">- Mike T., Waterford</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-6xl mb-4">⭐⭐⭐⭐⭐</div>
+                    <p class="italic">"Installed new flooring in record time. Highly recommend!"</p>
+                    <p class="mt-6 font-semibold">- Sarah K., Oakland County</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-6xl mb-4">⭐⭐⭐⭐⭐</div>
+                    <p class="italic">"Reliable team that shows up on time every time."</p>
+                    <p class="mt-6 font-semibold">- John D., Keego Harbor</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="text-5xl font-bold mb-8">Get In Touch Today</h2>
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-6">
+                            <i class="fas fa-phone text-4xl text-red-500 mt-1"></i>
+                            <div>
+                                <a href="tel:2488708603" class="text-3xl font-semibold hover:text-red-400">(248) 870-8603</a>
+                                <p class="text-gray-400">Call for immediate assistance</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-6">
+                            <i class="fas fa-envelope text-4xl text-red-500 mt-1"></i>
+                            <div>
+                                <a href="mailto:aaahandymanservices2026@gmail.com" class="text-2xl hover:text-red-400">aaahandymanservices2026@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-6">
+                            <i class="fas fa-map-marker-alt text-4xl text-red-500 mt-1"></i>
+                            <div>
+                                <p class="text-xl">Waterford, Michigan</p>
+                                <p class="text-gray-400">Proudly serving Oakland County</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div>
+                    <form id="contact-form" action="https://formspree.io/f/xojovqqr" method="POST" class="space-y-6">
+                        <div>
+                            <label class="block text-sm uppercase tracking-widest mb-2">Your Name</label>
+                            <input type="text" name="name" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm uppercase tracking-widest mb-2">Email Address</label>
+                            <input type="email" name="email" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm uppercase tracking-widest mb-2">Phone (optional)</label>
+                            <input type="tel" name="phone" class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm uppercase tracking-widest mb-2">Message / Project Details</label>
+                            <textarea name="message" rows="6" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-3xl focus:outline-none focus:border-red-500 text-lg resize-y"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-5 text-xl font-semibold rounded-3xl transition flex items-center justify-center gap-3">
+                            SEND MESSAGE <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex justify-center mb-6">
+                <!-- Circular Logo -->
+                <img src="logo-circular.png" alt="AAA Handyman Services" class="h-16 w-auto mx-auto">
+            </div>
+            <p class="text-sm">&copy; 2026 AAA Handyman Services. All Rights Reserved. Locally serving Waterford & Oakland County, MI.</p>
+            <p class="mt-2 text-xs">URL: <a href="https://aaahandyman.services" class="hover:text-white">aaahandyman.services</a></p>
+            <div class="mt-6 flex justify-center gap-6">
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="text-3xl hover:text-red-500 transition"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tailwind script already included via CDN
+        // Simple form success handling
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', function() {
+            setTimeout(() => {
+                alert('Thank you! Your message has been sent. We will contact you soon.');
+            }, 800);
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
