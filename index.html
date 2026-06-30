@@ -4,108 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AAA Handyman Services | Waterford, MI</title>
-    <meta name="description" content="Locally owned handyman services in Waterford, Michigan. Expert minor home repairs, maintenance, and small improvements in Oakland County.">
+    <meta name="description" content="Locally owned handyman services in Waterford, Michigan. Expert minor home repairs & maintenance.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://via.placeholder.com/64x64/002b5e/c8102e?text=AAA" id="favicon">
+    
     <style>
-        :root {
-            --red: #c8102e;
-            --blue: #002b5e;
-            --light: #f8f9fa;
-        }
+        :root { --red: #c8102e; --blue: #002b5e; }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-        header {
-            background: linear-gradient(rgba(0,43,94,0.95), rgba(0,43,94,0.95));
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 1rem 0;
-        }
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-        .logo { font-size: 1.8rem; font-weight: bold; }
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            margin-left: 2rem;
-            font-weight: 600;
-        }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; color: #333; }
+        header { background: linear-gradient(rgba(0,43,94,0.95), rgba(0,43,94,0.95)); color: white; position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo img { height: 65px; }
+        .nav-links a { color: white; text-decoration: none; margin-left: 2rem; font-weight: 600; }
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), #002b5e;
+            background: url('https://via.placeholder.com/1920x800/002b5e/c8102e?text=AAA+Banner') center/cover no-repeat;
             color: white;
             text-align: center;
-            padding: 160px 20px 100px;
+            padding: 180px 20px 120px;
         }
-        .hero h1 {
-            font-size: 3.2rem;
-            margin-bottom: 1rem;
-        }
-        .hero p { font-size: 1.4rem; max-width: 700px; margin: 0 auto 2rem; }
-        .cta {
-            background: var(--red);
-            color: white;
-            padding: 16px 40px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-        }
+        .hero-content img { height: 140px; margin-bottom: 20px; }
+        .hero h1 { font-size: 3.4rem; margin-bottom: 1rem; }
+        .cta { background: var(--red); color: white; padding: 16px 40px; font-size: 1.2rem; border: none; border-radius: 50px; cursor: pointer; }
         section { padding: 80px 20px; }
         .container { max-width: 1200px; margin: 0 auto; }
         h2 { color: var(--blue); text-align: center; margin-bottom: 3rem; font-size: 2.6rem; }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .rates { background: #f0f4f8; }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-        }
-        th, td {
-            padding: 14px 18px;
-            border-bottom: 1px solid #ddd;
-        }
-        th { background: var(--blue); color: white; }
-        .contact-form {
-            max-width: 700px;
-            margin: 0 auto;
-            background: white;
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-        footer {
-            background: var(--blue);
-            color: white;
-            text-align: center;
-            padding: 3rem 1rem;
-        }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        footer { background: var(--blue); color: white; text-align: center; padding: 3rem 1rem; }
     </style>
 </head>
 <body>
 
 <header>
     <nav>
-        <div class="logo">AAA Handyman Services</div>
+        <div class="logo">
+            <img src="https://via.placeholder.com/300x100/002b5e/c8102e?text=AAA+Logo" alt="AAA Handyman Services" id="nav-logo">
+        </div>
         <div class="nav-links">
             <a href="#services">Services</a>
             <a href="#rates">Rates</a>
@@ -115,74 +50,55 @@
 </header>
 
 <section class="hero">
-    <div class="container">
+    <div class="container hero-content">
+        <img src="https://via.placeholder.com/420x180/002b5e/c8102e?text=AAA+Handyman" alt="AAA Handyman Services" id="hero-logo">
         <h1>Quality Home Repairs.<br>Done Right.</h1>
-        <p>Locally owned in Waterford, Michigan • Serving all of Oakland County</p>
-        <p><strong>Mon–Fri 9am–6pm • Sat 10am–5pm • 24/7 Emergency Service</strong></p>
-        <a href="#contact" class="cta">Get Your Free Estimate</a>
+        <p style="font-size:1.5rem;">Waterford, Michigan • Serving Oakland County</p>
+        <a href="#contact" class="cta">Get Your Free Estimate Today</a>
     </div>
 </section>
 
-<section id="about">
+<section id="services">
     <div class="container">
-        <h2>About AAA Handyman Services</h2>
-        <p style="font-size:1.15rem; max-width:800px; margin:0 auto; text-align:center;">
-            Locally owned and independently operated in Oakland County, Michigan. 
-            We specialize in minor home repairs, maintenance, and small improvement projects with 1–2 skilled craftsmen.
-        </p>
-    </div>
-</section>
-
-<section id="services" style="background:#f8f9fa;">
-    <div class="container">
-        <h2>Expert Services</h2>
+        <h2>Our Services</h2>
         <div class="services-grid">
-            <div class="card"><h3>Carpentry & Trim</h3><p>Small interior/exterior trim, baseboards, minor woodwork</p></div>
-            <div class="card"><h3>Doors</h3><p>Hanging, hinge repair, alignment, minor door fixes</p></div>
-            <div class="card"><h3>Minor Plumbing</h3><p>Faucets, showerheads, small leaks (no major systems)</p></div>
-            <div class="card"><h3>Drywall</h3><p>Patches, cracks, minor water damage repair</p></div>
-            <div class="card"><h3>Minor Electrical</h3><p>Outlets, switches, ceiling fans, light fixtures</p></div>
-            <div class="card"><h3>Flooring & Painting</h3><p>Minor repairs, accent walls, trim touch-ups</p></div>
-            <div class="card"><h3>Deck & Fence Repairs</h3><p>Board replacement, railings, gates, staining</p></div>
-            <div class="card"><h3>Seasonal Maintenance</h3><p>Gutters, power washing, general property care</p></div>
+            <div class="card"><h3>Carpentry & Trim</h3><p>Minor interior/exterior trim and woodwork</p></div>
+            <div class="card"><h3>Doors & Plumbing</h3><p>Door repairs, faucets, showerheads</p></div>
+            <div class="card"><h3>Drywall & Painting</h3><p>Patches, small rooms, touch-ups</p></div>
+            <div class="card"><h3>Electrical & Flooring</h3><p>Outlets, fans, minor flooring fixes</p></div>
+            <div class="card"><h3>Deck & Fence</h3><p>Repairs, staining, gate fixes</p></div>
+            <div class="card"><h3>Seasonal Maintenance</h3><p>Gutters, power washing & more</p></div>
         </div>
     </div>
 </section>
 
-<section id="rates" class="rates">
+<section id="rates" style="background:#f0f4f8;">
     <div class="container">
-        <h2>Our Rates</h2>
-        <table>
-            <tr><th>Difficulty</th><th>Examples</th><th>Hourly Rate</th></tr>
-            <tr><td>Easy</td><td>Basic maintenance, small fixes</td><td>$45 – $52/hr</td></tr>
-            <tr><td>Medium</td><td>Standard repairs & installations</td><td>$53 – $62/hr</td></tr>
-            <tr><td>Complex</td><td>Advanced carpentry, skilled tasks</td><td>$63 – $70/hr</td></tr>
-        </table>
-        <p style="text-align:center; font-size:1.1rem;">
-            <strong>Minimum charge: 1 hour</strong> • Materials extra • Fixed bids available for larger jobs
+        <h2>Hourly Rates</h2>
+        <p style="text-align:center; font-size:1.3rem; margin-bottom:2rem;">
+            All work billed between <strong>$45 – $70 per hour</strong>
         </p>
     </div>
 </section>
 
 <section id="contact">
-    <div class="container">
-        <h2>Request an Estimate</h2>
-        <div class="contact-form">
-            <form action="https://formspree.io/f/your-id" method="POST">
-                <input type="text" name="name" placeholder="Name" style="width:100%; padding:12px; margin:10px 0;" required>
-                <input type="email" name="email" placeholder="Email" style="width:100%; padding:12px; margin:10px 0;" required>
-                <input type="tel" name="phone" placeholder="Phone" style="width:100%; padding:12px; margin:10px 0;">
-                <textarea name="message" placeholder="Describe your project..." rows="6" style="width:100%; padding:12px; margin:10px 0;" required></textarea>
-                <button type="submit" class="cta" style="width:100%;">Send Message & Get Estimate</button>
-            </form>
-        </div>
+    <div class="container" style="max-width:700px;">
+        <h2>Contact Us</h2>
+        <form action="https://formspree.io/f/your-id" method="POST" style="background:white; padding:2.5rem; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1);">
+            <input type="text" name="name" placeholder="Your Name" style="width:100%; padding:12px; margin:10px 0;" required>
+            <input type="email" name="email" placeholder="Email" style="width:100%; padding:12px; margin:10px 0;" required>
+            <input type="tel" name="phone" placeholder="(248) 870-8603" style="width:100%; padding:12px; margin:10px 0;">
+            <textarea name="message" placeholder="Tell us about your project..." rows="6" style="width:100%; padding:12px; margin:10px 0;" required></textarea>
+            <button type="submit" class="cta" style="width:100%;">Send Message</button>
+        </form>
     </div>
 </section>
 
 <footer>
-    <p><strong>AAA Handyman Services</strong> • Waterford, Michigan • Oakland County</p>
+    <img src="https://via.placeholder.com/280x110/002b5e/c8102e?text=AAA+Logo" alt="AAA Handyman" style="height:80px; margin-bottom:1rem;">
+    <p><strong>AAA Handyman Services</strong> • Waterford, Michigan</p>
     <p>(248) 870-8603 • contact@aaahandyman.services</p>
-    <p>© 2026 • Locally Owned & Operated</p>
+    <p>© 2026 Locally Owned & Operated in Oakland County</p>
 </footer>
 
 </body>
