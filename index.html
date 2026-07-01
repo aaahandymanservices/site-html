@@ -14,8 +14,6 @@
         .nav-link:hover { color: #ef4444; transform: translateY(-2px); }
         .service-card { transition: all 0.3s; }
         .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
-        .red-accent { color: #ef4444; }
-        .blue-accent { color: #1e40af; }
     </style>
     <link rel="icon" href="logo-shield.png">
 </head>
@@ -151,18 +149,18 @@
                 <div class="service-card bg-white p-8 rounded-3xl shadow">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">💡</div>
                     <h3 class="text-2xl font-semibold mb-3">Minor Electrical Services</h3>
-                    <p class="text-gray-600">Outlets, switches, covers, lights, and ceiling fans. Safe, updates and repairs. NO REWIRING OR BREAKER BOX WORK</p>
+                    <p class="text-gray-600">Outlets, switches, covers, lights, and ceiling fans. Safe updates and repairs. NO REWIRING OR BREAKER BOX WORK</p>
                 </div>
                 <div class="service-card bg-white p-8 rounded-3xl shadow">
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🪵</div>
                     <h3 class="text-2xl font-semibold mb-3">Flooring Solutions</h3>
-                    <p class="text-gray-600">Replacement, and repair for tile, hardwood, Pergo, laminate, and carpet. Beautiful results that last.</p>
+                    <p class="text-gray-600">Replacement and repair for tile, hardwood, Pergo, laminate, and carpet. Beautiful results that last.</p>
                 </div>
                 <!-- More services -->
                 <div class="service-card bg-white p-8 rounded-3xl shadow">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🎨</div>
                     <h3 class="text-2xl font-semibold mb-3">Painting</h3>
-                    <p class="text-gray-600">Replacement, and repair for tile, hardwood, Pergo, laminate, and carpet. Beautiful results that last.</p>
+                    <p class="text-gray-600">Professional interior and exterior painting. Crisp edges, smooth finishes, and meticulous prep work to refresh and protect your home.</p>
                 </div>
                 <div class="service-card bg-white p-8 rounded-3xl shadow">
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🌳</div>
@@ -177,12 +175,12 @@
                 <div class="service-card bg-white p-8 rounded-3xl shadow md:col-span-2 lg:col-span-1 lg:col-start-2">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🔨</div>
                     <h3 class="text-2xl font-semibold mb-3 text-red-600">24/7 Emergency Services Available</h3>
-                    <p class="text-grey-600">Covers urgent issues like major leaks, broken doors/windows compromising security, electrical hazards, etc. Urgent repairs and assistance outside of normal business hours.<br>•
-Priority response & dispatch</br>
-<br>•
-Available 24 hours / 7 days a week</br>
-<br>•
-Plumbing, electrical & structural emergencies</br></p>
+                    <p class="text-gray-600 mb-4">Urgent repairs and assistance outside of normal business hours. Covers urgent issues like major leaks, broken doors/windows compromising security, and electrical hazards.</p>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> Priority response & dispatch</li>
+                        <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> Available 24 hours / 7 days a week</li>
+                        <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> Plumbing, electrical & structural emergencies</li>
+                    </ul>
                 </div>
             </div>
             
@@ -336,7 +334,15 @@ Plumbing, electrical & structural emergencies</br></p>
                 
                 <!-- Contact Form -->
                 <div>
-                    <form id="contact-form" action="https://formspree.io/f/xojovqqr" method="POST" class="space-y-6">
+                    <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
+                        <!-- Hidden form-name input for AJAX/Netlify Form detection -->
+                        <input type="hidden" name="form-name" value="contact" />
+                        
+                        <!-- Honeypot Field to prevent spam -->
+                        <p class="hidden">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+
                         <div>
                             <label class="block text-sm uppercase tracking-widest mb-2">Your Name</label>
                             <input type="text" name="name" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
@@ -405,13 +411,30 @@ Plumbing, electrical & structural emergencies</br></p>
 
     <script>
         // Tailwind script already included via CDN
-        // Simple form success handling
+        // Handle form submission via Netlify Forms (AJAX)
         const form = document.getElementById('contact-form');
         if (form) {
-            form.addEventListener('submit', function() {
-                setTimeout(() => {
-                    alert('Thank you! Your message has been sent. We will contact you soon.');
-                }, 800);
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                
+                fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Thank you! Your message has been sent. We will contact you soon.');
+                        form.reset();
+                    } else {
+                        alert('Oops! There was a problem submitting your form. Please try calling or emailing us directly.');
+                    }
+                })
+                .catch(error => {
+                    alert('Oops! There was a problem submitting your form. Please try calling or emailing us directly.');
+                });
             });
         }
         
