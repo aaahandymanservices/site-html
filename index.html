@@ -22,42 +22,57 @@
 <body class="bg-gray-50 text-gray-900">
     <!-- Navbar -->
     <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 sm:py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <!-- Logo -->
-                <img src="logo-circular.png" alt="AAA Handyman Services Logo" class="h-12 w-12 rounded-full object-cover">
+                <img src="logo-circular.png" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover">
                 <div>
-                    <h1 class="text-3xl font-bold tracking-tight text-blue-900">AAA Handyman Services</h1>
-                    <p class="text-xs text-gray-500 -mt-1">Oakland County Michigan</p>
+                    <h1 class="text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-blue-900 leading-tight">AAA Handyman Services</h1>
+                    <p class="text-[10px] sm:text-xs text-gray-500">Oakland County Michigan</p>
                 </div>
             </div>
+            <!-- Desktop Nav Links -->
             <div class="hidden md:flex space-x-8 text-lg font-medium items-center">
                 <a href="#about" class="nav-link text-gray-700 hover:text-red-600">About</a>
                 <a href="#services" class="nav-link text-gray-700 hover:text-red-600">Services</a>
                 <a href="#contact" class="nav-link text-gray-700 hover:text-red-600">Contact</a>
                 <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="nav-link text-gray-700 hover:text-red-600 text-xl"><i class="fab fa-facebook-f"></i></a>
             </div>
-            <a href="tel:(248) 870-8603" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2 transition">
-                <i class="fas fa-phone"></i> (248) 870-8603
-            </a>
+            <!-- Nav Action Buttons -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <a href="tel:(248) 870-8603" class="bg-red-600 hover:bg-red-700 text-white p-3 sm:px-6 sm:py-3 rounded-full font-semibold flex items-center justify-center gap-2 transition" title="Call Us">
+                    <i class="fas fa-phone"></i> <span class="hidden sm:inline">(248) 870-8603</span>
+                </a>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
+                    <i class="fas fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-4 shadow-inner">
+            <a href="#about" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">About</a>
+            <a href="#services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
+            <a href="#contact" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Contact</a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1"><i class="fab fa-facebook-f mr-2"></i>Facebook Page</a>
         </div>
     </nav>
 
     <!-- Hero -->
-    <header class="hero h-screen flex items-center text-white">
+    <header class="hero min-h-screen md:h-screen py-20 md:py-0 flex items-center text-white">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <div class="max-w-3xl mx-auto">
-                <div class="inline-flex items-center bg-white/20 backdrop-blur-md px-6 py-2 rounded-full mb-6">
-                    <span class="bg-green-400 w-3 h-3 rounded-full animate-pulse mr-2"></span>
+                <div class="inline-flex items-center bg-white/20 backdrop-blur-md px-4 py-1.5 sm:px-6 sm:py-2 rounded-full mb-6 text-sm sm:text-base">
+                    <span class="bg-green-400 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full animate-pulse mr-2"></span>
                     Locally Owned • Serving Oakland County
                 </div>
-                <h2 class="text-7xl font-bold leading-none mb-6 tracking-tighter">Your Local Home Improvement Experts</h2>
-                <p class="text-2xl mb-10 text-white/90">Reliable craftsmanship for all your repair and renovation needs in Oakland County, MI and select surrounding areas.</p>
+                <h2 class="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight md:leading-none mb-6 tracking-tighter">Your Local Home Improvement Experts</h2>
+                <p class="text-lg sm:text-xl md:text-2xl mb-10 text-white/90">Reliable craftsmanship for all your repair and renovation needs in Oakland County, MI and select surrounding areas.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#contact" class="bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-5 rounded-2xl font-semibold inline-flex items-center justify-center gap-3 transition shadow-lg">
+                    <a href="#contact" class="bg-red-600 hover:bg-red-700 text-white text-lg sm:text-xl px-6 py-4 sm:px-10 sm:py-5 rounded-2xl font-semibold inline-flex items-center justify-center gap-3 transition shadow-lg">
                         Get a Free Quote <i class="fas fa-arrow-right"></i>
                     </a>
-                    <a href="#services" class="border-2 border-white hover:bg-white hover:text-blue-900 text-xl px-10 py-5 rounded-2xl font-semibold inline-flex items-center justify-center transition">
+                    <a href="#services" class="border-2 border-white hover:bg-white hover:text-blue-900 text-lg sm:text-xl px-6 py-4 sm:px-10 sm:py-5 rounded-2xl font-semibold inline-flex items-center justify-center transition">
                         View Services
                     </a>
                 </div>
@@ -66,17 +81,17 @@
     </header>
 
     <!-- About -->
-    <section id="about" class="py-24 bg-white">
+    <section id="about" class="py-16 sm:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div>
                     <div class="uppercase tracking-widest text-red-600 font-semibold mb-3">About Us</div>
-                    <h2 class="text-5xl font-bold leading-tight mb-8">Locally Owned and Operated</h2>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6 sm:mb-8">Locally Owned and Operated</h2>
                     <div class="prose prose-lg text-gray-600">
                         <p>AAA Handyman Services is your trusted partner for all home improvement and repair needs. Exclusively serving the local community, we pride ourselves on quality workmanship, attention to detail, and customer satisfaction.</p>
                         <p>With a team of 1 or 2 skilled craftsmen, we handle projects of any size – no job is too small or too large!</p>
                     </div>
-                    <div class="mt-10 flex items-center gap-8 text-sm">
+                    <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 text-sm">
                         <div class="flex items-center gap-3">
                             <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl">🛠️</div>
                             <div><strong class="block">Experienced</strong>Craftsmen</div>
@@ -89,10 +104,10 @@
                 </div>
                 <div class="relative">
                     <img src="logo-circular.png" alt="AAA Handyman Services Circular Logo" class="rounded-3xl shadow-2xl w-full max-w-md mx-auto">
-                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-xl">
+                    <div class="absolute -bottom-6 left-4 sm:-left-6 bg-white p-4 sm:p-6 rounded-3xl shadow-xl">
                         <div class="flex items-center gap-4">
-                            <div class="text-5xl font-bold text-red-600">25+</div>
-                            <div class="text-sm leading-tight">Years of<br>Experience</div>
+                            <div class="text-3xl sm:text-5xl font-bold text-red-600">25+</div>
+                            <div class="text-xs sm:text-sm leading-tight">Years of<br>Experience</div>
                         </div>
                     </div>
                 </div>
@@ -101,12 +116,12 @@
     </section>
 
     <!-- Services -->
-    <section id="services" class="py-24 bg-gray-100">
+    <section id="services" class="py-16 sm:py-24 bg-gray-100">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
+            <div class="text-center mb-12 sm:mb-16">
                 <div class="uppercase text-blue-600 font-semibold tracking-widest">Our Expertise</div>
-                <h2 class="text-5xl font-bold mt-3">Professional Services</h2>
-                <p class="mt-4 max-w-md mx-auto text-lg text-gray-600">From small fixes to new doors, we've got you covered with competitive rates.</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">Professional Services</h2>
+                <p class="mt-4 max-w-md mx-auto text-base sm:text-lg text-gray-600">From small fixes to new doors, we've got you covered with competitive rates.</p>
             </div>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -159,20 +174,20 @@
                 </div>
             </div>
             
-            <div class="mt-16 text-center bg-blue-900 text-white p-12 rounded-3xl">
-                <p class="text-3xl font-medium">Available Monday - Friday 9am - 6pm - Saturday 10am - 5pm</p>
-                <p class="mt-4 text-xl opacity-90">Competitive hourly rates • No job too small!</p>
+            <div class="mt-12 sm:mt-16 text-center bg-blue-900 text-white p-6 sm:p-12 rounded-3xl">
+                <p class="text-xl sm:text-2xl md:text-3xl font-medium">Available Monday - Friday 9am - 6pm - Saturday 10am - 5pm</p>
+                <p class="mt-4 text-base sm:text-lg md:text-xl opacity-90">Competitive hourly rates • No job too small!</p>
             </div>
         </div>
     </section>
 
     <!-- Pricing / Hourly Rates -->
-    <section class="py-24 bg-white">
+    <section class="py-16 sm:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <div class="uppercase text-red-600 font-semibold tracking-widest">Transparent No-Haggle Pricing</div>
-                <h2 class="text-5xl font-bold mt-3">Handyman Hourly Rate Scale</h2>
-                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">$45 – $70 per man hour • Hourly or by bid in select circumstances • Minimum service fee applies (2 hours to cover time & travel).<br>NOTICE!! Have enough work to cover the minimum fee.</p>
+            <div class="text-center mb-12 sm:mb-16">
+                <div class="uppercase text-red-600 font-semibold tracking-widest text-sm sm:text-base">Transparent No-Haggle Pricing</div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">Handyman Hourly Rate Scale</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">$45 – $70 per man hour • Hourly or by bid in select circumstances • Minimum service fee applies (2 hours to cover time & travel).<br>NOTICE!! Have enough work to cover the minimum fee.</p>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
@@ -237,53 +252,53 @@
     </section>
 
     <!-- Testimonials / Why Us -->
-    <section class="py-24 bg-white">
+    <section class="py-16 sm:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="text-6xl mb-4">⭐⭐⭐⭐⭐</div>
-                    <p class="italic">"Fast, professional, and fair priced. Fixed my deck perfectly!"</p>
-                    <p class="mt-6 font-semibold">- Mike T., Waterford</p>
+                <div class="text-center p-6 bg-gray-50 rounded-3xl shadow-sm border border-gray-100">
+                    <div class="text-3xl sm:text-4xl md:text-5xl mb-4">⭐⭐⭐⭐⭐</div>
+                    <p class="italic text-base sm:text-lg">"Fast, professional, and fair priced. Fixed my deck perfectly!"</p>
+                    <p class="mt-6 font-semibold text-red-600">- Mike T., Waterford</p>
                 </div>
-                <div class="text-center">
-                    <div class="text-6xl mb-4">⭐⭐⭐⭐⭐</div>
-                    <p class="italic">"Installed new flooring in record time. Highly recommend!"</p>
-                    <p class="mt-6 font-semibold">- Sarah K., Oakland County</p>
+                <div class="text-center p-6 bg-gray-50 rounded-3xl shadow-sm border border-gray-100">
+                    <div class="text-3xl sm:text-4xl md:text-5xl mb-4">⭐⭐⭐⭐⭐</div>
+                    <p class="italic text-base sm:text-lg">"Installed new flooring in record time. Highly recommend!"</p>
+                    <p class="mt-6 font-semibold text-red-600">- Sarah K., Oakland County</p>
                 </div>
-                <div class="text-center">
-                    <div class="text-6xl mb-4">⭐⭐⭐⭐⭐</div>
-                    <p class="italic">"Reliable team that shows up on time every time."</p>
-                    <p class="mt-6 font-semibold">- John D., Keego Harbor</p>
+                <div class="text-center p-6 bg-gray-50 rounded-3xl shadow-sm border border-gray-100">
+                    <div class="text-3xl sm:text-4xl md:text-5xl mb-4">⭐⭐⭐⭐⭐</div>
+                    <p class="italic text-base sm:text-lg">"Reliable team that shows up on time every time."</p>
+                    <p class="mt-6 font-semibold text-red-600">- John D., Keego Harbor</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="py-24 bg-gray-900 text-white">
+    <section id="contact" class="py-16 sm:py-24 bg-gray-900 text-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-16">
+            <div class="grid md:grid-cols-2 gap-12 sm:gap-16">
                 <div>
-                    <h2 class="text-5xl font-bold mb-8">Get In Touch Today</h2>
-                    <div class="space-y-8">
-                        <div class="flex items-start gap-6">
-                            <i class="fas fa-phone text-4xl text-red-500 mt-1"></i>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8">Get In Touch Today</h2>
+                    <div class="space-y-6 sm:space-y-8">
+                        <div class="flex items-start gap-4 sm:gap-6">
+                            <i class="fas fa-phone text-3xl sm:text-4xl text-red-500 mt-1 flex-shrink-0"></i>
                             <div>
-                                <a href="tel:2488708603" class="text-3xl font-semibold hover:text-red-400">(248) 870-8603</a>
-                                <p class="text-gray-400">Call for immediate assistance</p>
+                                <a href="tel:2488708603" class="text-xl sm:text-2xl md:text-3xl font-semibold hover:text-red-400 break-all">(248) 870-8603</a>
+                                <p class="text-sm sm:text-base text-gray-400">Call for immediate assistance</p>
                             </div>
                         </div>
-                        <div class="flex items-start gap-6">
-                            <i class="fas fa-envelope text-4xl text-red-500 mt-1"></i>
+                        <div class="flex items-start gap-4 sm:gap-6">
+                            <i class="fas fa-envelope text-3xl sm:text-4xl text-red-500 mt-1 flex-shrink-0"></i>
                             <div>
-                                <a href="mailto:estimates@aaahandyman.services" class="text-2xl hover:text-red-400">estimates@aaahandyman.services</a>
+                                <a href="mailto:estimates@aaahandyman.services" class="text-lg sm:text-xl md:text-2xl hover:text-red-400 break-all">estimates@aaahandyman.services</a>
                             </div>
                         </div>
-                        <div class="flex items-start gap-6">
-                            <i class="fas fa-map-marker-alt text-4xl text-red-500 mt-1"></i>
+                        <div class="flex items-start gap-4 sm:gap-6">
+                            <i class="fas fa-map-marker-alt text-3xl sm:text-4xl text-red-500 mt-1 flex-shrink-0"></i>
                             <div>
-                                <p class="text-xl">Waterford, Michigan</p>
-                                <p class="text-gray-400">Proudly Serving Oakland County</p>
+                                <p class="text-lg sm:text-xl font-medium">Waterford, Michigan</p>
+                                <p class="text-sm sm:text-base text-gray-400">Proudly Serving Oakland County</p>
                             </div>
                         </div>
                     </div>
@@ -362,23 +377,52 @@
         // Tailwind script already included via CDN
         // Simple form success handling
         const form = document.getElementById('contact-form');
-        form.addEventListener('submit', function() {
-            setTimeout(() => {
-                alert('Thank you! Your message has been sent. We will contact you soon.');
-            }, 800);
-        });
+        if (form) {
+            form.addEventListener('submit', function() {
+                setTimeout(() => {
+                    alert('Thank you! Your message has been sent. We will contact you soon.');
+                }, 800);
+            });
+        }
         
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 if (this.getAttribute('href') !== '#') {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    const targetEl = document.querySelector(this.getAttribute('href'));
+                    if (targetEl) {
+                        targetEl.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             });
         });
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        if (menuBtn && mobileMenu && menuIcon) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.className = 'fas fa-bars';
+                } else {
+                    menuIcon.className = 'fas fa-times';
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.className = 'fas fa-bars';
+                });
+            });
+        }
     </script>
 </body>
 </html>
