@@ -1,0 +1,13 @@
+# The site content is published from the "public" directory.
+#
+# This is a plain static HTML site. The "@netlify/plugin-gatsby" build plugin
+# was enabled on the site (via the Netlify UI) even though this is not a Gatsby
+# project. That plugin's onPreBuild fails the build whenever the publish
+# directory resolves to the repository root, so we publish from a dedicated
+# subdirectory and tell the plugin to skip its work.
+[build]
+  publish = "public"
+
+[build.environment]
+  # Skip the Gatsby build plugin — this is not a Gatsby site.
+  NETLIFY_SKIP_GATSBY_BUILD_PLUGIN = "true"
