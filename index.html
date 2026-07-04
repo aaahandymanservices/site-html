@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Impact&display=swap');
+        html { scroll-behavior: smooth; }
         body { font-family: 'Roboto', sans-serif; }
         .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('logo-banner.jpg') center/cover; }
         .nav-link { transition: all 0.3s; }
@@ -446,21 +447,6 @@
             });
         }
         
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    const targetEl = document.querySelector(this.getAttribute('href'));
-                    if (targetEl) {
-                        targetEl.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        });
-
         // Mobile menu toggle
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
