@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /_netlify/
+
+Sitemap: https://aaahandymanservices.com/sitemap.xml
