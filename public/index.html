@@ -466,6 +466,46 @@
         </div>
     </section>
 
+    <!-- Newsletter Sign Up -->
+    <section id="newsletter" class="bg-blue-900 py-16 sm:py-20">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="relative overflow-hidden bg-gradient-to-br from-red-600 to-red-700 rounded-3xl shadow-2xl px-6 py-10 sm:px-12 sm:py-14 text-center text-white">
+                <!-- Decorative accents -->
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full"></div>
+                <div class="absolute -bottom-12 -left-12 w-52 h-52 bg-white/10 rounded-full"></div>
+
+                <div class="relative">
+                    <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full mb-5 text-sm font-semibold uppercase tracking-widest">
+                        <i class="fas fa-envelope-open-text"></i> Stay In The Loop
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">Seasonal Tips & Exclusive Deals</h2>
+                    <p class="text-base sm:text-lg text-white/90 max-w-xl mx-auto mb-8">Join our newsletter for handyman tips, seasonal home maintenance reminders, and money-saving offers — straight to your inbox. No spam, unsubscribe anytime.</p>
+
+                    <form id="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="max-w-xl mx-auto">
+                        <!-- Hidden form-name input for AJAX/Netlify Form detection -->
+                        <input type="hidden" name="form-name" value="newsletter" />
+
+                        <!-- Honeypot Field to prevent spam -->
+                        <p class="hidden">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <label for="newsletter-email" class="sr-only">Email Address</label>
+                            <input id="newsletter-email" type="email" name="email" required placeholder="Enter your email address"
+                                class="flex-1 px-6 py-4 rounded-2xl text-gray-900 text-lg placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/50">
+                            <button type="submit"
+                                class="bg-blue-900 hover:bg-blue-800 text-white text-lg px-8 py-4 rounded-2xl font-semibold inline-flex items-center justify-center gap-2 transition whitespace-nowrap">
+                                Sign Me Up <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <p id="newsletter-message" class="mt-4 text-sm font-medium text-white hidden"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-black text-gray-400 py-12">
         <div class="max-w-7xl mx-auto px-6 text-center">
@@ -514,6 +554,36 @@
             });
         }
         
+        // Handle newsletter signup via Netlify Forms (AJAX)
+        const newsletterForm = document.getElementById('newsletter-form');
+        const newsletterMessage = document.getElementById('newsletter-message');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const formData = new FormData(newsletterForm);
+
+                fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
+                })
+                .then(response => {
+                    newsletterMessage.classList.remove('hidden');
+                    if (response.ok) {
+                        newsletterMessage.textContent = '🎉 You\'re in! Thanks for subscribing.';
+                        newsletterForm.reset();
+                    } else {
+                        newsletterMessage.textContent = 'Oops! Something went wrong. Please try again.';
+                    }
+                })
+                .catch(error => {
+                    newsletterMessage.classList.remove('hidden');
+                    newsletterMessage.textContent = 'Oops! Something went wrong. Please try again.';
+                });
+            });
+        }
+
         // Mobile menu toggle
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
