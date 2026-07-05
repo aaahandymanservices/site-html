@@ -11,3 +11,15 @@
 [build.environment]
   # Skip the Gatsby build plugin — this is not a Gatsby site.
   NETLIFY_SKIP_GATSBY_BUILD_PLUGIN = "true"
+
+[[redirects]]
+  from = "/privacy"
+  to = "https://aaahandymanservices-privacy.netlify.app/"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/terms"
+  to = "https://aaahandymanservices-terms.netlify.app/"
+  status = 200
+  force = true
