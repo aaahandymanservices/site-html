@@ -16,6 +16,9 @@ const json = (body: unknown, init?: ResponseInit) =>
     },
   });
 
+const errorJson = (message = "Something went wrong. Please try again soon.", status = 500) =>
+  json({ error: message }, { status });
+
 const clean = (value: FormDataEntryValue | null, maxLength: number) =>
   String(value ?? "")
     .replace(/\s+/g, " ")
@@ -71,9 +74,18 @@ const validatePhoto = (photo: FormDataEntryValue | null, required: boolean) => {
 };
 
 const tokenMatches = (existingToken: string | null, submittedToken: string) =>
-  Boolean(existingToken && submittedToken && existingToken === submittedToken);
+  Boolean(existingToken && submittedToken && submittedToken === existingToken);
 
-export default async (request: Request) => {
+const handleReviewsRequest = async (request: Request) => {
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        allow: "GET, POST, PUT, DELETE, OPTIONS",
+      },
+    });
+  }
+
   if (request.method === "GET") {
     const list = await db
       .select()
@@ -94,7 +106,7 @@ export default async (request: Request) => {
     );
 
     if (!id) {
-      return json({ error: "This review submission could not be removed." }, { status: 400 });
+      return errorJson("This review submission could not be removed.", 400);
     }
 
     const [existing] = await db
@@ -104,11 +116,11 @@ export default async (request: Request) => {
       .limit(1);
 
     if (!existing) {
-      return json({ error: "This review submission could not be removed." }, { status: 404 });
+      return errorJson("This review submission could not be removed.", 404);
     }
 
     if (!tokenMatches(existing.editToken, submittedToken)) {
-      return json({ error: "This review submission can only be removed from the browser that created it." }, { status: 403 });
+      return errorJson("This review submission can only be removed from the browser that created it.", 403);
     }
 
     await db.delete(reviews).where(eq(reviews.id, id));
@@ -118,7 +130,7 @@ export default async (request: Request) => {
   }
 
   if (request.method !== "POST" && request.method !== "PUT") {
-    return json({ error: "Method not allowed" }, { status: 405 });
+    return errorJson("Method not allowed", 405);
   }
 
   const isUpdate = request.method === "PUT";
@@ -134,17 +146,17 @@ export default async (request: Request) => {
 
   const fieldError = validateReviewFields(customerName, location, projectType, review, rating);
   if (fieldError) {
-    return json({ error: fieldError }, { status: 400 });
+    return errorJson(fieldError, 400);
   }
 
   const photoError = validatePhoto(photo, !isUpdate);
   if (photoError) {
-    return json({ error: photoError }, { status: 400 });
+    return errorJson(photoError, 400);
   }
 
   if (isUpdate) {
     if (!id) {
-      return json({ error: "This review submission could not be updated." }, { status: 400 });
+      return errorJson("This review submission could not be updated.", 400);
     }
 
     const [existing] = await db
@@ -154,11 +166,11 @@ export default async (request: Request) => {
       .limit(1);
 
     if (!existing) {
-      return json({ error: "This review submission could not be updated." }, { status: 404 });
+      return errorJson("This review submission could not be updated.", 404);
     }
 
     if (!tokenMatches(existing.editToken, editToken)) {
-      return json({ error: "This review submission can only be edited from the browser that created it." }, { status: 403 });
+      return errorJson("This review submission can only be edited from the browser that created it.", 403);
     }
 
     let imageKey = existing.imageKey;
@@ -212,6 +224,15 @@ export default async (request: Request) => {
     },
     { status: 201 }
   );
+};
+
+export default async (request: Request) => {
+  try {
+    return await handleReviewsRequest(request);
+  } catch (error) {
+    console.error("reviews function failed", error);
+    return errorJson();
+  }
 };
 
 export const config: Config = {
