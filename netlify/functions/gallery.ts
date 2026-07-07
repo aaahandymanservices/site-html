@@ -83,20 +83,19 @@ export default async (request: Request) => {
 
   if (request.method === "DELETE") {
     const id = idFromRequest(request);
-    const { editToken } = await request.json().catch(() => ({ editToken: "" }));
 
-    if (!id || !editToken) {
+    if (!id) {
       return json({ error: "This gallery submission could not be removed." }, { status: 400 });
     }
 
     const [existing] = await db
       .select()
       .from(galleryReviews)
-      .where(and(eq(galleryReviews.id, id), eq(galleryReviews.editToken, String(editToken))))
+      .where(eq(galleryReviews.id, id))
       .limit(1);
 
     if (!existing) {
-      return json({ error: "This gallery submission could not be removed." }, { status: 403 });
+      return json({ error: "This gallery submission could not be removed." }, { status: 404 });
     }
 
     await db.delete(galleryReviews).where(eq(galleryReviews.id, id));
@@ -131,18 +130,18 @@ export default async (request: Request) => {
   }
 
   if (isUpdate) {
-    if (!id || !editToken) {
+    if (!id) {
       return json({ error: "This gallery submission could not be updated." }, { status: 400 });
     }
 
     const [existing] = await db
       .select()
       .from(galleryReviews)
-      .where(and(eq(galleryReviews.id, id), eq(galleryReviews.editToken, editToken)))
+      .where(eq(galleryReviews.id, id))
       .limit(1);
 
     if (!existing) {
-      return json({ error: "This gallery submission could not be updated." }, { status: 403 });
+      return json({ error: "This gallery submission could not be updated." }, { status: 404 });
     }
 
     let imageKey = existing.imageKey;
