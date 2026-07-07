@@ -1,9 +1,13 @@
 import { defineStackbitConfig } from '@stackbit/types';
 import { GitContentSource } from '@stackbit/cms-git';
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import sdk from '@stackbit/sdk';
 import core from '@stackbit/cms-core';
 import coreUtils from '@stackbit/cms-core/dist/utils/index.js';
+
+const rootDir = path.dirname(fileURLToPath(import.meta.url));
 
 // Add html to supported extensions so Git Content Source scans .html files
 if (sdk && sdk.SUPPORTED_FILE_EXTENSIONS && !sdk.SUPPORTED_FILE_EXTENSIONS.includes('html')) {
@@ -35,17 +39,39 @@ export default defineStackbitConfig({
   stackbitVersion: '~0.6.0',
   ssgName: 'custom',
   nodeVersion: '18',
-  devCommand: 'npx serve public -p {PORT}',
+  devCommand: 'node ./node_modules/.bin/serve public --listen tcp://{HOSTNAME}:{PORT}',
+  sitemap: ({ documents }) => {
+    const homeDocument = documents.find((document) => document.id === 'public/index.html');
+
+    if (!homeDocument) {
+      return [];
+    }
+
+    return [
+      {
+        stableId: 'home',
+        label: 'Home',
+        urlPath: '/',
+        document: {
+          id: homeDocument.id,
+          modelName: homeDocument.modelName,
+          srcType: homeDocument.srcType,
+          srcProjectId: homeDocument.srcProjectId
+        }
+      }
+    ];
+  },
   contentSources: [
     new GitContentSource({
-      rootPath: __dirname,
+      rootPath: rootDir,
       contentDirs: ['public'],
       models: [
         {
           name: 'Page',
           type: 'page',
-          urlPath: '/{slug}',
-          filePath: '{slug}.html',
+          filePath: 'index.html',
+          singleInstance: true,
+          labelField: 'title',
           fields: [
             { name: 'title', type: 'string', required: true },
             { name: 'body', type: 'markdown' }
