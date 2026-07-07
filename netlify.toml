@@ -11,3 +11,9 @@
 [build.environment]
   # Skip the Gatsby build plugin — this is not a Gatsby site.
   NETLIFY_SKIP_GATSBY_BUILD_PLUGIN = "true"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "frame-ancestors 'self' https://app.netlify.com https://app.stackbit.com"
+
