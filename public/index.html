@@ -106,8 +106,6 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google reCAPTCHA v2 -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Impact&display=swap');
         html { scroll-behavior: smooth; }
@@ -571,11 +569,8 @@
                                 <button id="reviews-cancel-edit" type="button" class="font-bold text-red-700 hover:text-red-800">Cancel</button>
                             </div>
                         </div>
-                        <!-- Google reCAPTCHA widget -->
-                        <div class="flex justify-center py-2">
-                            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
-                        </div>
-                        <button id="reviews-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3">                            Add Review <i class="fas fa-camera-retro"></i>
+                        <button id="reviews-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3">
+                            Add Review <i class="fas fa-camera-retro"></i>
                         </button>
                     </form>
                 </div>
@@ -812,13 +807,6 @@
             if (!reviewsForm) return;
             reviewsEditId = null;
             reviewsForm.reset();
-            if (typeof grecaptcha !== 'undefined') {
-                try {
-                    grecaptcha.reset();
-                } catch (e) {
-                    console.error('Failed to reset grecaptcha', e);
-                }
-            }
             if (reviewsPhoto) reviewsPhoto.required = true;
             if (reviewsFileName) reviewsFileName.textContent = 'Choose a photo or drag it here';
             if (reviewsEditing) reviewsEditing.classList.add('hidden');
@@ -952,20 +940,7 @@
         if (reviewsForm) {
             reviewsForm.addEventListener('submit', (event) => {
                 event.preventDefault();
-                
-                let recaptchaResponse = '';
-                if (typeof grecaptcha !== 'undefined') {
-                    recaptchaResponse = grecaptcha.getResponse();
-                }
-                
-                if (!recaptchaResponse) {
-                    showReviewsMessage('Please verify you are not a robot by checking the reCAPTCHA box.', true);
-                    return;
-                }
-
                 const formData = new FormData(reviewsForm);
-                formData.append('g-recaptcha-response', recaptchaResponse);
-                
                 const isEditing = Boolean(reviewsEditId);
                 if (isEditing) {
                     formData.append('editToken', reviewsTokens()[reviewsEditId] || '');

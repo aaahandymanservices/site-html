@@ -57,27 +57,6 @@ const validateReviewFields = (customerName: string, location: string, projectTyp
   return "";
 };
 
-const verifyRecaptcha = async (responseToken: string): Promise<boolean> => {
-  if (!responseToken) return false;
-
-  const secretKey = process.env.RECAPTCHA_SECRET_KEY || "6LeIxAcTAAAAAGG-vFI1Tn756FDPI9ndA46-g31N";
-  try {
-    const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(responseToken)}`,
-    });
-
-    const data = (await res.json()) as { success: boolean };
-    return !!data.success;
-  } catch (error) {
-    console.error("reCAPTCHA verification error:", error);
-    return false;
-  }
-};
-
 const validatePhoto = (photo: FormDataEntryValue | null, required: boolean) => {
   if (!(photo instanceof File) || photo.size === 0) {
     return required ? "Please upload a project photo." : "";
@@ -157,13 +136,6 @@ const handleReviewsRequest = async (request: Request) => {
   const isUpdate = request.method === "PUT";
   const id = isUpdate ? idFromRequest(request) : null;
   const form = await request.formData();
-  
-  const recaptchaResponse = clean(form.get("g-recaptcha-response"), 2000);
-  const isRecaptchaValid = await verifyRecaptcha(recaptchaResponse);
-  if (!isRecaptchaValid) {
-    return errorJson("reCAPTCHA verification failed. Please try again.", 400);
-  }
-
   const customerName = clean(form.get("customerName"), 80);
   const location = clean(form.get("location"), 90);
   const projectType = clean(form.get("projectType"), 80);
