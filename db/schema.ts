@@ -1,6 +1,6 @@
 import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
-export const galleryReviews = pgTable("gallery_reviews", {
+export const reviews = pgTable("gallery_reviews", {
   id: serial("id").primaryKey(),
   customerName: text("customer_name").notNull(),
   location: text("location").notNull(),

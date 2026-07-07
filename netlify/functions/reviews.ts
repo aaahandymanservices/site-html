@@ -2,7 +2,7 @@ import type { Config } from "@netlify/functions";
 import { getStore } from "@netlify/blobs";
 import { and, desc, eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
-import { galleryReviews } from "../../db/schema.js";
+import { reviews } from "../../db/schema.js";
 
 const MAX_IMAGE_SIZE = 4 * 1024 * 1024;
 const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
@@ -30,18 +30,18 @@ const slug = (value: string) =>
     .slice(0, 60) || "customer-photo";
 
 const idFromRequest = (request: Request) => {
-  const id = Number.parseInt(new URL(request.url).pathname.replace("/api/gallery/", ""), 10);
+  const id = Number.parseInt(new URL(request.url).pathname.replace("/api/reviews/", ""), 10);
   return Number.isInteger(id) && id > 0 ? id : null;
 };
 
-const publicReview = (review: typeof galleryReviews.$inferSelect) => ({
+const publicReview = (review: typeof reviews.$inferSelect) => ({
   id: review.id,
   customerName: review.customerName,
   location: review.location,
   projectType: review.projectType,
   rating: review.rating,
   review: review.review,
-  imageUrl: `/api/gallery/photo/${review.imageKey}`,
+  imageUrl: `/api/reviews/photo/${review.imageKey}`,
   imageAlt: review.imageAlt,
   createdAt: review.createdAt,
 });
@@ -72,34 +72,34 @@ const validatePhoto = (photo: FormDataEntryValue | null, required: boolean) => {
 
 export default async (request: Request) => {
   if (request.method === "GET") {
-    const reviews = await db
+    const list = await db
       .select()
-      .from(galleryReviews)
-      .orderBy(desc(galleryReviews.createdAt))
+      .from(reviews)
+      .orderBy(desc(reviews.createdAt))
       .limit(24);
 
-    return json(reviews.map(publicReview));
+    return json(list.map(publicReview));
   }
 
   if (request.method === "DELETE") {
     const id = idFromRequest(request);
 
     if (!id) {
-      return json({ error: "This gallery submission could not be removed." }, { status: 400 });
+      return json({ error: "This review submission could not be removed." }, { status: 400 });
     }
 
     const [existing] = await db
       .select()
-      .from(galleryReviews)
-      .where(eq(galleryReviews.id, id))
+      .from(reviews)
+      .where(eq(reviews.id, id))
       .limit(1);
 
     if (!existing) {
-      return json({ error: "This gallery submission could not be removed." }, { status: 404 });
+      return json({ error: "This review submission could not be removed." }, { status: 404 });
     }
 
-    await db.delete(galleryReviews).where(eq(galleryReviews.id, id));
-    await getStore("customer-gallery").delete(existing.imageKey);
+    await db.delete(reviews).where(eq(reviews.id, id));
+    await getStore("customer-reviews").delete(existing.imageKey);
 
     return json({ ok: true });
   }
@@ -131,23 +131,23 @@ export default async (request: Request) => {
 
   if (isUpdate) {
     if (!id) {
-      return json({ error: "This gallery submission could not be updated." }, { status: 400 });
+      return json({ error: "This review submission could not be updated." }, { status: 400 });
     }
 
     const [existing] = await db
       .select()
-      .from(galleryReviews)
-      .where(eq(galleryReviews.id, id))
+      .from(reviews)
+      .where(eq(reviews.id, id))
       .limit(1);
 
     if (!existing) {
-      return json({ error: "This gallery submission could not be updated." }, { status: 404 });
+      return json({ error: "This review submission could not be updated." }, { status: 404 });
     }
 
     let imageKey = existing.imageKey;
     let imageContentType = existing.imageContentType;
     const imageAlt = `${projectType} project photo from ${customerName} in ${location}`;
-    const store = getStore("customer-gallery");
+    const store = getStore("customer-reviews");
 
     if (photo instanceof File && photo.size > 0) {
       const extension = photo.type.split("/")[1]?.replace("jpeg", "jpg") ?? "jpg";
@@ -158,9 +158,9 @@ export default async (request: Request) => {
     }
 
     const [updated] = await db
-      .update(galleryReviews)
+      .update(reviews)
       .set({ customerName, location, projectType, rating, review, imageKey, imageContentType, imageAlt })
-      .where(eq(galleryReviews.id, id))
+      .where(eq(reviews.id, id))
       .returning();
 
     return json(publicReview(updated));
@@ -171,10 +171,10 @@ export default async (request: Request) => {
   const imageKey = `${Date.now()}-${crypto.randomUUID()}-${slug(projectType)}.${extension}`;
   const imageAlt = `${projectType} project photo from ${customerName} in ${location}`;
 
-  await getStore("customer-gallery").set(imageKey, await upload.arrayBuffer());
+  await getStore("customer-reviews").set(imageKey, await upload.arrayBuffer());
 
   const [created] = await db
-    .insert(galleryReviews)
+    .insert(reviews)
     .values({
       customerName,
       location,
@@ -198,5 +198,5 @@ export default async (request: Request) => {
 };
 
 export const config: Config = {
-  path: ["/api/gallery", "/api/gallery/:id"],
+  path: ["/api/reviews", "/api/reviews/:id"],
 };
