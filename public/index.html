@@ -558,6 +558,12 @@
                             </label>
                         </div>
                         <p id="gallery-message" class="hidden text-sm font-semibold"></p>
+                        <div id="gallery-editing" class="hidden bg-blue-50 border border-blue-200 rounded-2xl p-4 text-sm text-blue-900">
+                            <div class="flex items-center justify-between gap-3">
+                                <span><i class="fas fa-pen-to-square mr-2"></i>Editing your gallery submission</span>
+                                <button id="gallery-cancel-edit" type="button" class="font-bold text-red-700 hover:text-red-800">Cancel</button>
+                            </div>
+                        </div>
                         <button id="gallery-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3">
                             Add Review <i class="fas fa-camera-retro"></i>
                         </button>
@@ -807,6 +813,10 @@
         const galleryPhoto = document.getElementById('gallery-photo');
         const galleryDropzone = document.getElementById('gallery-dropzone');
         const galleryFileName = document.getElementById('gallery-file-name');
+        const galleryEditing = document.getElementById('gallery-editing');
+        const galleryCancelEdit = document.getElementById('gallery-cancel-edit');
+        const galleryTokenKey = 'aaaGalleryEditTokens';
+        let galleryEditId = null;
 
         const escapeHTML = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({
             '&': '&amp;',
@@ -826,13 +836,92 @@
             galleryMessage.className = `text-sm font-semibold ${isError ? 'text-red-700' : 'text-green-700'}`;
         };
 
+        const galleryTokens = () => {
+            try {
+                return JSON.parse(localStorage.getItem(galleryTokenKey) || '{}');
+            } catch {
+                return {};
+            }
+        };
+
+        const saveGalleryToken = (id, token) => {
+            if (!id || !token) return;
+            const tokens = galleryTokens();
+            tokens[id] = token;
+            localStorage.setItem(galleryTokenKey, JSON.stringify(tokens));
+        };
+
+        const removeGalleryToken = (id) => {
+            const tokens = galleryTokens();
+            delete tokens[id];
+            localStorage.setItem(galleryTokenKey, JSON.stringify(tokens));
+        };
+
+        const setGallerySubmitting = (isSubmitting) => {
+            if (!gallerySubmit) return;
+            gallerySubmit.disabled = isSubmitting;
+            gallerySubmit.classList.toggle('opacity-70', isSubmitting);
+            gallerySubmit.classList.toggle('cursor-not-allowed', isSubmitting);
+        };
+
+        const resetGalleryForm = () => {
+            if (!galleryForm) return;
+            galleryEditId = null;
+            galleryForm.reset();
+            if (galleryPhoto) galleryPhoto.required = true;
+            if (galleryFileName) galleryFileName.textContent = 'Choose a photo or drag it here';
+            if (galleryEditing) galleryEditing.classList.add('hidden');
+            if (gallerySubmit) gallerySubmit.innerHTML = 'Add Review <i class="fas fa-camera-retro"></i>';
+        };
+
+        const startGalleryEdit = (item) => {
+            if (!galleryForm) return;
+            galleryEditId = item.id;
+            galleryForm.customerName.value = item.customerName || '';
+            galleryForm.location.value = item.location || '';
+            galleryForm.projectType.value = item.projectType || '';
+            galleryForm.rating.value = String(item.rating || 5);
+            galleryForm.review.value = item.review || '';
+            if (galleryPhoto) galleryPhoto.required = false;
+            if (galleryFileName) galleryFileName.textContent = 'Keep current photo or choose a replacement';
+            if (galleryEditing) galleryEditing.classList.remove('hidden');
+            if (gallerySubmit) gallerySubmit.innerHTML = 'Save Changes <i class="fas fa-floppy-disk"></i>';
+            showGalleryMessage('Update the fields below, then save your changes.', false);
+            galleryForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        };
+
+        const deleteGalleryItem = (id) => {
+            const token = galleryTokens()[id];
+            if (!token || !confirm('Remove this gallery submission?')) return;
+            showGalleryMessage('Removing your gallery submission...', false);
+
+            fetch(`/api/gallery/${encodeURIComponent(id)}`, {
+                method: 'DELETE',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({ editToken: token })
+            })
+            .then(async response => {
+                const payload = await response.json().catch(() => ({}));
+                if (!response.ok) throw new Error(payload.error || 'Delete failed.');
+                removeGalleryToken(id);
+                if (galleryEditId === id) resetGalleryForm();
+                showGalleryMessage('Your gallery submission was removed.', false);
+                loadGallery();
+            })
+            .catch(error => {
+                showGalleryMessage(error.message || 'The gallery submission could not be removed.', true);
+            });
+        };
+
         const renderGallery = (items) => {
             if (!galleryList || !galleryEmpty || !galleryLoading) return;
             galleryLoading.classList.add('hidden');
             galleryList.innerHTML = '';
             galleryEmpty.classList.toggle('hidden', items.length > 0);
+            const tokens = galleryTokens();
 
             items.forEach((item, index) => {
+                const canManage = Boolean(tokens[item.id]);
                 const card = document.createElement('article');
                 card.className = 'gallery-card bg-white text-gray-900 rounded-3xl overflow-hidden shadow-2xl border border-white/20';
                 card.style.animationDelay = `${index * 60}ms`;
@@ -850,8 +939,22 @@
                             <strong class="text-gray-900">${escapeHTML(item.customerName)}</strong>
                             <span class="text-sm text-gray-500 text-right">${escapeHTML(item.location)}</span>
                         </div>
+                        ${canManage ? `
+                            <div class="mt-4 grid grid-cols-2 gap-2">
+                                <button type="button" class="gallery-edit-btn border border-blue-200 text-blue-800 hover:bg-blue-50 px-3 py-2 rounded-xl font-bold text-sm" data-id="${escapeHTML(item.id)}">
+                                    <i class="fas fa-pen-to-square mr-1"></i>Edit
+                                </button>
+                                <button type="button" class="gallery-delete-btn border border-red-200 text-red-700 hover:bg-red-50 px-3 py-2 rounded-xl font-bold text-sm" data-id="${escapeHTML(item.id)}">
+                                    <i class="fas fa-trash-can mr-1"></i>Delete
+                                </button>
+                            </div>
+                        ` : ''}
                     </div>
                 `;
+                if (canManage) {
+                    card.querySelector('.gallery-edit-btn')?.addEventListener('click', () => startGalleryEdit(item));
+                    card.querySelector('.gallery-delete-btn')?.addEventListener('click', () => deleteGalleryItem(item.id));
+                }
                 galleryList.appendChild(card);
             });
         };
@@ -906,14 +1009,15 @@
             galleryForm.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const formData = new FormData(galleryForm);
-                if (gallerySubmit) {
-                    gallerySubmit.disabled = true;
-                    gallerySubmit.classList.add('opacity-70', 'cursor-not-allowed');
+                const isEditing = Boolean(galleryEditId);
+                if (isEditing) {
+                    formData.append('editToken', galleryTokens()[galleryEditId] || '');
                 }
-                showGalleryMessage('Uploading your review...', false);
+                setGallerySubmitting(true);
+                showGalleryMessage(isEditing ? 'Saving your changes...' : 'Uploading your review...', false);
 
-                fetch('/api/gallery', {
-                    method: 'POST',
+                fetch(isEditing ? `/api/gallery/${encodeURIComponent(galleryEditId)}` : '/api/gallery', {
+                    method: isEditing ? 'PUT' : 'POST',
                     body: formData
                 })
                 .then(async response => {
@@ -921,21 +1025,25 @@
                     if (!response.ok) throw new Error(payload.error || 'Upload failed.');
                     return payload;
                 })
-                .then(() => {
-                    galleryForm.reset();
-                    if (galleryFileName) galleryFileName.textContent = 'Choose a photo or drag it here';
-                    showGalleryMessage('Thanks. Your photo and review were added to the gallery.', false);
+                .then((payload) => {
+                    if (payload.id && payload.editToken) saveGalleryToken(payload.id, payload.editToken);
+                    resetGalleryForm();
+                    showGalleryMessage(isEditing ? 'Your gallery submission was updated.' : 'Thanks. Your photo and review were added to the gallery.', false);
                     loadGallery();
                 })
                 .catch(error => {
-                    showGalleryMessage(error.message || 'The gallery review could not be uploaded.', true);
+                    showGalleryMessage(error.message || 'The gallery review could not be saved.', true);
                 })
                 .finally(() => {
-                    if (gallerySubmit) {
-                        gallerySubmit.disabled = false;
-                        gallerySubmit.classList.remove('opacity-70', 'cursor-not-allowed');
-                    }
+                    setGallerySubmitting(false);
                 });
+            });
+        }
+
+        if (galleryCancelEdit) {
+            galleryCancelEdit.addEventListener('click', () => {
+                resetGalleryForm();
+                showGalleryMessage('Editing canceled.', false);
             });
         }
 

@@ -10,5 +10,6 @@ export const galleryReviews = pgTable("gallery_reviews", {
   imageKey: text("image_key").notNull(),
   imageContentType: text("image_content_type").notNull(),
   imageAlt: text("image_alt").notNull(),
+  editToken: text("edit_token"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
