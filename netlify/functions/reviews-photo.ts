@@ -9,14 +9,21 @@ const contentTypeFor = (key: string) => {
 };
 
 export default async (request: Request) => {
-  const key = decodeURIComponent(new URL(request.url).pathname.replace("/api/reviews/photo/", ""));
+  let key = "";
+  try {
+    key = decodeURIComponent(new URL(request.url).pathname.replace("/api/reviews/photo/", ""));
+  } catch {
+    return new Response("Not found", { status: 404 });
+  }
 
   if (!key || key.includes("..") || key.includes("/")) {
     return new Response("Not found", { status: 404 });
   }
 
-  const store = getStore("customer-reviews");
-  const image = await store.get(key, { type: "arrayBuffer" });
+  const image = await getStore("customer-reviews").get(key, { type: "arrayBuffer" }).catch((error) => {
+    console.error("review photo lookup failed", error);
+    return null;
+  });
 
   if (!image) {
     return new Response("Not found", { status: 404 });
