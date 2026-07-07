@@ -891,14 +891,12 @@
         };
 
         const deleteGalleryItem = (id) => {
-            const token = galleryTokens()[id];
-            if (!token || !confirm('Remove this gallery submission?')) return;
+            if (!confirm('Remove this gallery submission?')) return;
             showGalleryMessage('Removing your gallery submission...', false);
 
             fetch(`/api/gallery/${encodeURIComponent(id)}`, {
                 method: 'DELETE',
-                headers: { 'content-type': 'application/json' },
-                body: JSON.stringify({ editToken: token })
+                headers: { 'content-type': 'application/json' }
             })
             .then(async response => {
                 const payload = await response.json().catch(() => ({}));
@@ -918,10 +916,8 @@
             galleryLoading.classList.add('hidden');
             galleryList.innerHTML = '';
             galleryEmpty.classList.toggle('hidden', items.length > 0);
-            const tokens = galleryTokens();
 
             items.forEach((item, index) => {
-                const canManage = Boolean(tokens[item.id]);
                 const card = document.createElement('article');
                 card.className = 'gallery-card bg-white text-gray-900 rounded-3xl overflow-hidden shadow-2xl border border-white/20';
                 card.style.animationDelay = `${index * 60}ms`;
@@ -939,22 +935,18 @@
                             <strong class="text-gray-900">${escapeHTML(item.customerName)}</strong>
                             <span class="text-sm text-gray-500 text-right">${escapeHTML(item.location)}</span>
                         </div>
-                        ${canManage ? `
-                            <div class="mt-4 grid grid-cols-2 gap-2">
-                                <button type="button" class="gallery-edit-btn border border-blue-200 text-blue-800 hover:bg-blue-50 px-3 py-2 rounded-xl font-bold text-sm" data-id="${escapeHTML(item.id)}">
-                                    <i class="fas fa-pen-to-square mr-1"></i>Edit
-                                </button>
-                                <button type="button" class="gallery-delete-btn border border-red-200 text-red-700 hover:bg-red-50 px-3 py-2 rounded-xl font-bold text-sm" data-id="${escapeHTML(item.id)}">
-                                    <i class="fas fa-trash-can mr-1"></i>Delete
-                                </button>
-                            </div>
-                        ` : ''}
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button type="button" class="gallery-edit-btn border border-blue-200 text-blue-800 hover:bg-blue-50 px-3 py-2 rounded-xl font-bold text-sm" data-id="${escapeHTML(item.id)}">
+                                <i class="fas fa-pen-to-square mr-1"></i>Edit
+                            </button>
+                            <button type="button" class="gallery-delete-btn border border-red-200 text-red-700 hover:bg-red-50 px-3 py-2 rounded-xl font-bold text-sm" data-id="${escapeHTML(item.id)}">
+                                <i class="fas fa-trash-can mr-1"></i>Delete
+                            </button>
+                        </div>
                     </div>
                 `;
-                if (canManage) {
-                    card.querySelector('.gallery-edit-btn')?.addEventListener('click', () => startGalleryEdit(item));
-                    card.querySelector('.gallery-delete-btn')?.addEventListener('click', () => deleteGalleryItem(item.id));
-                }
+                card.querySelector('.gallery-edit-btn')?.addEventListener('click', () => startGalleryEdit(item));
+                card.querySelector('.gallery-delete-btn')?.addEventListener('click', () => deleteGalleryItem(item.id));
                 galleryList.appendChild(card);
             });
         };
