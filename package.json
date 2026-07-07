@@ -1,0 +1,23 @@
+{
+  "name": "repo",
+  "version": "1.0.0",
+  "description": "AAA Handyman Services static site with customer gallery submissions.",
+  "type": "module",
+  "main": "stackbit.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@netlify/blobs": "^10.7.9",
+    "@netlify/database": "^1.1.0",
+    "drizzle-orm": "^1.0.0-beta.22"
+  },
+  "devDependencies": {
+    "@netlify/functions": "^5.3.0",
+    "drizzle-kit": "^1.0.0-beta.22",
+    "typescript": "^6.0.3"
+  }
+}

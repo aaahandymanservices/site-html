@@ -91,6 +91,28 @@
         .nav-link:hover { color: #ef4444; transform: translateY(-2px); }
         .service-card { transition: all 0.3s; }
         .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
+        .gallery-section {
+            background:
+                linear-gradient(135deg, rgba(17, 24, 39, 0.94), rgba(30, 64, 175, 0.88)),
+                url('logo-banner.jpg') center/cover fixed;
+        }
+        .gallery-card {
+            animation: gallery-rise 0.45s ease both;
+        }
+        @keyframes gallery-rise {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .gallery-dropzone {
+            background-image: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(37, 99, 235, 0.12));
+        }
+        .gallery-dropzone.dragging {
+            border-color: #ef4444;
+            background-image: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(37, 99, 235, 0.2));
+        }
+        .gallery-preview img {
+            aspect-ratio: 4 / 3;
+        }
         /* Siren flashing animation */
         @keyframes siren-flash {
             0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 0 rgba(239, 68, 68, 0)); }
@@ -128,6 +150,7 @@
             <div class="hidden md:flex space-x-8 text-lg font-medium items-center">
                 <a href="#about" class="nav-link text-gray-700 hover:text-red-600">About</a>
                 <a href="#services" class="nav-link text-gray-700 hover:text-red-600">Services</a>
+                <a href="#gallery" class="nav-link text-gray-700 hover:text-red-600">Gallery</a>
                 <a href="#rates" class="nav-link text-gray-700 hover:text-red-600">Rates</a>
                 <a href="#travel-zones" class="nav-link text-gray-700 hover:text-red-600">Service Area</a>
                 <a href="#contact" class="nav-link text-gray-700 hover:text-red-600">Contact</a>
@@ -148,6 +171,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-4 shadow-inner">
             <a href="#about" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">About</a>
             <a href="#services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
+            <a href="#gallery" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Gallery</a>
             <a href="#rates" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Rates</a>
             <a href="#travel-zones" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Service Area</a>
             <a href="#contact" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Contact</a>
@@ -474,6 +498,97 @@
         </div>
     </section>
 
+    <!-- Customer Gallery -->
+    <section id="gallery" class="gallery-section py-16 sm:py-24 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
+                <div class="lg:sticky lg:top-28">
+                    <div class="uppercase tracking-widest text-red-300 font-semibold text-sm">Customer Project Gallery</div>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 leading-tight">Share a finished repair and review the work</h2>
+                    <p class="mt-5 text-base sm:text-lg text-white/80 max-w-xl">Upload a project photo, add a quick rating, and help nearby Oakland County homeowners see the kind of repairs AAA Handyman Services handles.</p>
+
+                    <form id="gallery-form" class="mt-8 bg-white text-gray-900 border border-white/20 rounded-3xl shadow-2xl p-5 sm:p-7 space-y-5">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="gallery-name" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Name</label>
+                                <input id="gallery-name" name="customerName" type="text" required maxlength="80" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                            </div>
+                            <div>
+                                <label for="gallery-location" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">City / Area</label>
+                                <input id="gallery-location" name="location" type="text" required maxlength="90" placeholder="Waterford, MI" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                            </div>
+                        </div>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="gallery-project" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Type</label>
+                                <select id="gallery-project" name="projectType" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                    <option value="">Choose a project</option>
+                                    <option>Carpentry & Trim</option>
+                                    <option>Doors & Installation</option>
+                                    <option>Drywall Work</option>
+                                    <option>Painting</option>
+                                    <option>Decks & Fences</option>
+                                    <option>Flooring Solutions</option>
+                                    <option>Maintenance & Cleaning</option>
+                                    <option>Other Repair</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="gallery-rating" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Rating</label>
+                                <select id="gallery-rating" name="rating" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                    <option value="5">5 stars</option>
+                                    <option value="4">4 stars</option>
+                                    <option value="3">3 stars</option>
+                                    <option value="2">2 stars</option>
+                                    <option value="1">1 star</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="gallery-review" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Review</label>
+                            <textarea id="gallery-review" name="review" rows="4" required maxlength="700" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Tell neighbors what was fixed and how it went."></textarea>
+                        </div>
+                        <div>
+                            <label for="gallery-photo" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Photo</label>
+                            <label id="gallery-dropzone" for="gallery-photo" class="gallery-dropzone block cursor-pointer border-2 border-dashed border-blue-300 rounded-3xl p-5 text-center transition">
+                                <input id="gallery-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif" required class="sr-only">
+                                <span class="block text-3xl text-blue-800 mb-2"><i class="fas fa-cloud-arrow-up"></i></span>
+                                <span id="gallery-file-name" class="block font-semibold text-blue-900">Choose a photo or drag it here</span>
+                                <span class="block text-sm text-gray-500 mt-1">JPG, PNG, WebP, or GIF up to 4 MB</span>
+                            </label>
+                        </div>
+                        <p id="gallery-message" class="hidden text-sm font-semibold"></p>
+                        <button id="gallery-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3">
+                            Add Review <i class="fas fa-camera-retro"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <div>
+                    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+                        <div>
+                            <div class="uppercase tracking-widest text-blue-200 font-semibold text-sm">Recent Customer Photos</div>
+                            <h3 class="text-2xl sm:text-3xl font-bold mt-2">Finished work from local homes</h3>
+                        </div>
+                        <button id="gallery-refresh" type="button" class="self-start sm:self-auto border border-white/40 hover:bg-white hover:text-blue-900 px-5 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2">
+                            <i class="fas fa-rotate-right"></i> Refresh
+                        </button>
+                    </div>
+                    <div id="gallery-list" class="grid sm:grid-cols-2 gap-5"></div>
+                    <div id="gallery-empty" class="hidden bg-white/10 border border-white/20 rounded-3xl p-8 text-white/85">
+                        <div class="text-4xl mb-4"><i class="fas fa-images"></i></div>
+                        <h4 class="text-2xl font-bold text-white mb-2">No customer photos yet</h4>
+                        <p>Be the first to add a project photo and review.</p>
+                    </div>
+                    <div id="gallery-loading" class="grid sm:grid-cols-2 gap-5">
+                        <div class="h-80 rounded-3xl bg-white/15 animate-pulse"></div>
+                        <div class="h-80 rounded-3xl bg-white/15 animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact -->
     <section id="contact" class="py-16 sm:py-24 bg-gray-900 text-white">
         <div class="max-w-7xl mx-auto px-6">
@@ -680,6 +795,155 @@
                 });
             });
         }
+
+        // Customer gallery submissions
+        const galleryForm = document.getElementById('gallery-form');
+        const galleryList = document.getElementById('gallery-list');
+        const galleryEmpty = document.getElementById('gallery-empty');
+        const galleryLoading = document.getElementById('gallery-loading');
+        const galleryMessage = document.getElementById('gallery-message');
+        const gallerySubmit = document.getElementById('gallery-submit');
+        const galleryRefresh = document.getElementById('gallery-refresh');
+        const galleryPhoto = document.getElementById('gallery-photo');
+        const galleryDropzone = document.getElementById('gallery-dropzone');
+        const galleryFileName = document.getElementById('gallery-file-name');
+
+        const escapeHTML = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        }[char]));
+
+        const stars = (rating) => Array.from({ length: 5 }, (_, index) =>
+            `<i class="${index < rating ? 'fas' : 'far'} fa-star"></i>`
+        ).join('');
+
+        const showGalleryMessage = (text, isError) => {
+            if (!galleryMessage) return;
+            galleryMessage.textContent = text;
+            galleryMessage.className = `text-sm font-semibold ${isError ? 'text-red-700' : 'text-green-700'}`;
+        };
+
+        const renderGallery = (items) => {
+            if (!galleryList || !galleryEmpty || !galleryLoading) return;
+            galleryLoading.classList.add('hidden');
+            galleryList.innerHTML = '';
+            galleryEmpty.classList.toggle('hidden', items.length > 0);
+
+            items.forEach((item, index) => {
+                const card = document.createElement('article');
+                card.className = 'gallery-card bg-white text-gray-900 rounded-3xl overflow-hidden shadow-2xl border border-white/20';
+                card.style.animationDelay = `${index * 60}ms`;
+                card.innerHTML = `
+                    <div class="gallery-preview bg-gray-100">
+                        <img src="${escapeHTML(item.imageUrl)}" alt="${escapeHTML(item.imageAlt)}" class="w-full object-cover" loading="lazy">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center justify-between gap-3 mb-3">
+                            <div class="text-red-600 text-sm" aria-label="${escapeHTML(item.rating)} out of 5 stars">${stars(Number(item.rating) || 0)}</div>
+                            <span class="text-xs uppercase tracking-widest text-blue-800 font-bold">${escapeHTML(item.projectType)}</span>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed">"${escapeHTML(item.review)}"</p>
+                        <div class="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between gap-4">
+                            <strong class="text-gray-900">${escapeHTML(item.customerName)}</strong>
+                            <span class="text-sm text-gray-500 text-right">${escapeHTML(item.location)}</span>
+                        </div>
+                    </div>
+                `;
+                galleryList.appendChild(card);
+            });
+        };
+
+        const loadGallery = () => {
+            if (!galleryList || !galleryLoading || !galleryEmpty) return;
+            galleryLoading.classList.remove('hidden');
+            galleryEmpty.classList.add('hidden');
+
+            fetch('/api/gallery')
+                .then(response => response.ok ? response.json() : Promise.reject())
+                .then(renderGallery)
+                .catch(() => {
+                    galleryLoading.classList.add('hidden');
+                    galleryEmpty.classList.remove('hidden');
+                    galleryEmpty.querySelector('p').textContent = 'The gallery could not load right now. Please try again soon.';
+                });
+        };
+
+        if (galleryPhoto && galleryFileName) {
+            galleryPhoto.addEventListener('change', () => {
+                galleryFileName.textContent = galleryPhoto.files?.[0]?.name || 'Choose a photo or drag it here';
+            });
+        }
+
+        if (galleryDropzone && galleryPhoto) {
+            ['dragenter', 'dragover'].forEach(eventName => {
+                galleryDropzone.addEventListener(eventName, (event) => {
+                    event.preventDefault();
+                    galleryDropzone.classList.add('dragging');
+                });
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                galleryDropzone.addEventListener(eventName, (event) => {
+                    event.preventDefault();
+                    galleryDropzone.classList.remove('dragging');
+                });
+            });
+
+            galleryDropzone.addEventListener('drop', (event) => {
+                const file = event.dataTransfer?.files?.[0];
+                if (!file) return;
+                const transfer = new DataTransfer();
+                transfer.items.add(file);
+                galleryPhoto.files = transfer.files;
+                galleryPhoto.dispatchEvent(new Event('change'));
+            });
+        }
+
+        if (galleryForm) {
+            galleryForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(galleryForm);
+                if (gallerySubmit) {
+                    gallerySubmit.disabled = true;
+                    gallerySubmit.classList.add('opacity-70', 'cursor-not-allowed');
+                }
+                showGalleryMessage('Uploading your review...', false);
+
+                fetch('/api/gallery', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(async response => {
+                    const payload = await response.json().catch(() => ({}));
+                    if (!response.ok) throw new Error(payload.error || 'Upload failed.');
+                    return payload;
+                })
+                .then(() => {
+                    galleryForm.reset();
+                    if (galleryFileName) galleryFileName.textContent = 'Choose a photo or drag it here';
+                    showGalleryMessage('Thanks. Your photo and review were added to the gallery.', false);
+                    loadGallery();
+                })
+                .catch(error => {
+                    showGalleryMessage(error.message || 'The gallery review could not be uploaded.', true);
+                })
+                .finally(() => {
+                    if (gallerySubmit) {
+                        gallerySubmit.disabled = false;
+                        gallerySubmit.classList.remove('opacity-70', 'cursor-not-allowed');
+                    }
+                });
+            });
+        }
+
+        if (galleryRefresh) {
+            galleryRefresh.addEventListener('click', loadGallery);
+        }
+
+        loadGallery();
 
         // Mobile menu toggle
         const menuBtn = document.getElementById('mobile-menu-btn');
