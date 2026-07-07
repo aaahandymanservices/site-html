@@ -1,6 +1,6 @@
 import type { Config } from "@netlify/functions";
 import { getStore } from "@netlify/blobs";
-import { and, desc, eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { reviews } from "../../db/schema.js";
 
@@ -70,6 +70,9 @@ const validatePhoto = (photo: FormDataEntryValue | null, required: boolean) => {
   return "";
 };
 
+const tokenMatches = (existingToken: string | null, submittedToken: string) =>
+  Boolean(existingToken && submittedToken && existingToken === submittedToken);
+
 export default async (request: Request) => {
   if (request.method === "GET") {
     const list = await db
@@ -83,6 +86,12 @@ export default async (request: Request) => {
 
   if (request.method === "DELETE") {
     const id = idFromRequest(request);
+    const submittedToken = clean(
+      request.headers.get("content-type")?.includes("application/json")
+        ? ((await request.json().catch(() => ({}))) as { editToken?: string }).editToken ?? null
+        : null,
+      80
+    );
 
     if (!id) {
       return json({ error: "This review submission could not be removed." }, { status: 400 });
@@ -96,6 +105,10 @@ export default async (request: Request) => {
 
     if (!existing) {
       return json({ error: "This review submission could not be removed." }, { status: 404 });
+    }
+
+    if (!tokenMatches(existing.editToken, submittedToken)) {
+      return json({ error: "This review submission can only be removed from the browser that created it." }, { status: 403 });
     }
 
     await db.delete(reviews).where(eq(reviews.id, id));
@@ -142,6 +155,10 @@ export default async (request: Request) => {
 
     if (!existing) {
       return json({ error: "This review submission could not be updated." }, { status: 404 });
+    }
+
+    if (!tokenMatches(existing.editToken, editToken)) {
+      return json({ error: "This review submission can only be edited from the browser that created it." }, { status: 403 });
     }
 
     let imageKey = existing.imageKey;
