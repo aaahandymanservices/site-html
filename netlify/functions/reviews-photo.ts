@@ -9,13 +9,13 @@ const contentTypeFor = (key: string) => {
 };
 
 export default async (request: Request) => {
-  const key = decodeURIComponent(new URL(request.url).pathname.replace("/api/gallery/photo/", ""));
+  const key = decodeURIComponent(new URL(request.url).pathname.replace("/api/reviews/photo/", ""));
 
   if (!key || key.includes("..") || key.includes("/")) {
     return new Response("Not found", { status: 404 });
   }
 
-  const store = getStore("customer-gallery");
+  const store = getStore("customer-reviews");
   const image = await store.get(key, { type: "arrayBuffer" });
 
   if (!image) {
@@ -31,5 +31,5 @@ export default async (request: Request) => {
 };
 
 export const config: Config = {
-  path: "/api/gallery/photo/:key",
+  path: "/api/reviews/photo/:key",
 };

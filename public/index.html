@@ -91,26 +91,26 @@
         .nav-link:hover { color: #ef4444; transform: translateY(-2px); }
         .service-card { transition: all 0.3s; }
         .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
-        .gallery-section {
+        .reviews-section {
             background:
                 linear-gradient(135deg, rgba(17, 24, 39, 0.94), rgba(30, 64, 175, 0.88)),
                 url('logo-banner.jpg') center/cover fixed;
         }
-        .gallery-card {
-            animation: gallery-rise 0.45s ease both;
+        .review-card {
+            animation: review-rise 0.45s ease both;
         }
-        @keyframes gallery-rise {
+        @keyframes review-rise {
             from { opacity: 0; transform: translateY(18px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .gallery-dropzone {
+        .review-dropzone {
             background-image: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(37, 99, 235, 0.12));
         }
-        .gallery-dropzone.dragging {
+        .review-dropzone.dragging {
             border-color: #ef4444;
             background-image: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(37, 99, 235, 0.2));
         }
-        .gallery-preview img {
+        .review-preview img {
             aspect-ratio: 4 / 3;
         }
         /* Siren flashing animation */
@@ -150,7 +150,7 @@
             <div class="hidden md:flex space-x-8 text-lg font-medium items-center">
                 <a href="#about" class="nav-link text-gray-700 hover:text-red-600">About</a>
                 <a href="#services" class="nav-link text-gray-700 hover:text-red-600">Services</a>
-                <a href="#gallery" class="nav-link text-gray-700 hover:text-red-600">Gallery</a>
+                <a href="#reviews" class="nav-link text-gray-700 hover:text-red-600">Reviews</a>
                 <a href="#rates" class="nav-link text-gray-700 hover:text-red-600">Rates</a>
                 <a href="#travel-zones" class="nav-link text-gray-700 hover:text-red-600">Service Area</a>
                 <a href="#contact" class="nav-link text-gray-700 hover:text-red-600">Contact</a>
@@ -171,7 +171,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-4 shadow-inner">
             <a href="#about" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">About</a>
             <a href="#services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
-            <a href="#gallery" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Gallery</a>
+            <a href="#reviews" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Reviews</a>
             <a href="#rates" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Rates</a>
             <a href="#travel-zones" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Service Area</a>
             <a href="#contact" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Contact</a>
@@ -498,30 +498,30 @@
         </div>
     </section>
 
-    <!-- Customer Gallery -->
-    <section id="gallery" class="gallery-section py-16 sm:py-24 text-white">
+    <!-- Customer Reviews -->
+    <section id="reviews" class="reviews-section py-16 sm:py-24 text-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
                 <div class="lg:sticky lg:top-28">
-                    <div class="uppercase tracking-widest text-red-300 font-semibold text-sm">Customer Project Gallery</div>
+                    <div class="uppercase tracking-widest text-red-300 font-semibold text-sm">Customer Reviews</div>
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 leading-tight">Share a finished repair and review the work</h2>
                     <p class="mt-5 text-base sm:text-lg text-white/80 max-w-xl">Upload a project photo, add a quick rating, and help nearby Oakland County homeowners see the kind of repairs AAA Handyman Services handles.</p>
 
-                    <form id="gallery-form" class="mt-8 bg-white text-gray-900 border border-white/20 rounded-3xl shadow-2xl p-5 sm:p-7 space-y-5">
+                    <form id="reviews-form" class="mt-8 bg-white text-gray-900 border border-white/20 rounded-3xl shadow-2xl p-5 sm:p-7 space-y-5">
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div>
-                                <label for="gallery-name" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Name</label>
-                                <input id="gallery-name" name="customerName" type="text" required maxlength="80" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <label for="reviews-name" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Name</label>
+                                <input id="reviews-name" name="customerName" type="text" required maxlength="80" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                             </div>
                             <div>
-                                <label for="gallery-location" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">City / Area</label>
-                                <input id="gallery-location" name="location" type="text" required maxlength="90" placeholder="Waterford, MI" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <label for="reviews-location" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">City / Area</label>
+                                <input id="reviews-location" name="location" type="text" required maxlength="90" placeholder="Waterford, MI" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                             </div>
                         </div>
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div>
-                                <label for="gallery-project" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Type</label>
-                                <select id="gallery-project" name="projectType" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <label for="reviews-project" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Type</label>
+                                <select id="reviews-project" name="projectType" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                                     <option value="">Choose a project</option>
                                     <option>Carpentry & Trim</option>
                                     <option>Doors & Installation</option>
@@ -534,8 +534,8 @@
                                 </select>
                             </div>
                             <div>
-                                <label for="gallery-rating" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Rating</label>
-                                <select id="gallery-rating" name="rating" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <label for="reviews-rating" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Rating</label>
+                                <select id="reviews-rating" name="rating" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                                     <option value="5">5 stars</option>
                                     <option value="4">4 stars</option>
                                     <option value="3">3 stars</option>
@@ -545,26 +545,26 @@
                             </div>
                         </div>
                         <div>
-                            <label for="gallery-review" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Review</label>
-                            <textarea id="gallery-review" name="review" rows="4" required maxlength="700" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Tell neighbors what was fixed and how it went."></textarea>
+                            <label for="reviews-review" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Review</label>
+                            <textarea id="reviews-review" name="review" rows="4" required maxlength="700" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Tell neighbors what was fixed and how it went."></textarea>
                         </div>
                         <div>
-                            <label for="gallery-photo" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Photo</label>
-                            <label id="gallery-dropzone" for="gallery-photo" class="gallery-dropzone block cursor-pointer border-2 border-dashed border-blue-300 rounded-3xl p-5 text-center transition">
-                                <input id="gallery-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif" required class="sr-only">
+                            <label for="reviews-photo" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Photo</label>
+                            <label id="reviews-dropzone" for="reviews-photo" class="review-dropzone block cursor-pointer border-2 border-dashed border-blue-300 rounded-3xl p-5 text-center transition">
+                                <input id="reviews-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif" required class="sr-only">
                                 <span class="block text-3xl text-blue-800 mb-2"><i class="fas fa-cloud-arrow-up"></i></span>
-                                <span id="gallery-file-name" class="block font-semibold text-blue-900">Choose a photo or drag it here</span>
+                                <span id="reviews-file-name" class="block font-semibold text-blue-900">Choose a photo or drag it here</span>
                                 <span class="block text-sm text-gray-500 mt-1">JPG, PNG, WebP, or GIF up to 4 MB</span>
                             </label>
                         </div>
-                        <p id="gallery-message" class="hidden text-sm font-semibold"></p>
-                        <div id="gallery-editing" class="hidden bg-blue-50 border border-blue-200 rounded-2xl p-4 text-sm text-blue-900">
+                        <p id="reviews-message" class="hidden text-sm font-semibold"></p>
+                        <div id="reviews-editing" class="hidden bg-blue-50 border border-blue-200 rounded-2xl p-4 text-sm text-blue-900">
                             <div class="flex items-center justify-between gap-3">
-                                <span><i class="fas fa-pen-to-square mr-2"></i>Editing your gallery submission</span>
-                                <button id="gallery-cancel-edit" type="button" class="font-bold text-red-700 hover:text-red-800">Cancel</button>
+                                <span><i class="fas fa-pen-to-square mr-2"></i>Editing your review submission</span>
+                                <button id="reviews-cancel-edit" type="button" class="font-bold text-red-700 hover:text-red-800">Cancel</button>
                             </div>
                         </div>
-                        <button id="gallery-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3">
+                        <button id="reviews-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3">
                             Add Review <i class="fas fa-camera-retro"></i>
                         </button>
                     </form>
@@ -573,20 +573,20 @@
                 <div>
                     <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
                         <div>
-                            <div class="uppercase tracking-widest text-blue-200 font-semibold text-sm">Recent Customer Photos</div>
+                            <div class="uppercase tracking-widest text-blue-200 font-semibold text-sm">Recent Customer Reviews</div>
                             <h3 class="text-2xl sm:text-3xl font-bold mt-2">Finished work from local homes</h3>
                         </div>
-                        <button id="gallery-refresh" type="button" class="self-start sm:self-auto border border-white/40 hover:bg-white hover:text-blue-900 px-5 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2">
+                        <button id="reviews-refresh" type="button" class="self-start sm:self-auto border border-white/40 hover:bg-white hover:text-blue-900 px-5 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2">
                             <i class="fas fa-rotate-right"></i> Refresh
                         </button>
                     </div>
-                    <div id="gallery-list" class="grid sm:grid-cols-2 gap-5"></div>
-                    <div id="gallery-empty" class="hidden bg-white/10 border border-white/20 rounded-3xl p-8 text-white/85">
+                    <div id="reviews-list" class="grid sm:grid-cols-2 gap-5"></div>
+                    <div id="reviews-empty" class="hidden bg-white/10 border border-white/20 rounded-3xl p-8 text-white/85">
                         <div class="text-4xl mb-4"><i class="fas fa-images"></i></div>
-                        <h4 class="text-2xl font-bold text-white mb-2">No customer photos yet</h4>
+                        <h4 class="text-2xl font-bold text-white mb-2">No customer reviews yet</h4>
                         <p>Be the first to add a project photo and review.</p>
                     </div>
-                    <div id="gallery-loading" class="grid sm:grid-cols-2 gap-5">
+                    <div id="reviews-loading" class="grid sm:grid-cols-2 gap-5">
                         <div class="h-80 rounded-3xl bg-white/15 animate-pulse"></div>
                         <div class="h-80 rounded-3xl bg-white/15 animate-pulse"></div>
                     </div>
@@ -802,21 +802,21 @@
             });
         }
 
-        // Customer gallery submissions
-        const galleryForm = document.getElementById('gallery-form');
-        const galleryList = document.getElementById('gallery-list');
-        const galleryEmpty = document.getElementById('gallery-empty');
-        const galleryLoading = document.getElementById('gallery-loading');
-        const galleryMessage = document.getElementById('gallery-message');
-        const gallerySubmit = document.getElementById('gallery-submit');
-        const galleryRefresh = document.getElementById('gallery-refresh');
-        const galleryPhoto = document.getElementById('gallery-photo');
-        const galleryDropzone = document.getElementById('gallery-dropzone');
-        const galleryFileName = document.getElementById('gallery-file-name');
-        const galleryEditing = document.getElementById('gallery-editing');
-        const galleryCancelEdit = document.getElementById('gallery-cancel-edit');
-        const galleryTokenKey = 'aaaGalleryEditTokens';
-        let galleryEditId = null;
+        // Customer reviews submissions
+        const reviewsForm = document.getElementById('reviews-form');
+        const reviewsList = document.getElementById('reviews-list');
+        const reviewsEmpty = document.getElementById('reviews-empty');
+        const reviewsLoading = document.getElementById('reviews-loading');
+        const reviewsMessage = document.getElementById('reviews-message');
+        const reviewsSubmit = document.getElementById('reviews-submit');
+        const reviewsRefresh = document.getElementById('reviews-refresh');
+        const reviewsPhoto = document.getElementById('reviews-photo');
+        const reviewsDropzone = document.getElementById('reviews-dropzone');
+        const reviewsFileName = document.getElementById('reviews-file-name');
+        const reviewsEditing = document.getElementById('reviews-editing');
+        const reviewsCancelEdit = document.getElementById('reviews-cancel-edit');
+        const reviewsTokenKey = 'aaaReviewsEditTokens';
+        let reviewsEditId = null;
 
         const escapeHTML = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({
             '&': '&amp;',
@@ -830,99 +830,99 @@
             `<i class="${index < rating ? 'fas' : 'far'} fa-star"></i>`
         ).join('');
 
-        const showGalleryMessage = (text, isError) => {
-            if (!galleryMessage) return;
-            galleryMessage.textContent = text;
-            galleryMessage.className = `text-sm font-semibold ${isError ? 'text-red-700' : 'text-green-700'}`;
+        const showReviewsMessage = (text, isError) => {
+            if (!reviewsMessage) return;
+            reviewsMessage.textContent = text;
+            reviewsMessage.className = `text-sm font-semibold ${isError ? 'text-red-700' : 'text-green-700'}`;
         };
 
-        const galleryTokens = () => {
+        const reviewsTokens = () => {
             try {
-                return JSON.parse(localStorage.getItem(galleryTokenKey) || '{}');
+                return JSON.parse(localStorage.getItem(reviewsTokenKey) || '{}');
             } catch {
                 return {};
             }
         };
 
-        const saveGalleryToken = (id, token) => {
+        const saveReviewsToken = (id, token) => {
             if (!id || !token) return;
-            const tokens = galleryTokens();
+            const tokens = reviewsTokens();
             tokens[id] = token;
-            localStorage.setItem(galleryTokenKey, JSON.stringify(tokens));
+            localStorage.setItem(reviewsTokenKey, JSON.stringify(tokens));
         };
 
-        const removeGalleryToken = (id) => {
-            const tokens = galleryTokens();
+        const removeReviewsToken = (id) => {
+            const tokens = reviewsTokens();
             delete tokens[id];
-            localStorage.setItem(galleryTokenKey, JSON.stringify(tokens));
+            localStorage.setItem(reviewsTokenKey, JSON.stringify(tokens));
         };
 
-        const setGallerySubmitting = (isSubmitting) => {
-            if (!gallerySubmit) return;
-            gallerySubmit.disabled = isSubmitting;
-            gallerySubmit.classList.toggle('opacity-70', isSubmitting);
-            gallerySubmit.classList.toggle('cursor-not-allowed', isSubmitting);
+        const setReviewsSubmitting = (isSubmitting) => {
+            if (!reviewsSubmit) return;
+            reviewsSubmit.disabled = isSubmitting;
+            reviewsSubmit.classList.toggle('opacity-70', isSubmitting);
+            reviewsSubmit.classList.toggle('cursor-not-allowed', isSubmitting);
         };
 
-        const resetGalleryForm = () => {
-            if (!galleryForm) return;
-            galleryEditId = null;
-            galleryForm.reset();
-            if (galleryPhoto) galleryPhoto.required = true;
-            if (galleryFileName) galleryFileName.textContent = 'Choose a photo or drag it here';
-            if (galleryEditing) galleryEditing.classList.add('hidden');
-            if (gallerySubmit) gallerySubmit.innerHTML = 'Add Review <i class="fas fa-camera-retro"></i>';
+        const resetReviewsForm = () => {
+            if (!reviewsForm) return;
+            reviewsEditId = null;
+            reviewsForm.reset();
+            if (reviewsPhoto) reviewsPhoto.required = true;
+            if (reviewsFileName) reviewsFileName.textContent = 'Choose a photo or drag it here';
+            if (reviewsEditing) reviewsEditing.classList.add('hidden');
+            if (reviewsSubmit) reviewsSubmit.innerHTML = 'Add Review <i class="fas fa-camera-retro"></i>';
         };
 
-        const startGalleryEdit = (item) => {
-            if (!galleryForm) return;
-            galleryEditId = item.id;
-            galleryForm.customerName.value = item.customerName || '';
-            galleryForm.location.value = item.location || '';
-            galleryForm.projectType.value = item.projectType || '';
-            galleryForm.rating.value = String(item.rating || 5);
-            galleryForm.review.value = item.review || '';
-            if (galleryPhoto) galleryPhoto.required = false;
-            if (galleryFileName) galleryFileName.textContent = 'Keep current photo or choose a replacement';
-            if (galleryEditing) galleryEditing.classList.remove('hidden');
-            if (gallerySubmit) gallerySubmit.innerHTML = 'Save Changes <i class="fas fa-floppy-disk"></i>';
-            showGalleryMessage('Update the fields below, then save your changes.', false);
-            galleryForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const startReviewsEdit = (item) => {
+            if (!reviewsForm) return;
+            reviewsEditId = item.id;
+            reviewsForm.customerName.value = item.customerName || '';
+            reviewsForm.location.value = item.location || '';
+            reviewsForm.projectType.value = item.projectType || '';
+            reviewsForm.rating.value = String(item.rating || 5);
+            reviewsForm.review.value = item.review || '';
+            if (reviewsPhoto) reviewsPhoto.required = false;
+            if (reviewsFileName) reviewsFileName.textContent = 'Keep current photo or choose a replacement';
+            if (reviewsEditing) reviewsEditing.classList.remove('hidden');
+            if (reviewsSubmit) reviewsSubmit.innerHTML = 'Save Changes <i class="fas fa-floppy-disk"></i>';
+            showReviewsMessage('Update the fields below, then save your changes.', false);
+            reviewsForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
         };
 
-        const deleteGalleryItem = (id) => {
-            if (!confirm('Remove this gallery submission?')) return;
-            showGalleryMessage('Removing your gallery submission...', false);
+        const deleteReviewsItem = (id) => {
+            if (!confirm('Remove this review submission?')) return;
+            showReviewsMessage('Removing your review submission...', false);
 
-            fetch(`/api/gallery/${encodeURIComponent(id)}`, {
+            fetch(`/api/reviews/${encodeURIComponent(id)}`, {
                 method: 'DELETE',
                 headers: { 'content-type': 'application/json' }
             })
             .then(async response => {
                 const payload = await response.json().catch(() => ({}));
                 if (!response.ok) throw new Error(payload.error || 'Delete failed.');
-                removeGalleryToken(id);
-                if (galleryEditId === id) resetGalleryForm();
-                showGalleryMessage('Your gallery submission was removed.', false);
-                loadGallery();
+                removeReviewsToken(id);
+                if (reviewsEditId === id) resetReviewsForm();
+                showReviewsMessage('Your review submission was removed.', false);
+                loadReviews();
             })
             .catch(error => {
-                showGalleryMessage(error.message || 'The gallery submission could not be removed.', true);
+                showReviewsMessage(error.message || 'The review submission could not be removed.', true);
             });
         };
 
-        const renderGallery = (items) => {
-            if (!galleryList || !galleryEmpty || !galleryLoading) return;
-            galleryLoading.classList.add('hidden');
-            galleryList.innerHTML = '';
-            galleryEmpty.classList.toggle('hidden', items.length > 0);
+        const renderReviews = (items) => {
+            if (!reviewsList || !reviewsEmpty || !reviewsLoading) return;
+            reviewsLoading.classList.add('hidden');
+            reviewsList.innerHTML = '';
+            reviewsEmpty.classList.toggle('hidden', items.length > 0);
 
             items.forEach((item, index) => {
                 const card = document.createElement('article');
-                card.className = 'gallery-card bg-white text-gray-900 rounded-3xl overflow-hidden shadow-2xl border border-white/20';
+                card.className = 'review-card bg-white text-gray-900 rounded-3xl overflow-hidden shadow-2xl border border-white/20';
                 card.style.animationDelay = `${index * 60}ms`;
                 card.innerHTML = `
-                    <div class="gallery-preview bg-gray-100">
+                    <div class="review-preview bg-gray-100">
                         <img src="${escapeHTML(item.imageUrl)}" alt="${escapeHTML(item.imageAlt)}" class="w-full object-cover" loading="lazy">
                     </div>
                     <div class="p-5">
@@ -936,79 +936,79 @@
                             <span class="text-sm text-gray-500 text-right">${escapeHTML(item.location)}</span>
                         </div>
                         <div class="mt-4 grid grid-cols-2 gap-2">
-                            <button type="button" class="gallery-edit-btn border border-blue-200 text-blue-800 hover:bg-blue-50 px-3 py-2 rounded-xl font-bold text-sm" data-id="${escapeHTML(item.id)}">
+                            <button type="button" class="review-edit-btn border border-blue-200 text-blue-800 hover:bg-blue-50 px-3 py-2 rounded-xl font-bold text-sm" data-id="${escapeHTML(item.id)}">
                                 <i class="fas fa-pen-to-square mr-1"></i>Edit
                             </button>
-                            <button type="button" class="gallery-delete-btn border border-red-200 text-red-700 hover:bg-red-50 px-3 py-2 rounded-xl font-bold text-sm" data-id="${escapeHTML(item.id)}">
+                            <button type="button" class="review-delete-btn border border-red-200 text-red-700 hover:bg-red-50 px-3 py-2 rounded-xl font-bold text-sm" data-id="${escapeHTML(item.id)}">
                                 <i class="fas fa-trash-can mr-1"></i>Delete
                             </button>
                         </div>
                     </div>
                 `;
-                card.querySelector('.gallery-edit-btn')?.addEventListener('click', () => startGalleryEdit(item));
-                card.querySelector('.gallery-delete-btn')?.addEventListener('click', () => deleteGalleryItem(item.id));
-                galleryList.appendChild(card);
+                card.querySelector('.review-edit-btn')?.addEventListener('click', () => startReviewsEdit(item));
+                card.querySelector('.review-delete-btn')?.addEventListener('click', () => deleteReviewsItem(item.id));
+                reviewsList.appendChild(card);
             });
         };
 
-        const loadGallery = () => {
-            if (!galleryList || !galleryLoading || !galleryEmpty) return;
-            galleryLoading.classList.remove('hidden');
-            galleryEmpty.classList.add('hidden');
+        const loadReviews = () => {
+            if (!reviewsList || !reviewsLoading || !reviewsEmpty) return;
+            reviewsLoading.classList.remove('hidden');
+            reviewsEmpty.classList.add('hidden');
 
-            fetch('/api/gallery')
+            fetch('/api/reviews')
                 .then(response => response.ok ? response.json() : Promise.reject())
-                .then(renderGallery)
+                .then(renderReviews)
                 .catch(() => {
-                    galleryLoading.classList.add('hidden');
-                    galleryEmpty.classList.remove('hidden');
-                    galleryEmpty.querySelector('p').textContent = 'The gallery could not load right now. Please try again soon.';
+                    reviewsLoading.classList.add('hidden');
+                    reviewsEmpty.classList.remove('hidden');
+                    reviewsEmpty.querySelector('p').textContent = 'The reviews could not load right now. Please try again soon.';
                 });
         };
 
-        if (galleryPhoto && galleryFileName) {
-            galleryPhoto.addEventListener('change', () => {
-                galleryFileName.textContent = galleryPhoto.files?.[0]?.name || 'Choose a photo or drag it here';
+        if (reviewsPhoto && reviewsFileName) {
+            reviewsPhoto.addEventListener('change', () => {
+                reviewsFileName.textContent = reviewsPhoto.files?.[0]?.name || 'Choose a photo or drag it here';
             });
         }
 
-        if (galleryDropzone && galleryPhoto) {
+        if (reviewsDropzone && reviewsPhoto) {
             ['dragenter', 'dragover'].forEach(eventName => {
-                galleryDropzone.addEventListener(eventName, (event) => {
+                reviewsDropzone.addEventListener(eventName, (event) => {
                     event.preventDefault();
-                    galleryDropzone.classList.add('dragging');
+                    reviewsDropzone.classList.add('dragging');
                 });
             });
 
             ['dragleave', 'drop'].forEach(eventName => {
-                galleryDropzone.addEventListener(eventName, (event) => {
+                reviewsDropzone.addEventListener(eventName, (event) => {
                     event.preventDefault();
-                    galleryDropzone.classList.remove('dragging');
+                    reviewsDropzone.classList.remove('dragging');
                 });
             });
 
-            galleryDropzone.addEventListener('drop', (event) => {
+            reviewsDropzone.addEventListener('drop', (event) => {
                 const file = event.dataTransfer?.files?.[0];
                 if (!file) return;
                 const transfer = new DataTransfer();
                 transfer.items.add(file);
-                galleryPhoto.files = transfer.files;
-                galleryPhoto.dispatchEvent(new Event('change'));
+                reviewsPhoto.files = transfer.files;
+                reviewsPhoto.dispatchEvent(new Event('change'));
             });
         }
 
-        if (galleryForm) {
-            galleryForm.addEventListener('submit', (event) => {
+        if (reviewsForm) {
+            reviewsForm.addEventListener('submit', (event) => {
                 event.preventDefault();
-                const formData = new FormData(galleryForm);
-                const isEditing = Boolean(galleryEditId);
+                const formData = new FormData(reviewsForm);
+                const isEditing = Boolean(reviewsEditId);
                 if (isEditing) {
-                    formData.append('editToken', galleryTokens()[galleryEditId] || '');
+                    formData.append('editToken', reviewsTokens()[reviewsEditId] || '');
                 }
-                setGallerySubmitting(true);
-                showGalleryMessage(isEditing ? 'Saving your changes...' : 'Uploading your review...', false);
+                setReviewsSubmitting(true);
+                showReviewsMessage(isEditing ? 'Saving your changes...' : 'Uploading your review...', false);
 
-                fetch(isEditing ? `/api/gallery/${encodeURIComponent(galleryEditId)}` : '/api/gallery', {
+                fetch(isEditing ? `/api/reviews/${encodeURIComponent(reviewsEditId)}` : '/api/reviews', {
                     method: isEditing ? 'PUT' : 'POST',
                     body: formData
                 })
@@ -1018,32 +1018,32 @@
                     return payload;
                 })
                 .then((payload) => {
-                    if (payload.id && payload.editToken) saveGalleryToken(payload.id, payload.editToken);
-                    resetGalleryForm();
-                    showGalleryMessage(isEditing ? 'Your gallery submission was updated.' : 'Thanks. Your photo and review were added to the gallery.', false);
-                    loadGallery();
+                    if (payload.id && payload.editToken) saveReviewsToken(payload.id, payload.editToken);
+                    resetReviewsForm();
+                    showReviewsMessage(isEditing ? 'Your review submission was updated.' : 'Thanks. Your photo and review were added successfully.', false);
+                    loadReviews();
                 })
                 .catch(error => {
-                    showGalleryMessage(error.message || 'The gallery review could not be saved.', true);
+                    showReviewsMessage(error.message || 'The review could not be saved.', true);
                 })
                 .finally(() => {
-                    setGallerySubmitting(false);
+                    setReviewsSubmitting(false);
                 });
             });
         }
 
-        if (galleryCancelEdit) {
-            galleryCancelEdit.addEventListener('click', () => {
-                resetGalleryForm();
-                showGalleryMessage('Editing canceled.', false);
+        if (reviewsCancelEdit) {
+            reviewsCancelEdit.addEventListener('click', () => {
+                resetReviewsForm();
+                showReviewsMessage('Editing canceled.', false);
             });
         }
 
-        if (galleryRefresh) {
-            galleryRefresh.addEventListener('click', loadGallery);
+        if (reviewsRefresh) {
+            reviewsRefresh.addEventListener('click', loadReviews);
         }
 
-        loadGallery();
+        loadReviews();
 
         // Mobile menu toggle
         const menuBtn = document.getElementById('mobile-menu-btn');
