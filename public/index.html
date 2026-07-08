@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Preconnect to external resources for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
-  gtag('config', 'G-VRMCPNEQC3');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VRMCPNEQC3');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#DC2626">
     <title>AAA Handyman Services - Oakland County, MI | Home Repair Experts</title>
     
     <!-- Search Engine Optimization (SEO) Metadata -->
-    <meta name="description" content="Looking for trusted home maintenance and repair experts in Oakland County, MI? AAA Handyman Services provides reliable carpentry, door/window installs, assembly, drywall, plumbing, electrical, flooring, painting, decks, and fences.">
-    <meta name="keywords" content="handyman Oakland County MI, home repair Oakland County, handyman services Michigan, local handyman, home maintenance Oakland County, carpentry, door installation, drywall repair, painting, flooring">
+    <meta name="description" content="Looking for trusted home maintenance and repair experts in Oakland County, MI? AAA Handyman Services provides reliable carpentry, door/window installs, assembly, plumbing, electrical, drywall, and more. Call (248) 385-3432 for estimates.">
+    <meta name="keywords" content="handyman Oakland County MI, home repair Oakland County, handyman services Michigan, local handyman, home maintenance Oakland County, carpentry, door installation, drywall repair, plumbing, electrical">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://aaahandyman.services/">
+    <link rel="sitemap" href="/sitemap.xml">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -26,6 +34,7 @@
     <meta property="og:title" content="AAA Handyman Services - Oakland County, MI | Home Repair Experts">
     <meta property="og:description" content="Trusted home maintenance and repair experts in Oakland County, MI. Handyman services, door installs, assembly, and home improvements. Call (248) 385-3432.">
     <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
+    <meta property="og:image:alt" content="AAA Handyman Services logo banner">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -67,13 +76,7 @@
       ],
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         "opens": "08:00",
         "closes": "17:00"
       }
@@ -83,49 +86,75 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Impact&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        
         html { scroll-behavior: smooth; }
         body { font-family: 'Roboto', sans-serif; }
-        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('logo-banner.jpg') center/cover; }
-        .nav-link { transition: all 0.3s; }
-        .nav-link:hover { color: #ef4444; transform: translateY(-2px); }
-        .service-card { transition: all 0.3s; }
-        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
-        .reviews-section {
-            background:
-                linear-gradient(135deg, rgba(17, 24, 39, 0.94), rgba(30, 64, 175, 0.88)),
-                url('logo-banner.jpg') center/cover fixed;
+        
+        .hero { 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('logo-banner.jpg') center/cover; 
         }
+        
+        .nav-link { 
+            transition: all 0.3s; 
+        }
+        
+        .nav-link:hover { 
+            color: #ef4444; 
+            transform: translateY(-2px); 
+        }
+        
+        .service-card { 
+            transition: all 0.3s; 
+        }
+        
+        .service-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); 
+        }
+        
+        .reviews-section {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.94), rgba(30, 64, 175, 0.88)), url('logo-banner.jpg') center/cover fixed;
+        }
+        
         .review-card {
             animation: review-rise 0.45s ease both;
         }
+        
         @keyframes review-rise {
             from { opacity: 0; transform: translateY(18px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
         .review-dropzone {
             background-image: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(37, 99, 235, 0.12));
         }
+        
         .review-dropzone.dragging {
             border-color: #ef4444;
             background-image: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(37, 99, 235, 0.2));
         }
+        
         .review-preview img {
             aspect-ratio: 4 / 3;
         }
+        
         /* Siren flashing animation */
         @keyframes siren-flash {
             0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 0 rgba(239, 68, 68, 0)); }
             50% { opacity: 0.3; transform: scale(1.15); filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.8)); }
         }
+        
         .flash-siren {
             display: inline-block;
             animation: siren-flash 1s infinite ease-in-out;
         }
+        
         /* Anchor scroll margin for sticky navbar */
         section[id] {
             scroll-margin-top: 80px;
         }
+        
         @media (max-width: 768px) {
             section[id] {
                 scroll-margin-top: 100px;
@@ -140,7 +169,7 @@
         <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 sm:py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <!-- Logo -->
-                <img src="logo-shield.png" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover">
+                <img src="logo-shield.png" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover" loading="eager">
                 <div>
                     <h1 class="text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-900 leading-tight">AAA Handyman Services</h1>
                     <p class="text-[10px] sm:text-xs text-gray-500">Oakland County Michigan</p>
@@ -154,15 +183,15 @@
                 <a href="#travel-zones" class="nav-link text-gray-700 hover:text-red-600">Service Area</a>
                 <a href="#reviews" class="nav-link text-gray-700 hover:text-red-600">Reviews</a>
                 <a href="#contact" class="nav-link text-gray-700 hover:text-red-600">Contact</a>
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="nav-link text-gray-700 hover:text-red-600 text-xl"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" class="nav-link text-gray-700 hover:text-red-600 text-xl" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             </div>
             <!-- Nav Action Buttons -->
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <a href="tel:2483853432" class="bg-red-600 hover:bg-red-700 text-white p-3 sm:px-6 sm:py-3 rounded-full font-semibold flex items-center justify-center gap-2 transition" title="Call us">
+                <a href="tel:2483853432" class="bg-red-600 hover:bg-red-700 text-white p-3 sm:px-6 sm:py-3 rounded-full font-semibold flex items-center justify-center gap-2 transition" title="Call AAA Handyman Services">
                     <i class="fas fa-phone"></i> <span class="hidden sm:inline">‪(248) 385-3432‬</span>
                 </a>
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
+                <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Mobile Menu" aria-expanded="false" aria-controls="mobile-menu">
                     <i class="fas fa-bars" id="menu-icon"></i>
                 </button>
             </div>
@@ -175,7 +204,7 @@
             <a href="#travel-zones" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Service Area</a>
             <a href="#reviews" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Reviews</a>
             <a href="#contact" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Contact</a>
-            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1"><i class="fab fa-facebook-f"></i> Facebook</a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
         </div>
     </nav>
 
@@ -209,7 +238,7 @@
                     <div class="uppercase tracking-widest text-red-600 font-semibold mb-3">About Us</div>
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6 sm:mb-8">Locally Owned and Operated</h2>
                     <div class="prose prose-lg text-gray-600">
-                        <p>AAA Handyman Services is your trusted partner for all home maintenance and repair needs. Exclusively serving the local community, we pride ourselves on quality workmanship and honest, upfront pricing.</p>
+                        <p>AAA Handyman Services is your trusted partner for all home maintenance and repair needs. Exclusively serving the local community, we pride ourselves on quality workmanship and customer satisfaction.</p>
                         <p>With a team of 1 or 2 skilled craftsmen, we handle most projects – no job is too small!</p>
                     </div>
                     <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 text-sm">
@@ -224,7 +253,7 @@
                     </div>
                 </div>
                 <div class="relative">
-                    <img src="logo-circular.png" alt="AAA Handyman Services Circular Logo" class="rounded-full shadow-2xl w-full max-w-md mx-auto">
+                    <img src="logo-circular.png" alt="AAA Handyman Services Circular Logo" class="rounded-full shadow-2xl w-full max-w-md mx-auto" loading="lazy">
                     <div class="absolute -bottom-6 left-4 sm:-left-6 bg-white p-4 sm:p-6 rounded-3xl shadow-xl">
                         <div class="flex items-center gap-4">
                             <div class="text-3xl sm:text-5xl font-bold text-red-600">25+</div>
@@ -250,53 +279,53 @@
                 <div class="service-card bg-white border border-gray-100 p-8 rounded-3xl shadow ring-1 ring-red-500">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🔨</div>
                     <h3 class="text-2xl font-semibold mb-3">Carpentry & Trim</h3>
-                    <p class="text-gray-600">Revive your home’s character. From baseboards and crown molding to custom exterior woodwork, I provide precision craftsmanship that restores the aesthetic and structural integrity of your living space.</p>
+                    <p class="text-gray-600">Revive your home's character. From baseboards and crown molding to custom exterior woodwork, I provide precision craftsmanship that restores the aesthetic beauty of your space.</p>
                 </div>
                 <div class="service-card bg-white border border-gray-100 p-8 rounded-3xl shadow ring-1 ring-blue-500">
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🚪</div>
                     <h3 class="text-2xl font-semibold mb-3">Doors</h3>
-                    <p class="text-gray-600">Secure, smooth, and seamless. Whether it’s an elegant new entry door for curb appeal or an interior door that sticks, I handle expert installation and alignment to ensure your doors function perfectly every time.</p>
+                    <p class="text-gray-600">Secure, smooth, and seamless. Whether it's an elegant new entry door for curb appeal or an interior door that sticks, I handle expert installation and alignment.</p>
                 </div>
                 <div class="service-card bg-white border border-gray-100 p-8 rounded-3xl shadow ring-1 ring-red-500">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🚿</div>
                     <h3 class="text-2xl font-semibold mb-3">Minor Plumbing Repairs</h3>
-                    <p class="text-gray-600">Stop the drip, protect your home. I provide fast, clean solutions for leaky faucets, showerheads, and stubborn drains, ensuring your home’s flow is restored efficiently.</p>
+                    <p class="text-gray-600">Stop the drip, protect your home. I provide fast, clean solutions for leaky faucets, showerheads, and stubborn drains, ensuring your home's flow is restored.</p>
                 </div>
                 <div class="service-card bg-white border border-gray-100 p-8 rounded-3xl shadow ring-1 ring-blue-500">
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🧱</div>
                     <h3 class="text-2xl font-semibold mb-3">Drywall</h3>
-                    <p class="text-gray-600">Seamless surfaces, flawless finishes. Don’t let cracks or holes distract from your home’s interior. I deliver professional-grade patching and smoothing, leaving your walls paint-ready and pristine.</p>
+                    <p class="text-gray-600">Seamless surfaces, flawless finishes. Don't let cracks or holes distract from your home's interior. I deliver professional-grade patching and smoothing.</p>
                 </div>
                 <div class="service-card bg-white border border-gray-100 p-8 rounded-3xl shadow ring-1 ring-red-500">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">💡</div>
                     <h3 class="text-2xl font-semibold mb-3">Minor Electrical Services</h3>
-                    <p class="text-gray-600">Safe, reliable updates. Keep your home powered and bright. I specialize in replacing outdated switches, outlets, and fixtures or installing new ceiling fans with safety and code-conscious precision. (Note: I focus on fixtures and safety updates; new wiring or breaker box installations are not included.)</p>
+                    <p class="text-gray-600">Safe, reliable updates. Keep your home powered and bright. I specialize in replacing outdated switches, outlets, and fixtures or installing new ceiling fans.</p>
                 </div>
                 <div class="service-card bg-white border border-gray-100 p-8 rounded-3xl shadow ring-1 ring-blue-500">
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🪵</div>
                     <h3 class="text-2xl font-semibold mb-3">Flooring Solutions</h3>
-                    <p class="text-gray-600">Durable beauty underfoot. From tile and hardwood to laminate and carpet, I provide expert maintenance and repair services, ensuring your floors are level, secure, and built to last.</p>
+                    <p class="text-gray-600">Durable beauty underfoot. From tile and hardwood to laminate and carpet, I provide expert maintenance and repair services, ensuring your floors are level and pristine.</p>
                 </div>
                 <!-- More services -->
                 <div class="service-card bg-white border border-gray-100 p-8 rounded-3xl shadow ring-1 ring-red-500">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🎨</div>
                     <h3 class="text-2xl font-semibold mb-3">Painting</h3>
-                    <p class="text-gray-600">A fresh look, perfectly executed. Painting is 90% preparation. I focus on meticulous surface prep, crisp edging, and smooth, professional finishes to revitalize your home's appearance inside and out.</p>
+                    <p class="text-gray-600">A fresh look, perfectly executed. Painting is 90% preparation. I focus on meticulous surface prep, crisp edging, and smooth, professional finishes to revitalize your spaces.</p>
                 </div>
                 <div class="service-card bg-white border border-gray-100 p-8 rounded-3xl shadow ring-1 ring-blue-500">
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🌳</div>
                     <h3 class="text-2xl font-semibold mb-3">Decks & Fences</h3>
-                    <p class="text-gray-600">Restore your outdoor sanctuary. Extend the life of your wood structures with professional resurfacing, structural repairs, and expert staining to protect your investment against the elements.</p>
+                    <p class="text-gray-600">Restore your outdoor sanctuary. Extend the life of your wood structures with professional resurfacing, structural repairs, and expert staining to protect your investment.</p>
                 </div>
                 <div class="service-card bg-white border border-gray-100 p-8 rounded-3xl shadow ring-1 ring-red-500">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6">🧹</div>
                     <h3 class="text-2xl font-semibold mb-3">Maintenance & Cleaning</h3>
-                    <p class="text-gray-600">easonal care, year-round peace of mind. Cross off your to-do list with comprehensive gutter cleaning, power washing, and general home maintenance designed to keep your property in peak condition.</p>
+                    <p class="text-gray-600">Seasonal care, year-round peace of mind. Cross off your to-do list with comprehensive gutter cleaning, power washing, and general home maintenance designed for longevity.</p>
                 </div>
                 <div class="service-card bg-white border border-gray-100 p-8 rounded-3xl shadow ring-1 ring-red-500 md:col-span-2 lg:col-span-1 lg:col-start-2">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-4xl mb-6"><span class="flash-siren">🚨</span></div>
                     <h3 class="text-2xl font-semibold mb-3 text-red-600">After Hours Emergency Services Available</h3>
-                    <p class="text-gray-600 mb-4">Help when you need it most. Available 7 days a week for urgent repairs—such as leaks or security-compromising door/window issues—I provide priority response to keep your home safe and secure.</p>
+                    <p class="text-gray-600 mb-4">Help when you need it most. Available 7 days a week for urgent repairs—such as leaks or security-compromising door/window issues—I provide priority response.</p>
                     <ul class="space-y-3 text-sm text-gray-600">
                         <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span>Priority response & dispatch</li>
                         <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span>Available After Hours / 7 days a week</li>
@@ -307,7 +336,7 @@
             
             <div class="mt-12 sm:mt-16 text-center bg-blue-900 text-white p-6 sm:p-12 rounded-3xl">
                 <p class="text-xl sm:text-2xl md:text-3xl font-medium">Available Monday - Friday 9am - 6pm - Saturday 10am - 5pm</p>
-                <p class="mt-4 text-base sm:text-lg md:text-xl opacity-90"><span class="flash-siren">🚨</span> After Hours Emergency Services Available - Competitive hourly rates • No job too small!</p>
+                <p class="mt-4 text-base sm:text-lg md:text-xl opacity-90"><span class="flash-siren">🚨</span> After Hours Emergency Services Available - Competitive hourly rates • No job too small</p>
             </div>
         </div>
     </section>
@@ -382,7 +411,8 @@
                         <div class="text-4xl font-bold text-red-800 mt-4">$150 / $75</div>
                         <div class="text-sm text-gray-500">first / add'l man-hr</div>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-4 text-center"><span class="flash-siren">🚨</span> After Hours Emergency Service Rate</h3>                    <p class="text-gray-600 mb-6">Urgent repairs and assistance outside of normal business hours.</p>
+                    <h3 class="text-2xl font-semibold mb-4 text-center"><span class="flash-siren">🚨</span> After Hours Emergency Service Rate</h3>
+                    <p class="text-gray-600 mb-6">Urgent repairs available 7 days a week. Premium pricing reflects priority dispatch and immediate availability.</p>
                     <ul class="space-y-3 text-sm text-gray-600">
                         <li class="flex items-start gap-2"><span class="text-red-700 mt-1">•</span> Priority response & dispatch</li>
                         <li class="flex items-start gap-2"><span class="text-red-700 mt-1">•</span> Available after hours / 7 days a week</li>
@@ -411,7 +441,7 @@
                 <div class="bg-white p-8 rounded-3xl shadow-sm flex flex-col justify-between border border-red-500">
                     <div>
                         <div class="flex items-center gap-3 mb-6">
-                            <span class="text-3xl">🟢</span>
+                            <span class="text-3xl" aria-hidden="true">🟢</span>
                             <div>
                                 <h3 class="text-xl sm:text-2xl font-bold text-green-700">20 Mile Free Travel Zone</h3>
                                 <p class="text-sm text-gray-500">No travel fees applied</p>
@@ -421,17 +451,17 @@
                         <div class="space-y-6">
                             <div>
                                 <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2">North & West Metro</h4>
-                                <p class="text-gray-600 text-sm sm:text-base leading-relaxed">Waterford, Pontiac, West Bloomfield, Bloomfield Hills, White Lake, Commerce Township, Walled Lake, Wixom, Novi, Union Lake, Davisburg.</p>
+                                <p class="text-gray-600 text-sm sm:text-base leading-relaxed">Waterford, Pontiac, West Bloomfield, Bloomfield Hills, White Lake, Commerce Township, Walled Lake, Wixom, and surrounding areas.</p>
                             </div>
                             
                             <div class="pt-4">
                                 <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2">North & East Metro</h4>
-                                <p class="text-gray-600 text-sm sm:text-base leading-relaxed">Clarkston, Independence Township, Lake Orion, Oxford, Auburn Hills, Rochester, Rochester Hills, Troy, Utica.</p>
+                                <p class="text-gray-600 text-sm sm:text-base leading-relaxed">Clarkston, Independence Township, Lake Orion, Oxford, Auburn Hills, Rochester, Rochester Hills, Troy, Utica, and surrounding areas.</p>
                             </div>
 
                             <div class="pt-4">
                                 <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2">South & Southeast Metro</h4>
-                                <p class="text-gray-600 text-sm sm:text-base leading-relaxed">Royal Oak, Berkley, Birmingham, Southfield, Clawson, Madison Heights, Hazel Park, Oak Park, Ferndale, Pontiac Heights, Farmington Hills.</p>
+                                <p class="text-gray-600 text-sm sm:text-base leading-relaxed">Royal Oak, Berkley, Birmingham, Southfield, Clawson, Madison Heights, Hazel Park, Oak Park, Ferndale, Pontiac, and surrounding areas.</p>
                             </div>
 
                             <div class="pt-4">
@@ -446,7 +476,7 @@
                 <div class="bg-white p-8 rounded-3xl shadow-sm border border-blue-600 flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-3 mb-6">
-                            <span class="text-3xl">🔴</span>
+                            <span class="text-3xl" aria-hidden="true">🔴</span>
                             <div>
                                 <h3 class="text-xl sm:text-2xl font-bold text-red-600">20+ Travel Fee Zone</h3>
                                 <p class="text-sm text-gray-500">Over 20 miles away ($30 flat travel fee)</p>
@@ -474,6 +504,7 @@
             </div>
         </div>
     </section>
+
     <!-- Customer Reviews -->
     <section id="reviews" class="reviews-section py-16 sm:py-24 text-white">
         <div class="max-w-7xl mx-auto px-6">
@@ -481,7 +512,7 @@
                 <div class="lg:sticky lg:top-28">
                     <div class="uppercase tracking-widest text-red-300 font-semibold text-sm">Customer Reviews</div>
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 leading-tight">Share a finished repair and review the work</h2>
-                    <p class="mt-5 text-base sm:text-lg text-white/80 max-w-xl">Upload a project photo, add a quick rating, and help nearby Oakland County homeowners see the kind of repairs AAA Handyman Services handles.</p>
+                    <p class="mt-5 text-base sm:text-lg text-white/80 max-w-xl">Upload a project photo, add a quick rating, and help nearby Oakland County homeowners see the kind of repairs AAA Handyman Services provides.</p>
 
                     <form id="reviews-form" class="mt-8 bg-white text-gray-900 border border-white/20 rounded-3xl shadow-2xl p-5 sm:p-7 space-y-5">
                         <div class="grid sm:grid-cols-2 gap-4">
@@ -522,7 +553,7 @@
                         </div>
                         <div>
                             <label for="reviews-review" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Review</label>
-                            <textarea id="reviews-review" name="review" rows="4" required maxlength="700" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Tell neighbors what was fixed and how it went."></textarea>
+                            <textarea id="reviews-review" name="review" rows="4" required maxlength="700" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Share your experience..."></textarea>
                         </div>
                         <div>
                             <label for="reviews-photo" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Photo</label>
@@ -540,7 +571,7 @@
                                 <button id="reviews-cancel-edit" type="button" class="font-bold text-red-700 hover:text-red-800">Cancel</button>
                             </div>
                         </div>
-                        <button id="reviews-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3">
+                        <button id="reviews-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-2">
                             Add Review <i class="fas fa-camera-retro"></i>
                         </button>
                     </form>
@@ -552,7 +583,7 @@
                             <div class="uppercase tracking-widest text-blue-200 font-semibold text-sm">Recent Customer Reviews</div>
                             <h3 class="text-2xl sm:text-3xl font-bold mt-2">Finished work from local homes</h3>
                         </div>
-                        <button id="reviews-refresh" type="button" class="self-start sm:self-auto border border-white/40 hover:bg-white hover:text-blue-900 px-5 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2">
+                        <button id="reviews-refresh" type="button" class="self-start sm:self-auto border border-white/40 hover:bg-white hover:text-blue-900 px-5 py-3 rounded-2xl font-semibold transition">
                             <i class="fas fa-rotate-right"></i> Refresh
                         </button>
                     </div>
@@ -613,21 +644,21 @@
                         </p>
 
                         <div>
-                            <label class="block text-sm uppercase tracking-widest mb-2">Your Name</label>
-                            <input type="text" name="name" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
+                            <label for="contact-name" class="block text-sm uppercase tracking-widest mb-2">Your Name</label>
+                            <input id="contact-name" type="text" name="name" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
                         </div>
                         <div>
-                            <label class="block text-sm uppercase tracking-widest mb-2">Email Address</label>
-                            <input type="email" name="email" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
+                            <label for="contact-email" class="block text-sm uppercase tracking-widest mb-2">Email Address</label>
+                            <input id="contact-email" type="email" name="email" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
                         </div>
                         <div>
-                            <label class="block text-sm uppercase tracking-widest mb-2">Phone</label>
-                            <input type="tel" name="phone" class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
+                            <label for="contact-phone" class="block text-sm uppercase tracking-widest mb-2">Phone <span class="text-gray-500">(optional)</span></label>
+                            <input id="contact-phone" type="tel" name="phone" class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
                         </div>
                         <div>
-                            <label class="block text-sm uppercase tracking-widest mb-2">Service / Project Type</label>
+                            <label for="contact-service" class="block text-sm uppercase tracking-widest mb-2">Service / Project Type</label>
                             <div class="relative">
-                                <select name="service" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg text-white appearance-none">
+                                <select id="contact-service" name="service" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg text-white appearance-none">
                                     <option value="" disabled selected class="bg-gray-800 text-gray-400">Select a Service...</option>
                                     <option value="Carpentry & Trim" class="bg-gray-800 text-white">Carpentry & Trim</option>
                                     <option value="Doors & Installation" class="bg-gray-800 text-white">Doors & Installation</option>
@@ -646,8 +677,8 @@
                             </div>
                         </div>
                         <div>
-                            <label class="block text-sm uppercase tracking-widest mb-2">Message / Project Details</label>
-                            <textarea name="message" rows="6" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-3xl focus:outline-none focus:border-red-500 text-lg resize-none"></textarea>
+                            <label for="contact-message" class="block text-sm uppercase tracking-widest mb-2">Message / Project Details</label>
+                            <textarea id="contact-message" name="message" rows="6" required class="w-full px-6 py-4 bg-gray-800 border border-gray-700 rounded-3xl focus:outline-none focus:border-red-500 text-lg resize-none" placeholder="Tell us about your project..."></textarea>
                         </div>
                         <div class="flex justify-center sm:justify-start overflow-x-auto">
                             <div data-netlify-recaptcha="true"></div>
@@ -687,10 +718,8 @@
 
                         <div class="flex flex-col sm:flex-row gap-3">
                             <label for="newsletter-email" class="sr-only">Email Address</label>
-                            <input id="newsletter-email" type="email" name="email" required placeholder="Enter your email address"
-                                class="flex-1 px-6 py-4 rounded-2xl text-gray-900 text-lg placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/50">
-                            <button type="submit"
-                                class="bg-blue-900 hover:bg-blue-800 text-white text-lg px-8 py-4 rounded-2xl font-semibold inline-flex items-center justify-center gap-2 transition whitespace-nowrap">
+                            <input id="newsletter-email" type="email" name="email" required placeholder="Enter your email address" class="flex-1 px-6 py-4 rounded-2xl text-gray-900 text-lg placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/50">
+                            <button type="submit" class="bg-blue-900 hover:bg-blue-800 text-white text-lg px-8 py-4 rounded-2xl font-semibold inline-flex items-center justify-center gap-2 transition whitespace-nowrap">
                                 Sign Me Up <i class="fas fa-arrow-right"></i>
                             </button>
                         </div>
@@ -703,31 +732,57 @@
 
     <!-- Footer -->
     <footer class="bg-black text-gray-400 py-12">
-       <div class="max-w-7xl mx-auto px-6 text-center">
-           <div class="flex justify-center mb-6">
-               <!-- Circular Logo -->
-               <img src="logo-circular.png" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 mx-auto rounded-full object-cover shadow-lg">
-           </div>            <p class="text-sm">&copy; 2026 AAA Handyman Services. All Rights Reserved. Michigan's $600 Handyman Law MCL 339.2403 Compliant. Locally Serving Oakland County, MI.</p>
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex justify-center mb-6">
+                <!-- Circular Logo -->
+                <img src="logo-circular.png" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 mx-auto rounded-full object-cover shadow-lg" loading="lazy">
+            </div>
+            <p class="text-sm">&copy; 2026 AAA Handyman Services. All Rights Reserved. Michigan's $600 Handyman Law MCL 339.2403 Compliant. Locally Serving Oakland County, MI.</p>
             <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
-                <a href="https://aaahandymanservices-privacy.netlify.app/" target="_blank" rel="noopener" class="hover:text-white transition">Privacy Policy</a>
+                <a href="https://aaahandymanservices-privacy.netlify.app/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Privacy Policy</a>
                 <span class="text-gray-600">|</span>
-                <a href="https://aaahandymanservices-terms.netlify.app/" target="_blank" rel="noopener" class="hover:text-white transition">Terms of Service</a>
+                <a href="https://aaahandymanservices-terms.netlify.app/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Terms of Service</a>
             </div>
             <div class="mt-6 flex justify-center gap-6">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="text-3xl hover:text-red-500 transition"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" class="text-3xl hover:text-red-500 transition" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Tailwind script already included via CDN
+        // Mobile menu toggle functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                const isOpen = mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+                menuIcon.classList.toggle('fa-bars', isOpen);
+                menuIcon.classList.toggle('fa-times', !isOpen);
+            });
+
+            // Close menu when a link is clicked
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    menuIcon.classList.add('fa-bars');
+                    menuIcon.classList.remove('fa-times');
+                });
+            });
+        }
+
         // Handle form submission via Netlify Forms (AJAX)
-        const form = document.getElementById('contact-form');
-        if (form) {
-            form.addEventListener('submit', function(e) {
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                const formData = new FormData(form);
+                const formData = new FormData(contactForm);
                 
                 fetch('/', {
                     method: 'POST',
@@ -737,12 +792,13 @@
                 .then(response => {
                     if (response.ok) {
                         alert('Thank you! Your message has been sent. We will contact you soon.');
-                        form.reset();
+                        contactForm.reset();
                     } else {
                         alert('Oops! There was a problem submitting your form. Please try calling or emailing us directly.');
                     }
                 })
                 .catch(error => {
+                    console.error('Contact form error:', error);
                     alert('Oops! There was a problem submitting your form. Please try calling or emailing us directly.');
                 });
             });
@@ -772,6 +828,7 @@
                     }
                 })
                 .catch(error => {
+                    console.error('Newsletter form error:', error);
                     newsletterMessage.classList.remove('hidden');
                     newsletterMessage.textContent = 'Oops! Something went wrong. Please try again.';
                 });
@@ -810,6 +867,7 @@
             if (!reviewsMessage) return;
             reviewsMessage.textContent = text;
             reviewsMessage.className = `text-sm font-semibold ${isError ? 'text-red-700' : 'text-green-700'}`;
+            reviewsMessage.classList.remove('hidden');
         };
 
         const reviewsTokens = () => {
@@ -848,6 +906,7 @@
             if (reviewsFileName) reviewsFileName.textContent = 'Choose a photo or drag it here';
             if (reviewsEditing) reviewsEditing.classList.add('hidden');
             if (reviewsSubmit) reviewsSubmit.innerHTML = 'Add Review <i class="fas fa-camera-retro"></i>';
+            if (reviewsMessage) reviewsMessage.classList.add('hidden');
         };
 
         const startReviewsEdit = (item) => {
@@ -883,6 +942,7 @@
                 loadReviews();
             })
             .catch(error => {
+                console.error('Delete review error:', error);
                 showReviewsMessage(error.message || 'The review submission could not be removed.', true);
             });
         };
@@ -903,7 +963,7 @@
                     </div>
                     <div class="p-5">
                         <div class="flex items-center justify-between gap-3 mb-3">
-                            <div class="text-red-600 text-sm" aria-label="${escapeHTML(item.rating)} out of 5 stars">${stars(Number(item.rating) || 0)}</div>
+                            <div class="text-red-600 text-sm" aria-label="${escapeHTML(item.rating)} out of 5 stars" role="img">${stars(Number(item.rating) || 0)}</div>
                             <span class="text-xs uppercase tracking-widest text-blue-800 font-bold">${escapeHTML(item.projectType)}</span>
                         </div>
                         <p class="text-gray-700 leading-relaxed">"${escapeHTML(item.review)}"</p>
@@ -933,12 +993,16 @@
             reviewsEmpty.classList.add('hidden');
 
             fetch('/api/reviews')
-                .then(response => response.ok ? response.json() : Promise.reject())
+                .then(response => response.ok ? response.json() : Promise.reject(new Error('Failed to fetch reviews')))
                 .then(renderReviews)
-                .catch(() => {
+                .catch(error => {
+                    console.error('Load reviews error:', error);
                     reviewsLoading.classList.add('hidden');
                     reviewsEmpty.classList.remove('hidden');
-                    reviewsEmpty.querySelector('p').textContent = 'The reviews could not load right now. Please try again soon.';
+                    const emptyParagraph = reviewsEmpty.querySelector('p');
+                    if (emptyParagraph) {
+                        emptyParagraph.textContent = 'The reviews could not load right now. Please try again soon.';
+                    }
                 });
         };
 
@@ -969,7 +1033,7 @@
                 const transfer = new DataTransfer();
                 transfer.items.add(file);
                 reviewsPhoto.files = transfer.files;
-                reviewsPhoto.dispatchEvent(new Event('change'));
+                reviewsPhoto.dispatchEvent(new Event('change', { bubbles: true }));
             });
         }
 
@@ -995,58 +1059,29 @@
                 })
                 .then((payload) => {
                     if (payload.id && payload.editToken) saveReviewsToken(payload.id, payload.editToken);
+                    setReviewsSubmitting(false);
                     resetReviewsForm();
                     showReviewsMessage(isEditing ? 'Your review submission was updated.' : 'Thanks. Your photo and review were added successfully.', false);
                     loadReviews();
                 })
                 .catch(error => {
-                    showReviewsMessage(error.message || 'The review could not be saved.', true);
-                })
-                .finally(() => {
+                    console.error('Review submission error:', error);
                     setReviewsSubmitting(false);
+                    showReviewsMessage(error.message || 'Unable to upload. Please try again.', true);
                 });
             });
         }
 
         if (reviewsCancelEdit) {
-            reviewsCancelEdit.addEventListener('click', () => {
-                resetReviewsForm();
-                showReviewsMessage('Editing canceled.', false);
-            });
+            reviewsCancelEdit.addEventListener('click', resetReviewsForm);
         }
 
         if (reviewsRefresh) {
             reviewsRefresh.addEventListener('click', loadReviews);
         }
 
-        loadReviews();
-
-        // Mobile menu toggle
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-
-        if (menuBtn && mobileMenu && menuIcon) {
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                if (mobileMenu.classList.contains('hidden')) {
-                    menuIcon.className = 'fas fa-bars';
-                } else {
-                    menuIcon.className = 'fas fa-times';
-                }
-            });
-
-            // Close mobile menu when a link is clicked
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    menuIcon.className = 'fas fa-bars';
-                });
-            });
-        }
+        // Load reviews on page load
+        document.addEventListener('DOMContentLoaded', loadReviews);
     </script>
 </body>
 </html>
->
->
->
