@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-VRMCPNEQC3');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Resource hints: warm up connections to third-party origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+
+    <!-- Preload the hero background (LCP) served via Netlify Image CDN -->
+    <link rel="preload" as="image" href="/.netlify/images?url=/logo-banner.jpg&amp;w=1760&amp;fm=avif&amp;q=80" fetchpriority="high">
     <title>AAA Handyman Services | Handyman in Waterford & Oakland County, MI</title>
     
     <!-- Search Engine Optimization (SEO) Metadata -->
@@ -189,13 +190,13 @@
     }
     </script>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Impact&display=swap');
         html { scroll-behavior: smooth; }
         body { font-family: 'Roboto', sans-serif; }
-        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('logo-banner.jpg') center/cover; }
+        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=80') center/cover; }
         .hero-title {
             -webkit-text-stroke: 2px #dc2626;
             text-stroke: 2px #dc2626;
@@ -208,7 +209,7 @@
         .reviews-section {
             background:
                 linear-gradient(135deg, rgba(17, 24, 39, 0.94), rgba(30, 64, 175, 0.88)),
-                url('logo-banner.jpg') center/cover fixed;
+                url('/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=80') center/cover fixed;
         }
         .review-card {
             animation: review-rise 0.45s ease both;
@@ -271,7 +272,7 @@
         <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 sm:py-4 flex justify-between items-center">
             <a href="#top" class="flex min-w-0 items-center space-x-3" aria-label="AAA Handyman Services home">
                 <!-- Logo -->
-                <img src="logo-shield.png" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0">
+                <img src="/.netlify/images?url=/logo-shield.png&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-shield.png&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-shield.png&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0">
                 <div class="min-w-0">
                     <h1 class="text-base min-[390px]:text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</h1>
                     <p class="text-[10px] sm:text-xs text-gray-500">Oakland County Michigan</p>
@@ -366,7 +367,7 @@
                     </div>
                 </div>
                 <div class="relative">
-                    <img src="logo-circular.png" alt="AAA Handyman Services Circular Logo" class="rounded-full border-[3px] border-red-600 shadow-2xl w-full max-w-md mx-auto">
+                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=800&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=400&amp;fm=avif&amp;q=80 400w, /.netlify/images?url=/logo-circular.png&amp;w=800&amp;fm=avif&amp;q=80 800w, /.netlify/images?url=/logo-circular.png&amp;w=1200&amp;fm=avif&amp;q=80 1200w" sizes="(max-width: 768px) 90vw, 448px" width="448" height="448" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="rounded-full border-[3px] border-red-600 shadow-2xl w-full max-w-md mx-auto">
                     <div class="absolute -bottom-6 left-4 sm:-left-6 bg-white p-4 sm:p-6 rounded-3xl shadow-xl" style="border: 3px solid blue;">
                         <div class="flex items-center gap-4">
                             <div class="text-3xl sm:text-5xl font-bold text-red-600">30+</div>
@@ -846,7 +847,7 @@
        <div class="max-w-7xl mx-auto px-6 text-center">
            <div class="flex justify-center mb-6">
                <!-- Circular Logo -->
-               <img src="logo-circular.png" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 mx-auto rounded-full object-cover shadow-lg border-2 border-red-600">
+               <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 mx-auto rounded-full object-cover shadow-lg border-2 border-red-600">
            </div>            <p class="text-sm">&copy; 2026 AAA Handyman Services. All Rights Reserved. Michigan's $600 Handyman Law MCL 339.2403 Compliant.<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects. We are not a licensed builder or general contractor.<br>Locally Serving Oakland County, MI.</p>
             <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
                 <a href="/privacy" target="_blank" rel="noopener" class="hover:text-white transition">Privacy Policy</a>
@@ -1011,7 +1012,7 @@
                 card.style.animationDelay = `${index * 60}ms`;
                 card.innerHTML = `
                     <div class="review-preview bg-gray-100">
-                        <img src="${escapeHTML(item.imageUrl)}" alt="${escapeHTML(item.imageAlt)}" class="w-full object-cover" loading="lazy">
+                        <img src="/.netlify/images?url=${encodeURIComponent(item.imageUrl)}&w=800&fm=avif&q=80" alt="${escapeHTML(item.imageAlt)}" width="800" height="600" class="w-full object-cover" loading="lazy" decoding="async">
                     </div>
                     <div class="p-5">
                         <div class="flex items-center justify-between gap-3 mb-3">
@@ -1167,5 +1168,14 @@
             <i class="fas fa-envelope text-2xl"></i>
         </a>
     </div>
+
+    <!-- Google tag (gtag.js) — loaded after page content to prioritize rendering -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VRMCPNEQC3');
+    </script>
 </body>
 </html>
