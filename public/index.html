@@ -165,7 +165,7 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What handyman services does AAA Handyman Services offer?",
+          "name": "What handyman services do you offer?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "AAA Handyman Services handles carpentry and trim, doors, drywall, painting, flooring, deck and fence repair, maintenance, cleaning, and minor plumbing or electrical repairs."
@@ -176,12 +176,12 @@
           "name": "What areas do you serve?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "AAA Handyman Services is based in Waterford, Michigan and serves Oakland County communities including Pontiac, West Bloomfield, Bloomfield Hills, White Lake, Commerce Township, Clarkston, Lake Orion, Rochester Hills, Troy, Royal Oak, Birmingham, Southfield, Farmington Hills, Milford, Highland, and nearby areas."
+            "text": "We are based in Waterford, Michigan and serve Oakland County communities including Pontiac, West Bloomfield, Bloomfield Hills, White Lake, Commerce Township, Clarkston, Lake Orion, Rochester Hills, Troy, Royal Oak, Birmingham, Southfield, Farmington Hills, Milford, Highland, and nearby areas."
           }
         },
         {
           "@type": "Question",
-          "name": "Do you offer after-hours emergency handyman service?",
+          "name": "Do you offer emergency handyman service?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "After-hours emergency services are available 7 days a week for urgent repairs such as leaks or door and window problems that affect home safety or security."
@@ -192,7 +192,7 @@
           "name": "How much does handyman service cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Standard handyman service is listed at $45 to $65 per man-hour depending on project complexity, with a 2-hour minimum for standard service tiers. Materials are not included."
+            "text": "Standard handyman service is listed at $45 to $70 per man-hour depending on project complexity, with a 2-hour minimum for standard tiers. Materials are not included in the hourly rate."
           }
         }
       ]
@@ -265,28 +265,6 @@
         .pulse-btn-green {
             animation: pulse-attention-green 2s infinite;
         }
-        /* Blinking blue border around craftsmen heading letters */
-        @keyframes blue-border-blink {
-            0%, 100% { -webkit-text-stroke: 1px blue; text-stroke: 1px blue; }
-            50% { -webkit-text-stroke: 1px red; text-stroke: 1px red; }
-        }
-        .craftsmen-title {
-            -webkit-text-stroke: 1px blue;
-            text-stroke: 1px blue;
-            paint-order: stroke fill;
-            animation: blue-border-blink 1s step-start infinite;
-        }
-        /* Blinking blue-to-red outline around the hero title letters */
-        @keyframes hero-title-border-blink {
-            0%, 49% { -webkit-text-stroke: 2px #2563eb; text-stroke: 2px #2563eb; }
-            50%, 100% { -webkit-text-stroke: 2px #dc2626; text-stroke: 2px #dc2626; }
-        }
-        .hero-title-blink-border {
-            -webkit-text-stroke: 2px #2563eb;
-            text-stroke: 2px #2563eb;
-            paint-order: stroke fill;
-            animation: hero-title-border-blink 1s step-start infinite;
-        }
         /* Anchor scroll margin for sticky navbar */
         section[id] {
             scroll-margin-top: 80px;
@@ -295,6 +273,19 @@
             section[id] {
                 scroll-margin-top: 100px;
             }
+        }
+        /* Respect visitors who prefer reduced motion (accessibility) */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .flash-siren,
+            .pulse-btn,
+            .pulse-btn-green,
+            .animate-pulse,
+            .review-card { animation: none !important; }
+            .service-card,
+            .nav-link { transition: none !important; }
+            .service-card:hover,
+            .nav-link:hover { transform: none !important; }
         }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -372,7 +363,7 @@
                     <span class="hidden sm:inline text-white/55">•</span>
                     <span class="text-yellow-400 font-bold"><i class="fas fa-star mr-1"></i> Satisfaction Guaranteed</span>
                 </div>
-                <h1 class="hero-title hero-title-blink-border text-4xl sm:text-5xl md:text-7xl font-bold leading-tight md:leading-none mb-6 tracking-tighter">Handyman Services in Waterford & Oakland County</h1>
+                <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl font-bold leading-tight md:leading-none mb-6 tracking-tighter">Handyman Services in Waterford & Oakland County</h1>
                 <p class="text-lg sm:text-xl md:text-2xl mb-10 text-white/95 font-medium">No Job Too Small! Your trusted local handyman for quick, high-quality home repairs, drywall, painting, carpentry, decks, fences, and minor plumbing or electrical work across Oakland County, MI.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <a href="#contact" class="bg-red-600 hover:bg-red-700 text-white text-lg sm:text-xl px-6 py-4 sm:px-10 sm:py-5 rounded-2xl font-semibold inline-flex items-center justify-center gap-2 transition shadow-lg hover:shadow-red-600/30">
@@ -510,7 +501,7 @@
             <div class="text-center mb-12 sm:mb-16">
                 <div class="uppercase text-red-600 font-semibold tracking-widest text-sm sm:text-base">Transparent No-Haggle Pricing</div>
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">Handyman Hourly Rate Scale</h2>
-                <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">$45 – $65 per man-hour (Standard Tiers 1-3)<br>There is a 2-hour minimum for standard tiers 1-3.</p>
+                <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">$45 – $70 per man-hour (Standard Tiers 1-3)<br>There is a 2-hour minimum for standard tiers 1-3.</p>
             </div>
             
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -793,7 +784,7 @@
                 </article>
                 <article class="service-card bg-gray-50 border-[2px] border-red-600 p-6 rounded-3xl shadow-sm ring-1 ring-red-600">
                     <h3 class="text-xl font-bold text-blue-900 mb-3">How much does handyman service cost?</h3>
-                    <p class="text-gray-600">Standard handyman service is listed at $45 to $65 per man-hour depending on project complexity, with a 2-hour minimum for standard tiers. Materials are not included in the hourly rate.</p>
+                    <p class="text-gray-600">Standard handyman service is listed at $45 to $70 per man-hour depending on project complexity, with a 2-hour minimum for standard tiers. Materials are not included in the hourly rate.</p>
                 </article>
             </div>
         </div>
@@ -806,7 +797,7 @@
                 <!-- Pitch -->
                 <div>
                     <div class="uppercase tracking-widest text-red-600 font-semibold mb-3">Now Hiring</div>
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6"><span class="craftsmen-title">Join Our Team of Craftsmen</span></h2>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6"><span>Join Our Team of Craftsmen</span></h2>
                     <p class="text-base sm:text-lg text-gray-600 mb-8">Are you a skilled handyman or tradesperson who takes pride in quality work and honest service? AAA Handyman Services is growing across Oakland County, and we're looking for experienced craftsmen to join us. Apply below and we'll be in touch.</p>
                     <ul class="space-y-4 text-gray-700">
                         <li class="flex items-start gap-3">
@@ -944,7 +935,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-12 sm:gap-16">
                 <div>
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8 hero-title-blink-border" style="color: #fff;">Get In Touch Today</h2>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8" style="color: #fff;">Get In Touch Today</h2>
                     <div class="space-y-6 sm:space-y-8">
                         <div class="flex items-start gap-4 sm:gap-6">
                             <i class="fas fa-phone text-3xl sm:text-4xl text-red-500 mt-1 flex-shrink-0"></i>
