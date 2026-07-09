@@ -265,6 +265,17 @@
         .pulse-btn-green {
             animation: pulse-attention-green 2s infinite;
         }
+        /* Blinking blue border around craftsmen heading letters */
+        @keyframes blue-border-blink {
+            0%, 100% { -webkit-text-stroke: 1px blue; text-stroke: 1px blue; }
+            50% { -webkit-text-stroke: 1px transparent; text-stroke: 1px transparent; }
+        }
+        .craftsmen-title {
+            -webkit-text-stroke: 1px blue;
+            text-stroke: 1px blue;
+            paint-order: stroke fill;
+            animation: blue-border-blink 1s step-start infinite;
+        }
         /* Anchor scroll margin for sticky navbar */
         section[id] {
             scroll-margin-top: 80px;
@@ -784,7 +795,7 @@
                 <!-- Pitch -->
                 <div>
                     <div class="uppercase tracking-widest text-red-600 font-semibold mb-3">Now Hiring</div>
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6">Join Our Team of Craftsmen</h2>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6"><span class="craftsmen-title">Join Our Team of Craftsmen</span></h2>
                     <p class="text-base sm:text-lg text-gray-600 mb-8">Are you a skilled handyman or tradesperson who takes pride in quality work and honest service? AAA Handyman Services is growing across Oakland County, and we're looking for experienced craftsmen to join us. Apply below and we'll be in touch.</p>
                     <ul class="space-y-4 text-gray-700">
                         <li class="flex items-start gap-3">
