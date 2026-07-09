@@ -196,6 +196,11 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Roboto', sans-serif; }
         .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('logo-banner.jpg') center/cover; }
+        .hero-title {
+            -webkit-text-stroke: 2px #dc2626;
+            text-stroke: 2px #dc2626;
+            paint-order: stroke fill;
+        }
         .nav-link { transition: all 0.3s; }
         .nav-link:hover { color: #dc2626; transform: translateY(-2px); }
         .service-card { transition: all 0.3s; }
@@ -298,7 +303,7 @@
                     <span class="bg-green-400 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full animate-pulse mr-2"></span>
                     Locally Owned • Serving Oakland County
                 </div>
-                <h2 class="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight md:leading-none mb-6 tracking-tighter">Handyman Services in Waterford & Oakland County</h2>
+                <h2 class="hero-title text-4xl sm:text-5xl md:text-7xl font-bold leading-tight md:leading-none mb-6 tracking-tighter">Handyman Services in Waterford & Oakland County</h2>
                 <p class="text-lg sm:text-xl md:text-2xl mb-10 text-white/90">Reliable home repair, maintenance, drywall, painting, carpentry, deck, fence, door, and minor plumbing or electrical help across Oakland County, MI.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="#contact" class="bg-red-600 hover:bg-red-700 text-white text-lg sm:text-xl px-6 py-4 sm:px-10 sm:py-5 rounded-2xl font-semibold inline-flex items-center justify-center gap-2 transition">
