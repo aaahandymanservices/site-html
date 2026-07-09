@@ -276,6 +276,17 @@
             paint-order: stroke fill;
             animation: blue-border-blink 1s step-start infinite;
         }
+        /* Blinking blue-to-red outline around the hero title letters */
+        @keyframes hero-title-border-blink {
+            0%, 49% { -webkit-text-stroke: 2px #2563eb; text-stroke: 2px #2563eb; }
+            50%, 100% { -webkit-text-stroke: 2px #dc2626; text-stroke: 2px #dc2626; }
+        }
+        .hero-title-blink-border {
+            -webkit-text-stroke: 2px #2563eb;
+            text-stroke: 2px #2563eb;
+            paint-order: stroke fill;
+            animation: hero-title-border-blink 1s step-start infinite;
+        }
         /* Anchor scroll margin for sticky navbar */
         section[id] {
             scroll-margin-top: 80px;
@@ -361,7 +372,7 @@
                     <span class="hidden sm:inline text-white/55">•</span>
                     <span class="text-yellow-400 font-bold"><i class="fas fa-star mr-1"></i> Satisfaction Guaranteed</span>
                 </div>
-                <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl font-bold leading-tight md:leading-none mb-6 tracking-tighter">Handyman Services in Waterford & Oakland County</h1>
+                <h1 class="hero-title hero-title-blink-border text-4xl sm:text-5xl md:text-7xl font-bold leading-tight md:leading-none mb-6 tracking-tighter">Handyman Services in Waterford & Oakland County</h1>
                 <p class="text-lg sm:text-xl md:text-2xl mb-10 text-white/95 font-medium">No Job Too Small! Your trusted local handyman for quick, high-quality home repairs, drywall, painting, carpentry, decks, fences, and minor plumbing or electrical work across Oakland County, MI.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <a href="#contact" class="bg-red-600 hover:bg-red-700 text-white text-lg sm:text-xl px-6 py-4 sm:px-10 sm:py-5 rounded-2xl font-semibold inline-flex items-center justify-center gap-2 transition shadow-lg hover:shadow-red-600/30">
