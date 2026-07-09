@@ -236,6 +236,14 @@
             display: inline-block;
             animation: siren-flash 1s infinite ease-in-out;
         }
+        /* Pulse attention animation */
+        @keyframes pulse-attention {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+        }
+        .pulse-btn {
+            animation: pulse-attention 2s infinite;
+        }
         /* Anchor scroll margin for sticky navbar */
         section[id] {
             scroll-margin-top: 80px;
@@ -274,7 +282,7 @@
             </div>
             <!-- Nav Action Buttons -->
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <a href="tel:2483853432" class="bg-red-600 hover:bg-red-700 text-white p-3 lg:px-5 lg:py-3 xl:px-6 rounded-full font-semibold flex items-center justify-center gap-2 transition" title="Call us">
+                <a href="tel:2483853432" class="bg-red-600 hover:bg-red-700 text-white p-3 lg:px-5 lg:py-3 xl:px-6 rounded-full font-semibold flex items-center justify-center gap-2 transition pulse-btn" title="Call us">
                     <i class="fas fa-phone"></i> <span class="hidden sm:inline">‪(248) 385-3432‬</span>
                 </a>
                 <!-- Mobile Menu Button -->
@@ -299,19 +307,30 @@
     <header id="top" class="hero min-h-screen md:h-screen py-20 md:py-0 flex items-center text-white">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <div class="max-w-3xl mx-auto">
-                <div class="inline-flex items-center bg-white/20 backdrop-blur-md px-4 py-1.5 sm:px-6 sm:py-2 rounded-full mb-6 text-sm sm:text-base">
-                    <span class="bg-green-400 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full animate-pulse mr-2"></span>
-                    Locally Owned • Serving Oakland County
+                <div class="inline-flex flex-wrap justify-center gap-2 items-center bg-white/20 backdrop-blur-md px-4 py-1.5 sm:px-6 sm:py-2 rounded-full mb-6 text-xs sm:text-base">
+                    <span class="inline-flex items-center">
+                        <span class="bg-green-400 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full animate-pulse mr-2"></span>
+                        Locally Owned • Serving Oakland County
+                    </span>
+                    <span class="hidden sm:inline text-white/55">•</span>
+                    <span class="text-yellow-400 font-bold"><i class="fas fa-star mr-1"></i> Satisfaction Guaranteed</span>
                 </div>
                 <h2 class="hero-title text-4xl sm:text-5xl md:text-7xl font-bold leading-tight md:leading-none mb-6 tracking-tighter">Handyman Services in Waterford & Oakland County</h2>
-                <p class="text-lg sm:text-xl md:text-2xl mb-10 text-white/90">Reliable home repair, maintenance, drywall, painting, carpentry, deck, fence, door, and minor plumbing or electrical help across Oakland County, MI.</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#contact" class="bg-red-600 hover:bg-red-700 text-white text-lg sm:text-xl px-6 py-4 sm:px-10 sm:py-5 rounded-2xl font-semibold inline-flex items-center justify-center gap-2 transition">
-                        Contact Us <i class="fas fa-arrow-right"></i>
+                <p class="text-lg sm:text-xl md:text-2xl mb-10 text-white/95 font-medium">No Job Too Small! Your trusted local handyman for quick, high-quality home repairs, drywall, painting, carpentry, decks, fences, and minor plumbing or electrical work across Oakland County, MI.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="#contact" class="bg-red-600 hover:bg-red-700 text-white text-lg sm:text-xl px-6 py-4 sm:px-10 sm:py-5 rounded-2xl font-semibold inline-flex items-center justify-center gap-2 transition shadow-lg hover:shadow-red-600/30">
+                        Contact Us Today <i class="fas fa-arrow-right"></i>
                     </a>
                     <a href="#services" class="border-[3px] border-white hover:bg-white hover:text-blue-900 text-lg sm:text-xl px-6 py-4 sm:px-10 sm:py-5 rounded-2xl font-semibold inline-flex items-center justify-center gap-2 transition">
-                        View Services
+                        View Our Services
                     </a>
+                </div>
+                <!-- Trust Badges Row -->
+                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto text-xs sm:text-sm font-semibold opacity-90">
+                    <div class="bg-black/30 backdrop-blur-sm p-3 rounded-xl border border-white/10 flex items-center justify-center gap-2"><i class="fas fa-screwdriver-wrench text-green-400 text-base"></i> Experienced Craftsmen</div>
+                    <div class="bg-black/30 backdrop-blur-sm p-3 rounded-xl border border-white/10 flex items-center justify-center gap-2"><i class="fas fa-medal text-yellow-400 text-base"></i> Satisfaction Guaranteed</div>
+                    <div class="bg-black/30 backdrop-blur-sm p-3 rounded-xl border border-white/10 flex items-center justify-center gap-2"><i class="fas fa-handshake-angle text-blue-400 text-base"></i> Honest upfront pricing</div>
+                    <div class="bg-black/30 backdrop-blur-sm p-3 rounded-xl border border-white/10 flex items-center justify-center gap-2"><i class="fas fa-clock text-red-400 text-base"></i> Emergency After-Hours</div>
                 </div>
             </div>
         </div>
@@ -457,8 +476,11 @@
                 </div>
                 
                 <!-- Tier 2 -->
-                <div class="service-card bg-white border-[3px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
-                    <div class="text-center mb-6">
+                <div class="service-card bg-white border-[3px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
+                        <i class="fas fa-star mr-1"></i> Most Popular
+                    </div>
+                    <div class="text-center mb-6 mt-2">
                         <div class="inline-block bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-sm font-semibold">Tier 2</div>
                         <div class="text-4xl font-bold text-orange-600 mt-4">$55</div>
                         <div class="text-sm text-gray-500">per man-hour</div>
@@ -474,8 +496,11 @@
                 </div>
                 
                 <!-- Tier 3 -->
-                <div class="service-card bg-white border-[3px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
-                    <div class="text-center mb-6">
+                <div class="service-card bg-white border-[3px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-blue-900 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
+                        Best Value
+                    </div>
+                    <div class="text-center mb-6 mt-2">
                         <div class="inline-block bg-red-100 text-red-600 px-4 py-1 rounded-full text-sm font-semibold">Tier 3</div>
                         <div class="text-4xl font-bold text-red-600 mt-4">$65</div>
                         <div class="text-sm text-gray-500">per man-hour</div>
@@ -1128,5 +1153,15 @@
             });
         }
     </script>
+
+    <!-- Floating Mobile Call/SMS CTA Widget -->
+    <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 md:hidden">
+        <a href="tel:2483853432" class="w-14 h-14 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center shadow-2xl transition pulse-btn border-2 border-white" title="Call Us Now">
+            <i class="fas fa-phone text-2xl"></i>
+        </a>
+        <a href="#contact" class="w-14 h-14 bg-blue-950 hover:bg-blue-800 text-white rounded-full flex items-center justify-center shadow-2xl transition border-2 border-white" title="Message Us">
+            <i class="fas fa-envelope text-2xl"></i>
+        </a>
+    </div>
 </body>
 </html>
