@@ -1592,6 +1592,105 @@
 
         loadReviews();
 
+        // Interactive Estimate Calculator Logic
+        const calcServices = document.querySelectorAll('input[name="calc-service"]');
+        const calcZone = document.getElementById('calc-zone');
+        const calcPriceDisplay = document.getElementById('calc-price-display');
+        const calcHours = document.getElementById('calc-hours');
+        const calcTravelFee = document.getElementById('calc-travel-fee');
+        const calcMinStatus = document.getElementById('calc-min-status');
+        const calcBookBtn = document.getElementById('calc-book-btn');
+        const contactMessage = document.getElementById('contact-message') || document.querySelector('[name="message"]');
+
+        const calculateEstimate = () => {
+            if (!calcPriceDisplay || !calcHours || !calcTravelFee || !calcMinStatus) return;
+
+            let totalHours = 0;
+            const selectedServices = [];
+
+            calcServices.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const hours = parseFloat(checkbox.dataset.hours || '0');
+                    totalHours += hours;
+                    const serviceLabel = checkbox.closest('label')?.querySelector('span.block.font-bold')?.textContent || checkbox.value;
+                    selectedServices.push(`${serviceLabel} (Est. ${hours} hrs)`);
+                }
+            });
+
+            const travelSurcharge = parseFloat(calcZone?.value || '0');
+
+            if (totalHours === 0) {
+                calcPriceDisplay.textContent = '$0 - $0';
+                calcHours.textContent = '0 hours';
+                calcTravelFee.textContent = `$${travelSurcharge}`;
+                calcMinStatus.textContent = 'Requires 2-hr min.';
+                calcMinStatus.className = 'font-semibold text-red-600';
+                return { totalHours, travelSurcharge, selectedServices, lowEstimate: 0, highEstimate: 0 };
+            }
+
+            // High/low estimate calculations ($45 to $70/hr)
+            // Job minimum is 2 hours.
+            const billableHours = Math.max(totalHours, 2);
+            const lowEstimate = (billableHours * 45) + travelSurcharge;
+            const highEstimate = (billableHours * 70) + travelSurcharge;
+
+            calcPriceDisplay.textContent = `$${lowEstimate} - $${highEstimate}`;
+            calcHours.textContent = totalHours < 2 ? `${totalHours} hours (2-hr min applied)` : `${totalHours} hours`;
+            calcTravelFee.textContent = `$${travelSurcharge}`;
+            
+            calcMinStatus.textContent = 'Met';
+            calcMinStatus.className = 'font-semibold text-green-600';
+
+            return { totalHours, travelSurcharge, selectedServices, lowEstimate, highEstimate };
+        };
+
+        if (calcServices.length > 0) {
+            calcServices.forEach(checkbox => checkbox.addEventListener('change', calculateEstimate));
+        }
+        if (calcZone) {
+            calcZone.addEventListener('change', calculateEstimate);
+        }
+
+        if (calcBookBtn) {
+            calcBookBtn.addEventListener('click', () => {
+                const { totalHours, travelSurcharge, selectedServices, lowEstimate, highEstimate } = calculateEstimate() || {};
+                
+                if (!selectedServices || selectedServices.length === 0) {
+                    alert('Please select at least one repair service to build an estimate first.');
+                    return;
+                }
+
+                if (contactMessage) {
+                    const zoneLabel = calcZone?.options[calcZone.selectedIndex]?.text.split(' — ')[0] || 'Selected Zone';
+                    const summary = `Hello! I would like to lock in an estimate. My selections:\n` +
+                        `- Services: ${selectedServices.join(', ')}\n` +
+                        `- Total Estimated Labor: ${totalHours} hours\n` +
+                        `- Travel Zone: ${zoneLabel}\n` +
+                        `- Estimated Price Range: $${lowEstimate} - $${highEstimate}\n\n` +
+                        `Please contact me to schedule a convenient appointment!`;
+                    
+                    contactMessage.value = summary;
+                    // Trigger input event in case of any dynamic framework/listeners
+                    contactMessage.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+
+                // Smooth scroll to contact section
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Focus the first input field in the contact form
+                    setTimeout(() => {
+                        const contactName = document.getElementById('contact-name') || contactSection.querySelector('input');
+                        if (contactName) contactName.focus();
+                    }, 800);
+                }
+            });
+        }
+
+        // Initialize calculator values on page load
+        calculateEstimate();
+
         // Mobile menu toggle
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
