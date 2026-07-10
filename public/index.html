@@ -258,6 +258,56 @@
         .pulse-btn {
             animation: pulse-attention 2s infinite;
         }
+
+        /* Interactive Before/After slider styles */
+        .before-after-container {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            user-select: none;
+        }
+        .before-after-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        .before-after-overlay {
+            width: 50%;
+        }
+        .before-after-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: #ffffff;
+            cursor: ew-resize;
+            z-index: 10;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .before-after-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #dc2626;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            border: 2px solid #ffffff;
+            pointer-events: none;
+            font-size: 0.75rem;
+        }
         @keyframes pulse-attention-green {
             0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
             50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
@@ -755,6 +805,189 @@
                         <div class="h-80 rounded-3xl bg-white/15 animate-pulse"></div>
                         <div class="h-80 rounded-3xl bg-white/15 animate-pulse"></div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Before & After Comparison -->
+    <section id="work-gallery" class="py-16 sm:py-24 bg-gray-50 border-t border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <div class="uppercase text-red-600 font-semibold tracking-widest text-sm sm:text-base">Our Craftsmanship</div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">Interactive Before & After Works</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">Drag the sliders to see real, visual results of home repairs and touch-ups we handle across local Michigan homes.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Drywall Repair Slider -->
+                <div class="bg-white p-5 rounded-3xl shadow-lg border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="before-after-container mb-4">
+                            <!-- Before Image (Underneath) -->
+                            <div class="before-after-image" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80');">
+                                <div class="absolute bottom-4 left-4 bg-black/60 text-white px-3 py-1 text-xs font-bold rounded-full">BEFORE: Damaged Wall</div>
+                            </div>
+                            <!-- After Image (Overlay Layer) -->
+                            <div class="before-after-image before-after-overlay" style="background-image: url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80'); border-right: 2px solid white;">
+                                <div class="absolute bottom-4 left-4 bg-green-600 text-white px-3 py-1 text-xs font-bold rounded-full whitespace-nowrap">AFTER: Perfect Drywall</div>
+                            </div>
+                            <!-- Handle -->
+                            <div class="before-after-handle">
+                                <div class="before-after-button"><i class="fas fa-arrows-left-right"></i></div>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Flawless Drywall Patching</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">No more unsightly holes, moisture cracks, or settlement lines. We patch, compound, sand, and smooth ready for paint.</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Waterford, MI</span>
+                        <span class="text-red-600 font-bold text-sm">Drywall Repair</span>
+                    </div>
+                </div>
+
+                <!-- Deck Staining Slider -->
+                <div class="bg-white p-5 rounded-3xl shadow-lg border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="before-after-container mb-4">
+                            <!-- Before Image (Underneath) -->
+                            <div class="before-after-image" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80');">
+                                <div class="absolute bottom-4 left-4 bg-black/60 text-white px-3 py-1 text-xs font-bold rounded-full">BEFORE: Weathered Wood</div>
+                            </div>
+                            <!-- After Image (Overlay Layer) -->
+                            <div class="before-after-image before-after-overlay" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'); border-right: 2px solid white;">
+                                <div class="absolute bottom-4 left-4 bg-green-600 text-white px-3 py-1 text-xs font-bold rounded-full whitespace-nowrap">AFTER: Freshly Stained</div>
+                            </div>
+                            <!-- Handle -->
+                            <div class="before-after-handle">
+                                <div class="before-after-button"><i class="fas fa-arrows-left-right"></i></div>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Deck Wood Refinishing</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">Restore color and defend structures against water and UV damage. We pressure-wash, clean, scrape, and stain wood decks.</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Rochester, MI</span>
+                        <span class="text-red-600 font-bold text-sm">Decks & Fences</span>
+                    </div>
+                </div>
+
+                <!-- Entry Door Installation Slider -->
+                <div class="bg-white p-5 rounded-3xl shadow-lg border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="before-after-container mb-4">
+                            <!-- Before Image (Underneath) -->
+                            <div class="before-after-image" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80');">
+                                <div class="absolute bottom-4 left-4 bg-black/60 text-white px-3 py-1 text-xs font-bold rounded-full">BEFORE: Sticky Old Door</div>
+                            </div>
+                            <!-- After Image (Overlay Layer) -->
+                            <div class="before-after-image before-after-overlay" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'); border-right: 2px solid white;">
+                                <div class="absolute bottom-4 left-4 bg-green-600 text-white px-3 py-1 text-xs font-bold rounded-full whitespace-nowrap">AFTER: Perfect Hanging</div>
+                            </div>
+                            <!-- Handle -->
+                            <div class="before-after-handle">
+                                <div class="before-after-button"><i class="fas fa-arrows-left-right"></i></div>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Door Tuning & Installation</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">Fix drafts, eliminate rubbing, and replace outdated doors. We ensure deadbolts and trim align perfectly with every hang.</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Clarkston, MI</span>
+                        <span class="text-red-600 font-bold text-sm">Doors & Trim</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Estimate Calculator -->
+    <section id="estimate-calculator" class="py-16 sm:py-24 bg-gray-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(220,38,38,0.15),transparent_50%)]"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 sm:gap-16 items-center">
+                <div>
+                    <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base">Upfront & Fair</div>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 leading-tight text-white">Get a Quick Estimate</h2>
+                    <p class="mt-4 text-base sm:text-lg text-gray-300">Choose your project services below to build a realistic estimate in seconds. Real-time labor and travel zone calculations based on Waterford, MI standards.</p>
+
+                    <div class="mt-8 space-y-5 bg-gray-800/50 backdrop-blur border border-gray-700 p-6 sm:p-8 rounded-3xl">
+                        <!-- Select Services -->
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">1. Select Repairs (Check all that apply)</label>
+                            <div class="grid sm:grid-cols-2 gap-3 mt-3">
+                                <label class="flex items-center gap-3 p-3 bg-gray-800 border border-gray-700 hover:border-red-500 rounded-2xl cursor-pointer transition">
+                                    <input type="checkbox" name="calc-service" value="drywall" data-hours="3" class="w-5 h-5 text-red-600 border-gray-600 rounded focus:ring-red-500">
+                                    <div>
+                                        <span class="block font-bold text-sm text-white">Drywall Patching</span>
+                                        <span class="block text-xs text-gray-400">Est. 2-4 hours</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 bg-gray-800 border border-gray-700 hover:border-red-500 rounded-2xl cursor-pointer transition">
+                                    <input type="checkbox" name="calc-service" value="door" data-hours="4" class="w-5 h-5 text-red-600 border-gray-600 rounded focus:ring-red-500">
+                                    <div>
+                                        <span class="block font-bold text-sm text-white">Door Install / Tuning</span>
+                                        <span class="block text-xs text-gray-400">Est. 3-5 hours</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 bg-gray-800 border border-gray-700 hover:border-red-500 rounded-2xl cursor-pointer transition">
+                                    <input type="checkbox" name="calc-service" value="electrical" data-hours="2" class="w-5 h-5 text-red-600 border-gray-600 rounded focus:ring-red-500">
+                                    <div>
+                                        <span class="block font-bold text-sm text-white">Fixture & Fan Update</span>
+                                        <span class="block text-xs text-gray-400">Est. 1-3 hours</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 bg-gray-800 border border-gray-700 hover:border-red-500 rounded-2xl cursor-pointer transition">
+                                    <input type="checkbox" name="calc-service" value="carpentry" data-hours="5" class="w-5 h-5 text-red-600 border-gray-600 rounded focus:ring-red-500">
+                                    <div>
+                                        <span class="block font-bold text-sm text-white">Trim & Carpentry</span>
+                                        <span class="block text-xs text-gray-400">Est. 4-6 hours</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Select Travel Zone -->
+                        <div>
+                            <label for="calc-zone" class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">2. Your Travel Distance Zone</label>
+                            <select id="calc-zone" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-white mt-1">
+                                <option value="0" selected>Standard Metro (Waterford & within 20 miles) — $0 Travel Fee</option>
+                                <option value="30">Far Zone (Over 20 miles away) — $30 Flat Travel Fee</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator Display Results -->
+                <div class="bg-white text-gray-900 p-8 rounded-3xl shadow-2xl border-2 border-red-600 flex flex-col justify-between h-full min-h-[420px]">
+                    <div class="text-center">
+                        <span class="inline-block bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-4">Estimated Range</span>
+                        <div class="text-4xl sm:text-5xl font-black text-gray-900 tracking-tight mt-1 mb-2" id="calc-price-display">$0 - $0</div>
+                        <p class="text-sm text-gray-500">Based on standard $45 - $70 standard handyman rates + selected travel fees.</p>
+                    </div>
+
+                    <div class="my-6 space-y-3 bg-gray-50 p-4 rounded-2xl border border-gray-100 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Handyman Rate:</span>
+                            <span class="font-semibold text-gray-900">$45 - $70 / hr</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Estimated Labor Hours:</span>
+                            <span id="calc-hours" class="font-semibold text-gray-900">0 hours</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Travel Zone Surcharge:</span>
+                            <span id="calc-travel-fee" class="font-semibold text-gray-900">$0</span>
+                        </div>
+                        <div class="flex justify-between pt-3 border-t border-gray-200">
+                            <span class="font-bold text-gray-800">Job Minimum Met:</span>
+                            <span id="calc-min-status" class="font-semibold text-red-600">Requires 2-hr min.</span>
+                        </div>
+                    </div>
+
+                    <button id="calc-book-btn" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-2xl transition shadow-lg shadow-red-600/20 text-center uppercase tracking-wider text-base inline-flex items-center justify-center gap-2">
+                        <span>Lock In This Estimate</span> <i class="fas fa-arrow-down"></i>
+                    </button>
                 </div>
             </div>
         </div>
