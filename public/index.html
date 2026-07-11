@@ -381,7 +381,6 @@
                 <a href="#services" class="nav-link text-gray-700 hover:text-red-600">Services</a>
                 <a href="#rates" class="nav-link text-gray-700 hover:text-red-600">Rates</a>
                 <a href="#reviews" class="nav-link text-gray-700 hover:text-red-600">Reviews</a>
-                <a href="#payments" class="nav-link text-gray-700 hover:text-red-600">Pay</a>
                 <a href="#careers" class="nav-link text-gray-700 hover:text-red-600">Careers</a>
                 <a href="#contact" class="nav-link text-gray-700 hover:text-red-600">Contact</a>
                 <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="nav-link text-gray-700 hover:text-[#1877F2] text-xl"><i class="fab fa-facebook"></i></a>
@@ -403,7 +402,6 @@
             <a href="#services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
             <a href="#rates" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Rates</a>
             <a href="#reviews" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Reviews</a>
-            <a href="#payments" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Make a Payment</a>
             <a href="#careers" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Careers</a>
             <a href="#contact" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Contact</a>
             <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="block text-lg font-medium text-gray-700 hover:text-[#1877F2] py-1"><i class="fab fa-facebook"></i> Facebook</a>
@@ -1245,81 +1243,6 @@
 
 
 
-    <!-- Payments -->
-    <section id="payments" class="py-16 sm:py-24 bg-slate-100 relative overflow-hidden">
-        <div class="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-[#6d1ed4]/10" aria-hidden="true"></div>
-        <div class="absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-red-600/10" aria-hidden="true"></div>
-        <div class="max-w-7xl mx-auto px-6 relative">
-            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-14 items-start">
-                <div class="lg:pt-8">
-                    <div class="inline-flex items-center gap-3 rounded-full bg-white border border-slate-200 px-4 py-2 shadow-sm">
-                        <span class="grid h-8 w-8 place-items-center rounded-full bg-[#6d1ed4] text-white font-bold text-lg">Z</span>
-                        <span class="text-sm font-bold uppercase tracking-[0.18em] text-[#4b158f]">Zelle Payments</span>
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-6 leading-tight text-blue-950">Pay your invoice directly with Zelle</h2>
-                    <p class="mt-5 text-lg text-slate-600 leading-relaxed">Use the amount and invoice or job number provided by AAA Handyman Services. Zelle payments are sent outside this website through your bank or Zelle.</p>
-
-                    <div class="mt-8 grid gap-4">
-                        <div class="flex gap-4 rounded-2xl bg-white p-5 border border-slate-200 shadow-sm">
-                            <span class="grid h-10 w-10 flex-none place-items-center rounded-xl bg-blue-950 text-white font-bold">1</span>
-                            <div><strong class="block text-blue-950">Enter your payment details</strong><span class="text-sm text-slate-600">Add the exact amount and the invoice or job number.</span></div>
-                        </div>
-                        <div class="flex gap-4 rounded-2xl bg-white p-5 border border-slate-200 shadow-sm">
-                            <span class="grid h-10 w-10 flex-none place-items-center rounded-xl bg-blue-950 text-white font-bold">2</span>
-                            <div><strong class="block text-blue-950">Continue to Zelle</strong><span class="text-sm text-slate-600">Confirm the recipient before authorizing the transfer.</span></div>
-                        </div>
-                        <div class="flex gap-4 rounded-2xl bg-white p-5 border border-slate-200 shadow-sm">
-                            <span class="grid h-10 w-10 flex-none place-items-center rounded-xl bg-blue-950 text-white font-bold">3</span>
-                            <div><strong class="block text-blue-950">Keep your confirmation</strong><span class="text-sm text-slate-600">Save the confirmation from your bank for your records.</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rounded-[2rem] bg-white border border-slate-200 shadow-2xl shadow-slate-300/50 overflow-hidden">
-                    <div class="bg-blue-950 px-6 sm:px-8 py-6 text-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                        <div>
-                            <div class="text-xs uppercase tracking-[0.2em] text-blue-200 font-bold">Customer Payment</div>
-                            <h3 class="text-2xl font-bold mt-1">Prepare your Zelle payment</h3>
-                        </div>
-                        <i class="fas fa-shield-halved text-3xl text-blue-200" aria-hidden="true"></i>
-                    </div>
-                    <form id="zelle-payment-form" class="p-6 sm:p-8 space-y-5">
-                        <div>
-                            <label for="zelle-name" class="block text-xs uppercase tracking-widest font-bold text-slate-600 mb-2">Customer Name</label>
-                            <input id="zelle-name" name="customerName" type="text" required maxlength="100" autocomplete="name" class="w-full px-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-2xl focus:outline-none focus:border-[#6d1ed4]" placeholder="Name shown on your invoice">
-                        </div>
-                        <div class="grid sm:grid-cols-2 gap-5">
-                            <div>
-                                <label for="zelle-amount" class="block text-xs uppercase tracking-widest font-bold text-slate-600 mb-2">Payment Amount</label>
-                                <div class="relative">
-                                    <span class="absolute inset-y-0 left-0 flex items-center pl-4 font-bold text-slate-500">$</span>
-                                    <input id="zelle-amount" name="amount" type="number" required min="1" max="10000" step="0.01" inputmode="decimal" class="w-full pl-8 pr-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-2xl focus:outline-none focus:border-[#6d1ed4]" placeholder="0.00">
-                                </div>
-                            </div>
-                            <div>
-                                <label for="zelle-reference" class="block text-xs uppercase tracking-widest font-bold text-slate-600 mb-2">Invoice / Job Number</label>
-                                <input id="zelle-reference" name="reference" type="text" required maxlength="80" class="w-full px-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-2xl focus:outline-none focus:border-[#6d1ed4]" placeholder="Example: INV-1042">
-                            </div>
-                        </div>
-
-                        <div class="rounded-2xl bg-amber-50 border border-amber-200 p-4 text-sm text-amber-950 flex gap-3">
-                            <i class="fas fa-triangle-exclamation mt-0.5" aria-hidden="true"></i>
-                            <p><strong>Verify before sending.</strong> Only send payment after confirming the recipient is AAA Handyman Services. Zelle transfers may not be reversible.</p>
-                        </div>
-
-                        <p id="zelle-payment-status" class="text-sm font-semibold text-slate-600" role="status" aria-live="polite">Checking Zelle payment availability…</p>
-                        <button id="zelle-payment-submit" type="submit" disabled class="w-full bg-[#6d1ed4] hover:bg-[#5816ae] disabled:bg-slate-300 disabled:cursor-not-allowed text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3">
-                            Continue to Zelle <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                        </button>
-                        <p class="text-xs text-center text-slate-500">No payment information is stored on this website. Need help? Call <a href="tel:2483853432" class="font-bold text-blue-950 hover:text-red-600">(248) 385-3432</a>.</p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
     <!-- Footer -->
     <footer class="bg-black text-gray-400 py-12">
        <div class="max-w-7xl mx-auto px-6 text-center">
@@ -1363,43 +1286,6 @@
                 .catch(error => {
                     alert('Oops! There was a problem submitting your form. Please try calling or emailing us directly.');
                 });
-            });
-        }
-
-        // Zelle payment handoff
-        const zelleForm = document.getElementById('zelle-payment-form');
-        const zelleSubmit = document.getElementById('zelle-payment-submit');
-        const zelleStatus = document.getElementById('zelle-payment-status');
-        let zellePaymentUrl = '';
-
-        if (zelleForm && zelleSubmit && zelleStatus) {
-            fetch('/api/create-payment?payment_options=1', { headers: { Accept: 'application/json' } })
-                .then(response => response.ok ? response.json() : Promise.reject(new Error('Payment options unavailable')))
-                .then(options => {
-                    if (typeof options.zelleUrl === 'string' && options.zelleUrl.startsWith('https://')) {
-                        zellePaymentUrl = options.zelleUrl;
-                        zelleSubmit.disabled = false;
-                        zelleStatus.textContent = 'Zelle is available. Enter your details to continue.';
-                        zelleStatus.className = 'text-sm font-semibold text-green-700';
-                    } else {
-                        zelleStatus.innerHTML = 'Online Zelle payments are being set up. Please call <a href="tel:2483853432" class="underline">(248) 385-3432</a> to confirm the Zelle recipient.';
-                        zelleStatus.className = 'text-sm font-semibold text-amber-700';
-                    }
-                })
-                .catch(() => {
-                    zelleStatus.innerHTML = 'Zelle availability could not be checked. Please call <a href="tel:2483853432" class="underline">(248) 385-3432</a> for payment help.';
-                    zelleStatus.className = 'text-sm font-semibold text-red-700';
-                });
-
-            zelleForm.addEventListener('submit', event => {
-                event.preventDefault();
-                if (!zellePaymentUrl || !zelleForm.reportValidity()) return;
-
-                const amount = document.getElementById('zelle-amount').value;
-                const reference = document.getElementById('zelle-reference').value.trim();
-                zelleStatus.textContent = `Opening Zelle. Send $${Number(amount).toFixed(2)} and include “${reference}” in the memo.`;
-                zelleStatus.className = 'text-sm font-semibold text-[#4b158f]';
-                window.open(zellePaymentUrl, '_blank', 'noopener,noreferrer');
             });
         }
 
