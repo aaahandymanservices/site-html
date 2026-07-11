@@ -280,34 +280,6 @@
         .pulse-btn {
             animation: pulse-attention 2s infinite;
         }
-        .payment-section {
-            background:
-                radial-gradient(circle at 12% 18%, rgba(220, 38, 38, 0.2), transparent 26rem),
-                radial-gradient(circle at 88% 78%, rgba(37, 99, 235, 0.24), transparent 30rem),
-                #0f172a;
-        }
-        .payment-card {
-            box-shadow: 0 32px 80px -32px rgba(15, 23, 42, 0.7);
-        }
-        .payment-amount-button {
-            transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-        }
-        .payment-amount-button:hover,
-        .payment-amount-button[aria-pressed="true"] {
-            transform: translateY(-2px);
-            border-color: #dc2626;
-            background: #fef2f2;
-            color: #b91c1c;
-        }
-        .payment-method-tile {
-            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        .payment-method-tile:hover {
-            transform: translateY(-3px);
-            border-color: rgba(248, 113, 113, 0.65);
-            box-shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.85);
-        }
-
         /* Interactive Before/After slider styles */
         .before-after-container {
             position: relative;
@@ -408,7 +380,6 @@
                 <a href="#about" class="nav-link text-gray-700 hover:text-red-600">About</a>
                 <a href="#services" class="nav-link text-gray-700 hover:text-red-600">Services</a>
                 <a href="#rates" class="nav-link text-gray-700 hover:text-red-600">Rates</a>
-                <a href="#payments" class="nav-link text-gray-700 hover:text-red-600">Pay</a>
                 <a href="#reviews" class="nav-link text-gray-700 hover:text-red-600">Reviews</a>
                 <a href="#careers" class="nav-link text-gray-700 hover:text-red-600">Careers</a>
                 <a href="#contact" class="nav-link text-gray-700 hover:text-red-600">Contact</a>
@@ -430,7 +401,6 @@
             <a href="#about" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">About</a>
             <a href="#services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
             <a href="#rates" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Rates</a>
-            <a href="#payments" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Make a Payment</a>
             <a href="#reviews" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Reviews</a>
             <a href="#careers" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Careers</a>
             <a href="#contact" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Contact</a>
@@ -1181,147 +1151,6 @@
         </div>
     </section>
 
-    <!-- Payments -->
-    <section id="payments" class="payment-section py-16 sm:py-24 text-white relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10" aria-hidden="true" style="background-image: linear-gradient(rgba(255,255,255,.18) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.18) 1px, transparent 1px); background-size: 42px 42px;"></div>
-        <div class="max-w-7xl mx-auto px-6 relative">
-            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
-                <div>
-                    <div class="inline-flex items-center gap-2 rounded-full border border-red-400/40 bg-red-500/10 px-4 py-2 text-sm font-bold uppercase tracking-widest text-red-300 mb-6">
-                        <i class="fas fa-lock" aria-hidden="true"></i> Secure Online Payment
-                    </div>
-                    <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">Pay your invoice without the paperwork.</h2>
-                    <p class="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-xl mb-8">Enter the amount shown on your AAA Handyman Services invoice or estimate, then choose the payment option that works for you.</p>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-2xl mb-8" aria-label="Accepted payment methods">
-                        <div class="payment-method-tile rounded-2xl border border-white/15 bg-white/5 p-4 backdrop-blur-sm">
-                            <i class="fas fa-credit-card text-red-400 text-xl mb-2" aria-hidden="true"></i>
-                            <p class="font-bold">Debit &amp; Credit</p>
-                        </div>
-                        <div class="payment-method-tile rounded-2xl border border-white/15 bg-white/5 p-4 backdrop-blur-sm">
-                            <i class="fas fa-building-columns text-blue-400 text-xl mb-2" aria-hidden="true"></i>
-                            <p class="font-bold">Bank / ACH</p>
-                        </div>
-                        <div class="payment-method-tile rounded-2xl border border-white/15 bg-white/5 p-4 backdrop-blur-sm">
-                            <i class="fas fa-dollar-sign text-green-400 text-xl mb-2" aria-hidden="true"></i>
-                            <p class="font-bold">Cash App</p>
-                        </div>
-                        <div class="payment-method-tile rounded-2xl border border-white/15 bg-white/5 p-4 backdrop-blur-sm">
-                            <span class="inline-flex h-6 min-w-6 items-center justify-center rounded-md bg-violet-500 px-1.5 text-sm font-black mb-2" aria-hidden="true">Z</span>
-                            <p class="font-bold">Zelle</p>
-                        </div>
-                        <div class="payment-method-tile rounded-2xl border border-white/15 bg-white/5 p-4 backdrop-blur-sm">
-                            <span class="inline-flex h-6 min-w-6 items-center justify-center rounded-md bg-sky-500 px-1.5 text-sm font-black mb-2" aria-hidden="true">V</span>
-                            <p class="font-bold">Venmo</p>
-                        </div>
-                        <div class="payment-method-tile rounded-2xl border border-white/15 bg-white/5 p-4 backdrop-blur-sm">
-                            <i class="fas fa-money-bill-transfer text-amber-400 text-xl mb-2" aria-hidden="true"></i>
-                            <p class="font-bold">Bank Transfer</p>
-                        </div>
-                    </div>
-                    <div class="grid sm:grid-cols-3 gap-4 max-w-2xl">
-                        <div class="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-                            <i class="fas fa-shield-halved text-red-400 text-xl mb-3" aria-hidden="true"></i>
-                            <p class="font-bold">Secure checkout</p>
-                            <p class="text-sm text-slate-400 mt-1">Financial details stay with the processor.</p>
-                        </div>
-                        <div class="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-                            <i class="fas fa-receipt text-blue-400 text-xl mb-3" aria-hidden="true"></i>
-                            <p class="font-bold">Easy matching</p>
-                            <p class="text-sm text-slate-400 mt-1">Add your invoice or job number.</p>
-                        </div>
-                        <div class="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-                            <i class="fas fa-envelope-circle-check text-green-400 text-xl mb-3" aria-hidden="true"></i>
-                            <p class="font-bold">Email receipt</p>
-                            <p class="text-sm text-slate-400 mt-1">Stripe sends confirmation.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="payment-card bg-white text-gray-900 rounded-[2rem] p-6 sm:p-9 border border-white/60">
-                    <div id="payment-success" class="hidden rounded-2xl border border-green-200 bg-green-50 p-5 mb-6" role="status">
-                        <div class="flex gap-4">
-                            <i class="fas fa-circle-check text-3xl text-green-600" aria-hidden="true"></i>
-                            <div>
-                                <p class="font-bold text-green-900 text-lg">Payment confirmed</p>
-                                <p id="payment-success-detail" class="text-sm text-green-800 mt-1">Thank you. Your receipt is on its way by email.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="payment-canceled" class="hidden rounded-2xl border border-amber-200 bg-amber-50 p-5 mb-6" role="status">
-                        <p class="font-bold text-amber-900">Payment was not completed.</p>
-                        <p class="text-sm text-amber-800 mt-1">No charge was made. Your details remain below so you can try again.</p>
-                    </div>
-
-                    <div class="flex items-start justify-between gap-6 mb-7">
-                        <div>
-                            <p class="text-xs uppercase tracking-[0.2em] font-bold text-red-600 mb-2">AAA Handyman Services</p>
-                            <h3 class="text-2xl sm:text-3xl font-bold text-slate-950">Make a Payment</h3>
-                        </div>
-                        <div class="w-14 h-14 rounded-2xl bg-slate-950 text-white flex items-center justify-center text-2xl flex-shrink-0">
-                            <i class="fas fa-credit-card" aria-hidden="true"></i>
-                        </div>
-                    </div>
-
-                    <form id="payment-form" class="space-y-5">
-                        <div>
-                            <label for="payment-amount" class="block text-sm font-bold text-slate-700 mb-2">Payment amount</label>
-                            <div class="relative">
-                                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-2xl font-bold text-slate-500">$</span>
-                                <input id="payment-amount" name="amount" type="number" inputmode="decimal" min="1" max="10000" step="0.01" required class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 py-4 pl-12 pr-5 text-2xl font-bold focus:border-red-500 focus:outline-none" placeholder="0.00" autocomplete="off">
-                            </div>
-                            <div class="grid grid-cols-4 gap-2 mt-3" aria-label="Quick amount choices">
-                                <button type="button" class="payment-amount-button rounded-xl border-2 border-slate-200 py-2 text-sm font-bold" data-payment-amount="50" aria-pressed="false">$50</button>
-                                <button type="button" class="payment-amount-button rounded-xl border-2 border-slate-200 py-2 text-sm font-bold" data-payment-amount="100" aria-pressed="false">$100</button>
-                                <button type="button" class="payment-amount-button rounded-xl border-2 border-slate-200 py-2 text-sm font-bold" data-payment-amount="250" aria-pressed="false">$250</button>
-                                <button type="button" class="payment-amount-button rounded-xl border-2 border-slate-200 py-2 text-sm font-bold" data-payment-amount="500" aria-pressed="false">$500</button>
-                            </div>
-                        </div>
-
-                        <div class="grid sm:grid-cols-2 gap-4">
-                            <div>
-                                <label for="payment-name" class="block text-sm font-bold text-slate-700 mb-2">Customer name</label>
-                                <input id="payment-name" name="customerName" type="text" maxlength="100" required autocomplete="name" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3.5 focus:border-red-500 focus:outline-none" placeholder="Your full name">
-                            </div>
-                            <div>
-                                <label for="payment-email" class="block text-sm font-bold text-slate-700 mb-2">Receipt email</label>
-                                <input id="payment-email" name="email" type="email" maxlength="160" required autocomplete="email" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3.5 focus:border-red-500 focus:outline-none" placeholder="you@example.com">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="payment-reference" class="block text-sm font-bold text-slate-700 mb-2">Invoice or job number <span class="font-normal text-slate-400">(optional)</span></label>
-                            <input id="payment-reference" name="reference" type="text" maxlength="80" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3.5 focus:border-red-500 focus:outline-none" placeholder="Example: INV-1042">
-                        </div>
-
-                        <p id="payment-message" class="hidden rounded-xl px-4 py-3 text-sm font-semibold" role="alert"></p>
-                        <button id="payment-submit" type="submit" name="paymentMethod" value="checkout" class="w-full rounded-2xl bg-red-600 hover:bg-red-700 text-white py-4 text-lg font-bold transition flex items-center justify-center gap-3">
-                            Pay by Card, Bank, or Cash App <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                        </button>
-                        <button id="bank-transfer-submit" type="submit" name="paymentMethod" value="bank_transfer" class="w-full rounded-2xl border-2 border-blue-200 bg-blue-50 hover:border-blue-400 text-blue-950 py-3.5 font-bold transition flex items-center justify-center gap-3">
-                            Get Bank Transfer Instructions <i class="fas fa-building-columns" aria-hidden="true"></i>
-                        </button>
-                        <p class="text-xs leading-relaxed text-slate-500 text-center"><i class="fas fa-lock mr-1" aria-hidden="true"></i> Available Stripe methods appear at checkout based on your device and eligibility. AAA Handyman Services does not receive or store your financial account numbers.</p>
-                    </form>
-
-                    <div class="my-7 flex items-center gap-4" aria-hidden="true">
-                        <span class="h-px flex-1 bg-slate-200"></span>
-                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Zelle or Venmo</span>
-                        <span class="h-px flex-1 bg-slate-200"></span>
-                    </div>
-                    <div class="grid sm:grid-cols-2 gap-3">
-                        <a id="zelle-payment-link" href="mailto:contact@aaahandyman.services?subject=Zelle%20payment%20details" class="rounded-2xl border-2 border-violet-200 bg-violet-50 px-4 py-3.5 font-bold text-violet-900 hover:border-violet-400 transition flex items-center justify-center gap-2">
-                            <span class="inline-flex h-6 min-w-6 items-center justify-center rounded-md bg-violet-600 px-1.5 text-sm font-black text-white" aria-hidden="true">Z</span> Get Zelle Details
-                        </a>
-                        <a id="venmo-payment-link" href="mailto:contact@aaahandyman.services?subject=Venmo%20payment%20details" class="rounded-2xl border-2 border-sky-200 bg-sky-50 px-4 py-3.5 font-bold text-sky-900 hover:border-sky-400 transition flex items-center justify-center gap-2">
-                            <span class="inline-flex h-6 min-w-6 items-center justify-center rounded-md bg-sky-500 px-1.5 text-sm font-black text-white" aria-hidden="true">V</span> Get Venmo Details
-                        </a>
-                    </div>
-                    <p class="mt-3 text-xs text-center text-slate-500">Always confirm the recipient shown matches AAA Handyman Services before sending a direct payment.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact -->
     <section id="contact" class="py-16 sm:py-24 bg-gray-900 text-white">
         <div class="max-w-7xl mx-auto px-6">
@@ -1506,128 +1335,6 @@
         }
         
 
-
-        // Secure hosted payment checkout
-        const paymentForm = document.getElementById('payment-form');
-        const paymentSubmit = document.getElementById('payment-submit');
-        const bankTransferSubmit = document.getElementById('bank-transfer-submit');
-        const paymentMessage = document.getElementById('payment-message');
-        const paymentAmount = document.getElementById('payment-amount');
-        const paymentSuccess = document.getElementById('payment-success');
-        const paymentSuccessDetail = document.getElementById('payment-success-detail');
-        const paymentCanceled = document.getElementById('payment-canceled');
-        const paymentAmountButtons = document.querySelectorAll('[data-payment-amount]');
-        const zellePaymentLink = document.getElementById('zelle-payment-link');
-        const venmoPaymentLink = document.getElementById('venmo-payment-link');
-
-        const setPaymentMessage = (text, isError) => {
-            if (!paymentMessage) return;
-            paymentMessage.textContent = text;
-            paymentMessage.className = `rounded-xl px-4 py-3 text-sm font-semibold ${isError ? 'bg-red-50 text-red-700' : 'bg-blue-50 text-blue-800'}`;
-        };
-
-        const updateDirectPaymentLinks = () => {
-            const amount = paymentAmount?.value ? `$${Number(paymentAmount.value).toFixed(2)}` : 'the invoice amount';
-            const reference = document.getElementById('payment-reference')?.value.trim() || 'not provided';
-            const customerName = document.getElementById('payment-name')?.value.trim() || 'customer';
-            const body = `Hello, I would like to pay ${amount} by PAYMENT_METHOD.\n\nCustomer: ${customerName}\nInvoice or job number: ${reference}\n\nPlease send the verified payment details.`;
-            if (zellePaymentLink) zellePaymentLink.href = `mailto:contact@aaahandyman.services?subject=${encodeURIComponent('Zelle payment details')}&body=${encodeURIComponent(body.replace('PAYMENT_METHOD', 'Zelle'))}`;
-            if (venmoPaymentLink) venmoPaymentLink.href = `mailto:contact@aaahandyman.services?subject=${encodeURIComponent('Venmo payment details')}&body=${encodeURIComponent(body.replace('PAYMENT_METHOD', 'Venmo'))}`;
-        };
-
-        paymentAmountButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                if (paymentAmount) paymentAmount.value = button.dataset.paymentAmount || '';
-                paymentAmountButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-            });
-        });
-
-        if (paymentAmount) {
-            paymentAmount.addEventListener('input', () => {
-                paymentAmountButtons.forEach(button => {
-                    button.setAttribute('aria-pressed', String(button.dataset.paymentAmount === paymentAmount.value));
-                });
-                updateDirectPaymentLinks();
-            });
-        }
-
-        paymentForm?.querySelectorAll('input').forEach(input => input.addEventListener('input', updateDirectPaymentLinks));
-        updateDirectPaymentLinks();
-
-        fetch('/api/create-payment?payment_options=1')
-            .then(response => response.ok ? response.json() : {})
-            .then(options => {
-                if (options.zelleUrl && zellePaymentLink) {
-                    zellePaymentLink.href = options.zelleUrl;
-                    zellePaymentLink.innerHTML = '<span class="inline-flex h-6 min-w-6 items-center justify-center rounded-md bg-violet-600 px-1.5 text-sm font-black text-white" aria-hidden="true">Z</span> Pay with Zelle';
-                }
-                if (options.venmoUrl && venmoPaymentLink) {
-                    venmoPaymentLink.href = options.venmoUrl;
-                    venmoPaymentLink.innerHTML = '<span class="inline-flex h-6 min-w-6 items-center justify-center rounded-md bg-sky-500 px-1.5 text-sm font-black text-white" aria-hidden="true">V</span> Pay with Venmo';
-                }
-            })
-            .catch(() => {});
-
-        if (paymentForm) {
-            paymentForm.addEventListener('submit', async event => {
-                event.preventDefault();
-                if (!paymentForm.reportValidity()) return;
-
-                const selectedMethod = event.submitter?.value === 'bank_transfer' ? 'bank_transfer' : 'checkout';
-
-                [paymentSubmit, bankTransferSubmit].forEach(button => {
-                    if (!button) return;
-                    button.disabled = true;
-                    button.classList.add('opacity-70', 'cursor-not-allowed');
-                });
-                const activeButton = selectedMethod === 'bank_transfer' ? bankTransferSubmit : paymentSubmit;
-                if (activeButton) {
-                    activeButton.innerHTML = 'Opening Secure Checkout <i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i>';
-                }
-                setPaymentMessage('Creating your secure payment session...', false);
-
-                try {
-                    const paymentData = Object.fromEntries(new FormData(paymentForm));
-                    paymentData.paymentMethod = selectedMethod;
-                    const response = await fetch('/api/create-payment', {
-                        method: 'POST',
-                        headers: { 'content-type': 'application/json' },
-                        body: JSON.stringify(paymentData)
-                    });
-                    const payload = await response.json().catch(() => ({}));
-                    if (!response.ok || !payload.url) throw new Error(payload.error || 'Secure checkout is unavailable right now.');
-                    window.location.assign(payload.url);
-                } catch (error) {
-                    setPaymentMessage(error.message || 'Secure checkout is unavailable right now. Please call us for help.', true);
-                    [paymentSubmit, bankTransferSubmit].forEach(button => {
-                        if (!button) return;
-                        button.disabled = false;
-                        button.classList.remove('opacity-70', 'cursor-not-allowed');
-                    });
-                    if (paymentSubmit) paymentSubmit.innerHTML = 'Pay by Card, Bank, or Cash App <i class="fas fa-arrow-right" aria-hidden="true"></i>';
-                    if (bankTransferSubmit) bankTransferSubmit.innerHTML = 'Get Bank Transfer Instructions <i class="fas fa-building-columns" aria-hidden="true"></i>';
-                }
-            });
-        }
-
-        const paymentParams = new URLSearchParams(window.location.search);
-        const paymentState = paymentParams.get('payment');
-        const paymentSessionId = paymentParams.get('session_id');
-        if (paymentState === 'canceled' && paymentCanceled) {
-            paymentCanceled.classList.remove('hidden');
-        }
-        if (paymentState === 'success' && paymentSessionId && paymentSuccess) {
-            fetch(`/api/create-payment?session_id=${encodeURIComponent(paymentSessionId)}`)
-                .then(async response => {
-                    const payload = await response.json().catch(() => ({}));
-                    if (!response.ok || payload.paymentStatus !== 'paid') throw new Error('Payment confirmation is pending.');
-                    const amount = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format((payload.amountTotal || 0) / 100);
-                    paymentSuccess.classList.remove('hidden');
-                    if (paymentSuccessDetail) paymentSuccessDetail.textContent = `${amount} was received. Your Stripe receipt is on its way by email.`;
-                    paymentForm?.reset();
-                })
-                .catch(() => setPaymentMessage('Your payment was submitted, but confirmation is still pending. Check your email receipt or call us if you need help.', false));
-        }
 
         // Customer reviews submissions
         const reviewsForm = document.getElementById('reviews-form');
