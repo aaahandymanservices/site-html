@@ -20,7 +20,7 @@ export default async (request: Request) => {
     return new Response("Not found", { status: 404 });
   }
 
-  const image = await getStore("customer-reviews").get(key, { type: "arrayBuffer" }).catch((error) => {
+  const image = await getStore("customer-reviews").get(key, { type: "arrayBuffer" }).catch((error: unknown) => {
     console.error("review photo lookup failed", error);
     return null;
   });
