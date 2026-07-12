@@ -35,14 +35,16 @@
                 extend: {
                     colors: {
                         red: {
-                            50: '#fff1f2',
-                            100: '#ffe4e6',
-                            200: '#fecdd3',
-                            500: '#f43f5e',
-                            600: '#e11d48',
-                            700: '#be123c',
-                            800: '#9f1239',
-                            950: '#4c0519',
+                            50: '#fdf2f2',
+                            100: '#fde8e8',
+                            200: '#fbd5d5',
+                            300: '#f8b4b4',
+                            400: '#f98080',
+                            500: '#e02424',
+                            600: '#8e1f26',
+                            700: '#751a1e',
+                            800: '#5c1417',
+                            900: '#461012',
                         },
                         blue: {
                             50: '#f3f6f9',
@@ -98,8 +100,8 @@
             transition: all 0.2s ease;
         }
         .review-dropzone.dragging {
-            border-color: #ef4444;
-            background-color: #fef2f2;
+            border-color: #8e1f26;
+            background-color: #fdf2f2;
             transform: scale(1.02);
         }
         @keyframes pulse-attention-green {
@@ -299,24 +301,19 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-900 text-slate-400 py-12">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-            <div>
-                <span class="text-white font-bold text-xl block mb-3">AAA Handyman Services</span>
-                <p class="text-sm">Waterford, Michigan based. Your top choice for residential and light commercial upkeep throughout Oakland County, MI.</p>
+    <footer class="bg-black text-gray-400 py-12">
+       <div class="max-w-7xl mx-auto px-6 text-center">
+           <div class="flex justify-center mb-6">
+               <!-- Circular Logo -->
+               <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 mx-auto rounded-full object-cover shadow-lg border-2 border-red-600">
+           </div>            <p class="text-sm">&copy; 2026 AAA Handyman Services. All Rights Reserved. Michigan's $600 Handyman Law MCL 339.2403 Compliant.<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects.<br>We are not a licensed builder or general contractor.<br>Locally Serving Oakland County, MI.</p>
+            <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
+                <a href="/privacy" target="_blank" rel="noopener" class="hover:text-white transition">Privacy Policy</a>
+                <span class="text-gray-600">|</span>
+                <a href="/terms" target="_blank" rel="noopener" class="hover:text-white transition">Terms of Service</a>
+            </div>            <div class="mt-6 flex justify-center gap-6">
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="text-3xl hover:text-[#1877F2] transition"><i class="fab fa-facebook"></i></a>
             </div>
-            <div>
-                <span class="text-white font-bold text-base block mb-3">Service Areas</span>
-                <p class="text-sm">Waterford, West Bloomfield, Troy, Birmingham, Clarkston, Royal Oak, Rochester, Bloomfield Hills, Franklin, Orchard Lake.</p>
-            </div>
-            <div>
-                <span class="text-white font-bold text-base block mb-3">Contact</span>
-                <p class="text-sm mb-1"><i class="fas fa-phone text-red-500 mr-1.5"></i> (248) 385-3432</p>
-                <p class="text-sm mb-1"><i class="fas fa-envelope text-red-500 mr-1.5"></i> contact@aaahandyman.services</p>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-slate-900 text-xs text-center">
-            &copy; 2026 AAA Handyman Services. All rights reserved.
         </div>
     </footer>
 
