@@ -1973,6 +1973,41 @@
                 });
             });
         }
+
+        // Smooth scroll implementation for all anchor links to ensure consistent offset on mobile/desktop
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.getElementById(targetId.substring(1));
+                if (targetElement) {
+                    e.preventDefault();
+                    
+                    // Close mobile menu if it is open
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        if (menuIcon) menuIcon.className = 'fas fa-bars';
+                    }
+
+                    // Calculate the header/sticky nav offset dynamically
+                    const nav = document.querySelector('nav');
+                    const offset = nav ? nav.offsetHeight : 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Update URL hash safely without jumping
+                    setTimeout(() => {
+                        history.pushState(null, null, targetId);
+                    }, 500);
+                }
+            });
+        });
     </script>
 
     <!-- Floating Mobile Call/SMS CTA Widget -->
