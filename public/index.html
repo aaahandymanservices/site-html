@@ -1486,7 +1486,8 @@
                 loadReviews();
             })
             .catch(error => {
-                showReviewsMessage(error.message || 'The review submission could not be removed.', true);
+                const message = error instanceof Error ? error.message : String(error || '');
+                showReviewsMessage(message || 'The review submission could not be removed.', true);
             });
         };
 
@@ -1637,7 +1638,8 @@
                     loadReviews();
                 })
                 .catch(error => {
-                    showReviewsMessage(error.message || 'The review could not be saved.', true);
+                    const message = error instanceof Error ? error.message : String(error || '');
+                    showReviewsMessage(message || 'The review could not be saved.', true);
                 })
                 .finally(() => {
                     setReviewsSubmitting(false);
