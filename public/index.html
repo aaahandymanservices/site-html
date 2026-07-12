@@ -664,7 +664,7 @@
                             <span class="text-2xl text-green-600" aria-hidden="true"><i class="fas fa-circle-check"></i></span>
                             <div>
                                 <h3 class="text-xl sm:text-2xl font-bold text-green-700">20 Mile Free Travel Zone</h3>
-                                <p class="text-sm text-gray-500">No travel fees applied</p>
+                                <p class="text-sm text-gray-500">No travel fees applied (2-hour minimum)</p>
                             </div>
                         </div>
                         
@@ -698,8 +698,8 @@
                         <div class="flex items-center gap-3 mb-6">
                             <span class="text-2xl text-red-600" aria-hidden="true"><i class="fas fa-circle-exclamation"></i></span>
                             <div>
-                                <h3 class="text-xl sm:text-2xl font-bold text-red-600">20+ Travel Fee Zone</h3>
-                                <p class="text-sm text-gray-500">Over 20 miles away ($30 flat travel fee)</p>
+                                <h3 class="text-xl sm:text-2xl font-bold text-red-600">20+ Mile Zone</h3>
+                                <p class="text-sm text-gray-500">Over 20 miles away (3-hour minimum, no travel fees)</p>
                             </div>
                         </div>
 
@@ -836,8 +836,8 @@
                         <div>
                             <label for="calc-zone" class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">2. Your Travel Distance Zone</label>
                             <select id="calc-zone" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-white mt-1">
-                                <option value="0" selected>Standard Metro (Waterford & within 20 miles) — $0 Travel Fee</option>
-                                <option value="30">Far Zone (Over 20 miles away) — $30 Flat Travel Fee</option>
+                                <option value="0" data-min-hours="2" selected>Standard Metro (Waterford & within 20 miles) — $0 Travel Fee (2-hr min)</option>
+                                <option value="0" data-min-hours="3">Far Zone (Over 20 miles away) — $0 Travel Fee (3-hr min)</option>
                             </select>
                         </div>
                     </div>
@@ -848,7 +848,7 @@
                     <div class="text-center">
                         <span class="inline-block bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-4">Estimated Range</span>
                         <div class="text-4xl sm:text-5xl font-black text-gray-900 tracking-tight mt-1 mb-2" id="calc-price-display">$0 - $0</div>
-                        <p class="text-sm text-gray-500">Based on standard $45–$70 handyman rates plus selected travel fees.</p>
+                        <p class="text-sm text-gray-500">Based on standard $45–$70 handyman rates with no travel fees.</p>
                     </div>
 
                     <div class="my-6 space-y-3 bg-gray-50 p-4 rounded-2xl border border-gray-100 text-sm">
@@ -866,7 +866,7 @@
                         </div>
                         <div class="flex justify-between pt-3 border-t border-gray-200">
                             <span class="font-bold text-gray-800">Job Minimum Met:</span>
-                            <span id="calc-min-status" class="font-semibold text-red-600">Requires 2-hr min.</span>
+                            <span id="calc-min-status" class="font-semibold text-red-600">Requires min. hours</span>
                         </div>
                     </div>
 
@@ -1685,25 +1685,27 @@
                 }
             });
 
-            const travelSurcharge = parseFloat(calcZone?.value || '0');
+            const selectedOption = calcZone?.options[calcZone.selectedIndex];
+            const travelSurcharge = parseFloat(selectedOption?.value || '0');
+            const zoneMinHours = parseInt(selectedOption?.dataset.minHours || '2', 10);
 
             if (totalHours === 0) {
                 calcPriceDisplay.textContent = '$0 - $0';
                 calcHours.textContent = '0 hours';
                 calcTravelFee.textContent = `$${travelSurcharge}`;
-                calcMinStatus.textContent = 'Requires 2-hr min.';
+                calcMinStatus.textContent = `Requires ${zoneMinHours}-hr min.`;
                 calcMinStatus.className = 'font-semibold text-red-600';
                 return { totalHours, travelSurcharge, selectedServices, lowEstimate: 0, highEstimate: 0 };
             }
 
             // High/low estimate calculations ($45 to $70/hr)
-            // Job minimum is 2 hours.
-            const billableHours = Math.max(totalHours, 2);
+            // Job minimum is 2 hours (0 travel fee) or 3 hours (30 travel fee).
+            const billableHours = Math.max(totalHours, zoneMinHours);
             const lowEstimate = (billableHours * 45) + travelSurcharge;
             const highEstimate = (billableHours * 70) + travelSurcharge;
 
             calcPriceDisplay.textContent = `$${lowEstimate} - $${highEstimate}`;
-            calcHours.textContent = totalHours < 2 ? `${totalHours} hours (2-hr min applied)` : `${totalHours} hours`;
+            calcHours.textContent = totalHours < zoneMinHours ? `${totalHours} hours (${zoneMinHours}-hr min applied)` : `${totalHours} hours`;
             calcTravelFee.textContent = `$${travelSurcharge}`;
             
             calcMinStatus.textContent = 'Met';
