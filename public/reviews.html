@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Resource hints: warm up connections to third-party origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
+    <title>Customer Reviews & Testimonials | AAA Handyman Services</title>
+    
+    <!-- Search Engine Optimization (SEO) Metadata -->
+    <meta name="description" content="Read reviews and testimonials from homeowners in Waterford, Troy, West Bloomfield, and across Oakland County, MI. Submit your own project photo and review.">
+    <meta name="theme-color" content="#8e1f26">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aaahandyman.services/reviews">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aaahandyman.services/reviews">
+    <meta property="og:site_name" content="AAA Handyman Services">
+    <meta property="og:title" content="Customer Reviews & Testimonials | AAA Handyman Services">
+    <meta property="og:description" content="See recent home repair projects and verified client testimonials from around Oakland County, Michigan. Submit your own review today.">
+    <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Tailwind Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        red: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            950: '#4c0519',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom font family */
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        /* Animated entrance for loaded reviews */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .review-card {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        .review-preview {
+            aspect-ratio: 4 / 3;
+        }
+        /* Drag and Drop dropzone styling */
+        .review-dropzone {
+            transition: all 0.2s ease;
+        }
+        .review-dropzone.dragging {
+            border-color: #ef4444;
+            background-color: #fef2f2;
+            transform: scale(1.02);
+        }
+        @keyframes pulse-attention-green {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
+        }
+        .pulse-btn-green {
+            animation: pulse-attention-green 2s infinite;
+        }
+        /* Anchor scroll margin for sticky navbar */
+        section[id], header[id] {
+            scroll-margin-top: 80px;
+        }
+        @media (max-width: 768px) {
+            section[id], header[id] {
+                scroll-margin-top: 100px;
+            }
+        }
+        /* Respect visitors who prefer reduced motion (accessibility) */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .pulse-btn-green,
+            .review-card { animation: none !important; }
+            .review-card { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+</head>
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 sm:py-4 flex justify-between items-center">
+            <a href="/" class="flex min-w-0 items-center space-x-3" aria-label="AAA Handyman Services home">
+                <!-- Logo -->
+                <img src="/.netlify/images?url=/logo-shield.png&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-shield.png&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-shield.png&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600">
+                <div class="min-w-0">
+                    <p class="text-base min-[390px]:text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
+                    <p class="text-[10px] sm:text-xs text-gray-500">Oakland County Michigan</p>
+                </div>
+            </a>
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex space-x-8 text-lg font-medium items-center">
+                <a href="/#about" class="nav-link text-gray-700 hover:text-red-600 transition">About</a>
+                <a href="/#services" class="nav-link text-gray-700 hover:text-red-600 transition">Services</a>
+                <a href="/#rates" class="nav-link text-gray-700 hover:text-red-600 transition">Rates</a>
+                <a href="/reviews.html" class="nav-link text-red-600 font-bold border-b-2 border-red-600">Reviews</a>
+                <a href="/#careers" class="nav-link text-gray-700 hover:text-red-600 transition">Careers</a>
+                <a href="/#contact" class="nav-link text-gray-700 hover:text-red-600 transition">Contact</a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="nav-link text-gray-700 hover:text-[#1877F2] text-xl transition"><i class="fab fa-facebook"></i></a>
+            </div>
+            <!-- Nav Action Buttons -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <a href="tel:2483853432" class="bg-green-600 hover:bg-green-700 text-white p-3 lg:px-5 lg:py-3 xl:px-6 rounded-full font-semibold flex items-center justify-center gap-2 transition pulse-btn-green" title="Call us">
+                    <i class="fas fa-phone"></i> <span class="hidden sm:inline">‪(248) 385-3432‬</span>
+                </a>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
+                    <i class="fas fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t-[3px] border-gray-100 px-6 py-4 space-y-4 shadow-inner">
+            <a href="/#about" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">About</a>
+            <a href="/#services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
+            <a href="/#rates" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Rates</a>
+            <a href="/reviews.html" class="block text-lg font-bold text-red-600 py-1">Reviews</a>
+            <a href="/#careers" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Careers</a>
+            <a href="/#contact" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Contact</a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="block text-lg font-medium text-gray-700 hover:text-[#1877F2] py-1"><i class="fab fa-facebook"></i> Facebook</a>
+        </div>
+    </nav>
+
+    <!-- Reviews Section -->
+    <main class="flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Customer Feedback</div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Reviews & Testimonials</h1>
+                <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                    Check out recent projects completed by AAA Handyman Services across Oakland County, or share your own experience by submitting a review below!
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-5 gap-12 items-start">
+                <!-- Submit a Review Form (lg:col-span-2) -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white text-gray-900 border border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2">Write a Review</h2>
+                        <p class="text-sm text-gray-500 mb-6">Upload a photo of your finished repair/project and let your neighbors know how it went.</p>
+                        
+                        <form id="reviews-form" class="space-y-5">
+                            <div>
+                                <label for="reviews-name" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Name</label>
+                                <input id="reviews-name" name="customerName" type="text" required maxlength="80" autocomplete="name" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label for="reviews-location" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">City / Area</label>
+                                    <input id="reviews-location" name="location" type="text" required maxlength="90" placeholder="Waterford, MI" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                </div>
+                                <div>
+                                    <label for="reviews-project" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Type</label>
+                                    <select id="reviews-project" name="projectType" required class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                        <option value="" disabled selected>Select...</option>
+                                        <option value="Carpentry & Trim">Carpentry & Trim</option>
+                                        <option value="Doors">Doors</option>
+                                        <option value="Drywall">Drywall</option>
+                                        <option value="Painting">Painting</option>
+                                        <option value="Electrical">Electrical</option>
+                                        <option value="Plumbing">Plumbing</option>
+                                        <option value="Decks & Fences">Decks & Fences</option>
+                                        <option value="Flooring">Flooring</option>
+                                        <option value="Maintenance">Maintenance</option>
+                                        <option value="Other Service">Other Service</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Rating</label>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex gap-1">
+                                        <button type="button" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="1" aria-label="1 star"><i class="fas fa-star"></i></button>
+                                        <button type="button" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="2" aria-label="2 stars"><i class="fas fa-star"></i></button>
+                                        <button type="button" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="3" aria-label="3 stars"><i class="fas fa-star"></i></button>
+                                        <button type="button" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="4" aria-label="4 stars"><i class="fas fa-star"></i></button>
+                                        <button type="button" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="5" aria-label="5 stars"><i class="fas fa-star"></i></button>
+                                    </div>
+                                    <span id="rating-text" class="text-sm font-semibold text-amber-600">Perfect!</span>
+                                    <input type="hidden" id="reviews-rating" name="rating" value="5" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="reviews-review" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Review</label>
+                                <textarea id="reviews-review" name="review" rows="4" required maxlength="700" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Tell neighbors what was fixed and how it went."></textarea>
+                            </div>
+
+                            <div>
+                                <label for="reviews-photo" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Photo</label>
+                                <label id="reviews-dropzone" for="reviews-photo" class="review-dropzone block cursor-pointer border-[2px] border-dashed border-red-200 hover:border-red-500 rounded-3xl p-5 text-center transition">
+                                    <input id="reviews-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif" required class="sr-only">
+                                    <i class="fas fa-cloud-arrow-up text-3xl text-red-500 mb-2 block"></i>
+                                    <span id="reviews-file-name" class="block font-semibold text-slate-800">Choose a photo or drag it here</span>
+                                    <span class="text-xs text-gray-400 block mt-1">Supports JPEG, PNG, WEBP, GIF (Max 10MB)</span>
+                                </label>
+                            </div>
+
+                            <p id="reviews-message" class="hidden text-sm font-semibold"></p>
+                            
+                            <div id="reviews-editing" class="hidden bg-blue-50 border-[2px] border-blue-200 rounded-2xl p-4 text-sm text-blue-900">
+                                <span class="block mb-1">✍️ You are editing an existing review.</span>
+                                <button id="reviews-cancel-edit" type="button" class="font-bold text-red-600 hover:text-red-700">Cancel</button>
+                            </div>
+
+                            <button id="reviews-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
+                                Add Review <i class="fas fa-camera-retro"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Reviews Feed List (lg:col-span-3) -->
+                <div class="lg:col-span-3 space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <h2 class="text-2xl font-bold text-white">Client Showcases</h2>
+                            <p class="text-slate-400 text-sm">Real pictures from real clients across Oakland County, MI.</p>
+                        </div>
+                        <button id="reviews-refresh" type="button" class="self-start sm:self-auto border-[2px] border-white/20 hover:bg-white hover:text-slate-900 px-5 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2">
+                            <i class="fas fa-arrows-rotate"></i> Refresh Feed
+                        </button>
+                    </div>
+
+                    <!-- List Container -->
+                    <div id="reviews-list" class="grid sm:grid-cols-2 gap-5"></div>
+
+                    <!-- Empty State -->
+                    <div id="reviews-empty" class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
+                        <i class="fas fa-comment-slash text-4xl text-slate-500 mb-3 block"></i>
+                        <h4 class="text-xl font-bold text-white mb-2">No customer reviews yet</h4>
+                        <p class="text-sm">Be the first to share your experience with AAA Handyman Services!</p>
+                    </div>
+
+                    <!-- Loading State Skeleton -->
+                    <div id="reviews-loading" class="grid sm:grid-cols-2 gap-5">
+                        <div class="bg-white/5 border border-white/10 rounded-3xl p-6 h-[400px] animate-pulse"></div>
+                        <div class="bg-white/5 border border-white/10 rounded-3xl p-6 h-[400px] animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-900 text-slate-400 py-12">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+            <div>
+                <span class="text-white font-bold text-xl block mb-3">AAA Handyman Services</span>
+                <p class="text-sm">Waterford, Michigan based. Your top choice for residential and light commercial upkeep throughout Oakland County, MI.</p>
+            </div>
+            <div>
+                <span class="text-white font-bold text-base block mb-3">Service Areas</span>
+                <p class="text-sm">Waterford, West Bloomfield, Troy, Birmingham, Clarkston, Royal Oak, Rochester, Bloomfield Hills, Franklin, Orchard Lake.</p>
+            </div>
+            <div>
+                <span class="text-white font-bold text-base block mb-3">Contact</span>
+                <p class="text-sm mb-1"><i class="fas fa-phone text-red-500 mr-1.5"></i> (248) 385-3432</p>
+                <p class="text-sm mb-1"><i class="fas fa-envelope text-red-500 mr-1.5"></i> contact@aaahandyman.services</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-slate-900 text-xs text-center">
+            &copy; 2026 AAA Handyman Services. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Interactive JS scripts -->
+    <script>
+        // Reviews functionality
+        const reviewsForm = document.getElementById('reviews-form');
+        const reviewsList = document.getElementById('reviews-list');
+        const reviewsEmpty = document.getElementById('reviews-empty');
+        const reviewsLoading = document.getElementById('reviews-loading');
+        const reviewsMessage = document.getElementById('reviews-message');
+        const reviewsSubmit = document.getElementById('reviews-submit');
+        const reviewsRefresh = document.getElementById('reviews-refresh');
+        const reviewsPhoto = document.getElementById('reviews-photo');
+        const reviewsDropzone = document.getElementById('reviews-dropzone');
+        const reviewsFileName = document.getElementById('reviews-file-name');
+        const reviewsEditing = document.getElementById('reviews-editing');
+        const reviewsCancelEdit = document.getElementById('reviews-cancel-edit');
+        const reviewsRatingInput = document.getElementById('reviews-rating');
+        const ratingText = document.getElementById('rating-text');
+        const starRatingBtns = document.querySelectorAll('.star-rating-btn');
+        const reviewsTokenKey = 'aaaReviewsEditTokens';
+        let reviewsEditId = null;
+
+        // Initialize Star Rating Selector logic
+        const ratingLabels = {
+            '1': 'Disappointing',
+            '2': 'Could be better',
+            '3': 'Good service',
+            '4': 'Great work!',
+            '5': 'Perfect!'
+        };
+
+        const updateStarRatingDisplay = (rating) => {
+            if (!reviewsRatingInput) return;
+            reviewsRatingInput.value = String(rating);
+            if (ratingText) {
+                ratingText.textContent = ratingLabels[String(rating)] || '';
+            }
+            starRatingBtns.forEach((btn) => {
+                const val = parseInt(btn.dataset.value || '0', 10);
+                const icon = btn.querySelector('i');
+                if (icon) {
+                    if (val <= rating) {
+                        icon.className = 'fas fa-star';
+                        btn.className = 'star-rating-btn text-2xl text-amber-400 focus:outline-none';
+                    } else {
+                        icon.className = 'far fa-star';
+                        btn.className = 'star-rating-btn text-2xl text-gray-300 hover:text-amber-300 focus:outline-none';
+                    }
+                }
+            });
+        };
+
+        starRatingBtns.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const val = parseInt(btn.dataset.value || '5', 10);
+                updateStarRatingDisplay(val);
+            });
+        });
+
+        // Initialize with default 5 stars
+        updateStarRatingDisplay(5);
+
+        const escapeHTML = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        }[char]));
+
+        const stars = (rating) => Array.from({ length: 5 }, (_, index) =>
+            `<i class="${index < rating ? 'fas' : 'far'} fa-star"></i>`
+        ).join('');
+
+        const showReviewsMessage = (text, isError) => {
+            if (!reviewsMessage) return;
+            reviewsMessage.textContent = text;
+            reviewsMessage.className = `text-sm font-semibold ${isError ? 'text-red-500' : 'text-green-400'}`;
+            reviewsMessage.classList.remove('hidden');
+        };
+
+        const reviewsTokens = () => {
+            try {
+                return JSON.parse(localStorage.getItem(reviewsTokenKey) || '{}');
+            } catch {
+                return {};
+            }
+        };
+
+        const saveReviewsToken = (id, token) => {
+            if (!id || !token) return;
+            const tokens = reviewsTokens();
+            tokens[id] = token;
+            localStorage.setItem(reviewsTokenKey, JSON.stringify(tokens));
+        };
+
+        const removeReviewsToken = (id) => {
+            const tokens = reviewsTokens();
+            delete tokens[id];
+            localStorage.setItem(reviewsTokenKey, JSON.stringify(tokens));
+        };
+
+        const setReviewsSubmitting = (isSubmitting) => {
+            if (!reviewsSubmit) return;
+            reviewsSubmit.disabled = isSubmitting;
+            reviewsSubmit.classList.toggle('opacity-70', isSubmitting);
+            reviewsSubmit.classList.toggle('cursor-not-allowed', isSubmitting);
+        };
+
+        const resetReviewsForm = () => {
+            if (!reviewsForm) return;
+            reviewsEditId = null;
+            reviewsForm.reset();
+            updateStarRatingDisplay(5);
+            if (reviewsPhoto) reviewsPhoto.required = true;
+            if (reviewsFileName) reviewsFileName.textContent = 'Choose a photo or drag it here';
+            if (reviewsEditing) reviewsEditing.classList.add('hidden');
+            if (reviewsSubmit) reviewsSubmit.innerHTML = 'Add Review <i class="fas fa-camera-retro"></i>';
+        };
+
+        const startReviewsEdit = (item) => {
+            if (!reviewsForm) return;
+            reviewsEditId = item.id;
+            reviewsForm.customerName.value = item.customerName || '';
+            reviewsForm.location.value = item.location || '';
+            reviewsForm.projectType.value = item.projectType || '';
+            updateStarRatingDisplay(item.rating || 5);
+            reviewsForm.review.value = item.review || '';
+            if (reviewsPhoto) reviewsPhoto.required = false;
+            if (reviewsFileName) reviewsFileName.textContent = 'Keep current photo or choose a replacement';
+            if (reviewsEditing) reviewsEditing.classList.remove('hidden');
+            if (reviewsSubmit) reviewsSubmit.innerHTML = 'Save Changes <i class="fas fa-floppy-disk"></i>';
+            showReviewsMessage('Update the fields below, then save your changes.', false);
+            reviewsForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        };
+
+        const deleteReviewsItem = (id) => {
+            if (!confirm('Remove this review submission?')) return;
+            showReviewsMessage('Removing your review submission...', false);
+
+            fetch(`/api/reviews/${encodeURIComponent(id)}`, {
+                method: 'DELETE',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({ editToken: reviewsTokens()[id] || '' })
+            })
+            .then(async response => {
+                const payload = await response.json().catch(() => ({}));
+                if (!response.ok) throw new Error(payload.error || 'Delete failed.');
+                removeReviewsToken(id);
+                if (reviewsEditId === id) resetReviewsForm();
+                showReviewsMessage('Your review submission was removed.', false);
+                loadReviews();
+            })
+            .catch(error => {
+                const message = error instanceof Error ? error.message : String(error || '');
+                showReviewsMessage(message || 'The review submission could not be removed.', true);
+            });
+        };
+
+        const renderReviews = (items) => {
+            if (!reviewsList || !reviewsEmpty || !reviewsLoading) return;
+            reviewsLoading.classList.add('hidden');
+            reviewsList.innerHTML = '';
+            reviewsEmpty.classList.toggle('hidden', items.length > 0);
+
+            // Pre-defined modern Tailwind color mappings for different job types to make them pop!
+            const badgeColors = {
+                'Carpentry & Trim': 'bg-amber-100 text-amber-800 border-amber-200',
+                'Doors': 'bg-emerald-100 text-indigo-800 border-emerald-200',
+                'Drywall': 'bg-neutral-100 text-neutral-800 border-neutral-200',
+                'Painting': 'bg-pink-100 text-pink-800 border-pink-200',
+                'Electrical': 'bg-yellow-100 text-yellow-800 border-yellow-200',
+                'Plumbing': 'bg-sky-100 text-sky-800 border-sky-200',
+                'Decks & Fences': 'bg-teal-100 text-teal-800 border-teal-200',
+                'Flooring': 'bg-violet-100 text-violet-800 border-violet-200',
+                'Maintenance': 'bg-orange-100 text-orange-800 border-orange-200',
+                'Other Service': 'bg-blue-100 text-blue-800 border-blue-200'
+            };
+
+            items.forEach((item, index) => {
+                const card = document.createElement('article');
+                card.className = 'review-card bg-white text-gray-900 rounded-3xl overflow-hidden shadow-xl border border-gray-150 flex flex-col justify-between';
+                card.style.animationDelay = `${index * 60}ms`;
+                const badgeStyle = badgeColors[item.projectType] || 'bg-gray-100 text-gray-800 border-gray-200';
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="review-preview bg-gray-50 relative overflow-hidden">
+                            <img src="/.netlify/images?url=${encodeURIComponent(item.imageUrl)}&w=800&fm=avif&q=80" alt="${escapeHTML(item.imageAlt)}" width="800" height="600" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <span class="absolute top-4 left-4 ${badgeStyle} text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md border">
+                                ${escapeHTML(item.projectType)}
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between gap-3 mb-4">
+                                <div class="text-amber-500 text-lg flex gap-1" aria-label="${escapeHTML(item.rating)} out of 5 stars">
+                                    ${stars(Number(item.rating) || 0)}
+                                </div>
+                                <span class="text-xs text-gray-400 font-medium">Verified Client</span>
+                            </div>
+                            <p class="text-gray-700 leading-relaxed italic text-base">"${escapeHTML(item.review)}"</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm uppercase">
+                                    ${escapeHTML(item.customerName.charAt(0))}
+                                </div>
+                                <div>
+                                    <strong class="text-gray-900 block text-sm">${escapeHTML(item.customerName)}</strong>
+                                    <span class="text-xs text-gray-500 flex items-center gap-1">
+                                        <i class="fas fa-map-marker-alt text-red-500"></i> ${escapeHTML(item.location)}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5 grid grid-cols-2 gap-3">
+                            <button type="button" class="review-edit-btn border border-blue-200 text-blue-700 hover:bg-blue-50 px-3 py-2.5 rounded-xl font-bold text-xs transition flex items-center justify-center gap-1.5" data-id="${escapeHTML(item.id)}">
+                                <i class="fas fa-pen-to-square"></i> Edit
+                            </button>
+                            <button type="button" class="review-delete-btn border border-red-100 text-red-500 hover:bg-red-50 px-3 py-2.5 rounded-xl font-semibold text-xs transition flex items-center justify-center gap-1.5" data-id="${escapeHTML(item.id)}">
+                                <i class="fas fa-trash-can"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+                card.querySelector('.review-edit-btn')?.addEventListener('click', () => startReviewsEdit(item));
+                card.querySelector('.review-delete-btn')?.addEventListener('click', () => deleteReviewsItem(item.id));
+                reviewsList.appendChild(card);
+            });
+        };
+
+        const loadReviews = () => {
+            if (!reviewsList || !reviewsLoading || !reviewsEmpty) return;
+            reviewsLoading.classList.remove('hidden');
+            reviewsEmpty.classList.add('hidden');
+            
+            fetch('/api/reviews')
+                .then(response => response.ok ? response.json() : Promise.reject())
+                .then(renderReviews)
+                .catch(() => {
+                    reviewsLoading.classList.add('hidden');
+                    reviewsEmpty.classList.remove('hidden');
+                    const emptyText = reviewsEmpty.querySelector('p');
+                    if (emptyText) emptyText.textContent = 'The reviews could not load right now. Please try again soon.';
+                });
+        };
+
+        if (reviewsPhoto && reviewsFileName) {
+            reviewsPhoto.addEventListener('change', () => {
+                reviewsFileName.textContent = reviewsPhoto.files?.[0]?.name || 'Choose a photo or drag it here';
+            });
+        }
+
+        if (reviewsDropzone && reviewsPhoto) {
+            ['dragenter', 'dragover'].forEach(eventName => {
+                reviewsDropzone.addEventListener(eventName, (event) => {
+                    event.preventDefault();
+                    reviewsDropzone.classList.add('dragging');
+                });
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                reviewsDropzone.addEventListener(eventName, (event) => {
+                    event.preventDefault();
+                    reviewsDropzone.classList.remove('dragging');
+                });
+            });
+
+            reviewsDropzone.addEventListener('drop', (event) => {
+                const file = event.dataTransfer?.files?.[0];
+                if (!file) return;
+                const transfer = new DataTransfer();
+                transfer.items.add(file);
+                reviewsPhoto.files = transfer.files;
+                reviewsPhoto.dispatchEvent(new Event('change'));
+            });
+        }
+
+        if (reviewsForm) {
+            reviewsForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(reviewsForm);
+                const isEditing = Boolean(reviewsEditId);
+                if (isEditing) {
+                    formData.append('editToken', reviewsTokens()[reviewsEditId] || '');
+                }
+                setReviewsSubmitting(true);
+                showReviewsMessage(isEditing ? 'Saving your changes...' : 'Uploading your review...', false);
+
+                fetch(isEditing ? `/api/reviews/${encodeURIComponent(reviewsEditId)}` : '/api/reviews', {
+                    method: isEditing ? 'PUT' : 'POST',
+                    body: formData
+                })
+                .then(async response => {
+                    const payload = await response.json().catch(() => ({}));
+                    if (!response.ok) throw new Error(payload.error || 'Upload failed.');
+                    return payload;
+                })
+                .then((payload) => {
+                    if (payload.id && payload.editToken) saveReviewsToken(payload.id, payload.editToken);
+                    resetReviewsForm();
+                    showReviewsMessage(isEditing ? 'Your review submission was updated.' : 'Thanks. Your photo and review were added successfully.', false);
+                    loadReviews();
+                })
+                .catch(error => {
+                    const message = error instanceof Error ? error.message : String(error || '');
+                    showReviewsMessage(message || 'The review could not be saved.', true);
+                })
+                .finally(() => {
+                    setReviewsSubmitting(false);
+                });
+            });
+        }
+
+        if (reviewsCancelEdit) {
+            reviewsCancelEdit.addEventListener('click', () => {
+                resetReviewsForm();
+                showReviewsMessage('Editing canceled.', false);
+            });
+        }
+
+        if (reviewsRefresh) {
+            reviewsRefresh.addEventListener('click', loadReviews);
+        }
+
+        loadReviews();
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        if (menuBtn && mobileMenu && menuIcon) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.className = 'fas fa-bars';
+                } else {
+                    menuIcon.className = 'fas fa-times';
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.className = 'fas fa-bars';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
