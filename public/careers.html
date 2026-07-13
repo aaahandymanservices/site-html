@@ -423,6 +423,25 @@
             });
         }
 
+        // Auto-formatter for Careers Phone Input
+        const careersPhone = document.getElementById('careers-phone');
+        if (careersPhone) {
+            careersPhone.addEventListener('input', function (e) {
+                let val = e.target.value.replace(/\D/g, '');
+                if (val.length > 10) val = val.substring(0, 10);
+                const match = val.match(/^(\d{1,3})(\d{0,3})(\d{0,4})$/);
+                if (match) {
+                    let formatted = "";
+                    if (match[1]) formatted += "(" + match[1];
+                    if (match[1].length === 3) formatted += ") ";
+                    if (match[2]) formatted += match[2];
+                    if (match[2].length === 3) formatted += "-";
+                    if (match[3]) formatted += match[3];
+                    e.target.value = formatted;
+                }
+            });
+        }
+
         // Mobile menu toggle
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');

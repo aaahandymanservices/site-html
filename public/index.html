@@ -794,8 +794,19 @@
             <!-- Quick Service Locator Row for local reach improvement -->
             <div class="max-w-5xl mx-auto mt-16 bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow-lg">
                 <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Are you in our service area?</h3>
-                <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">We provide top-rated handyman services across all major cities and townships in Oakland County, MI. Find your city below to get started:</p>
+                <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">We provide top-rated handyman services across all major cities and townships in Oakland County, MI. Try our instant service locator or browse cities below:</p>
                 
+                <!-- Instant Service Area Search Widget -->
+                <div class="max-w-md mx-auto mb-8">
+                    <div class="relative">
+                        <input id="service-area-checker" type="text" placeholder="Enter your City or Zip Code (e.g. 48329, Troy)..." class="w-full px-5 py-4 pl-12 bg-gray-50 border-[2px] border-gray-300 rounded-2xl focus:outline-none focus:border-red-600 focus:bg-white text-base transition text-gray-900 font-medium">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400">
+                            <i class="fas fa-search-location text-lg"></i>
+                        </div>
+                    </div>
+                    <div id="checker-result" class="mt-3 text-sm font-semibold text-center hidden p-3 rounded-xl"></div>
+                </div>
+
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-center text-sm font-semibold text-gray-800">
                     <a href="#contact" class="p-3 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200">Waterford</a>
                     <a href="#contact" class="p-3 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200">Clarkston</a>
@@ -978,6 +989,82 @@
                 }
             } catch (e) {}
         })();
+
+        // Interactive Service Area Checker Logic
+        (function () {
+            const checkerInput = document.getElementById('service-area-checker');
+            const resultBox = document.getElementById('checker-result');
+            if (!checkerInput || !resultBox) return;
+
+            // Database of Oakland County MI cities and corresponding Zip Codes we serve
+            const serviceData = [
+                { names: ['waterford', 'waterford township'], zips: ['48327', '48328', '48329', '48340'], zone: 'Zone A', rate: '$120 Min Call' },
+                { names: ['pontiac'], zips: ['48341', '48342', '48343'], zone: 'Zone A', rate: '$120 Min Call' },
+                { names: ['west bloomfield', 'west bloomfield township'], zips: ['48322', '48323', '48324'], zone: 'Zone A', rate: '$120 Min Call' },
+                { names: ['clarkston', 'independence township'], zips: ['48346', '48347', '48348'], zone: 'Zone A', rate: '$120 Min Call' },
+                { names: ['birmingham'], zips: ['48009', '48012'], zone: 'Zone A', rate: '$120 Min Call' },
+                { names: ['troy'], zips: ['48007', '48083', '48084', '48085', '48098'], zone: 'Zone B', rate: '$165 Min Call' },
+                { names: ['rochester hills', 'rochester'], zips: ['48306', '48307', '48308', '48309'], zone: 'Zone B', rate: '$165 Min Call' },
+                { names: ['farmington hills', 'farmington'], zips: ['48331', '48332', '48333', '48334', '48335', '48336'], zone: 'Zone A', rate: '$120 Min Call' },
+                { names: ['royal oak'], zips: ['48067', '48068', '48073'], zone: 'Zone B', rate: '$165 Min Call' },
+                { names: ['orchard lake', 'orchard lake village'], zips: ['48323', '48324'], zone: 'Zone A', rate: '$120 Min Call' },
+                { names: ['franklin'], zips: ['48025'], zone: 'Zone A', rate: '$120 Min Call' },
+                { names: ['huntington woods'], zips: ['48070'], zone: 'Zone B', rate: '$165 Min Call' },
+                { names: ['beverly hills'], zips: ['48025'], zone: 'Zone A', rate: '$120 Min Call' },
+                { names: ['novi'], zips: ['48374', '48375', '48376', '48377'], zone: 'Zone B', rate: '$165 Min Call' },
+                { names: ['southfield'], zips: ['48033', '48034', '48037', '48075', '48076', '48086'], zone: 'Zone B', rate: '$165 Min Call' },
+                { names: ['lake orion', 'orion township'], zips: ['48359', '48360', '48361', '48362'], zone: 'Zone B', rate: '$165 Min Call' },
+                { names: ['oxford', 'oxford township'], zips: ['48370', '48371'], zone: 'Zone B', rate: '$165 Min Call' }
+            ];
+
+            checkerInput.addEventListener('input', function () {
+                const query = checkerInput.value.trim().toLowerCase();
+                if (!query) {
+                    resultBox.className = "hidden";
+                    return;
+                }
+
+                let found = null;
+                for (const item of serviceData) {
+                    const matchCity = item.names.some(name => name.includes(query) || query.includes(name));
+                    const matchZip = item.zips.some(zip => zip.startsWith(query) || query === zip);
+                    if (matchCity || matchZip) {
+                        found = item;
+                        break;
+                    }
+                }
+
+                resultBox.classList.remove('hidden');
+                if (found) {
+                    resultBox.className = "mt-3 text-sm font-semibold text-center p-3 rounded-xl bg-green-50 text-green-800 border border-green-200";
+                    resultBox.innerHTML = `<i class="fas fa-check-circle text-green-600 mr-1.5"></i> Yes! We serve this area in <strong>${found.zone}</strong> (${found.rate}). <a href="#contact" class="underline hover:text-green-950 font-bold ml-1.5">Request Service <i class="fas fa-arrow-right text-xs"></i></a>`;
+                } else if (query.length >= 3) {
+                    resultBox.className = "mt-3 text-sm font-semibold text-center p-3 rounded-xl bg-amber-50 text-amber-800 border border-amber-200";
+                    resultBox.innerHTML = `<i class="fas fa-info-circle text-amber-600 mr-1.5"></i> Location not explicitly listed. We serve all of Oakland County, MI! <a href="tel:2483853432" class="underline hover:text-amber-950 font-bold ml-1.5">Call (248) 385-3432 to confirm</a>`;
+                } else {
+                    resultBox.className = "hidden";
+                }
+            });
+        })();
+
+        // Auto-formatter for Phone Inputs
+        const contactPhone = document.getElementById('contact-phone');
+        if (contactPhone) {
+            contactPhone.addEventListener('input', function (e) {
+                let val = e.target.value.replace(/\D/g, '');
+                if (val.length > 10) val = val.substring(0, 10);
+                const match = val.match(/^(\d{1,3})(\d{0,3})(\d{0,4})$/);
+                if (match) {
+                    let formatted = "";
+                    if (match[1]) formatted += "(" + match[1];
+                    if (match[1].length === 3) formatted += ") ";
+                    if (match[2]) formatted += match[2];
+                    if (match[2].length === 3) formatted += "-";
+                    if (match[3]) formatted += match[3];
+                    e.target.value = formatted;
+                }
+            });
+        }
 
         // Handle form submission via Netlify Forms (AJAX)
         const form = document.getElementById('contact-form');
