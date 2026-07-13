@@ -23,3 +23,15 @@ export const seasonalSubscribers = pgTable("seasonal_subscribers", {
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
+export const homeMaintenanceMemberships = pgTable("home_maintenance_memberships", {
+  id: serial("id").primaryKey(),
+  customerName: text("customer_name").notNull(),
+  email: text("email").notNull(),
+  purchaseDate: timestamp("purchase_date", { withTimezone: true }).defaultNow().notNull(),
+  nextMaintenanceDate: timestamp("next_maintenance_date", { withTimezone: true }).notNull(),
+  noticeSentAt: timestamp("notice_sent_at", { withTimezone: true }),
+  status: text("status").default("active").notNull(), // 'active', 'cancelled'
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
+
