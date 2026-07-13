@@ -1,4 +1,4 @@
-import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
 export const reviews = pgTable("gallery_reviews", {
   id: serial("id").primaryKey(),
@@ -13,3 +13,13 @@ export const reviews = pgTable("gallery_reviews", {
   editToken: text("edit_token"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
+
+export const seasonalSubscribers = pgTable("seasonal_subscribers", {
+  id: serial("id").primaryKey(),
+  email: text("email").notNull().unique(),
+  name: text("name"),
+  source: text("source").default("quote_form").notNull(), // 'quote_form' or 'direct'
+  optIn: boolean("opt_in").default(true).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
