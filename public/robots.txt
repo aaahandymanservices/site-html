@@ -1,6 +1,10 @@
 User-agent: *
 Allow: /
-Disallow: /_netlify/
+# Keep internal function/JSON endpoints out of the index.
+# (The /.netlify/images path is intentionally left crawlable so project
+#  photos and logos can appear in Google Images.)
+Disallow: /.netlify/functions/
+Disallow: /api/
 
 Host: https://aaahandyman.services
 Sitemap: https://aaahandyman.services/sitemap.xml

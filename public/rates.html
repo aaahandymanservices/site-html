@@ -27,6 +27,92 @@
     <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
     <meta property="og:locale" content="en_US">
 
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://aaahandyman.services/rates">
+    <meta name="twitter:title" content="Rates — Transparent No-Haggle Handyman Pricing | AAA Handyman Services">
+    <meta name="twitter:description" content="Fair Upfront Pricing Model, flat-rate menu, and honest hourly rates with no hidden trip fees across Oakland County, MI.">
+    <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
+
+    <!-- Structured Data (JSON-LD): handyman service pricing -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Handyman and home repair services",
+      "name": "AAA Handyman Services — Fair Upfront Pricing",
+      "url": "https://aaahandyman.services/rates",
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Oakland County, MI"
+      },
+      "provider": {
+        "@type": "HomeAndConstructionBusiness",
+        "name": "AAA Handyman Services",
+        "@id": "https://aaahandyman.services/#business",
+        "telephone": "+1-248-385-3432",
+        "email": "contact@aaahandyman.services",
+        "url": "https://aaahandyman.services/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Zone A Minimum Service Call (within 20 miles)",
+          "description": "Includes travel, diagnostics, and the first hour of labor for locations within 20 miles.",
+          "priceCurrency": "USD",
+          "price": "120",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "price": "120",
+            "priceCurrency": "USD",
+            "minPrice": "120"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Zone B Minimum Service Call (20+ miles)",
+          "description": "Includes travel, diagnostics, and the first hour of labor for locations beyond 20 miles.",
+          "priceCurrency": "USD",
+          "price": "165",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "price": "165",
+            "priceCurrency": "USD",
+            "minPrice": "165"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Continuous labor after the first hour",
+          "description": "Billed in transparent half-hour increments at a flat rate. Materials are not included; supply them yourself at no markup, or have us source them with a standard 10-15% supply markup.",
+          "priceCurrency": "USD",
+          "price": "65",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "65",
+            "priceCurrency": "USD",
+            "unitCode": "HUR",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitCode": "HUR"
+            }
+          }
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aaahandyman.services/" },
+        { "@type": "ListItem", "position": 2, "name": "Rates", "item": "https://aaahandyman.services/rates" }
+      ]
+    }
+    </script>
+
     <!-- Tailwind Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
