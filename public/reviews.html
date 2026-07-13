@@ -326,21 +326,66 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black text-gray-400 py-12">
-       <div class="max-w-7xl mx-auto px-6 text-center">
-           <div class="flex justify-center mb-6">
-               <!-- Circular Logo -->
-               <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 mx-auto rounded-full object-cover shadow-lg border-2 border-red-600">
-           </div>            <p class="text-sm">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the under-$600 per-project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects.<br>We are not a licensed builder or general contractor.<br>Locally Serving Oakland County, MI.</p>
-            <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
-                <a href="/privacy" target="_blank" rel="noopener" class="hover:text-white transition">Privacy Policy</a>
-                <span class="text-gray-600">|</span>
-                <a href="/terms" target="_blank" rel="noopener" class="hover:text-white transition">Terms of Service</a>
-            </div>            <div class="mt-6 flex justify-center gap-6">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="text-3xl hover:text-[#1877F2] transition"><i class="fab fa-facebook"></i></a>
+    <footer class="bg-black text-gray-400 pt-14 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
+                <!-- Brand -->
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
+                    <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
+                    <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="mt-4 inline-flex items-center gap-2 text-2xl hover:text-[#1877F2] transition"><i class="fab fa-facebook"></i></a>
+                </div>
+                <!-- Quick links -->
+                <nav aria-label="Footer">
+                    <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/#services" class="hover:text-white transition">Services</a></li>
+                        <li><a href="/rates" class="hover:text-white transition">Rates &amp; Packages</a></li>
+                        <li><a href="/guarantee" class="hover:text-white transition">Our Guarantee</a></li>
+                        <li><a href="/reviews" class="hover:text-white transition">Reviews</a></li>
+                        <li><a href="/careers" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="/#travel-zones" class="hover:text-white transition">Service Areas</a></li>
+                        <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </nav>
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="tel:2483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center"></i>(248) 385-3432</a></li>
+                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center"></i>Waterford, MI &middot; Oakland County</li>
+                    </ul>
+                    <a href="/#contact" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Get a Free Quote</a>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center">
+                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the under-$600 per-project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects.<br>We are not a licensed builder or general contractor.<br>Locally Serving Oakland County, MI.</p>
+                <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
+                    <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="/terms" class="hover:text-white transition">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>
+
+    <!-- Back to top -->
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
+    <script>
+        (function () {
+            var btn = document.getElementById('back-to-top');
+            if (!btn) return;
+            window.addEventListener('scroll', function () {
+                var show = window.scrollY > 400;
+                btn.classList.toggle('hidden', !show);
+                btn.classList.toggle('flex', show);
+            }, { passive: true });
+            btn.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script>
 
     <!-- Interactive JS scripts -->
     <script>
