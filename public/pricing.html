@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Resource hints: warm up connections to third-party origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
+    <title>Pricing — Transparent No-Haggle Rates | AAA Handyman Services</title>
+
+    <!-- Search Engine Optimization (SEO) Metadata -->
+    <meta name="description" content="Transparent, no-haggle handyman pricing across Oakland County, MI. See our Fair Upfront Pricing Model, flat-rate menu, and honest hourly rates with no hidden trip fees.">
+    <meta name="theme-color" content="#8e1f26">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aaahandyman.services/pricing">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aaahandyman.services/pricing">
+    <meta property="og:site_name" content="AAA Handyman Services">
+    <meta property="og:title" content="Pricing — Transparent No-Haggle Rates | AAA Handyman Services">
+    <meta property="og:description" content="Honest, upfront handyman pricing across Oakland County, Michigan. A Fair Upfront Pricing Model with a flat-rate menu and no hidden trip fees.">
+    <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Tailwind Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        red: {
+                            50: '#fdf2f2',
+                            100: '#fde8e8',
+                            200: '#fbd5d5',
+                            300: '#f8b4b4',
+                            400: '#f98080',
+                            500: '#e02424',
+                            600: '#8e1f26',
+                            700: '#751a1e',
+                            800: '#5c1417',
+                            900: '#461012',
+                        },
+                        blue: {
+                            50: '#f3f6f9',
+                            100: '#e7ecf2',
+                            200: '#c3cfde',
+                            300: '#9fb1ca',
+                            400: '#5776a2',
+                            500: '#0f3b79',
+                            600: '#0d2237', // Custom main Logo Blue
+                            700: '#0a1b2c',
+                            800: '#081421',
+                            900: '#050e16',
+                            950: '#03070b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom font family */
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        /* Animated entrance for content cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .pricing-card {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        .service-card { transition: all 0.3s; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
+        /* Flashing siren icon for the after-hours emergency rate */
+        @keyframes siren-flash {
+            0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 0 rgba(142, 31, 38, 0)); }
+            50% { opacity: 0.3; transform: scale(1.15); filter: drop-shadow(0 0 8px rgba(142, 31, 38, 0.8)); }
+        }
+        .flash-siren {
+            display: inline-block;
+            animation: siren-flash 1s infinite ease-in-out;
+        }
+        @keyframes pulse-attention-green {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
+        }
+        .pulse-btn-green {
+            animation: pulse-attention-green 2s infinite;
+        }
+        /* Anchor scroll margin for sticky navbar */
+        section[id], header[id] {
+            scroll-margin-top: 80px;
+        }
+        @media (max-width: 768px) {
+            section[id], header[id] {
+                scroll-margin-top: 100px;
+            }
+        }
+        /* Respect visitors who prefer reduced motion (accessibility) */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .pulse-btn-green,
+            .flash-siren,
+            .service-card,
+            .pricing-card { animation: none !important; }
+            .service-card:hover { transform: none !important; }
+            .pricing-card { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+</head>
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 sm:py-4 flex justify-between items-center">
+            <a href="/" class="flex min-w-0 items-center space-x-3" aria-label="AAA Handyman Services home">
+                <!-- Logo -->
+                <img src="/.netlify/images?url=/logo-shield.png&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-shield.png&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-shield.png&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600">
+                <div class="min-w-0">
+                    <p class="text-base min-[390px]:text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
+                    <p class="text-[10px] sm:text-xs text-gray-500">Oakland County Michigan</p>
+                </div>
+            </a>
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex space-x-8 text-lg font-medium items-center">
+                <a href="/#about" class="nav-link text-gray-700 hover:text-red-600 transition">About</a>
+                <a href="/#services" class="nav-link text-gray-700 hover:text-red-600 transition">Services</a>
+                <a href="/pricing" class="nav-link text-red-600 font-bold border-b-2 border-red-600">Rates</a>
+                <a href="/reviews" class="nav-link text-gray-700 hover:text-red-600 transition">Reviews</a>
+                <a href="/careers" class="nav-link text-gray-700 hover:text-red-600 transition">Careers</a>
+                <a href="/#contact" class="nav-link text-gray-700 hover:text-red-600 transition">Contact</a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="nav-link text-gray-700 hover:text-[#1877F2] text-xl transition"><i class="fab fa-facebook"></i></a>
+            </div>
+            <!-- Nav Action Buttons -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <a href="tel:2483853432" class="bg-green-600 hover:bg-green-700 text-white p-3 lg:px-5 lg:py-3 xl:px-6 rounded-full font-semibold flex items-center justify-center gap-2 transition pulse-btn-green" title="Call us">
+                    <i class="fas fa-phone"></i> <span class="hidden sm:inline">‪(248) 385-3432‬</span>
+                </a>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
+                    <i class="fas fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t-[3px] border-gray-100 px-6 py-4 space-y-4 shadow-inner">
+            <a href="/#about" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">About</a>
+            <a href="/#services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
+            <a href="/pricing" class="block text-lg font-bold text-red-600 py-1">Rates</a>
+            <a href="/reviews" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Reviews</a>
+            <a href="/careers" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Careers</a>
+            <a href="/#contact" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Contact</a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="block text-lg font-medium text-gray-700 hover:text-[#1877F2] py-1"><i class="fab fa-facebook"></i> Facebook</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        <!-- Hero Intro -->
+        <header id="pricing-hero" class="py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
+            <div class="max-w-3xl mx-auto px-6 text-center">
+                <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Transparent No-Haggle Pricing</div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Fair Upfront Pricing Model</h1>
+                <p class="text-slate-300 text-base sm:text-lg leading-relaxed">Instead of flat trip fees or complex tiers, we use a straightforward Minimum Service Call that includes your diagnostic and first portion of labor. Any consecutive time is billed at an extremely reasonable flat hourly rate.</p>
+            </div>
+        </header>
+
+        <!-- Rates -->
+        <section id="rates" class="py-12 sm:py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+                    <!-- Zone A Minimum Service Call -->
+                    <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
+                            <i class="fas fa-location-dot mr-1"></i> Zone A
+                        </div>
+                        <div class="text-center mb-6">
+                            <div class="inline-block bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-semibold">Within 20 Miles</div>
+                            <div class="text-5xl font-black text-green-600 mt-4">$120</div>
+                            <div class="text-sm text-gray-500 mt-1">Minimum Service Call</div>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-center">Standard Coverage</h3>
+                        <p class="text-gray-600 mb-6">Covers our travel and includes <strong>up to the first 1 hour</strong> of active diagnostic, troubleshooting, or labor time.</p>
+                        <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-4">
+                            <li class="flex items-start gap-2"><span class="text-green-500 mt-1">•</span> Includes first 1 hour of labor</li>
+                            <li class="flex items-start gap-2"><span class="text-green-500 mt-1">•</span> Zero travel fees</li>
+                            <li class="flex items-start gap-2"><span class="text-green-500 mt-1">•</span> Any action/tool usage initiates first-hour block</li>
+                        </ul>
+                    </div>
+
+                    <!-- Zone B Minimum Service Call -->
+                    <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
+                            <i class="fas fa-location-dot mr-1"></i> Zone B
+                        </div>
+                        <div class="text-center mb-6">
+                            <div class="inline-block bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-sm font-semibold">Outside 20 Miles</div>
+                            <div class="text-5xl font-black text-orange-600 mt-4">$165</div>
+                            <div class="text-sm text-gray-500 mt-1">Minimum Service Call</div>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-center">Extended County</h3>
+                        <p class="text-gray-600 mb-6">Covers our extended travel and includes <strong>up to the first 1 hour</strong> of active diagnostic, troubleshooting, or labor time.</p>
+                        <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-4">
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">•</span> Includes first 1 hour of labor</li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">•</span> Extended travel covered</li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">•</span> Any action/tool usage initiates first-hour block</li>
+                        </ul>
+                    </div>
+
+                    <!-- Consecutive Hourly Rate -->
+                    <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden">
+                        <div class="text-center mb-6">
+                            <div class="inline-block bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-semibold">Continuous Labor</div>
+                            <div class="text-5xl font-black text-blue-600 mt-4">$65</div>
+                            <div class="text-sm text-gray-500 mt-1">per hour ($32.50 / 30 min)</div>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-center">Consecutive Hourly Rate</h3>
+                        <p class="text-gray-600 mb-6">If the job goes past the first hour, billing transitions smoothly in <strong>half-hour increments</strong> to keep things fair and affordable.</p>
+                        <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-4">
+                            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">•</span> $32.50 per 30-minute block</li>
+                            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">•</span> Billed transparently</li>
+                            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">•</span> Highly cost-efficient for multiple chores!</li>
+                        </ul>
+                    </div>
+
+                    <!-- Emergency After-Hours Rate -->
+                    <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
+                            <span class="flash-siren"><i class="fas fa-triangle-exclamation mr-1"></i></span> Urgent
+                        </div>
+                        <div class="text-center mb-6">
+                            <div class="inline-block bg-red-100 text-red-700 px-4 py-1 rounded-full text-sm font-semibold">After-Hours Emergency</div>
+                            <div class="text-5xl font-black text-red-600 mt-4">$175</div>
+                            <div class="text-sm text-gray-500 mt-1">first hour ($37.50 / 30 min after)</div>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-center">After-Hours Rates</h3>
+                        <p class="text-gray-600 mb-6">Urgent response for evening and weekend calls. Billed at <strong>$175 for the first hour</strong> and transitions to half-hour increments after.</p>
+                        <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-4">
+                            <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> $37.50 per 30-minute block</li>
+                            <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> Billed transparently</li>
+                            <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> Highly cost-efficient for security, structural, plumbing, and electrical emergencies.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Instant Book Flat-Rate Menu -->
+                <div class="mt-16 bg-gray-50 border-[2px] border-red-600 rounded-3xl p-8 sm:p-12 max-w-5xl mx-auto shadow-lg">
+                    <div class="text-center mb-8">
+                        <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">No Clock-Watching Anxiety</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-gray-950 mt-3">The Flat-Rate Menu</h2>
+                        <p class="text-gray-600 mt-2 max-w-2xl mx-auto">For the most common, repetitive tasks within the Zone A 20-mile radius, you can bypass hourly estimates entirely. We provide standard fixed prices, so you know exactly what you will pay upfront.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                        <!-- Ceiling Fan & Light Fixtures -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">Ceiling Fan & Light Fixtures</h4>
+                                <p class="text-gray-500 text-xs mb-3">Replacement on existing approved junction boxes and brackets.</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$175 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                        <!-- Smart Doorbell & Thermostats -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">Smart Doorbell & Thermostats</h4>
+                                <p class="text-gray-500 text-xs mb-3">Mounting and connecting to your existing low-voltage system wiring.</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$145 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                        <!-- TV Wall Mounting -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">TV Wall Mounting</h4>
+                                <p class="text-gray-500 text-xs mb-3">Up to 65" TV on standard wood or metal studs (bracket not included).</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$155 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                        <!-- Garbage Disposal Replacement -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">Garbage Disposal Replacement</h4>
+                                <p class="text-gray-500 text-xs mb-3">Swapping out existing disposal with a customer-supplied unit.</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$165 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                        <!-- Door Locks & Deadbolts -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">Door Locks & Deadbolts</h4>
+                                <p class="text-gray-500 text-xs mb-3">Standard lockset or deadbolt swap on existing correctly aligned door prep.</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$100 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                        <!-- Toilet Component Rebuilds -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">Toilet Component Rebuilds</h4>
+                                <p class="text-gray-500 text-xs mb-3">Replacement of flush valve, fill valve, flapper, and tank lever.</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$150 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                        <!-- Dryer Vent Cleaning -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">Dryer Vent Cleaning</h4>
+                                <p class="text-gray-500 text-xs mb-3">Exhaust line cleaning from dryer back to wall terminal to maximize airflow.</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$130 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                        <!-- Kitchen & Bath Faucets -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">Kitchen & Bath Faucets</h4>
+                                <p class="text-gray-500 text-xs mb-3">Complete kitchen or bathroom sink faucet and supply line replacement.</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$135 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                        <!-- Window Blinds & Curtain Rods -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">Window Blinds & Curtain Rods</h4>
+                                <p class="text-gray-500 text-xs mb-3">Hanging standard pre-sized blinds or decorative window hardware.</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$105 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                        <!-- Storm Door Installations -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">Storm Door Installations</h4>
+                                <p class="text-gray-500 text-xs mb-3">Full install of standard pre-hung storm/screen doors in ready framing.</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$245 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                        <!-- Cabinet Hardware Upgrades -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">Cabinet Hardware Upgrades</h4>
+                                <p class="text-gray-500 text-xs mb-3">Swapping out knobs or pulls with exact-size replacements.</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$85 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                        <!-- Smoke & CO Detectors -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">Smoke & CO Detectors</h4>
+                                <p class="text-gray-500 text-xs mb-3">Installing or replacing combined safety alarm units.</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$95 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                        <!-- Gutter Cleaning -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">Gutter Cleaning</h4>
+                                <p class="text-gray-500 text-xs mb-3">Removal of debris, clearing downspouts, and testing flow (up to 145 linear feet, single-story).</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$135 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                        <!-- Power Washing -->
+                        <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-base mb-1">Power Washing</h4>
+                                <p class="text-gray-500 text-xs mb-3">Professional wash for standard driveways, walkways, patios, or decks to remove grime and mildew (up to 1,000 sq. ft.).</p>
+                            </div>
+                            <p class="text-red-600 font-extrabold text-lg mt-auto">$175 <span class="text-xs text-gray-400 font-normal">flat-rate</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 text-center text-sm text-gray-500 max-w-lg mx-auto space-y-3">
+                    <p>Rates vary by project complexity, materials, and location.<br>Materials needed for repairs are not included in the Service Call or hourly rate and must be provided by the homeowner or a materials supplier.</p>
+                    <p class="font-medium text-gray-600"><strong>Note on Billing:</strong> Our service blocks and subsequent hourly rate apply to all active labor, on-site troubleshooting, material shopping, and necessary preparation or cleanup related to the specific tasks performed.<br><strong>We only accept Cash, Check, Zelle&reg;, and Venmo&reg;.</strong></p>
+                </div>
+
+                <!-- Call to action -->
+                <div class="mt-14 text-center">
+                    <p class="text-lg font-semibold text-gray-900 mb-5">Ready for an honest, upfront quote?</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="tel:2483853432" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-green-600/30">
+                            <i class="fas fa-phone"></i> ‪(248) 385-3432‬
+                        </a>
+                        <a href="/#contact" class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
+                            Request a Quote <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-400 py-12">
+       <div class="max-w-7xl mx-auto px-6 text-center">
+           <div class="flex justify-center mb-6">
+               <!-- Circular Logo -->
+               <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 mx-auto rounded-full object-cover shadow-lg border-2 border-red-600">
+           </div>            <p class="text-sm">&copy; 2026 AAA Handyman Services. All Rights Reserved. Michigan's $600 Handyman Law MCL 339.2403 Compliant.<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects.<br>We are not a licensed builder or general contractor.<br>Locally Serving Oakland County, MI.</p>
+            <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
+                <a href="/privacy" target="_blank" rel="noopener" class="hover:text-white transition">Privacy Policy</a>
+                <span class="text-gray-600">|</span>
+                <a href="/terms" target="_blank" rel="noopener" class="hover:text-white transition">Terms of Service</a>
+            </div>            <div class="mt-6 flex justify-center gap-6">
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="text-3xl hover:text-[#1877F2] transition"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JS scripts -->
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        if (menuBtn && mobileMenu && menuIcon) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.className = 'fas fa-bars';
+                } else {
+                    menuIcon.className = 'fas fa-times';
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.className = 'fas fa-bars';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
