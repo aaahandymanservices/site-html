@@ -68,6 +68,44 @@ export default async (request: Request) => {
     const { response, error } = await stripeRequest(`/checkout/sessions/${encodeURIComponent(sessionId)}`);
     if (!response) return json({ error }, 502);
 
+    // If the checked session is successful and has membership metadata, auto-register the membership in our database!
+    if (response.payment_status === "paid" && response.metadata?.is_membership === "true") {
+      try {
+        const customerName = response.metadata.customer_name || response.customer_details?.name || "Valued Customer";
+        const email = response.customer_email || response.customer_details?.email || "";
+        
+        if (email) {
+          // Check if already registered
+          const { db } = await import("../../db/index.js");
+          const { homeMaintenanceMemberships } = await import("../../db/schema.js");
+          const { eq } = await import("drizzle-orm");
+          
+          const existing = await db
+            .select()
+            .from(homeMaintenanceMemberships)
+            .where(eq(homeMaintenanceMemberships.email, email.toLowerCase()))
+            .limit(1);
+            
+          if (existing.length === 0) {
+            const purchaseDate = new Date();
+            const nextMaintenanceDate = new Date();
+            nextMaintenanceDate.setDate(purchaseDate.getDate() + 180); // 6 months tune-up
+            
+            await db.insert(homeMaintenanceMemberships).values({
+              customerName,
+              email: email.toLowerCase(),
+              purchaseDate,
+              nextMaintenanceDate,
+              status: "active",
+            });
+            console.log(`Automatically registered membership for ${customerName} (${email})`);
+          }
+        }
+      } catch (dbErr) {
+        console.error("Failed to automatically register membership on checkout success:", dbErr);
+      }
+    }
+
     return json({
       paymentStatus: response.payment_status,
       amountTotal: response.amount_total,
@@ -114,16 +152,25 @@ export default async (request: Request) => {
   params.set("line_items[0][quantity]", "1");
   params.set("line_items[0][price_data][currency]", "usd");
   params.set("line_items[0][price_data][unit_amount]", String(amountCents));
-  params.set("line_items[0][price_data][product_data][name]", "AAA Handyman Services payment");
-  params.set(
-    "line_items[0][price_data][product_data][description]",
-    reference ? `Invoice or job ${reference}` : `Payment from ${customerName}`,
-  );
+  
+  // Tying to the Home Maintenance Membership add-on explicitly
+  const isMembership = reference.toLowerCase().includes("membership") || reference.toLowerCase().includes("maintenance plan");
+  const productName = isMembership ? "Home Maintenance Membership" : "AAA Handyman Services payment";
+  const productDesc = isMembership 
+    ? `Annual Home Maintenance Membership for ${customerName}` 
+    : (reference ? `Invoice or job ${reference}` : `Payment from ${customerName}`);
+
+  params.set("line_items[0][price_data][product_data][name]", productName);
+  params.set("line_items[0][price_data][product_data][description]", productDesc);
   params.set("metadata[customer_name]", customerName);
   params.set("metadata[payment_reference]", reference || "Not provided");
-  params.set("payment_intent_data[description]", reference ? `AAA Handyman Services — ${reference}` : "AAA Handyman Services customer payment");
+  params.set("metadata[is_membership]", isMembership ? "true" : "false");
+  
+  params.set("payment_intent_data[description]", productDesc);
   params.set("payment_intent_data[metadata][customer_name]", customerName);
   params.set("payment_intent_data[metadata][payment_reference]", reference || "Not provided");
+  params.set("payment_intent_data[metadata][is_membership]", isMembership ? "true" : "false");
+
 
   const { response, error } = await stripeRequest("/checkout/sessions", {
     method: "POST",
