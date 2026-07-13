@@ -16,6 +16,41 @@
     <link rel="icon" type="image/png" href="/favicon-32x32.png">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        red: {
+                            50: '#fdf2f2',
+                            100: '#fde8e8',
+                            200: '#fbd5d5',
+                            300: '#f8b4b4',
+                            400: '#f98080',
+                            500: '#e02424',
+                            600: '#8e1f26',
+                            700: '#751a1e',
+                            800: '#5c1417',
+                            900: '#461012',
+                        },
+                        blue: {
+                            50: '#f3f6f9',
+                            100: '#e7ecf2',
+                            200: '#c3cfde',
+                            300: '#9fb1ca',
+                            400: '#5776a2',
+                            500: '#0f3b79',
+                            600: '#0d2237', // Custom main Logo Blue
+                            700: '#0a1b2c',
+                            800: '#081421',
+                            900: '#050e16',
+                            950: '#03070b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -60,7 +95,7 @@
                     <i class="fas fa-phone"></i> <span class="hidden lg:inline">‪(248) 385-3432‬</span>
                 </a>
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-gray-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
+                <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
                     <i class="fas fa-bars" id="menu-icon"></i>
                 </button>
             </div>
