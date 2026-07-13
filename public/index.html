@@ -683,133 +683,6 @@
         </div>
     </section>
 
-    <!-- Interactive Estimate Calculator -->
-    <section id="estimate-calculator" class="py-12 sm:py-16 bg-gray-900 text-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(220,38,38,0.15),transparent_50%)]"></div>
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 sm:gap-16 items-center">
-                <div>
-                    <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base">Upfront & Fair</div>
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 leading-tight text-white">Get a Quick Estimate</h2>
-                    <p class="mt-4 text-base sm:text-lg text-gray-300">Choose your project services below to build a realistic estimate in seconds. Real-time labor and travel zone calculations based on Waterford, MI standards.</p>
-
-                    <div class="mt-8 space-y-5 bg-gray-800/50 backdrop-blur border border-gray-700 p-6 sm:p-8 rounded-3xl">
-                        <!-- Select Services -->
-                        <div>
-                            <label class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">1. Select Repairs (check all that apply)</label>
-                            <div class="grid sm:grid-cols-2 gap-3 mt-3">
-                                <label class="flex items-center gap-3 p-3 bg-gray-800 border border-gray-700 hover:border-red-500 rounded-2xl cursor-pointer transition">
-                                    <input type="checkbox" name="calc-service" value="drywall" data-hours="3" class="w-5 h-5 text-red-600 border-gray-600 rounded focus:ring-red-500">
-                                    <div>
-                                        <span class="block font-bold text-sm text-white">Drywall Patching</span>
-                                        <span class="block text-xs text-gray-400">Est. 2-4 hours</span>
-                                    </div>
-                                </label>
-                                <label class="flex items-center gap-3 p-3 bg-gray-800 border border-gray-700 hover:border-red-500 rounded-2xl cursor-pointer transition">
-                                    <input type="checkbox" name="calc-service" value="door" data-hours="4" class="w-5 h-5 text-red-600 border-gray-600 rounded focus:ring-red-500">
-                                    <div>
-                                        <span class="block font-bold text-sm text-white">Door Install / Tuning</span>
-                                        <span class="block text-xs text-gray-400">Est. 4-6 hours</span>
-                                    </div>
-                                </label>
-                                <label class="flex items-center gap-3 p-3 bg-gray-800 border border-gray-700 hover:border-red-500 rounded-2xl cursor-pointer transition">
-                                    <input type="checkbox" name="calc-service" value="electrical" data-hours="2" class="w-5 h-5 text-red-600 border-gray-600 rounded focus:ring-red-500">
-                                    <div>
-                                        <span class="block font-bold text-sm text-white">Fixture & Fan Update</span>
-                                        <span class="block text-xs text-gray-400">Est. 2-4 hours</span>
-                                    </div>
-                                </label>
-                                <label class="flex items-center gap-3 p-3 bg-gray-800 border border-gray-700 hover:border-red-500 rounded-2xl cursor-pointer transition">
-                                    <input type="checkbox" name="calc-service" value="carpentry" data-hours="5" class="w-5 h-5 text-red-600 border-gray-600 rounded focus:ring-red-500">
-                                    <div>
-                                        <span class="block font-bold text-sm text-white">Trim & Carpentry</span>
-                                        <span class="block text-xs text-gray-400">Est. 4-6 hours</span>
-                                    </div>
-                                </label>
-                                <label class="flex items-center gap-3 p-3 bg-gray-800 border border-gray-700 hover:border-red-500 rounded-2xl cursor-pointer transition">
-                                    <input type="checkbox" name="calc-service" value="painting" data-hours="4" class="w-5 h-5 text-red-600 border-gray-600 rounded focus:ring-red-500">
-                                    <div>
-                                        <span class="block font-bold text-sm text-white">Interior Painting</span>
-                                        <span class="block text-xs text-gray-400">Est. 3-5 hours</span>
-                                    </div>
-                                </label>
-                                <label class="flex items-center gap-3 p-3 bg-gray-800 border border-gray-700 hover:border-red-500 rounded-2xl cursor-pointer transition">
-                                    <input type="checkbox" name="calc-service" value="plumbing" data-hours="3" class="w-5 h-5 text-red-600 border-gray-600 rounded focus:ring-red-500">
-                                    <div>
-                                        <span class="block font-bold text-sm text-white">Plumbing Fixture Update</span>
-                                        <span class="block text-xs text-gray-400">Est. 2-4 hours</span>
-                                    </div>
-                                </label>
-                                <label class="flex items-center gap-3 p-3 bg-gray-800 border border-gray-700 hover:border-red-500 rounded-2xl cursor-pointer transition">
-                                    <input type="checkbox" name="calc-service" value="deckfence" data-hours="6" class="w-5 h-5 text-red-600 border-gray-600 rounded focus:ring-red-500">
-                                    <div>
-                                        <span class="block font-bold text-sm text-white">Deck & Fence Repair</span>
-                                        <span class="block text-xs text-gray-400">Est. 4-8 hours</span>
-                                    </div>
-                                </label>
-                                <label class="flex items-center gap-3 p-3 bg-gray-800 border border-gray-700 hover:border-red-500 rounded-2xl cursor-pointer transition">
-                                    <input type="checkbox" name="calc-service" value="flooring" data-hours="6" class="w-5 h-5 text-red-600 border-gray-600 rounded focus:ring-red-500">
-                                    <div>
-                                        <span class="block font-bold text-sm text-white">Flooring Install / Repair</span>
-                                        <span class="block text-xs text-gray-400">Est. 4-8 hours</span>
-                                    </div>
-                                </label>
-                                <label class="flex items-center gap-3 p-3 bg-gray-800 border border-gray-700 hover:border-red-500 rounded-2xl cursor-pointer transition">
-                                    <input type="checkbox" name="calc-service" value="maintenance" data-hours="3" class="w-5 h-5 text-red-600 border-gray-600 rounded focus:ring-red-500">
-                                    <div>
-                                        <span class="block font-bold text-sm text-white">General Maintenance</span>
-                                        <span class="block text-xs text-gray-400">Est. 4-6 hours</span>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Select Travel Zone -->
-                        <div>
-                            <label for="calc-zone" class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">2. Your Travel Distance Zone</label>
-                            <select id="calc-zone" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-white mt-1">
-                                <option value="120" data-zone="Zone A (Within 20 Miles)" selected>Zone A (Within 20 Miles) — $120 Minimum Service Call (includes 1st hour)</option>
-                                <option value="165" data-zone="Zone B (Outside 20 Miles)">Zone B (Outside 20 Miles / Extended) — $165 Minimum Service Call (includes 1st hour)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator Display Results -->
-                <div class="bg-white text-gray-900 p-8 rounded-3xl shadow-2xl border-2 border-red-600 flex flex-col justify-between h-full min-h-[420px]">
-                    <div class="text-center">
-                        <span class="inline-block bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-4">Estimated Total</span>
-                        <div class="text-4xl sm:text-5xl font-black text-gray-900 tracking-tight mt-1 mb-2" id="calc-price-display">$0</div>
-                        <p class="text-sm text-gray-500">Includes travel, diagnostic, and listed hours of labor.</p>
-                    </div>
-
-                    <div class="my-6 space-y-3 bg-gray-50 p-4 rounded-2xl border border-gray-100 text-sm">
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Minimum Service Call:</span>
-                            <span id="calc-base-fee" class="font-semibold text-gray-900">$120</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Estimated Labor Hours:</span>
-                            <span id="calc-hours" class="font-semibold text-gray-900">0 hours</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Consecutive Hourly Rate:</span>
-                            <span class="font-semibold text-gray-900">$65 / hr</span>
-                        </div>
-                        <div class="flex justify-between pt-3 border-t border-gray-200">
-                            <span class="font-bold text-gray-800">Consecutive Labor Cost:</span>
-                            <span id="calc-extra-cost" class="font-semibold text-gray-900">$0</span>
-                        </div>
-                    </div>
-
-                    <button id="calc-book-btn" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-2xl transition shadow-lg shadow-red-600/20 text-center uppercase tracking-wider text-base inline-flex items-center justify-center gap-2">
-                        <span>Lock In This Estimate</span> <i class="fas fa-arrow-down"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Frequently Asked Questions -->
     <section id="faq" class="py-12 sm:py-16 bg-white">
         <div class="max-w-5xl mx-auto px-6">
@@ -951,6 +824,21 @@
 
     <script>
         // Tailwind script already included via CDN
+        // Prefill the contact message with an estimate built on the Rates page
+        (function () {
+            try {
+                const savedEstimate = sessionStorage.getItem('aaaEstimateSummary');
+                if (savedEstimate) {
+                    const messageField = document.getElementById('contact-message');
+                    if (messageField) {
+                        messageField.value = savedEstimate;
+                        messageField.dispatchEvent(new Event('input', { bubbles: true }));
+                    }
+                    sessionStorage.removeItem('aaaEstimateSummary');
+                }
+            } catch (e) {}
+        })();
+
         // Handle form submission via Netlify Forms (AJAX)
         const form = document.getElementById('contact-form');
         if (form) {
@@ -977,105 +865,6 @@
                 });
             });
         }
-
-        // Interactive Estimate Calculator Logic
-        const calcServices = document.querySelectorAll('input[name="calc-service"]');
-        const calcZone = document.getElementById('calc-zone');
-        const calcPriceDisplay = document.getElementById('calc-price-display');
-        const calcHours = document.getElementById('calc-hours');
-        const calcBaseFee = document.getElementById('calc-base-fee');
-        const calcExtraCost = document.getElementById('calc-extra-cost');
-        const calcBookBtn = document.getElementById('calc-book-btn');
-        const contactMessage = document.getElementById('contact-message') || document.querySelector('[name="message"]');
-
-        const calculateEstimate = () => {
-            if (!calcPriceDisplay || !calcHours || !calcBaseFee || !calcExtraCost) return;
-
-            let totalHours = 0;
-            const selectedServices = [];
-
-            calcServices.forEach(checkbox => {
-                if (checkbox.checked) {
-                    const hours = parseFloat(checkbox.dataset.hours || '0');
-                    totalHours += hours;
-                    const serviceLabel = checkbox.closest('label')?.querySelector('span.block.font-bold')?.textContent || checkbox.value;
-                    selectedServices.push(`${serviceLabel} (Est. ${hours} hrs)`);
-                }
-            });
-
-            const selectedOption = calcZone?.options[calcZone.selectedIndex];
-            const baseServiceCall = parseFloat(selectedOption?.value || '120');
-            const zoneName = selectedOption?.dataset.zone || 'Zone A';
-
-            if (totalHours === 0) {
-                calcPriceDisplay.textContent = '$0';
-                calcHours.textContent = '0 hours';
-                calcBaseFee.textContent = `$${baseServiceCall}`;
-                calcExtraCost.textContent = '$0';
-                return { totalHours, baseServiceCall, zoneName, selectedServices, totalPrice: 0 };
-            }
-
-            // Minimum Service Call covers up to the first 1 hour of labor.
-            let consecutiveLaborHours = 0;
-            if (totalHours > 1) {
-                consecutiveLaborHours = totalHours - 1;
-            }
-
-            const extraCost = consecutiveLaborHours * 65;
-            const totalPrice = baseServiceCall + extraCost;
-
-            calcPriceDisplay.textContent = `$${totalPrice}`;
-            calcHours.textContent = `${totalHours} hours`;
-            calcBaseFee.textContent = `$${baseServiceCall}`;
-            calcExtraCost.textContent = `$${extraCost}`;
-
-            return { totalHours, baseServiceCall, zoneName, selectedServices, totalPrice };
-        };
-
-        if (calcServices.length > 0) {
-            calcServices.forEach(checkbox => checkbox.addEventListener('change', calculateEstimate));
-        }
-        if (calcZone) {
-            calcZone.addEventListener('change', calculateEstimate);
-        }
-
-        if (calcBookBtn) {
-            calcBookBtn.addEventListener('click', () => {
-                const { totalHours, baseServiceCall, zoneName, selectedServices, totalPrice } = calculateEstimate() || {};
-                
-                if (!selectedServices || selectedServices.length === 0) {
-                    alert('Please select at least one repair service to build an estimate first.');
-                    return;
-                }
-
-                if (contactMessage) {
-                    const summary = `Hello! I would like to lock in an estimate. My selections:\n` +
-                        `- Services: ${selectedServices.join(', ')}\n` +
-                        `- Total Estimated Labor: ${totalHours} hours\n` +
-                        `- Travel Distance Zone: ${zoneName}\n` +
-                        `- Minimum Service Call: $${baseServiceCall} (covers first 1 hour)\n` +
-                        `- Estimated Total Price: $${totalPrice}\n\n` +
-                        `Please contact me to schedule a convenient appointment!`;
-                    
-                    contactMessage.value = summary;
-                    contactMessage.dispatchEvent(new Event('input', { bubbles: true }));
-                }
-
-                // Smooth scroll to contact section
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    
-                    setTimeout(() => {
-                        const contactName = document.getElementById('contact-name') || contactSection.querySelector('input');
-                        if (contactName) contactName.focus();
-                    }, 800);
-                }
-            });
-        }
-
-        // Initialize calculator values on page load
-        calculateEstimate();
 
         // Mobile menu toggle
         const menuBtn = document.getElementById('mobile-menu-btn');
