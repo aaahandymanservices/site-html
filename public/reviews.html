@@ -338,6 +338,53 @@
         const reviewsTokenKey = 'aaaReviewsEditTokens';
         let reviewsEditId = null;
 
+        // Photo upload sizing. Source photos up to 10MB are accepted, but the serverless
+        // upload endpoint can only receive a limited request body, so oversized images are
+        // downscaled/re-encoded in the browser to keep the actual upload comfortably small.
+        const MAX_SOURCE_BYTES = 10 * 1024 * 1024;
+        const UPLOAD_SAFE_BYTES = 5 * 1024 * 1024;
+        const MAX_IMAGE_DIMENSION = 2000;
+
+        const preparePhotoForUpload = (file) => new Promise((resolve, reject) => {
+            if (!(file instanceof File) || file.size === 0) {
+                resolve(file);
+                return;
+            }
+            // Leave already-small photos and animated GIFs untouched (canvas would drop animation).
+            if (file.size <= UPLOAD_SAFE_BYTES || file.type === 'image/gif') {
+                resolve(file);
+                return;
+            }
+            const url = URL.createObjectURL(file);
+            const img = new Image();
+            img.onload = () => {
+                URL.revokeObjectURL(url);
+                const scale = Math.min(1, MAX_IMAGE_DIMENSION / Math.max(img.width, img.height));
+                const canvas = document.createElement('canvas');
+                canvas.width = Math.max(1, Math.round(img.width * scale));
+                canvas.height = Math.max(1, Math.round(img.height * scale));
+                const ctx = canvas.getContext('2d');
+                if (!ctx) {
+                    resolve(file);
+                    return;
+                }
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                canvas.toBlob((blob) => {
+                    if (!blob) {
+                        resolve(file);
+                        return;
+                    }
+                    const name = `${(file.name || 'photo').replace(/\.[^.]+$/, '')}.jpg`;
+                    resolve(new File([blob], name, { type: 'image/jpeg' }));
+                }, 'image/jpeg', 0.85);
+            };
+            img.onerror = () => {
+                URL.revokeObjectURL(url);
+                reject(new Error('That image could not be processed. Please try a different photo.'));
+            };
+            img.src = url;
+        });
+
         // Initialize Star Rating Selector logic
         const ratingLabels = {
             '1': 'Disappointing',
@@ -597,15 +644,33 @@
         }
 
         if (reviewsForm) {
-            reviewsForm.addEventListener('submit', (event) => {
+            reviewsForm.addEventListener('submit', async (event) => {
                 event.preventDefault();
-                const formData = new FormData(reviewsForm);
                 const isEditing = Boolean(reviewsEditId);
+                const sourceFile = reviewsPhoto?.files?.[0] || null;
+
+                if (sourceFile && sourceFile.size > MAX_SOURCE_BYTES) {
+                    showReviewsMessage('Photos must be 10 MB or smaller.', true);
+                    return;
+                }
+
+                setReviewsSubmitting(true);
+                showReviewsMessage(isEditing ? 'Saving your changes...' : 'Uploading your review...', false);
+
+                let uploadFile = sourceFile;
+                try {
+                    if (sourceFile) uploadFile = await preparePhotoForUpload(sourceFile);
+                } catch (error) {
+                    showReviewsMessage(error instanceof Error ? error.message : 'That photo could not be processed.', true);
+                    setReviewsSubmitting(false);
+                    return;
+                }
+
+                const formData = new FormData(reviewsForm);
+                if (uploadFile) formData.set('photo', uploadFile, uploadFile.name);
                 if (isEditing) {
                     formData.append('editToken', reviewsTokens()[reviewsEditId] || '');
                 }
-                setReviewsSubmitting(true);
-                showReviewsMessage(isEditing ? 'Saving your changes...' : 'Uploading your review...', false);
 
                 fetch(isEditing ? `/api/reviews/${encodeURIComponent(reviewsEditId)}` : '/api/reviews', {
                     method: isEditing ? 'PUT' : 'POST',
