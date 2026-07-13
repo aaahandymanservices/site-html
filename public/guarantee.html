@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Resource hints: warm up connections to third-party origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
+    <title>Our Service Guarantee — 1-Year Workmanship Promise | AAA Handyman Services</title>
+
+    <!-- Search Engine Optimization (SEO) Metadata -->
+    <meta name="description" content="AAA Handyman Services stands behind every repair and installation with a 1-Year Workmanship Guarantee, honest upfront pricing, reliable scheduling, and payment upon completion. Background-checked, insured technicians serving Oakland County, MI.">
+    <meta name="theme-color" content="#8e1f26">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aaahandyman.services/guarantee">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aaahandyman.services/guarantee">
+    <meta property="og:site_name" content="AAA Handyman Services">
+    <meta property="og:title" content="Our Service Guarantee — 1-Year Workmanship Promise | AAA Handyman Services">
+    <meta property="og:description" content="Every project is backed by our 1-Year Workmanship Guarantee. Trusted, insured technicians, transparent pricing, and payment only when the work is done right.">
+    <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Structured Data (JSON-LD) for the workmanship warranty -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Our Service Guarantee",
+      "url": "https://aaahandyman.services/guarantee",
+      "about": {
+        "@type": "HomeAndConstructionBusiness",
+        "name": "AAA Handyman Services",
+        "telephone": "+1-248-385-3432",
+        "email": "contact@aaahandyman.services",
+        "areaServed": "Oakland County, MI",
+        "makesOffer": {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Handyman and home repair services"
+          },
+          "warranty": {
+            "@type": "WarrantyPromise",
+            "durationOfWarranty": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitCode": "ANN"
+            },
+            "warrantyScope": "1-Year Workmanship Guarantee covering all labor performed by our Craftsman and quality-related concerns that emerge within 12 months of project completion."
+          }
+        }
+      }
+    }
+    </script>
+
+    <!-- Tailwind Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        red: {
+                            50: '#fdf2f2',
+                            100: '#fde8e8',
+                            200: '#fbd5d5',
+                            300: '#f8b4b4',
+                            400: '#f98080',
+                            500: '#e02424',
+                            600: '#8e1f26',
+                            700: '#751a1e',
+                            800: '#5c1417',
+                            900: '#461012',
+                        },
+                        blue: {
+                            50: '#f3f6f9',
+                            100: '#e7ecf2',
+                            200: '#c3cfde',
+                            300: '#9fb1ca',
+                            400: '#5776a2',
+                            500: '#0f3b79',
+                            600: '#0d2237', // Custom main Logo Blue
+                            700: '#0a1b2c',
+                            800: '#081421',
+                            900: '#050e16',
+                            950: '#03070b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom font family */
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        /* Animated entrance for content cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .promise-card {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        .service-card { transition: all 0.3s; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
+        @keyframes pulse-attention-green {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
+        }
+        .pulse-btn-green {
+            animation: pulse-attention-green 2s infinite;
+        }
+        /* Anchor scroll margin for sticky navbar */
+        section[id], header[id] {
+            scroll-margin-top: 80px;
+        }
+        @media (max-width: 768px) {
+            section[id], header[id] {
+                scroll-margin-top: 100px;
+            }
+        }
+        /* Respect visitors who prefer reduced motion (accessibility) */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .pulse-btn-green,
+            .service-card,
+            .promise-card { animation: none !important; }
+            .service-card:hover { transform: none !important; }
+            .promise-card { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+</head>
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
+        <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
+            <a href="/" class="flex min-w-0 items-center space-x-3" aria-label="AAA Handyman Services home">
+                <!-- Logo -->
+                <img src="/.netlify/images?url=/logo-shield.png&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-shield.png&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-shield.png&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600">
+                <div class="min-w-0">
+                    <p class="text-base min-[390px]:text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
+                    <p class="text-[10px] sm:text-xs text-gray-500">Oakland County Michigan</p>
+                </div>
+            </a>
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex space-x-6 lg:space-x-8 text-lg font-medium items-center">
+                <a href="/#services" class="nav-link text-gray-700 hover:text-red-600 transition">Services</a>
+                <a href="/rates" class="nav-link text-gray-700 hover:text-red-600 transition">Rates</a>
+                <a href="/guarantee" class="nav-link text-red-600 font-bold border-b-2 border-red-600">Guarantee</a>
+                <a href="/reviews" class="nav-link text-gray-700 hover:text-red-600 transition">Reviews</a>
+                <a href="/careers" class="nav-link text-gray-700 hover:text-red-600 transition">Careers</a>
+                <a href="/#contact" class="nav-link text-gray-700 hover:text-red-600 transition">Contact</a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="nav-link text-gray-700 hover:text-[#1877F2] text-xl transition"><i class="fab fa-facebook"></i></a>
+            </div>
+            <!-- Nav Action Buttons -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <a href="tel:2483853432" class="bg-green-600 hover:bg-green-700 text-white p-3 lg:px-5 lg:py-3 xl:px-6 rounded-full font-semibold flex items-center justify-center gap-2 transition pulse-btn-green" title="Call us">
+                    <i class="fas fa-phone"></i> <span class="hidden lg:inline">‪(248) 385-3432‬</span>
+                </a>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
+                    <i class="fas fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t-[3px] border-gray-100 px-6 py-4 space-y-4 shadow-inner">
+            <a href="/#services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
+            <a href="/rates" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Rates</a>
+            <a href="/guarantee" class="block text-lg font-bold text-red-600 py-1">Guarantee</a>
+            <a href="/reviews" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Reviews</a>
+            <a href="/careers" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Careers</a>
+            <a href="/#contact" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Contact</a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="block text-lg font-medium text-gray-700 hover:text-[#1877F2] py-1"><i class="fab fa-facebook"></i> Facebook</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        <!-- Hero Intro -->
+        <header id="guarantee-hero" class="py-14 sm:py-20 bg-gradient-to-b from-blue-950 to-slate-900 text-white relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(142,31,38,0.28),transparent_55%)]"></div>
+            <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/15 px-4 py-1.5 rounded-full mb-5 text-sm font-semibold">
+                    <span class="text-yellow-400"><i class="fas fa-shield-halved"></i></span> Guaranteed.
+                </div>
+                <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Our Service Guarantee</div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-5">The Job Done Right, the First Time</h1>
+                <p class="text-slate-300 text-base sm:text-lg leading-relaxed">When you invite AAA Handyman Services into your home, you’re choosing a trusted partner dedicated to getting the job done right. Our background-checked, insured technicians arrive on time and prepared to deliver a seamless, worry-free experience. We don’t just complete your project—we stand behind it with an unwavering commitment to quality and customer satisfaction.</p>
+            </div>
+        </header>
+
+        <!-- Cornerstone: 1-Year Workmanship Guarantee -->
+        <section id="service-promise" class="py-12 sm:py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-10 sm:mb-14 max-w-2xl mx-auto">
+                    <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm sm:text-base">Our Service Promise</div>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">Excellence in Every Project</h2>
+                    <p class="mt-4 text-base sm:text-lg text-gray-600">We believe in delivering excellence in every repair, installation, and improvement. Our 1-Year Workmanship Guarantee is the cornerstone of our commitment to you.</p>
+                </div>
+
+                <!-- Feature guarantee card -->
+                <div class="promise-card max-w-4xl mx-auto bg-gradient-to-br from-red-600 to-red-800 text-white rounded-3xl shadow-xl overflow-hidden">
+                    <div class="grid md:grid-cols-[auto_1fr] gap-6 sm:gap-8 items-center p-8 sm:p-12">
+                        <div class="flex md:block justify-center">
+                            <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-white/15 border-2 border-white/40 flex flex-col items-center justify-center text-center shadow-inner">
+                                <span class="text-4xl sm:text-5xl font-black leading-none">1</span>
+                                <span class="text-xs uppercase tracking-widest font-bold mt-1">Year</span>
+                            </div>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h3 class="text-2xl sm:text-3xl font-bold mb-3">1-Year Guarantee on All Labor</h3>
+                            <p class="text-white/90 leading-relaxed">Every project we undertake is backed by our 1-Year Guarantee. If any issue arises directly related to our craftsmanship within one year of service, we will return to address and resolve it—completely free of charge. No fine print, no hassle. Just dependable, high-quality service you can count on.</p>
+                            <div class="mt-6 grid sm:grid-cols-2 gap-3 text-left">
+                                <div class="flex items-start gap-3 bg-white/10 rounded-2xl p-4">
+                                    <span class="text-yellow-300 mt-0.5"><i class="fas fa-circle-check"></i></span>
+                                    <span class="text-sm text-white/95">All labor performed by our Craftsman.</span>
+                                </div>
+                                <div class="flex items-start gap-3 bg-white/10 rounded-2xl p-4">
+                                    <span class="text-yellow-300 mt-0.5"><i class="fas fa-circle-check"></i></span>
+                                    <span class="text-sm text-white/95">Quality-related concerns that emerge within 12 months of project completion.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Service Commitments -->
+        <section id="commitments" class="py-12 sm:py-16 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-8 sm:mb-12">
+                    <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm sm:text-base">Additional Service Commitments</div>
+                    <h2 class="text-3xl sm:text-4xl font-bold mt-3">How We Earn Your Trust</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-comments-dollar"></i></div>
+                        <h3 class="text-xl sm:text-2xl font-semibold mb-3">Transparency Before We Begin</h3>
+                        <p class="text-gray-600">If your project encounters unexpected challenges that could impact the scope, timeline, or cost, we pause immediately to discuss the situation and gain your approval before proceeding. You will never face surprise charges.</p>
+                    </div>
+                    <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-clock"></i></div>
+                        <h3 class="text-xl sm:text-2xl font-semibold mb-3">Reliable Scheduling</h3>
+                        <p class="text-gray-600">We respect your time. If our technician is running behind, we will notify you promptly. We aim to keep our appointments and keep you informed every step of the way.</p>
+                    </div>
+                    <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-handshake"></i></div>
+                        <h3 class="text-xl sm:text-2xl font-semibold mb-3">Payment Upon Completion</h3>
+                        <p class="text-gray-600">For standard projects, we don’t ask for payment until the work is finished to your satisfaction. We want you to feel confident in the results before the job is officially closed.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section id="why-choose" class="py-12 sm:py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-8 sm:mb-12 max-w-2xl mx-auto">
+                    <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm sm:text-base">Why Choose AAA Handyman Services?</div>
+                    <h2 class="text-3xl sm:text-4xl font-bold mt-3">Reasons Neighbors Rely on Us</h2>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <div class="flex items-start gap-4 bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                        <span class="flex-shrink-0 w-11 h-11 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl" aria-hidden="true"><i class="fas fa-medal"></i></span>
+                        <div>
+                            <h3 class="font-bold text-lg mb-1">Quality Workmanship Guaranteed</h3>
+                            <p class="text-gray-600 text-sm">Every repair and installation meets our rigorous professional standards.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                        <span class="flex-shrink-0 w-11 h-11 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center text-xl" aria-hidden="true"><i class="fas fa-user-shield"></i></span>
+                        <div>
+                            <h3 class="font-bold text-lg mb-1">Trusted &amp; Insured Technicians</h3>
+                            <p class="text-gray-600 text-sm">Each team member is fully vetted and insured, giving you total peace of mind while we are in your home.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                        <span class="flex-shrink-0 w-11 h-11 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl" aria-hidden="true"><i class="fas fa-screwdriver-wrench"></i></span>
+                        <div>
+                            <h3 class="font-bold text-lg mb-1">Professional Service</h3>
+                            <p class="text-gray-600 text-sm">We bring a polite, efficient, and solution-oriented approach to every visit.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                        <span class="flex-shrink-0 w-11 h-11 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center text-xl" aria-hidden="true"><i class="fas fa-calendar-check"></i></span>
+                        <div>
+                            <h3 class="font-bold text-lg mb-1">Reliable &amp; Convenient</h3>
+                            <p class="text-gray-600 text-sm">From the first call to the final walkthrough, we make your home maintenance simple and stress-free.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                        <span class="flex-shrink-0 w-11 h-11 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl" aria-hidden="true"><i class="fas fa-people-roof"></i></span>
+                        <div>
+                            <h3 class="font-bold text-lg mb-1">Community-Focused</h3>
+                            <p class="text-gray-600 text-sm">As a local provider, we are deeply invested in the satisfaction of our neighbors and the quality of your home.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-blue-900 text-white rounded-2xl p-6">
+                        <span class="flex-shrink-0 w-11 h-11 rounded-xl bg-white/15 text-yellow-300 flex items-center justify-center text-xl" aria-hidden="true"><i class="fas fa-star"></i></span>
+                        <div>
+                            <h3 class="font-bold text-lg mb-1">Excellence You Can Trust</h3>
+                            <p class="text-white/85 text-sm">Our reputation is built on reliability, skill, and a dedication to superior customer service.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing CTA -->
+        <section id="guarantee-cta" class="py-12 sm:py-16 bg-gray-100">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="bg-blue-900 text-white rounded-3xl p-8 sm:p-12 text-center shadow-lg">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Your Go-To Partner for Home Repair</h2>
+                    <p class="text-base sm:text-lg text-white/90 max-w-2xl mx-auto mb-8">At AAA Handyman Services, our reputation is built on reliability, skill, and a dedication to superior customer service. We look forward to becoming your go-to partner for all your home maintenance and repair needs.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="tel:2483853432" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-green-600/30">
+                            <i class="fas fa-phone"></i> ‪(248) 385-3432‬
+                        </a>
+                        <a href="/#contact" class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
+                            Request a Quote <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <p class="mt-6 text-sm text-white/70">Prefer email? Reach us at <a href="mailto:contact@aaahandyman.services" class="underline hover:text-white">contact@aaahandyman.services</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-400 py-12">
+       <div class="max-w-7xl mx-auto px-6 text-center">
+           <div class="flex justify-center mb-6">
+               <!-- Circular Logo -->
+               <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 mx-auto rounded-full object-cover shadow-lg border-2 border-red-600">
+           </div>            <p class="text-sm">&copy; 2026 AAA Handyman Services. All Rights Reserved. Michigan's $600 Handyman Law MCL 339.2403 Compliant.<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects.<br>We are not a licensed builder or general contractor.<br>Locally Serving Oakland County, MI.</p>
+            <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
+                <a href="/privacy" target="_blank" rel="noopener" class="hover:text-white transition">Privacy Policy</a>
+                <span class="text-gray-600">|</span>
+                <a href="/terms" target="_blank" rel="noopener" class="hover:text-white transition">Terms of Service</a>
+            </div>            <div class="mt-6 flex justify-center gap-6">
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="text-3xl hover:text-[#1877F2] transition"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JS scripts -->
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        if (menuBtn && mobileMenu && menuIcon) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.className = 'fas fa-bars';
+                } else {
+                    menuIcon.className = 'fas fa-times';
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.className = 'fas fa-bars';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
