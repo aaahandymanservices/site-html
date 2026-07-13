@@ -1045,22 +1045,6 @@
     </script>
 
     <script>
-        // Tailwind script already included via CDN
-        // Prefill the contact message with an estimate built on the Rates page
-        (function () {
-            try {
-                const savedEstimate = sessionStorage.getItem('aaaEstimateSummary');
-                if (savedEstimate) {
-                    const messageField = document.getElementById('contact-message');
-                    if (messageField) {
-                        messageField.value = savedEstimate;
-                        messageField.dispatchEvent(new Event('input', { bubbles: true }));
-                    }
-                    sessionStorage.removeItem('aaaEstimateSummary');
-                }
-            } catch (e) {}
-        })();
-
         // Interactive Service Area Checker Logic
         (function () {
             const checkerInput = document.getElementById('service-area-checker');
