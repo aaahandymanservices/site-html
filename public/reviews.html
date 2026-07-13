@@ -23,7 +23,7 @@
     <meta property="og:url" content="https://aaahandyman.services/reviews">
     <meta property="og:site_name" content="AAA Handyman Services">
     <meta property="og:title" content="Customer Reviews & Testimonials | AAA Handyman Services">
-    <meta property="og:description" content="See recent home repair projects and verified client testimonials from around Oakland County, Michigan. Submit your own review today.">
+    <meta property="og:description" content="See recent home repair projects and customer testimonials from around Oakland County, Michigan. Submit your own review today.">
     <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
     <meta property="og:locale" content="en_US">
 
@@ -269,6 +269,7 @@
                             <button id="reviews-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
                                 Add Review <i class="fas fa-camera-retro"></i>
                             </button>
+                            <p class="text-xs text-gray-500 text-center">By submitting, you confirm this review reflects your genuine experience and agree that your first name, city, rating, review, and photo may be published publicly on this website.</p>
                         </form>
                     </div>
                 </div>
@@ -278,7 +279,7 @@
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
                             <h2 class="text-2xl font-bold text-white">Client Showcases</h2>
-                            <p class="text-slate-400 text-sm">Real pictures from real clients across Oakland County, MI.</p>
+                            <p class="text-slate-400 text-sm">Photos and reviews submitted by customers across Oakland County, MI.</p>
                         </div>
                         <button id="reviews-refresh" type="button" class="self-start sm:self-auto border-[2px] border-white/20 hover:bg-white hover:text-slate-900 px-5 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2">
                             <i class="fas fa-arrows-rotate"></i> Refresh Feed
@@ -505,8 +506,8 @@
         };
 
         const deleteReviewsItem = (id) => {
-            if (!confirm('Remove this review submission?')) return;
-            showReviewsMessage('Removing your review submission...', false);
+            if (!confirm('Remove this review?')) return;
+            showReviewsMessage('Removing your review...', false);
 
             fetch(`/api/reviews/${encodeURIComponent(id)}`, {
                 method: 'DELETE',
@@ -518,12 +519,12 @@
                 if (!response.ok) throw new Error(payload.error || 'Delete failed.');
                 removeReviewsToken(id);
                 if (reviewsEditId === id) resetReviewsForm();
-                showReviewsMessage('Your review submission was removed.', false);
+                showReviewsMessage('Your review was removed.', false);
                 loadReviews();
             })
             .catch(error => {
                 const message = error instanceof Error ? error.message : String(error || '');
-                showReviewsMessage(message || 'The review submission could not be removed.', true);
+                showReviewsMessage(message || 'This review could not be removed.', true);
             });
         };
 
@@ -566,7 +567,7 @@
                                 <div class="text-amber-500 text-lg flex gap-1" aria-label="${escapeHTML(item.rating)} out of 5 stars">
                                     ${stars(Number(item.rating) || 0)}
                                 </div>
-                                <span class="text-xs text-gray-400 font-medium">Verified Client</span>
+                                <span class="text-xs text-gray-400 font-medium">Customer Review</span>
                             </div>
                             <p class="text-gray-700 leading-relaxed italic text-base">"${escapeHTML(item.review)}"</p>
                         </div>
@@ -689,7 +690,7 @@
                 .then((payload) => {
                     if (payload.id && payload.editToken) saveReviewsToken(payload.id, payload.editToken);
                     resetReviewsForm();
-                    showReviewsMessage(isEditing ? 'Your review submission was updated.' : 'Thanks. Your photo and review were added successfully.', false);
+                    showReviewsMessage(isEditing ? 'Your review was updated.' : 'Thank you! Your photo and review were added successfully.', false);
                     loadReviews();
                 })
                 .catch(error => {
