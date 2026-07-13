@@ -4,7 +4,7 @@ import { desc, eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { reviews } from "../../db/schema.js";
 
-const MAX_IMAGE_SIZE = 4 * 1024 * 1024;
+const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
 const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
 
 const json = (body: unknown, init?: ResponseInit) =>
@@ -63,7 +63,7 @@ const validatePhoto = (photo: FormDataEntryValue | null, required: boolean) => {
   }
 
   if (photo.size > MAX_IMAGE_SIZE) {
-    return "Photos must be 4 MB or smaller.";
+    return "Photos must be 10 MB or smaller.";
   }
 
   if (!IMAGE_TYPES.has(photo.type)) {
