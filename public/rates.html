@@ -60,12 +60,12 @@
           "name": "Zone A Minimum Service Call (within 20 miles)",
           "description": "Includes travel, diagnostics, and the first hour of labor for locations within 20 miles.",
           "priceCurrency": "USD",
-          "price": "120",
+          "price": "100",
           "priceSpecification": {
             "@type": "PriceSpecification",
-            "price": "120",
+            "price": "100",
             "priceCurrency": "USD",
-            "minPrice": "120"
+            "minPrice": "100"
           }
         },
         {
@@ -73,12 +73,12 @@
           "name": "Zone B Minimum Service Call (20+ miles)",
           "description": "Includes travel, diagnostics, and the first hour of labor for locations beyond 20 miles.",
           "priceCurrency": "USD",
-          "price": "165",
+          "price": "145",
           "priceSpecification": {
             "@type": "PriceSpecification",
-            "price": "165",
+            "price": "145",
             "priceCurrency": "USD",
-            "minPrice": "165"
+            "minPrice": "145"
           }
         },
         {
@@ -291,7 +291,7 @@
                         </div>
                         <div class="text-center mb-6">
                             <div class="inline-block bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-semibold">Within 20 Miles</div>
-                            <div class="text-5xl font-black text-green-600 mt-4">$120</div>
+                            <div class="text-5xl font-black text-green-600 mt-4">$100</div>
                             <div class="text-sm text-gray-500 mt-1">Minimum Service Call</div>
                         </div>
                         <h3 class="text-2xl font-bold mb-4 text-center">Standard Coverage</h3>
@@ -310,7 +310,7 @@
                         </div>
                         <div class="text-center mb-6">
                             <div class="inline-block bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-sm font-semibold">Outside 20 Miles</div>
-                            <div class="text-5xl font-black text-orange-600 mt-4">$165</div>
+                            <div class="text-5xl font-black text-orange-600 mt-4">$145</div>
                             <div class="text-sm text-gray-500 mt-1">Minimum Service Call</div>
                         </div>
                         <h3 class="text-2xl font-bold mb-4 text-center">Extended County</h3>
@@ -345,11 +345,11 @@
                         </div>
                         <div class="text-center mb-6">
                             <div class="inline-block bg-red-100 text-red-700 px-4 py-1 rounded-full text-sm font-semibold">After-Hours Emergency</div>
-                            <div class="text-5xl font-black text-red-600 mt-4">$175</div>
+                            <div class="text-5xl font-black text-red-600 mt-4">$155</div>
                             <div class="text-sm text-gray-500 mt-1">first hour ($50 / 30 min after)</div>
                         </div>
                         <h3 class="text-2xl font-bold mb-4 text-center">After-Hours Rates</h3>
-                        <p class="text-gray-600 mb-6">Urgent response for evening and weekend calls. Billed at <strong>$175 for the first hour</strong> (travel included within our standard service area), then <strong>$100/hr</strong> in half-hour increments after.</p>
+                        <p class="text-gray-600 mb-6">Urgent response for evening and weekend calls. Billed at <strong>$155 for the first hour</strong> (travel included within our standard service area), then <strong>$100/hr</strong> in half-hour increments after.</p>
                         <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-4">
                             <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> $50 per 30-minute block after the first hour</li>
                             <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> Consistent urgent-rate premium, billed transparently</li>
@@ -894,8 +894,8 @@
                         <div>
                             <label for="calc-zone" class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">2. Your Travel Distance Zone</label>
                             <select id="calc-zone" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-white mt-1">
-                                <option value="120" data-zone="Zone A (Within 20 Miles)" selected>Zone A (Within 20 Miles) — $120 Minimum Service Call (includes 1st hour)</option>
-                                <option value="165" data-zone="Zone B (Outside 20 Miles)">Zone B (Outside 20 Miles / Extended) — $165 Minimum Service Call (includes 1st hour)</option>
+                                <option value="100" data-zone="Zone A (Within 20 Miles)" selected>Zone A (Within 20 Miles) — $100 Minimum Service Call (includes 1st hour)</option>
+                                <option value="145" data-zone="Zone B (Outside 20 Miles)">Zone B (Outside 20 Miles / Extended) — $145 Minimum Service Call (includes 1st hour)</option>
                             </select>
                         </div>
                     </div>
@@ -912,7 +912,7 @@
                     <div class="my-6 space-y-3 bg-gray-50 p-4 rounded-2xl border border-gray-100 text-sm">
                         <div class="flex justify-between">
                             <span class="text-gray-600">Minimum Service Call:</span>
-                            <span id="calc-base-fee" class="font-semibold text-gray-900">$120</span>
+                            <span id="calc-base-fee" class="font-semibold text-gray-900">$100</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600">Estimated Labor Hours:</span>
@@ -1061,7 +1061,7 @@
             });
 
             const selectedOption = calcZone?.options[calcZone.selectedIndex];
-            const baseServiceCall = parseFloat(selectedOption?.value || '120');
+            const baseServiceCall = parseFloat(selectedOption?.value || '100');
             const zoneName = selectedOption?.dataset.zone || 'Zone A';
 
             if (totalHours === 0) {
