@@ -417,9 +417,6 @@
             </div>
             <!-- Nav Action Buttons -->
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <a href="tel:2483853432" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-semibold flex items-center justify-center gap-2 transition pulse-btn-green shadow-md" title="Call AAA Handyman Services Now">
-                    <i class="fas fa-phone"></i> <span>Call Now!</span>
-                </a>
                 <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
                     <i class="fas fa-bars" id="menu-icon"></i>
@@ -436,6 +433,12 @@
             <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="block text-lg font-medium text-gray-700 hover:text-[#1877F2] py-1"><i class="fab fa-facebook"></i> Facebook</a>
         </div>
     </nav>
+
+    <!-- Floating Call Action -->
+    <a href="tel:2483853432" class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-bold items-center justify-center gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now">
+        <i class="fas fa-phone" aria-hidden="true"></i>
+        <span>Call Now! <span class="hidden sm:inline">(248) 385-3432</span></span>
+    </a>
 
     <!-- Hero -->
     <header id="top" class="hero min-h-[70vh] md:h-[75vh] py-12 md:py-0 flex items-center text-white">
@@ -983,7 +986,7 @@
     </footer>
 
     <!-- Back to top -->
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 md:left-auto md:right-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
     <script>
         (function () {
             var btn = document.getElementById('back-to-top');
