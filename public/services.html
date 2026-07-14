@@ -533,6 +533,23 @@
         </div>
     </footer>
 
+    <!-- Back to top -->
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
+    <script>
+        (function () {
+            var btn = document.getElementById('back-to-top');
+            if (!btn) return;
+            window.addEventListener('scroll', function () {
+                var show = window.scrollY > 400;
+                btn.classList.toggle('hidden', !show);
+                btn.classList.toggle('flex', show);
+            }, { passive: true });
+            btn.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script>
+
     <!-- Mobile Navigation Menu Toggle Script -->
     <script>
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
