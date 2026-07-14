@@ -1,0 +1,1 @@
+DROP TABLE "home_maintenance_memberships";
