@@ -413,7 +413,7 @@
                 <a href="/reviews" class="nav-link text-gray-700 hover:text-red-600">Reviews</a>
                 <a href="/careers" class="nav-link text-gray-700 hover:text-red-600">Careers</a>
                 <a href="#contact" class="nav-link text-gray-700 hover:text-red-600">Contact</a>
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="nav-link text-gray-700 hover:text-[#1877F2] text-xl"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="nav-link text-gray-700 hover:text-[#1877F2] text-xl" aria-label="AAA Handyman Services on Facebook"><i class="fab fa-facebook"></i></a>
             </div>
             <!-- Nav Action Buttons -->
             <div class="flex items-center space-x-2 sm:space-x-4">
@@ -811,7 +811,7 @@
                 <!-- Instant Service Area Search Widget -->
                 <div class="max-w-md mx-auto mb-8">
                     <div class="relative">
-                        <input id="service-area-checker" type="text" placeholder="Enter your City or Zip Code (e.g. 48329, Troy)..." class="w-full px-5 py-4 pl-12 bg-gray-50 border-[2px] border-gray-300 rounded-2xl focus:outline-none focus:border-red-600 focus:bg-white text-base transition text-gray-900 font-medium">
+                        <input id="service-area-checker" type="text" aria-label="Enter your city or zip code to check service area" placeholder="Enter your City or Zip Code (e.g. 48329, Troy)..." class="w-full px-5 py-4 pl-12 bg-gray-50 border-[2px] border-gray-300 rounded-2xl focus:outline-none focus:border-red-600 focus:bg-white text-base transition text-gray-900 font-medium">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400">
                             <i class="fas fa-search-location text-lg"></i>
                         </div>
@@ -938,7 +938,7 @@
                         <div class="flex items-start gap-4 sm:gap-6">
                             <i class="fas fa-phone text-3xl sm:text-4xl text-green-500 mt-1 flex-shrink-0"></i>
                             <div>
-                                <a href="tel:+12483853432" class="text-xl sm:text-2xl md:text-3xl font-semibold hover:text-red-400 break-all">‪(248) 385-3432‬</a>
+                                <a href="tel:+12483853432" class="text-xl sm:text-2xl md:text-3xl font-semibold hover:text-red-400 break-all">(248) 385-3432</a>
                                 <p class="text-sm sm:text-base text-gray-400">Call for immediate assistance</p>
                             </div>
                         </div>
@@ -1110,18 +1110,18 @@
                 { names: ['west bloomfield', 'west bloomfield township'], zips: ['48322', '48323', '48324'], zone: 'Zone A', rate: '$100 Min Call' },
                 { names: ['clarkston', 'independence township'], zips: ['48346', '48347', '48348'], zone: 'Zone A', rate: '$100 Min Call' },
                 { names: ['birmingham'], zips: ['48009', '48012'], zone: 'Zone A', rate: '$100 Min Call' },
-                { names: ['troy'], zips: ['48007', '48083', '48084', '48085', '48098'], zone: 'Zone B', rate: '$145 Min Call' },
-                { names: ['rochester hills', 'rochester'], zips: ['48306', '48307', '48308', '48309'], zone: 'Zone B', rate: '$145 Min Call' },
+                { names: ['troy'], zips: ['48007', '48083', '48084', '48085', '48098'], zone: 'Zone A', rate: '$100 Min Call' },
+                { names: ['rochester hills', 'rochester'], zips: ['48306', '48307', '48308', '48309'], zone: 'Zone A', rate: '$100 Min Call' },
                 { names: ['farmington hills', 'farmington'], zips: ['48331', '48332', '48333', '48334', '48335', '48336'], zone: 'Zone A', rate: '$100 Min Call' },
-                { names: ['royal oak'], zips: ['48067', '48068', '48073'], zone: 'Zone B', rate: '$145 Min Call' },
+                { names: ['royal oak'], zips: ['48067', '48068', '48073'], zone: 'Zone A', rate: '$100 Min Call' },
                 { names: ['orchard lake', 'orchard lake village'], zips: ['48323', '48324'], zone: 'Zone A', rate: '$100 Min Call' },
                 { names: ['franklin'], zips: ['48025'], zone: 'Zone A', rate: '$100 Min Call' },
-                { names: ['huntington woods'], zips: ['48070'], zone: 'Zone B', rate: '$145 Min Call' },
+                { names: ['huntington woods'], zips: ['48070'], zone: 'Zone A', rate: '$100 Min Call' },
                 { names: ['beverly hills'], zips: ['48025'], zone: 'Zone A', rate: '$100 Min Call' },
-                { names: ['novi'], zips: ['48374', '48375', '48376', '48377'], zone: 'Zone B', rate: '$145 Min Call' },
-                { names: ['southfield'], zips: ['48033', '48034', '48037', '48075', '48076', '48086'], zone: 'Zone B', rate: '$145 Min Call' },
-                { names: ['lake orion', 'orion township'], zips: ['48359', '48360', '48361', '48362'], zone: 'Zone B', rate: '$145 Min Call' },
-                { names: ['oxford', 'oxford township'], zips: ['48370', '48371'], zone: 'Zone B', rate: '$145 Min Call' }
+                { names: ['novi'], zips: ['48374', '48375', '48376', '48377'], zone: 'Zone A', rate: '$100 Min Call' },
+                { names: ['southfield'], zips: ['48033', '48034', '48037', '48075', '48076', '48086'], zone: 'Zone A', rate: '$100 Min Call' },
+                { names: ['lake orion', 'orion township'], zips: ['48359', '48360', '48361', '48362'], zone: 'Zone A', rate: '$100 Min Call' },
+                { names: ['oxford', 'oxford township'], zips: ['48370', '48371'], zone: 'Zone A', rate: '$100 Min Call' }
             ];
 
             checkerInput.addEventListener('input', function () {

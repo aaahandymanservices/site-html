@@ -6,5 +6,5 @@ Allow: /
 Disallow: /.netlify/functions/
 Disallow: /api/
 
-Host: https://aaahandyman.services
+Host: aaahandyman.services
 Sitemap: https://aaahandyman.services/sitemap.xml

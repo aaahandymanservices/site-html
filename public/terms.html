@@ -13,6 +13,14 @@
     <meta property="og:site_name" content="AAA Handyman Services">
     <meta property="og:title" content="Terms of Service | AAA Handyman Services">
     <meta property="og:description" content="Terms of Service for AAA Handyman Services in Waterford and Oakland County, Michigan.">
+    <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
+    <meta property="og:locale" content="en_US">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://aaahandyman.services/terms">
+    <meta name="twitter:title" content="Terms of Service | AAA Handyman Services">
+    <meta name="twitter:description" content="Terms of Service for AAA Handyman Services in Waterford and Oakland County, Michigan.">
+    <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
     <link rel="icon" type="image/png" href="/favicon-32x32.png">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -73,14 +81,14 @@
     <!-- Navbar -->
     <nav class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
         <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
-            <div class="flex min-w-0 items-center space-x-3">
+            <a href="/" class="flex min-w-0 items-center space-x-3" aria-label="AAA Handyman Services home">
                 <!-- Logo -->
-                <img src="/logo-circular.png" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0">
-                <div>
-                    <a href="/" class="text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight hover:text-red-700 transition">AAA Handyman Services</a>
+                <img src="/.netlify/images?url=/logo-shield.png&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-shield.png&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-shield.png&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600">
+                <div class="min-w-0">
+                    <p class="text-base min-[390px]:text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
                     <p class="text-[10px] sm:text-xs text-gray-500">Oakland County Michigan</p>
                 </div>
-            </div>
+            </a>
             <!-- Desktop Nav Links -->
             <div class="hidden md:flex space-x-6 lg:space-x-8 text-lg font-medium items-center">
                 <a href="/services" class="nav-link text-gray-700 hover:text-red-600">Services</a>
@@ -89,11 +97,11 @@
                 <a href="/reviews" class="nav-link text-gray-700 hover:text-red-600">Reviews</a>
                 <a href="/careers" class="nav-link text-gray-700 hover:text-red-600">Careers</a>
                 <a href="/#contact" class="nav-link text-gray-700 hover:text-red-600">Contact</a>
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="nav-link text-gray-700 hover:text-[#1877F2] text-xl"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="nav-link text-gray-700 hover:text-[#1877F2] text-xl transition" aria-label="AAA Handyman Services on Facebook"><i class="fab fa-facebook"></i></a>
             </div>
             <!-- Nav Action Buttons -->
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <a href="tel:+12483853432" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-semibold flex items-center justify-center gap-2 transition pulse-btn-green" title="Call us">
+                <a href="tel:+12483853432" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-semibold flex items-center justify-center gap-2 transition pulse-btn-green" title="Call AAA Handyman Services Now">
                     <i class="fas fa-phone"></i> <span>Call Now!</span>
                 </a>
                 <!-- Mobile Menu Button -->
@@ -445,7 +453,7 @@
                         </p>
                         <p class="flex items-center gap-3">
                             <i class="fas fa-phone text-green-500 flex-shrink-0"></i>
-                            <a href="tel:+12483853432" class="hover:underline hover:text-red-400 transition">‪(248) 385-3432‬</a>
+                            <a href="tel:+12483853432" class="hover:underline hover:text-red-400 transition">(248) 385-3432</a>
                         </p>
                     </div>
                 </div>
