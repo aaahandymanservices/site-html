@@ -15,6 +15,27 @@ const json = (body: unknown, init?: ResponseInit) =>
 const errorJson = (message = "Something went wrong. Please try again soon.", status = 500) =>
   json({ error: message }, { status });
 
+// The membership endpoint reads and writes customer records (names and emails),
+// so it must stay admin-only. Access requires a bearer token matching the
+// ADMIN_API_TOKEN environment variable (set it in the Netlify UI). If the
+// variable is unset we fail closed so customer data is never exposed. Note that
+// customer-facing membership registration happens automatically after a
+// successful Stripe checkout in create-payment.mts, not through this endpoint.
+const requireAdmin = (request: Request): Response | null => {
+  const expected = Netlify.env.get("ADMIN_API_TOKEN");
+  if (!expected) {
+    return errorJson("Admin access is not configured. Set the ADMIN_API_TOKEN environment variable to enable this endpoint.", 503);
+  }
+  const provided =
+    request.headers.get("authorization")?.replace(/^Bearer\s+/i, "").trim() ??
+    request.headers.get("x-admin-token")?.trim() ??
+    "";
+  if (provided !== expected) {
+    return errorJson("Unauthorized.", 401);
+  }
+  return null;
+};
+
 export default async (request: Request) => {
   if (request.method === "OPTIONS") {
     return new Response(null, {
@@ -24,6 +45,9 @@ export default async (request: Request) => {
       },
     });
   }
+
+  const unauthorized = requireAdmin(request);
+  if (unauthorized) return unauthorized;
 
   // GET: Retrieve memberships or get notices
   if (request.method === "GET") {
