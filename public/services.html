@@ -489,43 +489,46 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-blue-600 text-white pt-12 sm:py-16 border-t-[3px] border-red-600">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
-            <!-- Footer brand info -->
-            <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
-                <p class="text-xl sm:text-2xl font-bold tracking-tight text-white mb-2">AAA Handyman Services</p>
-                <p class="text-sm text-slate-300 max-w-xs">Your trusted local handyman. Quality home repair and professional, reliable service across Oakland County, Michigan.</p>
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="mt-4 inline-flex items-center gap-2 text-2xl hover:text-[#1877F2] transition"><i class="fab fa-facebook"></i></a>
-            </div>
-            <!-- Quick Links -->
-            <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                <h4 class="text-lg font-bold mb-4 border-b-2 border-red-600 pb-1 w-24">Quick Links</h4>
-                <div class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-                    <a href="/services" class="hover:text-red-400 transition">Our Services</a>
-                    <a href="/rates" class="hover:text-red-400 transition">Pricing &amp; Rates</a>
-                    <a href="/guarantee" class="hover:text-red-400 transition">Our Guarantee</a>
-                    <a href="/reviews" class="hover:text-red-400 transition">Customer Reviews</a>
-                    <a href="/careers" class="hover:text-red-400 transition">Join Our Team</a>
-                    <a href="/#contact" class="hover:text-red-400 transition">Get Estimate</a>
+    <footer class="bg-black text-gray-400 pt-14 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
+                <!-- Brand -->
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
+                    <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
+                    <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="mt-4 inline-flex items-center gap-2 text-2xl hover:text-[#1877F2] transition"><i class="fab fa-facebook"></i></a>
+                </div>
+                <!-- Quick links -->
+                <nav aria-label="Footer">
+                    <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/services" class="hover:text-white transition">Services</a></li>
+                        <li><a href="/rates" class="hover:text-white transition">Rates &amp; Packages</a></li>
+                        <li><a href="/guarantee" class="hover:text-white transition">Our Guarantee</a></li>
+                        <li><a href="/reviews" class="hover:text-white transition">Reviews</a></li>
+                        <li><a href="/careers" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="/#travel-zones" class="hover:text-white transition">Service Areas</a></li>
+                        <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </nav>
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="tel:2483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center"></i>(248) 385-3432</a></li>
+                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center"></i>Waterford, MI &middot; Oakland County</li>
+                    </ul>
+                    <a href="/#contact" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Request Service</a>
                 </div>
             </div>
-            <!-- Contact Info -->
-            <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                <h4 class="text-lg font-bold mb-4 border-b-2 border-red-600 pb-1 w-32">Get In Touch</h4>
-                <div class="space-y-3 text-sm text-slate-300">
-                    <p class="flex items-center justify-center md:justify-start gap-2"><i class="fas fa-phone text-green-500"></i> <a href="tel:2483853432" class="hover:text-white transition">(248) 385-3432</a></p>
-                    <p class="flex items-center justify-center md:justify-start gap-2"><i class="fas fa-envelope text-blue-500"></i> <a href="mailto:contact@aaahandyman.services" class="hover:text-white transition">contact@aaahandyman.services</a></p>
-                    <p class="flex items-center justify-center md:justify-start gap-2"><i class="fas fa-location-dot text-red-500"></i> Waterford &amp; Oakland County, MI</p>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center">
+                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects.<br>We are not a licensed builder or general contractor.<br>Locally Serving Oakland County, MI.</p>
+                <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
+                    <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="/terms" class="hover:text-white transition">Terms of Service</a>
                 </div>
-            </div>
-        </div>
-        <!-- Legal & Copyright footer -->
-        <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/10 text-slate-400 text-center">
-            <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects.<br>We are not a licensed builder or general contractor.<br>Locally Serving Oakland County, MI.</p>
-            <div class="flex justify-center gap-4 mt-4 text-xs">
-                <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
-                <a href="/terms" class="hover:text-white transition">Terms of Service</a>
             </div>
         </div>
     </footer>
