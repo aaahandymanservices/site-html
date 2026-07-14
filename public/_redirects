@@ -1,3 +1,4 @@
+# 301 redirects: strip .html extension → canonical clean URLs
 /index.html     /             301!
 /services.html  /services     301!
 /rates.html     /rates        301!
@@ -5,11 +6,13 @@
 /careers.html   /careers      301!
 /guarantee.html /guarantee    301!
 /privacy.html   /privacy      301!
-/privacy    /privacy.html    200
-/terms.html /terms            301!
-/terms      /terms.html      200
+/terms.html     /terms        301!
+
+# 200 rewrites: serve .html files for clean URL paths (Netlify SPA-style)
+/services   /services.html   200
+/rates      /rates.html      200
 /reviews    /reviews.html    200
 /careers    /careers.html    200
-/rates      /rates.html      200
 /guarantee  /guarantee.html  200
-/services   /services.html   200
+/privacy    /privacy.html    200
+/terms      /terms.html      200
