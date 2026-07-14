@@ -38,12 +38,12 @@ export default async (request: Request) => {
     const contentType = request.headers.get("content-type") || "";
     if (contentType.includes("application/json")) {
       const body = await request.json();
-      email = String(body.email || "").trim();
+      email = String(body.email || "").trim().toLowerCase();
       name = String(body.name || "").trim();
       source = String(body.source || "quote_form").trim();
     } else {
       const formData = await request.formData();
-      email = String(formData.get("email") || "").trim();
+      email = String(formData.get("email") || "").trim().toLowerCase();
       name = String(formData.get("name") || "").trim();
       source = String(formData.get("source") || "quote_form").trim();
     }
