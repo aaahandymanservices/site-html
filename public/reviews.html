@@ -635,7 +635,7 @@
                 card.innerHTML = `
                     <div>
                         <div class="review-preview bg-gray-50 relative overflow-hidden">
-                            <img src="${item.imageUrl}" alt="${escapeHTML(item.imageAlt)}" width="800" height="600" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <img src="/.netlify/images?url=${encodeURIComponent(item.imageUrl)}&w=800&fm=avif&q=80" alt="${escapeHTML(item.imageAlt)}" width="800" height="600" class="w-full h-full object-cover" loading="lazy" decoding="async">
                             <span class="absolute top-4 left-4 ${badgeStyle} text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md border">
                                 ${escapeHTML(item.projectType)}
                             </span>
