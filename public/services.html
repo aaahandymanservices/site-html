@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Resource hints: warm up connections to third-party origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
+    <title>Handyman Services — Our Expertise | AAA Handyman Services</title>
+
+    <!-- Search Engine Optimization (SEO) Metadata -->
+    <meta name="description" content="Explore our professional local handyman services in Waterford and across Oakland County, MI. No job too small. We specialize in carpentry, drywall, doors, painting, flooring, tile, and home repair.">
+    <meta name="theme-color" content="#8e1f26">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aaahandyman.services/services">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aaahandyman.services/services">
+    <meta property="og:site_name" content="AAA Handyman Services">
+    <meta property="og:title" content="Handyman Services — Our Expertise | AAA Handyman Services">
+    <meta property="og:description" content="Explore our professional local handyman services in Waterford and across Oakland County, MI. No job too small. We specialize in carpentry, drywall, doors, painting, flooring, tile, and home repair.">
+    <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://aaahandyman.services/services">
+    <meta name="twitter:title" content="Handyman Services — Our Expertise | AAA Handyman Services">
+    <meta name="twitter:description" content="Explore our professional local handyman services in Waterford and across Oakland County, MI. No job too small. We specialize in carpentry, drywall, doors, painting, flooring, tile, and home repair.">
+    <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Our Handyman Services & Expertise",
+      "url": "https://aaahandyman.services/services",
+      "description": "Explore our professional local handyman services in Waterford and across Oakland County, MI. No job too small. We specialize in carpentry, drywall, doors, painting, flooring, tile, and home repair.",
+      "about": {
+        "@type": "HomeAndConstructionBusiness",
+        "name": "AAA Handyman Services",
+        "telephone": "+1-248-385-3432",
+        "email": "contact@aaahandyman.services",
+        "areaServed": "Oakland County, MI"
+      }
+    }
+    </script>
+
+    <!-- Structured Data (JSON-LD): breadcrumb trail -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aaahandyman.services/" },
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://aaahandyman.services/services" }
+      ]
+    }
+    </script>
+
+    <!-- Tailwind Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        red: {
+                            50: '#fdf2f2',
+                            100: '#fde8e8',
+                            200: '#fbd5d5',
+                            300: '#f8b4b4',
+                            400: '#f98080',
+                            500: '#e02424',
+                            600: '#8e1f26',
+                            700: '#751a1e',
+                            800: '#5c1417',
+                            900: '#461012',
+                        },
+                        blue: {
+                            50: '#f3f6f9',
+                            100: '#e7ecf2',
+                            200: '#c3cfde',
+                            300: '#9fb1ca',
+                            400: '#5776a2',
+                            500: '#0f3b79',
+                            600: '#0d2237', // Custom main Logo Blue
+                            700: '#0a1b2c',
+                            800: '#081421',
+                            900: '#050e16',
+                            950: '#03070b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Brand font: Roboto (matches the homepage) -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"></noscript>
+
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom font family */
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        /* Animated entrance for content cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .header-card {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        .service-card { transition: all 0.3s; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
+        @keyframes pulse-attention-green {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
+        }
+        .pulse-btn-green {
+            animation: pulse-attention-green 2s infinite;
+        }
+        @keyframes siren-flash {
+            0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 0 rgba(142, 31, 38, 0)); }
+            50% { opacity: 0.3; transform: scale(1.15); filter: drop-shadow(0 0 8px rgba(142, 31, 38, 0.8)); }
+        }
+        .flash-siren {
+            display: inline-block;
+            animation: siren-flash 1s infinite ease-in-out;
+        }
+        /* Anchor scroll margin for sticky navbar */
+        section[id], header[id] {
+            scroll-margin-top: 80px;
+        }
+        @media (max-width: 768px) {
+            section[id], header[id] {
+                scroll-margin-top: 100px;
+            }
+        }
+        /* Respect visitors who prefer reduced motion (accessibility) */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .pulse-btn-green,
+            .flash-siren,
+            .service-card,
+            .header-card { animation: none !important; }
+            .service-card:hover { transform: none !important; }
+            .header-card { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+</head>
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
+        <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
+            <a href="/" class="flex min-w-0 items-center space-x-3" aria-label="AAA Handyman Services home">
+                <!-- Logo -->
+                <img src="/.netlify/images?url=/logo-shield.png&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-shield.png&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-shield.png&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600">
+                <div class="min-w-0">
+                    <p class="text-base min-[390px]:text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
+                    <p class="text-[10px] sm:text-xs text-gray-500">Oakland County Michigan</p>
+                </div>
+            </a>
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex space-x-6 lg:space-x-8 text-lg font-medium items-center">
+                <a href="/services" class="nav-link text-red-600 font-bold border-b-2 border-red-600">Services</a>
+                <a href="/rates" class="nav-link text-gray-700 hover:text-red-600 transition">Rates</a>
+                <a href="/guarantee" class="nav-link text-gray-700 hover:text-red-600 transition">Guarantee</a>
+                <a href="/reviews" class="nav-link text-gray-700 hover:text-red-600 transition">Reviews</a>
+                <a href="/careers" class="nav-link text-gray-700 hover:text-red-600 transition">Careers</a>
+                <a href="/#contact" class="nav-link text-gray-700 hover:text-red-600 transition">Contact</a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="nav-link text-gray-700 hover:text-[#1877F2] text-xl transition"><i class="fab fa-facebook"></i></a>
+            </div>
+            <!-- Nav Action Buttons -->
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <a href="tel:2483853432" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-semibold flex items-center justify-center gap-2 transition pulse-btn-green shadow-md" title="Call AAA Handyman Services Now">
+                    <i class="fas fa-phone"></i>
+                    <span class="hidden sm:inline">(248) 385-3432</span>
+                </a>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700 hover:text-red-600 focus:outline-none p-1 sm:p-2" aria-label="Toggle Navigation Menu">
+                    <i class="fas fa-bars text-xl sm:text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3 shadow-inner">
+            <a href="/services" class="block text-red-600 font-bold py-2 border-b border-gray-100">Services</a>
+            <a href="/rates" class="block text-gray-700 hover:text-red-600 py-2 border-b border-gray-100 transition">Rates</a>
+            <a href="/guarantee" class="block text-gray-700 hover:text-red-600 py-2 border-b border-gray-100 transition">Guarantee</a>
+            <a href="/reviews" class="block text-gray-700 hover:text-red-600 py-2 border-b border-gray-100 transition">Reviews</a>
+            <a href="/careers" class="block text-gray-700 hover:text-red-600 py-2 border-b border-gray-100 transition">Careers</a>
+            <a href="/#contact" class="block text-gray-700 hover:text-red-600 py-2 transition">Contact</a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-gray-700 hover:text-[#1877F2] py-2 transition"><i class="fab fa-facebook"></i> Facebook Page</a>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-950 text-white py-16 sm:py-20 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        </div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10 header-card">
+            <div class="uppercase tracking-widest text-red-400 font-bold text-sm sm:text-base mb-3">Our Expertise</div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">Professional Handyman Services</h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
+                No job is too small! We provide reliable, high-quality, and transparently priced home repair and maintenance solutions across Oakland County, Michigan.
+            </p>
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <a href="/#contact" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-red-600/30 transition">
+                    Schedule an Estimate
+                </a>
+                <a href="/rates" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold px-6 py-3 rounded-xl transition">
+                    View Pricing & Rates
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services Grid -->
+    <main class="py-12 sm:py-16 bg-gray-50 flex-grow">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold text-blue-900">Guaranteed Craftsmanship & Repairs</h2>
+                <p class="mt-2 text-gray-600 max-w-xl mx-auto">Browse our core services below. Every job is covered by our trusted 1-Year Workmanship Guarantee.</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-8">
+                <!-- Carpentry -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-hammer"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Carpentry</h3>
+                    <p class="text-gray-600 mb-4">Revive your home’s character. From baseboards and crown molding to custom exterior woodwork, I provide precision craftsmanship that restores the aesthetic and structural integrity of your living space.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
+                    </ul>
+                </div>
+
+                <!-- Doors & Windows -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-door-open"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Doors &amp; Windows</h3>
+                    <p class="text-gray-600 mb-4">Secure, smooth, and weather-tight. Whether it’s an elegant new entry door for curb appeal, an interior door that sticks, or a window that needs installing or adjusting, I handle expert installation and alignment so every opening works perfectly and seals out the elements.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Door Installation &amp; Repair</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Window Installation &amp; Repair</li>
+                    </ul>
+                </div>
+
+                <!-- Drywall Repair -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-border-all"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Drywall Repair</h3>
+                    <p class="text-gray-600 mb-4">Seamless surfaces, flawless finishes. Don’t let cracks or holes distract from your home’s interior. I deliver craftsman-grade patching and smoothing, leaving your walls paint-ready and pristine.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Drywall Repair</li>
+                    </ul>
+                </div>
+
+                <!-- Painting & Staining -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-paint-roller"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Painting &amp; Staining</h3>
+                    <p class="text-gray-600 mb-4">A fresh look, perfectly executed. Painting is 90% preparation. I focus on meticulous surface prep, crisp edging, and smooth, craftsman finishes to revitalize your home’s appearance inside and out.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
+                    </ul>
+                </div>
+
+                <!-- Flooring Solutions -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-ruler-combined"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Flooring Solutions</h3>
+                    <p class="text-gray-600 mb-4">Durable beauty underfoot. From tile and hardwood to laminate and carpet, I provide expert maintenance and repair services, ensuring your floors are level, secure, and built to last.</p>
+                </div>
+
+                <!-- Tile Install -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-table-cells-large"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Tile Install</h3>
+                    <p class="text-gray-600 mb-4">Durable beauty that lasts. From floors to walls, I set tile with level, watertight precision for kitchens, baths, and beyond.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Flooring</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Walls</li>
+                    </ul>
+                </div>
+
+                <!-- Minor Plumbing Repairs -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-faucet-drip"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Minor Plumbing Repairs</h3>
+                    <p class="text-gray-600">Stop the drip, protect your home. I provide fast, clean solutions for leaky faucets, showerheads, and stubborn drains, ensuring your home’s flow is restored efficiently.</p>
+                </div>
+
+                <!-- Minor Electrical Services -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-lightbulb"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Minor Electrical Services</h3>
+                    <p class="text-gray-600">Safe, reliable updates. Keep your home powered and bright. I specialize in replacing outdated switches, outlets, and fixtures or installing new ceiling fans with safety and code-conscious precision. (Note: I focus on fixtures and safety updates; new wiring or breaker box installations are not included.)</p>
+                </div>
+
+                <!-- Installation -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-screwdriver-wrench"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Installation</h3>
+                    <p class="text-gray-600 mb-4">Mounted, anchored, and ready to go. Whatever needs putting up or putting in, I handle it with clean, code-conscious installation you can rely on.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Baby &amp; Child Proofing</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>All Your Installation Projects</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Handrail &amp; Stairs Installation</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Kitchen Installation</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bathroom Installation</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>TV Wall Mounting</li>
+                    </ul>
+                </div>
+
+                <!-- Furniture Assembly -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-couch"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Furniture Assembly</h3>
+                    <p class="text-gray-600 mb-4">Assembled right, the first time. Skip the confusing instructions and leftover parts—I put together flat-pack, brand-name, and outdoor pieces so they’re sturdy, safe, and ready to use.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Deck Furniture &amp; BBQ</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Brand Name Assembly</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Furniture Assembly</li>
+                    </ul>
+                </div>
+
+                <!-- Decks & Fences -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-tree"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Decks &amp; Fences</h3>
+                    <p class="text-gray-600">Restore your outdoor sanctuary. Extend the life of your wood structures with craftsman resurfacing, structural repairs, and expert staining to protect your investment against the elements.</p>
+                </div>
+
+                <!-- Gutters -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-house-flood-water"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Gutters</h3>
+                    <p class="text-gray-600 mb-4">Protect your home from the top down. Clogged or damaged gutters lead to costly water damage—I clean, repair, and cover them to keep water flowing away from your foundation.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Gutter Cover Install</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Gutter Repair</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Gutter Cleaning</li>
+                    </ul>
+                </div>
+
+                <!-- Power Washing -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-spray-can-sparkles"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Power Washing</h3>
+                    <p class="text-gray-600 mb-4">Restore that like-new shine. Blast away years of grime, mildew, and buildup from the surfaces around your home for instant curb appeal.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>BBQ</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Siding</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Sidewalks</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Driveway</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Fence</li>
+                    </ul>
+                </div>
+
+                <!-- Projects For Pets -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-dog"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Projects For Pets</h3>
+                    <p class="text-gray-600 mb-4">Thoughtful projects for your whole family—pets included. From secure fencing to dog doors and trim repair, I create safe, convenient spaces for your four-legged friends.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Fence Installation &amp; Repair</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Dog Door Installation</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Trim Repair</li>
+                    </ul>
+                </div>
+
+                <!-- Home Repair & Upkeep -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-house-chimney"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Home Repair &amp; Upkeep</h3>
+                    <p class="text-gray-600 mb-4">Keep every room in peak condition. From the laundry room to the kitchen, bath, and exterior, I tackle the ongoing repairs and upkeep that protect your home’s comfort and value.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Laundry Room Maintenance</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bathroom Maintenance &amp; Upkeep</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Kitchen Maintenance &amp; Upkeep</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior Home Maintenance</li>
+                    </ul>
+                </div>
+
+                <!-- Preventative Maintenance -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-clipboard-check"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Preventative Maintenance</h3>
+                    <p class="text-gray-600 mb-4">Stop small problems before they start. Regular seasonal check-ups inside and out catch wear early—saving you money and headaches down the road.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
+                    </ul>
+                </div>
+
+                <!-- Maintenance & Cleaning -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-broom"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Maintenance &amp; Cleaning</h3>
+                    <p class="text-gray-600">Seasonal care, year-round peace of mind. Cross off your to-do list with comprehensive gutter cleaning, power washing, and general home maintenance designed to keep your property in peak condition. <strong><br>Spring: Gutter cleaning, deck repair, window inspections.<br>Autumn: Weatherproofing, door sealing, winterization repairs.</strong></p>
+                </div>
+
+                <!-- Senior Care -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-wheelchair"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Senior Care</h3>
+                    <p class="text-gray-600 mb-4">Comfort and safety at every stage of life. I make practical modifications throughout the home so you or your loved ones can live independently and confidently.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bathroom Safety Fixtures &amp; Minor Replacements</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior Home Modifications</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Kitchen Modifications</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bathroom Modifications</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Whole Home Modification</li>
+                    </ul>
+                </div>
+
+                <!-- Home Security -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-shield-halved"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Home Security</h3>
+                    <p class="text-gray-600 mb-4">Peace of mind, professionally installed. I set up home security products so you can protect what matters most, day and night.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Home Security Installation &amp; Products</li>
+                    </ul>
+                </div>
+
+                <!-- Commercial Services -->
+                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-building"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-900">Commercial Services</h3>
+                    <p class="text-gray-600 mb-4">Reliable help for your business, too. I keep commercial properties looking sharp and running smoothly with dependable interior and exterior services.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
+                    </ul>
+                </div>
+
+                <!-- Emergency Callout -->
+                <div class="service-card w-full md:w-full lg:w-[calc(66.666%-0.668rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 text-center">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6 mx-auto" aria-hidden="true"><span class="flash-siren"><i class="fas fa-triangle-exclamation"></i></span></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-red-600">After-Hours Emergency Services Available</h3>
+                    <p class="text-gray-600 mb-4 max-w-2xl mx-auto">Help when you need it most. Available 7 days a week for urgent repairs—such as leaks or security-compromising door/window issues—I provide priority response to keep your home safe and secure.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start justify-center gap-2"><span class="text-red-600 mt-1">•</span>Priority response &amp; dispatch</li>
+                        <li class="flex items-start justify-center gap-2"><span class="text-red-600 mt-1">•</span>Available after hours, 7 days a week</li>
+                        <li class="flex items-start justify-center gap-2"><span class="text-red-600 mt-1">•</span>Unforeseen Home Emergencies</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Hours and availability footer block -->
+            <div class="mt-12 sm:mt-16 text-center bg-blue-900 text-white p-6 sm:p-12 rounded-3xl">
+                <p class="text-xl sm:text-2xl md:text-3xl font-medium">Available Monday–Friday, 9 a.m.–6 p.m.; Saturday, 10 a.m.–5 p.m.</p>
+                <p class="mt-4 text-base sm:text-lg md:text-xl opacity-90"><span class="flash-siren" aria-hidden="true"><i class="fas fa-triangle-exclamation"></i></span> After-Hours Emergency Services Available—Competitive hourly rates • No job too small!</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white pt-12 sm:py-16 border-t-[3px] border-red-600">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
+            <!-- Footer brand info -->
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
+                <p class="text-xl sm:text-2xl font-bold tracking-tight text-white mb-2">AAA Handyman Services</p>
+                <p class="text-sm text-slate-300 max-w-xs">Your trusted local handyman. Quality home repair and professional, reliable service across Oakland County, Michigan.</p>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="mt-4 inline-flex items-center gap-2 text-2xl hover:text-[#1877F2] transition"><i class="fab fa-facebook"></i></a>
+            </div>
+            <!-- Quick Links -->
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <h4 class="text-lg font-bold mb-4 border-b-2 border-red-600 pb-1 w-24">Quick Links</h4>
+                <div class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                    <a href="/services" class="hover:text-red-400 transition">Our Services</a>
+                    <a href="/rates" class="hover:text-red-400 transition">Pricing &amp; Rates</a>
+                    <a href="/guarantee" class="hover:text-red-400 transition">Our Guarantee</a>
+                    <a href="/reviews" class="hover:text-red-400 transition">Customer Reviews</a>
+                    <a href="/careers" class="hover:text-red-400 transition">Join Our Team</a>
+                    <a href="/#contact" class="hover:text-red-400 transition">Get Estimate</a>
+                </div>
+            </div>
+            <!-- Contact Info -->
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <h4 class="text-lg font-bold mb-4 border-b-2 border-red-600 pb-1 w-32">Get In Touch</h4>
+                <div class="space-y-3 text-sm text-slate-300">
+                    <p class="flex items-center justify-center md:justify-start gap-2"><i class="fas fa-phone text-red-400"></i> <a href="tel:2483853432" class="hover:text-white transition">(248) 385-3432</a></p>
+                    <p class="flex items-center justify-center md:justify-start gap-2"><i class="fas fa-envelope text-red-400"></i> <a href="mailto:contact@aaahandyman.services" class="hover:text-white transition">contact@aaahandyman.services</a></p>
+                    <p class="flex items-center justify-center md:justify-start gap-2"><i class="fas fa-location-dot text-red-400"></i> Waterford &amp; Oakland County, MI</p>
+                </div>
+            </div>
+        </div>
+        <!-- Legal & Copyright footer -->
+        <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/10 text-slate-400 text-center">
+            <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects.<br>We are not a licensed builder or general contractor.<br>Locally Serving Oakland County, MI.</p>
+            <div class="flex justify-center gap-4 mt-4 text-xs">
+                <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
+                <a href="/terms" class="hover:text-white transition">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation Menu Toggle Script -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
