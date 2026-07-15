@@ -7,39 +7,20 @@
 # subdirectory and tell the plugin to skip its work.
 [build]
   publish = "public"
-  # Regenerate the JSON-driven pages on every deploy. The editable "single
-  # source of truth" lives in public/data/*.json and is edited through the
-  # Netlify Visual Editor (Stackbit). These scripts render that JSON into the
+  # Regenerate the JSON-driven pages on every deploy. The "single source of
+  # truth" lives in public/data/*.json; these scripts render that JSON into the
   # per-service pages (public/services/<slug>.html) and per-city pages
-  # (public/handyman/<slug>.html). Without this command those edits were never
-  # applied to the published site, so visual-editor changes appeared to do
-  # nothing.
+  # (public/handyman/<slug>.html).
   command = "node scripts/build-service-pages.mjs && node scripts/build-city-pages.mjs"
 
 [build.environment]
   # Skip the Gatsby build plugin — this is not a Gatsby site.
   NETLIFY_SKIP_GATSBY_BUILD_PLUGIN = "true"
 
-  # Let the Netlify Visual Editor (Stackbit) dev server start in this
-  # read-only-git environment. Stackbit's Git content source compares a working
-  # branch against a publish branch to list pending changes; with the defaults
-  # (working "preview", publish "master") those differ, so it runs
-  # `git fetch origin master:master` on startup. Network git commands are
-  # disabled here ("'git fetch' is disabled in this environment"), so the fetch
-  # exits non-zero and the dev server aborts with "Could not start local
-  # development server". Pointing both branches at HEAD makes them identical, so
-  # Stackbit skips the fetch entirely and the diff (`git log HEAD..HEAD`)
-  # resolves locally to an empty change set. HEAD always resolves regardless of
-  # which branch is checked out. Content is still edited and saved as local
-  # files and published through the normal Netlify deploy, so this only affects
-  # the editor's internal change-tracking, which is a no-op for this static site.
-  REPO_BRANCH = "HEAD"
-  REPO_PUBLISH_BRANCH = "HEAD"
-
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "frame-ancestors 'self' https://app.netlify.com https://app.stackbit.com"
+    Content-Security-Policy = "frame-ancestors 'self' https://app.netlify.com"
 
 # HTML: let the CDN serve stale content while it revalidates in the background.
 # Netlify-CDN-Cache-Control controls only the CDN edge and is stripped before
