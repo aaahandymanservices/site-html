@@ -233,6 +233,10 @@
                             <input id="contact-phone" type="tel" name="phone" autocomplete="tel" class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
                         </div>
                         <div>
+                            <label for="contact-city" class="block text-sm uppercase tracking-widest mb-2">City / Location <span class="text-gray-500 normal-case tracking-normal">(optional)</span></label>
+                            <input id="contact-city" type="text" name="city" autocomplete="address-level2" placeholder="e.g. Troy, MI" class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
+                        </div>
+                        <div>
                             <label for="contact-service" class="block text-sm uppercase tracking-widest mb-2">Service / Project Type</label>
                             <div class="relative">
                                 <select id="contact-service" name="service" required class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg text-white appearance-none">
@@ -382,8 +386,17 @@
         };
 
         (function prefillServiceFromQuery() {
-            const requested = new URLSearchParams(window.location.search).get('service');
+            const params = new URLSearchParams(window.location.search);
+            const requested = params.get('service');
             if (requested) setContactService(requested);
+
+            // Prefill the City / Location field from cross-page CTAs (?city=...),
+            // e.g. links from the city landing pages and the service-area checker.
+            const requestedCity = params.get('city');
+            const contactCity = document.getElementById('contact-city');
+            if (requestedCity && contactCity && !contactCity.value) {
+                contactCity.value = requestedCity;
+            }
         })();
 
         document.addEventListener('click', event => {

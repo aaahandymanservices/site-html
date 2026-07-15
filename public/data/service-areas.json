@@ -1,0 +1,179 @@
+{
+  "note": "Single source of truth for AAA Handyman Services coverage. Consumed by the browser service-area checker (/js/service-area-checker.js) and the city landing-page generator (scripts/build-city-pages.mjs). Zone A = $100 minimum service call (within ~20 miles of Waterford). Zone B = $145 minimum service call (extended county / 20+ miles).",
+  "zones": {
+    "A": { "label": "Zone A (Within 20 Miles)", "rate": "$100 Minimum Service Call" },
+    "B": { "label": "Zone B (Extended County / 20+ Miles)", "rate": "$145 Minimum Service Call" }
+  },
+  "cities": [
+    {
+      "name": "Waterford",
+      "slug": "waterford",
+      "aliases": ["waterford township"],
+      "zips": ["48327", "48328", "48329", "48340"],
+      "zone": "A",
+      "region": "North & West Metro",
+      "blurb": "As our home base, Waterford is where AAA Handyman Services got its start. From the lakes area to the neighborhoods off Dixie Highway, we know these homes and turn up fast for repairs, maintenance, and small projects.",
+      "nearby": ["pontiac", "west-bloomfield", "clarkston"]
+    },
+    {
+      "name": "Pontiac",
+      "slug": "pontiac",
+      "aliases": [],
+      "zips": ["48341", "48342", "48343"],
+      "zone": "A",
+      "region": "North & West Metro",
+      "blurb": "Pontiac's mix of historic and updated homes keeps our handyman busy with everything from drywall and door repairs to painting and preventative upkeep. We're just minutes away in neighboring Waterford.",
+      "nearby": ["waterford", "birmingham", "clarkston"]
+    },
+    {
+      "name": "West Bloomfield",
+      "slug": "west-bloomfield",
+      "aliases": ["west bloomfield township"],
+      "zips": ["48322", "48323", "48324"],
+      "zone": "A",
+      "region": "North & West Metro",
+      "blurb": "West Bloomfield homeowners count on us for careful carpentry, tile, and finish work that matches the quality of the neighborhood, plus the everyday repairs that keep a busy household running.",
+      "nearby": ["waterford", "orchard-lake", "farmington-hills"]
+    },
+    {
+      "name": "Clarkston",
+      "slug": "clarkston",
+      "aliases": ["independence township"],
+      "zips": ["48346", "48347", "48348"],
+      "zone": "A",
+      "region": "North & East Metro",
+      "blurb": "From downtown Clarkston to the surrounding subdivisions of Independence Township, we handle deck and fence work, gutters, interior repairs, and seasonal maintenance with honest, upfront pricing.",
+      "nearby": ["waterford", "lake-orion", "oxford"]
+    },
+    {
+      "name": "Birmingham",
+      "slug": "birmingham",
+      "aliases": [],
+      "zips": ["48009", "48012"],
+      "zone": "A",
+      "region": "South & Southeast Metro",
+      "blurb": "Birmingham's established homes deserve detail-obsessed work. We deliver crisp painting, trim carpentry, drywall, and the reliable small repairs that protect the value of a premium property.",
+      "nearby": ["royal-oak", "beverly-hills", "troy"]
+    },
+    {
+      "name": "Troy",
+      "slug": "troy",
+      "aliases": [],
+      "zips": ["48007", "48083", "48084", "48085", "48098"],
+      "zone": "B",
+      "region": "Northeast & East",
+      "blurb": "Troy homeowners rely on us for dependable handyman help, from TV mounting and fixture swaps to drywall, flooring, and full seasonal maintenance, all backed by our workmanship guarantee.",
+      "nearby": ["rochester-hills", "birmingham", "royal-oak"]
+    },
+    {
+      "name": "Rochester Hills",
+      "slug": "rochester-hills",
+      "aliases": ["rochester"],
+      "zips": ["48306", "48307", "48308", "48309"],
+      "zone": "B",
+      "region": "Northeast & East",
+      "blurb": "In Rochester Hills and Rochester, we tackle the growing list every homeowner keeps, including door and window adjustments, caulking, minor plumbing, and exterior upkeep, so your weekends stay yours.",
+      "nearby": ["troy", "lake-orion", "oxford"]
+    },
+    {
+      "name": "Farmington Hills",
+      "slug": "farmington-hills",
+      "aliases": ["farmington"],
+      "zips": ["48331", "48332", "48333", "48334", "48335", "48336"],
+      "zone": "A",
+      "region": "South & Southeast Metro",
+      "blurb": "Farmington Hills and Farmington families trust us for safe, code-conscious installs and repairs, including smart-home devices, grab bars, lighting, and the everyday fixes that keep a home comfortable.",
+      "nearby": ["west-bloomfield", "novi", "southfield"]
+    },
+    {
+      "name": "Royal Oak",
+      "slug": "royal-oak",
+      "aliases": [],
+      "zips": ["48067", "48068", "48073"],
+      "zone": "B",
+      "region": "South & Southeast",
+      "blurb": "Royal Oak's classic bungalows and updated homes see plenty of drywall, plaster, painting, and tidy repair work from us, always with clean job sites and clear communication.",
+      "nearby": ["birmingham", "huntington-woods", "southfield"]
+    },
+    {
+      "name": "Orchard Lake",
+      "slug": "orchard-lake",
+      "aliases": ["orchard lake village"],
+      "zips": ["48323", "48324"],
+      "zone": "A",
+      "region": "North & West Metro",
+      "blurb": "Around Orchard Lake Village, we help homeowners protect their investment with staining, deck and dock-adjacent carpentry, power washing, and the finish work these homes call for.",
+      "nearby": ["west-bloomfield", "waterford", "farmington-hills"]
+    },
+    {
+      "name": "Franklin",
+      "slug": "franklin",
+      "aliases": [],
+      "zips": ["48025"],
+      "zone": "A",
+      "region": "South & Southeast Metro",
+      "blurb": "In the Village of Franklin, character homes need a careful hand. We provide restoration-minded carpentry, painting, and repairs that respect the age and detail of your property.",
+      "nearby": ["birmingham", "beverly-hills", "southfield"]
+    },
+    {
+      "name": "Huntington Woods",
+      "slug": "huntington-woods",
+      "aliases": [],
+      "zips": ["48070"],
+      "zone": "B",
+      "region": "South & Southeast",
+      "blurb": "Huntington Woods homeowners call us for reliable interior and exterior repairs, from plaster and paint to storm-door installs and the seasonal upkeep that keeps a tidy home tidy.",
+      "nearby": ["royal-oak", "birmingham", "southfield"]
+    },
+    {
+      "name": "Beverly Hills",
+      "slug": "beverly-hills",
+      "aliases": [],
+      "zips": ["48025"],
+      "zone": "A",
+      "region": "South & Southeast Metro",
+      "blurb": "Across the Village of Beverly Hills, we handle the repairs and improvements that keep a home safe and sharp, including drywall, doors, minor electrical, and preventative maintenance.",
+      "nearby": ["birmingham", "franklin", "southfield"]
+    },
+    {
+      "name": "Novi",
+      "slug": "novi",
+      "aliases": [],
+      "zips": ["48374", "48375", "48376", "48377"],
+      "zone": "B",
+      "region": "Southwest",
+      "blurb": "Novi's newer construction still needs a handyman for punch-list fixes, furniture assembly, mounting, and the wear-and-tear repairs that come with a busy household. We're on it.",
+      "nearby": ["farmington-hills", "southfield", "west-bloomfield"]
+    },
+    {
+      "name": "Southfield",
+      "slug": "southfield",
+      "aliases": [],
+      "zips": ["48033", "48034", "48037", "48075", "48076", "48086"],
+      "zone": "B",
+      "region": "South & Southeast",
+      "blurb": "In Southfield we serve both homes and small commercial spaces, keeping properties looking sharp with dependable interior and exterior repair and maintenance work.",
+      "nearby": ["farmington-hills", "royal-oak", "beverly-hills"]
+    },
+    {
+      "name": "Lake Orion",
+      "slug": "lake-orion",
+      "aliases": ["orion township"],
+      "zips": ["48359", "48360", "48361", "48362"],
+      "zone": "B",
+      "region": "Northeast & East",
+      "blurb": "From the lake to Orion Township's neighborhoods, we help homeowners with deck restoration, staining, gutters, and the repairs that keep a home ready for every Michigan season.",
+      "nearby": ["clarkston", "oxford", "rochester-hills"]
+    },
+    {
+      "name": "Oxford",
+      "slug": "oxford",
+      "aliases": ["oxford township"],
+      "zips": ["48370", "48371"],
+      "zone": "B",
+      "region": "Far North & Northeast",
+      "blurb": "In Oxford and Oxford Township, we bring town-and-country homes the same reliable handyman help, including carpentry, painting, weatherization, and honest preventative maintenance.",
+      "nearby": ["lake-orion", "clarkston", "rochester-hills"]
+    }
+  ]
+}
