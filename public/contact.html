@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Resource hints: warm up connections to third-party origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
+    <title>Contact Us — Get a Free Quote | AAA Handyman Services</title>
+
+    <!-- Search Engine Optimization (SEO) Metadata -->
+    <meta name="description" content="Contact AAA Handyman Services in Waterford, MI. Call (248) 385-3432 or send us a message for a free quote on minor home repairs, maintenance, and small projects across Oakland County.">
+    <meta name="theme-color" content="#8e1f26">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aaahandyman.services/contact">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aaahandyman.services/contact">
+    <meta property="og:site_name" content="AAA Handyman Services">
+    <meta property="og:title" content="Contact Us — Get a Free Quote | AAA Handyman Services">
+    <meta property="og:description" content="Reach AAA Handyman Services for a free quote. Call (248) 385-3432 or email contact@aaahandyman.services. Proudly serving Oakland County, Michigan.">
+    <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://aaahandyman.services/contact">
+    <meta name="twitter:title" content="Contact Us — Get a Free Quote | AAA Handyman Services">
+    <meta name="twitter:description" content="Reach AAA Handyman Services for a free quote. Call (248) 385-3432 or email contact@aaahandyman.services. Proudly serving Oakland County, Michigan.">
+    <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
+
+    <!-- Structured Data (JSON-LD): breadcrumb trail -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aaahandyman.services/" },
+        { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://aaahandyman.services/contact" }
+      ]
+    }
+    </script>
+
+    <!-- Tailwind Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        red: {
+                            50: '#fdf2f2',
+                            100: '#fde8e8',
+                            200: '#fbd5d5',
+                            300: '#f8b4b4',
+                            400: '#f98080',
+                            500: '#e02424',
+                            600: '#8e1f26',
+                            700: '#751a1e',
+                            800: '#5c1417',
+                            900: '#461012',
+                        },
+                        blue: {
+                            50: '#f3f6f9',
+                            100: '#e7ecf2',
+                            200: '#c3cfde',
+                            300: '#9fb1ca',
+                            400: '#5776a2',
+                            500: '#0f3b79',
+                            600: '#0d2237', // Custom main Logo Blue
+                            700: '#0a1b2c',
+                            800: '#081421',
+                            900: '#050e16',
+                            950: '#03070b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Brand font: Roboto (matches the homepage) -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"></noscript>
+
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom font family */
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        @keyframes pulse-attention-green {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
+        }
+        .pulse-btn-green {
+            animation: pulse-attention-green 2s infinite;
+        }
+        /* Anchor scroll margin for sticky navbar */
+        section[id], header[id] {
+            scroll-margin-top: 80px;
+        }
+        @media (max-width: 768px) {
+            section[id], header[id] {
+                scroll-margin-top: 100px;
+            }
+        }
+        /* Respect visitors who prefer reduced motion (accessibility) */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .pulse-btn-green { animation: none !important; }
+        }
+    </style>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+</head>
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
+        <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
+            <a href="/" class="flex min-w-0 items-center space-x-3" aria-label="AAA Handyman Services home">
+                <!-- Logo -->
+                <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600">
+                <div class="min-w-0">
+                    <p class="text-base min-[390px]:text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
+                    <p class="text-[10px] sm:text-xs text-gray-500">Oakland County, Michigan</p>
+                </div>
+            </a>
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex space-x-6 lg:space-x-8 text-lg font-medium items-center">
+                <a href="/services" class="nav-link text-gray-700 hover:text-red-600 transition">Services</a>
+                <a href="/service-areas" class="nav-link text-gray-700 hover:text-red-600 transition">Service Areas</a>
+                <a href="/rates" class="nav-link text-gray-700 hover:text-red-600 transition">Rates</a>
+                <a href="/guarantee" class="nav-link text-gray-700 hover:text-red-600 transition">Guarantee</a>
+                <a href="/reviews" class="nav-link text-gray-700 hover:text-red-600 transition">Reviews</a>
+                <a href="/careers" class="nav-link text-gray-700 hover:text-red-600 transition">Careers</a>
+                <a href="/contact" class="nav-link text-red-600 font-bold border-b-2 border-red-600">Contact</a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="nav-link text-gray-700 hover:text-[#1877F2] text-xl transition"><i class="fab fa-facebook"></i></a>
+            </div>
+            <!-- Nav Action Buttons -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
+                    <i class="fas fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t-[3px] border-gray-100 px-6 py-4 space-y-4 shadow-inner">
+            <a href="/services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
+            <a href="/service-areas" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Service Areas</a>
+            <a href="/rates" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Rates</a>
+            <a href="/guarantee" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Guarantee</a>
+            <a href="/reviews" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Reviews</a>
+            <a href="/careers" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Careers</a>
+            <a href="/contact" class="block text-lg font-bold text-red-600 py-1">Contact</a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="block text-lg font-medium text-gray-700 hover:text-[#1877F2] py-1"><i class="fab fa-facebook"></i> Facebook</a>
+        </div>
+    </nav>
+
+    <!-- Contact -->
+    <main class="flex-grow">
+    <section id="contact" class="py-12 sm:py-16 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+                <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Contact Us</div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Get in Touch Today</h1>
+                <p class="text-gray-400 text-base sm:text-lg leading-relaxed">
+                    Have a repair, project, or question? Call, email, or send the form below and we'll get back to you with a free, no-obligation quote.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 sm:gap-16">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8" style="color: #fff;">Reach AAA Handyman Services</h2>
+                    <div class="space-y-6 sm:space-y-8">
+                        <div class="flex items-start gap-4 sm:gap-6">
+                            <i class="fas fa-phone text-3xl sm:text-4xl text-green-500 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <a href="tel:+12483853432" class="text-xl sm:text-2xl md:text-3xl font-semibold hover:text-red-400 break-all">‪(248) 385-3432‬</a>
+                                <p class="text-sm sm:text-base text-gray-400">Call for immediate assistance</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 sm:gap-6">
+                            <i class="fas fa-envelope text-3xl sm:text-4xl text-blue-500 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <a href="mailto:contact@aaahandyman.services" class="text-lg sm:text-xl md:text-2xl hover:text-red-400 break-all">contact@aaahandyman.services</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 sm:gap-6">
+                            <i class="fas fa-map-marker-alt text-3xl sm:text-4xl text-red-500 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <p class="text-lg sm:text-xl font-medium">Waterford, Michigan</p>
+                                <p class="text-sm sm:text-base text-gray-400">Proudly Serving Oakland County</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div>
+                    <form id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" class="space-y-6">
+                        <!-- Hidden form-name input for AJAX/Netlify Form detection -->
+                        <input type="hidden" name="form-name" value="contact" />
+
+                        <!-- Honeypot Field to prevent spam -->
+                        <p class="hidden">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+
+                        <div>
+                            <label for="contact-name" class="block text-sm uppercase tracking-widest mb-2">Your Name</label>
+                            <input id="contact-name" type="text" name="name" required autocomplete="name" class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
+                        </div>
+                        <div>
+                            <label for="contact-email" class="block text-sm uppercase tracking-widest mb-2">Email Address</label>
+                            <input id="contact-email" type="email" name="email" required autocomplete="email" class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
+                        </div>
+                        <div>
+                            <label for="contact-phone" class="block text-sm uppercase tracking-widest mb-2">Phone</label>
+                            <input id="contact-phone" type="tel" name="phone" autocomplete="tel" class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg">
+                        </div>
+                        <div>
+                            <label for="contact-service" class="block text-sm uppercase tracking-widest mb-2">Service / Project Type</label>
+                            <div class="relative">
+                                <select id="contact-service" name="service" required class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg text-white appearance-none">
+                                    <option value="" disabled selected class="bg-gray-800 text-gray-400">Select a Service...</option>
+                                    <option value="General Estimate / Quote" class="bg-gray-800 text-white">General Estimate / Quote</option>
+                                    <option value="Half-Day Handyman Package" class="bg-gray-800 text-white">Half-Day Handyman Package</option>
+                                    <option value="Full-Day Handyman Package" class="bg-gray-800 text-white">Full-Day Handyman Package</option>
+                                    <option value="Priority / After-Hours Service" class="bg-gray-800 text-white">Priority / After-Hours Service</option>
+                                    <option value="Fall Home Prep Package" class="bg-gray-800 text-white">Fall Home Prep Package</option>
+                                    <option value="Spring Home Refresh Package" class="bg-gray-800 text-white">Spring Home Refresh Package</option>
+                                    <option value="Home Safety Audit" class="bg-gray-800 text-white">Home Safety Audit</option>
+                                    <option value="Energy Tune-Up Audit" class="bg-gray-800 text-white">Energy Tune-Up Audit</option>
+                                    <option value="Storm-Prep Check" class="bg-gray-800 text-white">Storm-Prep Check</option>
+                                    <option value="Whole-Home Assessment" class="bg-gray-800 text-white">Whole-Home Assessment (3-Audit Bundle)</option>
+                                    <option value="Home Safety Menu" class="bg-gray-800 text-white">Home Safety Menu (Good/Better/Best)</option>
+                                    <option value="Energy Efficiency Menu" class="bg-gray-800 text-white">Energy Efficiency Menu (Good/Better/Best)</option>
+                                    <option value="Storm & Water Defense Menu" class="bg-gray-800 text-white">Storm & Water Defense Menu (Good/Better/Best)</option>
+                                    <option value="Carpentry & Trim" class="bg-gray-800 text-white">Carpentry & Trim</option>
+                                    <option value="Doors" class="bg-gray-800 text-white">Doors</option>
+                                    <option value="Plumbing" class="bg-gray-800 text-white">Plumbing</option>
+                                    <option value="Drywall" class="bg-gray-800 text-white">Drywall</option>
+                                    <option value="Electrical" class="bg-gray-800 text-white">Electrical</option>
+                                    <option value="Flooring" class="bg-gray-800 text-white">Flooring</option>
+                                    <option value="Painting" class="bg-gray-800 text-white">Painting</option>
+                                    <option value="Decks & Fences" class="bg-gray-800 text-white">Decks & Fences</option>
+                                    <option value="Maintenance & Cleaning" class="bg-gray-800 text-white">Maintenance</option>
+                                    <option value="Other" class="bg-gray-800 text-white">Other (Specify in details below)</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-6 pointer-events-none text-gray-400">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="contact-message" class="block text-sm uppercase tracking-widest mb-2">Message / Project Details</label>
+                            <textarea id="contact-message" name="message" rows="6" required class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-3xl focus:outline-none focus:border-red-500 text-lg resize-none"></textarea>
+                        </div>
+                        <div class="flex items-start gap-3 bg-gray-900 p-4 rounded-2xl border border-gray-800">
+                            <input id="seasonal-opt-in" type="checkbox" name="seasonal-opt-in" checked class="mt-1 h-5 w-5 accent-red-600 rounded cursor-pointer">
+                            <label for="seasonal-opt-in" class="text-sm text-gray-300 cursor-pointer select-none">
+                                <span class="font-semibold text-white block mb-0.5">Preventative & Seasonal Reminders</span>
+                                Send me free home maintenance tips & reminders (e.g. Spring gutter & deck checks, Fall weatherproofing & winterization).
+                            </label>
+                        </div>
+                        <div class="flex justify-center sm:justify-start overflow-x-auto">
+                            <div data-netlify-recaptcha="true"></div>
+                        </div>
+                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-5 text-xl font-semibold rounded-3xl transition flex items-center justify-center gap-3">
+                            SEND MESSAGE <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-400 pt-14 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
+                <!-- Brand -->
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
+                    <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
+                    <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="mt-4 inline-flex items-center gap-2 text-2xl hover:text-[#1877F2] transition"><i class="fab fa-facebook"></i></a>
+                </div>
+                <!-- Quick links -->
+                <nav aria-label="Footer">
+                    <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/services" class="hover:text-white transition">Services</a></li>
+                        <li><a href="/rates" class="hover:text-white transition">Rates &amp; Packages</a></li>
+                        <li><a href="/guarantee" class="hover:text-white transition">Our Guarantee</a></li>
+                        <li><a href="/reviews" class="hover:text-white transition">Reviews</a></li>
+                        <li><a href="/careers" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="/service-areas" class="hover:text-white transition">Service Areas</a></li>
+                        <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </nav>
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center"></i>(248) 385-3432</a></li>
+                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center"></i>Waterford, MI &middot; Oakland County</li>
+                    </ul>
+                    <a href="/contact?service=General+Estimate+%2F+Quote" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Get a Free Quote</a>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center">
+                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects.<br>Locally Serving Oakland County, MI.</p>
+                <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
+                    <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="/terms" class="hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Call Action -->
+    <a href="tel:+12483853432" class="fixed bottom-5 right-5 z-50 flex bg-green-600 hover:bg-green-700 text-white px-5 py-3 sm:px-6 rounded-full font-bold items-center justify-center gap-2 sm:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now">
+        <i class="fas fa-phone" aria-hidden="true"></i>
+        <span>Call Now! <span class="hidden sm:inline">(248) 385-3432</span></span>
+    </a>
+
+    <!-- Back to top -->
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
+    <script>
+        (function () {
+            var btn = document.getElementById('back-to-top');
+            if (!btn) return;
+            window.addEventListener('scroll', function () {
+                var show = window.scrollY > 400;
+                btn.classList.toggle('hidden', !show);
+                btn.classList.toggle('flex', show);
+            }, { passive: true });
+            btn.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script>
+
+    <!-- Interactive JS scripts -->
+    <script>
+        // Auto-formatter for Phone Inputs
+        const contactPhone = document.getElementById('contact-phone');
+        if (contactPhone) {
+            contactPhone.addEventListener('input', function (e) {
+                let val = e.target.value.replace(/\D/g, '');
+                if (val.length > 10) val = val.substring(0, 10);
+                const match = val.match(/^(\d{1,3})(\d{0,3})(\d{0,4})$/);
+                if (match) {
+                    let formatted = "";
+                    if (match[1]) formatted += "(" + match[1];
+                    if (match[1].length === 3) formatted += ") ";
+                    if (match[2]) formatted += match[2];
+                    if (match[2].length === 3) formatted += "-";
+                    if (match[3]) formatted += match[3];
+                    e.target.value = formatted;
+                }
+            });
+        }
+
+        // Pre-select the "Service / Project Type" from cross-page CTAs (?service=...).
+        const contactService = document.getElementById('contact-service');
+        const setContactService = (value) => {
+            if (!contactService || !value) return;
+            const match = Array.from(contactService.options).find(opt => opt.value === value);
+            if (match) contactService.value = value;
+        };
+
+        (function prefillServiceFromQuery() {
+            const requested = new URLSearchParams(window.location.search).get('service');
+            if (requested) setContactService(requested);
+        })();
+
+        document.addEventListener('click', event => {
+            const link = event.target.closest('a[data-service]');
+            if (link) setContactService(link.getAttribute('data-service'));
+        });
+
+        // Handle form submission via Netlify Forms (AJAX)
+        const form = document.getElementById('contact-form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+                const isSubscribed = document.getElementById('seasonal-opt-in')?.checked;
+                const email = formData.get('email');
+                const name = formData.get('name');
+
+                fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // If they opted into seasonal reminders, subscribe them via our API endpoint
+                        if (isSubscribed && email) {
+                            fetch('/api/seasonal-subscription', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ email: email, name: name, source: 'quote_form' })
+                            }).catch(err => console.error('Subscription error:', err));
+                        }
+
+                        alert('Thank you! Your message has been sent. We will contact you soon.');
+                        form.reset();
+                    } else {
+                        alert('Oops! There was a problem submitting your form. Please try calling or emailing us directly.');
+                    }
+                })
+                .catch(error => {
+                    alert('Oops! There was a problem submitting your form. Please try calling or emailing us directly.');
+                });
+            });
+        }
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        if (menuBtn && mobileMenu && menuIcon) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.className = 'fas fa-bars';
+                } else {
+                    menuIcon.className = 'fas fa-times';
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.className = 'fas fa-bars';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
