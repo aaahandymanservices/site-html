@@ -13,7 +13,12 @@ export default defineStackbitConfig({
   stackbitVersion: '~0.6.0',
   ssgName: 'custom',
   nodeVersion: '22',
-  devCommand: 'node ./node_modules/.bin/serve public --listen tcp://{HOSTNAME}:{PORT}',
+  // Regenerate the JSON-driven pages from public/data/*.json before serving so
+  // the preview reflects the current content, then serve the static site. This
+  // mirrors the Netlify build command in netlify.toml; without the regenerate
+  // step the preview showed stale committed HTML that ignored edits.
+  devCommand:
+    'node scripts/build-service-pages.mjs && node scripts/build-city-pages.mjs && node ./node_modules/.bin/serve public --listen tcp://{HOSTNAME}:{PORT}',
   // Map the editable content documents to the live pages that render them so
   // the visual editor can open each document against a real preview URL.
   sitemap: ({ documents }) => {
