@@ -7,6 +7,14 @@
 # subdirectory and tell the plugin to skip its work.
 [build]
   publish = "public"
+  # Regenerate the JSON-driven pages on every deploy. The editable "single
+  # source of truth" lives in public/data/*.json and is edited through the
+  # Netlify Visual Editor (Stackbit). These scripts render that JSON into the
+  # per-service pages (public/services/<slug>.html) and per-city pages
+  # (public/handyman/<slug>.html). Without this command those edits were never
+  # applied to the published site, so visual-editor changes appeared to do
+  # nothing.
+  command = "node scripts/build-service-pages.mjs && node scripts/build-city-pages.mjs"
 
 [build.environment]
   # Skip the Gatsby build plugin — this is not a Gatsby site.
