@@ -1,80 +1,141 @@
 import { defineStackbitConfig } from '@stackbit/types';
 import { GitContentSource } from '@stackbit/cms-git';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import sdk from '@stackbit/sdk';
-import core from '@stackbit/cms-core';
-import coreUtils from '@stackbit/cms-core/dist/utils/index.js';
 
-const rootDir = path.dirname(fileURLToPath(import.meta.url));
-
-// Add html to supported extensions so Git Content Source scans .html files
-if (sdk && sdk.SUPPORTED_FILE_EXTENSIONS && !sdk.SUPPORTED_FILE_EXTENSIONS.includes('html')) {
-  sdk.SUPPORTED_FILE_EXTENSIONS.push('html');
-}
-
-// Override core.utils.parseFile to handle .html files and parse them as page models
-if (core && core.utils) {
-  const origParseFile = core.utils.parseFile;
-  core.utils = {
-    ...core.utils,
-    parseFile: (filePath) => {
-      if (filePath.endsWith('.html')) {
-        return fs.promises.readFile(filePath, 'utf8').then((data) => {
-          const parsed = coreUtils.parseMarkdownWithFrontMatter(data);
-          return {
-            type: 'Page',
-            title: parsed?.frontmatter?.title || '',
-            body: parsed?.markdown || ''
-          };
-        });
-      }
-      return origParseFile(filePath);
-    }
-  };
-}
+// Stackbit bundles this config to CommonJS before loading it, and esbuild
+// replaces `import.meta` with `{}` in that output. That made the previous
+// `fileURLToPath(import.meta.url)` throw ("path must be a string, received
+// undefined") and the whole config failed to load. Stackbit always runs from
+// the project root, so use the working directory instead — it is correct in
+// both the native ESM and the bundled-CJS execution contexts.
+const rootDir = process.cwd();
 
 export default defineStackbitConfig({
   stackbitVersion: '~0.6.0',
   ssgName: 'custom',
-  nodeVersion: '18',
+  nodeVersion: '22',
   devCommand: 'node ./node_modules/.bin/serve public --listen tcp://{HOSTNAME}:{PORT}',
+  // Map the editable content documents to the live pages that render them so
+  // the visual editor can open each document against a real preview URL.
   sitemap: ({ documents }) => {
-    const homeDocument = documents.find((document) => document.id === 'public/index.html');
+    const pages = {
+      ServicesData: { label: 'Services', urlPath: '/services' },
+      ServiceAreasData: { label: 'Service Areas', urlPath: '/service-areas' }
+    };
 
-    if (!homeDocument) {
-      return [];
-    }
-
-    return [
-      {
-        stableId: 'home',
-        label: 'Home',
-        urlPath: '/',
+    return documents
+      .filter((document) => pages[document.modelName])
+      .map((document) => ({
+        stableId: document.modelName,
+        label: pages[document.modelName].label,
+        urlPath: pages[document.modelName].urlPath,
         document: {
-          id: homeDocument.id,
-          modelName: homeDocument.modelName,
-          srcType: homeDocument.srcType,
-          srcProjectId: homeDocument.srcProjectId
+          id: document.id,
+          modelName: document.modelName,
+          srcType: document.srcType,
+          srcProjectId: document.srcProjectId
         }
-      }
-    ];
+      }));
   },
   contentSources: [
     new GitContentSource({
       rootPath: rootDir,
       contentDirs: ['public'],
+      // The site's editable content lives in the JSON "single source of truth"
+      // files under public/data. The Git content source can load and round-trip
+      // JSON natively; the page HTML is generated from these files by the build
+      // scripts (scripts/build-service-pages.mjs, scripts/build-city-pages.mjs)
+      // and by the browser service-area checker (public/js/service-area-checker.js).
+      // Fields left unmodeled here (e.g. the `note` and `categories` keys) are
+      // preserved on save — updates only mutate the edited field path.
       models: [
         {
-          name: 'Page',
-          type: 'page',
-          filePath: 'index.html',
+          name: 'ServicesData',
+          type: 'data',
+          filePath: 'data/services.json',
           singleInstance: true,
-          labelField: 'title',
+          label: 'Services',
           fields: [
-            { name: 'title', type: 'string', required: true },
-            { name: 'body', type: 'markdown' }
+            {
+              name: 'services',
+              type: 'list',
+              label: 'Services',
+              items: {
+                type: 'object',
+                labelField: 'name',
+                fields: [
+                  { name: 'name', type: 'string', required: true },
+                  { name: 'slug', type: 'string', required: true },
+                  { name: 'icon', type: 'string' },
+                  { name: 'category', type: 'string' },
+                  { name: 'formService', type: 'string', label: 'Form service name' },
+                  { name: 'tagline', type: 'string' },
+                  { name: 'intro', type: 'list', items: { type: 'text' } },
+                  { name: 'features', type: 'list', items: { type: 'string' } },
+                  {
+                    name: 'faq',
+                    type: 'object',
+                    label: 'FAQ',
+                    fields: [
+                      { name: 'q', type: 'string', label: 'Question' },
+                      { name: 'a', type: 'text', label: 'Answer' }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          name: 'ServiceAreasData',
+          type: 'data',
+          filePath: 'data/service-areas.json',
+          singleInstance: true,
+          label: 'Service Areas',
+          fields: [
+            {
+              name: 'zones',
+              type: 'object',
+              label: 'Zones',
+              fields: [
+                {
+                  name: 'A',
+                  type: 'object',
+                  label: 'Zone A',
+                  fields: [
+                    { name: 'label', type: 'string' },
+                    { name: 'rate', type: 'string' }
+                  ]
+                },
+                {
+                  name: 'B',
+                  type: 'object',
+                  label: 'Zone B',
+                  fields: [
+                    { name: 'label', type: 'string' },
+                    { name: 'rate', type: 'string' }
+                  ]
+                }
+              ]
+            },
+            {
+              name: 'cities',
+              type: 'list',
+              label: 'Cities',
+              items: {
+                type: 'object',
+                labelField: 'name',
+                fields: [
+                  { name: 'name', type: 'string', required: true },
+                  { name: 'slug', type: 'string', required: true },
+                  { name: 'aliases', type: 'list', items: { type: 'string' } },
+                  { name: 'zips', type: 'list', items: { type: 'string' } },
+                  { name: 'zone', type: 'string' },
+                  { name: 'region', type: 'string' },
+                  { name: 'blurb', type: 'text' },
+                  { name: 'nearby', type: 'list', items: { type: 'string' } }
+                ]
+              }
+            }
           ]
         }
       ],

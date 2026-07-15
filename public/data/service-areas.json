@@ -1,4 +1,5 @@
 {
+  "type": "ServiceAreasData",
   "note": "Single source of truth for AAA Handyman Services coverage. Consumed by the browser service-area checker (/js/service-area-checker.js) and the city landing-page generator (scripts/build-city-pages.mjs). Zone A = $100 minimum service call (within ~20 miles of Waterford). Zone B = $145 minimum service call (extended county / 20+ miles).",
   "zones": {
     "A": { "label": "Zone A (Within 20 Miles)", "rate": "$100 Minimum Service Call" },

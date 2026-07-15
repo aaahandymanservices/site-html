@@ -1,4 +1,5 @@
 {
+  "type": "ServicesData",
   "note": "Single source of truth for AAA Handyman Services service offerings. Consumed by the per-service landing-page generator (scripts/build-service-pages.mjs), which writes public/services/<slug>.html. Clean URLs (/services/<slug>) are handled by the splat rule in public/_redirects. Categories are used to group services and to auto-pick related services shown on each page.",
   "categories": {
     "interior": "Interior Repairs & Finishes",
