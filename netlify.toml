@@ -20,6 +20,22 @@
   # Skip the Gatsby build plugin — this is not a Gatsby site.
   NETLIFY_SKIP_GATSBY_BUILD_PLUGIN = "true"
 
+  # Let the Netlify Visual Editor (Stackbit) dev server start in this
+  # read-only-git environment. Stackbit's Git content source compares a working
+  # branch against a publish branch to list pending changes; with the defaults
+  # (working "preview", publish "master") those differ, so it runs
+  # `git fetch origin master:master` on startup. Network git commands are
+  # disabled here ("'git fetch' is disabled in this environment"), so the fetch
+  # exits non-zero and the dev server aborts with "Could not start local
+  # development server". Pointing both branches at HEAD makes them identical, so
+  # Stackbit skips the fetch entirely and the diff (`git log HEAD..HEAD`)
+  # resolves locally to an empty change set. HEAD always resolves regardless of
+  # which branch is checked out. Content is still edited and saved as local
+  # files and published through the normal Netlify deploy, so this only affects
+  # the editor's internal change-tracking, which is a no-op for this static site.
+  REPO_BRANCH = "HEAD"
+  REPO_PUBLISH_BRANCH = "HEAD"
+
 [[headers]]
   for = "/*"
   [headers.values]
