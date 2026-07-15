@@ -1,0 +1,544 @@
+{
+  "note": "Single source of truth for AAA Handyman Services service offerings. Consumed by the per-service landing-page generator (scripts/build-service-pages.mjs), which writes public/services/<slug>.html. Clean URLs (/services/<slug>) are handled by the splat rule in public/_redirects. Categories are used to group services and to auto-pick related services shown on each page.",
+  "categories": {
+    "interior": "Interior Repairs & Finishes",
+    "doors-efficiency": "Doors, Windows & Efficiency",
+    "plumbing": "Plumbing & Water Protection",
+    "electrical": "Electrical & Smart Home",
+    "installation": "Installation & Assembly",
+    "exterior": "Exterior & Curb Appeal",
+    "maintenance": "Maintenance & Seasonal Care",
+    "safety": "Safety & Accessibility",
+    "commercial": "Commercial"
+  },
+  "services": [
+    {
+      "name": "Carpentry",
+      "slug": "carpentry",
+      "icon": "fa-hammer",
+      "category": "interior",
+      "formService": "Carpentry & Trim",
+      "tagline": "Precision trim and woodwork that restores your home's character and structure.",
+      "intro": [
+        "Revive your home's character with craftsman carpentry. From baseboards and crown molding to custom exterior woodwork, we deliver precision work that restores both the look and the structural integrity of your living space.",
+        "Whether it is a single length of damaged trim or a room full of finish carpentry, we bring clean job sites, tight joints, and honest, upfront pricing to every project."
+      ],
+      "features": [
+        "Interior trim, baseboards & crown molding",
+        "Exterior woodwork & repairs",
+        "Custom cuts & finish carpentry",
+        "Rot repair & board replacement"
+      ],
+      "faq": {
+        "q": "What kinds of carpentry projects do you take on?",
+        "a": "We focus on minor carpentry and finish work: trim, molding, baseboards, exterior wood repairs, and similar small-scale projects. Under Michigan's minor project exemption (MCL 339.2403) we do not take on structural framing or projects that require a licensed builder."
+      }
+    },
+    {
+      "name": "Doors & Windows",
+      "slug": "doors-windows",
+      "icon": "fa-door-open",
+      "category": "doors-efficiency",
+      "formService": "Doors",
+      "tagline": "Secure, smooth, and weather-tight doors and windows, installed and aligned right.",
+      "intro": [
+        "Secure, smooth, and weather-tight. Whether it is an elegant new entry door for curb appeal, an interior door that sticks, or a window that needs installing or adjusting, we handle expert installation and alignment so every opening works perfectly and seals out the elements.",
+        "Properly hung doors and well-sealed windows keep your home comfortable, quiet, and protected year-round."
+      ],
+      "features": [
+        "Door installation & repair",
+        "Window installation & repair",
+        "Alignment, planing & hardware adjustment",
+        "Weather sealing & threshold fixes"
+      ],
+      "faq": {
+        "q": "Can you fix a door that sticks or will not latch?",
+        "a": "Yes. Sticking doors, misaligned strike plates, and latches that will not catch are among our most common calls. We plane, shim, and re-hang doors and adjust hardware so they open, close, and lock the way they should."
+      }
+    },
+    {
+      "name": "Energy-Efficiency Tune-Up",
+      "slug": "energy-efficiency",
+      "icon": "fa-wind",
+      "category": "doors-efficiency",
+      "formService": "Energy Tune-Up Audit",
+      "tagline": "Seal the hidden leaks that quietly drive up your heating and cooling bills.",
+      "intro": [
+        "Comfort up, energy bills down. Drafts around doors and windows quietly drive up your heating and cooling costs all year. We replace worn weatherstripping and door sweeps, seal hidden air leaks, and close the small gaps that waste conditioned air, so your home stays comfortable and efficient.",
+        "A focused tune-up is one of the highest-return improvements you can make, paying for itself in lower utility bills and a more comfortable home."
+      ],
+      "features": [
+        "Weatherstripping & door sweep replacement",
+        "Draft-stopping & air-leak sealing",
+        "Attic hatch & outlet gasket sealing",
+        "Window sash & lock repair"
+      ],
+      "faq": {
+        "q": "How do I know if my home needs an energy tune-up?",
+        "a": "Cold drafts near doors and windows, rooms that never feel the right temperature, and rising utility bills are all signs of air leaks. We can walk your home, find the leaks, and seal the ones that matter most in a single visit."
+      }
+    },
+    {
+      "name": "Dryer Vent Cleaning",
+      "slug": "dryer-vent",
+      "icon": "fa-fire-flame-curved",
+      "category": "maintenance",
+      "formService": "Maintenance & Cleaning",
+      "tagline": "A quick job that prevents a house fire and speeds up every load of laundry.",
+      "intro": [
+        "A quick job that prevents a house fire. Lint buildup in dryer vents is a leading cause of home fires and forces your dryer to work overtime. We clear the full vent run so your laundry dries faster, your energy use drops, and your home stays safe.",
+        "It is an easy add-on to any visit and one of the simplest ways to protect your home."
+      ],
+      "features": [
+        "Full vent & duct cleaning",
+        "Lint buildup & airflow check",
+        "Faster drying & lower fire risk",
+        "Easy add-on to any service visit"
+      ],
+      "faq": {
+        "q": "How often should a dryer vent be cleaned?",
+        "a": "For most households, once a year keeps airflow strong and fire risk low. If your clothes take more than one cycle to dry or the dryer feels hot to the touch, it is worth cleaning sooner."
+      }
+    },
+    {
+      "name": "Drywall Repair",
+      "slug": "drywall-repair",
+      "icon": "fa-border-all",
+      "category": "interior",
+      "formService": "Drywall",
+      "tagline": "Seamless patching and smoothing that leaves your walls paint-ready and pristine.",
+      "intro": [
+        "Seamless surfaces, flawless finishes. Do not let cracks or holes distract from your home's interior. We deliver craftsman-grade patching and smoothing, leaving your walls paint-ready and pristine.",
+        "From doorknob dings and nail pops to larger holes and water-damaged sections, we blend repairs into the surrounding wall so the fix disappears."
+      ],
+      "features": [
+        "Hole & crack patching",
+        "Nail pops & seam repair",
+        "Texture matching & sanding",
+        "Paint-ready smoothing"
+      ],
+      "faq": {
+        "q": "Will the drywall patch be noticeable after painting?",
+        "a": "No. We feather and sand each repair to blend with the surrounding wall and match existing texture, so once the area is primed and painted the patch is invisible."
+      }
+    },
+    {
+      "name": "Painting & Staining",
+      "slug": "painting-staining",
+      "icon": "fa-paint-roller",
+      "category": "interior",
+      "formService": "Painting",
+      "tagline": "Meticulous prep, crisp edges, and smooth finishes inside and out.",
+      "intro": [
+        "A fresh look, perfectly executed. Painting is 90% preparation. We focus on meticulous surface prep, crisp edging, and smooth, craftsman finishes to revitalize your home's appearance inside and out.",
+        "From a single accent wall to trim, doors, and exterior surfaces, careful prep and clean lines make the difference between a paint job and a finish you are proud of."
+      ],
+      "features": [
+        "Interior painting",
+        "Exterior painting & staining",
+        "Surface prep, priming & patching",
+        "Trim, doors & accent walls"
+      ],
+      "faq": {
+        "q": "Do you handle the prep work and cleanup too?",
+        "a": "Yes. Prep is where a lasting finish is won. We patch, sand, mask, and prime as needed, protect your floors and furnishings, and leave the space clean when the work is done."
+      }
+    },
+    {
+      "name": "Flooring Solutions",
+      "slug": "flooring-solutions",
+      "icon": "fa-ruler-combined",
+      "category": "interior",
+      "formService": "Flooring",
+      "tagline": "Level, secure, and built to last, from tile and hardwood to laminate and carpet.",
+      "intro": [
+        "Durable beauty underfoot. From tile and hardwood to laminate and carpet, we provide expert maintenance and repair services, ensuring your floors are level, secure, and built to last.",
+        "Squeaks, loose boards, damaged planks, and transitions that trip you up are all repairs we handle so your floors look and feel solid again."
+      ],
+      "features": [
+        "Repair & board replacement",
+        "Laminate & vinyl plank",
+        "Squeak & subfloor fixes",
+        "Transitions & thresholds"
+      ],
+      "faq": {
+        "q": "Can you replace just a few damaged planks?",
+        "a": "Often, yes. When matching material is available we can swap out damaged boards or sections rather than replacing the whole floor, saving you time and money."
+      }
+    },
+    {
+      "name": "Tile Install",
+      "slug": "tile-install",
+      "icon": "fa-table-cells-large",
+      "category": "interior",
+      "formService": "Flooring",
+      "tagline": "Level, watertight tile for kitchens, baths, and beyond.",
+      "intro": [
+        "Durable beauty that lasts. From floors to walls, we set tile with level, watertight precision for kitchens, baths, and beyond.",
+        "Careful layout, proper substrate prep, and clean grout lines mean a tiled surface that looks sharp and keeps water where it belongs."
+      ],
+      "features": [
+        "Floor tile installation",
+        "Wall & backsplash tile",
+        "Grouting & sealing",
+        "Repairs & regrouting"
+      ],
+      "faq": {
+        "q": "Do you install backsplashes and shower walls?",
+        "a": "Yes. We handle kitchen backsplashes, bathroom walls, and tub and shower surrounds, with proper waterproofing so the finished tile stays watertight for years."
+      }
+    },
+    {
+      "name": "Minor Plumbing & Leak Prevention",
+      "slug": "minor-plumbing",
+      "icon": "fa-faucet-drip",
+      "category": "plumbing",
+      "formService": "Plumbing",
+      "tagline": "Fast, clean fixes for drips, drains, and the leaks that become emergencies.",
+      "intro": [
+        "Stop the drip, protect your home. We provide fast, clean solutions for leaky faucets, showerheads, and stubborn drains, plus the small preventative fixes that stop a slow leak from becoming an expensive emergency.",
+        "Catching a worn supply line or a running toilet early is one of the cheapest ways to prevent serious water damage down the road."
+      ],
+      "features": [
+        "Faucet, showerhead & drain repair",
+        "Under-sink valve & supply-line swaps",
+        "Toilet rebuilds & wax ring replacement",
+        "Leak sensor & washer hose upgrades"
+      ],
+      "faq": {
+        "q": "What plumbing work is outside your scope?",
+        "a": "We handle minor, fixture-level plumbing: faucets, drains, toilets, valves, and supply lines. Work that requires opening walls, moving main lines, or a licensed master plumber is coordinated with a licensed pro."
+      }
+    },
+    {
+      "name": "Tub & Shower Re-Caulk",
+      "slug": "tub-shower-recaulk",
+      "icon": "fa-shower",
+      "category": "plumbing",
+      "formService": "Plumbing",
+      "tagline": "Strip out failing caulk and lay down a clean, watertight, mold-free seal.",
+      "intro": [
+        "Fresh, waterproof, and mold-free. Old, cracked, or discolored caulk is an eyesore, and it lets water seep into the places that cause costly damage. We strip out the failing caulk and lay down a clean, watertight seal that protects your walls, floors, and peace of mind.",
+        "It is a small job with an outsized payoff, protecting the structure behind your tub and shower from hidden water damage."
+      ],
+      "features": [
+        "Tub & shower re-caulk",
+        "Mold & mildew caulk removal",
+        "Kitchen & wet-area sealing",
+        "Clean, watertight finish"
+      ],
+      "faq": {
+        "q": "Why does caulk keep failing in my shower?",
+        "a": "Cracked or peeling caulk usually means the old bead was applied over moisture or has simply aged out. We fully remove the failing caulk, clean and dry the joint, and reseal it so the new bead lasts."
+      }
+    },
+    {
+      "name": "Minor Electrical Services",
+      "slug": "minor-electrical",
+      "icon": "fa-lightbulb",
+      "category": "electrical",
+      "formService": "Electrical",
+      "tagline": "Safe, code-conscious swaps of switches, outlets, fixtures, and fans.",
+      "intro": [
+        "Safe, reliable updates. Keep your home powered and bright. We specialize in replacing outdated switches, outlets, and fixtures or installing new ceiling fans with safety and code-conscious precision.",
+        "Note: we focus on fixtures and safety updates. New wiring runs and breaker-box installations are outside our scope and are coordinated with a licensed electrician when needed."
+      ],
+      "features": [
+        "Switch & outlet replacement",
+        "Light fixture installation",
+        "Ceiling fan installation",
+        "Safety updates & swaps"
+      ],
+      "faq": {
+        "q": "Do you install new wiring or upgrade breaker panels?",
+        "a": "No. We handle fixture-level electrical work such as swapping switches, outlets, and light fixtures and installing ceiling fans. New circuits, rewiring, and panel work require a licensed electrician, which we are happy to help coordinate."
+      }
+    },
+    {
+      "name": "Installation & Mounting",
+      "slug": "installation",
+      "icon": "fa-screwdriver-wrench",
+      "category": "installation",
+      "formService": "General Estimate / Quote",
+      "tagline": "Mounted, anchored, and ready to go, with clean, code-conscious installs.",
+      "intro": [
+        "Mounted, anchored, and ready to go. Whatever needs putting up or putting in, we handle it with clean, code-conscious installation you can rely on.",
+        "From TV wall mounts and handrails to full kitchen and bath fixtures, we anchor everything securely and leave the job site clean."
+      ],
+      "features": [
+        "TV wall mounting",
+        "Handrail & stairs installation",
+        "Kitchen & bathroom fixtures",
+        "Baby & child proofing"
+      ],
+      "faq": {
+        "q": "Can you mount a TV on any type of wall?",
+        "a": "In most cases, yes. We locate studs or use the correct anchors for drywall, plaster, brick, or masonry, conceal cables where possible, and make sure the mount is level and rock-solid."
+      }
+    },
+    {
+      "name": "Furniture Assembly",
+      "slug": "furniture-assembly",
+      "icon": "fa-couch",
+      "category": "installation",
+      "formService": "General Estimate / Quote",
+      "tagline": "Flat-pack, brand-name, and outdoor pieces built sturdy and ready to use.",
+      "intro": [
+        "Assembled right, the first time. Skip the confusing instructions and leftover parts. We put together flat-pack, brand-name, and outdoor pieces so they are sturdy, safe, and ready to use.",
+        "Beds, dressers, shelving, desks, patio sets, and grills, we assemble it correctly and haul away the packaging if you like."
+      ],
+      "features": [
+        "Flat-pack & brand-name assembly",
+        "Deck furniture & BBQ grills",
+        "Beds, dressers & shelving",
+        "Sturdy, safe, ready to use"
+      ],
+      "faq": {
+        "q": "Do you assemble furniture from any brand?",
+        "a": "Yes. Whether it is a flat-pack big-box item, a brand-name piece, or outdoor furniture, we follow the specs and reinforce where it counts so it stands up to daily use."
+      }
+    },
+    {
+      "name": "Garage & Storage Organization",
+      "slug": "garage-storage",
+      "icon": "fa-warehouse",
+      "category": "installation",
+      "formService": "General Estimate / Quote",
+      "tagline": "Turn a cluttered garage into organized, usable square footage.",
+      "intro": [
+        "Reclaim your space. Turn a cluttered garage into organized, usable square footage. We install shelving, overhead racks, and wall storage so everything has its place, and you get your floor back.",
+        "Smart storage makes a garage safer and easier to use, and it keeps your tools and gear off the floor and within reach."
+      ],
+      "features": [
+        "Shelving & overhead storage racks",
+        "Wall slat boards & tool storage",
+        "Bike, ladder & gear hooks",
+        "Workbench & lighting upgrades"
+      ],
+      "faq": {
+        "q": "Can you design storage around what I need to store?",
+        "a": "Yes. We look at what you are storing and the space you have, then install the right mix of shelving, overhead racks, and wall systems to make the most of it."
+      }
+    },
+    {
+      "name": "Decks & Fences",
+      "slug": "decks-fences",
+      "icon": "fa-tree",
+      "category": "exterior",
+      "formService": "Decks & Fences",
+      "tagline": "Resurfacing, structural repairs, and staining that protect your investment.",
+      "intro": [
+        "Restore your outdoor sanctuary. Extend the life of your wood structures with craftsman resurfacing, structural repairs, and expert staining to protect your investment against the elements.",
+        "A well-maintained deck or fence adds usable outdoor living space and lasting curb appeal, and regular care keeps it safe and looking sharp."
+      ],
+      "features": [
+        "Board & railing repair",
+        "Resurfacing & staining",
+        "Fence repair & installation",
+        "Weatherproofing & sealing"
+      ],
+      "faq": {
+        "q": "Should I repair or replace my aging deck?",
+        "a": "It depends on the condition of the framing. When the structure is sound, resurfacing boards and re-staining can add years of life for a fraction of a rebuild. We will give you an honest assessment before any work begins."
+      }
+    },
+    {
+      "name": "Gutters",
+      "slug": "gutters",
+      "icon": "fa-house-flood-water",
+      "category": "exterior",
+      "formService": "Maintenance & Cleaning",
+      "tagline": "Clean, repair, and cover gutters to keep water away from your foundation.",
+      "intro": [
+        "Protect your home from the top down. Clogged or damaged gutters lead to costly water damage. We clean, repair, and cover them to keep water flowing away from your foundation.",
+        "Functioning gutters protect your roof, siding, and foundation, making them one of the most important, and most overlooked, parts of home maintenance."
+      ],
+      "features": [
+        "Gutter cleaning",
+        "Gutter repair & resealing",
+        "Gutter cover & guard install",
+        "Downspout & drainage checks"
+      ],
+      "faq": {
+        "q": "How often should gutters be cleaned?",
+        "a": "Twice a year is typical, in spring and fall, but homes surrounded by trees may need more frequent cleaning. Gutter covers can dramatically cut down how often you need service."
+      }
+    },
+    {
+      "name": "Power Washing",
+      "slug": "power-washing",
+      "icon": "fa-spray-can-sparkles",
+      "category": "exterior",
+      "formService": "Maintenance & Cleaning",
+      "tagline": "Blast away years of grime and mildew for instant curb appeal.",
+      "intro": [
+        "Restore that like-new shine. Blast away years of grime, mildew, and buildup from the surfaces around your home for instant curb appeal.",
+        "From siding and driveways to decks, fences, and walkways, a proper wash makes surfaces look years younger and helps them last longer."
+      ],
+      "features": [
+        "Siding & exterior walls",
+        "Driveways & sidewalks",
+        "Decks & fences",
+        "Patios & BBQ areas"
+      ],
+      "faq": {
+        "q": "Is power washing safe for my siding and deck?",
+        "a": "Yes, when it is done correctly. We match the pressure and technique to each surface, using lower pressure and the right approach on softer materials like wood so we clean without causing damage."
+      }
+    },
+    {
+      "name": "Projects For Pets",
+      "slug": "projects-for-pets",
+      "icon": "fa-dog",
+      "category": "exterior",
+      "formService": "General Estimate / Quote",
+      "tagline": "Safe, convenient spaces for your four-legged family members.",
+      "intro": [
+        "Thoughtful projects for your whole family, pets included. From secure fencing to dog doors and trim repair, we create safe, convenient spaces for your four-legged friends.",
+        "Small, pet-focused projects make daily life easier for you and safer for them."
+      ],
+      "features": [
+        "Fence installation & repair",
+        "Dog door installation",
+        "Pet-damage trim repair",
+        "Secure gates & enclosures"
+      ],
+      "faq": {
+        "q": "Can you install a dog door in my existing door or wall?",
+        "a": "In most cases, yes. We fit dog doors into exterior doors, walls, and screen doors, sized to your pet, with a clean, weather-tight finish."
+      }
+    },
+    {
+      "name": "Home Repair & Upkeep",
+      "slug": "home-repair-upkeep",
+      "icon": "fa-house-chimney",
+      "category": "maintenance",
+      "formService": "General Estimate / Quote",
+      "tagline": "Ongoing repairs and upkeep that protect your home's comfort and value.",
+      "intro": [
+        "Keep every room in peak condition. From the laundry room to the kitchen, bath, and exterior, we tackle the ongoing repairs and upkeep that protect your home's comfort and value.",
+        "A single visit can knock out a whole punch list, the collection of small fixes that add up to a home that runs smoothly."
+      ],
+      "features": [
+        "Laundry room maintenance",
+        "Bathroom maintenance & upkeep",
+        "Kitchen maintenance & upkeep",
+        "Exterior home maintenance"
+      ],
+      "faq": {
+        "q": "Can I hand you a whole punch list in one visit?",
+        "a": "Absolutely. Many customers save up a list of small repairs and have us work through them in a single visit. It is an efficient, cost-effective way to keep your home in top shape."
+      }
+    },
+    {
+      "name": "Preventative Maintenance",
+      "slug": "preventative-maintenance",
+      "icon": "fa-clipboard-check",
+      "category": "maintenance",
+      "formService": "Whole-Home Assessment",
+      "tagline": "Seasonal check-ups that catch wear early and save you money.",
+      "intro": [
+        "Stop small problems before they start. Regular seasonal check-ups inside and out catch wear early, saving you money and headaches down the road.",
+        "A little attention each season keeps minor issues from turning into major repairs and extends the life of everything from your caulk lines to your deck."
+      ],
+      "features": [
+        "Exterior seasonal check-ups",
+        "Interior seasonal check-ups",
+        "Early wear detection",
+        "Scheduled upkeep plans"
+      ],
+      "faq": {
+        "q": "What does a preventative maintenance visit cover?",
+        "a": "We walk your home inside and out, checking the areas most prone to wear, caulk and seals, weatherstripping, gutters, exterior wood, and fixtures, and address what we find or flag it for a follow-up."
+      }
+    },
+    {
+      "name": "Maintenance & Cleaning",
+      "slug": "maintenance-cleaning",
+      "icon": "fa-broom",
+      "category": "maintenance",
+      "formService": "Maintenance & Cleaning",
+      "tagline": "Seasonal care, year-round peace of mind.",
+      "intro": [
+        "Seasonal care, year-round peace of mind. Cross off your to-do list with comprehensive gutter cleaning, power washing, and general home maintenance designed to keep your property in peak condition.",
+        "Spring: gutter cleaning, deck repair, and window inspections. Autumn: weatherproofing, door sealing, and winterization repairs."
+      ],
+      "features": [
+        "Gutter cleaning",
+        "Power washing",
+        "Spring & autumn seasonal prep",
+        "General home maintenance"
+      ],
+      "faq": {
+        "q": "Do you offer seasonal maintenance in spring and fall?",
+        "a": "Yes. Spring visits focus on gutter cleaning, deck repair, and window inspections; fall visits focus on weatherproofing, door sealing, and winterization so your home is ready for the season ahead."
+      }
+    },
+    {
+      "name": "Senior Care & Aging-in-Place",
+      "slug": "senior-care",
+      "icon": "fa-wheelchair",
+      "category": "safety",
+      "formService": "Home Safety Audit",
+      "tagline": "Practical modifications so you can live independently and confidently.",
+      "intro": [
+        "Comfort and safety at every stage of life. Falls are a leading cause of injury at home, but small changes make a big difference. We offer a Home Safety Audit plus practical modifications so you or your loved ones can live independently and confidently.",
+        "Thoughtful, well-installed modifications add safety without making a home feel like a hospital."
+      ],
+      "features": [
+        "Grab bars & handrail installation",
+        "Handheld shower heads & comfort-height toilets",
+        "Lever handles & threshold adjustments",
+        "Whole-home safety modifications"
+      ],
+      "faq": {
+        "q": "Do you assess the whole home for fall risks?",
+        "a": "Yes. Our Home Safety Audit reviews bathrooms, stairs, entryways, and high-traffic areas for hazards, then we recommend and install the modifications that make the biggest difference in safety and independence."
+      }
+    },
+    {
+      "name": "Home Security & Smart Home",
+      "slug": "home-security",
+      "icon": "fa-shield-halved",
+      "category": "electrical",
+      "formService": "General Estimate / Quote",
+      "tagline": "Peace of mind, professionally installed, day and night.",
+      "intro": [
+        "Peace of mind, professionally installed. From smart devices to security hardware, we set up the products that make your home safer and more convenient, day and night.",
+        "Note: we focus on device installs and setup. Any work requiring licensed electrical or HVAC scope is coordinated with a licensed pro."
+      ],
+      "features": [
+        "Video doorbells & security cameras",
+        "Smart locks & deadbolts",
+        "Leak & freeze sensors",
+        "Smart switches, dimmers & thermostats"
+      ],
+      "faq": {
+        "q": "Do you set up the app and get devices working, not just mount them?",
+        "a": "Yes. We install the hardware and complete the setup, connecting devices to your Wi-Fi and app so everything is working and ready to use before we leave."
+      }
+    },
+    {
+      "name": "Commercial Services",
+      "slug": "commercial",
+      "icon": "fa-building",
+      "category": "commercial",
+      "formService": "General Estimate / Quote",
+      "tagline": "Reliable interior and exterior help that keeps your business running smoothly.",
+      "intro": [
+        "Reliable help for your business, too. We keep commercial properties looking sharp and running smoothly with dependable interior and exterior services.",
+        "From storefronts and offices to rental and small commercial spaces, we handle the same minor repairs and upkeep we bring to homes, on a schedule that works for your business."
+      ],
+      "features": [
+        "Interior repairs & upkeep",
+        "Exterior maintenance",
+        "Storefront & office fixes",
+        "Scheduled property maintenance"
+      ],
+      "faq": {
+        "q": "Do you work with property managers and small businesses?",
+        "a": "Yes. We provide dependable interior and exterior handyman services for offices, storefronts, and small commercial properties, and can work around your operating hours."
+      }
+    }
+  ]
+}
