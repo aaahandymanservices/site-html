@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "AAA Handyman Services static site with customer gallery submissions.",
   "type": "module",
-  "main": "stackbit.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,8 +17,6 @@
   },
   "devDependencies": {
     "@netlify/functions": "^5.3.0",
-    "@stackbit/cms-git": "^1.0.38",
-    "@stackbit/types": "^2.1.15",
     "serve": "^14.2.6",
     "typescript": "^6.0.3"
   }
