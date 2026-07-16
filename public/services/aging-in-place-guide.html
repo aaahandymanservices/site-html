@@ -63,8 +63,30 @@
     <style>
         html { scroll-behavior: smooth; }
         body { font-family: 'Roboto', sans-serif; }
-        .checklist-item { transition: all 0.2s; }
-        .checklist-item:hover { border-color: #8e1f26; }
+        
+        /* Interactive checklist items */
+        .checklist-item { 
+            transition: all 0.2s ease-in-out; 
+            cursor: pointer;
+        }
+        .checklist-item:hover { 
+            border-color: #8e1f26; 
+            background-color: #fdfafb;
+            transform: translateY(-1px);
+        }
+        .checklist-item.checked {
+            border-color: #16a34a !important;
+            background-color: #f0fdf4 !important;
+        }
+        .checklist-item.checked h4 {
+            color: #16a34a !important;
+            text-decoration: line-through;
+            opacity: 0.8;
+        }
+        .checklist-item.checked p {
+            opacity: 0.7;
+        }
+        
         @keyframes pulse-attention-green {
             0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
             50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
@@ -80,9 +102,10 @@
             body {
                 background-color: #ffffff !important;
                 color: #000000 !important;
-                font-size: 12pt !important;
+                font-size: 11pt !important;
             }
-            nav, footer, button, #back-to-top, .pulse-btn-green, .no-print, [href^="#"] {
+            /* Hide ALL non-essential elements to render a pure checklist document */
+            nav, footer, button, #back-to-top, .pulse-btn-green, .no-print, [href^="#"], .progress-widget-container, header, .mb-10, .bg-white.rounded-3xl.p-6, .text-center.mt-12.bg-gray-100 {
                 display: none !important;
             }
             main {
@@ -95,27 +118,68 @@
                 padding: 0 !important;
                 margin: 0 !important;
             }
-            .checklist-item {
-                border: 1px solid #ddd !important;
-                break-inside: avoid;
-                margin-bottom: 10px !important;
-                padding: 10px !important;
-                background-color: #fff !important;
+            
+            /* Override tailwind grids to display nicely as a single vertical stack on paper */
+            .grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 12px !important;
             }
+            
+            .checklist-item {
+                border: 1.5px solid #bbb !important;
+                break-inside: avoid;
+                margin-bottom: 12px !important;
+                padding: 12px !important;
+                background-color: #fff !important;
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: flex-start !important;
+                gap: 12px !important;
+                border-radius: 8px !important;
+                box-shadow: none !important;
+                width: 100% !important;
+            }
+            
+            /* Print-specific square checkboxes so users can check them physically */
+            .print-checkbox {
+                display: inline-block !important;
+                width: 18px !important;
+                height: 18px !important;
+                border: 2px solid #333 !important;
+                border-radius: 4px !important;
+                margin-top: 4px !important;
+                flex-shrink: 0 !important;
+            }
+
+            .web-checkbox {
+                display: none !important;
+            }
+
             h1 {
-                font-size: 24pt !important;
+                font-size: 22pt !important;
                 margin-top: 0 !important;
+                color: #1B2A4A !important;
             }
             h2 {
-                font-size: 18pt !important;
+                font-size: 16pt !important;
+                color: #1B2A4A !important;
             }
             h3 {
-                font-size: 14pt !important;
+                font-size: 13pt !important;
+                color: #1B2A4A !important;
+                border-bottom: 2px solid #8e1f26 !important;
+                padding-bottom: 4px !important;
+                margin-top: 24px !important;
+                margin-bottom: 12px !important;
             }
             .bg-blue-50, .bg-red-50, .bg-gray-100 {
                 background-color: #f9f9f9 !important;
                 border-color: #333 !important;
                 color: #000 !important;
+                padding: 12px !important;
+                border-radius: 6px !important;
+                border-left: 4px solid #333 !important;
             }
             /* Add custom header on printed page representing the checklist */
             .print-header {
@@ -302,6 +366,31 @@
                     <a href="#electrical" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 hover:bg-red-50 hover:text-red-600 transition">Storage &amp; Controls</a>
                     <a href="#hvac" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 hover:bg-red-50 hover:text-red-600 transition">HVAC &amp; Flooring</a>
                     <a href="#miscellaneous" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 hover:bg-red-50 hover:text-red-600 transition">Convenience &amp; Misc</a>
+                </div>
+            </div>
+
+            <!-- Interactive Progress Widget (Sticky on larger screens) -->
+            <div class="progress-widget-container sticky top-20 z-40 bg-white border border-gray-200 p-5 rounded-3xl shadow-md mb-10 no-print">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-gray-500 mb-1">Live Home Walkthrough Tracker</h4>
+                        <div class="flex items-center gap-2">
+                            <span id="progress-text" class="text-2xl font-extrabold text-blue-900">0 of 28 items checked</span>
+                            <span id="progress-percent" class="text-sm font-bold text-red-600 bg-red-50 px-2.5 py-1 rounded-full border border-red-100">0%</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button id="reset-checklist" class="text-xs font-bold text-gray-500 hover:text-red-600 border border-gray-200 hover:border-red-200 px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 bg-gray-50">
+                            <i class="fas fa-rotate-left"></i> Reset Progress
+                        </button>
+                        <a href="#lead-magnet-form" class="text-xs font-bold bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-xl transition shadow-md shadow-red-600/20 flex items-center gap-1.5">
+                            <i class="fas fa-print"></i> Get Clipboard PDF &amp; Print
+                        </a>
+                    </div>
+                </div>
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-100 h-3 rounded-full mt-4 overflow-hidden border border-gray-100">
+                    <div id="progress-bar" class="bg-gradient-to-r from-red-600 to-red-500 h-full rounded-full transition-all duration-300 ease-out" style="width: 0%"></div>
                 </div>
             </div>
 
@@ -636,6 +725,136 @@
         if (mobileMenuBtn && mobileMenu) {
             mobileMenuBtn.addEventListener('click', function () { mobileMenu.classList.toggle('hidden'); });
         }
+
+        // Dynamic Interactive Checklist Logic
+        (function () {
+            var items = document.querySelectorAll('.checklist-item');
+            var progressText = document.getElementById('progress-text');
+            var progressPercent = document.getElementById('progress-percent');
+            var progressBar = document.getElementById('progress-bar');
+            var resetBtn = document.getElementById('reset-checklist');
+            
+            if (!items.length) return;
+
+            // Load saved state from localStorage
+            var savedState = {};
+            try {
+                savedState = JSON.parse(localStorage.getItem('aging_in_place_checklist') || '{}');
+            } catch (e) {
+                console.error('Failed to read checklist state', e);
+            }
+
+            // Decorate each checklist item with interactive checkboxes
+            items.forEach(function (item, idx) {
+                var itemId = 'item_' + idx;
+                var h4 = item.querySelector('h4');
+                var textElement = h4 || item.querySelector('p'); // Fallback for general text cards without h4
+                
+                // Set item style attributes for flexible layout
+                item.style.display = 'flex';
+                item.style.alignItems = 'flex-start';
+                item.style.gap = '14px';
+                
+                // Create a beautiful wrapper around the content
+                var contentWrapper = document.createElement('div');
+                contentWrapper.className = 'flex-1';
+                while (item.firstChild) {
+                    contentWrapper.appendChild(item.firstChild);
+                }
+
+                // Create custom interactive checkbox container
+                var checkContainer = document.createElement('div');
+                checkContainer.className = 'flex-shrink-0 mt-1 flex items-center justify-center';
+                
+                // Web Checkbox (Premium styling)
+                var webCheck = document.createElement('div');
+                webCheck.className = 'web-checkbox w-6 h-6 rounded-lg border-2 border-gray-300 flex items-center justify-center transition-all bg-white text-transparent';
+                webCheck.innerHTML = '<i class="fas fa-check text-xs"></i>';
+                
+                // Print Checkbox (Rendered as empty square [] on printed paper)
+                var printCheck = document.createElement('div');
+                printCheck.className = 'print-checkbox hidden';
+
+                checkContainer.appendChild(webCheck);
+                checkContainer.appendChild(printCheck);
+                
+                // Prepend checklist indicator to item
+                item.appendChild(checkContainer);
+                item.appendChild(contentWrapper);
+                
+                // Apply loaded state
+                if (savedState[itemId]) {
+                    item.classList.add('checked');
+                    webCheck.classList.add('bg-green-600', 'border-green-600', 'text-white');
+                    webCheck.classList.remove('border-gray-300', 'bg-white', 'text-transparent');
+                }
+
+                // Make the entire card interactive
+                item.addEventListener('click', function (e) {
+                    // Prevent text selection toggles or duplicate links
+                    if (e.target.tagName === 'A' || e.target.closest('a')) return;
+                    
+                    var isChecked = item.classList.toggle('checked');
+                    savedState[itemId] = isChecked;
+                    
+                    try {
+                        localStorage.setItem('aging_in_place_checklist', JSON.stringify(savedState));
+                    } catch (e) {}
+
+                    if (isChecked) {
+                        webCheck.classList.add('bg-green-600', 'border-green-600', 'text-white');
+                        webCheck.classList.remove('border-gray-300', 'bg-white', 'text-transparent');
+                    } else {
+                        webCheck.classList.remove('bg-green-600', 'border-green-600', 'text-white');
+                        webCheck.classList.add('border-gray-300', 'bg-white', 'text-transparent');
+                    }
+                    
+                    updateProgress();
+                });
+            });
+
+            // Calculate and display progress in real-time
+            function updateProgress() {
+                var checkedCount = 0;
+                items.forEach(function (item, idx) {
+                    if (item.classList.contains('checked')) {
+                        checkedCount++;
+                    }
+                });
+
+                var total = items.length;
+                var percent = Math.round((checkedCount / total) * 100);
+                
+                if (progressText) progressText.innerText = checkedCount + ' of ' + total + ' items checked';
+                if (progressPercent) progressPercent.innerText = percent + '%';
+                if (progressBar) progressBar.style.width = percent + '%';
+            }
+
+            // Reset checklist state
+            if (resetBtn) {
+                resetBtn.addEventListener('click', function () {
+                    if (confirm('Are you sure you want to reset your checklist progress?')) {
+                        savedState = {};
+                        try {
+                            localStorage.removeItem('aging_in_place_checklist');
+                        } catch (e) {}
+
+                        items.forEach(function (item) {
+                            item.classList.remove('checked');
+                            var webCheck = item.querySelector('.web-checkbox');
+                            if (webCheck) {
+                                webCheck.classList.remove('bg-green-600', 'border-green-600', 'text-white');
+                                webCheck.classList.add('border-gray-300', 'bg-white', 'text-transparent');
+                            }
+                        });
+                        updateProgress();
+                    }
+                });
+            }
+
+            // Run initial progress setup
+            updateProgress();
+        })();
 
         // Lead Magnet Form Submission and Printing Integration
         var leadForm = document.getElementById('lead-magnet-form');
