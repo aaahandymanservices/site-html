@@ -20,8 +20,8 @@
   resultBox.setAttribute('role', 'status');
 
   const ZONES = {
-    A: { label: 'Zone A', rate: '$115 Min Call' },
-    B: { label: 'Zone B', rate: '$160 Min Call' }
+    A: { label: 'Zone A', rate: '$100 First Hour' },
+    B: { label: 'Zone B', rate: '$145 First Hour' }
   };
 
   let cities = [];

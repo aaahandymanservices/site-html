@@ -60,12 +60,12 @@
           "name": "Zone A Minimum Service Call (within 20 miles)",
           "description": "Includes travel, diagnostics, and the first hour of labor for locations within 20 miles.",
           "priceCurrency": "USD",
-          "price": "115",
+          "price": "100",
           "priceSpecification": {
             "@type": "PriceSpecification",
-            "price": "115",
+            "price": "100",
             "priceCurrency": "USD",
-            "minPrice": "115"
+            "minPrice": "100"
           }
         },
         {
@@ -73,12 +73,12 @@
           "name": "Zone B Minimum Service Call (20+ miles)",
           "description": "Includes travel, diagnostics, and the first hour of labor for locations beyond 20 miles.",
           "priceCurrency": "USD",
-          "price": "160",
+          "price": "145",
           "priceSpecification": {
             "@type": "PriceSpecification",
-            "price": "160",
+            "price": "145",
             "priceCurrency": "USD",
-            "minPrice": "160"
+            "minPrice": "145"
           }
         },
         {
@@ -86,10 +86,10 @@
           "name": "Continuous labor after the first hour",
           "description": "Billed in transparent quarter-hour increments at a flat rate. Materials are not included; supply them yourself at no markup, or have us source them with a standard 10-15% supply markup.",
           "priceCurrency": "USD",
-          "price": "75",
+          "price": "65",
           "priceSpecification": {
             "@type": "UnitPriceSpecification",
-            "price": "75",
+            "price": "65",
             "priceCurrency": "USD",
             "unitCode": "HUR",
             "referenceQuantity": {
@@ -322,95 +322,95 @@
 
     <main class="flex-grow">
         <!-- Hero Intro -->
-        <header id="pricing-hero" class="py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
-            <div class="max-w-3xl mx-auto px-6 text-center">
-                <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Transparent No-Haggle Pricing</div>
-                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Fair Upfront Pricing</h1>
-                <p class="text-slate-300 text-base sm:text-lg leading-relaxed">Instead of flat trip fees or complex tiers, we use a straightforward Minimum Service Call that includes your diagnostic and first portion of labor. Any additional time is billed at a fair, flat hourly rate.</p>
+        <header id="pricing-hero" class="relative overflow-hidden bg-blue-950 text-white">
+            <div class="absolute inset-0 opacity-30" aria-hidden="true" style="background: radial-gradient(circle at 82% 15%, rgba(166,31,46,.75), transparent 26%), linear-gradient(135deg, transparent 45%, rgba(255,255,255,.06) 45%, rgba(255,255,255,.06) 46%, transparent 46%);"></div>
+            <div class="relative max-w-7xl mx-auto px-6 py-14 sm:py-20 grid lg:grid-cols-[1.1fr_.9fr] gap-10 items-center">
+                <div class="max-w-2xl">
+                    <div class="uppercase tracking-[0.2em] text-red-400 font-bold text-xs mb-4">Simple Oakland County Pricing</div>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.02]">Know the starting price before we arrive.</h1>
+                    <p class="text-slate-300 text-base sm:text-xl leading-relaxed mt-6">Your service call includes travel, diagnosis, and the first hour of hands-on work. After that, you pay one clear hourly rate in 15-minute increments.</p>
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <a href="/service-areas#check-area" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3 rounded-xl transition"><i class="fas fa-location-dot"></i> Find Your Zone</a>
+                        <a href="/contact?service=General+Estimate+%2F+Quote" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold px-5 py-3 rounded-xl transition"><i class="fas fa-calendar-check"></i> Request Service</a>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3 sm:gap-4" aria-label="Standard pricing summary">
+                    <div class="col-span-2 rounded-3xl border border-white/15 bg-white/10 backdrop-blur p-6 sm:p-8">
+                        <div class="text-xs uppercase tracking-widest text-blue-200 font-bold">After the first hour</div>
+                        <div class="flex items-end gap-2 mt-2"><span class="text-5xl sm:text-6xl font-black">$65</span><span class="text-slate-300 pb-2">/ hour</span></div>
+                        <p class="text-sm text-slate-300 mt-2">That is $16.25 per 15 minutes.</p>
+                    </div>
+                    <div class="rounded-3xl bg-white text-blue-950 p-5 sm:p-6 shadow-2xl">
+                        <div class="text-xs uppercase tracking-widest text-green-700 font-bold">Zone A</div>
+                        <div class="text-4xl sm:text-5xl font-black mt-2">$100</div>
+                        <p class="text-xs sm:text-sm text-gray-600 mt-2">First hour included</p>
+                    </div>
+                    <div class="rounded-3xl bg-red-600 text-white p-5 sm:p-6 shadow-2xl">
+                        <div class="text-xs uppercase tracking-widest text-red-100 font-bold">Zone B</div>
+                        <div class="text-4xl sm:text-5xl font-black mt-2">$145</div>
+                        <p class="text-xs sm:text-sm text-red-100 mt-2">First hour included</p>
+                    </div>
+                </div>
             </div>
         </header>
 
         <!-- Rates -->
         <section id="rates" class="py-12 sm:py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto mb-12">
-                    <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Core Pricing</span>
-                    <h2 class="text-3xl sm:text-4xl font-black text-gray-950 mt-4">Service Call &amp; Hourly Rates</h2>
-                    <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">Every visit begins with a Minimum Service Call that covers our travel and your first hour of labor. If a job runs longer, we simply continue at a fair, flat hourly rate billed in transparent quarter-hour increments.</p>
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">The Three Numbers To Know</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-gray-950 mt-4">Straightforward rates, explained simply</h2>
+                    <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">Choose your location zone for the first hour. If the work takes longer, both zones continue at the same $65 hourly rate.</p>
                 </div>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-                    <!-- Zone A Minimum Service Call -->
-                    <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
-                            <i class="fas fa-location-dot mr-1"></i> Zone A
-                        </div>
-                        <div class="text-center mb-6">
-                            <div class="inline-block bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-semibold">Within 20 Miles</div>
-                            <div class="text-5xl font-black text-green-600 mt-4">$115</div>
-                            <div class="text-sm text-gray-500 mt-1">Minimum Service Call</div>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 text-center">Standard Coverage</h3>
-                        <p class="text-gray-600 mb-6">Covers our travel and includes <strong>up to the first hour</strong> of active diagnostic, troubleshooting, or labor time.</p>
-                        <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-4">
-                            <li class="flex items-start gap-2"><span class="text-green-500 mt-1">•</span> Includes the first hour of labor</li>
-                            <li class="flex items-start gap-2"><span class="text-green-500 mt-1">•</span> Zero travel fees</li>
-                            <li class="flex items-start gap-2"><span class="text-green-500 mt-1">•</span> Any hands-on work or tool use begins the first-hour block</li>
-                        </ul>
-                    </div>
 
-                    <!-- Zone B Minimum Service Call -->
-                    <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
-                            <i class="fas fa-location-dot mr-1"></i> Zone B
-                        </div>
-                        <div class="text-center mb-6">
-                            <div class="inline-block bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-sm font-semibold">Outside 20 Miles</div>
-                            <div class="text-5xl font-black text-orange-600 mt-4">$160</div>
-                            <div class="text-sm text-gray-500 mt-1">Minimum Service Call</div>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 text-center">Extended County</h3>
-                        <p class="text-gray-600 mb-6">Covers our extended travel and includes <strong>up to the first hour</strong> of active diagnostic, troubleshooting, or labor time.</p>
-                        <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-4">
-                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">•</span> Includes the first hour of labor</li>
-                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">•</span> Extended travel covered</li>
-                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">•</span> Any hands-on work or tool use begins the first-hour block</li>
-                        </ul>
-                    </div>
+                <div class="grid md:grid-cols-3 gap-5">
+                    <article class="service-card bg-green-50 border border-green-200 p-7 rounded-3xl">
+                        <div class="flex items-center justify-between gap-3"><span class="text-xs font-black uppercase tracking-widest text-green-700">Zone A</span><i class="fas fa-location-dot text-green-600"></i></div>
+                        <div class="text-5xl font-black text-gray-950 mt-4">$100</div>
+                        <h3 class="text-xl font-bold mt-2 text-gray-950">First hour</h3>
+                        <p class="text-gray-600 mt-3">For homes within about 20 miles of our Waterford base. Travel, diagnosis, and up to one hour of labor are included.</p>
+                    </article>
+                    <article class="service-card bg-orange-50 border border-orange-200 p-7 rounded-3xl">
+                        <div class="flex items-center justify-between gap-3"><span class="text-xs font-black uppercase tracking-widest text-orange-700">Zone B</span><i class="fas fa-route text-orange-600"></i></div>
+                        <div class="text-5xl font-black text-gray-950 mt-4">$145</div>
+                        <h3 class="text-xl font-bold mt-2 text-gray-950">First hour</h3>
+                        <p class="text-gray-600 mt-3">For extended Oakland County locations. The $45 difference covers additional travel; the first hour of labor is included.</p>
+                    </article>
+                    <article class="service-card bg-blue-50 border border-blue-200 p-7 rounded-3xl">
+                        <div class="flex items-center justify-between gap-3"><span class="text-xs font-black uppercase tracking-widest text-blue-700">Both Zones</span><i class="fas fa-clock text-blue-600"></i></div>
+                        <div class="text-5xl font-black text-gray-950 mt-4">$65</div>
+                        <h3 class="text-xl font-bold mt-2 text-gray-950">Each additional hour</h3>
+                        <p class="text-gray-600 mt-3">After the first hour, labor is billed in 15-minute increments at $16.25 per quarter hour. Materials are separate.</p>
+                    </article>
+                </div>
 
-                    <!-- Continuous Hourly Rate -->
-                    <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden">
-                        <div class="text-center mb-6">
-                            <div class="inline-block bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-semibold">Continuous Labor</div>
-                            <div class="text-5xl font-black text-blue-600 mt-4">$75</div>
-                            <div class="text-sm text-gray-500 mt-1">per hour ($18.75 / 15 min)</div>
+                <div class="mt-10 grid lg:grid-cols-[1.35fr_.65fr] gap-6 items-stretch">
+                    <div class="rounded-3xl border-2 border-blue-900 overflow-hidden bg-white shadow-sm">
+                        <div class="bg-blue-900 text-white px-6 py-5">
+                            <h3 class="text-xl sm:text-2xl font-black">What a standard visit costs</h3>
+                            <p class="text-blue-100 text-sm mt-1">Labor totals before materials. Partial hours after the first are billed by the quarter hour.</p>
                         </div>
-                        <h3 class="text-2xl font-bold mb-4 text-center">Continuous Hourly Rate</h3>
-                        <p class="text-gray-600 mb-6">If the job goes past the first hour, billing transitions smoothly in <strong>quarter-hour increments</strong> to keep things fair and affordable.</p>
-                        <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-4">
-                            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">•</span> $18.75 per 15-minute block</li>
-                            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">•</span> Billed transparently</li>
-                            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">•</span> Highly cost-efficient for multiple chores!</li>
-                        </ul>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-gray-50 text-xs uppercase tracking-wider text-gray-500"><tr><th class="px-5 py-4">Time on site</th><th class="px-5 py-4">Zone A</th><th class="px-5 py-4">Zone B</th></tr></thead>
+                                <tbody class="divide-y divide-gray-100 text-gray-700">
+                                    <tr><td class="px-5 py-4 font-semibold">Up to 1 hour</td><td class="px-5 py-4 font-black text-green-700">$100</td><td class="px-5 py-4 font-black text-orange-700">$145</td></tr>
+                                    <tr><td class="px-5 py-4 font-semibold">2 hours</td><td class="px-5 py-4 font-black text-green-700">$165</td><td class="px-5 py-4 font-black text-orange-700">$210</td></tr>
+                                    <tr><td class="px-5 py-4 font-semibold">3 hours</td><td class="px-5 py-4 font-black text-green-700">$230</td><td class="px-5 py-4 font-black text-orange-700">$275</td></tr>
+                                    <tr><td class="px-5 py-4 font-semibold">4 hours at standard rates</td><td class="px-5 py-4 font-black text-green-700">$295</td><td class="px-5 py-4 font-black text-orange-700">$340</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-
-                    <!-- Emergency After-Hours Rate -->
-                    <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
-                            <span class="flash-siren"><i class="fas fa-triangle-exclamation mr-1"></i></span> Urgent
+                    <aside class="rounded-3xl bg-red-50 border border-red-200 p-7 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 text-red-700 font-black uppercase tracking-widest text-xs"><span class="flash-siren"><i class="fas fa-triangle-exclamation"></i></span> After-Hours Emergency</div>
+                            <div class="text-5xl font-black text-gray-950 mt-4">$175</div>
+                            <p class="font-bold text-gray-900 mt-1">First hour</p>
+                            <p class="text-gray-600 text-sm mt-3">Urgent evening and weekend response, then $120/hour in 15-minute increments.</p>
                         </div>
-                        <div class="text-center mb-6">
-                            <div class="inline-block bg-red-100 text-red-700 px-4 py-1 rounded-full text-sm font-semibold">After-Hours Emergency</div>
-                            <div class="text-5xl font-black text-red-600 mt-4">$175</div>
-                            <div class="text-sm text-gray-500 mt-1">first hour ($30 / 15 min after)</div>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 text-center">After-Hours Rates</h3>
-                        <p class="text-gray-600 mb-6">Urgent response for evening and weekend calls. Billed at <strong>$175 for the first hour</strong> (travel included within our standard service area), then <strong>$120/hr</strong> in quarter-hour increments after.</p>
-                        <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-4">
-                            <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> $30 per 15-minute block after the first hour</li>
-                            <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> Consistent urgent-rate premium, billed transparently</li>
-                            <li class="flex items-start gap-2"><span class="text-red-500 mt-1">•</span> Fast help for urgent issues like leaks or door and window security</li>
-                        </ul>
-                    </div>
+                        <a href="tel:+12483853432" class="mt-6 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3 rounded-xl transition"><i class="fas fa-phone"></i> Call for Urgent Help</a>
+                    </aside>
                 </div>
 
                 <!-- Instant Book Flat-Rate Menu -->
@@ -1083,11 +1083,13 @@
                             <div class="mt-3 grid grid-cols-2 gap-3">
                                 <div class="bg-green-50 border border-green-100 rounded-2xl py-3 px-2">
                                     <div class="inline-block bg-green-100 text-green-700 px-3 py-0.5 rounded-full text-[11px] font-semibold">Within 20 Miles</div>
-                                    <div class="text-3xl font-black text-gray-900 tracking-tight mt-2">$315</div>
+                                    <div class="text-3xl font-black text-gray-900 tracking-tight mt-2">$270</div>
+                                    <div class="text-[11px] font-bold text-green-700 mt-1">Save $25</div>
                                 </div>
                                 <div class="bg-orange-50 border border-orange-100 rounded-2xl py-3 px-2">
                                     <div class="inline-block bg-orange-100 text-orange-700 px-3 py-0.5 rounded-full text-[11px] font-semibold">Outside 20 Miles</div>
-                                    <div class="text-3xl font-black text-gray-900 tracking-tight mt-2">$360</div>
+                                    <div class="text-3xl font-black text-gray-900 tracking-tight mt-2">$315</div>
+                                    <div class="text-[11px] font-bold text-orange-700 mt-1">Save $25</div>
                                 </div>
                             </div>
                         </div>
@@ -1122,16 +1124,18 @@
                             <div class="mt-3 grid grid-cols-2 gap-3">
                                 <div class="bg-green-50 border border-green-100 rounded-2xl py-3 px-2">
                                     <div class="inline-block bg-green-100 text-green-700 px-3 py-0.5 rounded-full text-[11px] font-semibold">Zone A (8 Hours)</div>
-                                    <div class="text-3xl font-black text-gray-900 tracking-tight mt-2">$540</div>
+                                    <div class="text-3xl font-black text-gray-900 tracking-tight mt-2">$455</div>
+                                    <div class="text-[11px] font-bold text-green-700 mt-1">Save $100</div>
                                 </div>
                                 <div class="bg-orange-50 border border-orange-100 rounded-2xl py-3 px-2">
                                     <div class="inline-block bg-orange-100 text-orange-700 px-3 py-0.5 rounded-full text-[11px] font-semibold">Zone B (6 Hours)</div>
-                                    <div class="text-3xl font-black text-gray-900 tracking-tight mt-2">$495</div>
+                                    <div class="text-3xl font-black text-gray-900 tracking-tight mt-2">$430</div>
+                                    <div class="text-[11px] font-bold text-orange-700 mt-1">Save $40</div>
                                 </div>
                             </div>
                         </div>
                         <div class="space-y-4 text-gray-600 text-sm leading-relaxed">
-                            <p>Book a craftsman for a high-value day package to tackle a bigger stretch of your to-do list. To keep contracts completely compliant under Michigan's $600 handyman limit, Zone A offers a full 8-hour package for <strong>$540</strong>, while Zone B offers a focused 6-Hour Power Package for <strong>$495</strong> (surcharge included!).</p>
+                            <p>Book a craftsman for a high-value day package to tackle a bigger stretch of your to-do list. To keep contracts completely compliant under Michigan's $600 handyman limit, Zone A offers a full 8-hour package for <strong>$455</strong>, while Zone B offers a focused 6-Hour Power Package for <strong>$430</strong> (extended travel included).</p>
                             <p>Perfect for a productive day of work &mdash; light carpentry and trim, a round of fixture and hardware updates, deck and fence repairs, flooring touch-ups, seasonal maintenance, and everything in between, all handled back to back.</p>
                             <p>You'll get the same trained craftsman for the whole block, working steadily through your list with attention to detail. Transparent, no-haggle pricing from start to finish, so you always know where you stand.</p>
                         </div>
@@ -1174,7 +1178,7 @@
                             <div class="mt-3 text-xs uppercase tracking-widest font-semibold text-gray-500">Flat Convenience Fee</div>
                             <div class="text-6xl font-black text-red-600 tracking-tight mt-3">+$50</div>
                             <div class="text-sm text-gray-500 mt-1">added to your service call</div>
-                            <div class="mt-2 text-xs text-gray-500"><i class="fas fa-clock text-gray-400 mr-1"></i> Scheduling premium only &mdash; no added labor; your job is still billed at the $75/hr rate</div>
+                            <div class="mt-2 text-xs text-gray-500"><i class="fas fa-clock text-gray-400 mr-1"></i> Scheduling premium only &mdash; no added labor; your job is still billed at the $65/hr rate</div>
                         </div>
                         <div>
                             <div class="space-y-4 text-gray-600 text-sm leading-relaxed">
