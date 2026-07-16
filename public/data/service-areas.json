@@ -61,7 +61,7 @@
       "slug": "troy",
       "aliases": [],
       "zips": ["48007", "48083", "48084", "48085", "48098"],
-      "zone": "B",
+      "zone": "A",
       "region": "Northeast & East",
       "blurb": "Troy homeowners rely on us for dependable handyman help, from TV mounting and fixture swaps to drywall, flooring, and full seasonal maintenance, all backed by our workmanship guarantee.",
       "nearby": ["rochester-hills", "birmingham", "royal-oak"]
@@ -71,7 +71,7 @@
       "slug": "rochester-hills",
       "aliases": ["rochester"],
       "zips": ["48306", "48307", "48308", "48309"],
-      "zone": "B",
+      "zone": "A",
       "region": "Northeast & East",
       "blurb": "In Rochester Hills and Rochester, we tackle the growing list every homeowner keeps, including door and window adjustments, caulking, minor plumbing, and exterior upkeep, so your weekends stay yours.",
       "nearby": ["troy", "lake-orion", "oxford"]
@@ -141,7 +141,7 @@
       "slug": "novi",
       "aliases": [],
       "zips": ["48374", "48375", "48376", "48377"],
-      "zone": "B",
+      "zone": "A",
       "region": "Southwest",
       "blurb": "Novi's newer construction still needs a handyman for punch-list fixes, furniture assembly, mounting, and the wear-and-tear repairs that come with a busy household. We're on it.",
       "nearby": ["farmington-hills", "southfield", "west-bloomfield"]
@@ -161,7 +161,7 @@
       "slug": "lake-orion",
       "aliases": ["orion township"],
       "zips": ["48359", "48360", "48361", "48362"],
-      "zone": "B",
+      "zone": "A",
       "region": "Northeast & East",
       "blurb": "From the lake to Orion Township's neighborhoods, we help homeowners with deck restoration, staining, gutters, and the repairs that keep a home ready for every Michigan season.",
       "nearby": ["clarkston", "oxford", "rochester-hills"]
@@ -171,7 +171,7 @@
       "slug": "oxford",
       "aliases": ["oxford township"],
       "zips": ["48370", "48371"],
-      "zone": "B",
+      "zone": "A",
       "region": "Far North & Northeast",
       "blurb": "In Oxford and Oxford Township, we bring town-and-country homes the same reliable handyman help, including carpentry, painting, weatherization, and honest preventative maintenance.",
       "nearby": ["lake-orion", "clarkston", "rochester-hills"]
