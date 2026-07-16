@@ -376,7 +376,7 @@ ${service.intro.map((p) => `                    <p>${amp(p)}</p>`).join('\n')}
 
             <!-- What's included -->
             <div class="max-w-6xl mx-auto mt-14 sm:mt-20">
-                \${service.slug === 'senior-care' ? \`<!-- Checklist Callout Section -->
+                ${service.slug === 'senior-care' ? `<!-- Checklist Callout Section -->
                 <div class="bg-red-50 border-2 border-red-600 rounded-3xl p-6 sm:p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
                     <div class="max-w-2xl text-center md:text-left">
                         <h3 class="text-xl sm:text-2xl font-bold text-blue-900 flex items-center justify-center md:justify-start gap-2.5">
@@ -392,7 +392,7 @@ ${service.intro.map((p) => `                    <p>${amp(p)}</p>`).join('\n')}
                             View Checklist &amp; Guide <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
-                </div>\` : ''}
+                </div>` : ''}
                 <div class="text-center mb-8">
                     <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm">What's Included</div>
                     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">${displayName} Services We Provide</h2>
