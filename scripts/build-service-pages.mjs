@@ -357,7 +357,6 @@ ${jsonLd(service)}
                 <div class="lg:col-span-2 prose prose-lg max-w-none text-gray-600">
                     <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4">${displayName} in Oakland County, MI</h2>
 ${service.intro.map((p) => `                    <p>${amp(p)}</p>`).join('\n')}
-                    <p>Operating under Michigan's minor project exemption (MCL 339.2403), we specialize in minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County.</p>
                 </div>
                 <aside class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 shadow-lg">
                     <div class="flex items-center gap-3 mb-4">

@@ -336,7 +336,6 @@ ${jsonLd(city)}
                     <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4">Your Local Handyman for ${city.name}</h2>
                     <p>${city.blurb}</p>
                     <p>Whether it is a single nagging repair or a full seasonal to-do list, we bring the same craftsmanship, clean job sites, and clear communication to every ${city.name} home. From drywall and doors to painting, flooring, gutters, and minor plumbing or electrical work, we help you protect your home's comfort and value.</p>
-                    <p>Operating under Michigan's minor project exemption (MCL 339.2403), we specialize in minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County.</p>
                 </div>
                 <aside class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 shadow-lg">
                     <div class="flex items-center gap-3 mb-4">
