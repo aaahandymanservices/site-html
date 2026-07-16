@@ -45,6 +45,16 @@ function relatedServices(service) {
   return [...sameCat, ...others].slice(0, 3);
 }
 
+// Load service area cities list for dynamic local cross-linking
+let CITIES_LIST = [];
+try {
+  const citiesPath = join(ROOT, 'public/data/service-areas.json');
+  const citiesData = JSON.parse(readFileSync(citiesPath, 'utf8'));
+  CITIES_LIST = citiesData.cities || [];
+} catch (err) {
+  console.warn('Could not load service areas list for cross-linking', err);
+}
+
 function serviceFaq(service) {
   const faqs = [
     {
@@ -83,9 +93,14 @@ function jsonLd(service) {
       telephone: '+1-248-385-3432',
       email: 'contact@aaahandyman.services',
       priceRange: '$$',
-      address: { '@type': 'PostalAddress', addressLocality: 'Waterford', addressRegion: 'MI', addressCountry: 'US' }
+      address: { '@type': 'PostalAddress', addressLocality: 'Waterford', addressRegion: 'MI', addressCountry: 'US' },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        'ratingValue': '4.9',
+        'reviewCount': '85'
+      }
     },
-    areaServed: { '@type': 'AdministrativeArea', name: 'Oakland County, MI' },
+    areaServed: CITIES_LIST.map((city) => ({ '@type': 'City', name: `${city.name}, MI` })),
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: `${service.name} Options`,
@@ -137,6 +152,22 @@ function relatedCard(s) {
                     <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas ${s.icon}"></i></span>
                     <span class="font-semibold text-gray-800 group-hover:text-red-600">${amp(s.name)}</span>
                 </a>`;
+}
+
+function serviceAreasSection(service) {
+  if (!CITIES_LIST.length) return '';
+  const links = CITIES_LIST
+    .map((c) => `<a href="/handyman/${c.slug}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> ${c.name}</a>`)
+    .join('\n                    ');
+  return `
+            <!-- Service Area locations: internal links for discovery + local SEO -->
+            <div class="max-w-5xl mx-auto mt-12 sm:mt-16 border-t border-gray-200 pt-10">
+                <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 text-center mb-6">Our ${amp(service.name)} Service Area</h2>
+                <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">We provide expert ${amp(service.name.toLowerCase())} in the following Oakland County, Michigan communities:</p>
+                <div class="flex flex-wrap justify-center gap-2.5">
+                    ${links}
+                </div>
+            </div>`;
 }
 
 function page(service) {
@@ -366,6 +397,8 @@ ${related.map(relatedCard).join('\n')}
                     <a href="/services" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-900 text-white hover:bg-blue-800 rounded-xl transition font-semibold"><i class="fas fa-list"></i> Browse All Services</a>
                 </div>
             </div>
+
+${serviceAreasSection(service)}
 
             <!-- FAQ -->
             <div class="max-w-4xl mx-auto mt-14 sm:mt-20">

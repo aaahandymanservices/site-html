@@ -59,12 +59,83 @@
           "addressLocality": "Waterford",
           "addressRegion": "MI",
           "addressCountry": "US"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "85"
         }
       },
-      "areaServed": {
-        "@type": "AdministrativeArea",
-        "name": "Oakland County, MI"
-      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Waterford, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Pontiac, MI"
+        },
+        {
+          "@type": "City",
+          "name": "West Bloomfield, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Clarkston, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Birmingham, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Troy, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Rochester Hills, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Farmington Hills, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Royal Oak, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Orchard Lake, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Franklin, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Huntington Woods, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Beverly Hills, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Novi, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Southfield, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Lake Orion, MI"
+        },
+        {
+          "@type": "City",
+          "name": "Oxford, MI"
+        }
+      ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Minor Electrical Services Options",
@@ -272,8 +343,7 @@
                 <span class="text-white font-semibold">Minor Electrical Services</span>
             </nav>
             <div class="w-16 h-16 mx-auto bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center text-3xl text-red-400 mb-5" aria-hidden="true"><i class="fas fa-lightbulb"></i></div>
-            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-3">Electrical &amp; Smart Home &middot; Oakland County, MI</div>
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">Minor Electrical Services</h1>
+            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-3">${amp(catLabel)} &middot; Oakland County, MI</div>            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">Minor Electrical Services</h1>
             <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
                 Safe, code-conscious swaps of switches, outlets, fixtures, and fans.
             </p>
@@ -371,6 +441,32 @@
                 </div>
                 <div class="mt-6 text-center">
                     <a href="/services" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-900 text-white hover:bg-blue-800 rounded-xl transition font-semibold"><i class="fas fa-list"></i> Browse All Services</a>
+                </div>
+            </div>
+
+
+            <!-- Service Area locations: internal links for discovery + local SEO -->
+            <div class="max-w-5xl mx-auto mt-12 sm:mt-16 border-t border-gray-200 pt-10">
+                <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 text-center mb-6">Our Minor Electrical Services Service Area</h2>
+                <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">We provide expert minor electrical services in the following Oakland County, Michigan communities:</p>
+                <div class="flex flex-wrap justify-center gap-2.5">
+                    <a href="/handyman/waterford" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Waterford</a>
+                    <a href="/handyman/pontiac" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Pontiac</a>
+                    <a href="/handyman/west-bloomfield" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> West Bloomfield</a>
+                    <a href="/handyman/clarkston" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Clarkston</a>
+                    <a href="/handyman/birmingham" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Birmingham</a>
+                    <a href="/handyman/troy" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Troy</a>
+                    <a href="/handyman/rochester-hills" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Rochester Hills</a>
+                    <a href="/handyman/farmington-hills" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Farmington Hills</a>
+                    <a href="/handyman/royal-oak" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Royal Oak</a>
+                    <a href="/handyman/orchard-lake" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Orchard Lake</a>
+                    <a href="/handyman/franklin" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Franklin</a>
+                    <a href="/handyman/huntington-woods" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Huntington Woods</a>
+                    <a href="/handyman/beverly-hills" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Beverly Hills</a>
+                    <a href="/handyman/novi" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Novi</a>
+                    <a href="/handyman/southfield" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Southfield</a>
+                    <a href="/handyman/lake-orion" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Lake Orion</a>
+                    <a href="/handyman/oxford" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Oxford</a>
                 </div>
             </div>
 
