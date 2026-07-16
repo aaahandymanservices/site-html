@@ -94,6 +94,11 @@ function jsonLd(service) {
       email: 'contact@aaahandyman.services',
       priceRange: '$$',
       address: { '@type': 'PostalAddress', addressLocality: 'Waterford', addressRegion: 'MI', addressCountry: 'US' },
+      sameAs: [
+        'https://www.facebook.com/AAAHandymanServices',
+        'https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960',
+        'https://www.yelp.com/biz/aaa-handyman-services-waterford-township'
+      ],
       aggregateRating: {
         '@type': 'AggregateRating',
         'ratingValue': '4.9',
@@ -437,7 +442,11 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                 <div class="flex flex-col items-center md:items-start">
                     <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
-                    <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="mt-4 inline-flex items-center gap-2 text-2xl hover:text-[#1877F2] transition"><i class="fab fa-facebook"></i></a>
+                    <div class="mt-4 flex items-center gap-4">
+                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl hover:text-[#1877F2] transition"><i class="fab fa-facebook"></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl hover:text-[#00B24F] transition"><i class="fa-solid fa-house-chimney"></i></a>
+                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl hover:text-[#FF1A1A] transition"><i class="fa-brands fa-yelp"></i></a>
+                    </div>
                 </div>
                 <nav aria-label="Footer">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
