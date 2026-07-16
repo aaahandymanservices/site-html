@@ -97,99 +97,178 @@
             .pulse-btn-green { animation: none !important; transition: none !important; }
         }
 
-        /* Print styling for clean physical clipboard sheets */
+        /* Print styling for the dedicated clipboard assessment kit */
         @media print {
+            @page {
+                size: letter portrait;
+                margin: 0.45in;
+            }
+            *, *::before, *::after {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            html, body {
+                width: auto !important;
+                min-height: 0 !important;
+            }
             body {
                 background-color: #ffffff !important;
                 color: #000000 !important;
-                font-size: 11pt !important;
+                display: block !important;
+                font-size: 9pt !important;
+                line-height: 1.35 !important;
             }
-            /* Hide ALL non-essential elements to render a pure checklist document */
-            nav, footer, button, #back-to-top, .pulse-btn-green, .no-print, [href^="#"], .progress-widget-container, header, .mb-10, .bg-white.rounded-3xl.p-6, .text-center.mt-12.bg-gray-100 {
+            body > nav,
+            body > header,
+            body > footer,
+            body > button,
+            #back-to-top,
+            .pulse-btn-green,
+            main > .print-header,
+            main > .max-w-5xl > :not(#printable-assessment) {
                 display: none !important;
             }
             main {
+                display: block !important;
                 padding: 0 !important;
                 margin: 0 !important;
             }
-            .max-w-5xl {
+            main > .max-w-5xl {
                 max-w: 100% !important;
                 width: 100% !important;
                 padding: 0 !important;
                 margin: 0 !important;
             }
-            
-            /* Override tailwind grids to display nicely as a single vertical stack on paper */
-            .grid {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 12px !important;
+            #printable-assessment {
+                display: block !important;
+                width: 100% !important;
             }
-            
+            #printable-assessment .print-header {
+                display: block !important;
+                border: 0 !important;
+                border-bottom: 3px solid #1B2A4A !important;
+                padding: 0 0 0.16in !important;
+                margin: 0 0 0.18in !important;
+            }
+            #printable-assessment .print-header h1 {
+                font-size: 20pt !important;
+                line-height: 1.05 !important;
+                margin: 0 0 0.04in !important;
+                color: #1B2A4A !important;
+            }
+            #printable-assessment .print-header p {
+                margin: 0.02in 0 !important;
+            }
+            #printable-assessment .assessment-details {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 0.18in !important;
+                margin-top: 0.15in !important;
+            }
+            #printable-assessment .assessment-line {
+                border-bottom: 1px solid #6b7280 !important;
+                min-height: 0.22in !important;
+                padding-bottom: 0.02in !important;
+                color: #374151 !important;
+                font-size: 8pt !important;
+            }
+            #printable-assessment section {
+                margin: 0 0 0.16in !important;
+                padding: 0 !important;
+                break-inside: auto;
+            }
+            #printable-assessment section > .flex {
+                break-after: avoid;
+                gap: 0.08in !important;
+                margin: 0 0 0.09in !important;
+                padding: 0 0 0.05in !important;
+                border-bottom: 2px solid #A61F2E !important;
+            }
+            #printable-assessment section > .flex > span {
+                display: none !important;
+            }
+            #printable-assessment .grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                align-items: start !important;
+                gap: 0.1in !important;
+            }
             .checklist-item {
-                border: 1.5px solid #bbb !important;
+                box-sizing: border-box !important;
+                border: 1px solid #9ca3af !important;
                 break-inside: avoid;
-                margin-bottom: 12px !important;
-                padding: 12px !important;
+                margin: 0 !important;
+                padding: 0.1in !important;
                 background-color: #fff !important;
                 display: flex !important;
                 flex-direction: row !important;
                 align-items: flex-start !important;
-                gap: 12px !important;
-                border-radius: 8px !important;
+                gap: 0.08in !important;
+                border-radius: 0.06in !important;
                 box-shadow: none !important;
                 width: 100% !important;
+                min-width: 0 !important;
+                color: #111827 !important;
             }
-            
-            /* Print-specific square checkboxes so users can check them physically */
+            .checklist-item.checked,
+            .checklist-item.checked h4,
+            .checklist-item.checked p {
+                background: #fff !important;
+                color: #111827 !important;
+                text-decoration: none !important;
+                opacity: 1 !important;
+            }
+            .checklist-item.checked {
+                border-color: #9ca3af !important;
+            }
+            .checklist-item h4 {
+                color: #1B2A4A !important;
+                font-size: 9.5pt !important;
+                line-height: 1.2 !important;
+                margin: 0 !important;
+            }
+            .checklist-item p,
+            .checklist-item ul {
+                color: #374151 !important;
+                font-size: 7.75pt !important;
+                line-height: 1.3 !important;
+                margin-top: 0.04in !important;
+            }
+            .checklist-item ul {
+                padding-left: 0.16in !important;
+            }
             .print-checkbox {
                 display: inline-block !important;
-                width: 18px !important;
-                height: 18px !important;
-                border: 2px solid #333 !important;
-                border-radius: 4px !important;
-                margin-top: 4px !important;
+                box-sizing: border-box !important;
+                width: 0.17in !important;
+                height: 0.17in !important;
+                border: 1.5px solid #1B2A4A !important;
+                border-radius: 0.02in !important;
+                margin-top: 0.01in !important;
                 flex-shrink: 0 !important;
             }
-
             .web-checkbox {
                 display: none !important;
             }
-
-            h1 {
-                font-size: 22pt !important;
-                margin-top: 0 !important;
+            #printable-assessment h3 {
+                font-size: 12pt !important;
+                line-height: 1.15 !important;
                 color: #1B2A4A !important;
+                border: 0 !important;
+                padding: 0 !important;
+                margin: 0 !important;
             }
-            h2 {
-                font-size: 16pt !important;
-                color: #1B2A4A !important;
-            }
-            h3 {
-                font-size: 13pt !important;
-                color: #1B2A4A !important;
-                border-bottom: 2px solid #8e1f26 !important;
-                padding-bottom: 4px !important;
-                margin-top: 24px !important;
-                margin-bottom: 12px !important;
-            }
-            .bg-blue-50, .bg-red-50, .bg-gray-100 {
-                background-color: #f9f9f9 !important;
-                border-color: #333 !important;
-                color: #000 !important;
-                padding: 12px !important;
-                border-radius: 6px !important;
-                border-left: 4px solid #333 !important;
-            }
-            /* Add custom header on printed page representing the checklist */
-            .print-header {
+            #printable-assessment .print-footer {
                 display: block !important;
-                border-bottom: 2px solid #1B2A4A !important;
-                padding-bottom: 10px !important;
-                margin-bottom: 20px !important;
+                break-inside: avoid;
+                border-top: 2px solid #1B2A4A !important;
+                margin-top: 0.18in !important;
+                padding-top: 0.1in !important;
+                color: #4b5563 !important;
+                font-size: 7.5pt !important;
             }
         }
-        .print-header { display: none; }
+        .print-header, .print-footer { display: none; }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -274,21 +353,6 @@
     </header>
 
     <main class="flex-grow py-12 sm:py-16">
-        <!-- Print Header (Visible ONLY on printed page) -->
-        <div class="print-header max-w-5xl mx-auto px-6 mb-8">
-            <div class="flex justify-between items-center border-b-2 border-blue-900 pb-4">
-                <div>
-                    <h1 class="text-2xl font-bold text-blue-900">AAA Handyman Services</h1>
-                    <p class="text-sm text-gray-600">Oakland County, Michigan | Professional Home Safety retrofits</p>
-                    <p class="text-xs text-gray-500">Phone: (248) 385-3432 | Email: contact@aaahandyman.services</p>
-                </div>
-                <div class="text-right">
-                    <p class="text-sm font-semibold text-red-600">Aging-In-Place Checklist</p>
-                    <p class="text-xs text-gray-500">Walk-Through Assessment Sheet</p>
-                </div>
-            </div>
-        </div>
-
         <div class="max-w-5xl mx-auto px-6">
             <!-- Lead Magnet Section -->
             <div class="bg-gradient-to-br from-blue-900 to-blue-950 rounded-3xl p-6 sm:p-8 text-white border border-blue-800 shadow-xl mb-12 flex flex-col md:flex-row items-center gap-8 no-print">
@@ -309,13 +373,16 @@
                             <label for="lead-email" class="sr-only">Your Email</label>
                             <input type="email" id="lead-email" name="email" placeholder="Your Email Address" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm" required>
                         </div>
-                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-lg shadow-red-600/30 flex items-center justify-center gap-2 text-sm">
+                        <button id="lead-submit-btn" type="submit" class="w-full bg-red-600 hover:bg-red-700 disabled:cursor-wait disabled:opacity-70 text-white font-bold py-3 px-6 rounded-xl transition shadow-lg shadow-red-600/30 flex items-center justify-center gap-2 text-sm">
                             <i class="fas fa-file-pdf"></i> Get Checklist &amp; Print
                         </button>
                     </form>
                     <div id="lead-success-msg" class="hidden text-center bg-green-900/40 border border-green-500 text-green-200 p-4 rounded-xl mt-3 text-xs leading-relaxed">
                         <p class="font-bold mb-1"><i class="fas fa-circle-check"></i> Thank you!</p>
-                        <p>You have been subscribed to our seasonal home upkeep updates. A print dialog is opening so you can print your clipboard-friendly checklist immediately!</p>
+                        <p class="mb-3">Your assessment kit is ready. If the print dialog does not open automatically, use the button below.</p>
+                        <button id="print-assessment-btn" type="button" class="w-full bg-white text-blue-900 hover:bg-blue-50 font-bold py-2.5 px-4 rounded-lg transition flex items-center justify-center gap-2 text-sm">
+                            <i class="fas fa-print"></i> Print Assessment Kit
+                        </button>
                     </div>
                     <div id="lead-error-msg" class="hidden text-center bg-red-900/40 border border-red-500 text-red-200 p-3 rounded-xl mt-3 text-xs leading-relaxed">
                     </div>
@@ -384,13 +451,32 @@
                             <i class="fas fa-rotate-left"></i> Reset Progress
                         </button>
                         <a href="#lead-magnet-form" class="text-xs font-bold bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-xl transition shadow-md shadow-red-600/20 flex items-center gap-1.5">
-                            <i class="fas fa-print"></i> Get Clipboard PDF &amp; Print
+                            <i class="fas fa-print"></i> Get Printable Assessment Kit
                         </a>
                     </div>
                 </div>
                 <!-- Progress Bar -->
                 <div class="w-full bg-gray-100 h-3 rounded-full mt-4 overflow-hidden border border-gray-100">
                     <div id="progress-bar" class="bg-gradient-to-r from-red-600 to-red-500 h-full rounded-full transition-all duration-300 ease-out" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div id="printable-assessment">
+            <!-- Print Header (Visible ONLY on printed page) -->
+            <div class="print-header">
+                <div class="flex justify-between items-start gap-6">
+                    <div>
+                        <h1>AAA Handyman Services</h1>
+                        <p class="font-bold text-red-600">Aging-in-Place Walk-Through Assessment Kit</p>
+                        <p>Oakland County, Michigan &middot; (248) 385-3432 &middot; contact@aaahandyman.services</p>
+                    </div>
+                    <p class="text-right font-bold">Safety &middot; Access &middot; Comfort</p>
+                </div>
+                <div class="assessment-details">
+                    <div class="assessment-line">Homeowner / resident:</div>
+                    <div class="assessment-line">Assessment date:</div>
+                    <div class="assessment-line">Property address:</div>
+                    <div class="assessment-line">Completed by:</div>
                 </div>
             </div>
 
@@ -641,6 +727,12 @@
                 </div>
             </section>
 
+            <div class="print-footer">
+                <p><strong>Next steps:</strong> Circle priority items, add measurements or notes in the margins, and contact AAA Handyman Services for help with minor safety and accessibility improvements.</p>
+                <p class="mt-1">This checklist is a general planning aid and is not a substitute for medical, occupational therapy, engineering, code, or licensed contractor advice.</p>
+            </div>
+            </div>
+
             <!-- Back to Service CTA -->
             <div class="text-center mt-12 bg-gray-100 py-10 px-6 rounded-3xl">
                 <h3 class="text-xl font-bold text-blue-900 mb-2">Need Help Modifying Your Home?</h3>
@@ -860,11 +952,29 @@
         var leadForm = document.getElementById('lead-magnet-form');
         var successMsg = document.getElementById('lead-success-msg');
         var errorMsg = document.getElementById('lead-error-msg');
+        var submitBtn = document.getElementById('lead-submit-btn');
+        var printBtn = document.getElementById('print-assessment-btn');
+
+        function printAssessmentKit() {
+            window.requestAnimationFrame(function () {
+                window.requestAnimationFrame(function () {
+                    window.print();
+                });
+            });
+        }
+
+        if (printBtn) {
+            printBtn.addEventListener('click', printAssessmentKit);
+        }
 
         if (leadForm) {
             leadForm.addEventListener('submit', function (e) {
                 e.preventDefault();
                 errorMsg.classList.add('hidden');
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Preparing Your Kit...';
+                }
                 
                 var name = document.getElementById('lead-name').value;
                 var email = document.getElementById('lead-email').value;
@@ -891,14 +1001,15 @@
                 .then(function (data) {
                     leadForm.classList.add('hidden');
                     successMsg.classList.remove('hidden');
-                    // Automatically trigger print dialog for custom printable view
-                    setTimeout(function () {
-                        window.print();
-                    }, 500);
+                    printAssessmentKit();
                 })
                 .catch(function (err) {
                     errorMsg.innerText = err.message || 'An error occurred. Please try again.';
                     errorMsg.classList.remove('hidden');
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-file-pdf"></i> Get Checklist &amp; Print';
+                    }
                 });
             });
         }
