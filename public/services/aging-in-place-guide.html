@@ -74,6 +74,58 @@
             html { scroll-behavior: auto; }
             .pulse-btn-green { animation: none !important; transition: none !important; }
         }
+
+        /* Print styling for clean physical clipboard sheets */
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                font-size: 12pt !important;
+            }
+            nav, footer, button, #back-to-top, .pulse-btn-green, .no-print, [href^="#"] {
+                display: none !important;
+            }
+            main {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .max-w-5xl {
+                max-w: 100% !important;
+                width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .checklist-item {
+                border: 1px solid #ddd !important;
+                break-inside: avoid;
+                margin-bottom: 10px !important;
+                padding: 10px !important;
+                background-color: #fff !important;
+            }
+            h1 {
+                font-size: 24pt !important;
+                margin-top: 0 !important;
+            }
+            h2 {
+                font-size: 18pt !important;
+            }
+            h3 {
+                font-size: 14pt !important;
+            }
+            .bg-blue-50, .bg-red-50, .bg-gray-100 {
+                background-color: #f9f9f9 !important;
+                border-color: #333 !important;
+                color: #000 !important;
+            }
+            /* Add custom header on printed page representing the checklist */
+            .print-header {
+                display: block !important;
+                border-bottom: 2px solid #1B2A4A !important;
+                padding-bottom: 10px !important;
+                margin-bottom: 20px !important;
+            }
+        }
+        .print-header { display: none; }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -158,7 +210,54 @@
     </header>
 
     <main class="flex-grow py-12 sm:py-16">
+        <!-- Print Header (Visible ONLY on printed page) -->
+        <div class="print-header max-w-5xl mx-auto px-6 mb-8">
+            <div class="flex justify-between items-center border-b-2 border-blue-900 pb-4">
+                <div>
+                    <h1 class="text-2xl font-bold text-blue-900">AAA Handyman Services</h1>
+                    <p class="text-sm text-gray-600">Oakland County, Michigan | Professional Home Safety retrofits</p>
+                    <p class="text-xs text-gray-500">Phone: (248) 385-3432 | Email: contact@aaahandyman.services</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm font-semibold text-red-600">Aging-In-Place Checklist</p>
+                    <p class="text-xs text-gray-500">Walk-Through Assessment Sheet</p>
+                </div>
+            </div>
+        </div>
+
         <div class="max-w-5xl mx-auto px-6">
+            <!-- Lead Magnet Section -->
+            <div class="bg-gradient-to-br from-blue-900 to-blue-950 rounded-3xl p-6 sm:p-8 text-white border border-blue-800 shadow-xl mb-12 flex flex-col md:flex-row items-center gap-8 no-print">
+                <div class="flex-1">
+                    <div class="inline-block bg-red-600 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-3">Free Printable Assessment Kit</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2">Want a Clean, Printable Checklist?</h3>
+                    <p class="text-blue-100 text-sm leading-relaxed">
+                        Enter your email below to receive a beautifully formatted, printer-friendly version of this complete assessment checklist. It's designed to let you walk through your parents' or your own home with a clipboard and easily check off each item!
+                    </p>
+                </div>
+                <div class="w-full md:w-auto flex-shrink-0 min-w-[280px] sm:min-w-[320px]">
+                    <form id="lead-magnet-form" class="space-y-3">
+                        <div>
+                            <label for="lead-name" class="sr-only">Your Name</label>
+                            <input type="text" id="lead-name" name="name" placeholder="Your Name" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm" required>
+                        </div>
+                        <div class="relative">
+                            <label for="lead-email" class="sr-only">Your Email</label>
+                            <input type="email" id="lead-email" name="email" placeholder="Your Email Address" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm" required>
+                        </div>
+                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-lg shadow-red-600/30 flex items-center justify-center gap-2 text-sm">
+                            <i class="fas fa-file-pdf"></i> Get Checklist &amp; Print
+                        </button>
+                    </form>
+                    <div id="lead-success-msg" class="hidden text-center bg-green-900/40 border border-green-500 text-green-200 p-4 rounded-xl mt-3 text-xs leading-relaxed">
+                        <p class="font-bold mb-1"><i class="fas fa-circle-check"></i> Thank you!</p>
+                        <p>You have been subscribed to our seasonal home upkeep updates. A print dialog is opening so you can print your clipboard-friendly checklist immediately!</p>
+                    </div>
+                    <div id="lead-error-msg" class="hidden text-center bg-red-900/40 border border-red-500 text-red-200 p-3 rounded-xl mt-3 text-xs leading-relaxed">
+                    </div>
+                </div>
+            </div>
+
             <!-- Overview intro card -->
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200 shadow-sm mb-12">
                 <h2 class="text-2xl font-bold text-blue-900 mb-4">An Overview &amp; Checklist</h2>
@@ -168,6 +267,17 @@
                 <p class="text-gray-600 mb-6 leading-relaxed">
                     The checklist below contains features you may want to consider for your next new construction or renovation project. It also provides a quick reference for various aging-in-place issues. Because this list is not comprehensive, it’s best to also consult with a Certified Aging-in-Place specialist.
                 </p>
+                
+                <!-- Handyman vs. Contractor Expectation Callout -->
+                <div class="bg-blue-50 border-l-4 border-blue-900 p-5 rounded-r-xl mb-6">
+                    <p class="text-sm font-bold text-blue-900 flex items-center gap-2">
+                        <i class="fas fa-hammer"></i> Handyman vs. General Contractor: Setting Expectations
+                    </p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                        To set perfect expectations, we want to clarify exactly what our team handles: <strong>While we don't build elevator shafts, construct new additions, or perform major structural framing</strong>, we specialize in the essential accessibility retrofits that secure your home. We can install heavy-duty grab bars, change out your round door knobs for comfortable lever handles, secure your stair handrails, mount task lighting, and make minor threshold adjustments. Our services are perfectly tailored to these high-impact safety modifications!
+                    </p>
+                </div>
+
                 <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-xl">
                     <p class="text-sm font-semibold text-red-800">
                         <i class="fas fa-circle-info mr-1"></i> Looking to execute any of these changes?
@@ -525,6 +635,53 @@
         var mobileMenu = document.getElementById('mobile-menu');
         if (mobileMenuBtn && mobileMenu) {
             mobileMenuBtn.addEventListener('click', function () { mobileMenu.classList.toggle('hidden'); });
+        }
+
+        // Lead Magnet Form Submission and Printing Integration
+        var leadForm = document.getElementById('lead-magnet-form');
+        var successMsg = document.getElementById('lead-success-msg');
+        var errorMsg = document.getElementById('lead-error-msg');
+
+        if (leadForm) {
+            leadForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                errorMsg.classList.add('hidden');
+                
+                var name = document.getElementById('lead-name').value;
+                var email = document.getElementById('lead-email').value;
+
+                fetch('/api/seasonal-subscription', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        source: 'aging_in_place_pdf'
+                    })
+                })
+                .then(function (res) {
+                    return res.json().then(function (data) {
+                        if (!res.ok) {
+                            throw new Error(data.error || 'Failed to submit subscription.');
+                        }
+                        return data;
+                    });
+                })
+                .then(function (data) {
+                    leadForm.classList.add('hidden');
+                    successMsg.classList.remove('hidden');
+                    // Automatically trigger print dialog for custom printable view
+                    setTimeout(function () {
+                        window.print();
+                    }, 500);
+                })
+                .catch(function (err) {
+                    errorMsg.innerText = err.message || 'An error occurred. Please try again.';
+                    errorMsg.classList.remove('hidden');
+                });
+            });
         }
     </script>
 </body>
