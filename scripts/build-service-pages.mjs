@@ -324,7 +324,7 @@ ${jsonLd(service)}
                 <span class="text-white font-semibold">${displayName}</span>
             </nav>
             <div class="w-16 h-16 mx-auto bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center text-3xl text-red-400 mb-5" aria-hidden="true"><i class="fas ${service.icon}"></i></div>
-            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-3">\${amp(catLabel)} &middot; Oakland County, MI</div>            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">${displayName}</h1>
+            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-3">${amp(catLabel)} &middot; Oakland County, MI</div>            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">${displayName}</h1>
             <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
                 ${amp(service.tagline)}
             </p>
