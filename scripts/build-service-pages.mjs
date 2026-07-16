@@ -175,6 +175,71 @@ function serviceAreasSection(service) {
             </div>`;
 }
 
+// Gutter cost guide: a one-off explainer that lives only on the gutters page.
+// Kept here (rather than in the generic template) because it is specific to a
+// single service, mirroring how the senior-care checklist callout is handled.
+function costGuideSection(service) {
+  if (service.slug !== 'gutters') return '';
+  return `
+            <!-- Understanding gutter cleaning costs: market context + factors -->
+            <div class="max-w-6xl mx-auto mt-14 sm:mt-20">
+                <div class="text-center mb-8">
+                    <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm">Cost Guide</div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">Understanding Gutter Cleaning Costs in Southeast Michigan</h2>
+                    <p class="mt-3 text-gray-600 max-w-3xl mx-auto">Gutter cleaning is priced a few different ways across the metro Detroit area. Here is how the common models compare so you know what a fair quote looks like, and how our own <a href="/rates" class="text-red-600 font-semibold underline underline-offset-2">transparent flat rates</a> stack up.</p>
+                </div>
+
+                <!-- Linear foot pricing model -->
+                <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 sm:p-8 shadow-sm">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-ruler-horizontal"></i></span>
+                        <h3 class="text-xl sm:text-2xl font-bold text-blue-900">The Linear-Foot Pricing Model</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">Gutter cleaning in Southeast Michigan is often priced directly by the foot. Rates vary mostly with the height and reach of the work:</p>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5">
+                            <div class="text-sm font-bold uppercase tracking-wider text-blue-600 mb-1">Standard Rate</div>
+                            <div class="text-2xl font-extrabold text-gray-900 mb-2">$0.95&ndash;$1.25 <span class="text-base font-semibold text-gray-500">/ linear foot</span></div>
+                            <p class="text-sm text-gray-600">Typical for a single-story home.</p>
+                        </div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5">
+                            <div class="text-sm font-bold uppercase tracking-wider text-red-600 mb-1">Multi-Story Rate</div>
+                            <div class="text-2xl font-extrabold text-gray-900 mb-2">$1.00&ndash;$1.80+ <span class="text-base font-semibold text-gray-500">/ linear foot</span></div>
+                            <p class="text-sm text-gray-600">Two-story homes, reflecting the extra ladder work and safety equipment required.</p>
+                        </div>
+                    </div>
+                    <div class="mt-5 flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-2xl p-4">
+                        <i class="fas fa-calculator text-blue-600 mt-1" aria-hidden="true"></i>
+                        <p class="text-sm text-gray-700"><strong>Example:</strong> Cleaning 150 linear feet of gutters on a single-story ranch usually runs about <strong>$140 to $185</strong> under this model &mdash; right in line with AAA Handyman's flat <strong>$135 (Zone A) / $180 (Zone B)</strong> gutter-cleaning rate for a comparable home.</p>
+                    </div>
+                </div>
+
+                <!-- Key factors that adjust the price -->
+                <div class="mt-6">
+                    <h3 class="text-xl sm:text-2xl font-bold text-blue-900 mb-4 text-center">Key Factors That Can Adjust the Price</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
+                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-house-chimney"></i></span>
+                            <h4 class="font-bold text-gray-900 mb-1">Roof Pitch &amp; Height</h4>
+                            <p class="text-sm text-gray-600">Un-walkable, steep roofs or multi-story homes require extra safety harnesses and setup time, which can add a premium of 15% or more.</p>
+                        </div>
+                        <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
+                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-seedling"></i></span>
+                            <h4 class="font-bold text-gray-900 mb-1">Severity of Clogs</h4>
+                            <p class="text-sm text-gray-600">Gutters that are severely overflowing, packed with dirt, or hosting growing weeds must be scooped by hand instead of flushed &mdash; expect a 10% to 50% heavy-debris surcharge.</p>
+                        </div>
+                        <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
+                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-screwdriver-wrench"></i></span>
+                            <h4 class="font-bold text-gray-900 mb-1">Gutter Guards</h4>
+                            <p class="text-sm text-gray-600">Mesh or surface-tension guards that must be unscrewed and re-secured to clean underneath add labor time, and usually increase the cost.</p>
+                        </div>
+                    </div>
+                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: rather than charging by the foot, we quote a flat rate up front, then bill continuous labor at <strong>$65/hour</strong> in quarter-hour increments for anything beyond a standard clean. You will always know the price before we start.</p>
+                </div>
+            </div>
+`;
+}
+
 function page(service) {
   const url = `${SITE}/services/${service.slug}`;
   const catLabel = CATEGORIES[service.category];
@@ -378,7 +443,7 @@ ${service.intro.map((p) => `                    <p>${amp(p)}</p>`).join('\n')}
                     <a href="/rates" class="mt-3 block text-center text-sm text-gray-500 hover:text-red-600 underline underline-offset-2">See full rates &amp; packages</a>
                 </aside>
             </div>
-
+${costGuideSection(service)}
             <!-- What's included -->
             <div class="max-w-6xl mx-auto mt-14 sm:mt-20">
                 ${service.slug === 'senior-care' ? `<!-- Checklist Callout Section -->
