@@ -221,7 +221,7 @@
           "name": "How much does power washing cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Pricing starts with a minimum service call: $115 in Zone A (within about 20 miles of our Waterford base) or $160 in Zone B (extended county, 20+ miles). That covers travel, diagnostics, and up to the first hour of labor. Continuous labor after the first hour is billed at a flat $75 per hour in quarter-hour increments, and materials are billed separately."
+            "text": "Pricing starts with a minimum service call: $100 in Zone A (within about 20 miles of our Waterford base) or $145 in Zone B (extended county, 20+ miles). That covers travel, diagnostics, and up to the first hour of labor. Continuous labor after the first hour is billed at a flat $65 per hour in quarter-hour increments, and materials are billed separately."
           }
         },
         {
@@ -382,8 +382,8 @@
                         </div>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
-                        <li class="flex items-start gap-2"><i class="fas fa-location-dot text-red-600 mt-1"></i><span><strong>$115 minimum</strong> in Zone A (within ~20 miles) &middot; <strong>$160</strong> in Zone B (extended county).</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1"></i><span>Then a flat <strong>$75/hour</strong> in quarter-hour increments.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-location-dot text-red-600 mt-1"></i><span><strong>$100 minimum</strong> in Zone A (within ~20 miles) &middot; <strong>$145</strong> in Zone B (extended county).</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1"></i><span>Then a flat <strong>$65/hour</strong> in quarter-hour increments.</span></li>
                         <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
                         <li class="flex items-start gap-2"><i class="fas fa-map text-red-600 mt-1"></i><span>Available across <a href="/service-areas" class="text-red-600 font-semibold underline underline-offset-2">Oakland County</a>.</span></li>
                     </ul>
@@ -396,6 +396,23 @@
 
             <!-- What's included -->
             <div class="max-w-6xl mx-auto mt-14 sm:mt-20">
+                ${service.slug === 'senior-care' ? `<!-- Checklist Callout Section -->
+                <div class="bg-red-50 border-2 border-red-600 rounded-3xl p-6 sm:p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
+                    <div class="max-w-2xl text-center md:text-left">
+                        <h3 class="text-xl sm:text-2xl font-bold text-blue-900 flex items-center justify-center md:justify-start gap-2.5">
+                            <i class="fas fa-clipboard-list text-red-600"></i>
+                            Complete Aging-in-Place Checklist
+                        </h3>
+                        <p class="text-gray-600 mt-2 text-sm sm:text-base leading-relaxed">
+                            Planning a home renovation or build? Explore our comprehensive guide covering exterior layout, room dimensions, countertops, bathroom wall-bracing, stairways, and electrical controls.
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0 w-full md:w-auto text-center">
+                        <a href="/services/aging-in-place-guide" class="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-4 rounded-xl transition shadow-lg shadow-red-600/30">
+                            View Checklist &amp; Guide <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>` : ''}
                 <div class="text-center mb-8">
                     <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm">What's Included</div>
                     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">Power Washing Services We Provide</h2>
@@ -488,7 +505,7 @@
                     </article>
                     <article class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-6 rounded-3xl shadow-sm">
                         <h3 class="text-lg sm:text-xl font-bold text-blue-900 mb-2">How much does power washing cost?</h3>
-                        <p class="text-gray-600">Pricing starts with a minimum service call: $115 in Zone A (within about 20 miles of our Waterford base) or $160 in Zone B (extended county, 20+ miles). That covers travel, diagnostics, and up to the first hour of labor. Continuous labor after the first hour is billed at a flat $75 per hour in quarter-hour increments, and materials are billed separately.</p>
+                        <p class="text-gray-600">Pricing starts with a minimum service call: $100 in Zone A (within about 20 miles of our Waterford base) or $145 in Zone B (extended county, 20+ miles). That covers travel, diagnostics, and up to the first hour of labor. Continuous labor after the first hour is billed at a flat $65 per hour in quarter-hour increments, and materials are billed separately.</p>
                     </article>
                     <article class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-6 rounded-3xl shadow-sm">
                         <h3 class="text-lg sm:text-xl font-bold text-blue-900 mb-2">Is power washing safe for my siding and deck?</h3>
