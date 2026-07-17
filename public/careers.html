@@ -361,6 +361,21 @@
                             </div>
 
                             <div>
+                                <label for="careers-felony" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Have you been convicted of a felony in the last 5 years?</label>
+                                <select id="careers-felony" name="felonyConviction" required class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                    <option value="" disabled selected>Select...</option>
+                                    <option value="No">No</option>
+                                    <option value="Yes">Yes</option>
+                                </select>
+                                <p class="text-[10px] text-gray-400 mt-1 leading-normal">A conviction is not an automatic bar to employment. Each application is considered individually, taking into account the nature of the offense, how much time has passed, and its relevance to the job.</p>
+                            </div>
+
+                            <div id="careers-felony-details-wrap" class="hidden">
+                                <label for="careers-felony-details" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">If yes, please explain <span class="text-gray-400 normal-case tracking-normal font-medium">(optional)</span></label>
+                                <textarea id="careers-felony-details" name="felonyDetails" rows="3" maxlength="1000" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Nature of the offense and any context you'd like us to consider."></textarea>
+                            </div>
+
+                            <div>
                                 <label for="careers-message" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Tell Us About Your Experience</label>
                                 <textarea id="careers-message" name="message" rows="4" required maxlength="1000" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Describe the work you do best, past projects, and why you'd be a great fit."></textarea>
                             </div>
@@ -545,6 +560,15 @@
                         careersSubmit.classList.remove('opacity-70', 'cursor-not-allowed');
                     }
                 });
+            });
+        }
+
+        // Reveal the felony explanation field only when "Yes" is selected
+        const careersFelony = document.getElementById('careers-felony');
+        const careersFelonyWrap = document.getElementById('careers-felony-details-wrap');
+        if (careersFelony && careersFelonyWrap) {
+            careersFelony.addEventListener('change', function () {
+                careersFelonyWrap.classList.toggle('hidden', careersFelony.value !== 'Yes');
             });
         }
 
