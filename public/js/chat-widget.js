@@ -24,11 +24,12 @@
   // --- Styles -------------------------------------------------------------
   var style = document.createElement("style");
   style.textContent = [
-    // Bottom-right group of round icon buttons, stacked with chat above call:
+    // Bottom-right group of labeled buttons, stacked with chat above call:
     // the chat launcher and a call button. The site's own floating call widget
     // is hidden at runtime (see hideExistingFloating) so these don't overlap.
-    ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:2147483000;display:flex;flex-direction:column;gap:12px;align-items:center}",
-    ".aaa-fab .aaa-fab-btn{width:60px;height:60px;border-radius:9999px;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;cursor:pointer;text-decoration:none;box-shadow:0 8px 24px rgba(13,34,55,.35);transition:transform .15s ease,background .15s ease}",
+    ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:2147483000;display:flex;flex-direction:column;gap:12px;align-items:flex-end}",
+    ".aaa-fab .aaa-fab-btn{min-width:126px;height:60px;padding:0 20px;border-radius:9999px;border:2px solid #fff;display:flex;align-items:center;justify-content:center;gap:10px;box-sizing:border-box;font:700 16px/1 'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap;color:#fff;cursor:pointer;text-decoration:none;box-shadow:0 8px 24px rgba(13,34,55,.35);transition:transform .15s ease,background .15s ease}",
+    ".aaa-fab .aaa-fab-btn i{font-size:20px}",
     ".aaa-fab .aaa-fab-btn:hover{transform:scale(1.06)}",
     ".aaa-fab .aaa-fab-btn:focus-visible{outline:3px solid #9fb1ca;outline-offset:2px}",
     ".aaa-chat-launch{background:" + CRIMSON + "}",
@@ -64,7 +65,7 @@
   document.head.appendChild(style);
 
   // --- Markup -------------------------------------------------------------
-  // A bottom-right stack with chat above call, each a round icon button.
+  // A bottom-right stack with chat above call, each shown as a labeled pill.
   var group = document.createElement("div");
   group.className = "aaa-fab";
 
@@ -72,14 +73,14 @@
   launch.type = "button";
   launch.className = "aaa-fab-btn aaa-chat-launch";
   launch.setAttribute("aria-label", "Open chat with AAA Handyman Services");
-  launch.innerHTML = '<i class="fas fa-comments" aria-hidden="true"></i>';
+  launch.innerHTML = '<i class="fas fa-comments" aria-hidden="true"></i><span>AI Chat</span>';
 
   var callBtn = document.createElement("a");
   callBtn.className = "aaa-fab-btn aaa-call";
   callBtn.href = "tel:+12483853432";
   callBtn.title = "Call AAA Handyman Services";
   callBtn.setAttribute("aria-label", "Call AAA Handyman Services at (248) 385-3432");
-  callBtn.innerHTML = '<i class="fas fa-phone" aria-hidden="true"></i>';
+  callBtn.innerHTML = '<i class="fas fa-phone" aria-hidden="true"></i><span>Call Now!</span>';
 
   group.appendChild(launch);
   group.appendChild(callBtn);
@@ -114,8 +115,8 @@
 
   // --- Placement ----------------------------------------------------------
   // The site ships its own floating call widget in the bottom-right corner (a
-  // pill on desktop, a stacked round widget on mobile). Hide it so our unified
-  // round button group is the only thing in that corner — no overlap. We detect
+  // pill on desktop, a stacked widget on mobile). Hide it so our unified
+  // labeled button group is the only thing in that corner — no overlap. We detect
   // it as a small fixed element anchored to the bottom-right quadrant, ignoring
   // our own group/panel and the bottom-left "back to top" control.
   function hideExistingFloating() {
