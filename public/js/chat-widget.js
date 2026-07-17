@@ -56,16 +56,16 @@
     ".aaa-typing span{width:7px;height:7px;border-radius:9999px;background:#9fb1ca;animation:aaa-blink 1.2s infinite ease-in-out}",
     ".aaa-typing span:nth-child(2){animation-delay:.2s}.aaa-typing span:nth-child(3){animation-delay:.4s}",
     "@keyframes aaa-blink{0%,80%,100%{opacity:.3}40%{opacity:1}}",
-    ".aaa-chat-suggestion-bar{display:flex;gap:8px;padding:8px 12px;background:#f8fafc;border-top:1px solid #e7ecf2;align-items:center;overflow-x:auto;scrollbar-width:none}",
-    ".aaa-chat-suggestion-bar::-webkit-scrollbar{display:none}",
-    ".aaa-chat-suggestion{flex:0 0 auto;border:1px solid #c3cfde;border-radius:9999px;background:#fff;color:" + NAVY + ";padding:7px 10px;font:700 11px/1.2 'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;cursor:pointer;transition:background .15s ease,border-color .15s ease,color .15s ease,transform .15s ease}",
-    ".aaa-chat-suggestion:hover{background:" + NAVY + ";border-color:" + NAVY + ";color:#fff;transform:translateY(-1px)}",
-    ".aaa-chat-suggestion:focus-visible{outline:3px solid rgba(166,31,46,.25);outline-offset:1px}",
+    ".aaa-chat-emoji-bar{display:flex;gap:6px;padding:8px 12px;background:#f8fafc;border-top:1px solid #e7ecf2;align-items:center;overflow-x:auto;scrollbar-width:none}",
+    ".aaa-chat-emoji-bar::-webkit-scrollbar{display:none}",
+    ".aaa-chat-emoji{flex:0 0 auto;width:34px;height:34px;border:1px solid #d7e0ea;border-radius:10px;background:#fff;font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease,border-color .15s ease,transform .15s ease}",
+    ".aaa-chat-emoji:hover{background:#edf2f7;border-color:#9fb1ca;transform:translateY(-2px) rotate(-3deg)}",
+    ".aaa-chat-emoji:focus-visible{outline:3px solid rgba(166,31,46,.25);outline-offset:1px}",
     ".aaa-chat-form{border-top:1px solid #e7ecf2;padding:12px;display:flex;gap:8px;align-items:flex-end;background:#fff}",
     ".aaa-chat-form textarea{flex:1;resize:none;border:1px solid #c3cfde;border-radius:12px;padding:10px 12px;font-family:inherit;font-size:14px;line-height:1.4;max-height:120px;color:#0d2237}",
     ".aaa-chat-form textarea:focus{outline:none;border-color:" + NAVY + ";box-shadow:0 0 0 3px rgba(15,59,121,.15)}",
-    ".aaa-chat-suggestion-trigger{flex-shrink:0;width:42px;height:42px;border-radius:12px;border:1px solid #c3cfde;background:#fff;color:#5776a2;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease,color .15s ease}",
-    ".aaa-chat-suggestion-trigger:hover,.aaa-chat-suggestion-trigger[aria-expanded='true']{background:#f3f6f9;color:" + NAVY + "}",
+    ".aaa-chat-emoji-trigger{flex-shrink:0;width:42px;height:42px;border-radius:12px;border:1px solid #c3cfde;background:#fff;color:#5776a2;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease,color .15s ease}",
+    ".aaa-chat-emoji-trigger:hover,.aaa-chat-emoji-trigger[aria-expanded='true']{background:#f3f6f9;color:" + NAVY + "}",
     ".aaa-chat-send{flex-shrink:0;width:42px;height:42px;border-radius:12px;border:none;background:" + CRIMSON + ";color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease}",
     ".aaa-chat-send:hover:not(:disabled){background:#751a1e}",
     ".aaa-chat-send:disabled{opacity:.5;cursor:not-allowed}",
@@ -108,13 +108,20 @@
       '</div>' +
     '</div>' +
     '<div class="aaa-chat-log" id="aaa-chat-log" role="log" aria-live="polite"></div>' +
-    '<div class="aaa-chat-suggestion-bar" id="aaa-chat-suggestion-bar" style="display:none;" aria-label="Suggested questions">' +
-      '<button type="button" class="aaa-chat-suggestion">What services do you offer?</button>' +
-      '<button type="button" class="aaa-chat-suggestion">What areas do you serve?</button>' +
-      '<button type="button" class="aaa-chat-suggestion">How do I get a quote?</button>' +
+    '<div class="aaa-chat-emoji-bar" id="aaa-chat-emoji-bar" style="display:none;" aria-label="Handyman emojis">' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🛠️" aria-label="Hammer and wrench">🛠️</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🔨" aria-label="Hammer">🔨</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🔧" aria-label="Wrench">🔧</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🪛" aria-label="Screwdriver">🪛</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🪚" aria-label="Saw">🪚</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🧰" aria-label="Toolbox">🧰</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🪜" aria-label="Ladder">🪜</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🧱" aria-label="Brick">🧱</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🏠" aria-label="House">🏠</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🎨" aria-label="Painting">🎨</button>' +
     '</div>' +
     '<form class="aaa-chat-form" id="aaa-chat-form">' +
-      '<button type="button" class="aaa-chat-suggestion-trigger" id="aaa-chat-suggestion-trigger" title="Show quick questions" aria-label="Show quick questions" aria-expanded="false" aria-controls="aaa-chat-suggestion-bar"><i class="fas fa-bolt" aria-hidden="true"></i></button>' +
+      '<button type="button" class="aaa-chat-emoji-trigger" id="aaa-chat-emoji-trigger" title="Add a handyman emoji" aria-label="Add a handyman emoji" aria-expanded="false" aria-controls="aaa-chat-emoji-bar"><i class="far fa-face-smile" aria-hidden="true"></i></button>' +
       '<textarea id="aaa-chat-input" rows="1" placeholder="Type your question…" aria-label="Your message"></textarea>' +
       '<button type="submit" class="aaa-chat-send" id="aaa-chat-send" aria-label="Send message"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>' +
     '</form>' +
@@ -129,8 +136,8 @@
   var sendBtn = panel.querySelector("#aaa-chat-send");
   var closeBtn = panel.querySelector(".aaa-chat-close");
   var newChatBtn = panel.querySelector(".aaa-chat-new");
-  var suggestionTrigger = panel.querySelector("#aaa-chat-suggestion-trigger");
-  var suggestionBar = panel.querySelector("#aaa-chat-suggestion-bar");
+  var emojiTrigger = panel.querySelector("#aaa-chat-emoji-trigger");
+  var emojiBar = panel.querySelector("#aaa-chat-emoji-bar");
 
   var GREETING = "Hi! 👋 I'm the AAA Handyman Services assistant. Ask me about our services, the areas we cover, or how to get a quote.";
 
@@ -288,27 +295,30 @@
       messages = [];
       log.innerHTML = "";
       addMessage("assistant", GREETING);
-      suggestionBar.style.display = "none";
-      suggestionTrigger.setAttribute("aria-expanded", "false");
+      emojiBar.style.display = "none";
+      emojiTrigger.setAttribute("aria-expanded", "false");
       input.value = "";
       autoGrow();
     }
   });
 
-  suggestionTrigger.addEventListener("click", function () {
-    var isOpen = suggestionBar.style.display !== "none";
-    suggestionBar.style.display = isOpen ? "none" : "flex";
-    suggestionTrigger.setAttribute("aria-expanded", String(!isOpen));
+  emojiTrigger.addEventListener("click", function () {
+    var isOpen = emojiBar.style.display !== "none";
+    emojiBar.style.display = isOpen ? "none" : "flex";
+    emojiTrigger.setAttribute("aria-expanded", String(!isOpen));
   });
 
-  suggestionBar.addEventListener("click", function (e) {
-    var suggestion = e.target.closest(".aaa-chat-suggestion");
-    if (!suggestion || streaming) return;
-    input.value = "";
+  emojiBar.addEventListener("click", function (e) {
+    var emojiButton = e.target.closest(".aaa-chat-emoji");
+    if (!emojiButton) return;
+    var emoji = emojiButton.getAttribute("data-emoji");
+    var start = input.selectionStart;
+    var end = input.selectionEnd;
+    input.value = input.value.substring(0, start) + emoji + input.value.substring(end);
     autoGrow();
-    suggestionBar.style.display = "none";
-    suggestionTrigger.setAttribute("aria-expanded", "false");
-    sendMessage(suggestion.textContent);
+    input.focus();
+    var newPosition = start + emoji.length;
+    input.setSelectionRange(newPosition, newPosition);
   });
 
   form.addEventListener("submit", function (e) {
@@ -317,8 +327,8 @@
     if (!text || streaming) return;
     input.value = "";
     autoGrow();
-    suggestionBar.style.display = "none";
-    suggestionTrigger.setAttribute("aria-expanded", "false");
+    emojiBar.style.display = "none";
+    emojiTrigger.setAttribute("aria-expanded", "false");
     sendMessage(text);
   });
 
