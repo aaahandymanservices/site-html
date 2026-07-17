@@ -24,13 +24,18 @@
   // --- Styles -------------------------------------------------------------
   var style = document.createElement("style");
   style.textContent = [
-    // Position is set at runtime by positionLauncher(), which measures the
-    // floating call button and places the launcher just above it. These values
-    // are only fallbacks used until that measurement runs.
-    ".aaa-chat-launch{position:fixed;bottom:156px;right:20px;z-index:2147483000;width:60px;height:60px;border-radius:9999px;border:none;background:" + CRIMSON + ";color:#fff;font-size:24px;cursor:pointer;box-shadow:0 8px 24px rgba(13,34,55,.35);display:flex;align-items:center;justify-content:center;transition:transform .15s ease,background .15s ease}",
-    ".aaa-chat-launch:hover{transform:scale(1.06);background:#751a1e}",
-    ".aaa-chat-launch:focus-visible{outline:3px solid #f8b4b4;outline-offset:2px}",
-    ".aaa-chat-panel{position:fixed;bottom:228px;right:20px;z-index:2147483000;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 260px);background:#fff;border-radius:16px;box-shadow:0 20px 50px rgba(13,34,55,.4);display:none;flex-direction:column;overflow:hidden;font-family:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif}",
+    // Bottom-right group of round icon buttons, sitting next to each other:
+    // the chat launcher and a call button. The site's own floating call widget
+    // is hidden at runtime (see hideExistingFloating) so these don't overlap.
+    ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:2147483000;display:flex;gap:12px;align-items:center}",
+    ".aaa-fab .aaa-fab-btn{width:60px;height:60px;border-radius:9999px;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;cursor:pointer;text-decoration:none;box-shadow:0 8px 24px rgba(13,34,55,.35);transition:transform .15s ease,background .15s ease}",
+    ".aaa-fab .aaa-fab-btn:hover{transform:scale(1.06)}",
+    ".aaa-fab .aaa-fab-btn:focus-visible{outline:3px solid #9fb1ca;outline-offset:2px}",
+    ".aaa-chat-launch{background:" + CRIMSON + "}",
+    ".aaa-chat-launch:hover{background:#751a1e}",
+    ".aaa-call{background:#16a34a}",
+    ".aaa-call:hover{background:#15803d}",
+    ".aaa-chat-panel{position:fixed;bottom:96px;right:20px;z-index:2147483000;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 130px);background:#fff;border-radius:16px;box-shadow:0 20px 50px rgba(13,34,55,.4);display:none;flex-direction:column;overflow:hidden;font-family:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif}",
     ".aaa-chat-panel.aaa-open{display:flex;animation:aaa-pop .18s ease}",
     "@keyframes aaa-pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}",
     ".aaa-chat-header{background:" + NAVY + ";color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px}",
@@ -59,10 +64,25 @@
   document.head.appendChild(style);
 
   // --- Markup -------------------------------------------------------------
+  // A bottom-right row: [chat] [call], each a round icon button.
+  var group = document.createElement("div");
+  group.className = "aaa-fab";
+
   var launch = document.createElement("button");
-  launch.className = "aaa-chat-launch";
+  launch.type = "button";
+  launch.className = "aaa-fab-btn aaa-chat-launch";
   launch.setAttribute("aria-label", "Open chat with AAA Handyman Services");
   launch.innerHTML = '<i class="fas fa-comments" aria-hidden="true"></i>';
+
+  var callBtn = document.createElement("a");
+  callBtn.className = "aaa-fab-btn aaa-call";
+  callBtn.href = "tel:+12483853432";
+  callBtn.title = "Call AAA Handyman Services";
+  callBtn.setAttribute("aria-label", "Call AAA Handyman Services at (248) 385-3432");
+  callBtn.innerHTML = '<i class="fas fa-phone" aria-hidden="true"></i>';
+
+  group.appendChild(launch);
+  group.appendChild(callBtn);
 
   var panel = document.createElement("div");
   panel.className = "aaa-chat-panel";
@@ -81,7 +101,7 @@
     '</form>' +
     '<div class="aaa-chat-disclaimer">Automated assistant. For quotes or booking call (248) 385-3432.</div>';
 
-  document.body.appendChild(launch);
+  document.body.appendChild(group);
   document.body.appendChild(panel);
 
   var log = panel.querySelector("#aaa-chat-log");
@@ -93,41 +113,28 @@
   var GREETING = "Hi! 👋 I'm the AAA Handyman Services assistant. Ask me about our services, the areas we cover, or how to get a quote.";
 
   // --- Placement ----------------------------------------------------------
-  // Measure the floating call button and sit the launcher just above it. The
-  // call button is a compact pill on desktop and a taller stacked widget on
-  // mobile, so we find whichever fixed element occupies the bottom-right corner
-  // (excluding our own widget and the bottom-left "back to top" control) and
-  // anchor to the highest one. Re-run on resize/orientation and after load,
-  // since fonts and breakpoints change the button's height.
-  var GAP = 14;
-
-  function positionLauncher() {
+  // The site ships its own floating call widget in the bottom-right corner (a
+  // pill on desktop, a stacked round widget on mobile). Hide it so our unified
+  // round button group is the only thing in that corner — no overlap. We detect
+  // it as a small fixed element anchored to the bottom-right quadrant, ignoring
+  // our own group/panel and the bottom-left "back to top" control.
+  function hideExistingFloating() {
     var vw = window.innerWidth;
     var vh = window.innerHeight;
-    var topMost = null;
-
     var els = document.body.querySelectorAll("*");
     for (var i = 0; i < els.length; i++) {
       var el = els[i];
-      if (el === launch || el === panel || panel.contains(el)) continue;
+      if (el === group || el === panel || group.contains(el) || panel.contains(el)) continue;
       var cs = window.getComputedStyle(el);
       if (cs.position !== "fixed" || cs.display === "none" || cs.visibility === "hidden") continue;
       var r = el.getBoundingClientRect();
       if (r.width === 0 || r.height === 0) continue;
-      // Ignore large fixed overlays (menus, headers, backdrops) — the call
-      // button is small; anything covering much of the screen is not it.
+      // Skip large fixed overlays (menus, headers, backdrops).
       if (r.width > vw * 0.6 || r.height > vh * 0.6) continue;
-      // Only elements anchored to the bottom-right quadrant (the call button).
+      // Only the bottom-right corner (where the floating call widget lives).
       if (r.right < vw * 0.5 || r.bottom < vh * 0.5) continue;
-      if (topMost === null || r.top < topMost) topMost = r.top;
+      el.style.setProperty("display", "none", "important");
     }
-
-    var launchBottom = topMost === null ? 24 : Math.round(vh - topMost + GAP);
-    launch.style.bottom = launchBottom + "px";
-    var panelBottom = launchBottom + 60 + 12;
-    panel.style.bottom = panelBottom + "px";
-    // Keep the panel from running off the top of short (mobile) viewports.
-    panel.style.maxHeight = Math.max(320, vh - panelBottom - 16) + "px";
   }
 
   // --- Helpers ------------------------------------------------------------
@@ -277,9 +284,10 @@
     if (e.key === "Escape" && panel.classList.contains("aaa-open")) closePanel();
   });
 
-  // Position the launcher now, once fonts/layout settle, and on viewport change.
-  positionLauncher();
-  window.addEventListener("load", positionLauncher);
-  window.addEventListener("resize", positionLauncher);
-  window.addEventListener("orientationchange", positionLauncher);
+  // Hide the site's own floating call widget now and after layout settles, so
+  // it can't reappear at a breakpoint and overlap our button group.
+  hideExistingFloating();
+  window.addEventListener("load", hideExistingFloating);
+  window.addEventListener("resize", hideExistingFloating);
+  window.addEventListener("orientationchange", hideExistingFloating);
 })();
