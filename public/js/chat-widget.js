@@ -59,6 +59,14 @@
     ".aaa-typing span{width:7px;height:7px;border-radius:9999px;background:#9fb1ca;animation:aaa-blink 1.2s infinite ease-in-out}",
     ".aaa-typing span:nth-child(2){animation-delay:.2s}.aaa-typing span:nth-child(3){animation-delay:.4s}",
     "@keyframes aaa-blink{0%,80%,100%{opacity:.3}40%{opacity:1}}",
+    ".aaa-chat-prompts{padding:10px 12px 9px;background:#fff;border-top:1px solid #e7ecf2}",
+    ".aaa-chat-prompts-label{margin:0 0 7px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5776a2}",
+    ".aaa-chat-prompts-list{display:flex;gap:7px;overflow-x:auto;padding:1px 1px 3px;scrollbar-width:none}",
+    ".aaa-chat-prompts-list::-webkit-scrollbar{display:none}",
+    ".aaa-chat-prompt{flex:0 0 auto;max-width:230px;border:1px solid #cbd6e2;border-radius:9999px;background:#f8fafc;color:" + NAVY + ";padding:8px 11px;font:700 12px/1.2 'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;cursor:pointer;white-space:nowrap;transition:transform .15s ease,border-color .15s ease,background .15s ease,color .15s ease}",
+    ".aaa-chat-prompt:hover:not(:disabled){transform:translateY(-1px);border-color:" + CRIMSON + ";background:#fff5f5;color:" + CRIMSON + "}",
+    ".aaa-chat-prompt:focus-visible{outline:3px solid rgba(166,31,46,.22);outline-offset:1px}",
+    ".aaa-chat-prompt:disabled{opacity:.48;cursor:not-allowed}",
     ".aaa-chat-emoji-bar{display:flex;gap:6px;padding:8px 12px;background:#f8fafc;border-top:1px solid #e7ecf2;align-items:center;overflow-x:auto;scrollbar-width:none}",
     ".aaa-chat-emoji-bar[hidden]{display:none}",
     ".aaa-chat-emoji-bar::-webkit-scrollbar{display:none}",
@@ -112,6 +120,14 @@
       '</div>' +
     '</div>' +
     '<div class="aaa-chat-log" id="aaa-chat-log" role="log" aria-live="polite"></div>' +
+    '<div class="aaa-chat-prompts" aria-label="Suggested questions">' +
+      '<p class="aaa-chat-prompts-label">Popular questions</p>' +
+      '<div class="aaa-chat-prompts-list">' +
+        '<button type="button" class="aaa-chat-prompt" data-question="What handyman services do you offer?">What services do you offer?</button>' +
+        '<button type="button" class="aaa-chat-prompt" data-question="Do you serve my area?">Do you serve my area?</button>' +
+        '<button type="button" class="aaa-chat-prompt" data-question="How can I get a quote for my project?">How do I get a quote?</button>' +
+      '</div>' +
+    '</div>' +
     '<div class="aaa-chat-emoji-bar" id="aaa-chat-emoji-bar" hidden aria-label="Handyman emojis">' +
       '<button type="button" class="aaa-chat-emoji" data-emoji="🛠️" aria-label="Hammer and wrench">🛠️</button>' +
       '<button type="button" class="aaa-chat-emoji" data-emoji="🔨" aria-label="Hammer">🔨</button>' +
@@ -142,6 +158,8 @@
   var newChatBtn = panel.querySelector(".aaa-chat-new");
   var emojiTrigger = panel.querySelector("#aaa-chat-emoji-trigger");
   var emojiBar = panel.querySelector("#aaa-chat-emoji-bar");
+  var promptList = panel.querySelector(".aaa-chat-prompts-list");
+  var promptButtons = panel.querySelectorAll(".aaa-chat-prompt");
 
   var GREETING = "Hi! 👋 I'm the AAA Handyman Services assistant. Ask me about our services, the areas we cover, or how to get a quote.";
 
@@ -207,12 +225,19 @@
     emojiTrigger.setAttribute("aria-expanded", String(isOpen));
   }
 
+  function setPromptButtonsDisabled(isDisabled) {
+    for (var i = 0; i < promptButtons.length; i++) {
+      promptButtons[i].disabled = isDisabled;
+    }
+  }
+
   function resetChat() {
     conversationVersion += 1;
     if (activeRequest) activeRequest.abort();
     activeRequest = null;
     streaming = false;
     sendBtn.disabled = false;
+    setPromptButtonsDisabled(false);
     messages = [];
     log.innerHTML = "";
     addMessage("assistant", GREETING);
@@ -247,6 +272,7 @@
     if (streaming) return;
     streaming = true;
     sendBtn.disabled = true;
+    setPromptButtonsDisabled(true);
     var requestVersion = conversationVersion;
     activeRequest = new AbortController();
 
@@ -314,6 +340,7 @@
         activeRequest = null;
         streaming = false;
         sendBtn.disabled = false;
+        setPromptButtonsDisabled(false);
         input.focus();
       }
     }
@@ -340,6 +367,15 @@
     input.focus();
     var newPosition = start + emoji.length;
     input.setSelectionRange(newPosition, newPosition);
+  });
+
+  promptList.addEventListener("click", function (e) {
+    var promptButton = e.target.closest(".aaa-chat-prompt");
+    if (!promptButton || streaming) return;
+    input.value = "";
+    autoGrow();
+    setEmojiBarOpen(false);
+    sendMessage(promptButton.getAttribute("data-question"));
   });
 
   form.addEventListener("submit", function (e) {
