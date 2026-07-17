@@ -175,10 +175,12 @@ function serviceAreasSection(service) {
             </div>`;
 }
 
-// Gutter cost guide: a one-off explainer that lives only on the gutters page.
-// Kept here (rather than in the generic template) because it is specific to a
-// single service, mirroring how the senior-care checklist callout is handled.
+// Per-service cost guide: a one-off explainer that lives only on select service
+// pages. Kept here (rather than in the generic template) because it is specific
+// to a single service, mirroring how the senior-care checklist callout is
+// handled. Each branch returns the full section for its slug.
 function costGuideSection(service) {
+  if (service.slug === 'power-washing') return powerWashingCostGuide();
   if (service.slug !== 'gutters') return '';
   return `
             <!-- Understanding gutter cleaning costs: market context + factors -->
@@ -235,6 +237,79 @@ function costGuideSection(service) {
                         </div>
                     </div>
                     <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: rather than charging by the foot, we quote a flat rate up front, then bill continuous labor at <strong>$65/hour</strong> in quarter-hour increments for anything beyond a standard clean. You will always know the price before we start.</p>
+                </div>
+            </div>
+`;
+}
+
+// Power washing cost guide: mirrors the gutters explainer, but built around the
+// per-square-foot model that dominates exterior-cleaning pricing.
+function powerWashingCostGuide() {
+  return `
+            <!-- Understanding power washing costs: market context + factors -->
+            <div class="max-w-6xl mx-auto mt-14 sm:mt-20">
+                <div class="text-center mb-8">
+                    <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm">Cost Guide</div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">Understanding Power Washing Costs in Southeast Michigan</h2>
+                    <p class="mt-3 text-gray-600 max-w-3xl mx-auto">Power washing is priced a few different ways across the metro Detroit area, and most pros quote by the square foot. Here is how the common models compare so you know what a fair quote looks like, and how our own <a href="/rates" class="text-red-600 font-semibold underline underline-offset-2">transparent flat rates</a> stack up.</p>
+                </div>
+
+                <!-- Per-square-foot pricing model -->
+                <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 sm:p-8 shadow-sm">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-ruler-combined"></i></span>
+                        <h3 class="text-xl sm:text-2xl font-bold text-blue-900">The Per-Square-Foot Pricing Model</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">In the Oakland County area, professional power washing typically runs <strong>$0.10 to $0.60 per square foot</strong>. Where you land depends heavily on the surface being cleaned &mdash; flat, accessible concrete costs less than delicate wood or high-up roofs:</p>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5">
+                            <div class="text-sm font-bold uppercase tracking-wider text-blue-600 mb-1">Concrete Driveways, Walks &amp; Patios</div>
+                            <div class="text-2xl font-extrabold text-gray-900 mb-2">$0.10&ndash;$0.25 <span class="text-base font-semibold text-gray-500">/ sq. ft.</span></div>
+                            <p class="text-sm text-gray-600">A standard 2-car driveway (about 400&ndash;600 sq. ft.) usually averages $100 to $250.</p>
+                        </div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5">
+                            <div class="text-sm font-bold uppercase tracking-wider text-blue-600 mb-1">Vinyl House Siding</div>
+                            <div class="text-2xl font-extrabold text-gray-900 mb-2">$0.20&ndash;$0.50 <span class="text-base font-semibold text-gray-500">/ sq. ft.</span></div>
+                            <p class="text-sm text-gray-600">A 1,500 sq. ft. home typically runs $150 to $750.</p>
+                        </div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5">
+                            <div class="text-sm font-bold uppercase tracking-wider text-red-600 mb-1">Decks &amp; Fences (Wood or Composite)</div>
+                            <div class="text-2xl font-extrabold text-gray-900 mb-2">$0.30&ndash;$0.55 <span class="text-base font-semibold text-gray-500">/ sq. ft.</span></div>
+                            <p class="text-sm text-gray-600">Higher because soft wood needs a gentle low-pressure &ldquo;soft wash&rdquo; and specialized detergents, not raw force.</p>
+                        </div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5">
+                            <div class="text-sm font-bold uppercase tracking-wider text-red-600 mb-1">Roofs</div>
+                            <div class="text-2xl font-extrabold text-gray-900 mb-2">$0.20&ndash;$1.00 <span class="text-base font-semibold text-gray-500">/ sq. ft.</span></div>
+                            <p class="text-sm text-gray-600">Highest of all: pitch, steepness, and height demand safety gear plus slow, gentle chemical algae treatment.</p>
+                        </div>
+                    </div>
+                    <div class="mt-5 flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-2xl p-4">
+                        <i class="fas fa-calculator text-blue-600 mt-1" aria-hidden="true"></i>
+                        <p class="text-sm text-gray-700"><strong>Example:</strong> Washing the vinyl siding on a 1,500 sq. ft. home runs roughly <strong>$150 to $750</strong> by the square foot, and many companies set a job minimum of around $150. Rather than a rigid per-foot measure, AAA Handyman uses a simple hybrid: a flat service-call minimum that covers the first hour, then continuous labor billed by the quarter-hour.</p>
+                    </div>
+                </div>
+
+                <!-- Key factors that adjust the price -->
+                <div class="mt-6">
+                    <h3 class="text-xl sm:text-2xl font-bold text-blue-900 mb-4 text-center">Key Factors That Can Adjust the Price</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
+                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-soap"></i></span>
+                            <h4 class="font-bold text-gray-900 mb-1">Surface Condition</h4>
+                            <p class="text-sm text-gray-600">Heavy oil stains on driveways or thick green mold on north-facing siding need chemical pre-treatments, which add to material costs.</p>
+                        </div>
+                        <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
+                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-faucet-drip"></i></span>
+                            <h4 class="font-bold text-gray-900 mb-1">Water Access</h4>
+                            <p class="text-sm text-gray-600">Rates assume a hookup to an outdoor spigot with strong pressure. If a technician must bring a water truck, the price scales up sharply.</p>
+                        </div>
+                        <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
+                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-couch"></i></span>
+                            <h4 class="font-bold text-gray-900 mb-1">Obstacles &amp; Protection</h4>
+                            <p class="text-sm text-gray-600">Moving heavy patio furniture or wrapping delicate landscaping, lighting, and outlets in protective plastic adds prep labor to the final cost.</p>
+                        </div>
+                    </div>
+                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: a <strong>$100 (Zone A) / $145 (Zone B)</strong> minimum covers travel and the first hour, then continuous washing is billed at a flat <strong>$65/hour</strong> in quarter-hour increments. You will always know the price before we start.</p>
                 </div>
             </div>
 `;
