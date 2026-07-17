@@ -24,10 +24,10 @@
   // --- Styles -------------------------------------------------------------
   var style = document.createElement("style");
   style.textContent = [
-    // Bottom-right group of round icon buttons, sitting next to each other:
+    // Bottom-right group of round icon buttons, stacked with chat above call:
     // the chat launcher and a call button. The site's own floating call widget
     // is hidden at runtime (see hideExistingFloating) so these don't overlap.
-    ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:2147483000;display:flex;gap:12px;align-items:center}",
+    ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:2147483000;display:flex;flex-direction:column;gap:12px;align-items:center}",
     ".aaa-fab .aaa-fab-btn{width:60px;height:60px;border-radius:9999px;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;cursor:pointer;text-decoration:none;box-shadow:0 8px 24px rgba(13,34,55,.35);transition:transform .15s ease,background .15s ease}",
     ".aaa-fab .aaa-fab-btn:hover{transform:scale(1.06)}",
     ".aaa-fab .aaa-fab-btn:focus-visible{outline:3px solid #9fb1ca;outline-offset:2px}",
@@ -35,7 +35,7 @@
     ".aaa-chat-launch:hover{background:#751a1e}",
     ".aaa-call{background:#16a34a}",
     ".aaa-call:hover{background:#15803d}",
-    ".aaa-chat-panel{position:fixed;bottom:96px;right:20px;z-index:2147483000;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 130px);background:#fff;border-radius:16px;box-shadow:0 20px 50px rgba(13,34,55,.4);display:none;flex-direction:column;overflow:hidden;font-family:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif}",
+    ".aaa-chat-panel{position:fixed;bottom:164px;right:20px;z-index:2147483000;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 198px);background:#fff;border-radius:16px;box-shadow:0 20px 50px rgba(13,34,55,.4);display:none;flex-direction:column;overflow:hidden;font-family:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif}",
     ".aaa-chat-panel.aaa-open{display:flex;animation:aaa-pop .18s ease}",
     "@keyframes aaa-pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}",
     ".aaa-chat-header{background:" + NAVY + ";color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px}",
@@ -64,7 +64,7 @@
   document.head.appendChild(style);
 
   // --- Markup -------------------------------------------------------------
-  // A bottom-right row: [chat] [call], each a round icon button.
+  // A bottom-right stack with chat above call, each a round icon button.
   var group = document.createElement("div");
   group.className = "aaa-fab";
 
