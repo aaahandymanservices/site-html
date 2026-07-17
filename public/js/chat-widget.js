@@ -207,7 +207,7 @@
       var res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: messages }),
+        body: JSON.stringify({ messages: messages, page: window.location.pathname }),
       });
 
       if (!res.ok || !res.body) throw new Error("Request failed");

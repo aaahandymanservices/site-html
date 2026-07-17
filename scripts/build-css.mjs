@@ -29,7 +29,7 @@ const config = join(ROOT, 'tailwind.config.cjs');
 
 execFileSync(
   'npx',
-  ['tailwindcss', '-c', config, '-i', input, '-o', output, '--minify'],
+  ['--yes', 'tailwindcss@3.4.19', '-c', config, '-i', input, '-o', output, '--minify'],
   { cwd: ROOT, stdio: 'inherit' },
 );
 
