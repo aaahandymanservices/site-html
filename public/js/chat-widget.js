@@ -43,8 +43,10 @@
     ".aaa-chat-header .aaa-avatar{width:38px;height:38px;border-radius:9999px;background:" + CRIMSON + ";display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}",
     ".aaa-chat-header h2{margin:0;font-size:15px;font-weight:700;line-height:1.2}",
     ".aaa-chat-header p{margin:2px 0 0;font-size:12px;opacity:.75;line-height:1.2}",
-    ".aaa-chat-close{margin-left:auto;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;opacity:.8;padding:4px;line-height:1}",
-    ".aaa-chat-close:hover{opacity:1}",
+    ".aaa-chat-header-actions{margin-left:auto;display:flex;align-items:center;gap:8px}",
+    ".aaa-chat-control-btn{background:none;border:none;color:#fff;font-size:16px;cursor:pointer;opacity:.8;padding:6px;line-height:1;display:flex;align-items:center;justify-content:center;border-radius:4px;transition:opacity .15s,background-color .15s}",
+    ".aaa-chat-control-btn:hover{opacity:1;background-color:rgba(255,255,255,0.15)}",
+    ".aaa-chat-close{font-size:20px}",
     ".aaa-chat-log{flex:1;overflow-y:auto;padding:18px;background:#f3f6f9;display:flex;flex-direction:column;gap:12px}",
     ".aaa-msg{max-width:82%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}",
     ".aaa-msg.aaa-user{align-self:flex-end;background:" + NAVY + ";color:#fff;border-bottom-right-radius:4px}",
@@ -54,9 +56,15 @@
     ".aaa-typing span{width:7px;height:7px;border-radius:9999px;background:#9fb1ca;animation:aaa-blink 1.2s infinite ease-in-out}",
     ".aaa-typing span:nth-child(2){animation-delay:.2s}.aaa-typing span:nth-child(3){animation-delay:.4s}",
     "@keyframes aaa-blink{0%,80%,100%{opacity:.3}40%{opacity:1}}",
+    ".aaa-chat-emoji-bar{display:flex;gap:8px;padding:6px 12px;background:#f8fafc;border-top:1px solid #e7ecf2;align-items:center;overflow-x:auto;scrollbar-width:none}",
+    ".aaa-chat-emoji-bar::-webkit-scrollbar{display:none}",
+    ".aaa-chat-emoji-bar span{font-size:18px;cursor:pointer;user-select:none;transition:transform .1s ease;padding:2px}",
+    ".aaa-chat-emoji-bar span:hover{transform:scale(1.25)}",
     ".aaa-chat-form{border-top:1px solid #e7ecf2;padding:12px;display:flex;gap:8px;align-items:flex-end;background:#fff}",
     ".aaa-chat-form textarea{flex:1;resize:none;border:1px solid #c3cfde;border-radius:12px;padding:10px 12px;font-family:inherit;font-size:14px;line-height:1.4;max-height:120px;color:#0d2237}",
     ".aaa-chat-form textarea:focus{outline:none;border-color:" + NAVY + ";box-shadow:0 0 0 3px rgba(15,59,121,.15)}",
+    ".aaa-chat-emoji-trigger{flex-shrink:0;width:42px;height:42px;border-radius:12px;border:1px solid #c3cfde;background:#fff;color:#5776a2;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease,color .15s ease}",
+    ".aaa-chat-emoji-trigger:hover{background:#f3f6f9;color:" + NAVY + "}",
     ".aaa-chat-send{flex-shrink:0;width:42px;height:42px;border-radius:12px;border:none;background:" + CRIMSON + ";color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease}",
     ".aaa-chat-send:hover:not(:disabled){background:#751a1e}",
     ".aaa-chat-send:disabled{opacity:.5;cursor:not-allowed}",
@@ -93,10 +101,17 @@
     '<div class="aaa-chat-header">' +
       '<div class="aaa-avatar"><i class="fas fa-hammer" aria-hidden="true"></i></div>' +
       '<div><h2>AAA Handyman Services</h2><p>Ask about our services &amp; areas</p></div>' +
-      '<button class="aaa-chat-close" aria-label="Close chat">&times;</button>' +
+      '<div class="aaa-chat-header-actions">' +
+        '<button class="aaa-chat-control-btn aaa-chat-reset" title="Start new chat / Delete chat history" aria-label="Start new chat / Delete chat history"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>' +
+        '<button class="aaa-chat-control-btn aaa-chat-close" title="Close chat" aria-label="Close chat">&times;</button>' +
+      '</div>' +
     '</div>' +
     '<div class="aaa-chat-log" id="aaa-chat-log" role="log" aria-live="polite"></div>' +
+    '<div class="aaa-chat-emoji-bar" id="aaa-chat-emoji-bar" style="display:none;">' +
+      '<span>👋</span><span>🛠️</span><span>🏠</span><span>📞</span><span>👍</span><span>❤️</span><span>😁</span><span>🙏</span><span>✨</span><span>🔥</span>' +
+    '</div>' +
     '<form class="aaa-chat-form" id="aaa-chat-form">' +
+      '<button type="button" class="aaa-chat-emoji-trigger" id="aaa-chat-emoji-trigger" title="Insert emoji" aria-label="Insert emoji"><i class="far fa-smile" aria-hidden="true"></i></button>' +
       '<textarea id="aaa-chat-input" rows="1" placeholder="Type your question…" aria-label="Your message"></textarea>' +
       '<button type="submit" class="aaa-chat-send" id="aaa-chat-send" aria-label="Send message"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>' +
     '</form>' +
@@ -110,6 +125,9 @@
   var input = panel.querySelector("#aaa-chat-input");
   var sendBtn = panel.querySelector("#aaa-chat-send");
   var closeBtn = panel.querySelector(".aaa-chat-close");
+  var resetBtn = panel.querySelector(".aaa-chat-reset");
+  var emojiTrigger = panel.querySelector("#aaa-chat-emoji-trigger");
+  var emojiBar = panel.querySelector("#aaa-chat-emoji-bar");
 
   var GREETING = "Hi! 👋 I'm the AAA Handyman Services assistant. Ask me about our services, the areas we cover, or how to get a quote.";
 
@@ -262,12 +280,46 @@
   launch.addEventListener("click", togglePanel);
   closeBtn.addEventListener("click", closePanel);
 
+  resetBtn.addEventListener("click", function () {
+    if (confirm("Are you sure you want to clear your chat history and start a new session?")) {
+      messages = [];
+      log.innerHTML = "";
+      addMessage("assistant", GREETING);
+      emojiBar.style.display = "none";
+      input.value = "";
+      autoGrow();
+    }
+  });
+
+  emojiTrigger.addEventListener("click", function () {
+    if (emojiBar.style.display === "none") {
+      emojiBar.style.display = "flex";
+    } else {
+      emojiBar.style.display = "none";
+    }
+  });
+
+  emojiBar.addEventListener("click", function (e) {
+    if (e.target.tagName === "SPAN") {
+      var emoji = e.target.textContent;
+      var start = input.selectionStart;
+      var end = input.selectionEnd;
+      var text = input.value;
+      input.value = text.substring(0, start) + emoji + text.substring(end);
+      input.focus();
+      var newPos = start + emoji.length;
+      input.setSelectionRange(newPos, newPos);
+      autoGrow();
+    }
+  });
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var text = input.value.trim();
     if (!text || streaming) return;
     input.value = "";
     autoGrow();
+    emojiBar.style.display = "none";
     sendMessage(text);
   });
 
