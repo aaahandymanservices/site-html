@@ -696,6 +696,9 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
       gtag('js', new Date());
       gtag('config', 'G-VRMCPNEQC3');
     </script>
+
+    <!-- AI chat assistant widget -->
+    <script src="/js/chat-widget.js?v=20260717-2" defer></script>
 </body>
 </html>
 `;
