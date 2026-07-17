@@ -56,15 +56,16 @@
     ".aaa-typing span{width:7px;height:7px;border-radius:9999px;background:#9fb1ca;animation:aaa-blink 1.2s infinite ease-in-out}",
     ".aaa-typing span:nth-child(2){animation-delay:.2s}.aaa-typing span:nth-child(3){animation-delay:.4s}",
     "@keyframes aaa-blink{0%,80%,100%{opacity:.3}40%{opacity:1}}",
-    ".aaa-chat-emoji-bar{display:flex;gap:8px;padding:6px 12px;background:#f8fafc;border-top:1px solid #e7ecf2;align-items:center;overflow-x:auto;scrollbar-width:none}",
+    ".aaa-chat-emoji-bar{display:flex;gap:6px;padding:8px 12px;background:#f8fafc;border-top:1px solid #e7ecf2;align-items:center;overflow-x:auto;scrollbar-width:none}",
     ".aaa-chat-emoji-bar::-webkit-scrollbar{display:none}",
-    ".aaa-chat-emoji-bar span{font-size:18px;cursor:pointer;user-select:none;transition:transform .1s ease;padding:2px}",
-    ".aaa-chat-emoji-bar span:hover{transform:scale(1.25)}",
+    ".aaa-chat-emoji{flex:0 0 auto;width:34px;height:34px;border:1px solid #d7e0ea;border-radius:10px;background:#fff;font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease,border-color .15s ease,transform .15s ease}",
+    ".aaa-chat-emoji:hover{background:#edf2f7;border-color:#9fb1ca;transform:translateY(-2px) rotate(-3deg)}",
+    ".aaa-chat-emoji:focus-visible{outline:3px solid rgba(166,31,46,.25);outline-offset:1px}",
     ".aaa-chat-form{border-top:1px solid #e7ecf2;padding:12px;display:flex;gap:8px;align-items:flex-end;background:#fff}",
     ".aaa-chat-form textarea{flex:1;resize:none;border:1px solid #c3cfde;border-radius:12px;padding:10px 12px;font-family:inherit;font-size:14px;line-height:1.4;max-height:120px;color:#0d2237}",
     ".aaa-chat-form textarea:focus{outline:none;border-color:" + NAVY + ";box-shadow:0 0 0 3px rgba(15,59,121,.15)}",
     ".aaa-chat-emoji-trigger{flex-shrink:0;width:42px;height:42px;border-radius:12px;border:1px solid #c3cfde;background:#fff;color:#5776a2;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease,color .15s ease}",
-    ".aaa-chat-emoji-trigger:hover{background:#f3f6f9;color:" + NAVY + "}",
+    ".aaa-chat-emoji-trigger:hover,.aaa-chat-emoji-trigger[aria-expanded='true']{background:#f3f6f9;color:" + NAVY + "}",
     ".aaa-chat-send{flex-shrink:0;width:42px;height:42px;border-radius:12px;border:none;background:" + CRIMSON + ";color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease}",
     ".aaa-chat-send:hover:not(:disabled){background:#751a1e}",
     ".aaa-chat-send:disabled{opacity:.5;cursor:not-allowed}",
@@ -102,16 +103,25 @@
       '<div class="aaa-avatar"><i class="fas fa-hammer" aria-hidden="true"></i></div>' +
       '<div><h2>AAA Handyman Services</h2><p>Ask about our services &amp; areas</p></div>' +
       '<div class="aaa-chat-header-actions">' +
-        '<button class="aaa-chat-control-btn aaa-chat-reset" title="Start new chat / Delete chat history" aria-label="Start new chat / Delete chat history"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>' +
+        '<button type="button" class="aaa-chat-control-btn aaa-chat-new" title="Start a new chat" aria-label="Start a new chat"><i class="fas fa-rotate-right" aria-hidden="true"></i></button>' +
         '<button class="aaa-chat-control-btn aaa-chat-close" title="Close chat" aria-label="Close chat">&times;</button>' +
       '</div>' +
     '</div>' +
     '<div class="aaa-chat-log" id="aaa-chat-log" role="log" aria-live="polite"></div>' +
-    '<div class="aaa-chat-emoji-bar" id="aaa-chat-emoji-bar" style="display:none;">' +
-      '<span>👋</span><span>🛠️</span><span>🏠</span><span>📞</span><span>👍</span><span>❤️</span><span>😁</span><span>🙏</span><span>✨</span><span>🔥</span>' +
+    '<div class="aaa-chat-emoji-bar" id="aaa-chat-emoji-bar" style="display:none;" aria-label="Handyman emojis">' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🛠️" aria-label="Hammer and wrench">🛠️</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🔨" aria-label="Hammer">🔨</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🔧" aria-label="Wrench">🔧</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🪛" aria-label="Screwdriver">🪛</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🪚" aria-label="Saw">🪚</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🧰" aria-label="Toolbox">🧰</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🪜" aria-label="Ladder">🪜</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🧱" aria-label="Brick">🧱</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🏠" aria-label="House">🏠</button>' +
+      '<button type="button" class="aaa-chat-emoji" data-emoji="🎨" aria-label="Painting">🎨</button>' +
     '</div>' +
     '<form class="aaa-chat-form" id="aaa-chat-form">' +
-      '<button type="button" class="aaa-chat-emoji-trigger" id="aaa-chat-emoji-trigger" title="Insert emoji" aria-label="Insert emoji"><i class="far fa-smile" aria-hidden="true"></i></button>' +
+      '<button type="button" class="aaa-chat-emoji-trigger" id="aaa-chat-emoji-trigger" title="Add a handyman emoji" aria-label="Add a handyman emoji" aria-expanded="false" aria-controls="aaa-chat-emoji-bar"><i class="far fa-face-smile" aria-hidden="true"></i></button>' +
       '<textarea id="aaa-chat-input" rows="1" placeholder="Type your question…" aria-label="Your message"></textarea>' +
       '<button type="submit" class="aaa-chat-send" id="aaa-chat-send" aria-label="Send message"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>' +
     '</form>' +
@@ -125,7 +135,7 @@
   var input = panel.querySelector("#aaa-chat-input");
   var sendBtn = panel.querySelector("#aaa-chat-send");
   var closeBtn = panel.querySelector(".aaa-chat-close");
-  var resetBtn = panel.querySelector(".aaa-chat-reset");
+  var newChatBtn = panel.querySelector(".aaa-chat-new");
   var emojiTrigger = panel.querySelector("#aaa-chat-emoji-trigger");
   var emojiBar = panel.querySelector("#aaa-chat-emoji-bar");
 
@@ -280,37 +290,35 @@
   launch.addEventListener("click", togglePanel);
   closeBtn.addEventListener("click", closePanel);
 
-  resetBtn.addEventListener("click", function () {
-    if (confirm("Are you sure you want to clear your chat history and start a new session?")) {
+  newChatBtn.addEventListener("click", function () {
+    if (confirm("Start a new chat? Your current conversation won't carry over.")) {
       messages = [];
       log.innerHTML = "";
       addMessage("assistant", GREETING);
       emojiBar.style.display = "none";
+      emojiTrigger.setAttribute("aria-expanded", "false");
       input.value = "";
       autoGrow();
     }
   });
 
   emojiTrigger.addEventListener("click", function () {
-    if (emojiBar.style.display === "none") {
-      emojiBar.style.display = "flex";
-    } else {
-      emojiBar.style.display = "none";
-    }
+    var isOpen = emojiBar.style.display !== "none";
+    emojiBar.style.display = isOpen ? "none" : "flex";
+    emojiTrigger.setAttribute("aria-expanded", String(!isOpen));
   });
 
   emojiBar.addEventListener("click", function (e) {
-    if (e.target.tagName === "SPAN") {
-      var emoji = e.target.textContent;
-      var start = input.selectionStart;
-      var end = input.selectionEnd;
-      var text = input.value;
-      input.value = text.substring(0, start) + emoji + text.substring(end);
-      input.focus();
-      var newPos = start + emoji.length;
-      input.setSelectionRange(newPos, newPos);
-      autoGrow();
-    }
+    var emojiButton = e.target.closest(".aaa-chat-emoji");
+    if (!emojiButton) return;
+    var emoji = emojiButton.getAttribute("data-emoji");
+    var start = input.selectionStart;
+    var end = input.selectionEnd;
+    input.value = input.value.substring(0, start) + emoji + input.value.substring(end);
+    autoGrow();
+    input.focus();
+    var newPosition = start + emoji.length;
+    input.setSelectionRange(newPosition, newPosition);
   });
 
   form.addEventListener("submit", function (e) {
@@ -320,6 +328,7 @@
     input.value = "";
     autoGrow();
     emojiBar.style.display = "none";
+    emojiTrigger.setAttribute("aria-expanded", "false");
     sendMessage(text);
   });
 
