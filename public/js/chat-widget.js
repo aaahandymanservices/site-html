@@ -81,7 +81,12 @@
     ".aaa-chat-send{flex-shrink:0;width:42px;height:42px;border-radius:12px;border:none;background:" + CRIMSON + ";color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease}",
     ".aaa-chat-send:hover:not(:disabled){background:#751a1e}",
     ".aaa-chat-send:disabled{opacity:.5;cursor:not-allowed}",
-    ".aaa-chat-disclaimer{font-size:10px;color:#5776a2;text-align:center;padding:0 12px 10px;background:#fff;line-height:1.3}"
+    ".aaa-chat-disclaimer{font-size:10px;color:#5776a2;text-align:center;padding:0 12px 10px;background:#fff;line-height:1.3}",
+    ".aaa-chat-bubble{position:fixed;bottom:164px;right:20px;z-index:2147482999;width:280px;background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(13,34,55,.25);border:1.5px solid #e7ecf2;padding:12px 14px;box-sizing:border-box;font:14px/1.4 'Roboto',system-ui,-apple-system,sans-serif;color:#0d2237;cursor:pointer;display:none;opacity:0;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease}",
+    ".aaa-chat-bubble.aaa-show{display:block;opacity:1;transform:translateY(0)}",
+    ".aaa-chat-bubble-arrow{position:absolute;bottom:-8px;right:42px;width:12px;height:12px;background:#fff;border-right:1.5px solid #e7ecf2;border-bottom:1.5px solid #e7ecf2;transform:rotate(45deg)}",
+    ".aaa-chat-bubble-close{position:absolute;top:6px;right:8px;background:none;border:none;color:#9fb1ca;font-size:16px;cursor:pointer;line-height:1;padding:4px;transition:color .15s}",
+    ".aaa-chat-bubble-close:hover{color:" + CRIMSON + "}"
   ].join("");
   document.head.appendChild(style);
 
@@ -149,6 +154,22 @@
 
   document.body.appendChild(group);
   document.body.appendChild(panel);
+
+  // Create and append the welcome notification bubble
+  var bubble = document.createElement("div");
+  bubble.className = "aaa-chat-bubble";
+  bubble.innerHTML = 
+    '<strong>Need repair help?</strong><br>Ask our AI assistant a question! 👋' +
+    '<button type="button" class="aaa-chat-bubble-close" title="Dismiss" aria-label="Dismiss">&times;</button>' +
+    '<div class="aaa-chat-bubble-arrow"></div>';
+  document.body.appendChild(bubble);
+
+  var bubbleTimeout = setTimeout(function () {
+    // Show only if the chat hasn't been opened yet
+    if (!panel.classList.contains("aaa-open")) {
+      bubble.classList.add("aaa-show");
+    }
+  }, 5000); // 5 seconds delay
 
   var log = panel.querySelector("#aaa-chat-log");
   var form = panel.querySelector("#aaa-chat-form");
@@ -251,6 +272,8 @@
   function openPanel() {
     panel.classList.add("aaa-open");
     launch.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+    bubble.classList.remove("aaa-show");
+    clearTimeout(bubbleTimeout);
     if (!opened) {
       opened = true;
       addMessage("assistant", GREETING);
@@ -400,6 +423,18 @@
 
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && panel.classList.contains("aaa-open")) closePanel();
+  });
+
+  // Handle clicking the welcome bubble to open the panel
+  bubble.addEventListener("click", function (e) {
+    var closeBtnClick = e.target.closest(".aaa-chat-bubble-close");
+    if (closeBtnClick) {
+      e.stopPropagation();
+      bubble.classList.remove("aaa-show");
+      clearTimeout(bubbleTimeout);
+      return;
+    }
+    openPanel();
   });
 
   // Hide the site's own floating call widget now and after layout settles, so
