@@ -63,7 +63,7 @@ function serviceFaq(service) {
     },
     {
       q: `How much does ${service.name.toLowerCase().replace(/ services$/, '')} cost?`,
-      a: `Pricing starts with a minimum service call: $100 in Zone A (within about 20 miles of our Waterford base) or $145 in Zone B (extended county, 20+ miles). That covers travel, diagnostics, and up to the first hour of labor. Continuous labor after the first hour is billed at a flat $75 per hour in quarter-hour increments, and materials are billed separately.`
+      a: `Pricing starts with a minimum service call: $100 in Zone A (within about 20 miles of our Waterford base) or $145 in Zone B (extended county, 20+ miles). That covers travel, diagnostics, and up to the first hour of labor. Continuous labor after the first hour is billed at a flat $70 per hour in quarter-hour increments, and materials are billed separately.`
     }
   ];
   if (service.faq) faqs.push({ q: service.faq.q, a: service.faq.a });
@@ -236,7 +236,7 @@ function costGuideSection(service) {
                             <p class="text-sm text-gray-600">Mesh or surface-tension guards that must be unscrewed and re-secured to clean underneath add labor time, and usually increase the cost.</p>
                         </div>
                     </div>
-                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: rather than charging by the foot, we quote a flat rate up front, then bill continuous labor at <strong>$75/hour</strong> in quarter-hour increments for anything beyond a standard clean. You will always know the price before we start.</p>
+                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: rather than charging by the foot, we quote a flat rate up front, then bill continuous labor at <strong>$70/hour</strong> in quarter-hour increments for anything beyond a standard clean. You will always know the price before we start.</p>
                 </div>
             </div>
 `;
@@ -309,7 +309,7 @@ function powerWashingCostGuide() {
                             <p class="text-sm text-gray-600">Moving heavy patio furniture or wrapping delicate landscaping, lighting, and outlets in protective plastic adds prep labor to the final cost.</p>
                         </div>
                     </div>
-                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: a <strong>$100 (Zone A) / $145 (Zone B)</strong> minimum covers travel and the first hour, then continuous washing is billed at a flat <strong>$75/hour</strong> in quarter-hour increments. You will always know the price before we start.</p>
+                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: a <strong>$100 (Zone A) / $145 (Zone B)</strong> minimum covers travel and the first hour, then continuous washing is billed at a flat <strong>$70/hour</strong> in quarter-hour increments. You will always know the price before we start.</p>
                 </div>
             </div>
 `;
@@ -508,8 +508,7 @@ ${service.intro.map((p) => `                    <p>${amp(p)}</p>`).join('\n')}
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
                         <li class="flex items-start gap-2"><i class="fas fa-location-dot text-red-600 mt-1"></i><span><strong>$100 minimum</strong> in Zone A (within ~20 miles) &middot; <strong>$145</strong> in Zone B (extended county).</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1"></i><span>Then a flat <strong>$75/hour</strong> in quarter-hour increments.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
                         <li class="flex items-start gap-2"><i class="fas fa-map text-red-600 mt-1"></i><span>Available across <a href="/service-areas" class="text-red-600 font-semibold underline underline-offset-2">Oakland County</a>.</span></li>
                     </ul>
                     <a href="${quoteHref(service.formService)}" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30">
