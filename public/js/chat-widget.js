@@ -20,6 +20,8 @@
   // Conversation history in OpenAI chat format: { role, content }.
   var messages = [];
   var streaming = false;
+  var activeRequest = null;
+  var conversationVersion = 0;
 
   // --- Styles -------------------------------------------------------------
   var style = document.createElement("style");
@@ -46,6 +48,7 @@
     ".aaa-chat-header-actions{margin-left:auto;display:flex;align-items:center;gap:8px}",
     ".aaa-chat-control-btn{background:none;border:none;color:#fff;font-size:16px;cursor:pointer;opacity:.8;padding:6px;line-height:1;display:flex;align-items:center;justify-content:center;border-radius:4px;transition:opacity .15s,background-color .15s}",
     ".aaa-chat-control-btn:hover{opacity:1;background-color:rgba(255,255,255,0.15)}",
+    ".aaa-chat-control-btn svg,.aaa-chat-emoji-trigger svg{width:20px;height:20px;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}",
     ".aaa-chat-close{font-size:20px}",
     ".aaa-chat-log{flex:1;overflow-y:auto;padding:18px;background:#f3f6f9;display:flex;flex-direction:column;gap:12px}",
     ".aaa-msg{max-width:82%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}",
@@ -57,6 +60,7 @@
     ".aaa-typing span:nth-child(2){animation-delay:.2s}.aaa-typing span:nth-child(3){animation-delay:.4s}",
     "@keyframes aaa-blink{0%,80%,100%{opacity:.3}40%{opacity:1}}",
     ".aaa-chat-emoji-bar{display:flex;gap:6px;padding:8px 12px;background:#f8fafc;border-top:1px solid #e7ecf2;align-items:center;overflow-x:auto;scrollbar-width:none}",
+    ".aaa-chat-emoji-bar[hidden]{display:none}",
     ".aaa-chat-emoji-bar::-webkit-scrollbar{display:none}",
     ".aaa-chat-emoji{flex:0 0 auto;width:34px;height:34px;border:1px solid #d7e0ea;border-radius:10px;background:#fff;font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease,border-color .15s ease,transform .15s ease}",
     ".aaa-chat-emoji:hover{background:#edf2f7;border-color:#9fb1ca;transform:translateY(-2px) rotate(-3deg)}",
@@ -103,12 +107,12 @@
       '<div class="aaa-avatar"><i class="fas fa-hammer" aria-hidden="true"></i></div>' +
       '<div><h2>AAA Handyman Services</h2><p>Ask about our services &amp; areas</p></div>' +
       '<div class="aaa-chat-header-actions">' +
-        '<button type="button" class="aaa-chat-control-btn aaa-chat-new" title="Start a new chat" aria-label="Start a new chat"><i class="fas fa-rotate-right" aria-hidden="true"></i></button>' +
-        '<button class="aaa-chat-control-btn aaa-chat-close" title="Close chat" aria-label="Close chat">&times;</button>' +
+        '<button type="button" class="aaa-chat-control-btn aaa-chat-new" title="Refresh chat" aria-label="Refresh chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8.1 8.1 0 0 0-15.5-2M4 4v5h5"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2M20 20v-5h-5"/></svg></button>' +
+        '<button type="button" class="aaa-chat-control-btn aaa-chat-close" title="Close chat" aria-label="Close chat">&times;</button>' +
       '</div>' +
     '</div>' +
     '<div class="aaa-chat-log" id="aaa-chat-log" role="log" aria-live="polite"></div>' +
-    '<div class="aaa-chat-emoji-bar" id="aaa-chat-emoji-bar" style="display:none;" aria-label="Handyman emojis">' +
+    '<div class="aaa-chat-emoji-bar" id="aaa-chat-emoji-bar" hidden aria-label="Handyman emojis">' +
       '<button type="button" class="aaa-chat-emoji" data-emoji="🛠️" aria-label="Hammer and wrench">🛠️</button>' +
       '<button type="button" class="aaa-chat-emoji" data-emoji="🔨" aria-label="Hammer">🔨</button>' +
       '<button type="button" class="aaa-chat-emoji" data-emoji="🔧" aria-label="Wrench">🔧</button>' +
@@ -121,7 +125,7 @@
       '<button type="button" class="aaa-chat-emoji" data-emoji="🎨" aria-label="Painting">🎨</button>' +
     '</div>' +
     '<form class="aaa-chat-form" id="aaa-chat-form">' +
-      '<button type="button" class="aaa-chat-emoji-trigger" id="aaa-chat-emoji-trigger" title="Add a handyman emoji" aria-label="Add a handyman emoji" aria-expanded="false" aria-controls="aaa-chat-emoji-bar"><i class="far fa-face-smile" aria-hidden="true"></i></button>' +
+      '<button type="button" class="aaa-chat-emoji-trigger" id="aaa-chat-emoji-trigger" title="Add an emoji" aria-label="Add an emoji" aria-expanded="false" aria-controls="aaa-chat-emoji-bar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg></button>' +
       '<textarea id="aaa-chat-input" rows="1" placeholder="Type your question…" aria-label="Your message"></textarea>' +
       '<button type="submit" class="aaa-chat-send" id="aaa-chat-send" aria-label="Send message"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>' +
     '</form>' +
@@ -198,6 +202,26 @@
     input.style.height = Math.min(input.scrollHeight, 120) + "px";
   }
 
+  function setEmojiBarOpen(isOpen) {
+    emojiBar.hidden = !isOpen;
+    emojiTrigger.setAttribute("aria-expanded", String(isOpen));
+  }
+
+  function resetChat() {
+    conversationVersion += 1;
+    if (activeRequest) activeRequest.abort();
+    activeRequest = null;
+    streaming = false;
+    sendBtn.disabled = false;
+    messages = [];
+    log.innerHTML = "";
+    addMessage("assistant", GREETING);
+    setEmojiBarOpen(false);
+    input.value = "";
+    autoGrow();
+    input.focus();
+  }
+
   var opened = false;
   function openPanel() {
     panel.classList.add("aaa-open");
@@ -223,6 +247,8 @@
     if (streaming) return;
     streaming = true;
     sendBtn.disabled = true;
+    var requestVersion = conversationVersion;
+    activeRequest = new AbortController();
 
     addMessage("user", text);
     messages.push({ role: "user", content: text });
@@ -237,6 +263,7 @@
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: messages, page: window.location.pathname }),
+        signal: activeRequest.signal,
       });
 
       if (!res.ok || !res.body) throw new Error("Request failed");
@@ -263,6 +290,7 @@
             var data = JSON.parse(payload);
             if (data.error) throw new Error("stream error");
             if (data.text) {
+              if (requestVersion !== conversationVersion) return;
               full += data.text;
               renderBot(botEl, full);
             }
@@ -272,17 +300,22 @@
         }
       }
 
+      if (requestVersion !== conversationVersion) return;
       if (!full) throw new Error("Empty response");
       messages.push({ role: "assistant", content: full });
     } catch (err) {
+      if (err.name === "AbortError" || requestVersion !== conversationVersion) return;
       renderBot(
         botEl,
         "Sorry, I couldn't reach the assistant just now. Please call us at (248) 385-3432 or email contact@aaahandyman.services."
       );
     } finally {
-      streaming = false;
-      sendBtn.disabled = false;
-      input.focus();
+      if (requestVersion === conversationVersion) {
+        activeRequest = null;
+        streaming = false;
+        sendBtn.disabled = false;
+        input.focus();
+      }
     }
   }
 
@@ -290,22 +323,10 @@
   launch.addEventListener("click", togglePanel);
   closeBtn.addEventListener("click", closePanel);
 
-  newChatBtn.addEventListener("click", function () {
-    if (confirm("Start a new chat? Your current conversation won't carry over.")) {
-      messages = [];
-      log.innerHTML = "";
-      addMessage("assistant", GREETING);
-      emojiBar.style.display = "none";
-      emojiTrigger.setAttribute("aria-expanded", "false");
-      input.value = "";
-      autoGrow();
-    }
-  });
+  newChatBtn.addEventListener("click", resetChat);
 
   emojiTrigger.addEventListener("click", function () {
-    var isOpen = emojiBar.style.display !== "none";
-    emojiBar.style.display = isOpen ? "none" : "flex";
-    emojiTrigger.setAttribute("aria-expanded", String(!isOpen));
+    setEmojiBarOpen(emojiBar.hidden);
   });
 
   emojiBar.addEventListener("click", function (e) {
@@ -327,8 +348,7 @@
     if (!text || streaming) return;
     input.value = "";
     autoGrow();
-    emojiBar.style.display = "none";
-    emojiTrigger.setAttribute("aria-expanded", "false");
+    setEmojiBarOpen(false);
     sendMessage(text);
   });
 
