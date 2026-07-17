@@ -14,12 +14,12 @@
     "@netlify/blobs": "^10.7.9",
     "@netlify/database": "^1.1.0",
     "drizzle-kit": "^1.0.0-beta.22",
-    "drizzle-orm": "^1.0.0-beta.22"
+    "drizzle-orm": "^1.0.0-beta.22",
+    "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
     "@netlify/functions": "^5.3.0",
     "serve": "^14.2.6",
-    "tailwindcss": "^3.4.19",
     "typescript": "^6.0.3"
   }
 }
