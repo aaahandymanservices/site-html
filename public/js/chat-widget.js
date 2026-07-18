@@ -52,9 +52,13 @@
     ".aaa-chat-control-btn svg,.aaa-chat-emoji-trigger svg{width:20px;height:20px;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}",
     ".aaa-chat-close{font-size:20px}",
     ".aaa-chat-log{flex:1;overflow-y:auto;padding:18px;background:#f3f6f9;display:flex;flex-direction:column;gap:12px}",
-    ".aaa-msg{max-width:82%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}",
-    ".aaa-msg.aaa-user{align-self:flex-end;background:" + NAVY + ";color:#fff;border-bottom-right-radius:4px}",
-    ".aaa-msg.aaa-bot{align-self:flex-start;background:#fff;color:#0d2237;border:1px solid #e7ecf2;border-bottom-left-radius:4px}",
+    ".aaa-msg-row{display:flex;align-items:flex-end;gap:8px;max-width:88%}",
+    ".aaa-msg-row.aaa-user-row{align-self:flex-end;justify-content:flex-end}",
+    ".aaa-msg-row.aaa-bot-row{align-self:flex-start}",
+    ".aaa-msg-avatar{width:30px;height:30px;border-radius:9999px;object-fit:cover;flex:0 0 30px;border:1px solid #cbd6e2;box-shadow:0 2px 6px rgba(13,34,55,.16)}",
+    ".aaa-msg{max-width:100%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}",
+    ".aaa-msg.aaa-user{background:" + NAVY + ";color:#fff;border-bottom-right-radius:4px}",
+    ".aaa-msg.aaa-bot{background:#fff;color:#0d2237;border:1px solid #e7ecf2;border-bottom-left-radius:4px}",
     ".aaa-msg.aaa-bot a{color:" + CRIMSON + ";text-decoration:underline}",
     ".aaa-typing{display:inline-flex;gap:4px;align-items:center}",
     ".aaa-typing span{width:7px;height:7px;border-radius:9999px;background:#9fb1ca;animation:aaa-blink 1.2s infinite ease-in-out}",
@@ -118,7 +122,7 @@
   panel.setAttribute("aria-label", "Chat with AAA Handyman Services");
   panel.innerHTML =
     '<div class="aaa-chat-header">' +
-      '<div class="aaa-avatar"><img src="/logo-circular.png" alt="" aria-hidden="true"></div>' +
+      '<div class="aaa-avatar"><img src="/logo-circular.png?v=20260718-1" alt="" aria-hidden="true"></div>' +
       '<div><h2>AAA Handyman Services</h2><p>Ask about our services &amp; areas</p></div>' +
       '<div class="aaa-chat-header-actions">' +
         '<button type="button" class="aaa-chat-control-btn aaa-chat-new" title="Refresh chat" aria-label="Refresh chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8.1 8.1 0 0 0-15.5-2M4 4v5h5"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2M20 20v-5h-5"/></svg></button>' +
@@ -225,10 +229,22 @@
   }
 
   function addMessage(role, text) {
+    var row = document.createElement("div");
+    row.className = "aaa-msg-row " + (role === "user" ? "aaa-user-row" : "aaa-bot-row");
+
+    if (role !== "user") {
+      var avatar = document.createElement("img");
+      avatar.className = "aaa-msg-avatar";
+      avatar.src = "/logo-circular.png?v=20260718-1";
+      avatar.alt = "AAA Handyman Services";
+      row.appendChild(avatar);
+    }
+
     var el = document.createElement("div");
     el.className = "aaa-msg " + (role === "user" ? "aaa-user" : "aaa-bot");
     el.textContent = text;
-    log.appendChild(el);
+    row.appendChild(el);
+    log.appendChild(row);
     scrollToBottom();
     return el;
   }
