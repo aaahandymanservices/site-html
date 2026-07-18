@@ -255,12 +255,33 @@
     <style>
         html { scroll-behavior: smooth; }
         body { font-family: 'Roboto', sans-serif; }
-        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=80') center/cover; }
+        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=80') center/cover; height: auto; }
         .hero-title {
             -webkit-text-stroke: 2px #8e1f26;
             text-stroke: 2px #8e1f26;
             paint-order: stroke fill;
         }
+        .first-service-certificate {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            background: linear-gradient(135deg, #fff8dc 0%, #ffffff 48%, #f5e7b6 100%);
+            border: 2px solid #d6b85a;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+        }
+        .first-service-certificate::before,
+        .first-service-certificate::after {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            width: 7rem;
+            height: 7rem;
+            border: 1px solid rgba(166, 31, 46, 0.18);
+            transform: rotate(45deg);
+        }
+        .first-service-certificate::before { top: -4.5rem; left: -3rem; }
+        .first-service-certificate::after { right: -3rem; bottom: -4.5rem; }
+        .certificate-value { text-shadow: 0 2px 0 #ffffff; }
         .nav-link { transition: all 0.3s; }
         .nav-link:hover { color: #8e1f26; transform: translateY(-2px); }
         .service-card { transition: all 0.3s; }
@@ -421,7 +442,7 @@
     </a>
 
     <!-- Hero -->
-    <header id="top" class="hero min-h-[70vh] md:h-[75vh] py-12 md:py-0 flex items-center text-white">
+    <header id="top" class="hero min-h-[70vh] py-12 md:py-16 flex items-center text-white">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <div class="max-w-3xl mx-auto">
                 <div class="inline-flex flex-wrap justify-center gap-2 items-center bg-white/20 backdrop-blur-md px-4 py-1.5 sm:px-6 sm:py-2 rounded-full mb-4 text-xs sm:text-base">
@@ -434,6 +455,14 @@
                 </div>
                 <h1 class="hero-title text-3xl sm:text-4xl md:text-6xl font-bold leading-tight md:leading-none mb-4 tracking-tighter">Reliable Handyman Services in Oakland County, MI: Expert Repairs & Maintenance</h1>
                 <p class="text-base sm:text-lg md:text-xl mb-6 text-white/95 font-medium">No Job Too Small! Your trusted, locally owned home repair partner operated by skilled local craftsmen. Specializing in high-quality minor home repairs, maintenance, and reliable custom solutions across Oakland County.</p>
+                <a href="/contact?offer=first-service#contact-form" class="first-service-certificate group mx-auto mb-6 grid max-w-2xl grid-cols-[auto_1fr_auto] items-center gap-3 rounded-2xl px-4 py-3 text-left text-blue-950 transition hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-yellow-300 sm:gap-5 sm:px-6 sm:py-4" aria-label="Claim the $50 first-service gift certificate">
+                    <span class="certificate-value text-4xl font-bold leading-none text-red-700 sm:text-5xl">$50</span>
+                    <span>
+                        <span class="block text-xs font-bold uppercase tracking-[0.18em] text-red-700 sm:text-sm">First-Service Gift Certificate</span>
+                        <span class="mt-1 block text-xs font-medium leading-snug text-blue-950/75 sm:text-sm">Strictly for first-time customers booking their first service with AAA Handyman Services.</span>
+                    </span>
+                    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-red-700 text-white transition group-hover:translate-x-1 sm:h-11 sm:w-11" aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
+                </a>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
                     <a href="tel:+12483853432" class="bg-green-600 hover:bg-green-700 text-white text-base sm:text-lg px-5 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold inline-flex items-center justify-center gap-2 transition shadow-lg hover:shadow-green-600/30 pulse-btn-green">
                         Call Now! (248) 385-3432 <i class="fas fa-phone"></i>
