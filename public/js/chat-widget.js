@@ -42,7 +42,8 @@
     ".aaa-chat-panel.aaa-open{display:flex;animation:aaa-pop .18s ease}",
     "@keyframes aaa-pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}",
     ".aaa-chat-header{background:" + NAVY + ";color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px}",
-    ".aaa-chat-header .aaa-avatar{width:38px;height:38px;border-radius:9999px;background:" + CRIMSON + ";display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}",
+    ".aaa-chat-header .aaa-avatar{width:42px;height:42px;border-radius:9999px;background:" + CRIMSON + ";display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;border:2px solid rgba(255,255,255,.9);box-shadow:0 2px 8px rgba(0,0,0,.22)}",
+    ".aaa-chat-header .aaa-avatar img{width:100%;height:100%;display:block;object-fit:cover}",
     ".aaa-chat-header h2{margin:0;font-size:15px;font-weight:700;line-height:1.2}",
     ".aaa-chat-header p{margin:2px 0 0;font-size:12px;opacity:.75;line-height:1.2}",
     ".aaa-chat-header-actions{margin-left:auto;display:flex;align-items:center;gap:8px}",
@@ -117,7 +118,7 @@
   panel.setAttribute("aria-label", "Chat with AAA Handyman Services");
   panel.innerHTML =
     '<div class="aaa-chat-header">' +
-      '<div class="aaa-avatar"><i class="fas fa-hammer" aria-hidden="true"></i></div>' +
+      '<div class="aaa-avatar"><img src="/logo-circular.png" alt="" aria-hidden="true"></div>' +
       '<div><h2>AAA Handyman Services</h2><p>Ask about our services &amp; areas</p></div>' +
       '<div class="aaa-chat-header-actions">' +
         '<button type="button" class="aaa-chat-control-btn aaa-chat-new" title="Refresh chat" aria-label="Refresh chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8.1 8.1 0 0 0-15.5-2M4 4v5h5"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2M20 20v-5h-5"/></svg></button>' +
