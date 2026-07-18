@@ -71,29 +71,29 @@
             overflow: hidden;
             color: #03070b;
             background: linear-gradient(135deg, #fff8dc 0%, #ffffff 48%, #f5e7b6 100%);
-            border: 2px solid #d6b85a;
-            border-radius: 1rem;
-            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+            border: 1px solid #d6b85a;
+            border-radius: 0.75rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
         }
         .first-service-certificate::before,
         .first-service-certificate::after {
             content: '';
             position: absolute;
             z-index: -1;
-            width: 7rem;
-            height: 7rem;
-            border: 1px solid rgba(166, 31, 46, 0.18);
+            width: 4rem;
+            height: 4rem;
+            border: 1px solid rgba(166, 31, 46, 0.1);
             transform: rotate(45deg);
             pointer-events: none;
         }
-        .first-service-certificate::before { top: -4.5rem; left: -3rem; }
-        .first-service-certificate::after { right: -3rem; bottom: -4.5rem; }
+        .first-service-certificate::before { top: -2.5rem; left: -1.5rem; }
+        .first-service-certificate::after { right: -1.5rem; bottom: -2.5rem; }
         .contact-certificate-header {
             display: grid;
             grid-template-columns: auto minmax(0, 1fr);
             align-items: center;
-            gap: 1rem;
-            padding: 1rem 1.25rem;
+            gap: 0.75rem;
+            padding: 0.65rem 1rem;
             border-bottom: 1px solid #d6b85a;
         }
         .certificate-value {
@@ -232,16 +232,16 @@
                         </p>
 
                         <div id="first-service-offer" class="first-service-certificate">
-                            <div class="contact-certificate-header sm:px-6">
-                                <div class="certificate-value text-4xl font-bold leading-none sm:text-5xl">$50</div>
+                            <div class="contact-certificate-header sm:px-5">
+                                <div class="certificate-value text-3xl font-bold leading-none sm:text-4xl">$50</div>
                                 <div>
-                                    <p class="contact-certificate-title text-xs font-bold uppercase tracking-[0.16em] sm:text-sm">First-Service Gift Certificate</p>
-                                    <p class="contact-certificate-copy mt-1 text-sm leading-snug">For first-time customers booking their first service.</p>
+                                    <p class="contact-certificate-title text-[11px] font-bold uppercase tracking-[0.16em] sm:text-xs">First-Service Gift Certificate</p>
+                                    <p class="contact-certificate-copy mt-0.5 text-xs leading-snug">For first-time customers booking their first service.</p>
                                 </div>
                             </div>
-                            <label for="first-service-certificate" class="contact-certificate-claim flex cursor-pointer items-start gap-3 px-5 py-4 sm:px-6">
-                                <input id="first-service-certificate" type="checkbox" name="first-service-gift-certificate" value="Requested — customer confirms first service" class="mt-0.5 h-5 w-5 shrink-0 accent-red-700">
-                                <span class="text-sm font-semibold leading-relaxed">I’m a first-time AAA Handyman Services customer booking my first service and want to claim this certificate.</span>
+                            <label for="first-service-certificate" class="contact-certificate-claim flex cursor-pointer items-start gap-3 px-4 py-2.5 sm:px-5">
+                                <input id="first-service-certificate" type="checkbox" name="first-service-gift-certificate" value="Requested — customer confirms first service" class="mt-0.5 h-4 w-4 shrink-0 accent-red-700">
+                                <span class="text-xs font-semibold leading-relaxed">Yes, I’m a first-time customer booking my first service!</span>
                             </label>
                         </div>
 
