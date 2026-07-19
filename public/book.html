@@ -294,6 +294,8 @@
                                     </label>
                                 </div>
 
+                                <div data-captcha class="hidden flex justify-center overflow-x-auto"></div>
+
                                 <button type="submit" id="submit-btn" class="w-full bg-red-600 hover:bg-red-700 py-4 text-lg font-bold rounded-2xl transition flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
                                     CONFIRM APPOINTMENT <i class="fas fa-calendar-check"></i>
                                 </button>
@@ -560,6 +562,16 @@
                     return;
                 }
 
+                // Captcha (only enforced once the site owner has provisioned keys)
+                let captchaToken = "";
+                if (window.SiteCaptcha && window.SiteCaptcha.isEnabled()) {
+                    captchaToken = window.SiteCaptcha.getToken(bookingForm);
+                    if (!captchaToken) {
+                        alert('Please complete the "I\'m not a robot" captcha before confirming.');
+                        return;
+                    }
+                }
+
                 const submitBtn = document.getElementById('submit-btn');
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = 'PROCESSING BOOKING... <i class="fas fa-spinner animate-spin"></i>';
@@ -572,7 +584,8 @@
                     bookingDate: bookingDate,
                     bookingTime: bookingTime,
                     message: message,
-                    optIn: optIn
+                    optIn: optIn,
+                    captchaToken: captchaToken
                 };
 
                 fetch('/api/booking', {
@@ -627,6 +640,7 @@
                 })
                 .catch(error => {
                     alert('Oops! ' + error.message + ' Please double check your details or call us directly.');
+                    if (window.SiteCaptcha) window.SiteCaptcha.reset(bookingForm);
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = 'CONFIRM APPOINTMENT <i class="fas fa-calendar-check"></i>';
                 });
@@ -635,6 +649,7 @@
     </script>
 
     <script src="/js/site.js?v=20260719" defer></script>
+    <script src="/js/captcha.js?v=20260719" defer></script>
     <script src="/js/chat-widget.js?v=20260719-2" defer></script>
 </body>
 </html>
