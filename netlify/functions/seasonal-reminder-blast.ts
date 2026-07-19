@@ -15,12 +15,26 @@ const json = (body: unknown, init?: ResponseInit) =>
 const errorJson = (message = "Something went wrong. Please try again soon.", status = 500) =>
   json({ error: message }, { status });
 
+const getEnv = (name: string): string => {
+  try {
+    if (typeof Netlify !== "undefined" && Netlify.env) {
+      return Netlify.env.get(name) ?? "";
+    }
+  } catch {}
+  try {
+    if (typeof process !== "undefined" && process.env) {
+      return process.env[name] ?? "";
+    }
+  } catch {}
+  return "";
+};
+
 // This endpoint returns the full opted-in subscriber list (emails and names),
 // so it must never be publicly reachable. Access requires a bearer token that
 // matches the ADMIN_API_TOKEN environment variable (set it in the Netlify UI).
 // If the variable is unset we fail closed so subscriber data is never exposed.
 const requireAdmin = (request: Request): Response | null => {
-  const expected = Netlify.env.get("ADMIN_API_TOKEN");
+  const expected = getEnv("ADMIN_API_TOKEN");
   if (!expected) {
     return errorJson("Admin access is not configured. Set the ADMIN_API_TOKEN environment variable to enable this endpoint.", 503);
   }

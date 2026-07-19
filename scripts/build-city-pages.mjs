@@ -281,10 +281,12 @@ ${jsonLd(city)}
     </nav>
 
     <!-- Floating Call Action -->
-    <a href="tel:${PHONE_TEL}" class="fixed bottom-5 right-5 z-50 flex bg-green-600 hover:bg-green-700 text-white px-5 py-3 sm:px-6 rounded-full font-bold items-center justify-center gap-2 sm:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now">
-        <i class="fas fa-phone" aria-hidden="true"></i>
-        <span>Call Now! <span class="hidden sm:inline">${PHONE_DISPLAY}</span></span>
-    </a>
+    <noscript>
+        <a href="tel:${PHONE_TEL}" class="fixed bottom-5 right-5 z-50 flex bg-green-600 hover:bg-green-700 text-white px-5 py-3 sm:px-6 rounded-full font-bold items-center justify-center gap-2 sm:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now">
+            <i class="fas fa-phone" aria-hidden="true"></i>
+            <span>Call Now! <span class="hidden sm:inline">${PHONE_DISPLAY}</span></span>
+        </a>
+    </noscript>
 
     <!-- Header / Hero -->
     <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-950 text-white py-16 sm:py-20 relative overflow-hidden">

@@ -436,10 +436,12 @@
     </nav>
 
     <!-- Floating Call Action -->
-    <a href="tel:+12483853432" class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-bold items-center justify-center gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now">
-        <i class="fas fa-phone" aria-hidden="true"></i>
-        <span>Call Now! <span class="hidden sm:inline">(248) 385-3432</span></span>
-    </a>
+    <noscript>
+        <a href="tel:+12483853432" class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-bold items-center justify-center gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now">
+            <i class="fas fa-phone" aria-hidden="true"></i>
+            <span>Call Now! <span class="hidden sm:inline">(248) 385-3432</span></span>
+        </a>
+    </noscript>
 
     <!-- Hero -->
     <header id="top" class="hero min-h-[70vh] py-12 md:py-16 flex items-center text-white">
@@ -1062,14 +1064,16 @@
     </script>
 
     <!-- Floating Mobile Call/SMS CTA Widget -->
-    <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 md:hidden">
-        <a href="tel:+12483853432" class="w-14 h-14 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center shadow-2xl transition pulse-btn-green border-2 border-white" title="Call Us Now">
-            <i class="fas fa-phone text-2xl"></i>
-        </a>
-        <a href="/contact?service=General+Estimate+%2F+Quote" data-service="General Estimate / Quote" class="w-14 h-14 bg-blue-950 hover:bg-blue-800 text-white rounded-full flex items-center justify-center shadow-2xl transition border-2 border-white" title="Message Us">
-            <i class="fas fa-envelope text-2xl"></i>
-        </a>
-    </div>
+    <noscript>
+        <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 md:hidden">
+            <a href="tel:+12483853432" class="w-14 h-14 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center shadow-2xl transition pulse-btn-green border-2 border-white" title="Call Us Now">
+                <i class="fas fa-phone text-2xl"></i>
+            </a>
+            <a href="/contact?service=General+Estimate+%2F+Quote" data-service="General Estimate / Quote" class="w-14 h-14 bg-blue-950 hover:bg-blue-800 text-white rounded-full flex items-center justify-center shadow-2xl transition border-2 border-white" title="Message Us">
+                <i class="fas fa-envelope text-2xl"></i>
+            </a>
+        </div>
+    </noscript>
 
     <!-- Homepage testimonials: pull a few recent reviews from the same feed as /reviews -->
     <script>
@@ -1129,6 +1133,23 @@
                     if (!Array.isArray(items) || items.length === 0) return;
                     list.innerHTML = items.slice(0, 3).map(renderCard).join('');
                     section.classList.remove('hidden');
+
+                    // Recalculate and re-apply target scroll position to prevent scroll-jump when reviews load
+                    if (window.location.hash) {
+                        const targetId = window.location.hash;
+                        const targetEl = document.querySelector(targetId);
+                        if (targetEl) {
+                            setTimeout(() => {
+                                const rect = targetEl.getBoundingClientRect();
+                                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                                const offsetPosition = rect.top + scrollTop - 80; // Offset sticky nav height
+                                window.scrollTo({
+                                    top: offsetPosition,
+                                    behavior: 'auto'
+                                });
+                            }, 50);
+                        }
+                    }
                 })
                 .catch(() => { /* Leave the section hidden if reviews cannot load. */ });
         })();

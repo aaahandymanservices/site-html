@@ -302,7 +302,7 @@
             </div>
             <div class="flex items-center space-x-2 sm:space-x-3">
                 <button id="mobile-menu-btn" class="md:hidden text-gray-700 hover:text-red-600 focus:outline-none p-1 sm:p-2" aria-label="Toggle Navigation Menu">
-                    <i class="fas fa-bars text-xl sm:text-2xl"></i>
+                    <i class="fas fa-bars text-xl sm:text-2xl" id="menu-icon"></i>
                 </button>
             </div>
         </div>
@@ -321,10 +321,12 @@
     </nav>
 
     <!-- Floating Call Action -->
-    <a href="tel:+12483853432" class="fixed bottom-5 right-5 z-50 flex bg-green-600 hover:bg-green-700 text-white px-5 py-3 sm:px-6 rounded-full font-bold items-center justify-center gap-2 sm:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now">
-        <i class="fas fa-phone" aria-hidden="true"></i>
-        <span>Call Now! <span class="hidden sm:inline">(248) 385-3432</span></span>
-    </a>
+    <noscript>
+        <a href="tel:+12483853432" class="fixed bottom-5 right-5 z-50 flex bg-green-600 hover:bg-green-700 text-white px-5 py-3 sm:px-6 rounded-full font-bold items-center justify-center gap-2 sm:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now">
+            <i class="fas fa-phone" aria-hidden="true"></i>
+            <span>Call Now! <span class="hidden sm:inline">(248) 385-3432</span></span>
+        </a>
+    </noscript>
 
     <!-- Header / Hero -->
     <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-950 text-white py-16 sm:py-20 relative overflow-hidden">
@@ -666,8 +668,16 @@
         // Mobile Navigation Menu Toggle
         var mobileMenuBtn = document.getElementById('mobile-menu-btn');
         var mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', function () { mobileMenu.classList.toggle('hidden'); });
+        var menuIcon = document.getElementById('menu-icon');
+        if (mobileMenuBtn && mobileMenu && menuIcon) {
+            mobileMenuBtn.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.className = 'fas fa-bars text-xl sm:text-2xl';
+                } else {
+                    menuIcon.className = 'fas fa-times text-xl sm:text-2xl';
+                }
+            });
         }
     </script>
 

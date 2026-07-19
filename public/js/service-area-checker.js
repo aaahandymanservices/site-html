@@ -36,7 +36,7 @@
     }
     if (query.length < 2) return null;
     return cities.find((city) => {
-      const names = [city.name.toLowerCase(), ...(city.aliases || [])];
+      const names = [city.name.toLowerCase(), ...(city.aliases || []).map((a) => a.toLowerCase())];
       return names.some((name) => name.includes(query));
     }) || null;
   };
