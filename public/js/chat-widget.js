@@ -74,8 +74,8 @@
     ".aaa-chat-bubble-arrow{position:absolute;bottom:-8px;right:42px;width:12px;height:12px;background:#fff;border-right:1.5px solid #e7ecf2;border-bottom:1.5px solid #e7ecf2;transform:rotate(45deg)}",
     ".aaa-chat-bubble-close{position:absolute;top:6px;right:8px;background:none;border:none;color:#9fb1ca;font-size:16px;cursor:pointer;line-height:1;padding:4px;transition:color .15s}",
     ".aaa-chat-bubble-close:hover{color:" + CRIMSON + "}",
-    "@media(max-width:767px){.aaa-fab{right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));flex-direction:row;gap:10px;align-items:center}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}.aaa-chat-panel{right:max(12px,env(safe-area-inset-right));bottom:88px;max-width:calc(100vw - 24px);max-height:calc(100vh - 112px)}.aaa-chat-bubble{right:max(12px,env(safe-area-inset-right));bottom:88px;max-width:calc(100vw - 24px)}.aaa-chat-bubble-arrow{right:24px}}",
-    "@media(max-width:359px){.aaa-fab .aaa-fab-btn{width:50px;height:50px;flex-basis:50px}.aaa-fab{gap:8px}.aaa-chat-panel,.aaa-chat-bubble{bottom:80px}}"
+    "@media(max-width:767px){.aaa-fab{right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));flex-direction:column;gap:12px;align-items:flex-end}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}.aaa-chat-panel{right:max(12px,env(safe-area-inset-right));bottom:148px;max-width:calc(100vw - 24px);max-height:calc(100vh - 172px)}.aaa-chat-bubble{right:max(12px,env(safe-area-inset-right));bottom:148px;max-width:calc(100vw - 24px)}.aaa-chat-bubble-arrow{right:24px}}",
+    "@media(max-width:359px){.aaa-fab .aaa-fab-btn{width:50px;height:50px;flex-basis:50px}.aaa-fab{gap:10px}.aaa-chat-panel,.aaa-chat-bubble{bottom:136px}}"
   ].join("");
   document.head.appendChild(style);
   var group = document.createElement("div");
