@@ -4,20 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Resource hints: warm up connections to third-party origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
     <title>Customer Reviews & Testimonials | AAA Handyman Services</title>
-    
-    <!-- Search Engine Optimization (SEO) Metadata -->
+
     <meta name="description" content="Read reviews and testimonials from homeowners in Waterford, Troy, West Bloomfield, and across Oakland County, MI. Submit your own project photo and review.">
     <meta name="theme-color" content="#8e1f26">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://aaahandyman.services/reviews">
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aaahandyman.services/reviews">
     <meta property="og:site_name" content="AAA Handyman Services">
@@ -26,14 +23,12 @@
     <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
     <meta property="og:locale" content="en_US">
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://aaahandyman.services/reviews">
     <meta name="twitter:title" content="Customer Reviews & Testimonials | AAA Handyman Services">
     <meta name="twitter:description" content="See recent home repair projects and customer testimonials from around Oakland County, Michigan. Submit your own review today.">
     <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
 
-    <!-- Structured Data (JSON-LD): breadcrumb trail -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -45,27 +40,16 @@
     }
     </script>
 
-    <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
     <link rel="stylesheet" href="/css/tailwind.css">
 
-    <!-- Brand font: Roboto (matches the homepage) -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"></noscript>
 
-    <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* Smooth scrolling for anchor links */
-        html {
-            scroll-behavior: smooth;
-        }
-        /* Custom font family */
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
-        /* Animated entrance for loaded reviews */
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -83,7 +67,7 @@
         .review-preview {
             aspect-ratio: 4 / 3;
         }
-        /* Drag and Drop dropzone styling */
+
         .review-dropzone {
             transition: all 0.2s ease;
         }
@@ -92,14 +76,7 @@
             background-color: #fdf2f2;
             transform: scale(1.02);
         }
-        @keyframes pulse-attention-green {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
-        }
-        .pulse-btn-green {
-            animation: pulse-attention-green 2s infinite;
-        }
-        /* Anchor scroll margin for sticky navbar */
+
         section[id], header[id] {
             scroll-margin-top: 80px;
         }
@@ -108,10 +85,9 @@
                 scroll-margin-top: 100px;
             }
         }
-        /* Respect visitors who prefer reduced motion (accessibility) */
+
         @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            .pulse-btn-green,
+
             .review-card { animation: none !important; }
             .review-card { opacity: 1 !important; transform: none !important; }
         }
@@ -121,18 +97,18 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
-    <!-- Navbar -->
+
     <nav class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
         <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
             <a href="/" class="flex min-w-0 items-center space-x-3" aria-label="AAA Handyman Services home">
-                <!-- Logo -->
+
                 <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600">
                 <div class="min-w-0">
                     <p class="text-base min-[390px]:text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
                     <p class="text-[10px] sm:text-xs text-gray-500">Oakland County, Michigan</p>
                 </div>
             </a>
-            <!-- Desktop Nav Links -->
+
             <div class="hidden md:flex space-x-6 lg:space-x-8 text-lg font-medium items-center">
                 <a href="/services" class="nav-link text-gray-700 hover:text-red-600 transition">Services</a>
                 <a href="/service-areas" class="nav-link text-gray-700 hover:text-red-600 transition">Service Areas</a>
@@ -147,15 +123,15 @@
                     <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="nav-link text-gray-700 hover:text-[#00B24F] text-sm transition leading-none"><i class="fa-solid fa-house-chimney"></i></a>
                 </div>
             </div>
-            <!-- Nav Action Buttons -->
+
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <!-- Mobile Menu Button -->
+
                 <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
                     <i class="fas fa-bars" id="menu-icon"></i>
                 </button>
             </div>
         </div>
-        <!-- Mobile Navigation Menu -->
+
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t-[3px] border-gray-100 px-6 py-4 space-y-4 shadow-inner">
             <a href="/services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
             <a href="/service-areas" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Service Areas</a>
@@ -170,7 +146,6 @@
         </div>
     </nav>
 
-    <!-- Reviews Section -->
     <main class="flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
@@ -180,14 +155,14 @@
                     Check out recent projects completed by AAA Handyman Services across Oakland County, or share your own experience by submitting a review below!
                 </p>
                 <div class="flex flex-wrap items-center justify-center gap-4">
-                    <!-- Nextdoor Link -->
+
                     <div class="inline-flex items-center justify-center gap-2 bg-emerald-600/10 border border-emerald-500/30 hover:bg-emerald-600/20 px-6 py-3 rounded-2xl transition">
                         <span class="text-emerald-400 font-bold text-lg"><i class="fa-solid fa-house-chimney"></i></span>
                         <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" class="text-emerald-300 hover:text-emerald-200 font-semibold text-sm sm:text-base">
                             Find us on Nextdoor
                         </a>
                     </div>
-                    <!-- Yelp Link -->
+
                     <div class="inline-flex items-center justify-center gap-2 bg-red-600/10 border border-red-500/30 hover:bg-red-600/20 px-6 py-3 rounded-2xl transition">
                         <span class="text-red-500 font-bold text-lg"><i class="fa-brands fa-yelp"></i></span>
                         <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" class="text-red-200 hover:text-red-100 font-semibold text-sm sm:text-base">
@@ -198,18 +173,18 @@
             </div>
 
             <div class="grid lg:grid-cols-5 gap-12 items-start">
-                <!-- Submit a Review Form (lg:col-span-2) -->
+
                 <div class="lg:col-span-2 space-y-6">
                     <div class="bg-white text-gray-900 border border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8">
                         <h2 class="text-2xl font-bold text-gray-900 mb-2">Write a Review</h2>
                         <p class="text-sm text-gray-500 mb-6">Upload a photo of your finished repair/project and let your neighbors know how it went.</p>
-                        
+
                         <form id="reviews-form" class="space-y-5">
                             <div>
                                 <label for="reviews-name" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Name</label>
                                 <input id="reviews-name" name="customerName" type="text" required maxlength="80" autocomplete="name" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                             </div>
-                            
+
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label for="reviews-location" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">City / Area</label>
@@ -264,7 +239,7 @@
                             </div>
 
                             <p id="reviews-message" class="hidden text-sm font-semibold"></p>
-                            
+
                             <div id="reviews-editing" class="hidden bg-blue-50 border-[2px] border-blue-200 rounded-2xl p-4 text-sm text-blue-900">
                                 <span class="block mb-1">✍️ You are editing an existing review.</span>
                                 <button id="reviews-cancel-edit" type="button" class="font-bold text-red-600 hover:text-red-700">Cancel</button>
@@ -278,7 +253,6 @@
                     </div>
                 </div>
 
-                <!-- Reviews Feed List (lg:col-span-3) -->
                 <div class="lg:col-span-3 space-y-6">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
@@ -290,17 +264,14 @@
                         </button>
                     </div>
 
-                    <!-- List Container -->
                     <div id="reviews-list" class="grid sm:grid-cols-2 gap-5"></div>
 
-                    <!-- Empty State -->
                     <div id="reviews-empty" class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
                         <i class="fas fa-comment-slash text-4xl text-slate-500 mb-3 block"></i>
                         <h4 class="text-xl font-bold text-white mb-2">No customer reviews yet</h4>
                         <p class="text-sm">Be the first to share your experience with AAA Handyman Services!</p>
                     </div>
 
-                    <!-- Loading State Skeleton -->
                     <div id="reviews-loading" class="grid sm:grid-cols-2 gap-5">
                         <div class="bg-white/5 border border-white/10 rounded-3xl p-6 h-[400px] animate-pulse"></div>
                         <div class="bg-white/5 border border-white/10 rounded-3xl p-6 h-[400px] animate-pulse"></div>
@@ -309,7 +280,6 @@
             </div>
         </div>
 
-        <!-- Hours and availability footer block -->
         <div class="max-w-7xl mx-auto px-6 mb-12">
             <div class="text-center bg-blue-900 text-white py-12 px-8 sm:py-20 sm:px-16 rounded-3xl">
                 <p class="text-xl sm:text-2xl md:text-3xl font-medium">Available Monday–Friday, 9 a.m.–6 p.m.; Saturday, 10 a.m.–5 p.m.</p>
@@ -318,11 +288,10 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-black text-gray-400 pt-14 pb-10">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
-                <!-- Brand -->
+
                 <div class="flex flex-col items-center md:items-start">
                     <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
@@ -332,7 +301,7 @@
                         <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl hover:text-[#FF1A1A] transition"><i class="fa-brands fa-yelp"></i></a>
                     </div>
                 </div>
-                <!-- Quick links -->
+
                 <nav aria-label="Footer">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
                     <ul class="space-y-2 text-sm">
@@ -345,7 +314,7 @@
                         <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
                     </ul>
                 </nav>
-                <!-- Contact -->
+
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
@@ -356,7 +325,7 @@
                     <a href="/contact?service=General+Estimate+%2F+Quote" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Get a Free Quote</a>
                 </div>
             </div>
-            <!-- Quick-access sitemap: popular services + service areas reachable in one click from any page -->
+
             <div class="mt-12 pt-10 border-t border-gray-800 grid gap-10 sm:grid-cols-2 text-center sm:text-left">
                 <nav aria-label="Popular services">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Popular Services</h3>
@@ -404,8 +373,6 @@
         </div>
     </footer>
 
-    <!-- Back to top -->
-    <!-- Floating Call Action -->
     <noscript>
         <a href="tel:+12483853432" class="fixed bottom-5 right-5 z-50 flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now">
             <i class="fas fa-phone" aria-hidden="true"></i>
@@ -414,25 +381,8 @@
     </noscript>
 
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
-    <script>
-        (function () {
-            var btn = document.getElementById('back-to-top');
-            if (!btn) return;
-            window.addEventListener('scroll', function () {
-                var show = window.scrollY > 400;
-                btn.classList.toggle('hidden', !show);
-                btn.classList.toggle('flex', show);
-            }, { passive: true });
-            btn.addEventListener('click', function () {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        })();
-    </script>
 
-    <!-- Interactive JS scripts -->
-    <script>
-        // Reviews functionality
-        const reviewsForm = document.getElementById('reviews-form');
+    <script>        const reviewsForm = document.getElementById('reviews-form');
         const reviewsList = document.getElementById('reviews-list');
         const reviewsEmpty = document.getElementById('reviews-empty');
         const reviewsLoading = document.getElementById('reviews-loading');
@@ -449,10 +399,6 @@
         const starRatingBtns = document.querySelectorAll('.star-rating-btn');
         const reviewsTokenKey = 'aaaReviewsEditTokens';
         let reviewsEditId = null;
-
-        // Photo upload sizing. Source photos up to 10MB are accepted, but the serverless
-        // upload endpoint can only receive a limited request body, so oversized images are
-        // downscaled/re-encoded in the browser to keep the actual upload comfortably small.
         const MAX_SOURCE_BYTES = 10 * 1024 * 1024;
         const UPLOAD_SAFE_BYTES = 5 * 1024 * 1024;
         const MAX_IMAGE_DIMENSION = 2000;
@@ -462,7 +408,6 @@
                 resolve(file);
                 return;
             }
-            // Leave already-small photos and animated GIFs untouched (canvas would drop animation).
             if (file.size <= UPLOAD_SAFE_BYTES || file.type === 'image/gif') {
                 resolve(file);
                 return;
@@ -496,8 +441,6 @@
             };
             img.src = url;
         });
-
-        // Initialize Star Rating Selector logic
         const ratingLabels = {
             '1': 'Disappointing',
             '2': 'Could be better',
@@ -533,8 +476,6 @@
                 updateStarRatingDisplay(val);
             });
         });
-
-        // Initialize with default 5 stars
         updateStarRatingDisplay(5);
 
         const escapeHTML = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({
@@ -639,8 +580,6 @@
             reviewsLoading.classList.add('hidden');
             reviewsList.innerHTML = '';
             reviewsEmpty.classList.toggle('hidden', items.length > 0);
-
-            // Pre-defined modern Tailwind color mappings for different job types to make them pop!
             const badgeColors = {
                 'Carpentry & Trim': 'bg-amber-100 text-amber-800 border-amber-200',
                 'Doors': 'bg-emerald-100 text-emerald-800 border-emerald-200',
@@ -659,7 +598,7 @@
                 card.className = 'review-card bg-white text-gray-900 rounded-3xl overflow-hidden shadow-xl border border-gray-150 flex flex-col justify-between';
                 card.style.animationDelay = `${index * 60}ms`;
                 const badgeStyle = badgeColors[item.projectType] || 'bg-gray-100 text-gray-800 border-gray-200';
-                
+
                 card.innerHTML = `
                     <div>
                         <div class="review-preview bg-gray-50 relative overflow-hidden">
@@ -712,7 +651,7 @@
             if (!reviewsList || !reviewsLoading || !reviewsEmpty) return;
             reviewsLoading.classList.remove('hidden');
             reviewsEmpty.classList.add('hidden');
-            
+
             fetch('/api/reviews')
                 .then(response => response.ok ? response.json() : Promise.reject())
                 .then(renderReviews)
@@ -821,32 +760,9 @@
         }
 
         loadReviews();
-
-        // Mobile menu toggle
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-
-        if (menuBtn && mobileMenu && menuIcon) {
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                if (mobileMenu.classList.contains('hidden')) {
-                    menuIcon.className = 'fas fa-bars';
-                } else {
-                    menuIcon.className = 'fas fa-times';
-                }
-            });
-
-            // Close mobile menu when a link is clicked
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    menuIcon.className = 'fas fa-bars';
-                });
-            });
-        }
     </script>
-    <!-- AI chat assistant widget -->
-    <script src="/js/chat-widget.js?v=20260718-1" defer></script>
+
+    <script src="/js/site.js?v=20260719" defer></script>
+    <script src="/js/chat-widget.js?v=20260719" defer></script>
 </body>
 </html>

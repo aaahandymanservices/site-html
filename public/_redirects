@@ -9,10 +9,8 @@
 /service-areas /service-areas.html 200
 /contact    /contact.html    200
 
-# City landing pages (clean URLs -> generated files in public/handyman/)
 /handyman/  /service-areas   301!
 /handyman/* /handyman/:splat.html 200
 
-# Service landing pages (clean URLs -> generated files in public/services/)
 /services/  /services        301!
 /services/* /services/:splat.html 200

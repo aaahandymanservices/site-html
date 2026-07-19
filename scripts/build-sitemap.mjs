@@ -27,7 +27,6 @@ const staticPages = [
 
 const urls = [];
 
-// 1. Static Pages
 for (const page of staticPages) {
   const loc = page.path ? `${SITE}/${page.path}` : `${SITE}/`;
   let imagesMarkup = '';
@@ -50,7 +49,6 @@ for (const page of staticPages) {
   </url>`);
 }
 
-// 2. Handyman per-city pages
 for (const city of citiesData.cities) {
   urls.push(`  <url>
     <loc>${SITE}/handyman/${city.slug}</loc>
@@ -60,7 +58,6 @@ for (const city of citiesData.cities) {
   </url>`);
 }
 
-// 3. Per-service pages
 for (const service of servicesData.services) {
   urls.push(`  <url>
     <loc>${SITE}/services/${service.slug}</loc>

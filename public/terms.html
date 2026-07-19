@@ -14,39 +14,30 @@
     <meta property="og:title" content="Terms of Service | AAA Handyman Services">
     <meta property="og:description" content="Terms of Service for AAA Handyman Services in Waterford and Oakland County, Michigan.">
     <link rel="icon" type="image/png" href="/favicon-32x32.png">
-    <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
+
     <link rel="stylesheet" href="/css/tailwind.css">
-    <!-- Font Awesome -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Roboto', sans-serif; }
         .nav-link { transition: all 0.3s; }
         .nav-link:hover { color: #dc2626; transform: translateY(-2px); }
-        /* Pulse attention animation (green call-to-action) */
-        @keyframes pulse-attention-green {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
-        }
-        .pulse-btn-green {
-            animation: pulse-attention-green 2s infinite;
-        }
+
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
-    <!-- Navbar -->
+
     <nav class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
         <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
             <div class="flex min-w-0 items-center space-x-3">
-                <!-- Logo -->
+
                 <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600">
                 <div>
                     <a href="/" class="text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight hover:text-red-700 transition">AAA Handyman Services</a>
                     <p class="text-[10px] sm:text-xs text-gray-500">Oakland County, Michigan</p>
                 </div>
             </div>
-            <!-- Desktop Nav Links -->
+
             <div class="hidden md:flex space-x-6 lg:space-x-8 text-lg font-medium items-center">
                 <a href="/services" class="nav-link text-gray-700 hover:text-red-600">Services</a>
                 <a href="/service-areas" class="nav-link text-gray-700 hover:text-red-600">Service Areas</a>
@@ -61,15 +52,15 @@
                     <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="nav-link text-gray-700 hover:text-[#00B24F] text-sm leading-none"><i class="fa-solid fa-house-chimney"></i></a>
                 </div>
             </div>
-            <!-- Nav Action Buttons -->
+
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <!-- Mobile Menu Button -->
+
                 <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
                     <i class="fas fa-bars" id="menu-icon"></i>
                 </button>
             </div>
         </div>
-        <!-- Mobile Navigation Menu -->
+
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-4 shadow-inner">
             <a href="/services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
             <a href="/service-areas" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Service Areas</a>
@@ -84,9 +75,8 @@
         </div>
     </nav>
 
-    <!-- Main Content Container -->
     <main class="flex-grow max-w-4xl mx-auto px-6 py-12 md:py-16">
-        <!-- Breadcrumb / Header Subtitle -->
+
         <div class="text-center mb-8">
             <span class="inline-block bg-red-50 text-red-800 border border-red-200 rounded-full px-4 py-1.5 text-sm font-semibold tracking-wide uppercase mb-3">
                 Legal Documentation
@@ -96,11 +86,10 @@
             <div class="w-24 h-1.5 bg-red-600 mx-auto mt-6 rounded-full"></div>
         </div>
 
-        <!-- Introductory Section -->
         <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 mb-8">
             <p class="text-gray-700 text-lg leading-relaxed mb-4">
-                Welcome to AAA Handyman Services! These Terms of Service govern your use of our website 
-                <a href="/" class="text-red-600 hover:underline font-semibold">aaahandyman.services</a> 
+                Welcome to AAA Handyman Services! These Terms of Service govern your use of our website
+                <a href="/" class="text-red-600 hover:underline font-semibold">aaahandyman.services</a>
                 and the handyman, repair, and home improvement services we provide in the greater Oakland County, Michigan area.
             </p>
             <p class="text-gray-700 text-lg leading-relaxed">
@@ -108,9 +97,8 @@
             </p>
         </section>
 
-        <!-- Terms Clauses -->
         <div class="space-y-6">
-            <!-- 1. Our Services -->
+
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">1</span>
@@ -190,7 +178,6 @@
                 </p>
             </section>
 
-            <!-- 2. Licensing & Scope of Work -->
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">2</span>
@@ -221,7 +208,6 @@
                 </ul>
             </section>
 
-            <!-- 3. Rates & Pricing -->
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">3</span>
@@ -263,7 +249,6 @@
                 </ul>
             </section>
 
-            <!-- 4. Scheduling & Cancellations -->
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">4</span>
@@ -293,7 +278,6 @@
                 </ul>
             </section>
 
-            <!-- 5. Warranty & Liability -->
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">5</span>
@@ -310,7 +294,6 @@
                 </p>
             </section>
 
-            <!-- 6. Customer Responsibilities -->
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">6</span>
@@ -336,7 +319,6 @@
                 </ul>
             </section>
 
-            <!-- 7. Website Use -->
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">7</span>
@@ -347,20 +329,18 @@
                 </p>
             </section>
 
-            <!-- 8. Privacy -->
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">8</span>
                     Privacy
                 </h2>
                 <p class="text-gray-600 leading-relaxed">
-                    Your privacy is important to us. Please review our 
+                    Your privacy is important to us. Please review our
                     <a href="/privacy" class="text-red-600 hover:underline font-semibold">Privacy Policy</a>
                     for details on how we collect and protect your information.
                 </p>
             </section>
 
-            <!-- 9. Limitation of Liability -->
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">9</span>
@@ -371,7 +351,6 @@
                 </p>
             </section>
 
-            <!-- 10. Governing Law -->
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">10</span>
@@ -382,7 +361,6 @@
                 </p>
             </section>
 
-            <!-- 11. Changes to Terms -->
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">11</span>
@@ -393,14 +371,13 @@
                 </p>
             </section>
 
-            <!-- Contact Us -->
             <section class="bg-gray-800 rounded-2xl shadow-md p-6 md:p-8 text-white">
                 <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center gap-3 text-white">
                     <i class="fas fa-envelope text-blue-500"></i>
                     Contact Us
                 </h2>
                 <p class="mb-6 text-gray-300">If you have questions about these Terms of Service, please contact us:</p>
-                
+
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="space-y-3">
                         <p class="flex items-start gap-3">
@@ -423,11 +400,10 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-black text-gray-400 pt-14 pb-10 mt-auto">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
-                <!-- Brand -->
+
                 <div class="flex flex-col items-center md:items-start">
                     <img src="/logo-circular.png" alt="AAA Handyman Services" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
@@ -437,7 +413,7 @@
                         <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl hover:text-[#FF1A1A] transition"><i class="fa-brands fa-yelp"></i></a>
                     </div>
                 </div>
-                <!-- Quick links -->
+
                 <nav aria-label="Footer">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
                     <ul class="space-y-2 text-sm">
@@ -450,7 +426,7 @@
                         <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
                     </ul>
                 </nav>
-                <!-- Contact -->
+
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
@@ -461,7 +437,7 @@
                     <a href="/contact?service=General+Estimate+%2F+Quote" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Get a Free Quote</a>
                 </div>
             </div>
-            <!-- Quick-access sitemap: popular services + service areas reachable in one click from any page -->
+
             <div class="mt-12 pt-10 border-t border-gray-800 grid gap-10 sm:grid-cols-2 text-center sm:text-left">
                 <nav aria-label="Popular services">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Popular Services</h3>
@@ -509,50 +485,9 @@
         </div>
     </footer>
 
-    <!-- Back to top -->
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
-    <script>
-        (function () {
-            var btn = document.getElementById('back-to-top');
-            if (!btn) return;
-            window.addEventListener('scroll', function () {
-                var show = window.scrollY > 400;
-                btn.classList.toggle('hidden', !show);
-                btn.classList.toggle('flex', show);
-            }, { passive: true });
-            btn.addEventListener('click', function () {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        })();
-    </script>
 
-    <!-- Interactive JS scripts -->
-    <script>
-        // Mobile menu toggle
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-
-        if (menuBtn && mobileMenu && menuIcon) {
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                if (mobileMenu.classList.contains('hidden')) {
-                    menuIcon.className = 'fas fa-bars';
-                } else {
-                    menuIcon.className = 'fas fa-times';
-                }
-            });
-
-            // Close mobile menu when a link is clicked
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    menuIcon.className = 'fas fa-bars';
-                });
-            });
-        }
-    </script>
-    <!-- AI chat assistant widget -->
-    <script src="/js/chat-widget.js?v=20260718-1" defer></script>
+    <script src="/js/site.js?v=20260719" defer></script>
+    <script src="/js/chat-widget.js?v=20260719" defer></script>
 </body>
 </html>
