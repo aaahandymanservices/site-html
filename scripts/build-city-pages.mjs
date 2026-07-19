@@ -246,8 +246,7 @@ ${jsonLd(city)}
             <a href="/guarantee" class="block text-gray-700 hover:text-red-600 py-2 border-b border-gray-100 transition">Guarantee</a>
             <a href="/reviews" class="block text-gray-700 hover:text-red-600 py-2 border-b border-gray-100 transition">Reviews</a>
             <a href="/careers" class="block text-gray-700 hover:text-red-600 py-2 border-b border-gray-100 transition">Careers</a>
-            <a href="/contact" class="block text-gray-700 hover:text-red-600 py-2 transition">Contact</a>
-            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-gray-700 hover:text-[#1877F2] py-2 transition"><i class="fab fa-facebook"></i> Facebook Page</a>
+            <a href="/contact" class="block text-gray-700 hover:text-red-600 py-2 transition">Contact</a>            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-gray-700 hover:text-[#1877F2] py-2 transition"><i class="fab fa-facebook"></i> Facebook Page</a>
             <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-gray-700 hover:text-[#FF1A1A] py-2 transition"><i class="fa-brands fa-yelp"></i> Yelp Page</a>
             <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-gray-700 hover:text-[#00B24F] py-2 transition"><i class="fa-solid fa-house-chimney"></i> Nextdoor Page</a>
         </div>
@@ -388,6 +387,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                         <li><a href="/guarantee" class="hover:text-white transition">Our Guarantee</a></li>
                         <li><a href="/reviews" class="hover:text-white transition">Reviews</a></li>
                         <li><a href="/careers" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="/book" class="hover:text-white transition">Book Online</a></li>
                         <li><a href="/service-areas" class="hover:text-white transition">Service Areas</a></li>
                         <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
                     </ul>
@@ -399,7 +399,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                         <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
                         <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center"></i>Serving ${city.name} &middot; Oakland County, MI</li>
                     </ul>
-                    <a href="${quoteHref(city.name)}" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Get a Free Quote</a>
+                    <a href="/book?service=General+Estimate+%2F+Quote&city=${enc(city.name)}" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Book Online Now</a>
                 </div>
             </div>
             <!-- Quick-access sitemap: popular services + service areas reachable in one click from any page -->
