@@ -431,7 +431,7 @@
                 const email = formData.get('email');
                 const name = formData.get('name');
 
-                fetch('/', {
+                fetch('/contact.html', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: new URLSearchParams(formData).toString()

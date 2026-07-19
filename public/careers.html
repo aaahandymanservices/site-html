@@ -455,7 +455,7 @@
                     careersSubmit.classList.add('opacity-70', 'cursor-not-allowed');
                 }
                 setCareersStatus('Sending your application...', false);
-                fetch('/', {
+                fetch('/careers.html', {
                     method: 'POST',
                     body: new FormData(careersForm)
                 })
