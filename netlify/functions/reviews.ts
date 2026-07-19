@@ -158,9 +158,9 @@ const handleReviewsRequest = async (request: Request) => {
   // Spam protection for new public submissions (edits are already gated by the
   // per-review edit token, so they don't need a fresh captcha).
   if (!isUpdate) {
-    const captcha = await verifyCaptcha(
-      clean(form.get("captchaToken") ?? form.get("g-recaptcha-response"), 4000),
-      request.headers.get("x-nf-client-connection-ip") || undefined
+    const captcha = verifyCaptcha(
+      clean(form.get("captchaToken"), 200),
+      clean(form.get("captchaAnswer"), 20)
     );
     if (!captcha.ok) {
       return errorJson(captcha.error || "Captcha verification failed. Please try again.", 400);

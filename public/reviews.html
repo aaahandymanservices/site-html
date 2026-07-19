@@ -711,12 +711,15 @@
                 setReviewsSubmitting(true);
                 showReviewsMessage(isEditing ? 'Saving your changes...' : 'Uploading your review...', false);
 
-                // Captcha for brand-new reviews (edits reuse the saved edit token).
+                // Simple captcha for brand-new reviews (edits reuse the saved edit token).
                 var reviewCaptchaToken = "";
-                if (!isEditing && window.SiteCaptcha && window.SiteCaptcha.isEnabled()) {
-                    reviewCaptchaToken = window.SiteCaptcha.getToken(reviewsForm);
-                    if (!reviewCaptchaToken) {
-                        showReviewsMessage('Please complete the "I\'m not a robot" captcha before submitting.', true);
+                var reviewCaptchaAnswer = "";
+                if (!isEditing && window.SiteCaptcha) {
+                    var captchaResponse = window.SiteCaptcha.getResponse(reviewsForm);
+                    reviewCaptchaToken = captchaResponse.token;
+                    reviewCaptchaAnswer = captchaResponse.answer;
+                    if (!reviewCaptchaAnswer) {
+                        showReviewsMessage('Please answer the spam-check question before submitting.', true);
                         setReviewsSubmitting(false);
                         return;
                     }
@@ -738,6 +741,7 @@
                 }
                 if (reviewCaptchaToken) {
                     formData.set('captchaToken', reviewCaptchaToken);
+                    formData.set('captchaAnswer', reviewCaptchaAnswer);
                 }
 
                 fetch(isEditing ? `/api/reviews/${encodeURIComponent(reviewsEditId)}` : '/api/reviews', {
