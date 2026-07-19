@@ -211,7 +211,7 @@
                         <h2 class="text-2xl font-bold text-gray-900 mb-2">Craftsman Application</h2>
                         <p class="text-sm text-gray-500 mb-6">Tell us about your trade and experience. All fields are required unless marked optional.</p>
 
-                        <form id="careers-form" name="careers" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" class="space-y-5">
+                        <form id="careers-form" name="careers" method="POST" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" enctype="multipart/form-data" class="space-y-5">
 
                             <input type="hidden" name="form-name" value="careers" />
                             <input type="hidden" name="subject" value="New craftsman application from %{formName}" />
@@ -322,6 +322,10 @@
                             </div>
 
                             <p id="careers-message-status" class="hidden text-sm font-semibold"></p>
+
+                            <div class="flex justify-center sm:justify-start overflow-x-auto">
+                                <div data-netlify-recaptcha="true"></div>
+                            </div>
 
                             <button id="careers-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
                                 Submit Application <i class="fas fa-paper-plane"></i>

@@ -3,6 +3,7 @@ import { getStore } from "@netlify/blobs";
 import { desc, eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { reviews } from "../../db/schema.js";
+import { verifyCaptcha } from "../../lib/captcha.js";
 
 const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
 const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
@@ -152,6 +153,18 @@ const handleReviewsRequest = async (request: Request) => {
   const photoError = validatePhoto(photo, !isUpdate);
   if (photoError) {
     return errorJson(photoError, 400);
+  }
+
+  // Spam protection for new public submissions (edits are already gated by the
+  // per-review edit token, so they don't need a fresh captcha).
+  if (!isUpdate) {
+    const captcha = await verifyCaptcha(
+      clean(form.get("captchaToken") ?? form.get("g-recaptcha-response"), 4000),
+      request.headers.get("x-nf-client-connection-ip") || undefined
+    );
+    if (!captcha.ok) {
+      return errorJson(captcha.error || "Captcha verification failed. Please try again.", 400);
+    }
   }
 
   if (isUpdate) {
