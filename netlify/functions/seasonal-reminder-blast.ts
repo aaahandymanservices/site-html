@@ -1,4 +1,5 @@
 import type { Config } from "@netlify/functions";
+import { createHash, timingSafeEqual } from "node:crypto";
 import { eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { seasonalSubscribers } from "../../db/schema.js";
@@ -42,7 +43,13 @@ const requireAdmin = (request: Request): Response | null => {
     request.headers.get("authorization")?.replace(/^Bearer\s+/i, "").trim() ??
     request.headers.get("x-admin-token")?.trim() ??
     "";
-  if (provided !== expected) {
+
+  // Use a constant-time secure buffer comparison (using SHA-256 hashes to guarantee equal length inputs)
+  // to defend against timing side-channel attacks that could leak the ADMIN_API_TOKEN.
+  const expectedHash = createHash("sha256").update(expected).digest();
+  const providedHash = createHash("sha256").update(provided).digest();
+
+  if (!timingSafeEqual(providedHash, expectedHash)) {
     return errorJson("Unauthorized.", 401);
   }
   return null;
