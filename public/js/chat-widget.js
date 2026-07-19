@@ -91,7 +91,8 @@
     ".aaa-chat-bubble.aaa-show{display:block;opacity:1;transform:translateY(0)}",
     ".aaa-chat-bubble-arrow{position:absolute;bottom:-8px;right:42px;width:12px;height:12px;background:#fff;border-right:1.5px solid #e7ecf2;border-bottom:1.5px solid #e7ecf2;transform:rotate(45deg)}",
     ".aaa-chat-bubble-close{position:absolute;top:6px;right:8px;background:none;border:none;color:#9fb1ca;font-size:16px;cursor:pointer;line-height:1;padding:4px;transition:color .15s}",
-    ".aaa-chat-bubble-close:hover{color:" + CRIMSON + "}"
+    ".aaa-chat-bubble-close:hover{color:" + CRIMSON + "}",
+    "@media(max-width:767px){.aaa-fab .aaa-fab-btn{min-width:0;width:56px;height:56px;padding:0;border-radius:50%}.aaa-fab .aaa-fab-btn span{display:none}}"
   ].join("");
   document.head.appendChild(style);
 
