@@ -19,7 +19,7 @@
   resultBox.setAttribute('aria-live', 'polite');
   resultBox.setAttribute('role', 'status');
 
-  const ZONES = {
+  let zones = {
     A: { label: 'Zone A', rate: '$100 First Hour' },
     B: { label: 'Zone B', rate: '$145 First Hour' }
   };
@@ -46,7 +46,7 @@
 
     const match = findMatch(query);
     if (match) {
-      const zone = ZONES[match.zone] || ZONES.A;
+      const zone = zones[match.zone] || zones.A;
       resultBox.className = 'mt-3 text-sm font-semibold text-center p-3 rounded-xl bg-green-50 text-green-800 border border-green-200';
       resultBox.innerHTML =
         '<i class="fas fa-check-circle text-green-600 mr-1.5"></i> Yes! We serve <strong>' + match.name + ', MI</strong> in <strong>' + zone.label + '</strong> (' + zone.rate + '). ' +
@@ -79,6 +79,9 @@
     .then((response) => (response.ok ? response.json() : Promise.reject(response.status)))
     .then((data) => {
       cities = Array.isArray(data.cities) ? data.cities : [];
+      if (data.zones) {
+        zones = data.zones;
+      }
       // Run once in case the visitor typed before the data loaded.
       const query = input.value.trim().toLowerCase();
       if (query) render(query);

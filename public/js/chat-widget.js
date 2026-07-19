@@ -196,20 +196,10 @@
   // it as a small fixed element anchored to the bottom-right quadrant, ignoring
   // our own group/panel and the bottom-left "back to top" control.
   function hideExistingFloating() {
-    var vw = window.innerWidth;
-    var vh = window.innerHeight;
-    var els = document.body.querySelectorAll("*");
+    var els = document.querySelectorAll(".fixed.bottom-5.right-5, [class*='fixed'][class*='bottom-5'][class*='right-5']");
     for (var i = 0; i < els.length; i++) {
       var el = els[i];
       if (el === group || el === panel || group.contains(el) || panel.contains(el)) continue;
-      var cs = window.getComputedStyle(el);
-      if (cs.position !== "fixed" || cs.display === "none" || cs.visibility === "hidden") continue;
-      var r = el.getBoundingClientRect();
-      if (r.width === 0 || r.height === 0) continue;
-      // Skip large fixed overlays (menus, headers, backdrops).
-      if (r.width > vw * 0.6 || r.height > vh * 0.6) continue;
-      // Only the bottom-right corner (where the floating call widget lives).
-      if (r.right < vw * 0.5 || r.bottom < vh * 0.5) continue;
       el.style.setProperty("display", "none", "important");
     }
   }
