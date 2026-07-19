@@ -1,6 +1,6 @@
 [build]
   publish = "public"
-  command = "node scripts/build-css.mjs && node scripts/build-service-pages.mjs && node scripts/build-city-pages.mjs && node scripts/build-chat-knowledge.mjs"
+  command = "node scripts/build-css.mjs && node scripts/build-service-pages.mjs && node scripts/build-city-pages.mjs && node scripts/build-chat-knowledge.mjs && node scripts/build-sitemap.mjs"
 
 [build.environment]
   NETLIFY_SKIP_GATSBY_BUILD_PLUGIN = "true"
