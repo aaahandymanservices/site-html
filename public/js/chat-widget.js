@@ -1,33 +1,16 @@
-/*
- * AAA Handyman Services — AI chat widget.
- *
- * A self-contained floating chat widget (bottom-right corner) that talks to the
- * streaming Netlify Function at /api/chat. Drop `<script src="/js/chat-widget.js"
- * defer></script>` onto any page and this file injects its own markup + styles,
- * so no per-page HTML is required. Styling mirrors the site palette:
- * navy #0d2237 (blue-600) and crimson #8e1f26 (red-600).
- */
 (function () {
   "use strict";
-
-  // Guard against double-injection if the script is included more than once.
   if (window.__aaaChatWidgetLoaded) return;
   window.__aaaChatWidgetLoaded = true;
 
   var NAVY = "#0d2237";
   var CRIMSON = "#8e1f26";
-
-  // Conversation history in OpenAI chat format: { role, content }.
   var messages = [];
   var streaming = false;
   var activeRequest = null;
   var conversationVersion = 0;
-
-  // --- Styles -------------------------------------------------------------
   var style = document.createElement("style");
   style.textContent = [
-    // Bottom-right group with a chat launcher and call button. Desktop uses
-    // labeled pills; mobile uses a compact icon-only row.
     ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:2147483000;display:flex;flex-direction:column;gap:12px;align-items:flex-end}",
     ".aaa-fab .aaa-fab-btn{min-width:126px;height:60px;padding:0 20px;border-radius:9999px;border:2px solid #fff;display:flex;align-items:center;justify-content:center;gap:10px;box-sizing:border-box;font:700 16px/1 'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap;color:#fff;cursor:pointer;text-decoration:none;box-shadow:0 8px 24px rgba(13,34,55,.35);transition:transform .15s ease,background .15s ease}",
     ".aaa-fab .aaa-fab-btn i{font-size:20px}",
@@ -95,9 +78,6 @@
     "@media(max-width:359px){.aaa-fab .aaa-fab-btn{width:50px;height:50px;flex-basis:50px}.aaa-fab{gap:8px}.aaa-chat-panel,.aaa-chat-bubble{bottom:80px}}"
   ].join("");
   document.head.appendChild(style);
-
-  // --- Markup -------------------------------------------------------------
-  // Desktop uses labeled pills; mobile retains accessible icon-only controls.
   var group = document.createElement("div");
   group.className = "aaa-fab";
 
@@ -160,8 +140,6 @@
 
   document.body.appendChild(group);
   document.body.appendChild(panel);
-
-  // Create and append the welcome notification bubble
   var bubble = document.createElement("div");
   bubble.className = "aaa-chat-bubble";
   bubble.innerHTML = 
@@ -171,11 +149,10 @@
   document.body.appendChild(bubble);
 
   var bubbleTimeout = setTimeout(function () {
-    // Show only if the chat hasn't been opened yet
     if (!panel.classList.contains("aaa-open")) {
       bubble.classList.add("aaa-show");
     }
-  }, 5000); // 5 seconds delay
+  }, 5000);
 
   var log = panel.querySelector("#aaa-chat-log");
   var form = panel.querySelector("#aaa-chat-form");
@@ -189,13 +166,6 @@
   var promptButtons = panel.querySelectorAll(".aaa-chat-prompt");
 
   var GREETING = "Hi! 👋 I'm the AAA Handyman Services assistant. Ask me about our services, the areas we cover, or how to get a quote.";
-
-  // --- Placement ----------------------------------------------------------
-  // The site ships its own floating call widget in the bottom-right corner (a
-  // pill on desktop, a stacked widget on mobile). Hide it so our unified
-  // labeled button group is the only thing in that corner — no overlap. We detect
-  // it as a small fixed element anchored to the bottom-right quadrant, ignoring
-  // our own group/panel and the bottom-left "back to top" control.
   function hideExistingFloating() {
     var els = document.querySelectorAll(".fixed.bottom-5.right-5, [class*='fixed'][class*='bottom-5'][class*='right-5']");
     for (var i = 0; i < els.length; i++) {
@@ -204,15 +174,11 @@
       el.style.setProperty("display", "none", "important");
     }
   }
-
-  // --- Helpers ------------------------------------------------------------
   function escapeHTML(str) {
     return str.replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-
-  // Render bot text: escape, then linkify newlines, simple **bold**, and [links](url).
   function renderBot(el, text) {
     var html = escapeHTML(text)
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
@@ -299,8 +265,6 @@
   function togglePanel() {
     panel.classList.contains("aaa-open") ? closePanel() : openPanel();
   }
-
-  // --- Streaming request --------------------------------------------------
   async function sendMessage(text) {
     if (streaming) return;
     streaming = true;
@@ -311,8 +275,6 @@
 
     addMessage("user", text);
     messages.push({ role: "user", content: text });
-
-    // Placeholder bubble with an animated typing indicator.
     var botEl = addMessage("assistant", "");
     botEl.innerHTML = '<span class="aaa-typing"><span></span><span></span><span></span></span>';
 
@@ -335,8 +297,6 @@
         var chunk = await reader.read();
         if (chunk.done) break;
         buffer += decoder.decode(chunk.value, { stream: true });
-
-        // SSE frames are separated by a blank line.
         var frames = buffer.split("\n\n");
         buffer = frames.pop();
 
@@ -378,8 +338,6 @@
       }
     }
   }
-
-  // --- Events -------------------------------------------------------------
   launch.addEventListener("click", togglePanel);
   closeBtn.addEventListener("click", closePanel);
 
@@ -422,8 +380,6 @@
   });
 
   input.addEventListener("input", autoGrow);
-
-  // Enter sends, Shift+Enter inserts a newline.
   input.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -434,8 +390,6 @@
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && panel.classList.contains("aaa-open")) closePanel();
   });
-
-  // Handle clicking the welcome bubble to open the panel
   bubble.addEventListener("click", function (e) {
     var closeBtnClick = e.target.closest(".aaa-chat-bubble-close");
     if (closeBtnClick) {
@@ -446,9 +400,6 @@
     }
     openPanel();
   });
-
-  // Hide the site's own floating call widget now and after layout settles, so
-  // it can't reappear at a breakpoint and overlap our button group.
   hideExistingFloating();
   window.addEventListener("load", hideExistingFloating);
   window.addEventListener("resize", hideExistingFloating);

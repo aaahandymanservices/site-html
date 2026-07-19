@@ -4,17 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Resource hints: warm up connections to third-party origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://www.googletagmanager.com">
 
-    <!-- Preload the hero background (LCP) served via Netlify Image CDN -->
     <link rel="preload" as="image" href="/.netlify/images?url=/logo-banner.jpg&amp;w=1760&amp;fm=avif&amp;q=80" fetchpriority="high">
     <title>AAA Handyman Services | Best Handyman in Oakland County, MI</title>
-    
-    <!-- Search Engine Optimization (SEO) Metadata -->
+
     <meta name="description" content="Affordable local handyman services in Waterford, Troy, West Bloomfield, Bloomfield, Clarkston, Orchard Lake, Franklin, Huntington Woods, Birmingham, Royal Oak, and across Oakland County, MI. Home repairs, drywall, painting, carpentry, doors, trim, decks, and minor plumbing/electrical. Call (248) 385-3432 today!">
     <meta name="theme-color" content="#8e1f26">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -26,7 +23,6 @@
     <link rel="alternate" href="https://aaahandyman.services/" hreflang="en-us">
     <link rel="alternate" href="https://aaahandyman.services/" hreflang="x-default">
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aaahandyman.services/">
     <meta property="og:site_name" content="AAA Handyman Services">
@@ -39,7 +35,6 @@
     <meta property="og:image:alt" content="AAA Handyman Services serving Oakland County, Michigan">
     <meta property="og:locale" content="en_US">
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://aaahandyman.services/">
     <meta name="twitter:title" content="AAA Handyman Services | Handyman in Waterford & Oakland County, MI">
@@ -47,7 +42,6 @@
     <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
     <meta name="twitter:image:alt" content="AAA Handyman Services serving Oakland County, Michigan">
 
-    <!-- Structured Data (JSON-LD) for LocalBusiness -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -253,8 +247,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
     <style>
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Roboto', sans-serif; }
         .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=80') center/cover; height: auto; }
         .hero-title {
             -webkit-text-stroke: 2px #8e1f26;
@@ -286,7 +278,7 @@
         .nav-link:hover { color: #8e1f26; transform: translateY(-2px); }
         .service-card { transition: all 0.3s; }
         .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
-        /* Siren flashing animation */
+
         @keyframes siren-flash {
             0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 0 rgba(142, 31, 38, 0)); }
             50% { opacity: 0.3; transform: scale(1.15); filter: drop-shadow(0 0 8px rgba(142, 31, 38, 0.8)); }
@@ -295,7 +287,7 @@
             display: inline-block;
             animation: siren-flash 1s infinite ease-in-out;
         }
-        /* Pulse attention animation */
+
         @keyframes pulse-attention {
             0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(142, 31, 38, 0.7); }
             50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(142, 31, 38, 0); }
@@ -303,63 +295,7 @@
         .pulse-btn {
             animation: pulse-attention 2s infinite;
         }
-        /* Interactive Before/After slider styles */
-        .before-after-container {
-            position: relative;
-            width: 100%;
-            height: 380px;
-            overflow: hidden;
-            border-radius: 1.5rem;
-            user-select: none;
-        }
-        .before-after-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-        }
-        .before-after-overlay {
-            width: 50%;
-        }
-        .before-after-handle {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 4px;
-            background: #ffffff;
-            cursor: ew-resize;
-            z-index: 10;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .before-after-button {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #8e1f26;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            border: 2px solid #ffffff;
-            pointer-events: none;
-            font-size: 0.75rem;
-        }
-        @keyframes pulse-attention-green {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
-        }
-        .pulse-btn-green {
-            animation: pulse-attention-green 2s infinite;
-        }
-        /* Anchor scroll margin for sticky navbar */
+
         section[id], header[id] {
             scroll-margin-top: 80px;
         }
@@ -368,12 +304,12 @@
                 scroll-margin-top: 100px;
             }
         }
-        /* Respect visitors who prefer reduced motion (accessibility) */
+
         @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
+
             .flash-siren,
             .pulse-btn,
-            .pulse-btn-green,
+
             .animate-pulse { animation: none !important; }
             .service-card,
             .nav-link { transition: none !important; }
@@ -386,18 +322,18 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 </head>
 <body class="bg-gray-50 text-gray-900">
-    <!-- Navbar -->
+
     <nav class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
         <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
             <a href="#top" class="flex min-w-0 items-center space-x-3" aria-label="AAA Handyman Services home">
-                <!-- Logo -->
+
                 <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600">
                 <div class="min-w-0">
                     <p class="text-base min-[390px]:text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
                     <p class="text-[10px] sm:text-xs text-gray-500">Oakland County, Michigan</p>
                 </div>
             </a>
-            <!-- Desktop Nav Links -->
+
             <div class="hidden md:flex space-x-6 lg:space-x-8 text-lg font-medium items-center">
                 <a href="/services" class="nav-link text-gray-700 hover:text-red-600">Services</a>
                 <a href="/service-areas" class="nav-link text-gray-700 hover:text-red-600">Service Areas</a>
@@ -412,15 +348,15 @@
                     <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="nav-link text-gray-700 hover:text-[#00B24F] text-sm leading-none"><i class="fa-solid fa-house-chimney"></i></a>
                 </div>
             </div>
-            <!-- Nav Action Buttons -->
+
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <!-- Mobile Menu Button -->
+
                 <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
                     <i class="fas fa-bars" id="menu-icon"></i>
                 </button>
             </div>
         </div>
-        <!-- Mobile Navigation Menu -->
+
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t-[3px] border-gray-100 px-6 py-4 space-y-4 shadow-inner">
             <a href="/services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
             <a href="/service-areas" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Service Areas</a>
@@ -435,7 +371,6 @@
         </div>
     </nav>
 
-    <!-- Floating Call Action -->
     <noscript>
         <a href="tel:+12483853432" class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-bold items-center justify-center gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now">
             <i class="fas fa-phone" aria-hidden="true"></i>
@@ -443,7 +378,6 @@
         </a>
     </noscript>
 
-    <!-- Hero -->
     <header id="top" class="hero min-h-[70vh] py-12 md:py-16 flex items-center text-white">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <div class="max-w-3xl mx-auto">
@@ -473,7 +407,7 @@
                         View Transparent Rates
                     </a>
                 </div>
-                <!-- Trust Badges Row -->
+
                 <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-2xl mx-auto text-xs sm:text-sm font-semibold">
                    <div class="bg-white/10 hover:bg-white/[0.15] backdrop-blur-sm px-3 py-2.5 rounded-xl border border-white/15 flex items-center justify-center text-center gap-2 transition-colors"><i class="fas fa-shield-halved text-green-400 text-base sm:text-lg shrink-0"></i> <span>Satisfaction Guaranteed!</span></div>
                    <div class="bg-white/10 hover:bg-white/[0.15] backdrop-blur-sm px-3 py-2.5 rounded-xl border border-white/15 flex items-center justify-center text-center gap-2 transition-colors"><i class="fas fa-screwdriver-wrench text-yellow-400 text-base sm:text-lg shrink-0"></i> <span>Minor Repair Experts</span></div>
@@ -483,7 +417,6 @@
         </div>
     </header>
 
-    <!-- About -->
     <section id="about" class="py-12 sm:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-8 items-center">
@@ -508,7 +441,6 @@
         </div>
     </section>
 
-    <!-- Why Choose Us -->
     <section id="why-us" class="py-12 sm:py-16 bg-blue-900 text-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-8 sm:mb-12">
@@ -540,7 +472,6 @@
         </div>
     </section>
 
-    <!-- Services -->
     <section id="services" class="py-12 sm:py-16 bg-gray-100">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-8 sm:mb-12">
@@ -548,9 +479,9 @@
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">Handyman Services</h2>
                 <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">No job is too small. Get practical home repair help for common projects in Waterford, Pontiac, West Bloomfield, Clarkston, Rochester Hills, Troy, Royal Oak, Farmington Hills, and nearby Oakland County communities.</p>
             </div>
-            
+
             <div class="flex flex-wrap justify-center gap-8">
-                <!-- Service cards -->
+
                 <a href="/services/carpentry" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-hammer"></i></div>
                     <h3 class="text-2xl font-semibold mb-3">Carpentry</h3>
@@ -634,7 +565,7 @@
                     </ul>
                     <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
                 </a>
-                <!-- Emergency callout -->
+
                 <div class="service-card w-full md:w-full lg:w-[calc(66.666%-0.668rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 text-center">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6 mx-auto" aria-hidden="true"><span class="flash-siren"><i class="fas fa-triangle-exclamation"></i></span></div>
                     <h3 class="text-2xl font-semibold mb-3 text-red-600">After-Hours Emergency Services Available</h3>
@@ -646,7 +577,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="mt-10 sm:mt-12 text-center">
                 <a href="/services" class="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-semibold transition shadow-lg hover:shadow-red-600/30">
                     View All Services <i class="fas fa-arrow-right"></i>
@@ -656,7 +587,6 @@
         </div>
     </section>
 
-    <!-- Reviews / Testimonials -->
     <section id="reviews" class="py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white hidden" aria-labelledby="reviews-heading">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
@@ -673,7 +603,6 @@
         </div>
     </section>
 
-    <!-- Travel & Service Areas -->
     <section id="travel-zones" class="py-12 sm:py-16 bg-gray-50 rounded-3xl m-6">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-8 sm:mb-12">
@@ -682,7 +611,6 @@
                 <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">We proudly serve Oakland County, Michigan. Below is our distance coverage schedule.</p>
             </div>
 
-            <!-- Oakland County Map -->
             <div class="max-w-5xl mx-auto mb-8 sm:mb-12">
                 <div class="rounded-3xl overflow-hidden shadow-lg ring-1 ring-red-600 border-[2px] border-red-600 bg-white">
                     <iframe
@@ -698,7 +626,7 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <!-- Zone A Minimum Service Call -->
+
                 <div class="service-card bg-white p-8 rounded-3xl shadow ring-1 ring-red-600 border-[2px] border-red-600 flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-3 mb-6">
@@ -708,7 +636,7 @@
                                 <p class="text-sm text-gray-500">$100 Minimum Service Call (includes the first hour)</p>
                             </div>
                         </div>
-                        
+
                         <div class="space-y-6">
                             <div>
                                 <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2">North & West Metro</h4>
@@ -733,7 +661,6 @@
                     </div>
                 </div>
 
-                <!-- Zone B Minimum Service Call -->
                 <div class="service-card bg-white p-8 rounded-3xl shadow ring-1 ring-red-600 border-[2px] border-red-600 flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-3 mb-6">
@@ -769,12 +696,10 @@
                 </div>
             </div>
 
-            <!-- Quick Service Locator Row for local reach improvement -->
             <div class="max-w-5xl mx-auto mt-16 bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow-lg">
                 <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Are you in our service area?</h3>
                 <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">We provide top-rated handyman services across all major cities and townships in Oakland County, MI. Try our instant service locator or browse cities below:</p>
-                
-                <!-- Instant Service Area Search Widget -->
+
                 <div class="max-w-md mx-auto mb-8">
                     <div class="relative">
                         <input id="service-area-checker" type="text" placeholder="Enter your City or Zip Code (e.g. 48329, Troy)..." class="w-full px-5 py-4 pl-12 bg-gray-50 border-[2px] border-gray-300 rounded-2xl focus:outline-none focus:border-red-600 focus:bg-white text-base transition text-gray-900 font-medium">
@@ -804,7 +729,7 @@
                     <a href="/handyman/oxford" class="p-3 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200">Oxford</a>
                 </div>
                 <div class="mt-8 text-center">
-                    <!-- High-Trust Local Social Proof Row -->
+
                     <div class="flex flex-col md:flex-row justify-center gap-6 max-w-4xl mx-auto mb-8 text-left">
                         <div class="bg-gray-50 p-5 rounded-2xl border border-gray-150 flex-1 shadow-sm">
                             <div class="flex items-center gap-1 text-yellow-500 mb-2">
@@ -828,7 +753,6 @@
         </div>
     </section>
 
-    <!-- Frequently Asked Questions -->
     <section id="faq" class="py-12 sm:py-16 bg-white">
         <div class="max-w-5xl mx-auto px-6">
             <div class="text-center mb-10 sm:mb-14">
@@ -879,7 +803,7 @@
                 <article class="service-card bg-gray-50 border-[2px] border-red-600 p-6 rounded-3xl shadow-sm ring-1 ring-red-600 flex flex-col justify-between">
                     <div>
                         <h3 class="text-xl font-bold text-blue-900 mb-3"><i class="fas fa-map-location-dot text-red-600 mr-2"></i>What are your service areas?</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">We are based in Waterford, Michigan, and primarily serve Oakland County. 
+                        <p class="text-gray-600 text-sm leading-relaxed">We are based in Waterford, Michigan, and primarily serve Oakland County.
                         <br><strong class="text-blue-900">Zone A (Standard - Within 20 miles):</strong> Waterford, Clarkston, West Bloomfield, Troy, Rochester Hills, Pontiac, Orchard Lake, Farmington Hills, Franklin, Beverly Hills, Birmingham, Novi, Lake Orion, and Oxford.
                         <br><strong class="text-blue-900">Zone B (Extended - Outside 20 miles):</strong> Royal Oak, Huntington Woods, Southfield, and surrounding communities.</p>
                     </div>
@@ -888,7 +812,6 @@
         </div>
     </section>
 
-    <!-- Hours and availability footer block -->
     <div class="max-w-7xl mx-auto px-6 mb-12">
         <div class="text-center bg-blue-900 text-white py-12 px-8 sm:py-20 sm:px-16 rounded-3xl">
             <p class="text-xl sm:text-2xl md:text-3xl font-medium">Available Monday–Friday, 9 a.m.–6 p.m.; Saturday, 10 a.m.–5 p.m.</p>
@@ -896,11 +819,10 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-black text-gray-400 pt-14 pb-10">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
-                <!-- Brand -->
+
                 <div class="flex flex-col items-center md:items-start">
                     <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
@@ -910,7 +832,7 @@
                         <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl hover:text-[#FF1A1A] transition"><i class="fa-brands fa-yelp"></i></a>
                     </div>
                 </div>
-                <!-- Quick links -->
+
                 <nav aria-label="Footer">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
                     <ul class="space-y-2 text-sm">
@@ -923,7 +845,7 @@
                         <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
                     </ul>
                 </nav>
-                <!-- Contact -->
+
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
@@ -934,7 +856,7 @@
                     <a href="/contact?service=General+Estimate+%2F+Quote" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Get a Free Quote</a>
                 </div>
             </div>
-            <!-- Quick-access sitemap: popular services + service areas reachable in one click from any page -->
+
             <div class="mt-12 pt-10 border-t border-gray-800 grid gap-10 sm:grid-cols-2 text-center sm:text-left">
                 <nav aria-label="Popular services">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Popular Services</h3>
@@ -982,68 +904,26 @@
         </div>
     </footer>
 
-    <!-- Back to top -->
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
-    <script>
-        (function () {
-            var btn = document.getElementById('back-to-top');
-            if (!btn) return;
-            window.addEventListener('scroll', function () {
-                var show = window.scrollY > 400;
-                btn.classList.toggle('hidden', !show);
-                btn.classList.toggle('flex', show);
-            }, { passive: true });
-            btn.addEventListener('click', function () {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        })();
-    </script>
 
-    <!-- Interactive Service Area Checker (shared data + logic) -->
     <script src="/js/service-area-checker.js?v=20260715" defer></script>
 
     <script>
-        // Mobile menu toggle
-        const menuBtn = document.getElementById('mobile-menu-btn');
+
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
-
-        if (menuBtn && mobileMenu && menuIcon) {
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                if (mobileMenu.classList.contains('hidden')) {
-                    menuIcon.className = 'fas fa-bars';
-                } else {
-                    menuIcon.className = 'fas fa-times';
-                }
-            });
-
-            // Close mobile menu when a link is clicked
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    menuIcon.className = 'fas fa-bars';
-                });
-            });
-        }
-
-        // Smooth scroll implementation for all anchor links to ensure consistent offset on mobile/desktop
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
-                
+
                 const targetElement = document.getElementById(targetId.substring(1));
                 if (targetElement) {
                     e.preventDefault();
-                    
-                    // Close mobile menu if it is open
                     if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                         mobileMenu.classList.add('hidden');
                         if (menuIcon) menuIcon.className = 'fas fa-bars';
                     }
-
-                    // Calculate the header/sticky nav offset dynamically
                     const nav = document.querySelector('nav');
                     const offset = nav ? nav.offsetHeight : 80;
                     const elementPosition = targetElement.getBoundingClientRect().top;
@@ -1053,8 +933,6 @@
                         top: offsetPosition,
                         behavior: 'smooth'
                     });
-
-                    // Update URL hash safely without jumping
                     setTimeout(() => {
                         history.pushState(null, null, targetId);
                     }, 500);
@@ -1063,7 +941,6 @@
         });
     </script>
 
-    <!-- Floating Mobile Call/SMS CTA Widget -->
     <noscript>
         <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 md:hidden">
             <a href="tel:+12483853432" class="w-14 h-14 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center shadow-2xl transition pulse-btn-green border-2 border-white" title="Call Us Now">
@@ -1075,8 +952,8 @@
         </div>
     </noscript>
 
-    <!-- Homepage testimonials: pull a few recent reviews from the same feed as /reviews -->
     <script>
+
         (function () {
             const section = document.getElementById('reviews');
             const list = document.getElementById('home-reviews-list');
@@ -1133,8 +1010,6 @@
                     if (!Array.isArray(items) || items.length === 0) return;
                     list.innerHTML = items.slice(0, 3).map(renderCard).join('');
                     section.classList.remove('hidden');
-
-                    // Recalculate and re-apply target scroll position to prevent scroll-jump when reviews load
                     if (window.location.hash) {
                         const targetId = window.location.hash;
                         const targetEl = document.querySelector(targetId);
@@ -1151,19 +1026,20 @@
                         }
                     }
                 })
-                .catch(() => { /* Leave the section hidden if reviews cannot load. */ });
+                .catch(() => undefined);
         })();
     </script>
 
-    <!-- Google tag (gtag.js) — loaded after page content to prioritize rendering -->
     <script defer src="https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3"></script>
     <script>
+
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-VRMCPNEQC3');
     </script>
-    <!-- AI chat assistant widget -->
-    <script src="/js/chat-widget.js?v=20260718-1" defer></script>
+
+    <script src="/js/site.js?v=20260719" defer></script>
+    <script src="/js/chat-widget.js?v=20260719" defer></script>
 </body>
 </html>

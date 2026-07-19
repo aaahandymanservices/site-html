@@ -1,18 +1,3 @@
-/*
- * build-service-pages.mjs
- *
- * Generates the per-service landing pages under public/services/<slug>.html
- * from the single source of truth at public/data/services.json.
- *
- * This mirrors scripts/build-city-pages.mjs: it is a plain content generator,
- * NOT part of the Netlify build. Run it by hand after editing the service data
- * or the template below:
- *
- *     node scripts/build-service-pages.mjs
- *
- * The generated .html files are committed and served statically. Clean URLs
- * (/services/<slug>) are handled by the splat rule in public/_redirects.
- */
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -28,14 +13,12 @@ const PHONE_TEL = '+12483853432';
 
 const CATEGORIES = DATA.categories;
 const SERVICES = DATA.services;
-const bySlug = Object.fromEntries(SERVICES.map((s) => [s.slug, s]));
 
 const enc = (s) => encodeURIComponent(s);
-// Minimal HTML-attribute/entity escaping for text pulled into markup.
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-// Ampersands in display names -> &amp; for valid HTML, but leave other text alone.
 const amp = (s) => String(s).replace(/&/g, '&amp;');
 const quoteHref = (service) => `/contact?service=${enc(service)}`;
+const cleanHtml = (html) => html.replace(/<!--[\s\S]*?-->/g, '').replace(/\n\s*\n/g, '\n');
 
 // Up to three related services: prefer the same category, then fall back to the
 // next services in the catalog so every page has a full "related" row.
@@ -153,7 +136,7 @@ function featureCard(f) {
 }
 
 function relatedCard(s) {
-  return `                <a href="/services/${s.slug}" class="service-card group flex items-center gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm hover:text-red-600">
+  return `                <a href="/services/${s.slug}" class="generated-service-card group flex items-center gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm hover:text-red-600">
                     <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas ${s.icon}"></i></span>
                     <span class="font-semibold text-gray-800 group-hover:text-red-600">${amp(s.name)}</span>
                 </a>`;
@@ -377,20 +360,6 @@ ${jsonLd(service)}
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
     <style>
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Roboto', sans-serif; }
-        .service-card { transition: all 0.3s; }
-        .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
-        @keyframes pulse-attention-green {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
-        }
-        .pulse-btn-green { animation: pulse-attention-green 2s infinite; }
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            .pulse-btn-green, .service-card { animation: none !important; transition: none !important; }
-            .service-card:hover { transform: none !important; }
-        }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -670,33 +639,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
 
     <!-- Back to top -->
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
-    <script>
-        (function () {
-            var btn = document.getElementById('back-to-top');
-            if (!btn) return;
-            window.addEventListener('scroll', function () {
-                var show = window.scrollY > 400;
-                btn.classList.toggle('hidden', !show);
-                btn.classList.toggle('flex', show);
-            }, { passive: true });
-            btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-        })();
-
-        // Mobile Navigation Menu Toggle
-        var mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        var mobileMenu = document.getElementById('mobile-menu');
-        var menuIcon = document.getElementById('menu-icon');
-        if (mobileMenuBtn && mobileMenu && menuIcon) {
-            mobileMenuBtn.addEventListener('click', function () {
-                mobileMenu.classList.toggle('hidden');
-                if (mobileMenu.classList.contains('hidden')) {
-                    menuIcon.className = 'fas fa-bars text-xl sm:text-2xl';
-                } else {
-                    menuIcon.className = 'fas fa-times text-xl sm:text-2xl';
-                }
-            });
-        }
-    </script>
+    <script src="/js/site.js?v=20260719" defer></script>
 
     <!-- Google tag (gtag.js) -->
     <script defer src="https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3"></script>
@@ -708,7 +651,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
     </script>
 
     <!-- AI chat assistant widget -->
-    <script src="/js/chat-widget.js?v=20260717-5" defer></script>
+    <script src="/js/chat-widget.js?v=20260719" defer></script>
 </body>
 </html>
 `;
@@ -717,7 +660,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
 mkdirSync(OUT_DIR, { recursive: true });
 let count = 0;
 for (const service of SERVICES) {
-  const html = page(service);
+  const html = cleanHtml(page(service));
   writeFileSync(join(OUT_DIR, `${service.slug}.html`), html, 'utf8');
   count += 1;
   console.log(`  wrote public/services/${service.slug}.html`);

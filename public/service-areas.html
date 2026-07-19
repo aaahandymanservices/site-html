@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Resource hints: warm up connections to third-party origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
     <title>Service Area — Oakland County, MI | AAA Handyman Services</title>
 
-    <!-- Search Engine Optimization (SEO) Metadata -->
     <meta name="description" content="See where AAA Handyman Services works. Based in Waterford, MI, we serve Oakland County communities including Pontiac, West Bloomfield, Clarkston, Troy, Rochester Hills, Royal Oak, Birmingham, Southfield, Farmington Hills, Novi, and more. Check your city or zip code below.">
     <meta name="theme-color" content="#8e1f26">
     <meta name="robots" content="index, follow">
@@ -19,7 +17,6 @@
     <meta name="geo.placename" content="Waterford, Michigan">
     <link rel="canonical" href="https://aaahandyman.services/service-areas">
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aaahandyman.services/service-areas">
     <meta property="og:site_name" content="AAA Handyman Services">
@@ -28,14 +25,12 @@
     <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
     <meta property="og:locale" content="en_US">
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://aaahandyman.services/service-areas">
     <meta name="twitter:title" content="Service Area — Oakland County, MI | AAA Handyman Services">
     <meta name="twitter:description" content="Based in Waterford, MI, we serve Oakland County communities including Pontiac, West Bloomfield, Clarkston, Troy, Rochester Hills, Royal Oak, Birmingham, Southfield, Farmington Hills, Novi, and more.">
     <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
 
-    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -71,7 +66,6 @@
     }
     </script>
 
-    <!-- Structured Data (JSON-LD): breadcrumb trail -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -83,27 +77,16 @@
     }
     </script>
 
-    <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
     <link rel="stylesheet" href="/css/tailwind.css">
 
-    <!-- Brand font: Roboto (matches the homepage) -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"></noscript>
 
-    <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* Smooth scrolling for anchor links */
-        html {
-            scroll-behavior: smooth;
-        }
-        /* Custom font family */
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
-        /* Animated entrance for content cards */
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -120,14 +103,7 @@
         }
         .service-card { transition: all 0.3s; }
         .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
-        @keyframes pulse-attention-green {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
-        }
-        .pulse-btn-green {
-            animation: pulse-attention-green 2s infinite;
-        }
-        /* Anchor scroll margin for sticky navbar */
+
         section[id], header[id] {
             scroll-margin-top: 80px;
         }
@@ -136,10 +112,9 @@
                 scroll-margin-top: 100px;
             }
         }
-        /* Respect visitors who prefer reduced motion (accessibility) */
+
         @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            .pulse-btn-green,
+
             .service-card,
             .header-card { animation: none !important; }
             .service-card:hover { transform: none !important; }
@@ -151,18 +126,18 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
-    <!-- Navbar -->
+
     <nav class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
         <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
             <a href="/" class="flex min-w-0 items-center space-x-3" aria-label="AAA Handyman Services home">
-                <!-- Logo -->
+
                 <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600">
                 <div class="min-w-0">
                     <p class="text-base min-[390px]:text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
                     <p class="text-[10px] sm:text-xs text-gray-500">Oakland County, Michigan</p>
                 </div>
             </a>
-            <!-- Desktop Nav Links -->
+
             <div class="hidden md:flex space-x-6 lg:space-x-8 text-lg font-medium items-center">
                 <a href="/services" class="nav-link text-gray-700 hover:text-red-600 transition">Services</a>
                 <a href="/service-areas" class="nav-link text-red-600 font-bold border-b-2 border-red-600">Service Areas</a>
@@ -177,15 +152,15 @@
                     <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="nav-link text-gray-700 hover:text-[#00B24F] text-sm transition leading-none"><i class="fa-solid fa-house-chimney"></i></a>
                 </div>
             </div>
-            <!-- Nav Action Buttons -->
+
             <div class="flex items-center space-x-2 sm:space-x-3">
-                <!-- Mobile Menu Button -->
+
                 <button id="mobile-menu-btn" class="md:hidden text-gray-700 hover:text-red-600 focus:outline-none p-1 sm:p-2" aria-label="Toggle Navigation Menu">
                     <i class="fas fa-bars text-xl sm:text-2xl"></i>
                 </button>
             </div>
         </div>
-        <!-- Mobile Menu -->
+
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3 shadow-inner">
             <a href="/services" class="block text-gray-700 hover:text-red-600 py-2 border-b border-gray-100 transition">Services</a>
             <a href="/service-areas" class="block text-red-600 font-bold py-2 border-b border-gray-100">Service Areas</a>
@@ -200,7 +175,6 @@
         </div>
     </nav>
 
-    <!-- Floating Call Action -->
     <noscript>
         <a href="tel:+12483853432" class="fixed bottom-5 right-5 z-50 flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now">
             <i class="fas fa-phone" aria-hidden="true"></i>
@@ -208,13 +182,12 @@
         </a>
     </noscript>
 
-    <!-- Header Section -->
     <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-950 text-white py-16 sm:py-20 text-center relative overflow-hidden">
         <div class="absolute inset-0 opacity-10">
             <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
         </div>
         <div class="max-w-4xl mx-auto px-6 relative z-10 header-card">
-            <!-- Breadcrumb -->
+
             <nav aria-label="Breadcrumb" class="text-sm text-blue-200 mb-4">
                 <a href="/" class="hover:text-white">Home</a>
                 <span class="mx-2">/</span>
@@ -238,7 +211,7 @@
     </header>
 
     <main class="flex-grow">
-        <!-- Travel & Service Areas -->
+
         <section id="travel-zones" class="py-12 sm:py-16 bg-gray-50">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-8 sm:mb-12">
@@ -247,7 +220,6 @@
                     <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">We proudly serve Oakland County, Michigan. Below is our distance coverage schedule.</p>
                 </div>
 
-                <!-- Oakland County Map -->
                 <div class="max-w-5xl mx-auto mb-8 sm:mb-12">
                     <div class="rounded-3xl overflow-hidden shadow-lg ring-1 ring-red-600 border-[2px] border-red-600 bg-white">
                         <iframe
@@ -263,7 +235,7 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                    <!-- Zone A Minimum Service Call -->
+
                     <div class="service-card bg-white p-8 rounded-3xl shadow ring-1 ring-red-600 border-[2px] border-red-600 flex flex-col justify-between">
                         <div>
                             <div class="flex items-center gap-3 mb-6">
@@ -298,7 +270,6 @@
                         </div>
                     </div>
 
-                    <!-- Zone B Minimum Service Call -->
                     <div class="service-card bg-white p-8 rounded-3xl shadow ring-1 ring-red-600 border-[2px] border-red-600 flex flex-col justify-between">
                         <div>
                             <div class="flex items-center gap-3 mb-6">
@@ -334,12 +305,10 @@
                     </div>
                 </div>
 
-                <!-- Pricing note -->
                 <p class="max-w-3xl mx-auto mt-8 text-center text-sm sm:text-base text-gray-600">
                     Your zone sets only the Minimum Service Call, which covers travel, diagnostics, and up to the first hour of labor. Continuous labor after the first hour is billed at a flat <strong>$70/hour</strong> in quarter-hour increments. See the <a href="/rates" class="text-red-600 font-semibold underline underline-offset-2 hover:text-red-700">full rates &amp; packages</a> for details.
                 </p>
 
-                <!-- Browse handyman service by city (internal links + local SEO) -->
                 <div class="max-w-5xl mx-auto mt-12 sm:mt-16">
                     <div class="text-center mb-6">
                         <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm">City Pages</div>
@@ -367,13 +336,10 @@
                     </div>
                 </div>
 
-
-                <!-- Quick Service Locator Row for local reach improvement -->
                 <div id="service-area-search" class="max-w-5xl mx-auto mt-12 sm:mt-16 bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow-lg">
                     <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Are you in our service area?</h3>
                     <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">We provide top-rated handyman services across all major cities and townships in Oakland County, MI. Try our instant service locator or browse cities below:</p>
 
-                    <!-- Instant Service Area Search Widget -->
                     <div class="max-w-md mx-auto mb-8">
                         <div class="relative">
                             <input id="service-area-checker" type="text" placeholder="Enter your City or Zip Code (e.g. 48329, Troy)..." class="w-full px-5 py-4 pl-12 bg-gray-50 border-[2px] border-gray-300 rounded-2xl focus:outline-none focus:border-red-600 focus:bg-white text-base transition text-gray-900 font-medium">
@@ -403,7 +369,7 @@
                         <a href="/handyman/oxford" class="p-3 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200">Oxford</a>
                     </div>
                     <div class="mt-8 text-center">
-                        <!-- High-Trust Local Social Proof Row -->
+
                         <div class="flex flex-col md:flex-row justify-center gap-6 max-w-4xl mx-auto mb-8 text-left">
                             <div class="bg-gray-50 p-5 rounded-2xl border border-gray-150 flex-1 shadow-sm">
                                 <div class="flex items-center gap-1 text-yellow-500 mb-2">
@@ -425,7 +391,6 @@
                     </div>
                 </div>
 
-                <!-- Hours and availability footer block -->
                 <div class="mt-12 sm:mt-16 text-center bg-blue-900 text-white py-12 px-8 sm:py-16 sm:px-16 rounded-3xl max-w-5xl mx-auto">
                     <p class="text-xl sm:text-2xl md:text-3xl font-medium">Not sure if you're in our area?</p>
                     <p class="mt-4 text-base sm:text-lg md:text-xl opacity-90">Give us a call &mdash; we serve all of Oakland County, MI, and we're happy to confirm coverage for your address.</p>
@@ -437,11 +402,10 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-black text-gray-400 pt-14 pb-10">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
-                <!-- Brand -->
+
                 <div class="flex flex-col items-center md:items-start">
                     <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
@@ -451,7 +415,7 @@
                         <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl hover:text-[#FF1A1A] transition"><i class="fa-brands fa-yelp"></i></a>
                     </div>
                 </div>
-                <!-- Quick links -->
+
                 <nav aria-label="Footer">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
                     <ul class="space-y-2 text-sm">
@@ -464,7 +428,7 @@
                         <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
                     </ul>
                 </nav>
-                <!-- Contact -->
+
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
@@ -475,7 +439,7 @@
                     <a href="/contact?service=General+Estimate+%2F+Quote" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Get a Free Quote</a>
                 </div>
             </div>
-            <!-- Quick-access sitemap: popular services + service areas reachable in one click from any page -->
+
             <div class="mt-12 pt-10 border-t border-gray-800 grid gap-10 sm:grid-cols-2 text-center sm:text-left">
                 <nav aria-label="Popular services">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Popular Services</h3>
@@ -523,36 +487,11 @@
         </div>
     </footer>
 
-    <!-- Back to top -->
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
-    <script>
-        (function () {
-            var btn = document.getElementById('back-to-top');
-            if (!btn) return;
-            window.addEventListener('scroll', function () {
-                var show = window.scrollY > 400;
-                btn.classList.toggle('hidden', !show);
-                btn.classList.toggle('flex', show);
-            }, { passive: true });
-            btn.addEventListener('click', function () {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        })();
-    </script>
 
-    <!-- Interactive Service Area Checker (shared data + logic) -->
     <script src="/js/service-area-checker.js?v=20260715" defer></script>
 
-    <!-- Mobile Navigation Menu Toggle Script -->
-    <script>
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script>
-    <!-- AI chat assistant widget -->
-    <script src="/js/chat-widget.js?v=20260718-1" defer></script>
+    <script src="/js/site.js?v=20260719" defer></script>
+    <script src="/js/chat-widget.js?v=20260719" defer></script>
 </body>
 </html>

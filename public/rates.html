@@ -4,20 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Resource hints: warm up connections to third-party origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
     <title>Rates — Transparent No-Haggle Rates | AAA Handyman Services</title>
 
-    <!-- Search Engine Optimization (SEO) Metadata -->
     <meta name="description" content="Transparent, no-haggle handyman pricing across Oakland County, MI. See our Fair Upfront Pricing, flat-rate menu, and honest hourly rates with no hidden trip fees.">
     <meta name="theme-color" content="#8e1f26">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://aaahandyman.services/rates">
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aaahandyman.services/rates">
     <meta property="og:site_name" content="AAA Handyman Services">
@@ -26,14 +23,12 @@
     <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
     <meta property="og:locale" content="en_US">
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://aaahandyman.services/rates">
     <meta name="twitter:title" content="Rates — Transparent No-Haggle Handyman Pricing | AAA Handyman Services">
     <meta name="twitter:description" content="Fair Upfront Pricing, flat-rate menu, and honest hourly rates with no hidden trip fees across Oakland County, MI.">
     <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
 
-    <!-- Structured Data (JSON-LD): handyman service pricing -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -133,44 +128,19 @@
     }
     </script>
 
-    <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
     <link rel="stylesheet" href="/css/tailwind.css">
 
-    <!-- Brand font: Roboto (matches the homepage) -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"></noscript>
 
-    <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* Smooth scrolling for anchor links */
-        html {
-            scroll-behavior: smooth;
-        }
-        /* Custom font family */
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
-        /* Animated entrance for content cards */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .pricing-card {
-            opacity: 0;
-            animation: fadeInUp 0.5s ease forwards;
-        }
+
         .service-card { transition: all 0.3s; }
         .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
-        /* Flashing siren icon for the after-hours emergency rate */
+
         @keyframes siren-flash {
             0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 0 rgba(142, 31, 38, 0)); }
             50% { opacity: 0.3; transform: scale(1.15); filter: drop-shadow(0 0 8px rgba(142, 31, 38, 0.8)); }
@@ -179,18 +149,11 @@
             display: inline-block;
             animation: siren-flash 1s infinite ease-in-out;
         }
-        @keyframes pulse-attention-green {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
-        }
-        .pulse-btn-green {
-            animation: pulse-attention-green 2s infinite;
-        }
-        /* Anchor scroll margin for sticky navbar + sticky section nav (offset set dynamically in JS) */
+
         section[id], header[id], #flat-rate {
             scroll-margin-top: var(--sticky-offset, 140px);
         }
-        /* Sticky in-page section navigation */
+
         .section-nav-link {
             white-space: nowrap;
             border: 1px solid transparent;
@@ -201,18 +164,15 @@
             border-color: #f8b4b4;
             font-weight: 700;
         }
-        /* Hide the scrollbar on the horizontally-scrollable section nav */
+
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        /* Respect visitors who prefer reduced motion (accessibility) */
+
         @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            .pulse-btn-green,
+
             .flash-siren,
-            .service-card,
-            .pricing-card { animation: none !important; }
+            .service-card { animation: none !important; }
             .service-card:hover { transform: none !important; }
-            .pricing-card { opacity: 1 !important; transform: none !important; }
         }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -220,18 +180,18 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
-    <!-- Navbar -->
+
     <nav id="site-nav" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
         <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
             <a href="/" class="flex min-w-0 items-center space-x-3" aria-label="AAA Handyman Services home">
-                <!-- Logo -->
+
                 <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600">
                 <div class="min-w-0">
                     <p class="text-base min-[390px]:text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
                     <p class="text-[10px] sm:text-xs text-gray-500">Oakland County, Michigan</p>
                 </div>
             </a>
-            <!-- Desktop Nav Links -->
+
             <div class="hidden md:flex space-x-6 lg:space-x-8 text-lg font-medium items-center">
                 <a href="/services" class="nav-link text-gray-700 hover:text-red-600 transition">Services</a>
                 <a href="/service-areas" class="nav-link text-gray-700 hover:text-red-600 transition">Service Areas</a>
@@ -246,15 +206,15 @@
                     <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="nav-link text-gray-700 hover:text-[#00B24F] text-sm transition leading-none"><i class="fa-solid fa-house-chimney"></i></a>
                 </div>
             </div>
-            <!-- Nav Action Buttons -->
+
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <!-- Mobile Menu Button -->
+
                 <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
                     <i class="fas fa-bars" id="menu-icon"></i>
                 </button>
             </div>
         </div>
-        <!-- Mobile Navigation Menu -->
+
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t-[3px] border-gray-100 px-6 py-4 space-y-4 shadow-inner">
             <a href="/services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
             <a href="/service-areas" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Service Areas</a>
@@ -269,7 +229,6 @@
         </div>
     </nav>
 
-    <!-- Sticky in-page section navigation with scroll-spy highlighting -->
     <nav id="section-nav" aria-label="Jump to pricing section" class="bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm sticky z-40" style="top: 0;">
         <div class="max-w-7xl mx-auto px-3 sm:px-6">
             <ul class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-2.5 text-sm font-medium lg:justify-center">
@@ -285,7 +244,7 @@
     </nav>
 
     <main class="flex-grow">
-        <!-- Hero Intro -->
+
         <header id="pricing-hero" class="relative overflow-hidden bg-blue-950 text-white">
             <div class="absolute inset-0 opacity-30" aria-hidden="true" style="background: radial-gradient(circle at 82% 15%, rgba(166,31,46,.75), transparent 26%), linear-gradient(135deg, transparent 45%, rgba(255,255,255,.06) 45%, rgba(255,255,255,.06) 46%, transparent 46%);"></div>
             <div class="relative max-w-7xl mx-auto px-6 py-14 sm:py-20 grid lg:grid-cols-[1.1fr_.9fr] gap-10 items-center">
@@ -318,7 +277,6 @@
             </div>
         </header>
 
-        <!-- Rates -->
         <section id="rates" class="py-12 sm:py-16 bg-white">
             <div class="max-w-6xl mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto mb-10">
@@ -377,7 +335,6 @@
                     </aside>
                 </div>
 
-                <!-- Instant Book Flat-Rate Menu -->
                 <div id="flat-rate" class="mt-16 bg-gray-50 border-[2px] border-red-600 rounded-3xl p-8 sm:p-12 max-w-5xl mx-auto shadow-lg">
                     <div class="text-center mb-8">
                         <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">No Clock-Watching Anxiety</span>
@@ -385,13 +342,13 @@
                         <p class="text-gray-600 mt-2 max-w-2xl mx-auto">For the most common, repetitive tasks, you can bypass hourly estimates entirely. We provide standard fixed prices for both Zone A and Zone B, so you know exactly what you will pay upfront.</p>
                     </div>
                     <div class="space-y-10">
-                        <!-- Category: Electrical & Smart Home -->
+
                         <div>
                             <h3 class="flex items-center gap-2.5 text-lg font-black text-gray-950 mb-4 pb-2 border-b-2 border-red-600/20">
                                 <i class="fas fa-bolt text-red-600" aria-hidden="true"></i> Electrical &amp; Smart Home
                             </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                                <!-- Ceiling Fan & Light Fixtures -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Ceiling Fan & Light Fixtures</h4>
@@ -408,7 +365,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Smart Doorbell & Thermostats -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Smart Doorbell & Thermostats</h4>
@@ -425,7 +382,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Smoke & CO Detectors -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Smoke & CO Detectors</h4>
@@ -444,13 +401,13 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Category: Plumbing -->
+
                         <div>
                             <h3 class="flex items-center gap-2.5 text-lg font-black text-gray-950 mb-4 pb-2 border-b-2 border-red-600/20">
                                 <i class="fas fa-faucet text-red-600" aria-hidden="true"></i> Plumbing
                             </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                                <!-- Garbage Disposal Replacement -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Garbage Disposal Replacement</h4>
@@ -467,7 +424,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Toilet Component Rebuilds -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Toilet Component Rebuilds</h4>
@@ -484,7 +441,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Kitchen & Bath Faucets -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Kitchen & Bath Faucets</h4>
@@ -503,13 +460,13 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Category: Doors, Windows & Security -->
+
                         <div>
                             <h3 class="flex items-center gap-2.5 text-lg font-black text-gray-950 mb-4 pb-2 border-b-2 border-red-600/20">
                                 <i class="fas fa-door-open text-red-600" aria-hidden="true"></i> Doors, Windows &amp; Security
                             </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                                <!-- Door Locks & Deadbolts -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Door Locks & Deadbolts</h4>
@@ -526,7 +483,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Storm Door Installations -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Storm Door Installations</h4>
@@ -543,7 +500,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Window Blinds & Curtain Rods -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Window Blinds & Curtain Rods</h4>
@@ -562,13 +519,13 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Category: Interior & Fixtures -->
+
                         <div>
                             <h3 class="flex items-center gap-2.5 text-lg font-black text-gray-950 mb-4 pb-2 border-b-2 border-red-600/20">
                                 <i class="fas fa-couch text-red-600" aria-hidden="true"></i> Interior &amp; Fixtures
                             </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                                <!-- TV Wall Mounting -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">TV Wall Mounting</h4>
@@ -585,7 +542,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Cabinet Hardware Upgrades -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Cabinet Hardware Upgrades</h4>
@@ -604,13 +561,13 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Category: Exterior & Maintenance -->
+
                         <div>
                             <h3 class="flex items-center gap-2.5 text-lg font-black text-gray-950 mb-4 pb-2 border-b-2 border-red-600/20">
                                 <i class="fas fa-house text-red-600" aria-hidden="true"></i> Exterior &amp; Maintenance
                             </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                                <!-- Dryer Vent Cleaning -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Dryer Vent Cleaning</h4>
@@ -627,7 +584,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Gutter Cleaning -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Gutter Cleaning</h4>
@@ -644,7 +601,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Power Washing -->
+
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Power Washing</h4>
@@ -671,7 +628,6 @@
                     <p class="font-medium text-gray-600"><strong>Note on Billing:</strong> Our service blocks and subsequent hourly rate apply to all active labor, on-site troubleshooting, material shopping, and necessary preparation or cleanup related to the specific tasks performed.<br><strong>We only accept Cash, Check, Zelle&reg;, and Venmo&reg;.</strong></p>
                 </div>
 
-                <!-- Call to action -->
                 <div class="mt-14 text-center">
                     <p class="text-lg font-semibold text-gray-900 mb-5">Ready for an honest, upfront quote?</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -682,7 +638,6 @@
                 </div>            </div>
         </section>
 
-        <!-- Flat-Fee Home Audits -->
         <section id="audits" class="py-12 sm:py-16 bg-gray-50 border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto mb-12">
@@ -692,7 +647,7 @@
                 </div>
 
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <!-- Home Safety Audit -->
+
                     <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
                             <i class="fas fa-shield-heart mr-1"></i> Safety
@@ -719,7 +674,6 @@
                         </a>
                     </div>
 
-                    <!-- Energy Tune-Up -->
                     <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
                             <i class="fas fa-wind mr-1"></i> Energy
@@ -746,7 +700,6 @@
                         </a>
                     </div>
 
-                    <!-- Storm-Prep Check -->
                     <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
                             <i class="fas fa-cloud-showers-heavy mr-1"></i> Storm
@@ -774,7 +727,6 @@
                     </div>
                 </div>
 
-                <!-- Whole-Home Assessment bundle -->
                 <div class="mt-8 bg-blue-900 text-white rounded-3xl p-8 sm:p-10 max-w-6xl mx-auto shadow-lg flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     <div class="text-center md:text-left">
                         <div class="inline-block bg-white/10 border border-white/20 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3"><i class="fas fa-layer-group mr-1"></i> Best Value</div>
@@ -790,7 +742,6 @@
                     </div>
                 </div>
 
-                <!-- How the same-day punch-list works -->
                 <div class="mt-12 bg-white border-[2px] border-red-600 rounded-3xl p-8 sm:p-12 max-w-5xl mx-auto shadow-lg">
                     <div class="text-center mb-8">
                         <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">No Vague Estimates</span>
@@ -798,7 +749,7 @@
                         <p class="text-gray-600 mt-2 max-w-2xl mx-auto">Every audit ends the same way: a written list of exactly what we found, each item priced on its own line straight from our standardized menu. Approve what you want, skip what you don't, and we get started that day.</p>
                     </div>
                     <div class="grid md:grid-cols-2 gap-8 items-start">
-                        <!-- Sample punch-list -->
+
                         <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-sm">
                             <div class="flex items-center justify-between border-b border-gray-200 pb-3 mb-3">
                                 <span class="font-bold text-gray-900 text-sm uppercase tracking-wider"><i class="fas fa-clipboard-list text-red-600 mr-2"></i>Sample Punch-List</span>
@@ -832,7 +783,7 @@
                             </div>
                             <p class="text-[11px] text-gray-400 mt-3 leading-relaxed">Illustrative example. Your list and prices reflect what's actually found in your home. Materials priced separately unless a standardized menu tier is selected.</p>
                         </div>
-                        <!-- How it works steps -->
+
                         <div>
                             <h4 class="font-bold text-gray-900 mb-4">How It Works</h4>
                             <ol class="space-y-4 text-sm text-gray-600">
@@ -848,7 +799,6 @@
             </div>
         </section>
 
-        <!-- Good / Better / Best Menus -->
         <section id="menus" class="py-12 sm:py-16 bg-white border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto mb-10">
@@ -861,7 +811,6 @@
                     </div>
                 </div>
 
-                <!-- Menu 1: Home Safety -->
                 <div class="mb-14">
                     <div class="flex items-center gap-3 mb-6 max-w-6xl mx-auto">
                         <span class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-red-100 text-red-600 text-xl"><i class="fas fa-shield-heart"></i></span>
@@ -871,7 +820,7 @@
                         </div>
                     </div>
                     <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
-                        <!-- Good -->
+
                         <div class="service-card bg-white border-[2px] border-gray-200 p-7 rounded-3xl shadow-sm flex flex-col">
                             <div class="text-center mb-5">
                                 <span class="inline-block bg-gray-100 text-gray-600 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Good</span>
@@ -887,7 +836,7 @@
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> brushed-nickel 24&Prime; grab bar, anti-slip strip set.</p>
                             <a href="/contact?service=Home+Safety+Menu" class="mt-5 bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Good</a>
                         </div>
-                        <!-- Better -->
+
                         <div class="service-card bg-white border-[2px] border-red-600 p-7 rounded-3xl shadow-xl ring-2 ring-red-600 relative flex flex-col lg:-translate-y-2">
                             <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-4 py-1 rounded-full shadow"><i class="fas fa-star mr-1"></i> Most Popular</div>
                             <div class="text-center mb-5 mt-2">
@@ -906,7 +855,7 @@
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> grab bars, 10-yr sealed smoke/CO alarm, lever handset, plug-in night-light.</p>
                             <a href="/contact?service=Home+Safety+Menu" class="mt-5 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Better</a>
                         </div>
-                        <!-- Best -->
+
                         <div class="service-card bg-white border-[2px] border-gray-200 p-7 rounded-3xl shadow-sm flex flex-col">
                             <div class="text-center mb-5">
                                 <span class="inline-block bg-blue-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Best</span>
@@ -926,7 +875,6 @@
                     </div>
                 </div>
 
-                <!-- Menu 2: Energy Efficiency -->
                 <div class="mb-14">
                     <div class="flex items-center gap-3 mb-6 max-w-6xl mx-auto">
                         <span class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-blue-100 text-blue-900 text-xl"><i class="fas fa-wind"></i></span>
@@ -936,7 +884,7 @@
                         </div>
                     </div>
                     <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
-                        <!-- Good -->
+
                         <div class="service-card bg-white border-[2px] border-gray-200 p-7 rounded-3xl shadow-sm flex flex-col">
                             <div class="text-center mb-5">
                                 <span class="inline-block bg-gray-100 text-gray-600 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Good</span>
@@ -952,7 +900,7 @@
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> foam/V-seal weatherstrip, aluminum door sweep.</p>
                             <a href="/contact?service=Energy+Efficiency+Menu" class="mt-5 bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Good</a>
                         </div>
-                        <!-- Better -->
+
                         <div class="service-card bg-white border-[2px] border-red-600 p-7 rounded-3xl shadow-xl ring-2 ring-red-600 relative flex flex-col lg:-translate-y-2">
                             <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-4 py-1 rounded-full shadow"><i class="fas fa-star mr-1"></i> Most Popular</div>
                             <div class="text-center mb-5 mt-2">
@@ -970,7 +918,7 @@
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> outlet gaskets, attic-hatch kit, paintable exterior caulk.</p>
                             <a href="/contact?service=Energy+Efficiency+Menu" class="mt-5 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Better</a>
                         </div>
-                        <!-- Best -->
+
                         <div class="service-card bg-white border-[2px] border-gray-200 p-7 rounded-3xl shadow-sm flex flex-col">
                             <div class="text-center mb-5">
                                 <span class="inline-block bg-blue-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Best</span>
@@ -990,7 +938,6 @@
                     </div>
                 </div>
 
-                <!-- Menu 3: Storm & Water Defense -->
                 <div>
                     <div class="flex items-center gap-3 mb-6 max-w-6xl mx-auto">
                         <span class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-blue-100 text-blue-900 text-xl"><i class="fas fa-house-flood-water"></i></span>
@@ -1000,7 +947,7 @@
                         </div>
                     </div>
                     <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
-                        <!-- Good -->
+
                         <div class="service-card bg-white border-[2px] border-gray-200 p-7 rounded-3xl shadow-sm flex flex-col">
                             <div class="text-center mb-5">
                                 <span class="inline-block bg-gray-100 text-gray-600 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Good</span>
@@ -1016,7 +963,7 @@
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> gutter hangers, downspout screws, closer hardware.</p>
                             <a href="/contact?service=Storm+%26+Water+Defense+Menu" class="mt-5 bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Good</a>
                         </div>
-                        <!-- Better -->
+
                         <div class="service-card bg-white border-[2px] border-red-600 p-7 rounded-3xl shadow-xl ring-2 ring-red-600 relative flex flex-col lg:-translate-y-2">
                             <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-4 py-1 rounded-full shadow"><i class="fas fa-star mr-1"></i> Most Popular</div>
                             <div class="text-center mb-5 mt-2">
@@ -1034,7 +981,7 @@
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> downspout extension, exterior sealant, braided supply hoses.</p>
                             <a href="/contact?service=Storm+%26+Water+Defense+Menu" class="mt-5 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Better</a>
                         </div>
-                        <!-- Best -->
+
                         <div class="service-card bg-white border-[2px] border-gray-200 p-7 rounded-3xl shadow-sm flex flex-col">
                             <div class="text-center mb-5">
                                 <span class="inline-block bg-blue-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Best</span>
@@ -1058,7 +1005,6 @@
             </div>
         </section>
 
-        <!-- Pre-Built Packages -->
         <section id="packages" class="py-12 sm:py-16 bg-gray-50 border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto mb-12">
@@ -1075,7 +1021,7 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-                    <!-- 4-Hour Package -->
+
                     <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
                             <i class="fas fa-clock mr-1"></i> 4 Hours
@@ -1113,7 +1059,6 @@
                         </a>
                     </div>
 
-                    <!-- 6-Hour Package -->
                     <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
                             <i class="fas fa-clock mr-1"></i> 6 Hours
@@ -1151,7 +1096,6 @@
                         </a>
                     </div>
 
-                    <!-- 8-Hour Package -->
                     <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
                             <i class="fas fa-clock mr-1"></i> 8 Hours
@@ -1194,7 +1138,6 @@
             </div>
         </section>
 
-        <!-- Premium Add-Ons -->
         <section id="add-ons" class="py-12 sm:py-16 bg-white border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto mb-12">
@@ -1203,7 +1146,6 @@
                     <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">Want your job moved to the front of the calendar? This optional upgrade layers right on top of the transparent pricing above &mdash; no haggling, no hidden fees, just a clear flat rate for the convenience.</p>
                 </div>
 
-                <!-- Priority / Next-Day Scheduling — full-width banner across the top -->
                 <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-hidden mb-8">
                     <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
                         <i class="fas fa-bolt mr-1"></i> Skip The Line
@@ -1241,7 +1183,6 @@
             </div>
         </section>
 
-    <!-- Materials & Supply Runs -->
     <section id="materials" class="py-12 sm:py-16 bg-white border-t border-gray-100">
         <div class="max-w-7xl mx-auto px-6">
             <div class="bg-gray-50 border-[2px] border-red-600 rounded-3xl p-8 sm:p-12 max-w-5xl mx-auto shadow-lg">
@@ -1251,7 +1192,7 @@
                     <p class="text-gray-600 mt-2 max-w-2xl mx-auto">Materials are never bundled into your Service Call or hourly rate. You always have two transparent options &mdash; supply them yourself, or let us handle the sourcing for you.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Option 1: You supply -->
+
                     <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col">
                         <div class="flex items-center gap-3 mb-3">
                             <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-blue-600"><i class="fas fa-box-open"></i></span>
@@ -1260,7 +1201,7 @@
                         <p class="text-gray-600 text-sm mb-4">Have the parts ready on-site and there is <strong>no markup at all</strong>. We simply install what you provide. Please confirm the exact make, model, and specs before your appointment so nothing stalls the job.</p>
                         <p class="text-blue-600 font-extrabold text-lg mt-auto">$0 <span class="text-xs text-gray-400 font-normal">materials markup</span></p>
                     </div>
-                    <!-- Option 2: We supply -->
+
                     <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col">
                         <div class="flex items-center gap-3 mb-3">
                             <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-red-100 text-red-600"><i class="fas fa-truck-fast"></i></span>
@@ -1275,7 +1216,6 @@
         </div>
     </section>
 
-    <!-- Hours and availability footer block -->
     <div class="max-w-7xl mx-auto px-6 mb-12">
         <div class="text-center bg-blue-900 text-white py-12 px-8 sm:py-20 sm:px-16 rounded-3xl">
             <p class="text-xl sm:text-2xl md:text-3xl font-medium">Available Monday–Friday, 9 a.m.–6 p.m.; Saturday, 10 a.m.–5 p.m.</p>
@@ -1285,11 +1225,10 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="bg-black text-gray-400 pt-14 pb-10">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
-                <!-- Brand -->
+
                 <div class="flex flex-col items-center md:items-start">
                     <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
@@ -1299,7 +1238,7 @@
                         <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl hover:text-[#FF1A1A] transition"><i class="fa-brands fa-yelp"></i></a>
                     </div>
                 </div>
-                <!-- Quick links -->
+
                 <nav aria-label="Footer">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
                     <ul class="space-y-2 text-sm">
@@ -1312,7 +1251,7 @@
                         <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
                     </ul>
                 </nav>
-                <!-- Contact -->
+
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
@@ -1323,7 +1262,7 @@
                     <a href="/contact?service=General+Estimate+%2F+Quote" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Get a Free Quote</a>
                 </div>
             </div>
-            <!-- Quick-access sitemap: popular services + service areas reachable in one click from any page -->
+
             <div class="mt-12 pt-10 border-t border-gray-800 grid gap-10 sm:grid-cols-2 text-center sm:text-left">
                 <nav aria-label="Popular services">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Popular Services</h3>
@@ -1371,8 +1310,6 @@
         </div>
     </footer>
 
-    <!-- Back to top -->
-    <!-- Floating Call Action -->
     <noscript>
         <a href="tel:+12483853432" class="fixed bottom-5 right-5 z-50 flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now">
             <i class="fas fa-phone" aria-hidden="true"></i>
@@ -1381,52 +1318,9 @@
     </noscript>
 
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
+
     <script>
-        (function () {
-            var btn = document.getElementById('back-to-top');
-            if (!btn) return;
-            window.addEventListener('scroll', function () {
-                var show = window.scrollY > 400;
-                btn.classList.toggle('hidden', !show);
-                btn.classList.toggle('flex', show);
-            }, { passive: true });
-            btn.addEventListener('click', function () {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        })();
-    </script>
 
-    <!-- Interactive JS scripts -->
-    <script>
-        // Mobile menu toggle
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-
-        if (menuBtn && mobileMenu && menuIcon) {
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                if (mobileMenu.classList.contains('hidden')) {
-                    menuIcon.className = 'fas fa-bars';
-                } else {
-                    menuIcon.className = 'fas fa-times';
-                }
-                // Navbar height changed — let the sticky section bar re-measure.
-                window.dispatchEvent(new Event('resize'));
-            });
-
-            // Close mobile menu when a link is clicked
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    menuIcon.className = 'fas fa-bars';
-                });
-            });
-        }
-    </script>
-
-    <!-- Sticky section nav: dynamic offset + scroll-spy highlighting -->
-    <script>
         (function () {
             var siteNav = document.getElementById('site-nav');
             var sectionNav = document.getElementById('section-nav');
@@ -1443,9 +1337,6 @@
                 var secH = sectionNav.getBoundingClientRect().height;
                 return { navH: navH, total: navH + secH };
             }
-
-            // Stack the section bar directly under the main navbar and keep anchor
-            // scroll offsets in sync with the combined sticky height.
             function updateOffsets() {
                 var m = metrics();
                 sectionNav.style.top = m.navH + 'px';
@@ -1460,7 +1351,6 @@
                     var on = t.id === id;
                     t.link.classList.toggle('active-section', on);
                     if (on) {
-                        // Keep the active pill in view within the scrollable bar (horizontal only).
                         var ul = t.link.parentNode.parentNode;
                         var lr = t.link.getBoundingClientRect();
                         var ur = ul.getBoundingClientRect();
@@ -1489,7 +1379,8 @@
             window.addEventListener('load', function () { updateOffsets(); onScroll(); });
         })();
     </script>
-    <!-- AI chat assistant widget -->
-    <script src="/js/chat-widget.js?v=20260718-1" defer></script>
+
+    <script src="/js/site.js?v=20260719" defer></script>
+    <script src="/js/chat-widget.js?v=20260719" defer></script>
 </body>
 </html>

@@ -1,20 +1,8 @@
-# The site content is published from the "public" directory.
-#
-# This is a plain static HTML site. The "@netlify/plugin-gatsby" build plugin
-# was enabled on the site (via the Netlify UI) even though this is not a Gatsby
-# project. That plugin's onPreBuild fails the build whenever the publish
-# directory resolves to the repository root, so we publish from a dedicated
-# subdirectory and tell the plugin to skip its work.
 [build]
   publish = "public"
-  # Regenerate the JSON-driven pages on every deploy. The "single source of
-  # truth" lives in public/data/*.json; these scripts render that JSON into the
-  # per-service pages (public/services/<slug>.html) and per-city pages
-  # (public/handyman/<slug>.html).
   command = "node scripts/build-css.mjs && node scripts/build-service-pages.mjs && node scripts/build-city-pages.mjs && node scripts/build-chat-knowledge.mjs"
 
 [build.environment]
-  # Skip the Gatsby build plugin — this is not a Gatsby site.
   NETLIFY_SKIP_GATSBY_BUILD_PLUGIN = "true"
 
 [[headers]]
@@ -22,9 +10,6 @@
   [headers.values]
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob:; connect-src 'self'; frame-ancestors 'self' https://app.netlify.com;"
 
-# HTML: let the CDN serve stale content while it revalidates in the background.
-# Netlify-CDN-Cache-Control controls only the CDN edge and is stripped before
-# the browser, so pages still update quickly for visitors.
 [[headers]]
   for = "/"
   [headers.values]
@@ -35,7 +20,6 @@
   [headers.values]
     Netlify-CDN-Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
 
-# Static assets: cache aggressively at the browser and the CDN.
 [[headers]]
   for = "/*.jpg"
   [headers.values]
