@@ -26,9 +26,8 @@
   // --- Styles -------------------------------------------------------------
   var style = document.createElement("style");
   style.textContent = [
-    // Bottom-right group of labeled buttons, stacked with chat above call:
-    // the chat launcher and a call button. The site's own floating call widget
-    // is hidden at runtime (see hideExistingFloating) so these don't overlap.
+    // Bottom-right group with a chat launcher and call button. Desktop uses
+    // labeled pills; mobile uses a compact icon-only row.
     ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:2147483000;display:flex;flex-direction:column;gap:12px;align-items:flex-end}",
     ".aaa-fab .aaa-fab-btn{min-width:126px;height:60px;padding:0 20px;border-radius:9999px;border:2px solid #fff;display:flex;align-items:center;justify-content:center;gap:10px;box-sizing:border-box;font:700 16px/1 'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap;color:#fff;cursor:pointer;text-decoration:none;box-shadow:0 8px 24px rgba(13,34,55,.35);transition:transform .15s ease,background .15s ease}",
     ".aaa-fab .aaa-fab-btn i{font-size:20px}",
@@ -92,12 +91,13 @@
     ".aaa-chat-bubble-arrow{position:absolute;bottom:-8px;right:42px;width:12px;height:12px;background:#fff;border-right:1.5px solid #e7ecf2;border-bottom:1.5px solid #e7ecf2;transform:rotate(45deg)}",
     ".aaa-chat-bubble-close{position:absolute;top:6px;right:8px;background:none;border:none;color:#9fb1ca;font-size:16px;cursor:pointer;line-height:1;padding:4px;transition:color .15s}",
     ".aaa-chat-bubble-close:hover{color:" + CRIMSON + "}",
-    "@media(max-width:767px){.aaa-fab .aaa-fab-btn{min-width:0;width:56px;height:56px;padding:0;border-radius:50%}.aaa-fab .aaa-fab-btn span{display:none}}"
+    "@media(max-width:767px){.aaa-fab{right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));flex-direction:row;gap:10px;align-items:center}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}.aaa-chat-panel{right:max(12px,env(safe-area-inset-right));bottom:88px;max-width:calc(100vw - 24px);max-height:calc(100vh - 112px)}.aaa-chat-bubble{right:max(12px,env(safe-area-inset-right));bottom:88px;max-width:calc(100vw - 24px)}.aaa-chat-bubble-arrow{right:24px}}",
+    "@media(max-width:359px){.aaa-fab .aaa-fab-btn{width:50px;height:50px;flex-basis:50px}.aaa-fab{gap:8px}.aaa-chat-panel,.aaa-chat-bubble{bottom:80px}}"
   ].join("");
   document.head.appendChild(style);
 
   // --- Markup -------------------------------------------------------------
-  // A bottom-right stack with chat above call, each shown as a labeled pill.
+  // Desktop uses labeled pills; mobile retains accessible icon-only controls.
   var group = document.createElement("div");
   group.className = "aaa-fab";
 
@@ -105,14 +105,14 @@
   launch.type = "button";
   launch.className = "aaa-fab-btn aaa-chat-launch";
   launch.setAttribute("aria-label", "Open chat with AAA Handyman Services");
-  launch.innerHTML = '<i class="fas fa-comments" aria-hidden="true"></i><span>AI Chat</span>';
+  launch.innerHTML = '<i class="fas fa-comments" aria-hidden="true"></i><span class="aaa-fab-label">AI Chat</span>';
 
   var callBtn = document.createElement("a");
   callBtn.className = "aaa-fab-btn aaa-call";
   callBtn.href = "tel:+12483853432";
   callBtn.title = "Call AAA Handyman Services";
   callBtn.setAttribute("aria-label", "Call AAA Handyman Services at (248) 385-3432");
-  callBtn.innerHTML = '<i class="fas fa-phone" aria-hidden="true"></i><span>Call Now!</span>';
+  callBtn.innerHTML = '<i class="fas fa-phone" aria-hidden="true"></i><span class="aaa-fab-label">Call Now!</span>';
 
   group.appendChild(launch);
   group.appendChild(callBtn);
