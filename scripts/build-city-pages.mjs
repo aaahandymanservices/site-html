@@ -282,8 +282,8 @@ ${jsonLd(city)}
                 <a href="tel:${PHONE_TEL}" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-green-600/30 transition flex items-center gap-2">
                     <i class="fas fa-phone"></i> Call Now! ${PHONE_DISPLAY}
                 </a>
-                <a href="${quoteHref(city.name)}" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold px-6 py-3 rounded-xl transition flex items-center gap-2">
-                    <i class="fas fa-calendar-check"></i> Get a Free Quote
+                <a href="/book?service=General+Estimate+%2F+Quote&city=${enc(city.name)}" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold px-6 py-3 rounded-xl transition flex items-center gap-2">
+                    <i class="fas fa-calendar-check"></i> Book Online Now
                 </a>
             </div>
         </div>
@@ -358,8 +358,8 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                     <a href="tel:${PHONE_TEL}" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-green-600/30">
                         <i class="fas fa-phone"></i> ${PHONE_DISPLAY}
                     </a>
-                    <a href="${quoteHref(city.name)}" class="inline-flex items-center gap-2 bg-white text-blue-900 hover:bg-gray-100 font-semibold px-6 py-3 rounded-xl transition shadow-lg">
-                        <i class="fas fa-calendar-check"></i> Get a Free Quote
+                    <a href="/book?service=General+Estimate+%2F+Quote&city=${enc(city.name)}" class="inline-flex items-center gap-2 bg-white text-blue-900 hover:bg-gray-100 font-semibold px-6 py-3 rounded-xl transition shadow-lg">
+                        <i class="fas fa-calendar-check"></i> Book Online Now
                     </a>
                 </div>
             </div>
