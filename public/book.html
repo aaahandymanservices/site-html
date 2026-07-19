@@ -210,7 +210,11 @@
                         <div class="bg-gray-800/30 rounded-3xl p-6 sm:p-8 border border-gray-800/80 shadow-2xl relative">
                             
                             <!-- Form State Container -->
-                            <form id="booking-form" class="space-y-6">
+                            <form id="booking-form" name="bookings" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
+                                <input type="hidden" name="form-name" value="bookings" />
+                                <p class="hidden">
+                                    <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                                </p>
                                 
                                 <div class="grid sm:grid-cols-2 gap-6">
                                     <div>
@@ -598,6 +602,24 @@
                     } catch (err) {
                         document.getElementById('summary-date').innerText = `${bookingDate} (${bookingTime})`;
                     }
+
+                    // Forward booking to Netlify Forms for email alert and dashboard integration
+                    const netlifyFormData = new URLSearchParams();
+                    netlifyFormData.append('form-name', 'bookings');
+                    netlifyFormData.append('name', name);
+                    netlifyFormData.append('email', email);
+                    netlifyFormData.append('phone', phone);
+                    netlifyFormData.append('service', service);
+                    netlifyFormData.append('bookingDate', bookingDate);
+                    netlifyFormData.append('bookingTime', bookingTime);
+                    netlifyFormData.append('message', message);
+                    netlifyFormData.append('seasonal-opt-in', optIn ? 'on' : 'off');
+
+                    fetch('/book.html', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: netlifyFormData.toString()
+                    }).catch(err => console.error('Netlify Form submission failed:', err));
 
                     // Toggle States
                     bookingForm.classList.add('hidden');
