@@ -262,7 +262,7 @@ ${jsonLd(city)}
             </div>
             <div class="flex items-center space-x-2 sm:space-x-3">
                 <button id="mobile-menu-btn" class="md:hidden text-gray-700 hover:text-red-600 focus:outline-none p-1 sm:p-2" aria-label="Toggle Navigation Menu">
-                    <i class="fas fa-bars text-xl sm:text-2xl"></i>
+                    <i class="fas fa-bars text-xl sm:text-2xl" id="menu-icon"></i>
                 </button>
             </div>
         </div>
@@ -492,8 +492,16 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
         // Mobile Navigation Menu Toggle
         var mobileMenuBtn = document.getElementById('mobile-menu-btn');
         var mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', function () { mobileMenu.classList.toggle('hidden'); });
+        var menuIcon = document.getElementById('menu-icon');
+        if (mobileMenuBtn && mobileMenu && menuIcon) {
+            mobileMenuBtn.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.className = 'fas fa-bars text-xl sm:text-2xl';
+                } else {
+                    menuIcon.className = 'fas fa-times text-xl sm:text-2xl';
+                }
+            });
         }
     </script>
 
