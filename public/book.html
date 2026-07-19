@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <title>Book Online — Schedule Your Service | AAA Handyman Services</title>
+
+    <meta name="description" content="Schedule a local handyman online with AAA Handyman Services. Select your service, choose a preferred date and time slot, and reserve your appointment across Oakland County, MI.">
+    <meta name="theme-color" content="#8e1f26">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aaahandyman.services/book">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aaahandyman.services/book">
+    <meta property="og:site_name" content="AAA Handyman Services">
+    <meta property="og:title" content="Book Online — Schedule Your Service | AAA Handyman Services">
+    <meta property="og:description" content="Book a handyman online in Oakland County, MI. Select your service, date, and preferred time. No upfront payments.">
+    <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
+    <meta property="og:locale" content="en_US">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://aaahandyman.services/book">
+    <meta name="twitter:title" content="Book Online — Schedule Your Service | AAA Handyman Services">
+    <meta name="twitter:description" content="Book a handyman online in Oakland County, MI. Select your service, date, and preferred time. No upfront payments.">
+    <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aaahandyman.services/" },
+        { "@type": "ListItem", "position": 2, "name": "Book Online", "item": "https://aaahandyman.services/book" }
+      ]
+    }
+    </script>
+
+    <link rel="stylesheet" href="/css/tailwind.css">
+
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"></noscript>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        .nav-link { transition: all 0.3s; }
+        .nav-link:hover { color: #8e1f26; transform: translateY(-2px); }
+        
+        section[id], header[id] {
+            scroll-margin-top: 80px;
+        }
+        @media (max-width: 768px) {
+            section[id], header[id] {
+                scroll-margin-top: 100px;
+            }
+        }
+        
+        /* Interactive time slots styling */
+        .time-slot-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .time-slot-btn.selected {
+            background-color: #8e1f26;
+            border-color: #8e1f26;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(142, 31, 38, 0.3);
+        }
+    </style>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+</head>
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
+        <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
+            <a href="/" class="flex min-w-0 items-center space-x-3" aria-label="AAA Handyman Services home">
+                <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600">
+                <div class="min-w-0">
+                    <p class="text-base min-[390px]:text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
+                    <p class="text-[10px] sm:text-xs text-gray-500">Oakland County, Michigan</p>
+                </div>
+            </a>
+
+            <div class="hidden md:flex space-x-6 lg:space-x-8 text-lg font-medium items-center">
+                <a href="/services" class="nav-link text-gray-700 hover:text-red-600 transition">Services</a>
+                <a href="/service-areas" class="nav-link text-gray-700 hover:text-red-600 transition">Service Areas</a>
+                <a href="/rates" class="nav-link text-gray-700 hover:text-red-600 transition">Rates</a>
+                <a href="/guarantee" class="nav-link text-gray-700 hover:text-red-600 transition">Guarantee</a>
+                <a href="/reviews" class="nav-link text-gray-700 hover:text-red-600 transition">Reviews</a>
+                <a href="/careers" class="nav-link text-gray-700 hover:text-red-600 transition">Careers</a>
+                <a href="/contact" class="nav-link text-gray-700 hover:text-red-600 transition">Contact</a>
+                <div class="flex flex-col items-center space-y-1">
+                    <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="nav-link text-gray-700 hover:text-[#1877F2] text-xl transition leading-none"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="nav-link text-gray-700 hover:text-[#FF1A1A] text-sm transition leading-none"><i class="fa-brands fa-yelp"></i></a>
+                    <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="nav-link text-gray-700 hover:text-[#00B24F] text-sm transition leading-none"><i class="fa-solid fa-house-chimney"></i></a>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <button id="mobile-menu-btn" class="md:hidden text-blue-900 hover:text-red-600 focus:outline-none p-2 text-2xl" aria-label="Toggle Menu">
+                    <i class="fas fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t-[3px] border-gray-100 px-6 py-4 space-y-4 shadow-inner">
+            <a href="/services" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Services</a>
+            <a href="/service-areas" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Service Areas</a>
+            <a href="/rates" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Rates</a>
+            <a href="/guarantee" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Guarantee</a>
+            <a href="/reviews" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Reviews</a>
+            <a href="/careers" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Careers</a>
+            <a href="/contact" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Contact</a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="block text-lg font-medium text-gray-700 hover:text-[#1877F2] py-1"><i class="fab fa-facebook"></i> Facebook</a>
+            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" class="block text-lg font-medium text-gray-700 hover:text-[#FF1A1A] py-1"><i class="fa-brands fa-yelp"></i> Yelp</a>
+            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" class="block text-lg font-medium text-gray-700 hover:text-[#00B24F] py-1"><i class="fa-solid fa-house-chimney"></i> Nextdoor</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        <!-- Hero and content splitscreen Section -->
+        <section id="booking-section" class="py-12 sm:py-16 bg-gray-900 text-white relative">
+            <div class="max-w-7xl mx-auto px-6">
+                
+                <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+                    <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Instant Booking</div>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Book Your Handyman Online</h1>
+                    <p class="text-gray-400 text-base sm:text-lg leading-relaxed">
+                        Reserve your preferred date and time slot in under a minute. No deposit or payment required upfront. We will contact you shortly after to confirm details.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-12 items-start">
+                    
+                    <!-- Left column: Info and values -->
+                    <div class="lg:col-span-5 space-y-8">
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white leading-tight">Why Book Online with AAA Handyman?</h2>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-red-600/10 border border-red-500/20 flex items-center justify-center text-red-500 flex-shrink-0 text-xl">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Save Time & Hassle</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed mt-1">
+                                        Select exactly when you want us to come. Skip the back-and-forth emails.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-green-600/10 border border-green-500/20 flex items-center justify-center text-green-500 flex-shrink-0 text-xl">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">No Deposit Required</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed mt-1">
+                                        Your card is not charged when booking. Pay cleanly upon successful job completion.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-500 flex-shrink-0 text-xl">
+                                    <i class="fas fa-shield-halved"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">100% Satisfaction Guarantee</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed mt-1">
+                                        Our work is backed by a full 1-year warranty on craftsmanship and repairs.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Real Customer Review Snippet -->
+                        <div class="bg-gray-800/50 rounded-2xl p-6 border border-gray-800 space-y-4">
+                            <div class="flex items-center gap-1.5 text-yellow-500 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-300 text-sm italic leading-relaxed">
+                                "Booking AAA Handyman Services online was an absolute breeze. Selected a Tuesday morning slot for gutter maintenance and drywall repair. Victor showed up exactly on time, was extremely polite, and finished ahead of schedule. Outstanding service!"
+                            </p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm">
+                                    DM
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-white">Douglas Mitchell</p>
+                                    <p class="text-xs text-gray-500">Birmingham, MI</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right column: The interactive form -->
+                    <div class="lg:col-span-7">
+                        <div class="bg-gray-800/30 rounded-3xl p-6 sm:p-8 border border-gray-800/80 shadow-2xl relative">
+                            
+                            <!-- Form State Container -->
+                            <form id="booking-form" class="space-y-6">
+                                
+                                <div class="grid sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="booking-name" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Your Name *</label>
+                                        <input id="booking-name" type="text" name="name" required autocomplete="name" class="w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none focus:border-red-500 text-base text-white">
+                                    </div>
+                                    <div>
+                                        <label for="booking-email" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Email Address *</label>
+                                        <input id="booking-email" type="email" name="email" required autocomplete="email" class="w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none focus:border-red-500 text-base text-white">
+                                    </div>
+                                </div>
+
+                                <div class="grid sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="booking-phone" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Phone Number *</label>
+                                        <input id="booking-phone" type="tel" name="phone" required autocomplete="tel" placeholder="(248) 385-3432" class="w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none focus:border-red-500 text-base text-white">
+                                    </div>
+                                    <div>
+                                        <label for="booking-service" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Service / Project Type *</label>
+                                        <div class="relative">
+                                            <select id="booking-service" name="service" required class="w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none focus:border-red-500 text-base text-white appearance-none">
+                                                <option value="" disabled selected class="bg-gray-800 text-gray-400">Select a Service...</option>
+                                                <option value="General Estimate / Quote" class="bg-gray-800 text-white">General Estimate / Quote</option>
+                                                <option value="4-Hour Handyman Package" class="bg-gray-800 text-white">4-Hour Handyman Package</option>
+                                                <option value="6-Hour Handyman Package" class="bg-gray-800 text-white">6-Hour Handyman Package</option>
+                                                <option value="8-Hour Handyman Package" class="bg-gray-800 text-white">8-Hour Handyman Package</option>
+                                                <option value="Carpentry & Trim" class="bg-gray-800 text-white">Carpentry & Trim</option>
+                                                <option value="Doors & Windows" class="bg-gray-800 text-white">Doors & Windows</option>
+                                                <option value="Drywall Repair" class="bg-gray-800 text-white">Drywall Repair</option>
+                                                <option value="Painting & Staining" class="bg-gray-800 text-white">Painting & Staining</option>
+                                                <option value="Flooring & Tile" class="bg-gray-800 text-white">Flooring & Tile</option>
+                                                <option value="Minor Plumbing" class="bg-gray-800 text-white">Minor Plumbing</option>
+                                                <option value="Minor Electrical" class="bg-gray-800 text-white">Minor Electrical</option>
+                                                <option value="Installation & Mounting" class="bg-gray-800 text-white">Installation & Mounting</option>
+                                                <option value="Decks & Fences" class="bg-gray-800 text-white">Decks & Fences</option>
+                                                <option value="Gutters" class="bg-gray-800 text-white">Gutters</option>
+                                                <option value="Other / Custom Project" class="bg-gray-800 text-white">Other (Specify below)</option>
+                                            </select>
+                                            <div class="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none text-gray-400">
+                                                <i class="fas fa-chevron-down"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="grid sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="booking-date" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Preferred Date *</label>
+                                        <input id="booking-date" type="date" name="bookingDate" required class="w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none focus:border-red-500 text-base text-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Preferred Time Slot *</label>
+                                        <input type="hidden" id="booking-time" name="bookingTime" required>
+                                        <div id="time-slots-container" class="grid grid-cols-2 gap-3">
+                                            <button type="button" data-value="Morning (9 AM - 1 PM)" class="time-slot-btn px-4 py-3 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                                                Morning
+                                                <span class="block text-[10px] text-gray-400 font-normal">9 AM - 1 PM</span>
+                                            </button>
+                                            <button type="button" data-value="Afternoon (1 PM - 6 PM)" class="time-slot-btn px-4 py-3 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                                                Afternoon
+                                                <span class="block text-[10px] text-gray-400 font-normal">1 PM - 6 PM</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="booking-message" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Project Details & Special Notes <span class="text-gray-500 lowercase font-normal">(optional)</span></label>
+                                    <textarea id="booking-message" name="message" rows="4" placeholder="Please describe what tasks or repairs need to be addressed..." class="w-full px-5 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-base text-white resize-none"></textarea>
+                                </div>
+
+                                <div class="flex items-start gap-3 bg-gray-900/50 p-4 rounded-xl border border-gray-800">
+                                    <input id="seasonal-opt-in" type="checkbox" name="seasonal-opt-in" checked class="mt-1 h-5 w-5 accent-red-600 rounded cursor-pointer">
+                                    <label for="seasonal-opt-in" class="text-sm text-gray-300 cursor-pointer select-none">
+                                        <span class="font-semibold text-white block mb-0.5">Free Preventative & Seasonal Reminders</span>
+                                        Send me free home maintenance tips (e.g. spring gutter checks, winter weatherproofing). Unsubscribe anytime.
+                                    </label>
+                                </div>
+
+                                <button type="submit" id="submit-btn" class="w-full bg-red-600 hover:bg-red-700 py-4 text-lg font-bold rounded-2xl transition flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
+                                    CONFIRM APPOINTMENT <i class="fas fa-calendar-check"></i>
+                                </button>
+                            </form>
+
+                            <!-- Success State -->
+                            <div id="success-state" class="hidden text-center py-12 px-4 space-y-6">
+                                <div class="w-20 h-20 bg-green-600/10 border border-green-500/20 text-green-500 rounded-full flex items-center justify-center text-4xl mx-auto animate-bounce">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h2 class="text-2xl sm:text-3xl font-bold text-white">Booking Request Received!</h2>
+                                <p class="text-gray-300 max-w-md mx-auto leading-relaxed text-sm sm:text-base">
+                                    Thank you! Your booking for <span id="summary-service" class="font-bold text-white">gutter maintenance</span> on <span id="summary-date" class="font-bold text-white">July 22nd</span> is reserved.
+                                </p>
+                                <p class="text-gray-400 text-xs max-w-sm mx-auto leading-relaxed">
+                                    Victor or a team member will reach out to you within a few business hours to confirm your project scope and coordinate timing.
+                                </p>
+                                <div class="pt-4 flex flex-col sm:flex-row justify-center gap-4">
+                                    <a href="/" class="px-6 py-3 bg-red-600 hover:bg-red-700 font-bold rounded-xl text-sm transition">Back to Home</a>
+                                    <a href="/services" class="px-6 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-700 font-bold rounded-xl text-sm transition text-gray-300">View Services</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black text-gray-400 pt-14 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
+                    <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
+                    <div class="mt-4 flex items-center gap-4">
+                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl hover:text-[#1877F2] transition"><i class="fab fa-facebook"></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl hover:text-[#00B24F] transition"><i class="fa-solid fa-house-chimney"></i></a>
+                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl hover:text-[#FF1A1A] transition"><i class="fa-brands fa-yelp"></i></a>
+                    </div>
+                </div>
+
+                <nav aria-label="Footer">
+                    <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/services" class="hover:text-white transition">Services</a></li>
+                        <li><a href="/rates" class="hover:text-white transition">Rates &amp; Packages</a></li>
+                        <li><a href="/guarantee" class="hover:text-white transition">Our Guarantee</a></li>
+                        <li><a href="/reviews" class="hover:text-white transition">Reviews</a></li>
+                        <li><a href="/careers" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="/service-areas" class="hover:text-white transition">Service Areas</a></li>
+                        <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div>
+                    <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center"></i>(248) 385-3432</a></li>
+                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center"></i>Waterford, MI &middot; Oakland County</li>
+                    </ul>
+                    <a href="/book" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Book Online Now</a>
+                </div>
+            </div>
+
+            <div class="mt-12 pt-10 border-t border-gray-800 grid gap-10 sm:grid-cols-2 text-center sm:text-left">
+                <nav aria-label="Popular services">
+                    <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Popular Services</h3>
+                    <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                        <li><a href="/services/carpentry" class="hover:text-white transition">Carpentry</a></li>
+                        <li><a href="/services/drywall-repair" class="hover:text-white transition">Drywall Repair</a></li>
+                        <li><a href="/services/painting-staining" class="hover:text-white transition">Painting &amp; Staining</a></li>
+                        <li><a href="/services/doors-windows" class="hover:text-white transition">Doors &amp; Windows</a></li>
+                        <li><a href="/services/flooring-solutions" class="hover:text-white transition">Flooring Solutions</a></li>
+                        <li><a href="/services/minor-plumbing" class="hover:text-white transition">Minor Plumbing</a></li>
+                        <li><a href="/services/minor-electrical" class="hover:text-white transition">Minor Electrical</a></li>
+                        <li><a href="/services/decks-fences" class="hover:text-white transition">Decks &amp; Fences</a></li>
+                        <li><a href="/services/gutters" class="hover:text-white transition">Gutters</a></li>
+                        <li><a href="/services/power-washing" class="hover:text-white transition">Power Washing</a></li>
+                    </ul>
+                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs"></i></a>
+                </nav>
+                <nav aria-label="Service areas">
+                    <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Service Areas</h3>
+                    <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                        <li><a href="/handyman/waterford" class="hover:text-white transition">Waterford</a></li>
+                        <li><a href="/handyman/troy" class="hover:text-white transition">Troy</a></li>
+                        <li><a href="/handyman/west-bloomfield" class="hover:text-white transition">West Bloomfield</a></li>
+                        <li><a href="/handyman/rochester-hills" class="hover:text-white transition">Rochester Hills</a></li>
+                        <li><a href="/handyman/royal-oak" class="hover:text-white transition">Royal Oak</a></li>
+                        <li><a href="/handyman/birmingham" class="hover:text-white transition">Birmingham</a></li>
+                        <li><a href="/handyman/clarkston" class="hover:text-white transition">Clarkston</a></li>
+                        <li><a href="/handyman/farmington-hills" class="hover:text-white transition">Farmington Hills</a></li>
+                        <li><a href="/handyman/novi" class="hover:text-white transition">Novi</a></li>
+                        <li><a href="/handyman/southfield" class="hover:text-white transition">Southfield</a></li>
+                        <li><a href="/handyman/franklin" class="hover:text-white transition">Franklin</a></li>
+                        <li><a href="/handyman/orchard-lake" class="hover:text-white transition">Orchard Lake</a></li>
+                    </ul>
+                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs"></i></a>
+                </nav>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center">
+                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects.<br>Locally Serving Oakland County, MI.</p>
+                <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
+                    <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="/terms" class="hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // Automatic phone number formatter
+        const bookingPhone = document.getElementById('booking-phone');
+        if (bookingPhone) {
+            bookingPhone.addEventListener('input', function (e) {
+                let val = e.target.value.replace(/\D/g, '');
+                if (val.length > 10) val = val.substring(0, 10);
+                const match = val.match(/^(\d{1,3})(\d{0,3})(\d{0,4})$/);
+                if (match) {
+                    let formatted = "";
+                    if (match[1]) formatted += "(" + match[1];
+                    if (match[1].length === 3) formatted += ") ";
+                    if (match[2]) formatted += match[2];
+                    if (match[2].length === 3) formatted += "-";
+                    if (match[3]) formatted += match[3];
+                    e.target.value = formatted;
+                }
+            });
+        }
+
+        // Setup Datepicker Constraints (No past dates, only future dates starting tomorrow)
+        const bookingDateInput = document.getElementById('booking-date');
+        const timeSlotsContainer = document.getElementById('time-slots-container');
+        const hiddenTimeInput = document.getElementById('booking-time');
+
+        if (bookingDateInput) {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const yyyy = tomorrow.getFullYear();
+            const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+            const dd = String(tomorrow.getDate()).padStart(2, '0');
+            bookingDateInput.min = `${yyyy}-${mm}-${dd}`;
+
+            // Listen to date changes to validate closed days & update time slot business hours
+            bookingDateInput.addEventListener('change', function() {
+                const dateVal = this.value;
+                if (!dateVal) return;
+
+                // Parse input date (using parts to avoid timezone shifting)
+                const parts = dateVal.split('-');
+                const selectedDate = new Date(parts[0], parts[1] - 1, parts[2]);
+                const dayOfWeek = selectedDate.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+
+                // Reset selected time input value on date change
+                hiddenTimeInput.value = "";
+
+                if (dayOfWeek === 0) {
+                    alert("AAA Handyman Services is closed on Sundays. Please select a Monday-Saturday date.");
+                    this.value = "";
+                    renderTimeSlots("weekday"); // Reset slots
+                    return;
+                }
+
+                if (dayOfWeek === 6) {
+                    // Saturday business hours: 10:00 AM - 5:00 PM
+                    renderTimeSlots("saturday");
+                } else {
+                    // Mon-Fri business hours: 9:00 AM - 6:00 PM
+                    renderTimeSlots("weekday");
+                }
+            });
+        }
+
+        // Setup click handler function for dynamically created time slot buttons
+        function setupTimeSlotListeners() {
+            const timeSlotBtns = document.querySelectorAll('.time-slot-btn');
+            timeSlotBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Deselect all
+                    timeSlotBtns.forEach(b => {
+                        b.classList.remove('selected');
+                        b.classList.remove('bg-red-600');
+                        b.classList.add('bg-gray-800');
+                    });
+                    
+                    // Select clicked
+                    this.classList.add('selected');
+                    this.classList.remove('bg-gray-800');
+                    this.classList.add('bg-red-600');
+                    hiddenTimeInput.value = this.getAttribute('data-value');
+                });
+            });
+        }
+
+        // Render time slots dynamically based on the day type
+        function renderTimeSlots(type) {
+            if (!timeSlotsContainer) return;
+
+            if (type === "saturday") {
+                timeSlotsContainer.innerHTML = `
+                    <button type="button" data-value="Morning (10 AM - 1:30 PM)" class="time-slot-btn px-4 py-3 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                        Morning
+                        <span class="block text-[10px] text-gray-400 font-normal">10 AM - 1:30 PM</span>
+                    </button>
+                    <button type="button" data-value="Afternoon (1:30 PM - 5 PM)" class="time-slot-btn px-4 py-3 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                        Afternoon
+                        <span class="block text-[10px] text-gray-400 font-normal">1:30 PM - 5 PM</span>
+                    </button>
+                `;
+            } else {
+                timeSlotsContainer.innerHTML = `
+                    <button type="button" data-value="Morning (9 AM - 1 PM)" class="time-slot-btn px-4 py-3 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                        Morning
+                        <span class="block text-[10px] text-gray-400 font-normal">9 AM - 1 PM</span>
+                    </button>
+                    <button type="button" data-value="Afternoon (1 PM - 6 PM)" class="time-slot-btn px-4 py-3 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                        Afternoon
+                        <span class="block text-[10px] text-gray-400 font-normal">1 PM - 6 PM</span>
+                    </button>
+                `;
+            }
+            setupTimeSlotListeners();
+        }
+
+        // Initialize event listeners on page load
+        setupTimeSlotListeners();
+
+        // Set service parameter from query string if available
+        (function prefillServiceFromQuery() {
+            const params = new URLSearchParams(window.location.search);
+            const requested = params.get('service');
+            const bookingService = document.getElementById('booking-service');
+            if (requested && bookingService) {
+                const match = Array.from(bookingService.options).find(opt => opt.value === requested);
+                if (match) bookingService.value = requested;
+            }
+        })();
+
+        // Form submission via API
+        const bookingForm = document.getElementById('booking-form');
+        if (bookingForm) {
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Validation
+                const name = document.getElementById('booking-name').value.trim();
+                const email = document.getElementById('booking-email').value.trim();
+                const phone = document.getElementById('booking-phone').value.trim();
+                const service = document.getElementById('booking-service').value;
+                const bookingDate = document.getElementById('booking-date').value;
+                const bookingTime = hiddenTimeInput.value;
+                const message = document.getElementById('booking-message').value.trim();
+                const optIn = document.getElementById('seasonal-opt-in').checked;
+
+                if (!bookingTime) {
+                    alert('Please select a preferred time slot (Morning or Afternoon).');
+                    return;
+                }
+
+                const submitBtn = document.getElementById('submit-btn');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'PROCESSING BOOKING... <i class="fas fa-spinner animate-spin"></i>';
+
+                const requestData = {
+                    customerName: name,
+                    email: email,
+                    phone: phone,
+                    service: service,
+                    bookingDate: bookingDate,
+                    bookingTime: bookingTime,
+                    message: message,
+                    optIn: optIn
+                };
+
+                fetch('/api/booking', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestData)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        return response.json().then(data => {
+                            throw new Error(data.error || 'Failed to submit booking.');
+                        });
+                    }
+                })
+                .then(data => {
+                    // Nice confirmation details update
+                    document.getElementById('summary-service').innerText = service;
+                    
+                    // Format date nicely (e.g. 2026-07-22 to July 22, 2026)
+                    try {
+                        const parts = bookingDate.split('-');
+                        const d = new Date(parts[0], parts[1] - 1, parts[2]);
+                        const formattedDate = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+                        document.getElementById('summary-date').innerText = `${formattedDate} (${bookingTime})`;
+                    } catch (err) {
+                        document.getElementById('summary-date').innerText = `${bookingDate} (${bookingTime})`;
+                    }
+
+                    // Toggle States
+                    bookingForm.classList.add('hidden');
+                    document.getElementById('success-state').classList.remove('hidden');
+                })
+                .catch(error => {
+                    alert('Oops! ' + error.message + ' Please double check your details or call us directly.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'CONFIRM APPOINTMENT <i class="fas fa-calendar-check"></i>';
+                });
+            });
+        }
+    </script>
+
+    <script src="/js/site.js?v=20260719" defer></script>
+    <script src="/js/chat-widget.js?v=20260719-2" defer></script>
+</body>
+</html>
