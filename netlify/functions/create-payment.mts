@@ -13,8 +13,22 @@ const json = (body: Record<string, unknown>, status = 200) =>
 const clean = (value: unknown, maxLength: number) =>
   typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 
+const getEnv = (name: string): string => {
+  try {
+    if (typeof Netlify !== "undefined" && Netlify.env) {
+      return Netlify.env.get(name) ?? "";
+    }
+  } catch {}
+  try {
+    if (typeof process !== "undefined" && process.env) {
+      return process.env[name] ?? "";
+    }
+  } catch {}
+  return "";
+};
+
 const publicPaymentUrl = (name: string) => {
-  const value = clean(Netlify.env.get(name), 500);
+  const value = clean(getEnv(name), 500);
   if (!value) return "";
   try {
     const url = new URL(value);
@@ -25,7 +39,7 @@ const publicPaymentUrl = (name: string) => {
 };
 
 const stripeRequest = async (path: string, options: RequestInit = {}) => {
-  const secretKey = Netlify.env.get("STRIPE_SECRET_KEY");
+  const secretKey = getEnv("STRIPE_SECRET_KEY");
   if (!secretKey) {
     return { response: null, error: "Online payments are not configured yet. Please call (248) 385-3432 to make a payment." };
   }
