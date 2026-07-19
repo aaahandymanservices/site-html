@@ -281,9 +281,6 @@
                                 Send me free home maintenance tips & reminders (e.g. Spring gutter & deck checks, Fall weatherproofing & winterization).
                             </label>
                         </div>
-                        <div class="flex justify-center sm:justify-start overflow-x-auto">
-                            <div data-captcha></div>
-                        </div>
                         <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-5 text-xl font-semibold rounded-3xl transition flex items-center justify-center gap-3">
                             SEND MESSAGE <i class="fas fa-paper-plane"></i>
                         </button>
@@ -449,7 +446,6 @@
 
                             alert('Thank you! Your message has been sent. We will contact you soon.');
                             form.reset();
-                            if (window.SiteCaptcha) window.SiteCaptcha.reset(form);
                         } else {
                             alert('Oops! There was a problem submitting your form. Please try calling or emailing us directly.');
                         }
@@ -459,30 +455,12 @@
                     });
                 };
 
-                // Simple captcha gate (server-verified, no keys required)
-                if (window.SiteCaptcha) {
-                    const captchaResponse = window.SiteCaptcha.getResponse(form);
-                    if (!captchaResponse.answer) {
-                        alert('Please answer the spam-check question before sending.');
-                        return;
-                    }
-                    window.SiteCaptcha.verify(form).then(function(ok) {
-                        if (!ok) {
-                            alert('The spam-check answer was incorrect. Please try again.');
-                            window.SiteCaptcha.reset(form);
-                            return;
-                        }
-                        sendMessage();
-                    });
-                } else {
-                    sendMessage();
-                }
+                sendMessage();
             });
         }
     </script>
 
     <script src="/js/site.js?v=20260719" defer></script>
-    <script src="/js/captcha.js?v=20260719" defer></script>
     <script src="/js/chat-widget.js?v=20260719-2" defer></script>
 </body>
 </html>

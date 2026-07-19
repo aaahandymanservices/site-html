@@ -294,8 +294,6 @@
                                     </label>
                                 </div>
 
-                                <div data-captcha class="hidden flex justify-center overflow-x-auto"></div>
-
                                 <button type="submit" id="submit-btn" class="w-full bg-red-600 hover:bg-red-700 py-4 text-lg font-bold rounded-2xl transition flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
                                     CONFIRM APPOINTMENT <i class="fas fa-calendar-check"></i>
                                 </button>
@@ -562,19 +560,6 @@
                     return;
                 }
 
-                // Simple captcha (arithmetic question, no keys required)
-                let captchaToken = "";
-                let captchaAnswer = "";
-                if (window.SiteCaptcha) {
-                    const captchaResponse = window.SiteCaptcha.getResponse(bookingForm);
-                    captchaToken = captchaResponse.token;
-                    captchaAnswer = captchaResponse.answer;
-                    if (!captchaAnswer) {
-                        alert('Please answer the spam-check question before confirming.');
-                        return;
-                    }
-                }
-
                 const submitBtn = document.getElementById('submit-btn');
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = 'PROCESSING BOOKING... <i class="fas fa-spinner animate-spin"></i>';
@@ -587,9 +572,7 @@
                     bookingDate: bookingDate,
                     bookingTime: bookingTime,
                     message: message,
-                    optIn: optIn,
-                    captchaToken: captchaToken,
-                    captchaAnswer: captchaAnswer
+                    optIn: optIn
                 };
 
                 fetch('/api/booking', {
@@ -644,7 +627,6 @@
                 })
                 .catch(error => {
                     alert('Oops! ' + error.message + ' Please double check your details or call us directly.');
-                    if (window.SiteCaptcha) window.SiteCaptcha.reset(bookingForm);
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = 'CONFIRM APPOINTMENT <i class="fas fa-calendar-check"></i>';
                 });
@@ -653,7 +635,6 @@
     </script>
 
     <script src="/js/site.js?v=20260719" defer></script>
-    <script src="/js/captcha.js?v=20260719" defer></script>
     <script src="/js/chat-widget.js?v=20260719-2" defer></script>
 </body>
 </html>

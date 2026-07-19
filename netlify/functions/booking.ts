@@ -2,7 +2,6 @@ import type { Config } from "@netlify/functions";
 import { eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { bookings, seasonalSubscribers } from "../../db/schema.js";
-import { verifyCaptcha } from "../../lib/captcha.js";
 
 const json = (body: unknown, init?: ResponseInit) =>
   Response.json(body, {
@@ -39,8 +38,6 @@ export default async (request: Request) => {
     let bookingTime = "";
     let message = "";
     let optIn = false;
-    let captchaToken = "";
-    let captchaAnswer = "";
 
     // Handle JSON or URLSearchParams (standard form POST or application/json)
     const contentType = request.headers.get("content-type") || "";
@@ -54,8 +51,6 @@ export default async (request: Request) => {
       bookingTime = String(body.bookingTime || "").trim();
       message = String(body.message || "").trim();
       optIn = Boolean(body.optIn || body["seasonal-opt-in"] || false);
-      captchaToken = String(body.captchaToken || "").trim();
-      captchaAnswer = String(body.captchaAnswer || "").trim();
     } else {
       const formData = await request.formData();
       customerName = String(formData.get("customerName") || formData.get("name") || "").trim();
@@ -66,8 +61,6 @@ export default async (request: Request) => {
       bookingTime = String(formData.get("bookingTime") || "").trim();
       message = String(formData.get("message") || "").trim();
       optIn = formData.get("seasonal-opt-in") === "on" || formData.get("seasonal-opt-in") === "true";
-      captchaToken = String(formData.get("captchaToken") || "").trim();
-      captchaAnswer = String(formData.get("captchaAnswer") || "").trim();
     }
 
     if (!customerName || !email || !phone || !service || !bookingDate || !bookingTime) {
@@ -84,12 +77,6 @@ export default async (request: Request) => {
     const phoneClean = phone.replace(/\D/g, "");
     if (phoneClean.length < 10) {
       return errorJson("Please provide a valid 10-digit phone number.", 400);
-    }
-
-    // Spam protection: verify the simple captcha before touching the database.
-    const captcha = verifyCaptcha(captchaToken, captchaAnswer);
-    if (!captcha.ok) {
-      return errorJson(captcha.error || "Captcha verification failed. Please try again.", 400);
     }
 
     // Insert new booking request
