@@ -245,8 +245,6 @@
                                 <button id="reviews-cancel-edit" type="button" class="font-bold text-red-600 hover:text-red-700">Cancel</button>
                             </div>
 
-                            <div data-captcha class="hidden flex justify-center overflow-x-auto"></div>
-
                             <button id="reviews-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
                                 Add Review <i class="fas fa-camera-retro"></i>
                             </button>
@@ -711,20 +709,6 @@
                 setReviewsSubmitting(true);
                 showReviewsMessage(isEditing ? 'Saving your changes...' : 'Uploading your review...', false);
 
-                // Simple captcha for brand-new reviews (edits reuse the saved edit token).
-                var reviewCaptchaToken = "";
-                var reviewCaptchaAnswer = "";
-                if (!isEditing && window.SiteCaptcha) {
-                    var captchaResponse = window.SiteCaptcha.getResponse(reviewsForm);
-                    reviewCaptchaToken = captchaResponse.token;
-                    reviewCaptchaAnswer = captchaResponse.answer;
-                    if (!reviewCaptchaAnswer) {
-                        showReviewsMessage('Please answer the spam-check question before submitting.', true);
-                        setReviewsSubmitting(false);
-                        return;
-                    }
-                }
-
                 let uploadFile = sourceFile;
                 try {
                     if (sourceFile) uploadFile = await preparePhotoForUpload(sourceFile);
@@ -738,10 +722,6 @@
                 if (uploadFile) formData.set('photo', uploadFile, uploadFile.name);
                 if (isEditing) {
                     formData.append('editToken', reviewsTokens()[reviewsEditId] || '');
-                }
-                if (reviewCaptchaToken) {
-                    formData.set('captchaToken', reviewCaptchaToken);
-                    formData.set('captchaAnswer', reviewCaptchaAnswer);
                 }
 
                 fetch(isEditing ? `/api/reviews/${encodeURIComponent(reviewsEditId)}` : '/api/reviews', {
@@ -764,7 +744,6 @@
                     showReviewsMessage(message || 'The review could not be saved.', true);
                 })
                 .finally(() => {
-                    if (window.SiteCaptcha) window.SiteCaptcha.reset(reviewsForm);
                     setReviewsSubmitting(false);
                 });
             });
@@ -785,7 +764,6 @@
     </script>
 
     <script src="/js/site.js?v=20260719" defer></script>
-    <script src="/js/captcha.js?v=20260719" defer></script>
     <script src="/js/chat-widget.js?v=20260719-2" defer></script>
 </body>
 </html>
