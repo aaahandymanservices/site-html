@@ -562,12 +562,15 @@
                     return;
                 }
 
-                // Captcha (only enforced once the site owner has provisioned keys)
+                // Simple captcha (arithmetic question, no keys required)
                 let captchaToken = "";
-                if (window.SiteCaptcha && window.SiteCaptcha.isEnabled()) {
-                    captchaToken = window.SiteCaptcha.getToken(bookingForm);
-                    if (!captchaToken) {
-                        alert('Please complete the "I\'m not a robot" captcha before confirming.');
+                let captchaAnswer = "";
+                if (window.SiteCaptcha) {
+                    const captchaResponse = window.SiteCaptcha.getResponse(bookingForm);
+                    captchaToken = captchaResponse.token;
+                    captchaAnswer = captchaResponse.answer;
+                    if (!captchaAnswer) {
+                        alert('Please answer the spam-check question before confirming.');
                         return;
                     }
                 }
@@ -585,7 +588,8 @@
                     bookingTime: bookingTime,
                     message: message,
                     optIn: optIn,
-                    captchaToken: captchaToken
+                    captchaToken: captchaToken,
+                    captchaAnswer: captchaAnswer
                 };
 
                 fetch('/api/booking', {

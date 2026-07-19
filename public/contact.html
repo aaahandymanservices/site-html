@@ -194,7 +194,7 @@
                 </div>
 
                 <div>
-                    <form id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" class="space-y-6">
+                    <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
 
                         <input type="hidden" name="form-name" value="contact" />
 
@@ -282,7 +282,7 @@
                             </label>
                         </div>
                         <div class="flex justify-center sm:justify-start overflow-x-auto">
-                            <div data-netlify-recaptcha="true"></div>
+                            <div data-captcha></div>
                         </div>
                         <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-5 text-xl font-semibold rounded-3xl transition flex items-center justify-center gap-3">
                             SEND MESSAGE <i class="fas fa-paper-plane"></i>
@@ -431,35 +431,58 @@
                 const email = formData.get('email');
                 const name = formData.get('name');
 
-                fetch('/contact.html', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams(formData).toString()
-                })
-                .then(response => {
-                    if (response.ok) {
-                        if (isSubscribed && email) {
-                            fetch('/api/seasonal-subscription', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ email: email, name: name, source: 'quote_form' })
-                            }).catch(err => console.error('Subscription error:', err));
-                        }
+                const sendMessage = function() {
+                    fetch('/contact.html', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams(formData).toString()
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            if (isSubscribed && email) {
+                                fetch('/api/seasonal-subscription', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ email: email, name: name, source: 'quote_form' })
+                                }).catch(err => console.error('Subscription error:', err));
+                            }
 
-                        alert('Thank you! Your message has been sent. We will contact you soon.');
-                        form.reset();
-                    } else {
+                            alert('Thank you! Your message has been sent. We will contact you soon.');
+                            form.reset();
+                            if (window.SiteCaptcha) window.SiteCaptcha.reset(form);
+                        } else {
+                            alert('Oops! There was a problem submitting your form. Please try calling or emailing us directly.');
+                        }
+                    })
+                    .catch(error => {
                         alert('Oops! There was a problem submitting your form. Please try calling or emailing us directly.');
+                    });
+                };
+
+                // Simple captcha gate (server-verified, no keys required)
+                if (window.SiteCaptcha) {
+                    const captchaResponse = window.SiteCaptcha.getResponse(form);
+                    if (!captchaResponse.answer) {
+                        alert('Please answer the spam-check question before sending.');
+                        return;
                     }
-                })
-                .catch(error => {
-                    alert('Oops! There was a problem submitting your form. Please try calling or emailing us directly.');
-                });
+                    window.SiteCaptcha.verify(form).then(function(ok) {
+                        if (!ok) {
+                            alert('The spam-check answer was incorrect. Please try again.');
+                            window.SiteCaptcha.reset(form);
+                            return;
+                        }
+                        sendMessage();
+                    });
+                } else {
+                    sendMessage();
+                }
             });
         }
     </script>
 
     <script src="/js/site.js?v=20260719" defer></script>
+    <script src="/js/captcha.js?v=20260719" defer></script>
     <script src="/js/chat-widget.js?v=20260719-2" defer></script>
 </body>
 </html>
