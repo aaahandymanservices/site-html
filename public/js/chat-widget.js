@@ -221,9 +221,11 @@
     });
   }
 
-  // Render bot text: escape, then linkify newlines and simple **bold**.
+  // Render bot text: escape, then linkify newlines, simple **bold**, and [links](url).
   function renderBot(el, text) {
-    var html = escapeHTML(text).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    var html = escapeHTML(text)
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
     el.innerHTML = html;
     scrollToBottom();
   }

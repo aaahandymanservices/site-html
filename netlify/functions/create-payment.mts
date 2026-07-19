@@ -79,7 +79,7 @@ export default async (request: Request) => {
   }
 
   const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
-  const amount = Number(clean(body.amount, 20));
+  const amount = typeof body.amount === "number" ? body.amount : Number(clean(body.amount, 20));
   const amountCents = Math.round(amount * 100);
   const customerName = clean(body.customerName, 100);
   const email = clean(body.email, 160).toLowerCase();

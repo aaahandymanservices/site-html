@@ -1,6 +1,6 @@
 import type { Config } from "@netlify/functions";
 import { GoogleGenAI } from "@google/genai";
-import { siteKnowledge } from "./generated/site-knowledge.mts";
+import { siteKnowledge } from "./generated/site-knowledge.mjs";
 
 // Gemini model served through Netlify AI Gateway. The gateway injects the
 // GEMINI_API_KEY / GOOGLE_GEMINI_BASE_URL env vars automatically, so the SDK
@@ -80,7 +80,7 @@ const buildKnowledgeContext = (
   messages: { role: "user" | "assistant"; content: string }[],
   currentPage: string,
 ) => {
-  if (siteKnowledge.length === 0) {
+  if ((siteKnowledge.length as number) === 0) {
     return "SITE KNOWLEDGE is unavailable. Do not guess; direct the visitor to contact AAA Handyman Services.";
   }
 
