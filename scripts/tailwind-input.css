@@ -51,8 +51,21 @@ body { font-family: 'Roboto', sans-serif; }
   border-color: rgba(249, 115, 22, 0.25) !important;
 }
 .dark .bg-red-50 {
-  background-color: rgba(224, 36, 36, 0.08) !important;
-  border-color: rgba(224, 36, 36, 0.25) !important;
+  background-color: rgba(224, 36, 36, 0.12) !important;
+  border-color: rgba(224, 36, 36, 0.3) !important;
+  color: #fbc5c5 !important;
+}
+.dark .bg-red-50 p {
+  color: #fbc5c5 !important;
+}
+.dark .bg-red-50 p.font-semibold,
+.dark .bg-red-50 p.font-bold,
+.dark .bg-red-50 strong,
+.dark .bg-red-50 h1,
+.dark .bg-red-50 h2,
+.dark .bg-red-50 h3,
+.dark .bg-red-50 h4 {
+  color: #fee2e2 !important;
 }
 
 /* Text Overrides with High Contrast */
@@ -79,14 +92,23 @@ body { font-family: 'Roboto', sans-serif; }
 }
 
 /* Color Accent Overrides in Dark Mode */
+.dark .text-green-950,
+.dark .text-green-900,
+.dark .text-green-800,
 .dark .text-green-700,
 .dark .text-green-600 {
   color: #4ade80 !important;
 }
+.dark .text-orange-950,
+.dark .text-orange-900,
+.dark .text-orange-800,
 .dark .text-orange-700,
 .dark .text-orange-600 {
   color: #fb923c !important;
 }
+.dark .text-red-950,
+.dark .text-red-900,
+.dark .text-red-800,
 .dark .text-red-700,
 .dark .text-red-600 {
   color: #f87171 !important;
