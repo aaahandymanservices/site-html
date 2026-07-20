@@ -44,7 +44,7 @@
     // Create theme toggle button
     const toggleBtn = document.createElement('button');
     toggleBtn.id = 'theme-toggle-btn';
-    toggleBtn.className = 'text-blue-900 hover:text-red-600 dark:text-gray-100 dark:hover:text-red-400 focus:outline-none p-2 text-xl sm:text-2xl mr-2 transition-colors';
+    toggleBtn.className = 'text-blue-900 hover:text-red-600 dark:text-gray-100 dark:hover:text-red-400 focus:outline-none focus:ring-0 focus:ring-transparent focus-visible:outline-none focus-visible:ring-0 p-2 text-xl sm:text-2xl mr-2 transition-colors';
     toggleBtn.setAttribute('aria-label', 'Toggle Dark Mode');
     toggleBtn.setAttribute('title', 'Toggle Dark Mode');
 
