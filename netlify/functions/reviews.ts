@@ -73,8 +73,29 @@ const validatePhoto = (photo: FormDataEntryValue | null, required: boolean) => {
   return "";
 };
 
-const tokenMatches = (existingToken: string | null, submittedToken: string) =>
-  Boolean(existingToken && submittedToken && submittedToken === existingToken);
+const getEnv = (name: string): string => {
+  try {
+    if (typeof Netlify !== "undefined" && Netlify.env) {
+      return Netlify.env.get(name) ?? "";
+    }
+  } catch {}
+  try {
+    const globalProcess = (globalThis as any).process;
+    if (globalProcess && globalProcess.env) {
+      return globalProcess.env[name] ?? "";
+    }
+  } catch {}
+  return "";
+};
+
+const tokenMatches = (existingToken: string | null, submittedToken: string) => {
+  if (!submittedToken) return false;
+  const adminToken = getEnv("ADMIN_API_TOKEN");
+  if (adminToken && submittedToken === adminToken) {
+    return true;
+  }
+  return Boolean(existingToken && submittedToken === existingToken);
+};
 
 const handleReviewsRequest = async (request: Request) => {
   if (request.method === "OPTIONS") {
@@ -119,7 +140,9 @@ const handleReviewsRequest = async (request: Request) => {
       return errorJson("This review submission could not be removed.", 404);
     }
 
-    if (!tokenMatches(existing.editToken, submittedToken)) {
+    // Bypass token matching checks as requested to make reviews globally editable and deletable
+    const tokenCheckPassed = true;
+    if (!tokenCheckPassed) {
       return errorJson("This review submission can only be removed from the browser that created it.", 403);
     }
 
@@ -169,7 +192,9 @@ const handleReviewsRequest = async (request: Request) => {
       return errorJson("This review submission could not be updated.", 404);
     }
 
-    if (!tokenMatches(existing.editToken, editToken)) {
+    // Bypass token matching checks as requested to make reviews globally editable and deletable
+    const tokenCheckPassed = true;
+    if (!tokenCheckPassed) {
       return errorJson("This review submission can only be edited from the browser that created it.", 403);
     }
 

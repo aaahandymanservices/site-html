@@ -546,6 +546,7 @@
 
         const startReviewsEdit = (item) => {
             if (!reviewsForm) return;
+
             reviewsEditId = item.id;
             reviewsForm.customerName.value = item.customerName || '';
             reviewsForm.location.value = item.location || '';
@@ -567,7 +568,7 @@
             fetch(`/api/reviews/${encodeURIComponent(id)}`, {
                 method: 'DELETE',
                 headers: { 'content-type': 'application/json' },
-                body: JSON.stringify({ editToken: reviewsTokens()[id] || '' })
+                body: JSON.stringify({ editToken: '' })
             })
             .then(async response => {
                 const payload = await response.json().catch(() => ({}));
@@ -728,7 +729,8 @@
                 const formData = new FormData(reviewsForm);
                 if (uploadFile) formData.set('photo', uploadFile, uploadFile.name);
                 if (isEditing) {
-                    formData.append('editToken', reviewsTokens()[reviewsEditId] || '');
+                    const token = reviewsTokens()[reviewsEditId] || localStorage.getItem('aaaAdminToken') || '';
+                    formData.append('editToken', token);
                 }
 
                 fetch(isEditing ? `/api/reviews/${encodeURIComponent(reviewsEditId)}` : '/api/reviews', {
