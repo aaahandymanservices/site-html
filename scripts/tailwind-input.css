@@ -376,6 +376,43 @@ button.review-delete-btn:not(#theme-toggle-btn):hover {
   }
 }
 
+/* Ensure section numbers/icons in bg-red-100 are high contrast and readable in dark mode */
+.dark .bg-red-100 {
+  background-color: #461012 !important; /* Brand dark crimson */
+  border-color: #8e1f26 !important;
+}
+.dark .bg-red-100.text-gray-900,
+.dark .bg-red-100 .text-gray-900,
+.dark .bg-red-100 * {
+  color: #fee2e2 !important; /* High contrast light red-pink */
+}
+
+/* Preserve hamburger menu button and back-to-top button in dark mode (prevent generic blue overrides) */
+.dark #mobile-menu-btn,
+#mobile-menu-btn,
+.dark #mobile-menu-btn:hover,
+#mobile-menu-btn:hover,
+.dark #mobile-menu-btn:focus,
+#mobile-menu-btn:focus {
+  background-color: transparent !important;
+  border: none !important;
+  border-width: 0 !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
+}
+
+.dark #back-to-top,
+#back-to-top {
+  background-color: #8e1f26 !important; /* Brand deep crimson */
+  color: white !important;
+  border-color: #751a1e !important;
+}
+
+.dark #back-to-top:hover,
+#back-to-top:hover {
+  background-color: #a61f2e !important; /* Brand crimson accent */
+}
+
 
 
 
