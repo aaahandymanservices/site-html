@@ -16,3 +16,321 @@ body { font-family: 'Roboto', sans-serif; }
   .pulse-btn-green, .generated-service-card { animation: none !important; transition: none !important; }
   .generated-service-card:hover { transform: none !important; }
 }
+
+/* ==========================================================================
+   PREMIUM DARK THEME SUPPORT (Neutral Black, Charcoal, High-Contrast Red)
+   ========================================================================== */
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* 1. Base Body: Smooth, dark-charcoal neutral background matching footer */
+html.dark body {
+  background-color: #09090b !important; /* Premium Zinc-950 */
+  color: #f4f4f5 !important; /* Zinc-50 */
+}
+
+/* 2. Global Section & Alternating Block overrides: Creates gorgeous distinct blocks around sections */
+html.dark div.bg-white,
+html.dark section.bg-white,
+html.dark article.bg-white,
+html.dark div.bg-blue-50,
+html.dark section.bg-blue-50,
+html.dark div.bg-amber-50,
+html.dark section.bg-amber-50,
+html.dark div.bg-neutral-50,
+html.dark section.bg-neutral-50,
+html.dark section.bg-gray-50,
+html.dark div.bg-gray-50,
+html.dark section.bg-slate-50,
+html.dark div.bg-slate-50 {
+  background-color: #121214 !important; /* Zinc-900 / Dark Charcoal Block */
+  color: #f4f4f5 !important;
+  border-top: 1px solid #1f1f23 !important;
+  border-bottom: 1px solid #1f1f23 !important;
+}
+
+/* Alternating Section Blocks (e.g. Services / Testimonials) for contrast */
+html.dark div.bg-gray-100,
+html.dark section.bg-gray-100,
+html.dark div.bg-slate-100,
+html.dark section.bg-slate-100 {
+  background-color: #18181b !important; /* Darker charcoal separator block */
+  color: #f4f4f5 !important;
+  border-top: 1px solid #27272a !important;
+  border-bottom: 1px solid #27272a !important;
+}
+
+/* Distinctive Dark brand-red block for "Why Choose Us" to replace blue */
+html.dark section#why-us,
+html.dark section.bg-blue-900 {
+  background-color: #14080a !important; /* Rich Dark Burgundy block */
+  color: #f4f4f5 !important;
+  border-top: 2px solid #a61f2e !important;
+  border-bottom: 2px solid #a61f2e !important;
+}
+
+/* 3. Lighter card and badge blocks */
+html.dark div.bg-gray-200,
+html.dark section.bg-gray-200,
+html.dark div.bg-slate-200,
+html.dark section.bg-slate-200,
+html.dark div.bg-gray-800\/50,
+html.dark div.bg-gray-800\/30,
+html.dark div.bg-gray-900\/50 {
+  background-color: #1c1c1e !important; /* Zinc-800 charcoal container block */
+  border: 1px solid #27272a !important;
+  color: #f4f4f5 !important;
+}
+
+/* 4. Text contrast enhancements */
+html.dark .text-gray-900,
+html.dark .text-slate-900,
+html.dark .text-blue-900,
+html.dark .text-slate-950,
+html.dark .text-gray-800,
+html.dark .text-slate-800,
+html.dark .text-gray-700,
+html.dark .text-slate-700,
+html.dark .text-blue-950,
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4 {
+  color: #f4f4f5 !important; /* Pure white/zinc text */
+}
+
+html.dark .text-gray-600,
+html.dark .text-slate-600,
+html.dark .text-gray-500,
+html.dark .text-slate-500,
+html.dark p {
+  color: #a1a1aa !important; /* Soft zinc secondary text */
+}
+
+/* Restore color override for custom pastel classes to prevent they get overridden to zinc */
+html.dark .text-green-500, html.dark .text-red-500, html.dark .text-blue-500, html.dark .text-yellow-500 {
+  /* Keep custom neon/pastel classes intact */
+}
+
+/* 5. Custom border style overrides */
+html.dark .border,
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-gray-300,
+html.dark .border-slate-100,
+html.dark .border-slate-200,
+html.dark .border-slate-800,
+html.dark .border-gray-700,
+html.dark .border-gray-800 {
+  border-color: #27272a !important; /* Slate gray borders */
+}
+
+/* 6. Navigation Bar: Charcoal and brand red */
+html.dark nav {
+  background-color: #09090b !important;
+  border-bottom: 2px solid #a61f2e !important; /* Signature Crimson Red bottom border */
+}
+html.dark nav .text-gray-700,
+html.dark nav .text-blue-900,
+html.dark nav p.text-gray-500 {
+  color: #d4d4d8 !important;
+}
+html.dark nav .text-gray-700:hover,
+html.dark nav .text-blue-900:hover {
+  color: #f98080 !important;
+}
+html.dark #mobile-menu {
+  background-color: #09090b !important;
+  border-top: 1px solid #27272a !important;
+}
+html.dark #mobile-menu a {
+  color: #d4d4d8 !important;
+}
+html.dark #mobile-menu a:hover {
+  color: #f98080 !important;
+}
+
+/* 7. Form Inputs & Select elements */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #121214 !important;
+  color: #f4f4f5 !important;
+  border: 2px solid #27272a !important;
+}
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #71717a !important;
+}
+
+/* 8. Gift Certificate Block (Premium dark mode accent) */
+html.dark .first-service-certificate {
+  background: linear-gradient(135deg, #121214 0%, #09090b 48%, #1c1c1e 100%) !important;
+  border: 2px solid #a61f2e !important;
+  color: #f4f4f5 !important;
+}
+html.dark .first-service-certificate .certificate-value {
+  text-shadow: none !important;
+  color: #f98080 !important;
+}
+html.dark .first-service-certificate span,
+html.dark .first-service-certificate p,
+html.dark .first-service-certificate div {
+  color: #f4f4f5 !important;
+}
+html.dark .first-service-certificate .bg-red-700 {
+  background-color: #a61f2e !important;
+}
+
+/* 9. Card blocks and lists inside sections */
+html.dark .service-card,
+html.dark .generated-service-card,
+html.dark article {
+  background-color: #121214 !important;
+  border: 1px solid #27272a !important;
+}
+html.dark .service-card:hover,
+html.dark .generated-service-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.6) !important;
+  border-color: #a61f2e !important; /* Highlights dynamic card boundaries on hover */
+}
+
+/* 10. Table styling inside sections */
+html.dark .divide-gray-100 > * + * {
+  border-color: #27272a !important;
+}
+html.dark .divide-gray-200 > * + * {
+  border-color: #27272a !important;
+}
+html.dark table thead {
+  background-color: #1c1c1e !important;
+}
+html.dark table tbody tr {
+  border-bottom-color: #27272a !important;
+}
+
+/* 11. Custom Semantic Tints for Pricing Zones & Warnings (Zone A, Zone B, Emergency) */
+html.dark .bg-green-50 {
+  background-color: rgba(34, 197, 94, 0.1) !important; /* subtle dark translucent green */
+  color: #f4f4f5 !important;
+}
+html.dark .border-green-200 {
+  border-color: #14532d !important; /* dark green border */
+}
+html.dark .bg-orange-50 {
+  background-color: rgba(249, 115, 22, 0.1) !important; /* subtle dark translucent orange */
+  color: #f4f4f5 !important;
+}
+html.dark .border-orange-200 {
+  border-color: #7c2d12 !important; /* dark orange border */
+}
+html.dark .bg-red-50 {
+  background-color: rgba(239, 68, 68, 0.1) !important; /* subtle dark translucent red */
+  color: #f4f4f5 !important;
+}
+html.dark .border-red-200 {
+  border-color: #7f1d1d !important; /* dark red border */
+}
+
+/* 12. High-contrast accent and brand texts on dark surfaces */
+html.dark .text-blue-600,
+html.dark .text-blue-500 {
+  color: #a1a1aa !important; /* high visibility zinc-400 */
+}
+html.dark .text-green-700,
+html.dark .text-green-800,
+html.dark .text-green-900 {
+  color: #4ade80 !important; /* high contrast pastel green */
+}
+html.dark .text-orange-700,
+html.dark .text-orange-800,
+html.dark .text-orange-900 {
+  color: #fb923c !important; /* high contrast pastel orange */
+}
+html.dark .text-red-600,
+html.dark .text-red-700,
+html.dark .text-red-800,
+html.dark .text-red-900 {
+  color: #f98080 !important; /* high contrast pastel red */
+}
+
+/* 13. Dynamic translucent color boxes for cards and icon circles */
+html.dark .bg-blue-100 {
+  background-color: rgba(39, 39, 42, 0.4) !important; /* Zinc-800 neutral badge overlay */
+  color: #e4e4e7 !important;
+}
+html.dark .bg-red-100 {
+  background-color: rgba(166, 31, 46, 0.2) !important; /* crimson with opacity */
+  color: #f98080 !important;
+}
+html.dark .bg-green-100 {
+  background-color: rgba(22, 163, 74, 0.2) !important;
+  color: #4ade80 !important;
+}
+html.dark .bg-orange-100 {
+  background-color: rgba(234, 88, 12, 0.2) !important;
+  color: #fb923c !important;
+}
+html.dark .bg-yellow-100 {
+  background-color: rgba(202, 138, 4, 0.2) !important;
+  color: #fde047 !important;
+}
+
+/* 14. Support for hover coloring under dark mode */
+html.dark .generated-service-card:hover .text-gray-800,
+html.dark .service-card:hover .text-gray-800 {
+  color: #f98080 !important;
+}
+
+/* 15. Native file upload button styling for Careers form under dark mode */
+html.dark input[type="file"]::file-selector-button {
+  background-color: #1c1c1e !important;
+  color: #f4f4f5 !important;
+  border-color: #27272a !important;
+}
+html.dark input[type="file"]::file-selector-button:hover {
+  background-color: #121214 !important;
+}
+
+/* 16. AI Chat Widget dark mode support (Neutral black and charcoal matching the theme) */
+html.dark .aaa-chat-panel,
+html.dark .aaa-chat-bubble,
+html.dark .aaa-chat-form,
+html.dark .aaa-chat-prompts,
+html.dark .aaa-chat-disclaimer {
+  background-color: #121214 !important;
+  color: #f4f4f5 !important;
+  border-color: #27272a !important;
+}
+html.dark .aaa-chat-log {
+  background-color: #09090b !important;
+}
+html.dark .aaa-msg.aaa-user {
+  background-color: #a61f2e !important; /* brand crimson for user messages */
+}
+html.dark .aaa-msg.aaa-bot {
+  background-color: #1c1c1e !important;
+  color: #f4f4f5 !important;
+  border-color: #27272a !important;
+}
+html.dark .aaa-msg.aaa-bot a {
+  color: #f98080 !important;
+}
+html.dark .aaa-chat-prompt,
+html.dark .aaa-chat-emoji {
+  background-color: #1c1c1e !important;
+  color: #f4f4f5 !important;
+  border-color: #27272a !important;
+}
+html.dark .aaa-chat-form textarea {
+  background-color: #1c1c1e !important;
+  color: #f4f4f5 !important;
+  border-color: #27272a !important;
+}
+html.dark .aaa-chat-bubble-arrow {
+  background-color: #121214 !important;
+  border-right-color: #27272a !important;
+  border-bottom-color: #27272a !important;
+}
