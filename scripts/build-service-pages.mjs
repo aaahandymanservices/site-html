@@ -355,7 +355,7 @@ function page(service) {
 ${jsonLd(service)}
 
     <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
-    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260720">
 
     <!-- Brand font: Roboto -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style">
