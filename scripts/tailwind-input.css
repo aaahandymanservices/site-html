@@ -233,17 +233,17 @@ body { font-family: 'Roboto', sans-serif; }
 
 /* Grok Verbatim Button and Form Elements Fix */
 /* Fix Edit Buttons & Form Elements in Dark Mode */
-.dark button,
+.dark button:not(#theme-toggle-btn),
 .dark .btn,
 .dark .edit-button,
-.dark [type="button"],
+.dark [type="button"]:not(#theme-toggle-btn),
 .dark [type="submit"] {
   background-color: #3b82f6 !important;
   color: white !important;
   border-color: #2563eb !important;
 }
 
-.dark button:hover,
+.dark button:not(#theme-toggle-btn):hover,
 .dark .btn:hover {
   background-color: #2563eb !important;
 }
@@ -292,6 +292,20 @@ body { font-family: 'Roboto', sans-serif; }
   color: #f1f5f9 !important;
   border-color: #4b5563 !important;
 }
+
+/* Ensure Theme Toggle Button has no background or border overrides in any state */
+#theme-toggle-btn,
+.dark #theme-toggle-btn {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#theme-toggle-btn:hover,
+.dark #theme-toggle-btn:hover {
+  background-color: transparent !important;
+}
+
 
 
 
