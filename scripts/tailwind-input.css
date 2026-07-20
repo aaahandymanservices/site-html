@@ -306,9 +306,15 @@ body { font-family: 'Roboto', sans-serif; }
 .dark #theme-toggle-btn:focus-visible {
   background-color: transparent !important;
   border: none !important;
+  border-width: 0 !important;
   outline: none !important;
   outline-width: 0 !important;
   box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-shadow: 0 0 #0000 !important;
+  --tw-shadow-colored: 0 0 #0000 !important;
 }
 
 
