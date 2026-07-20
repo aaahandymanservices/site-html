@@ -346,6 +346,15 @@ button.review-delete-btn:not(#theme-toggle-btn):hover {
   background-color: #8e1f26 !important;
 }
 
+/* Footer mobile column responsiveness override */
+@media (max-width: 639px) {
+  footer .grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+    row-gap: 0.875rem !important;
+  }
+}
+
+
 
 
 
