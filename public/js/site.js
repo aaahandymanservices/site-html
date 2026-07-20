@@ -32,4 +32,53 @@
   mobileMenu.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => setMenuOpen(false));
   });
+
+  // --- Dark Mode Integration ---
+  const initDarkMode = () => {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    if (!menuBtn) return;
+
+    // Check if toggle button already exists to prevent duplicate insertion
+    if (document.getElementById('theme-toggle-btn')) return;
+
+    // Create theme toggle button
+    const toggleBtn = document.createElement('button');
+    toggleBtn.id = 'theme-toggle-btn';
+    toggleBtn.className = 'text-blue-900 hover:text-red-600 dark:text-gray-100 dark:hover:text-red-400 focus:outline-none p-2 text-xl sm:text-2xl mr-2 transition-colors';
+    toggleBtn.setAttribute('aria-label', 'Toggle Dark Mode');
+    toggleBtn.setAttribute('title', 'Toggle Dark Mode');
+
+    const toggleIcon = document.createElement('i');
+    toggleIcon.id = 'theme-toggle-icon';
+    toggleIcon.className = 'fas fa-moon';
+    toggleBtn.appendChild(toggleIcon);
+
+    // Insert before mobile-menu-btn
+    menuBtn.parentNode.insertBefore(toggleBtn, menuBtn);
+
+    const updateIcon = (isDark) => {
+      if (isDark) {
+        toggleIcon.className = 'fas fa-sun text-yellow-400';
+      } else {
+        toggleIcon.className = 'fas fa-moon text-blue-900';
+      }
+    };
+
+    // Initialize icon state
+    updateIcon(document.documentElement.classList.contains('dark'));
+
+    // Handle toggle click
+    toggleBtn.addEventListener('click', () => {
+      const isDarkNow = document.documentElement.classList.toggle('dark');
+      localStorage.theme = isDarkNow ? 'dark' : 'light';
+      updateIcon(isDarkNow);
+    });
+  };
+
+  // Run initial setup
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDarkMode);
+  } else {
+    initDarkMode();
+  }
 })();

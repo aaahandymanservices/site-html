@@ -16,3 +16,286 @@ body { font-family: 'Roboto', sans-serif; }
   .pulse-btn-green, .generated-service-card { animation: none !important; transition: none !important; }
   .generated-service-card:hover { transform: none !important; }
 }
+
+/* Dark Mode Overrides */
+.dark {
+  background-color: #050e16 !important;
+  color: #f3f6f9 !important;
+}
+.dark body {
+  background-color: #050e16 !important;
+  color: #f3f6f9 !important;
+}
+
+/* Structural BG Overrides */
+.dark .bg-white {
+  background-color: #0a1b2c !important;
+}
+.dark .bg-gray-50 {
+  background-color: #050e16 !important;
+}
+.dark .bg-gray-100 {
+  background-color: #0d2237 !important;
+}
+.dark .bg-blue-50 {
+  background-color: #0a1b2c !important;
+}
+
+/* Card BG tweaks */
+.dark .bg-green-50 {
+  background-color: rgba(22, 163, 74, 0.08) !important;
+  border-color: rgba(22, 163, 74, 0.25) !important;
+}
+.dark .bg-orange-50 {
+  background-color: rgba(249, 115, 22, 0.08) !important;
+  border-color: rgba(249, 115, 22, 0.25) !important;
+}
+.dark .bg-red-50 {
+  background-color: rgba(224, 36, 36, 0.08) !important;
+  border-color: rgba(224, 36, 36, 0.25) !important;
+}
+
+/* Text Overrides with High Contrast */
+.dark .text-gray-950,
+.dark .text-gray-900,
+.dark .text-blue-900,
+.dark .text-slate-900 {
+  color: #ffffff !important;
+}
+.dark .text-gray-800 {
+  color: #f3f6f9 !important;
+}
+.dark .text-gray-700 {
+  color: #e7ecf2 !important;
+}
+.dark .text-gray-600 {
+  color: #c3cfde !important;
+}
+.dark .text-gray-500 {
+  color: #9fb1ca !important;
+}
+.dark .text-gray-400 {
+  color: #9fb1ca !important;
+}
+
+/* Color Accent Overrides in Dark Mode */
+.dark .text-green-700,
+.dark .text-green-600 {
+  color: #4ade80 !important;
+}
+.dark .text-orange-700,
+.dark .text-orange-600 {
+  color: #fb923c !important;
+}
+.dark .text-red-700,
+.dark .text-red-600 {
+  color: #f87171 !important;
+}
+.dark .text-blue-700 {
+  color: #60a5fa !important;
+}
+
+/* Form controls in Dark Mode */
+.dark input:not([type="checkbox"]):not([type="radio"]),
+.dark textarea,
+.dark select {
+  background-color: #050e16 !important;
+  color: #ffffff !important;
+  border-color: #1B2A4A !important;
+}
+.dark input:not([type="checkbox"]):not([type="radio"])::placeholder,
+.dark textarea::placeholder {
+  color: #9fb1ca !important;
+}
+
+
+/* Border Overrides */
+.dark .border-gray-100,
+.dark .border-gray-200 {
+  border-color: #1B2A4A !important;
+}
+.dark .divide-gray-100 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #1B2A4A !important;
+}
+
+/* Tables */
+.dark thead.bg-gray-50 {
+  background-color: #0d2237 !important;
+}
+
+/* Navigation & Mobile menu */
+.dark #mobile-menu {
+  background-color: #0a1b2c !important;
+  border-top-color: #1B2A4A !important;
+}
+.dark .nav-link {
+  color: #c3cfde !important;
+}
+.dark .nav-link:hover {
+  color: #e02424 !important;
+}
+
+/* First service certificate custom styling */
+.dark .first-service-certificate {
+  background: linear-gradient(135deg, #1d1b11 0%, #0d2237 48%, #211c0c 100%) !important;
+  border-color: #8e1f26 !important;
+  color: #e7ecf2 !important;
+}
+.dark .certificate-value {
+  text-shadow: 0 2px 0 #0d2237 !important;
+}
+
+/* Hero background darkening in dark mode */
+.dark .hero {
+  background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=80') center/cover !important;
+}
+
+/* Review edit and delete buttons and panels in dark mode */
+.dark button.review-edit-btn,
+.dark .review-edit-btn {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+}
+.dark button.review-edit-btn:hover,
+.dark .review-edit-btn:hover {
+  background-color: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
+  color: #ffffff !important;
+}
+
+.dark button.review-delete-btn,
+.dark .review-delete-btn {
+  background-color: #dc2626 !important;
+  border-color: #dc2626 !important;
+  color: #ffffff !important;
+}
+.dark button.review-delete-btn:hover,
+.dark .review-delete-btn:hover {
+  background-color: #b91c1c !important;
+  border-color: #b91c1c !important;
+  color: #ffffff !important;
+}
+
+
+
+.dark #reviews-editing {
+  background-color: #0d2237 !important;
+  border-color: #5776a2 !important;
+  color: #f3f6f9 !important;
+}
+
+/* Reviews Page Explicit Contrast Overrides */
+.dark .review-card {
+  background-color: #0a1b2c !important;
+  color: #ffffff !important;
+  border-color: #1B2A4A !important;
+}
+.dark .review-card p {
+  color: #e2e8f0 !important; /* Lighter slate for review body readability */
+}
+.dark .review-card strong {
+  color: #ffffff !important; /* Pure white for customer names */
+}
+.dark .review-card .text-gray-500,
+.dark .review-card .text-gray-400 {
+  color: #9fb1ca !important; /* Soft blue-gray for metadata/location */
+}
+
+/* Grok Suggested Contrast Overrides Verbatim */
+/* Dark Mode Contrast Rescue */
+.dark body,
+.dark p,
+.dark li,
+.dark .prose,
+.dark .text-gray-600,
+.dark .text-slate-500,
+.dark .text-gray-700 {
+  color: #e2e8f0 !important; /* readable light slate */
+}
+
+.dark h1, .dark h2, .dark h3, .dark .text-gray-900, .dark .text-slate-900 {
+  color: #f8fafc !important;
+}
+
+.dark .review-card,
+.dark .testimonial,
+.dark .card {
+  background-color: #1f2937 !important;
+  color: #f1f5f9 !important;
+  border-color: #475569 !important;
+}
+
+.dark .review-text,
+.dark .quote {
+  color: #cbd5e1 !important;
+}
+
+/* Grok Verbatim Button and Form Elements Fix */
+/* Fix Edit Buttons & Form Elements in Dark Mode */
+.dark button,
+.dark .btn,
+.dark .edit-button,
+.dark [type="button"],
+.dark [type="submit"] {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border-color: #2563eb !important;
+}
+
+.dark button:hover,
+.dark .btn:hover {
+  background-color: #2563eb !important;
+}
+
+.dark .cancel-button {
+  background-color: #6b7280 !important;
+  color: white !important;
+}
+
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #1f2937 !important;
+  color: #f1f5f9 !important;
+  border-color: #4b5563 !important;
+}
+
+.dark input::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Reviews Page Dark Mode Fix with Perfect Target Matching */
+.dark #reviews .edit-button,
+.dark button.edit,
+.dark .cancel,
+.dark [data-action="edit"],
+.dark button.review-edit-btn,
+.dark .review-edit-btn {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border: 1px solid #2563eb !important;
+}
+
+.dark #reviews .cancel-button,
+.dark #reviews-cancel-edit,
+.dark .cancel-button {
+  background-color: #6b7280 !important;
+  color: white !important;
+}
+
+.dark .review-form input,
+.dark .review-form textarea,
+.dark #reviews-form input,
+.dark #reviews-form textarea {
+  background-color: #1f2937 !important;
+  color: #f1f5f9 !important;
+  border-color: #4b5563 !important;
+}
+
+
+
+
+
+
+
