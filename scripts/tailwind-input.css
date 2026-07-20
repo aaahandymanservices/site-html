@@ -317,6 +317,27 @@ body { font-family: 'Roboto', sans-serif; }
   --tw-shadow-colored: 0 0 #0000 !important;
 }
 
+/* Force Red Delete Buttons - Specific to Your Class */
+.review-delete-btn {
+  background-color: #e02424 !important;
+  color: white !important;
+  border-color: #8e1f26 !important;
+}
+
+.review-delete-btn:hover {
+  background-color: #8e1f26 !important;
+}
+
+.dark .review-delete-btn {
+  background-color: #e02424 !important;
+  color: white !important;
+}
+
+.dark .review-delete-btn:hover {
+  background-color: #8e1f26 !important;
+}
+
+
 
 
 
