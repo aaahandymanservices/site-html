@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        const isDark = savedTheme === 'dark' || (savedTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.toggle('dark', isDark);
+      })();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -307,8 +314,8 @@
                 </div>
 
                 <div class="mt-10 grid lg:grid-cols-[1.35fr_.65fr] gap-6 items-stretch">
-                    <div class="rounded-3xl border-2 border-blue-900 overflow-hidden bg-white shadow-sm">
-                        <div class="bg-blue-900 text-white px-6 py-5">
+                    <div class="rounded-3xl border-2 border-red-600 overflow-hidden bg-white shadow-sm">
+                        <div class="bg-black text-white px-6 py-5 border-b border-gray-800">
                             <h3 class="text-xl sm:text-2xl font-black">What a standard visit costs</h3>
                             <p class="text-blue-100 text-sm mt-1">Labor totals before materials. Partial hours after the first are billed by the quarter hour.</p>
                         </div>
@@ -727,7 +734,7 @@
                     </div>
                 </div>
 
-                <div class="mt-8 bg-blue-900 text-white rounded-3xl p-8 sm:p-10 max-w-6xl mx-auto shadow-lg flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div class="mt-8 bg-black border-2 border-red-600 text-white rounded-3xl p-8 sm:p-10 max-w-6xl mx-auto shadow-lg flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     <div class="text-center md:text-left">
                         <div class="inline-block bg-white/10 border border-white/20 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3"><i class="fas fa-layer-group mr-1"></i> Best Value</div>
                         <h3 class="text-2xl sm:text-3xl font-bold">Whole-Home Assessment</h3>
@@ -834,7 +841,7 @@
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Non-slip strips for one tub or shower</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> brushed-nickel 24&Prime; grab bar, anti-slip strip set.</p>
-                            <a href="/contact?service=Home+Safety+Menu" class="mt-5 bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Good</a>
+                            <a href="/contact?service=Home+Safety+Menu" class="mt-5 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Good</a>
                         </div>
 
                         <div class="service-card bg-white border-[2px] border-red-600 p-7 rounded-3xl shadow-xl ring-2 ring-red-600 relative flex flex-col lg:-translate-y-2">
@@ -870,7 +877,7 @@
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Door-width evaluation and safety tune-up</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> handheld shower kit, transition threshold. (To keep contracts legally compliant under Michigan's $600 handyman limit, toilet bowl hardware is excluded from this package but can be purchased separately for a self-install or discrete task limit).</p>
-                            <a href="/contact?service=Home+Safety+Menu" class="mt-5 bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Best</a>
+                            <a href="/contact?service=Home+Safety+Menu" class="mt-5 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Best</a>
                         </div>
                     </div>
                 </div>
@@ -898,7 +905,7 @@
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Seal one major visible air leak</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> foam/V-seal weatherstrip, aluminum door sweep.</p>
-                            <a href="/contact?service=Energy+Efficiency+Menu" class="mt-5 bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Good</a>
+                            <a href="/contact?service=Energy+Efficiency+Menu" class="mt-5 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Good</a>
                         </div>
 
                         <div class="service-card bg-white border-[2px] border-red-600 p-7 rounded-3xl shadow-xl ring-2 ring-red-600 relative flex flex-col lg:-translate-y-2">
@@ -933,7 +940,7 @@
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Remaining outlets &amp; switches gasketed</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> smart thermostat, outlet gaskets. Requires compatible low-voltage HVAC wiring.</p>
-                            <a href="/contact?service=Energy+Efficiency+Menu" class="mt-5 bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Best</a>
+                            <a href="/contact?service=Energy+Efficiency+Menu" class="mt-5 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Best</a>
                         </div>
                     </div>
                 </div>
@@ -961,7 +968,7 @@
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Storm-door closer &amp; latch adjustment</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> gutter hangers, downspout screws, closer hardware.</p>
-                            <a href="/contact?service=Storm+%26+Water+Defense+Menu" class="mt-5 bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Good</a>
+                            <a href="/contact?service=Storm+%26+Water+Defense+Menu" class="mt-5 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Good</a>
                         </div>
 
                         <div class="service-card bg-white border-[2px] border-red-600 p-7 rounded-3xl shadow-xl ring-2 ring-red-600 relative flex flex-col lg:-translate-y-2">
@@ -996,7 +1003,7 @@
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Under-sink shutoff &amp; supply-line review</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> Wi-Fi leak/freeze sensor, quarter-turn shutoffs.</p>
-                            <a href="/contact?service=Storm+%26+Water+Defense+Menu" class="mt-5 bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Best</a>
+                            <a href="/contact?service=Storm+%26+Water+Defense+Menu" class="mt-5 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Best</a>
                         </div>
                     </div>
                 </div>
@@ -1217,7 +1224,7 @@
     </section>
 
     <div class="max-w-7xl mx-auto px-6 mb-12">
-        <div class="text-center bg-blue-900 text-white py-12 px-8 sm:py-20 sm:px-16 rounded-3xl">
+        <div class="text-center bg-black border border-gray-800 text-white py-12 px-8 sm:py-20 sm:px-16 rounded-3xl">
             <p class="text-xl sm:text-2xl md:text-3xl font-medium">Available Monday–Friday, 9 a.m.–6 p.m.; Saturday, 10 a.m.–5 p.m.</p>
             <p class="mt-6 text-base sm:text-lg md:text-xl opacity-90"><span class="flash-siren" aria-hidden="true"><i class="fas fa-triangle-exclamation"></i></span> After-Hours Emergency Services Available &mdash; Competitive hourly rates • No job too small!</p>
         </div>
