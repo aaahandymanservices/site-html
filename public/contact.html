@@ -276,6 +276,7 @@
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
                             </div>
+                            <div id="service-package-info" class="hidden mt-3 p-4 bg-gray-900/60 border border-gray-800 rounded-2xl text-xs sm:text-sm text-gray-300"></div>
                         </div>
                         <div>
                             <label for="contact-message" class="block text-sm uppercase tracking-widest mb-2">Message / Project Details</label>
@@ -403,11 +404,90 @@
                 }
             });
         }
+        const PACKAGE_DESCRIPTIONS = {
+            "4-Hour Handyman Package": {
+                text: "4 Hours of reserved labor to work straight through a punch list of smaller repairs, adjustments, or upgrades. Save $30!",
+                link: "/rates#packages"
+            },
+            "6-Hour Handyman Package": {
+                text: "6 Productive hours for a longer punch list with room for repairs, maintenance, and light improvement projects. Save $70!",
+                link: "/rates#packages"
+            },
+            "8-Hour Handyman Package": {
+                text: "A full 8-hour workday for larger punch lists and projects that benefit from uninterrupted, back-to-back progress. Save $110!",
+                link: "/rates#packages"
+            },
+            "Home Safety Audit": {
+                text: "A focused $99 audit examining fall prevention, safety detectors, lighting, entry points, and lock security.",
+                link: "/rates#audits"
+            },
+            "Energy Tune-Up Audit": {
+                text: "A focused $99 audit to locate draft points, heat/cool leaks, and seal standard minor leaks on the spot.",
+                link: "/rates#audits"
+            },
+            "Storm-Prep Check": {
+                text: "A focused $99 audit checking drainage, gutter alignment, exterior caulk seals, and sump pump functionality.",
+                link: "/rates#audits"
+            },
+            "Whole-Home Assessment": {
+                text: "Get all three specialized audits (Safety, Energy, Storm-Prep) in a single visit with a unified punch list. Save $58!",
+                link: "/rates#audits"
+            },
+            "Home Safety Menu": {
+                text: "Standardized package safety menus: Good ($195 - Standard checks), Better ($345 - Upgraded safety additions), Best ($495 - Deluxe coverage). Materials included!",
+                link: "/rates#menus"
+            },
+            "Energy Efficiency Menu": {
+                text: "Standardized package energy menus: Good ($145 - Draft checks & standard sweeps), Better ($295 - Enhanced seals & hatch insulation), Best ($495 - Maximum thermal sealing). Materials included!",
+                link: "/rates#menus"
+            },
+            "Storm & Water Defense Menu": {
+                text: "Standardized package storm/water menus: Good ($215 - Basic checks & spot caulking), Better ($395 - Gutter tune-up & pump checks), Best ($645 - Full perimeter sealing & defense). Materials included!",
+                link: "/rates#menus"
+            },
+            "Fall Home Prep Package": {
+                text: "A comprehensive seasonal package detailing gutter clean-out, water spigot winterization, draft sealing, and leaf checks.",
+                link: "/rates"
+            },
+            "Spring Home Refresh Package": {
+                text: "A seasonal tune-up package including deck checks, screen washing, exterior caulk refreshes, and gutter flow checks.",
+                link: "/rates"
+            },
+            "Priority / After-Hours Service": {
+                text: "7-Day priority response service for urgent repairs that affect immediate home safety, plumbing leaks, or door/window security.",
+                link: "/rates"
+            }
+        };
+
         const contactService = document.getElementById('contact-service');
+        const servicePackageInfo = document.getElementById('service-package-info');
+
+        const updatePackageDetails = () => {
+            if (!contactService || !servicePackageInfo) return;
+            const val = contactService.value;
+            // Support exact keys and strip parentheticals if present
+            const cleanVal = val.split(" (")[0];
+            const desc = PACKAGE_DESCRIPTIONS[cleanVal] || PACKAGE_DESCRIPTIONS[val];
+            if (desc) {
+                servicePackageInfo.innerHTML = `<p class="leading-relaxed"><i class="fas fa-circle-info text-red-500 mr-2"></i><strong>${val}:</strong> ${desc.text} <a href="${desc.link}" target="_blank" class="text-red-400 hover:text-red-300 underline font-semibold whitespace-nowrap ml-1">Learn details <i class="fas fa-arrow-up-right-from-square text-xs"></i></a></p>`;
+                servicePackageInfo.classList.remove('hidden');
+            } else {
+                servicePackageInfo.classList.add('hidden');
+                servicePackageInfo.innerHTML = '';
+            }
+        };
+
+        if (contactService) {
+            contactService.addEventListener('change', updatePackageDetails);
+        }
+
         const setContactService = (value) => {
-            if (!contactService || !value) return;
+            if (!contactService) return;
             const match = Array.from(contactService.options).find(opt => opt.value === value);
-            if (match) contactService.value = value;
+            if (match) {
+                contactService.value = value;
+                updatePackageDetails();
+            }
         };
 
         (function prefillServiceFromQuery() {

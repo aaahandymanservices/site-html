@@ -264,6 +264,7 @@
                                                 <i class="fas fa-chevron-down"></i>
                                             </div>
                                         </div>
+                                        <div id="service-package-info" class="hidden mt-3 p-4 bg-gray-900/60 border border-gray-850 rounded-xl text-xs sm:text-sm text-gray-300"></div>
                                     </div>
                                 </div>
 
@@ -536,13 +537,50 @@
         setupTimeSlotListeners();
 
         // Set service parameter from query string if available
+        const PACKAGE_DESCRIPTIONS = {
+            "4-Hour Handyman Package": {
+                text: "4 Hours of reserved labor to work straight through a punch list of smaller repairs, adjustments, or upgrades. Save $30!",
+                link: "/rates#packages"
+            },
+            "6-Hour Handyman Package": {
+                text: "6 Productive hours for a longer punch list with room for repairs, maintenance, and light improvement projects. Save $70!",
+                link: "/rates#packages"
+            },
+            "8-Hour Handyman Package": {
+                text: "A full 8-hour workday for larger punch lists and projects that benefit from uninterrupted, back-to-back progress. Save $110!",
+                link: "/rates#packages"
+            }
+        };
+
+        const bookingService = document.getElementById('booking-service');
+        const servicePackageInfo = document.getElementById('service-package-info');
+
+        const updatePackageDetails = () => {
+            if (!bookingService || !servicePackageInfo) return;
+            const val = bookingService.value;
+            const desc = PACKAGE_DESCRIPTIONS[val];
+            if (desc) {
+                servicePackageInfo.innerHTML = `<p class="leading-relaxed"><i class="fas fa-circle-info text-red-500 mr-2"></i><strong>${val}:</strong> ${desc.text} <a href="${desc.link}" target="_blank" class="text-red-400 hover:text-red-300 underline font-semibold whitespace-nowrap ml-1">Learn details <i class="fas fa-arrow-up-right-from-square text-xs"></i></a></p>`;
+                servicePackageInfo.classList.remove('hidden');
+            } else {
+                servicePackageInfo.classList.add('hidden');
+                servicePackageInfo.innerHTML = '';
+            }
+        };
+
+        if (bookingService) {
+            bookingService.addEventListener('change', updatePackageDetails);
+        }
+
         (function prefillServiceFromQuery() {
             const params = new URLSearchParams(window.location.search);
             const requested = params.get('service');
-            const bookingService = document.getElementById('booking-service');
             if (requested && bookingService) {
                 const match = Array.from(bookingService.options).find(opt => opt.value === requested);
-                if (match) bookingService.value = requested;
+                if (match) {
+                    bookingService.value = requested;
+                    updatePackageDetails();
+                }
             }
         })();
 
