@@ -3,13 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-      (function() {
-        const savedTheme = localStorage.getItem('theme') || 'system';
-        const isDark = savedTheme === 'dark' || (savedTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        document.documentElement.classList.toggle('dark', isDark);
-      })();
-    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -369,7 +362,7 @@
                 <p class="mt-2 text-gray-600 max-w-xl mx-auto">Browse our core services below. Every job is covered by our trusted 1-Year Workmanship Guarantee.</p>
             </div>
 
-            <nav aria-label="Jump to a service" class="service-jump-nav max-w-5xl mx-auto mb-12">
+            <nav aria-label="Jump to a service" class="max-w-5xl mx-auto mb-12">
                 <p class="text-center text-xs uppercase tracking-widest text-blue-600 font-semibold mb-4"><i class="fas fa-list-ul mr-1"></i> Jump to a service</p>
                 <div class="flex flex-wrap justify-center gap-2 sm:gap-3">
                     <a href="#carpentry" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Carpentry</a>
@@ -863,7 +856,7 @@
                 </div>
             </div>
 
-            <div class="mt-12 sm:mt-16 text-center bg-black border border-gray-800 text-white py-12 px-8 sm:py-20 sm:px-16 rounded-3xl">
+            <div class="mt-12 sm:mt-16 text-center bg-blue-900 text-white py-12 px-8 sm:py-20 sm:px-16 rounded-3xl">
                 <p class="text-xl sm:text-2xl md:text-3xl font-medium">Available Monday–Friday, 9 a.m.–6 p.m.; Saturday, 10 a.m.–5 p.m.</p>
                 <p class="mt-6 text-base sm:text-lg md:text-xl opacity-90"><span class="flash-siren" aria-hidden="true"><i class="fas fa-triangle-exclamation"></i></span> After-Hours Emergency Services Available—Competitive hourly rates • No job too small!</p>
             </div>
