@@ -318,22 +318,31 @@ body { font-family: 'Roboto', sans-serif; }
 }
 
 /* Force Red Delete Buttons - Specific to Your Class */
-.review-delete-btn {
+.review-delete-btn,
+#reviews-list button.review-delete-btn,
+button.review-delete-btn:not(#theme-toggle-btn) {
   background-color: #e02424 !important;
   color: white !important;
   border-color: #8e1f26 !important;
 }
 
-.review-delete-btn:hover {
+.review-delete-btn:hover,
+#reviews-list button.review-delete-btn:hover,
+button.review-delete-btn:not(#theme-toggle-btn):hover {
   background-color: #8e1f26 !important;
 }
 
-.dark .review-delete-btn {
+.dark .review-delete-btn,
+.dark #reviews-list button.review-delete-btn,
+.dark button.review-delete-btn:not(#theme-toggle-btn) {
   background-color: #e02424 !important;
   color: white !important;
+  border-color: #8e1f26 !important;
 }
 
-.dark .review-delete-btn:hover {
+.dark .review-delete-btn:hover,
+.dark #reviews-list button.review-delete-btn:hover,
+.dark button.review-delete-btn:not(#theme-toggle-btn):hover {
   background-color: #8e1f26 !important;
 }
 
