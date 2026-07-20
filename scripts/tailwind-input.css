@@ -293,17 +293,22 @@ body { font-family: 'Roboto', sans-serif; }
   border-color: #4b5563 !important;
 }
 
-/* Ensure Theme Toggle Button has no background or border overrides in any state */
+/* Ensure Theme Toggle Button has no background, border, outline, or shadow overrides in any state */
 #theme-toggle-btn,
-.dark #theme-toggle-btn {
+.dark #theme-toggle-btn,
+#theme-toggle-btn:hover,
+.dark #theme-toggle-btn:hover,
+#theme-toggle-btn:focus,
+.dark #theme-toggle-btn:focus,
+#theme-toggle-btn:active,
+.dark #theme-toggle-btn:active,
+#theme-toggle-btn:focus-visible,
+.dark #theme-toggle-btn:focus-visible {
   background-color: transparent !important;
   border: none !important;
+  outline: none !important;
+  outline-width: 0 !important;
   box-shadow: none !important;
-}
-
-#theme-toggle-btn:hover,
-.dark #theme-toggle-btn:hover {
-  background-color: transparent !important;
 }
 
 
