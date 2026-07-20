@@ -312,6 +312,13 @@ function page(service) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        const isDark = savedTheme === 'dark' || (savedTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.toggle('dark', isDark);
+      })();
+    </script>
 
     <!-- Resource hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -504,7 +511,7 @@ ${costGuideSection(service)}
 ${service.features.map(featureCard).join('\n')}
                 </div>
                 <div class="mt-8 text-center">
-                    <a href="/services" class="inline-flex items-center justify-center gap-2 bg-blue-900 hover:bg-blue-800 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-semibold transition shadow-lg">
+                    <a href="/services" class="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-semibold transition shadow-lg">
                         View All Services <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -518,7 +525,7 @@ ${service.features.map(featureCard).join('\n')}
 ${related.map(relatedCard).join('\n')}
                 </div>
                 <div class="mt-6 text-center">
-                    <a href="/services" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-900 text-white hover:bg-blue-800 rounded-xl transition font-semibold"><i class="fas fa-list"></i> Browse All Services</a>
+                    <a href="/services" class="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-xl transition font-semibold"><i class="fas fa-list"></i> Browse All Services</a>
                 </div>
             </div>
 
@@ -539,7 +546,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
             </div>
 
             <!-- CTA band -->
-            <div class="max-w-5xl mx-auto mt-14 sm:mt-20 text-center bg-blue-900 text-white py-12 px-8 sm:py-16 sm:px-16 rounded-3xl">
+            <div class="max-w-5xl mx-auto mt-14 sm:mt-20 text-center bg-black border border-gray-800 text-white py-12 px-8 sm:py-16 sm:px-16 rounded-3xl">
                 <p class="text-xl sm:text-2xl md:text-3xl font-medium">Ready for ${displayName.toLowerCase()}?</p>
                 <p class="mt-4 text-base sm:text-lg opacity-90">Call for availability and same-week scheduling, or request a free quote online. No job too small.</p>
                 <div class="mt-8 flex flex-wrap justify-center gap-4">
