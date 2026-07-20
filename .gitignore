@@ -1,2 +1,21 @@
 # Local Netlify folder
 .netlify
+
+# Dependency directories
+node_modules/
+
+# Lockfiles and system settings
+deno.lock
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
