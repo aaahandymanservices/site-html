@@ -165,7 +165,7 @@
   var promptList = panel.querySelector(".aaa-chat-prompts-list");
   var promptButtons = panel.querySelectorAll(".aaa-chat-prompt");
 
-  var GREETING = "Hi! 👋 I'm the AAA Handyman Services assistant. Ask me about our services, the areas we cover, or how to get a quote.";
+  var GREETING = "Hey there! 👋 I'm the AAA Handyman Services assistant — part helper, part fixer, all fun. 🛠️😄 Ask me about our services, the areas we cover, or how to get a quote. Fair warning: I'm known to drop the occasional home-repair pun!";
   function hideExistingFloating() {
     var els = document.querySelectorAll(".fixed.bottom-5.right-5, [class*='fixed'][class*='bottom-5'][class*='right-5']");
     for (var i = 0; i < els.length; i++) {
