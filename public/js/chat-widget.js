@@ -113,8 +113,8 @@
     ".dark .aaa-chat-bubble-close:hover{color:#ff4d4d}",
     ".dark .aaa-chat-log::-webkit-scrollbar-thumb{background:#1B2A4A}",
     ".dark .aaa-chat-log::-webkit-scrollbar-thumb:hover{background:" + CRIMSON + "}",
-    "@media(max-width:767px){.aaa-fab{right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));flex-direction:column;gap:12px;align-items:flex-end}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}.aaa-chat-panel{right:max(12px,env(safe-area-inset-right));bottom:148px;max-width:calc(100vw - 24px);max-height:calc(100vh - 172px)}.aaa-chat-bubble{right:max(12px,env(safe-area-inset-right));bottom:148px;max-width:calc(100vw - 24px)}.aaa-chat-bubble-arrow{right:24px}}",
-    "@media(max-width:359px){.aaa-fab .aaa-fab-btn{width:50px;height:50px;flex-basis:50px}.aaa-fab{gap:10px}.aaa-chat-panel,.aaa-chat-bubble{bottom:136px}}"
+    "@media(max-width:767px){.aaa-fab{right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));flex-direction:column;gap:12px;align-items:flex-end}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}.aaa-chat-panel{position:fixed;top:0;left:0;right:0;bottom:0;width:100%!important;max-width:100%!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important;border:none!important;z-index:2147483005}.aaa-chat-header{padding:calc(16px + env(safe-area-inset-top,0px)) 18px 16px!important}.aaa-chat-disclaimer{padding:0 12px calc(10px + env(safe-area-inset-bottom,0px))!important}.aaa-chat-bubble{right:max(12px,env(safe-area-inset-right));bottom:148px;max-width:calc(100vw - 24px)}.aaa-chat-bubble-arrow{right:24px}}",
+    "@media(max-width:359px){.aaa-fab .aaa-fab-btn{width:50px;height:50px;flex-basis:50px}.aaa-fab{gap:10px}.aaa-chat-bubble{bottom:136px}}"
   ].join("");
   document.head.appendChild(style);
   var group = document.createElement("div");
@@ -293,12 +293,14 @@
       opened = true;
       addMessage("assistant", GREETING);
     }
+    document.body.style.overflow = "hidden";
     setTimeout(function () { input.focus(); }, 50);
   }
 
   function closePanel() {
     panel.classList.remove("aaa-open");
     launch.innerHTML = '<i class="fas fa-comments" aria-hidden="true"></i>';
+    document.body.style.overflow = "";
   }
 
   function togglePanel() {
@@ -326,19 +328,49 @@
         signal: activeRequest.signal,
       });
 
-      if (!res.ok || !res.body) throw new Error("Request failed");
+      if (!res.ok) throw new Error("Request failed");
 
-      var reader = res.body.getReader();
-      var decoder = new TextDecoder();
-      var buffer = "";
+      var reader = null;
+      if (res.body && typeof res.body.getReader === "function") {
+        try {
+          reader = res.body.getReader();
+        } catch (e) {
+          console.warn("getReader failed:", e);
+        }
+      }
 
-      while (true) {
-        var chunk = await reader.read();
-        if (chunk.done) break;
-        buffer += decoder.decode(chunk.value, { stream: true });
-        var frames = buffer.split("\n\n");
-        buffer = frames.pop();
+      if (reader) {
+        var decoder = new TextDecoder();
+        var buffer = "";
 
+        while (true) {
+          var chunk = await reader.read();
+          if (chunk.done) break;
+          buffer += decoder.decode(chunk.value, { stream: true });
+          var frames = buffer.split("\n\n");
+          buffer = frames.pop();
+
+          for (var i = 0; i < frames.length; i++) {
+            var line = frames[i].trim();
+            if (line.indexOf("data:") !== 0) continue;
+            var payload = line.slice(5).trim();
+            if (payload === "[DONE]") continue;
+            try {
+              var data = JSON.parse(payload);
+              if (data.error) throw new Error("stream error");
+              if (data.text) {
+                if (requestVersion !== conversationVersion) return;
+                full += data.text;
+                renderBot(botEl, full);
+              }
+            } catch (e) {
+              if (!full) throw e;
+            }
+          }
+        }
+      } else {
+        var rawText = await res.text();
+        var frames = rawText.split("\n\n");
         for (var i = 0; i < frames.length; i++) {
           var line = frames[i].trim();
           if (line.indexOf("data:") !== 0) continue;
@@ -348,13 +380,15 @@
             var data = JSON.parse(payload);
             if (data.error) throw new Error("stream error");
             if (data.text) {
-              if (requestVersion !== conversationVersion) return;
               full += data.text;
-              renderBot(botEl, full);
             }
           } catch (e) {
             if (!full) throw e;
           }
+        }
+        if (full) {
+          if (requestVersion !== conversationVersion) return;
+          renderBot(botEl, full);
         }
       }
 
