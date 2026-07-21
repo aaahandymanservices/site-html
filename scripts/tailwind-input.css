@@ -255,17 +255,17 @@ body { font-family: 'Roboto', sans-serif; }
 
 /* Grok Verbatim Button and Form Elements Fix */
 /* Fix Edit Buttons & Form Elements in Dark Mode */
-.dark button:not(#theme-toggle-btn):not(#mobile-menu-btn):not([class^="aaa-"]):not([class*=" aaa-"]),
+.dark button:not(#theme-toggle-btn):not(#mobile-menu-btn):not(#back-to-top):not([class^="aaa-"]):not([class*=" aaa-"]),
 .dark .btn:not([class^="aaa-"]):not([class*=" aaa-"]),
 .dark .edit-button:not([class^="aaa-"]):not([class*=" aaa-"]),
-.dark [type="button"]:not(#theme-toggle-btn):not(#mobile-menu-btn):not([class^="aaa-"]):not([class*=" aaa-"]),
+.dark [type="button"]:not(#theme-toggle-btn):not(#mobile-menu-btn):not(#back-to-top):not([class^="aaa-"]):not([class*=" aaa-"]),
 .dark [type="submit"]:not([class^="aaa-"]):not([class*=" aaa-"]) {
   background-color: #3b82f6 !important;
   color: white !important;
   border-color: #2563eb !important;
 }
 
-.dark button:not(#theme-toggle-btn):not(#mobile-menu-btn):not([class^="aaa-"]):not([class*=" aaa-"]):hover,
+.dark button:not(#theme-toggle-btn):not(#mobile-menu-btn):not(#back-to-top):not([class^="aaa-"]):not([class*=" aaa-"]):hover,
 .dark .btn:not([class^="aaa-"]):not([class*=" aaa-"]):hover {
   background-color: #2563eb !important;
 }
