@@ -372,6 +372,7 @@
             <a href="/reviews" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Reviews</a>
             <a href="/careers" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Careers</a>
             <a href="/contact" class="block text-lg font-medium text-gray-700 hover:text-red-600 py-1">Contact</a>
+            <button onclick="window.__aaaOpenChat &amp;&amp; (window.__aaaOpenChat(), document.getElementById('mobile-menu').classList.add('hidden'))" class="block text-left w-full text-lg font-medium text-red-600 py-1"><i class="fas fa-comments mr-2"></i>AI Chat Assistant</button>
                         <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="block text-lg font-medium text-[#1877F2] hover:opacity-80 py-1"><i class="fab fa-facebook"></i> Facebook</a>
             <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" class="block text-lg font-medium text-[#FF1A1A] hover:opacity-80 py-1"><i class="fa-brands fa-yelp"></i> Yelp</a>
             <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" class="block text-lg font-medium text-[#00B24F] hover:opacity-80 py-1"><i class="fa-solid fa-house-chimney"></i> Nextdoor</a>
@@ -388,16 +389,31 @@
     <header id="top" class="hero min-h-[70vh] py-12 md:py-16 flex items-center text-white">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <div class="max-w-3xl mx-auto">
+                <!-- Location Tag -->
                 <div class="inline-flex flex-wrap justify-center gap-2 items-center bg-white/20 backdrop-blur-md px-4 py-1.5 sm:px-6 sm:py-2 rounded-full mb-4 text-xs sm:text-base">
                     <span class="inline-flex items-center">
                         <span class="bg-green-400 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full animate-pulse mr-2"></span>
                         Locally Owned • Serving Oakland County
                     </span>
-                    <span class="hidden sm:inline text-white/55">•</span>
-                    <span class="text-yellow-400 font-bold"><i class="fas fa-star mr-1"></i> Satisfaction Guaranteed</span>
                 </div>
+
+                <!-- Trust Badges Promoted Above the Fold -->
+                <div class="flex flex-wrap justify-center gap-2.5 sm:gap-4 text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-6 text-yellow-400">
+                    <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-2 rounded-full border border-white/10 shadow-sm">
+                        <i class="fas fa-user-shield text-green-400 text-sm sm:text-base"></i> Background-Checked Technicians
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-2 rounded-full border border-white/10 shadow-sm">
+                        <i class="fas fa-user-tie text-blue-400 text-sm sm:text-base"></i> Expert Craftsmen
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-2 rounded-full border border-white/10 shadow-sm">
+                        <i class="fas fa-award text-red-400 text-sm sm:text-base"></i> Satisfaction Guaranteed
+                    </span>
+                </div>
+
                 <h1 class="hero-title text-3xl sm:text-4xl md:text-6xl font-bold leading-tight md:leading-none mb-4 tracking-tighter">Reliable Handyman Services in Oakland County, MI: Expert Repairs & Maintenance</h1>
                 <p class="text-base sm:text-lg md:text-xl mb-6 text-white/95 font-medium">No Job Too Small! Your trusted, locally owned home repair partner operated by skilled local craftsmen. Specializing in high-quality minor home repairs, maintenance, and reliable custom solutions across Oakland County.</p>
+                
+                <!-- $50 First-Service Certificate -->
                 <a href="/contact?offer=first-service#contact-form" class="first-service-certificate group mx-auto mb-6 grid max-w-xs grid-cols-[auto_1fr_auto] items-center gap-2 rounded-xl px-3 sm:px-4 py-2 text-left text-blue-950 transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-yellow-300" aria-label="Claim the $50 first-service gift certificate">
                     <span class="certificate-value text-3xl font-extrabold leading-none text-red-700 sm:text-4xl">$50</span>
                     <span class="flex flex-col justify-center">
@@ -406,23 +422,56 @@
                     </span>
                     <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-red-700 text-white transition group-hover:translate-x-1" aria-hidden="true"><i class="fas fa-arrow-right text-[10px]"></i></span>
                 </a>
-                <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
-                    <a href="tel:+12483853432" class="bg-green-600 hover:bg-green-700 text-white text-base sm:text-lg px-5 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold inline-flex items-center justify-center gap-2 transition shadow-lg hover:shadow-green-600/30 pulse-btn-green">
-                        Call Now! (248) 385-3432 <i class="fas fa-phone"></i>
-                    </a>
-                    <a href="/rates" class="border-[2px] border-white hover:bg-white hover:text-blue-900 text-base sm:text-lg px-5 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold inline-flex items-center justify-center gap-2 transition">
-                        View Transparent Rates
-                    </a>
-                </div>
 
-                <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-2xl mx-auto text-xs sm:text-sm font-semibold">
-                   <div class="bg-white/10 hover:bg-white/[0.15] backdrop-blur-sm px-3 py-2.5 rounded-xl border border-white/15 flex items-center justify-center text-center gap-2 transition-colors"><i class="fas fa-shield-halved text-green-400 text-base sm:text-lg shrink-0"></i> <span>Satisfaction Guaranteed!</span></div>
-                   <div class="bg-white/10 hover:bg-white/[0.15] backdrop-blur-sm px-3 py-2.5 rounded-xl border border-white/15 flex items-center justify-center text-center gap-2 transition-colors"><i class="fas fa-screwdriver-wrench text-yellow-400 text-base sm:text-lg shrink-0"></i> <span>Minor Repair Experts</span></div>
-                   <div class="bg-white/10 hover:bg-white/[0.15] backdrop-blur-sm px-3 py-2.5 rounded-xl border border-white/15 flex items-center justify-center text-center gap-2 transition-colors"><i class="fas fa-user-check text-red-400 text-base sm:text-lg shrink-0"></i> <span>Highly Motivated Technicians</span></div>
+                <!-- Streamlined Primary CTA Pathways -->
+                <div class="flex flex-col sm:flex-row gap-3.5 justify-center items-center">
+                    <a href="/book" class="bg-red-600 hover:bg-red-700 text-white text-base sm:text-lg px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl font-bold inline-flex items-center justify-center gap-2.5 transition shadow-lg hover:shadow-red-600/30">
+                        Get an Instant Estimate / Book Online <i class="fas fa-calendar-check"></i>
+                    </a>
+                    <a href="/rates" class="border-[2px] border-white hover:bg-white hover:text-blue-900 text-base sm:text-lg px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl font-bold inline-flex items-center justify-center gap-2.5 transition">
+                        View Transparent Rates <i class="fas fa-receipt"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- How It Works 3-Step Process -->
+    <section id="how-it-works" class="py-12 sm:py-16 bg-gray-50 border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-10 sm:mb-12">
+                <div class="uppercase text-red-600 font-semibold tracking-widest text-sm sm:text-base">Our Simple Process</div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">How It Works</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">Getting your home repairs handled is easy with our transparent, stress-free process.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <!-- Step 1 -->
+                <div class="bg-white border-[2px] border-red-600 rounded-3xl p-8 shadow-sm flex flex-col items-center text-center relative hover:shadow-md transition">
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md border-2 border-white">1</div>
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6 mt-2"><i class="fas fa-clipboard-list"></i></div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">Describe Your Job</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Tell us what needs fixing or pick a popular flat-rate service. Easy online scheduling or a quick phone call is all it takes.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white border-[2px] border-red-600 rounded-3xl p-8 shadow-sm flex flex-col items-center text-center relative hover:shadow-md transition">
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md border-2 border-white">2</div>
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6 mt-2"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">Get Upfront Pricing</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Receive a clear, honest estimate with absolutely no hidden fees. Know exactly what your starting cost is before we arrive.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white border-[2px] border-red-600 rounded-3xl p-8 shadow-sm flex flex-col items-center text-center relative hover:shadow-md transition">
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md border-2 border-white">3</div>
+                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center text-3xl text-green-600 mb-6 mt-2"><i class="fas fa-circle-check"></i></div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">Job Done Right</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">A skilled, background-checked craftsman arrives on time, completes the work meticulously, and leaves your home clean.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="about" class="py-12 sm:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-6">
@@ -590,6 +639,89 @@
                     View All Services <i class="fas fa-arrow-right"></i>
                 </a>
                 <p class="mt-4 text-sm text-gray-500">A selection of what we do &mdash; see the full list of handyman services, from furniture assembly and gutters to senior-care and commercial work.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Flat-Rate Menu Items -->
+    <section id="flat-rates" class="py-12 sm:py-16 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-10">
+                <div class="uppercase text-red-600 font-semibold tracking-widest text-sm sm:text-base">Popular Flat-Rate Menu</div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">Upfront Pricing on Common Services</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">No surprises, no hidden fees. Know exactly what you'll pay for standard home installation and mounting jobs. (Zone A pricing shown; Zone B is slightly higher for extended travel.)</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- TV Wall Mounting -->
+                <div class="bg-gray-50 border-[2px] border-red-600 rounded-3xl p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-xl text-red-600 mb-4"><i class="fas fa-tv"></i></div>
+                        <h3 class="text-lg font-bold text-gray-950 mb-2">TV Wall Mounting</h3>
+                        <p class="text-gray-600 text-xs leading-relaxed mb-4">Mounting of flat-screen TVs up to 65" securely on wood or metal studs. (Bracket not included)</p>
+                    </div>
+                    <div class="border-t border-gray-200 pt-4 mt-auto">
+                        <span class="text-xs text-gray-500 block font-medium">Starting at</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl font-black text-blue-900">$155</span>
+                            <span class="text-xs text-gray-500">(Zone A)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ceiling Fan Replacement -->
+                <div class="bg-gray-50 border-[2px] border-red-600 rounded-3xl p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-xl text-blue-950 mb-4"><i class="fas fa-fan"></i></div>
+                        <h3 class="text-lg font-bold text-gray-950 mb-2">Ceiling Fan Swap</h3>
+                        <p class="text-gray-600 text-xs leading-relaxed mb-4">Replacing fixtures or ceiling fans on your existing approved junction box and brackets.</p>
+                    </div>
+                    <div class="border-t border-gray-200 pt-4 mt-auto">
+                        <span class="text-xs text-gray-500 block font-medium">Starting at</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl font-black text-blue-900">$175</span>
+                            <span class="text-xs text-gray-500">(Zone A)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faucet Installation -->
+                <div class="bg-gray-50 border-[2px] border-red-600 rounded-3xl p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-xl text-red-600 mb-4"><i class="fas fa-faucet"></i></div>
+                        <h3 class="text-lg font-bold text-gray-950 mb-2">Faucet Installation</h3>
+                        <p class="text-gray-600 text-xs leading-relaxed mb-4">Complete swap and seal of a kitchen or bathroom sink faucet, including water supply lines.</p>
+                    </div>
+                    <div class="border-t border-gray-200 pt-4 mt-auto">
+                        <span class="text-xs text-gray-500 block font-medium">Starting at</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl font-black text-blue-900">$135</span>
+                            <span class="text-xs text-gray-500">(Zone A)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storm Door -->
+                <div class="bg-gray-50 border-[2px] border-red-600 rounded-3xl p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-xl text-blue-900 mb-4"><i class="fas fa-door-open"></i></div>
+                        <h3 class="text-lg font-bold text-gray-950 mb-2">Storm Door Install</h3>
+                        <p class="text-gray-600 text-xs leading-relaxed mb-4">Professional installation of a pre-hung storm/screen door in existing ready-to-use framing.</p>
+                    </div>
+                    <div class="border-t border-gray-200 pt-4 mt-auto">
+                        <span class="text-xs text-gray-500 block font-medium">Starting at</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl font-black text-blue-900">$245</span>
+                            <span class="text-xs text-gray-500">(Zone A)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="/rates" class="inline-flex items-center justify-center gap-2 bg-blue-900 hover:bg-blue-800 text-white font-semibold px-6 py-3.5 rounded-xl transition shadow-md">
+                    View Complete Flat-Rate Menus <i class="fas fa-receipt"></i>
+                </a>
             </div>
         </div>
     </section>
