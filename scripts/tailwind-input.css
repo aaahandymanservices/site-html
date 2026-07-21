@@ -71,6 +71,7 @@ body { font-family: 'Roboto', sans-serif; }
 /* Text Overrides with High Contrast */
 .dark .text-gray-950,
 .dark .text-gray-900,
+.dark .text-blue-950,
 .dark .text-blue-900,
 .dark .text-slate-900 {
   color: #ffffff !important;
@@ -163,8 +164,24 @@ body { font-family: 'Roboto', sans-serif; }
   border-color: #8e1f26 !important;
   color: #e7ecf2 !important;
 }
-.dark .certificate-value {
+.dark .first-service-certificate .text-blue-950,
+.dark .first-service-certificate .contact-certificate-title {
+  color: #e7ecf2 !important;
+}
+.dark .first-service-certificate .text-blue-950\/75,
+.dark .first-service-certificate .contact-certificate-copy {
+  color: rgba(231, 236, 242, 0.75) !important;
+}
+.dark .first-service-certificate .certificate-value {
+  color: #f87171 !important;
   text-shadow: 0 2px 0 #0d2237 !important;
+}
+.dark .first-service-certificate .contact-certificate-header {
+  border-bottom-color: #8e1f26 !important;
+}
+.dark .first-service-certificate .contact-certificate-claim {
+  color: #e7ecf2 !important;
+  background: rgba(13, 34, 55, 0.6) !important;
 }
 
 /* Hero background darkening in dark mode */
