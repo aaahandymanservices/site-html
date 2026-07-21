@@ -450,6 +450,27 @@ button.review-delete-btn:not(#theme-toggle-btn):hover {
   opacity: 0.8 !important;
 }
 
+/* Header Navigation Smoothness & Layout Stability */
+.hidden.md\:flex > .nav-link {
+  transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s ease !important;
+  font-weight: 500 !important; /* Force identical font weight to prevent horizontal text layout jumps */
+  border-bottom: 2px solid transparent !important;
+  padding-bottom: 4px !important; /* Stable pb-1 equivalent */
+  display: inline-block !important;
+}
+
+.hidden.md\:flex > .nav-link.border-b-2.border-red-600 {
+  color: #8e1f26 !important;
+  border-bottom-color: #8e1f26 !important;
+}
+
+.hidden.md\:flex > .nav-link:hover {
+  color: #8e1f26 !important;
+  border-bottom-color: rgba(142, 31, 38, 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+
 
 
 

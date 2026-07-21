@@ -113,8 +113,8 @@ function jsonLd(city) {
 
 function navLink(href, label, active) {
   const cls = active
-    ? 'nav-link text-red-600 font-bold border-b-2 border-red-600'
-    : 'nav-link text-gray-700 hover:text-red-600 transition';
+    ? 'nav-link text-red-600 border-b-2 border-red-600 pb-1'
+    : 'nav-link text-gray-700 hover:text-red-600 border-b-2 border-transparent pb-1 transition';
   return `<a href="${href}" class="${cls}">${label}</a>`;
 }
 
