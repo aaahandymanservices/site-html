@@ -419,6 +419,37 @@ button.review-delete-btn:not(#theme-toggle-btn):hover {
   background-color: #a61f2e !important; /* Brand crimson accent */
 }
 
+/* Social Icons Dark Mode Colors and Hover Fix */
+.dark .nav-link[href*="facebook.com"],
+.dark a[href*="facebook.com"] {
+  color: #1877F2 !important;
+}
+.dark .nav-link[href*="facebook.com"]:hover,
+.dark a[href*="facebook.com"]:hover {
+  color: #1877F2 !important;
+  opacity: 0.8 !important;
+}
+
+.dark .nav-link[href*="nextdoor.com"],
+.dark a[href*="nextdoor.com"] {
+  color: #00B24F !important;
+}
+.dark .nav-link[href*="nextdoor.com"]:hover,
+.dark a[href*="nextdoor.com"]:hover {
+  color: #00B24F !important;
+  opacity: 0.8 !important;
+}
+
+.dark .nav-link[href*="yelp.com"],
+.dark a[href*="yelp.com"] {
+  color: #FF1A1A !important;
+}
+.dark .nav-link[href*="yelp.com"]:hover,
+.dark a[href*="yelp.com"]:hover {
+  color: #FF1A1A !important;
+  opacity: 0.8 !important;
+}
+
 
 
 
