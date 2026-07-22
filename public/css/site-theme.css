@@ -1,0 +1,389 @@
+:root {
+  --brand-navy: #1b2a4a;
+  --brand-navy-deep: #101b31;
+  --brand-navy-soft: #263a62;
+  --brand-crimson: #a61f2e;
+  --brand-crimson-dark: #7f1723;
+  --brand-crimson-soft: #f8e9eb;
+  --brand-ink: #172033;
+  --brand-muted: #5f6b7a;
+  --brand-line: #dce2ea;
+  --brand-surface: #ffffff;
+  --brand-canvas: #f5f7fa;
+  --brand-radius-sm: 0.75rem;
+  --brand-radius: 1rem;
+  --brand-radius-lg: 1.5rem;
+  --brand-shadow-sm: 0 8px 24px rgba(27, 42, 74, 0.08);
+  --brand-shadow: 0 18px 45px rgba(27, 42, 74, 0.12);
+  --brand-shadow-strong: 0 22px 55px rgba(16, 27, 49, 0.22);
+}
+
+html {
+  color-scheme: light;
+  background: var(--brand-canvas);
+}
+
+body {
+  color: var(--brand-ink);
+  background-color: var(--brand-canvas) !important;
+  background-image:
+    radial-gradient(circle at 8% 0%, rgba(166, 31, 46, 0.045), transparent 28rem),
+    linear-gradient(180deg, #fafbfd 0%, var(--brand-canvas) 24rem);
+  font-family: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  color: #fff;
+  background: var(--brand-crimson);
+}
+
+.text-red-600 {
+  color: var(--brand-crimson) !important;
+}
+
+.border-red-600 {
+  border-color: var(--brand-crimson) !important;
+}
+
+.ring-red-600 {
+  --tw-ring-color: var(--brand-crimson) !important;
+}
+
+.bg-red-600 {
+  background-color: var(--brand-crimson) !important;
+}
+
+.hover\:bg-red-700:hover {
+  background-color: var(--brand-crimson-dark) !important;
+}
+
+.text-blue-900 {
+  color: var(--brand-navy) !important;
+}
+
+.bg-blue-900 {
+  background-color: var(--brand-navy) !important;
+}
+
+.border-blue-900 {
+  border-color: var(--brand-navy) !important;
+}
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 3px solid rgba(166, 31, 46, 0.38) !important;
+  outline-offset: 3px;
+}
+
+:where(h1, h2, h3, h4) {
+  color: var(--brand-navy);
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+
+body > nav.sticky {
+  border-bottom-color: var(--brand-crimson) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  box-shadow: 0 8px 30px rgba(27, 42, 74, 0.11) !important;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+body > nav.sticky > div:first-child {
+  min-height: 4.75rem;
+}
+
+body > nav.sticky img {
+  border-color: var(--brand-crimson) !important;
+  box-shadow: 0 0 0 3px rgba(166, 31, 46, 0.08);
+}
+
+body > nav.sticky a[href="#top"] p:first-of-type,
+body > nav.sticky a[href="/"] p:first-of-type {
+  color: var(--brand-crimson) !important;
+}
+
+.hidden.md\:flex > .nav-link {
+  color: #374151 !important;
+  font-size: 0.98rem;
+  letter-spacing: -0.01em;
+}
+
+.hidden.md\:flex > .nav-link:hover,
+.hidden.md\:flex > .nav-link.border-b-2.border-red-600 {
+  color: var(--brand-crimson) !important;
+  border-bottom-color: var(--brand-crimson) !important;
+}
+
+#mobile-menu {
+  border-top-color: rgba(166, 31, 46, 0.18) !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+}
+
+#mobile-menu > :where(a, button) {
+  border-radius: 0.65rem;
+  padding-inline: 0.75rem;
+}
+
+#mobile-menu > :where(a, button):hover {
+  color: var(--brand-crimson) !important;
+  background: var(--brand-crimson-soft);
+}
+
+.section-nav-link.active-section {
+  color: var(--brand-crimson) !important;
+  border-color: rgba(166, 31, 46, 0.28) !important;
+  background-color: var(--brand-crimson-soft) !important;
+}
+
+body > header.bg-gradient-to-r,
+main > section.bg-gradient-to-r,
+main.bg-gradient-to-b {
+  background-color: var(--brand-navy-deep) !important;
+  background-image:
+    radial-gradient(circle at 82% 18%, rgba(166, 31, 46, 0.3), transparent 24rem),
+    linear-gradient(125deg, var(--brand-navy-deep), var(--brand-navy-soft) 55%, var(--brand-navy)) !important;
+}
+
+.hero {
+  background-image:
+    linear-gradient(rgba(16, 27, 49, 0.82), rgba(16, 27, 49, 0.82)),
+    url('/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=80') !important;
+  background-position: center !important;
+  background-size: cover !important;
+}
+
+body > header.bg-gradient-to-r::before {
+  background-color: rgba(255, 255, 255, 0.035) !important;
+}
+
+body > header :where(h1, h2, h3),
+main.bg-gradient-to-b :where(h1, h2, h3),
+.hero :where(h1, h2, h3),
+footer :where(h2, h3, h4) {
+  color: #fff;
+}
+
+body > main,
+body > header + main {
+  position: relative;
+}
+
+main :where(.bg-white.rounded-xl, .bg-white.rounded-2xl, .bg-white.rounded-3xl),
+.service-card,
+.generated-service-card {
+  border-color: var(--brand-line) !important;
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: var(--brand-shadow-sm) !important;
+}
+
+main :where(.bg-white.rounded-xl, .bg-white.rounded-2xl, .bg-white.rounded-3xl):hover,
+.service-card:hover,
+.generated-service-card:hover {
+  border-color: rgba(166, 31, 46, 0.42) !important;
+  box-shadow: var(--brand-shadow) !important;
+}
+
+.service-card,
+.generated-service-card {
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease !important;
+}
+
+.service-card:hover,
+.generated-service-card:hover {
+  transform: translateY(-4px) !important;
+}
+
+:where(a, button, input[type="submit"]).bg-red-600 {
+  border: 1px solid var(--brand-crimson-dark);
+  background-color: var(--brand-crimson) !important;
+  box-shadow: 0 9px 22px rgba(166, 31, 46, 0.2);
+}
+
+:where(a, button, input[type="submit"]).bg-red-600:hover {
+  background-color: var(--brand-crimson-dark) !important;
+  box-shadow: 0 12px 28px rgba(127, 23, 35, 0.28);
+  transform: translateY(-1px);
+}
+
+:where(a, button).bg-blue-900 {
+  border: 1px solid var(--brand-navy-deep);
+  background-color: var(--brand-navy) !important;
+  box-shadow: 0 9px 22px rgba(27, 42, 74, 0.18);
+}
+
+:where(a, button).bg-blue-900:hover {
+  background-color: var(--brand-navy-deep) !important;
+}
+
+:where(a, button).bg-green-600 {
+  border: 1px solid #126b35;
+  background-color: #178447 !important;
+  box-shadow: 0 9px 22px rgba(23, 132, 71, 0.2);
+}
+
+:where(a, button).bg-green-600:hover {
+  background-color: #126b35 !important;
+}
+
+:where(a, button)[class*="bg-"][class*="text-white"] {
+  transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  border-color: #cfd7e2;
+  border-radius: var(--brand-radius-sm) !important;
+  box-shadow: inset 0 1px 2px rgba(27, 42, 74, 0.04);
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea):focus {
+  border-color: var(--brand-crimson) !important;
+  box-shadow: 0 0 0 4px rgba(166, 31, 46, 0.12) !important;
+}
+
+form label {
+  color: var(--brand-navy);
+  font-weight: 700;
+}
+
+main.bg-gradient-to-b form label,
+.bg-gray-800 form label,
+form.bg-gray-800 label {
+  color: #fff;
+}
+
+details {
+  border-color: var(--brand-line) !important;
+  border-radius: var(--brand-radius) !important;
+  background: var(--brand-surface);
+  box-shadow: var(--brand-shadow-sm);
+}
+
+details summary {
+  color: var(--brand-navy);
+}
+
+body > footer {
+  border-top: 5px solid var(--brand-crimson);
+  background-color: var(--brand-navy-deep) !important;
+  background-image:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.025) 25%, transparent 25%),
+    linear-gradient(315deg, rgba(255, 255, 255, 0.018) 25%, transparent 25%),
+    linear-gradient(180deg, var(--brand-navy) 0%, var(--brand-navy-deep) 100%);
+  background-size: 28px 28px, 28px 28px, auto;
+  color: #bac4d3 !important;
+}
+
+body > footer .border-gray-800 {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+body > footer a {
+  text-underline-offset: 0.2em;
+}
+
+body > footer a:hover {
+  color: #fff !important;
+}
+
+body > footer a.text-red-500 {
+  color: #f28a95 !important;
+}
+
+#back-to-top {
+  border: 2px solid rgba(255, 255, 255, 0.88) !important;
+  background: var(--brand-crimson) !important;
+  box-shadow: 0 12px 30px rgba(16, 27, 49, 0.25) !important;
+}
+
+.dark {
+  color-scheme: dark;
+  --brand-canvas: #07111f;
+  --brand-surface: #0d1d30;
+  --brand-ink: #eef3f8;
+  --brand-muted: #b6c2d1;
+  --brand-line: #263b55;
+}
+
+.dark .text-blue-900 {
+  color: #fff !important;
+}
+
+.dark .text-red-600 {
+  color: #f28a95 !important;
+}
+
+.dark body {
+  background-color: var(--brand-canvas) !important;
+  background-image: radial-gradient(circle at 8% 0%, rgba(166, 31, 46, 0.12), transparent 30rem) !important;
+}
+
+.dark body > nav.sticky {
+  background: rgba(9, 24, 40, 0.96) !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.32) !important;
+}
+
+.dark #mobile-menu {
+  background: #0d1d30 !important;
+}
+
+.dark main :where(.bg-white.rounded-xl, .bg-white.rounded-2xl, .bg-white.rounded-3xl),
+.dark .service-card,
+.dark .generated-service-card,
+.dark details {
+  border-color: var(--brand-line) !important;
+  background-color: var(--brand-surface) !important;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.2) !important;
+}
+
+.dark form label,
+.dark details summary {
+  color: #f7f9fc;
+}
+
+@media (max-width: 767px) {
+  body > nav.sticky > div:first-child {
+    min-height: 4.25rem;
+  }
+
+  body > header.bg-gradient-to-r {
+    padding-block: 3.25rem !important;
+  }
+
+  .hero {
+    background-image:
+      linear-gradient(rgba(16, 27, 49, 0.86), rgba(16, 27, 49, 0.86)),
+      url('/.netlify/images?url=/logo-banner.jpg&w=960&fm=avif&q=80') !important;
+  }
+
+  body > footer {
+    padding-top: 3rem !important;
+  }
+
+  :where(a, button)[class*="px-"][class*="py-"][class*="text-white"] {
+    min-height: 2.875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+
+  .service-card,
+  .generated-service-card,
+  :where(a, button)[class*="bg-"] {
+    transition-duration: 0.01ms !important;
+  }
+
+  .service-card:hover,
+  .generated-service-card:hover,
+  :where(a, button)[class*="bg-"]:hover {
+    transform: none !important;
+  }
+}
