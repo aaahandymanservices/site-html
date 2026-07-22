@@ -1,4 +1,7 @@
+/privacy.html /privacy            301!
 /privacy    /privacy.html    200
+/book.html  /book             301!
+/book       /book.html       200
 /terms.html /terms            301!
 /terms      /terms.html      200
 /reviews    /reviews.html    200
