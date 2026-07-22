@@ -172,7 +172,7 @@ function page(city) {
 
     <!-- Search Engine Optimization (SEO) Metadata -->
     <meta name="description" content="${desc}">
-    <meta name="theme-color" content="#8e1f26">
+    <meta name="theme-color" content="#A61F2E">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <meta name="geo.region" content="US-MI">
     <meta name="geo.placename" content="${city.name}, Michigan">
@@ -199,6 +199,7 @@ ${jsonLd(city)}
 
     <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
     <link rel="stylesheet" href="/css/tailwind.css?v=20260720">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260722">
 
     <!-- Brand font: Roboto -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style">
