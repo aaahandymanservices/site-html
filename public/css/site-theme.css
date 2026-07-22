@@ -228,10 +228,13 @@ body > header.bg-gradient-to-r::before {
   background-color: rgba(255, 255, 255, 0.035) !important;
 }
 
-body > header :where(h1, h2, h3),
-main.bg-gradient-to-b :where(h1, h2, h3),
-.hero :where(h1, h2, h3),
-footer :where(h2, h3, h4) {
+html:not(.dark) header :where(h1, h2, h3, h4),
+html:not(.dark) footer :where(h2, h3, h4),
+html:not(.dark) .hero :where(h1, h2, h3, h4),
+html:not(.dark) main.bg-gradient-to-b :where(h1, h2, h3, h4),
+html:not(.dark) .bg-gradient-to-r :where(h1, h2, h3, h4),
+html:not(.dark) .bg-gray-900 :where(h1, h2, h3, h4),
+html:not(.dark) .bg-blue-950 :where(h1, h2, h3, h4) {
   color: #f8fafc;
 }
 
@@ -337,7 +340,11 @@ form.bg-gray-800 label {
   color: #f1f5f9;
 }
 
-/* Solid white cards on dark section */
+/* Solid white cards on dark section keep dark headings */
+html:not(.dark) .bg-white :where(h1, h2, h3, h4, h5, h6) {
+  color: var(--brand-navy);
+}
+
 html:not(.dark) main.bg-gradient-to-b .bg-white :where(h1, h2, h3, h4) {
   color: var(--brand-navy);
 }
