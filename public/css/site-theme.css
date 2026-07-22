@@ -6,7 +6,7 @@
   --brand-crimson-dark: #7f1723;
   --brand-crimson-soft: #f8e9eb;
   --brand-ink: #172033;
-  --brand-muted: #5f6b7a;
+  --brand-muted: #526075;
   --brand-line: #dce2ea;
   --brand-surface: #ffffff;
   --brand-canvas: #f5f7fa;
@@ -38,6 +38,27 @@ body {
 ::selection {
   color: #fff;
   background: var(--brand-crimson);
+}
+
+/* Light mode text contrast adjustments */
+html:not(.dark) :where(p, span, label, li, small, td, th).text-gray-400:not(.dark *),
+html:not(.dark) :where(p, span, label, li, small, td, th).text-slate-400:not(.dark *) {
+  color: #526075;
+}
+
+html:not(.dark) :where(p, span, label, li, small, td, th).text-gray-500:not(.dark *),
+html:not(.dark) :where(p, span, label, li, small, td, th).text-slate-500:not(.dark *) {
+  color: #475569;
+}
+
+/* Protect dark section text in light mode */
+body > header.bg-gradient-to-r :where(p, span, label, li, small, div).text-gray-400,
+main.bg-gradient-to-b :where(p, span, label, li, small, div).text-gray-400,
+main.bg-gradient-to-b :where(p, span, label, li, small, div).text-slate-400,
+.hero :where(p, span, label, li, small, div).text-gray-400,
+.bg-gray-900 :where(p, span, label, li, small, div).text-gray-400,
+footer :where(p, span, label, li, small, div).text-gray-400 {
+  color: #94a3b8 !important;
 }
 
 .text-red-600 {
@@ -163,7 +184,7 @@ body > header :where(h1, h2, h3),
 main.bg-gradient-to-b :where(h1, h2, h3),
 .hero :where(h1, h2, h3),
 footer :where(h2, h3, h4) {
-  color: #fff;
+  color: #f8fafc;
 }
 
 body > main,
@@ -252,15 +273,10 @@ form label {
 main.bg-gradient-to-b form label,
 .bg-gray-800 form label,
 form.bg-gray-800 label {
-  color: #fff;
+  color: #f1f5f9;
 }
 
-/*
- * Solid white cards (e.g. the review and careers forms) can sit inside a dark
- * gradient section. The rules above assume the form is directly on the dark
- * background and turn labels/headings white, which is invisible on a white card.
- * In light mode, keep text dark whenever it lives inside a solid .bg-white card.
- */
+/* Solid white cards on dark section */
 html:not(.dark) main.bg-gradient-to-b .bg-white :where(h1, h2, h3, h4) {
   color: var(--brand-navy);
 }
@@ -288,7 +304,7 @@ body > footer {
     linear-gradient(315deg, rgba(255, 255, 255, 0.018) 25%, transparent 25%),
     linear-gradient(180deg, var(--brand-navy) 0%, var(--brand-navy-deep) 100%);
   background-size: 28px 28px, 28px 28px, auto;
-  color: #bac4d3 !important;
+  color: #a0aec0 !important;
 }
 
 body > footer .border-gray-800 {
@@ -300,11 +316,11 @@ body > footer a {
 }
 
 body > footer a:hover {
-  color: #fff !important;
+  color: #e2e8f0 !important;
 }
 
 body > footer a.text-red-500 {
-  color: #f28a95 !important;
+  color: #e06c75 !important;
 }
 
 #back-to-top {
@@ -313,49 +329,217 @@ body > footer a.text-red-500 {
   box-shadow: 0 12px 30px rgba(16, 27, 49, 0.25) !important;
 }
 
+/* ==========================================================================
+   Dark Mode Overrides - Softened for reduced glare
+   ========================================================================== */
+
 .dark {
   color-scheme: dark;
-  --brand-canvas: #07111f;
-  --brand-surface: #0d1d30;
-  --brand-ink: #eef3f8;
-  --brand-muted: #b6c2d1;
-  --brand-line: #263b55;
-}
-
-.dark .text-blue-900 {
-  color: #fff !important;
-}
-
-.dark .text-red-600 {
-  color: #f28a95 !important;
+  --brand-canvas: #091422;
+  --brand-surface: #0e2034;
+  --brand-ink: #e2e8f0;
+  --brand-muted: #94a3b8;
+  --brand-line: #20354f;
 }
 
 .dark body {
   background-color: var(--brand-canvas) !important;
-  background-image: radial-gradient(circle at 8% 0%, rgba(166, 31, 46, 0.12), transparent 30rem) !important;
+  background-image: radial-gradient(circle at 8% 0%, rgba(166, 31, 46, 0.09), transparent 30rem) !important;
+  color: var(--brand-ink) !important;
 }
 
+/* Softer text tone in dark mode */
+.dark :where(h1, h2, h3, h4, h5, h6) {
+  color: #f1f5f9 !important;
+}
+
+.dark .text-blue-900,
+.dark .text-blue-950,
+.dark .text-indigo-900 {
+  color: #f1f5f9 !important;
+}
+
+.dark .text-red-600,
+.dark .text-red-700 {
+  color: #e06c75 !important;
+}
+
+.dark .text-red-500,
+.dark .text-red-400 {
+  color: #e57373 !important;
+}
+
+.dark .text-gray-950,
+.dark .text-gray-900,
+.dark .text-slate-900,
+.dark .text-black {
+  color: #f1f5f9 !important;
+}
+
+.dark .text-gray-800,
+.dark .text-slate-800,
+.dark .text-gray-700,
+.dark .text-slate-700 {
+  color: #e2e8f0 !important;
+}
+
+.dark .text-gray-600,
+.dark .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+.dark .text-gray-500,
+.dark .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+.dark .text-gray-400,
+.dark .text-slate-400 {
+  color: #8292a6 !important;
+}
+
+.dark .text-gray-300,
+.dark .text-slate-300 {
+  color: #cbd5e1 !important;
+}
+
+/* Softer Navigation & Header in dark mode */
 .dark body > nav.sticky {
-  background: rgba(9, 24, 40, 0.96) !important;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.32) !important;
+  background: rgba(12, 28, 44, 0.96) !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.3) !important;
+  border-bottom-color: var(--brand-crimson) !important;
+}
+
+.dark body > nav.sticky p.text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+.dark .hidden.md\:flex > .nav-link,
+.dark .nav-link {
+  color: #cbd5e1 !important;
+}
+
+.dark .hidden.md\:flex > .nav-link:hover,
+.dark .hidden.md\:flex > .nav-link.border-b-2.border-red-600,
+.dark .nav-link:hover {
+  color: #e06c75 !important;
+  border-bottom-color: #e06c75 !important;
 }
 
 .dark #mobile-menu {
-  background: #0d1d30 !important;
+  background: #0e2034 !important;
+  border-top-color: var(--brand-line) !important;
 }
 
-.dark main :where(.bg-white.rounded-xl, .bg-white.rounded-2xl, .bg-white.rounded-3xl),
+.dark #mobile-menu a {
+  color: #cbd5e1 !important;
+}
+
+.dark #mobile-menu a:hover {
+  color: #e06c75 !important;
+  background: rgba(166, 31, 46, 0.18) !important;
+}
+
+/* Cards & Surfaces in dark mode */
+.dark main :where(.bg-white, .bg-gray-50, .bg-gray-100, .bg-slate-50, .bg-slate-100),
 .dark .service-card,
 .dark .generated-service-card,
+.dark .careers-card,
 .dark details {
   border-color: var(--brand-line) !important;
   background-color: var(--brand-surface) !important;
-  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.2) !important;
+  color: var(--brand-ink) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25) !important;
 }
 
+.dark .border-gray-100,
+.dark .border-gray-200,
+.dark .border-gray-300,
+.dark .border-slate-200,
+.dark .border-slate-300,
+.dark .border-slate-800 {
+  border-color: var(--brand-line) !important;
+}
+
+/* Forms & Inputs in dark mode */
 .dark form label,
 .dark details summary {
-  color: #f7f9fc;
+  color: #e2e8f0 !important;
+}
+
+.dark form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea),
+.dark :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea).booking-control,
+.dark :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea).quote-control {
+  background-color: #061220 !important;
+  color: #f1f5f9 !important;
+  border-color: var(--brand-line) !important;
+}
+
+.dark form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea):focus,
+.dark :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea).booking-control:focus {
+  border-color: var(--brand-crimson) !important;
+  box-shadow: 0 0 0 4px rgba(166, 31, 46, 0.2) !important;
+}
+
+.dark form :where(input, select, textarea)::placeholder,
+.dark :where(input, select, textarea)::placeholder {
+  color: #8292a6 !important;
+  opacity: 1 !important;
+}
+
+.dark select option {
+  background-color: #0e2034 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Interactive Components (Quote Calculator & Area Checker) in dark mode */
+.dark #quote-calculator .bg-white {
+  background-color: var(--brand-surface) !important;
+  border-color: var(--brand-line) !important;
+}
+
+.dark #quote-calculator h3,
+.dark #quote-calculator label {
+  color: #f1f5f9 !important;
+}
+
+.dark #quote-calculator p {
+  color: #94a3b8 !important;
+}
+
+.dark .quote-zone-btn {
+  border-color: var(--brand-line) !important;
+  color: #e2e8f0 !important;
+  background-color: #091728 !important;
+}
+
+.dark .quote-zone-btn.active,
+.dark .quote-zone-btn:hover {
+  border-color: var(--brand-crimson) !important;
+  background-color: rgba(166, 31, 46, 0.2) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .bg-green-50 {
+  background-color: rgba(22, 101, 52, 0.2) !important;
+  color: #86efac !important;
+  border-color: rgba(34, 197, 94, 0.3) !important;
+}
+
+.dark .bg-green-50 a,
+.dark .bg-green-50 .text-green-600 {
+  color: #4ade80 !important;
+}
+
+.dark .bg-amber-50 {
+  background-color: rgba(146, 64, 14, 0.2) !important;
+  color: #fde047 !important;
+  border-color: rgba(234, 179, 8, 0.3) !important;
+}
+
+.dark .bg-amber-50 a,
+.dark .bg-amber-50 .text-amber-600 {
+  color: #facc15 !important;
 }
 
 @media (max-width: 767px) {
