@@ -17,6 +17,45 @@ body { font-family: 'Roboto', sans-serif; }
   .generated-service-card:hover { transform: none !important; }
 }
 
+/* Light Mode Softened Contrast & Reduced Glare Overrides */
+html:not(.dark) {
+  background-color: #eef2f6 !important;
+  color: #273549 !important;
+}
+html:not(.dark) body {
+  background-color: #eef2f6 !important;
+  color: #273549 !important;
+}
+html:not(.dark) .bg-white {
+  background-color: #f8fafc !important;
+}
+html:not(.dark) .bg-gray-50,
+html:not(.dark) .bg-slate-50 {
+  background-color: #eef2f6 !important;
+}
+html:not(.dark) .bg-gray-100,
+html:not(.dark) .bg-slate-100 {
+  background-color: #e2e8f0 !important;
+}
+html:not(.dark) .text-gray-900,
+html:not(.dark) .text-gray-950,
+html:not(.dark) .text-slate-900,
+html:not(.dark) .text-blue-900,
+html:not(.dark) .text-blue-950,
+html:not(.dark) .text-black {
+  color: #273549 !important;
+}
+html:not(.dark) .text-gray-800,
+html:not(.dark) .text-slate-800,
+html:not(.dark) .text-gray-700,
+html:not(.dark) .text-slate-700 {
+  color: #334155 !important;
+}
+html:not(.dark) .text-gray-600,
+html:not(.dark) .text-slate-600 {
+  color: #475569 !important;
+}
+
 /* Dark Mode Overrides */
 .dark {
   background-color: #050e16 !important;
