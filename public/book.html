@@ -230,8 +230,9 @@
                         <div class="bg-gray-800/30 rounded-3xl p-6 sm:p-8 border border-gray-800/80 shadow-2xl relative">
                             
                             <!-- Form State Container -->
-                            <form id="booking-form" name="bookings" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
+                            <form id="booking-form" name="bookings" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
                                 <input type="hidden" name="form-name" value="bookings" />
+                                <input type="hidden" name="photoUrl" value="" />
                                 <p class="hidden">
                                     <label>Don't fill this out if you're human: <input name="bot-field" /></label>
                                 </p>
@@ -321,6 +322,32 @@
                                 <div>
                                     <label for="booking-message" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Project Details & Special Notes <span class="text-gray-500 lowercase font-normal">(optional)</span></label>
                                     <textarea id="booking-message" name="message" rows="4" placeholder="Please describe what tasks or repairs need to be addressed..." class="w-full px-5 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-base text-white resize-none"></textarea>
+                                </div>
+
+                                <div>
+                                    <div class="flex items-end justify-between gap-4 mb-2">
+                                        <label for="booking-photo" class="block text-xs uppercase tracking-wider font-semibold text-gray-400">Repair Photo <span class="text-gray-500 lowercase font-normal">(optional)</span></label>
+                                        <span class="text-[11px] text-gray-500">JPG, PNG or WebP · 10 MB max</span>
+                                    </div>
+                                    <label id="booking-photo-dropzone" for="booking-photo" class="group block cursor-pointer rounded-2xl border-2 border-dashed border-gray-700 bg-gray-900/45 p-4 transition hover:border-red-500/80 hover:bg-gray-900/70 focus-within:border-red-500">
+                                        <input id="booking-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" capture="environment" class="sr-only">
+                                        <div id="booking-photo-empty" class="flex items-center gap-4">
+                                            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-600/15 text-xl text-red-400 transition group-hover:bg-red-600 group-hover:text-white"><i class="fas fa-camera"></i></span>
+                                            <span>
+                                                <span class="block font-bold text-white">Snap or upload the repair</span>
+                                                <span class="mt-1 block text-sm leading-relaxed text-gray-400">A clear photo helps us diagnose the issue and prepare materials before your visit.</span>
+                                            </span>
+                                        </div>
+                                        <div id="booking-photo-preview-wrap" class="hidden items-center gap-4">
+                                            <img id="booking-photo-preview" class="h-20 w-24 shrink-0 rounded-xl border border-gray-700 object-cover" alt="Selected repair preview">
+                                            <span class="min-w-0 flex-1">
+                                                <span id="booking-photo-name" class="block truncate font-bold text-white"></span>
+                                                <span class="mt-1 block text-sm text-green-400"><i class="fas fa-check-circle mr-1"></i>Ready to upload</span>
+                                            </span>
+                                            <button id="booking-photo-remove" type="button" class="rounded-lg border border-gray-700 px-3 py-2 text-sm font-semibold text-gray-300 transition hover:border-red-500 hover:text-white">Remove</button>
+                                        </div>
+                                    </label>
+                                    <p id="booking-photo-error" class="mt-2 hidden text-sm font-semibold text-red-400" role="alert"></p>
                                 </div>
 
                                 <div class="flex items-start gap-3 bg-gray-900/50 p-4 rounded-xl border border-gray-800">
@@ -674,9 +701,130 @@
             }
         })();
 
+        const bookingPhoto = document.getElementById('booking-photo');
+        const bookingPhotoDropzone = document.getElementById('booking-photo-dropzone');
+        const bookingPhotoEmpty = document.getElementById('booking-photo-empty');
+        const bookingPhotoPreviewWrap = document.getElementById('booking-photo-preview-wrap');
+        const bookingPhotoPreview = document.getElementById('booking-photo-preview');
+        const bookingPhotoName = document.getElementById('booking-photo-name');
+        const bookingPhotoRemove = document.getElementById('booking-photo-remove');
+        const bookingPhotoError = document.getElementById('booking-photo-error');
+        const MAX_SOURCE_PHOTO_BYTES = 10 * 1024 * 1024;
+        const MAX_UPLOAD_PHOTO_BYTES = 5 * 1024 * 1024;
+        const MAX_PHOTO_DIMENSION = 2000;
+        const BOOKING_PHOTO_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+        let bookingPhotoPreviewUrl = '';
+
+        const showBookingPhotoError = (message = '') => {
+            if (!bookingPhotoError) return;
+            bookingPhotoError.textContent = message;
+            bookingPhotoError.classList.toggle('hidden', !message);
+        };
+
+        const clearBookingPhoto = () => {
+            if (bookingPhoto) bookingPhoto.value = '';
+            if (bookingPhotoPreviewUrl) URL.revokeObjectURL(bookingPhotoPreviewUrl);
+            bookingPhotoPreviewUrl = '';
+            bookingPhotoPreview?.removeAttribute('src');
+            bookingPhotoPreviewWrap?.classList.add('hidden');
+            bookingPhotoPreviewWrap?.classList.remove('flex');
+            bookingPhotoEmpty?.classList.remove('hidden');
+            showBookingPhotoError();
+        };
+
+        const updateBookingPhotoPreview = () => {
+            const file = bookingPhoto?.files?.[0];
+            if (!file) {
+                clearBookingPhoto();
+                return;
+            }
+            if (!BOOKING_PHOTO_TYPES.has(file.type)) {
+                clearBookingPhoto();
+                showBookingPhotoError('Choose a JPG, PNG, or WebP image.');
+                return;
+            }
+            if (file.size > MAX_SOURCE_PHOTO_BYTES) {
+                clearBookingPhoto();
+                showBookingPhotoError('Choose a photo that is 10 MB or smaller.');
+                return;
+            }
+            if (bookingPhotoPreviewUrl) URL.revokeObjectURL(bookingPhotoPreviewUrl);
+            bookingPhotoPreviewUrl = URL.createObjectURL(file);
+            bookingPhotoPreview.src = bookingPhotoPreviewUrl;
+            bookingPhotoName.textContent = file.name || 'Repair photo';
+            bookingPhotoEmpty?.classList.add('hidden');
+            bookingPhotoPreviewWrap?.classList.remove('hidden');
+            bookingPhotoPreviewWrap?.classList.add('flex');
+            showBookingPhotoError();
+        };
+
+        const prepareBookingPhoto = (file) => new Promise((resolve, reject) => {
+            if (!(file instanceof File) || file.size <= MAX_UPLOAD_PHOTO_BYTES) {
+                resolve(file);
+                return;
+            }
+            const url = URL.createObjectURL(file);
+            const image = new Image();
+            image.onload = () => {
+                URL.revokeObjectURL(url);
+                const scale = Math.min(1, MAX_PHOTO_DIMENSION / Math.max(image.width, image.height));
+                const canvas = document.createElement('canvas');
+                canvas.width = Math.max(1, Math.round(image.width * scale));
+                canvas.height = Math.max(1, Math.round(image.height * scale));
+                const context = canvas.getContext('2d');
+                if (!context) {
+                    reject(new Error('That photo could not be prepared for upload.'));
+                    return;
+                }
+                context.drawImage(image, 0, 0, canvas.width, canvas.height);
+                canvas.toBlob((blob) => {
+                    if (!blob) {
+                        reject(new Error('That photo could not be prepared for upload.'));
+                        return;
+                    }
+                    const name = `${(file.name || 'repair-photo').replace(/\.[^.]+$/, '')}.jpg`;
+                    resolve(new File([blob], name, { type: 'image/jpeg' }));
+                }, 'image/jpeg', 0.82);
+            };
+            image.onerror = () => {
+                URL.revokeObjectURL(url);
+                reject(new Error('That photo could not be read. Please choose a different image.'));
+            };
+            image.src = url;
+        });
+
+        bookingPhoto?.addEventListener('change', updateBookingPhotoPreview);
+        bookingPhotoRemove?.addEventListener('click', (event) => {
+            event.preventDefault();
+            clearBookingPhoto();
+        });
+
+        if (bookingPhotoDropzone && bookingPhoto) {
+            ['dragenter', 'dragover'].forEach((eventName) => {
+                bookingPhotoDropzone.addEventListener(eventName, (event) => {
+                    event.preventDefault();
+                    bookingPhotoDropzone.classList.add('border-red-500', 'bg-gray-900/70');
+                });
+            });
+            ['dragleave', 'drop'].forEach((eventName) => {
+                bookingPhotoDropzone.addEventListener(eventName, (event) => {
+                    event.preventDefault();
+                    bookingPhotoDropzone.classList.remove('border-red-500', 'bg-gray-900/70');
+                });
+            });
+            bookingPhotoDropzone.addEventListener('drop', (event) => {
+                const file = event.dataTransfer?.files?.[0];
+                if (!file) return;
+                const transfer = new DataTransfer();
+                transfer.items.add(file);
+                bookingPhoto.files = transfer.files;
+                updateBookingPhotoPreview();
+            });
+        }
+
         // Form submission via API
         if (bookingForm) {
-            bookingForm.addEventListener('submit', function(e) {
+            bookingForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
                 // Validation
@@ -705,32 +853,31 @@
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = 'PROCESSING BOOKING... <i class="fas fa-spinner animate-spin"></i>';
 
-                const requestData = {
-                    customerName: name,
-                    email: email,
-                    phone: phone,
-                    service: service,
-                    bookingDate: bookingDate,
-                    bookingTime: bookingTime,
-                    message: message,
-                    optIn: optIn
-                };
-
-                fetch('/api/booking', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(requestData)
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        return response.json().then(data => {
-                            throw new Error(data.error || 'Failed to submit booking.');
-                        });
+                try {
+                    const sourcePhoto = bookingPhoto?.files?.[0] || null;
+                    const uploadPhoto = sourcePhoto ? await prepareBookingPhoto(sourcePhoto) : null;
+                    if (uploadPhoto && uploadPhoto.size > MAX_UPLOAD_PHOTO_BYTES) {
+                        throw new Error('The photo is still too large after processing. Please choose a smaller image.');
                     }
-                })
-                .then(data => {
+
+                    const requestData = new FormData();
+                    requestData.append('customerName', name);
+                    requestData.append('email', email);
+                    requestData.append('phone', phone);
+                    requestData.append('service', service);
+                    requestData.append('bookingDate', bookingDate);
+                    requestData.append('bookingTime', bookingTime);
+                    requestData.append('message', message);
+                    requestData.append('seasonal-opt-in', optIn ? 'on' : 'off');
+                    if (uploadPhoto) requestData.append('photo', uploadPhoto, uploadPhoto.name);
+
+                    const response = await fetch('/api/booking', {
+                        method: 'POST',
+                        body: requestData
+                    });
+                    const data = await response.json().catch(() => ({}));
+                    if (!response.ok) throw new Error(data.error || 'Failed to submit booking.');
+
                     // Nice confirmation details update
                     document.getElementById('summary-service').innerText = service;
                     
@@ -755,6 +902,9 @@
                     netlifyFormData.append('bookingTime', bookingTime);
                     netlifyFormData.append('message', message);
                     netlifyFormData.append('seasonal-opt-in', optIn ? 'on' : 'off');
+                    if (data.booking?.photoUrl) {
+                        netlifyFormData.append('photoUrl', new URL(data.booking.photoUrl, window.location.origin).href);
+                    }
 
                     fetch('/book.html', {
                         method: 'POST',
@@ -765,12 +915,11 @@
                     // Toggle States
                     bookingForm.classList.add('hidden');
                     document.getElementById('success-state').classList.remove('hidden');
-                })
-                .catch(error => {
+                } catch (error) {
                     setBookingError(`${error.message} Please double-check your details or call us directly.`);
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = 'CONFIRM BOOKING DETAILS <i class="fas fa-calendar-check"></i>';
-                });
+                }
             });
         }
     </script>
