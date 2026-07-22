@@ -282,16 +282,18 @@ ${jsonLd(city)}
                 <span class="mx-2">/</span>
                 <span class="text-white font-semibold">${city.name}</span>
             </nav>
-            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-3">${city.region} &middot; Oakland County, MI</div>            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">Handyman in ${city.name}, Michigan</h1>
+            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-2">${city.region} &middot; Oakland County, MI</div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">Handyman in ${city.name}, Michigan</h1>
+            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5"></i>Serving ${city.name} &amp; surrounding Oakland County communities</p>
             <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
                 Trusted, locally owned home repair and maintenance for ${city.name} homeowners. No job too small &mdash; backed by our 1-Year Workmanship Guarantee and honest, upfront pricing.
             </p>
-            <div class="mt-8 flex flex-wrap justify-center gap-4">
-                <a href="tel:${PHONE_TEL}" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-green-600/30 transition flex items-center gap-2">
-                    <i class="fas fa-phone"></i> Call Now! ${PHONE_DISPLAY}
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="/book?service=General+Estimate+%2F+Quote&amp;city=${enc(city.name)}" class="bg-red-600 hover:bg-red-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-red-600/30 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-calendar-check"></i> Book Online / Get a Free Quote
                 </a>
-                <a href="/book?service=General+Estimate+%2F+Quote&city=${enc(city.name)}" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold px-6 py-3 rounded-xl transition flex items-center gap-2">
-                    <i class="fas fa-calendar-check"></i> Book Online Now
+                <a href="tel:${PHONE_TEL}" class="bg-green-600 hover:bg-green-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-green-600/30 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-phone"></i> Call Now! ${PHONE_DISPLAY}
                 </a>
             </div>
         </div>

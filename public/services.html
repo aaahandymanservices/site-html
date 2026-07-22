@@ -348,16 +348,20 @@
                 <span class="mx-2">/</span>
                 <span class="text-white font-semibold">Services</span>
             </nav>
-            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-3">Our Expertise</div>            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">Professional Handyman Services</h1>
-            <p class="text-lg sm:text-xl md:text-2xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
-                No job is too small! We provide reliable, high-quality, and transparently priced home repair and maintenance solutions across Oakland County, Michigan.
+            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-2">Our Expertise &amp; Packages</div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">Professional Handyman Services</h1>
+            <p class="text-sm sm:text-base md:text-lg font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5"></i>Serving Waterford, Troy, West Bloomfield, Rochester Hills, Royal Oak, Clarkston &amp; surrounding Oakland County communities</p>
+            <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
+                No job is too small! We provide reliable, high-quality, and transparently priced home repair, maintenance, and bundled packages across Oakland County, Michigan.
             </p>
-            <div class="mt-8 flex flex-wrap justify-center gap-4">
-                <a href="tel:+12483853432" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-green-600/30 transition flex items-center gap-2">
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="/book" class="bg-red-600 hover:bg-red-700 text-white font-bold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-red-600/30 transition flex items-center justify-center gap-2.5">
+                    <i class="fas fa-calendar-check"></i>
+                    Book Online / Get a Free Quote
+                </a>
+                <a href="tel:+12483853432" class="bg-green-600 hover:bg-green-700 text-white font-bold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-green-600/30 transition flex items-center justify-center gap-2.5">
                     <i class="fas fa-phone"></i>
                     Call Now! (248) 385-3432
-                </a>
-                <a href="/rates" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold px-6 py-3 rounded-xl transition">                    View Pricing & Rates
                 </a>
             </div>
         </div>
@@ -365,38 +369,137 @@
 
     <main class="py-12 sm:py-16 bg-gray-50 flex-grow">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-2xl sm:text-3xl font-bold text-blue-900">Guaranteed Craftsmanship & Repairs</h2>
-                <p class="mt-2 text-gray-600 max-w-xl mx-auto">Browse our core services below. Every job is covered by our trusted 1-Year Workmanship Guarantee.</p>
+
+            <!-- Popular Themed Packages Section -->
+            <div class="mb-16">
+                <div class="text-center mb-8">
+                    <span class="bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full"><i class="fas fa-layer-group mr-1"></i> Bundled Savings</span>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mt-2">High-Margin Service Packages &amp; Bundles</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">Group popular home maintenance projects into one streamlined appointment for faster results and better value.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Seasonal Prep Package -->
+                    <div class="bg-white border-2 border-red-600 rounded-3xl p-6 shadow-md flex flex-col justify-between hover:shadow-xl transition relative">
+                        <span class="absolute -top-3 right-6 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">High Value</span>
+                        <div>
+                            <div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl text-amber-700 mb-4"><i class="fas fa-snowflake-sun"></i></div>
+                            <h3 class="text-xl font-bold text-blue-900 mb-2">Seasonal Prep Package</h3>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4">Protect your home before seasonal weather shifts. Includes gutter clearing, draft-stopping weatherstripping, window sash checks, and deck maintenance inspection.</p>
+                            <ul class="space-y-2 text-xs text-gray-600 mb-6">
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Full gutter &amp; downspout clearing</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Weatherstripping &amp; door sweep replacement</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Deck board, railing &amp; seal inspection</li>
+                            </ul>
+                        </div>
+                        <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-gray-500 block font-medium">Package Rate</span>
+                                <span class="text-2xl font-black text-blue-900">$295 <span class="text-xs font-normal text-gray-500">(Half-Day Rate)</span></span>
+                            </div>
+                            <a href="/book?package=seasonal-prep" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition">Schedule Package</a>
+                        </div>
+                    </div>
+
+                    <!-- Move-In / Move-Out Bundle -->
+                    <div class="bg-white border-2 border-blue-900 rounded-3xl p-6 shadow-md flex flex-col justify-between hover:shadow-xl transition relative">
+                        <span class="absolute -top-3 right-6 bg-blue-900 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Most Requested</span>
+                        <div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl text-blue-900 mb-4"><i class="fas fa-truck-ramp-box"></i></div>
+                            <h3 class="text-xl font-bold text-blue-900 mb-2">Move-In / Move-Out Bundle</h3>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4">Settle in or prep for sale seamlessly. Covers TV wall mounting, drywall wall patching, paint touch-ups, and fresh deadbolt or smart lock upgrades.</p>
+                            <ul class="space-y-2 text-xs text-gray-600 mb-6">
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Flat-screen TV mounting (up to 65")</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Wall patching, nail pops &amp; touch-up paint</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Lock / deadbolt installation &amp; adjustment</li>
+                            </ul>
+                        </div>
+                        <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-gray-500 block font-medium">Package Rate</span>
+                                <span class="text-2xl font-black text-blue-900">$320 <span class="text-xs font-normal text-gray-500">(Customizable)</span></span>
+                            </div>
+                            <a href="/book?package=move-in-out" class="bg-blue-900 hover:bg-blue-800 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition">Schedule Package</a>
+                        </div>
+                    </div>
+
+                    <!-- Senior Safety & Accessibility Package -->
+                    <div class="bg-white border-2 border-emerald-600 rounded-3xl p-6 shadow-md flex flex-col justify-between hover:shadow-xl transition relative">
+                        <span class="absolute -top-3 right-6 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Peace of Mind</span>
+                        <div>
+                            <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-2xl text-emerald-800 mb-4"><i class="fas fa-hands-holding-child"></i></div>
+                            <h3 class="text-xl font-bold text-blue-900 mb-2">Senior Safety &amp; Accessibility</h3>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4">Independent living made secure and comfortable. Includes heavy-duty grab bar anchoring, easy-lever door handle swaps, and trip-hazard elimination.</p>
+                            <ul class="space-y-2 text-xs text-gray-600 mb-6">
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Bathroom grab bar mounting (up to 2)</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Easy-grip lever handle conversions</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Non-slip stair treads &amp; handrail checks</li>
+                            </ul>
+                        </div>
+                        <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-gray-500 block font-medium">Package Rate</span>
+                                <span class="text-2xl font-black text-blue-900">$275 <span class="text-xs font-normal text-gray-500">(Includes Hardware)</span></span>
+                            </div>
+                            <a href="/book?package=senior-safety" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition">Schedule Package</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <nav aria-label="Jump to a service" class="max-w-5xl mx-auto mb-12">
-                <p class="text-center text-xs uppercase tracking-widest text-blue-600 font-semibold mb-4"><i class="fas fa-list-ul mr-1"></i> Jump to a service</p>
-                <div class="flex flex-wrap justify-center gap-2 sm:gap-3">
-                    <a href="#carpentry" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Carpentry</a>
-                    <a href="#doors-windows" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Doors &amp; Windows</a>
-                    <a href="#energy-efficiency" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Energy-Efficiency</a>
-                    <a href="#dryer-vent" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Dryer Vent</a>
-                    <a href="#drywall-repair" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Drywall</a>
-                    <a href="#painting-staining" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Painting &amp; Staining</a>
-                    <a href="#flooring-solutions" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Flooring</a>
-                    <a href="#tile-install" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Tile</a>
-                    <a href="#minor-plumbing" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Plumbing</a>
-                    <a href="#tub-shower-recaulk" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Re-Caulk</a>
-                    <a href="#minor-electrical" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Electrical</a>
-                    <a href="#installation" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Installation</a>
-                    <a href="#furniture-assembly" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Furniture Assembly</a>
-                    <a href="#garage-storage" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Garage &amp; Storage</a>
-                    <a href="#decks-fences" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Decks &amp; Fences</a>
-                    <a href="#gutters" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Gutters</a>
-                    <a href="#power-washing" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Power Washing</a>
-                    <a href="#projects-for-pets" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Projects for Pets</a>
-                    <a href="#home-repair-upkeep" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Home Repair</a>
-                    <a href="#preventative-maintenance" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Preventative</a>
-                    <a href="#maintenance-cleaning" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Maintenance</a>
-                    <a href="#senior-care" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Senior Care</a>
-                    <a href="#home-security" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Home Security</a>
-                    <a href="#commercial" class="text-sm font-medium px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Commercial</a>
+            <!-- Grouped Jump Links -->
+            <nav aria-label="Jump to a service group" class="max-w-6xl mx-auto mb-12 bg-white p-6 rounded-3xl border border-gray-200 shadow-sm">
+                <p class="text-center text-xs uppercase tracking-widest text-blue-900 font-bold mb-4"><i class="fas fa-compass mr-1"></i> Grouped Service Navigation</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 text-xs font-semibold">
+                    <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
+                        <span class="block text-red-600 font-bold uppercase tracking-wider mb-2"><i class="fas fa-wrench mr-1"></i> Repairs</span>
+                        <div class="space-y-1 flex flex-col text-gray-700">
+                            <a href="#carpentry" class="hover:text-red-600">Carpentry</a>
+                            <a href="#doors-windows" class="hover:text-red-600">Doors &amp; Windows</a>
+                            <a href="#drywall-repair" class="hover:text-red-600">Drywall Repair</a>
+                            <a href="#painting-staining" class="hover:text-red-600">Painting &amp; Staining</a>
+                            <a href="#flooring-solutions" class="hover:text-red-600">Flooring Solutions</a>
+                            <a href="#tile-install" class="hover:text-red-600">Tile Install</a>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
+                        <span class="block text-blue-900 font-bold uppercase tracking-wider mb-2"><i class="fas fa-plug mr-1"></i> Installations</span>
+                        <div class="space-y-1 flex flex-col text-gray-700">
+                            <a href="#installation" class="hover:text-red-600">TV Mounting &amp; Installs</a>
+                            <a href="#minor-electrical" class="hover:text-red-600">Minor Electrical</a>
+                            <a href="#minor-plumbing" class="hover:text-red-600">Minor Plumbing</a>
+                            <a href="#furniture-assembly" class="hover:text-red-600">Furniture Assembly</a>
+                            <a href="#garage-storage" class="hover:text-red-600">Garage Storage</a>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
+                        <span class="block text-amber-700 font-bold uppercase tracking-wider mb-2"><i class="fas fa-leaf mr-1"></i> Maintenance</span>
+                        <div class="space-y-1 flex flex-col text-gray-700">
+                            <a href="#gutters" class="hover:text-red-600">Gutters</a>
+                            <a href="#dryer-vent" class="hover:text-red-600">Dryer Vent Cleaning</a>
+                            <a href="#energy-efficiency" class="hover:text-red-600">Energy Tune-Up</a>
+                            <a href="#decks-fences" class="hover:text-red-600">Decks &amp; Fences</a>
+                            <a href="#power-washing" class="hover:text-red-600">Power Washing</a>
+                            <a href="#home-repair-upkeep" class="hover:text-red-600">Home Upkeep</a>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
+                        <span class="block text-emerald-700 font-bold uppercase tracking-wider mb-2"><i class="fas fa-shield-cat mr-1"></i> Safety &amp; Smart</span>
+                        <div class="space-y-1 flex flex-col text-gray-700">
+                            <a href="#senior-care" class="hover:text-red-600">Senior Care &amp; Grab Bars</a>
+                            <a href="#home-security" class="hover:text-red-600">Smart Home &amp; Locks</a>
+                            <a href="#tub-shower-recaulk" class="hover:text-red-600">Tub &amp; Shower Re-Caulk</a>
+                            <a href="#projects-for-pets" class="hover:text-red-600">Projects for Pets</a>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
+                        <span class="block text-purple-700 font-bold uppercase tracking-wider mb-2"><i class="fas fa-layer-group mr-1"></i> Bundles &amp; Rates</span>
+                        <div class="space-y-1 flex flex-col text-gray-700">
+                            <a href="/rates" class="hover:text-red-600">Flat-Rate Menu</a>
+                            <a href="/rates#time-packages" class="hover:text-red-600">Half/Full-Day Packages</a>
+                            <a href="#commercial" class="hover:text-red-600">Commercial Services</a>
+                        </div>
+                    </div>
                 </div>
             </nav>
 
@@ -538,14 +641,18 @@
 
                 <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
                     <div>
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-faucet-drip"></i></div>
-                        <h3 id="minor-plumbing" class="text-2xl font-semibold mb-3 text-blue-900">Minor Plumbing &amp; Leak Prevention</h3>
-                        <p class="text-gray-600 mb-4">Stop the drip, protect your home. We provide fast, clean solutions for leaky faucets, showerheads, and stubborn drains—plus the small preventative fixes that stop a slow leak from becoming an expensive emergency.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Faucet, Showerhead &amp; Drain Repair</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Under-Sink Valve &amp; Supply-Line Swaps</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Toilet Rebuilds &amp; Wax Ring Replacement</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Leak Sensor &amp; Washer Hose Upgrades</li>
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600" aria-hidden="true"><i class="fas fa-faucet-drip"></i></div>
+                            <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $135</span>
+                        </div>
+                        <h3 id="minor-plumbing" class="text-2xl font-semibold mb-2 text-blue-900">Minor Plumbing &amp; Leak Prevention</h3>
+                        <p class="text-[11px] font-semibold text-blue-900 bg-blue-50 p-2.5 rounded-xl border border-blue-100 mb-3"><i class="fas fa-info-circle text-blue-600 mr-1"></i>Ideal for minor repairs, fixture replacements &amp; hardware upgrades. For major re-wiring or full replumbing, we can coordinate with licensed trades.</p>
+                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">Stop the drip, protect your home. We provide fast, clean solutions for leaky faucets, showerheads, and stubborn drains—plus preventative fixes that stop water damage.</p>
+                        <ul class="space-y-1.5 text-xs text-gray-600">
+                            <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Faucet, Showerhead &amp; Drain Repair</li>
+                            <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Under-Sink Valve &amp; Supply-Line Swaps</li>
+                            <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Toilet Rebuilds &amp; Wax Ring Replacement</li>
+                            <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Leak Sensor &amp; Washer Hose Upgrades</li>
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
@@ -575,9 +682,13 @@
 
                 <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
                     <div>
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-lightbulb"></i></div>
-                        <h3 id="minor-electrical" class="text-2xl font-semibold mb-3 text-blue-900">Minor Electrical Services</h3>
-                        <p class="text-gray-600 mb-4">Safe, reliable updates. Keep your home powered and bright. We specialize in replacing outdated switches, outlets, and fixtures or installing new ceiling fans with safety and code-conscious precision. (Note: We focus on fixtures and safety updates; new wiring or breaker box installations are not included.)</p>
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900" aria-hidden="true"><i class="fas fa-lightbulb"></i></div>
+                            <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $125</span>
+                        </div>
+                        <h3 id="minor-electrical" class="text-2xl font-semibold mb-2 text-blue-900">Minor Electrical Services</h3>
+                        <p class="text-[11px] font-semibold text-blue-900 bg-blue-50 p-2.5 rounded-xl border border-blue-100 mb-3"><i class="fas fa-info-circle text-blue-600 mr-1"></i>Ideal for minor repairs, fixture replacements &amp; hardware upgrades. For major re-wiring or full replumbing, we can coordinate with licensed trades.</p>
+                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">Safe, reliable updates. Keep your home powered and bright. We replace outdated switches, outlets, dimmers, light fixtures, and ceiling fans with safety precision.</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
                         <a href="/services/minor-electrical" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
