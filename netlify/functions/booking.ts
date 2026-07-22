@@ -1,7 +1,11 @@
 import type { Config } from "@netlify/functions";
+import { getStore } from "@netlify/blobs";
 import { eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { bookings, seasonalSubscribers } from "../../db/schema.js";
+
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 
 const json = (body: unknown, init?: ResponseInit) =>
   Response.json(body, {
@@ -38,6 +42,7 @@ export default async (request: Request) => {
     let bookingTime = "";
     let message = "";
     let optIn = false;
+    let photo: File | null = null;
 
     // Handle JSON or URLSearchParams (standard form POST or application/json)
     const contentType = request.headers.get("content-type") || "";
@@ -61,6 +66,8 @@ export default async (request: Request) => {
       bookingTime = String(formData.get("bookingTime") || "").trim();
       message = String(formData.get("message") || "").trim();
       optIn = formData.get("seasonal-opt-in") === "on" || formData.get("seasonal-opt-in") === "true";
+      const uploadedPhoto = formData.get("photo");
+      photo = uploadedPhoto instanceof File && uploadedPhoto.size > 0 ? uploadedPhoto : null;
     }
 
     if (!customerName || !email || !phone || !service || !bookingDate || !bookingTime) {
@@ -79,17 +86,42 @@ export default async (request: Request) => {
       return errorJson("Please provide a valid 10-digit phone number.", 400);
     }
 
-    // Insert new booking request
-    const [newBooking] = await db.insert(bookings).values({
-      customerName,
-      email,
-      phone,
-      service,
-      bookingDate,
-      bookingTime,
-      message: message || null,
-      status: "pending"
-    }).returning();
+    if (photo && photo.size > MAX_IMAGE_SIZE) {
+      return errorJson("The repair photo must be 5 MB or smaller.", 400);
+    }
+
+    if (photo && !IMAGE_TYPES.has(photo.type)) {
+      return errorJson("Upload a JPG, PNG, or WebP repair photo.", 400);
+    }
+
+    let photoKey: string | null = null;
+    const photoStore = getStore("booking-repair-photos");
+
+    if (photo) {
+      const extension = photo.type.split("/")[1]?.replace("jpeg", "jpg") ?? "jpg";
+      photoKey = `${Date.now()}-${crypto.randomUUID()}.${extension}`;
+      await photoStore.set(photoKey, await photo.arrayBuffer());
+    }
+
+    let newBooking: typeof bookings.$inferSelect;
+    try {
+      [newBooking] = await db.insert(bookings).values({
+        customerName,
+        email,
+        phone,
+        service,
+        bookingDate,
+        bookingTime,
+        message: message || null,
+        photoKey,
+        status: "pending"
+      }).returning();
+    } catch (error) {
+      if (photoKey) {
+        await photoStore.delete(photoKey).catch(() => undefined);
+      }
+      throw error;
+    }
 
     // Proactively handle seasonal newsletter opt-in if checked
     if (optIn) {
@@ -127,7 +159,8 @@ export default async (request: Request) => {
         customerName: newBooking.customerName,
         service: newBooking.service,
         bookingDate: newBooking.bookingDate,
-        bookingTime: newBooking.bookingTime
+        bookingTime: newBooking.bookingTime,
+        photoUrl: newBooking.photoKey ? `/api/booking/photo/${newBooking.photoKey}` : null
       }
     }, { status: 201 });
   } catch (err: any) {
