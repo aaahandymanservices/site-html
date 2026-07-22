@@ -522,7 +522,7 @@ ${costGuideSection(service)}
 ${service.features.map(featureCard).join('\n')}
                 </div>
                 <div class="mt-8 text-center">
-                    <a href="/services" class="inline-flex items-center justify-center gap-2 bg-blue-900 hover:bg-blue-800 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-semibold transition shadow-lg">
+                    <a href="/services" class="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-semibold transition shadow-lg hover:shadow-green-600/30">
                         View All Services <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -536,7 +536,7 @@ ${service.features.map(featureCard).join('\n')}
 ${related.map(relatedCard).join('\n')}
                 </div>
                 <div class="mt-6 text-center">
-                    <a href="/services" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-900 text-white hover:bg-blue-800 rounded-xl transition font-semibold"><i class="fas fa-list"></i> Browse All Services</a>
+                    <a href="/services" class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition font-semibold shadow-md hover:shadow-green-600/30"><i class="fas fa-list"></i> Browse All Services</a>
                 </div>
             </div>
 
@@ -564,7 +564,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                     <a href="tel:${PHONE_TEL}" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-green-600/30">
                         <i class="fas fa-phone"></i> ${PHONE_DISPLAY}
                     </a>
-                    <a href="/book?service=${enc(service.formService)}" class="inline-flex items-center gap-2 bg-white text-blue-900 hover:bg-gray-100 font-semibold px-6 py-3 rounded-xl transition shadow-lg">
+                    <a href="/book?service=${enc(service.formService)}" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/30">
                         <i class="fas fa-calendar-check"></i> Book Online Now
                     </a>
                 </div>
