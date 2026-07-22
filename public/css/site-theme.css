@@ -217,15 +217,19 @@ main :where(.bg-white.rounded-xl, .bg-white.rounded-2xl, .bg-white.rounded-3xl):
   transform: translateY(-4px) !important;
 }
 
-:where(a, button, input[type="submit"]).bg-red-600 {
+:where(a, button, input[type="submit"]).bg-red-600,
+.dark :where(a, button, input[type="submit"]).bg-red-600 {
   border: 1px solid var(--brand-crimson-dark);
   background-color: var(--brand-crimson) !important;
-  box-shadow: 0 9px 22px rgba(166, 31, 46, 0.2);
+  color: #ffffff !important;
+  box-shadow: 0 9px 22px rgba(166, 31, 46, 0.25);
 }
 
-:where(a, button, input[type="submit"]).bg-red-600:hover {
+:where(a, button, input[type="submit"]).bg-red-600:hover,
+.dark :where(a, button, input[type="submit"]).bg-red-600:hover {
   background-color: var(--brand-crimson-dark) !important;
-  box-shadow: 0 12px 28px rgba(127, 23, 35, 0.28);
+  color: #ffffff !important;
+  box-shadow: 0 12px 28px rgba(127, 23, 35, 0.35);
   transform: translateY(-1px);
 }
 
@@ -239,14 +243,20 @@ main :where(.bg-white.rounded-xl, .bg-white.rounded-2xl, .bg-white.rounded-3xl):
   background-color: var(--brand-navy-deep) !important;
 }
 
-:where(a, button).bg-green-600 {
+:where(a, button, input[type="submit"]).bg-green-600,
+.dark :where(a, button, input[type="submit"]).bg-green-600 {
   border: 1px solid #126b35;
   background-color: #178447 !important;
-  box-shadow: 0 9px 22px rgba(23, 132, 71, 0.2);
+  color: #ffffff !important;
+  box-shadow: 0 9px 22px rgba(23, 132, 71, 0.25);
 }
 
-:where(a, button).bg-green-600:hover {
+:where(a, button, input[type="submit"]).bg-green-600:hover,
+.dark :where(a, button, input[type="submit"]).bg-green-600:hover {
   background-color: #126b35 !important;
+  color: #ffffff !important;
+  box-shadow: 0 12px 28px rgba(18, 107, 53, 0.35);
+  transform: translateY(-1px);
 }
 
 :where(a, button)[class*="bg-"][class*="text-white"] {

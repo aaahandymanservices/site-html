@@ -192,14 +192,14 @@ body { font-family: 'Roboto', sans-serif; }
 /* Review edit and delete buttons and panels in dark mode */
 .dark button.review-edit-btn,
 .dark .review-edit-btn {
-  background-color: #2563eb !important;
-  border-color: #2563eb !important;
+  background-color: #178447 !important;
+  border-color: #126b35 !important;
   color: #ffffff !important;
 }
 .dark button.review-edit-btn:hover,
 .dark .review-edit-btn:hover {
-  background-color: #1d4ed8 !important;
-  border-color: #1d4ed8 !important;
+  background-color: #126b35 !important;
+  border-color: #0c4d28 !important;
   color: #ffffff !important;
 }
 
@@ -270,20 +270,55 @@ body { font-family: 'Roboto', sans-serif; }
   color: #cbd5e1 !important;
 }
 
+/* Unified CTA Button Design System Rules */
+:where(a, button, input[type="submit"]).bg-red-600,
+.dark :where(a, button, input[type="submit"]).bg-red-600 {
+  background-color: #a61f2e !important;
+  color: #ffffff !important;
+  border: 1px solid #7f1723 !important;
+  box-shadow: 0 9px 22px rgba(166, 31, 46, 0.25) !important;
+}
+
+:where(a, button, input[type="submit"]).bg-red-600:hover,
+.dark :where(a, button, input[type="submit"]).bg-red-600:hover {
+  background-color: #7f1723 !important;
+  color: #ffffff !important;
+  border-color: #5c101b !important;
+  box-shadow: 0 12px 28px rgba(127, 23, 35, 0.35) !important;
+  transform: translateY(-1px);
+}
+
+:where(a, button, input[type="submit"]).bg-green-600,
+.dark :where(a, button, input[type="submit"]).bg-green-600 {
+  background-color: #178447 !important;
+  color: #ffffff !important;
+  border: 1px solid #126b35 !important;
+  box-shadow: 0 9px 22px rgba(23, 132, 71, 0.25) !important;
+}
+
+:where(a, button, input[type="submit"]).bg-green-600:hover,
+.dark :where(a, button, input[type="submit"]).bg-green-600:hover {
+  background-color: #126b35 !important;
+  color: #ffffff !important;
+  border-color: #0c4d28 !important;
+  box-shadow: 0 12px 28px rgba(18, 107, 53, 0.35) !important;
+  transform: translateY(-1px);
+}
+
 /* Grok Verbatim Button and Form Elements Fix */
 /* Fix Edit Buttons & Form Elements in Dark Mode */
-.dark button:not(#theme-toggle-btn):not(#mobile-menu-btn):not(#back-to-top):not([class^="aaa-"]):not([class*=" aaa-"]),
-.dark .btn:not([class^="aaa-"]):not([class*=" aaa-"]),
+.dark button:not(#theme-toggle-btn):not(#mobile-menu-btn):not(#back-to-top):not([class^="aaa-"]):not([class*=" aaa-"]):not(.bg-red-600):not(.bg-green-600),
+.dark .btn:not([class^="aaa-"]):not([class*=" aaa-"]):not(.bg-red-600):not(.bg-green-600),
 .dark .edit-button:not([class^="aaa-"]):not([class*=" aaa-"]),
-.dark [type="button"]:not(#theme-toggle-btn):not(#mobile-menu-btn):not(#back-to-top):not([class^="aaa-"]):not([class*=" aaa-"]),
-.dark [type="submit"]:not([class^="aaa-"]):not([class*=" aaa-"]) {
+.dark [type="button"]:not(#theme-toggle-btn):not(#mobile-menu-btn):not(#back-to-top):not([class^="aaa-"]):not([class*=" aaa-"]):not(.bg-red-600):not(.bg-green-600),
+.dark [type="submit"]:not([class^="aaa-"]):not([class*=" aaa-"]):not(.bg-red-600):not(.bg-green-600) {
   background-color: #3b82f6 !important;
   color: white !important;
   border-color: #2563eb !important;
 }
 
-.dark button:not(#theme-toggle-btn):not(#mobile-menu-btn):not(#back-to-top):not([class^="aaa-"]):not([class*=" aaa-"]):hover,
-.dark .btn:not([class^="aaa-"]):not([class*=" aaa-"]):hover {
+.dark button:not(#theme-toggle-btn):not(#mobile-menu-btn):not(#back-to-top):not([class^="aaa-"]):not([class*=" aaa-"]):not(.bg-red-600):not(.bg-green-600):hover,
+.dark .btn:not([class^="aaa-"]):not([class*=" aaa-"]):not(.bg-red-600):not(.bg-green-600):hover {
   background-color: #2563eb !important;
 }
 
@@ -307,13 +342,12 @@ body { font-family: 'Roboto', sans-serif; }
 /* Reviews Page Dark Mode Fix with Perfect Target Matching */
 .dark #reviews .edit-button,
 .dark button.edit,
-.dark .cancel,
 .dark [data-action="edit"],
 .dark button.review-edit-btn,
 .dark .review-edit-btn {
-  background-color: #3b82f6 !important;
+  background-color: #178447 !important;
   color: white !important;
-  border: 1px solid #2563eb !important;
+  border: 1px solid #126b35 !important;
 }
 
 .dark #reviews .cancel-button,
