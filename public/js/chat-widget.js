@@ -296,7 +296,9 @@
       opened = true;
       addMessage("assistant", GREETING);
     }
-    document.body.style.overflow = "hidden";
+    if (window.innerWidth < 768) {
+      document.body.style.overflow = "hidden";
+    }
     setTimeout(function () { input.focus(); }, 50);
   }
 
