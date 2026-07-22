@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1b2a4a">
+  <title>Admin Sign In | AAA Handyman Services</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/admin.css">
+  <script src="/js/admin-login.js" defer></script>
+</head>
+<body>
+  <main class="login-page">
+    <section class="login-brand-panel" aria-label="AAA Handyman Services admin portal">
+      <a class="brand" href="/" aria-label="AAA Handyman Services home">
+        <img class="brand-mark" src="/logo-circular.png" alt="AAA Handyman Services">
+        <span><span class="brand-name">AAA Handyman Services</span><span class="brand-label">Private Operations</span></span>
+      </a>
+      <div class="login-message">
+        <p class="eyebrow">Customer Care Desk</p>
+        <h1>Keep every job moving.</h1>
+        <p>Manage the day’s schedule, update job progress, and let customers know when service is on the way.</p>
+      </div>
+      <p class="login-foot">Authorized administrators only · aaahandyman.services</p>
+    </section>
+    <section class="login-form-panel">
+      <form class="login-card" id="login-form">
+        <p class="eyebrow">Secure Access</p>
+        <h2>Welcome back</h2>
+        <p>Sign in with the administrator account assigned through Netlify Identity.</p>
+        <div class="form-error" id="login-error" role="alert" hidden></div>
+        <div class="field">
+          <label class="label" for="email">Email address</label>
+          <input class="input" id="email" name="email" type="email" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label class="label" for="password">Password</label>
+          <input class="input" id="password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <button class="button button-primary" id="login-button" type="submit">Sign in to dashboard</button>
+        <p class="login-help">Access is limited to invited users with the <strong>admin</strong> role. Contact the site owner if access needs to be added or restored.</p>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
