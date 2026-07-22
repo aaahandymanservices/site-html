@@ -255,6 +255,20 @@ form.bg-gray-800 label {
   color: #fff;
 }
 
+/*
+ * Solid white cards (e.g. the review and careers forms) can sit inside a dark
+ * gradient section. The rules above assume the form is directly on the dark
+ * background and turn labels/headings white, which is invisible on a white card.
+ * In light mode, keep text dark whenever it lives inside a solid .bg-white card.
+ */
+html:not(.dark) main.bg-gradient-to-b .bg-white :where(h1, h2, h3, h4) {
+  color: var(--brand-navy);
+}
+
+html:not(.dark) main.bg-gradient-to-b .bg-white form label {
+  color: var(--brand-navy);
+}
+
 details {
   border-color: var(--brand-line) !important;
   border-radius: var(--brand-radius) !important;
