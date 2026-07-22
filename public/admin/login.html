@@ -41,6 +41,22 @@
         <button class="button button-primary" id="login-button" type="submit">Sign in to dashboard</button>
         <p class="login-help">Access is limited to invited users with the <strong>admin</strong> role. Contact the site owner if access needs to be added or restored.</p>
       </form>
+      <form class="login-card" id="password-form" hidden>
+        <p class="eyebrow">Secure Access</p>
+        <h2 id="password-heading">Create your password</h2>
+        <p id="password-description">Choose a password to finish activating your administrator account.</p>
+        <div class="form-error" id="password-error" role="alert" hidden></div>
+        <div class="field">
+          <label class="label" for="new-password">New password</label>
+          <input class="input" id="new-password" name="password" type="password" autocomplete="new-password" minlength="8" required>
+        </div>
+        <div class="field">
+          <label class="label" for="confirm-password">Confirm new password</label>
+          <input class="input" id="confirm-password" name="confirm-password" type="password" autocomplete="new-password" minlength="8" required>
+        </div>
+        <button class="button button-primary" id="password-button" type="submit">Set password and continue</button>
+        <p class="login-help">For security, this link can only be used once and may expire. Request a new invitation or recovery email if it no longer works.</p>
+      </form>
     </section>
   </main>
 </body>

@@ -1,4 +1,10 @@
 (function () {
+  const authCallback = new URLSearchParams(window.location.hash.slice(1));
+  if (authCallback.has('invite_token') || authCallback.has('recovery_token')) {
+    window.location.replace(`/admin/login${window.location.hash}`);
+    return;
+  }
+
   // --- Dark Mode Integration (Decoupled & Robust) ---
   const initDarkMode = () => {
     const menuBtn = document.getElementById('mobile-menu-btn');
