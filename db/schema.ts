@@ -32,8 +32,8 @@ export const bookings = pgTable("bookings", {
   bookingDate: text("booking_date").notNull(),
   bookingTime: text("booking_time").notNull(),
   message: text("message"),
+  photoKey: text("photo_key"),
   status: text("status").default("pending").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
-
 
