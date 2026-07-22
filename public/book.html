@@ -78,6 +78,18 @@
             color: #ffffff;
             box-shadow: 0 4px 12px rgba(142, 31, 38, 0.3);
         }
+        .time-slot-btn:focus-visible {
+            outline: 3px solid rgba(248, 113, 113, 0.5);
+            outline-offset: 3px;
+        }
+        .booking-step-number {
+            background: #a61f2e;
+            box-shadow: 0 0 0 5px rgba(166, 31, 46, 0.16);
+        }
+        .booking-control:focus-visible {
+            border-color: #f87171;
+            box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.16);
+        }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -225,73 +237,86 @@
                                     <label>Don't fill this out if you're human: <input name="bot-field" /></label>
                                 </p>
                                 
+                                <fieldset class="rounded-2xl border border-gray-700 bg-gray-900/45 p-5 sm:p-6">
+                                    <legend class="px-3 text-lg sm:text-xl font-bold text-white">Schedule Your Service</legend>
+                                    <p class="mb-6 text-sm leading-relaxed text-gray-400">Choose a project, date, and arrival window. Your appointment remains a request until our team confirms it with you.</p>
+
+                                    <div class="space-y-6">
+                                        <div class="grid grid-cols-[2.25rem_1fr] gap-4 items-start">
+                                            <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden="true">1</span>
+                                            <div>
+                                                <label for="booking-service" class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Select Service Package or Project *</label>
+                                                <div class="relative">
+                                                    <select id="booking-service" name="service" required class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white appearance-none">
+                                                        <option value="" disabled selected class="bg-gray-800 text-gray-400">Choose a package or project...</option>
+                                                        <option value="Minor Repair & Upkeep (1 Hour)" class="bg-gray-800 text-white">Minor Repair &amp; Upkeep (1 Hour)</option>
+                                                        <option value="Carpentry & Installation (2 Hours)" class="bg-gray-800 text-white">Carpentry &amp; Installation (2 Hours)</option>
+                                                        <option value="Fixture or Outlet Replacement (1.5 Hours)" class="bg-gray-800 text-white">Fixture or Outlet Replacement (1.5 Hours)</option>
+                                                        <option value="Seasonal Prep Package" class="bg-gray-800 text-white">Seasonal Prep Package ($295)</option>
+                                                        <option value="Move-In / Move-Out Bundle" class="bg-gray-800 text-white">Move-In / Move-Out Bundle ($320)</option>
+                                                        <option value="Senior Safety & Accessibility Package" class="bg-gray-800 text-white">Senior Safety &amp; Accessibility Package ($275)</option>
+                                                        <option value="General Estimate / Quote" class="bg-gray-800 text-white">General Estimate / Quote</option>
+                                                        <option value="4-Hour Handyman Package" class="bg-gray-800 text-white">4-Hour Handyman Package ($280)</option>
+                                                        <option value="6-Hour Handyman Package" class="bg-gray-800 text-white">6-Hour Handyman Package ($400)</option>
+                                                        <option value="8-Hour Handyman Package" class="bg-gray-800 text-white">8-Hour Handyman Package ($520)</option>
+                                                        <option value="Carpentry & Trim" class="bg-gray-800 text-white">Carpentry &amp; Trim</option>
+                                                        <option value="Doors & Windows" class="bg-gray-800 text-white">Doors &amp; Windows</option>
+                                                        <option value="Drywall Repair" class="bg-gray-800 text-white">Drywall Repair</option>
+                                                        <option value="Painting & Staining" class="bg-gray-800 text-white">Painting &amp; Staining</option>
+                                                        <option value="Flooring Solutions" class="bg-gray-800 text-white">Flooring Solutions</option>
+                                                        <option value="Minor Plumbing" class="bg-gray-800 text-white">Minor Plumbing</option>
+                                                        <option value="Minor Electrical" class="bg-gray-800 text-white">Minor Electrical</option>
+                                                        <option value="Installation & Mounting" class="bg-gray-800 text-white">Installation &amp; Mounting</option>
+                                                        <option value="Decks & Fences" class="bg-gray-800 text-white">Decks &amp; Fences</option>
+                                                        <option value="Gutters" class="bg-gray-800 text-white">Gutters</option>
+                                                        <option value="Other / Custom Project" class="bg-gray-800 text-white">Other (Specify below)</option>
+                                                    </select>
+                                                    <div class="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none text-gray-400"><i class="fas fa-chevron-down"></i></div>
+                                                </div>
+                                                <div id="service-package-info" class="hidden mt-3 p-4 bg-gray-950/60 border border-gray-700 rounded-xl text-xs sm:text-sm text-gray-300"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-[2.25rem_1fr] gap-4 items-start">
+                                            <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden="true">2</span>
+                                            <div>
+                                                <label for="booking-date" class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Choose a Date *</label>
+                                                <input id="booking-date" type="date" name="bookingDate" required aria-describedby="booking-date-help booking-error" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
+                                                <p id="booking-date-help" class="mt-2 text-xs text-gray-400">Appointments begin tomorrow. Monday–Saturday availability only.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-[2.25rem_1fr] gap-4 items-start">
+                                            <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden="true">3</span>
+                                            <div>
+                                                <span id="time-slot-label" class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Select Arrival Window *</span>
+                                                <input type="hidden" id="booking-time" name="bookingTime" required>
+                                                <div id="time-slots-container" class="grid sm:grid-cols-3 gap-3" role="group" aria-labelledby="time-slot-label"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <div class="flex items-center gap-3 pt-1" aria-hidden="true">
+                                    <span class="h-px flex-1 bg-gray-700"></span>
+                                    <span class="text-xs font-bold uppercase tracking-[0.18em] text-gray-400">Contact Details</span>
+                                    <span class="h-px flex-1 bg-gray-700"></span>
+                                </div>
+
                                 <div class="grid sm:grid-cols-2 gap-6">
                                     <div>
                                         <label for="booking-name" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Your Name *</label>
-                                        <input id="booking-name" type="text" name="name" required autocomplete="name" class="w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none focus:border-red-500 text-base text-white">
+                                        <input id="booking-name" type="text" name="name" required autocomplete="name" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
                                     </div>
                                     <div>
                                         <label for="booking-email" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Email Address *</label>
-                                        <input id="booking-email" type="email" name="email" required autocomplete="email" class="w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none focus:border-red-500 text-base text-white">
+                                        <input id="booking-email" type="email" name="email" required autocomplete="email" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
                                     </div>
                                 </div>
 
-                                <div class="grid sm:grid-cols-2 gap-6">
-                                    <div>
-                                        <label for="booking-phone" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Phone Number *</label>
-                                        <input id="booking-phone" type="tel" name="phone" required autocomplete="tel" placeholder="(248) 385-3432" class="w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none focus:border-red-500 text-base text-white">
-                                    </div>
-                                    <div>
-                                        <label for="booking-service" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Service / Project Type *</label>
-                                        <div class="relative">
-                                            <select id="booking-service" name="service" required class="w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none focus:border-red-500 text-base text-white appearance-none">
-                                                <option value="" disabled selected class="bg-gray-800 text-gray-400">Select a Service or Package...</option>
-                                                <option value="Seasonal Prep Package" class="bg-gray-800 text-white font-bold text-red-400">Seasonal Prep Package ($295)</option>
-                                                <option value="Move-In / Move-Out Bundle" class="bg-gray-800 text-white font-bold text-blue-400">Move-In / Move-Out Bundle ($320)</option>
-                                                <option value="Senior Safety & Accessibility Package" class="bg-gray-800 text-white font-bold text-emerald-400">Senior Safety &amp; Accessibility Package ($275)</option>
-                                                <option value="General Estimate / Quote" class="bg-gray-800 text-white">General Estimate / Quote</option>
-                                                <option value="4-Hour Handyman Package" class="bg-gray-800 text-white">4-Hour Handyman Package ($280)</option>
-                                                <option value="6-Hour Handyman Package" class="bg-gray-800 text-white">6-Hour Handyman Package ($400)</option>
-                                                <option value="8-Hour Handyman Package" class="bg-gray-800 text-white">8-Hour Handyman Package ($520)</option>
-                                                <option value="Carpentry & Trim" class="bg-gray-800 text-white">Carpentry & Trim</option>
-                                                <option value="Doors & Windows" class="bg-gray-800 text-white">Doors & Windows</option>
-                                                <option value="Drywall Repair" class="bg-gray-800 text-white">Drywall Repair</option>
-                                                <option value="Painting & Staining" class="bg-gray-800 text-white">Painting & Staining</option>
-                                                <option value="Flooring Solutions" class="bg-gray-800 text-white">Flooring Solutions</option>
-                                                <option value="Minor Plumbing" class="bg-gray-800 text-white">Minor Plumbing</option>
-                                                <option value="Minor Electrical" class="bg-gray-800 text-white">Minor Electrical</option>
-                                                <option value="Installation & Mounting" class="bg-gray-800 text-white">Installation & Mounting</option>
-                                                <option value="Decks & Fences" class="bg-gray-800 text-white">Decks & Fences</option>
-                                                <option value="Gutters" class="bg-gray-800 text-white">Gutters</option>
-                                                <option value="Other / Custom Project" class="bg-gray-800 text-white">Other (Specify below)</option>
-                                            </select>
-                                            <div class="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none text-gray-400">
-                                                <i class="fas fa-chevron-down"></i>
-                                            </div>
-                                        </div>
-                                        <div id="service-package-info" class="hidden mt-3 p-4 bg-gray-900/60 border border-gray-850 rounded-xl text-xs sm:text-sm text-gray-300"></div>
-                                    </div>
-                                </div>
-
-                                <div class="grid sm:grid-cols-2 gap-6">
-                                    <div>
-                                        <label for="booking-date" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Preferred Date *</label>
-                                        <input id="booking-date" type="date" name="bookingDate" required class="w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none focus:border-red-500 text-base text-white">
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Preferred Time Slot *</label>
-                                        <input type="hidden" id="booking-time" name="bookingTime" required>
-                                        <div id="time-slots-container" class="grid grid-cols-2 gap-3">
-                                            <button type="button" data-value="Morning (9 AM - 1 PM)" class="time-slot-btn px-4 py-3 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
-                                                Morning
-                                                <span class="block text-[10px] text-gray-400 font-normal">9 AM - 1 PM</span>
-                                            </button>
-                                            <button type="button" data-value="Afternoon (1 PM - 6 PM)" class="time-slot-btn px-4 py-3 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
-                                                Afternoon
-                                                <span class="block text-[10px] text-gray-400 font-normal">1 PM - 6 PM</span>
-                                            </button>
-                                        </div>
-                                    </div>
+                                <div>
+                                    <label for="booking-phone" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Phone Number *</label>
+                                    <input id="booking-phone" type="tel" name="phone" required autocomplete="tel" placeholder="(248) 385-3432" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
                                 </div>
 
                                 <div>
@@ -333,8 +358,10 @@
                                     </label>
                                 </div>
 
-                                <button type="submit" id="submit-btn" class="w-full bg-red-600 hover:bg-red-700 py-4 text-lg font-bold rounded-2xl transition flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
-                                    CONFIRM APPOINTMENT <i class="fas fa-calendar-check"></i>
+                                <p id="booking-error" class="hidden rounded-xl border border-red-500/30 bg-red-950/40 px-4 py-3 text-sm text-red-200" role="alert" aria-live="polite"></p>
+
+                                <button type="submit" id="submit-btn" disabled class="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-600 disabled:text-gray-300 disabled:shadow-none disabled:cursor-not-allowed py-4 text-lg font-bold rounded-2xl transition flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
+                                    CONFIRM BOOKING DETAILS <i class="fas fa-calendar-check"></i>
                                 </button>
                             </form>
 
@@ -469,10 +496,26 @@
             });
         }
 
-        // Setup Datepicker Constraints (No past dates, only future dates starting tomorrow)
+        // Setup the guided booking widget and date constraints.
+        const bookingForm = document.getElementById('booking-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const bookingError = document.getElementById('booking-error');
         const bookingDateInput = document.getElementById('booking-date');
         const timeSlotsContainer = document.getElementById('time-slots-container');
         const hiddenTimeInput = document.getElementById('booking-time');
+        const requiredBookingFields = bookingForm ? Array.from(bookingForm.querySelectorAll('[required]:not(#booking-time)')) : [];
+
+        function setBookingError(message = '') {
+            if (!bookingError) return;
+            bookingError.textContent = message;
+            bookingError.classList.toggle('hidden', !message);
+        }
+
+        function updateBookingCompletion() {
+            if (!bookingForm || !submitBtn) return;
+            const fieldsComplete = requiredBookingFields.every(field => field.value.trim() && field.checkValidity());
+            submitBtn.disabled = !(fieldsComplete && hiddenTimeInput.value);
+        }
 
         if (bookingDateInput) {
             const today = new Date();
@@ -483,89 +526,98 @@
             const dd = String(tomorrow.getDate()).padStart(2, '0');
             bookingDateInput.min = `${yyyy}-${mm}-${dd}`;
 
-            // Listen to date changes to validate closed days & update time slot business hours
             bookingDateInput.addEventListener('change', function() {
                 const dateVal = this.value;
-                if (!dateVal) return;
-
-                // Parse input date (using parts to avoid timezone shifting)
-                const parts = dateVal.split('-');
-                const selectedDate = new Date(parts[0], parts[1] - 1, parts[2]);
-                const dayOfWeek = selectedDate.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-
-                // Reset selected time input value on date change
-                hiddenTimeInput.value = "";
-
-                if (dayOfWeek === 0) {
-                    alert("AAA Handyman Services is closed on Sundays. Please select a Monday-Saturday date.");
-                    this.value = "";
-                    renderTimeSlots("weekday"); // Reset slots
+                setBookingError();
+                hiddenTimeInput.value = '';
+                if (!dateVal) {
+                    renderTimeSlots('weekday');
+                    updateBookingCompletion();
                     return;
                 }
 
-                if (dayOfWeek === 6) {
-                    // Saturday business hours: 10:00 AM - 5:00 PM
-                    renderTimeSlots("saturday");
-                } else {
-                    // Mon-Fri business hours: 9:00 AM - 6:00 PM
-                    renderTimeSlots("weekday");
+                const parts = dateVal.split('-');
+                const selectedDate = new Date(parts[0], parts[1] - 1, parts[2]);
+                const dayOfWeek = selectedDate.getDay();
+
+                if (dayOfWeek === 0) {
+                    setBookingError('AAA Handyman Services is closed on Sundays. Please choose a Monday–Saturday date.');
+                    this.value = '';
+                    renderTimeSlots('weekday');
+                    updateBookingCompletion();
+                    return;
                 }
+
+                renderTimeSlots(dayOfWeek === 6 ? 'saturday' : 'weekday');
+                updateBookingCompletion();
             });
         }
 
-        // Setup click handler function for dynamically created time slot buttons
         function setupTimeSlotListeners() {
             const timeSlotBtns = document.querySelectorAll('.time-slot-btn');
             timeSlotBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    // Deselect all
                     timeSlotBtns.forEach(b => {
                         b.classList.remove('selected');
                         b.classList.remove('bg-red-600');
                         b.classList.add('bg-gray-800');
+                        b.setAttribute('aria-pressed', 'false');
                     });
-                    
-                    // Select clicked
+
                     this.classList.add('selected');
                     this.classList.remove('bg-gray-800');
                     this.classList.add('bg-red-600');
+                    this.setAttribute('aria-pressed', 'true');
                     hiddenTimeInput.value = this.getAttribute('data-value');
+                    setBookingError();
+                    updateBookingCompletion();
                 });
             });
         }
 
-        // Render time slots dynamically based on the day type
         function renderTimeSlots(type) {
             if (!timeSlotsContainer) return;
 
             if (type === "saturday") {
                 timeSlotsContainer.innerHTML = `
-                    <button type="button" data-value="Morning (10 AM - 1:30 PM)" class="time-slot-btn px-4 py-3 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
-                        Morning
-                        <span class="block text-[10px] text-gray-400 font-normal">10 AM - 1:30 PM</span>
+                    <button type="button" data-value="10:00 AM - 12:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                        10:00 AM
+                        <span class="block text-[10px] text-gray-400 font-normal">to 12:00 PM</span>
                     </button>
-                    <button type="button" data-value="Afternoon (1:30 PM - 5 PM)" class="time-slot-btn px-4 py-3 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
-                        Afternoon
-                        <span class="block text-[10px] text-gray-400 font-normal">1:30 PM - 5 PM</span>
+                    <button type="button" data-value="12:30 PM - 2:30 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                        12:30 PM
+                        <span class="block text-[10px] text-gray-400 font-normal">to 2:30 PM</span>
+                    </button>
+                    <button type="button" data-value="3:00 PM - 5:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                        3:00 PM
+                        <span class="block text-[10px] text-gray-400 font-normal">to 5:00 PM</span>
                     </button>
                 `;
             } else {
                 timeSlotsContainer.innerHTML = `
-                    <button type="button" data-value="Morning (9 AM - 1 PM)" class="time-slot-btn px-4 py-3 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
-                        Morning
-                        <span class="block text-[10px] text-gray-400 font-normal">9 AM - 1 PM</span>
+                    <button type="button" data-value="9:00 AM - 11:00 AM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                        9:00 AM
+                        <span class="block text-[10px] text-gray-400 font-normal">to 11:00 AM</span>
                     </button>
-                    <button type="button" data-value="Afternoon (1 PM - 6 PM)" class="time-slot-btn px-4 py-3 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
-                        Afternoon
-                        <span class="block text-[10px] text-gray-400 font-normal">1 PM - 6 PM</span>
+                    <button type="button" data-value="12:00 PM - 2:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                        12:00 PM
+                        <span class="block text-[10px] text-gray-400 font-normal">to 2:00 PM</span>
+                    </button>
+                    <button type="button" data-value="3:00 PM - 5:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                        3:00 PM
+                        <span class="block text-[10px] text-gray-400 font-normal">to 5:00 PM</span>
                     </button>
                 `;
             }
             setupTimeSlotListeners();
         }
 
-        // Initialize event listeners on page load
-        setupTimeSlotListeners();
+        renderTimeSlots('weekday');
+        requiredBookingFields.forEach(field => {
+            field.addEventListener('input', updateBookingCompletion);
+            field.addEventListener('change', updateBookingCompletion);
+        });
+        updateBookingCompletion();
 
         // Set service parameter from query string if available
         const PACKAGE_DESCRIPTIONS = {
@@ -771,7 +823,6 @@
         }
 
         // Form submission via API
-        const bookingForm = document.getElementById('booking-form');
         if (bookingForm) {
             bookingForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
@@ -786,12 +837,19 @@
                 const message = document.getElementById('booking-message').value.trim();
                 const optIn = document.getElementById('seasonal-opt-in').checked;
 
-                if (!bookingTime) {
-                    alert('Please select a preferred time slot (Morning or Afternoon).');
+                setBookingError();
+                if (!bookingForm.checkValidity()) {
+                    bookingForm.reportValidity();
+                    setBookingError('Please complete each required field before confirming your booking request.');
+                    updateBookingCompletion();
                     return;
                 }
 
-                const submitBtn = document.getElementById('submit-btn');
+                if (!bookingTime) {
+                    setBookingError('Please select an arrival window.');
+                    return;
+                }
+
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = 'PROCESSING BOOKING... <i class="fas fa-spinner animate-spin"></i>';
 
@@ -858,9 +916,9 @@
                     bookingForm.classList.add('hidden');
                     document.getElementById('success-state').classList.remove('hidden');
                 } catch (error) {
-                    alert('Oops! ' + error.message + ' Please double check your details or call us directly.');
+                    setBookingError(`${error.message} Please double-check your details or call us directly.`);
                     submitBtn.disabled = false;
-                    submitBtn.innerHTML = 'CONFIRM APPOINTMENT <i class="fas fa-calendar-check"></i>';
+                    submitBtn.innerHTML = 'CONFIRM BOOKING DETAILS <i class="fas fa-calendar-check"></i>';
                 }
             });
         }
