@@ -15,7 +15,24 @@
     saveButton: document.getElementById('save-button'),
     userEmail: document.getElementById('user-email'),
     toastRegion: document.getElementById('toast-region'),
+    themeToggle: document.getElementById('theme-toggle'),
+    themeToggleLabel: document.getElementById('theme-toggle-label'),
+    themeColor: document.querySelector('meta[name="theme-color"]'),
   };
+
+  const setTheme = (theme, persist = true) => {
+    const isDark = theme === 'dark';
+    document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
+    elements.themeToggle.setAttribute('aria-pressed', String(isDark));
+    elements.themeToggle.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} mode`);
+    elements.themeToggleLabel.textContent = `${isDark ? 'Light' : 'Dark'} mode`;
+    elements.themeColor.setAttribute('content', isDark ? '#0c1423' : '#1b2a4a');
+    if (persist) {
+      try { localStorage.setItem('admin-theme', isDark ? 'dark' : 'light'); } catch {}
+    }
+  };
+
+  setTheme(document.documentElement.dataset.theme, false);
 
   const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
@@ -228,6 +245,9 @@
   document.getElementById('status-filter').addEventListener('change', (event) => { state.status = event.target.value; render(); });
   document.getElementById('add-job-button').addEventListener('click', () => openModal());
   document.getElementById('refresh-button').addEventListener('click', loadJobs);
+  elements.themeToggle.addEventListener('click', () => {
+    setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+  });
   document.getElementById('modal-close').addEventListener('click', closeModal);
   document.getElementById('cancel-button').addEventListener('click', closeModal);
   elements.modal.addEventListener('click', (event) => { if (event.target === elements.modal) closeModal(); });
