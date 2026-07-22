@@ -592,6 +592,12 @@
             const params = new URLSearchParams(window.location.search);
             const requested = params.get('service');
             const requestedPkg = params.get('package');
+            const requestedNotes = params.get('notes');
+
+            const messageField = document.getElementById('booking-message');
+            if (requestedNotes && messageField && !messageField.value.trim()) {
+                messageField.value = requestedNotes;
+            }
 
             if (requestedPkg && bookingService) {
                 const pkgMap = {

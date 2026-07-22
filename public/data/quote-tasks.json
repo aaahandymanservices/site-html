@@ -1,0 +1,52 @@
+{
+  "type": "QuoteTasksData",
+  "note": "Single source of truth for the instant quote calculator (consumed by /js/quote-calculator.js on the rates page). Prices mirror the Flat-Rate Menu on rates.html and must be kept in sync with it. zoneMinimum values come from /data/service-areas.json (Zone A = $100 first hour, Zone B = $145 first hour). Each task price already includes the service call / first hour for a single-task visit; the calculator explains that bundling several tasks into one visit typically costs less than the raw sum because the trip is shared.",
+  "currency": "USD",
+  "zoneMinimum": { "A": 100, "B": 145 },
+  "categories": [
+    {
+      "label": "Electrical & Smart Home",
+      "icon": "fa-bolt",
+      "tasks": [
+        { "id": "ceiling-fan", "name": "Ceiling Fan & Light Fixtures", "desc": "Replacement on existing approved junction boxes and brackets.", "a": 175, "b": 220 },
+        { "id": "smart-devices", "name": "Smart Doorbell & Thermostats", "desc": "Mounting and connecting to your existing low-voltage system wiring.", "a": 145, "b": 190 },
+        { "id": "detectors", "name": "Smoke & CO Detectors", "desc": "Installing or replacing combined safety alarm units.", "a": 145, "b": 190 }
+      ]
+    },
+    {
+      "label": "Plumbing",
+      "icon": "fa-faucet",
+      "tasks": [
+        { "id": "garbage-disposal", "name": "Garbage Disposal Replacement", "desc": "Swapping out existing disposal with a customer-supplied unit.", "a": 165, "b": 210 },
+        { "id": "toilet-rebuild", "name": "Toilet Component Rebuilds", "desc": "Replacement of flush valve, fill valve, flapper, and tank lever.", "a": 150, "b": 195 },
+        { "id": "faucets", "name": "Kitchen & Bath Faucets", "desc": "Complete kitchen or bathroom sink faucet and supply line replacement.", "a": 135, "b": 180 }
+      ]
+    },
+    {
+      "label": "Doors, Windows & Security",
+      "icon": "fa-door-open",
+      "tasks": [
+        { "id": "locks", "name": "Door Locks & Deadbolts", "desc": "Standard lockset or deadbolt swap on existing correctly aligned door prep.", "a": 100, "b": 145 },
+        { "id": "storm-door", "name": "Storm Door Installations", "desc": "Full install of standard pre-hung storm/screen doors in ready framing.", "a": 245, "b": 290 },
+        { "id": "blinds", "name": "Window Blinds & Curtain Rods", "desc": "Hanging standard pre-sized blinds or decorative window hardware.", "a": 100, "b": 145 }
+      ]
+    },
+    {
+      "label": "Interior & Fixtures",
+      "icon": "fa-couch",
+      "tasks": [
+        { "id": "tv-mount", "name": "TV Wall Mounting", "desc": "Up to 65\" TV on standard wood or metal studs (bracket not included).", "a": 155, "b": 200 },
+        { "id": "cabinet-hardware", "name": "Cabinet Hardware Upgrades", "desc": "Swapping out knobs or pulls with exact-size replacements.", "a": 100, "b": 145 }
+      ]
+    },
+    {
+      "label": "Exterior & Maintenance",
+      "icon": "fa-house",
+      "tasks": [
+        { "id": "dryer-vent", "name": "Dryer Vent Cleaning", "desc": "Exhaust line cleaning from dryer back to wall terminal to maximize airflow.", "a": 130, "b": 175 },
+        { "id": "gutter-cleaning", "name": "Gutter Cleaning", "desc": "Debris removal, downspout clearing, and flow testing (up to 145 linear feet, single-story).", "a": 135, "b": 180 },
+        { "id": "power-washing", "name": "Power Washing", "desc": "Driveways, walkways, patios, or decks (up to 1,000 sq ft).", "a": 175, "b": 220 }
+      ]
+    }
+  ]
+}
