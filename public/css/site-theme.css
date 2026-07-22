@@ -1,21 +1,21 @@
 :root {
-  --brand-navy: #1b2a4a;
+  --brand-navy: #223354;
   --brand-navy-deep: #101b31;
   --brand-navy-soft: #263a62;
-  --brand-crimson: #a61f2e;
-  --brand-crimson-dark: #7f1723;
-  --brand-crimson-soft: #f8e9eb;
-  --brand-ink: #172033;
-  --brand-muted: #526075;
-  --brand-line: #dce2ea;
-  --brand-surface: #ffffff;
-  --brand-canvas: #f5f7fa;
+  --brand-crimson: #9e2230;
+  --brand-crimson-dark: #781925;
+  --brand-crimson-soft: #f5e6e8;
+  --brand-ink: #273549;
+  --brand-muted: #5b6b7f;
+  --brand-line: #d3dbe5;
+  --brand-surface: #f8fafc;
+  --brand-canvas: #eef2f6;
   --brand-radius-sm: 0.75rem;
   --brand-radius: 1rem;
   --brand-radius-lg: 1.5rem;
-  --brand-shadow-sm: 0 8px 24px rgba(27, 42, 74, 0.08);
-  --brand-shadow: 0 18px 45px rgba(27, 42, 74, 0.12);
-  --brand-shadow-strong: 0 22px 55px rgba(16, 27, 49, 0.22);
+  --brand-shadow-sm: 0 6px 20px rgba(27, 42, 74, 0.05);
+  --brand-shadow: 0 14px 36px rgba(27, 42, 74, 0.08);
+  --brand-shadow-strong: 0 18px 44px rgba(16, 27, 49, 0.14);
 }
 
 html {
@@ -27,8 +27,8 @@ body {
   color: var(--brand-ink);
   background-color: var(--brand-canvas) !important;
   background-image:
-    radial-gradient(circle at 8% 0%, rgba(166, 31, 46, 0.045), transparent 28rem),
-    linear-gradient(180deg, #fafbfd 0%, var(--brand-canvas) 24rem);
+    radial-gradient(circle at 8% 0%, rgba(158, 34, 48, 0.035), transparent 28rem),
+    linear-gradient(180deg, #f3f6fa 0%, var(--brand-canvas) 24rem);
   font-family: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
@@ -40,15 +40,63 @@ body {
   background: var(--brand-crimson);
 }
 
-/* Light mode text contrast adjustments */
+/* Light mode text contrast and brightness adjustments */
+html:not(.dark) :where(h1, h2, h3, h4, h5, h6) {
+  color: var(--brand-navy);
+}
+
+html:not(.dark) .text-gray-950,
+html:not(.dark) .text-gray-900,
+html:not(.dark) .text-slate-900,
+html:not(.dark) .text-blue-950,
+html:not(.dark) .text-blue-900,
+html:not(.dark) .text-black {
+  color: #273549 !important;
+}
+
+html:not(.dark) .text-gray-800,
+html:not(.dark) .text-slate-800,
+html:not(.dark) .text-gray-700,
+html:not(.dark) .text-slate-700 {
+  color: #334155 !important;
+}
+
+html:not(.dark) .text-gray-600,
+html:not(.dark) .text-slate-600 {
+  color: #475569 !important;
+}
+
 html:not(.dark) :where(p, span, label, li, small, td, th).text-gray-400:not(.dark *),
 html:not(.dark) :where(p, span, label, li, small, td, th).text-slate-400:not(.dark *) {
-  color: #526075;
+  color: #64748b;
 }
 
 html:not(.dark) :where(p, span, label, li, small, td, th).text-gray-500:not(.dark *),
 html:not(.dark) :where(p, span, label, li, small, td, th).text-slate-500:not(.dark *) {
-  color: #475569;
+  color: #5b6b7f;
+}
+
+/* Light mode background surface and border adjustments for reduced glare */
+html:not(.dark) .bg-white {
+  background-color: var(--brand-surface) !important;
+}
+
+html:not(.dark) .bg-gray-50,
+html:not(.dark) .bg-slate-50 {
+  background-color: var(--brand-canvas) !important;
+}
+
+html:not(.dark) .bg-gray-100,
+html:not(.dark) .bg-slate-100 {
+  background-color: #e2e8f0 !important;
+}
+
+html:not(.dark) .border-gray-100,
+html:not(.dark) .border-gray-200,
+html:not(.dark) .border-gray-300,
+html:not(.dark) .border-slate-200,
+html:not(.dark) .border-slate-300 {
+  border-color: var(--brand-line) !important;
 }
 
 /* Protect dark section text in light mode */
@@ -106,10 +154,10 @@ footer :where(p, span, label, li, small, div).text-gray-400 {
 
 body > nav.sticky {
   border-bottom-color: var(--brand-crimson) !important;
-  background: rgba(255, 255, 255, 0.96) !important;
-  box-shadow: 0 8px 30px rgba(27, 42, 74, 0.11) !important;
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  background: rgba(243, 246, 250, 0.95) !important;
+  box-shadow: 0 6px 22px rgba(27, 42, 74, 0.07) !important;
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
 }
 
 body > nav.sticky > div:first-child {
@@ -118,7 +166,7 @@ body > nav.sticky > div:first-child {
 
 body > nav.sticky img {
   border-color: var(--brand-crimson) !important;
-  box-shadow: 0 0 0 3px rgba(166, 31, 46, 0.08);
+  box-shadow: 0 0 0 3px rgba(158, 34, 48, 0.08);
 }
 
 body > nav.sticky a[href="#top"] p:first-of-type,
@@ -127,7 +175,7 @@ body > nav.sticky a[href="/"] p:first-of-type {
 }
 
 .hidden.md\:flex > .nav-link {
-  color: #374151 !important;
+  color: #404e62 !important;
   font-size: 0.98rem;
   letter-spacing: -0.01em;
 }
@@ -139,8 +187,8 @@ body > nav.sticky a[href="/"] p:first-of-type {
 }
 
 #mobile-menu {
-  border-top-color: rgba(166, 31, 46, 0.18) !important;
-  background: rgba(255, 255, 255, 0.98) !important;
+  border-top-color: rgba(158, 34, 48, 0.18) !important;
+  background: rgba(243, 246, 250, 0.98) !important;
 }
 
 #mobile-menu > :where(a, button) {
@@ -196,14 +244,14 @@ main :where(.bg-white.rounded-xl, .bg-white.rounded-2xl, .bg-white.rounded-3xl),
 .service-card,
 .generated-service-card {
   border-color: var(--brand-line) !important;
-  background-color: rgba(255, 255, 255, 0.98) !important;
+  background-color: var(--brand-surface) !important;
   box-shadow: var(--brand-shadow-sm) !important;
 }
 
 main :where(.bg-white.rounded-xl, .bg-white.rounded-2xl, .bg-white.rounded-3xl):hover,
 .service-card:hover,
 .generated-service-card:hover {
-  border-color: rgba(166, 31, 46, 0.42) !important;
+  border-color: rgba(158, 34, 48, 0.38) !important;
   box-shadow: var(--brand-shadow) !important;
 }
 
@@ -264,15 +312,18 @@ main :where(.bg-white.rounded-xl, .bg-white.rounded-2xl, .bg-white.rounded-3xl):
 }
 
 form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
-  border-color: #cfd7e2;
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #273549;
   border-radius: var(--brand-radius-sm) !important;
-  box-shadow: inset 0 1px 2px rgba(27, 42, 74, 0.04);
+  box-shadow: inset 0 1px 2px rgba(27, 42, 74, 0.03);
   transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
 }
 
 form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea):focus {
   border-color: var(--brand-crimson) !important;
-  box-shadow: 0 0 0 4px rgba(166, 31, 46, 0.12) !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 4px rgba(158, 34, 48, 0.12) !important;
 }
 
 form label {
