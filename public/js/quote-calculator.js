@@ -72,8 +72,8 @@
             '<div class="mt-6 space-y-3">' +
               '<a id="quote-book" href="/book?service=General%20Estimate%20%2F%20Quote" class="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3.5 rounded-xl transition shadow-lg">' +
                 '<i class="fas fa-calendar-check"></i> Book these tasks</a>' +
-              <a href="tel:+12483853432" class="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-5 py-3.5 rounded-xl transition shadow-lg shadow-green-600/30">
-                <i class="fas fa-phone"></i> Call (248) 385-3432</a>
+              '<a href="tel:+12483853432" class="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-5 py-3.5 rounded-xl transition shadow-lg shadow-green-600/30">' +
+                '<i class="fas fa-phone"></i> Call (248) 385-3432</a>' +
             '</div>' +
           '</div>' +
           '<p class="text-xs text-gray-500 leading-relaxed mt-4">Estimates use our standard flat-rate menu and are not a binding quote. Booking several tasks in one visit usually costs <strong>less</strong> than the total shown, because you only pay one trip charge. Materials are not included. Your final price is always confirmed free, upfront.</p>' +
