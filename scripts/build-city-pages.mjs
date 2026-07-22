@@ -22,7 +22,7 @@ const POPULAR_SERVICES = [
   { anchor: 'doors-windows', icon: 'fa-door-open', label: 'Doors & Windows' },
   { anchor: 'drywall-repair', icon: 'fa-border-all', label: 'Drywall Repair' },
   { anchor: 'painting-staining', icon: 'fa-paint-roller', label: 'Painting & Staining' },
-  { anchor: 'flooring-solutions', icon: 'fa-ruler-combined', label: 'Flooring & Tile' },
+  { anchor: 'flooring-solutions', icon: 'fa-ruler-combined', label: 'Flooring Solutions' },
   { anchor: 'minor-plumbing', icon: 'fa-faucet-drip', label: 'Minor Plumbing' },
   { anchor: 'minor-electrical', icon: 'fa-lightbulb', label: 'Minor Electrical' },
   { anchor: 'installation', icon: 'fa-screwdriver-wrench', label: 'Installation & Mounting' },
