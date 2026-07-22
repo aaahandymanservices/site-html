@@ -58,7 +58,7 @@
 
     <style>
         .nav-link { transition: all 0.3s; }
-        .nav-link:hover { color: #8e1f26; transform: translateY(-2px); }
+        .nav-link:hover { color: #a61f2e; transform: translateY(-2px); }
         
         section[id], header[id] {
             scroll-margin-top: 80px;
@@ -74,22 +74,27 @@
             transition: all 0.2s ease-in-out;
         }
         .time-slot-btn.selected {
-            background-color: #8e1f26;
-            border-color: #8e1f26;
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(142, 31, 38, 0.3);
+            background-color: var(--brand-crimson, #a61f2e) !important;
+            border-color: var(--brand-crimson-dark, #7f1723) !important;
+            color: #ffffff !important;
+            box-shadow: 0 9px 22px rgba(166, 31, 46, 0.25) !important;
+        }
+        .time-slot-btn:hover:not(.selected) {
+            border-color: var(--brand-crimson, #a61f2e) !important;
+            color: #ffffff !important;
         }
         .time-slot-btn:focus-visible {
-            outline: 3px solid rgba(248, 113, 113, 0.5);
-            outline-offset: 3px;
+            outline: 3px solid rgba(166, 31, 46, 0.5) !important;
+            outline-offset: 2px;
         }
         .booking-step-number {
             background: #a61f2e;
             box-shadow: 0 0 0 5px rgba(166, 31, 46, 0.16);
         }
-        .booking-control:focus-visible {
-            border-color: #f87171;
-            box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.16);
+        .booking-control:focus-visible,
+        .booking-control:focus {
+            border-color: #a61f2e !important;
+            box-shadow: 0 0 0 3px rgba(166, 31, 46, 0.2) !important;
         }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -190,7 +195,7 @@
                             </div>
 
                             <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-2xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-500 flex-shrink-0 text-xl">
+                                <div class="w-12 h-12 rounded-2xl bg-red-600/10 border border-red-500/20 flex items-center justify-center text-red-500 flex-shrink-0 text-xl">
                                     <i class="fas fa-shield-halved"></i>
                                 </div>
                                 <div>
@@ -421,7 +426,7 @@
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
                         <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center"></i>(248) 385-3432</a></li>
-                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
+                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-red-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
                         <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center"></i>Waterford, MI &middot; Oakland County</li>
                     </ul>
                     <a href="/book" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Book Online Now</a>
@@ -581,30 +586,30 @@
 
             if (type === "saturday") {
                 timeSlotsContainer.innerHTML = `
-                    <button type="button" data-value="10:00 AM - 12:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                    <button type="button" data-value="10:00 AM - 12:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-red-600 hover:text-white focus:outline-none text-center">
                         10:00 AM
                         <span class="block text-[10px] text-gray-400 font-normal">to 12:00 PM</span>
                     </button>
-                    <button type="button" data-value="12:30 PM - 2:30 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                    <button type="button" data-value="12:30 PM - 2:30 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-red-600 hover:text-white focus:outline-none text-center">
                         12:30 PM
                         <span class="block text-[10px] text-gray-400 font-normal">to 2:30 PM</span>
                     </button>
-                    <button type="button" data-value="3:00 PM - 5:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                    <button type="button" data-value="3:00 PM - 5:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-red-600 hover:text-white focus:outline-none text-center">
                         3:00 PM
                         <span class="block text-[10px] text-gray-400 font-normal">to 5:00 PM</span>
                     </button>
                 `;
             } else {
                 timeSlotsContainer.innerHTML = `
-                    <button type="button" data-value="9:00 AM - 11:00 AM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                    <button type="button" data-value="9:00 AM - 11:00 AM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-red-600 hover:text-white focus:outline-none text-center">
                         9:00 AM
                         <span class="block text-[10px] text-gray-400 font-normal">to 11:00 AM</span>
                     </button>
-                    <button type="button" data-value="12:00 PM - 2:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                    <button type="button" data-value="12:00 PM - 2:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-red-600 hover:text-white focus:outline-none text-center">
                         12:00 PM
                         <span class="block text-[10px] text-gray-400 font-normal">to 2:00 PM</span>
                     </button>
-                    <button type="button" data-value="3:00 PM - 5:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
+                    <button type="button" data-value="3:00 PM - 5:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-red-600 hover:text-white focus:outline-none text-center">
                         3:00 PM
                         <span class="block text-[10px] text-gray-400 font-normal">to 5:00 PM</span>
                     </button>
