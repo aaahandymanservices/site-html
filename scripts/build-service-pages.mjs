@@ -303,7 +303,7 @@ function page(service) {
   const catLabel = CATEGORIES[service.category];
   const displayName = amp(service.name);
   const title = `${service.name} in Oakland County, MI | AAA Handyman Services`;
-  const desc = `${service.tagline} Professional ${service.name.toLowerCase().replace(/ services$/, '')} for homeowners across Oakland County, Michigan. Backed by our 1-Year Workmanship Guarantee. Call ${PHONE_DISPLAY}.`;
+  const desc = `${service.tagline} Professional ${service.name.toLowerCase().replace(/ services$/, '')} across Oakland County, MI. Call ${PHONE_DISPLAY}.`;
   const faqs = serviceFaq(service);
   const related = relatedServices(service);
 

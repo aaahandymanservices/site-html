@@ -147,7 +147,7 @@ function page(city) {
   const zone = ZONE_INFO[city.zone];
   const url = `${SITE}/handyman/${city.slug}`;
   const title = `Handyman in ${city.name}, MI | AAA Handyman Services`;
-  const desc = `Reliable local handyman services in ${city.name}, Michigan. Carpentry, drywall, painting, flooring, doors, gutters, and minor plumbing or electrical repairs. ${zone.rate} minimum service call. Call ${PHONE_DISPLAY}.`;
+  const desc = `Reliable local handyman services in ${city.name}, MI. Carpentry, drywall, painting, doors, gutters, plumbing & electrical. ${zone.rate} minimum. Call ${PHONE_DISPLAY}.`;
   const faqs = cityFaq(city);
 
   return `<!DOCTYPE html>
