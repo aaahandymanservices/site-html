@@ -254,33 +254,63 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
     <style>
-        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=80') center/cover; height: auto; }
+        .hero {
+            background: linear-gradient(rgba(3,7,11,0.74), rgba(3,7,11,0.74)), url('/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=80') center/cover;
+            min-height: min(620px, calc(100vh - 5rem));
+        }
         .hero-title {
-            -webkit-text-stroke: 2px #8e1f26;
-            text-stroke: 2px #8e1f26;
-            paint-order: stroke fill;
+            max-width: 16ch;
+            margin-inline: auto;
+            text-wrap: balance;
         }
-        .first-service-certificate {
-            position: relative;
-            isolation: isolate;
-            overflow: hidden;
-            background: linear-gradient(135deg, #fff8dc 0%, #ffffff 48%, #f5e7b6 100%);
-            border: 1px solid #d6b85a;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        .hero-copy {
+            max-width: 42rem;
+            margin-inline: auto;
         }
-        .first-service-certificate::before,
-        .first-service-certificate::after {
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .hero-kicker::before,
+        .hero-kicker::after {
             content: '';
-            position: absolute;
-            z-index: -1;
-            width: 4rem;
-            height: 4rem;
-            border: 1px solid rgba(166, 31, 46, 0.1);
-            transform: rotate(45deg);
+            width: 1.5rem;
+            height: 2px;
+            background: #e02424;
         }
-        .first-service-certificate::before { top: -2.5rem; left: -1.5rem; }
-        .first-service-certificate::after { right: -1.5rem; bottom: -2.5rem; }
-        .certificate-value { text-shadow: 0 2px 0 #ffffff; }
+        .hero-trust {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            color: #ffffff;
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+        .hero-trust-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 0.85rem;
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 0.75rem;
+            background: rgba(27,42,74,0.78);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+            backdrop-filter: blur(6px);
+        }
+        .hero-trust-item i {
+            color: #f98080;
+            font-size: 0.875rem;
+        }
+        @media (max-width: 767px) {
+            .hero {
+                min-height: auto;
+                background: linear-gradient(rgba(3,7,11,0.8), rgba(3,7,11,0.8)), url('/.netlify/images?url=/logo-banner.jpg&w=960&fm=avif&q=80') center/cover;
+            }
+            .hero-title { max-width: none; }
+        }
         .nav-link { transition: all 0.3s; }
         .nav-link:hover { color: #8e1f26; transform: translateY(-2px); }
         .service-card { transition: all 0.3s; }
@@ -386,52 +416,20 @@
         </a>
     </noscript>
 
-    <header id="top" class="hero min-h-[70vh] py-12 md:py-16 flex items-center text-white">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="max-w-3xl mx-auto">
-                <!-- Location Tag -->
-                <div class="inline-flex flex-wrap justify-center gap-2 items-center bg-white/20 backdrop-blur-md px-4 py-1.5 sm:px-6 sm:py-2 rounded-full mb-4 text-xs sm:text-base">
-                    <span class="inline-flex items-center">
-                        <span class="bg-green-400 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full animate-pulse mr-2"></span>
-                        Locally Owned • Serving Oakland County
-                    </span>
-                </div>
+    <header id="top" class="hero py-12 md:py-16 flex items-center text-white">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <p class="hero-kicker mb-5 text-xs sm:text-sm font-bold uppercase tracking-widest text-white/80">Oakland County, Michigan</p>
+            <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl font-bold leading-tight md:leading-none mb-5 tracking-tighter">Dependable handyman service for your home.</h1>
+            <p class="hero-copy text-base sm:text-lg md:text-xl mb-8 text-white/90">Repairs, maintenance, and small projects handled with skilled workmanship, clear communication, and honest upfront pricing.</p>
 
-                <!-- Trust Badges Promoted Above the Fold -->
-                <div class="flex flex-wrap justify-center gap-2.5 sm:gap-4 text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-6 text-yellow-400">
-                    <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-2 rounded-full border border-white/10 shadow-sm">
-                        <i class="fas fa-user-shield text-green-400 text-sm sm:text-base"></i> Background-Checked Technicians
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-2 rounded-full border border-white/10 shadow-sm">
-                        <i class="fas fa-user-tie text-blue-400 text-sm sm:text-base"></i> Expert Craftsmen
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3.5 py-2 rounded-full border border-white/10 shadow-sm">
-                        <i class="fas fa-award text-red-400 text-sm sm:text-base"></i> Satisfaction Guaranteed
-                    </span>
-                </div>
+            <a href="/book" class="bg-red-600 hover:bg-red-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-bold inline-flex items-center justify-center gap-2.5 transition shadow-lg hover:shadow-red-600/30">
+                Get an Estimate <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
 
-                <h1 class="hero-title text-3xl sm:text-4xl md:text-6xl font-bold leading-tight md:leading-none mb-4 tracking-tighter">Reliable Handyman Services in Oakland County, MI: Expert Repairs & Maintenance</h1>
-                <p class="text-base sm:text-lg md:text-xl mb-6 text-white/95 font-medium">No Job Too Small! Your trusted, locally owned home repair partner operated by skilled local craftsmen. Specializing in high-quality minor home repairs, maintenance, and reliable custom solutions across Oakland County.</p>
-                
-                <!-- $50 First-Service Certificate -->
-                <a href="/contact?offer=first-service#contact-form" class="first-service-certificate group mx-auto mb-6 grid max-w-xs grid-cols-[auto_1fr_auto] items-center gap-2 rounded-xl px-3 sm:px-4 py-2 text-left text-blue-950 transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-yellow-300" aria-label="Claim the $50 first-service gift certificate">
-                    <span class="certificate-value text-3xl font-extrabold leading-none text-red-700 sm:text-4xl">$50</span>
-                    <span class="flex flex-col justify-center">
-                        <span class="block text-[10px] font-bold uppercase tracking-[0.14em] text-red-700 leading-tight sm:text-xs">First-Service Gift Certificate</span>
-                        <span class="block text-[10px] font-medium leading-tight text-blue-950/75 mt-0.5 sm:text-[11px]">For first-time customers booking their first service.</span>
-                    </span>
-                    <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-red-700 text-white transition group-hover:translate-x-1" aria-hidden="true"><i class="fas fa-arrow-right text-[10px]"></i></span>
-                </a>
-
-                <!-- Streamlined Primary CTA Pathways -->
-                <div class="flex flex-col sm:flex-row gap-3.5 justify-center items-center">
-                    <a href="/book" class="bg-red-600 hover:bg-red-700 text-white text-base sm:text-lg px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl font-bold inline-flex items-center justify-center gap-2.5 transition shadow-lg hover:shadow-red-600/30">
-                        Get an Instant Estimate / Book Online <i class="fas fa-calendar-check"></i>
-                    </a>
-                    <a href="/rates" class="border-[2px] border-white hover:bg-white hover:text-blue-900 text-base sm:text-lg px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl font-bold inline-flex items-center justify-center gap-2.5 transition">
-                        View Transparent Rates <i class="fas fa-receipt"></i>
-                    </a>
-                </div>
+            <div class="hero-trust mt-8" aria-label="Locally owned, background-checked, and backed by a one-year guarantee">
+                <span class="hero-trust-item"><i class="fas fa-house" aria-hidden="true"></i>Locally owned</span>
+                <span class="hero-trust-item"><i class="fas fa-user-shield" aria-hidden="true"></i>Background-checked</span>
+                <span class="hero-trust-item"><i class="fas fa-award" aria-hidden="true"></i>1-year workmanship guarantee</span>
             </div>
         </div>
     </header>
@@ -469,6 +467,13 @@
                     <h3 class="text-xl font-bold text-blue-900 mb-3">Job Done Right</h3>
                     <p class="text-gray-600 text-sm leading-relaxed">A skilled, background-checked craftsman arrives on time, completes the work meticulously, and leaves your home clean.</p>
                 </div>
+            </div>
+
+            <div class="mt-10 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-center">
+                <p class="text-gray-700"><span class="font-bold text-red-600">New customer?</span> Receive a $50 gift certificate toward your first service.</p>
+                <a href="/contact?offer=first-service#contact-form" class="inline-flex items-center gap-2 font-bold text-red-600 hover:text-red-700 transition" aria-label="Claim the $50 first-service gift certificate">
+                    Claim the offer <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
+                </a>
             </div>
         </div>
     </section>
