@@ -441,16 +441,18 @@ ${jsonLd(service)}
                 <span class="text-white font-semibold">${displayName}</span>
             </nav>
             <div class="w-16 h-16 mx-auto bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center text-3xl text-red-400 mb-5" aria-hidden="true"><i class="fas ${service.icon}"></i></div>
-            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-3">${amp(catLabel)} &middot; Oakland County, MI</div>            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">${displayName}</h1>
+            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-2">${amp(catLabel)} &middot; Oakland County, MI</div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">${displayName}</h1>
+            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5"></i>Serving Waterford, Troy, West Bloomfield, Rochester Hills, Royal Oak, Clarkston &amp; surrounding Oakland County communities</p>
             <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
                 ${amp(service.tagline)}
             </p>
-            <div class="mt-8 flex flex-wrap justify-center gap-4">
-                <a href="tel:${PHONE_TEL}" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-green-600/30 transition flex items-center gap-2">
-                    <i class="fas fa-phone"></i> Call Now! ${PHONE_DISPLAY}
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="/book?service=${enc(service.formService)}" class="bg-red-600 hover:bg-red-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-red-600/30 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-calendar-check"></i> Book Online / Get a Free Quote
                 </a>
-                <a href="/book?service=${enc(service.formService)}" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold px-6 py-3 rounded-xl transition flex items-center gap-2">
-                    <i class="fas fa-calendar-check"></i> Book Online Now
+                <a href="tel:${PHONE_TEL}" class="bg-green-600 hover:bg-green-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-green-600/30 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-phone"></i> Call Now! ${PHONE_DISPLAY}
                 </a>
             </div>
         </div>
@@ -461,7 +463,14 @@ ${jsonLd(service)}
             <!-- Intro + pricing -->
             <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
                 <div class="lg:col-span-2 prose prose-lg max-w-none text-gray-600">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4">${displayName} in Oakland County, MI</h2>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4">${displayName} in Waterford, Troy, West Bloomfield &amp; Oakland County, MI</h2>
+${(service.slug === 'minor-electrical' || service.slug === 'minor-plumbing') ? `
+                    <div class="my-4 p-4 bg-blue-50 border-2 border-blue-900 rounded-2xl flex items-start gap-3 text-blue-950">
+                        <i class="fas fa-info-circle text-blue-800 text-xl mt-0.5 flex-shrink-0" aria-hidden="true"></i>
+                        <p class="text-sm font-semibold leading-relaxed m-0">
+                            <strong>Licensing &amp; Scope Note:</strong> Ideal for minor repairs, fixture replacements, and hardware upgrades. For major re-wiring or full replumbing, we can coordinate with licensed trades.
+                        </p>
+                    </div>` : ''}
 ${service.intro.map((p) => `                    <p>${amp(p)}</p>`).join('\n')}
                 </div>
                 <aside class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 shadow-lg">

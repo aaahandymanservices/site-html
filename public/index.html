@@ -418,13 +418,19 @@
 
     <header id="top" class="hero py-12 md:py-16 flex items-center text-white">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <p class="hero-kicker mb-5 text-xs sm:text-sm font-bold uppercase tracking-widest text-white/80">Oakland County, Michigan</p>
-            <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl font-bold leading-tight md:leading-none mb-5 tracking-tighter">Dependable handyman service for your home.</h1>
+            <p class="hero-kicker mb-3 text-xs sm:text-sm font-bold uppercase tracking-widest text-white/80">Oakland County, Michigan</p>
+            <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl font-bold leading-tight md:leading-none mb-3 tracking-tighter">Dependable handyman service for your home.</h1>
+            <p class="text-sm sm:text-base md:text-lg font-semibold text-red-400 mb-4 tracking-wide"><i class="fas fa-location-dot mr-1.5"></i>Serving Waterford, Troy, West Bloomfield, Rochester Hills, Royal Oak, Clarkston &amp; surrounding Oakland County communities</p>
             <p class="hero-copy text-base sm:text-lg md:text-xl mb-8 text-white/90">Repairs, maintenance, and small projects handled with skilled workmanship, clear communication, and honest upfront pricing.</p>
 
-            <a href="/book" class="bg-red-600 hover:bg-red-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-bold inline-flex items-center justify-center gap-2.5 transition shadow-lg hover:shadow-red-600/30">
-                Get an Estimate <i class="fas fa-arrow-right" aria-hidden="true"></i>
-            </a>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="/book" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-bold inline-flex items-center justify-center gap-2.5 transition shadow-lg hover:shadow-red-600/30 pulse-btn">
+                    <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Free Quote
+                </a>
+                <a href="tel:+12483853432" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-bold inline-flex items-center justify-center gap-2.5 transition shadow-lg hover:shadow-green-600/30">
+                    <i class="fas fa-phone" aria-hidden="true"></i> Call Now (248) 385-3432
+                </a>
+            </div>
 
             <div class="hero-trust mt-8" aria-label="Locally owned, background-checked, and backed by a one-year guarantee">
                 <span class="hero-trust-item"><i class="fas fa-house" aria-hidden="true"></i>Locally owned</span>
@@ -536,95 +542,235 @@
     <section id="services" class="py-12 sm:py-16 bg-gray-100">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-8 sm:mb-12">
-                <div class="uppercase text-red-600 font-semibold tracking-widest">Our Expertise</div>
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">Handyman Services</h2>
-                <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">No job is too small. Get practical home repair help for common projects in Waterford, Pontiac, West Bloomfield, Clarkston, Rochester Hills, Troy, Royal Oak, Farmington Hills, and nearby Oakland County communities.</p>
+                <div class="uppercase text-red-600 font-semibold tracking-widest">Our Expertise &amp; Packages</div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">Featured Packages &amp; Handyman Services</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">No job is too small. Choose a high-value service bundle or get practical home repair help for individual projects in Waterford, Troy, West Bloomfield, Rochester Hills, Royal Oak, Clarkston, and nearby Oakland County communities.</p>
+            </div>
+
+            <!-- Popular Service Packages & Bundles -->
+            <div class="mb-12">
+                <div class="text-center mb-6">
+                    <span class="bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full"><i class="fas fa-boxes-packing mr-1"></i> Simplified Bundles</span>
+                    <h3 class="text-2xl font-bold text-blue-900 mt-2">Popular Themed Packages</h3>
+                    <p class="text-gray-600 text-sm">Save time and money by grouping related home upkeep projects into one visit.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Seasonal Prep Package -->
+                    <div class="bg-white border-2 border-red-600 rounded-3xl p-6 shadow-md flex flex-col justify-between hover:shadow-xl transition relative">
+                        <span class="absolute -top-3 right-6 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">High Value</span>
+                        <div>
+                            <div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl text-amber-700 mb-4"><i class="fas fa-snowflake-sun"></i></div>
+                            <h4 class="text-xl font-bold text-blue-900 mb-2">Seasonal Prep Package</h4>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4">Protect your home before Michigan weather changes. Includes gutter clearing, draft-stopping weatherstripping, window sash checks, and deck maintenance inspection.</p>
+                            <ul class="space-y-2 text-xs text-gray-600 mb-6">
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Full gutter &amp; downspout clearing</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Weatherstripping &amp; door sweep swap</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Deck board &amp; railing stability check</li>
+                            </ul>
+                        </div>
+                        <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-gray-500 block font-medium">Bundle Price</span>
+                                <span class="text-2xl font-black text-blue-900">$295 <span class="text-xs font-normal text-gray-500">(Half-Day Package)</span></span>
+                            </div>
+                            <a href="/book?package=seasonal-prep" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition">Book Package</a>
+                        </div>
+                    </div>
+
+                    <!-- Move-In / Move-Out Bundle -->
+                    <div class="bg-white border-2 border-blue-900 rounded-3xl p-6 shadow-md flex flex-col justify-between hover:shadow-xl transition relative">
+                        <span class="absolute -top-3 right-6 bg-blue-900 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Most Popular</span>
+                        <div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl text-blue-900 mb-4"><i class="fas fa-truck-ramp-box"></i></div>
+                            <h4 class="text-xl font-bold text-blue-900 mb-2">Move-In / Move-Out Bundle</h4>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4">Settle in or prep for sale effortlessly. Covers TV wall mounting, hole patching, paint touch-ups, and fresh deadbolt or smart lock upgrades.</p>
+                            <ul class="space-y-2 text-xs text-gray-600 mb-6">
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> TV wall mounting (up to 65")</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Drywall hole patching &amp; touch-up</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Lock / deadbolt replacement &amp; align</li>
+                            </ul>
+                        </div>
+                        <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-gray-500 block font-medium">Bundle Price</span>
+                                <span class="text-2xl font-black text-blue-900">$320 <span class="text-xs font-normal text-gray-500">(Customizable)</span></span>
+                            </div>
+                            <a href="/book?package=move-in-out" class="bg-blue-900 hover:bg-blue-800 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition">Book Package</a>
+                        </div>
+                    </div>
+
+                    <!-- Senior Safety & Accessibility Package -->
+                    <div class="bg-white border-2 border-emerald-600 rounded-3xl p-6 shadow-md flex flex-col justify-between hover:shadow-xl transition relative">
+                        <span class="absolute -top-3 right-6 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Peace of Mind</span>
+                        <div>
+                            <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-2xl text-emerald-800 mb-4"><i class="fas fa-hands-holding-child"></i></div>
+                            <h4 class="text-xl font-bold text-blue-900 mb-2">Senior Safety &amp; Accessibility</h4>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4">Independent living made secure and comfortable. Includes heavy-duty grab bar mounting, easy-lever door handle swaps, and trip-hazard elimination.</p>
+                            <ul class="space-y-2 text-xs text-gray-600 mb-6">
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Bathroom grab bar anchoring (up to 2)</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Easy-grip lever handle conversions</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Non-slip stair treads &amp; handrail checks</li>
+                            </ul>
+                        </div>
+                        <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-gray-500 block font-medium">Bundle Price</span>
+                                <span class="text-2xl font-black text-blue-900">$275 <span class="text-xs font-normal text-gray-500">(Includes Hardware)</span></span>
+                            </div>
+                            <a href="/book?package=senior-safety" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition">Book Package</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Most Requested Section Header -->
+            <div class="bg-white border border-gray-200 rounded-3xl p-6 mb-8 shadow-sm">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-red-600"><i class="fas fa-fire mr-1"></i> Top Demand</span>
+                        <h3 class="text-xl font-bold text-gray-900">Most Requested Individual Services</h3>
+                        <p class="text-xs text-gray-600">High-demand tasks with clear starting rates and fast scheduling.</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                        <span class="bg-gray-100 text-gray-800 px-3 py-1.5 rounded-xl border border-gray-200"><i class="fas fa-tv text-red-600 mr-1"></i> TV Mounting ($155+)</span>
+                        <span class="bg-gray-100 text-gray-800 px-3 py-1.5 rounded-xl border border-gray-200"><i class="fas fa-border-all text-red-600 mr-1"></i> Drywall Patch ($100+)</span>
+                        <span class="bg-gray-100 text-gray-800 px-3 py-1.5 rounded-xl border border-gray-200"><i class="fas fa-door-open text-red-600 mr-1"></i> Door Alignment ($120+)</span>
+                        <span class="bg-gray-100 text-gray-800 px-3 py-1.5 rounded-xl border border-gray-200"><i class="fas fa-faucet-drip text-red-600 mr-1"></i> Plumbing Swap ($135+)</span>
+                    </div>
+                </div>
             </div>
 
             <div class="flex flex-wrap justify-center gap-8">
 
                 <a href="/services/carpentry" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
-                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-hammer"></i></div>
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600" aria-hidden="true"><i class="fas fa-hammer"></i></div>
+                        <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $100</span>
+                    </div>
                     <h3 class="text-2xl font-semibold mb-3">Carpentry</h3>
-                    <p class="text-gray-600 mb-4">Revive your home’s character. From baseboards and crown molding to custom exterior woodwork, we provide precision craftsmanship that restores the aesthetic and structural integrity of your living space.</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">Revive your home’s character. From baseboards and crown molding to custom exterior woodwork, we provide precision craftsmanship that restores aesthetic and structural integrity.</p>
+                    <ul class="space-y-1.5 text-xs text-gray-600 mb-4">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Interior trim, baseboards &amp; crown molding</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Exterior woodwork &amp; rot repairs</li>
                     </ul>
-                    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
+                    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
                 </a>
-                <a href="/services/doors-windows" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
-                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-door-open"></i></div>
-                    <h3 class="text-2xl font-semibold mb-3">Doors &amp; Windows</h3>
-                    <p class="text-gray-600 mb-4">Secure, smooth, and weather-tight. Whether it’s an elegant new entry door for curb appeal, an interior door that sticks, or a window that needs installing or adjusting, we handle expert installation and alignment so every opening works perfectly and seals out the elements.</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Door Installation &amp; Repair</li>
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Window Installation &amp; Repair</li>
-                    </ul>
-                    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
+
+                <a href="/services/doors-windows" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900" aria-hidden="true"><i class="fas fa-door-open"></i></div>
+                            <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $120</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-3">Doors &amp; Windows</h3>
+                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">Secure, smooth, and weather-tight. Whether it’s an entry door for curb appeal, an interior door that sticks, or a window needing installation or adjustment, we align openings to seal out weather.</p>
+                        <ul class="space-y-1.5 text-xs text-gray-600 mb-4">
+                            <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Door Installation, Planing &amp; Alignment</li>
+                            <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Window Installation &amp; Weather Sealing</li>
+                        </ul>
+                    </div>
+                    <!-- Hyper-Local Review Quote -->
+                    <div class="bg-gray-50 p-3 rounded-2xl border border-gray-200 text-xs text-gray-700 italic mt-2 mb-4">
+                        <div class="text-amber-500 text-[10px] mb-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        "Victor adjusted our sticking front door in Waterford so it latches smoothly and stopped cold drafts."
+                        <span class="block not-italic font-bold text-gray-900 mt-1">&mdash; Mark S., Waterford, MI</span>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
                 </a>
-                <a href="/services/drywall-repair" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
-                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-border-all"></i></div>
-                    <h3 class="text-2xl font-semibold mb-3">Drywall Repair</h3>
-                    <p class="text-gray-600 mb-4">Seamless surfaces, flawless finishes. Don’t let cracks or holes distract from your home’s interior. We deliver craftsman-grade patching and smoothing, leaving your walls paint-ready and pristine.</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Drywall Repair</li>
-                    </ul>
-                    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
+
+                <a href="/services/drywall-repair" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600" aria-hidden="true"><i class="fas fa-border-all"></i></div>
+                            <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $100</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-3">Drywall Repair</h3>
+                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">Seamless surfaces, flawless finishes. Don’t let cracks or doorknob dings distract. We deliver craftsman-grade patching and smoothing, leaving your walls paint-ready and pristine.</p>
+                        <ul class="space-y-1.5 text-xs text-gray-600 mb-4">
+                            <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Hole, crack &amp; water-damage patching</li>
+                            <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Texture matching &amp; paint-ready sanding</li>
+                        </ul>
+                    </div>
+                    <!-- Hyper-Local Review Quote -->
+                    <div class="bg-gray-50 p-3 rounded-2xl border border-gray-200 text-xs text-gray-700 italic mt-2 mb-4">
+                        <div class="text-amber-500 text-[10px] mb-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        "Flawless drywall patch in our Troy home — you can't even tell where the hole was."
+                        <span class="block not-italic font-bold text-gray-900 mt-1">&mdash; Sarah K., Troy, MI</span>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
                 </a>
+
                 <a href="/services/painting-staining" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
-                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-paint-roller"></i></div>
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900" aria-hidden="true"><i class="fas fa-paint-roller"></i></div>
+                        <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $100</span>
+                    </div>
                     <h3 class="text-2xl font-semibold mb-3">Painting &amp; Staining</h3>
-                    <p class="text-gray-600 mb-4">A fresh look, perfectly executed. Painting is 90% preparation. We focus on meticulous surface prep, crisp edging, and smooth, craftsman finishes to revitalize your home’s appearance inside and out.</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">A fresh look, perfectly executed. Painting is 90% preparation. We focus on meticulous surface prep, crisp edging, and smooth, craftsman finishes inside and out.</p>
+                    <ul class="space-y-1.5 text-xs text-gray-600 mb-4">
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Interior room &amp; accent wall painting</li>
+                        <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Trim, door &amp; deck staining/refinishing</li>
                     </ul>
-                    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
+                    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
                 </a>
-                <a href="/services/flooring-solutions" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
-                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-ruler-combined"></i></div>
-                    <h3 class="text-2xl font-semibold mb-3">Flooring Solutions</h3>
-                    <p class="text-gray-600 mb-4">Durable beauty underfoot. From tile and hardwood to laminate and carpet, we provide expert maintenance and repair services, ensuring your floors are level, secure, and built to last.</p>
-                    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
+
+                <a href="/services/minor-plumbing" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600" aria-hidden="true"><i class="fas fa-faucet-drip"></i></div>
+                            <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $135</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-2">Minor Plumbing Repairs</h3>
+                        <!-- Scope Clearance Note -->
+                        <p class="text-[11px] font-semibold text-blue-900 bg-blue-50 p-2 rounded-xl border border-blue-100 mb-3"><i class="fas fa-info-circle text-blue-600 mr-1"></i>Ideal for minor repairs, fixture replacements &amp; hardware upgrades. For major re-wiring or full replumbing, we can coordinate with licensed trades.</p>
+                        <p class="text-gray-600 mb-3 text-sm leading-relaxed">Stop the drip, protect your home. Fast, clean solutions for leaky faucets, showerheads, toilet rebuilds, and supply lines.</p>
+                    </div>
+                    <!-- Hyper-Local Review Quote -->
+                    <div class="bg-gray-50 p-3 rounded-2xl border border-gray-200 text-xs text-gray-700 italic my-2">
+                        <div class="text-amber-500 text-[10px] mb-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        "Replaced our kitchen faucet and fixed a slow drain in West Bloomfield quickly and cleanly."
+                        <span class="block not-italic font-bold text-gray-900 mt-1">&mdash; Dave L., West Bloomfield, MI</span>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
                 </a>
-                <a href="/services/minor-plumbing" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
-                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-faucet-drip"></i></div>
-                    <h3 class="text-2xl font-semibold mb-3">Minor Plumbing Repairs</h3>
-                    <p class="text-gray-600 mb-4">Stop the drip, protect your home. We provide fast, clean solutions for leaky faucets, showerheads, and stubborn drains, ensuring your home’s flow is restored efficiently.</p>
-                    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
+
+                <a href="/services/minor-electrical" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900" aria-hidden="true"><i class="fas fa-lightbulb"></i></div>
+                            <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $125</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-2">Minor Electrical Services</h3>
+                        <!-- Scope Clearance Note -->
+                        <p class="text-[11px] font-semibold text-blue-900 bg-blue-50 p-2 rounded-xl border border-blue-100 mb-3"><i class="fas fa-info-circle text-blue-600 mr-1"></i>Ideal for minor repairs, fixture replacements &amp; hardware upgrades. For major re-wiring or full replumbing, we can coordinate with licensed trades.</p>
+                        <p class="text-gray-600 mb-3 text-sm leading-relaxed">Safe, reliable updates. Keep your home bright and powered. We replace switches, outlets, dimmers, light fixtures, and ceiling fans with safety precision.</p>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
                 </a>
-                <a href="/services/minor-electrical" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
-                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-lightbulb"></i></div>
-                    <h3 class="text-2xl font-semibold mb-3">Minor Electrical Services</h3>
-                    <p class="text-gray-600 mb-4">Safe, reliable updates. Keep your home powered and bright. We specialize in replacing outdated switches, outlets, and fixtures or installing new ceiling fans with safety and code-conscious precision. (Note: We focus on fixtures and safety updates; new wiring or breaker box installations are not included.)</p>
-                    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
-                </a>
+
                 <a href="/services/installation" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
-                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-screwdriver-wrench"></i></div>
-                    <h3 class="text-2xl font-semibold mb-3">Installation</h3>
-                    <p class="text-gray-600 mb-4">Mounted, anchored, and ready to go. Whatever needs putting up or putting in, we handle it with clean, code-conscious installation you can rely on.</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Baby &amp; Child Proofing</li>
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>All Your Installation Projects</li>
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Handrail &amp; Stairs Installation</li>
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Kitchen Installation</li>
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bathroom Installation</li>
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>TV Wall Mounting</li>
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600" aria-hidden="true"><i class="fas fa-screwdriver-wrench"></i></div>
+                        <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $100</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3">Installation &amp; Mounting</h3>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">Mounted, anchored, and ready to go. Professional installation for TV wall mounting, baby proofing, kitchen hardware, and handrails.</p>
+                    <ul class="space-y-1 text-xs text-gray-600 mb-4">
+                        <li class="flex items-center gap-1.5"><i class="fas fa-check text-red-600"></i> TV Wall Mounting ($155+)</li>
+                        <li class="flex items-center gap-1.5"><i class="fas fa-check text-red-600"></i> Handrails &amp; Grab Bars</li>
                     </ul>
-                    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
+                    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
                 </a>
+
                 <a href="/services/home-repair-upkeep" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600">
-                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-house-chimney"></i></div>
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600" aria-hidden="true"><i class="fas fa-house-chimney"></i></div>
+                        <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $100</span>
+                    </div>
                     <h3 class="text-2xl font-semibold mb-3">Home Repair &amp; Upkeep</h3>
-                    <p class="text-gray-600 mb-4">Keep every room in peak condition. From the laundry room to the kitchen, bath, and exterior, we tackle the ongoing repairs and upkeep that protect your home’s comfort and value.</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Laundry Room Maintenance</li>
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bathroom Maintenance &amp; Upkeep</li>
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Kitchen Maintenance &amp; Upkeep</li>
-                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior Home Maintenance</li>
-                    </ul>
-                    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">Keep every room in peak condition. Tackle ongoing punch lists across laundry rooms, kitchens, bathrooms, and exterior surfaces.</p>
+                    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs"></i></span>
                 </a>
 
                 <div class="service-card w-full md:w-full lg:w-[calc(66.666%-0.668rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 text-center">
@@ -641,7 +787,7 @@
 
             <div class="mt-10 sm:mt-12 text-center">
                 <a href="/services" class="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-semibold transition shadow-lg hover:shadow-red-600/30">
-                    View All Services <i class="fas fa-arrow-right"></i>
+                    View All Services &amp; Packages <i class="fas fa-arrow-right"></i>
                 </a>
                 <p class="mt-4 text-sm text-gray-500">A selection of what we do &mdash; see the full list of handyman services, from furniture assembly and gutters to senior-care and commercial work.</p>
             </div>
