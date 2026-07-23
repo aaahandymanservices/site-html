@@ -257,7 +257,7 @@ ${jsonLd(city)}
 
     <!-- Floating Call Action -->
     <noscript>
-        <a href="tel:${PHONE_TEL}" class="fixed bottom-5 right-5 z-50 flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now" aria-label="Call AAA Handyman Services Now">
+        <a href="tel:${PHONE_TEL}" class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now" aria-label="Call AAA Handyman Services Now">
             <i class="fas fa-phone" aria-hidden="true"></i>
             <span class="hidden md:inline">Call Now! <span class="hidden lg:inline">${PHONE_DISPLAY}</span></span>
         </a>
