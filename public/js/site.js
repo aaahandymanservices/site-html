@@ -36,47 +36,4 @@
     });
   }
 
-  // --- Mobile Sticky Floating Call & Get Quote Bar ---
-  const initMobileFloatingBar = () => {
-    if (document.getElementById('mobile-floating-bar')) return;
-
-    const floatBar = document.createElement('div');
-    floatBar.id = 'mobile-floating-bar';
-    floatBar.className = 'fixed bottom-0 left-0 right-0 z-40 md:hidden bg-slate-900/95 backdrop-blur-md border-t border-slate-700/80 p-2.5 px-4 shadow-2xl transition-transform duration-300 translate-y-0';
-    floatBar.setAttribute('aria-label', 'Quick Contact Bar');
-    // Keep the CTAs above the home-indicator safe area on notched phones.
-    floatBar.style.paddingBottom = 'calc(0.625rem + env(safe-area-inset-bottom, 0px))';
-
-    floatBar.innerHTML = `
-      <div class="max-w-md mx-auto flex items-center justify-between gap-3">
-        <a href="tel:+12483853432" class="cta-button bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-3 rounded-xl flex-1 flex items-center justify-center gap-2 text-xs sm:text-sm text-center shadow-md active:scale-95 transition" style="min-height: 48px;">
-          <i class="fas fa-phone text-sm" aria-hidden="true"></i>
-          <span>Call (248) 385-3432</span>
-        </a>
-        <a href="/contact" class="cta-button bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 px-3 rounded-xl flex-1 flex items-center justify-center gap-2 text-xs sm:text-sm text-center shadow-md active:scale-95 transition" style="min-height: 48px;">
-          <i class="fas fa-calculator text-sm" aria-hidden="true"></i>
-          <span>Get Quote</span>
-        </a>
-      </div>
-    `;
-
-    document.body.appendChild(floatBar);
-
-    const adjustBodyPadding = () => {
-      if (window.innerWidth < 768) {
-        document.body.style.paddingBottom = 'calc(68px + env(safe-area-inset-bottom, 0px))';
-      } else {
-        document.body.style.paddingBottom = '0px';
-      }
-    };
-
-    adjustBodyPadding();
-    window.addEventListener('resize', adjustBodyPadding, { passive: true });
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initMobileFloatingBar);
-  } else {
-    initMobileFloatingBar();
-  }
 })();
