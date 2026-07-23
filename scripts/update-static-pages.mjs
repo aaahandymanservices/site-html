@@ -21,21 +21,34 @@ const STATIC_PAGES = [
   { path: 'public/services/aging-in-place-guide.html', active: 'services' }
 ];
 
+function replaceNavBlock(content, newNavHtml) {
+  // Option 1: Existing <header class="sticky top-0 z-50 ..."> ... </header>
+  const headerMatch = content.match(/<header[^>]*class="[^"]*sticky top-0 z-50[^"]*"[\s\S]*?<\/header>/);
+  if (headerMatch) {
+    return content.replace(headerMatch[0], newNavHtml);
+  }
+
+  // Option 2: Existing <nav class="bg-white shadow-md sticky top-0 z-50 ..."> ... </nav>
+  const navStartMatch = content.match(/<nav[^>]*class="bg-white shadow-md sticky top-0 z-50 border-b-\[3px\] border-red-600"[^>]*>/);
+  if (navStartMatch) {
+    const startIndex = navStartMatch.index;
+    const nextSectionMatch = content.slice(startIndex).match(/(\n\s*<noscript>|\n\s*<header class="bg-gradient|\n\s*<main)/);
+    if (nextSectionMatch) {
+      const endIndex = startIndex + nextSectionMatch.index;
+      return content.slice(0, startIndex) + newNavHtml + content.slice(endIndex);
+    }
+  }
+
+  console.warn('Could not match nav block');
+  return content;
+}
+
 for (const { path, active, removeSectionNav } of STATIC_PAGES) {
   const fullPath = join(ROOT, path);
   let content = readFileSync(fullPath, 'utf8');
 
-  // Regex to match the main top navbar
-  const mainNavRegex = /(?:<header[^>]*class="sticky top-0 z-50 bg-white[\s\S]*?<\/header>|<nav[^>]*class="bg-white shadow-md sticky top-0 z-50 border-b-\[3px\] border-red-600"[\s\S]*?<\/nav>)/;
-  
-  if (mainNavRegex.test(content)) {
-    const unifiedNavHtml = getUnifiedNav(active);
-    content = content.replace(mainNavRegex, unifiedNavHtml);
-  } else {
-    console.warn(`Main nav regex did not match in ${path}`);
-  }
+  content = replaceNavBlock(content, getUnifiedNav(active));
 
-  // On rates.html, remove secondary sub-nav #section-nav if present
   if (removeSectionNav) {
     const sectionNavRegex = /\s*<nav\s+id="section-nav"[\s\S]*?<\/nav>/;
     content = content.replace(sectionNavRegex, '');

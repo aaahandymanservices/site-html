@@ -2,6 +2,23 @@ section[id], header[id], div[id] {
   scroll-margin-top: 80px;
 }
 
+/* Navigation Megamenu & Dropdowns */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+  display: block !important;
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-dropdown-menu {
+  display: none;
+  z-index: 120;
+}
+
 body > nav.sticky,
 header.sticky,
 nav.sticky {
