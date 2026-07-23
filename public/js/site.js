@@ -42,7 +42,7 @@
 
     const floatBar = document.createElement('div');
     floatBar.id = 'mobile-floating-bar';
-    floatBar.className = 'fixed bottom-0 left-0 right-0 z-50 md:hidden bg-slate-900/95 backdrop-blur-md border-t border-slate-700/80 p-2.5 px-4 shadow-2xl transition-transform duration-300 translate-y-0';
+    floatBar.className = 'fixed bottom-0 left-0 right-0 z-40 md:hidden bg-slate-900/95 backdrop-blur-md border-t border-slate-700/80 p-2.5 px-4 shadow-2xl transition-transform duration-300 translate-y-0';
     floatBar.setAttribute('aria-label', 'Quick Contact Bar');
 
     floatBar.innerHTML = `
