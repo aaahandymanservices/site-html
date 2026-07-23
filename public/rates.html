@@ -157,17 +157,6 @@
             scroll-margin-top: var(--sticky-offset, 140px);
         }
 
-        .section-nav-link {
-            white-space: nowrap;
-            border: 1px solid transparent;
-        }
-        .section-nav-link.active-section {
-            color: #8e1f26;
-            background-color: #fde8e8;
-            border-color: #f8b4b4;
-            font-weight: 700;
-        }
-
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -222,7 +211,7 @@
 
     <!-- Mobile Navigation Drawer / Menu -->
     <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-2xl max-h-[calc(100vh-70px)] overflow-y-auto">
-        <nav aria-label="Mobile Navigation" class="space-y-1">
+        <div aria-label="Mobile Navigation" role="navigation" class="space-y-1">
             <a href="/services" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
             <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
             <a href="/rates" class="block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition">Rates</a>
@@ -230,7 +219,7 @@
             <a href="/reviews" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Reviews</a>
             <a href="/careers" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Careers</a>
             <a href="/contact" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Contact</a>
-        </nav>
+        </div>
 
         <div class="pt-3 border-t border-gray-100 flex items-center justify-center space-x-6 text-2xl">
             <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Facebook Page" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
@@ -241,7 +230,7 @@
 </nav>
 
     <!-- In-page Section Sub-Menu -->
-    <nav id="section-nav" aria-label="Jump to a pricing section" class="sticky z-40 bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm" style="top:0;">
+    <nav id="section-nav" aria-label="Jump to a pricing section" class="sticky z-40 bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm" style="top:60px;">
         <div class="max-w-7xl mx-auto px-3 sm:px-6">
             <ul class="flex items-center gap-2 overflow-x-auto no-scrollbar py-2 flex-nowrap whitespace-nowrap">
                 <li><a href="#rates" class="section-nav-link inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold transition"><i class="fas fa-tags text-xs" aria-hidden="true"></i> Rates</a></li>
