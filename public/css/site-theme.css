@@ -697,6 +697,10 @@ body > footer a.text-red-500 {
 
   body > footer {
     padding-top: 3rem !important;
+    /* Reserve space at the bottom so the fixed chat/call buttons never cover
+       the footer's closing content. Applied to the (black) footer rather than
+       <body> so no light background strip shows beneath it. */
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px)) !important;
   }
 
   :where(a, button)[class*="px-"][class*="py-"][class*="text-white"] {
