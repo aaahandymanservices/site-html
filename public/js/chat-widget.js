@@ -11,7 +11,7 @@
   var conversationVersion = 0;
   var style = document.createElement("style");
   style.textContent = [
-    ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:2147483000;display:flex;flex-direction:column;gap:12px;align-items:flex-end}",
+    ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:40;display:flex;flex-direction:column;gap:12px;align-items:flex-end}",
     ".aaa-fab .aaa-fab-btn{min-width:126px;height:60px;padding:0 20px;border-radius:9999px;border:2px solid #fff;display:flex;align-items:center;justify-content:center;gap:10px;box-sizing:border-box;font:700 16px/1 'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap;color:#fff;cursor:pointer;text-decoration:none;box-shadow:0 8px 24px rgba(13,34,55,.35);transition:transform .15s ease,background .15s ease}",
     ".aaa-fab .aaa-fab-btn i{font-size:20px}",
     ".aaa-fab .aaa-fab-btn:hover{transform:scale(1.06)}",
