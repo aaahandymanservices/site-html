@@ -351,14 +351,14 @@ html:not(.dark) .text-slate-600 {
 .dark .edit-button:not([class^="aaa-"]):not([class*=" aaa-"]),
 .dark [type="button"]:not(#theme-toggle-btn):not(#mobile-menu-btn):not(#back-to-top):not(.time-slot-btn):not([class^="aaa-"]):not([class*=" aaa-"]):not(.bg-red-600):not(.bg-green-600),
 .dark [type="submit"]:not(.time-slot-btn):not([class^="aaa-"]):not([class*=" aaa-"]):not(.bg-red-600):not(.bg-green-600) {
-  background-color: #3b82f6 !important;
+  background-color: #a61f2e !important;
   color: white !important;
-  border-color: #2563eb !important;
+  border-color: #7f1723 !important;
 }
 
 .dark button:not(#theme-toggle-btn):not(#mobile-menu-btn):not(#back-to-top):not(.time-slot-btn):not([class^="aaa-"]):not([class*=" aaa-"]):not(.bg-red-600):not(.bg-green-600):hover,
 .dark .btn:not(.time-slot-btn):not([class^="aaa-"]):not([class*=" aaa-"]):not(.bg-red-600):not(.bg-green-600):hover {
-  background-color: #2563eb !important;
+  background-color: #7f1723 !important;
 }
 
 .dark .cancel-button {
