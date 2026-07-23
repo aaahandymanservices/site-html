@@ -702,12 +702,13 @@
                         <p class="text-sm text-gray-500 font-semibold mb-3">Year-Round</p>
                         <div class="mb-4"><span class="text-3xl font-black text-blue-900">$49</span> <span class="text-xs text-gray-500">/mo</span></div>
                         <p class="text-gray-600 text-sm leading-relaxed mb-4">Scheduled seasonal visits, priority booking, and member pricing all year.</p>
-                        <ul class="space-y-2 text-sm text-gray-700 mb-6 flex-grow">
+                        <ul class="space-y-2 text-sm text-gray-700 mb-4 flex-grow">
                             <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> 2&ndash;4 scheduled visits per year</li>
                             <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Priority scheduling &amp; member rate</li>
                             <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Seasonal home health checklist</li>
                         </ul>
                         <a href="/contact?service=Maintenance+Membership#contact-form" class="cta-button bg-emerald-700 hover:bg-emerald-800 w-full text-sm font-bold">Ask About Membership</a>
+                        <button type="button" data-membership-open class="aaa-btn-plain mt-3 bg-transparent text-sm font-semibold text-emerald-700 hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300 underline underline-offset-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 rounded">Learn more about membership</button>
                     </div>
                 </div>
 
@@ -1754,6 +1755,85 @@
       ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function(e) {
         window.addEventListener(e, loadGtag, { once: true, passive: true });
       });
+    </script>
+
+    <!-- Maintenance Membership details modal -->
+    <dialog id="membership-modal" aria-labelledby="membership-modal-title" class="membership-dialog w-[92vw] max-w-2xl rounded-3xl p-0 shadow-2xl backdrop:bg-slate-900/60 backdrop:backdrop-blur-sm">
+        <div class="flex flex-col max-h-[88vh]">
+            <div class="flex items-start justify-between gap-4 bg-blue-900 text-white p-6 rounded-t-3xl">
+                <div>
+                    <div class="flex items-center gap-2 text-emerald-300 text-xs font-bold uppercase tracking-widest"><i class="fas fa-calendar-check" aria-hidden="true"></i> Year-Round Plan</div>
+                    <h2 id="membership-modal-title" class="text-2xl font-bold mt-1">Maintenance Membership</h2>
+                    <p class="text-sm text-blue-100 mt-1"><span class="text-2xl font-black text-white align-middle">$49</span> <span class="text-blue-200">/mo</span> &middot; month-to-month</p>
+                </div>
+                <button type="button" data-membership-close class="aaa-btn-plain shrink-0 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white" aria-label="Close membership details"><i class="fas fa-times" aria-hidden="true"></i></button>
+            </div>
+
+            <div class="overflow-y-auto p-6 space-y-6 text-gray-700">
+                <section>
+                    <h3 class="flex items-center gap-2 text-lg font-bold text-blue-900"><i class="fas fa-clipboard-check text-emerald-600" aria-hidden="true"></i> What the Seasonal Home Checklist covers</h3>
+                    <p class="text-sm text-gray-600 mt-1 mb-3">On each scheduled visit, your craftsman works through a whole-home safety and upkeep sweep so small issues get caught before they become expensive repairs.</p>
+                    <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Gutter &amp; downspout clearing and flow check</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Weatherstripping &amp; door-sweep inspection</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Smoke &amp; CO detector test and battery swap</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Caulking check at tubs, sinks &amp; windows</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> HVAC filter replacement &amp; vent check</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Deck, railing &amp; exterior stability review</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Faucet, toilet &amp; under-sink leak inspection</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Written summary of anything that needs attention</li>
+                    </ul>
+                </section>
+
+                <section class="border-t border-gray-100 pt-5">
+                    <h3 class="flex items-center gap-2 text-lg font-bold text-blue-900"><i class="fas fa-tags text-emerald-600" aria-hidden="true"></i> How member pricing works on future service calls</h3>
+                    <ul class="space-y-2 text-sm mt-3">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Members book at a discounted hourly labor rate on any additional service call or project.</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Priority scheduling &mdash; members go to the front of the calendar, including seasonal rushes.</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> The standard trip charge is waived within Zone A on covered visits.</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Materials stay at our everyday pricing &mdash; supply your own at no markup, or we source them at our standard 10&ndash;15% supply fee.</li>
+                    </ul>
+                </section>
+
+                <section class="border-t border-gray-100 pt-5">
+                    <h3 class="flex items-center gap-2 text-lg font-bold text-blue-900"><i class="fas fa-file-signature text-emerald-600" aria-hidden="true"></i> Commitment &amp; cancellation</h3>
+                    <ul class="space-y-2 text-sm mt-3">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Month-to-month &mdash; no long-term contract and no enrollment fee.</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Cancel anytime with 30 days' notice; you keep any scheduled visit already booked.</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> No cancellation penalty &mdash; you simply stop billing at the end of the cycle.</li>
+                    </ul>
+                    <p class="text-xs text-gray-500 mt-3">Final terms are confirmed in writing when you enroll. Have a question first? Just ask &mdash; we're happy to walk through the details.</p>
+                </section>
+            </div>
+
+            <div class="p-6 border-t border-gray-100 flex flex-col sm:flex-row gap-3 sm:justify-end">
+                <button type="button" data-membership-close class="aaa-btn-plain order-2 sm:order-1 bg-transparent text-sm font-semibold text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white px-5 py-3 rounded-xl transition focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400">Close</button>
+                <a href="/contact?service=Maintenance+Membership#contact-form" class="order-1 sm:order-2 cta-button bg-emerald-700 hover:bg-emerald-800 text-sm font-bold text-center"><i class="fas fa-comment-dots mr-1.5" aria-hidden="true"></i> Ask About Membership</a>
+            </div>
+        </div>
+    </dialog>
+
+    <script>
+        (function () {
+            const modal = document.getElementById('membership-modal');
+            if (!modal || typeof modal.showModal !== 'function') return;
+            const openers = document.querySelectorAll('[data-membership-open]');
+            const closers = modal.querySelectorAll('[data-membership-close]');
+
+            openers.forEach((btn) => btn.addEventListener('click', () => {
+                modal.showModal();
+                document.body.style.overflow = 'hidden';
+            }));
+            closers.forEach((btn) => btn.addEventListener('click', () => modal.close()));
+
+            // Close when the backdrop (area outside the card) is clicked.
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) modal.close();
+            });
+            modal.addEventListener('close', () => {
+                document.body.style.overflow = '';
+            });
+        })();
     </script>
 
     <script src="/js/site.js?v=20260720" defer></script>
