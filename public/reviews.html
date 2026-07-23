@@ -554,7 +554,7 @@
         };
 
         const deleteReviewsItem = (id) => {
-            if (!confirm('Remove this review?')) return;
+            if (!confirm("Delete this review permanently? This can't be undone.")) return;
             showReviewsMessage('Removing your review...', false);
 
             fetch(`/api/reviews/${encodeURIComponent(id)}`, {
