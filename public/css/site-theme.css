@@ -1,12 +1,20 @@
 :root {
-  --brand-navy: #223354;
+  --primary-color: #1B2A4A;
+  --accent-color: #A61F2E;
+  --accent-color-hover: #781925;
+  --text-dark: #1f2937;
+  --bg-light: #f8fafc;
+  --radius: 8px;
+  --radius-lg: 12px;
+
+  --brand-navy: #1B2A4A;
   --brand-navy-deep: #101b31;
   --brand-navy-soft: #263a62;
-  --brand-crimson: #9e2230;
+  --brand-crimson: #A61F2E;
   --brand-crimson-dark: #781925;
   --brand-crimson-soft: #f5e6e8;
-  --brand-ink: #273549;
-  --brand-muted: #5b6b7f;
+  --brand-ink: #1f2937;
+  --brand-muted: #475569;
   --brand-line: #d3dbe5;
   --brand-surface: #f8fafc;
   --brand-canvas: #eef2f6;
@@ -18,9 +26,41 @@
   --brand-shadow-strong: 0 18px 44px rgba(16, 27, 49, 0.14);
 }
 
+.cta-button {
+  background-color: var(--accent-color);
+  color: #ffffff !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+.cta-button:hover {
+  background-color: var(--accent-color-hover);
+  transform: translateY(-1px);
+}
+.cta-button:focus-visible {
+  outline: 3px solid rgba(166, 31, 46, 0.38) !important;
+  outline-offset: 3px;
+}
+
+/* Touch targets & typography defaults */
 html {
-  color-scheme: light;
-  background: var(--brand-canvas);
+  font-size: 16px;
+}
+
+button,
+a.btn,
+.cta-button,
+input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  min-height: 48px;
 }
 
 body {
@@ -30,6 +70,7 @@ body {
     radial-gradient(circle at 8% 0%, rgba(158, 34, 48, 0.035), transparent 28rem),
     linear-gradient(180deg, #f3f6fa 0%, var(--brand-canvas) 24rem);
   font-family: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1rem;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
