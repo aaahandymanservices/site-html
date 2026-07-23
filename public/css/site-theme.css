@@ -1,7 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&display=swap");
+
 :root {
   --brand-navy: #1b2a4a;
   --brand-navy-deep: #101b31;
+  --brand-navy-soft: #26395a;
   --brand-crimson: #a61f2e;
+  --brand-crimson-bright: #c62839;
   --brand-crimson-dark: #781925;
   --brand-crimson-soft: #f8e9eb;
   --brand-ink: #1f2937;
@@ -9,7 +13,24 @@
   --brand-line: #d8dee8;
   --brand-surface: #ffffff;
   --brand-canvas: #f4f6fa;
-  --brand-shadow: 0 14px 36px rgb(27 42 74 / 10%);
+
+  /* Layered shadow scale for consistent depth across the site */
+  --shadow-sm: 0 1px 2px rgb(16 27 49 / 6%), 0 2px 6px rgb(16 27 49 / 6%);
+  --shadow-md: 0 8px 24px rgb(27 42 74 / 8%);
+  --shadow-lg: 0 18px 44px rgb(27 42 74 / 12%);
+  --shadow-crimson: 0 12px 26px rgb(120 25 37 / 26%);
+  --brand-shadow: var(--shadow-lg);
+
+  /* Motion + shape tokens */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 200ms;
+
+  /* Signature gradients */
+  --grad-crimson: linear-gradient(135deg, var(--brand-crimson-bright), var(--brand-crimson) 55%, var(--brand-crimson-dark));
+  --grad-navy: linear-gradient(135deg, var(--brand-navy-deep), var(--brand-navy));
+
+  --font-display: "Archivo", "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 html {
@@ -20,17 +41,51 @@ html {
 body {
   min-width: 320px;
   background:
-    radial-gradient(circle at 8% 0%, rgb(166 31 46 / 4%), transparent 28rem),
-    linear-gradient(180deg, #f8fafc 0%, var(--brand-canvas) 24rem);
+    radial-gradient(circle at 8% -2%, rgb(166 31 46 / 5%), transparent 30rem),
+    radial-gradient(circle at 100% 0%, rgb(27 42 74 / 5%), transparent 34rem),
+    linear-gradient(180deg, #f8fafc 0%, var(--brand-canvas) 26rem);
   color: var(--brand-ink);
   line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  animation: page-enter 0.55s var(--ease-out) both;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 ::selection {
   color: #fff;
   background: var(--brand-crimson);
+}
+
+/* Refined, brand-tinted scrollbar */
+* {
+  scrollbar-color: rgb(166 31 46 / 55%) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: rgb(38 57 90 / 45%);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(166 31 46 / 65%);
+  background-clip: content-box;
 }
 
 section[id],
@@ -39,14 +94,19 @@ div[id] {
   scroll-margin-top: 6rem;
 }
 
-:where(h1, h2, h3, h4) {
-  letter-spacing: -0.018em;
+/* Distinctive, sturdy display type for every heading — applied at zero
+   specificity so Tailwind size/weight utilities keep full control. */
+:where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
 :where(a, button, input, select, textarea, summary):focus-visible {
-  outline: 3px solid rgb(166 31 46 / 38%);
+  outline: 3px solid rgb(166 31 46 / 45%);
   outline-offset: 3px;
+  border-radius: 4px;
 }
 
 button,
@@ -58,25 +118,50 @@ textarea {
   min-height: 44px;
 }
 
+/* Primary call-to-action buttons — one cohesive crimson treatment site-wide */
 .cta-button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   min-height: 48px;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  background: var(--brand-crimson);
+  padding: 0.8rem 1.6rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--grad-crimson);
   color: #fff;
   font-weight: 700;
+  letter-spacing: 0.01em;
   text-decoration: none;
-  transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), filter var(--dur) var(--ease);
+}
+
+/* Moving sheen on hover for a tactile, polished feel */
+.cta-button::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 28%) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 620ms var(--ease-out);
+  pointer-events: none;
 }
 
 .cta-button:hover {
-  background: var(--brand-crimson-dark);
-  box-shadow: 0 8px 18px rgb(120 25 37 / 22%);
-  transform: translateY(-1px);
+  filter: saturate(1.05) brightness(1.03);
+  box-shadow: var(--shadow-crimson);
+  transform: translateY(-2px);
+}
+
+.cta-button:hover::after {
+  transform: translateX(120%);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 body > nav.sticky,
@@ -87,10 +172,11 @@ nav.sticky {
 
 body > nav.sticky {
   border-bottom-color: var(--brand-crimson);
-  background: rgb(255 255 255 / 96%);
+  background: rgb(255 255 255 / 90%);
   box-shadow: 0 6px 22px rgb(27 42 74 / 8%);
-  backdrop-filter: blur(14px) saturate(130%);
-  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  transition: box-shadow var(--dur) var(--ease), background-color var(--dur) var(--ease);
 }
 
 body > nav.sticky > div:first-child {
@@ -99,21 +185,41 @@ body > nav.sticky > div:first-child {
 
 body > nav.sticky img {
   border-color: var(--brand-crimson);
-  box-shadow: 0 0 0 3px rgb(166 31 46 / 8%);
+  box-shadow: 0 0 0 3px rgb(166 31 46 / 10%);
 }
 
 .nav-link {
+  position: relative;
   border-bottom: 2px solid transparent;
   color: #404e62;
   font-weight: 500;
-  transition: color 180ms ease, border-color 180ms ease, transform 180ms ease;
+  transition: color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+/* Animated underline that grows from the center */
+.nav-link::after {
+  position: absolute;
+  right: 0;
+  bottom: -2px;
+  left: 0;
+  height: 2px;
+  margin-inline: auto;
+  content: "";
+  width: 0;
+  background: var(--brand-crimson);
+  border-radius: 2px;
+  transition: width var(--dur) var(--ease);
 }
 
 .nav-link:hover,
 .nav-link.border-red-600 {
-  border-bottom-color: var(--brand-crimson);
   color: var(--brand-crimson);
   transform: translateY(-1px);
+}
+
+.nav-link:hover::after,
+.nav-link.border-red-600::after {
+  width: 100%;
 }
 
 #mobile-menu {
@@ -124,6 +230,7 @@ body > nav.sticky img {
 
 #mobile-menu-btn {
   background: transparent;
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
 }
 
 #section-nav {
@@ -131,7 +238,7 @@ body > nav.sticky img {
   top: 4.75rem;
   z-index: 40;
   border-bottom: 1px solid rgb(216 222 232 / 90%);
-  background: rgb(255 255 255 / 95%);
+  background: rgb(255 255 255 / 92%);
   box-shadow: 0 4px 15px -3px rgb(27 42 74 / 7%);
   backdrop-filter: blur(12px) saturate(150%);
   -webkit-backdrop-filter: blur(12px) saturate(150%);
@@ -155,30 +262,37 @@ body > nav.sticky img {
   align-items: center;
   gap: 0.45rem;
   min-height: 40px;
-  padding: 0.55rem 0.85rem;
-  border: 1px solid transparent;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid rgb(216 222 232 / 90%);
   border-radius: 999px;
   color: #526174;
   font-size: 0.875rem;
   font-weight: 700;
   white-space: nowrap;
-  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease), border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
 
 .section-nav-link:hover,
 .section-nav-link.active-section {
-  border-color: rgb(166 31 46 / 18%);
+  border-color: rgb(166 31 46 / 30%);
   background: var(--brand-crimson-soft);
   color: var(--brand-crimson-dark);
+  transform: translateY(-1px);
 }
 
 #pricing-hero {
-  background: linear-gradient(135deg, var(--brand-navy-deep), var(--brand-navy));
+  background: var(--grad-navy);
 }
 
 .hero {
   background-position: center;
   background-size: cover;
+}
+
+/* Truly fluid hero headline — scales continuously instead of in breakpoint steps */
+.hero-title {
+  font-size: clamp(2.25rem, 6.2vw + 0.5rem, 3.9rem);
+  line-height: 1.04;
 }
 
 body > header.bg-gradient-to-r {
@@ -193,7 +307,7 @@ body > header.bg-gradient-to-r::before {
   pointer-events: none;
   background:
     radial-gradient(circle at 85% 15%, rgb(255 255 255 / 10%), transparent 19rem),
-    linear-gradient(115deg, transparent 55%, rgb(166 31 46 / 12%));
+    linear-gradient(115deg, transparent 55%, rgb(166 31 46 / 14%));
 }
 
 body > header.bg-gradient-to-r > * {
@@ -203,15 +317,15 @@ body > header.bg-gradient-to-r > * {
 .service-card,
 .generated-service-card {
   border-color: rgb(216 222 232 / 92%);
-  box-shadow: 0 8px 24px rgb(27 42 74 / 7%);
-  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+  box-shadow: var(--shadow-md);
+  transition: border-color 260ms var(--ease), box-shadow 260ms var(--ease), transform 260ms var(--ease);
 }
 
 .service-card:hover,
 .generated-service-card:hover {
-  border-color: rgb(166 31 46 / 25%);
-  box-shadow: var(--brand-shadow);
-  transform: translateY(-5px);
+  border-color: rgb(166 31 46 / 30%);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px);
 }
 
 @keyframes pulse-attention-green {
@@ -233,14 +347,16 @@ body > header.bg-gradient-to-r > * {
 
 form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
   border-color: #b8c2d0;
+  border-radius: 0.6rem;
   background-color: #fff;
   color: var(--brand-ink);
-  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease), background-color 160ms var(--ease);
 }
 
 form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea):focus {
   border-color: var(--brand-crimson);
-  box-shadow: 0 0 0 4px rgb(166 31 46 / 12%);
+  box-shadow: 0 0 0 4px rgb(166 31 46 / 14%);
+  outline: none;
 }
 
 form :where(input, select, textarea)::placeholder {
@@ -250,39 +366,57 @@ form :where(input, select, textarea)::placeholder {
 
 details {
   border-color: var(--brand-line);
+  border-radius: 0.75rem;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+details[open] {
+  border-color: rgb(166 31 46 / 28%);
+  box-shadow: var(--shadow-sm);
 }
 
 details summary {
   cursor: pointer;
+  transition: color var(--dur) var(--ease);
+}
+
+details summary:hover {
+  color: var(--brand-crimson);
 }
 
 body > footer {
   border-top: 4px solid var(--brand-crimson);
   background:
     radial-gradient(circle at 90% 0%, rgb(166 31 46 / 16%), transparent 24rem),
+    radial-gradient(circle at 0% 100%, rgb(38 57 90 / 40%), transparent 30rem),
     var(--brand-navy-deep);
 }
 
 body > footer a {
   text-underline-offset: 0.2em;
+  transition: color var(--dur) var(--ease), opacity var(--dur) var(--ease);
 }
 
 #back-to-top {
   z-index: 80;
   border: 1px solid rgb(255 255 255 / 18%);
-  background: var(--brand-crimson);
+  background: var(--grad-crimson);
   color: #fff;
-  box-shadow: 0 10px 24px rgb(16 27 49 / 28%);
+  box-shadow: 0 10px 24px rgb(16 27 49 / 30%);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), filter var(--dur) var(--ease);
 }
 
 #back-to-top:hover {
-  background: var(--brand-crimson-dark);
+  filter: brightness(1.05);
+  box-shadow: 0 14px 30px rgb(16 27 49 / 38%);
+  transform: translateY(-2px);
 }
 
 .review-delete-btn {
   border-color: var(--brand-crimson-dark);
   background: var(--brand-crimson);
   color: #fff;
+  transition: background-color var(--dur) var(--ease);
 }
 
 .review-delete-btn:hover {
@@ -335,10 +469,19 @@ body > footer a {
     transition-duration: 0.01ms !important;
   }
 
+  body {
+    animation: none;
+  }
+
+  .cta-button::after {
+    display: none;
+  }
+
   .service-card:hover,
   .generated-service-card:hover,
   .cta-button:hover,
-  .nav-link:hover {
+  .nav-link:hover,
+  #back-to-top:hover {
     transform: none;
   }
 
@@ -346,3 +489,4 @@ body > footer a {
     animation: none;
   }
 }
+</content>
