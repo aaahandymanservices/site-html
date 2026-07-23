@@ -440,6 +440,33 @@
         </div>
     </header>
 
+    <!-- Local Trust Banner -->
+    <section id="trust-banner" class="bg-blue-900 text-white border-b-4 border-red-600">
+        <div class="max-w-7xl mx-auto px-6 py-10 sm:py-12">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Your Neighbor with a Tool Belt &mdash; Not a Call Center.</h2>
+                <p class="mt-3 text-white/80 max-w-2xl mx-auto text-sm sm:text-base">Every job is done by the owner's own crew and backed by a full one-year workmanship guarantee.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="flex flex-col items-center text-center gap-3 bg-white/5 border border-white/10 rounded-3xl p-6">
+                    <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-2xl text-red-400" aria-hidden="true"><i class="fas fa-award"></i></div>
+                    <h3 class="text-lg font-bold text-white">1-Year Workmanship Guarantee</h3>
+                    <p class="text-sm text-white/75">If it's not right, we make it right &mdash; in writing, for a full year. <a href="/guarantee" class="underline decoration-red-400 underline-offset-2 hover:text-white">See our guarantee</a>.</p>
+                </div>
+                <div class="flex flex-col items-center text-center gap-3 bg-white/5 border border-white/10 rounded-3xl p-6">
+                    <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-2xl text-red-400" aria-hidden="true"><i class="fas fa-location-dot"></i></div>
+                    <h3 class="text-lg font-bold text-white">Oakland County Born &amp; Based</h3>
+                    <p class="text-sm text-white/75">Waterford-based, serving Troy, Royal Oak, Rochester Hills &amp; neighbors. We know these homes.</p>
+                </div>
+                <div class="flex flex-col items-center text-center gap-3 bg-white/5 border border-white/10 rounded-3xl p-6">
+                    <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-2xl text-red-400" aria-hidden="true"><i class="fas fa-user-tie"></i></div>
+                    <h3 class="text-lg font-bold text-white">Direct, Owner-Operated</h3>
+                    <p class="text-sm text-white/75">You talk to the owner, not a dispatcher. Same trusted hands, every visit.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- How It Works 3-Step Process -->
     <section id="how-it-works" class="py-12 sm:py-16 bg-gray-50 border-y border-gray-200">
         <div class="max-w-7xl mx-auto px-6">
@@ -613,6 +640,82 @@
                         <a href="/services#home-repair-upkeep" class="cta-button bg-emerald-700 hover:bg-emerald-800 w-full text-sm font-bold shadow hover:shadow-md">Explore General Repairs <i class="fas fa-arrow-right text-xs"></i></a>
                     </div>
                 </div>
+            </div>
+
+            <!-- Service Packages & Hourly Tiers -->
+            <div class="mb-14">
+                <div class="text-center mb-8">
+                    <span class="bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border border-red-200"><i class="fas fa-clock mr-1.5"></i> Book Time, Not Guesswork</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-3">Pick a Block. We Handle the List.</h3>
+                    <p class="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto mt-2">Reserve a block of time and knock out as much as fits &mdash; no per-job surprises. Every block includes travel, cleanup, and our 1-year workmanship guarantee.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+                    <!-- Tier 1: Quick Fix -->
+                    <div class="service-card bg-white border-2 border-gray-200 rounded-3xl p-6 shadow-md flex flex-col">
+                        <div class="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center text-2xl text-red-600 mb-4" aria-hidden="true"><i class="fas fa-bolt"></i></div>
+                        <h4 class="text-xl font-bold text-blue-900">Quick Fix</h4>
+                        <p class="text-sm text-gray-500 font-semibold mb-3">2-Hour Block</p>
+                        <div class="mb-4"><span class="text-3xl font-black text-blue-900">$170</span> <span class="text-xs text-gray-500">flat</span></div>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">One or two nagging repairs, handled in a focused two-hour visit.</p>
+                        <ul class="space-y-2 text-sm text-gray-700 mb-6 flex-grow">
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 mt-1 shrink-0"></i> Up to 2 hours of skilled labor</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 mt-1 shrink-0"></i> Travel, diagnosis &amp; cleanup</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 mt-1 shrink-0"></i> 1-year workmanship guarantee</li>
+                        </ul>
+                        <a href="/book?package=quick-fix" class="cta-button w-full text-sm font-bold">Book Quick Fix</a>
+                    </div>
+
+                    <!-- Tier 2: Half-Day Punch List (highlighted) -->
+                    <div class="service-card bg-white border-2 border-red-600 rounded-3xl p-6 shadow-xl flex flex-col relative lg:-mt-3 lg:mb-3">
+                        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider whitespace-nowrap">Most Popular</span>
+                        <div class="w-12 h-12 bg-red-600 rounded-2xl flex items-center justify-center text-2xl text-white mb-4 mt-2" aria-hidden="true"><i class="fas fa-list-check"></i></div>
+                        <h4 class="text-xl font-bold text-blue-900">Half-Day Punch List</h4>
+                        <p class="text-sm text-gray-500 font-semibold mb-3">4-Hour Block</p>
+                        <div class="mb-4"><span class="text-3xl font-black text-blue-900">$330</span> <span class="text-xs text-gray-500">flat</span></div>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">Your whole small-repair list, worked in priority order &mdash; one visit, one invoice.</p>
+                        <ul class="space-y-2 text-sm text-gray-700 mb-6 flex-grow">
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 mt-1 shrink-0"></i> Up to 4 hours of labor</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 mt-1 shrink-0"></i> One trip charge, not several</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 mt-1 shrink-0"></i> Photo summary of completed work</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 mt-1 shrink-0"></i> 1-year workmanship guarantee</li>
+                        </ul>
+                        <a href="/book?package=half-day" class="cta-button w-full text-sm font-bold pulse-btn">Book Half-Day</a>
+                    </div>
+
+                    <!-- Tier 3: Full-Day Handyman -->
+                    <div class="service-card bg-white border-2 border-blue-900 rounded-3xl p-6 shadow-md flex flex-col">
+                        <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl text-blue-900 mb-4" aria-hidden="true"><i class="fas fa-screwdriver-wrench"></i></div>
+                        <h4 class="text-xl font-bold text-blue-900">Full-Day Handyman</h4>
+                        <p class="text-sm text-gray-500 font-semibold mb-3">8-Hour Block</p>
+                        <div class="mb-4"><span class="text-3xl font-black text-blue-900">$625</span> <span class="text-xs text-gray-500">flat</span></div>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">Bigger projects or a full backlog cleared end to end in one dedicated day.</p>
+                        <ul class="space-y-2 text-sm text-gray-700 mb-6 flex-grow">
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-900 mt-1 shrink-0"></i> Up to 8 hours of labor</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-900 mt-1 shrink-0"></i> Project sequencing &amp; material pickup</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-900 mt-1 shrink-0"></i> Progress check-ins &amp; full cleanup</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-900 mt-1 shrink-0"></i> 1-year workmanship guarantee</li>
+                        </ul>
+                        <a href="/book?package=full-day" class="cta-button bg-blue-900 hover:bg-blue-950 w-full text-sm font-bold">Book Full-Day</a>
+                    </div>
+
+                    <!-- Tier 4: Maintenance Membership -->
+                    <div class="service-card bg-white border-2 border-emerald-600 rounded-3xl p-6 shadow-md flex flex-col">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-2xl text-emerald-800 mb-4" aria-hidden="true"><i class="fas fa-calendar-check"></i></div>
+                        <h4 class="text-xl font-bold text-blue-900">Maintenance Membership</h4>
+                        <p class="text-sm text-gray-500 font-semibold mb-3">Year-Round</p>
+                        <div class="mb-4"><span class="text-3xl font-black text-blue-900">$49</span> <span class="text-xs text-gray-500">/mo</span></div>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">Scheduled seasonal visits, priority booking, and member pricing all year.</p>
+                        <ul class="space-y-2 text-sm text-gray-700 mb-6 flex-grow">
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> 2&ndash;4 scheduled visits per year</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Priority scheduling &amp; member rate</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0"></i> Seasonal home health checklist</li>
+                        </ul>
+                        <a href="/contact?service=Maintenance+Membership#contact-form" class="cta-button bg-emerald-700 hover:bg-emerald-800 w-full text-sm font-bold">Ask About Membership</a>
+                    </div>
+                </div>
+
+                <p class="text-center text-sm text-gray-500 mt-8 max-w-2xl mx-auto">Blocks cover labor and are billed at booking. Materials are quoted separately &mdash; supply your own at no markup, or we'll source them for a standard 10&ndash;15% supply fee. Need more than a day? We'll build a custom quote.</p>
             </div>
 
             <!-- Popular Service Packages & Bundles -->
@@ -1059,6 +1162,21 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Neighborhood proof + closing CTA -->
+            <div class="mt-10 pt-8 border-t border-gray-200 text-center">
+                <p class="text-sm font-semibold uppercase tracking-widest text-red-600 mb-3">On the job across Oakland County</p>
+                <div class="flex flex-wrap justify-center gap-2 mb-8">
+                    <a href="/handyman/waterford" class="px-4 py-2 rounded-full text-sm font-bold bg-gray-100 text-blue-900 hover:bg-red-100 transition">Waterford</a>
+                    <a href="/handyman/troy" class="px-4 py-2 rounded-full text-sm font-bold bg-gray-100 text-blue-900 hover:bg-red-100 transition">Troy</a>
+                    <a href="/handyman/rochester-hills" class="px-4 py-2 rounded-full text-sm font-bold bg-gray-100 text-blue-900 hover:bg-red-100 transition">Rochester Hills</a>
+                    <a href="/handyman/royal-oak" class="px-4 py-2 rounded-full text-sm font-bold bg-gray-100 text-blue-900 hover:bg-red-100 transition">Royal Oak</a>
+                    <a href="/handyman/west-bloomfield" class="px-4 py-2 rounded-full text-sm font-bold bg-gray-100 text-blue-900 hover:bg-red-100 transition">West Bloomfield</a>
+                    <a href="/service-areas" class="px-4 py-2 rounded-full text-sm font-bold bg-blue-900 text-white hover:bg-blue-950 transition">See all areas</a>
+                </div>
+                <p class="text-gray-600 mb-4">See a project like yours?</p>
+                <a href="#quote" class="cta-button inline-flex font-bold">Get a Free Quote <i class="fas fa-arrow-right text-sm"></i></a>
+            </div>
         </div>
     </section>
 
@@ -1237,6 +1355,108 @@
             </div>
         </div>
     </section>
+
+    <!-- Frictionless Quote Form -->
+    <section id="quote" class="py-12 sm:py-16 bg-blue-900 text-white">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-8">
+                <div class="uppercase text-red-400 font-semibold tracking-widest text-sm sm:text-base">Free Quote</div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 text-white">Get Your Free Quote &mdash; No Obligation, No Pressure</h2>
+                <p class="mt-4 text-white/80 max-w-xl mx-auto text-base sm:text-lg">Tell us what's going on. We usually reply the same day &mdash; often within the hour during business hours.</p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-2xl p-6 sm:p-8">
+                <form id="quote-form" name="quote" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" class="space-y-5">
+                    <input type="hidden" name="form-name" value="quote" />
+                    <input type="hidden" name="subject" value="New quote request from aaahandyman.services" />
+                    <p class="hidden"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
+
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="q-name" class="block text-sm uppercase tracking-widest mb-2">Your Name</label>
+                            <input id="q-name" type="text" name="name" required autocomplete="name" autocapitalize="words" placeholder="First name is fine" class="w-full px-5 py-4 rounded-2xl text-lg">
+                        </div>
+                        <div>
+                            <label for="q-phone" class="block text-sm uppercase tracking-widest mb-2">Best Number to Reach You</label>
+                            <input id="q-phone" type="tel" name="phone" required autocomplete="tel" inputmode="tel" placeholder="We'll text or call — your choice" class="w-full px-5 py-4 rounded-2xl text-lg">
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="q-email" class="block text-sm uppercase tracking-widest mb-2">Email <span class="text-gray-500 normal-case tracking-normal">(optional)</span></label>
+                            <input id="q-email" type="email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" autocorrect="off" class="w-full px-5 py-4 rounded-2xl text-lg">
+                        </div>
+                        <div>
+                            <label for="q-city" class="block text-sm uppercase tracking-widest mb-2">Your City <span class="text-gray-500 normal-case tracking-normal">(optional)</span></label>
+                            <input id="q-city" type="text" name="city" autocomplete="address-level2" autocapitalize="words" placeholder="e.g. Troy, MI" class="w-full px-5 py-4 rounded-2xl text-lg">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="q-job" class="block text-sm uppercase tracking-widest mb-2">What Can We Fix?</label>
+                        <textarea id="q-job" name="message" rows="4" required placeholder="e.g. Leaky kitchen faucet and a door that won't latch" class="w-full px-5 py-4 rounded-3xl text-lg resize-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="q-photos" class="flex flex-col items-center justify-center gap-2 w-full px-6 py-6 border-2 border-dashed border-red-600/50 rounded-3xl cursor-pointer hover:bg-red-50 transition text-center">
+                            <i class="fas fa-camera text-2xl text-red-600" aria-hidden="true"></i>
+                            <span class="quote-photo-label font-bold text-blue-900">Add Photos (Optional)</span>
+                            <span class="text-xs text-gray-500">A quick snap helps us quote faster &mdash; no photo needed to send.</span>
+                        </label>
+                        <input id="q-photos" type="file" name="photos" accept="image/*" multiple capture="environment" class="hidden">
+                    </div>
+
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-5 text-xl font-bold rounded-3xl transition flex items-center justify-center gap-3 text-white">Get My Free Quote <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+
+                    <p class="text-center text-xs text-gray-500"><i class="fas fa-lock" aria-hidden="true"></i> No spam, ever. We only use this to get back to you about your project.</p>
+                </form>
+
+                <div id="quote-success" class="hidden text-center py-8">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-3xl text-green-600 mx-auto mb-4" aria-hidden="true"><i class="fas fa-circle-check"></i></div>
+                    <h3 class="text-2xl font-bold text-blue-900 mb-2">Got it &mdash; thanks!</h3>
+                    <p class="text-gray-600">We'll be in touch shortly. Need it handled now? Call <a href="tel:+12483853432" class="font-bold text-red-600 hover:text-red-700">(248) 385-3432</a>.</p>
+                </div>
+            </div>
+
+            <p class="text-center text-white/70 text-sm mt-6">Prefer to talk? Call <a href="tel:+12483853432" class="font-bold text-white underline decoration-red-400 underline-offset-2">(248) 385-3432</a> &mdash; we answer during business hours.</p>
+        </div>
+    </section>
+
+    <script>
+        (function () {
+            var form = document.getElementById('quote-form');
+            if (!form) return;
+
+            var photoInput = document.getElementById('q-photos');
+            if (photoInput) {
+                photoInput.addEventListener('change', function () {
+                    var label = form.querySelector('.quote-photo-label');
+                    var n = photoInput.files.length;
+                    if (label) label.textContent = n ? (n + ' photo' + (n > 1 ? 's' : '') + ' attached ✓') : 'Add Photos (Optional)';
+                });
+            }
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var btn = form.querySelector('button[type="submit"]');
+                if (btn) { btn.disabled = true; btn.innerHTML = 'Sending…'; }
+
+                // File uploads: let the browser set the multipart Content-Type boundary.
+                fetch('/', { method: 'POST', body: new FormData(form) })
+                    .then(function (res) {
+                        if (!res.ok) throw new Error('Bad response');
+                        form.classList.add('hidden');
+                        var success = document.getElementById('quote-success');
+                        if (success) success.classList.remove('hidden');
+                    })
+                    .catch(function () {
+                        if (btn) { btn.disabled = false; btn.innerHTML = 'Get My Free Quote <i class="fas fa-arrow-right" aria-hidden="true"></i>'; }
+                        alert('Sorry — there was a problem sending your request. Please call (248) 385-3432 or email contact@aaahandyman.services.');
+                    });
+            });
+        })();
+    </script>
 
     <section id="faq" class="py-12 sm:py-16 bg-white">
         <div class="max-w-5xl mx-auto px-6">
