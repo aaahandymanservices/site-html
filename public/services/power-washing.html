@@ -238,7 +238,7 @@
       ]
     }
     </script>
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260722">
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260720">
     <link rel="stylesheet" href="/css/site-theme.css?v=20260722">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
@@ -613,12 +613,27 @@
     </footer>
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
     <script src="/js/site.js?v=20260720" defer></script>
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-VRMCPNEQC3');
+      function loadGtag(){
+        if(window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function() { setTimeout(loadGtag, 2500); });
+      } else {
+        setTimeout(loadGtag, 3500);
+      }
+      ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function(e) {
+        window.addEventListener(e, loadGtag, { once: true, passive: true });
+      });
     </script>
     <script src="/js/chat-widget.js?v=20260720" defer></script>
 </body>

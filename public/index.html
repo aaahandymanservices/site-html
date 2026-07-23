@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://www.googletagmanager.com">
 
-    <link rel="preload" as="image" href="/.netlify/images?url=/logo-banner.jpg&amp;w=1760&amp;fm=avif&amp;q=80" fetchpriority="high">
+    <link rel="preload" as="image" href="/.netlify/images?url=/logo-banner.jpg&amp;w=1760&amp;fm=avif&amp;q=80" imagesrcset="/.netlify/images?url=/logo-banner.jpg&amp;w=640&amp;fm=avif&amp;q=80 640w, /.netlify/images?url=/logo-banner.jpg&amp;w=1024&amp;fm=avif&amp;q=80 1024w, /.netlify/images?url=/logo-banner.jpg&amp;w=1760&amp;fm=avif&amp;q=80 1760w" imagesizes="100vw" fetchpriority="high">
     <title>AAA Handyman Services | Best Handyman in Oakland County, MI</title>
 
     <meta name="description" content="Trusted local handyman services across Oakland County, MI. Professional home repairs, drywall, painting, carpentry, doors, and plumbing/electrical. Call (248) 385-3432!">
@@ -307,7 +307,7 @@
         @media (max-width: 767px) {
             .hero {
                 min-height: auto;
-                background: linear-gradient(rgba(3,7,11,0.8), rgba(3,7,11,0.8)), url('/.netlify/images?url=/logo-banner.jpg&w=960&fm=avif&q=80') center/cover;
+                background: linear-gradient(rgba(3,7,11,0.8), rgba(3,7,11,0.8)), url('/.netlify/images?url=/logo-banner.jpg&w=640&fm=avif&q=80') center/cover;
             }
             .hero-title { max-width: none; }
         }
@@ -1516,13 +1516,28 @@
         })();
     </script>
 
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3"></script>
     <script>
-
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-VRMCPNEQC3');
+
+      function loadGtag(){
+        if(window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function() { setTimeout(loadGtag, 2500); });
+      } else {
+        setTimeout(loadGtag, 3500);
+      }
+      ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function(e) {
+        window.addEventListener(e, loadGtag, { once: true, passive: true });
+      });
     </script>
 
     <script src="/js/site.js?v=20260720" defer></script>

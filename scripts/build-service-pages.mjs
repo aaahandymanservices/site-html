@@ -661,12 +661,28 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
     <script src="/js/site.js?v=20260720" defer></script>
 
     <!-- Google tag (gtag.js) -->
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-VRMCPNEQC3');
+
+      function loadGtag(){
+        if(window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function() { setTimeout(loadGtag, 2500); });
+      } else {
+        setTimeout(loadGtag, 3500);
+      }
+      ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function(e) {
+        window.addEventListener(e, loadGtag, { once: true, passive: true });
+      });
     </script>
 
     <!-- AI chat assistant widget -->
