@@ -275,6 +275,7 @@ html:not(.dark) .hero :where(h1, h2, h3, h4),
 html:not(.dark) main.bg-gradient-to-b :where(h1, h2, h3, h4),
 html:not(.dark) .bg-gradient-to-r :where(h1, h2, h3, h4),
 html:not(.dark) .bg-gray-900 :where(h1, h2, h3, h4),
+html:not(.dark) .bg-blue-900 :where(h1, h2, h3, h4),
 html:not(.dark) .bg-blue-950 :where(h1, h2, h3, h4) {
   color: #f8fafc;
 }
@@ -386,12 +387,40 @@ html:not(.dark) .bg-white :where(h1, h2, h3, h4, h5, h6) {
   color: var(--brand-navy);
 }
 
+/* ...but a dark card nested inside a white card (e.g. a bg-blue-900 panel
+   inside a bg-white section) must keep light headings. :is() gives this a
+   higher specificity than the .bg-white rule above so it wins the tie. */
+html:not(.dark) :is(.bg-blue-900, .bg-blue-950, .bg-gray-900, .bg-gray-800) :is(h1, h2, h3, h4, h5, h6) {
+  color: #f8fafc;
+}
+
 html:not(.dark) main.bg-gradient-to-b .bg-white :where(h1, h2, h3, h4) {
   color: var(--brand-navy);
 }
 
 html:not(.dark) main.bg-gradient-to-b .bg-white form label {
   color: var(--brand-navy);
+}
+
+/* Forms rendered on intentionally-dark sections (e.g. contact page) need
+   light control text so labels and typed input stay readable in light mode.
+   The gift-certificate card is its own light panel, so it is excluded. */
+.bg-gray-900 form label:not(.contact-certificate-claim),
+.bg-gray-800 form label:not(.contact-certificate-claim) {
+  color: #e2e8f0;
+}
+
+.bg-gray-900 form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea),
+.bg-gray-800 form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  background-color: #1f2937;
+  border-color: #374151;
+  color: #f1f5f9;
+}
+
+.bg-gray-900 form :where(input, select, textarea)::placeholder,
+.bg-gray-800 form :where(input, select, textarea)::placeholder {
+  color: #9fb1ca;
+  opacity: 1;
 }
 
 details {

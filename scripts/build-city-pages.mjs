@@ -154,13 +154,6 @@ function page(city) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Resource hints -->
@@ -198,8 +191,8 @@ function page(city) {
 ${jsonLd(city)}
 
     <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260720">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260722">
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260724">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260724">
 
     <!-- Brand font: Roboto -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style">
@@ -464,7 +457,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
 
     <!-- Back to top -->
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
-    <script src="/js/site.js?v=20260720" defer></script>
+    <script src="/js/site.js?v=20260724" defer></script>
 
     <!-- Google tag (gtag.js) -->
     <script>
