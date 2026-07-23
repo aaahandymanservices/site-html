@@ -43,7 +43,7 @@
             '<h3 class="text-lg font-black text-gray-950 flex items-center gap-2"><i class="fas fa-location-dot text-red-600"></i> 1. Your location</h3>' +
             '<p class="text-gray-500 text-sm mt-1">Enter your zip code and we\'ll set your zone automatically, or choose it below.</p>' +
             '<div class="mt-4 flex flex-col sm:flex-row gap-3">' +
-              '<input id="quote-zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="e.g. 48327" ' +
+              '<input id="quote-zip" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="postal-code" maxlength="5" placeholder="e.g. 48327" ' +
                 'aria-label="Zip code" class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-red-600 text-base font-semibold" />' +
               '<div class="grid grid-cols-2 gap-2 sm:w-64" role="group" aria-label="Choose service zone">' +
                 '<button type="button" data-zone="A" class="quote-zone-btn px-3 py-3 rounded-xl border-2 font-bold text-sm transition">Zone A<span class="block text-[11px] font-semibold opacity-80">' + money(state.zoneMinimum.A) + ' first hour</span></button>' +
