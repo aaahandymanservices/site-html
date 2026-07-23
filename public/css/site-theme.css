@@ -702,6 +702,14 @@ body > footer a.text-red-500 {
   :where(a, button)[class*="px-"][class*="py-"][class*="text-white"] {
     min-height: 2.875rem;
   }
+
+  /* Lift the back-to-top button clear of the sticky mobile contact bar and
+     pin it to the left so it never sits under the right-side chat button. */
+  #back-to-top {
+    bottom: calc(5rem + env(safe-area-inset-bottom, 0px)) !important;
+    left: 1.5rem !important;
+    right: auto !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
