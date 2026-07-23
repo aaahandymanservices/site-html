@@ -10,7 +10,7 @@ const STATIC_PAGES = [
   { path: 'public/index.html', active: 'none' },
   { path: 'public/services.html', active: 'services' },
   { path: 'public/service-areas.html', active: 'service-areas' },
-  { path: 'public/rates.html', active: 'rates', removeSectionNav: true },
+  { path: 'public/rates.html', active: 'rates', removeSectionNav: false },
   { path: 'public/guarantee.html', active: 'guarantee' },
   { path: 'public/reviews.html', active: 'reviews' },
   { path: 'public/careers.html', active: 'careers' },
