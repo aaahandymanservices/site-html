@@ -234,7 +234,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
-<nav class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
+<nav id="site-nav" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
     <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
         <a href="/" class="flex min-w-0 items-center space-x-3 group" aria-label="AAA Handyman Services home">
             <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600 transition group-hover:scale-105">
@@ -243,7 +243,7 @@
                 <p class="text-[10px] sm:text-xs text-gray-500 font-medium">Oakland County, Michigan</p>
             </div>
         </a>
-        <div class="hidden lg:flex space-x-6 xl:space-x-8 text-base xl:text-lg font-medium items-center">
+        <div class="hidden lg:flex space-x-5 xl:space-x-7 text-base xl:text-lg font-medium items-center">
             <a href="/services" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a>
             <a href="/service-areas" class="nav-link py-1 text-red-600 font-bold border-b-2 border-red-600 transition">Service Areas</a>
             <a href="/rates" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Rates</a>
@@ -251,6 +251,9 @@
             <a href="/reviews" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Reviews</a>
             <a href="/careers" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Careers</a>
             <a href="/contact" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Contact</a>
+            <a href="/book" class="bg-red-600 hover:bg-red-700 text-white font-bold text-sm xl:text-base px-4 py-2 rounded-xl transition shadow-md flex items-center gap-1.5 ml-2">
+                <i class="fas fa-calendar-check text-xs"></i> Book Online
+            </a>
             <div class="flex items-center space-x-3 pl-2 border-l border-gray-200">
                 <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook"></i></a>
                 <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp"></i></a>
@@ -264,7 +267,7 @@
         </div>
     </div>
     <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-2xl max-h-[calc(100vh-70px)] overflow-y-auto">
-        <nav aria-label="Mobile Navigation" class="space-y-1">
+        <div aria-label="Mobile Navigation" role="navigation" class="space-y-1">
             <a href="/services" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
             <a href="/service-areas" class="block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition">Service Areas</a>
             <a href="/rates" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
@@ -272,7 +275,7 @@
             <a href="/reviews" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Reviews</a>
             <a href="/careers" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Careers</a>
             <a href="/contact" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Contact</a>
-        </nav>
+        </div>
         <div class="pt-2 border-t border-gray-100 space-y-2">
             <a href="/book" class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition shadow-md text-base">
                 <i class="fas fa-calendar-check"></i> Book Online — Free Quote

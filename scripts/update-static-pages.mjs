@@ -25,8 +25,8 @@ for (const { path, active, removeSectionNav } of STATIC_PAGES) {
   const fullPath = join(ROOT, path);
   let content = readFileSync(fullPath, 'utf8');
 
-  // Regex to match the main top navbar and clean up any orphaned fragments
-  const mainNavRegex = /(?:<header[^>]*class="sticky top-0 z-50 bg-white[\s\S]*?<\/header>|<nav[^>]*class="bg-white shadow-md sticky top-0 z-50 border-b-\[3px\] border-red-600"[\s\S]*?<\/nav>(?:\s*<div class="pt-3 border-t border-gray-100 flex items-center justify-center space-x-6 text-2xl">[\s\S]*?<\/div>\s*<\/div>\s*<\/nav>)*)/;
+  // Regex to match the main top navbar
+  const mainNavRegex = /<nav\s+(?:id="site-nav"\s+)?class="bg-white shadow-md sticky top-0 z-50 border-b-\[3px\] border-red-600"[\s\S]*?<\/nav>/;
   
   if (mainNavRegex.test(content)) {
     const unifiedNavHtml = getUnifiedNav(active);

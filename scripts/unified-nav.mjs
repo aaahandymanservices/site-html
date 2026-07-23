@@ -26,7 +26,7 @@ export function getUnifiedNav(activePage = 'none') {
         </a>
 
         <!-- Desktop Navigation -->
-        <div class="hidden lg:flex space-x-6 xl:space-x-8 text-base xl:text-lg font-medium items-center">
+        <div class="hidden lg:flex space-x-5 xl:space-x-7 text-base xl:text-lg font-medium items-center">
             <a href="/services" class="${linkCls(isServices)}">Services</a>
             <a href="/service-areas" class="${linkCls(isServiceAreas)}">Service Areas</a>
             <a href="/rates" class="${linkCls(isRates)}">Rates</a>
@@ -34,6 +34,11 @@ export function getUnifiedNav(activePage = 'none') {
             <a href="/reviews" class="${linkCls(isReviews)}">Reviews</a>
             <a href="/careers" class="${linkCls(isCareers)}">Careers</a>
             <a href="/contact" class="${linkCls(isContact)}">Contact</a>
+
+            <!-- Desktop CTA Button -->
+            <a href="/book" class="bg-red-600 hover:bg-red-700 text-white font-bold text-sm xl:text-base px-4 py-2 rounded-xl transition shadow-md flex items-center gap-1.5 ml-2">
+                <i class="fas fa-calendar-check text-xs"></i> Book Online
+            </a>
 
             <!-- Social Media Icons -->
             <div class="flex items-center space-x-3 pl-2 border-l border-gray-200">
@@ -61,6 +66,19 @@ export function getUnifiedNav(activePage = 'none') {
             <a href="/reviews" class="${mobileLinkCls(isReviews)}">Reviews</a>
             <a href="/careers" class="${mobileLinkCls(isCareers)}">Careers</a>
             <a href="/contact" class="${mobileLinkCls(isContact)}">Contact</a>
+        </div>
+
+        <!-- Mobile CTAs -->
+        <div class="pt-2 border-t border-gray-100 space-y-2">
+            <a href="/book" class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition shadow-md text-base">
+                <i class="fas fa-calendar-check"></i> Book Online — Free Quote
+            </a>
+            <a href="tel:+12483853432" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition shadow-md text-base">
+                <i class="fas fa-phone"></i> Call Now! (248) 385-3432
+            </a>
+            <button type="button" onclick="window.__aaaOpenChat &amp;&amp; (window.__aaaOpenChat(), document.getElementById('mobile-menu').classList.add('hidden'))" class="w-full flex items-center justify-center gap-2 bg-blue-900 hover:bg-blue-950 text-white font-bold py-3 rounded-xl transition shadow-md text-base">
+                <i class="fas fa-comments"></i> AI Chat Assistant
+            </button>
         </div>
 
         <div class="pt-3 border-t border-gray-100 flex items-center justify-center space-x-6 text-2xl">
