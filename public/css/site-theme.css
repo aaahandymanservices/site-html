@@ -265,27 +265,28 @@ body > nav.sticky a[href="/"] p:first-of-type {
 /* Rates Sub-Menu Navigation & Section Styling */
 #section-nav {
   position: sticky;
-  top: 0;
+  top: 60px;
   z-index: 40;
-  background-color: rgba(255, 255, 255, 0.96) !important;
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  border-bottom: 1px solid #e2e8f0 !important;
-  box-shadow: 0 2px 12px -2px rgba(27, 42, 74, 0.06) !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
+  box-shadow: 0 4px 15px -3px rgba(27, 42, 74, 0.05) !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 #section-nav ul {
   display: flex !important;
   align-items: center !important;
-  gap: 0.45rem !important;
+  gap: 0.5rem !important;
   overflow-x: auto !important;
   flex-wrap: nowrap !important;
   white-space: nowrap !important;
   -webkit-overflow-scrolling: touch !important;
   scroll-snap-type: x proximity;
   overscroll-behavior-x: contain;
-  padding-block: 0.5rem !important;
-  padding-inline-end: 1rem !important;
+  padding-block: 0.6rem !important;
+  padding-inline: 0.25rem !important;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -298,20 +299,21 @@ body > nav.sticky a[href="/"] p:first-of-type {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 0.4rem !important;
-  padding: 0.4rem 0.85rem !important;
+  gap: 0.45rem !important;
+  padding: 0.45rem 0.95rem !important;
   border-radius: 9999px !important;
   font-size: 0.8125rem !important;
   font-weight: 600 !important;
   line-height: 1.2 !important;
-  color: #475569 !important;
-  background-color: #f8fafc !important;
-  border: 1.25px solid #cbd5e1 !important;
+  color: #334155 !important;
+  background-color: #ffffff !important;
+  border: 1px solid #d1d5db !important;
   white-space: nowrap !important;
   flex-shrink: 0 !important;
   scroll-snap-align: start;
   text-decoration: none !important;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
   cursor: pointer;
   min-height: 2.25rem;
 }
@@ -321,32 +323,73 @@ body > nav.sticky a[href="/"] p:first-of-type {
   line-height: 1 !important;
   display: inline-block !important;
   flex-shrink: 0 !important;
-  color: #64748b;
-  transition: color 0.2s ease;
+  color: #a61f2e !important;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .section-nav-link:hover {
-  color: var(--brand-crimson) !important;
+  color: #a61f2e !important;
   background-color: #fef2f2 !important;
-  border-color: rgba(166, 31, 46, 0.35) !important;
-  box-shadow: 0 2px 6px rgba(166, 31, 46, 0.1) !important;
+  border-color: #f87171 !important;
+  box-shadow: 0 3px 8px rgba(166, 31, 46, 0.12) !important;
   transform: translateY(-1px);
 }
 
 .section-nav-link:hover i {
-  color: var(--brand-crimson) !important;
+  color: #a61f2e !important;
+  transform: scale(1.1);
 }
 
 .section-nav-link.active-section {
   color: #ffffff !important;
-  background-color: var(--brand-crimson) !important;
-  border-color: var(--brand-crimson) !important;
+  background: linear-gradient(135deg, #a61f2e, #781925) !important;
+  border-color: #781925 !important;
   font-weight: 700 !important;
-  box-shadow: 0 3px 10px rgba(166, 31, 46, 0.28) !important;
+  box-shadow: 0 4px 12px rgba(166, 31, 46, 0.32) !important;
   transform: translateY(-1px);
 }
 
 .section-nav-link.active-section i {
+  color: #ffffff !important;
+}
+
+/* Dark Mode Rates Sub-Menu Styling */
+.dark #section-nav {
+  background-color: rgba(16, 27, 49, 0.95) !important;
+  border-bottom-color: #1B2A4A !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark .section-nav-link {
+  color: #cbd5e1 !important;
+  background-color: #101b31 !important;
+  border-color: #1e3a5f !important;
+  box-shadow: none !important;
+}
+
+.dark .section-nav-link i {
+  color: #f87171 !important;
+}
+
+.dark .section-nav-link:hover {
+  color: #fee2e2 !important;
+  background-color: #2c151a !important;
+  border-color: #8e1f26 !important;
+  box-shadow: 0 3px 10px rgba(166, 31, 46, 0.35) !important;
+}
+
+.dark .section-nav-link:hover i {
+  color: #f87171 !important;
+}
+
+.dark .section-nav-link.active-section {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #a61f2e, #8e1f26) !important;
+  border-color: #a61f2e !important;
+  box-shadow: 0 4px 14px rgba(166, 31, 46, 0.5) !important;
+}
+
+.dark .section-nav-link.active-section i {
   color: #ffffff !important;
 }
 
