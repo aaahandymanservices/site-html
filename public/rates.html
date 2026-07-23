@@ -184,7 +184,7 @@
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
 
-    <nav class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
+    <nav id="site-nav" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
     <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
         <a href="/" class="flex min-w-0 items-center space-x-3 group" aria-label="AAA Handyman Services home">
             <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600 transition group-hover:scale-105">
@@ -239,6 +239,22 @@
         </div>
     </div>
 </nav>
+
+    <!-- In-page Section Sub-Menu -->
+    <nav id="section-nav" aria-label="Jump to a pricing section" class="sticky z-40 bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm" style="top:0;">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6">
+            <ul class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-2.5">
+                <li><a href="#rates" class="section-nav-link inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-red-600 hover:bg-red-50 transition"><i class="fas fa-tags text-xs" aria-hidden="true"></i> Rates</a></li>
+                <li><a href="#flat-rate" class="section-nav-link inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-red-600 hover:bg-red-50 transition"><i class="fas fa-list-check text-xs" aria-hidden="true"></i> Flat-Rate Menu</a></li>
+                <li><a href="#estimate" class="section-nav-link inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-red-600 hover:bg-red-50 transition"><i class="fas fa-calculator text-xs" aria-hidden="true"></i> Quote Calculator</a></li>
+                <li><a href="#audits" class="section-nav-link inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-red-600 hover:bg-red-50 transition"><i class="fas fa-clipboard-check text-xs" aria-hidden="true"></i> Home Audits</a></li>
+                <li><a href="#menus" class="section-nav-link inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-red-600 hover:bg-red-50 transition"><i class="fas fa-layer-group text-xs" aria-hidden="true"></i> Good/Better/Best</a></li>
+                <li><a href="#packages" class="section-nav-link inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-red-600 hover:bg-red-50 transition"><i class="fas fa-clock text-xs" aria-hidden="true"></i> Time Packages</a></li>
+                <li><a href="#add-ons" class="section-nav-link inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-red-600 hover:bg-red-50 transition"><i class="fas fa-bolt text-xs" aria-hidden="true"></i> Add-Ons</a></li>
+                <li><a href="#materials" class="section-nav-link inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-red-600 hover:bg-red-50 transition"><i class="fas fa-box-open text-xs" aria-hidden="true"></i> Materials</a></li>
+            </ul>
+        </div>
+    </nav>
 
     <main class="flex-grow">
 
@@ -856,7 +872,7 @@
                             <div class="text-center mb-5">
                                 <span class="inline-block bg-gray-100 text-gray-600 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Good</span>
                                 <h4 class="text-xl font-bold mt-3 text-gray-900">Safe Step</h4>
-                                <div class="text-4xl font-black text-gray-990 tracking-tight mt-2">$189</div>
+                                <div class="text-4xl font-black text-gray-900 tracking-tight mt-2">$189</div>
                                 <div class="text-xs text-gray-500 mt-1">materials included</div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
