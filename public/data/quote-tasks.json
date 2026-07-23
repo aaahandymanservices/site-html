@@ -10,6 +10,9 @@
       "tasks": [
         { "id": "ceiling-fan", "name": "Ceiling Fan & Light Fixtures", "desc": "Replacement on existing approved junction boxes and brackets.", "a": 175, "b": 220 },
         { "id": "smart-devices", "name": "Smart Doorbell & Thermostats", "desc": "Mounting and connecting to your existing low-voltage system wiring.", "a": 145, "b": 190 },
+        { "id": "smart-lock", "name": "Smart Lock & Deadbolt", "desc": "App-connected deadbolt or keypad lock fitted to existing, aligned door prep and paired to your app.", "a": 135, "b": 180 },
+        { "id": "security-camera", "name": "Security Cameras & Floodlights", "desc": "Mounting and app-pairing Wi-Fi cameras or smart floodlights at existing exterior fixtures.", "a": 185, "b": 230 },
+        { "id": "smart-switch", "name": "Smart Switches & Plugs", "desc": "Swapping standard switches or outlets for smart controls and setting up the app ecosystem.", "a": 145, "b": 190 },
         { "id": "detectors", "name": "Smoke & CO Detectors", "desc": "Installing or replacing combined safety alarm units.", "a": 145, "b": 190 }
       ]
     },
@@ -36,6 +39,7 @@
       "icon": "fa-couch",
       "tasks": [
         { "id": "tv-mount", "name": "TV Wall Mounting", "desc": "Up to 65\" TV on standard wood or metal studs (bracket not included).", "a": 155, "b": 200 },
+        { "id": "picture-hanging", "name": "Gallery Wall & Picture Hanging", "desc": "Laid-out hanging of a gallery wall, heavy mirror, or framed art set (per package).", "a": 135, "b": 180 },
         { "id": "cabinet-hardware", "name": "Cabinet Hardware Upgrades", "desc": "Swapping out knobs or pulls with exact-size replacements.", "a": 100, "b": 145 }
       ]
     },
@@ -45,7 +49,30 @@
       "tasks": [
         { "id": "dryer-vent", "name": "Dryer Vent Cleaning", "desc": "Exhaust line cleaning from dryer back to wall terminal to maximize airflow.", "a": 130, "b": 175 },
         { "id": "gutter-cleaning", "name": "Gutter Cleaning", "desc": "Debris removal, downspout clearing, and flow testing (up to 145 linear feet, single-story).", "a": 135, "b": 180 },
-        { "id": "power-washing", "name": "Power Washing", "desc": "Driveways, walkways, patios, or decks (up to 1,000 sq ft).", "a": 175, "b": 220 }
+        { "id": "power-washing", "name": "Power Washing", "desc": "Driveways, walkways, patios, or decks (up to 1,000 sq ft).", "a": 175, "b": 220 },
+        { "id": "soft-washing", "name": "House Soft Washing", "desc": "Low-pressure soft wash for siding to safely lift mildew and algae (up to 1,500 sq ft).", "a": 225, "b": 270 },
+        { "id": "gutter-guards", "name": "Gutter Guard Installation", "desc": "Fitting leaf-guard gutter protection, typically paired with a cleaning (up to 145 linear feet).", "a": 215, "b": 260 },
+        { "id": "fence-gate-repair", "name": "Fence & Gate Repair", "desc": "Latch repair, sagging-gate realignment, and replacement of a few fence boards.", "a": 155, "b": 200 }
+      ]
+    },
+    {
+      "label": "Storage & Organization",
+      "icon": "fa-boxes-stacked",
+      "tasks": [
+        { "id": "overhead-rack", "name": "Overhead Garage Ceiling Rack", "desc": "Heavy-duty overhead storage rack anchored into ceiling joists (one 4x8 rack).", "a": 195, "b": 240 },
+        { "id": "slatwall", "name": "Garage Slatwall & Wall Storage", "desc": "Mounting Slatwall or Flow Wall panels with accessory hooks to studs (per 4-ft section).", "a": 185, "b": 230 },
+        { "id": "closet-system", "name": "Closet & Pantry System Install", "desc": "Installing a wire or wood closet system (e.g., Rubbermaid, IKEA PAX) on a single wall.", "a": 225, "b": 270 },
+        { "id": "workbench-assembly", "name": "Workbench Assembly", "desc": "Assembly and leveling of a customer-supplied workbench or storage cabinet.", "a": 135, "b": 180 }
+      ]
+    },
+    {
+      "label": "Childproofing & Pet Access",
+      "icon": "fa-shield-heart",
+      "tasks": [
+        { "id": "babyproofing", "name": "Babyproofing Package", "desc": "Cabinet safety latches, edge guards, and outlet covers installed room by room.", "a": 145, "b": 190 },
+        { "id": "anti-tip", "name": "Furniture & TV Anti-Tip Anchoring", "desc": "Anchoring heavy dressers, bookcases, and TVs to wall studs to prevent tip-overs.", "a": 130, "b": 175 },
+        { "id": "baby-gate", "name": "Baby Gate Installation", "desc": "Hardware-mounted safety gate fitted to a stairway or hallway (per gate).", "a": 120, "b": 165 },
+        { "id": "pet-door", "name": "Pet Door Installation", "desc": "Interior door or wall pet portal fitted and finished (exterior/glass quoted on site).", "a": 225, "b": 270 }
       ]
     }
   ]
