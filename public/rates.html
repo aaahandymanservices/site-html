@@ -153,7 +153,7 @@
             animation: siren-flash 1s infinite ease-in-out;
         }
 
-        section[id], header[id], #flat-rate {
+        section[id], header[id], #flat-rate-menu, #quote-calculator {
             scroll-margin-top: var(--sticky-offset, 140px);
         }
 
@@ -230,17 +230,33 @@
 </nav>
 
     <!-- In-page Section Sub-Menu -->
-    <nav id="section-nav" aria-label="Jump to a pricing section" class="sticky z-40 bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm" style="top:60px;">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6">
-            <ul class="flex items-center gap-2 overflow-x-auto no-scrollbar py-2 flex-nowrap whitespace-nowrap">
-                <li><a href="#rates" class="section-nav-link inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold transition"><i class="fas fa-tags text-xs" aria-hidden="true"></i> Rates</a></li>
-                <li><a href="#flat-rate" class="section-nav-link inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold transition"><i class="fas fa-list-check text-xs" aria-hidden="true"></i> Flat-Rate Menu</a></li>
-                <li><a href="#estimate" class="section-nav-link inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold transition"><i class="fas fa-calculator text-xs" aria-hidden="true"></i> Quote Calculator</a></li>
-                <li><a href="#audits" class="section-nav-link inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold transition"><i class="fas fa-clipboard-check text-xs" aria-hidden="true"></i> Home Audits</a></li>
-                <li><a href="#menus" class="section-nav-link inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold transition"><i class="fas fa-layer-group text-xs" aria-hidden="true"></i> Good/Better/Best</a></li>
-                <li><a href="#packages" class="section-nav-link inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold transition"><i class="fas fa-clock text-xs" aria-hidden="true"></i> Time Packages</a></li>
-                <li><a href="#add-ons" class="section-nav-link inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold transition"><i class="fas fa-bolt text-xs" aria-hidden="true"></i> Add-Ons</a></li>
-                <li><a href="#materials" class="section-nav-link inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold transition"><i class="fas fa-box-open text-xs" aria-hidden="true"></i> Materials</a></li>
+    <nav id="section-nav" aria-label="Jump to a pricing section" class="sticky z-40" style="top:60px;">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3">
+            <ul class="section-nav-shell no-scrollbar flex items-center overflow-x-auto flex-nowrap whitespace-nowrap">
+                <li><a href="#rates" class="section-nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581a2.25 2.25 0 0 0 3.182 0l4.318-4.318a2.25 2.25 0 0 0 0-3.182L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/><circle cx="6.75" cy="6.75" r="1"/></svg>
+                    Rates</a></li>
+                <li><a href="#flat-rate-menu" class="section-nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.25 6.75h12M8.25 12h12M8.25 17.25h12"/><path d="M3.75 6.75h.008v.008H3.75V6.75ZM3.75 12h.008v.008H3.75V12ZM3.75 17.25h.008v.008H3.75v-.008Z"/></svg>
+                    Flat-Rate Menu</a></li>
+                <li><a href="#quote-calculator" class="section-nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="3" width="15" height="18" rx="2"/><path d="M8.25 7.5h7.5M8.25 12h.008M12 12h.008M15.75 12h.008M8.25 15.75h.008M12 15.75h.008M15.75 15.75h.008"/></svg>
+                    Quote Calculator</a></li>
+                <li><a href="#home-audits" class="section-nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                    Home Audits</a></li>
+                <li><a href="#good-better-best" class="section-nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.75 16.5 8.25 4.5 8.25-4.5M3.75 12 12 16.5 20.25 12M12 3 3.75 7.5 12 12l8.25-4.5L12 3Z"/></svg>
+                    Good/Better/Best</a></li>
+                <li><a href="#time-packages" class="section-nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.75V12l3.75 2.25M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                    Time Packages</a></li>
+                <li><a href="#add-ons" class="section-nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.75 13.5 10.5 3v7.5h9L12.75 21v-7.5h-9Z"/></svg>
+                    Add-Ons</a></li>
+                <li><a href="#materials" class="section-nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
+                    Materials</a></li>
             </ul>
         </div>
     </nav>
@@ -345,7 +361,8 @@
                     </aside>
                 </div>
 
-                <div id="flat-rate" class="mt-16 bg-gray-50 border-[2px] border-red-600 rounded-3xl p-8 sm:p-12 max-w-5xl mx-auto shadow-lg">
+                <span id="flat-rate" class="nav-anchor-alias" aria-hidden="true"></span>
+                <div id="flat-rate-menu" class="mt-16 bg-gray-50 border-[2px] border-red-600 rounded-3xl p-8 sm:p-12 max-w-5xl mx-auto shadow-lg">
                     <div class="text-center mb-8">
                         <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">No Clock-Watching Anxiety</span>
                         <h2 class="text-2xl sm:text-3xl font-black text-gray-950 mt-3">The Flat-Rate Menu</h2>
@@ -677,7 +694,8 @@
             </div>
         </section>
 
-        <section id="audits" class="py-12 sm:py-16 bg-gray-50 border-t border-gray-100">
+        <span id="audits" class="nav-anchor-alias" aria-hidden="true"></span>
+        <section id="home-audits" class="py-12 sm:py-16 bg-gray-50 border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto mb-12">
                     <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Book a Visit, Not a Guess</span>
@@ -838,7 +856,8 @@
             </div>
         </section>
 
-        <section id="menus" class="py-12 sm:py-16 bg-white border-t border-gray-100">
+        <span id="menus" class="nav-anchor-alias" aria-hidden="true"></span>
+        <section id="good-better-best" class="py-12 sm:py-16 bg-white border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto mb-10">
                     <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Pick Your Level</span>
@@ -1044,7 +1063,8 @@
             </div>
         </section>
 
-        <section id="packages" class="py-12 sm:py-16 bg-gray-50 border-t border-gray-100">
+        <span id="packages" class="nav-anchor-alias" aria-hidden="true"></span>
+        <section id="time-packages" class="py-12 sm:py-16 bg-gray-50 border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto mb-12">
                     <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Bundle & Save</span>
