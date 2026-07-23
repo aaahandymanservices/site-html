@@ -663,7 +663,7 @@ body > footer a.text-red-500 {
   .hero {
     background-image:
       linear-gradient(rgba(16, 27, 49, 0.86), rgba(16, 27, 49, 0.86)),
-      url('/.netlify/images?url=/logo-banner.jpg&w=960&fm=avif&q=80') !important;
+      url('/.netlify/images?url=/logo-banner.jpg&w=640&fm=avif&q=80') !important;
   }
 
   body > footer {
