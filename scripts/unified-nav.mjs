@@ -63,18 +63,6 @@ export function getUnifiedNav(activePage = 'none') {
             <a href="/contact" class="${mobileLinkCls(isContact)}">Contact</a>
         </nav>
 
-        <div class="pt-2 border-t border-gray-100 space-y-2">
-            <a href="/book" class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition shadow-md text-base">
-                <i class="fas fa-calendar-check"></i> Book Online — Free Quote
-            </a>
-            <a href="tel:+12483853432" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition shadow-md text-base">
-                <i class="fas fa-phone"></i> Call Now! (248) 385-3432
-            </a>
-            <button type="button" onclick="window.__aaaOpenChat &amp;&amp; (window.__aaaOpenChat(), document.getElementById('mobile-menu').classList.add('hidden'))" class="w-full flex items-center justify-center gap-2 bg-blue-900 hover:bg-blue-950 text-white font-bold py-3 rounded-xl transition shadow-md text-base">
-                <i class="fas fa-comments"></i> AI Chat Assistant
-            </button>
-        </div>
-
         <div class="pt-3 border-t border-gray-100 flex items-center justify-center space-x-6 text-2xl">
             <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Facebook Page" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
             <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Yelp Page" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp"></i></a>
