@@ -2,6 +2,13 @@
   "use strict";
 
   if (window.__aaaChatLoaderReady || window.__aaaChatWidgetLoaded) return;
+
+  // The contact page already shows the phone number and a full contact form,
+  // so the floating chat/call buttons are redundant there and can crowd the
+  // form. Bail out before creating the .aaa-fab group on that page only.
+  var path = location.pathname.replace(/\.html$/, "").replace(/\/+$/, "");
+  if (path === "/contact") return;
+
   window.__aaaChatLoaderReady = true;
 
   var style = document.createElement("style");
