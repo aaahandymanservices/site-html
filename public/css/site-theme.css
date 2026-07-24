@@ -109,6 +109,17 @@ div[id] {
   border-radius: 4px;
 }
 
+/* Tailwind's `focus:outline-none` utility strips the browser focus ring and
+   leaves several controls (the mobile-menu button, star-rating and time-slot
+   buttons) with no visible keyboard-focus indicator. Reinstate one wherever
+   the utility is used. This rule matches Tailwind's own specificity and wins
+   by load order (site-theme.css follows tailwind.css), and it targets only
+   :focus-visible so pointer clicks stay ring-free. */
+.focus\:outline-none:focus-visible {
+  outline: 3px solid var(--brand-crimson);
+  outline-offset: 2px;
+}
+
 button,
 a.btn,
 .cta-button,

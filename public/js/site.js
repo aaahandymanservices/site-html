@@ -18,6 +18,7 @@
   const mobileMenu = document.getElementById('mobile-menu');
   const menuIcon = document.getElementById('menu-icon');
   if (menuButton && mobileMenu) {
+    if (mobileMenu.id) menuButton.setAttribute('aria-controls', mobileMenu.id);
     menuButton.setAttribute('aria-expanded', String(!mobileMenu.classList.contains('hidden')));
 
     const setMenuOpen = (open) => {
