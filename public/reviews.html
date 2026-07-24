@@ -462,7 +462,6 @@
         const reviewsRatingInput = document.getElementById('reviews-rating');
         const ratingText = document.getElementById('rating-text');
         const starRatingBtns = document.querySelectorAll('.star-rating-btn');
-        const reviewsTokenKey = 'aaaReviewsEditTokens';
         let reviewsEditId = null;
         const MAX_SOURCE_BYTES = 10 * 1024 * 1024;
         const UPLOAD_SAFE_BYTES = 5 * 1024 * 1024;
@@ -562,27 +561,6 @@
             reviewsMessage.classList.remove('hidden');
         };
 
-        const reviewsTokens = () => {
-            try {
-                return JSON.parse(localStorage.getItem(reviewsTokenKey) || '{}');
-            } catch {
-                return {};
-            }
-        };
-
-        const saveReviewsToken = (id, token) => {
-            if (!id || !token) return;
-            const tokens = reviewsTokens();
-            tokens[id] = token;
-            localStorage.setItem(reviewsTokenKey, JSON.stringify(tokens));
-        };
-
-        const removeReviewsToken = (id) => {
-            const tokens = reviewsTokens();
-            delete tokens[id];
-            localStorage.setItem(reviewsTokenKey, JSON.stringify(tokens));
-        };
-
         const setReviewsSubmitting = (isSubmitting) => {
             if (!reviewsSubmit) return;
             reviewsSubmit.disabled = isSubmitting;
@@ -635,7 +613,6 @@
             .then(async response => {
                 const payload = await response.json().catch(() => ({}));
                 if (!response.ok) throw new Error(payload.error || 'Delete failed.');
-                removeReviewsToken(id);
                 if (reviewsEditId === id) resetReviewsForm();
                 showReviewsMessage('The review was removed.', false);
                 loadReviews();
@@ -651,7 +628,6 @@
             reviewsLoading.classList.add('hidden');
             reviewsList.innerHTML = '';
             reviewsEmpty.classList.toggle('hidden', items.length > 0);
-            const userTokens = reviewsTokens();
             const adminToken = localStorage.getItem('aaaAdminToken');
             const badgeColors = {
                 'Doors': 'bg-emerald-100 text-emerald-800 border-emerald-200',
@@ -818,7 +794,6 @@
                     return payload;
                 })
                 .then((payload) => {
-                    if (payload.id && payload.editToken) saveReviewsToken(payload.id, payload.editToken);
                     resetReviewsForm();
                     showReviewsMessage(isEditing ? 'Your review was updated.' : 'Thank you! Your photo and review were added successfully.', false);
                     loadReviews();
