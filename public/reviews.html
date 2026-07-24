@@ -619,22 +619,25 @@
         };
 
         const deleteReviewsItem = (id) => {
+            const adminToken = localStorage.getItem('aaaAdminToken') || '';
+            if (!adminToken) {
+                showReviewsMessage('Administrator access is required to delete reviews.', true);
+                return;
+            }
             if (!confirm("Delete this review permanently? This can't be undone.")) return;
             showReviewsMessage('Removing your review...', false);
 
-            const token = reviewsTokens()[id] || localStorage.getItem('aaaAdminToken') || '';
-
             fetch(`/api/reviews/${encodeURIComponent(id)}`, {
                 method: 'DELETE',
-                headers: { 'content-type': 'application/json' },
-                body: JSON.stringify({ editToken: token })
+                headers: { 'content-type': 'application/json', 'x-admin-token': adminToken },
+                body: JSON.stringify({ adminToken })
             })
             .then(async response => {
                 const payload = await response.json().catch(() => ({}));
                 if (!response.ok) throw new Error(payload.error || 'Delete failed.');
                 removeReviewsToken(id);
                 if (reviewsEditId === id) resetReviewsForm();
-                showReviewsMessage('Your review was removed.', false);
+                showReviewsMessage('The review was removed.', false);
                 loadReviews();
             })
             .catch(error => {
@@ -651,7 +654,6 @@
             const userTokens = reviewsTokens();
             const adminToken = localStorage.getItem('aaaAdminToken');
             const badgeColors = {
-                'Carpentry & Trim': 'bg-amber-100 text-amber-800 border-amber-200',
                 'Doors': 'bg-emerald-100 text-emerald-800 border-emerald-200',
                 'Drywall': 'bg-neutral-100 text-neutral-800 border-neutral-200',
                 'Painting': 'bg-pink-100 text-pink-800 border-pink-200',
@@ -668,7 +670,7 @@
                 card.className = 'review-card bg-white text-gray-900 rounded-3xl overflow-hidden shadow-xl border border-gray-150 flex flex-col justify-between';
                 card.style.animationDelay = `${index * 60}ms`;
                 const badgeStyle = badgeColors[item.projectType] || 'bg-gray-100 text-gray-800 border-gray-200';
-                const canManage = Boolean(userTokens[item.id] || adminToken);
+                const canManage = Boolean(adminToken);
 
                 const actionsHtml = canManage ? `
                         <div class="mt-5 grid grid-cols-2 gap-3">
@@ -796,13 +798,18 @@
 
                 const formData = new FormData(reviewsForm);
                 if (uploadFile) formData.set('photo', uploadFile, uploadFile.name);
-                if (isEditing) {
-                    const token = reviewsTokens()[reviewsEditId] || localStorage.getItem('aaaAdminToken') || '';
-                    formData.append('editToken', token);
+
+                const adminToken = localStorage.getItem('aaaAdminToken') || '';
+                if (isEditing && !adminToken) {
+                    showReviewsMessage('Administrator access is required to edit reviews.', true);
+                    setReviewsSubmitting(false);
+                    return;
                 }
+                const requestHeaders = isEditing ? { 'x-admin-token': adminToken } : undefined;
 
                 fetch(isEditing ? `/api/reviews/${encodeURIComponent(reviewsEditId)}` : '/api/reviews', {
                     method: isEditing ? 'PUT' : 'POST',
+                    headers: requestHeaders,
                     body: formData
                 })
                 .then(async response => {
