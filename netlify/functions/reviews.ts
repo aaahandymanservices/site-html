@@ -88,13 +88,38 @@ const getEnv = (name: string): string => {
   return "";
 };
 
-const tokenMatches = (existingToken: string | null, submittedToken: string) => {
-  if (!submittedToken) return false;
-  const adminToken = getEnv("ADMIN_API_TOKEN") || "aaahandyman2026";
-  if (adminToken && submittedToken === adminToken) {
-    return true;
+// Constant-time string comparison to avoid leaking the secret via timing.
+const timingSafeEqual = (a: string, b: string) => {
+  if (a.length !== b.length) return false;
+  let mismatch = 0;
+  for (let i = 0; i < a.length; i += 1) {
+    mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i);
   }
-  return Boolean(existingToken && submittedToken === existingToken);
+  return mismatch === 0;
+};
+
+// Pull the admin secret from the request: an X-Admin-Token header (preferred),
+// an Authorization: Bearer header, or a JSON/query/form field carried through.
+const submittedAdminSecret = (request: Request, fallback = "") => {
+  const header = request.headers.get("x-admin-token") ?? request.headers.get("x-admin-secret") ?? "";
+  if (header.trim()) return header.trim().slice(0, 200);
+  const bearer = /^Bearer\s+(.+)$/i.exec(request.headers.get("authorization") ?? "")?.[1];
+  if (bearer?.trim()) return bearer.trim().slice(0, 200);
+  return fallback.trim().slice(0, 200);
+};
+
+// Authorization gate for any review mutation. Fails closed: if no admin secret
+// is configured on the server, no one is allowed to edit or delete reviews.
+const authorizeAdmin = (submitted: string): Response | null => {
+  const adminSecret = getEnv("ADMIN_API_TOKEN");
+  if (!adminSecret) {
+    console.error("ADMIN_API_TOKEN is not configured; refusing review mutation.");
+    return errorJson("Review management is not available right now.", 503);
+  }
+  if (!submitted || !timingSafeEqual(submitted, adminSecret)) {
+    return errorJson("Administrator authentication is required to modify or remove reviews.", 401);
+  }
+  return null;
 };
 
 const handleReviewsRequest = async (request: Request) => {
@@ -119,14 +144,19 @@ const handleReviewsRequest = async (request: Request) => {
 
   if (request.method === "DELETE") {
     const id = idFromRequest(request);
-    let submittedToken = "";
+    let bodyToken = "";
     if (request.headers.get("content-type")?.includes("application/json")) {
       const body = await request.json().catch(() => ({}));
-      submittedToken = clean((body as { editToken?: string }).editToken ?? null, 80);
+      bodyToken = clean((body as { editToken?: string; adminToken?: string }).adminToken ?? (body as { editToken?: string }).editToken ?? null, 200);
     }
-    if (!submittedToken) {
+    if (!bodyToken) {
       const url = new URL(request.url);
-      submittedToken = clean(url.searchParams.get("editToken") ?? request.headers.get("x-edit-token") ?? null, 80);
+      bodyToken = clean(url.searchParams.get("editToken") ?? url.searchParams.get("adminToken") ?? null, 200);
+    }
+
+    const authError = authorizeAdmin(submittedAdminSecret(request, bodyToken));
+    if (authError) {
+      return authError;
     }
 
     if (!id) {
@@ -141,11 +171,6 @@ const handleReviewsRequest = async (request: Request) => {
 
     if (!existing) {
       return errorJson("This review submission could not be removed.", 404);
-    }
-
-    const tokenCheckPassed = tokenMatches(existing.editToken, submittedToken);
-    if (!tokenCheckPassed) {
-      return errorJson("This review submission can only be removed from the browser that created it or by an administrator.", 403);
     }
 
     await db.delete(reviews).where(eq(reviews.id, id));
@@ -167,7 +192,7 @@ const handleReviewsRequest = async (request: Request) => {
   const review = clean(form.get("review"), 700);
   const rating = Number.parseInt(String(form.get("rating") ?? ""), 10);
   const photo = form.get("photo");
-  const editToken = isUpdate ? clean(form.get("editToken"), 80) : crypto.randomUUID();
+  const formAdminToken = isUpdate ? clean(form.get("editToken") ?? form.get("adminToken"), 200) : "";
 
   const fieldError = validateReviewFields(customerName, location, projectType, review, rating);
   if (fieldError) {
@@ -180,6 +205,11 @@ const handleReviewsRequest = async (request: Request) => {
   }
 
   if (isUpdate) {
+    const authError = authorizeAdmin(submittedAdminSecret(request, formAdminToken));
+    if (authError) {
+      return authError;
+    }
+
     if (!id) {
       return errorJson("This review submission could not be updated.", 400);
     }
@@ -192,11 +222,6 @@ const handleReviewsRequest = async (request: Request) => {
 
     if (!existing) {
       return errorJson("This review submission could not be updated.", 404);
-    }
-
-    const tokenCheckPassed = tokenMatches(existing.editToken, editToken);
-    if (!tokenCheckPassed) {
-      return errorJson("This review submission can only be edited from the browser that created it or by an administrator.", 403);
     }
 
     let imageKey = existing.imageKey;
@@ -239,17 +264,10 @@ const handleReviewsRequest = async (request: Request) => {
       imageKey,
       imageContentType: upload.type,
       imageAlt,
-      editToken,
     })
     .returning();
 
-  return json(
-    {
-      ...publicReview(created),
-      editToken,
-    },
-    { status: 201 }
-  );
+  return json(publicReview(created), { status: 201 });
 };
 
 export default async (request: Request) => {
