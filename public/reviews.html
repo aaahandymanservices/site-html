@@ -422,15 +422,46 @@
             }
         };
 
+        // Verify a candidate access key against the server before unlocking admin
+        // mode. The key is only stored locally if ADMIN_API_TOKEN matches, so an
+        // arbitrary passcode can no longer reveal the management controls.
+        const verifyAdminKey = async (candidate) => {
+            const key = String(candidate || '').trim();
+            if (!key) return false;
+            try {
+                const response = await fetch('/api/admin/verify', {
+                    method: 'POST',
+                    headers: { 'content-type': 'application/json' },
+                    body: JSON.stringify({ passcode: key })
+                });
+                if (!response.ok) {
+                    const payload = await response.json().catch(() => ({}));
+                    const message = payload.error || (response.status === 401
+                        ? 'That access key was not recognized.'
+                        : 'Admin access could not be verified right now.');
+                    showReviewsMessage(message, true);
+                    return false;
+                }
+                localStorage.setItem('aaaAdminToken', key);
+                updateAdminUI();
+                loadReviews();
+                showReviewsMessage('Admin mode unlocked.', false);
+                return true;
+            } catch {
+                showReviewsMessage('Admin access could not be verified. Please check your connection and try again.', true);
+                return false;
+            }
+        };
+
         try {
             const urlParams = new URLSearchParams(window.location.search);
             const adminKeyFromUrl = urlParams.get('admin') || urlParams.get('adminKey') || urlParams.get('token');
             if (adminKeyFromUrl && adminKeyFromUrl !== 'false' && adminKeyFromUrl !== '0') {
                 if (adminKeyFromUrl === 'true' || adminKeyFromUrl === '1') {
                     const key = prompt('Enter Owner / Admin Access Key:');
-                    if (key) localStorage.setItem('aaaAdminToken', key.trim());
+                    if (key) verifyAdminKey(key);
                 } else {
-                    localStorage.setItem('aaaAdminToken', adminKeyFromUrl.trim());
+                    verifyAdminKey(adminKeyFromUrl);
                 }
             }
         } catch {}
@@ -446,11 +477,7 @@
                     }
                 } else {
                     const key = prompt('Enter Owner / Admin Access Key:');
-                    if (key) {
-                        localStorage.setItem('aaaAdminToken', key.trim());
-                        updateAdminUI();
-                        loadReviews();
-                    }
+                    if (key) verifyAdminKey(key);
                 }
             });
         }
