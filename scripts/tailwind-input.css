@@ -11,3 +11,13 @@
     font-family: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
 }
+
+@layer components {
+  .card-container, 
+  .pricing-card,
+  .service-card,
+  .generated-service-card {
+    overflow: visible !important; /* Prevent clipping floating absolute elements */
+  }
+}
+
