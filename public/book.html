@@ -158,7 +158,7 @@
                     <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Instant Booking</div>
                     <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Book Your Handyman Online</h1>
                     <p class="text-gray-400 text-base sm:text-lg leading-relaxed">
-                        Reserve your preferred date and time slot in under a minute. No deposit or payment required upfront. We will contact you shortly after to confirm details.
+                        Reserve your preferred date and time slot in under a minute. No upfront payment required. We'll contact you shortly to confirm the details.
                     </p>
                 </div>
 
@@ -188,7 +188,7 @@
                                 <div>
                                     <h3 class="text-lg font-bold text-white">No Deposit Required</h3>
                                     <p class="text-gray-400 text-sm leading-relaxed mt-1">
-                                        Your card is not charged when booking. Pay cleanly upon successful job completion.
+                                        Your card is never charged when you book. You pay only after the work is finished and you're happy with it.
                                     </p>
                                 </div>
                             </div>
@@ -287,7 +287,7 @@
                                             <div>
                                                 <label for="booking-date" class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Choose a Date *</label>
                                                 <input id="booking-date" type="date" name="bookingDate" required aria-describedby="booking-date-help booking-error" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
-                                                <p id="booking-date-help" class="mt-2 text-xs text-gray-400">Appointments begin tomorrow. Monday–Saturday availability only.</p>
+                                                <p id="booking-date-help" class="mt-2 text-xs text-gray-400">The earliest available date is tomorrow. We book Monday–Saturday.</p>
                                             </div>
                                         </div>
 
@@ -326,13 +326,13 @@
 
                                 <div>
                                     <label for="booking-message" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Project Details & Special Notes <span class="text-gray-500 lowercase font-normal">(optional)</span></label>
-                                    <textarea id="booking-message" name="message" rows="4" placeholder="Please describe what tasks or repairs need to be addressed..." class="w-full px-5 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-base text-white resize-none"></textarea>
+                                    <textarea id="booking-message" name="message" rows="4" placeholder="Tell us what needs fixing, installing, or looking at…" class="w-full px-5 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-base text-white resize-none"></textarea>
                                 </div>
 
                                 <div>
                                     <div class="flex items-end justify-between gap-4 mb-2">
                                         <label for="booking-photo" class="block text-xs uppercase tracking-wider font-semibold text-gray-400">Repair Photo <span class="text-gray-500 lowercase font-normal">(optional)</span></label>
-                                        <span class="text-[11px] text-gray-500">JPG, PNG or WebP · 10 MB max</span>
+                                        <span class="text-[11px] text-gray-500">JPG, PNG, WebP or GIF · 10 MB max</span>
                                     </div>
                                     <label id="booking-photo-dropzone" for="booking-photo" class="group block cursor-pointer rounded-2xl border-2 border-dashed border-gray-700 bg-gray-900/45 p-4 transition hover:border-red-500/80 hover:bg-gray-900/70 focus-within:border-red-500">
                                         <input id="booking-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" capture="environment" class="sr-only">
@@ -366,7 +366,7 @@
                                 <p id="booking-error" class="hidden rounded-xl border border-red-500/30 bg-red-950/40 px-4 py-3 text-sm text-red-200" role="alert" aria-live="polite"></p>
 
                                 <button type="submit" id="submit-btn" disabled class="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-600 disabled:text-gray-300 disabled:shadow-none disabled:cursor-not-allowed py-4 text-lg font-bold rounded-2xl transition flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
-                                    CONFIRM BOOKING DETAILS <i class="fas fa-calendar-check"></i>
+                                    Request My Booking <i class="fas fa-calendar-check"></i>
                                 </button>
                             </form>
 
@@ -924,7 +924,7 @@
                 } catch (error) {
                     setBookingError(`${error.message} Please double-check your details or call us directly.`);
                     submitBtn.disabled = false;
-                    submitBtn.innerHTML = 'CONFIRM BOOKING DETAILS <i class="fas fa-calendar-check"></i>';
+                    submitBtn.innerHTML = 'Request My Booking <i class="fas fa-calendar-check"></i>';
                 }
             });
         }

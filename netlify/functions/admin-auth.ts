@@ -79,7 +79,7 @@ export default async (request: Request) => {
     return await handleAuthRequest(request);
   } catch (error) {
     console.error("admin-auth function failed", error);
-    return json({ error: "Something went wrong. Please try again soon." }, { status: 500 });
+    return json({ error: "Something went wrong on our end. Please try again in a moment." }, { status: 500 });
   }
 };
 

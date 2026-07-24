@@ -16,7 +16,7 @@ const json = (body: unknown, init?: ResponseInit) =>
     },
   });
 
-const errorJson = (message = "Something went wrong. Please try again soon.", status = 500) =>
+const errorJson = (message = "Something went wrong on our end. Please try again in a moment, or call us at (248) 385-3432.", status = 500) =>
   json({ error: message }, { status });
 
 const clean = (value: FormDataEntryValue | null, maxLength: number) =>
@@ -140,7 +140,7 @@ const authorizeAdmin = (submitted: string): Response | null => {
     return errorJson("Review management is not available right now.", 503);
   }
   if (!submitted || !timingSafeEqual(submitted, adminSecret)) {
-    return errorJson("Administrator authentication is required to modify or remove reviews.", 401);
+    return errorJson("Please sign in as the owner to edit or remove reviews.", 401);
   }
   return null;
 };
@@ -183,7 +183,7 @@ const handleReviewsRequest = async (request: Request) => {
     }
 
     if (!id) {
-      return errorJson("This review submission could not be removed.", 400);
+      return errorJson("We couldn't remove that review. Please refresh and try again.", 400);
     }
 
     const [existing] = await db
@@ -193,7 +193,7 @@ const handleReviewsRequest = async (request: Request) => {
       .limit(1);
 
     if (!existing) {
-      return errorJson("This review submission could not be removed.", 404);
+      return errorJson("We couldn't remove that review. Please refresh and try again.", 404);
     }
 
     await db.delete(reviews).where(eq(reviews.id, id));
@@ -237,7 +237,7 @@ const handleReviewsRequest = async (request: Request) => {
     }
 
     if (!id) {
-      return errorJson("This review submission could not be updated.", 400);
+      return errorJson("We couldn't update that review. Please refresh and try again.", 400);
     }
 
     const [existing] = await db
@@ -247,7 +247,7 @@ const handleReviewsRequest = async (request: Request) => {
       .limit(1);
 
     if (!existing) {
-      return errorJson("This review submission could not be updated.", 404);
+      return errorJson("We couldn't update that review. Please refresh and try again.", 404);
     }
 
     let imageKey = existing.imageKey;

@@ -16,7 +16,7 @@ const json = (body: unknown, init?: ResponseInit) =>
     },
   });
 
-const errorJson = (message = "Something went wrong. Please try again soon.", status = 500) =>
+const errorJson = (message = "Something went wrong on our end. Please try again in a moment, or call us at (248) 385-3432.", status = 500) =>
   json({ error: message }, { status });
 
 const getDetroitDateString = (date: Date) => {
@@ -199,7 +199,7 @@ export default async (request: Request) => {
       }
     }, { status: 201 });
   } catch (err: any) {
-    return errorJson(err.message || "Failed to submit booking. Please try again soon.", 500);
+    return errorJson(err.message || "We couldn't save your booking just now. Please try again, or call us at (248) 385-3432 and we'll book you over the phone.", 500);
   }
 };
 
