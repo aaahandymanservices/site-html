@@ -11,6 +11,10 @@ export const reviews = pgTable("gallery_reviews", {
   imageContentType: text("image_content_type").notNull(),
   imageAlt: text("image_alt").notNull(),
   editToken: text("edit_token"),
+  // Comma-separated highlight tags chosen by the customer (e.g. "Punctual,Fair Pricing").
+  attributes: text("attributes"),
+  // Optional public reply from the business owner, shown beneath the review.
+  ownerResponse: text("owner_response"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
 

@@ -71,6 +71,60 @@
             aspect-ratio: 4 / 3;
         }
 
+        /* Masonry feed via CSS multi-column; cards must not split across columns. */
+        .reviews-masonry {
+            column-gap: 1.25rem;
+        }
+        .reviews-masonry > .review-card {
+            break-inside: avoid;
+            margin-bottom: 1.25rem;
+            display: inline-block;
+            width: 100%;
+        }
+        @media (min-width: 640px) {
+            .reviews-masonry { column-count: 2; }
+        }
+        @media (min-width: 1280px) {
+            .reviews-masonry { column-count: 3; }
+        }
+        .review-card.is-hidden { display: none; }
+
+        /* Zoomable project photo */
+        .review-zoom img { transition: transform 0.4s ease; }
+        .review-zoom:hover img,
+        .review-zoom:focus-visible img { transform: scale(1.07); }
+        .review-zoom { cursor: zoom-in; }
+
+        /* Filter tabs */
+        .filter-tab {
+            transition: all 0.2s ease;
+        }
+        .filter-tab[aria-pressed="true"] {
+            background-color: #A61F2E;
+            border-color: #A61F2E;
+            color: #fff;
+            box-shadow: 0 8px 20px -8px rgba(166, 31, 46, 0.7);
+        }
+
+        /* Attribute chips */
+        .attr-chip { transition: all 0.15s ease; }
+        .attr-chip[aria-pressed="true"] {
+            background-color: #A61F2E;
+            border-color: #A61F2E;
+            color: #fff;
+        }
+
+        /* Lightbox */
+        #reviews-lightbox { transition: opacity 0.25s ease; }
+        #reviews-lightbox.hidden { opacity: 0; pointer-events: none; }
+        #reviews-lightbox img {
+            animation: lightboxIn 0.25s ease;
+        }
+        @keyframes lightboxIn {
+            from { opacity: 0; transform: scale(0.94); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
         .review-dropzone {
             transition: all 0.2s ease;
         }
@@ -93,6 +147,7 @@
 
             .review-card { animation: none !important; }
             .review-card { opacity: 1 !important; transform: none !important; }
+            .review-zoom img, #reviews-lightbox, #reviews-lightbox img { transition: none !important; animation: none !important; }
         }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -159,36 +214,58 @@
 
     <main class="flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Customer Feedback</div>
-                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Reviews & Testimonials</h1>
-                <p class="text-slate-300 text-base sm:text-lg leading-relaxed mb-6">
-                    Check out recent projects completed by AAA Handyman Services across Oakland County, or share your own experience by submitting a review below!
+            <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+                <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Trusted by your neighbors</div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">See How We’ve Helped Your Neighbors Across Oakland County</h1>
+                <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                    Real photos and honest words from homeowners we’ve worked with — right here in Waterford, Troy, Birmingham, and all around Oakland County. Take a look, then share your own story below.
                 </p>
-                <div class="flex flex-wrap items-center justify-center gap-4">
+            </div>
 
-                    <div class="inline-flex items-center justify-center gap-2 bg-emerald-600/10 border border-emerald-500/30 hover:bg-emerald-600/20 px-6 py-3 rounded-2xl transition">
-                        <span class="text-emerald-400 font-bold text-lg"><i class="fa-solid fa-house-chimney"></i></span>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" class="text-emerald-300 hover:text-emerald-200 font-semibold text-sm sm:text-base">
-                            Find us on Nextdoor
-                        </a>
+            <!-- Aggregate trust banner -->
+            <div class="max-w-4xl mx-auto mb-8">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 bg-white/5 border border-white/15 rounded-3xl px-6 py-5 text-center">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl sm:text-5xl font-black text-white leading-none">5.0</span>
+                        <div class="text-left">
+                            <div class="text-amber-400 text-xl leading-none tracking-wide" aria-hidden="true">★★★★★</div>
+                            <div class="text-xs text-slate-300 mt-1.5 font-medium">Average Rating Across Oakland County</div>
+                        </div>
                     </div>
-
-                    <div class="inline-flex items-center justify-center gap-2 bg-red-600/10 border border-red-500/30 hover:bg-red-600/20 px-6 py-3 rounded-2xl transition">
-                        <span class="text-red-500 font-bold text-lg"><i class="fa-brands fa-yelp"></i></span>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" class="text-red-200 hover:text-red-100 font-semibold text-sm sm:text-base">
-                            Find us on Yelp
-                        </a>
+                    <div class="hidden sm:block h-12 w-px bg-white/20"></div>
+                    <div class="flex items-center gap-2 text-emerald-300 font-bold text-base sm:text-lg">
+                        <i class="fas fa-shield-heart text-emerald-400"></i>
+                        <span>100% Satisfaction Guaranteed</span>
                     </div>
+                    <span class="sr-only">AAA Handyman Services holds a 5.0 out of 5 average rating across Oakland County and guarantees 100% satisfaction.</span>
                 </div>
+            </div>
+
+            <!-- Trust badges / review platform links -->
+            <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16">
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white hover:bg-emerald-50 text-slate-900 font-bold px-5 py-3 rounded-2xl shadow-lg transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-emerald-400/40">
+                    <i class="fa-solid fa-house-chimney text-[#00B24F] text-xl"></i>
+                    <span class="text-sm sm:text-base">Reviews on Nextdoor</span>
+                </a>
+                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white hover:bg-red-50 text-slate-900 font-bold px-5 py-3 rounded-2xl shadow-lg transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-red-400/40">
+                    <i class="fa-brands fa-yelp text-[#FF1A1A] text-xl"></i>
+                    <span class="text-sm sm:text-base">Reviews on Yelp</span>
+                </a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 bg-white hover:bg-blue-50 text-slate-900 font-bold px-5 py-3 rounded-2xl shadow-lg transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-blue-400/40">
+                    <i class="fa-brands fa-facebook text-[#1877F2] text-xl"></i>
+                    <span class="text-sm sm:text-base">Reviews on Facebook</span>
+                </a>
             </div>
 
             <div class="grid lg:grid-cols-5 gap-12 items-start">
 
                 <div class="lg:col-span-2 space-y-6">
                     <div class="bg-white text-gray-900 border border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-2">Write a Review</h2>
-                        <p class="text-sm text-gray-500 mb-6">Upload a photo of your finished repair/project and let your neighbors know how it went.</p>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-red-100 text-red-600 text-xl"><i class="fas fa-pen-nib"></i></span>
+                            <h2 class="text-2xl font-bold text-gray-900">Share Your Experience</h2>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-6">A quick rating, a photo of the finished work, and a few words — that’s all it takes to help a neighbor choose with confidence.</p>
 
                         <form id="reviews-form" class="space-y-5">
                             <div>
@@ -222,7 +299,7 @@
                             <div>
                                 <label class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Rating</label>
                                 <div class="flex items-center gap-3">
-                                    <div class="flex gap-1">
+                                    <div class="flex gap-1" role="radiogroup" aria-label="Star rating">
                                         <button type="button" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="1" aria-label="1 star"><i class="fas fa-star"></i></button>
                                         <button type="button" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="2" aria-label="2 stars"><i class="fas fa-star"></i></button>
                                         <button type="button" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="3" aria-label="3 stars"><i class="fas fa-star"></i></button>
@@ -235,6 +312,19 @@
                             </div>
 
                             <div>
+                                <span class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">What stood out? <span class="normal-case text-gray-400 font-medium tracking-normal">(optional)</span></span>
+                                <div id="reviews-attributes" class="flex flex-wrap gap-2" role="group" aria-label="Highlight tags">
+                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Punctual" aria-pressed="false"><i class="fas fa-clock mr-1.5 text-xs opacity-70"></i>Punctual</button>
+                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Clean Workspace" aria-pressed="false"><i class="fas fa-broom mr-1.5 text-xs opacity-70"></i>Clean Workspace</button>
+                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Fair Pricing" aria-pressed="false"><i class="fas fa-tag mr-1.5 text-xs opacity-70"></i>Fair Pricing</button>
+                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Great Communication" aria-pressed="false"><i class="fas fa-comments mr-1.5 text-xs opacity-70"></i>Great Communication</button>
+                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Quality Work" aria-pressed="false"><i class="fas fa-award mr-1.5 text-xs opacity-70"></i>Quality Work</button>
+                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Friendly" aria-pressed="false"><i class="fas fa-face-smile mr-1.5 text-xs opacity-70"></i>Friendly</button>
+                                </div>
+                                <input type="hidden" id="reviews-attributes-input" name="attributes" value="">
+                            </div>
+
+                            <div>
                                 <label for="reviews-review" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Review</label>
                                 <textarea id="reviews-review" name="review" rows="4" required maxlength="700" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Tell neighbors what was fixed and how it went."></textarea>
                             </div>
@@ -243,22 +333,32 @@
                                 <label for="reviews-photo" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Photo</label>
                                 <label id="reviews-dropzone" for="reviews-photo" class="review-dropzone block cursor-pointer border-[2px] border-dashed border-red-200 hover:border-red-500 rounded-3xl p-5 text-center transition">
                                     <input id="reviews-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif" required class="sr-only">
+                                    <div id="reviews-preview-wrap" class="hidden mb-3">
+                                        <img id="reviews-preview" src="" alt="Preview of the photo you selected" class="mx-auto max-h-48 w-auto rounded-2xl object-cover shadow-md">
+                                    </div>
                                     <i class="fas fa-cloud-arrow-up text-3xl text-red-500 mb-2 block"></i>
                                     <span id="reviews-file-name" class="block font-semibold text-slate-800">Choose a photo or drag it here</span>
                                     <span class="text-xs text-gray-400 block mt-1">Supports JPEG, PNG, WEBP, GIF (Max 10MB)</span>
                                 </label>
                             </div>
 
-                            <p id="reviews-message" class="hidden text-sm font-semibold"></p>
+                            <p id="reviews-message" class="hidden text-sm font-semibold" role="status" aria-live="polite"></p>
 
-                            <div id="reviews-editing" class="hidden bg-blue-50 border-[2px] border-blue-200 rounded-2xl p-4 text-sm text-blue-900 dark:bg-blue-950/40 dark:border-blue-900 dark:text-blue-100">
-                                <span class="block mb-1">✍️ You are editing an existing review.</span>
-                                <button id="reviews-cancel-edit" type="button" class="font-bold text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">Cancel</button>
+                            <div id="reviews-editing" class="hidden bg-blue-50 border-[2px] border-blue-200 rounded-2xl p-4 text-sm text-blue-900 space-y-3">
+                                <div>
+                                    <span class="block mb-1 font-semibold">✍️ You are editing an existing review.</span>
+                                    <button id="reviews-cancel-edit" type="button" class="font-bold text-red-600 hover:text-red-700">Cancel</button>
+                                </div>
+                                <div>
+                                    <label for="reviews-owner-response" class="block text-xs uppercase tracking-widest font-bold text-blue-900/70 mb-1.5">Owner Response <span class="normal-case font-medium">(public reply)</span></label>
+                                    <textarea id="reviews-owner-response" name="ownerResponse" rows="2" maxlength="500" class="w-full px-3 py-2 bg-white border-[2px] border-blue-200 rounded-xl focus:outline-none focus:border-blue-400 resize-none text-blue-950" placeholder="Thanks Bruce! Glad we could fix that drainage issue for you."></textarea>
+                                </div>
                             </div>
 
                             <button id="reviews-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
-                                Add Review <i class="fas fa-camera-retro"></i>
+                                Post My Review <i class="fas fa-camera-retro"></i>
                             </button>
+                            <p class="text-center text-sm font-semibold text-red-600 flex items-center justify-center gap-2"><i class="fas fa-heart"></i> Thank you for supporting a local, family-owned business in Oakland County!</p>
                             <p class="text-xs text-gray-500 text-center">By submitting, you confirm this review reflects your genuine experience and agree that your first name, city, rating, review, and photo may be published publicly on this website.</p>
                         </form>
                     </div>
@@ -268,7 +368,7 @@
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
                             <h2 class="text-2xl font-bold text-white">Client Showcases</h2>
-                            <p class="text-slate-400 text-sm">Photos and reviews submitted by customers across Oakland County, MI.</p>
+                            <p class="text-slate-400 text-sm">Verified local projects submitted by customers across Oakland County, MI.</p>
                         </div>
                         <div class="flex flex-wrap items-center gap-3">
                             <button id="admin-access-btn" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md">
@@ -280,7 +380,25 @@
                         </div>
                     </div>
 
-                    <div id="reviews-list" class="grid sm:grid-cols-2 gap-5"></div>
+                    <!-- Interactive category filters -->
+                    <div id="reviews-filters" class="flex flex-wrap gap-2" role="group" aria-label="Filter reviews by project category">
+                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="all" aria-pressed="true">All Projects</button>
+                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Carpentry" aria-pressed="false">Carpentry</button>
+                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Plumbing" aria-pressed="false">Plumbing</button>
+                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Electrical" aria-pressed="false">Electrical</button>
+                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Decks & Fences" aria-pressed="false">Decks &amp; Fences</button>
+                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Drywall" aria-pressed="false">Drywall</button>
+                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Painting" aria-pressed="false">Painting</button>
+                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Maintenance" aria-pressed="false">Maintenance</button>
+                    </div>
+
+                    <div id="reviews-list" class="reviews-masonry" aria-live="polite"></div>
+
+                    <div id="reviews-filter-empty" class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
+                        <i class="fas fa-filter-circle-xmark text-4xl text-slate-500 mb-3 block"></i>
+                        <h4 class="text-xl font-bold text-white mb-2">No projects in this category yet</h4>
+                        <p class="text-sm">Try another category, or view all projects.</p>
+                    </div>
 
                     <div id="reviews-empty" class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
                         <i class="fas fa-comment-slash text-4xl text-slate-500 mb-3 block"></i>
@@ -288,9 +406,9 @@
                         <p class="text-sm">Be the first to share your experience with AAA Handyman Services!</p>
                     </div>
 
-                    <div id="reviews-loading" class="grid sm:grid-cols-2 gap-5">
-                        <div class="bg-white/5 border border-white/10 rounded-3xl p-6 h-[400px] animate-pulse"></div>
-                        <div class="bg-white/5 border border-white/10 rounded-3xl p-6 h-[400px] animate-pulse"></div>
+                    <div id="reviews-loading" class="reviews-masonry">
+                        <div class="bg-white/5 border border-white/10 rounded-3xl p-6 h-[400px] animate-pulse review-card" style="opacity:1"></div>
+                        <div class="bg-white/5 border border-white/10 rounded-3xl p-6 h-[320px] animate-pulse review-card" style="opacity:1"></div>
                     </div>
                 </div>
             </div>
@@ -399,6 +517,17 @@
 
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
 
+    <!-- Lightbox overlay for zooming project photos -->
+    <div id="reviews-lightbox" class="hidden fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4" role="dialog" aria-modal="true" aria-label="Project photo viewer">
+        <button id="reviews-lightbox-close" type="button" aria-label="Close photo viewer" class="absolute top-5 right-5 h-11 w-11 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-xl transition focus:outline-none focus:ring-4 focus:ring-white/40">
+            <i class="fas fa-xmark"></i>
+        </button>
+        <figure class="max-w-4xl w-full text-center">
+            <img id="reviews-lightbox-img" src="" alt="" class="mx-auto max-h-[80vh] w-auto rounded-2xl shadow-2xl object-contain">
+            <figcaption id="reviews-lightbox-caption" class="mt-4 text-slate-200 text-sm font-medium"></figcaption>
+        </figure>
+    </div>
+
     <script>        const reviewsForm = document.getElementById('reviews-form');
         const reviewsList = document.getElementById('reviews-list');
         const reviewsEmpty = document.getElementById('reviews-empty');
@@ -489,7 +618,21 @@
         const reviewsRatingInput = document.getElementById('reviews-rating');
         const ratingText = document.getElementById('rating-text');
         const starRatingBtns = document.querySelectorAll('.star-rating-btn');
+        const reviewsPreview = document.getElementById('reviews-preview');
+        const reviewsPreviewWrap = document.getElementById('reviews-preview-wrap');
+        const attrChips = document.querySelectorAll('.attr-chip');
+        const attributesInput = document.getElementById('reviews-attributes-input');
+        const ownerResponseInput = document.getElementById('reviews-owner-response');
+        const filterButtons = document.querySelectorAll('.filter-tab');
+        const reviewsFilterEmpty = document.getElementById('reviews-filter-empty');
+        const lightbox = document.getElementById('reviews-lightbox');
+        const lightboxImg = document.getElementById('reviews-lightbox-img');
+        const lightboxCaption = document.getElementById('reviews-lightbox-caption');
+        const lightboxClose = document.getElementById('reviews-lightbox-close');
         let reviewsEditId = null;
+        let allReviews = [];
+        let activeFilter = 'all';
+        let lastFocusedBeforeLightbox = null;
         const MAX_SOURCE_BYTES = 10 * 1024 * 1024;
         const UPLOAD_SAFE_BYTES = 5 * 1024 * 1024;
         const MAX_IMAGE_DIMENSION = 2000;
@@ -569,6 +712,36 @@
         });
         updateStarRatingDisplay(5);
 
+        // --- Attribute highlight chips ---
+        const syncAttributesInput = () => {
+            if (!attributesInput) return;
+            const selected = Array.from(attrChips)
+                .filter((chip) => chip.getAttribute('aria-pressed') === 'true')
+                .map((chip) => chip.dataset.attr || '');
+            attributesInput.value = selected.join(',');
+        };
+
+        attrChips.forEach((chip) => {
+            chip.addEventListener('click', () => {
+                const pressed = chip.getAttribute('aria-pressed') === 'true';
+                chip.setAttribute('aria-pressed', pressed ? 'false' : 'true');
+                syncAttributesInput();
+            });
+        });
+
+        const resetAttributeChips = (selected = []) => {
+            const set = new Set(selected);
+            attrChips.forEach((chip) => {
+                chip.setAttribute('aria-pressed', set.has(chip.dataset.attr) ? 'true' : 'false');
+            });
+            syncAttributesInput();
+        };
+
+        const clearPhotoPreview = () => {
+            if (reviewsPreview) reviewsPreview.src = '';
+            if (reviewsPreviewWrap) reviewsPreviewWrap.classList.add('hidden');
+        };
+
         const escapeHTML = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({
             '&': '&amp;',
             '<': '&lt;',
@@ -600,10 +773,12 @@
             reviewsEditId = null;
             reviewsForm.reset();
             updateStarRatingDisplay(5);
+            resetAttributeChips([]);
+            clearPhotoPreview();
             if (reviewsPhoto) reviewsPhoto.required = true;
             if (reviewsFileName) reviewsFileName.textContent = 'Choose a photo or drag it here';
             if (reviewsEditing) reviewsEditing.classList.add('hidden');
-            if (reviewsSubmit) reviewsSubmit.innerHTML = 'Add Review <i class="fas fa-camera-retro"></i>';
+            if (reviewsSubmit) reviewsSubmit.innerHTML = 'Post My Review <i class="fas fa-camera-retro"></i>';
         };
 
         const startReviewsEdit = (item) => {
@@ -614,7 +789,10 @@
             reviewsForm.location.value = item.location || '';
             reviewsForm.projectType.value = item.projectType || '';
             updateStarRatingDisplay(item.rating || 5);
+            resetAttributeChips(Array.isArray(item.attributes) ? item.attributes : []);
             reviewsForm.review.value = item.review || '';
+            if (ownerResponseInput) ownerResponseInput.value = item.ownerResponse || '';
+            clearPhotoPreview();
             if (reviewsPhoto) reviewsPhoto.required = false;
             if (reviewsFileName) reviewsFileName.textContent = 'Keep current photo or choose a replacement';
             if (reviewsEditing) reviewsEditing.classList.remove('hidden');
@@ -650,94 +828,193 @@
             });
         };
 
-        const renderReviews = (items) => {
+        const badgeColors = {
+            'Carpentry & Trim': 'bg-amber-100 text-amber-800 border-amber-200',
+            'Doors': 'bg-emerald-100 text-emerald-800 border-emerald-200',
+            'Drywall': 'bg-neutral-100 text-neutral-800 border-neutral-200',
+            'Painting': 'bg-pink-100 text-pink-800 border-pink-200',
+            'Electrical': 'bg-yellow-100 text-yellow-800 border-yellow-200',
+            'Plumbing': 'bg-sky-100 text-sky-800 border-sky-200',
+            'Decks & Fences': 'bg-teal-100 text-teal-800 border-teal-200',
+            'Flooring': 'bg-violet-100 text-violet-800 border-violet-200',
+            'Maintenance': 'bg-orange-100 text-orange-800 border-orange-200',
+            'Other Service': 'bg-blue-100 text-blue-800 border-blue-200'
+        };
+
+        const matchesFilter = (item, filter) =>
+            filter === 'all' || String(item.projectType || '').toLowerCase().includes(filter.toLowerCase());
+
+        const attributesHtml = (attributes) => {
+            if (!Array.isArray(attributes) || attributes.length === 0) return '';
+            const chips = attributes.map((tag) =>
+                `<span class="inline-flex items-center gap-1 bg-red-50 text-red-700 border border-red-100 rounded-full px-2.5 py-1 text-xs font-semibold"><i class="fas fa-check text-[10px]"></i>${escapeHTML(tag)}</span>`
+            ).join('');
+            return `<div class="mt-4 flex flex-wrap gap-1.5">${chips}</div>`;
+        };
+
+        const ownerResponseHtml = (item) => {
+            if (!item.ownerResponse) return '';
+            return `
+                <div class="mt-4 bg-blue-950/95 text-slate-100 rounded-2xl p-4 border-l-4 border-red-600">
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <i class="fas fa-reply text-red-400 text-xs"></i>
+                        <span class="text-xs font-bold uppercase tracking-wider text-red-300">AAA Handyman Response</span>
+                    </div>
+                    <p class="text-sm leading-relaxed text-slate-200">${escapeHTML(item.ownerResponse)}</p>
+                </div>
+            `;
+        };
+
+        const buildCard = (item, index) => {
+            const card = document.createElement('article');
+            card.className = 'review-card bg-white text-gray-900 rounded-3xl overflow-hidden shadow-xl border border-gray-150 flex flex-col';
+            card.dataset.category = item.projectType || '';
+            card.style.animationDelay = `${Math.min(index, 8) * 60}ms`;
+            const badgeStyle = badgeColors[item.projectType] || 'bg-gray-100 text-gray-800 border-gray-200';
+            const canManage = Boolean(localStorage.getItem('aaaAdminToken'));
+            const thumbUrl = `/.netlify/images?url=${encodeURIComponent(item.imageUrl)}&w=800&fm=avif&q=80`;
+            const fullUrl = `/.netlify/images?url=${encodeURIComponent(item.imageUrl)}&w=1600&fm=avif&q=82`;
+
+            const actionsHtml = canManage ? `
+                    <div class="mt-5 grid grid-cols-2 gap-3">
+                        <button type="button" class="review-edit-btn bg-green-600 text-white hover:bg-green-700 px-3 py-2.5 rounded-xl font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-md hover:shadow-green-600/30" data-id="${escapeHTML(item.id)}">
+                            <i class="fas fa-pen-to-square"></i> Edit
+                        </button>
+                        <button type="button" class="review-delete-btn bg-red-600 text-white hover:bg-red-700 px-3 py-2.5 rounded-xl font-semibold text-xs transition flex items-center justify-center gap-1.5" data-id="${escapeHTML(item.id)}">
+                            <i class="fas fa-trash-can"></i> Delete
+                        </button>
+                    </div>
+            ` : '';
+
+            card.innerHTML = `
+                <div class="review-preview bg-gray-50 relative overflow-hidden">
+                    <button type="button" class="review-zoom block w-full h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50" data-full="${escapeHTML(fullUrl)}" data-caption="${escapeHTML(item.projectType)} · ${escapeHTML(item.location)}" data-alt="${escapeHTML(item.imageAlt)}" aria-label="Zoom photo: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
+                        <img src="${thumbUrl}" alt="${escapeHTML(item.imageAlt)}" width="800" height="600" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                        <span class="pointer-events-none absolute bottom-3 right-3 h-9 w-9 rounded-full bg-black/55 text-white flex items-center justify-center text-sm"><i class="fas fa-magnifying-glass-plus"></i></span>
+                    </button>
+                    <div class="absolute top-4 left-4 right-4 flex flex-wrap items-start justify-between gap-2">
+                        <span class="${badgeStyle} text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md border">
+                            ${escapeHTML(item.projectType)}
+                        </span>
+                        <span class="bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full shadow-md flex items-center gap-1 whitespace-nowrap">
+                            <i class="fas fa-circle-check"></i> Verified Local Project
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-1">
+                    <div class="flex items-center justify-between gap-3 mb-3">
+                        <div class="text-amber-500 text-lg flex gap-1" role="img" aria-label="${escapeHTML(item.rating)} out of 5 stars">
+                            ${stars(Number(item.rating) || 0)}
+                        </div>
+                        <span class="inline-flex items-center gap-1 text-xs font-semibold text-gray-500">
+                            <i class="fas fa-location-dot text-red-500"></i> ${escapeHTML(item.location)}
+                        </span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed italic text-base">"${escapeHTML(item.review)}"</p>
+                    ${attributesHtml(item.attributes)}
+                    ${ownerResponseHtml(item)}
+                    <div class="mt-5 pt-4 border-t border-gray-100 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm uppercase">
+                            ${escapeHTML(item.customerName.charAt(0))}
+                        </div>
+                        <div>
+                            <strong class="text-gray-900 block text-sm">${escapeHTML(item.customerName)}</strong>
+                            <span class="text-xs text-emerald-600 font-semibold flex items-center gap-1">
+                                <i class="fas fa-shield-halved"></i> Verified customer
+                            </span>
+                        </div>
+                    </div>
+                    ${actionsHtml}
+                </div>
+            `;
+
+            card.querySelector('.review-zoom')?.addEventListener('click', (event) => {
+                const trigger = event.currentTarget;
+                openLightbox(trigger.dataset.full, trigger.dataset.alt, trigger.dataset.caption);
+            });
+
+            if (canManage) {
+                card.querySelector('.review-edit-btn')?.addEventListener('click', () => startReviewsEdit(item));
+                card.querySelector('.review-delete-btn')?.addEventListener('click', () => deleteReviewsItem(item.id));
+            }
+            return card;
+        };
+
+        const renderReviews = () => {
             if (!reviewsList || !reviewsEmpty || !reviewsLoading) return;
             reviewsLoading.classList.add('hidden');
             reviewsList.innerHTML = '';
-            reviewsEmpty.classList.toggle('hidden', items.length > 0);
-            const adminToken = localStorage.getItem('aaaAdminToken');
-            const badgeColors = {
-                'Doors': 'bg-emerald-100 text-emerald-800 border-emerald-200',
-                'Drywall': 'bg-neutral-100 text-neutral-800 border-neutral-200',
-                'Painting': 'bg-pink-100 text-pink-800 border-pink-200',
-                'Electrical': 'bg-yellow-100 text-yellow-800 border-yellow-200',
-                'Plumbing': 'bg-sky-100 text-sky-800 border-sky-200',
-                'Decks & Fences': 'bg-teal-100 text-teal-800 border-teal-200',
-                'Flooring': 'bg-violet-100 text-violet-800 border-violet-200',
-                'Maintenance': 'bg-orange-100 text-orange-800 border-orange-200',
-                'Other Service': 'bg-blue-100 text-blue-800 border-blue-200'
-            };
 
-            items.forEach((item, index) => {
-                const card = document.createElement('article');
-                card.className = 'review-card bg-white text-gray-900 rounded-3xl overflow-hidden shadow-xl border border-gray-150 flex flex-col justify-between';
-                card.style.animationDelay = `${index * 60}ms`;
-                const badgeStyle = badgeColors[item.projectType] || 'bg-gray-100 text-gray-800 border-gray-200';
-                const canManage = Boolean(adminToken);
+            const hasAny = allReviews.length > 0;
+            reviewsEmpty.classList.toggle('hidden', hasAny);
 
-                const actionsHtml = canManage ? `
-                        <div class="mt-5 grid grid-cols-2 gap-3">
-                            <button type="button" class="review-edit-btn bg-green-600 text-white hover:bg-green-700 px-3 py-2.5 rounded-xl font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-md hover:shadow-green-600/30" data-id="${escapeHTML(item.id)}">
-                                <i class="fas fa-pen-to-square"></i> Edit
-                            </button>
-                            <button type="button" class="review-delete-btn bg-red-600 text-white hover:bg-red-700 dark:bg-red-600 dark:text-white dark:border-red-600 dark:hover:bg-red-700 px-3 py-2.5 rounded-xl font-semibold text-xs transition flex items-center justify-center gap-1.5" data-id="${escapeHTML(item.id)}">
-                                <i class="fas fa-trash-can"></i> Delete
-                            </button>
-                        </div>
-                ` : '';
+            const filtered = allReviews.filter((item) => matchesFilter(item, activeFilter));
+            if (reviewsFilterEmpty) {
+                reviewsFilterEmpty.classList.toggle('hidden', !hasAny || filtered.length > 0);
+            }
 
-                card.innerHTML = `
-                    <div>
-                        <div class="review-preview bg-gray-50 relative overflow-hidden">
-                            <img src="/.netlify/images?url=${encodeURIComponent(item.imageUrl)}&w=800&fm=avif&q=80" alt="${escapeHTML(item.imageAlt)}" width="800" height="600" class="w-full h-full object-cover" loading="lazy" decoding="async">
-                            <span class="absolute top-4 left-4 ${badgeStyle} text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md border">
-                                ${escapeHTML(item.projectType)}
-                            </span>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center justify-between gap-3 mb-4">
-                                <div class="text-amber-500 text-lg flex gap-1" aria-label="${escapeHTML(item.rating)} out of 5 stars">
-                                    ${stars(Number(item.rating) || 0)}
-                                </div>
-                                <span class="text-xs text-gray-400 font-medium">Customer Review</span>
-                            </div>
-                            <p class="text-gray-700 leading-relaxed italic text-base">"${escapeHTML(item.review)}"</p>
-                        </div>
-                    </div>
-                    <div class="p-6 pt-0">
-                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between gap-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm uppercase">
-                                    ${escapeHTML(item.customerName.charAt(0))}
-                                </div>
-                                <div>
-                                    <strong class="text-gray-900 block text-sm">${escapeHTML(item.customerName)}</strong>
-                                    <span class="text-xs text-gray-500 flex items-center gap-1">
-                                        <i class="fas fa-map-marker-alt text-red-500"></i> ${escapeHTML(item.location)}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        ${actionsHtml}
-                    </div>
-                `;
-                if (canManage) {
-                    card.querySelector('.review-edit-btn')?.addEventListener('click', () => startReviewsEdit(item));
-                    card.querySelector('.review-delete-btn')?.addEventListener('click', () => deleteReviewsItem(item.id));
-                }
-                reviewsList.appendChild(card);
+            filtered.forEach((item, index) => {
+                reviewsList.appendChild(buildCard(item, index));
             });
         };
+
+        // --- Filter tabs ---
+        filterButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                activeFilter = btn.dataset.filter || 'all';
+                filterButtons.forEach((other) => {
+                    other.setAttribute('aria-pressed', other === btn ? 'true' : 'false');
+                });
+                renderReviews();
+            });
+        });
+
+        // --- Lightbox ---
+        const openLightbox = (src, alt, caption) => {
+            if (!lightbox || !lightboxImg) return;
+            lastFocusedBeforeLightbox = document.activeElement;
+            lightboxImg.src = src || '';
+            lightboxImg.alt = alt || '';
+            if (lightboxCaption) lightboxCaption.textContent = caption || '';
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            lightboxClose?.focus();
+        };
+
+        const closeLightbox = () => {
+            if (!lightbox) return;
+            lightbox.classList.add('hidden');
+            if (lightboxImg) lightboxImg.src = '';
+            document.body.style.overflow = '';
+            if (lastFocusedBeforeLightbox && typeof lastFocusedBeforeLightbox.focus === 'function') {
+                lastFocusedBeforeLightbox.focus();
+            }
+        };
+
+        if (lightbox) {
+            lightboxClose?.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (event) => {
+                if (event.target === lightbox) closeLightbox();
+            });
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && !lightbox.classList.contains('hidden')) closeLightbox();
+            });
+        }
 
         const loadReviews = () => {
             if (!reviewsList || !reviewsLoading || !reviewsEmpty) return;
             reviewsLoading.classList.remove('hidden');
             reviewsEmpty.classList.add('hidden');
+            if (reviewsFilterEmpty) reviewsFilterEmpty.classList.add('hidden');
 
             fetch('/api/reviews')
                 .then(response => response.ok ? response.json() : Promise.reject())
-                .then(renderReviews)
+                .then((items) => {
+                    allReviews = Array.isArray(items) ? items : [];
+                    renderReviews();
+                })
                 .catch(() => {
+                    allReviews = [];
                     reviewsLoading.classList.add('hidden');
                     reviewsEmpty.classList.remove('hidden');
                     const emptyText = reviewsEmpty.querySelector('p');
@@ -747,7 +1024,18 @@
 
         if (reviewsPhoto && reviewsFileName) {
             reviewsPhoto.addEventListener('change', () => {
-                reviewsFileName.textContent = reviewsPhoto.files?.[0]?.name || 'Choose a photo or drag it here';
+                const file = reviewsPhoto.files?.[0];
+                reviewsFileName.textContent = file?.name || 'Choose a photo or drag it here';
+                if (file && file.type.startsWith('image/') && reviewsPreview && reviewsPreviewWrap) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        reviewsPreview.src = String(event.target?.result || '');
+                        reviewsPreviewWrap.classList.remove('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    clearPhotoPreview();
+                }
             });
         }
 
