@@ -183,12 +183,23 @@
 
   var GREETING = "Hi! 👋 I'm the AAA Handyman Services assistant. Ask me about our services, the areas we cover, or how to get a quote.";
   function hideExistingFloating() {
+    // Hide static (noscript) floating "Call Now" CTAs baked into the markup.
     var els = document.querySelectorAll(".fixed.bottom-5.right-5, [class*='fixed'][class*='bottom-5'][class*='right-5']");
     for (var i = 0; i < els.length; i++) {
       var el = els[i];
       if (el === group || el === panel || group.contains(el) || panel.contains(el)) continue;
       el.style.setProperty("display", "none", "important");
     }
+    // Remove any other floating action-button group (e.g. the lightweight
+    // chat-loader FAB) so only this widget's Call Now + Chat buttons remain.
+    // This makes the widget the single source of truth and guarantees the
+    // page never shows two CTAs of the same function at once.
+    var fabs = document.querySelectorAll(".aaa-fab");
+    for (var j = 0; j < fabs.length; j++) {
+      if (fabs[j] !== group && fabs[j].parentNode) fabs[j].parentNode.removeChild(fabs[j]);
+    }
+    var loaderStyle = document.getElementById("aaa-chat-loader-style");
+    if (loaderStyle && loaderStyle.parentNode) loaderStyle.parentNode.removeChild(loaderStyle);
   }
   function escapeHTML(str) {
     return str.replace(/[&<>"']/g, function (c) {
