@@ -386,6 +386,7 @@ body > header.bg-gradient-to-r > * {
 }
 
 form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  border-width: 1px;
   border-color: #b8c2d0;
   border-radius: 0.6rem;
   background-color: #fff;
