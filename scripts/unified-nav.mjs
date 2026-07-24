@@ -45,8 +45,8 @@ export function getUnifiedNav(activePage = 'none') {
 
         <!-- Mobile Hamburger Button -->
         <div class="flex items-center lg:hidden space-x-2">
-            <button id="mobile-menu-btn" class="text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-lg transition border border-gray-200 hover:border-gray-300" aria-label="Toggle Navigation Menu">
-                <i class="fas fa-bars text-2xl" id="menu-icon"></i>
+            <button id="mobile-menu-btn" class="text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-lg transition border border-gray-200 hover:border-gray-300" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-menu">
+                <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
             </button>
         </div>
     </div>
