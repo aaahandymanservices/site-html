@@ -210,7 +210,7 @@ ${jsonLd(city)}
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 </head>
-<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
     <!-- Navbar -->
 ${getUnifiedNav('service-areas')}
 
