@@ -347,6 +347,13 @@ body > header.bg-gradient-to-r > * {
   position: relative;
 }
 
+.card-container, 
+.pricing-card,
+.service-card,
+.generated-service-card {
+  overflow: visible !important; /* Prevent clipping floating absolute elements */
+}
+
 .service-card,
 .generated-service-card {
   border-color: rgb(216 222 232 / 92%);
@@ -578,7 +585,7 @@ body > header.bg-gradient-to-r > div:last-child {
 .service-card,
 .generated-service-card {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .service-card::before,
