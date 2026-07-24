@@ -102,10 +102,10 @@ export default async (request: Request) => {
 
     if (touch === "spring") {
       subject = "Spring is here—time for gutter cleaning and deck checkups!";
-      emailBody = `Hi [Name],\n\nSpring is finally here! It's the perfect time to get your home ready for the warmer months ahead. Contact AAA Handyman Services today for your gutter cleaning, deck safety checkups, and minor exterior repairs.\n\nWarm regards,\nVictor Gregg Hale\nAAA Handyman Services\nPhone: (248) 385-3432\nEmail: contact@aaahandyman.services`;
+      emailBody = `Hi [Name],\n\nSpring is finally here! It's the perfect time to get your home ready for the warmer months ahead. Contact AAA Handyman Services today for your gutter cleaning, deck safety checkups, and minor exterior repairs.\n\nReady to get started? Book online at aaahandyman.services/book or call (248) 385-3432.\n\nWarm regards,\nVictor Gregg Hale\nAAA Handyman Services\nPhone: (248) 385-3432\nEmail: contact@aaahandyman.services`;
     } else {
       subject = "Prepare for cold weather—weatherproofing and winterization";
-      emailBody = `Hi [Name],\n\nFall has arrived and winter is just around the corner. Prevent drafty rooms and high heating bills by scheduling your weatherproofing and winterization checks with AAA Handyman Services today!\n\nWarm regards,\nVictor Gregg Hale\nAAA Handyman Services\nPhone: (248) 385-3432\nEmail: contact@aaahandyman.services`;
+      emailBody = `Hi [Name],\n\nFall has arrived and winter is just around the corner. Prevent drafty rooms and high heating bills by scheduling your weatherproofing and winterization checks with AAA Handyman Services today!\n\nReady to get started? Book online at aaahandyman.services/book or call (248) 385-3432.\n\nWarm regards,\nVictor Gregg Hale\nAAA Handyman Services\nPhone: (248) 385-3432\nEmail: contact@aaahandyman.services`;
     }
 
     // Simulate sending email blasts

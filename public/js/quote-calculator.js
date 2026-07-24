@@ -270,7 +270,7 @@
     })
     .catch(() => {
       root.innerHTML = '<div class="bg-amber-50 border border-amber-200 text-amber-800 rounded-2xl p-6 text-center text-sm font-semibold">' +
-        'Our instant calculator is taking a break. <a href="/book" class="underline font-bold">Book online</a> or call ' +
+        'Our instant calculator isn\'t loading right now. <a href="/book" class="underline font-bold">Book online</a> or call ' +
         '<a href="tel:+12483853432" class="underline font-bold">(248) 385-3432</a> for a fast, free quote.</div>';
     });
 })();

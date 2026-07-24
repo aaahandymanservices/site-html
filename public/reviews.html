@@ -338,7 +338,7 @@
                                     </div>
                                     <i class="fas fa-cloud-arrow-up text-3xl text-red-500 mb-2 block"></i>
                                     <span id="reviews-file-name" class="block font-semibold text-slate-800">Choose a photo or drag it here</span>
-                                    <span class="text-xs text-gray-400 block mt-1">Supports JPEG, PNG, WEBP, GIF (Max 10MB)</span>
+                                    <span class="text-xs text-gray-400 block mt-1">JPG, PNG, WebP or GIF · 10 MB max</span>
                                 </label>
                             </div>
 
@@ -375,7 +375,7 @@
                                 <i class="fas fa-user-shield"></i> <span id="admin-access-label">Owner Access</span>
                             </button>
                             <button id="reviews-refresh" type="button" class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md hover:shadow-green-600/30">
-                                <i class="fas fa-arrows-rotate"></i> Refresh Feed
+                                <i class="fas fa-arrows-rotate"></i> Refresh Reviews
                             </button>
                         </div>
                     </div>
@@ -1018,7 +1018,7 @@
                     reviewsLoading.classList.add('hidden');
                     reviewsEmpty.classList.remove('hidden');
                     const emptyText = reviewsEmpty.querySelector('p');
-                    if (emptyText) emptyText.textContent = 'The reviews could not load right now. Please try again soon.';
+                    if (emptyText) emptyText.textContent = "We couldn't load the reviews just now. Please refresh the page to try again.";
                 });
         };
 
@@ -1082,7 +1082,7 @@
                 try {
                     if (sourceFile) uploadFile = await preparePhotoForUpload(sourceFile);
                 } catch (error) {
-                    showReviewsMessage(error instanceof Error ? error.message : 'That photo could not be processed.', true);
+                    showReviewsMessage(error instanceof Error ? error.message : "We couldn't read that photo. Please try a different JPEG, PNG, WEBP, or GIF image.", true);
                     setReviewsSubmitting(false);
                     return;
                 }

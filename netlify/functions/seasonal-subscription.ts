@@ -12,7 +12,7 @@ const json = (body: unknown, init?: ResponseInit) =>
     },
   });
 
-const errorJson = (message = "Something went wrong. Please try again soon.", status = 500) =>
+const errorJson = (message = "Something went wrong on our end. Please try again in a moment, or call us at (248) 385-3432.", status = 500) =>
   json({ error: message }, { status });
 
 export default async (request: Request) => {
