@@ -489,6 +489,145 @@ body > footer a {
   }
 }
 
+/* ============================================================
+   Spectacular enhancement layer
+   Site-wide atmosphere, cinematic entrances, and tactile polish.
+   Layered on top of the base theme so every page inherits it.
+   ============================================================ */
+
+/* Fine film-grain overlay adds warmth and depth over flat fills.
+   Fixed, non-interactive, and painted below the sticky nav (z-100). */
+body::after {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  content: "";
+  pointer-events: none;
+  opacity: 0.55;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* --- Homepage hero: drifting aurora glow + staggered content entrance --- */
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(38rem 34rem at 12% 6%, rgb(166 31 46 / 34%), transparent 62%),
+    radial-gradient(34rem 34rem at 92% 104%, rgb(61 89 133 / 60%), transparent 60%);
+  animation: aurora-drift 19s var(--ease) infinite alternate;
+}
+
+.hero > div > * {
+  animation: hero-rise 0.85s var(--ease-out) both;
+}
+
+.hero > div > *:nth-child(1) { animation-delay: 0.04s; }
+.hero > div > *:nth-child(2) { animation-delay: 0.12s; }
+.hero > div > *:nth-child(3) { animation-delay: 0.2s; }
+.hero > div > *:nth-child(4) { animation-delay: 0.28s; }
+.hero > div > *:nth-child(5) { animation-delay: 0.36s; }
+.hero > div > *:nth-child(6) { animation-delay: 0.44s; }
+
+/* Give the hero headline a subtle metallic depth */
+.hero-title {
+  text-shadow: 0 1px 0 rgb(0 0 0 / 18%), 0 12px 40px rgb(0 0 0 / 35%);
+}
+
+@keyframes aurora-drift {
+  from { transform: translate3d(-2%, -1%, 0) scale(1.02); }
+  to { transform: translate3d(3%, 2%, 0) scale(1.09); }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- Interior-page gradient headers: matching glow + entrance --- */
+body > header.bg-gradient-to-r::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background: radial-gradient(30rem 26rem at 16% 118%, rgb(166 31 46 / 24%), transparent 58%);
+  animation: aurora-drift 22s var(--ease) infinite alternate;
+}
+
+body > header.bg-gradient-to-r > div:last-child {
+  animation: hero-rise 0.8s var(--ease-out) both;
+}
+
+/* --- Tactile sheen sweep across feature cards on hover --- */
+.service-card,
+.generated-service-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before,
+.generated-service-card::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 55%;
+  height: 100%;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgb(255 255 255 / 42%), transparent);
+  transform: translateX(-180%) skewX(-14deg);
+  transition: transform 760ms var(--ease-out);
+}
+
+.service-card:hover::before,
+.generated-service-card:hover::before {
+  transform: translateX(280%) skewX(-14deg);
+}
+
+/* --- Scroll-reveal: cinematic entrances as sections come into view.
+   Initial hidden state is applied only when JS opts in via `.js-reveal`,
+   so with JS disabled every section stays fully visible. --- */
+.js-reveal .reveal-block {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
+  will-change: opacity, transform;
+}
+
+.js-reveal .reveal-block.reveal-shown {
+  opacity: 1;
+  transform: none;
+}
+
+/* Children of a section's primary grid slide up in a gentle cascade.
+   Transform only, so it composites cleanly under the parent's fade. */
+.js-reveal .reveal-child {
+  transform: translateY(22px);
+  transition: transform 0.7s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 65ms);
+}
+
+.js-reveal .reveal-child.reveal-shown {
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -506,8 +645,20 @@ body > footer a {
     animation: none;
   }
 
-  .cta-button::after {
+  .cta-button::after,
+  .service-card::before,
+  .generated-service-card::before {
     display: none;
+  }
+
+  .hero::after,
+  body > header.bg-gradient-to-r::after {
+    animation: none;
+  }
+
+  .hero > div > *,
+  body > header.bg-gradient-to-r > div:last-child {
+    animation: none;
   }
 
   .service-card:hover,
