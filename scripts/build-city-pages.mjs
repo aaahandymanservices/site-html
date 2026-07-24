@@ -444,7 +444,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
     </script>
 
     <!-- AI chat assistant widget -->
-    <script src="/js/chat-widget.js?v=20260720" defer></script>
+    <script src="/js/chat-loader.js?v=20260724" defer></script>
 </body>
 </html>
 `;

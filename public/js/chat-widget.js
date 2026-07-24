@@ -78,12 +78,6 @@
     ".aaa-chat-send:focus-visible{outline:3px solid " + CRIMSON + ";outline-offset:1px}",
     ".aaa-chat-send:disabled{opacity:.5;cursor:not-allowed}",
     ".aaa-chat-disclaimer{font-size:10px;color:#64748b;text-align:center;padding:0 12px 10px;background:#fff;line-height:1.3}",
-    ".aaa-chat-bubble{position:fixed;bottom:164px;right:20px;z-index:2147482999;width:280px;background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(13,34,55,.25);border:1.5px solid " + CRIMSON + ";padding:12px 14px;box-sizing:border-box;font:14px/1.4 'Roboto',system-ui,-apple-system,sans-serif;color:#0d2237;cursor:pointer;display:none;opacity:0;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease}",
-    ".aaa-chat-bubble.aaa-show{display:block;opacity:1;transform:translateY(0)}",
-    ".aaa-chat-bubble-arrow{position:absolute;bottom:-8px;right:42px;width:12px;height:12px;background:#fff;border-right:1.5px solid " + CRIMSON + ";border-bottom:1.5px solid " + CRIMSON + ";transform:rotate(45deg)}",
-    ".aaa-chat-bubble-close{position:absolute;top:6px;right:8px;background:none;border:none;color:" + CRIMSON + ";font-size:16px;cursor:pointer;line-height:1;padding:4px;transition:color .15s,transform .15s}",
-    ".aaa-chat-bubble-close:hover{color:#751a1e;transform:scale(1.1)}",
-    ".aaa-chat-bubble-close:focus,.aaa-chat-bubble-close:focus-visible,.aaa-chat-bubble-close:active{outline:none !important;box-shadow:none !important}",
     ".dark .aaa-chat-panel{background:#0a1b2c;border:1px solid #1B2A4A;box-shadow:0 20px 50px rgba(3,7,11,0.6)}",
     ".dark .aaa-chat-header{background:#0d2237;border-bottom:3px solid " + CRIMSON + "}",
     ".dark .aaa-chat-header h2{color:#fff}",
@@ -107,13 +101,9 @@
     ".dark .aaa-chat-emoji-trigger{background:#0d2237;border-color:" + CRIMSON + ";color:#fff}",
     ".dark .aaa-chat-emoji-trigger:hover,.dark .aaa-chat-emoji-trigger[aria-expanded='true']{background:" + CRIMSON + ";color:#fff;border-color:" + CRIMSON + "}",
     ".dark .aaa-chat-disclaimer{background:#0a1b2c;color:#94a3b8}",
-    ".dark .aaa-chat-bubble{background:#0a1b2c;color:#fff;border-color:" + CRIMSON + ";box-shadow:0 10px 30px rgba(3,7,11,0.4)}",
-    ".dark .aaa-chat-bubble-arrow{background:#0a1b2c;border-right-color:" + CRIMSON + ";border-bottom-color:" + CRIMSON + "}",
-    ".dark .aaa-chat-bubble-close{color:" + CRIMSON + "}",
-    ".dark .aaa-chat-bubble-close:hover{color:#ff4d4d}",
     ".dark .aaa-chat-log::-webkit-scrollbar-thumb{background:#1B2A4A}",
     ".dark .aaa-chat-log::-webkit-scrollbar-thumb:hover{background:" + CRIMSON + "}",
-    "@media(max-width:767px){.aaa-fab{right:max(16px,env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));flex-direction:column;gap:14px;align-items:flex-end}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}.aaa-fab-btn.aaa-chat-launch,.aaa-fab-btn.aaa-call{display:flex!important}.aaa-chat-bubble{display:none!important}.aaa-chat-panel{position:fixed;top:0;left:0;right:0;bottom:0;width:100%!important;max-width:100%!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important;border:none!important;z-index:2147483005}.aaa-chat-header{padding:calc(16px + env(safe-area-inset-top,0px)) 18px 16px!important}.aaa-chat-disclaimer{padding:0 12px calc(10px + env(safe-area-inset-bottom,0px))!important}}",
+    "@media(max-width:767px){.aaa-fab{right:max(16px,env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));flex-direction:column;gap:14px;align-items:flex-end}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}.aaa-fab-btn.aaa-chat-launch,.aaa-fab-btn.aaa-call{display:flex!important}.aaa-chat-panel{position:fixed;top:0;left:0;right:0;bottom:0;width:100%!important;max-width:100%!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important;border:none!important;z-index:2147483005}.aaa-chat-header{padding:calc(16px + env(safe-area-inset-top,0px)) 18px 16px!important}.aaa-chat-disclaimer{padding:0 12px calc(10px + env(safe-area-inset-bottom,0px))!important}}",
     "@media(max-width:359px){.aaa-fab .aaa-fab-btn{width:50px;height:50px;flex-basis:50px}.aaa-fab{gap:10px}}"
   ].join("");
   document.head.appendChild(style);
@@ -179,22 +169,6 @@
 
   document.body.appendChild(group);
   document.body.appendChild(panel);
-  var bubble = document.createElement("div");
-  bubble.className = "aaa-chat-bubble";
-  bubble.innerHTML = 
-    '<strong>Need repair help?</strong><br>Ask our AI assistant a question! 👋' +
-    '<button type="button" class="aaa-chat-bubble-close" title="Dismiss" aria-label="Dismiss">&times;</button>' +
-    '<div class="aaa-chat-bubble-arrow"></div>';
-  document.body.appendChild(bubble);
-
-  var bubbleTimeout = setTimeout(function () {
-    if (!panel.classList.contains("aaa-open")) {
-      bubble.classList.add("aaa-show");
-      setTimeout(function () {
-        bubble.classList.remove("aaa-show");
-      }, 8000);
-    }
-  }, 5000);
 
   var log = panel.querySelector("#aaa-chat-log");
   var form = panel.querySelector("#aaa-chat-form");
@@ -290,8 +264,6 @@
   function openPanel() {
     panel.classList.add("aaa-open");
     launch.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-    bubble.classList.remove("aaa-show");
-    clearTimeout(bubbleTimeout);
     if (!opened) {
       opened = true;
       addMessage("assistant", GREETING);
@@ -467,16 +439,6 @@
 
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && panel.classList.contains("aaa-open")) closePanel();
-  });
-  bubble.addEventListener("click", function (e) {
-    var closeBtnClick = e.target.closest(".aaa-chat-bubble-close");
-    if (closeBtnClick) {
-      e.stopPropagation();
-      bubble.classList.remove("aaa-show");
-      clearTimeout(bubbleTimeout);
-      return;
-    }
-    openPanel();
   });
   window.__aaaOpenChat = openPanel;
   window.__aaaCloseChat = closePanel;
