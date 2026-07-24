@@ -44,10 +44,33 @@ const publicReview = (review: typeof reviews.$inferSelect) => ({
   projectType: review.projectType,
   rating: review.rating,
   review: review.review,
+  attributes: review.attributes
+    ? review.attributes.split(",").map((tag) => tag.trim()).filter(Boolean)
+    : [],
+  ownerResponse: review.ownerResponse ?? "",
   imageUrl: `/api/reviews/photo/${review.imageKey}`,
   imageAlt: review.imageAlt,
   createdAt: review.createdAt,
 });
+
+// A curated allow-list keeps stored highlight tags tidy and prevents arbitrary
+// text from being smuggled through the attribute chips.
+const ALLOWED_ATTRIBUTES = new Set([
+  "Punctual",
+  "Clean Workspace",
+  "Fair Pricing",
+  "Great Communication",
+  "Quality Work",
+  "Friendly",
+]);
+
+const cleanAttributes = (value: FormDataEntryValue | null) =>
+  String(value ?? "")
+    .split(",")
+    .map((tag) => tag.trim())
+    .filter((tag) => ALLOWED_ATTRIBUTES.has(tag))
+    .slice(0, 6)
+    .join(",");
 
 const validateReviewFields = (customerName: string, location: string, projectType: string, review: string, rating: number) => {
   if (!customerName || !location || !projectType || !review || !Number.isInteger(rating) || rating < 1 || rating > 5) {
@@ -191,7 +214,10 @@ const handleReviewsRequest = async (request: Request) => {
   const projectType = clean(form.get("projectType"), 80);
   const review = clean(form.get("review"), 700);
   const rating = Number.parseInt(String(form.get("rating") ?? ""), 10);
+  const attributes = cleanAttributes(form.get("attributes"));
   const photo = form.get("photo");
+  // Owner responses are only honored on the admin-authorized update path below.
+  const ownerResponse = clean(form.get("ownerResponse"), 500);
   const formAdminToken = isUpdate ? clean(form.get("editToken") ?? form.get("adminToken"), 200) : "";
 
   const fieldError = validateReviewFields(customerName, location, projectType, review, rating);
@@ -239,7 +265,7 @@ const handleReviewsRequest = async (request: Request) => {
 
     const [updated] = await db
       .update(reviews)
-      .set({ customerName, location, projectType, rating, review, imageKey, imageContentType, imageAlt })
+      .set({ customerName, location, projectType, rating, review, attributes, ownerResponse, imageKey, imageContentType, imageAlt })
       .where(eq(reviews.id, id))
       .returning();
 
@@ -261,6 +287,7 @@ const handleReviewsRequest = async (request: Request) => {
       projectType,
       rating,
       review,
+      attributes,
       imageKey,
       imageContentType: upload.type,
       imageAlt,
