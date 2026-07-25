@@ -5,7 +5,7 @@ export default defineStackbitConfig({
   stackbitVersion: "~0.6.0",
   ssgName: "custom",
   nodeVersion: "18",
-  devCommand: "npx serve public -p {PORT}", // Static site files are served from public
+  devCommand: "node -e \"require('http').createServer((req, res) => { require('node:fs').readFile('./public' + req.url, (err, data) => { res.end(data); }); }).listen({PORT})\"",
   contentSources: [
     new GitContentSource({
       rootPath: __dirname,
