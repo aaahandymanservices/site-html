@@ -664,7 +664,35 @@
             const val = bookingService.value;
             const desc = PACKAGE_DESCRIPTIONS[val];
             if (desc) {
-                servicePackageInfo.innerHTML = `<p class="leading-relaxed"><i class="fas fa-circle-info text-red-500 mr-2" aria-hidden="true"></i><strong>${val}:</strong> ${desc.text} <a href="${desc.link}" target="_blank" class="text-red-400 hover:text-red-300 underline font-semibold whitespace-nowrap ml-1">Learn details <i class="fas fa-arrow-up-right-from-square text-xs" aria-hidden="true"></i></a></p>`;
+                servicePackageInfo.innerHTML = '';
+
+                const p = document.createElement('p');
+                p.className = 'leading-relaxed';
+
+                const infoIcon = document.createElement('i');
+                infoIcon.className = 'fas fa-circle-info text-red-500 mr-2';
+                infoIcon.setAttribute('aria-hidden', 'true');
+                p.appendChild(infoIcon);
+
+                const strong = document.createElement('strong');
+                strong.textContent = `${val}:`;
+                p.appendChild(strong);
+
+                p.appendChild(document.createTextNode(` ${desc.text} `));
+
+                const link = document.createElement('a');
+                link.href = desc.link;
+                link.target = '_blank';
+                link.className = 'text-red-400 hover:text-red-300 underline font-semibold whitespace-nowrap ml-1';
+                link.textContent = 'Learn details ';
+
+                const linkIcon = document.createElement('i');
+                linkIcon.className = 'fas fa-arrow-up-right-from-square text-xs';
+                linkIcon.setAttribute('aria-hidden', 'true');
+                link.appendChild(linkIcon);
+
+                p.appendChild(link);
+                servicePackageInfo.appendChild(p);
                 servicePackageInfo.classList.remove('hidden');
             } else {
                 servicePackageInfo.classList.add('hidden');
