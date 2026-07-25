@@ -1,24 +1,7 @@
 import { defineStackbitConfig } from "@stackbit/types";
 import type { SiteMapEntry } from "@stackbit/types";
-import { GitContentSource } from "@stackbit/cms-git";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { visualEditorModels } from "./stackbit.models";
-
-function getAuthenticatedRepositoryUrl() {
-  const repositoryUrl = new URL("https://github.com/aaahandymanservices/site-html.git");
-  const githubToken = process.env.GITHUB_TOKEN;
-
-  if (githubToken) {
-    repositoryUrl.username = "x-access-token";
-    repositoryUrl.password = githubToken;
-  }
-
-  return repositoryUrl.toString();
-}
-
-const repositoryUrl = getAuthenticatedRepositoryUrl();
-const repositoryBranch = "preview";
 
 const staticPages = [
   { urlPath: "/", label: "Home", stableId: "home", isHomePage: true },
@@ -43,24 +26,7 @@ export default defineStackbitConfig({
   ssgName: "custom",
   nodeVersion: "18",
   devCommand: "node scripts/visual-editor-server.mjs --hostname {HOSTNAME} --port {PORT}",
-  contentSources: [
-    new GitContentSource({
-      rootPath: __dirname,
-      contentDirs: ["public/data"],
-      models: visualEditorModels,
-      localDevSync: {
-        repoUrl: repositoryUrl,
-        repoWorkingBranch: repositoryBranch,
-        repoPublishBranch: repositoryBranch
-      },
-      assetsConfig: {
-        referenceType: "static",
-        staticDir: "public",
-        uploadDir: "images",
-        publicPath: "/"
-      }
-    })
-  ],
+  contentSources: [],
   sitemap: ({ documents }) => {
     const servicesDocument = documents.find((document) => document.modelName === "ServicesData");
     const serviceAreasDocument = documents.find((document) => document.modelName === "ServiceAreasData");
