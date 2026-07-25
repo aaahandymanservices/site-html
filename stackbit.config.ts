@@ -25,7 +25,7 @@ export default defineStackbitConfig({
   stackbitVersion: "~0.6.0",
   ssgName: "custom",
   nodeVersion: "18",
-  devCommand: "node scripts/visual-editor-server.mjs --hostname {HOSTNAME} --port {PORT}",
+  devCommand: "npm run dev -- --hostname {HOSTNAME} --port {PORT}",
   contentSources: [],
   sitemap: ({ documents }) => {
     const servicesDocument = documents.find((document) => document.modelName === "ServicesData");

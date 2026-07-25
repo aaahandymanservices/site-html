@@ -31,7 +31,7 @@ function getOption(name, fallback) {
   return index >= 0 && process.argv[index + 1] ? process.argv[index + 1] : fallback;
 }
 
-const hostname = getOption("hostname", "127.0.0.1");
+const hostname = getOption("hostname", "0.0.0.0");
 const port = Number(getOption("port", "8889"));
 
 if (!Number.isInteger(port) || port < 1 || port > 65535) {
