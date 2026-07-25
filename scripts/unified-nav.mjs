@@ -15,7 +15,7 @@ export function getUnifiedNav(activePage = 'none') {
     ? 'block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition'
     : 'block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition';
 
-  return `<a href="#main-content" class="skip-link">Skip to main content</a>
+  return `<a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
 <nav id="site-nav" aria-label="Primary" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
     <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
