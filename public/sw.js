@@ -1,0 +1,162 @@
+/*
+ * Service worker for AAA Handyman Services.
+ *
+ * Goals, in order: never serve stale content to an online visitor, keep the
+ * shell instant on repeat visits, and show a branded page instead of the
+ * browser's error screen when the connection drops.
+ *
+ * Strategies:
+ *   - navigations      network first, fall back to cache, then /offline.html
+ *   - static assets    stale-while-revalidate (hashed by ?v= query in markup)
+ *   - everything else  straight to the network, uncached
+ *
+ * Bump CACHE_VERSION to force every client onto a fresh cache.
+ */
+const CACHE_VERSION = 'v1';
+const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
+const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
+const OFFLINE_URL = '/offline.html';
+
+// The start_url and offline page must be available with no network at all;
+// the rest is what every page needs to render its first frame.
+const PRECACHE_URLS = [
+  '/',
+  OFFLINE_URL,
+  '/css/tailwind.css',
+  '/css/site-theme.css',
+  '/css/icons.css',
+  '/js/site.js',
+  '/js/chat-loader.js',
+  '/fonts/archivo-latin.woff2',
+  '/fonts/roboto-latin.woff2',
+  '/fonts/fa-solid-900.woff2',
+  '/icons/icon-192.png',
+  '/manifest.webmanifest',
+];
+
+// Requests that must always hit the origin: form posts, bookings, chat, review
+// submissions, and analytics.
+const NETWORK_ONLY_PATHS = ['/api/', '/.netlify/functions/', '/.netlify/identity/'];
+
+const STATIC_ASSET_PATTERN = /\.(?:css|js|mjs|woff2?|ttf|otf|png|jpe?g|gif|svg|webp|avif|ico|webmanifest|json)$/i;
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    (async () => {
+      const cache = await caches.open(SHELL_CACHE);
+      // Add entries individually: one 404 shouldn't void the whole precache.
+      await Promise.all(
+        PRECACHE_URLS.map((url) =>
+          cache.add(new Request(url, { cache: 'reload' })).catch(() => undefined),
+        ),
+      );
+      await self.skipWaiting();
+    })(),
+  );
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    (async () => {
+      const keep = [SHELL_CACHE, ASSET_CACHE];
+      const names = await caches.keys();
+      await Promise.all(
+        names.filter((name) => !keep.includes(name)).map((name) => caches.delete(name)),
+      );
+
+      // Let the browser handle range requests and back/forward navigations
+      // from its own cache without waking the worker.
+      if (self.registration.navigationPreload) {
+        await self.registration.navigationPreload.disable();
+      }
+
+      await self.clients.claim();
+    })(),
+  );
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data === 'skip-waiting') self.skipWaiting();
+});
+
+/** Cache lookup that ignores the ?v= cache-busting query used in markup. */
+function matchIgnoringQuery(request) {
+  return caches.match(request, { ignoreSearch: true });
+}
+
+async function handleNavigation(request) {
+  try {
+    const response = await fetch(request);
+    // Only cache real, final HTML responses.
+    if (response.ok && response.type !== 'opaque' && !response.redirected) {
+      const cache = await caches.open(SHELL_CACHE);
+      cache.put(request, response.clone()).catch(() => undefined);
+    }
+    return response;
+  } catch (error) {
+    const cached = await matchIgnoringQuery(request);
+    if (cached) return cached;
+
+    const offline = await caches.match(OFFLINE_URL);
+    if (offline) return offline;
+
+    return new Response('You are offline.', {
+      status: 503,
+      statusText: 'Offline',
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    });
+  }
+}
+
+async function handleAsset(event) {
+  const { request } = event;
+  const cached = await caches.match(request, { ignoreSearch: true });
+
+  const network = fetch(request)
+    .then(async (response) => {
+      if (response.ok && response.type !== 'opaque') {
+        const cache = await caches.open(ASSET_CACHE);
+        await cache.put(request, response.clone()).catch(() => undefined);
+      }
+      return response;
+    })
+    .catch(() => undefined);
+
+  if (cached) {
+    // Refresh in the background; the visitor gets the cached copy immediately.
+    // waitUntil keeps the worker alive long enough for that write to land.
+    event.waitUntil(network);
+    return cached;
+  }
+
+  const response = await network;
+  if (response) return response;
+
+  throw new Error(`Unable to fetch ${request.url}`);
+}
+
+self.addEventListener('fetch', (event) => {
+  const { request } = event;
+
+  if (request.method !== 'GET') return;
+
+  let url;
+  try {
+    url = new URL(request.url);
+  } catch (error) {
+    return;
+  }
+
+  // Third-party requests (analytics, maps) stay entirely on the network.
+  if (url.origin !== self.location.origin) return;
+  if (NETWORK_ONLY_PATHS.some((path) => url.pathname.startsWith(path))) return;
+
+  if (request.mode === 'navigate') {
+    event.respondWith(handleNavigation(request));
+    return;
+  }
+
+  if (STATIC_ASSET_PATTERN.test(url.pathname) || url.pathname.startsWith('/.netlify/images')) {
+    event.respondWith(handleAsset(event));
+  }
+});

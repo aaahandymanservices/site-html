@@ -156,11 +156,10 @@ function page(city) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Resource hints -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <!-- Self-hosted brand fonts + icon subset; @font-face lives in site-theme.css -->
+    <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
 
     <title>${title}</title>
 
@@ -192,22 +191,22 @@ function page(city) {
 ${jsonLd(city)}
 
     <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260727">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260727">
-
-    <!-- Brand fonts: Archivo & Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Roboto:wght@400;700&display=swap"></noscript>
-
-    <!-- FontAwesome icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260728">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260728">
+    <!-- Font Awesome subset (generated, see scripts/build-icon-css.mjs) -->
+    <link rel="stylesheet" href="/css/icons.css?v=20260728">
 
     <style>
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AAA Handyman">
+    <meta name="application-name" content="AAA Handyman">
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
     <!-- Navbar -->
@@ -444,6 +443,15 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
 
     <!-- AI chat assistant widget -->
     <script src="/js/chat-loader.js?v=20260724" defer></script>
+
+    <script>
+      // Registered after load so it never competes with the first render.
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').catch(function () {});
+        });
+      }
+    </script>
 </body>
 </html>
 `;
