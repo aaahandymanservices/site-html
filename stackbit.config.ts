@@ -5,17 +5,16 @@ export default defineStackbitConfig({
   stackbitVersion: "~0.6.0",
   ssgName: "custom",
   nodeVersion: "18",
-  // Specify how Netlify Visual Editor should serve your site's preview
-  devCommand: "npx serve public -p {PORT}",
+  devCommand: "npx serve public -p {PORT}", // Static site files are served from public
   contentSources: [
     new GitContentSource({
       rootPath: __dirname,
       contentDirs: ["public"],
-      models: [], // Define editable content models here
+      models: [],
       assetsConfig: {
         referenceType: "static",
         staticDir: "public",
-        uploadDir: "icons",
+        uploadDir: "images",
         publicPath: "/"
       }
     })
