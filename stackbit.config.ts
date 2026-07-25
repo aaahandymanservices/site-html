@@ -5,6 +5,32 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { visualEditorModels } from "./stackbit.models";
 
+function getHttpsRepositoryUrl() {
+  const repositoryUrl = process.env.REPOSITORY_URL;
+
+  if (!repositoryUrl) {
+    return undefined;
+  }
+
+  const sshMatch = repositoryUrl.match(/^git@([^:]+):(.+)$/);
+  if (sshMatch) {
+    return `https://${sshMatch[1]}/${sshMatch[2]}`;
+  }
+
+  try {
+    const url = new URL(repositoryUrl);
+    url.protocol = "https:";
+    url.username = "";
+    url.password = "";
+    return url.toString();
+  } catch {
+    return undefined;
+  }
+}
+
+const repositoryUrl = getHttpsRepositoryUrl();
+const repositoryBranch = process.env.BRANCH ?? "main";
+
 const staticPages = [
   { urlPath: "/", label: "Home", stableId: "home", isHomePage: true },
   { urlPath: "/services", label: "Services", stableId: "services-index" },
@@ -33,6 +59,15 @@ export default defineStackbitConfig({
       rootPath: __dirname,
       contentDirs: ["public/data"],
       models: visualEditorModels,
+      ...(repositoryUrl
+        ? {
+            localDevSync: {
+              repoUrl: repositoryUrl,
+              repoWorkingBranch: process.env.HEAD ?? repositoryBranch,
+              repoPublishBranch: repositoryBranch
+            }
+          }
+        : {}),
       assetsConfig: {
         referenceType: "static",
         staticDir: "public",
