@@ -21,21 +21,31 @@ const STATIC_NAV_PAGES = [
   { path: 'public/services/aging-in-place-guide.html', active: 'services' }
 ];
 
+/**
+ * Normalise asset loading: fonts and icons are self-hosted now, so strip any
+ * page that still reaches out to fonts.googleapis.com or cdnjs and point it at
+ * the local subset instead. See public/css/site-theme.css for the @font-face
+ * rules and scripts/build-icon-css.mjs for the icon stylesheet.
+ */
 function optimizeFontsAndAssets(html) {
-  // 1. Remove redundant <link rel="preload" ... as="style"> for Google Fonts and FontAwesome
-  html = html.replace(/\s*<link\s+rel="preload"\s+href="https:\/\/fonts\.googleapis\.com\/css2\?[^"]*"\s+as="style">\s*/gi, '\n');
-  html = html.replace(/\s*<link\s+rel="preload"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"\s+as="style">\s*/gi, '\n');
+  // Resource hints for origins the site no longer contacts.
+  html = html.replace(/[ \t]*<link\s+rel="preconnect"\s+href="https:\/\/fonts\.(?:googleapis|gstatic)\.com"[^>]*>\r?\n/gi, '');
+  html = html.replace(/[ \t]*<link\s+rel="preconnect"\s+href="https:\/\/cdnjs\.cloudflare\.com"[^>]*>\r?\n/gi, '');
 
-  // 2. Replace Google Fonts links (Roboto only or older) with combined Archivo & Roboto async font links
-  const oldGoogleFontsRegex = /(?:<!-- Brand font[s]?: [^>]*-->\s*)?(?:<link\s+rel="preload"\s+href="https:\/\/fonts\.googleapis\.com\/css2\?[^"]*"\s+as="style">\s*)?<link\s+rel="stylesheet"\s+href="https:\/\/fonts\.googleapis\.com\/css2\?[^"]*"\s+media="print"\s+onload="this\.media='all'">\s*<noscript><link\s+rel="stylesheet"\s+href="https:\/\/fonts\.googleapis\.com\/css2\?[^"]*"><\/noscript>/gi;
+  // Google Fonts, in every form these pages have used.
+  html = html.replace(/[ \t]*<!-- Brand fonts?: [^\n]*-->\r?\n/gi, '');
+  html = html.replace(/[ \t]*<link\s+rel="(?:preload|stylesheet)"\s+href="https:\/\/fonts\.googleapis\.com\/[^"]*"[^>]*>\r?\n/gi, '');
+  html = html.replace(/[ \t]*<noscript><link\s+rel="stylesheet"\s+href="https:\/\/fonts\.googleapis\.com\/[^"]*"><\/noscript>\r?\n/gi, '');
+  html = html.replace(/[ \t]*@import\s+url\(['"]?https:\/\/fonts\.googleapis\.com\/[^)]*\);\r?\n/gi, '');
 
-  const newGoogleFontsHtml = `<!-- Brand fonts: Archivo & Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Roboto:wght@400;700&display=swap"></noscript>`;
-
-  if (oldGoogleFontsRegex.test(html)) {
-    html = html.replace(oldGoogleFontsRegex, newGoogleFontsHtml);
-  }
+  // Font Awesome from cdnjs -> generated local subset.
+  html = html.replace(/[ \t]*<!-- FontAwesome icons -->\r?\n/gi, '');
+  html = html.replace(
+    /[ \t]*<link\s+rel="stylesheet"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"[^>]*>\r?\n/gi,
+    '    <link rel="stylesheet" href="/css/icons.css?v=20260728">\n',
+  );
+  html = html.replace(/[ \t]*<link\s+rel="preload"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"[^>]*>\r?\n/gi, '');
+  html = html.replace(/[ \t]*<noscript><link\s+rel="stylesheet"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"><\/noscript>\r?\n/gi, '');
 
   return html;
 }

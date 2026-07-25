@@ -1,0 +1,65 @@
+{
+  "id": "/",
+  "name": "AAA Handyman Services",
+  "short_name": "AAA Handyman",
+  "description": "Trusted local handyman and home repair services across Waterford and Oakland County, Michigan. Book a visit, check rates, or get an instant quote estimate.",
+  "lang": "en-US",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait-primary",
+  "theme_color": "#A61F2E",
+  "background_color": "#1B2A4A",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Book a visit",
+      "short_name": "Book",
+      "description": "Request a handyman appointment",
+      "url": "/book",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Rates & instant quote",
+      "short_name": "Rates",
+      "description": "See hourly rates and estimate a job",
+      "url": "/rates",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Contact us",
+      "short_name": "Contact",
+      "description": "Call, email, or message AAA Handyman Services",
+      "url": "/contact",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}
