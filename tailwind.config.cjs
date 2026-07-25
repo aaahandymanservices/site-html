@@ -3,6 +3,10 @@ module.exports = {
   content: [
     './public/**/*.html',
     './public/**/*.js',
+    // The nav markup lives in a shared module rather than in the generated
+    // pages, and the CSS build runs before those pages exist, so it has to be
+    // scanned directly or its utilities never reach the stylesheet.
+    './scripts/unified-nav.mjs',
     './scripts/build-service-pages.mjs',
     './scripts/build-city-pages.mjs',
   ],

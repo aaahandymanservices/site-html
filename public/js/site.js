@@ -85,6 +85,20 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isOpen()) setMenuOpen(false, { restoreFocus: true });
     });
+
+    // Crossing into the desktop layout hides the drawer through CSS alone, which
+    // would leave the toggle reporting aria-expanded="true" behind a close icon,
+    // and the drawer already open the next time the window narrows. Keep the
+    // two in step. 1024px is Tailwind's `lg`, where the full link row appears.
+    const desktopLayout = window.matchMedia('(min-width: 1024px)');
+    const closeOnDesktop = (event) => {
+      if (event.matches && isOpen()) setMenuOpen(false);
+    };
+    if (desktopLayout.addEventListener) {
+      desktopLayout.addEventListener('change', closeOnDesktop);
+    } else if (desktopLayout.addListener) {
+      desktopLayout.addListener(closeOnDesktop);
+    }
   }
 
   // --- Scroll-reveal: cinematic entrances as content scrolls into view ---
