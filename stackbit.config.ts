@@ -5,31 +5,20 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { visualEditorModels } from "./stackbit.models";
 
-function getHttpsRepositoryUrl() {
-  const repositoryUrl = process.env.REPOSITORY_URL;
+function getAuthenticatedRepositoryUrl() {
+  const repositoryUrl = new URL("https://github.com/aaahandymanservices/site-html.git");
+  const githubToken = process.env.GITHUB_TOKEN;
 
-  if (!repositoryUrl) {
-    return undefined;
+  if (githubToken) {
+    repositoryUrl.username = "x-access-token";
+    repositoryUrl.password = githubToken;
   }
 
-  const sshMatch = repositoryUrl.match(/^git@([^:]+):(.+)$/);
-  if (sshMatch) {
-    return `https://${sshMatch[1]}/${sshMatch[2]}`;
-  }
-
-  try {
-    const url = new URL(repositoryUrl);
-    url.protocol = "https:";
-    url.username = "";
-    url.password = "";
-    return url.toString();
-  } catch {
-    return undefined;
-  }
+  return repositoryUrl.toString();
 }
 
-const repositoryUrl = getHttpsRepositoryUrl();
-const repositoryBranch = process.env.BRANCH ?? "main";
+const repositoryUrl = getAuthenticatedRepositoryUrl();
+const repositoryBranch = "preview";
 
 const staticPages = [
   { urlPath: "/", label: "Home", stableId: "home", isHomePage: true },
@@ -59,15 +48,11 @@ export default defineStackbitConfig({
       rootPath: __dirname,
       contentDirs: ["public/data"],
       models: visualEditorModels,
-      ...(repositoryUrl
-        ? {
-            localDevSync: {
-              repoUrl: repositoryUrl,
-              repoWorkingBranch: process.env.HEAD ?? repositoryBranch,
-              repoPublishBranch: repositoryBranch
-            }
-          }
-        : {}),
+      localDevSync: {
+        repoUrl: repositoryUrl,
+        repoWorkingBranch: repositoryBranch,
+        repoPublishBranch: repositoryBranch
+      },
       assetsConfig: {
         referenceType: "static",
         staticDir: "public",
