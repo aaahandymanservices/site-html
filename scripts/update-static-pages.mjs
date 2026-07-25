@@ -55,10 +55,26 @@ for (const { path, active, removeSectionNav } of STATIC_NAV_PAGES) {
   const fullPath = join(ROOT, path);
   let content = readFileSync(fullPath, 'utf8');
 
-  // Regex to match the main top navbar and clean up any orphaned fragments
-  const mainNavRegex = /(?:<header[^>]*class="sticky top-0 z-50 bg-white[\s\S]*?<\/header>|<nav[^>]*class="bg-white shadow-md sticky top-0 z-50 border-b-\[3px\] border-red-600"[\s\S]*?<\/nav>(?:\s*<div class="pt-3 border-t border-gray-100 flex items-center justify-center space-x-6 text-2xl">[\s\S]*?<\/div>\s*<\/div>\s*<\/nav>)*)/;
-  
+  // The top bar is matched as a single unit: the skip link (which getUnifiedNav
+  // also emits, so leaving it unmatched would duplicate it on every run), the
+  // bar itself, and any orphaned drawer tail. That tail -- stray `pt-2`/`pt-3`
+  // <div>s plus an unbalanced `</div></nav>` left behind by an earlier revision
+  // of the drawer -- is not inert: the parser closes the <nav> at the first
+  // `</nav>`, so those <div>s become body-level siblings and render as loose
+  // buttons and icons between the bar and the page content.
+  const ORPHAN_DRAWER_TAIL =
+    '(?:(?:\\s*<div class="pt-[23] border-t border-gray-100(?:[^<]|<(?!\\/div>))*<\\/div>)+\\s*<\\/div>\\s*<\\/nav>)?';
+  const mainNavRegex = new RegExp(
+    '(?:<a[^>]*class="skip-link"[^>]*>[\\s\\S]*?<\\/a>\\s*)?' +
+      '(?:<header[^>]*class="sticky top-0 z-50 bg-white[\\s\\S]*?<\\/header>' +
+      '|<nav[^>]*id="site-nav"[\\s\\S]*?<\\/nav>' + ORPHAN_DRAWER_TAIL + ')'
+  );
+
   if (mainNavRegex.test(content)) {
+    const [matched] = content.match(mainNavRegex);
+    if (/<\/nav>[\s\S]*<\/nav>/.test(matched)) {
+      console.log(`  Removed orphaned drawer markup after the nav in ${path}`);
+    }
     const unifiedNavHtml = getUnifiedNav(active);
     content = content.replace(mainNavRegex, unifiedNavHtml);
   } else {
