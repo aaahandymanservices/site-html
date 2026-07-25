@@ -247,7 +247,8 @@
     <meta name="application-name" content="AAA Handyman">
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
-<nav id="site-nav" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<nav id="site-nav" aria-label="Primary" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
     <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
         <a href="/" class="flex min-w-0 items-center space-x-3 group" aria-label="AAA Handyman Services home">
             <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600 transition group-hover:scale-105">
@@ -265,9 +266,9 @@
             <a href="/careers" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Careers</a>
             <a href="/contact" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Contact</a>
             <div class="flex items-center space-x-3 pl-2 border-l border-gray-200">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney"></i></a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="flex items-center lg:hidden space-x-2">
@@ -277,7 +278,7 @@
         </div>
     </div>
     <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-2xl max-h-[calc(100vh-70px)] overflow-y-auto">
-        <div aria-label="Mobile Navigation" role="navigation" class="space-y-1">
+        <div class="space-y-1">
             <a href="/services" class="block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition">Services</a>
             <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
             <a href="/rates" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
@@ -287,9 +288,9 @@
             <a href="/contact" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Contact</a>
         </div>
         <div class="pt-3 border-t border-gray-100 flex items-center justify-center space-x-6 text-2xl">
-            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Facebook Page" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Yelp Page" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp"></i></a>
-            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor Page" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney"></i></a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Facebook Page" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Yelp Page" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor Page" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
         </div>
     </div>
 </nav>
@@ -311,24 +312,24 @@
                 <span class="mx-2">/</span>
                 <span class="text-white font-semibold">Tub &amp; Shower Re-Caulk</span>
             </nav>
-            <div class="w-16 h-16 mx-auto bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center text-3xl text-red-400 mb-5" aria-hidden="true"><i class="fas fa-shower"></i></div>
+            <div class="w-16 h-16 mx-auto bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center text-3xl text-red-400 mb-5" aria-hidden="true"><i class="fas fa-shower" aria-hidden="true"></i></div>
             <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-2">Plumbing &amp; Water Protection &middot; Oakland County, MI</div>
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">Tub &amp; Shower Re-Caulk</h1>
-            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5"></i>Serving Waterford, Troy, West Bloomfield, Rochester Hills, Royal Oak, Clarkston &amp; surrounding Oakland County communities</p>
+            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving Waterford, Troy, West Bloomfield, Rochester Hills, Royal Oak, Clarkston &amp; surrounding Oakland County communities</p>
             <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
                 Strip out failing caulk and lay down a clean, watertight, mold-free seal.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="/book?service=Plumbing" class="bg-red-600 hover:bg-red-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-red-600/30 transition flex items-center justify-center gap-2">
-                    <i class="fas fa-calendar-check"></i> Book Online / Get a Free Quote
+                    <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Get a Free Quote
                 </a>
                 <a href="tel:+12483853432" class="bg-green-600 hover:bg-green-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-green-600/30 transition flex items-center justify-center gap-2">
-                    <i class="fas fa-phone"></i> Call Now! (248) 385-3432
+                    <i class="fas fa-phone" aria-hidden="true"></i> Call Now! (248) 385-3432
                 </a>
             </div>
         </div>
     </header>
-    <main class="flex-grow py-12 sm:py-16">
+    <main id="main-content" class="flex-grow py-12 sm:py-16">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
                 <div class="lg:col-span-2 prose prose-lg max-w-none text-gray-600">
@@ -338,19 +339,19 @@
                 </div>
                 <aside class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 shadow-lg">
                     <div class="flex items-center gap-3 mb-4">
-                        <span class="text-2xl text-red-600" aria-hidden="true"><i class="fas fa-tag"></i></span>
+                        <span class="text-2xl text-red-600" aria-hidden="true"><i class="fas fa-tag" aria-hidden="true"></i></span>
                         <div>
                             <h3 class="text-lg font-bold text-gray-900">Simple, Upfront Pricing</h3>
                             <p class="text-sm text-gray-500">Tub &amp; Shower Re-Caulk</p>
                         </div>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
-                        <li class="flex items-start gap-2"><i class="fas fa-location-dot text-red-600 mt-1"></i><span><strong>$100 minimum</strong> in Zone A (within ~20 miles) &middot; <strong>$145</strong> in Zone B (extended county).</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-map text-red-600 mt-1"></i><span>Available across <a href="/service-areas" class="text-red-600 font-semibold underline underline-offset-2">Oakland County</a>.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-location-dot text-red-600 mt-1" aria-hidden="true"></i><span><strong>$100 minimum</strong> in Zone A (within ~20 miles) &middot; <strong>$145</strong> in Zone B (extended county).</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1" aria-hidden="true"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-map text-red-600 mt-1" aria-hidden="true"></i><span>Available across <a href="/service-areas" class="text-red-600 font-semibold underline underline-offset-2">Oakland County</a>.</span></li>
                     </ul>
                     <a href="/contact?service=Plumbing" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30">
-                        <i class="fas fa-calendar-check"></i> Request This Service
+                        <i class="fas fa-calendar-check" aria-hidden="true"></i> Request This Service
                     </a>
                     <a href="/rates" class="mt-3 block text-center text-sm text-gray-500 hover:text-red-600 underline underline-offset-2">See full rates &amp; packages</a>
                 </aside>
@@ -363,25 +364,25 @@
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="flex items-start gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm">
-                    <span class="w-8 h-8 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-check"></i></span>
+                    <span class="w-8 h-8 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800">Tub &amp; shower re-caulk</span>
                 </div>
                 <div class="flex items-start gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm">
-                    <span class="w-8 h-8 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-check"></i></span>
+                    <span class="w-8 h-8 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800">Mold &amp; mildew caulk removal</span>
                 </div>
                 <div class="flex items-start gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm">
-                    <span class="w-8 h-8 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-check"></i></span>
+                    <span class="w-8 h-8 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800">Kitchen &amp; wet-area sealing</span>
                 </div>
                 <div class="flex items-start gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm">
-                    <span class="w-8 h-8 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-check"></i></span>
+                    <span class="w-8 h-8 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800">Clean, watertight finish</span>
                 </div>
                 </div>
                 <div class="mt-8 text-center">
                     <a href="/services" class="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-semibold transition shadow-lg hover:shadow-green-600/30">
-                        View All Services <i class="fas fa-arrow-right"></i>
+                        View All Services <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -390,43 +391,43 @@
                 <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">Homeowners who booked tub & shower re-caulk also asked about:</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <a href="/services/minor-plumbing" class="generated-service-card group flex items-center gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm hover:text-red-600">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-faucet-drip"></i></span>
+                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-faucet-drip" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800 group-hover:text-red-600">Minor Plumbing &amp; Leak Prevention</span>
                 </a>
                 <a href="/services/carpentry" class="generated-service-card group flex items-center gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm hover:text-red-600">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-hammer"></i></span>
+                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-hammer" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800 group-hover:text-red-600">Carpentry</span>
                 </a>
                 <a href="/services/doors-windows" class="generated-service-card group flex items-center gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm hover:text-red-600">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-door-open"></i></span>
+                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-door-open" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800 group-hover:text-red-600">Doors &amp; Windows</span>
                 </a>
                 </div>
                 <div class="mt-6 text-center">
-                    <a href="/services" class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition font-semibold shadow-md hover:shadow-green-600/30"><i class="fas fa-list"></i> Browse All Services</a>
+                    <a href="/services" class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition font-semibold shadow-md hover:shadow-green-600/30"><i class="fas fa-list" aria-hidden="true"></i> Browse All Services</a>
                 </div>
             </div>
             <div class="max-w-5xl mx-auto mt-12 sm:mt-16 border-t border-gray-200 pt-10">
                 <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 text-center mb-6">Our Tub &amp; Shower Re-Caulk Service Area</h2>
                 <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">We provide expert tub &amp; shower re-caulk in the following Oakland County, Michigan communities:</p>
                 <div class="flex flex-wrap justify-center gap-2.5">
-                    <a href="/handyman/waterford" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Waterford</a>
-                    <a href="/handyman/pontiac" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Pontiac</a>
-                    <a href="/handyman/west-bloomfield" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> West Bloomfield</a>
-                    <a href="/handyman/clarkston" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Clarkston</a>
-                    <a href="/handyman/birmingham" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Birmingham</a>
-                    <a href="/handyman/troy" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Troy</a>
-                    <a href="/handyman/rochester-hills" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Rochester Hills</a>
-                    <a href="/handyman/farmington-hills" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Farmington Hills</a>
-                    <a href="/handyman/royal-oak" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Royal Oak</a>
-                    <a href="/handyman/orchard-lake" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Orchard Lake</a>
-                    <a href="/handyman/franklin" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Franklin</a>
-                    <a href="/handyman/huntington-woods" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Huntington Woods</a>
-                    <a href="/handyman/beverly-hills" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Beverly Hills</a>
-                    <a href="/handyman/novi" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Novi</a>
-                    <a href="/handyman/southfield" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Southfield</a>
-                    <a href="/handyman/lake-orion" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Lake Orion</a>
-                    <a href="/handyman/oxford" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> Oxford</a>
+                    <a href="/handyman/waterford" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Waterford</a>
+                    <a href="/handyman/pontiac" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Pontiac</a>
+                    <a href="/handyman/west-bloomfield" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> West Bloomfield</a>
+                    <a href="/handyman/clarkston" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Clarkston</a>
+                    <a href="/handyman/birmingham" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Birmingham</a>
+                    <a href="/handyman/troy" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Troy</a>
+                    <a href="/handyman/rochester-hills" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Rochester Hills</a>
+                    <a href="/handyman/farmington-hills" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Farmington Hills</a>
+                    <a href="/handyman/royal-oak" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Royal Oak</a>
+                    <a href="/handyman/orchard-lake" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Orchard Lake</a>
+                    <a href="/handyman/franklin" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Franklin</a>
+                    <a href="/handyman/huntington-woods" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Huntington Woods</a>
+                    <a href="/handyman/beverly-hills" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Beverly Hills</a>
+                    <a href="/handyman/novi" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Novi</a>
+                    <a href="/handyman/southfield" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Southfield</a>
+                    <a href="/handyman/lake-orion" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Lake Orion</a>
+                    <a href="/handyman/oxford" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> Oxford</a>
                 </div>
             </div>
             <div class="max-w-4xl mx-auto mt-14 sm:mt-20">
@@ -458,10 +459,10 @@
                 <p class="mt-4 text-base sm:text-lg opacity-90">Call for availability and same-week scheduling, or request a free quote online. No job too small.</p>
                 <div class="mt-8 flex flex-wrap justify-center gap-4">
                     <a href="tel:+12483853432" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-green-600/30">
-                        <i class="fas fa-phone"></i> (248) 385-3432
+                        <i class="fas fa-phone" aria-hidden="true"></i> (248) 385-3432
                     </a>
                     <a href="/book?service=Plumbing" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/30">
-                        <i class="fas fa-calendar-check"></i> Book Online Now
+                        <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online Now
                     </a>
                 </div>
             </div>
@@ -474,9 +475,9 @@
                     <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
                     <div class="mt-4 flex items-center gap-4">
-                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney"></i></a>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp"></i></a>
+                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <nav aria-label="Footer">
@@ -495,11 +496,11 @@
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center"></i>(248) 385-3432</a></li>
-                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
-                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center"></i>Waterford, MI &middot; Oakland County</li>
+                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden="true"></i>(248) 385-3432</a></li>
+                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Waterford, MI &middot; Oakland County</li>
                     </ul>
-                    <a href="/book?service=Plumbing" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Book Online Now</a>
+                    <a href="/book?service=Plumbing" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
                 </div>
             </div>
             <div class="mt-12 pt-10 border-t border-gray-800 grid gap-10 sm:grid-cols-2 text-center sm:text-left">
@@ -517,7 +518,7 @@
                         <li><a href="/services/gutters" class="hover:text-white transition">Gutters</a></li>
                         <li><a href="/services/power-washing" class="hover:text-white transition">Power Washing</a></li>
                     </ul>
-                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
                 <nav aria-label="Service areas">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Service Areas</h3>
@@ -535,7 +536,7 @@
                         <li><a href="/handyman/franklin" class="hover:text-white transition">Franklin</a></li>
                         <li><a href="/handyman/orchard-lake" class="hover:text-white transition">Orchard Lake</a></li>
                     </ul>
-                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
@@ -548,7 +549,7 @@
             </div>
         </div>
     </footer>
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
     <script src="/js/site.js?v=20260727" defer></script>
     <script>
       window.dataLayer = window.dataLayer || [];

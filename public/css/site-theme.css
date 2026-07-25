@@ -152,6 +152,42 @@ div[id] {
   border-radius: 4px;
 }
 
+/* Anything given an explicit widget role is keyboard-reachable and therefore
+   needs the same visible ring as a native control. */
+:where([role="radio"], [role="button"], [role="tab"], [tabindex]):focus-visible {
+  outline: 3px solid rgb(166 31 46 / 45%);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Skip link: the first focusable element on every page, so a keyboard or
+   screen-reader user can jump past the sticky nav straight to the content.
+   Hidden off-screen until focused rather than `display: none`, which would
+   take it out of the tab order entirely. */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 200;
+  padding: 0.75rem 1.5rem;
+  border-bottom-right-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+  background: var(--brand-crimson);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--shadow-lg);
+  transform: translate(-50%, -125%);
+  transition: transform 160ms var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -6px;
+  transform: translate(-50%, 0);
+}
+
 /* Tailwind's `focus:outline-none` utility strips the browser focus ring and
    leaves several controls (the mobile-menu button, star-rating and time-slot
    buttons) with no visible keyboard-focus indicator. Reinstate one wherever

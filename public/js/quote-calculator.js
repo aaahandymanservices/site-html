@@ -40,7 +40,7 @@
         // ---- Left: inputs ----
         '<div>' +
           '<div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">' +
-            '<h3 class="text-lg font-black text-gray-950 flex items-center gap-2"><i class="fas fa-location-dot text-red-600"></i> 1. Your location</h3>' +
+            '<h3 class="text-lg font-black text-gray-950 flex items-center gap-2"><i class="fas fa-location-dot text-red-600" aria-hidden="true"></i> 1. Your location</h3>' +
             '<p class="text-gray-500 text-sm mt-1">Enter your zip code and we\'ll set your zone automatically, or choose it below.</p>' +
             '<div class="mt-4 flex flex-col sm:flex-row gap-3">' +
               '<input id="quote-zip" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="postal-code" maxlength="5" placeholder="e.g. 48327" ' +
@@ -55,7 +55,7 @@
 
           '<div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm mt-6">' +
             '<div class="flex items-center justify-between gap-3">' +
-              '<h3 class="text-lg font-black text-gray-950 flex items-center gap-2"><i class="fas fa-list-check text-red-600"></i> 2. Pick your tasks</h3>' +
+              '<h3 class="text-lg font-black text-gray-950 flex items-center gap-2"><i class="fas fa-list-check text-red-600" aria-hidden="true"></i> 2. Pick your tasks</h3>' +
               '<button type="button" id="quote-clear" class="text-xs font-bold text-gray-500 hover:text-red-600 underline hidden">Clear all</button>' +
             '</div>' +
             '<div id="quote-tasks" class="mt-4 space-y-7"></div>' +
@@ -66,14 +66,18 @@
         '<div class="lg:sticky" style="top: var(--sticky-offset, 160px);">' +
           '<div class="bg-blue-950 text-white rounded-3xl p-7 shadow-2xl">' +
             '<div class="text-xs uppercase tracking-widest text-red-400 font-bold">Your instant estimate</div>' +
-            '<div class="flex items-end gap-2 mt-2"><span id="quote-total" class="text-5xl font-black tracking-tight">' + money(state.zoneMinimum.A) + '</span></div>' +
-            '<p id="quote-total-sub" class="text-slate-300 text-sm mt-2">Starting price for a ' + state.zoneLabels.A + ' visit.</p>' +
+            // Only the running total is a live region. Widening it to the whole
+            // card would re-read every line item and CTA on each checkbox.
+            '<div role="status" aria-live="polite">' +
+              '<div class="flex items-end gap-2 mt-2"><span id="quote-total" class="text-5xl font-black tracking-tight">' + money(state.zoneMinimum.A) + '</span></div>' +
+              '<p id="quote-total-sub" class="text-slate-300 text-sm mt-2">Starting price for a ' + state.zoneLabels.A + ' visit.</p>' +
+            '</div>' +
             '<ul id="quote-lines" class="mt-5 space-y-2 text-sm border-t border-white/15 pt-4 hidden"></ul>' +
             '<div class="mt-6 space-y-3">' +
               '<a id="quote-book" href="/book?service=General%20Estimate%20%2F%20Quote" class="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3.5 rounded-xl transition shadow-lg">' +
-                '<i class="fas fa-calendar-check"></i> Book these tasks</a>' +
+                '<i class="fas fa-calendar-check" aria-hidden="true"></i> Book these tasks</a>' +
               '<a href="tel:+12483853432" class="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-5 py-3.5 rounded-xl transition shadow-lg shadow-green-600/30">' +
-                '<i class="fas fa-phone"></i> Call (248) 385-3432</a>' +
+                '<i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432</a>' +
             '</div>' +
           '</div>' +
           '<p class="text-xs text-gray-500 leading-relaxed mt-4">Estimates use our standard flat-rate menu and are not a binding quote. Booking several tasks in one visit usually costs <strong>less</strong> than the total shown, because you only pay one trip charge. Materials are not included. Your final price is always confirmed free, upfront.</p>' +
@@ -204,13 +208,13 @@
     if (city) {
       state.matchCity = city.name;
       msg.className = 'mt-3 text-sm font-semibold p-3 rounded-xl bg-green-50 text-green-800 border border-green-200';
-      msg.innerHTML = '<i class="fas fa-check-circle mr-1"></i> We serve <strong>' + city.name + ', MI</strong> — ' +
+      msg.innerHTML = '<i class="fas fa-check-circle mr-1" aria-hidden="true"></i> We serve <strong>' + city.name + ', MI</strong> — ' +
         state.zoneLabels[city.zone] + '.';
       setZone(city.zone);
     } else if (query.length >= 5) {
       state.matchCity = null;
       msg.className = 'mt-3 text-sm font-semibold p-3 rounded-xl bg-amber-50 text-amber-800 border border-amber-200';
-      msg.innerHTML = '<i class="fas fa-info-circle mr-1"></i> Zip not listed. We serve all of Oakland County, MI — pick a zone above or ' +
+      msg.innerHTML = '<i class="fas fa-info-circle mr-1" aria-hidden="true"></i> Zip not listed. We serve all of Oakland County, MI — pick a zone above or ' +
         '<a href="tel:+12483853432" class="underline font-bold">call to confirm</a>.';
     } else {
       msg.classList.add('hidden');

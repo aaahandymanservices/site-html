@@ -35,17 +35,17 @@
       const zone = zones[match.zone] || zones.A;
       resultBox.className = 'mt-3 text-sm font-semibold text-center p-3 rounded-xl bg-green-50 text-green-800 border border-green-200';
       resultBox.innerHTML =
-        '<i class="fas fa-check-circle text-green-600 mr-1.5"></i> Yes! We serve <strong>' + match.name + ', MI</strong> in <strong>' + zone.label + '</strong> (' + zone.rate + '). ' +
+        '<i class="fas fa-check-circle text-green-600 mr-1.5" aria-hidden="true"></i> Yes! We serve <strong>' + match.name + ', MI</strong> in <strong>' + zone.label + '</strong> (' + zone.rate + '). ' +
         '<a href="/handyman/' + match.slug + '" class="underline hover:text-green-950 font-bold ml-1.5">See ' + match.name + ' page</a> ' +
         '<span class="text-green-400">&middot;</span> ' +
-        '<a href="/contact?service=General+Estimate+%2F+Quote&city=' + encodeURIComponent(match.name) + '" data-service="General Estimate / Quote" class="underline hover:text-green-950 font-bold">Request Service <i class="fas fa-arrow-right text-xs"></i></a>';
+        '<a href="/contact?service=General+Estimate+%2F+Quote&city=' + encodeURIComponent(match.name) + '" data-service="General Estimate / Quote" class="underline hover:text-green-950 font-bold">Request Service <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>';
       return;
     }
 
     if (query.length >= 3) {
       resultBox.className = 'mt-3 text-sm font-semibold text-center p-3 rounded-xl bg-amber-50 text-amber-800 border border-amber-200';
       resultBox.innerHTML =
-        '<i class="fas fa-info-circle text-amber-600 mr-1.5"></i> Location not explicitly listed. We serve all of Oakland County, MI! ' +
+        '<i class="fas fa-info-circle text-amber-600 mr-1.5" aria-hidden="true"></i> Location not explicitly listed. We serve all of Oakland County, MI! ' +
         '<a href="tel:+12483853432" class="underline hover:text-amber-950 font-bold ml-1.5">Call (248) 385-3432 to confirm</a>';
     } else {
       hideResult();

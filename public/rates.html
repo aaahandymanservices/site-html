@@ -173,7 +173,10 @@
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
 
-    <nav id="site-nav" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+
+    <nav id="site-nav" aria-label="Primary" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
     <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
         <a href="/" class="flex min-w-0 items-center space-x-3 group" aria-label="AAA Handyman Services home">
             <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600 transition group-hover:scale-105">
@@ -195,9 +198,9 @@
 
             <!-- Social Media Icons -->
             <div class="flex items-center space-x-3 pl-2 border-l border-gray-200">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney"></i></a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
             </div>
         </div>
 
@@ -211,7 +214,7 @@
 
     <!-- Mobile Navigation Drawer / Menu -->
     <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-2xl max-h-[calc(100vh-70px)] overflow-y-auto">
-        <div aria-label="Mobile Navigation" role="navigation" class="space-y-1">
+        <div class="space-y-1">
             <a href="/services" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
             <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
             <a href="/rates" class="block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition">Rates</a>
@@ -222,9 +225,9 @@
         </div>
 
         <div class="pt-3 border-t border-gray-100 flex items-center justify-center space-x-6 text-2xl">
-            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Facebook Page" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Yelp Page" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp"></i></a>
-            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor Page" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney"></i></a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Facebook Page" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Yelp Page" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor Page" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
         </div>
     </div>
 </nav>
@@ -261,7 +264,7 @@
         </div>
     </nav>
 
-    <main class="flex-grow">
+    <main id="main-content" class="flex-grow">
 
         <header id="pricing-hero" class="relative overflow-hidden bg-blue-950 text-white">
             <div class="absolute inset-0 z-0 bg-slate-950/40 pointer-events-none" aria-hidden="true"></div>
@@ -296,7 +299,7 @@
                         <p class="text-sm text-slate-300 mt-2">That is $17.50 per 15 minutes.</p>
                     </div>
                     <div class="col-span-2 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 p-5 text-left text-yellow-300 text-xs sm:text-sm font-semibold flex items-start gap-3">
-                        <i class="fas fa-circle-info text-yellow-400 text-lg shrink-0 mt-0.5"></i>
+                        <i class="fas fa-circle-info text-yellow-400 text-lg shrink-0 mt-0.5" aria-hidden="true"></i>
                         <span><strong>One charge for your first hour:</strong> the $100 / $145 service call already includes travel, diagnosis, and your first hour of labor — there's no separate hourly fee stacked on top.</span>
                     </div>
                 </div>
@@ -313,19 +316,19 @@
 
                 <div class="grid md:grid-cols-3 gap-5">
                     <article class="service-card bg-green-50 border border-green-200 p-7 rounded-3xl">
-                        <div class="flex items-center justify-between gap-3"><span class="text-xs font-black uppercase tracking-widest text-green-700">Zone A</span><i class="fas fa-location-dot text-green-600"></i></div>
+                        <div class="flex items-center justify-between gap-3"><span class="text-xs font-black uppercase tracking-widest text-green-700">Zone A</span><i class="fas fa-location-dot text-green-600" aria-hidden="true"></i></div>
                         <div class="text-5xl font-black text-gray-950 mt-4">$100</div>
                         <h3 class="text-xl font-bold mt-2 text-gray-950">First hour</h3>
                         <p class="text-gray-600 mt-3">For homes within about 20 miles of our Waterford base. Travel, diagnosis, and up to one hour of labor are included.</p>
                     </article>
                     <article class="service-card bg-orange-50 border border-orange-200 p-7 rounded-3xl">
-                        <div class="flex items-center justify-between gap-3"><span class="text-xs font-black uppercase tracking-widest text-orange-700">Zone B</span><i class="fas fa-route text-orange-600"></i></div>
+                        <div class="flex items-center justify-between gap-3"><span class="text-xs font-black uppercase tracking-widest text-orange-700">Zone B</span><i class="fas fa-route text-orange-600" aria-hidden="true"></i></div>
                         <div class="text-5xl font-black text-gray-950 mt-4">$145</div>
                         <h3 class="text-xl font-bold mt-2 text-gray-950">First hour</h3>
                         <p class="text-gray-600 mt-3">For extended Oakland County locations. The $45 difference covers additional travel; the first hour of labor is included.</p>
                     </article>
                     <article class="service-card bg-blue-50 border border-blue-200 p-7 rounded-3xl">
-                        <div class="flex items-center justify-between gap-3"><span class="text-xs font-black uppercase tracking-widest text-blue-700">Both Zones</span><i class="fas fa-clock text-blue-600"></i></div>
+                        <div class="flex items-center justify-between gap-3"><span class="text-xs font-black uppercase tracking-widest text-blue-700">Both Zones</span><i class="fas fa-clock text-blue-600" aria-hidden="true"></i></div>
                         <div class="text-5xl font-black text-gray-950 mt-4">$70</div>
                         <h3 class="text-xl font-bold mt-2 text-gray-950">Each additional hour</h3>
                         <p class="text-gray-600 mt-3">After the first hour, labor is billed in 15-minute increments at $17.50 per quarter hour. Materials are separate.</p>
@@ -352,12 +355,12 @@
                     </div>
                     <aside class="rounded-3xl bg-red-50 border border-red-200 p-7 flex flex-col justify-between">
                         <div>
-                            <div class="flex items-center gap-2 text-red-700 font-black uppercase tracking-widest text-xs"><span class="flash-siren"><i class="fas fa-triangle-exclamation"></i></span> After-Hours Emergency</div>
+                            <div class="flex items-center gap-2 text-red-700 font-black uppercase tracking-widest text-xs"><span class="flash-siren"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i></span> After-Hours Emergency</div>
                             <div class="text-5xl font-black text-gray-950 mt-4">$175</div>
                             <p class="font-bold text-gray-900 mt-1">First hour</p>
                             <p class="text-gray-600 text-sm mt-3">Urgent evening and weekend response, then $100/hour in 15-minute increments.</p>
                         </div>
-                        <a href="tel:+12483853432" class="mt-6 inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-5 py-3 rounded-xl transition shadow-md hover:shadow-green-600/30"><i class="fas fa-phone"></i> Call for Urgent Help</a>
+                        <a href="tel:+12483853432" class="mt-6 inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-5 py-3 rounded-xl transition shadow-md hover:shadow-green-600/30"><i class="fas fa-phone" aria-hidden="true"></i> Call for Urgent Help</a>
                     </aside>
                 </div>
 
@@ -929,7 +932,7 @@
                     <p class="text-lg font-semibold text-gray-900 mb-5">Ready for an honest, upfront quote?</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <a href="tel:+12483853432" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-green-600/30">
-                            <i class="fas fa-phone"></i> Call Now!
+                            <i class="fas fa-phone" aria-hidden="true"></i> Call Now!
                         </a>
                     </div>
                 </div>            </div>
@@ -961,10 +964,10 @@
 
                     <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-visible flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
-                            <i class="fas fa-shield-heart mr-1"></i> Safety
+                            <i class="fas fa-shield-heart mr-1" aria-hidden="true"></i> Safety
                         </div>
                         <div class="text-center mb-6">
-                            <div class="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center text-2xl text-red-600 mb-4 mx-auto" aria-hidden="true"><i class="fas fa-house-medical"></i></div>
+                            <div class="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center text-2xl text-red-600 mb-4 mx-auto" aria-hidden="true"><i class="fas fa-house-medical" aria-hidden="true"></i></div>
                             <h3 class="text-2xl font-bold">Home Safety Audit</h3>
                             <div class="mt-3 text-xs uppercase tracking-widest font-semibold text-gray-500">Flat Audit Fee</div>
                             <div class="text-5xl font-black text-red-600 tracking-tight mt-2">$99</div>
@@ -981,16 +984,16 @@
                             </ul>
                         </div>
                         <a href="/contact?service=Home+Safety+Audit" class="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center inline-flex items-center justify-center gap-2">
-                            Book Home Safety Audit <i class="fas fa-arrow-right"></i>
+                            Book Home Safety Audit <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
 
                     <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-visible flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
-                            <i class="fas fa-wind mr-1"></i> Energy
+                            <i class="fas fa-wind mr-1" aria-hidden="true"></i> Energy
                         </div>
                         <div class="text-center mb-6">
-                            <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl text-blue-900 mb-4 mx-auto" aria-hidden="true"><i class="fas fa-temperature-arrow-down"></i></div>
+                            <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl text-blue-900 mb-4 mx-auto" aria-hidden="true"><i class="fas fa-temperature-arrow-down" aria-hidden="true"></i></div>
                             <h3 class="text-2xl font-bold">Energy Tune-Up</h3>
                             <div class="mt-3 text-xs uppercase tracking-widest font-semibold text-gray-500">Flat Audit Fee</div>
                             <div class="text-5xl font-black text-red-600 tracking-tight mt-2">$99</div>
@@ -1007,16 +1010,16 @@
                             </ul>
                         </div>
                         <a href="/contact?service=Energy+Tune-Up+Audit" class="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center inline-flex items-center justify-center gap-2">
-                            Book Energy Tune-Up <i class="fas fa-arrow-right"></i>
+                            Book Energy Tune-Up <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
 
                     <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-visible flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
-                            <i class="fas fa-cloud-showers-heavy mr-1"></i> Storm
+                            <i class="fas fa-cloud-showers-heavy mr-1" aria-hidden="true"></i> Storm
                         </div>
                         <div class="text-center mb-6">
-                            <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl text-blue-900 mb-4 mx-auto" aria-hidden="true"><i class="fas fa-house-flood-water"></i></div>
+                            <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl text-blue-900 mb-4 mx-auto" aria-hidden="true"><i class="fas fa-house-flood-water" aria-hidden="true"></i></div>
                             <h3 class="text-2xl font-bold">Storm-Prep Check</h3>
                             <div class="mt-3 text-xs uppercase tracking-widest font-semibold text-gray-500">Flat Audit Fee</div>
                             <div class="text-5xl font-black text-red-600 tracking-tight mt-2">$99</div>
@@ -1033,14 +1036,14 @@
                             </ul>
                         </div>
                         <a href="/contact?service=Storm-Prep+Check" class="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center inline-flex items-center justify-center gap-2">
-                            Book Storm-Prep Check <i class="fas fa-arrow-right"></i>
+                            Book Storm-Prep Check <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
 
                 <div class="mt-8 bg-blue-900 text-white rounded-3xl p-8 sm:p-10 max-w-6xl mx-auto shadow-lg flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     <div class="text-center md:text-left">
-                        <div class="inline-block bg-white/10 border border-white/20 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3"><i class="fas fa-layer-group mr-1"></i> Best Value</div>
+                        <div class="inline-block bg-white/10 border border-white/20 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3"><i class="fas fa-layer-group mr-1" aria-hidden="true"></i> Best Value</div>
                         <h3 class="text-2xl sm:text-3xl font-bold">Whole-Home Assessment</h3>
                         <p class="text-blue-100 mt-2 max-w-xl text-sm sm:text-base">All three audits &mdash; Safety, Energy, and Storm-Prep &mdash; in one visit, with a single combined punch-list. <span class="font-semibold text-white">Save $58</span> versus booking each on its own.</p>
                     </div>
@@ -1048,7 +1051,7 @@
                         <div class="text-sm line-through text-blue-200/80">$297</div>
                         <div class="text-5xl font-black tracking-tight">$239</div>
                         <a href="/contact?service=Whole-Home+Assessment" class="mt-4 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-2xl transition shadow-lg shadow-red-600/30">
-                            Book All Three <i class="fas fa-arrow-right"></i>
+                            Book All Three <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -1063,7 +1066,7 @@
 
                         <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-sm">
                             <div class="flex items-center justify-between border-b border-gray-200 pb-3 mb-3">
-                                <span class="font-bold text-gray-900 text-sm uppercase tracking-wider"><i class="fas fa-clipboard-list text-red-600 mr-2"></i>Sample Punch-List</span>
+                                <span class="font-bold text-gray-900 text-sm uppercase tracking-wider"><i class="fas fa-clipboard-list text-red-600 mr-2" aria-hidden="true"></i>Sample Punch-List</span>
                                 <span class="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Line-Item Pricing</span>
                             </div>
                             <ul class="divide-y divide-gray-200 text-sm">
@@ -1106,7 +1109,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="text-center text-xs text-gray-500 mt-8 max-w-2xl mx-auto"><i class="fas fa-location-dot text-red-500 mr-1"></i> Audit fees shown are Zone A (within 20 miles); Zone B adds our standard $45 extended-travel differential. The audit fee is credited toward same-day repairs totaling $250 or more.</p>
+                <p class="text-center text-xs text-gray-500 mt-8 max-w-2xl mx-auto"><i class="fas fa-location-dot text-red-500 mr-1" aria-hidden="true"></i> Audit fees shown are Zone A (within 20 miles); Zone B adds our standard $45 extended-travel differential. The audit fee is credited toward same-day repairs totaling $250 or more.</p>
             </div>
         </section>
 
@@ -1118,14 +1121,14 @@
                     <h2 class="text-3xl sm:text-4xl font-black text-gray-950 mt-4">Good / Better / Best Menus</h2>
                     <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">The fixes we recommend most often, packaged into three clear levels. Because every tier uses the <strong>same standardized, pre-selected materials</strong>, we can quote you on the spot and carry the parts on the truck &mdash; no store runs, no waiting on a custom estimate. Just pick the level that fits your home and budget.</p>
                     <div class="mt-6 inline-flex items-start gap-3 bg-gray-50 border border-gray-200 rounded-2xl px-5 py-4 text-left text-sm text-gray-600 max-w-2xl">
-                        <i class="fas fa-boxes-stacked text-red-600 mt-0.5"></i>
+                        <i class="fas fa-boxes-stacked text-red-600 mt-0.5" aria-hidden="true"></i>
                         <span><strong class="text-gray-900">Standardized materials, included.</strong> Unlike our à-la-carte work, these menu prices bundle in the standard parts listed &mdash; that's what lets us keep pricing fixed and inventory ready. Prefer a specific brand or model? We'll happily quote it custom.</span>
                     </div>
                 </div>
 
                 <div class="mb-14">
                     <div class="flex items-center gap-3 mb-6 max-w-6xl mx-auto">
-                        <span class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-red-100 text-red-600 text-xl"><i class="fas fa-shield-heart"></i></span>
+                        <span class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-red-100 text-red-600 text-xl"><i class="fas fa-shield-heart" aria-hidden="true"></i></span>
                         <div>
                             <h3 class="text-xl sm:text-2xl font-black text-gray-950">Home Safety Menu</h3>
                             <p class="text-gray-500 text-sm">Pairs with the Home Safety Audit</p>
@@ -1141,9 +1144,9 @@
                                 <div class="text-xs text-gray-500 mt-1">materials included</div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> One (1) ADA grab bar installed</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> One (1) stair or step handrail re-secured</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Non-slip strips for one tub or shower</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> One (1) ADA grab bar installed</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> One (1) stair or step handrail re-secured</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Non-slip strips for one tub or shower</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> brushed-nickel 24&Prime; grab bar, anti-slip strip set.</p>
                             <a href="/contact?service=Home+Safety+Menu" class="mt-5 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm shadow-md hover:shadow-green-600/30">Choose Good</a>
@@ -1158,11 +1161,11 @@
                                 <div class="text-xs text-gray-500 mt-1">materials included</div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Everything in <strong>Good</strong></li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> One (1) more grab bar (2 total)</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Smoke &amp; CO combo detector installed</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Lever handle on up to 1 interior door</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> One (1) motion night-light</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Everything in <strong>Good</strong></li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> One (1) more grab bar (2 total)</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Smoke &amp; CO combo detector installed</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Lever handle on up to 1 interior door</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> One (1) motion night-light</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> grab bars, 10-yr sealed smoke/CO alarm, lever handset, plug-in night-light.</p>
                             <a href="/contact?service=Home+Safety+Menu" class="mt-5 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Better</a>
@@ -1176,10 +1179,10 @@
                                 <div class="text-xs text-gray-500 mt-1">materials included</div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Everything in <strong>Better</strong></li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Handheld shower head installed</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> High-grip transition threshold ramp</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Door-width evaluation and safety tune-up</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Everything in <strong>Better</strong></li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Handheld shower head installed</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> High-grip transition threshold ramp</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Door-width evaluation and safety tune-up</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> handheld shower kit, transition threshold. (To keep contracts legally compliant under Michigan's $600 handyman limit, toilet bowl hardware is excluded from this package but can be purchased separately for a self-install or discrete task limit).</p>
                             <a href="/contact?service=Home+Safety+Menu" class="mt-5 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm shadow-md hover:shadow-green-600/30">Choose Best</a>
@@ -1189,7 +1192,7 @@
 
                 <div class="mb-14">
                     <div class="flex items-center gap-3 mb-6 max-w-6xl mx-auto">
-                        <span class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-blue-100 text-blue-900 text-xl"><i class="fas fa-wind"></i></span>
+                        <span class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-blue-100 text-blue-900 text-xl"><i class="fas fa-wind" aria-hidden="true"></i></span>
                         <div>
                             <h3 class="text-xl sm:text-2xl font-black text-gray-950">Energy Efficiency Menu</h3>
                             <p class="text-gray-500 text-sm">Pairs with the Energy Tune-Up</p>
@@ -1205,9 +1208,9 @@
                                 <div class="text-xs text-gray-500 mt-1">materials included</div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Weatherstrip up to 1 exterior door</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> New door sweep installed</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Seal one major visible air leak</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Weatherstrip up to 1 exterior door</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> New door sweep installed</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Seal one major visible air leak</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> foam/V-seal weatherstrip, aluminum door sweep.</p>
                             <a href="/contact?service=Energy+Efficiency+Menu" class="mt-5 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm shadow-md hover:shadow-green-600/30">Choose Good</a>
@@ -1222,10 +1225,10 @@
                                 <div class="text-xs text-gray-500 mt-1">materials included</div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Everything in <strong>Good</strong></li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Foam-gasket up to 8 outlets &amp; switches</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Attic-hatch weatherseal &amp; insulation</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Caulk &amp; seal up to 4 windows</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Everything in <strong>Good</strong></li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Foam-gasket up to 8 outlets &amp; switches</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Attic-hatch weatherseal &amp; insulation</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Caulk &amp; seal up to 4 windows</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> outlet gaskets, attic-hatch kit, paintable exterior caulk.</p>
                             <a href="/contact?service=Energy+Efficiency+Menu" class="mt-5 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Better</a>
@@ -1239,10 +1242,10 @@
                                 <div class="text-xs text-gray-500 mt-1">materials included</div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Everything in <strong>Better</strong></li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Smart programmable thermostat installed</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Full dryer-vent cleaning</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Remaining outlets &amp; switches gasketed</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Everything in <strong>Better</strong></li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Smart programmable thermostat installed</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Full dryer-vent cleaning</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Remaining outlets &amp; switches gasketed</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> smart thermostat, outlet gaskets. Requires compatible low-voltage HVAC wiring.</p>
                             <a href="/contact?service=Energy+Efficiency+Menu" class="mt-5 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm shadow-md hover:shadow-green-600/30">Choose Best</a>
@@ -1252,7 +1255,7 @@
 
                 <div>
                     <div class="flex items-center gap-3 mb-6 max-w-6xl mx-auto">
-                        <span class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-blue-100 text-blue-900 text-xl"><i class="fas fa-house-flood-water"></i></span>
+                        <span class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-blue-100 text-blue-900 text-xl"><i class="fas fa-house-flood-water" aria-hidden="true"></i></span>
                         <div>
                             <h3 class="text-xl sm:text-2xl font-black text-gray-950">Storm &amp; Water Defense Menu</h3>
                             <p class="text-gray-500 text-sm">Pairs with the Storm-Prep Check</p>
@@ -1268,9 +1271,9 @@
                                 <div class="text-xs text-gray-500 mt-1">materials included</div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Gutter clear (up to 50 linear ft)</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Re-secure loose gutters &amp; downspouts</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Storm-door closer &amp; latch adjustment</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Gutter clear (up to 50 linear ft)</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Re-secure loose gutters &amp; downspouts</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Storm-door closer &amp; latch adjustment</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> gutter hangers, downspout screws, closer hardware.</p>
                             <a href="/contact?service=Storm+%26+Water+Defense+Menu" class="mt-5 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm shadow-md hover:shadow-green-600/30">Choose Good</a>
@@ -1285,10 +1288,10 @@
                                 <div class="text-xs text-gray-500 mt-1">materials included</div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Everything in <strong>Good</strong></li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> One (1) downspout extension added</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Re-caulk exterior wall penetrations</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Steel-braided washing-machine hoses</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Everything in <strong>Good</strong></li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> One (1) downspout extension added</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Re-caulk exterior wall penetrations</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Steel-braided washing-machine hoses</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> downspout extension, exterior sealant, braided supply hoses.</p>
                             <a href="/contact?service=Storm+%26+Water+Defense+Menu" class="mt-5 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm">Choose Better</a>
@@ -1302,10 +1305,10 @@
                                 <div class="text-xs text-gray-500 mt-1">materials included</div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Everything in <strong>Better</strong></li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> One (1) smart leak &amp; freeze sensor</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Sump-pump operation &amp; float check</li>
-                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Under-sink shutoff &amp; supply-line review</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Everything in <strong>Better</strong></li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> One (1) smart leak &amp; freeze sensor</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Sump-pump operation &amp; float check</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Under-sink shutoff &amp; supply-line review</li>
                             </ul>
                             <p class="text-[11px] text-gray-400 mt-4 leading-relaxed"><strong>Std. materials:</strong> Wi-Fi leak/freeze sensor, quarter-turn shutoffs.</p>
                             <a href="/contact?service=Storm+%26+Water+Defense+Menu" class="mt-5 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-2xl transition text-center text-sm shadow-md hover:shadow-green-600/30">Choose Best</a>
@@ -1313,7 +1316,7 @@
                     </div>
                 </div>
 
-                <p class="text-center text-xs text-gray-500 mt-10 max-w-2xl mx-auto"><i class="fas fa-circle-info text-red-500 mr-1"></i> Menu prices are Zone A (within 20 miles) and include the standardized materials listed; Zone B adds our standard $45 extended-travel differential. Choosing a specific brand, premium finish, or non-standard part moves the job to a quick custom quote. Every tier is backed by our 1-Year Workmanship Guarantee.</p>
+                <p class="text-center text-xs text-gray-500 mt-10 max-w-2xl mx-auto"><i class="fas fa-circle-info text-red-500 mr-1" aria-hidden="true"></i> Menu prices are Zone A (within 20 miles) and include the standardized materials listed; Zone B adds our standard $45 extended-travel differential. Choosing a specific brand, premium finish, or non-standard part moves the job to a quick custom quote. Every tier is backed by our 1-Year Workmanship Guarantee.</p>
             </div>
         </section>
 
@@ -1326,10 +1329,10 @@
                     <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">Have a running list of small repairs, upgrades, and maintenance jobs? Instead of booking them one at a time, reserve a block of our craftsman's day and knock them out in a single visit. It's the same transparent, no-haggle pricing you see above &mdash; just pre-planned, so you get more done for one predictable rate.</p>
                     <p class="text-gray-600 mt-4">Every package here in Oakland County includes:</p>
                     <ul class="mt-4 space-y-2 text-left sm:text-center text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-                        <li class="flex items-start gap-2 sm:justify-center"><i class="fas fa-check text-green-500 mt-1"></i> A reserved block of hands-on labor for your to-do list.</li>
-                        <li class="flex items-start gap-2 sm:justify-center"><i class="fas fa-check text-green-500 mt-1"></i> One scheduled visit instead of multiple separate service calls.</li>
-                        <li class="flex items-start gap-2 sm:justify-center"><i class="fas fa-check text-green-500 mt-1"></i> A trained, multi-skilled craftsman for repairs, installs, and maintenance.</li>
-                        <li class="flex items-start gap-2 sm:justify-center"><i class="fas fa-check text-green-500 mt-1"></i> Upfront, no-haggle pricing with our satisfaction guarantee.</li>
+                        <li class="flex items-start gap-2 sm:justify-center"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> A reserved block of hands-on labor for your to-do list.</li>
+                        <li class="flex items-start gap-2 sm:justify-center"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> One scheduled visit instead of multiple separate service calls.</li>
+                        <li class="flex items-start gap-2 sm:justify-center"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> A trained, multi-skilled craftsman for repairs, installs, and maintenance.</li>
+                        <li class="flex items-start gap-2 sm:justify-center"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Upfront, no-haggle pricing with our satisfaction guarantee.</li>
                     </ul>
                 </div>
 
@@ -1337,7 +1340,7 @@
 
                     <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-visible flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
-                            <i class="fas fa-clock mr-1"></i> 4 Hours
+                            <i class="fas fa-clock mr-1" aria-hidden="true"></i> 4 Hours
                         </div>
                         <div class="text-center mb-6">
                             <div class="inline-block bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-semibold">Quick List</div>
@@ -1368,13 +1371,13 @@
                             </ul>
                         </div>
                         <a href="/contact?service=4-Hour+Handyman+Package" class="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center inline-flex items-center justify-center gap-2">
-                            Book 4 Hours <i class="fas fa-arrow-right"></i>
+                            Book 4 Hours <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
 
                     <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-visible flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
-                            <i class="fas fa-clock mr-1"></i> 6 Hours
+                            <i class="fas fa-clock mr-1" aria-hidden="true"></i> 6 Hours
                         </div>
                         <div class="text-center mb-6">
                             <div class="inline-block bg-red-100 text-red-700 px-4 py-1 rounded-full text-sm font-semibold">Most Popular</div>
@@ -1405,13 +1408,13 @@
                             </ul>
                         </div>
                         <a href="/contact?service=6-Hour+Handyman+Package" class="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center inline-flex items-center justify-center gap-2">
-                            Book 6 Hours <i class="fas fa-arrow-right"></i>
+                            Book 6 Hours <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
 
                     <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-visible flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
-                            <i class="fas fa-clock mr-1"></i> 8 Hours
+                            <i class="fas fa-clock mr-1" aria-hidden="true"></i> 8 Hours
                         </div>
                         <div class="text-center mb-6">
                             <div class="inline-block bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-semibold">Full Day</div>
@@ -1442,12 +1445,12 @@
                             </ul>
                         </div>
                         <a href="/contact?service=8-Hour+Handyman+Package" class="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl transition text-center inline-flex items-center justify-center gap-2">
-                            Book 8 Hours <i class="fas fa-arrow-right"></i>
+                            Book 8 Hours <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
-                <p class="text-center text-sm font-semibold text-red-700 mt-8 max-w-4xl mx-auto"><i class="fas fa-circle-exclamation mr-1"></i> Time packages cover general labor list items such as drywall patches, door adjustments, hanging blinds, and minor carpentry. Standardized Flat-Rate Menu items have fixed productized pricing and are excluded from general labor packages.</p>
-                <p class="text-center text-xs text-gray-500 mt-8 max-w-2xl mx-auto"><i class="fas fa-location-dot text-red-500 mr-1"></i> <strong>Within 20 Miles</strong> (Zone A) prices apply to our core service area. <strong>Outside 20 Miles</strong> (Zone B) prices include a $45 extended-travel differential, matching our standard zone pricing.</p>
+                <p class="text-center text-sm font-semibold text-red-700 mt-8 max-w-4xl mx-auto"><i class="fas fa-circle-exclamation mr-1" aria-hidden="true"></i> Time packages cover general labor list items such as drywall patches, door adjustments, hanging blinds, and minor carpentry. Standardized Flat-Rate Menu items have fixed productized pricing and are excluded from general labor packages.</p>
+                <p class="text-center text-xs text-gray-500 mt-8 max-w-2xl mx-auto"><i class="fas fa-location-dot text-red-500 mr-1" aria-hidden="true"></i> <strong>Within 20 Miles</strong> (Zone A) prices apply to our core service area. <strong>Outside 20 Miles</strong> (Zone B) prices include a $45 extended-travel differential, matching our standard zone pricing.</p>
             </div>
         </section>
 
@@ -1461,7 +1464,7 @@
 
                 <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 relative overflow-visible mb-8">
                     <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-bl-xl shadow-sm">
-                        <i class="fas fa-bolt mr-1"></i> Skip The Line
+                        <i class="fas fa-bolt mr-1" aria-hidden="true"></i> Skip The Line
                     </div>
                     <div class="grid md:grid-cols-2 gap-8 md:gap-10 items-center">
                         <div class="text-center md:text-left md:border-r md:border-gray-100 md:pr-10">
@@ -1470,7 +1473,7 @@
                             <div class="mt-3 text-xs uppercase tracking-widest font-semibold text-gray-500">Flat Convenience Fee</div>
                             <div class="text-6xl font-black text-red-600 tracking-tight mt-3">+$50</div>
                             <div class="text-sm text-gray-500 mt-1">added to your service call</div>
-                            <div class="mt-2 text-xs text-gray-500"><i class="fas fa-clock text-gray-400 mr-1"></i> Scheduling premium only &mdash; no added labor; your job is still billed at the $70/hr rate</div>
+                            <div class="mt-2 text-xs text-gray-500"><i class="fas fa-clock text-gray-400 mr-1" aria-hidden="true"></i> Scheduling premium only &mdash; no added labor; your job is still billed at the $70/hr rate</div>
                         </div>
                         <div>
                             <div class="space-y-4 text-gray-600 text-sm leading-relaxed">
@@ -1487,12 +1490,12 @@
                                 </ul>
                             </div>
                             <a href="/contact?service=Priority+%2F+After-Hours+Service" class="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-2xl transition text-center inline-flex items-center justify-center gap-2">
-                                Request Priority Booking <i class="fas fa-arrow-right"></i>
+                                Request Priority Booking <i class="fas fa-arrow-right" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <p class="text-center text-xs text-gray-500 mt-8 max-w-2xl mx-auto"><i class="fas fa-circle-info text-red-500 mr-1"></i> Add-ons are optional and stack with our standard service calls and time packages. Priority booking applies to non-emergency jobs.</p>
+                <p class="text-center text-xs text-gray-500 mt-8 max-w-2xl mx-auto"><i class="fas fa-circle-info text-red-500 mr-1" aria-hidden="true"></i> Add-ons are optional and stack with our standard service calls and time packages. Priority booking applies to non-emergency jobs.</p>
             </div>
         </section>
 
@@ -1508,7 +1511,7 @@
 
                     <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col">
                         <div class="flex items-center gap-3 mb-3">
-                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-blue-600"><i class="fas fa-box-open"></i></span>
+                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-blue-600"><i class="fas fa-box-open" aria-hidden="true"></i></span>
                             <h3 class="font-bold text-gray-900 text-lg">You Supply the Materials</h3>
                         </div>
                         <p class="text-gray-600 text-sm mb-4">Have the parts ready on-site and there is <strong>no markup at all</strong>. We simply install what you provide. Please confirm the exact make, model, and specs before your appointment so nothing stalls the job.</p>
@@ -1517,7 +1520,7 @@
 
                     <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col">
                         <div class="flex items-center gap-3 mb-3">
-                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-red-100 text-red-600"><i class="fas fa-truck-fast"></i></span>
+                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-red-100 text-red-600"><i class="fas fa-truck-fast" aria-hidden="true"></i></span>
                             <h3 class="font-bold text-gray-900 text-lg">We Supply the Materials</h3>
                         </div>
                         <p class="text-gray-600 text-sm mb-4">Skip the store run. With prior agreement we shop, select, and warranty the correct parts. A standard <strong>10&ndash;15% supply markup</strong> covers our sourcing time, vehicle use, and the liability of standing behind every part we bring.</p>
@@ -1530,17 +1533,17 @@
             <div class="mt-8 max-w-2xl mx-auto">
                 <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5 text-left shadow-sm">
                     <p class="font-semibold text-gray-900 mb-2 flex items-center gap-2">
-                        <i class="fas fa-wallet text-blue-900"></i> Payment Options &amp; Billing Note
+                        <i class="fas fa-wallet text-blue-900" aria-hidden="true"></i> Payment Options &amp; Billing Note
                     </p>
                     <p class="text-xs text-gray-600 leading-relaxed mb-3">
                         Our service blocks and subsequent hourly rate apply to all active labor, on-site troubleshooting, material shopping, and necessary preparation or cleanup related to the specific tasks performed.
                     </p>
                     <div class="pt-3 border-t border-gray-200 text-sm font-bold text-gray-900 flex flex-wrap items-center gap-2">
-                        <span class="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-800"><i class="fas fa-money-bill-wave text-green-600"></i> Cash</span>
-                        <span class="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-800"><i class="fas fa-money-check-dollar text-blue-600"></i> Checks</span>
-                        <span class="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-800"><i class="fas fa-bolt text-purple-600"></i> Zelle&reg;</span>
-                        <span class="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-800"><i class="fas fa-v text-blue-500 font-black"></i> Venmo&reg;</span>
-                        <span class="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-800"><i class="fas fa-dollar-sign text-green-500 font-black"></i> Cash App</span>
+                        <span class="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-800"><i class="fas fa-money-bill-wave text-green-600" aria-hidden="true"></i> Cash</span>
+                        <span class="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-800"><i class="fas fa-money-check-dollar text-blue-600" aria-hidden="true"></i> Checks</span>
+                        <span class="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-800"><i class="fas fa-bolt text-purple-600" aria-hidden="true"></i> Zelle&reg;</span>
+                        <span class="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-800"><i class="fas fa-v text-blue-500 font-black" aria-hidden="true"></i> Venmo&reg;</span>
+                        <span class="inline-flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-800"><i class="fas fa-dollar-sign text-green-500 font-black" aria-hidden="true"></i> Cash App</span>
                     </div>
                     <p class="text-xs font-bold text-gray-800 mt-3">We accept cash, checks, Zelle, Venmo, and Cash App.</p>
                 </div>
@@ -1551,7 +1554,7 @@
     <div class="max-w-7xl mx-auto px-6 mb-12">
         <div class="text-center bg-blue-900 text-white py-12 px-8 sm:py-20 sm:px-16 rounded-3xl">
             <p class="text-xl sm:text-2xl md:text-3xl font-medium">Available Monday–Friday, 9 a.m.–6 p.m.; Saturday, 10 a.m.–5 p.m.</p>
-            <p class="mt-6 text-base sm:text-lg md:text-xl opacity-90"><span class="flash-siren" aria-hidden="true"><i class="fas fa-triangle-exclamation"></i></span> After-Hours Emergency Services Available &mdash; Competitive hourly rates • No job too small!</p>
+            <p class="mt-6 text-base sm:text-lg md:text-xl opacity-90"><span class="flash-siren" aria-hidden="true"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i></span> After-Hours Emergency Services Available &mdash; Competitive hourly rates • No job too small!</p>
         </div>
     </div>
 
@@ -1565,9 +1568,9 @@
                     <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
                     <div class="mt-4 flex items-center gap-4">
-                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney"></i></a>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp"></i></a>
+                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -1588,11 +1591,11 @@
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center"></i>(248) 385-3432</a></li>
-                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
-                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center"></i>Waterford, MI &middot; Oakland County</li>
+                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden="true"></i>(248) 385-3432</a></li>
+                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Waterford, MI &middot; Oakland County</li>
                     </ul>
-                    <a href="/book" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Book Online Now</a>
+                    <a href="/book" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
                 </div>
             </div>
 
@@ -1611,7 +1614,7 @@
                         <li><a href="/services/gutters" class="hover:text-white transition">Gutters</a></li>
                         <li><a href="/services/power-washing" class="hover:text-white transition">Power Washing</a></li>
                     </ul>
-                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
                 <nav aria-label="Service areas">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Service Areas</h3>
@@ -1629,7 +1632,7 @@
                         <li><a href="/handyman/franklin" class="hover:text-white transition">Franklin</a></li>
                         <li><a href="/handyman/orchard-lake" class="hover:text-white transition">Orchard Lake</a></li>
                     </ul>
-                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
@@ -1650,7 +1653,7 @@
         </a>
     </noscript>
 
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
     <script>
 
