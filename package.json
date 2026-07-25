@@ -4,6 +4,9 @@
   "description": "AAA Handyman Services static site with customer gallery submissions.",
   "type": "module",
   "license": "UNLICENSED",
+  "scripts": {
+    "dev": "node scripts/visual-editor-server.mjs"
+  },
   "dependencies": {
     "@google/genai": "^2.12.0",
     "@netlify/blobs": "^10.7.9",
