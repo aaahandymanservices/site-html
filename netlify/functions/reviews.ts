@@ -4,8 +4,16 @@ import { desc, eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { reviews } from "../../db/schema.js";
 
-const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
+// Netlify caps a buffered function request/response at 6 MB, so anything larger
+// is rejected by the platform before this code runs. Staying under that ceiling
+// keeps the failure a readable validation message instead of an opaque 413.
+// The browser downscales bigger source photos before sending them.
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
+
+// Strong consistency so a photo is readable the instant the upload responds and
+// the page re-renders; the default eventual store can lag by up to a minute.
+const photoStore = () => getStore({ name: "customer-reviews", consistency: "strong" });
 
 const json = (body: unknown, init?: ResponseInit) =>
   Response.json(body, {
@@ -37,6 +45,15 @@ const idFromRequest = (request: Request) => {
   return Number.isInteger(id) && id > 0 ? id : null;
 };
 
+// The row stores only the blob key; the public path is derived here so the
+// storage layout stays an implementation detail of this function. A row with no
+// key yields an empty imageUrl rather than a dangling "/api/reviews/photo/",
+// which the page would otherwise render as a broken image.
+const publicPhotoPath = (imageKey: string | null | undefined) => {
+  const key = String(imageKey ?? "").trim();
+  return key ? `/api/reviews/photo/${encodeURIComponent(key)}` : "";
+};
+
 const publicReview = (review: typeof reviews.$inferSelect) => ({
   id: review.id,
   customerName: review.customerName,
@@ -48,7 +65,7 @@ const publicReview = (review: typeof reviews.$inferSelect) => ({
     ? review.attributes.split(",").map((tag) => tag.trim()).filter(Boolean)
     : [],
   ownerResponse: review.ownerResponse ?? "",
-  imageUrl: `/api/reviews/photo/${review.imageKey}`,
+  imageUrl: publicPhotoPath(review.imageKey),
   imageAlt: review.imageAlt,
   createdAt: review.createdAt,
 });
@@ -86,7 +103,7 @@ const validatePhoto = (photo: FormDataEntryValue | null, required: boolean) => {
   }
 
   if (photo.size > MAX_IMAGE_SIZE) {
-    return "Photos must be 10 MB or smaller.";
+    return "That photo is too large to upload. Please choose one 5 MB or smaller.";
   }
 
   if (!IMAGE_TYPES.has(photo.type)) {
@@ -197,7 +214,7 @@ const handleReviewsRequest = async (request: Request) => {
     }
 
     await db.delete(reviews).where(eq(reviews.id, id));
-    await getStore("customer-reviews").delete(existing.imageKey);
+    await photoStore().delete(existing.imageKey);
 
     return json({ ok: true });
   }
@@ -253,7 +270,7 @@ const handleReviewsRequest = async (request: Request) => {
     let imageKey = existing.imageKey;
     let imageContentType = existing.imageContentType;
     const imageAlt = `${projectType} project photo from ${customerName} in ${location}`;
-    const store = getStore("customer-reviews");
+    const store = photoStore();
 
     if (photo instanceof File && photo.size > 0) {
       const extension = photo.type.split("/")[1]?.replace("jpeg", "jpg") ?? "jpg";
@@ -276,25 +293,33 @@ const handleReviewsRequest = async (request: Request) => {
   const extension = upload.type.split("/")[1]?.replace("jpeg", "jpg") ?? "jpg";
   const imageKey = `${Date.now()}-${crypto.randomUUID()}-${slug(projectType)}.${extension}`;
   const imageAlt = `${projectType} project photo from ${customerName} in ${location}`;
+  const store = photoStore();
 
-  await getStore("customer-reviews").set(imageKey, await upload.arrayBuffer());
+  await store.set(imageKey, await upload.arrayBuffer());
 
-  const [created] = await db
-    .insert(reviews)
-    .values({
-      customerName,
-      location,
-      projectType,
-      rating,
-      review,
-      attributes,
-      imageKey,
-      imageContentType: upload.type,
-      imageAlt,
-    })
-    .returning();
+  try {
+    const [created] = await db
+      .insert(reviews)
+      .values({
+        customerName,
+        location,
+        projectType,
+        rating,
+        review,
+        attributes,
+        imageKey,
+        imageContentType: upload.type,
+        imageAlt,
+      })
+      .returning();
 
-  return json(publicReview(created), { status: 201 });
+    return json(publicReview(created), { status: 201 });
+  } catch (error) {
+    // The photo is already stored but has no row pointing at it. Drop it so a
+    // failed submission doesn't leave an unreachable object behind forever.
+    await store.delete(imageKey).catch(() => undefined);
+    throw error;
+  }
 };
 
 export default async (request: Request) => {
