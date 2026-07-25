@@ -1,6 +1,12 @@
 import type { Config } from "@netlify/functions";
 import { getStore } from "@netlify/blobs";
 
+// Strong consistency matters here: the reviews page re-renders the moment an
+// upload returns, so the photo must be readable immediately. The default
+// eventual store can take up to a minute to propagate, which shows the visitor
+// a broken image for their own brand-new review.
+const photoStore = () => getStore({ name: "customer-reviews", consistency: "strong" });
+
 const contentTypeFor = (key: string) => {
   if (key.endsWith(".png")) return "image/png";
   if (key.endsWith(".webp")) return "image/webp";
@@ -20,13 +26,15 @@ export default async (request: Request) => {
     return new Response("Not found", { status: 404 });
   }
 
-  const image = await getStore("customer-reviews").get(key, { type: "arrayBuffer" }).catch((error: unknown) => {
+  const image = await photoStore().get(key, { type: "arrayBuffer" }).catch((error: unknown) => {
     console.error("review photo lookup failed", error);
     return null;
   });
 
+  // A miss must never be cached. The Image CDN fetches through this route, and
+  // a cached miss would pin a broken thumbnail for the life of the cache entry.
   if (!image) {
-    return new Response("Not found", { status: 404 });
+    return new Response("Not found", { status: 404, headers: { "cache-control": "no-store" } });
   }
 
   return new Response(image, {

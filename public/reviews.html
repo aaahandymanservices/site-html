@@ -634,40 +634,19 @@
         let activeFilter = 'all';
         let lastFocusedBeforeLightbox = null;
         const MAX_SOURCE_BYTES = 10 * 1024 * 1024;
-        const UPLOAD_SAFE_BYTES = 5 * 1024 * 1024;
+        // A buffered Netlify function request is capped at 6 MB, so the bytes we
+        // actually put on the wire have to stay well under that once multipart
+        // overhead and the text fields are added.
+        const UPLOAD_SAFE_BYTES = 4 * 1024 * 1024;
         const MAX_IMAGE_DIMENSION = 2000;
+        const PHOTO_TOO_BIG_MESSAGE = 'That photo is too large to upload. Please choose a smaller one, or save it as a JPG first.';
 
-        const preparePhotoForUpload = (file) => new Promise((resolve, reject) => {
-            if (!(file instanceof File) || file.size === 0) {
-                resolve(file);
-                return;
-            }
-            if (file.size <= UPLOAD_SAFE_BYTES || file.type === 'image/gif') {
-                resolve(file);
-                return;
-            }
+        const loadImageFile = (file) => new Promise((resolve, reject) => {
             const url = URL.createObjectURL(file);
             const img = new Image();
             img.onload = () => {
                 URL.revokeObjectURL(url);
-                const scale = Math.min(1, MAX_IMAGE_DIMENSION / Math.max(img.width, img.height));
-                const canvas = document.createElement('canvas');
-                canvas.width = Math.max(1, Math.round(img.width * scale));
-                canvas.height = Math.max(1, Math.round(img.height * scale));
-                const ctx = canvas.getContext('2d');
-                if (!ctx) {
-                    resolve(file);
-                    return;
-                }
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                canvas.toBlob((blob) => {
-                    if (!blob) {
-                        resolve(file);
-                        return;
-                    }
-                    const name = `${(file.name || 'photo').replace(/\.[^.]+$/, '')}.jpg`;
-                    resolve(new File([blob], name, { type: 'image/jpeg' }));
-                }, 'image/jpeg', 0.85);
+                resolve(img);
             };
             img.onerror = () => {
                 URL.revokeObjectURL(url);
@@ -675,6 +654,47 @@
             };
             img.src = url;
         });
+
+        const canvasToJpeg = (canvas, quality) =>
+            new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', quality));
+
+        // Photos straight off a phone routinely outweigh what a single function
+        // request can carry, so anything over the safe size is downscaled and
+        // re-encoded until it fits. Animated GIFs can't survive a canvas
+        // round-trip, so they are only ever passed through as-is.
+        const preparePhotoForUpload = async (file) => {
+            if (!(file instanceof File) || file.size === 0) return file;
+            if (file.size <= UPLOAD_SAFE_BYTES) return file;
+            if (file.type === 'image/gif') throw new Error(PHOTO_TOO_BIG_MESSAGE);
+
+            const img = await loadImageFile(file);
+            let dimension = MAX_IMAGE_DIMENSION;
+            let quality = 0.85;
+
+            // Each pass shrinks harder. A few rounds is plenty to bring any
+            // camera photo under the limit without softening a normal one.
+            for (let attempt = 0; attempt < 5; attempt += 1) {
+                const scale = Math.min(1, dimension / Math.max(img.width, img.height));
+                const canvas = document.createElement('canvas');
+                canvas.width = Math.max(1, Math.round(img.width * scale));
+                canvas.height = Math.max(1, Math.round(img.height * scale));
+                const ctx = canvas.getContext('2d');
+                if (!ctx) throw new Error(PHOTO_TOO_BIG_MESSAGE);
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                const blob = await canvasToJpeg(canvas, quality);
+                if (!blob) throw new Error(PHOTO_TOO_BIG_MESSAGE);
+                if (blob.size <= UPLOAD_SAFE_BYTES) {
+                    const name = `${(file.name || 'photo').replace(/\.[^.]+$/, '')}.jpg`;
+                    return new File([blob], name, { type: 'image/jpeg' });
+                }
+
+                dimension = Math.round(dimension * 0.75);
+                quality = Math.max(0.5, quality - 0.1);
+            }
+
+            throw new Error(PHOTO_TOO_BIG_MESSAGE);
+        };
         const ratingLabels = {
             '1': 'Disappointing',
             '2': 'Could be better',
@@ -865,6 +885,49 @@
             `;
         };
 
+        // Review photos live in Netlify Blobs and are streamed by the
+        // /api/reviews/photo/:key function. A card must never assume the record
+        // has a usable photo, so anything that isn't a real photo path is
+        // treated as "no photo" instead of becoming a dead <img>.
+        const PHOTO_ROUTE = '/api/reviews/photo/';
+
+        const photoPathOf = (item) => {
+            const url = typeof item?.imageUrl === 'string' ? item.imageUrl.trim() : '';
+            return url.startsWith(PHOTO_ROUTE) && url.length > PHOTO_ROUTE.length ? url : '';
+        };
+
+        const transformedPhoto = (path, width, quality) =>
+            `/.netlify/images?url=${encodeURIComponent(path)}&w=${width}&fm=avif&q=${quality}`;
+
+        const photoPlaceholderHtml = () => `
+                    <div class="w-full h-full bg-blue-900 text-blue-200 flex flex-col items-center justify-center gap-2 text-center px-4">
+                        <i class="fas fa-camera-retro text-3xl text-red-400"></i>
+                        <span class="text-xs font-semibold uppercase tracking-widest">Photo unavailable</span>
+                    </div>`;
+
+        // The Image CDN transform is an optimisation, not a dependency: if it
+        // can't produce a thumbnail, fall back to the original blob, and only
+        // then to a placeholder. A visitor should never see a broken icon.
+        const attachPhotoFallback = (img) => {
+            if (!img) return;
+
+            const useFallback = () => {
+                const original = img.dataset.original || '';
+                if (original && img.dataset.triedOriginal !== 'true') {
+                    img.dataset.triedOriginal = 'true';
+                    img.src = original;
+                    return;
+                }
+                const preview = img.closest('.review-preview');
+                if (preview) preview.innerHTML = photoPlaceholderHtml();
+            };
+
+            img.addEventListener('error', useFallback);
+            // innerHTML starts the request immediately, so a already-cached
+            // failure can land before this listener is attached.
+            if (img.complete && img.naturalWidth === 0) useFallback();
+        };
+
         const buildCard = (item, index) => {
             const card = document.createElement('article');
             card.className = 'review-card bg-white text-gray-900 rounded-3xl overflow-hidden shadow-xl border border-gray-150 flex flex-col';
@@ -872,8 +935,15 @@
             card.style.animationDelay = `${Math.min(index, 8) * 60}ms`;
             const badgeStyle = badgeColors[item.projectType] || 'bg-gray-100 text-gray-800 border-gray-200';
             const canManage = Boolean(localStorage.getItem('aaaAdminToken'));
-            const thumbUrl = `/.netlify/images?url=${encodeURIComponent(item.imageUrl)}&w=800&fm=avif&q=80`;
-            const fullUrl = `/.netlify/images?url=${encodeURIComponent(item.imageUrl)}&w=1600&fm=avif&q=82`;
+            const photoPath = photoPathOf(item);
+            const thumbUrl = photoPath ? transformedPhoto(photoPath, 800, 80) : '';
+            const fullUrl = photoPath ? transformedPhoto(photoPath, 1600, 82) : '';
+
+            const previewHtml = photoPath ? `
+                    <button type="button" class="review-zoom block w-full h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50" data-full="${escapeHTML(fullUrl)}" data-original="${escapeHTML(photoPath)}" data-caption="${escapeHTML(item.projectType)} · ${escapeHTML(item.location)}" data-alt="${escapeHTML(item.imageAlt)}" aria-label="Zoom photo: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
+                        <img class="review-photo w-full h-full object-cover" src="${escapeHTML(thumbUrl)}" data-original="${escapeHTML(photoPath)}" alt="${escapeHTML(item.imageAlt)}" width="800" height="600" loading="lazy" decoding="async">
+                        <span class="pointer-events-none absolute bottom-3 right-3 h-9 w-9 rounded-full bg-black/55 text-white flex items-center justify-center text-sm"><i class="fas fa-magnifying-glass-plus"></i></span>
+                    </button>` : photoPlaceholderHtml();
 
             const actionsHtml = canManage ? `
                     <div class="mt-5 grid grid-cols-2 gap-3">
@@ -888,10 +958,7 @@
 
             card.innerHTML = `
                 <div class="review-preview bg-gray-50 relative overflow-hidden">
-                    <button type="button" class="review-zoom block w-full h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50" data-full="${escapeHTML(fullUrl)}" data-caption="${escapeHTML(item.projectType)} · ${escapeHTML(item.location)}" data-alt="${escapeHTML(item.imageAlt)}" aria-label="Zoom photo: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
-                        <img src="${thumbUrl}" alt="${escapeHTML(item.imageAlt)}" width="800" height="600" class="w-full h-full object-cover" loading="lazy" decoding="async">
-                        <span class="pointer-events-none absolute bottom-3 right-3 h-9 w-9 rounded-full bg-black/55 text-white flex items-center justify-center text-sm"><i class="fas fa-magnifying-glass-plus"></i></span>
-                    </button>
+                    ${previewHtml}
                     <div class="absolute top-4 left-4 right-4 flex flex-wrap items-start justify-between gap-2">
                         <span class="${badgeStyle} text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md border">
                             ${escapeHTML(item.projectType)}
@@ -928,9 +995,11 @@
                 </div>
             `;
 
+            attachPhotoFallback(card.querySelector('.review-photo'));
+
             card.querySelector('.review-zoom')?.addEventListener('click', (event) => {
                 const trigger = event.currentTarget;
-                openLightbox(trigger.dataset.full, trigger.dataset.alt, trigger.dataset.caption);
+                openLightbox(trigger.dataset.full, trigger.dataset.alt, trigger.dataset.caption, trigger.dataset.original);
             });
 
             if (canManage) {
@@ -970,10 +1039,14 @@
         });
 
         // --- Lightbox ---
-        const openLightbox = (src, alt, caption) => {
+        const openLightbox = (src, alt, caption, original) => {
             if (!lightbox || !lightboxImg) return;
             lastFocusedBeforeLightbox = document.activeElement;
-            lightboxImg.src = src || '';
+            // Same reasoning as the card thumbnails: if the transformed image
+            // fails, show the original blob rather than a broken icon.
+            lightboxImg.dataset.original = original || '';
+            lightboxImg.dataset.triedOriginal = 'false';
+            lightboxImg.src = src || original || '';
             lightboxImg.alt = alt || '';
             if (lightboxCaption) lightboxCaption.textContent = caption || '';
             lightbox.classList.remove('hidden');
@@ -992,6 +1065,13 @@
         };
 
         if (lightbox) {
+            lightboxImg?.addEventListener('error', () => {
+                const original = lightboxImg.dataset.original || '';
+                if (original && lightboxImg.dataset.triedOriginal !== 'true') {
+                    lightboxImg.dataset.triedOriginal = 'true';
+                    lightboxImg.src = original;
+                }
+            });
             lightboxClose?.addEventListener('click', closeLightbox);
             lightbox.addEventListener('click', (event) => {
                 if (event.target === lightbox) closeLightbox();
@@ -1104,6 +1184,9 @@
                     body: formData
                 })
                 .then(async response => {
+                    // A payload rejected by the platform never reaches our
+                    // function, so it answers with a non-JSON error body.
+                    if (response.status === 413) throw new Error(PHOTO_TOO_BIG_MESSAGE);
                     const payload = await response.json().catch(() => ({}));
                     if (!response.ok) throw new Error(payload.error || 'Upload failed.');
                     return payload;

@@ -7,12 +7,14 @@
  *
  * Strategies:
  *   - navigations      network first, fall back to cache, then /offline.html
- *   - static assets    stale-while-revalidate (hashed by ?v= query in markup)
+ *   - static assets    stale-while-revalidate, keyed on the URL minus ?v=
  *   - everything else  straight to the network, uncached
  *
  * Bump CACHE_VERSION to force every client onto a fresh cache.
  */
-const CACHE_VERSION = 'v1';
+// v2 evicts the v1 asset cache, where every /.netlify/images request shared a
+// single entry and served one image in place of all the others.
+const CACHE_VERSION = 'v2';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -79,9 +81,29 @@ self.addEventListener('message', (event) => {
   if (event.data === 'skip-waiting') self.skipWaiting();
 });
 
-/** Cache lookup that ignores the ?v= cache-busting query used in markup. */
+/**
+ * Cache lookup for a navigation, ignoring the query. Offline, any cached copy of
+ * the page is a better answer than the offline placeholder, even if it was
+ * stored under different query parameters.
+ */
 function matchIgnoringQuery(request) {
   return caches.match(request, { ignoreSearch: true });
+}
+
+/*
+ * Cache key for an asset request.
+ *
+ * Only the ?v= cache-buster is dropped, so a version bump still lines up with
+ * the copy stored by the precache. The rest of the query has to survive: every
+ * Netlify Image CDN request shares the pathname /.netlify/images and identifies
+ * the image entirely through its query, so discarding it would collapse all of
+ * them onto one entry and serve a single picture for the logo, the banner, the
+ * icons, and every review photo.
+ */
+function assetCacheKey(request) {
+  const url = new URL(request.url);
+  url.searchParams.delete('v');
+  return url.href;
 }
 
 async function handleNavigation(request) {
@@ -110,13 +132,17 @@ async function handleNavigation(request) {
 
 async function handleAsset(event) {
   const { request } = event;
-  const cached = await caches.match(request, { ignoreSearch: true });
+  const key = assetCacheKey(request);
+  // The format is pinned in the URL, so the key alone identifies the variant.
+  // ignoreVary keeps that true if the Image CDN ever starts negotiating on
+  // Accept, which would otherwise turn every lookup into a silent miss.
+  const cached = await caches.match(key, { ignoreVary: true });
 
   const network = fetch(request)
     .then(async (response) => {
       if (response.ok && response.type !== 'opaque') {
         const cache = await caches.open(ASSET_CACHE);
-        await cache.put(request, response.clone()).catch(() => undefined);
+        await cache.put(key, response.clone()).catch(() => undefined);
       }
       return response;
     })
