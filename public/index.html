@@ -8,16 +8,32 @@
     <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
 
-    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <!-- Analytics is deliberately held back to idle + 2.5s (see the gtag loader
+         near the end of <body>), so a preconnect here would run a DNS lookup,
+         TCP handshake, and TLS negotiation inside the LCP window for a script
+         that will not be requested for seconds. dns-prefetch keeps the name
+         resolved without spending a connection slot or handshake bytes. -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
     <!-- Hero artwork is a CSS background-image, so the preload scanner needs an
-         explicit hint to start it before the stylesheets parse. These two media
-         queries mirror the 767px breakpoint in the inline .hero rules below, and
-         each href matches its url() byte for byte, so exactly one candidate is
-         ever downloaded. An imagesrcset here would pick a width the CSS never
-         asks for and download the image twice. -->
-    <link rel="preload" as="image" href="/.netlify/images?url=/logo-banner.jpg&amp;w=640&amp;fm=avif&amp;q=80" media="(max-width: 767px)" fetchpriority="high">
-    <link rel="preload" as="image" href="/.netlify/images?url=/logo-banner.jpg&amp;w=1760&amp;fm=avif&amp;q=80" media="(min-width: 768px)" fetchpriority="high">
+         explicit hint to start it before the stylesheets parse. These media
+         queries mirror the breakpoints in the inline .hero rules below, and each
+         href matches its url() byte for byte, so exactly one candidate is ever
+         downloaded. An imagesrcset here would pick a width the CSS never asks
+         for and download the image twice.
+
+         The ranges are mutually exclusive rather than open-ended so that a
+         middle tier can exist without depending on rule order: laptops in the
+         768-1439px band were downloading the 1760px file, which is roughly
+         13KB of pixels they never display.
+
+         q=65 rather than the site-wide 80: this image sits under a 74-80% black
+         scrim, which hides compression artifacts that would be obvious on an
+         unobscured photo. It is the largest resource in the LCP window, and the
+         lower quality takes ~40% off every tier. -->
+    <link rel="preload" as="image" href="/.netlify/images?url=/logo-banner.jpg&amp;w=640&amp;fm=avif&amp;q=65" media="(max-width: 767px)" fetchpriority="high">
+    <link rel="preload" as="image" href="/.netlify/images?url=/logo-banner.jpg&amp;w=1440&amp;fm=avif&amp;q=65" media="(min-width: 768px) and (max-width: 1439px)" fetchpriority="high">
+    <link rel="preload" as="image" href="/.netlify/images?url=/logo-banner.jpg&amp;w=1760&amp;fm=avif&amp;q=65" media="(min-width: 1440px)" fetchpriority="high">
     <title>AAA Handyman Services | Best Handyman in Oakland County, MI</title>
 
     <meta name="description" content="Trusted local handyman services across Oakland County, MI. Professional home repairs, drywall, painting, carpentry, doors, and plumbing/electrical. Call (248) 385-3432!">
@@ -250,8 +266,16 @@
     <link rel="stylesheet" href="/css/icons.css?v=20260728">
     <style>
         .hero {
-            background: linear-gradient(rgba(3,7,11,0.74), rgba(3,7,11,0.74)), url('/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=80') center/cover;
+            background: linear-gradient(rgba(3,7,11,0.74), rgba(3,7,11,0.74)), url('/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=65') center/cover;
             min-height: min(620px, calc(100vh - 5rem));
+        }
+        /* Mid tier for the 768-1439px band. Only the matching rule's url() is
+           ever fetched, so this replaces the 1760px download rather than
+           adding to it. Ranges are exclusive; see the preloads in <head>. */
+        @media (min-width: 768px) and (max-width: 1439px) {
+            .hero {
+                background: linear-gradient(rgba(3,7,11,0.74), rgba(3,7,11,0.74)), url('/.netlify/images?url=/logo-banner.jpg&w=1440&fm=avif&q=65') center/cover;
+            }
         }
         .hero-title {
             max-width: 16ch;
@@ -308,7 +332,7 @@
         @media (max-width: 767px) {
             .hero {
                 min-height: auto;
-                background: linear-gradient(rgba(3,7,11,0.8), rgba(3,7,11,0.8)), url('/.netlify/images?url=/logo-banner.jpg&w=640&fm=avif&q=80') center/cover;
+                background: linear-gradient(rgba(3,7,11,0.8), rgba(3,7,11,0.8)), url('/.netlify/images?url=/logo-banner.jpg&w=640&fm=avif&q=65') center/cover;
             }
             .hero-title { max-width: none; }
         }
@@ -1731,7 +1755,7 @@
                     </article>`;
             };
 
-            fetch('/api/reviews')
+            const loadReviews = () => fetch('/api/reviews')
                 .then(response => response.ok ? response.json() : Promise.reject())
                 .then(items => {
                     if (!Array.isArray(items) || items.length === 0) return;
@@ -1754,6 +1778,32 @@
                     }
                 })
                 .catch(() => undefined);
+
+            /*
+             * This section is hidden until the data lands and sits well below
+             * the fold, but the fetch used to fire during HTML parse: a function
+             * invocation -- cold start included -- competing with the hero image
+             * for bandwidth inside the LCP window, to populate something nobody
+             * can see yet. Waiting for load and then for an idle moment hands
+             * that time back to the largest paint and changes nothing visible.
+             *
+             * A deep link is the exception. When the URL already points at a
+             * review the cards have to exist before the scroll can land on
+             * them, so that path still runs immediately.
+             */
+            if (window.location.hash) {
+                loadReviews();
+            } else {
+                const whenIdle = () => {
+                    if ('requestIdleCallback' in window) {
+                        requestIdleCallback(loadReviews, { timeout: 3000 });
+                    } else {
+                        setTimeout(loadReviews, 1200);
+                    }
+                };
+                if (document.readyState === 'complete') whenIdle();
+                else window.addEventListener('load', whenIdle, { once: true });
+            }
         })();
     </script>
 

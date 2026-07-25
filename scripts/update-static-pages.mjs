@@ -24,7 +24,7 @@ const STATIC_NAV_PAGES = [
 /**
  * Normalise asset loading: fonts and icons are self-hosted now, so strip any
  * page that still reaches out to fonts.googleapis.com or cdnjs and point it at
- * the local subset instead. See public/css/site-theme.css for the @font-face
+ * the local subset instead. See scripts/site-theme.css for the @font-face
  * rules and scripts/build-icon-css.mjs for the icon stylesheet.
  */
 function optimizeFontsAndAssets(html) {

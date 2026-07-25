@@ -58,15 +58,42 @@
     timer = setTimeout(() => render(query), 120);
   });
 
-  fetch('/data/service-areas.json')
-    .then((response) => (response.ok ? response.json() : Promise.reject(response.status)))
-    .then((data) => {
-      cities = Array.isArray(data.cities) ? data.cities : [];
-      if (data.zones) {
-        zones = data.zones;
-      }
-      const query = input.value.trim().toLowerCase();
-      if (query) render(query);
-    })
-    .catch(() => undefined);
+  /*
+   * The city list is a few kilobytes of JSON for a widget that sits far below
+   * the fold, and it used to be requested the moment this script ran -- inside
+   * the window where the hero image is still painting. It now loads on first
+   * contact with the field, with an idle prefetch after load so the common case
+   * still has the data in hand before anyone finishes typing. render() re-runs
+   * when the data lands, so a keystroke that beats the response is not lost.
+   */
+  let areasPromise = null;
+  const loadAreas = () => {
+    if (areasPromise) return areasPromise;
+    areasPromise = fetch('/data/service-areas.json')
+      .then((response) => (response.ok ? response.json() : Promise.reject(response.status)))
+      .then((data) => {
+        cities = Array.isArray(data.cities) ? data.cities : [];
+        if (data.zones) {
+          zones = data.zones;
+        }
+        const query = input.value.trim().toLowerCase();
+        if (query) render(query);
+      })
+      .catch(() => undefined);
+    return areasPromise;
+  };
+
+  ['focus', 'pointerdown', 'input'].forEach((event) => {
+    input.addEventListener(event, loadAreas, { once: true, passive: true });
+  });
+
+  const prefetchWhenIdle = () => {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadAreas, { timeout: 4000 });
+    } else {
+      setTimeout(loadAreas, 1500);
+    }
+  };
+  if (document.readyState === 'complete') prefetchWhenIdle();
+  else window.addEventListener('load', prefetchWhenIdle, { once: true });
 })();
