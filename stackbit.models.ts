@@ -134,9 +134,10 @@ export const visualEditorModels: Model[] = [
   quoteTask,
   quoteCategory,
   {
-    type: "data",
+    type: "page",
     name: "ServicesData",
     label: "Services",
+    urlPath: "/services",
     singleInstance: true,
     file: "services.json",
     canDelete: false,
@@ -147,9 +148,10 @@ export const visualEditorModels: Model[] = [
     ]
   },
   {
-    type: "data",
+    type: "page",
     name: "ServiceAreasData",
     label: "Service Areas",
+    urlPath: "/service-areas",
     singleInstance: true,
     file: "service-areas.json",
     canDelete: false,
