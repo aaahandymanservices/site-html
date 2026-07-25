@@ -4,11 +4,32 @@
 
 @layer base {
   html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
     scroll-behavior: smooth;
   }
 
   body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 320px;
+    overflow-x: hidden;
+    box-sizing: border-box;
     font-family: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  *, ::before, ::after {
+    box-sizing: border-box;
+  }
+
+  img, video, canvas, svg, iframe, embed, object {
+    max-width: 100%;
+  }
+
+  main, section, header, footer, nav {
+    max-width: 100%;
   }
 }
 

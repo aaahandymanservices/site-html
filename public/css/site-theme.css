@@ -77,12 +77,20 @@
 }
 
 html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
   color: var(--brand-ink);
   background: var(--brand-canvas);
 }
 
 body {
+  width: 100%;
+  max-width: 100%;
   min-width: 320px;
+  overflow-x: hidden;
+  box-sizing: border-box;
   background:
     radial-gradient(circle at 8% -2%, rgb(166 31 46 / 5%), transparent 30rem),
     radial-gradient(circle at 100% 0%, rgb(27 42 74 / 5%), transparent 34rem),
@@ -92,6 +100,18 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   animation: page-enter 0.55s var(--ease-out) both;
+}
+
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+img, video, canvas, svg, iframe, embed, object {
+  max-width: 100%;
+}
+
+main, section, header, footer, nav {
+  max-width: 100%;
 }
 
 @keyframes page-enter {
