@@ -131,14 +131,14 @@ function navLink(href, label, active) {
 
 function featureCard(f) {
   return `                <div class="flex items-start gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm">
-                    <span class="w-8 h-8 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-check"></i></span>
+                    <span class="w-8 h-8 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800">${amp(f)}</span>
                 </div>`;
 }
 
 function relatedCard(s) {
   return `                <a href="/services/${s.slug}" class="generated-service-card group flex items-center gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm hover:text-red-600">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas ${s.icon}"></i></span>
+                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas ${s.icon}" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800 group-hover:text-red-600">${amp(s.name)}</span>
                 </a>`;
 }
@@ -146,7 +146,7 @@ function relatedCard(s) {
 function serviceAreasSection(service) {
   if (!CITIES_LIST.length) return '';
   const links = CITIES_LIST
-    .map((c) => `<a href="/handyman/${c.slug}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs"></i> ${c.name}</a>`)
+    .map((c) => `<a href="/handyman/${c.slug}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> ${c.name}</a>`)
     .join('\n                    ');
   return `
             <!-- Service Area locations: internal links for discovery + local SEO -->
@@ -178,7 +178,7 @@ function costGuideSection(service) {
                 <!-- Linear foot pricing model -->
                 <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 sm:p-8 shadow-sm">
                     <div class="flex items-center gap-3 mb-5">
-                        <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-ruler-horizontal"></i></span>
+                        <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-ruler-horizontal" aria-hidden="true"></i></span>
                         <h3 class="text-xl sm:text-2xl font-bold text-blue-900">The Linear-Foot Pricing Model</h3>
                     </div>
                     <p class="text-gray-600 mb-6">Gutter cleaning in Southeast Michigan is often priced directly by the foot. Rates vary mostly with the height and reach of the work:</p>
@@ -205,17 +205,17 @@ function costGuideSection(service) {
                     <h3 class="text-xl sm:text-2xl font-bold text-blue-900 mb-4 text-center">Key Factors That Can Adjust the Price</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
-                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-house-chimney"></i></span>
+                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-house-chimney" aria-hidden="true"></i></span>
                             <h4 class="font-bold text-gray-900 mb-1">Roof Pitch &amp; Height</h4>
                             <p class="text-sm text-gray-600">Un-walkable, steep roofs or multi-story homes require extra safety harnesses and setup time, which can add a premium of 15% or more.</p>
                         </div>
                         <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
-                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-seedling"></i></span>
+                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-seedling" aria-hidden="true"></i></span>
                             <h4 class="font-bold text-gray-900 mb-1">Severity of Clogs</h4>
                             <p class="text-sm text-gray-600">Gutters that are severely overflowing, packed with dirt, or hosting growing weeds must be scooped by hand instead of flushed &mdash; expect a 10% to 50% heavy-debris surcharge.</p>
                         </div>
                         <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
-                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-screwdriver-wrench"></i></span>
+                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></span>
                             <h4 class="font-bold text-gray-900 mb-1">Gutter Guards</h4>
                             <p class="text-sm text-gray-600">Mesh or surface-tension guards that must be unscrewed and re-secured to clean underneath add labor time, and usually increase the cost.</p>
                         </div>
@@ -241,7 +241,7 @@ function powerWashingCostGuide() {
                 <!-- Per-square-foot pricing model -->
                 <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 sm:p-8 shadow-sm">
                     <div class="flex items-center gap-3 mb-5">
-                        <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-ruler-combined"></i></span>
+                        <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-ruler-combined" aria-hidden="true"></i></span>
                         <h3 class="text-xl sm:text-2xl font-bold text-blue-900">The Per-Square-Foot Pricing Model</h3>
                     </div>
                     <p class="text-gray-600 mb-6">In the Oakland County area, professional power washing typically runs <strong>$0.10 to $0.60 per square foot</strong>. Where you land depends heavily on the surface being cleaned &mdash; flat, accessible concrete costs less than delicate wood or high-up roofs:</p>
@@ -278,17 +278,17 @@ function powerWashingCostGuide() {
                     <h3 class="text-xl sm:text-2xl font-bold text-blue-900 mb-4 text-center">Key Factors That Can Adjust the Price</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
-                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-soap"></i></span>
+                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-soap" aria-hidden="true"></i></span>
                             <h4 class="font-bold text-gray-900 mb-1">Surface Condition</h4>
                             <p class="text-sm text-gray-600">Heavy oil stains on driveways or thick green mold on north-facing siding need chemical pre-treatments, which add to material costs.</p>
                         </div>
                         <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
-                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-faucet-drip"></i></span>
+                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-faucet-drip" aria-hidden="true"></i></span>
                             <h4 class="font-bold text-gray-900 mb-1">Water Access</h4>
                             <p class="text-sm text-gray-600">Rates assume a hookup to an outdoor spigot with strong pressure. If a technician must bring a water truck, the price scales up sharply.</p>
                         </div>
                         <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
-                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-couch"></i></span>
+                            <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-couch" aria-hidden="true"></i></span>
                             <h4 class="font-bold text-gray-900 mb-1">Obstacles &amp; Protection</h4>
                             <p class="text-sm text-gray-600">Moving heavy patio furniture or wrapping delicate landscaping, lighting, and outlets in protective plastic adds prep labor to the final cost.</p>
                         </div>
@@ -391,25 +391,25 @@ ${getUnifiedNav('services')}
                 <span class="mx-2">/</span>
                 <span class="text-white font-semibold">${displayName}</span>
             </nav>
-            <div class="w-16 h-16 mx-auto bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center text-3xl text-red-400 mb-5" aria-hidden="true"><i class="fas ${service.icon}"></i></div>
+            <div class="w-16 h-16 mx-auto bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center text-3xl text-red-400 mb-5" aria-hidden="true"><i class="fas ${service.icon}" aria-hidden="true"></i></div>
             <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-2">${amp(catLabel)} &middot; Oakland County, MI</div>
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">${displayName}</h1>
-            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5"></i>Serving Waterford, Troy, West Bloomfield, Rochester Hills, Royal Oak, Clarkston &amp; surrounding Oakland County communities</p>
+            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving Waterford, Troy, West Bloomfield, Rochester Hills, Royal Oak, Clarkston &amp; surrounding Oakland County communities</p>
             <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
                 ${amp(service.tagline)}
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="/book?service=${enc(service.formService)}" class="bg-red-600 hover:bg-red-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-red-600/30 transition flex items-center justify-center gap-2">
-                    <i class="fas fa-calendar-check"></i> Book Online / Get a Free Quote
+                    <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Get a Free Quote
                 </a>
                 <a href="tel:${PHONE_TEL}" class="bg-green-600 hover:bg-green-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-green-600/30 transition flex items-center justify-center gap-2">
-                    <i class="fas fa-phone"></i> Call Now! ${PHONE_DISPLAY}
+                    <i class="fas fa-phone" aria-hidden="true"></i> Call Now! ${PHONE_DISPLAY}
                 </a>
             </div>
         </div>
     </header>
 
-    <main class="flex-grow py-12 sm:py-16">
+    <main id="main-content" class="flex-grow py-12 sm:py-16">
         <div class="max-w-7xl mx-auto px-6">
             <!-- Intro + pricing -->
             <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
@@ -426,19 +426,19 @@ ${service.intro.map((p) => `                    <p>${amp(p)}</p>`).join('\n')}
                 </div>
                 <aside class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 shadow-lg">
                     <div class="flex items-center gap-3 mb-4">
-                        <span class="text-2xl text-red-600" aria-hidden="true"><i class="fas fa-tag"></i></span>
+                        <span class="text-2xl text-red-600" aria-hidden="true"><i class="fas fa-tag" aria-hidden="true"></i></span>
                         <div>
                             <h3 class="text-lg font-bold text-gray-900">Simple, Upfront Pricing</h3>
                             <p class="text-sm text-gray-500">${amp(service.name)}</p>
                         </div>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
-                        <li class="flex items-start gap-2"><i class="fas fa-location-dot text-red-600 mt-1"></i><span><strong>$100 minimum</strong> in Zone A (within ~20 miles) &middot; <strong>$145</strong> in Zone B (extended county).</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-map text-red-600 mt-1"></i><span>Available across <a href="/service-areas" class="text-red-600 font-semibold underline underline-offset-2">Oakland County</a>.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-location-dot text-red-600 mt-1" aria-hidden="true"></i><span><strong>$100 minimum</strong> in Zone A (within ~20 miles) &middot; <strong>$145</strong> in Zone B (extended county).</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1" aria-hidden="true"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-map text-red-600 mt-1" aria-hidden="true"></i><span>Available across <a href="/service-areas" class="text-red-600 font-semibold underline underline-offset-2">Oakland County</a>.</span></li>
                     </ul>
                     <a href="${quoteHref(service.formService)}" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30">
-                        <i class="fas fa-calendar-check"></i> Request This Service
+                        <i class="fas fa-calendar-check" aria-hidden="true"></i> Request This Service
                     </a>
                     <a href="/rates" class="mt-3 block text-center text-sm text-gray-500 hover:text-red-600 underline underline-offset-2">See full rates &amp; packages</a>
                 </aside>
@@ -450,7 +450,7 @@ ${costGuideSection(service)}
                 <div class="bg-red-50 border-2 border-red-600 rounded-3xl p-6 sm:p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
                     <div class="max-w-2xl text-center md:text-left">
                         <h3 class="text-xl sm:text-2xl font-bold text-blue-900 flex items-center justify-center md:justify-start gap-2.5">
-                            <i class="fas fa-clipboard-list text-red-600"></i>
+                            <i class="fas fa-clipboard-list text-red-600" aria-hidden="true"></i>
                             Complete Aging-in-Place Checklist
                         </h3>
                         <p class="text-gray-600 mt-2 text-sm sm:text-base leading-relaxed">
@@ -459,7 +459,7 @@ ${costGuideSection(service)}
                     </div>
                     <div class="flex-shrink-0 w-full md:w-auto text-center">
                         <a href="/services/aging-in-place-guide" class="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-4 rounded-xl transition shadow-lg shadow-red-600/30">
-                            View Checklist &amp; Guide <i class="fas fa-arrow-right"></i>
+                            View Checklist &amp; Guide <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>` : ''}
@@ -473,7 +473,7 @@ ${service.features.map(featureCard).join('\n')}
                 </div>
                 <div class="mt-8 text-center">
                     <a href="/services" class="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-semibold transition shadow-lg hover:shadow-green-600/30">
-                        View All Services <i class="fas fa-arrow-right"></i>
+                        View All Services <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -486,7 +486,7 @@ ${service.features.map(featureCard).join('\n')}
 ${related.map(relatedCard).join('\n')}
                 </div>
                 <div class="mt-6 text-center">
-                    <a href="/services" class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition font-semibold shadow-md hover:shadow-green-600/30"><i class="fas fa-list"></i> Browse All Services</a>
+                    <a href="/services" class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition font-semibold shadow-md hover:shadow-green-600/30"><i class="fas fa-list" aria-hidden="true"></i> Browse All Services</a>
                 </div>
             </div>
 
@@ -512,10 +512,10 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                 <p class="mt-4 text-base sm:text-lg opacity-90">Call for availability and same-week scheduling, or request a free quote online. No job too small.</p>
                 <div class="mt-8 flex flex-wrap justify-center gap-4">
                     <a href="tel:${PHONE_TEL}" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-green-600/30">
-                        <i class="fas fa-phone"></i> ${PHONE_DISPLAY}
+                        <i class="fas fa-phone" aria-hidden="true"></i> ${PHONE_DISPLAY}
                     </a>
                     <a href="/book?service=${enc(service.formService)}" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/30">
-                        <i class="fas fa-calendar-check"></i> Book Online Now
+                        <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online Now
                     </a>
                 </div>
             </div>
@@ -530,9 +530,9 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                     <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
                     <div class="mt-4 flex items-center gap-4">
-                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney"></i></a>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp"></i></a>
+                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <nav aria-label="Footer">
@@ -551,11 +551,11 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="tel:${PHONE_TEL}" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center"></i>${PHONE_DISPLAY}</a></li>
-                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
-                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center"></i>Waterford, MI &middot; Oakland County</li>
+                        <li><a href="tel:${PHONE_TEL}" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden="true"></i>${PHONE_DISPLAY}</a></li>
+                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Waterford, MI &middot; Oakland County</li>
                     </ul>
-                    <a href="/book?service=${enc(service.formService)}" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Book Online Now</a>
+                    <a href="/book?service=${enc(service.formService)}" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
                 </div>
             </div>
             <!-- Quick-access sitemap: popular services + service areas reachable in one click from any page -->
@@ -574,7 +574,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                         <li><a href="/services/gutters" class="hover:text-white transition">Gutters</a></li>
                         <li><a href="/services/power-washing" class="hover:text-white transition">Power Washing</a></li>
                     </ul>
-                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
                 <nav aria-label="Service areas">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Service Areas</h3>
@@ -592,7 +592,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                         <li><a href="/handyman/franklin" class="hover:text-white transition">Franklin</a></li>
                         <li><a href="/handyman/orchard-lake" class="hover:text-white transition">Orchard Lake</a></li>
                     </ul>
-                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
@@ -607,7 +607,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
     </footer>
 
     <!-- Back to top -->
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
     <script src="/js/site.js?v=20260727" defer></script>
 
     <!-- Google tag (gtag.js) -->

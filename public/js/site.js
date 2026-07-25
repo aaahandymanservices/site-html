@@ -21,34 +21,71 @@
     if (mobileMenu.id) menuButton.setAttribute('aria-controls', mobileMenu.id);
     menuButton.setAttribute('aria-expanded', String(!mobileMenu.classList.contains('hidden')));
 
-    const setMenuOpen = (open) => {
+    const isOpen = () => !mobileMenu.classList.contains('hidden');
+
+    const setMenuOpen = (open, { restoreFocus = false } = {}) => {
       mobileMenu.classList.toggle('hidden', !open);
       menuButton.setAttribute('aria-expanded', String(open));
       if (menuIcon) {
         menuIcon.classList.toggle('fa-bars', !open);
         menuIcon.classList.toggle('fa-times', open);
       }
+      // Send keyboard users somewhere sensible: into the drawer on open, and
+      // back to the button they came from on close, so focus never lands on a
+      // hidden element or resets to the top of the document.
+      if (open) {
+        const first = mobileMenu.querySelector('a, button');
+        if (first) first.focus();
+      } else if (restoreFocus) {
+        menuButton.focus();
+      }
       window.dispatchEvent(new Event('resize'));
     };
 
-    menuButton.addEventListener('click', () => setMenuOpen(mobileMenu.classList.contains('hidden')));
+    menuButton.addEventListener('click', () => setMenuOpen(!isOpen()));
     mobileMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => setMenuOpen(false));
     });
-  }
 
-  // --- Keyboard & Focus Accessibility ---
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-        mobileMenu.classList.add('hidden');
-        if (menuIcon) {
-          menuIcon.classList.add('fa-bars');
-          menuIcon.classList.remove('fa-times');
-        }
+    // The drawer covers the page while open, so Tab must cycle within it
+    // instead of walking through the content hidden behind it.
+    mobileMenu.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || !isOpen()) return;
+
+      const focusables = Array.from(
+        mobileMenu.querySelectorAll('a[href], button:not([disabled])')
+      ).filter((el) => el.offsetParent !== null);
+      if (!focusables.length) return;
+
+      // The toggle button sits outside the drawer but belongs to it, so it
+      // bookends the cycle rather than being skipped.
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        menuButton.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        menuButton.focus();
       }
-    }
-  });
+    });
+
+    menuButton.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || !isOpen() || !e.shiftKey) return;
+      const focusables = Array.from(
+        mobileMenu.querySelectorAll('a[href], button:not([disabled])')
+      ).filter((el) => el.offsetParent !== null);
+      if (!focusables.length) return;
+      e.preventDefault();
+      focusables[focusables.length - 1].focus();
+    });
+
+    // --- Keyboard & Focus Accessibility ---
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) setMenuOpen(false, { restoreFocus: true });
+    });
+  }
 
   // --- Scroll-reveal: cinematic entrances as content scrolls into view ---
   // The initial hidden state lives behind the `.js-reveal` class, which is only

@@ -115,6 +115,8 @@
   launch.type = "button";
   launch.className = "aaa-fab-btn aaa-chat-launch";
   launch.setAttribute("aria-label", "Open chat with AAA Handyman Services");
+  launch.setAttribute("aria-expanded", "false");
+  launch.setAttribute("aria-controls", "aaa-chat-panel");
   launch.innerHTML = '<i class="fas fa-comments" aria-hidden="true"></i><span class="aaa-fab-label">AI Chat</span>';
 
   var callBtn = document.createElement("a");
@@ -129,6 +131,7 @@
 
   var panel = document.createElement("div");
   panel.className = "aaa-chat-panel";
+  panel.id = "aaa-chat-panel";
   panel.setAttribute("role", "dialog");
   panel.setAttribute("aria-label", "Chat with AAA Handyman Services");
   panel.innerHTML =
@@ -276,6 +279,10 @@
   function openPanel() {
     panel.classList.add("aaa-open");
     launch.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+    // The button toggles, so its name and state have to follow suit —
+    // otherwise it keeps announcing "Open chat" while it actually closes.
+    launch.setAttribute("aria-label", "Close chat with AAA Handyman Services");
+    launch.setAttribute("aria-expanded", "true");
     if (!opened) {
       opened = true;
       addMessage("assistant", GREETING);
@@ -289,12 +296,37 @@
   function closePanel() {
     panel.classList.remove("aaa-open");
     launch.innerHTML = '<i class="fas fa-comments" aria-hidden="true"></i>';
+    launch.setAttribute("aria-label", "Open chat with AAA Handyman Services");
+    launch.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";
+    // Focus was inside the panel that just disappeared; hand it back to the
+    // launcher rather than letting it fall to the top of the document.
+    if (panel.contains(document.activeElement)) launch.focus();
   }
 
   function togglePanel() {
     panel.classList.contains("aaa-open") ? closePanel() : openPanel();
   }
+
+  // On phones the panel covers the entire viewport, so Tab has to cycle
+  // within it; the launcher bookends the cycle so it stays reachable.
+  panel.addEventListener("keydown", function (e) {
+    if (e.key !== "Tab" || !panel.classList.contains("aaa-open")) return;
+    var focusables = Array.prototype.filter.call(
+      panel.querySelectorAll("a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled])"),
+      function (el) { return el.offsetParent !== null || el === document.activeElement; }
+    );
+    if (!focusables.length) return;
+    var first = focusables[0];
+    var last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      launch.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      launch.focus();
+    }
+  });
   async function sendMessage(text) {
     if (streaming) return;
     streaming = true;

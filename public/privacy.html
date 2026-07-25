@@ -62,7 +62,10 @@
 </head>
 <body class="legal-page bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
 
-    <nav id="site-nav" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+
+    <nav id="site-nav" aria-label="Primary" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
     <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
         <a href="/" class="flex min-w-0 items-center space-x-3 group" aria-label="AAA Handyman Services home">
             <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600 transition group-hover:scale-105">
@@ -84,9 +87,9 @@
 
             <!-- Social Media Icons -->
             <div class="flex items-center space-x-3 pl-2 border-l border-gray-200">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney"></i></a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
             </div>
         </div>
 
@@ -100,7 +103,7 @@
 
     <!-- Mobile Navigation Drawer / Menu -->
     <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-2xl max-h-[calc(100vh-70px)] overflow-y-auto">
-        <div aria-label="Mobile Navigation" role="navigation" class="space-y-1">
+        <div class="space-y-1">
             <a href="/services" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
             <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
             <a href="/rates" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
@@ -111,14 +114,14 @@
         </div>
 
         <div class="pt-3 border-t border-gray-100 flex items-center justify-center space-x-6 text-2xl">
-            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Facebook Page" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Yelp Page" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp"></i></a>
-            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor Page" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney"></i></a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Facebook Page" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Yelp Page" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor Page" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
         </div>
     </div>
 </nav>
 
-    <main class="legal-content flex-grow max-w-4xl mx-auto px-6 py-12 md:py-16">
+    <main id="main-content" class="legal-content flex-grow max-w-4xl mx-auto px-6 py-12 md:py-16">
 
         <div class="legal-hero text-center mb-8">
             <span class="legal-eyebrow inline-block bg-red-50 text-red-800 border border-red-200 rounded-full px-4 py-1.5 text-sm font-semibold tracking-wide uppercase mb-3">
@@ -152,27 +155,27 @@
                         <h3 class="font-semibold text-gray-800 mb-2">Personal Information</h3>
                         <ul class="space-y-2 text-gray-600 pl-4">
                             <li class="flex items-start gap-2">
-                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0"></i>
+                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden="true"></i>
                                 <span>Contact details (name, phone number, email, address)</span>
                             </li>
                             <li class="flex items-start gap-2">
-                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0"></i>
+                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden="true"></i>
                                 <span>Service request and online booking details, including project descriptions and your preferred appointment dates and times</span>
                             </li>
                             <li class="flex items-start gap-2">
-                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0"></i>
+                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden="true"></i>
                                 <span>Payment details processed securely</span>
                             </li>
                             <li class="flex items-start gap-2">
-                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0"></i>
+                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden="true"></i>
                                 <span>Communication records, including messages you send through our on-site chat assistant, and project photos</span>
                             </li>
                             <li class="flex items-start gap-2">
-                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0"></i>
+                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden="true"></i>
                                 <span>Reviews, ratings, and photos you choose to submit for public display on our website</span>
                             </li>
                             <li class="flex items-start gap-2">
-                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0"></i>
+                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden="true"></i>
                                 <span>Job application details if you apply through our Careers page (work history, qualifications, availability, resume, and related disclosures)</span>
                             </li>
                         </ul>
@@ -181,11 +184,11 @@
                         <h3 class="font-semibold text-gray-800 mb-2">Automatically Collected Information</h3>
                         <ul class="space-y-2 text-gray-600 pl-4">
                             <li class="flex items-start gap-2">
-                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0"></i>
+                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden="true"></i>
                                 <span>Website usage details (IP address, pages visited, browser type)</span>
                             </li>
                             <li class="flex items-start gap-2">
-                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0"></i>
+                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden="true"></i>
                                 <span>Device specifications and operating system information</span>
                             </li>
                         </ul>
@@ -200,41 +203,41 @@
                 </h2>
                 <ul class="space-y-3 text-gray-600">
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-cog text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-cog text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>To provide, schedule, and complete requested handyman services.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-envelope text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-envelope text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>To communicate about appointments, estimates, and follow-ups.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-credit-card text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-credit-card text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>To process payments and send receipts.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-chart-line text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-chart-line text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>To improve our services and overall website experience.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-comments text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-comments text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>To answer questions you ask through our on-site chat assistant.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-star text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-star text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>To publish reviews, ratings, and photos you submit, and to showcase completed projects.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-user-tie text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-user-tie text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>To review and respond to job applications submitted through our Careers page.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-bell text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-bell text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>To send free preventative and seasonal maintenance reminders if you opt in, along with occasional promotions. You can unsubscribe at any time.</span>
                     </li>
                 </ul>
                 <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-xl mt-4 text-red-900">
                     <p class="font-semibold flex items-center gap-2 mb-1">
-                        <i class="fas fa-comment-sms"></i> Text Messaging
+                        <i class="fas fa-comment-sms" aria-hidden="true"></i> Text Messaging
                     </p>
                     If you provide your mobile number, we may contact you by call or text about appointments, estimates, and service follow-ups. We send promotional text messages only with your express consent. Message and data rates may apply, and message frequency varies. You can opt out of texts at any time by replying STOP, or opt out of promotional messages by contacting us using the details below. Opting out of promotional messages does not affect service-related messages about a job you have booked.
                 </div>
@@ -250,25 +253,25 @@
                 </p>
                 <ul class="space-y-3 text-gray-600">
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-handshake text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-handshake text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>With trusted service partners or subcontractors needed to complete your project.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-lock text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-lock text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>With secure payment processors and essential web analytics providers.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-robot text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-robot text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>With the third-party AI provider that powers our on-site chat assistant, which processes the messages you send in order to generate replies.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-gavel text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-gavel text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>When required by law or to protect the safety and rights of our customers and team.</span>
                     </li>
                 </ul>
                 <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-xl mt-4 text-red-900">
                     <p class="font-semibold flex items-center gap-2 mb-1">
-                        <i class="fas fa-star"></i> Reviews You Submit Are Public
+                        <i class="fas fa-star" aria-hidden="true"></i> Reviews You Submit Are Public
                     </p>
                     When you submit a review, the first name, city, rating, written review, and photo you provide may be published publicly on our website. Please share only what you are comfortable making public. You can request an update or removal at any time using the contact details below.
                 </div>
@@ -291,7 +294,7 @@
                 </h2>
                 <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-xl mb-4 text-red-900">
                     <p class="font-semibold flex items-center gap-2 mb-1">
-                        <i class="fas fa-shield-alt"></i> Security Measures
+                        <i class="fas fa-shield-alt" aria-hidden="true"></i> Security Measures
                     </p>
                     We implement reasonable administrative, technical, and physical safeguards to protect your information. However, no method of transmission over the Internet is 100% secure.
                 </div>
@@ -329,7 +332,7 @@
 
             <section class="bg-gray-800 rounded-2xl shadow-md p-6 md:p-8 text-white">
                 <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center gap-3 text-white">
-                    <i class="fas fa-envelope text-blue-500"></i>
+                    <i class="fas fa-envelope text-blue-500" aria-hidden="true"></i>
                     Contact Us
                 </h2>
                 <p class="mb-6 text-gray-300">If you have questions about this Privacy Policy, please contact us:</p>
@@ -337,17 +340,17 @@
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="space-y-3">
                         <p class="flex items-start gap-3">
-                            <i class="fas fa-map-marker-alt text-red-500 mt-1 flex-shrink-0"></i>
+                            <i class="fas fa-map-marker-alt text-red-500 mt-1 flex-shrink-0" aria-hidden="true"></i>
                             <span><strong>AAA Handyman Services</strong><br>Waterford, Michigan</span>
                         </p>
                     </div>
                     <div class="space-y-3">
                         <p class="flex items-center gap-3">
-                            <i class="fas fa-envelope text-blue-500 flex-shrink-0"></i>
+                            <i class="fas fa-envelope text-blue-500 flex-shrink-0" aria-hidden="true"></i>
                             <a href="mailto:contact@aaahandyman.services" class="hover:underline hover:text-red-400 transition">contact@aaahandyman.services</a>
                         </p>
                         <p class="flex items-center gap-3">
-                            <i class="fas fa-phone text-green-500 flex-shrink-0"></i>
+                            <i class="fas fa-phone text-green-500 flex-shrink-0" aria-hidden="true"></i>
                             <a href="tel:+12483853432" class="hover:underline hover:text-red-400 transition">‪(248) 385-3432‬</a>
                         </p>
                     </div>
@@ -364,9 +367,9 @@
                     <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
                     <div class="mt-4 flex items-center gap-4">
-                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney"></i></a>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp"></i></a>
+                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -387,11 +390,11 @@
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center"></i>(248) 385-3432</a></li>
-                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
-                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center"></i>Waterford, MI &middot; Oakland County</li>
+                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden="true"></i>(248) 385-3432</a></li>
+                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Waterford, MI &middot; Oakland County</li>
                     </ul>
-                    <a href="/book" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Book Online Now</a>
+                    <a href="/book" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
                 </div>
             </div>
 
@@ -410,7 +413,7 @@
                         <li><a href="/services/gutters" class="hover:text-white transition">Gutters</a></li>
                         <li><a href="/services/power-washing" class="hover:text-white transition">Power Washing</a></li>
                     </ul>
-                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
                 <nav aria-label="Service areas">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Service Areas</h3>
@@ -428,7 +431,7 @@
                         <li><a href="/handyman/franklin" class="hover:text-white transition">Franklin</a></li>
                         <li><a href="/handyman/orchard-lake" class="hover:text-white transition">Orchard Lake</a></li>
                     </ul>
-                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
@@ -442,7 +445,7 @@
         </div>
     </footer>
 
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
     <script src="/js/site.js?v=20260727" defer></script>
     <script src="/js/chat-loader.js?v=20260724-2" defer></script>

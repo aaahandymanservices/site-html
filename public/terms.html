@@ -62,7 +62,10 @@
 </head>
 <body class="legal-page bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
 
-    <nav id="site-nav" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+
+    <nav id="site-nav" aria-label="Primary" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
     <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
         <a href="/" class="flex min-w-0 items-center space-x-3 group" aria-label="AAA Handyman Services home">
             <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600 transition group-hover:scale-105">
@@ -84,9 +87,9 @@
 
             <!-- Social Media Icons -->
             <div class="flex items-center space-x-3 pl-2 border-l border-gray-200">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney"></i></a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
             </div>
         </div>
 
@@ -100,7 +103,7 @@
 
     <!-- Mobile Navigation Drawer / Menu -->
     <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-2xl max-h-[calc(100vh-70px)] overflow-y-auto">
-        <div aria-label="Mobile Navigation" role="navigation" class="space-y-1">
+        <div class="space-y-1">
             <a href="/services" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
             <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
             <a href="/rates" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
@@ -111,14 +114,14 @@
         </div>
 
         <div class="pt-3 border-t border-gray-100 flex items-center justify-center space-x-6 text-2xl">
-            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Facebook Page" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Yelp Page" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp"></i></a>
-            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor Page" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney"></i></a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Facebook Page" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Yelp Page" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor Page" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
         </div>
     </div>
 </nav>
 
-    <main class="legal-content flex-grow max-w-4xl mx-auto px-6 py-12 md:py-16">
+    <main id="main-content" class="legal-content flex-grow max-w-4xl mx-auto px-6 py-12 md:py-16">
 
         <div class="legal-hero text-center mb-8">
             <span class="legal-eyebrow inline-block bg-red-50 text-red-800 border border-red-200 rounded-full px-4 py-1.5 text-sm font-semibold tracking-wide uppercase mb-3">
@@ -152,63 +155,63 @@
                 </p>
                 <ul class="grid md:grid-cols-2 gap-3 text-gray-600">
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-hammer text-red-600 text-sm"></i>
+                        <i class="fas fa-hammer text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Carpentry &amp; Trim:</strong> Interior/exterior woodwork &amp; trim</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-door-open text-red-600 text-sm"></i>
+                        <i class="fas fa-door-open text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Doors &amp; Windows:</strong> Installation &amp; repair of doors and windows</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-faucet text-red-600 text-sm"></i>
+                        <i class="fas fa-faucet text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Plumbing Fixes:</strong> Faucets, showerheads, drains &amp; repairs</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-screwdriver-wrench text-red-600 text-sm"></i>
+                        <i class="fas fa-screwdriver-wrench text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Drywall:</strong> Installation, repairs, patching &amp; cracks</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-bolt text-red-600 text-sm"></i>
+                        <i class="fas fa-bolt text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Minor Electrical:</strong> Outlets, switches, lights &amp; fans</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-layer-group text-red-600 text-sm"></i>
+                        <i class="fas fa-layer-group text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Flooring:</strong> Wood, laminate/Pergo &amp; carpet</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-paint-roller text-red-600 text-sm"></i>
+                        <i class="fas fa-paint-roller text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Painting:</strong> Interior, exterior &amp; ceiling touch-ups</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-sun text-red-600 text-sm"></i>
+                        <i class="fas fa-sun text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Decks:</strong> Installation, resurfacing, repairs &amp; staining</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-border-all text-red-600 text-sm"></i>
+                        <i class="fas fa-border-all text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Privacy Fences:</strong> Installation, repairs &amp; staining</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-cloud-showers-water text-red-600 text-sm"></i>
+                        <i class="fas fa-cloud-showers-water text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Seasonal Maintenance:</strong> Gutter cleaning &amp; power washing</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-tv text-red-600 text-sm"></i>
+                        <i class="fas fa-tv text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Installation &amp; Mounting:</strong> TVs, fixtures, blinds &amp; smart devices</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-couch text-red-600 text-sm"></i>
+                        <i class="fas fa-couch text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Furniture Assembly:</strong> Flat-pack &amp; ready-to-assemble items</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-lock text-red-600 text-sm"></i>
+                        <i class="fas fa-lock text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Home Security:</strong> Locks, deadbolts, cameras &amp; safety alarms</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-wheelchair text-red-600 text-sm"></i>
+                        <i class="fas fa-wheelchair text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Senior &amp; Aging-in-Place:</strong> Grab bars &amp; accessibility modifications</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fas fa-store text-red-600 text-sm"></i>
+                        <i class="fas fa-store text-red-600 text-sm" aria-hidden="true"></i>
                         <span><strong>Commercial Services:</strong> Light interior &amp; exterior upkeep for businesses</span>
                     </li>
                 </ul>
@@ -227,21 +230,21 @@
                 </p>
                 <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-xl mb-4 text-red-900">
                     <p class="font-semibold flex items-center gap-2 mb-1">
-                        <i class="fas fa-scale-balanced"></i> Michigan Minor Project Exemption
+                        <i class="fas fa-scale-balanced" aria-hidden="true"></i> Michigan Minor Project Exemption
                     </p>
                     We operate under the exemption in Michigan's Occupational Code, <strong>MCL 339.2403</strong>, which allows unlicensed home repair and improvement work for minor projects where the total contract value (including labor, materials, and all fees) remains strictly under $600. We accept only projects that fall within the legal parameters of this exemption. Larger jobs, and any work that would require a residential builder or general contractor license, are referred to an appropriately licensed professional.
                 </div>
                 <ul class="space-y-3 text-gray-600">
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-layer-group text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-layer-group text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>We do not divide larger projects into multiple smaller contracts in order to circumvent licensing requirements. Each project we accept is a genuinely separate undertaking matching our scope of minor repairs.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-plug text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-plug text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>Plumbing, electrical, and mechanical work require the appropriate skilled-trade license under Michigan law regardless of price. Our services in these areas are limited to minor tasks that an unlicensed person may lawfully perform; any work requiring a licensed trade is performed or subcontracted by an appropriately licensed contractor.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-file-signature text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-file-signature text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>Where a project requires a permit or licensed trade, we will let you know before work begins so it can be arranged properly.</span>
                     </li>
                 </ul>
@@ -254,35 +257,35 @@
                 </h2>
                 <ul class="space-y-3 text-gray-600">
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>We offer honest, upfront, transparent pricing. Jobs are priced either on an <strong>hourly basis with a flat Minimum Service Call</strong>, as a <strong>prepaid time package</strong>, as a <strong>flat-fee audit package</strong>, or <strong>by the bid</strong> (a fixed price for an agreed scope).</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>Standard service calls include travel, diagnostics, and up to the first hour of labor: <strong>$100 Minimum Service Call in Zone A</strong> (within ~20 miles of our Waterford base) and <strong>$145 Minimum Service Call in Zone B</strong> (extended Oakland County area). Continuous labor after the first hour is billed at a flat <strong>$70/hour in quarter-hour increments</strong>.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>We offer half-day and full-day prepaid time packages: <strong>4-Hour Package ($280)</strong>, <strong>6-Hour Package ($380)</strong>, and <strong>8-Hour Package ($480)</strong> in Zone A (Zone B adds the standard $45 travel differential) for tackling multi-item punch lists in a single visit.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>Flat-fee inspection packages—including our <strong>Home Safety Audit ($99)</strong>, <strong>Energy Tune-Up Audit ($99)</strong>, <strong>Storm-Prep Check ($99)</strong>, or <strong>Whole-Home Assessment 3-Audit Bundle ($239)</strong>—include room-by-room assessments and a same-day line-item punch list. The audit fee is credited directly toward same-day repairs totaling over $250.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>We provide <strong>free quotes</strong> online or by phone. To receive a fast and accurate estimate, we encourage you to contact us with your project details and, if possible, photos of the work area.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>Materials are not included in the standard labor rate. You may supply materials yourself at no markup, or we can source them on your behalf, in which case a standard <strong>10&ndash;15% supply markup</strong> applies to cover sourcing time, transport, and parts liability.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>Priority after-hours and emergency service is available 7 days a week ($175 for the first hour, then $100/hour in quarter-hour increments). Current figures are always listed on our <a href="/rates" class="text-red-600 hover:underline font-semibold">Rates page</a>.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-check text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>Payment is due upon completion of the day's work unless other arrangements have been agreed upon in writing beforehand. We accept cash, checks, Zelle&reg;, Venmo&reg;, and Cash App.</span>
                     </li>
                 </ul>
@@ -295,27 +298,27 @@
                 </h2>
                 <ul class="space-y-3 text-gray-600">
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-calendar-alt text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-calendar-alt text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>We strive to accommodate your preferred schedule and complete work efficiently.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-laptop text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-laptop text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>You can submit a service request through our <a href="/book" class="text-red-600 hover:underline font-semibold">online booking portal</a>. Submitting a request is an application for an appointment, not a confirmed booking, until we review details and contact you to confirm the date, time, and scope.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-envelope-open-text text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-envelope-open-text text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>Homeowners can voluntarily subscribe to our free seasonal maintenance reminder service on our booking or contact forms to receive periodic maintenance check reminders (e.g., spring gutter checks, fall weatherproofing). You can unsubscribe at any time.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-bell text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-bell text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>24-hour notice is appreciated for cancellations or rescheduling. Late cancellations or no-shows may incur a trip charge equal to the applicable Minimum Service Call.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-calendar-check text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-calendar-check text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>Prepaid time packages follow the same notice policy; a missed visit rescheduled with less than 24-hour notice may forfeit the reserved time.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-bolt text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-bolt text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>After-hours and emergency requests are accommodated 7 days a week when a craftsman is available and are billed at the urgent rates described in Section 3.</span>
                     </li>
                 </ul>
@@ -328,7 +331,7 @@
                 </h2>
                 <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-xl mb-4 text-red-900">
                     <p class="font-semibold flex items-center gap-2 mb-1">
-                        <i class="fas fa-shield-alt"></i> Limited Warranty
+                        <i class="fas fa-shield-alt" aria-hidden="true"></i> Limited Warranty
                     </p>
                     We stand behind our workmanship with a <strong>limited warranty</strong> on labor and materials for defects (typically 1 year &mdash; specific terms provided per job). The material warranty applies <strong>only to materials purchased by AAA Handyman Services</strong>; materials supplied by the customer or third parties are not covered. Warranty does not cover misuse, normal wear and tear, or damage caused by others.
                 </div>
@@ -344,19 +347,19 @@
                 </h2>
                 <ul class="space-y-3 text-gray-600">
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-door-open text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-door-open text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>Provide clear access to the work area.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-box-open text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-box-open text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>Remove personal items and valuables from the work zone.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-file-signature text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-file-signature text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>Obtain any necessary permits if required (we can assist).</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-user-shield text-red-600 mt-1.5 flex-shrink-0"></i>
+                        <i class="fas fa-user-shield text-red-600 mt-1.5 flex-shrink-0" aria-hidden="true"></i>
                         <span>Ensure the property is safe and free of hazards for our team.</span>
                     </li>
                 </ul>
@@ -425,7 +428,7 @@
 
             <section class="bg-gray-800 rounded-2xl shadow-md p-6 md:p-8 text-white">
                 <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center gap-3 text-white">
-                    <i class="fas fa-envelope text-blue-500"></i>
+                    <i class="fas fa-envelope text-blue-500" aria-hidden="true"></i>
                     Contact Us
                 </h2>
                 <p class="mb-6 text-gray-300">If you have questions about these Terms of Service, please contact us:</p>
@@ -433,17 +436,17 @@
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="space-y-3">
                         <p class="flex items-start gap-3">
-                            <i class="fas fa-map-marker-alt text-red-500 mt-1 flex-shrink-0"></i>
+                            <i class="fas fa-map-marker-alt text-red-500 mt-1 flex-shrink-0" aria-hidden="true"></i>
                             <span><strong>AAA Handyman Services</strong><br>Waterford, Michigan</span>
                         </p>
                     </div>
                     <div class="space-y-3">
                         <p class="flex items-center gap-3">
-                            <i class="fas fa-envelope text-blue-500 flex-shrink-0"></i>
+                            <i class="fas fa-envelope text-blue-500 flex-shrink-0" aria-hidden="true"></i>
                             <a href="mailto:contact@aaahandyman.services" class="hover:underline hover:text-red-400 transition">contact@aaahandyman.services</a>
                         </p>
                         <p class="flex items-center gap-3">
-                            <i class="fas fa-phone text-green-500 flex-shrink-0"></i>
+                            <i class="fas fa-phone text-green-500 flex-shrink-0" aria-hidden="true"></i>
                             <a href="tel:+12483853432" class="hover:underline hover:text-red-400 transition">(248) 385-3432</a>
                         </p>
                     </div>
@@ -460,9 +463,9 @@
                     <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
                     <div class="mt-4 flex items-center gap-4">
-                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney"></i></a>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp"></i></a>
+                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -483,11 +486,11 @@
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center"></i>(248) 385-3432</a></li>
-                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
-                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center"></i>Waterford, MI &middot; Oakland County</li>
+                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden="true"></i>(248) 385-3432</a></li>
+                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Waterford, MI &middot; Oakland County</li>
                     </ul>
-                    <a href="/book" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Book Online Now</a>
+                    <a href="/book" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
                 </div>
             </div>
 
@@ -506,7 +509,7 @@
                         <li><a href="/services/gutters" class="hover:text-white transition">Gutters</a></li>
                         <li><a href="/services/power-washing" class="hover:text-white transition">Power Washing</a></li>
                     </ul>
-                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
                 <nav aria-label="Service areas">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Service Areas</h3>
@@ -524,7 +527,7 @@
                         <li><a href="/handyman/franklin" class="hover:text-white transition">Franklin</a></li>
                         <li><a href="/handyman/orchard-lake" class="hover:text-white transition">Orchard Lake</a></li>
                     </ul>
-                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
@@ -538,7 +541,7 @@
         </div>
     </footer>
 
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
     <script src="/js/site.js?v=20260727" defer></script>
     <script src="/js/chat-loader.js?v=20260724-2" defer></script>

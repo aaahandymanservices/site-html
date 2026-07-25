@@ -156,7 +156,10 @@
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
 
-    <nav id="site-nav" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+
+    <nav id="site-nav" aria-label="Primary" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
     <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
         <a href="/" class="flex min-w-0 items-center space-x-3 group" aria-label="AAA Handyman Services home">
             <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600 transition group-hover:scale-105">
@@ -178,9 +181,9 @@
 
             <!-- Social Media Icons -->
             <div class="flex items-center space-x-3 pl-2 border-l border-gray-200">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney"></i></a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
             </div>
         </div>
 
@@ -194,7 +197,7 @@
 
     <!-- Mobile Navigation Drawer / Menu -->
     <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-2xl max-h-[calc(100vh-70px)] overflow-y-auto">
-        <div aria-label="Mobile Navigation" role="navigation" class="space-y-1">
+        <div class="space-y-1">
             <a href="/services" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
             <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
             <a href="/rates" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
@@ -205,14 +208,14 @@
         </div>
 
         <div class="pt-3 border-t border-gray-100 flex items-center justify-center space-x-6 text-2xl">
-            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Facebook Page" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Yelp Page" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp"></i></a>
-            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor Page" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney"></i></a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Facebook Page" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Yelp Page" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor Page" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
         </div>
     </div>
 </nav>
 
-    <main class="flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
+    <main id="main-content" class="flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
                 <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Trusted by your neighbors</div>
@@ -234,7 +237,7 @@
                     </div>
                     <div class="hidden sm:block h-12 w-px bg-white/20"></div>
                     <div class="flex items-center gap-2 text-emerald-300 font-bold text-base sm:text-lg">
-                        <i class="fas fa-shield-heart text-emerald-400"></i>
+                        <i class="fas fa-shield-heart text-emerald-400" aria-hidden="true"></i>
                         <span>100% Satisfaction Guaranteed</span>
                     </div>
                     <span class="sr-only">AAA Handyman Services holds a 5.0 out of 5 average rating across Oakland County and guarantees 100% satisfaction.</span>
@@ -244,15 +247,15 @@
             <!-- Trust badges / review platform links -->
             <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16">
                 <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white hover:bg-emerald-50 text-slate-900 font-bold px-5 py-3 rounded-2xl shadow-lg transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-emerald-400/40">
-                    <i class="fa-solid fa-house-chimney text-[#00B24F] text-xl"></i>
+                    <i class="fa-solid fa-house-chimney text-[#00B24F] text-xl" aria-hidden="true"></i>
                     <span class="text-sm sm:text-base">Reviews on Nextdoor</span>
                 </a>
                 <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white hover:bg-red-50 text-slate-900 font-bold px-5 py-3 rounded-2xl shadow-lg transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-red-400/40">
-                    <i class="fa-brands fa-yelp text-[#FF1A1A] text-xl"></i>
+                    <i class="fa-brands fa-yelp text-[#FF1A1A] text-xl" aria-hidden="true"></i>
                     <span class="text-sm sm:text-base">Reviews on Yelp</span>
                 </a>
                 <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 bg-white hover:bg-blue-50 text-slate-900 font-bold px-5 py-3 rounded-2xl shadow-lg transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-blue-400/40">
-                    <i class="fa-brands fa-facebook text-[#1877F2] text-xl"></i>
+                    <i class="fa-brands fa-facebook text-[#1877F2] text-xl" aria-hidden="true"></i>
                     <span class="text-sm sm:text-base">Reviews on Facebook</span>
                 </a>
             </div>
@@ -262,7 +265,7 @@
                 <div class="lg:col-span-2 space-y-6">
                     <div class="bg-white text-gray-900 border border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8">
                         <div class="flex items-center gap-3 mb-2">
-                            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-red-100 text-red-600 text-xl"><i class="fas fa-pen-nib"></i></span>
+                            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-red-100 text-red-600 text-xl"><i class="fas fa-pen-nib" aria-hidden="true"></i></span>
                             <h2 class="text-2xl font-bold text-gray-900">Share Your Experience</h2>
                         </div>
                         <p class="text-sm text-gray-500 mb-6">A quick rating, a photo of the finished work, and a few words — that’s all it takes to help a neighbor choose with confidence.</p>
@@ -297,14 +300,14 @@
                             </div>
 
                             <div>
-                                <label class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Rating</label>
+                                <span id="reviews-rating-label" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Rating</span>
                                 <div class="flex items-center gap-3">
-                                    <div class="flex gap-1" role="radiogroup" aria-label="Star rating">
-                                        <button type="button" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="1" aria-label="1 star"><i class="fas fa-star"></i></button>
-                                        <button type="button" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="2" aria-label="2 stars"><i class="fas fa-star"></i></button>
-                                        <button type="button" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="3" aria-label="3 stars"><i class="fas fa-star"></i></button>
-                                        <button type="button" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="4" aria-label="4 stars"><i class="fas fa-star"></i></button>
-                                        <button type="button" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="5" aria-label="5 stars"><i class="fas fa-star"></i></button>
+                                    <div class="flex gap-1" role="radiogroup" aria-labelledby="reviews-rating-label">
+                                        <button type="button" role="radio" aria-checked="false" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="1" aria-label="1 star"><i class="fas fa-star" aria-hidden="true"></i></button>
+                                        <button type="button" role="radio" aria-checked="false" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="2" aria-label="2 stars"><i class="fas fa-star" aria-hidden="true"></i></button>
+                                        <button type="button" role="radio" aria-checked="false" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="3" aria-label="3 stars"><i class="fas fa-star" aria-hidden="true"></i></button>
+                                        <button type="button" role="radio" aria-checked="false" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="4" aria-label="4 stars"><i class="fas fa-star" aria-hidden="true"></i></button>
+                                        <button type="button" role="radio" aria-checked="false" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="5" aria-label="5 stars"><i class="fas fa-star" aria-hidden="true"></i></button>
                                     </div>
                                     <span id="rating-text" class="text-sm font-semibold text-amber-600">Perfect!</span>
                                     <input type="hidden" id="reviews-rating" name="rating" value="5" required>
@@ -314,12 +317,12 @@
                             <div>
                                 <span class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">What stood out? <span class="normal-case text-gray-400 font-medium tracking-normal">(optional)</span></span>
                                 <div id="reviews-attributes" class="flex flex-wrap gap-2" role="group" aria-label="Highlight tags">
-                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Punctual" aria-pressed="false"><i class="fas fa-clock mr-1.5 text-xs opacity-70"></i>Punctual</button>
-                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Clean Workspace" aria-pressed="false"><i class="fas fa-broom mr-1.5 text-xs opacity-70"></i>Clean Workspace</button>
-                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Fair Pricing" aria-pressed="false"><i class="fas fa-tag mr-1.5 text-xs opacity-70"></i>Fair Pricing</button>
-                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Great Communication" aria-pressed="false"><i class="fas fa-comments mr-1.5 text-xs opacity-70"></i>Great Communication</button>
-                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Quality Work" aria-pressed="false"><i class="fas fa-award mr-1.5 text-xs opacity-70"></i>Quality Work</button>
-                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Friendly" aria-pressed="false"><i class="fas fa-face-smile mr-1.5 text-xs opacity-70"></i>Friendly</button>
+                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Punctual" aria-pressed="false"><i class="fas fa-clock mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Punctual</button>
+                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Clean Workspace" aria-pressed="false"><i class="fas fa-broom mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Clean Workspace</button>
+                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Fair Pricing" aria-pressed="false"><i class="fas fa-tag mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Fair Pricing</button>
+                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Great Communication" aria-pressed="false"><i class="fas fa-comments mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Great Communication</button>
+                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Quality Work" aria-pressed="false"><i class="fas fa-award mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Quality Work</button>
+                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Friendly" aria-pressed="false"><i class="fas fa-face-smile mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Friendly</button>
                                 </div>
                                 <input type="hidden" id="reviews-attributes-input" name="attributes" value="">
                             </div>
@@ -336,7 +339,7 @@
                                     <div id="reviews-preview-wrap" class="hidden mb-3">
                                         <img id="reviews-preview" src="" alt="Preview of the photo you selected" class="mx-auto max-h-48 w-auto rounded-2xl object-cover shadow-md">
                                     </div>
-                                    <i class="fas fa-cloud-arrow-up text-3xl text-red-500 mb-2 block"></i>
+                                    <i class="fas fa-cloud-arrow-up text-3xl text-red-500 mb-2 block" aria-hidden="true"></i>
                                     <span id="reviews-file-name" class="block font-semibold text-slate-800">Choose a photo or drag it here</span>
                                     <span class="text-xs text-gray-400 block mt-1">JPG, PNG, WebP or GIF · 10 MB max</span>
                                 </label>
@@ -356,9 +359,9 @@
                             </div>
 
                             <button id="reviews-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
-                                Post My Review <i class="fas fa-camera-retro"></i>
+                                Post My Review <i class="fas fa-camera-retro" aria-hidden="true"></i>
                             </button>
-                            <p class="text-center text-sm font-semibold text-red-600 flex items-center justify-center gap-2"><i class="fas fa-heart"></i> Thank you for supporting a local, family-owned business in Oakland County!</p>
+                            <p class="text-center text-sm font-semibold text-red-600 flex items-center justify-center gap-2"><i class="fas fa-heart" aria-hidden="true"></i> Thank you for supporting a local, family-owned business in Oakland County!</p>
                             <p class="text-xs text-gray-500 text-center">By submitting, you confirm this review reflects your genuine experience and agree that your first name, city, rating, review, and photo may be published publicly on this website.</p>
                         </form>
                     </div>
@@ -372,10 +375,10 @@
                         </div>
                         <div class="flex flex-wrap items-center gap-3">
                             <button id="admin-access-btn" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md">
-                                <i class="fas fa-user-shield"></i> <span id="admin-access-label">Owner Access</span>
+                                <i class="fas fa-user-shield" aria-hidden="true"></i> <span id="admin-access-label">Owner Access</span>
                             </button>
                             <button id="reviews-refresh" type="button" class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md hover:shadow-green-600/30">
-                                <i class="fas fa-arrows-rotate"></i> Refresh Reviews
+                                <i class="fas fa-arrows-rotate" aria-hidden="true"></i> Refresh Reviews
                             </button>
                         </div>
                     </div>
@@ -395,13 +398,13 @@
                     <div id="reviews-list" class="reviews-masonry" aria-live="polite"></div>
 
                     <div id="reviews-filter-empty" class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
-                        <i class="fas fa-filter-circle-xmark text-4xl text-slate-500 mb-3 block"></i>
+                        <i class="fas fa-filter-circle-xmark text-4xl text-slate-500 mb-3 block" aria-hidden="true"></i>
                         <h3 class="text-xl font-bold text-white mb-2">No projects in this category yet</h3>
                         <p class="text-sm">Try another category, or view all projects.</p>
                     </div>
 
                     <div id="reviews-empty" class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
-                        <i class="fas fa-comment-slash text-4xl text-slate-500 mb-3 block"></i>
+                        <i class="fas fa-comment-slash text-4xl text-slate-500 mb-3 block" aria-hidden="true"></i>
                         <h3 class="text-xl font-bold text-white mb-2">No customer reviews yet</h3>
                         <p class="text-sm">Be the first to share your experience with AAA Handyman Services!</p>
                     </div>
@@ -417,7 +420,7 @@
         <div class="max-w-7xl mx-auto px-6 mb-12">
             <div class="text-center bg-blue-900 text-white py-12 px-8 sm:py-20 sm:px-16 rounded-3xl">
                 <p class="text-xl sm:text-2xl md:text-3xl font-medium">Available Monday–Friday, 9 a.m.–6 p.m.; Saturday, 10 a.m.–5 p.m.</p>
-                <p class="mt-6 text-base sm:text-lg md:text-xl opacity-90"><span class="flash-siren" aria-hidden="true"><i class="fas fa-triangle-exclamation"></i></span> After-Hours Emergency Services Available—Competitive hourly rates • No job too small!</p>
+                <p class="mt-6 text-base sm:text-lg md:text-xl opacity-90"><span class="flash-siren" aria-hidden="true"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i></span> After-Hours Emergency Services Available—Competitive hourly rates • No job too small!</p>
             </div>
         </div>
     </main>
@@ -430,9 +433,9 @@
                     <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
                     <div class="mt-4 flex items-center gap-4">
-                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney"></i></a>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp"></i></a>
+                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -453,11 +456,11 @@
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center"></i>(248) 385-3432</a></li>
-                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
-                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center"></i>Waterford, MI &middot; Oakland County</li>
+                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden="true"></i>(248) 385-3432</a></li>
+                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Waterford, MI &middot; Oakland County</li>
                     </ul>
-                    <a href="/book" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Book Online Now</a>
+                    <a href="/book" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
                 </div>
             </div>
 
@@ -476,7 +479,7 @@
                         <li><a href="/services/gutters" class="hover:text-white transition">Gutters</a></li>
                         <li><a href="/services/power-washing" class="hover:text-white transition">Power Washing</a></li>
                     </ul>
-                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
                 <nav aria-label="Service areas">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Service Areas</h3>
@@ -494,7 +497,7 @@
                         <li><a href="/handyman/franklin" class="hover:text-white transition">Franklin</a></li>
                         <li><a href="/handyman/orchard-lake" class="hover:text-white transition">Orchard Lake</a></li>
                     </ul>
-                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
@@ -515,12 +518,12 @@
         </a>
     </noscript>
 
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
     <!-- Lightbox overlay for zooming project photos -->
     <div id="reviews-lightbox" class="hidden fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4" role="dialog" aria-modal="true" aria-label="Project photo viewer">
         <button id="reviews-lightbox-close" type="button" aria-label="Close photo viewer" class="absolute top-5 right-5 h-11 w-11 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-xl transition focus:outline-none focus:ring-4 focus:ring-white/40">
-            <i class="fas fa-xmark"></i>
+            <i class="fas fa-xmark" aria-hidden="true"></i>
         </button>
         <figure class="max-w-4xl w-full text-center">
             <img id="reviews-lightbox-img" src="" alt="" class="mx-auto max-h-[80vh] w-auto rounded-2xl shadow-2xl object-contain">
@@ -720,7 +723,15 @@
                         icon.className = 'far fa-star';
                         btn.className = 'star-rating-btn text-2xl text-gray-300 hover:text-amber-300 focus:outline-none';
                     }
+                    icon.setAttribute('aria-hidden', 'true');
                 }
+                // The colour change alone conveys the choice visually; radios
+                // need aria-checked so it is announced too. A roving tabindex
+                // keeps the whole group a single stop in the tab order, which
+                // is how a radio group is expected to behave.
+                const isSelected = val === rating;
+                btn.setAttribute('aria-checked', String(isSelected));
+                btn.setAttribute('tabindex', isSelected ? '0' : '-1');
             });
         };
 
@@ -728,6 +739,26 @@
             btn.addEventListener('click', () => {
                 const val = parseInt(btn.dataset.value || '5', 10);
                 updateStarRatingDisplay(val);
+            });
+
+            // Arrow keys move between ratings, Home/End jump to the ends —
+            // the standard radio-group keyboard contract.
+            btn.addEventListener('keydown', (event) => {
+                const current = parseInt(reviewsRatingInput?.value || '5', 10);
+                let next = null;
+                if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = current + 1;
+                else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = current - 1;
+                else if (event.key === 'Home') next = 1;
+                else if (event.key === 'End') next = 5;
+                if (next === null) return;
+
+                event.preventDefault();
+                next = Math.min(5, Math.max(1, next));
+                updateStarRatingDisplay(next);
+                const target = Array.from(starRatingBtns).find(
+                    (b) => parseInt(b.dataset.value || '0', 10) === next
+                );
+                if (target) target.focus();
             });
         });
         updateStarRatingDisplay(5);
@@ -771,7 +802,7 @@
         }[char]));
 
         const stars = (rating) => Array.from({ length: 5 }, (_, index) =>
-            `<i class="${index < rating ? 'fas' : 'far'} fa-star"></i>`
+            `<i class="${index < rating ? 'fas' : 'far'} fa-star" aria-hidden="true"></i>`
         ).join('');
 
         const showReviewsMessage = (text, isError) => {
@@ -798,7 +829,7 @@
             if (reviewsPhoto) reviewsPhoto.required = true;
             if (reviewsFileName) reviewsFileName.textContent = 'Choose a photo or drag it here';
             if (reviewsEditing) reviewsEditing.classList.add('hidden');
-            if (reviewsSubmit) reviewsSubmit.innerHTML = 'Post My Review <i class="fas fa-camera-retro"></i>';
+            if (reviewsSubmit) reviewsSubmit.innerHTML = 'Post My Review <i class="fas fa-camera-retro" aria-hidden="true"></i>';
         };
 
         const startReviewsEdit = (item) => {
@@ -816,7 +847,7 @@
             if (reviewsPhoto) reviewsPhoto.required = false;
             if (reviewsFileName) reviewsFileName.textContent = 'Keep current photo or choose a replacement';
             if (reviewsEditing) reviewsEditing.classList.remove('hidden');
-            if (reviewsSubmit) reviewsSubmit.innerHTML = 'Save Changes <i class="fas fa-floppy-disk"></i>';
+            if (reviewsSubmit) reviewsSubmit.innerHTML = 'Save Changes <i class="fas fa-floppy-disk" aria-hidden="true"></i>';
             showReviewsMessage('Update the fields below, then save your changes.', false);
             reviewsForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
         };
@@ -867,7 +898,7 @@
         const attributesHtml = (attributes) => {
             if (!Array.isArray(attributes) || attributes.length === 0) return '';
             const chips = attributes.map((tag) =>
-                `<span class="inline-flex items-center gap-1 bg-red-50 text-red-700 border border-red-100 rounded-full px-2.5 py-1 text-xs font-semibold"><i class="fas fa-check text-[10px]"></i>${escapeHTML(tag)}</span>`
+                `<span class="inline-flex items-center gap-1 bg-red-50 text-red-700 border border-red-100 rounded-full px-2.5 py-1 text-xs font-semibold"><i class="fas fa-check text-[10px]" aria-hidden="true"></i>${escapeHTML(tag)}</span>`
             ).join('');
             return `<div class="mt-4 flex flex-wrap gap-1.5">${chips}</div>`;
         };
@@ -877,7 +908,7 @@
             return `
                 <div class="mt-4 bg-blue-950/95 text-slate-100 rounded-2xl p-4 border-l-4 border-red-600">
                     <div class="flex items-center gap-2 mb-1.5">
-                        <i class="fas fa-reply text-red-400 text-xs"></i>
+                        <i class="fas fa-reply text-red-400 text-xs" aria-hidden="true"></i>
                         <span class="text-xs font-bold uppercase tracking-wider text-red-300">AAA Handyman Response</span>
                     </div>
                     <p class="text-sm leading-relaxed text-slate-200">${escapeHTML(item.ownerResponse)}</p>
@@ -901,7 +932,7 @@
 
         const photoPlaceholderHtml = () => `
                     <div class="w-full h-full bg-blue-900 text-blue-200 flex flex-col items-center justify-center gap-2 text-center px-4">
-                        <i class="fas fa-camera-retro text-3xl text-red-400"></i>
+                        <i class="fas fa-camera-retro text-3xl text-red-400" aria-hidden="true"></i>
                         <span class="text-xs font-semibold uppercase tracking-widest">Photo unavailable</span>
                     </div>`;
 
@@ -942,16 +973,16 @@
             const previewHtml = photoPath ? `
                     <button type="button" class="review-zoom block w-full h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50" data-full="${escapeHTML(fullUrl)}" data-original="${escapeHTML(photoPath)}" data-caption="${escapeHTML(item.projectType)} · ${escapeHTML(item.location)}" data-alt="${escapeHTML(item.imageAlt)}" aria-label="Zoom photo: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
                         <img class="review-photo w-full h-full object-cover" src="${escapeHTML(thumbUrl)}" data-original="${escapeHTML(photoPath)}" alt="${escapeHTML(item.imageAlt)}" width="800" height="600" loading="lazy" decoding="async">
-                        <span class="pointer-events-none absolute bottom-3 right-3 h-9 w-9 rounded-full bg-black/55 text-white flex items-center justify-center text-sm"><i class="fas fa-magnifying-glass-plus"></i></span>
+                        <span class="pointer-events-none absolute bottom-3 right-3 h-9 w-9 rounded-full bg-black/55 text-white flex items-center justify-center text-sm"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i></span>
                     </button>` : photoPlaceholderHtml();
 
             const actionsHtml = canManage ? `
                     <div class="mt-5 grid grid-cols-2 gap-3">
-                        <button type="button" class="review-edit-btn bg-green-600 text-white hover:bg-green-700 px-3 py-2.5 rounded-xl font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-md hover:shadow-green-600/30" data-id="${escapeHTML(item.id)}">
-                            <i class="fas fa-pen-to-square"></i> Edit
+                        <button type="button" class="review-edit-btn bg-green-600 text-white hover:bg-green-700 px-3 py-2.5 rounded-xl font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-md hover:shadow-green-600/30" data-id="${escapeHTML(item.id)}" aria-label="Edit review by ${escapeHTML(item.customerName)}">
+                            <i class="fas fa-pen-to-square" aria-hidden="true"></i> Edit
                         </button>
-                        <button type="button" class="review-delete-btn bg-red-600 text-white hover:bg-red-700 px-3 py-2.5 rounded-xl font-semibold text-xs transition flex items-center justify-center gap-1.5" data-id="${escapeHTML(item.id)}">
-                            <i class="fas fa-trash-can"></i> Delete
+                        <button type="button" class="review-delete-btn bg-red-600 text-white hover:bg-red-700 px-3 py-2.5 rounded-xl font-semibold text-xs transition flex items-center justify-center gap-1.5" data-id="${escapeHTML(item.id)}" aria-label="Delete review by ${escapeHTML(item.customerName)}">
+                            <i class="fas fa-trash-can" aria-hidden="true"></i> Delete
                         </button>
                     </div>
             ` : '';
@@ -964,7 +995,7 @@
                             ${escapeHTML(item.projectType)}
                         </span>
                         <span class="bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full shadow-md flex items-center gap-1 whitespace-nowrap">
-                            <i class="fas fa-circle-check"></i> Verified Local Project
+                            <i class="fas fa-circle-check" aria-hidden="true"></i> Verified Local Project
                         </span>
                     </div>
                 </div>
@@ -974,7 +1005,7 @@
                             ${stars(Number(item.rating) || 0)}
                         </div>
                         <span class="inline-flex items-center gap-1 text-xs font-semibold text-gray-500">
-                            <i class="fas fa-location-dot text-red-500"></i> ${escapeHTML(item.location)}
+                            <i class="fas fa-location-dot text-red-500" aria-hidden="true"></i> ${escapeHTML(item.location)}
                         </span>
                     </div>
                     <p class="text-gray-700 leading-relaxed italic text-base">"${escapeHTML(item.review)}"</p>
@@ -987,7 +1018,7 @@
                         <div>
                             <strong class="text-gray-900 block text-sm">${escapeHTML(item.customerName)}</strong>
                             <span class="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-                                <i class="fas fa-shield-halved"></i> Verified customer
+                                <i class="fas fa-shield-halved" aria-hidden="true"></i> Verified customer
                             </span>
                         </div>
                     </div>
@@ -1078,6 +1109,25 @@
             });
             document.addEventListener('keydown', (event) => {
                 if (event.key === 'Escape' && !lightbox.classList.contains('hidden')) closeLightbox();
+            });
+
+            // The overlay claims the whole viewport, so keyboard focus must stay
+            // inside it — otherwise Tab walks invisibly through the page behind.
+            lightbox.addEventListener('keydown', (event) => {
+                if (event.key !== 'Tab' || lightbox.classList.contains('hidden')) return;
+                const focusables = Array.from(
+                    lightbox.querySelectorAll('a[href], button:not([disabled])')
+                ).filter((el) => el.offsetParent !== null);
+                if (!focusables.length) return;
+                const first = focusables[0];
+                const last = focusables[focusables.length - 1];
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
             });
         }
 

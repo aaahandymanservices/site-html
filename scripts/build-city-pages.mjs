@@ -121,7 +121,7 @@ function navLink(href, label, active) {
 
 function serviceChip(s) {
   return `                <a href="/services#${s.anchor}" class="generated-service-card group flex items-center gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm hover:text-red-600">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas ${s.icon}"></i></span>
+                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas ${s.icon}" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800 group-hover:text-red-600">${s.label}</span>
                 </a>`;
 }
@@ -130,7 +130,7 @@ function nearbyLinks(city) {
   const nearby = (city.nearby || []).map((slug) => bySlug[slug]).filter(Boolean);
   if (!nearby.length) return '';
   const chips = nearby
-    .map((n) => `<a href="/handyman/${n.slug}" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500"></i> ${n.name}</a>`)
+    .map((n) => `<a href="/handyman/${n.slug}" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500" aria-hidden="true"></i> ${n.name}</a>`)
     .join('\n                    ');
   return `
             <!-- Nearby areas: internal links for discovery + local SEO -->
@@ -139,7 +139,7 @@ function nearbyLinks(city) {
                 <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">We also serve nearby Oakland County communities. Explore a neighboring area:</p>
                 <div class="flex flex-wrap justify-center gap-3">
                     ${chips}
-                    <a href="/service-areas" class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition font-semibold shadow-md hover:shadow-green-600/30"><i class="fas fa-map"></i> All Service Areas</a>
+                    <a href="/service-areas" class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition font-semibold shadow-md hover:shadow-green-600/30"><i class="fas fa-map" aria-hidden="true"></i> All Service Areas</a>
                 </div>
             </div>`;
 }
@@ -236,22 +236,22 @@ ${getUnifiedNav('service-areas')}
             </nav>
             <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-2">${city.region} &middot; Oakland County, MI</div>
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">Handyman in ${city.name}, Michigan</h1>
-            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5"></i>Serving ${city.name} &amp; surrounding Oakland County communities</p>
+            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving ${city.name} &amp; surrounding Oakland County communities</p>
             <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
                 Trusted, locally owned home repair and maintenance for ${city.name} homeowners. No job too small &mdash; backed by our 1-Year Workmanship Guarantee and honest, upfront pricing.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="/book?service=General+Estimate+%2F+Quote&amp;city=${enc(city.name)}" class="bg-red-600 hover:bg-red-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-red-600/30 transition flex items-center justify-center gap-2">
-                    <i class="fas fa-calendar-check"></i> Book Online / Get a Free Quote
+                    <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Get a Free Quote
                 </a>
                 <a href="tel:${PHONE_TEL}" class="bg-green-600 hover:bg-green-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-green-600/30 transition flex items-center justify-center gap-2">
-                    <i class="fas fa-phone"></i> Call Now! ${PHONE_DISPLAY}
+                    <i class="fas fa-phone" aria-hidden="true"></i> Call Now! ${PHONE_DISPLAY}
                 </a>
             </div>
         </div>
     </header>
 
-    <main class="flex-grow py-12 sm:py-16">
+    <main id="main-content" class="flex-grow py-12 sm:py-16">
         <div class="max-w-7xl mx-auto px-6">
             <!-- Intro + pricing -->
             <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
@@ -262,19 +262,19 @@ ${getUnifiedNav('service-areas')}
                 </div>
                 <aside class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 shadow-lg">
                     <div class="flex items-center gap-3 mb-4">
-                        <span class="text-2xl text-${zone.color}-600" aria-hidden="true"><i class="fas fa-location-dot"></i></span>
+                        <span class="text-2xl text-${zone.color}-600" aria-hidden="true"><i class="fas fa-location-dot" aria-hidden="true"></i></span>
                         <div>
                             <h3 class="text-lg font-bold text-gray-900">${city.name} Coverage</h3>
                             <p class="text-sm text-gray-500">${zone.label}</p>
                         </div>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
-                        <li class="flex items-start gap-2"><i class="fas fa-tag text-red-600 mt-1"></i><span><strong>${zone.rate} minimum service call</strong> &mdash; covers travel, diagnostics, and the first hour of labor.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>                        <li class="flex items-start gap-2"><i class="fas fa-map-pin text-red-600 mt-1"></i><span>ZIP codes served: ${city.zips.join(', ')}.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-tag text-red-600 mt-1" aria-hidden="true"></i><span><strong>${zone.rate} minimum service call</strong> &mdash; covers travel, diagnostics, and the first hour of labor.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>                        <li class="flex items-start gap-2"><i class="fas fa-map-pin text-red-600 mt-1" aria-hidden="true"></i><span>ZIP codes served: ${city.zips.join(', ')}.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1" aria-hidden="true"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
                     </ul>
                     <a href="${quoteHref(city.name)}" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30">
-                        <i class="fas fa-calendar-check"></i> Request Service in ${city.name}
+                        <i class="fas fa-calendar-check" aria-hidden="true"></i> Request Service in ${city.name}
                     </a>
                     <a href="/rates" class="mt-3 block text-center text-sm text-gray-500 hover:text-red-600 underline underline-offset-2">See full rates &amp; packages</a>
                 </aside>
@@ -292,7 +292,7 @@ ${POPULAR_SERVICES.map(serviceChip).join('\n')}
                 </div>
                 <div class="mt-8 text-center">
                     <a href="/services" class="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-semibold transition shadow-lg hover:shadow-green-600/30">
-                        View All Services <i class="fas fa-arrow-right"></i>
+                        View All Services <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -318,10 +318,10 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                 <p class="mt-4 text-base sm:text-lg opacity-90">Call for availability and same-week scheduling, or request a free quote online. No job too small.</p>
                 <div class="mt-8 flex flex-wrap justify-center gap-4">
                     <a href="tel:${PHONE_TEL}" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-green-600/30">
-                        <i class="fas fa-phone"></i> ${PHONE_DISPLAY}
+                        <i class="fas fa-phone" aria-hidden="true"></i> ${PHONE_DISPLAY}
                     </a>
                     <a href="/book?service=General+Estimate+%2F+Quote&city=${enc(city.name)}" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/30">
-                        <i class="fas fa-calendar-check"></i> Book Online Now
+                        <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online Now
                     </a>
                 </div>
             </div>
@@ -336,9 +336,9 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                     <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
                     <div class="mt-4 flex items-center gap-4">
-                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook"></i></a>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney"></i></a>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp"></i></a>
+                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <nav aria-label="Footer">
@@ -357,11 +357,11 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="tel:${PHONE_TEL}" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center"></i>${PHONE_DISPLAY}</a></li>
-                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i>contact@aaahandyman.services</a></li>
-                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center"></i>Serving ${city.name} &middot; Oakland County, MI</li>
+                        <li><a href="tel:${PHONE_TEL}" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden="true"></i>${PHONE_DISPLAY}</a></li>
+                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Serving ${city.name} &middot; Oakland County, MI</li>
                     </ul>
-                    <a href="/book?service=General+Estimate+%2F+Quote&city=${enc(city.name)}" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check"></i>Book Online Now</a>
+                    <a href="/book?service=General+Estimate+%2F+Quote&city=${enc(city.name)}" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
                 </div>
             </div>
             <!-- Quick-access sitemap: popular services + service areas reachable in one click from any page -->
@@ -380,7 +380,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                         <li><a href="/services/gutters" class="hover:text-white transition">Gutters</a></li>
                         <li><a href="/services/power-washing" class="hover:text-white transition">Power Washing</a></li>
                     </ul>
-                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
                 <nav aria-label="Service areas">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Service Areas</h3>
@@ -398,7 +398,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
                         <li><a href="/handyman/franklin" class="hover:text-white transition">Franklin</a></li>
                         <li><a href="/handyman/orchard-lake" class="hover:text-white transition">Orchard Lake</a></li>
                     </ul>
-                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
@@ -413,7 +413,7 @@ ${faqs.map((f) => `                    <article class="bg-white border-[2px] bor
     </footer>
 
     <!-- Back to top -->
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up"></i></button>
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
     <script src="/js/site.js?v=20260727" defer></script>
 
     <!-- Google tag (gtag.js) -->
