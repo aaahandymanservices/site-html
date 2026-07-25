@@ -12,8 +12,8 @@ export function getUnifiedNav(activePage = 'none') {
     : 'nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition';
 
   const mobileLinkCls = (active) => active
-    ? 'block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition'
-    : 'block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition';
+    ? 'block text-red-600 font-bold py-2 px-3 bg-red-50 rounded-xl transition'
+    : 'block text-gray-800 font-medium py-2 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition';
 
   return `<a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
@@ -28,7 +28,7 @@ export function getUnifiedNav(activePage = 'none') {
         </a>
 
         <!-- Desktop Navigation -->
-        <div class="hidden lg:flex space-x-6 xl:space-x-8 text-base xl:text-lg font-medium items-center">
+        <div class="hidden lg:flex space-x-4 xl:space-x-6 text-base xl:text-lg font-medium items-center">
             <a href="/services" class="${linkCls(isServices)}">Services</a>
             <a href="/service-areas" class="${linkCls(isServiceAreas)}">Service Areas</a>
             <a href="/rates" class="${linkCls(isRates)}">Rates</a>
