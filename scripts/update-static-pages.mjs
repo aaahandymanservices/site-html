@@ -65,7 +65,7 @@ for (const { path, active, removeSectionNav } of STATIC_NAV_PAGES) {
   const ORPHAN_DRAWER_TAIL =
     '(?:(?:\\s*<div class="pt-[23] border-t border-gray-100(?:[^<]|<(?!\\/div>))*<\\/div>)+\\s*<\\/div>\\s*<\\/nav>)?';
   const mainNavRegex = new RegExp(
-    '(?:<a[^>]*class="skip-link"[^>]*>[\\s\\S]*?<\\/a>\\s*)?' +
+    '(?:<a[^>]*class="[^"]*skip-link[^"]*"[^>]*>[\\s\\S]*?<\\/a>\\s*)?' +
       '(?:<header[^>]*class="sticky top-0 z-50 bg-white[\\s\\S]*?<\\/header>' +
       '|<nav[^>]*id="site-nav"[\\s\\S]*?<\\/nav>' + ORPHAN_DRAWER_TAIL + ')'
   );

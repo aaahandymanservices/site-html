@@ -163,29 +163,43 @@ div[id] {
 /* Skip link: the first focusable element on every page, so a keyboard or
    screen-reader user can jump past the sticky nav straight to the content.
    Hidden off-screen until focused rather than `display: none`, which would
-   take it out of the tab order entirely. */
+   take it out of the tab order entirely. Uses sr-only clipping so it never
+   renders in the visible page flow or header when unfocused. */
 .skip-link {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  z-index: 200;
-  padding: 0.75rem 1.5rem;
-  border-bottom-right-radius: 0.75rem;
-  border-bottom-left-radius: 0.75rem;
-  background: var(--brand-crimson);
-  color: #fff;
-  font-family: var(--font-display);
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow: var(--shadow-lg);
-  transform: translate(-50%, -125%);
-  transition: transform 160ms var(--ease-out);
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border-width: 0 !important;
 }
 
+.skip-link:focus,
 .skip-link:focus-visible {
-  outline: 3px solid #fff;
-  outline-offset: -6px;
-  transform: translate(-50%, 0);
+  position: fixed !important;
+  top: 0.75rem !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 200 !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0.75rem 1.5rem !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+  background: var(--brand-crimson, #a61f2e) !important;
+  color: #fff !important;
+  font-family: var(--font-display, sans-serif) !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  border-radius: 0.75rem !important;
+  box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.3)) !important;
+  outline: 3px solid #fff !important;
+  outline-offset: -6px !important;
 }
 
 /* Tailwind's `focus:outline-none` utility strips the browser focus ring and
