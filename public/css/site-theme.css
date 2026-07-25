@@ -318,22 +318,6 @@ body > nav.sticky img {
   background: rgb(255 255 255 / 98%);
 }
 
-/* The drawer's height cap lives in the markup as `vh`, which every browser
-   understands. Where dynamic viewport units are supported, prefer them: on
-   mobile the address bar collapses as you scroll, and `vh` is frozen at the
-   larger viewport, so a `vh` cap can leave the last link out of reach. */
-@supports (height: 100dvh) {
-  #mobile-menu {
-    max-height: calc(100dvh - 4.5rem);
-  }
-
-  @media (min-width: 640px) {
-    #mobile-menu {
-      max-height: calc(100dvh - 5rem);
-    }
-  }
-}
-
 #mobile-menu-btn {
   background: transparent;
   transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
