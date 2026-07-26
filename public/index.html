@@ -510,9 +510,11 @@
     <main id="main-content" class="flex-grow">
     <header id="top" class="hero py-12 md:py-16 flex items-center text-white">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <p class="hero-kicker mb-3 text-xs sm:text-sm font-bold uppercase tracking-widest text-white/80">Oakland County, Michigan</p>
+            <div class="inline-flex items-center gap-2 mb-3 px-3.5 py-1 rounded-full bg-red-600/30 border border-red-400/40 text-xs sm:text-sm font-bold uppercase tracking-wider text-red-100 backdrop-blur-sm">
+                <i class="fas fa-user-gear text-red-300" aria-hidden="true"></i> Locally Owned &amp; Led by Victor Gregg Hale &bull; Waterford, MI
+            </div>
             <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl font-bold leading-tight md:leading-none mb-3 tracking-tighter">Dependable handyman service for Residential and Commercial.</h1>
-            <p class="hero-locale text-sm sm:text-base md:text-lg font-semibold text-red-200 mb-6 tracking-wide"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving Oakland County</p>
+            <p class="hero-locale text-sm sm:text-base md:text-lg font-semibold text-red-200 mb-6 tracking-wide"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving Oakland County with 25+ Years of Trade Experience</p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="/book" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-bold inline-flex items-center justify-center gap-2.5 transition shadow-lg hover:shadow-red-600/30 pulse-btn">
@@ -526,8 +528,8 @@
             </div>
 
             <div class="hero-trust mt-8" aria-label="Locally owned, background-checked, and backed by a one-year guarantee">
-                <span class="hero-trust-item"><i class="fas fa-house" aria-hidden="true"></i>Locally owned</span>
-                <span class="hero-trust-item"><i class="fas fa-user-shield" aria-hidden="true"></i>Background-checked</span>
+                <span class="hero-trust-item"><i class="fas fa-user-shield" aria-hidden="true"></i>Victor Gregg Hale, Owner &amp; Craftsman</span>
+                <span class="hero-trust-item"><i class="fas fa-house" aria-hidden="true"></i>Waterford &amp; Oakland County Local</span>
                 <span class="hero-trust-item"><i class="fas fa-award" aria-hidden="true"></i>1-year workmanship guarantee</span>
             </div>
         </div>
@@ -581,11 +583,15 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <div class="uppercase tracking-widest text-red-600 font-semibold mb-2">About Us</div>
-                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-4 sm:mb-6">Locally Owned and Operated</h2>
-                    <div class="prose prose-lg text-gray-600">
-                        <p>AAA Handyman Services is your trusted home repair companion. Serving home repair and maintenance needs across Oakland County, Michigan, we pride ourselves on friendly communication, absolute reliability, and honest, upfront pricing.</p>
-                        <p>With our highly trained technicians bringing 25+ years of combined hands-on trade experience to every project, we specialize in high-quality home repairs. From drywall patching to deck staining, window adjustments to fixture replacements, we treat your home like our own — and no job is too small!</p>
+                    <div class="uppercase tracking-widest text-red-600 font-semibold mb-2">Meet Your Local Craftsman</div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-4 sm:mb-6">Locally Owned &amp; Operated by Victor Gregg Hale</h2>
+                    <div class="prose prose-lg text-gray-600 space-y-4">
+                        <p>AAA Handyman Services is your trusted, neighborhood home repair companion based right here in Waterford, Michigan. Led by owner and craftsman <strong>Victor Gregg Hale</strong>, our team brings over 25 years of hands-on trade experience to homeowners and local businesses across Oakland County.</p>
+                        <p>We pride ourselves on friendly communication, absolute reliability, and transparent flat-rate pricing. From drywall patching to deck staining, window adjustments to fixture replacements, Victor and our crew treat your home like our own — and no job is ever too small!</p>
+                    </div>
+                    <div class="mt-6 p-4 sm:p-5 rounded-2xl bg-red-50 border-l-4 border-red-600 text-gray-800 text-sm sm:text-base italic">
+                        "When you call us, you get honest answers, upfront rates, and work backed by a 1-year guarantee. We're proud to serve our Oakland County neighbors."
+                        <span class="block not-italic font-bold text-blue-900 mt-2">&mdash; Victor Gregg Hale, Owner &amp; Lead Craftsman</span>
                     </div>
                 </div>
                 <div class="relative">
@@ -593,7 +599,7 @@
                     <div class="absolute -bottom-6 left-4 sm:-left-6 bg-white p-4 sm:p-6 rounded-3xl shadow-xl" style="border: 2px solid #0d2237;">
                         <div class="flex items-center gap-4">
                             <div class="text-3xl sm:text-5xl font-bold text-red-600">25+</div>
-                            <div class="text-xs sm:text-sm leading-tight">Years of<br>Trade Experience</div>
+                            <div class="text-xs sm:text-sm leading-tight font-semibold text-gray-900">Years Local<br>Trade Experience</div>
                         </div>
                     </div>
                 </div>
@@ -632,16 +638,84 @@
         </div>
     </section>
 
+    <!-- Social Proof & Customer Reviews (Elevated Higher Up) -->
+    <section id="reviews" class="py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white" aria-labelledby="reviews-heading">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+                <div class="uppercase tracking-widest text-red-300 font-semibold">Customer Feedback &amp; Neighbor Reviews</div>
+                <h2 id="reviews-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">What Your Neighbors Are Saying</h2>
+                <p class="mt-4 text-base sm:text-lg text-slate-300">Real 5-star reviews and feedback from homeowners across Oakland County, Michigan.</p>
+            </div>
+            <div id="home-reviews-list" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <article class="bg-white text-gray-900 rounded-3xl overflow-hidden shadow-xl flex flex-col p-6 border border-gray-100">
+                    <div class="text-amber-500 text-lg flex gap-1 mb-3" role="img" aria-label="5 out of 5 stars">
+                        <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+                    </div>
+                    <span class="bg-neutral-100 text-neutral-800 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm w-fit mb-3">Drywall &amp; Painting</span>
+                    <p class="text-gray-700 leading-relaxed italic flex-grow">"Flawless drywall patch and paint in our Troy home. Victor and his crew were punctual, professional, and stayed exactly within the initial estimate. Will definitely hire again!"</p>
+                    <div class="mt-5 pt-4 border-t border-gray-100 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm uppercase">S</div>
+                        <div>
+                            <strong class="text-gray-900 block text-sm">Sarah K.</strong>
+                            <span class="text-xs text-gray-600 flex items-center gap-1"><i class="fas fa-map-marker-alt text-red-500" aria-hidden="true"></i> Troy, MI</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="bg-white text-gray-900 rounded-3xl overflow-hidden shadow-xl flex flex-col p-6 border border-gray-100">
+                    <div class="text-amber-500 text-lg flex gap-1 mb-3" role="img" aria-label="5 out of 5 stars">
+                        <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+                    </div>
+                    <span class="bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm w-fit mb-3">Doors &amp; Hardware</span>
+                    <p class="text-gray-700 leading-relaxed italic flex-grow">"Victor adjusted our sticking front door in Waterford so it latches smoothly and stopped cold drafts. Clear upfront pricing and excellent quality workmanship."</p>
+                    <div class="mt-5 pt-4 border-t border-gray-100 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm uppercase">M</div>
+                        <div>
+                            <strong class="text-gray-900 block text-sm">Mark S.</strong>
+                            <span class="text-xs text-gray-600 flex items-center gap-1"><i class="fas fa-map-marker-alt text-red-500" aria-hidden="true"></i> Waterford, MI</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="bg-white text-gray-900 rounded-3xl overflow-hidden shadow-xl flex flex-col p-6 border border-gray-100">
+                    <div class="text-amber-500 text-lg flex gap-1 mb-3" role="img" aria-label="5 out of 5 stars">
+                        <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+                    </div>
+                    <span class="bg-sky-100 text-sky-800 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm w-fit mb-3">Plumbing Fixtures</span>
+                    <p class="text-gray-700 leading-relaxed italic flex-grow">"Replaced our kitchen faucet and fixed a slow drain in West Bloomfield quickly and cleanly. Having a dependable craftsman in our area makes all the difference."</p>
+                    <div class="mt-5 pt-4 border-t border-gray-100 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm uppercase">D</div>
+                        <div>
+                            <strong class="text-gray-900 block text-sm">Dave L.</strong>
+                            <span class="text-xs text-gray-600 flex items-center gap-1"><i class="fas fa-map-marker-alt text-red-500" aria-hidden="true"></i> West Bloomfield, MI</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="mt-10 text-center">
+                <a href="/reviews" class="inline-flex items-center justify-center gap-2 border-[2px] border-white hover:bg-white hover:text-blue-900 text-base sm:text-lg px-8 py-4 rounded-xl font-semibold transition shadow-lg">
+                    Read All Reviews &amp; Project Photos <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <section id="services" class="py-12 sm:py-16 bg-gray-100">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-8 sm:mb-12">
+            <div class="text-center mb-6 sm:mb-8">
                 <div class="uppercase text-red-600 font-semibold tracking-widest">Our Expertise &amp; Packages</div>
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">Featured Packages &amp; Handyman Services</h2>
-                <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">No job is too small. Choose a high-value service bundle or get practical home repair help for individual projects in Waterford, Troy, West Bloomfield, Rochester Hills, Royal Oak, Clarkston, and nearby Oakland County communities.</p>
+                <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">No job is too small. Choose a high-value service bundle or get practical home repair help for individual projects across Waterford, Troy, West Bloomfield, Rochester Hills, and nearby Oakland County communities.</p>
+            </div>
+
+            <!-- Quick Jump Category Bar -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10 max-w-3xl mx-auto">
+                <a href="#time-packages" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-red-600 text-red-600 hover:bg-red-600 hover:text-white text-xs sm:text-sm font-bold shadow-sm transition"><i class="fas fa-bolt" aria-hidden="true"></i> Time Packages</a>
+                <a href="#primary-categories" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white text-xs sm:text-sm font-bold shadow-sm transition"><i class="fas fa-layer-group" aria-hidden="true"></i> Core Categories</a>
+                <a href="#themed-packages" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-gray-300 text-gray-800 hover:bg-gray-100 text-xs sm:text-sm font-bold shadow-sm transition"><i class="fas fa-boxes-packing text-amber-600" aria-hidden="true"></i> Themed Bundles</a>
+                <a href="#flat-rates" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-gray-300 text-gray-800 hover:bg-gray-100 text-xs sm:text-sm font-bold shadow-sm transition"><i class="fas fa-receipt text-green-600" aria-hidden="true"></i> Flat-Rates</a>
             </div>
 
             <!-- Grouped Core Service Offerings -->
-            <div class="mb-14">
+            <div id="primary-categories" class="mb-14 scroll-mt-24">
                 <div class="text-center mb-8">
                     <span class="bg-blue-100 text-blue-900 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border border-blue-200"><i class="fas fa-layer-group mr-1.5 text-red-600" aria-hidden="true"></i> Explore Our Main Services</span>
                     <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-3">Primary Service Categories</h3>
@@ -709,7 +783,7 @@
             </div>
 
             <!-- Service Packages & Hourly Tiers -->
-            <div class="mb-14">
+            <div id="time-packages" class="mb-14 scroll-mt-24">
                 <div class="text-center mb-8">
                     <span class="bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border border-red-200"><i class="fas fa-clock mr-1.5" aria-hidden="true"></i> Book Time, Not Guesswork</span>
                     <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-3">Handyman Time Packages: Pick a Block, We Handle the List.</h3>
@@ -786,7 +860,7 @@
             </div>
 
             <!-- Popular Service Packages & Bundles -->
-            <div class="mb-12">
+            <div id="themed-packages" class="mb-12 scroll-mt-24">
                 <div class="text-center mb-6">
                     <span class="bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full"><i class="fas fa-boxes-packing mr-1" aria-hidden="true"></i> Simplified Bundles</span>
                     <h3 class="text-2xl font-bold text-blue-900 mt-2">Popular Themed Packages</h3>
@@ -1114,21 +1188,7 @@
 
     <!-- Before / After Transformations Showcase removed -->
 
-    <section id="reviews" class="py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white hidden" aria-labelledby="reviews-heading">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-                <div class="uppercase tracking-widest text-red-300 font-semibold">Customer Feedback</div>
-                <h2 id="reviews-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">What Your Neighbors Are Saying</h2>
-                <p class="mt-4 text-base sm:text-lg text-slate-300">Real reviews and project photos from homeowners across Oakland County, Michigan.</p>
-            </div>
-            <div id="home-reviews-list" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
-            <div class="mt-10 text-center">
-                <a href="/reviews" class="inline-flex items-center justify-center gap-2 border-[2px] border-white hover:bg-white hover:text-blue-900 text-base sm:text-lg px-8 py-4 rounded-xl font-semibold transition">
-                    Read All Reviews <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+    <!-- Reviews relocated higher up after Why Us section -->
 
     <section id="travel-zones" class="py-12 sm:py-16 bg-gray-50 rounded-3xl m-6">
         <div class="max-w-7xl mx-auto px-6">
@@ -1806,6 +1866,49 @@
             modal.addEventListener('close', () => {
                 document.body.style.overflow = '';
             });
+        })();
+    </script>
+
+    <!-- Sticky Service Action Bar (Persistent CTAs while scrolling through menus) -->
+    <div id="sticky-service-cta" class="fixed bottom-0 left-0 right-0 z-40 bg-blue-950/95 backdrop-blur-md text-white border-t-2 border-red-600 shadow-2xl py-2.5 px-4 transition-transform duration-300 transform translate-y-full" aria-label="Quick Booking Bar">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div class="flex items-center gap-2 text-xs sm:text-sm font-medium">
+                <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-red-600 text-white font-bold shrink-0"><i class="fas fa-bolt text-xs" aria-hidden="true"></i></span>
+                <span class="hidden md:inline text-slate-200">Ready to clear your home punch list?</span>
+                <span class="font-bold text-white">4-Hour Package: <span class="text-green-400 font-extrabold">$280</span></span>
+            </div>
+            <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                <a href="/book?service=4-Hour+Handyman+Package" class="flex-1 sm:flex-none text-center bg-red-600 hover:bg-red-700 text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-xl transition shadow-md whitespace-nowrap">
+                    <i class="fas fa-calendar-check mr-1" aria-hidden="true"></i> Book 4 Hours
+                </a>
+                <a href="#quote" class="flex-1 sm:flex-none text-center bg-white/10 hover:bg-white/20 text-white border border-white/30 text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl transition whitespace-nowrap">
+                    <i class="fas fa-file-invoice mr-1 text-red-400" aria-hidden="true"></i> Free Quote
+                </a>
+                <a href="tel:2483853432" class="p-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition text-xs sm:text-sm shrink-0" title="Call Victor: (248) 385-3432" aria-label="Call Victor Gregg Hale">
+                    <i class="fas fa-phone" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const stickyCta = document.getElementById('sticky-service-cta');
+            const servicesSection = document.getElementById('services');
+            if (!stickyCta || !servicesSection) return;
+
+            function checkScroll() {
+                const rect = servicesSection.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                if (rect.top <= windowHeight * 0.6 && rect.bottom >= 100) {
+                    stickyCta.classList.remove('translate-y-full');
+                } else {
+                    stickyCta.classList.add('translate-y-full');
+                }
+            }
+
+            window.addEventListener('scroll', checkScroll, { passive: true });
+            checkScroll();
         })();
     </script>
 
