@@ -1,6 +1,9 @@
 # Local Netlify folder
 .netlify
 
+# Visual Editor compiled config cache
+.stackbit
+
 # Dependency directories
 node_modules/
 

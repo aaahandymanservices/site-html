@@ -139,7 +139,7 @@ export const visualEditorModels: Model[] = [
     label: "Services",
     urlPath: "/services",
     singleInstance: true,
-    file: "services.json",
+    filePath: "public/data/services.json",
     canDelete: false,
     fields: [
       { type: "text", name: "note", label: "Internal Note", readOnly: true },
@@ -153,7 +153,7 @@ export const visualEditorModels: Model[] = [
     label: "Service Areas",
     urlPath: "/service-areas",
     singleInstance: true,
-    file: "service-areas.json",
+    filePath: "public/data/service-areas.json",
     canDelete: false,
     fields: [
       { type: "text", name: "note", label: "Internal Note", readOnly: true },
@@ -166,7 +166,7 @@ export const visualEditorModels: Model[] = [
     name: "QuoteTasksData",
     label: "Quote Calculator",
     singleInstance: true,
-    file: "quote-tasks.json",
+    filePath: "public/data/quote-tasks.json",
     canDelete: false,
     fields: [
       { type: "text", name: "note", label: "Internal Note", readOnly: true },
