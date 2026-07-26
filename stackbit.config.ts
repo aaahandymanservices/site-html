@@ -159,8 +159,17 @@ export default defineStackbitConfig({
   contentSources: [
     new GitContentSource({
       rootPath: projectRoot,
-      contentDirs: ["public/data"],
-      models: visualEditorModels,
+      contentDirs: ["public/data", "content"],
+      models: [
+        ...visualEditorModels,
+        {
+          name: "Page",
+          type: "page",
+          urlPath: "/{slug}",
+          filePath: "content/pages/{slug}.json",
+          fields: [{ name: "title", type: "string", required: true }]
+        }
+      ],
       assetsConfig: {
         referenceType: "static",
         staticDir: "public",
