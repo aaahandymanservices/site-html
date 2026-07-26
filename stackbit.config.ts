@@ -178,8 +178,9 @@ export default defineStackbitConfig({
       }
     })
   ],
-  sitemap: ({ getDocuments }) => {
-    const documentsByModel = new Map(getDocuments().map((document) => [document.modelName, document]));
+  siteMap: ({ documents, getDocuments }) => {
+    const availableDocuments = typeof getDocuments === "function" ? getDocuments() : documents;
+    const documentsByModel = new Map(availableDocuments.map((document) => [document.modelName, document]));
 
     // Discovered on every call so pages regenerated from a content edit show up
     // without restarting the editor.
