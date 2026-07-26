@@ -147,6 +147,25 @@
     </div>
 </nav>
 
+<aside id="seasonal-banner" class="seasonal-banner" data-season="summer" aria-label="Seasonal offer">
+    <div class="seasonal-banner__inner">
+        <p class="seasonal-badge">
+            <span class="seasonal-badge__icon" data-banner-icon aria-hidden="true">🌤️</span>
+            <span data-banner-label>Summer Exterior Refresh</span>
+        </p>
+        <p class="seasonal-banner__copy">
+            <span class="seasonal-banner__lead"><span data-banner-lead>Book your summer exterior refresh and</span> <strong class="seasonal-banner__save" data-banner-save>save $50</strong></span>
+            <span class="seasonal-banner__note" data-banner-note>Oakland County homeowners · limited summer openings</span>
+        </p>
+        <a class="seasonal-banner__cta" href="/#quote" data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+    </div>
+    <button type="button" class="seasonal-banner__close" data-banner-close aria-label="Dismiss seasonal offer">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"></path></svg>
+    </button>
+    <script type="application/json" data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck & Gutter Prep","lead":"Book your spring deck & gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
+    <script>(function(){try{var b=document.getElementById('seasonal-banner');if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();</script>
+</aside>
+
     <main id="main-content" class="flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
