@@ -12,9 +12,13 @@
  *
  * Bump CACHE_VERSION to force every client onto a fresh cache.
  */
-// v2 evicts the v1 asset cache, where every /.netlify/images request shared a
-// single entry and served one image in place of all the others.
-const CACHE_VERSION = 'v2';
+// v2 evicted the v1 asset cache, where every /.netlify/images request shared a
+// single entry and served one image in place of all the others. v3 lands the
+// seasonal offer bar: its markup, styles, and behaviour have to arrive
+// together, and the asset cache is keyed on the URL minus ?v=, so bumping the
+// stamp on the stylesheet and script alone would still have served a returning
+// visitor last deploy's pair for one more page view.
+const CACHE_VERSION = 'v3';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

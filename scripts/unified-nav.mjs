@@ -1,3 +1,100 @@
+/*
+ * Seasonal offer bar, rendered directly under the top nav on every page.
+ *
+ * The copy turns over four times a year while the pages themselves are static,
+ * so the season is resolved twice. Once here, at build time -- that is what a
+ * visitor without JavaScript and what a crawler that doesn't run it will read.
+ * Then again in the browser by js/site.js, so a deploy that predates the
+ * equinox never leaves the site advertising the wrong season. Both readings
+ * come from this one table: it travels to the browser as JSON inside the
+ * banner rather than being copied into the script, where the two would drift.
+ */
+export const SEASONAL_OFFERS = {
+  spring: {
+    icon: '☀️',
+    label: 'Spring Deck & Gutter Prep',
+    lead: 'Book your spring deck & gutter prep and',
+    save: 'save $50',
+    note: 'Oakland County homeowners · limited spring openings',
+  },
+  summer: {
+    icon: '🌤️',
+    label: 'Summer Exterior Refresh',
+    lead: 'Book your summer exterior refresh and',
+    save: 'save $50',
+    note: 'Oakland County homeowners · limited summer openings',
+  },
+  fall: {
+    icon: '🍂',
+    label: 'Fall Maintenance Special',
+    lead: 'Book your seasonal tune-up today and',
+    save: 'save $50',
+    note: 'Oakland County homeowners · limited fall openings',
+  },
+  winter: {
+    icon: '❄️',
+    label: 'Winter Weatherproofing Special',
+    lead: 'Book your winter weatherproofing and',
+    save: 'save $50',
+    note: 'Oakland County homeowners · limited winter openings',
+  },
+};
+
+/** Meteorological seasons, which is how a Michigan homeowner thinks about the
+ *  work: winter runs December through February, not from the solstice. */
+export function currentSeason(date = new Date()) {
+  const month = date.getMonth();
+  if (month <= 1 || month === 11) return 'winter';
+  if (month <= 4) return 'spring';
+  if (month <= 7) return 'summer';
+  return 'fall';
+}
+
+const escapeHtml = (value) => value
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;');
+
+export function getSeasonalBanner() {
+  const season = currentSeason();
+  const offer = SEASONAL_OFFERS[season];
+
+  // Nothing in the table contains `<` today, but JSON sitting inside a document
+  // has to survive the HTML parser whatever the copy is edited to later, and a
+  // stray `</script>` in it would end the block early.
+  const seasons = JSON.stringify(SEASONAL_OFFERS).replace(/</g, '\\u003c');
+
+  // Dismissal is read back before the first paint rather than in the deferred
+  // site.js, so a visitor who closed the bar never sees it flash in and
+  // collapse again on every page they open. It re-derives the season key
+  // instead of importing one -- the few bytes of duplication buy the whole
+  // no-flash behaviour, and site.js re-checks the same key straight after.
+  const dismissGuard = "(function(){try{var b=document.getElementById('seasonal-banner');"
+    + 'if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();'
+    + "var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';"
+    + "var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;"
+    + "if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();";
+
+  return `<aside id="seasonal-banner" class="seasonal-banner" data-season="${season}" aria-label="Seasonal offer">
+    <div class="seasonal-banner__inner">
+        <p class="seasonal-badge">
+            <span class="seasonal-badge__icon" data-banner-icon aria-hidden="true">${offer.icon}</span>
+            <span data-banner-label>${escapeHtml(offer.label)}</span>
+        </p>
+        <p class="seasonal-banner__copy">
+            <span class="seasonal-banner__lead"><span data-banner-lead>${escapeHtml(offer.lead)}</span> <strong class="seasonal-banner__save" data-banner-save>${escapeHtml(offer.save)}</strong></span>
+            <span class="seasonal-banner__note" data-banner-note>${escapeHtml(offer.note)}</span>
+        </p>
+        <a class="seasonal-banner__cta" href="/#quote" data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+    </div>
+    <button type="button" class="seasonal-banner__close" data-banner-close aria-label="Dismiss seasonal offer">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"></path></svg>
+    </button>
+    <script type="application/json" data-banner-seasons>${seasons}</script>
+    <script>${dismissGuard}</script>
+</aside>`;
+}
+
 export function getUnifiedNav(activePage = 'none') {
   const isServices = activePage === 'services';
   const isServiceAreas = activePage === 'service-areas';
@@ -71,5 +168,7 @@ export function getUnifiedNav(activePage = 'none') {
             <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor Page" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
         </div>
     </div>
-</nav>`;
+</nav>
+
+${getSeasonalBanner()}`;
 }
