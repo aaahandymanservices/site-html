@@ -24,7 +24,9 @@ const MIME_TYPES = {
   ".txt": "text/plain; charset=utf-8",
   ".webmanifest": "application/manifest+json; charset=utf-8",
   ".webp": "image/webp",
-  ".woff2": "font/woff2"
+  ".woff2": "font/woff2",
+  // sitemap.xml is a real preview route, not a download.
+  ".xml": "application/xml; charset=utf-8"
 };
 
 function getOption(name, fallback) {
