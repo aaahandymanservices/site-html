@@ -1018,6 +1018,332 @@ body > header.bg-gradient-to-r > div:last-child {
   transform: none;
 }
 
+/* ============================================================
+   Seasonal offer bar
+   Sits directly under the sticky nav on every page: the season's
+   badge, one line of copy, and the button that drops the visitor
+   straight onto the quote form. Dismissible, and it stays dismissed.
+   ============================================================ */
+
+/* Each season retints the same bar rather than restyling it, so the
+   palette is four custom properties deep and nothing below has to know
+   which season it is rendering. The fall values double as the fallback
+   if the data-season attribute is ever missing. */
+.seasonal-banner {
+  --season-a: #fff8ef;
+  --season-b: #fdeedd;
+  --season-c: #fff6ec;
+  --season-glow: rgb(200 106 26 / 20%);
+  --season-ring: rgb(180 96 24 / 28%);
+  --season-ink: #8a4712;
+
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgb(27 42 74 / 10%);
+  background:
+    radial-gradient(26rem 12rem at 14% -40%, var(--season-glow), transparent 72%),
+    linear-gradient(100deg, var(--season-a), var(--season-b) 48%, var(--season-c));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 70%);
+  animation: seasonal-banner-in 0.5s var(--ease-out) both;
+}
+
+.seasonal-banner[data-season="winter"] {
+  --season-a: #f5f9ff;
+  --season-b: #e8f1fb;
+  --season-c: #f7fbff;
+  --season-glow: rgb(46 106 170 / 18%);
+  --season-ring: rgb(46 106 170 / 26%);
+  --season-ink: #1f4d7a;
+}
+
+.seasonal-banner[data-season="spring"] {
+  --season-a: #f7fdf5;
+  --season-b: #eaf7e8;
+  --season-c: #f8fdf7;
+  --season-glow: rgb(46 138 62 / 17%);
+  --season-ring: rgb(46 138 62 / 26%);
+  --season-ink: #24632f;
+}
+
+.seasonal-banner[data-season="summer"] {
+  --season-a: #fffbf0;
+  --season-b: #fff4d9;
+  --season-c: #fffaf0;
+  --season-glow: rgb(206 148 20 / 20%);
+  --season-ring: rgb(186 132 16 / 30%);
+  --season-ink: #7e5906;
+}
+
+/* Belt and braces alongside the UA stylesheet's own [hidden] rule: nothing
+   here sets `display` on the bar, but a later layout change might, and the
+   dismissed state must win over it. */
+.seasonal-banner[hidden] {
+  display: none;
+}
+
+/* A slow highlight drifts across the fill every few seconds -- enough
+   movement to catch the eye on arrival, transform-only so it never costs
+   a repaint. */
+.seasonal-banner::before {
+  position: absolute;
+  inset: -50% -20%;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(104deg, transparent 44%, rgb(255 255 255 / 62%) 50%, transparent 56%);
+  transform: translateX(-55%);
+  animation: seasonal-sheen 11s var(--ease) infinite;
+}
+
+@keyframes seasonal-sheen {
+  0%,
+  55% {
+    transform: translateX(-55%);
+  }
+
+  100% {
+    transform: translateX(55%);
+  }
+}
+
+@keyframes seasonal-banner-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.seasonal-banner__inner {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 1.15rem;
+  max-width: 80rem;
+  margin-inline: auto;
+  /* Symmetric gutters so the row still reads as centred with the close
+     button occupying the right one. */
+  padding: 0.55rem 3.5rem;
+}
+
+.seasonal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.25rem 0.75rem 0.25rem 0.3rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 88%);
+  box-shadow:
+    inset 0 0 0 1px var(--season-ring),
+    0 1px 2px rgb(27 42 74 / 8%);
+  color: var(--season-ink);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.seasonal-badge__icon {
+  display: inline-flex;
+  flex: 0 0 1.55rem;
+  align-items: center;
+  justify-content: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(27 42 74 / 14%);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.seasonal-banner__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.seasonal-banner__lead {
+  color: var(--brand-navy);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.seasonal-banner__save {
+  color: var(--brand-crimson);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.seasonal-banner__note {
+  color: var(--brand-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.seasonal-banner__cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.15rem;
+  overflow: hidden;
+  border-radius: 0.7rem;
+  background: var(--grad-crimson);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgb(120 25 37 / 26%);
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    filter var(--dur) var(--ease);
+}
+
+.seasonal-banner__cta::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 30%) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.62s var(--ease-out);
+}
+
+.seasonal-banner__cta:hover {
+  filter: brightness(1.04);
+  box-shadow: 0 10px 22px rgb(120 25 37 / 34%);
+  transform: translateY(-1px);
+}
+
+.seasonal-banner__cta:hover::after {
+  transform: translateX(120%);
+}
+
+.seasonal-banner__cta:active {
+  transform: translateY(0);
+}
+
+.seasonal-banner__cta svg {
+  position: relative;
+  flex: 0 0 auto;
+  transition: transform var(--dur) var(--ease);
+}
+
+.seasonal-banner__cta:hover svg {
+  transform: translateX(2px);
+}
+
+.seasonal-banner__close {
+  position: absolute;
+  top: 50%;
+  /* Far enough in that the bar's own `overflow: hidden` -- which is there to
+     clip the sheen -- doesn't crop the focus ring off this button. */
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: rgb(27 42 74 / 45%);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: color var(--dur) var(--ease);
+}
+
+/* The touch target is deliberately larger than the mark should look, so
+   the hover state is drawn on an inset circle instead of the button box. */
+.seasonal-banner__close::before {
+  position: absolute;
+  inset: 0.5rem;
+  content: "";
+  border-radius: 50%;
+  background: transparent;
+  transition: background-color var(--dur) var(--ease);
+}
+
+.seasonal-banner__close:hover {
+  color: var(--brand-navy);
+}
+
+.seasonal-banner__close:hover::before {
+  background: rgb(27 42 74 / 8%);
+}
+
+.seasonal-banner__close svg {
+  position: relative;
+}
+
+/* Dismissal collapses the bar rather than snapping it out, so the page
+   below settles instead of jumping. js/site.js pins the current height
+   first; the entrance animation has to be cleared or its retained final
+   state would outrank the fade. */
+.seasonal-banner.is-dismissing {
+  height: 0;
+  opacity: 0;
+  animation: none;
+  transition:
+    height 0.32s var(--ease),
+    opacity 0.22s var(--ease);
+}
+
+@media (max-width: 767px) {
+  .seasonal-banner__inner {
+    gap: 0.45rem 0.75rem;
+    /* The right gutter clears the corner close button outright, so a wrapped
+       badge can never run underneath it on a 320px screen. */
+    padding: 0.7rem 3rem 0.8rem;
+  }
+
+  /* Stacked layout leaves no vertically centred row to sit against, so
+     the close button moves to the corner. */
+  .seasonal-banner__close {
+    top: 0.45rem;
+    right: 0.45rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    transform: none;
+  }
+
+  .seasonal-badge {
+    white-space: normal;
+  }
+
+  .seasonal-banner__lead {
+    font-size: 0.9rem;
+  }
+
+  .seasonal-banner__cta {
+    width: 100%;
+    max-width: 21rem;
+    justify-content: center;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1037,7 +1363,9 @@ body > header.bg-gradient-to-r > div:last-child {
 
   .cta-button::after,
   .service-card::before,
-  .generated-service-card::before {
+  .generated-service-card::before,
+  .seasonal-banner::before,
+  .seasonal-banner__cta::after {
     display: none;
   }
 
@@ -1056,8 +1384,14 @@ body > header.bg-gradient-to-r > div:last-child {
   .legal-sections > section:hover,
   .cta-button:hover,
   .nav-link:hover,
+  .seasonal-banner__cta:hover,
+  .seasonal-banner__cta:hover svg,
   #back-to-top:hover {
     transform: none;
+  }
+
+  .seasonal-banner {
+    animation: none;
   }
 
   .pulse-btn-green,
