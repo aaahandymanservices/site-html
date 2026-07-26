@@ -120,7 +120,7 @@ function navLink(href, label, active) {
 }
 
 function serviceChip(s) {
-  return `                <a href="/services#${s.anchor}" class="generated-service-card group flex items-center gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm hover:text-red-600">
+  return `                <a href="/services#${s.anchor}" class="generated-service-card group flex items-center gap-3 bg-white border border-slate-200/80 p-4 rounded-2xl shadow-sm hover:border-red-600/30 transition-all hover:text-red-600">
                     <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas ${s.icon}" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800 group-hover:text-red-600">${s.label}</span>
                 </a>`;
@@ -260,7 +260,7 @@ ${getUnifiedNav('service-areas')}
                     <p>${city.blurb}</p>
                     <p>Whether it is a single nagging repair or a full seasonal to-do list, we bring the same craftsmanship, clean job sites, and clear communication to every ${city.name} home. From drywall and doors to painting, flooring, gutters, and minor plumbing or electrical work, we help you protect your home's comfort and value.</p>
                 </div>
-                <aside class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 shadow-lg">
+                <aside class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-lg">
                     <div class="flex items-center gap-3 mb-4">
                         <span class="text-2xl text-${zone.color}-600" aria-hidden="true"><i class="fas fa-location-dot" aria-hidden="true"></i></span>
                         <div>
@@ -305,7 +305,7 @@ ${nearbyLinks(city)}
                     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">Questions from ${city.name} Homeowners</h2>
                 </div>
                 <div class="space-y-4">
-${faqs.map((f) => `                    <article class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-6 rounded-3xl shadow-sm">
+${faqs.map((f) => `                    <article class="bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm hover:border-red-600/30 transition-all">
                         <h3 class="text-lg sm:text-xl font-bold text-blue-900 mb-2">${f.q}</h3>
                         <p class="text-gray-600">${f.a}</p>
                     </article>`).join('\n')}

@@ -130,14 +130,14 @@ function navLink(href, label, active) {
 }
 
 function featureCard(f) {
-  return `                <div class="flex items-start gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm">
+  return `                <div class="flex items-start gap-3 bg-white border border-slate-200/80 p-4 rounded-2xl shadow-sm hover:border-red-600/30 transition-all">
                     <span class="w-8 h-8 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800">${amp(f)}</span>
                 </div>`;
 }
 
 function relatedCard(s) {
-  return `                <a href="/services/${s.slug}" class="generated-service-card group flex items-center gap-3 bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-4 rounded-2xl shadow-sm hover:text-red-600">
+  return `                <a href="/services/${s.slug}" class="generated-service-card group flex items-center gap-3 bg-white border border-slate-200/80 p-4 rounded-2xl shadow-sm hover:border-red-600/30 transition-all hover:text-red-600">
                     <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas ${s.icon}" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800 group-hover:text-red-600">${amp(s.name)}</span>
                 </a>`;
@@ -176,7 +176,7 @@ function costGuideSection(service) {
                 </div>
 
                 <!-- Linear foot pricing model -->
-                <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 sm:p-8 shadow-sm">
+                <div class="bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 shadow-sm">
                     <div class="flex items-center gap-3 mb-5">
                         <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-ruler-horizontal" aria-hidden="true"></i></span>
                         <h3 class="text-xl sm:text-2xl font-bold text-blue-900">The Linear-Foot Pricing Model</h3>
@@ -204,17 +204,17 @@ function costGuideSection(service) {
                 <div class="mt-6">
                     <h3 class="text-xl sm:text-2xl font-bold text-blue-900 mb-4 text-center">Key Factors That Can Adjust the Price</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
+                        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm hover:border-red-600/30 transition-all">
                             <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-house-chimney" aria-hidden="true"></i></span>
                             <h4 class="font-bold text-gray-900 mb-1">Roof Pitch &amp; Height</h4>
                             <p class="text-sm text-gray-600">Un-walkable, steep roofs or multi-story homes require extra safety harnesses and setup time, which can add a premium of 15% or more.</p>
                         </div>
-                        <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
+                        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm hover:border-red-600/30 transition-all">
                             <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-seedling" aria-hidden="true"></i></span>
                             <h4 class="font-bold text-gray-900 mb-1">Severity of Clogs</h4>
                             <p class="text-sm text-gray-600">Gutters that are severely overflowing, packed with dirt, or hosting growing weeds must be scooped by hand instead of flushed &mdash; expect a 10% to 50% heavy-debris surcharge.</p>
                         </div>
-                        <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
+                        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm hover:border-red-600/30 transition-all">
                             <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></span>
                             <h4 class="font-bold text-gray-900 mb-1">Gutter Guards</h4>
                             <p class="text-sm text-gray-600">Mesh or surface-tension guards that must be unscrewed and re-secured to clean underneath add labor time, and usually increase the cost.</p>
@@ -239,7 +239,7 @@ function powerWashingCostGuide() {
                 </div>
 
                 <!-- Per-square-foot pricing model -->
-                <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 sm:p-8 shadow-sm">
+                <div class="bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 shadow-sm">
                     <div class="flex items-center gap-3 mb-5">
                         <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-ruler-combined" aria-hidden="true"></i></span>
                         <h3 class="text-xl sm:text-2xl font-bold text-blue-900">The Per-Square-Foot Pricing Model</h3>
@@ -277,17 +277,17 @@ function powerWashingCostGuide() {
                 <div class="mt-6">
                     <h3 class="text-xl sm:text-2xl font-bold text-blue-900 mb-4 text-center">Key Factors That Can Adjust the Price</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
+                        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm hover:border-red-600/30 transition-all">
                             <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-soap" aria-hidden="true"></i></span>
                             <h4 class="font-bold text-gray-900 mb-1">Surface Condition</h4>
                             <p class="text-sm text-gray-600">Heavy oil stains on driveways or thick green mold on north-facing siding need chemical pre-treatments, which add to material costs.</p>
                         </div>
-                        <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
+                        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm hover:border-red-600/30 transition-all">
                             <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-faucet-drip" aria-hidden="true"></i></span>
                             <h4 class="font-bold text-gray-900 mb-1">Water Access</h4>
                             <p class="text-sm text-gray-600">Rates assume a hookup to an outdoor spigot with strong pressure. If a technician must bring a water truck, the price scales up sharply.</p>
                         </div>
-                        <div class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-2xl p-5 shadow-sm">
+                        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm hover:border-red-600/30 transition-all">
                             <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-3" aria-hidden="true"><i class="fas fa-couch" aria-hidden="true"></i></span>
                             <h4 class="font-bold text-gray-900 mb-1">Obstacles &amp; Protection</h4>
                             <p class="text-sm text-gray-600">Moving heavy patio furniture or wrapping delicate landscaping, lighting, and outlets in protective plastic adds prep labor to the final cost.</p>
@@ -424,7 +424,7 @@ ${(service.slug === 'minor-electrical' || service.slug === 'minor-plumbing') ? `
                     </div>` : ''}
 ${service.intro.map((p) => `                    <p>${amp(p)}</p>`).join('\n')}
                 </div>
-                <aside class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 rounded-3xl p-6 shadow-lg">
+                <aside class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-lg">
                     <div class="flex items-center gap-3 mb-4">
                         <span class="text-2xl text-red-600" aria-hidden="true"><i class="fas fa-tag" aria-hidden="true"></i></span>
                         <div>
@@ -499,7 +499,7 @@ ${serviceAreasSection(service)}
                     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">Common Questions</h2>
                 </div>
                 <div class="space-y-4">
-${faqs.map((f) => `                    <article class="bg-white border-[2px] border-red-600 ring-1 ring-red-600 p-6 rounded-3xl shadow-sm">
+${faqs.map((f) => `                    <article class="bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm hover:border-red-600/30 transition-all">
                         <h3 class="text-lg sm:text-xl font-bold text-blue-900 mb-2">${amp(f.q)}</h3>
                         <p class="text-gray-600">${amp(f.a)}</p>
                     </article>`).join('\n')}

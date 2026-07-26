@@ -227,8 +227,6 @@
             opacity: 0;
             animation: fadeInUp 0.5s ease forwards;
         }
-        .service-card { transition: all 0.3s; }
-        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
         /* Transform and opacity only, so the flashing icon is composited rather
            than repainted: the glow that used to be an animated drop-shadow() is
            a static radial gradient on a pseudo-element that just fades. */
@@ -250,7 +248,7 @@
             position: absolute;
             inset: -40%;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(142, 31, 38, 0.8), rgba(142, 31, 38, 0) 70%);
+            background: radial-gradient(circle, rgba(166, 31, 46, 0.8), rgba(166, 31, 46, 0) 70%);
             opacity: 0;
             pointer-events: none;
             animation: siren-glow 1s infinite ease-in-out;
