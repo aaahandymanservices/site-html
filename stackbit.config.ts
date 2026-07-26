@@ -1,4 +1,4 @@
-import { closeSync, existsSync, openSync, readSync, readdirSync } from "node:fs";
+import { closeSync, existsSync, openSync, readFileSync, readSync, readdirSync } from "node:fs";
 import { join, relative } from "node:path";
 import { GitContentSource } from "@stackbit/cms-git";
 import { defineStackbitConfig, type SiteMapEntry } from "@stackbit/types";
@@ -18,6 +18,12 @@ function resolveProjectRoot() {
 
 const projectRoot = resolveProjectRoot();
 const publicDir = join(projectRoot, "public");
+
+// The public path of the sitemap `scripts/build-sitemap.mjs` generates. Visual
+// Editor's config schema has no `sitemapUrl` property -- its sitemap surface is
+// the `siteMap` function at the bottom of this file -- so the path is declared
+// here once and both the file lookup below and that function work from it.
+const SITEMAP_URL = "/sitemap.xml";
 
 // Pages that exist in public/ but are not editor destinations. Matched against
 // the path relative to public/ (slash-separated), not the bare filename, so an
@@ -99,6 +105,37 @@ function pageLabel(filePath: string) {
   return title ? decodeTitleEntities(title) : pageRoute(filePath);
 }
 
+// Routes advertised by the generated sitemap at SITEMAP_URL. Its <loc> values
+// are absolute production URLs, so only the pathname is kept, and a trailing
+// slash is dropped so `/services/` and `/services` never register as two pages.
+function sitemapRoutes(): string[] {
+  const sitemapFile = join(publicDir, SITEMAP_URL.replace(/^\/+/, ""));
+  if (!existsSync(sitemapFile)) return [];
+
+  let xml: string;
+  try {
+    xml = readFileSync(sitemapFile, "utf8");
+  } catch {
+    // An unreadable sitemap should not take the whole editor down; page
+    // discovery still has the HTML on disk to work from.
+    return [];
+  }
+
+  const routes: string[] = [];
+  for (const match of xml.matchAll(/<loc>([^<]+)<\/loc>/gi)) {
+    const location = decodeTitleEntities(match[1].trim());
+    let pathname: string;
+    try {
+      pathname = new URL(location).pathname;
+    } catch {
+      // A relative or malformed <loc> gives us no route to navigate to.
+      continue;
+    }
+    routes.push(pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname);
+  }
+  return routes;
+}
+
 function collectPages(directory: string): SiteMapEntry[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const filePath = join(directory, entry.name);
@@ -117,11 +154,32 @@ function collectPages(directory: string): SiteMapEntry[] {
 }
 
 function discoverPages(): SiteMapEntry[] {
-  const pages = collectPages(publicDir).sort((left, right) => left.urlPath.localeCompare(right.urlPath));
+  const routes = new Set<string>();
+  const pages: SiteMapEntry[] = [];
 
   // `about.html` and `about/index.html` resolve to the same route, so keep the
   // first of each and never hand the editor two entries sharing a stableId.
-  return pages.filter((page, index) => index === 0 || page.urlPath !== pages[index - 1].urlPath);
+  for (const page of collectPages(publicDir)) {
+    if (routes.has(page.urlPath)) continue;
+    routes.add(page.urlPath);
+    pages.push(page);
+  }
+
+  // The generated sitemap is the site's own list of public routes, so anything
+  // it advertises that has no HTML on disk yet -- a service or city page whose
+  // generator has not run in this checkout -- still belongs in the editor.
+  for (const route of sitemapRoutes()) {
+    if (routes.has(route)) continue;
+    routes.add(route);
+    pages.push({
+      urlPath: route,
+      label: route,
+      stableId: `static-page:${route}`,
+      ...(route === "/" ? { isHomePage: true } : {})
+    });
+  }
+
+  return pages.sort((left, right) => left.urlPath.localeCompare(right.urlPath));
 }
 
 // Pages that sit under a document-backed prefix but render their own content.
