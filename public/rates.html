@@ -130,7 +130,7 @@
     </script>
 
     <link rel="stylesheet" href="/css/tailwind.css?v=20260728">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260728">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260728-2">
     <link rel="stylesheet" href="/css/icons.css?v=20260728">
 
     <style>
@@ -138,13 +138,31 @@
         .service-card { transition: all 0.3s; }
         .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
 
+        /* Transform and opacity only, so the flashing icon is composited rather
+           than repainted: the glow that used to be an animated drop-shadow() is
+           a static radial gradient on a pseudo-element that just fades. */
         @keyframes siren-flash {
-            0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 0 rgba(142, 31, 38, 0)); }
-            50% { opacity: 0.3; transform: scale(1.15); filter: drop-shadow(0 0 8px rgba(142, 31, 38, 0.8)); }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.15); }
+        }
+        @keyframes siren-glow {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
         }
         .flash-siren {
+            position: relative;
             display: inline-block;
             animation: siren-flash 1s infinite ease-in-out;
+        }
+        .flash-siren::after {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(142, 31, 38, 0.8), rgba(142, 31, 38, 0) 70%);
+            opacity: 0;
+            pointer-events: none;
+            animation: siren-glow 1s infinite ease-in-out;
         }
 
         section[id], header[id], #flat-rate-menu, #quote-calculator {
@@ -157,6 +175,7 @@
         @media (prefers-reduced-motion: reduce) {
 
             .flash-siren,
+            .flash-siren::after,
             .service-card { animation: none !important; }
             .service-card:hover { transform: none !important; }
         }

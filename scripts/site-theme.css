@@ -496,21 +496,53 @@ body > header.bg-gradient-to-r > * {
   transform: translateY(-6px);
 }
 
+/*
+ * The floating call button pulses on every page for as long as the page is
+ * open, so the animation is kept to transform and opacity -- the only two
+ * properties the compositor can animate without waking the main thread. The
+ * halo used to be an animated box-shadow spread, which forced a repaint of the
+ * button and the region around it 60 times a second; it is now a fixed ring on
+ * a pseudo-element that scales up and fades out instead.
+ */
 @keyframes pulse-attention-green {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgb(22 163 74 / 55%);
     transform: scale(1);
   }
 
   50% {
-    box-shadow: 0 0 0 10px rgb(22 163 74 / 0%);
     transform: scale(1.035);
   }
 }
 
+@keyframes pulse-attention-green-ring {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0;
+    transform: scale(1.16);
+  }
+}
+
 .pulse-btn-green {
+  position: relative;
   animation: pulse-attention-green 2s ease-in-out infinite;
+}
+
+/* An outer box-shadow is clipped to outside the border box, so the ring never
+   paints over the button's own background or label. */
+.pulse-btn-green::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 5px rgb(22 163 74 / 55%);
+  pointer-events: none;
+  animation: pulse-attention-green-ring 2s ease-in-out infinite;
 }
 
 form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
@@ -1028,7 +1060,8 @@ body > header.bg-gradient-to-r > div:last-child {
     transform: none;
   }
 
-  .pulse-btn-green {
+  .pulse-btn-green,
+  .pulse-btn-green::before {
     animation: none;
   }
 }

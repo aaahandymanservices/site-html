@@ -23,6 +23,28 @@
   [headers.values]
     Content-Type = "application/manifest+json; charset=utf-8"
     Cache-Control = "public, max-age=3600"
+    Netlify-CDN-Cache-Control = "public, max-age=3600"
+
+# ---------------------------------------------------------------------------
+# Static caching policy
+#
+# Everything below sorts into one of two tiers, decided by a single question:
+# does the URL change when the bytes change?
+#
+#   Versioned assets -- stylesheets and scripts are always linked with a ?v=
+#   stamp, and fonts, icons, and photography are added under a new name rather
+#   than edited in place. A year of browser cache plus `immutable` is safe for
+#   these, and it saves returning visitors a revalidation round trip per file
+#   on a page that links a dozen of them. The CDN is given the same year so
+#   repeat traffic is answered at the edge instead of from the origin.
+#
+#   Content -- pages, the JSON the quote calculator and service-area checker
+#   fetch, the sitemap, and robots.txt all keep their URL across edits, so a
+#   long max-age would pin stale content in browsers with no way to recall it.
+#   These revalidate with the origin every time while the CDN answers straight
+#   from cache and refreshes in the background, which keeps the response fast
+#   without delaying a price change or a new service area.
+# ---------------------------------------------------------------------------
 
 [[headers]]
   for = "/"
@@ -34,52 +56,104 @@
   [headers.values]
     Netlify-CDN-Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
 
+# Site data read at runtime by the quote calculator and service-area checker.
+# It is fetched without a version stamp, so it has to behave like content.
+[[headers]]
+  for = "/data/*.json"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Netlify-CDN-Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
+
+# Crawler-facing files: a new service page should be discoverable on the next
+# crawl, not after a day-long browser cache expires.
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Netlify-CDN-Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Netlify-CDN-Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
+
 [[headers]]
   for = "/*.jpg"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/*.jpeg"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/*.png"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/*.ico"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/*.svg"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/*.webp"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/*.avif"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/*.woff2"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable"
 
+# The subset font files are preloaded on every page, so their cache entry is
+# worth more than any other asset's: a hit here removes render-blocking bytes
+# from the critical path of a repeat visit.
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable"
+
+# Installed-app icons, referenced from the web manifest.
+[[headers]]
+  for = "/icons/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable"
+
+# Stylesheets and scripts are safe to pin for a year only because every <link>
+# and <script> that points at them carries a ?v= stamp. Changing one of these
+# files without bumping its stamp will strand returning visitors on the old
+# copy for the full year.
 [[headers]]
   for = "/css/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/js/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable"

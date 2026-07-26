@@ -239,7 +239,7 @@
     }
     </script>
     <link rel="stylesheet" href="/css/tailwind.css?v=20260728">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260728">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260728-2">
     <link rel="stylesheet" href="/css/icons.css?v=20260728">
     <style>
     </style>
@@ -567,22 +567,51 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-VRMCPNEQC3');
-      function loadGtag(){
-        if(window.__gtagLoaded) return;
-        window.__gtagLoaded = true;
-        var s = document.createElement('script');
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3';
-        s.async = true;
-        document.head.appendChild(s);
-      }
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(function() { setTimeout(loadGtag, 2500); });
-      } else {
-        setTimeout(loadGtag, 3500);
-      }
-      ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function(e) {
-        window.addEventListener(e, loadGtag, { once: true, passive: true });
-      });
+
+      // gtag.js is held back until the load event has fired. Before that the
+      // browser is still fetching this page's own CSS, fonts, and hero image,
+      // and a third-party script queued alongside them competes for bandwidth
+      // and main-thread time inside the LCP window. Once the document is done
+      // loading the request goes out on the first idle slot, and a real
+      // interaction promotes it so engaged visitors are still measured.
+      (function () {
+        var injected = false, armed = false;
+
+        function inject() {
+          if (injected) return;
+          injected = true;
+          window.__gtagLoaded = true;
+          var s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3';
+          s.async = true;
+          document.head.appendChild(s);
+        }
+
+        function afterLoad(fn) {
+          if (document.readyState === 'complete') fn();
+          else window.addEventListener('load', fn, { once: true });
+        }
+
+        // An interaction during loading queues the script for the moment
+        // loading finishes rather than firing it mid-load.
+        function loadGtag() {
+          if (injected || armed) return;
+          armed = true;
+          afterLoad(inject);
+        }
+
+        afterLoad(function () {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(function () { setTimeout(inject, 2500); }, { timeout: 6000 });
+          } else {
+            setTimeout(inject, 3500);
+          }
+        });
+
+        ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (e) {
+          window.addEventListener(e, loadGtag, { once: true, passive: true });
+        });
+      })();
     </script>
     <script src="/js/chat-loader.js?v=20260724" defer></script>
     <script>

@@ -8,11 +8,12 @@
     <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Analytics is deliberately held back to idle + 2.5s (see the gtag loader
-         near the end of <body>), so a preconnect here would run a DNS lookup,
-         TCP handshake, and TLS negotiation inside the LCP window for a script
-         that will not be requested for seconds. dns-prefetch keeps the name
-         resolved without spending a connection slot or handshake bytes. -->
+    <!-- Analytics is deliberately held back until the load event, then an idle
+         slot (see the gtag loader near the end of <body>), so a preconnect here
+         would run a DNS lookup, TCP handshake, and TLS negotiation inside the
+         LCP window for a script that will not be requested for seconds.
+         dns-prefetch keeps the name resolved without spending a connection slot
+         or handshake bytes. -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
     <!-- Hero artwork is a CSS background-image, so the preload scanner needs an
@@ -262,7 +263,7 @@
     }
     </script>
     <link rel="stylesheet" href="/css/tailwind.css?v=20260728">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260728">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260728-2">
     <link rel="stylesheet" href="/css/icons.css?v=20260728">
     <style>
         .hero {
@@ -341,22 +342,70 @@
         .service-card { transition: all 0.3s; }
         .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
 
+        /* Both attention animations run forever and sit near the fold, so they
+           are written to touch nothing but transform and opacity: those are the
+           two properties a compositor can animate on its own thread. The glow
+           that used to be an animated drop-shadow() is now a static radial
+           gradient on a pseudo-element that only fades in and out -- same
+           picture, without re-rasterizing the icon every frame. */
         @keyframes siren-flash {
-            0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 0 rgba(142, 31, 38, 0)); }
-            50% { opacity: 0.3; transform: scale(1.15); filter: drop-shadow(0 0 8px rgba(142, 31, 38, 0.8)); }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.15); }
+        }
+        @keyframes siren-glow {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
         }
         .flash-siren {
+            position: relative;
             display: inline-block;
             animation: siren-flash 1s infinite ease-in-out;
         }
+        .flash-siren::after {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(142, 31, 38, 0.8), rgba(142, 31, 38, 0) 70%);
+            opacity: 0;
+            pointer-events: none;
+            animation: siren-glow 1s infinite ease-in-out;
+        }
 
+        /* The expanding halo was a box-shadow spread, which repaints the button
+           and the area around it on every frame. A pseudo-element carrying a
+           fixed ring that scales up and fades out renders identically and stays
+           on the GPU. The ring is drawn outside the pseudo-element's box, so the
+           button's own background and label are never covered. */
         @keyframes pulse-attention {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(142, 31, 38, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(142, 31, 38, 0); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes pulse-attention-ring {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 0; transform: scale(1.14); }
         }
         .pulse-btn {
+            position: relative;
             animation: pulse-attention 2s infinite;
         }
+        .pulse-btn::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 0 5px rgba(142, 31, 38, 0.7);
+            pointer-events: none;
+            animation: pulse-attention-ring 2s infinite;
+        }
+
+        /* The 6-hour package button is both a .cta-button and a .pulse-btn. The
+           shell clips its contents with overflow:hidden for its hover shine,
+           which would also swallow the ring, so this one button trades the
+           shine -- a hover-only flourish -- for the pulse that makes it stand
+           out in the first place. */
+        .cta-button.pulse-btn { overflow: visible; }
+        .cta-button.pulse-btn::after { display: none; }
 
         section[id], header[id] {
             scroll-margin-top: 80px;
@@ -370,7 +419,9 @@
         @media (prefers-reduced-motion: reduce) {
 
             .flash-siren,
+            .flash-siren::after,
             .pulse-btn,
+            .pulse-btn::before,
 
             .animate-pulse { animation: none !important; }
             .service-card,
@@ -1813,22 +1864,50 @@
       gtag('js', new Date());
       gtag('config', 'G-VRMCPNEQC3');
 
-      function loadGtag(){
-        if(window.__gtagLoaded) return;
-        window.__gtagLoaded = true;
-        var s = document.createElement('script');
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3';
-        s.async = true;
-        document.head.appendChild(s);
-      }
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(function() { setTimeout(loadGtag, 2500); });
-      } else {
-        setTimeout(loadGtag, 3500);
-      }
-      ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function(e) {
-        window.addEventListener(e, loadGtag, { once: true, passive: true });
-      });
+      // gtag.js is held back until the load event has fired. Before that the
+      // browser is still fetching this page's own CSS, fonts, and hero image,
+      // and a third-party script queued alongside them competes for bandwidth
+      // and main-thread time inside the LCP window. Once the document is done
+      // loading the request goes out on the first idle slot, and a real
+      // interaction promotes it so engaged visitors are still measured.
+      (function () {
+        var injected = false, armed = false;
+
+        function inject() {
+          if (injected) return;
+          injected = true;
+          window.__gtagLoaded = true;
+          var s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3';
+          s.async = true;
+          document.head.appendChild(s);
+        }
+
+        function afterLoad(fn) {
+          if (document.readyState === 'complete') fn();
+          else window.addEventListener('load', fn, { once: true });
+        }
+
+        // An interaction during loading queues the script for the moment
+        // loading finishes rather than firing it mid-load.
+        function loadGtag() {
+          if (injected || armed) return;
+          armed = true;
+          afterLoad(inject);
+        }
+
+        afterLoad(function () {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(function () { setTimeout(inject, 2500); }, { timeout: 6000 });
+          } else {
+            setTimeout(inject, 3500);
+          }
+        });
+
+        ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (e) {
+          window.addEventListener(e, loadGtag, { once: true, passive: true });
+        });
+      })();
     </script>
 
     <!-- Maintenance Membership details modal -->
