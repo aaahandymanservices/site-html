@@ -294,6 +294,24 @@
         </div>
     </div>
 </nav>
+<aside id="seasonal-banner" class="seasonal-banner" data-season="summer" aria-label="Seasonal offer">
+    <div class="seasonal-banner__inner">
+        <p class="seasonal-badge">
+            <span class="seasonal-badge__icon" data-banner-icon aria-hidden="true">🌤️</span>
+            <span data-banner-label>Summer Exterior Refresh</span>
+        </p>
+        <p class="seasonal-banner__copy">
+            <span class="seasonal-banner__lead"><span data-banner-lead>Book your summer exterior refresh and</span> <strong class="seasonal-banner__save" data-banner-save>save $50</strong></span>
+            <span class="seasonal-banner__note" data-banner-note>Oakland County homeowners · limited summer openings</span>
+        </p>
+        <a class="seasonal-banner__cta" href="/#quote" data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+    </div>
+    <button type="button" class="seasonal-banner__close" data-banner-close aria-label="Dismiss seasonal offer">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"></path></svg>
+    </button>
+    <script type="application/json" data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck & Gutter Prep","lead":"Book your spring deck & gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
+    <script>(function(){try{var b=document.getElementById('seasonal-banner');if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();</script>
+</aside>
     <noscript>
         <a href="tel:+12483853432" class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now" aria-label="Call AAA Handyman Services Now">
             <i class="fas fa-phone" aria-hidden="true"></i>
@@ -315,7 +333,7 @@
             <div class="w-16 h-16 mx-auto bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center text-3xl text-red-400 mb-5" aria-hidden="true"><i class="fas fa-shower" aria-hidden="true"></i></div>
             <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-2">Plumbing &amp; Water Protection &middot; Oakland County, MI</div>
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">Tub &amp; Shower Re-Caulk</h1>
-            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving Waterford, Troy, West Bloomfield, Rochester Hills, Royal Oak, Clarkston &amp; surrounding Oakland County communities</p>
+            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving Oakland County</p>
             <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
                 Strip out failing caulk and lay down a clean, watertight, mold-free seal.
             </p>
@@ -556,7 +574,6 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-VRMCPNEQC3');
-
       // gtag.js is held back until the load event has fired. Before that the
       // browser is still fetching this page's own CSS, fonts, and hero image,
       // and a third-party script queued alongside them competes for bandwidth
@@ -565,7 +582,6 @@
       // interaction promotes it so engaged visitors are still measured.
       (function () {
         var injected = false, armed = false;
-
         function inject() {
           if (injected) return;
           injected = true;
@@ -575,12 +591,10 @@
           s.async = true;
           document.head.appendChild(s);
         }
-
         function afterLoad(fn) {
           if (document.readyState === 'complete') fn();
           else window.addEventListener('load', fn, { once: true });
         }
-
         // An interaction during loading queues the script for the moment
         // loading finishes rather than firing it mid-load.
         function loadGtag() {
@@ -588,7 +602,6 @@
           armed = true;
           afterLoad(inject);
         }
-
         afterLoad(function () {
           if ('requestIdleCallback' in window) {
             requestIdleCallback(function () { setTimeout(inject, 2500); }, { timeout: 6000 });
@@ -596,7 +609,6 @@
             setTimeout(inject, 3500);
           }
         });
-
         ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (e) {
           window.addEventListener(e, loadGtag, { once: true, passive: true });
         });
