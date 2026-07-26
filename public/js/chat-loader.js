@@ -20,7 +20,7 @@
     ".aaa-fab .aaa-fab-btn:hover{transform:scale(1.06)}",
     ".aaa-fab .aaa-fab-btn:focus-visible{outline:3px solid #9fb1ca;outline-offset:2px}",
     ".aaa-chat-launch{background:#A61F2E}",
-    ".aaa-chat-launch:hover{background:#751a1e}",
+    ".aaa-chat-launch:hover{background:#781925}",
     ".aaa-chat-launch[aria-busy='true']{cursor:progress;opacity:.8}",
     ".aaa-call{background:#16a34a}",
     ".aaa-call:hover{background:#15803d}",
