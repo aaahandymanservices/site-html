@@ -1953,48 +1953,7 @@
         })();
     </script>
 
-    <!-- Sticky Service Action Bar (Persistent CTAs while scrolling through menus) -->
-    <div id="sticky-service-cta" class="fixed bottom-0 left-0 right-0 z-40 bg-blue-950/95 backdrop-blur-md text-white border-t-2 border-red-600 shadow-2xl py-2.5 px-4 transition-transform duration-300 transform translate-y-full" aria-label="Quick Booking Bar">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-            <div class="flex items-center gap-2 text-xs sm:text-sm font-medium">
-                <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-red-600 text-white font-bold shrink-0"><i class="fas fa-bolt text-xs" aria-hidden="true"></i></span>
-                <span class="hidden md:inline text-slate-200">Ready to clear your home punch list?</span>
-                <span class="font-bold text-white">4-Hour Package: <span class="text-green-400 font-extrabold">$280</span></span>
-            </div>
-            <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-                <a href="/book?service=4-Hour+Handyman+Package" class="flex-1 sm:flex-none text-center bg-red-600 hover:bg-red-700 text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-xl transition shadow-md whitespace-nowrap">
-                    <i class="fas fa-calendar-check mr-1" aria-hidden="true"></i> Book 4 Hours
-                </a>
-                <a href="#quote" class="flex-1 sm:flex-none text-center bg-white/10 hover:bg-white/20 text-white border border-white/30 text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl transition whitespace-nowrap">
-                    <i class="fas fa-file-invoice mr-1 text-red-400" aria-hidden="true"></i> Free Quote
-                </a>
-                <a href="tel:2483853432" class="p-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition text-xs sm:text-sm shrink-0" title="Call Victor: (248) 385-3432" aria-label="Call Victor Gregg Hale">
-                    <i class="fas fa-phone" aria-hidden="true"></i>
-                </a>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        (function () {
-            const stickyCta = document.getElementById('sticky-service-cta');
-            const servicesSection = document.getElementById('services');
-            if (!stickyCta || !servicesSection) return;
-
-            function checkScroll() {
-                const rect = servicesSection.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-                if (rect.top <= windowHeight * 0.6 && rect.bottom >= 100) {
-                    stickyCta.classList.remove('translate-y-full');
-                } else {
-                    stickyCta.classList.add('translate-y-full');
-                }
-            }
-
-            window.addEventListener('scroll', checkScroll, { passive: true });
-            checkScroll();
-        })();
-    </script>
 
     <script src="/js/site.js?v=20260729" defer></script>
     <script src="/js/chat-loader.js?v=20260724-2" defer></script>
