@@ -73,10 +73,10 @@
 .fa-inverse{color:var(--fa-inverse,#fff)}
 .fa-sr-only,.fa-sr-only-focusable:not(:focus),.sr-only,.sr-only-focusable:not(:focus){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
 :host,:root{--fa-style-family-classic:"Font Awesome 6 Free";--fa-font-solid:normal 900 1em/1 "Font Awesome 6 Free"}
-@font-face{font-family:"Font Awesome 6 Free";font-style:normal;font-weight:900;font-display:block;src:url(/fonts/fa-solid-900.woff2) format("woff2")}
+@font-face{font-family:"Font Awesome 6 Free";font-style:normal;font-weight:900;font-display:swap;src:url(/fonts/fa-solid-900.woff2) format("woff2")}
 .fa-solid,.fas{font-weight:900}
 :host,:root{--fa-style-family-brands:"Font Awesome 6 Brands";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}
-@font-face{font-family:"Font Awesome 6 Brands";font-style:normal;font-weight:400;font-display:block;src:url(/fonts/fa-brands-400.woff2) format("woff2")}
+@font-face{font-family:"Font Awesome 6 Brands";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/fa-brands-400.woff2) format("woff2")}
 .fa-brands,.fab{font-weight:400}
 .fa-trash-alt:before,.fa-trash-can:before{content:"\f2ed"}
 .fa-calendar-alt:before,.fa-calendar-days:before{content:"\f073"}

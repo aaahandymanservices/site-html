@@ -313,10 +313,9 @@ function page(service) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Self-hosted brand fonts + icon subset; @font-face lives in site-theme.css -->
+    <!-- Self-hosted brand fonts; @font-face lives in site-theme.css -->
     <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
 
     <title>${esc(title)}</title>
 
@@ -351,7 +350,7 @@ ${jsonLd(service)}
     <link rel="stylesheet" href="/css/tailwind.css?v=20260728">
     <link rel="stylesheet" href="/css/site-theme.css?v=20260729">
     <!-- Font Awesome subset (generated, see scripts/build-icon-css.mjs) -->
-    <link rel="stylesheet" href="/css/icons.css?v=20260728">
+    <link rel="stylesheet" href="/css/icons.css?v=20260727a">
 
     <style>
     </style>

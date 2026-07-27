@@ -126,9 +126,8 @@
     Cache-Control = "public, max-age=31536000, immutable"
     Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable"
 
-# The subset font files are preloaded on every page, so their cache entry is
-# worth more than any other asset's: a hit here removes render-blocking bytes
-# from the critical path of a repeat visit.
+# Font files use stable URLs and are committed alongside their matching CSS,
+# so their cache entries remain immutable across repeat visits.
 [[headers]]
   for = "/fonts/*"
   [headers.values]
