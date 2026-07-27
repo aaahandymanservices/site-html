@@ -36,7 +36,7 @@
 
   const shell = () => {
     root.innerHTML =
-      '<div class="grid lg:grid-cols-[1.15fr_.85fr] gap-8 items-start">' +
+      '<div class="grid lg:grid-cols-[minmax(0,1fr)_21rem] xl:grid-cols-[minmax(0,1fr)_23rem] gap-8 items-start">' +
         // ---- Left: inputs ----
         '<div>' +
           '<div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">' +
@@ -92,7 +92,9 @@
         '<legend class="flex items-center gap-2 text-sm font-black text-gray-950 uppercase tracking-wide mb-3 pb-2 border-b-2 border-red-600/20 w-full">' +
           '<i class="fas ' + cat.icon + ' text-red-600" aria-hidden="true"></i> ' + cat.label +
         '</legend>' +
-        '<div class="space-y-2">' +
+        // Two columns once this column is wide enough (see the container query
+        // in rates.html); each category keeps its own full-width heading.
+        '<div class="quote-task-grid">' +
           cat.tasks.map((t) =>
             '<label class="quote-task flex items-center gap-3 p-3 rounded-xl border-2 border-gray-200 hover:border-red-300 cursor-pointer transition" data-id="' + t.id + '">' +
               '<input type="checkbox" class="quote-check h-5 w-5 accent-red-600 shrink-0" value="' + t.id + '" />' +
