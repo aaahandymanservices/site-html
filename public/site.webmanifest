@@ -1,0 +1,25 @@
+{
+  "name": "AAA Handyman Services",
+  "short_name": "AAA Handyman",
+  "description": "Local handyman and home-repair services in Waterford and the greater Oakland County, Michigan area.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1B2A4A",
+  "theme_color": "#8e1f26",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

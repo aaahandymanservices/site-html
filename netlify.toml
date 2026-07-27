@@ -15,6 +15,19 @@
   [headers.values]
     Netlify-CDN-Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
 
+# The service worker and manifest must never be cached long-term, so that
+# updates (a new precache version) reach visitors on their next visit.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/site.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
 [[headers]]
   for = "/*.html"
   [headers.values]

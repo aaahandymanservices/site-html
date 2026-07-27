@@ -1,3 +1,13 @@
+// Register the service worker so the site is installable and works offline.
+// Kept in its own block (the main IIFE below returns early on some pages).
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch((err) => {
+      console.error('Service worker registration failed:', err);
+    });
+  });
+}
+
 (function () {
   const backToTop = document.getElementById('back-to-top');
   if (backToTop) {
