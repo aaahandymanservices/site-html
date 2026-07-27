@@ -4,7 +4,7 @@
 # Visual Editor compiled config cache
 .stackbit
 
-# Dependency directories
+# Dependency directories (never commit vendored packages)
 node_modules/
 
 # Lockfiles and system settings
