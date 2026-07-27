@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { getUnifiedNav } from './unified-nav.mjs';
+import { escapeHtml as esc, jsonLdScript } from './html-escape.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -16,8 +17,6 @@ const CATEGORIES = DATA.categories;
 const SERVICES = DATA.services;
 
 const enc = (s) => encodeURIComponent(s);
-const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const amp = (s) => String(s).replace(/&/g, '&amp;');
 const quoteHref = (service) => `/contact?service=${enc(service)}`;
 const cleanHtml = (html) => html.replace(/<!--[\s\S]*?-->/g, '').replace(/\n\s*\n/g, '\n');
 
@@ -118,7 +117,7 @@ function jsonLd(service) {
     }))
   };
   return [serviceSchema, breadcrumb, faq]
-    .map((obj) => `    <script type="application/ld+json">\n${JSON.stringify(obj, null, 2).split('\n').map((l) => '    ' + l).join('\n')}\n    </script>`)
+    .map((obj) => jsonLdScript(obj))
     .join('\n');
 }
 
@@ -126,33 +125,33 @@ function navLink(href, label, active) {
   const cls = active
     ? 'nav-link text-red-600 border-b-2 border-red-600 pb-1'
     : 'nav-link text-gray-700 hover:text-red-600 border-b-2 border-transparent pb-1 transition';
-  return `<a href="${href}" class="${cls}">${label}</a>`;
+  return `<a href="${esc(href)}" class="${esc(cls)}">${esc(label)}</a>`;
 }
 
 function featureCard(f) {
   return `                <div class="flex items-start gap-3 bg-white border border-slate-200/80 p-4 rounded-2xl shadow-sm hover:border-red-600/30 transition-all">
                     <span class="w-8 h-8 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800">${amp(f)}</span>
+                    <span class="font-semibold text-gray-800">${esc(f)}</span>
                 </div>`;
 }
 
 function relatedCard(s) {
-  return `                <a href="/services/${s.slug}" class="generated-service-card group flex items-center gap-3 bg-white border border-slate-200/80 p-4 rounded-2xl shadow-sm hover:border-red-600/30 transition-all hover:text-red-600">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas ${s.icon}" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600">${amp(s.name)}</span>
+  return `                <a href="/services/${esc(s.slug)}" class="generated-service-card group flex items-center gap-3 bg-white border border-slate-200/80 p-4 rounded-2xl shadow-sm hover:border-red-600/30 transition-all hover:text-red-600">
+                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas ${esc(s.icon)}" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-red-600">${esc(s.name)}</span>
                 </a>`;
 }
 
 function serviceAreasSection(service) {
   if (!CITIES_LIST.length) return '';
   const links = CITIES_LIST
-    .map((c) => `<a href="/handyman/${c.slug}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> ${c.name}</a>`)
+    .map((c) => `<a href="/handyman/${esc(c.slug)}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> ${esc(c.name)}</a>`)
     .join('\n                    ');
   return `
             <!-- Service Area locations: internal links for discovery + local SEO -->
             <div class="max-w-5xl mx-auto mt-12 sm:mt-16 border-t border-gray-200 pt-10">
-                <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 text-center mb-6">Our ${amp(service.name)} Service Area</h2>
-                <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">We provide expert ${amp(service.name.toLowerCase())} in the following Oakland County, Michigan communities:</p>
+                <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 text-center mb-6">Our ${esc(service.name)} Service Area</h2>
+                <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">We provide expert ${esc(service.name.toLowerCase())} in the following Oakland County, Michigan communities:</p>
                 <div class="flex flex-wrap justify-center gap-2.5">
                     ${links}
                 </div>
@@ -302,7 +301,7 @@ function powerWashingCostGuide() {
 function page(service) {
   const url = `${SITE}/services/${service.slug}`;
   const catLabel = CATEGORIES[service.category];
-  const displayName = amp(service.name);
+  const displayName = service.name;
   const title = `${service.name} in Oakland County, MI | AAA Handyman Services`;
   const desc = `${service.tagline} Professional ${service.name.toLowerCase().replace(/ services$/, '')} across Oakland County, MI. Call ${PHONE_DISPLAY}.`;
   const faqs = serviceFaq(service);
@@ -325,11 +324,11 @@ function page(service) {
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <meta name="geo.region" content="US-MI">
     <meta name="geo.placename" content="Oakland County, Michigan">
-    <link rel="canonical" href="${url}">
+    <link rel="canonical" href="${esc(url)}">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="${url}">
+    <meta property="og:url" content="${esc(url)}">
     <meta property="og:site_name" content="AAA Handyman Services">
     <meta property="og:title" content="${esc(title)}">
     <meta property="og:description" content="${esc(desc)}">
@@ -338,7 +337,7 @@ function page(service) {
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="${url}">
+    <meta name="twitter:url" content="${esc(url)}">
     <meta name="twitter:title" content="${esc(title)}">
     <meta name="twitter:description" content="${esc(desc)}">
     <meta name="twitter:image" content="${SITE}/logo-banner.jpg">
@@ -388,14 +387,14 @@ ${getUnifiedNav('services')}
                 <span class="mx-2">/</span>
                 <a href="/services" class="hover:text-white">Services</a>
                 <span class="mx-2">/</span>
-                <span class="text-white font-semibold">${displayName}</span>
+                <span class="text-white font-semibold">${esc(displayName)}</span>
             </nav>
-            <div class="w-16 h-16 mx-auto bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center text-3xl text-red-400 mb-5" aria-hidden="true"><i class="fas ${service.icon}" aria-hidden="true"></i></div>
-            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-2">${amp(catLabel)} &middot; Oakland County, MI</div>
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">${displayName}</h1>
+            <div class="w-16 h-16 mx-auto bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center text-3xl text-red-400 mb-5" aria-hidden="true"><i class="fas ${esc(service.icon)}" aria-hidden="true"></i></div>
+            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-2">${esc(catLabel)} &middot; Oakland County, MI</div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">${esc(displayName)}</h1>
             <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving Oakland County</p>
             <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
-                ${amp(service.tagline)}
+                ${esc(service.tagline)}
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="/book?service=${enc(service.formService)}" class="bg-red-600 hover:bg-red-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-red-600/30 transition flex items-center justify-center gap-2">
@@ -413,7 +412,7 @@ ${getUnifiedNav('services')}
             <!-- Intro + pricing -->
             <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
                 <div class="lg:col-span-2 prose prose-lg max-w-none text-gray-600">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4">${displayName} in Waterford, Troy, West Bloomfield &amp; Oakland County, MI</h2>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4">${esc(displayName)} in Waterford, Troy, West Bloomfield &amp; Oakland County, MI</h2>
 ${(service.slug === 'minor-electrical' || service.slug === 'minor-plumbing') ? `
                     <div class="my-4 p-4 bg-blue-50 border-2 border-blue-900 rounded-2xl flex items-start gap-3 text-blue-950">
                         <i class="fas fa-info-circle text-blue-800 text-xl mt-0.5 flex-shrink-0" aria-hidden="true"></i>
@@ -421,14 +420,14 @@ ${(service.slug === 'minor-electrical' || service.slug === 'minor-plumbing') ? `
                             <strong>Licensing &amp; Scope Note:</strong> Ideal for minor repairs, fixture replacements, and hardware upgrades. For major re-wiring or full replumbing, we can coordinate with licensed trades.
                         </p>
                     </div>` : ''}
-${service.intro.map((p) => `                    <p>${amp(p)}</p>`).join('\n')}
+${service.intro.map((p) => `                    <p>${esc(p)}</p>`).join('\n')}
                 </div>
                 <aside class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-lg">
                     <div class="flex items-center gap-3 mb-4">
                         <span class="text-2xl text-red-600" aria-hidden="true"><i class="fas fa-tag" aria-hidden="true"></i></span>
                         <div>
                             <h3 class="text-lg font-bold text-gray-900">Simple, Upfront Pricing</h3>
-                            <p class="text-sm text-gray-500">${amp(service.name)}</p>
+                            <p class="text-sm text-gray-500">${esc(service.name)}</p>
                         </div>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
@@ -464,7 +463,7 @@ ${costGuideSection(service)}
                 </div>` : ''}
                 <div class="text-center mb-8">
                     <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm">What's Included</div>
-                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">${displayName} Services We Provide</h2>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">${esc(displayName)} Services We Provide</h2>
                     <p class="mt-3 text-gray-600 max-w-2xl mx-auto">A few of the most requested tasks in this category. Do not see yours? Just ask, no job too small.</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -480,7 +479,7 @@ ${service.features.map(featureCard).join('\n')}
             <!-- Related services: internal links for discovery + SEO -->
             <div class="max-w-5xl mx-auto mt-12 sm:mt-16">
                 <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 text-center mb-6">Related Services</h2>
-                <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">Homeowners who booked ${service.name.toLowerCase().replace(/ services$/, '')} also asked about:</p>
+                <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">Homeowners who booked ${esc(service.name.toLowerCase().replace(/ services$/, ''))} also asked about:</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 ${related.map(relatedCard).join('\n')}
                 </div>
@@ -494,20 +493,20 @@ ${serviceAreasSection(service)}
             <!-- FAQ -->
             <div class="max-w-4xl mx-auto mt-14 sm:mt-20">
                 <div class="text-center mb-8">
-                    <div class="uppercase text-red-600 font-semibold tracking-widest text-sm">${displayName} FAQ</div>
+                    <div class="uppercase text-red-600 font-semibold tracking-widest text-sm">${esc(displayName)} FAQ</div>
                     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">Common Questions</h2>
                 </div>
                 <div class="space-y-4">
 ${faqs.map((f) => `                    <article class="bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm hover:border-red-600/30 transition-all">
-                        <h3 class="text-lg sm:text-xl font-bold text-blue-900 mb-2">${amp(f.q)}</h3>
-                        <p class="text-gray-600">${amp(f.a)}</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-blue-900 mb-2">${esc(f.q)}</h3>
+                        <p class="text-gray-600">${esc(f.a)}</p>
                     </article>`).join('\n')}
                 </div>
             </div>
 
             <!-- CTA band -->
             <div class="max-w-5xl mx-auto mt-14 sm:mt-20 text-center bg-blue-900 text-white py-12 px-8 sm:py-16 sm:px-16 rounded-3xl">
-                <p class="text-xl sm:text-2xl md:text-3xl font-medium">Ready for ${displayName.toLowerCase()}?</p>
+                <p class="text-xl sm:text-2xl md:text-3xl font-medium">Ready for ${esc(displayName.toLowerCase())}?</p>
                 <p class="mt-4 text-base sm:text-lg opacity-90">Call for availability and same-week scheduling, or request a free quote online. No job too small.</p>
                 <div class="mt-8 flex flex-wrap justify-center gap-4">
                     <a href="tel:${PHONE_TEL}" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-green-600/30">
@@ -682,8 +681,8 @@ mkdirSync(OUT_DIR, { recursive: true });
 let count = 0;
 for (const service of SERVICES) {
   const html = cleanHtml(page(service));
-  writeFileSync(join(OUT_DIR, `${service.slug}.html`), html, 'utf8');
+  writeFileSync(join(OUT_DIR, `${esc(service.slug)}.html`), html, 'utf8');
   count += 1;
-  console.log(`  wrote public/services/${service.slug}.html`);
+  console.log(`  wrote public/services/${esc(service.slug)}.html`);
 }
 console.log(`\nGenerated ${count} service landing page(s).`);

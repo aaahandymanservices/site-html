@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { getUnifiedNav } from './unified-nav.mjs';
+import { escapeHtml as esc, jsonLdScript } from './html-escape.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -35,7 +36,7 @@ const POPULAR_SERVICES = [
 
 const bySlug = Object.fromEntries(DATA.cities.map((c) => [c.slug, c]));
 const enc = (s) => encodeURIComponent(s);
-const quoteHref = (city) => `/contact?service=General+Estimate+%2F+Quote&city=${enc(city)}`;
+const quoteHref = (city) => `/contact?service=General+Estimate+%2F+Quote&amp;city=${enc(city)}`;
 const cleanHtml = (html) => html.replace(/<!--[\s\S]*?-->/g, '').replace(/\n\s*\n/g, '\n');
 
 function cityFaq(city) {
@@ -107,22 +108,20 @@ function jsonLd(city) {
       acceptedAnswer: { '@type': 'Answer', text: f.a }
     }))
   };
-  return [localBusiness, breadcrumb, faq]
-    .map((obj) => `    <script type="application/ld+json">\n${JSON.stringify(obj, null, 2).split('\n').map((l) => '    ' + l).join('\n')}\n    </script>`)
-    .join('\n');
+  return jsonLdScript([localBusiness, breadcrumb, faq]);
 }
 
 function navLink(href, label, active) {
   const cls = active
     ? 'nav-link text-red-600 border-b-2 border-red-600 pb-1'
     : 'nav-link text-gray-700 hover:text-red-600 border-b-2 border-transparent pb-1 transition';
-  return `<a href="${href}" class="${cls}">${label}</a>`;
+  return `<a href="${esc(href)}" class="${esc(cls)}">${esc(label)}</a>`;
 }
 
 function serviceChip(s) {
-  return `                <a href="/services#${s.anchor}" class="generated-service-card group flex items-center gap-3 bg-white border border-slate-200/80 p-4 rounded-2xl shadow-sm hover:border-red-600/30 transition-all hover:text-red-600">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas ${s.icon}" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600">${s.label}</span>
+  return `                <a href="/services#${esc(s.anchor)}" class="generated-service-card group flex items-center gap-3 bg-white border border-slate-200/80 p-4 rounded-2xl shadow-sm hover:border-red-600/30 transition-all hover:text-red-600">
+                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas ${esc(s.icon)}" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-red-600">${esc(s.label)}</span>
                 </a>`;
 }
 
@@ -130,12 +129,12 @@ function nearbyLinks(city) {
   const nearby = (city.nearby || []).map((slug) => bySlug[slug]).filter(Boolean);
   if (!nearby.length) return '';
   const chips = nearby
-    .map((n) => `<a href="/handyman/${n.slug}" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500" aria-hidden="true"></i> ${n.name}</a>`)
+    .map((n) => `<a href="/handyman/${esc(n.slug)}" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500" aria-hidden="true"></i> ${esc(n.name)}</a>`)
     .join('\n                    ');
   return `
             <!-- Nearby areas: internal links for discovery + local SEO -->
             <div class="max-w-5xl mx-auto mt-12 sm:mt-16">
-                <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 text-center mb-6">Handyman Service Near ${city.name}</h2>
+                <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 text-center mb-6">Handyman Service Near ${esc(city.name)}</h2>
                 <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">We also serve nearby Oakland County communities. Explore a neighboring area:</p>
                 <div class="flex flex-wrap justify-center gap-3">
                     ${chips}
@@ -146,6 +145,8 @@ function nearbyLinks(city) {
 
 function page(city) {
   const zone = ZONE_INFO[city.zone];
+  // Raw text, escaped at each sink below. Escaping here instead would double up
+  // wherever these are interpolated into markup.
   const url = `${SITE}/handyman/${city.slug}`;
   const title = `Handyman in ${city.name}, MI | AAA Handyman Services`;
   const desc = `Reliable local handyman services in ${city.name}, MI. Carpentry, drywall, painting, doors, gutters, plumbing & electrical. ${zone.rate} minimum. Call ${PHONE_DISPLAY}.`;
@@ -160,30 +161,30 @@ function page(city) {
     <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-    <title>${title}</title>
+    <title>${esc(title)}</title>
 
     <!-- Search Engine Optimization (SEO) Metadata -->
-    <meta name="description" content="${desc}">
+    <meta name="description" content="${esc(desc)}">
     <meta name="theme-color" content="#A61F2E">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <meta name="geo.region" content="US-MI">
-    <meta name="geo.placename" content="${city.name}, Michigan">
-    <link rel="canonical" href="${url}">
+    <meta name="geo.placename" content="${esc(city.name)}, Michigan">
+    <link rel="canonical" href="${esc(url)}">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="${url}">
+    <meta property="og:url" content="${esc(url)}">
     <meta property="og:site_name" content="AAA Handyman Services">
-    <meta property="og:title" content="${title}">
-    <meta property="og:description" content="${desc}">
+    <meta property="og:title" content="${esc(title)}">
+    <meta property="og:description" content="${esc(desc)}">
     <meta property="og:image" content="${SITE}/logo-banner.jpg">
     <meta property="og:locale" content="en_US">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="${url}">
-    <meta name="twitter:title" content="${title}">
-    <meta name="twitter:description" content="${desc}">
+    <meta name="twitter:url" content="${esc(url)}">
+    <meta name="twitter:title" content="${esc(title)}">
+    <meta name="twitter:description" content="${esc(desc)}">
     <meta name="twitter:image" content="${SITE}/logo-banner.jpg">
 
     <!-- Structured Data (JSON-LD) -->
@@ -231,13 +232,13 @@ ${getUnifiedNav('service-areas')}
                 <span class="mx-2">/</span>
                 <a href="/service-areas" class="hover:text-white">Service Areas</a>
                 <span class="mx-2">/</span>
-                <span class="text-white font-semibold">${city.name}</span>
+                <span class="text-white font-semibold">${esc(city.name)}</span>
             </nav>
-            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-2">${city.region} &middot; Oakland County, MI</div>
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">Handyman in ${city.name}, Michigan</h1>
-            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving ${city.name} &amp; surrounding Oakland County communities</p>
+            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-2">${esc(city.region)} &middot; Oakland County, MI</div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">Handyman in ${esc(city.name)}, Michigan</h1>
+            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving ${esc(city.name)} &amp; surrounding Oakland County communities</p>
             <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
-                Trusted, locally owned home repair and maintenance for ${city.name} homeowners. No job too small &mdash; backed by our 1-Year Workmanship Guarantee and honest, upfront pricing.
+                Trusted, locally owned home repair and maintenance for ${esc(city.name)} homeowners. No job too small &mdash; backed by our 1-Year Workmanship Guarantee and honest, upfront pricing.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="/book?service=General+Estimate+%2F+Quote&amp;city=${enc(city.name)}" class="bg-red-600 hover:bg-red-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-red-600/30 transition flex items-center justify-center gap-2">
@@ -255,25 +256,25 @@ ${getUnifiedNav('service-areas')}
             <!-- Intro + pricing -->
             <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
                 <div class="lg:col-span-2 prose prose-lg max-w-none text-gray-600">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4">Your Local Handyman for ${city.name}</h2>
-                    <p>${city.blurb}</p>
-                    <p>Whether it is a single nagging repair or a full seasonal to-do list, we bring the same craftsmanship, clean job sites, and clear communication to every ${city.name} home. From drywall and doors to painting, flooring, gutters, and minor plumbing or electrical work, we help you protect your home's comfort and value.</p>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4">Your Local Handyman for ${esc(city.name)}</h2>
+                    <p>${esc(city.blurb)}</p>
+                    <p>Whether it is a single nagging repair or a full seasonal to-do list, we bring the same craftsmanship, clean job sites, and clear communication to every ${esc(city.name)} home. From drywall and doors to painting, flooring, gutters, and minor plumbing or electrical work, we help you protect your home's comfort and value.</p>
                 </div>
                 <aside class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-lg">
                     <div class="flex items-center gap-3 mb-4">
-                        <span class="text-2xl text-${zone.color}-600" aria-hidden="true"><i class="fas fa-location-dot" aria-hidden="true"></i></span>
+                        <span class="text-2xl text-${esc(zone.color)}-600" aria-hidden="true"><i class="fas fa-location-dot" aria-hidden="true"></i></span>
                         <div>
-                            <h3 class="text-lg font-bold text-gray-900">${city.name} Coverage</h3>
-                            <p class="text-sm text-gray-500">${zone.label}</p>
+                            <h3 class="text-lg font-bold text-gray-900">${esc(city.name)} Coverage</h3>
+                            <p class="text-sm text-gray-500">${esc(zone.label)}</p>
                         </div>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
-                        <li class="flex items-start gap-2"><i class="fas fa-tag text-red-600 mt-1" aria-hidden="true"></i><span><strong>${zone.rate} minimum service call</strong> &mdash; covers travel, diagnostics, and the first hour of labor.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>                        <li class="flex items-start gap-2"><i class="fas fa-map-pin text-red-600 mt-1" aria-hidden="true"></i><span>ZIP codes served: ${city.zips.join(', ')}.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-tag text-red-600 mt-1" aria-hidden="true"></i><span><strong>${esc(zone.rate)} minimum service call</strong> &mdash; covers travel, diagnostics, and the first hour of labor.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>                        <li class="flex items-start gap-2"><i class="fas fa-map-pin text-red-600 mt-1" aria-hidden="true"></i><span>ZIP codes served: ${esc(city.zips.join(', '))}.</span></li>
                         <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1" aria-hidden="true"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
                     </ul>
                     <a href="${quoteHref(city.name)}" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30">
-                        <i class="fas fa-calendar-check" aria-hidden="true"></i> Request Service in ${city.name}
+                        <i class="fas fa-calendar-check" aria-hidden="true"></i> Request Service in ${esc(city.name)}
                     </a>
                     <a href="/rates" class="mt-3 block text-center text-sm text-gray-500 hover:text-red-600 underline underline-offset-2">See full rates &amp; packages</a>
                 </aside>
@@ -282,7 +283,7 @@ ${getUnifiedNav('service-areas')}
             <!-- Popular services -->
             <div class="max-w-6xl mx-auto mt-14 sm:mt-20">
                 <div class="text-center mb-8">
-                    <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm">What We Do in ${city.name}</div>
+                    <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm">What We Do in ${esc(city.name)}</div>
                     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">Popular Handyman Services</h2>
                     <p class="mt-3 text-gray-600 max-w-2xl mx-auto">A few of the most requested repairs and projects. Tap any service for details, or see the full list.</p>
                 </div>
@@ -300,26 +301,26 @@ ${nearbyLinks(city)}
             <!-- FAQ -->
             <div class="max-w-4xl mx-auto mt-14 sm:mt-20">
                 <div class="text-center mb-8">
-                    <div class="uppercase text-red-600 font-semibold tracking-widest text-sm">${city.name} Handyman FAQ</div>
-                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">Questions from ${city.name} Homeowners</h2>
+                    <div class="uppercase text-red-600 font-semibold tracking-widest text-sm">${esc(city.name)} Handyman FAQ</div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">Questions from ${esc(city.name)} Homeowners</h2>
                 </div>
                 <div class="space-y-4">
 ${faqs.map((f) => `                    <article class="bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm hover:border-red-600/30 transition-all">
-                        <h3 class="text-lg sm:text-xl font-bold text-blue-900 mb-2">${f.q}</h3>
-                        <p class="text-gray-600">${f.a}</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-blue-900 mb-2">${esc(f.q)}</h3>
+                        <p class="text-gray-600">${esc(f.a)}</p>
                     </article>`).join('\n')}
                 </div>
             </div>
 
             <!-- CTA band -->
             <div class="max-w-5xl mx-auto mt-14 sm:mt-20 text-center bg-blue-900 text-white py-12 px-8 sm:py-16 sm:px-16 rounded-3xl">
-                <p class="text-xl sm:text-2xl md:text-3xl font-medium">Need a handyman in ${city.name}?</p>
+                <p class="text-xl sm:text-2xl md:text-3xl font-medium">Need a handyman in ${esc(city.name)}?</p>
                 <p class="mt-4 text-base sm:text-lg opacity-90">Call for availability and same-week scheduling, or request a free quote online. No job too small.</p>
                 <div class="mt-8 flex flex-wrap justify-center gap-4">
                     <a href="tel:${PHONE_TEL}" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-green-600/30">
                         <i class="fas fa-phone" aria-hidden="true"></i> ${PHONE_DISPLAY}
                     </a>
-                    <a href="/book?service=General+Estimate+%2F+Quote&city=${enc(city.name)}" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/30">
+                    <a href="/book?service=General+Estimate+%2F+Quote&amp;city=${enc(city.name)}" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/30">
                         <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online Now
                     </a>
                 </div>
@@ -358,9 +359,9 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
                     <ul class="space-y-3 text-sm">
                         <li><a href="tel:${PHONE_TEL}" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden="true"></i>${PHONE_DISPLAY}</a></li>
                         <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
-                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Serving ${city.name} &middot; Oakland County, MI</li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Serving ${esc(city.name)} &middot; Oakland County, MI</li>
                     </ul>
-                    <a href="/book?service=General+Estimate+%2F+Quote&city=${enc(city.name)}" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
+                    <a href="/book?service=General+Estimate+%2F+Quote&amp;city=${enc(city.name)}" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
                 </div>
             </div>
             <!-- Quick-access sitemap: popular services + service areas reachable in one click from any page -->
@@ -488,8 +489,8 @@ mkdirSync(OUT_DIR, { recursive: true });
 let count = 0;
 for (const city of DATA.cities) {
   const html = cleanHtml(page(city));
-  writeFileSync(join(OUT_DIR, `${city.slug}.html`), html, 'utf8');
+  writeFileSync(join(OUT_DIR, `${esc(city.slug)}.html`), html, 'utf8');
   count += 1;
-  console.log(`  wrote public/handyman/${city.slug}.html`);
+  console.log(`  wrote public/handyman/${esc(city.slug)}.html`);
 }
 console.log(`\nGenerated ${count} city landing page(s).`);
