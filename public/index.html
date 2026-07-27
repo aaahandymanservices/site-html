@@ -1409,6 +1409,22 @@
                     <input type="hidden" name="subject" value="New quote request from aaahandyman.services" />
                     <p class="hidden"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
 
+                    <div id="first-service-offer-quote" class="bg-slate-900 border-2 border-red-600/80 rounded-2xl p-4 sm:p-5 shadow-lg text-white">
+                        <div class="flex items-center gap-3 sm:gap-4 mb-3 pb-3 border-b border-gray-700">
+                            <div class="bg-red-600 text-white text-2xl sm:text-3xl font-extrabold px-3 py-1.5 rounded-xl leading-none flex-shrink-0 shadow">
+                                $50
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider text-red-400">FIRST-SERVICE GIFT CERTIFICATE</p>
+                                <p class="text-xs sm:text-sm text-gray-300 mt-0.5 leading-snug">Receive a $50 gift certificate toward your first service.</p>
+                            </div>
+                        </div>
+                        <label for="quote-first-service-certificate" class="flex cursor-pointer items-start gap-3 p-3 rounded-xl bg-gray-800/80 border border-gray-700 hover:border-red-500/60 transition group">
+                            <input id="quote-first-service-certificate" type="checkbox" name="first-service-gift-certificate" value="Requested — customer confirms first service" class="mt-0.5 h-4 w-4 shrink-0 accent-red-600 rounded focus:ring-red-500">
+                            <span class="text-xs sm:text-sm font-semibold text-white group-hover:text-red-300 transition leading-snug">Yes, I’m a new customer booking my first service!</span>
+                        </label>
+                    </div>
+
                     <div class="grid sm:grid-cols-2 gap-5">
                         <div>
                             <label for="q-name" class="block text-sm uppercase tracking-widest mb-2 text-blue-900">Your Name</label>
@@ -1465,6 +1481,13 @@
         (function () {
             var form = document.getElementById('quote-form');
             if (!form) return;
+
+            var params = new URLSearchParams(window.location.search);
+            var offer = params.get('offer');
+            var offerCheckbox = document.getElementById('quote-first-service-certificate');
+            if (offer === 'first-service' && offerCheckbox) {
+                offerCheckbox.checked = true;
+            }
 
             var photoInput = document.getElementById('q-photos');
             if (photoInput) {

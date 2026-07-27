@@ -259,6 +259,22 @@
                                 <p class="hidden">
                                     <label>Don't fill this out if you're human: <input name="bot-field" /></label>
                                 </p>
+
+                                <div id="first-service-offer-booking" class="bg-gray-800 border-2 border-red-600/80 rounded-2xl p-4 sm:p-5 shadow-lg">
+                                    <div class="flex items-center gap-3 sm:gap-4 mb-3 pb-3 border-b border-gray-700">
+                                        <div class="bg-red-600 text-white text-2xl sm:text-3xl font-extrabold px-3 py-1.5 rounded-xl leading-none flex-shrink-0 shadow">
+                                            $50
+                                        </div>
+                                        <div>
+                                            <p class="text-xs font-bold uppercase tracking-wider text-red-400">FIRST-SERVICE GIFT CERTIFICATE</p>
+                                            <p class="text-xs sm:text-sm text-gray-300 mt-0.5 leading-snug">Receive a $50 gift certificate toward your first service.</p>
+                                        </div>
+                                    </div>
+                                    <label for="booking-first-service-certificate" class="flex cursor-pointer items-start gap-3 p-3 rounded-xl bg-gray-900/70 border border-gray-700 hover:border-red-500/60 transition group">
+                                        <input id="booking-first-service-certificate" type="checkbox" name="first-service-gift-certificate" value="Requested — customer confirms first service" class="mt-0.5 h-4 w-4 shrink-0 accent-red-600 rounded focus:ring-red-500">
+                                        <span class="text-xs sm:text-sm font-semibold text-white group-hover:text-red-300 transition leading-snug">Yes, I’m a new customer booking my first service!</span>
+                                    </label>
+                                </div>
                                 
                                 <fieldset class="rounded-2xl border border-gray-700 bg-gray-900/45 p-5 sm:p-6">
                                     <legend class="px-3 text-lg sm:text-xl font-bold text-white">Schedule Your Service</legend>
@@ -502,6 +518,16 @@
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
     <script>
+        // Check for offer=first-service URL parameter
+        (function() {
+            var params = new URLSearchParams(window.location.search);
+            var offer = params.get('offer');
+            var bookingOfferCheckbox = document.getElementById('booking-first-service-certificate');
+            if (offer === 'first-service' && bookingOfferCheckbox) {
+                bookingOfferCheckbox.checked = true;
+            }
+        })();
+
         // Automatic phone number formatter
         const bookingPhone = document.getElementById('booking-phone');
         if (bookingPhone) {
