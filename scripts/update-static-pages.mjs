@@ -47,6 +47,15 @@ function optimizeFontsAndAssets(html) {
   html = html.replace(/[ \t]*<link\s+rel="preload"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"[^>]*>\r?\n/gi, '');
   html = html.replace(/[ \t]*<noscript><link\s+rel="stylesheet"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"><\/noscript>\r?\n/gi, '');
 
+  // Icon glyphs are decorative enhancements rather than critical text. Let
+  // the stylesheet discover the small subset instead of competing with the
+  // primary text fonts and hero image during the initial render.
+  html = html.replace(/[ \t]*<link\s+rel="preload"\s+href="\/fonts\/fa-solid-900\.woff2"[^>]*>\r?\n/gi, '');
+  html = html.replace(
+    /href="\/css\/icons\.css(?:\?v=[^"]*)?"/gi,
+    'href="/css/icons.css?v=20260727a"',
+  );
+
   return html;
 }
 

@@ -78,10 +78,12 @@ function partition(css) {
 
 /** Rewrite upstream `../webfonts/*` sources to this site's self-hosted, woff2-only paths. */
 function localiseFontFace(css) {
-  return css.replace(
-    /src:url\(\.\.\/webfonts\/([\w-]+)\.woff2\) format\("woff2"\)(?:,url\([^)]+\) format\("truetype"\))?/g,
-    'src:url(/fonts/$1.woff2) format("woff2")',
-  );
+  return css
+    .replace(/font-display:block/g, 'font-display:swap')
+    .replace(
+      /src:url\(\.\.\/webfonts\/([\w-]+)\.woff2\) format\("woff2"\)(?:,url\([^)]+\) format\("truetype"\))?/g,
+      'src:url(/fonts/$1.woff2) format("woff2")',
+    );
 }
 
 const used = collectUsedIcons();
