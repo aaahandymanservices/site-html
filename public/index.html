@@ -780,13 +780,13 @@
                 <!-- Tab Navigation Buttons -->
                 <div class="flex justify-center mb-8">
                     <div class="inline-flex p-1.5 bg-gray-100 rounded-2xl border border-gray-200 shadow-inner flex-wrap justify-center gap-1 sm:gap-2" role="tablist" aria-label="Pricing and Packages Hub tabs">
-                        <button id="tab-btn-time" type="button" role="tab" aria-selected="true" aria-controls="panel-time" class="pricing-tab-btn px-5 py-3 rounded-xl font-bold text-sm sm:text-base transition-all bg-red-600 text-white shadow-md flex items-center gap-2">
+                        <button id="tab-btn-time" type="button" role="tab" aria-selected="true" aria-controls="panel-time" class="pricing-tab-btn px-5 py-3 rounded-xl font-bold text-sm sm:text-base transition bg-red-600 text-white shadow-md flex items-center gap-2">
                             <i class="fas fa-clock" aria-hidden="true"></i> Handyman Time Packages
                         </button>
-                        <button id="tab-btn-themed" type="button" role="tab" aria-selected="false" aria-controls="panel-themed" class="pricing-tab-btn px-5 py-3 rounded-xl font-bold text-sm sm:text-base transition-all bg-transparent text-gray-700 hover:text-gray-900 hover:bg-gray-200/60 flex items-center gap-2">
+                        <button id="tab-btn-themed" type="button" role="tab" aria-selected="false" aria-controls="panel-themed" class="pricing-tab-btn px-5 py-3 rounded-xl font-bold text-sm sm:text-base transition bg-transparent text-gray-700 hover:text-gray-900 hover:bg-gray-200/60 flex items-center gap-2">
                             <i class="fas fa-boxes-packing" aria-hidden="true"></i> Popular Themed Bundles
                         </button>
-                        <button id="tab-btn-flat" type="button" role="tab" aria-selected="false" aria-controls="panel-flat" class="pricing-tab-btn px-5 py-3 rounded-xl font-bold text-sm sm:text-base transition-all bg-transparent text-gray-700 hover:text-gray-900 hover:bg-gray-200/60 flex items-center gap-2">
+                        <button id="tab-btn-flat" type="button" role="tab" aria-selected="false" aria-controls="panel-flat" class="pricing-tab-btn px-5 py-3 rounded-xl font-bold text-sm sm:text-base transition bg-transparent text-gray-700 hover:text-gray-900 hover:bg-gray-200/60 flex items-center gap-2">
                             <i class="fas fa-receipt" aria-hidden="true"></i> Upfront Pricing Menu
                         </button>
                     </div>
@@ -801,7 +801,7 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
                             <!-- Tier 1: 4-Hour Package -->
-                            <div class="service-card bg-gray-50 border border-slate-200/80 rounded-3xl p-6 shadow-sm flex flex-col hover:border-red-600/30 transition-all">
+                            <div class="service-card bg-gray-50 border border-slate-200/80 rounded-3xl p-6 shadow-sm flex flex-col hover:border-red-600/30 transition">
                                 <div class="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center text-2xl text-red-600 mb-4" aria-hidden="true"><i class="fas fa-bolt" aria-hidden="true"></i></div>
                                 <h4 class="text-xl font-bold text-blue-900">4-Hour Package</h4>
                                 <p class="text-sm text-gray-600 font-semibold mb-3">Quick List</p>
@@ -817,7 +817,7 @@
                             </div>
 
                             <!-- Tier 2: 6-Hour Package (highlighted) -->
-                            <div class="service-card bg-white border-2 border-red-600 rounded-3xl p-6 shadow-xl flex flex-col relative hover:border-red-600 transition-all">
+                            <div class="service-card bg-white border-2 border-red-600 rounded-3xl p-6 shadow-xl flex flex-col relative hover:border-red-600 transition">
                                 <div class="w-12 h-12 bg-red-600 rounded-2xl flex items-center justify-center text-2xl text-white mb-4 mt-2" aria-hidden="true"><i class="fas fa-list-check" aria-hidden="true"></i></div>
                                 <h4 class="text-xl font-bold text-blue-900">6-Hour Package</h4>
                                 <p class="text-sm text-gray-600 font-semibold mb-3">Half-Day Punch List</p>
@@ -833,7 +833,7 @@
                             </div>
 
                             <!-- Tier 3: 8-Hour Package -->
-                            <div class="service-card bg-gray-50 border border-slate-200/80 rounded-3xl p-6 shadow-sm flex flex-col hover:border-red-600/30 transition-all">
+                            <div class="service-card bg-gray-50 border border-slate-200/80 rounded-3xl p-6 shadow-sm flex flex-col hover:border-red-600/30 transition">
                                 <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl text-blue-900 mb-4" aria-hidden="true"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></div>
                                 <h4 class="text-xl font-bold text-blue-900">8-Hour Package</h4>
                                 <p class="text-sm text-gray-600 font-semibold mb-3">Full Day</p>
@@ -849,7 +849,7 @@
                             </div>
 
                             <!-- Tier 4: Maintenance Membership -->
-                            <div class="service-card bg-gray-50 border border-slate-200/80 rounded-3xl p-6 shadow-sm flex flex-col hover:border-red-600/30 transition-all">
+                            <div class="service-card bg-gray-50 border border-slate-200/80 rounded-3xl p-6 shadow-sm flex flex-col hover:border-red-600/30 transition">
                                 <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-2xl text-emerald-800 mb-4" aria-hidden="true"><i class="fas fa-calendar-check" aria-hidden="true"></i></div>
                                 <h4 class="text-xl font-bold text-blue-900">Maintenance Membership</h4>
                                 <p class="text-sm text-gray-600 font-semibold mb-3">Year-Round</p>
@@ -1044,7 +1044,7 @@
 
             <div class="flex flex-wrap justify-center gap-8">
 
-                <a href="/services/carpentry" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition-all">
+                <a href="/services/carpentry" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition">
                     <div class="flex justify-between items-start mb-6">
                         <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600" aria-hidden="true"><i class="fas fa-hammer" aria-hidden="true"></i></div>
                         <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $100</span>
@@ -1055,10 +1055,10 @@
                         <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Interior trim, baseboards &amp; crown molding</li>
                         <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Exterior woodwork &amp; rot repairs</li>
                     </ul>
-                    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
+                    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
                 </a>
 
-                <a href="/services/doors-windows" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition-all flex flex-col justify-between">
+                <a href="/services/doors-windows" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-start mb-6">
                             <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900" aria-hidden="true"><i class="fas fa-door-open" aria-hidden="true"></i></div>
@@ -1077,10 +1077,10 @@
                         "Victor adjusted our sticking front door in Waterford so it latches smoothly and stopped cold drafts."
                         <span class="block not-italic font-bold text-gray-900 mt-1">&mdash; Mark S., Waterford, MI</span>
                     </div>
-                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
+                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
                 </a>
 
-                <a href="/services/drywall-repair" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition-all flex flex-col justify-between">
+                <a href="/services/drywall-repair" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-start mb-6">
                             <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600" aria-hidden="true"><i class="fas fa-border-all" aria-hidden="true"></i></div>
@@ -1099,10 +1099,10 @@
                         "Flawless drywall patch in our Troy home — you can't even tell where the hole was."
                         <span class="block not-italic font-bold text-gray-900 mt-1">&mdash; Sarah K., Troy, MI</span>
                     </div>
-                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
+                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
                 </a>
 
-                <a href="/services/painting-staining" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition-all">
+                <a href="/services/painting-staining" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition">
                     <div class="flex justify-between items-start mb-6">
                         <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900" aria-hidden="true"><i class="fas fa-paint-roller" aria-hidden="true"></i></div>
                         <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $100</span>
@@ -1113,10 +1113,10 @@
                         <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Interior room &amp; accent wall painting</li>
                         <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Trim, door &amp; deck staining/refinishing</li>
                     </ul>
-                    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
+                    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
                 </a>
 
-                <a href="/services/minor-plumbing" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition-all flex flex-col justify-between">
+                <a href="/services/minor-plumbing" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-start mb-6">
                             <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600" aria-hidden="true"><i class="fas fa-faucet-drip" aria-hidden="true"></i></div>
@@ -1133,10 +1133,10 @@
                         "Replaced our kitchen faucet and fixed a slow drain in West Bloomfield quickly and cleanly."
                         <span class="block not-italic font-bold text-gray-900 mt-1">&mdash; Dave L., West Bloomfield, MI</span>
                     </div>
-                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
+                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
                 </a>
 
-                <a href="/services/minor-electrical" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition-all flex flex-col justify-between">
+                <a href="/services/minor-electrical" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-start mb-6">
                             <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900" aria-hidden="true"><i class="fas fa-lightbulb" aria-hidden="true"></i></div>
@@ -1147,10 +1147,10 @@
                         <p class="text-[11px] font-semibold text-blue-900 bg-blue-50 p-2 rounded-xl border border-blue-100 mb-3"><i class="fas fa-info-circle text-blue-600 mr-1" aria-hidden="true"></i>Ideal for minor repairs, fixture replacements &amp; hardware upgrades. For major re-wiring or full replumbing, we can coordinate with licensed trades.</p>
                         <p class="text-gray-600 mb-3 text-sm leading-relaxed">Safe, reliable updates. Keep your home bright and powered. We replace switches, outlets, dimmers, light fixtures, and ceiling fans with safety precision.</p>
                     </div>
-                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
+                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
                 </a>
 
-                <a href="/services/installation" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition-all">
+                <a href="/services/installation" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition">
                     <div class="flex justify-between items-start mb-6">
                         <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600" aria-hidden="true"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></div>
                         <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $100</span>
@@ -1161,17 +1161,17 @@
                         <li class="flex items-center gap-1.5"><i class="fas fa-check text-red-600" aria-hidden="true"></i> TV Wall Mounting ($155+)</li>
                         <li class="flex items-center gap-1.5"><i class="fas fa-check text-red-600" aria-hidden="true"></i> Handrails &amp; Grab Bars</li>
                     </ul>
-                    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
+                    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
                 </a>
 
-                <a href="/services/home-repair-upkeep" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition-all">
+                <a href="/services/home-repair-upkeep" class="service-card group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition">
                     <div class="flex justify-between items-start mb-6">
                         <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600" aria-hidden="true"><i class="fas fa-house-chimney" aria-hidden="true"></i></div>
                         <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $100</span>
                     </div>
                     <h3 class="text-2xl font-semibold mb-3">Home Repair &amp; Upkeep</h3>
                     <p class="text-gray-600 mb-4 text-sm leading-relaxed">Keep every room in peak condition. Tackle ongoing punch lists across laundry rooms, kitchens, bathrooms, and exterior surfaces.</p>
-                    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition-all">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
+                    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 group-hover:gap-2.5 transition">Learn more <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></span>
                 </a>
 
                 <div class="service-card w-full md:w-full lg:w-[calc(66.666%-0.668rem)] bg-white border-2 border-red-600 p-8 rounded-3xl shadow-md text-center">
@@ -1210,9 +1210,9 @@
                 var isTarget = btn.id === btnId;
                 btn.setAttribute('aria-selected', isTarget ? 'true' : 'false');
                 if (isTarget) {
-                    btn.className = 'pricing-tab-btn px-5 py-3 rounded-xl font-bold text-sm sm:text-base transition-all bg-red-600 text-white shadow-md flex items-center gap-2';
+                    btn.className = 'pricing-tab-btn px-5 py-3 rounded-xl font-bold text-sm sm:text-base transition bg-red-600 text-white shadow-md flex items-center gap-2';
                 } else {
-                    btn.className = 'pricing-tab-btn px-5 py-3 rounded-xl font-bold text-sm sm:text-base transition-all bg-transparent text-gray-700 hover:text-gray-900 hover:bg-gray-200/60 flex items-center gap-2';
+                    btn.className = 'pricing-tab-btn px-5 py-3 rounded-xl font-bold text-sm sm:text-base transition bg-transparent text-gray-700 hover:text-gray-900 hover:bg-gray-200/60 flex items-center gap-2';
                 }
             });
             Object.keys(panels).forEach(function(id) {

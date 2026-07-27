@@ -18,6 +18,9 @@
     overflow-x: hidden;
     box-sizing: border-box;
     font-family: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    text-rendering: optimizeLegibility;
   }
 
   *, ::before, ::after {
@@ -39,6 +42,10 @@
   .service-card,
   .generated-service-card {
     overflow: visible !important; /* Prevent clipping floating absolute elements */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
+    transform: translateZ(0);
   }
 }
 
