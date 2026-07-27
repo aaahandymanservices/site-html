@@ -606,7 +606,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
 
     <!-- Back to top -->
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
-    <script src="/js/site.js?v=20260729" defer></script>
+    <script src="/js/site.js?v=20260727" defer></script>
 
     <!-- Google tag (gtag.js) -->
     <script>
