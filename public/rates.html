@@ -177,6 +177,18 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+        /* Instant Quote Calculator: the task checklist flows into two columns
+           once its own column is wide enough. Keyed to the container rather
+           than the viewport so the list stays single-column on narrow desktops
+           where the sticky estimate card sits beside it. Browsers without
+           container query support simply keep the single-column list. */
+        #quote-tasks { container-type: inline-size; }
+        .quote-task-grid { display: grid; gap: 0.5rem; }
+
+        @container (min-width: 38rem) {
+            .quote-task-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
         @media (prefers-reduced-motion: reduce) {
 
             .flash-siren,
@@ -987,7 +999,7 @@
                     <h2 class="text-3xl sm:text-4xl font-black text-gray-950 mt-4">Build your estimate in seconds</h2>
                     <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">Enter your zip code to set your zone, then check off the tasks you need. Your estimated total updates instantly &mdash; no phone tag, no waiting.</p>
                 </div>
-                <div id="quote-calculator" class="max-w-6xl mx-auto">
+                <div id="quote-calculator" class="max-w-7xl mx-auto">
                     <div class="text-center text-gray-500 py-10"><i class="fas fa-circle-notch fa-spin text-red-600 text-2xl" aria-hidden="true"></i><p class="mt-3 text-sm font-semibold">Loading the calculator&hellip;</p></div>
                 </div>
             </div>
