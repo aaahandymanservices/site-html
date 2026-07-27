@@ -102,7 +102,7 @@ body {
   color: var(--brand-ink);
   line-height: 1.6;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: subpixel-antialiased;
   animation: page-enter 0.55s var(--ease-out) both;
 }
 
@@ -480,20 +480,27 @@ body > header.bg-gradient-to-r > * {
 .service-card,
 .generated-service-card {
   overflow: visible !important; /* Prevent clipping floating absolute elements */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
 }
 
 .service-card,
 .generated-service-card {
   border-color: rgb(216 222 232 / 92%);
   box-shadow: var(--shadow-md);
-  transition: border-color 260ms var(--ease), box-shadow 260ms var(--ease), transform 260ms var(--ease);
+  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease), border-color 260ms var(--ease), color 260ms var(--ease);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .service-card:hover,
 .generated-service-card:hover {
   border-color: rgb(166 31 46 / 30%);
   box-shadow: var(--shadow-lg);
-  transform: translateY(-6px);
+  transform: translateY(-6px) translateZ(0);
 }
 
 /*
