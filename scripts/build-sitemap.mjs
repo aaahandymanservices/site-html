@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { escapeXml } from './html-escape.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -43,16 +44,16 @@ for (const page of staticPages) {
     </image:image>`;
   }
   urls.push(`  <url>
-    <loc>${loc}</loc>
+    <loc>${escapeXml(loc)}</loc>
     <lastmod>${currentDate}</lastmod>
-    <changefreq>${page.changefreq}</changefreq>
-    <priority>${page.priority}</priority>${imagesMarkup}
+    <changefreq>${escapeXml(page.changefreq)}</changefreq>
+    <priority>${escapeXml(page.priority)}</priority>${imagesMarkup}
   </url>`);
 }
 
 for (const city of citiesData.cities) {
   urls.push(`  <url>
-    <loc>${SITE}/handyman/${city.slug}</loc>
+    <loc>${SITE}/handyman/${escapeXml(city.slug)}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -61,7 +62,7 @@ for (const city of citiesData.cities) {
 
 for (const service of servicesData.services) {
   urls.push(`  <url>
-    <loc>${SITE}/services/${service.slug}</loc>
+    <loc>${SITE}/services/${escapeXml(service.slug)}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

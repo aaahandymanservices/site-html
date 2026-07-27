@@ -670,7 +670,31 @@
         });
         updateBookingCompletion();
 
-        // Set service parameter from query string if available
+        // Set service parameter from query string if available.
+        //
+        // Nothing derived from the URL is ever written as markup. Query values are
+        // normalised through these helpers first: `sanitizeText` strips control
+        // characters (including the NUL/newline tricks used to smuggle markup past
+        // a naive filter) and caps the length to the same limit the API enforces,
+        // and `safeInternalPath` rejects anything that is not a plain root-relative
+        // path so a `javascript:`, `data:`, or cross-origin URL can never reach an
+        // href. See the API's own `clean()` for the server-side counterpart.
+        const MAX_NOTES_LENGTH = 700;
+
+        const sanitizeText = (value, maxLength) =>
+            String(value ?? '')
+                .replace(/[\u0000-\u001F\u007F-\u009F\u2028\u2029]+/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim()
+                .slice(0, maxLength);
+
+        const safeInternalPath = (value, fallback) => {
+            const path = String(value ?? '');
+            // A single leading slash not followed by another slash or a backslash:
+            // "/services#x" passes, "//evil.example" and "/\evil.example" do not.
+            return /^\/(?![/\\])[A-Za-z0-9\-._~/?#%&=+,:@!$'()*[\]]*$/.test(path) ? path : fallback;
+        };
+
         const PACKAGE_DESCRIPTIONS = {
             "Maintenance Membership": {
                 text: "Scheduled seasonal visits, priority booking, and member pricing all year long for $49/mo.",
@@ -708,7 +732,12 @@
         const updatePackageDetails = () => {
             if (!bookingService || !servicePackageInfo) return;
             const val = bookingService.value;
-            const desc = PACKAGE_DESCRIPTIONS[val];
+            // Own-property lookup only. A bare `PACKAGE_DESCRIPTIONS[val]` also
+            // resolves inherited keys ("constructor", "__proto__", "toString"),
+            // which would hand the block below an object it never described.
+            const desc = Object.prototype.hasOwnProperty.call(PACKAGE_DESCRIPTIONS, val)
+                ? PACKAGE_DESCRIPTIONS[val]
+                : null;
             if (desc) {
                 servicePackageInfo.innerHTML = '';
 
@@ -727,8 +756,11 @@
                 p.appendChild(document.createTextNode(` ${desc.text} `));
 
                 const link = document.createElement('a');
-                link.href = desc.link;
+                link.href = safeInternalPath(desc.link, '/services');
                 link.target = '_blank';
+                // Without noopener the new tab keeps a handle on this one and can
+                // navigate the booking form away to a look-alike page.
+                link.rel = 'noopener noreferrer';
                 link.className = 'text-red-400 hover:text-red-300 underline font-semibold whitespace-nowrap ml-1';
                 link.textContent = 'Learn details ';
 
@@ -757,8 +789,13 @@
             const requestedNotes = params.get('notes');
 
             const messageField = document.getElementById('booking-message');
-            if (requestedNotes && messageField && !messageField.value.trim()) {
-                messageField.value = requestedNotes;
+            // `?notes=` lands in a field the customer then submits, so it is
+            // reflected back to the owner's inbox and stored with the booking.
+            // Sanitising it here keeps a crafted link from seeding the record with
+            // control characters or padding past the API's own 700-char limit.
+            const safeNotes = sanitizeText(requestedNotes, MAX_NOTES_LENGTH);
+            if (safeNotes && messageField && !messageField.value.trim()) {
+                messageField.value = safeNotes;
             }
 
             if (requestedPkg && bookingService) {
@@ -986,7 +1023,13 @@
                     netlifyFormData.append('message', message);
                     netlifyFormData.append('seasonal-opt-in', optIn ? 'on' : 'off');
                     if (data.booking?.photoUrl) {
-                        netlifyFormData.append('photoUrl', new URL(data.booking.photoUrl, window.location.origin).href);
+                        // Resolve against this origin and forward it only when it
+                        // stayed here, so a tampered API response cannot plant an
+                        // off-site or javascript: link in the owner's notification.
+                        const resolved = new URL(data.booking.photoUrl, window.location.origin);
+                        if (resolved.origin === window.location.origin && (resolved.protocol === 'https:' || resolved.protocol === 'http:')) {
+                            netlifyFormData.append('photoUrl', resolved.href);
+                        }
                     }
 
                     fetch('/book.html', {

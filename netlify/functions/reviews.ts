@@ -3,6 +3,7 @@ import { getStore } from "@netlify/blobs";
 import { desc, eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { reviews } from "../../db/schema.js";
+import { submittedPasscode, verifyAdminPasscode } from "../lib/admin-credential.js";
 
 // Netlify caps a buffered function request/response at 6 MB, so anything larger
 // is rejected by the platform before this code runs. Staying under that ceiling
@@ -113,52 +114,26 @@ const validatePhoto = (photo: FormDataEntryValue | null, required: boolean) => {
   return "";
 };
 
-const getEnv = (name: string): string => {
-  try {
-    if (typeof Netlify !== "undefined" && Netlify.env) {
-      return Netlify.env.get(name) ?? "";
-    }
-  } catch {}
-  try {
-    const globalProcess = (globalThis as any).process;
-    if (globalProcess && globalProcess.env) {
-      return globalProcess.env[name] ?? "";
-    }
-  } catch {}
-  return "";
-};
-
-// Constant-time string comparison to avoid leaking the secret via timing.
-const timingSafeEqual = (a: string, b: string) => {
-  if (a.length !== b.length) return false;
-  let mismatch = 0;
-  for (let i = 0; i < a.length; i += 1) {
-    mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  }
-  return mismatch === 0;
-};
-
 // Pull the admin secret from the request: an X-Admin-Token header (preferred),
 // an Authorization: Bearer header, or a JSON/query/form field carried through.
-const submittedAdminSecret = (request: Request, fallback = "") => {
-  const header = request.headers.get("x-admin-token") ?? request.headers.get("x-admin-secret") ?? "";
-  if (header.trim()) return header.trim().slice(0, 200);
-  const bearer = /^Bearer\s+(.+)$/i.exec(request.headers.get("authorization") ?? "")?.[1];
-  if (bearer?.trim()) return bearer.trim().slice(0, 200);
-  return fallback.trim().slice(0, 200);
-};
+const submittedAdminSecret = (request: Request, fallback = "") => submittedPasscode(request, fallback);
 
-// Authorization gate for any review mutation. Fails closed: if no admin secret
-// is configured on the server, no one is allowed to edit or delete reviews.
+// Authorization gate for any review mutation. Fails closed: if no admin
+// credential is configured on the server, no one is allowed to edit or delete
+// reviews. Verification lives in netlify/lib/admin-credential.ts, which prefers
+// the salted ADMIN_API_TOKEN_HASH verifier over a plaintext secret.
 const authorizeAdmin = (submitted: string): Response | null => {
-  const adminSecret = getEnv("ADMIN_API_TOKEN");
-  if (!adminSecret) {
-    console.error("ADMIN_API_TOKEN is not configured; refusing review mutation.");
+  const result = verifyAdminPasscode(submitted);
+
+  if (result.status === "not-configured") {
+    console.error("No admin credential is configured; refusing review mutation.");
     return errorJson("Review management is not available right now.", 503);
   }
-  if (!submitted || !timingSafeEqual(submitted, adminSecret)) {
+
+  if (result.status === "rejected") {
     return errorJson("Please sign in as the owner to edit or remove reviews.", 401);
   }
+
   return null;
 };
 

@@ -9,6 +9,9 @@
  * come from this one table: it travels to the browser as JSON inside the
  * banner rather than being copied into the script, where the two would drift.
  */
+
+import { escapeHtml, jsonForScript } from './html-escape.mjs';
+
 export const SEASONAL_OFFERS = {
   spring: {
     icon: '☀️',
@@ -50,11 +53,6 @@ export function currentSeason(date = new Date()) {
   return 'fall';
 }
 
-const escapeHtml = (value) => value
-  .replace(/&/g, '&amp;')
-  .replace(/</g, '&lt;')
-  .replace(/>/g, '&gt;');
-
 export function getSeasonalBanner() {
   const season = currentSeason();
   const offer = SEASONAL_OFFERS[season];
@@ -62,7 +60,7 @@ export function getSeasonalBanner() {
   // Nothing in the table contains `<` today, but JSON sitting inside a document
   // has to survive the HTML parser whatever the copy is edited to later, and a
   // stray `</script>` in it would end the block early.
-  const seasons = JSON.stringify(SEASONAL_OFFERS).replace(/</g, '\\u003c');
+  const seasons = jsonForScript(SEASONAL_OFFERS, 0);
 
   // Dismissal is read back before the first paint rather than in the deferred
   // site.js, so a visitor who closed the bar never sees it flash in and

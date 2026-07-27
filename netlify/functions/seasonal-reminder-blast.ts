@@ -1,8 +1,8 @@
 import type { Config } from "@netlify/functions";
-import { createHash, timingSafeEqual } from "node:crypto";
 import { eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { seasonalSubscribers } from "../../db/schema.js";
+import { submittedPasscode, verifyAdminPasscode } from "../lib/admin-credential.js";
 
 const json = (body: unknown, init?: ResponseInit) =>
   Response.json(body, {
@@ -16,42 +16,25 @@ const json = (body: unknown, init?: ResponseInit) =>
 const errorJson = (message = "Something went wrong. Please try again soon.", status = 500) =>
   json({ error: message }, { status });
 
-const getEnv = (name: string): string => {
-  try {
-    if (typeof Netlify !== "undefined" && Netlify.env) {
-      return Netlify.env.get(name) ?? "";
-    }
-  } catch {}
-  try {
-    if (typeof process !== "undefined" && process.env) {
-      return process.env[name] ?? "";
-    }
-  } catch {}
-  return "";
-};
-
 // This endpoint returns the full opted-in subscriber list (emails and names),
-// so it must never be publicly reachable. Access requires a bearer token that
-// matches the ADMIN_API_TOKEN environment variable (set it in the Netlify UI).
-// If the variable is unset we fail closed so subscriber data is never exposed.
+// so it must never be publicly reachable. Access requires the owner's admin
+// passcode, verified against the salted ADMIN_API_TOKEN_HASH verifier (see
+// netlify/lib/admin-credential.ts). If no credential is configured we fail
+// closed so subscriber data is never exposed.
 const requireAdmin = (request: Request): Response | null => {
-  const expected = getEnv("ADMIN_API_TOKEN");
-  if (!expected) {
-    return errorJson("Admin access is not configured. Set the ADMIN_API_TOKEN environment variable to enable this endpoint.", 503);
+  const result = verifyAdminPasscode(submittedPasscode(request));
+
+  if (result.status === "not-configured") {
+    return errorJson(
+      "Admin access is not configured. Set the ADMIN_API_TOKEN_HASH environment variable to enable this endpoint.",
+      503,
+    );
   }
-  const provided =
-    request.headers.get("authorization")?.replace(/^Bearer\s+/i, "").trim() ??
-    request.headers.get("x-admin-token")?.trim() ??
-    "";
 
-  // Use a constant-time secure buffer comparison (using SHA-256 hashes to guarantee equal length inputs)
-  // to defend against timing side-channel attacks that could leak the ADMIN_API_TOKEN.
-  const expectedHash = createHash("sha256").update(expected).digest();
-  const providedHash = createHash("sha256").update(provided).digest();
-
-  if (!timingSafeEqual(providedHash, expectedHash)) {
+  if (result.status === "rejected") {
     return errorJson("Unauthorized.", 401);
   }
+
   return null;
 };
 
