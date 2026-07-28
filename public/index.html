@@ -394,14 +394,6 @@
             animation: pulse-attention-ring 2s infinite;
         }
 
-        /* The 6-hour package button is both a .cta-button and a .pulse-btn. The
-           shell clips its contents with overflow:hidden for its hover shine,
-           which would also swallow the ring, so this one button trades the
-           shine -- a hover-only flourish -- for the pulse that makes it stand
-           out in the first place. */
-        .cta-button.pulse-btn { overflow: visible; }
-        .cta-button.pulse-btn::after { display: none; }
-
         section[id], header[id] {
             scroll-margin-top: 80px;
         }
@@ -829,7 +821,7 @@
                                     <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 mt-1 shrink-0" aria-hidden="true"></i> Photo summary of completed work</li>
                                     <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 mt-1 shrink-0" aria-hidden="true"></i> 1-year workmanship guarantee</li>
                                 </ul>
-                                <a href="/book?service=6-Hour+Handyman+Package" class="cta-button w-full text-sm font-bold pulse-btn">Book 6 Hours</a>
+                                <a href="/book?service=6-Hour+Handyman+Package" class="cta-button w-full text-sm font-bold">Book 6 Hours</a>
                             </div>
 
                             <!-- Tier 3: 8-Hour Package -->
@@ -845,7 +837,7 @@
                                     <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-900 mt-1 shrink-0" aria-hidden="true"></i> Project sequencing &amp; full cleanup</li>
                                     <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-900 mt-1 shrink-0" aria-hidden="true"></i> 1-year workmanship guarantee</li>
                                 </ul>
-                                <a href="/book?service=8-Hour+Handyman+Package" class="cta-button bg-blue-900 hover:bg-blue-950 w-full text-sm font-bold">Book 8 Hours</a>
+                                <a href="/book?service=8-Hour+Handyman+Package" class="cta-button w-full text-sm font-bold">Book 8 Hours</a>
                             </div>
 
                             <!-- Tier 4: Maintenance Membership -->
