@@ -34,6 +34,15 @@
   main, section, header, footer, nav {
     max-width: 100%;
   }
+
+  input, select, textarea {
+    color: #ffffff;
+    background-color: #1a1a1a;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #888888;
+  }
 }
 
 @layer components {
