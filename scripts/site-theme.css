@@ -1050,26 +1050,29 @@ body > header.bg-gradient-to-r > div:last-child {
    so with JS disabled every section stays fully visible. --- */
 .js-reveal .reveal-block {
   opacity: 0;
-  transform: translateY(26px);
+  transform: translate3d(0, 26px, 0);
   transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
   will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 
 .js-reveal .reveal-block.reveal-shown {
   opacity: 1;
-  transform: none;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Children of a section's primary grid slide up in a gentle cascade.
    Transform only, so it composites cleanly under the parent's fade. */
 .js-reveal .reveal-child {
-  transform: translateY(22px);
+  transform: translate3d(0, 22px, 0);
   transition: transform 0.7s var(--ease-out);
   transition-delay: calc(var(--i, 0) * 65ms);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .js-reveal .reveal-child.reveal-shown {
-  transform: none;
+  transform: translate3d(0, 0, 0);
 }
 
 /* ============================================================

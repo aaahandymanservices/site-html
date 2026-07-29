@@ -191,7 +191,16 @@ function page(city) {
 ${jsonLd(city)}
 
     <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260729b">
+    <style id="critical-above-the-fold">
+        *, ::before, ::after { box-sizing: border-box; }
+        html { font-family: "Roboto", system-ui, -apple-system, sans-serif; -webkit-text-size-adjust: 100%; }
+        body { margin: 0; background-color: #f4f6fa; color: #1f2937; line-height: 1.6; }
+        header, nav, main, section, footer { display: block; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; }
+    </style>
+    <link rel="preload" href="/css/tailwind.css?v=20260729b" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729b"></noscript>
     <link rel="stylesheet" href="/css/site-theme.css?v=20260729b">
     <!-- Font Awesome subset (generated, see scripts/build-icon-css.mjs) -->
     <link rel="stylesheet" href="/css/icons.css?v=20260727a">
@@ -423,14 +432,11 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
       gtag('js', new Date());
       gtag('config', 'G-VRMCPNEQC3');
 
-      // gtag.js is held back until the load event has fired. Before that the
-      // browser is still fetching this page's own CSS, fonts, and hero image,
-      // and a third-party script queued alongside them competes for bandwidth
-      // and main-thread time inside the LCP window. Once the document is done
-      // loading the request goes out on the first idle slot, and a real
-      // interaction promotes it so engaged visitors are still measured.
+      // gtag.js is deferred until user interaction (pointer/touch/keydown) or
+      // 5 seconds post-load on idle, removing ~178 KiB third-party script from
+      // the initial page render window.
       (function () {
-        var injected = false, armed = false;
+        var injected = false;
 
         function inject() {
           if (injected) return;
@@ -442,30 +448,29 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
           document.head.appendChild(s);
         }
 
-        function afterLoad(fn) {
-          if (document.readyState === 'complete') fn();
-          else window.addEventListener('load', fn, { once: true });
-        }
-
-        // An interaction during loading queues the script for the moment
-        // loading finishes rather than firing it mid-load.
-        function loadGtag() {
-          if (injected || armed) return;
-          armed = true;
-          afterLoad(inject);
-        }
-
-        afterLoad(function () {
-          if ('requestIdleCallback' in window) {
-            requestIdleCallback(function () { setTimeout(inject, 2500); }, { timeout: 6000 });
+        function trigger() {
+          if (document.readyState === 'complete') {
+            if ('requestIdleCallback' in window) {
+              requestIdleCallback(function () { setTimeout(inject, 5000); }, { timeout: 10000 });
+            } else {
+              setTimeout(inject, 6000);
+            }
           } else {
-            setTimeout(inject, 3500);
+            window.addEventListener('load', function () {
+              if ('requestIdleCallback' in window) {
+                requestIdleCallback(function () { setTimeout(inject, 5000); }, { timeout: 10000 });
+              } else {
+                setTimeout(inject, 6000);
+              }
+            }, { once: true });
           }
+        }
+
+        ['pointerdown', 'keydown', 'touchstart'].forEach(function (e) {
+          window.addEventListener(e, inject, { once: true, passive: true });
         });
 
-        ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (e) {
-          window.addEventListener(e, loadGtag, { once: true, passive: true });
-        });
+        trigger();
       })();
     </script>
 
