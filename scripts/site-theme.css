@@ -1376,7 +1376,7 @@ body > header.bg-gradient-to-r > div:last-child {
 }
 
 #guarantee-highlight .guarantee-phrase {
-  display: inline-block;
+  display: inline;
   max-width: 100%;
 }
 
