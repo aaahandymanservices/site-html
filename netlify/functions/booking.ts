@@ -3,6 +3,12 @@ import { getStore } from "@netlify/blobs";
 import { eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { bookings, seasonalSubscribers } from "../../db/schema.js";
+import {
+  getRedemptionStatus,
+  isCertificateRequested,
+  recordRedemption,
+  releaseRedemption,
+} from "../lib/gift-certificate.js";
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
@@ -60,6 +66,7 @@ export default async (request: Request) => {
     let bookingTime = "";
     let message = "";
     let optIn = false;
+    let giftCertificateRequested = false;
     let photo: File | null = null;
 
     // Handle JSON or URLSearchParams (standard form POST or application/json)
@@ -74,6 +81,9 @@ export default async (request: Request) => {
       bookingTime = String(body.bookingTime || "").trim();
       message = String(body.message || "").trim();
       optIn = Boolean(body.optIn || body["seasonal-opt-in"] || false);
+      giftCertificateRequested = isCertificateRequested(
+        body.firstServiceGiftCertificate ?? body["first-service-gift-certificate"],
+      );
     } else {
       const formData = await request.formData();
       customerName = String(formData.get("customerName") || formData.get("name") || "").trim();
@@ -84,6 +94,9 @@ export default async (request: Request) => {
       bookingTime = String(formData.get("bookingTime") || "").trim();
       message = String(formData.get("message") || "").trim();
       optIn = formData.get("seasonal-opt-in") === "on" || formData.get("seasonal-opt-in") === "true";
+      giftCertificateRequested = isCertificateRequested(
+        formData.get("firstServiceGiftCertificate") ?? formData.get("first-service-gift-certificate"),
+      );
       const uploadedPhoto = formData.get("photo");
       photo = uploadedPhoto instanceof File && uploadedPhoto.size > 0 ? uploadedPhoto : null;
     }
@@ -138,6 +151,28 @@ export default async (request: Request) => {
       await photoStore.set(photoKey, await photo.arrayBuffer());
     }
 
+    // The $50 first-service certificate is one per customer, ever. Claim it
+    // before the booking is written so the UNIQUE constraint on the redemption
+    // table -- not the browser -- decides whether this booking gets it, and two
+    // simultaneous submissions from the same address can't both win. A request
+    // that ticks the box after having already spent it is downgraded to a plain
+    // booking rather than rejected. If the bookkeeping itself fails, the booking
+    // still goes through without the discount: an appointment is worth more than
+    // a promo flag, and the owner can honour the certificate by hand.
+    let giftStatus = { firstServiceGiftRedeemed: false, redeemedAt: null as string | null, alreadyRedeemed: false };
+    let giftCertificateApplied = false;
+    try {
+      if (giftCertificateRequested) {
+        giftStatus = await recordRedemption(email, { customerName, source: "booking_form" });
+        giftCertificateApplied = !giftStatus.alreadyRedeemed;
+      } else {
+        const status = await getRedemptionStatus(email);
+        giftStatus = { ...status, alreadyRedeemed: status.firstServiceGiftRedeemed };
+      }
+    } catch (giftErr) {
+      console.error("Failed to resolve the first-service gift certificate:", giftErr);
+    }
+
     let newBooking: typeof bookings.$inferSelect;
     try {
       [newBooking] = await db.insert(bookings).values({
@@ -149,11 +184,16 @@ export default async (request: Request) => {
         bookingTime,
         message: message || null,
         photoKey,
+        giftCertificateApplied,
         status: "pending"
       }).returning();
     } catch (error) {
       if (photoKey) {
         await photoStore.delete(photoKey).catch(() => undefined);
+      }
+      // Hand the certificate back: it was claimed for a booking that never saved.
+      if (giftCertificateApplied) {
+        await releaseRedemption(email).catch(() => undefined);
       }
       throw error;
     }
@@ -195,7 +235,16 @@ export default async (request: Request) => {
         service: newBooking.service,
         bookingDate: newBooking.bookingDate,
         bookingTime: newBooking.bookingTime,
+        giftCertificateApplied: newBooking.giftCertificateApplied,
         photoUrl: newBooking.photoKey ? `/api/booking/photo/${newBooking.photoKey}` : null
+      },
+      // The browser mirrors this into local storage so the offer stops being
+      // rendered for this visitor on every page.
+      giftCertificate: {
+        requested: giftCertificateRequested,
+        applied: giftCertificateApplied,
+        firstServiceGiftRedeemed: giftStatus.firstServiceGiftRedeemed,
+        redeemedAt: giftStatus.redeemedAt
       }
     }, { status: 201 });
   } catch (err: any) {

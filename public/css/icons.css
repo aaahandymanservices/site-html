@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 223 icon names in use.
+ * Generated subset - 224 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -109,6 +109,7 @@
 .fa-stairs:before{content:"\e289"}
 .fa-v:before{content:"\56"}
 .fa-magic-wand-sparkles:before,.fa-wand-magic-sparkles:before{content:"\e2ca"}
+.fa-key:before{content:"\f084"}
 .fa-money-bill-wave:before{content:"\f53a"}
 .fa-air-freshener:before,.fa-spray-can-sparkles:before{content:"\f5d0"}
 .fa-star:before{content:"\f005"}
@@ -119,6 +120,7 @@
 .fa-bath:before,.fa-bathtub:before{content:"\f2cd"}
 .fa-map-location-dot:before,.fa-map-marked-alt:before{content:"\f5a0"}
 .fa-cloud-showers-water:before{content:"\e4e4"}
+.fa-bucket:before{content:"\e4cf"}
 .fa-rotate-back:before,.fa-rotate-backward:before,.fa-rotate-left:before,.fa-undo-alt:before{content:"\f2ea"}
 .fa-handshake:before{content:"\f2b5"}
 .fa-check-circle:before,.fa-circle-check:before{content:"\f058"}
@@ -151,7 +153,7 @@
 .fa-clipboard-check:before{content:"\f46c"}
 .fa-wrench:before{content:"\f0ad"}
 .fa-circle-question:before,.fa-question-circle:before{content:"\f059"}
-.fa-route:before{content:"\f4d7"}
+.fa-phone-alt:before,.fa-phone-flip:before{content:"\f879"}
 .fa-tags:before{content:"\f02c"}
 .fa-faucet-drip:before{content:"\e006"}
 .fa-home-lg:before,.fa-house-chimney:before{content:"\e3af"}
@@ -182,7 +184,6 @@
 .fa-hands-helping:before,.fa-handshake-angle:before{content:"\f4c4"}
 .fa-location-dot:before,.fa-map-marker-alt:before{content:"\f3c5"}
 .fa-arrow-down:before{content:"\f063"}
-.fa-droplet:before,.fa-tint:before{content:"\f043"}
 .fa-envelope-open-text:before{content:"\f658"}
 .fa-boxes-alt:before,.fa-boxes-stacked:before,.fa-boxes:before{content:"\f468"}
 .fa-receipt:before{content:"\f543"}

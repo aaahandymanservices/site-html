@@ -38,5 +38,22 @@ export const bookings = pgTable("bookings", {
   message: text("message"),
   photoKey: text("photo_key"),
   status: text("status").default("pending").notNull(),
+  // True when this booking is the one that consumed the customer's $50
+  // first-service gift certificate, so the owner can see the discount owed
+  // without cross-referencing the redemption table.
+  giftCertificateApplied: boolean("gift_certificate_applied").default(false).notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
+// One row per customer who has consumed their $50 first-service gift
+// certificate. The email is the identity here -- the site has no customer
+// login -- and the UNIQUE constraint is what makes the offer one-time: a
+// second claim for the same address conflicts instead of inserting.
+export const giftCertificateRedemptions = pgTable("gift_certificate_redemptions", {
+  id: serial("id").primaryKey(),
+  email: text("email").notNull().unique(),
+  customerName: text("customer_name"),
+  // Where it was claimed: 'booking_form', 'contact_form', 'quote_form', or 'manual'.
+  source: text("source").default("booking_form").notNull(),
+  redeemedAt: timestamp("redeemed_at", { withTimezone: true }).defaultNow().notNull(),
 });

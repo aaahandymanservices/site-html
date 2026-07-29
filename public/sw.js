@@ -17,8 +17,10 @@
 // seasonal offer bar: its markup, styles, and behaviour have to arrive
 // together, and the asset cache is keyed on the URL minus ?v=, so bumping the
 // stamp on the stylesheet and script alone would still have served a returning
-// visitor last deploy's pair for one more page view.
-const CACHE_VERSION = 'v3';
+// visitor last deploy's pair for one more page view. v4 lands the one-time gate
+// on the first-service gift certificate for the same reason: a cached page
+// without the `data-gift-certificate` hooks would keep offering it.
+const CACHE_VERSION = 'v4';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -32,6 +34,7 @@ const PRECACHE_URLS = [
   '/css/site-theme.css',
   '/css/icons.css',
   '/js/site.js',
+  '/js/gift-certificate.js',
   '/js/chat-loader.js',
   '/fonts/archivo-latin.woff2',
   '/fonts/roboto-latin.woff2',
