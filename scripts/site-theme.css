@@ -161,6 +161,29 @@ div[id] {
   scroll-margin-top: 6rem;
 }
 
+/* Text may break between words and, only as a last resort for a token with no
+   break opportunity in it (a long URL, an email address), inside one. The
+   defaults invert that: `overflow-wrap: normal` lets a long token push out of
+   its box instead, and any rule that reaches for `break-word` to contain it
+   ends up licensing mid-word breaks in ordinary prose too.
+
+   Everything is at zero specificity, so Tailwind's own single-class utilities
+   -- `break-all` on the footer email address, `truncate`, `whitespace-nowrap`
+   -- still override this per element. */
+:where(h1, h2, h3, h4, h5, h6, p, li, dt, dd, blockquote, figcaption,
+       label, th, td, summary, a, button, span, strong, em) {
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+
+/* Running text gets the browser's paragraph shaping, which mainly means it
+   won't leave the last word of a paragraph alone on its own line. Headings
+   keep `balance` from the rule above, which evens their line lengths instead. */
+:where(p, li, blockquote, figcaption, dd) {
+  text-wrap: pretty;
+}
+
 /* Distinctive, sturdy display type for every heading — applied at zero
    specificity so Tailwind size/weight utilities keep full control. */
 :where(h1, h2, h3, h4, h5, h6) {
@@ -272,6 +295,14 @@ textarea {
 
 .cta-button.bg-emerald-700:hover {
   background: #065f46;
+}
+
+/* A full-width call to action already spans its card, so the generous inline
+   padding buys no visual breathing room -- it only narrows the label. Inside a
+   three-up card row that was the difference between "Explore Plumbing &
+   Electrical" fitting on two comfortable lines and breaking awkwardly. */
+.cta-button.w-full {
+  padding-inline: 1.1rem;
 }
 
 .cta-button.bg-blue-900 {
@@ -1367,41 +1398,170 @@ body > header.bg-gradient-to-r > div:last-child {
   }
 }
 
-/* Guarantee Highlight Section Layout & Typography Rules */
-#guarantee-highlight h2 {
+/* ============================================================
+   Content card grids: a floor on how narrow a column may get
+
+   The three-up card rows are declared as a fixed `md:grid-cols-3`, which holds
+   three columns from 768px upward no matter how little width that leaves each
+   one. Inside the pricing hub -- itself an inset card with its own padding --
+   a tablet-width viewport left roughly 150px of text per card, enough to break
+   list items into three lines apiece and drop single words onto lines of their
+   own.
+
+   Sizing the tracks with auto-fit instead makes the column count a consequence
+   of the available width rather than the breakpoint: three across whenever
+   three fit with a readable measure, two when they do not. The 17rem floor is
+   the card's own padding plus about 15rem of text, which is the narrowest these
+   cards read comfortably at.
+   ============================================================ */
+@media (min-width: 768px) {
+  #how-it-works .grid,
+  #primary-categories > .grid,
+  #themed-packages > .grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  }
+}
+
+/* ============================================================
+   1-Year Workmanship Guarantee band
+
+   Three columns of very different content share this row: a seal above a
+   single-line eyebrow, a heading with a paragraph of copy, and two buttons
+   whose labels are long ("Book Guaranteed Repair"). Splitting the row into
+   twelfths sized every track by the same arbitrary unit, so between 1024px
+   and 1279px the call-to-action column landed near 200px and its labels broke
+   after "Guaranteed" -- one word stranded per line -- while the copy beside
+   it had width to spare.
+
+   The tracks below are sized from what each column actually needs instead:
+   the seal takes its intrinsic width, the buttons get a floor wide enough to
+   hold the longest label on one line, and the copy absorbs everything left
+   over. Nothing here depends on a magic number matching the text, so a longer
+   label costs the copy some width rather than breaking mid-phrase.
+   ============================================================ */
+.guarantee-band__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.guarantee-band__seal {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Four words that read as one label; broken across lines it looks like an
+   error. Kept on one line, and the track it sits in is sized to fit it. */
+.guarantee-band__eyebrow {
+  white-space: nowrap;
+}
+
+.guarantee-band__copy {
+  min-width: 0;
+  text-align: center;
+}
+
+/* No width cap: the grid track is the only thing that should decide how wide
+   this copy runs. `pretty` keeps the browser from stranding the last word of
+   a paragraph on a line of its own. */
+.guarantee-band__copy > :where(h2, p) {
+  max-width: none;
+  margin-inline: 0;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: manual;
   text-wrap: pretty;
+}
+
+.guarantee-band__copy > p {
+  margin-top: 0.875rem;
+}
+
+.guarantee-band__points {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.625rem 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.guarantee-band__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.guarantee-band__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-width: 0;
+  padding: 0.875rem 1rem;
+  line-height: 1.375;
+  text-align: center;
+  /* Below the desktop layout the track width is not guaranteed, so a label may
+     still need two lines -- but it may only ever break between words. */
   word-break: normal;
   overflow-wrap: break-word;
   hyphens: manual;
 }
 
-#guarantee-highlight .guarantee-phrase {
-  display: inline;
-  max-width: 100%;
+/* From 640px the row is still stacked, but there is width for the two buttons
+   to sit beside each other instead of running the band tall. */
+@media (min-width: 640px) {
+  .guarantee-band__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .guarantee-band__copy > p {
+    margin-top: 1rem;
+  }
+
+  .guarantee-band__points {
+    margin-top: 1.5rem;
+  }
 }
 
+@media (min-width: 1024px) {
+  /* seal (intrinsic) | copy (everything left) | actions (label-width floor) */
+  .guarantee-band__grid {
+    grid-template-columns: max-content minmax(0, 1fr) minmax(16.5rem, 18rem);
+    gap: 2rem;
+  }
+
+  .guarantee-band__copy {
+    text-align: left;
+  }
+
+  .guarantee-band__points {
+    justify-content: flex-start;
+  }
+
+  /* Back to a stack. Two buttons sharing an 18rem track would put the labels
+     right back into the column this layout exists to give them room out of. */
+  .guarantee-band__actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* The track floor above guarantees the longest label fits, so both buttons
+     read as one line and end up the same height as each other. */
+  .guarantee-band__cta {
+    white-space: nowrap;
+  }
+}
+
+/* "1-Year" is a single term; a break after the hyphen reads as a typo. */
 #guarantee-highlight .no-break {
   white-space: nowrap;
-}
-
-/*
- * The section clips its own overflow to keep the decorative gradient inside the
- * rounded card, which means a call to action that outgrows its grid track fails
- * silently -- the label slides over the copy beside it and then off the card
- * edge instead of pushing a scrollbar that would make the problem obvious. The
- * grid tracks are already minmax(0, 1fr), so these rules close the remaining
- * gap: every child may shrink below its longest word, and the buttons wrap
- * their own text rather than spilling past the pill they sit in.
- */
-#guarantee-highlight .grid > * {
-  min-width: 0;
-}
-
-#guarantee-highlight a[href="/guarantee"],
-#guarantee-highlight a[href="/book"] {
-  max-width: 100%;
-  white-space: normal;
-  overflow-wrap: break-word;
 }
 
 @media (prefers-reduced-motion: reduce) {
