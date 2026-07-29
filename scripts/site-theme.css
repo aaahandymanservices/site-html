@@ -269,13 +269,32 @@ textarea {
   min-height: 44px;
 }
 
-input, select, textarea {
-  color: #ffffff; /* Ensures the typed text is visible */
-  background-color: #1a1a1a; /* Ensures a high-contrast background */
+/* Default field colours.
+ *
+ * Background and text colour have to travel together. A `bg-*` utility on the
+ * element is a class selector and outranks anything matched by element name, so
+ * a rule that hard-codes a dark field here keeps its white text on every field
+ * that carries a light `bg-*` class -- which is how the reviews and careers
+ * forms ended up with white text on a near-white input. Both halves are stated
+ * as a legible light pair, and `:where()` keeps the selector at element-level
+ * specificity so a page that wants a dark field (book, contact) overrides the
+ * pair together with its own `bg-gray-800 text-white`.
+ *
+ * Checkboxes, radios, and range sliders are left alone: a background on those
+ * replaces the control's native look rather than its canvas.
+ */
+input:where(:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="button"]):not([type="submit"]):not([type="reset"])),
+select,
+textarea {
+  background-color: #fff;
+  color: var(--brand-ink);
 }
 
+/* Derived from whatever colour actually won above, so a placeholder can never
+   come out the same shade as the field it sits in. */
 input::placeholder, textarea::placeholder {
-  color: #888888;
+  color: currentColor;
+  opacity: .7;
 }
 
 /* Primary call-to-action buttons — one cohesive crimson treatment site-wide */
@@ -671,8 +690,8 @@ form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) 
   border-width: 1px;
   border-color: #b8c2d0;
   border-radius: 0.6rem;
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: #fff;
+  color: var(--brand-ink);
   transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease), background-color 160ms var(--ease);
 }
 
@@ -683,8 +702,8 @@ form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea):
 }
 
 form :where(input, select, textarea)::placeholder {
-  color: #888888;
-  opacity: 1;
+  color: currentColor;
+  opacity: .7;
 }
 
 details {

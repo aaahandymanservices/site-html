@@ -27,7 +27,7 @@ const STATIC_NAV_PAGES = [
  * the local subset instead. See scripts/site-theme.css for the @font-face
  * rules and scripts/build-icon-css.mjs for the icon stylesheet.
  */
-const ICONS_CSS = '/css/icons.css?v=20260729c';
+const ICONS_CSS = '/css/icons.css?v=20260729d';
 
 /*
  * The two icon webfonts are named nowhere but icons.css, so without a hint the
@@ -96,8 +96,8 @@ function optimizeFontsAndAssets(html) {
         img { max-width: 100%; height: auto; display: block; }
         a { color: inherit; text-decoration: none; }
     </style>
-    <link rel="preload" href="/css/tailwind.css?v=20260729c" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729c"></noscript>`;
+    <link rel="preload" href="/css/tailwind.css?v=20260729d" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729d"></noscript>`;
     html = html.replace(renderBlockingTailwind, replacement);
   }
 
