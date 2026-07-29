@@ -1384,6 +1384,26 @@ body > header.bg-gradient-to-r > div:last-child {
   white-space: nowrap;
 }
 
+/*
+ * The section clips its own overflow to keep the decorative gradient inside the
+ * rounded card, which means a call to action that outgrows its grid track fails
+ * silently -- the label slides over the copy beside it and then off the card
+ * edge instead of pushing a scrollbar that would make the problem obvious. The
+ * grid tracks are already minmax(0, 1fr), so these rules close the remaining
+ * gap: every child may shrink below its longest word, and the buttons wrap
+ * their own text rather than spilling past the pill they sit in.
+ */
+#guarantee-highlight .grid > * {
+  min-width: 0;
+}
+
+#guarantee-highlight a[href="/guarantee"],
+#guarantee-highlight a[href="/book"] {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

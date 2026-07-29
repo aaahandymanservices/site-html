@@ -346,8 +346,8 @@ function page(service) {
 ${jsonLd(service)}
 
     <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260728">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260729">
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260729a">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260729a">
     <!-- Font Awesome subset (generated, see scripts/build-icon-css.mjs) -->
     <link rel="stylesheet" href="/css/icons.css?v=20260727a">
 
