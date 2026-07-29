@@ -269,6 +269,15 @@ textarea {
   min-height: 44px;
 }
 
+input, select, textarea {
+  color: #ffffff; /* Ensures the typed text is visible */
+  background-color: #1a1a1a; /* Ensures a high-contrast background */
+}
+
+input::placeholder, textarea::placeholder {
+  color: #888888;
+}
+
 /* Primary call-to-action buttons — one cohesive crimson treatment site-wide */
 .cta-button {
   position: relative;
@@ -603,8 +612,8 @@ form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) 
   border-width: 1px;
   border-color: #b8c2d0;
   border-radius: 0.6rem;
-  background-color: #fff;
-  color: var(--brand-ink);
+  background-color: #1a1a1a;
+  color: #ffffff;
   transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease), background-color 160ms var(--ease);
 }
 
@@ -615,7 +624,7 @@ form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea):
 }
 
 form :where(input, select, textarea)::placeholder {
-  color: #748195;
+  color: #888888;
   opacity: 1;
 }
 
