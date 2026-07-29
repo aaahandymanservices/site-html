@@ -52,7 +52,7 @@ function cityFaq(city) {
     },
     {
       q: `Do you offer emergency handyman service near ${city.name}?`,
-      a: `Yes. After-hours emergency service is available 7 days a week for urgent repairs such as leaks or door and window problems that affect home safety or security. Call ${PHONE_DISPLAY} for priority response.`
+      a: `Yes. After-hours emergency service is available 7 days a week for urgent repairs such as leaks or door and window problems that affect home safety or security ($175 first hour / $100 per hour after). Call ${PHONE_DISPLAY} for priority response.`
     }
   ];
 }
@@ -411,7 +411,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
-                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects.<br>Locally Serving Oakland County, MI.</p>
+                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects ($600 job limit under MCL 339.2403).<br>Locally Serving Oakland County, MI.</p>
                 <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
                     <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
                     <span class="text-gray-600">|</span>
