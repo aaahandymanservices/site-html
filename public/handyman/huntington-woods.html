@@ -213,13 +213,13 @@
           "name": "Do you offer emergency handyman service near Huntington Woods?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. After-hours emergency service is available 7 days a week for urgent repairs such as leaks or door and window problems that affect home safety or security. Call (248) 385-3432 for priority response."
+            "text": "Yes. After-hours emergency service is available 7 days a week for urgent repairs such as leaks or door and window problems that affect home safety or security ($175 first hour / $100 per hour after). Call (248) 385-3432 for priority response."
           }
         }
       ]
     }
     </script>
-        <style id="critical-above-the-fold">
+    <style id="critical-above-the-fold">
         *, ::before, ::after { box-sizing: border-box; }
         html { font-family: "Roboto", system-ui, -apple-system, sans-serif; -webkit-text-size-adjust: 100%; }
         body { margin: 0; background-color: #f4f6fa; color: #1f2937; line-height: 1.6; }
@@ -458,7 +458,7 @@
                     </article>
                     <article class="bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm hover:border-red-600/30 transition">
                         <h3 class="text-lg sm:text-xl font-bold text-blue-900 mb-2">Do you offer emergency handyman service near Huntington Woods?</h3>
-                        <p class="text-gray-600">Yes. After-hours emergency service is available 7 days a week for urgent repairs such as leaks or door and window problems that affect home safety or security. Call (248) 385-3432 for priority response.</p>
+                        <p class="text-gray-600">Yes. After-hours emergency service is available 7 days a week for urgent repairs such as leaks or door and window problems that affect home safety or security ($175 first hour / $100 per hour after). Call (248) 385-3432 for priority response.</p>
                     </article>
                 </div>
             </div>
@@ -548,7 +548,7 @@
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
-                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects.<br>Locally Serving Oakland County, MI.</p>
+                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects ($600 job limit under MCL 339.2403).<br>Locally Serving Oakland County, MI.</p>
                 <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
                     <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
                     <span class="text-gray-600">|</span>
@@ -564,15 +564,11 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-VRMCPNEQC3');
-      // gtag.js is held back until the load event has fired. Before that the
-      // browser is still fetching this page's own CSS, fonts, and hero image,
-      // and a third-party script queued alongside them competes for bandwidth
-      // and main-thread time inside the LCP window. Once the document is done
-      // loading the request goes out on the first idle slot, and a real
-      // interaction promotes it so engaged visitors are still measured.
+      // gtag.js is deferred until user interaction (pointer/touch/keydown) or
+      // 5 seconds post-load on idle, removing ~178 KiB third-party script from
+      // the initial page render window.
       (function () {
         var injected = false;
-
         function inject() {
           if (injected) return;
           injected = true;
@@ -582,7 +578,6 @@
           s.async = true;
           document.head.appendChild(s);
         }
-
         function trigger() {
           if (document.readyState === 'complete') {
             if ('requestIdleCallback' in window) {
@@ -600,11 +595,9 @@
             }, { once: true });
           }
         }
-
         ['pointerdown', 'keydown', 'touchstart'].forEach(function (e) {
           window.addEventListener(e, inject, { once: true, passive: true });
         });
-
         trigger();
       })();
     </script>

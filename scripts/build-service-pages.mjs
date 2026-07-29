@@ -52,7 +52,7 @@ function serviceFaq(service) {
   if (service.faq) faqs.push({ q: service.faq.q, a: service.faq.a });
   faqs.push({
     q: `Do you offer emergency service for urgent issues?`,
-    a: `Yes. After-hours emergency service is available 7 days a week for urgent repairs that affect home safety or security, such as leaks or door and window problems. Call ${PHONE_DISPLAY} for priority response.`
+    a: `Yes. After-hours emergency service is available 7 days a week for urgent repairs that affect home safety or security, such as leaks or door and window problems ($175 first hour / $100 per hour after). Call ${PHONE_DISPLAY} for priority response.`
   });
   return faqs;
 }
@@ -603,7 +603,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
-                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects.<br>Locally Serving Oakland County, MI.</p>
+                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects ($600 job limit under MCL 339.2403).<br>Locally Serving Oakland County, MI.</p>
                 <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
                     <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
                     <span class="text-gray-600">|</span>
