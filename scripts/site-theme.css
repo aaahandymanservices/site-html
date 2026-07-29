@@ -1367,6 +1367,23 @@ body > header.bg-gradient-to-r > div:last-child {
   }
 }
 
+/* Guarantee Highlight Section Layout & Typography Rules */
+#guarantee-highlight h2 {
+  text-wrap: pretty;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+
+#guarantee-highlight .guarantee-phrase {
+  display: inline-block;
+  max-width: 100%;
+}
+
+#guarantee-highlight .no-break {
+  white-space: nowrap;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
