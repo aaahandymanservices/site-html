@@ -19,8 +19,10 @@
 // stamp on the stylesheet and script alone would still have served a returning
 // visitor last deploy's pair for one more page view. v4 lands the one-time gate
 // on the first-service gift certificate for the same reason: a cached page
-// without the `data-gift-certificate` hooks would keep offering it.
-const CACHE_VERSION = 'v4';
+// without the `data-gift-certificate` hooks would keep offering it. v5 lands the
+// minified scripts and the trimmed stylesheets, which change the bytes behind
+// every /js/ and /css/ entry without changing a pathname.
+const CACHE_VERSION = 'v5';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -39,6 +41,8 @@ const PRECACHE_URLS = [
   '/fonts/archivo-latin.woff2',
   '/fonts/roboto-latin.woff2',
   '/fonts/fa-solid-900.woff2',
+  // Two glyphs' worth of brand icons, and every page preloads it.
+  '/fonts/fa-brands-400.woff2',
   '/icons/icon-192.png',
   '/manifest.webmanifest',
 ];

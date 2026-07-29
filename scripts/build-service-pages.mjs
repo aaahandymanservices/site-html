@@ -315,6 +315,8 @@ function page(service) {
     <!-- Self-hosted brand fonts; @font-face lives in site-theme.css -->
     <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
+    <link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
 
     <title>${esc(title)}</title>
 
@@ -354,11 +356,11 @@ ${jsonLd(service)}
         img { max-width: 100%; height: auto; display: block; }
         a { color: inherit; text-decoration: none; }
     </style>
-    <link rel="preload" href="/css/tailwind.css?v=20260729b" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729b"></noscript>
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260729b">
+    <link rel="preload" href="/css/tailwind.css?v=20260729c" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729c"></noscript>
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260729c">
     <!-- Font Awesome subset (generated, see scripts/build-icon-css.mjs) -->
-    <link rel="stylesheet" href="/css/icons.css?v=20260727a">
+    <link rel="stylesheet" href="/css/icons.css?v=20260729c">
 
     <style>
     </style>
@@ -615,7 +617,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
 
     <!-- Back to top -->
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
-    <script src="/js/site.js?v=20260729" defer></script>
+    <script src="/js/site.js?v=20260729b" defer></script>
 
     <!-- Google tag (gtag.js) -->
     <script>
@@ -667,7 +669,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
     </script>
 
     <!-- AI chat assistant widget -->
-    <script src="/js/chat-loader.js?v=20260724" defer></script>
+    <script src="/js/chat-loader.js?v=20260729b" defer></script>
 
     <script>
       // Registered after load so it never competes with the first render.
