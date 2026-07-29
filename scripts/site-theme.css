@@ -266,6 +266,22 @@ textarea {
   transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), filter var(--dur) var(--ease);
 }
 
+.cta-button.bg-emerald-700 {
+  background: #047857;
+}
+
+.cta-button.bg-emerald-700:hover {
+  background: #065f46;
+}
+
+.cta-button.bg-blue-900 {
+  background: #1e3a8a;
+}
+
+.cta-button.bg-blue-900:hover {
+  background: #172554;
+}
+
 /* Moving sheen on hover for a tactile, polished feel */
 .cta-button::after {
   position: absolute;
