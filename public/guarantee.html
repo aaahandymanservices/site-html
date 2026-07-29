@@ -6,7 +6,6 @@
     <!-- Self-hosted brand fonts + icon subset; @font-face lives in site-theme.css -->
     <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
 
 
     <title>Our Service Guarantee — 1-Year Workmanship Promise | AAA Handyman Services</title>
@@ -73,24 +72,35 @@
     }
     </script>
 
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260729b">
+        <style id="critical-above-the-fold">
+        *, ::before, ::after { box-sizing: border-box; }
+        html { font-family: "Roboto", system-ui, -apple-system, sans-serif; -webkit-text-size-adjust: 100%; }
+        body { margin: 0; background-color: #f4f6fa; color: #1f2937; line-height: 1.6; }
+        header, nav, main, section, footer { display: block; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; }
+    </style>
+    <link rel="preload" href="/css/tailwind.css?v=20260729b" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729b"></noscript>
     <link rel="stylesheet" href="/css/site-theme.css?v=20260729b">
-    <link rel="stylesheet" href="/css/icons.css?v=20260728">
+    <link rel="stylesheet" href="/css/icons.css?v=20260727a">
 
     <style>
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translate3d(0, 20px, 0);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translate3d(0, 0, 0);
             }
         }
         .promise-card {
             opacity: 0;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
             animation: fadeInUp 0.5s ease forwards;
         }
 
@@ -196,7 +206,7 @@
     <button type="button" class="seasonal-banner__close" data-banner-close aria-label="Dismiss seasonal offer">
         <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"></path></svg>
     </button>
-    <script type="application/json" data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck & Gutter Prep","lead":"Book your spring deck & gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
+    <script type="application/json" data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck \u0026 Gutter Prep","lead":"Book your spring deck \u0026 gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
     <script>(function(){try{var b=document.getElementById('seasonal-banner');if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();</script>
 </aside>
 

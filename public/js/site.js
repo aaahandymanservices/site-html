@@ -105,7 +105,7 @@
   // The initial hidden state lives behind the `.js-reveal` class, which is only
   // added here — so if this never runs (no JS, reduced motion, older browser)
   // every section stays fully visible.
-  (function initScrollReveal() {
+  function initScrollReveal() {
     const root = document.documentElement;
     const prefersReduced = window.matchMedia
       && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -120,8 +120,7 @@
         // Skip content that isn't laid out yet (modals, JS-populated blocks);
         // hiding it here could strand it invisible if it never intersects.
         if (section.closest('dialog, [role="dialog"]')) return;
-        if (section.classList.contains('hidden')) return;
-        if (window.getComputedStyle(section).display === 'none') return;
+        if (section.classList.contains('hidden') || section.hasAttribute('hidden')) return;
 
         section.classList.add('reveal-block');
 
@@ -168,7 +167,13 @@
     } catch (err) {
       root.classList.remove('js-reveal');
     }
-  })();
+  }
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => initScrollReveal(), { timeout: 2000 });
+  } else {
+    requestAnimationFrame(() => setTimeout(initScrollReveal, 100));
+  }
 
   // --- Seasonal offer bar ---
   // The bar is baked into the page with whatever season the site was last

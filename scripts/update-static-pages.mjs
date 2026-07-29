@@ -56,6 +56,64 @@ function optimizeFontsAndAssets(html) {
     'href="/css/icons.css?v=20260727a"',
   );
 
+  // Eliminate render-blocking Tailwind CSS
+  const renderBlockingTailwind = /<link\s+rel="stylesheet"\s+href="\/css\/tailwind\.css\?v=20260729b">/gi;
+  if (renderBlockingTailwind.test(html) && !html.includes('id="critical-above-the-fold"')) {
+    const replacement = `    <style id="critical-above-the-fold">
+        *, ::before, ::after { box-sizing: border-box; }
+        html { font-family: "Roboto", system-ui, -apple-system, sans-serif; -webkit-text-size-adjust: 100%; }
+        body { margin: 0; background-color: #f4f6fa; color: #1f2937; line-height: 1.6; }
+        header, nav, main, section, footer { display: block; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; }
+    </style>
+    <link rel="preload" href="/css/tailwind.css?v=20260729b" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729b"></noscript>`;
+    html = html.replace(renderBlockingTailwind, replacement);
+  }
+
+  // Defer GTM script until user interaction or 5s idle post-load
+  const oldGtmPattern = /\(function\s*\(\)\s*\{\s*var\s+injected\s*=\s*false,\s*armed\s*=\s*false;[\s\S]*?\['pointerdown',\s*'keydown',\s*'scroll',\s*'touchstart'\][\s\S]*?\}\)\(\);/gi;
+  const newGtmCode = `(function () {
+        var injected = false;
+
+        function inject() {
+          if (injected) return;
+          injected = true;
+          window.__gtagLoaded = true;
+          var s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3';
+          s.async = true;
+          document.head.appendChild(s);
+        }
+
+        function trigger() {
+          if (document.readyState === 'complete') {
+            if ('requestIdleCallback' in window) {
+              requestIdleCallback(function () { setTimeout(inject, 5000); }, { timeout: 10000 });
+            } else {
+              setTimeout(inject, 6000);
+            }
+          } else {
+            window.addEventListener('load', function () {
+              if ('requestIdleCallback' in window) {
+                requestIdleCallback(function () { setTimeout(inject, 5000); }, { timeout: 10000 });
+              } else {
+                setTimeout(inject, 6000);
+              }
+            }, { once: true });
+          }
+        }
+
+        ['pointerdown', 'keydown', 'touchstart'].forEach(function (e) {
+          window.addEventListener(e, inject, { once: true, passive: true });
+        });
+
+        trigger();
+      })();`;
+
+  html = html.replace(oldGtmPattern, newGtmCode);
+
   return html;
 }
 
