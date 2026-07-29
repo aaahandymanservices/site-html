@@ -273,6 +273,12 @@
     <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729b"></noscript>
     <link rel="stylesheet" href="/css/site-theme.css?v=20260729b">
     <link rel="stylesheet" href="/css/icons.css?v=20260727a">
+
+    <!-- The first-service gift certificate is one per customer. Visitors who
+         have already claimed it must never see it offered again, so it is hidden
+         here from local storage before first paint rather than after; the
+         deferred /js/gift-certificate.js then confirms against the server. -->
+    <script>(function(){try{var s=JSON.parse(localStorage.getItem('aaa-first-service-gift')||'{}');if(!s||s.firstServiceGiftRedeemed!==true)return;var t=document.createElement('style');t.id='gift-certificate-hidden';t.textContent='[data-gift-certificate]{display:none!important}';document.head.appendChild(t);}catch(e){}})();</script>
     <style>
         .hero {
             background: radial-gradient(ellipse at top, rgba(27,42,74,0.72) 0%, rgba(3,7,11,0.85) 100%), linear-gradient(rgba(3,7,11,0.65), rgba(3,7,11,0.75)), url('/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=65') center/cover;
@@ -626,7 +632,7 @@
                 </div>
             </div>
 
-            <div class="mt-10 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-center">
+            <div id="first-service-offer-promo" data-gift-certificate class="mt-10 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-center">
                 <p class="text-gray-700"><span class="font-bold text-red-600">New customer?</span> Receive a $50 gift certificate toward your first service.</p>
                 <a href="/contact?offer=first-service#contact-form" class="inline-flex items-center gap-2 font-bold text-red-600 hover:text-red-700 transition" aria-label="Claim the $50 first-service gift certificate">
                     Claim the offer <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
@@ -1528,7 +1534,7 @@
                     <input type="hidden" name="subject" value="New quote request from aaahandyman.services" />
                     <p class="hidden"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
 
-                    <div id="first-service-offer-quote" class="bg-slate-900 border-2 border-red-600/80 rounded-2xl p-4 sm:p-5 shadow-lg text-white">
+                    <div id="first-service-offer-quote" data-gift-certificate class="bg-slate-900 border-2 border-red-600/80 rounded-2xl p-4 sm:p-5 shadow-lg text-white">
                         <div class="flex items-center gap-3 sm:gap-4 mb-3 pb-3 border-b border-gray-700">
                             <div class="bg-red-600 text-white text-2xl sm:text-3xl font-extrabold px-3 py-1.5 rounded-xl leading-none flex-shrink-0 shadow">
                                 $50
@@ -1622,10 +1628,25 @@
                 var btn = form.querySelector('button[type="submit"]');
                 if (btn) { btn.disabled = true; btn.innerHTML = 'Sending…'; }
 
+                var certificateBox = document.getElementById('quote-first-service-certificate');
+                var claimedCertificate = Boolean(certificateBox && certificateBox.checked && !certificateBox.disabled);
+                var emailField = form.querySelector('input[name="email"]');
+                var nameField = form.querySelector('input[name="name"]');
+                var email = emailField ? emailField.value : '';
+
                 // File uploads: let the browser set the multipart Content-Type boundary.
                 fetch('/', { method: 'POST', body: new FormData(form) })
                     .then(function (res) {
                         if (!res.ok) throw new Error('Bad response');
+                        // One certificate per customer. Email is optional on this
+                        // form, and without one there is no identity to record the
+                        // claim against, so it stays available in that case.
+                        if (claimedCertificate && email && window.AAAGiftCertificate) {
+                            window.AAAGiftCertificate.markRedeemed(email, {
+                                name: nameField ? nameField.value : '',
+                                source: 'quote_form'
+                            });
+                        }
                         form.classList.add('hidden');
                         var success = document.getElementById('quote-success');
                         if (success) success.classList.remove('hidden');
@@ -2295,6 +2316,7 @@
 
 
     <script src="/js/site.js?v=20260729" defer></script>
+    <script src="/js/gift-certificate.js?v=20260729" defer></script>
     <script src="/js/chat-loader.js?v=20260724-2" defer></script>
     <script>
       // Registered after load so it never competes with the first render.
