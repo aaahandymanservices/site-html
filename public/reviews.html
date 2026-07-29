@@ -50,10 +50,10 @@
         img { max-width: 100%; height: auto; display: block; }
         a { color: inherit; text-decoration: none; }
     </style>
-    <link rel="preload" href="/css/tailwind.css?v=20260729c" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729c"></noscript>
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260729c">
-    <link rel="stylesheet" href="/css/icons.css?v=20260729c">
+    <link rel="preload" href="/css/tailwind.css?v=20260729d" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729d"></noscript>
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260729d">
+    <link rel="stylesheet" href="/css/icons.css?v=20260729d">
 
     <style>
 
@@ -303,17 +303,17 @@
                         <form id="reviews-form" class="space-y-5">
                             <div>
                                 <label for="reviews-name" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Name</label>
-                                <input id="reviews-name" name="customerName" type="text" required maxlength="80" autocomplete="name" autocapitalize="words" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <input id="reviews-name" name="customerName" type="text" required maxlength="80" autocomplete="name" autocapitalize="words" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 text-gray-900">
                             </div>
 
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label for="reviews-location" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">City / Area</label>
-                                    <input id="reviews-location" name="location" type="text" required maxlength="90" placeholder="Waterford, MI" autocapitalize="words" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                    <input id="reviews-location" name="location" type="text" required maxlength="90" placeholder="Waterford, MI" autocapitalize="words" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 text-gray-900">
                                 </div>
                                 <div>
                                     <label for="reviews-project" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Type</label>
-                                    <select id="reviews-project" name="projectType" required class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                    <select id="reviews-project" name="projectType" required class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 text-gray-900">
                                         <option value="" disabled selected>Select...</option>
                                         <option value="Carpentry & Trim">Carpentry & Trim</option>
                                         <option value="Doors">Doors</option>
@@ -359,7 +359,7 @@
 
                             <div>
                                 <label for="reviews-review" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Review</label>
-                                <textarea id="reviews-review" name="review" rows="4" required maxlength="700" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Tell neighbors what was fixed and how it went."></textarea>
+                                <textarea id="reviews-review" name="review" rows="4" required maxlength="700" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none text-gray-900" placeholder="Tell neighbors what was fixed and how it went."></textarea>
                             </div>
 
                             <div>
@@ -853,6 +853,9 @@
             if (!reviewsForm) return;
             reviewsEditId = null;
             reviewsForm.reset();
+            // Drop any option added for a review whose project type is no longer
+            // one of the choices, so it doesn't linger for the next submission.
+            reviewsForm.querySelectorAll('option[data-injected]').forEach((option) => option.remove());
             updateStarRatingDisplay(5);
             resetAttributeChips([]);
             clearPhotoPreview();
@@ -862,13 +865,33 @@
             if (reviewsSubmit) reviewsSubmit.innerHTML = 'Post My Review <i class="fas fa-camera-retro" aria-hidden="true"></i>';
         };
 
+        // Assigning a value the <select> has no <option> for silently leaves it
+        // empty, and the field is required -- so the browser would then refuse to
+        // submit with no explanation of which control was at fault. A review
+        // saved under a project type that has since been renamed or removed from
+        // the list keeps its own option so it can still be edited.
+        const setProjectTypeValue = (value) => {
+            const select = reviewsForm?.projectType;
+            if (!select) return;
+            const wanted = String(value || '');
+            select.value = wanted;
+            if (wanted && select.value !== wanted) {
+                const option = document.createElement('option');
+                option.value = wanted;
+                option.textContent = wanted;
+                option.dataset.injected = 'true';
+                select.appendChild(option);
+                select.value = wanted;
+            }
+        };
+
         const startReviewsEdit = (item) => {
             if (!reviewsForm) return;
 
             reviewsEditId = item.id;
             reviewsForm.customerName.value = item.customerName || '';
             reviewsForm.location.value = item.location || '';
-            reviewsForm.projectType.value = item.projectType || '';
+            setProjectTypeValue(item.projectType || '');
             updateStarRatingDisplay(item.rating || 5);
             resetAttributeChips(Array.isArray(item.attributes) ? item.attributes : []);
             reviewsForm.review.value = item.review || '';
