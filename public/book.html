@@ -6,6 +6,8 @@
     <!-- Self-hosted brand fonts + icon subset; @font-face lives in site-theme.css -->
     <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
+    <link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
 
 
     <title>Book Online — Schedule Your Service | AAA Handyman Services</title>
@@ -48,10 +50,10 @@
         img { max-width: 100%; height: auto; display: block; }
         a { color: inherit; text-decoration: none; }
     </style>
-    <link rel="preload" href="/css/tailwind.css?v=20260729b" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729b"></noscript>
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260729b">
-    <link rel="stylesheet" href="/css/icons.css?v=20260727a">
+    <link rel="preload" href="/css/tailwind.css?v=20260729c" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729c"></noscript>
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260729c">
+    <link rel="stylesheet" href="/css/icons.css?v=20260729c">
 
     <!-- The first-service gift certificate is one per customer. Visitors who
          have already claimed it must never see it offered again, so it is hidden
@@ -274,13 +276,13 @@
                                     <label>Don't fill this out if you're human: <input name="bot-field" /></label>
                                 </p>
 
-                                <div id="first-service-offer-booking" data-gift-certificate class="bg-gray-800 border-2 border-red-600/80 rounded-2xl p-4 sm:p-5 shadow-lg">
+                                <div id="first-service-offer-booking" data-gift-certificate class="bg-gray-800 border-2 border-red-400 rounded-2xl p-4 sm:p-5 shadow-lg">
                                     <div class="flex items-center gap-3 sm:gap-4 mb-3 pb-3 border-b border-gray-700">
                                         <div class="bg-red-600 text-white text-2xl sm:text-3xl font-extrabold px-3 py-1.5 rounded-xl leading-none flex-shrink-0 shadow">
                                             $50
                                         </div>
                                         <div>
-                                            <p class="text-xs font-bold uppercase tracking-wider text-red-400">FIRST-SERVICE GIFT CERTIFICATE</p>
+                                            <p class="text-xs font-bold uppercase tracking-wider text-red-300">FIRST-SERVICE GIFT CERTIFICATE</p>
                                             <p class="text-xs sm:text-sm text-gray-300 mt-0.5 leading-snug">Receive a $50 gift certificate toward your first service.</p>
                                         </div>
                                     </div>
@@ -401,7 +403,7 @@
                                             <button id="booking-photo-remove" type="button" class="rounded-lg border border-gray-700 px-3 py-2 text-sm font-semibold text-gray-300 transition hover:border-red-500 hover:text-white">Remove</button>
                                         </div>
                                     </label>
-                                    <p id="booking-photo-error" class="mt-2 hidden text-sm font-semibold text-red-400" role="alert"></p>
+                                    <p id="booking-photo-error" class="mt-2 hidden text-sm font-semibold text-red-300" role="alert"></p>
                                 </div>
 
                                 <div class="flex items-start gap-3 bg-gray-900/50 p-4 rounded-xl border border-gray-800">
@@ -775,7 +777,7 @@
                 // Without noopener the new tab keeps a handle on this one and can
                 // navigate the booking form away to a look-alike page.
                 link.rel = 'noopener noreferrer';
-                link.className = 'text-red-400 hover:text-red-300 underline font-semibold whitespace-nowrap ml-1';
+                link.className = 'text-red-300 hover:text-red-200 underline font-semibold whitespace-nowrap ml-1';
                 link.textContent = 'Learn details ';
 
                 const linkIcon = document.createElement('i');
@@ -1088,9 +1090,9 @@
         }
     </script>
 
-    <script src="/js/site.js?v=20260729" defer></script>
-    <script src="/js/gift-certificate.js?v=20260729" defer></script>
-    <script src="/js/chat-loader.js?v=20260724-2" defer></script>
+    <script src="/js/site.js?v=20260729b" defer></script>
+    <script src="/js/gift-certificate.js?v=20260729b" defer></script>
+    <script src="/js/chat-loader.js?v=20260729b" defer></script>
     <script>
       // Registered after load so it never competes with the first render.
       if ('serviceWorker' in navigator) {

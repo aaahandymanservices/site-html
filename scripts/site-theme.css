@@ -295,7 +295,12 @@ input::placeholder, textarea::placeholder {
   letter-spacing: 0.01em;
   text-decoration: none;
   box-shadow: var(--shadow-sm);
-  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), filter var(--dur) var(--ease);
+  /* `filter` is set on hover but not animated: a transitioned filter forces the
+     whole button -- gradient, label, and sheen -- through a fresh raster pass on
+     every frame, and pages carry a dozen of these. The shadow has to stay in the
+     list because the sheen needs `overflow: hidden`, which would clip an outer
+     shadow off a pseudo-element layer. */
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
 .cta-button.bg-emerald-700 {
@@ -360,7 +365,10 @@ body > nav.sticky {
   box-shadow: 0 6px 22px rgb(27 42 74 / 8%);
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
-  transition: box-shadow var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  /* No transition here: nothing ever changes this bar's shadow or background --
+     there is no scrolled or hovered variant -- so the declaration only asked the
+     compositor to watch two paint-heavy properties on a sticky, backdrop-blurred
+     element for the life of every page. */
 }
 
 body > nav.sticky > div:first-child {
@@ -461,7 +469,12 @@ body > nav.sticky img {
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
-  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  /* `box-shadow` is deliberately absent. The crimson shadow belongs to
+     `.active-section`, which js/site.js retargets while the visitor scrolls, so
+     animating it meant a blurred repaint of the pill and its surroundings on
+     every section boundary. Snapping it in is imperceptible next to the colour
+     crossfade that still runs. */
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 
 .section-nav-link svg {
@@ -531,6 +544,26 @@ body > header.bg-gradient-to-r > * {
   position: relative;
 }
 
+/*
+ * Icon tiles: the rounded, tinted square that a feature icon sits inside.
+ *
+ * These used to be a wrapper <div> holding a single <i>, which cost one DOM node
+ * and one level of depth per icon -- and the homepage has two dozen of them. The
+ * tile classes now go straight on the <i>.
+ *
+ * Font Awesome sets `display: var(--fa-display, inline-block)` on every icon, so
+ * a Tailwind `flex` utility would lose: icons.css is the last stylesheet in the
+ * cascade and both selectors are one class deep. Setting the variable is how you
+ * win that argument, and it works no matter which sheet lands first. Sizing,
+ * colour, and radius stay in the utility classes on the element.
+ */
+.icon-tile {
+  --fa-display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
 .card-container, 
 .pricing-card,
 .service-card,
@@ -545,17 +578,43 @@ body > header.bg-gradient-to-r > * {
 .generated-service-card {
   border-color: rgb(216 222 232 / 92%);
   box-shadow: var(--shadow-md);
-  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease), border-color 260ms var(--ease), color 260ms var(--ease);
+  /* Only `transform` and the 1px border edge animate here. The lift used to
+     crossfade `box-shadow: var(--shadow-md)` into `var(--shadow-lg)`, which the
+     compositor cannot do: every frame re-rasterised the blurred shadow of every
+     hovered card. A service grid is eight to twenty of these, so one pointer
+     sweep across a row was tens of full-card repaints. The raised shadow now
+     lives on a `::after` layer that only changes opacity (see below). */
+  transition: transform 260ms var(--ease), border-color 260ms var(--ease);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   will-change: transform;
   transform: translateZ(0);
 }
 
+/* The raised shadow, pre-rasterised at full strength and revealed by opacity.
+   An outer box-shadow paints only outside the border box, so this layer never
+   covers the card's own background or content, and the cards are
+   `overflow: visible` above, so nothing clips it. */
+.service-card::after,
+.generated-service-card::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border-radius: inherit;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transition: opacity 260ms var(--ease);
+  pointer-events: none;
+}
+
+.service-card:hover::after,
+.generated-service-card:hover::after {
+  opacity: 1;
+}
+
 .service-card:hover,
 .generated-service-card:hover {
   border-color: rgb(166 31 46 / 30%);
-  box-shadow: var(--shadow-lg);
   transform: translateY(-6px) translateZ(0);
 }
 
@@ -889,7 +948,7 @@ body > footer a {
   background: var(--grad-crimson);
   color: #fff;
   box-shadow: 0 10px 24px rgb(16 27 49 / 30%);
-  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), filter var(--dur) var(--ease);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
 #back-to-top:hover {
@@ -1281,8 +1340,7 @@ body > header.bg-gradient-to-r > div:last-child {
   box-shadow: 0 6px 16px rgb(120 25 37 / 26%);
   transition:
     transform var(--dur) var(--ease),
-    box-shadow var(--dur) var(--ease),
-    filter var(--dur) var(--ease);
+    box-shadow var(--dur) var(--ease);
 }
 
 .seasonal-banner__cta::after {

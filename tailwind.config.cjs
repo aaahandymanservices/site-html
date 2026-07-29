@@ -12,6 +12,21 @@ module.exports = {
   ],
   theme: {
     extend: {
+      /*
+       * `transition` is Tailwind's catch-all utility and this site uses it on
+       * roughly 150 elements per page. Its default property list includes
+       * `box-shadow`, which the compositor cannot animate: a hovered card
+       * crossfading `shadow-md` into `shadow-xl` re-rasterises the blurred
+       * shadow on the main thread every frame, and hovering across a service
+       * grid multiplies that by the number of cards. The list below is the
+       * upstream default minus `box-shadow`, so `hover:shadow-*` still applies,
+       * just instantly. Anything that genuinely needs an animated shadow can
+       * still opt in with `transition-shadow`.
+       */
+      transitionProperty: {
+        DEFAULT:
+          'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, transform, filter, backdrop-filter',
+      },
       colors: {
         red: {
           50: '#fdf2f2',

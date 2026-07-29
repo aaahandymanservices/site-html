@@ -7,12 +7,19 @@
  * icons, so the generated file is a fraction of the size, self-hosted, and
  * cacheable alongside the rest of the CSS.
  *
+ * The base rules get the same treatment as the icon definitions: Font Awesome's
+ * sizing, list, rotation, stacking, and animation utilities are around 14kB of
+ * the output and this site applies almost none of them, yet the stylesheet is
+ * render-blocking on every page. Rules whose every selector is a `fa-*` utility
+ * the markup never uses are dropped, along with any @keyframes left with
+ * nothing referencing it.
+ *
  * Run after the service and city pages are generated so their markup is
  * included in the usage scan.
  */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { ROOT, collectUsedIcons } from './icon-usage.mjs';
+import { ROOT, collectIconUsage, UTILITY_CLASSES } from './icon-usage.mjs';
 
 const VENDOR = join(ROOT, 'vendor/font-awesome');
 const OUTPUT = join(ROOT, 'public/css/icons.css');
@@ -86,7 +93,61 @@ function localiseFontFace(css) {
     );
 }
 
-const used = collectUsedIcons();
+/**
+ * True when a selector targets nothing but Font Awesome utility classes that
+ * the markup never applies.
+ *
+ * Everything left after the `.fa-*` class tokens are removed has to be
+ * structural -- combinators, element names, pseudo-classes. A leftover `.` or
+ * `#` means some other class or an id is involved, and the rule stays.
+ */
+function isDeadUtilitySelector(selector, usedUtilities) {
+  const tokens = [...selector.matchAll(/\.fa-([a-z0-9-]+)/g)].map((m) => m[1]);
+  if (tokens.length === 0) return false;
+  if (!/^[\s>+~a-z0-9:()-]*$/.test(selector.replace(/\.fa-[a-z0-9-]+/g, ''))) return false;
+  return tokens.every((token) => UTILITY_CLASSES.has(token) && !usedUtilities.has(token));
+}
+
+/**
+ * Drop the unused selectors from one rule, returning null when nothing is left.
+ * Upstream groups selectors freely (one rule can carry both an animation this
+ * site uses and three it does not), so a rule is usually thinned rather than
+ * removed outright.
+ */
+function pruneRule(rule, usedUtilities) {
+  const brace = rule.indexOf('{');
+  if (brace === -1) return rule;
+
+  const head = rule.slice(0, brace).trim();
+  const body = rule.slice(brace);
+
+  // Conditional group rules (@media, @supports) wrap rules of their own.
+  if (/^@(?:media|supports)/i.test(head)) {
+    const inner = splitTopLevelRules(body.slice(1, body.lastIndexOf('}')))
+      .map((nested) => pruneRule(nested, usedUtilities))
+      .filter(Boolean);
+    return inner.length ? `${head}{${inner.join('')}}` : null;
+  }
+
+  // @font-face, @keyframes and friends have no selector list to thin out.
+  if (head.startsWith('@')) return rule;
+
+  const kept = head.split(',').map((s) => s.trim()).filter(
+    (selector) => !isDeadUtilitySelector(selector, usedUtilities),
+  );
+  return kept.length ? `${kept.join(',')}${body}` : null;
+}
+
+/** Names of the animations the surviving rules still reference. */
+function referencedAnimations(rules) {
+  const names = new Set();
+  for (const rule of rules) {
+    for (const match of rule.matchAll(/animation-name:\s*([a-z0-9-]+)/gi)) names.add(match[1]);
+  }
+  return names;
+}
+
+const { icons: used, utilities: usedUtilities } = collectIconUsage();
 
 const classic = partition(readFileSync(join(VENDOR, 'fontawesome.min.css'), 'utf8'));
 const brands = partition(readFileSync(join(VENDOR, 'brands.min.css'), 'utf8'));
@@ -107,6 +168,23 @@ for (const { rule, names } of [...classic.iconRules, ...brands.iconRules]) {
   }
 }
 
+const baseRules = [
+  ...classic.base,
+  ...solid.base.map(localiseFontFace),
+  ...brands.base.map(localiseFontFace),
+];
+
+// Two passes: thin out the utility rules first, then drop the @keyframes blocks
+// whose animation is no longer named by anything that survived.
+const prunedBase = baseRules.map((rule) => pruneRule(rule, usedUtilities)).filter(Boolean);
+const animations = referencedAnimations(prunedBase);
+const keptBase = prunedBase.filter((rule) => {
+  const name = rule.match(/^@(?:-\w+-)?keyframes\s+([a-z0-9-]+)/i);
+  return !name || animations.has(name[1]);
+});
+
+const droppedBytes = baseRules.join('\n').length - keptBase.join('\n').length;
+
 const output = [
   '/*!',
   ' * Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com',
@@ -116,9 +194,7 @@ const output = [
   ` * Generated subset - ${keptNames.size} icon names in use.`,
   ' * Do not edit by hand; run scripts/build-icon-css.mjs instead.',
   ' */',
-  ...classic.base,
-  ...solid.base.map(localiseFontFace),
-  ...brands.base.map(localiseFontFace),
+  ...keptBase,
   ...keptIconRules,
 ].join('\n');
 
@@ -154,6 +230,10 @@ const unresolved = [...used].filter((name) => !keptNames.has(name));
 console.log(
   `Wrote ${OUTPUT} (${keptIconRules.length} rules, ${keptNames.size} icon names, ` +
   `${(Buffer.byteLength(output) / 1024).toFixed(1)} kB)`,
+);
+console.log(
+  `  Dropped ${baseRules.length - keptBase.length} unused base rule(s) ` +
+  `(${(droppedBytes / 1024).toFixed(1)} kB) off the render path.`,
 );
 if (unresolved.length) {
   console.log(`  Ignored ${unresolved.length} fa-* token(s) with no matching icon.`);

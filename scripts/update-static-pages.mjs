@@ -27,6 +27,26 @@ const STATIC_NAV_PAGES = [
  * the local subset instead. See scripts/site-theme.css for the @font-face
  * rules and scripts/build-icon-css.mjs for the icon stylesheet.
  */
+const ICONS_CSS = '/css/icons.css?v=20260729c';
+
+/*
+ * The two icon webfonts are named nowhere but icons.css, so without a hint the
+ * browser cannot start them until that stylesheet has arrived and been parsed:
+ * html -> icons.css -> woff2, the three-hop critical request chain the audit
+ * flags. Preloading both next to the brand fonts turns the last two hops into
+ * requests that run in parallel with the stylesheet.
+ *
+ * fetchpriority="low" is what makes that safe. An `as="font"` preload is high
+ * priority by default, which would put 19kB of decorative glyphs ahead of the
+ * hero image and the text fonts that decide LCP. Low priority still starts them
+ * in the first round trip, just behind the paint-critical resources, and both
+ * @font-face rules use font-display: swap, so a late arrival swaps the glyph in
+ * instead of holding text back.
+ */
+const ICON_FONT_PRELOADS =
+  '    <link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">\n' +
+  '    <link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">\n';
+
 function optimizeFontsAndAssets(html) {
   // Resource hints for origins the site no longer contacts.
   html = html.replace(/[ \t]*<link\s+rel="preconnect"\s+href="https:\/\/fonts\.(?:googleapis|gstatic)\.com"[^>]*>\r?\n/gi, '');
@@ -42,22 +62,31 @@ function optimizeFontsAndAssets(html) {
   html = html.replace(/[ \t]*<!-- FontAwesome icons -->\r?\n/gi, '');
   html = html.replace(
     /[ \t]*<link\s+rel="stylesheet"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"[^>]*>\r?\n/gi,
-    '    <link rel="stylesheet" href="/css/icons.css?v=20260728">\n',
+    `    <link rel="stylesheet" href="${ICONS_CSS}">\n`,
   );
   html = html.replace(/[ \t]*<link\s+rel="preload"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"[^>]*>\r?\n/gi, '');
   html = html.replace(/[ \t]*<noscript><link\s+rel="stylesheet"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"><\/noscript>\r?\n/gi, '');
 
-  // Icon glyphs are decorative enhancements rather than critical text. Let
-  // the stylesheet discover the small subset instead of competing with the
-  // primary text fonts and hero image during the initial render.
-  html = html.replace(/[ \t]*<link\s+rel="preload"\s+href="\/fonts\/fa-solid-900\.woff2"[^>]*>\r?\n/gi, '');
+  html = html.replace(/href="\/css\/icons\.css(?:\?v=[^"]*)?"/gi, `href="${ICONS_CSS}"`);
+
+  // Re-emitted rather than patched in place so a page carrying an older variant
+  // (different attribute order, no fetchpriority, solid only) converges.
+  html = html.replace(/[ \t]*<link\s+rel="preload"\s+href="\/fonts\/fa-(?:solid-900|brands-400)\.woff2"[^>]*>\r?\n/gi, '');
   html = html.replace(
-    /href="\/css\/icons\.css(?:\?v=[^"]*)?"/gi,
-    'href="/css/icons.css?v=20260727a"',
+    /([ \t]*<link\s+rel="preload"\s+href="\/fonts\/roboto-latin\.woff2"[^>]*>\r?\n)/i,
+    `$1${ICON_FONT_PRELOADS}`,
   );
 
-  // Eliminate render-blocking Tailwind CSS
-  const renderBlockingTailwind = /<link\s+rel="stylesheet"\s+href="\/css\/tailwind\.css\?v=20260729b">/gi;
+  /*
+   * Eliminate render-blocking Tailwind CSS.
+   *
+   * The pattern is stamp-agnostic on purpose: it used to name one exact ?v=
+   * value, which meant every stylesheet cache-bust silently switched this
+   * rewrite off and handed the next deploy a render-blocking 64kB stylesheet
+   * again. The `id="critical-above-the-fold"` guard is what keeps it from
+   * running twice on an already-converted page.
+   */
+  const renderBlockingTailwind = /<link\s+rel="stylesheet"\s+href="\/css\/tailwind\.css(\?v=[^"]*)?">/gi;
   if (renderBlockingTailwind.test(html) && !html.includes('id="critical-above-the-fold"')) {
     const replacement = `    <style id="critical-above-the-fold">
         *, ::before, ::after { box-sizing: border-box; }
@@ -67,8 +96,8 @@ function optimizeFontsAndAssets(html) {
         img { max-width: 100%; height: auto; display: block; }
         a { color: inherit; text-decoration: none; }
     </style>
-    <link rel="preload" href="/css/tailwind.css?v=20260729b" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729b"></noscript>`;
+    <link rel="preload" href="/css/tailwind.css?v=20260729c" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729c"></noscript>`;
     html = html.replace(renderBlockingTailwind, replacement);
   }
 
