@@ -103,7 +103,6 @@ body {
   line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: subpixel-antialiased;
-  animation: page-enter 0.55s var(--ease-out) both;
 }
 
 *, ::before, ::after {
@@ -118,13 +117,11 @@ main, section, header, footer, nav {
   max-width: 100%;
 }
 
-@keyframes page-enter {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
+@supports (content-visibility: auto) {
+  main > section,
+  footer {
+    content-visibility: auto;
+    contain-intrinsic-block-size: auto 48rem;
   }
 }
 
@@ -1039,7 +1036,7 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
 }
 
-/* --- Homepage hero: drifting aurora glow + staggered content entrance --- */
+/* --- Homepage hero: drifting aurora glow without delaying LCP content --- */
 .hero {
   position: relative;
   isolation: isolate;
@@ -1058,17 +1055,6 @@ body::after {
   animation: aurora-drift 19s var(--ease) infinite alternate;
 }
 
-.hero > div > * {
-  animation: hero-rise 0.85s var(--ease-out) both;
-}
-
-.hero > div > *:nth-child(1) { animation-delay: 0.04s; }
-.hero > div > *:nth-child(2) { animation-delay: 0.12s; }
-.hero > div > *:nth-child(3) { animation-delay: 0.2s; }
-.hero > div > *:nth-child(4) { animation-delay: 0.28s; }
-.hero > div > *:nth-child(5) { animation-delay: 0.36s; }
-.hero > div > *:nth-child(6) { animation-delay: 0.44s; }
-
 /* Give the hero headline a subtle metallic depth */
 .hero-title {
   text-shadow: 0 1px 0 rgb(0 0 0 / 18%), 0 12px 40px rgb(0 0 0 / 35%);
@@ -1079,19 +1065,7 @@ body::after {
   to { transform: translate3d(3%, 2%, 0) scale(1.09); }
 }
 
-@keyframes hero-rise {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* --- Interior-page gradient headers: matching glow + entrance --- */
+/* --- Interior-page gradient headers: matching glow --- */
 body > header.bg-gradient-to-r::after {
   position: absolute;
   inset: 0;
@@ -1099,10 +1073,6 @@ body > header.bg-gradient-to-r::after {
   pointer-events: none;
   background: radial-gradient(30rem 26rem at 16% 118%, rgb(166 31 46 / 24%), transparent 58%);
   animation: aurora-drift 22s var(--ease) infinite alternate;
-}
-
-body > header.bg-gradient-to-r > div:last-child {
-  animation: hero-rise 0.8s var(--ease-out) both;
 }
 
 /* --- Tactile sheen sweep across feature cards on hover --- */
@@ -1680,11 +1650,6 @@ body > header.bg-gradient-to-r > div:last-child {
 
   .hero::after,
   body > header.bg-gradient-to-r::after {
-    animation: none;
-  }
-
-  .hero > div > *,
-  body > header.bg-gradient-to-r > div:last-child {
     animation: none;
   }
 
