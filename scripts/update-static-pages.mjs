@@ -28,24 +28,10 @@ const STATIC_NAV_PAGES = [
  * rules and scripts/build-icon-css.mjs for the icon stylesheet.
  */
 const ICONS_CSS = '/css/icons.css?v=20260729d';
-
-/*
- * The two icon webfonts are named nowhere but icons.css, so without a hint the
- * browser cannot start them until that stylesheet has arrived and been parsed:
- * html -> icons.css -> woff2, the three-hop critical request chain the audit
- * flags. Preloading both next to the brand fonts turns the last two hops into
- * requests that run in parallel with the stylesheet.
- *
- * fetchpriority="low" is what makes that safe. An `as="font"` preload is high
- * priority by default, which would put 19kB of decorative glyphs ahead of the
- * hero image and the text fonts that decide LCP. Low priority still starts them
- * in the first round trip, just behind the paint-critical resources, and both
- * @font-face rules use font-display: swap, so a late arrival swaps the glyph in
- * instead of holding text back.
- */
-const ICON_FONT_PRELOADS =
-  '    <link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">\n' +
-  '    <link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">\n';
+const SITE_THEME_CSS = '/css/site-theme.css?v=20260730a';
+const ASYNC_ICONS_CSS =
+  `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +
+  `    <noscript><link rel="stylesheet" href="${ICONS_CSS}"></noscript>`;
 
 function optimizeFontsAndAssets(html) {
   // Resource hints for origins the site no longer contacts.
@@ -67,14 +53,21 @@ function optimizeFontsAndAssets(html) {
   html = html.replace(/[ \t]*<link\s+rel="preload"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"[^>]*>\r?\n/gi, '');
   html = html.replace(/[ \t]*<noscript><link\s+rel="stylesheet"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"><\/noscript>\r?\n/gi, '');
 
-  html = html.replace(/href="\/css\/icons\.css(?:\?v=[^"]*)?"/gi, `href="${ICONS_CSS}"`);
-
-  // Re-emitted rather than patched in place so a page carrying an older variant
-  // (different attribute order, no fetchpriority, solid only) converges.
+  // Decorative icons should not compete with the hero image or brand font in
+  // the critical window. Their stylesheet and fonts can arrive after the first
+  // paint, while noscript keeps the icons available without JavaScript.
   html = html.replace(/[ \t]*<link\s+rel="preload"\s+href="\/fonts\/fa-(?:solid-900|brands-400)\.woff2"[^>]*>\r?\n/gi, '');
   html = html.replace(
-    /([ \t]*<link\s+rel="preload"\s+href="\/fonts\/roboto-latin\.woff2"[^>]*>\r?\n)/i,
-    `$1${ICON_FONT_PRELOADS}`,
+    /[ \t]*<link\s+rel="preload"\s+href="\/fonts\/roboto-latin\.woff2"[^>]*>\r?\n/gi,
+    '',
+  );
+  html = html.replace(
+    /[ \t]*<link\s+rel="(?:stylesheet|preload)"\s+href="\/css\/icons\.css(?:\?v=[^"]*)?"[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel="stylesheet"\s+href="\/css\/icons\.css(?:\?v=[^"]*)?"><\/noscript>\r?\n?)?/gi,
+    `${ASYNC_ICONS_CSS}\n`,
+  );
+  html = html.replace(
+    /href="\/css\/site-theme\.css(?:\?v=[^"]*)?"/gi,
+    `href="${SITE_THEME_CSS}"`,
   );
 
   /*
