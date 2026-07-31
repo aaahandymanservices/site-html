@@ -28,7 +28,7 @@ const STATIC_NAV_PAGES = [
  * rules and scripts/build-icon-css.mjs for the icon stylesheet.
  */
 const ICONS_CSS = '/css/icons.css?v=20260729d';
-const SITE_THEME_CSS = '/css/site-theme.css?v=20260731a';
+const SITE_THEME_CSS = '/css/site-theme.css?v=20260731b';
 const ASYNC_ICONS_CSS =
   `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +
   `    <noscript><link rel="stylesheet" href="${ICONS_CSS}"></noscript>`;

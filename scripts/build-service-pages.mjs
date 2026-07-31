@@ -314,9 +314,6 @@ function page(service) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Self-hosted brand fonts; @font-face lives in site-theme.css -->
     <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
-    <link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
 
     <title>${esc(title)}</title>
 
@@ -358,9 +355,10 @@ ${jsonLd(service)}
     </style>
     <link rel="preload" href="/css/tailwind.css?v=20260729d" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729d"></noscript>
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260731a">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260731b">
     <!-- Font Awesome subset (generated, see scripts/build-icon-css.mjs) -->
-    <link rel="stylesheet" href="/css/icons.css?v=20260729d">
+    <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
 
     <style>
     </style>
