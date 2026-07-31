@@ -377,10 +377,14 @@ nav.sticky {
 
 body > nav.sticky {
   border-bottom-color: var(--brand-crimson);
-  background: rgb(255 255 255 / 90%);
+  /* Opaque, not 90% white: the bar sits over whatever scrolls beneath it, and at
+     90% the dark hero and its crimson glow tinted the bar red as the page moved
+     under it, which read as the hero background bleeding into the navigation.
+     A solid fill is also why the backdrop blur is gone -- with nothing showing
+     through, it cost a full-width backdrop sample on every frame and painted
+     nothing. */
+  background: var(--brand-surface);
   box-shadow: 0 6px 22px rgb(27 42 74 / 8%);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
   /* No transition here: nothing ever changes this bar's shadow or background --
      there is no scrolled or hovered variant -- so the declaration only asked the
      compositor to watch two paint-heavy properties on a sticky, backdrop-blurred
@@ -445,7 +449,12 @@ body > nav.sticky img {
   position: sticky;
   top: 4.75rem;
   z-index: 40;
-  background: transparent;
+  /* This strip overlaps the section below it once the page scrolls, so a
+     transparent background let the pricing hero -- and the crimson glow inside
+     it -- show through in the gaps between the jump-link pills. The page canvas
+     gives the strip a boundary of its own; it matches the body fill underneath
+     it at rest, so nothing changes visually at the top of the page. */
+  background: var(--brand-canvas);
 }
 
 /* Cohesive floating glass card that holds all the jump links */
@@ -526,8 +535,46 @@ body > nav.sticky img {
   scroll-margin-top: var(--sticky-offset, 140px);
 }
 
+/*
+ * Rates page hero.
+ *
+ * `isolation: isolate` keeps the hero's own decorative layers in a stacking
+ * context of their own so they can never paint over the sticky navigation, and
+ * `overflow: hidden` clips them to the section box, so a decorative layer can
+ * no longer reach the header above or the section below. The utility classes on
+ * the element already ask for both; they are repeated here so the containment
+ * is a property of the hero rather than of markup that is easy to edit away.
+ */
 #pricing-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: var(--grad-navy);
+}
+
+/*
+ * The crimson glow behind the Zone A / Zone B cards.
+ *
+ * This used to be an inline `radial-gradient(circle at 82% 15%, ..., transparent
+ * 30%)`. With no explicit size, a radial gradient takes its radius from the
+ * farthest corner of the box -- past 1100px on a desktop hero -- so `transparent
+ * 30%` still resolved to a ~330px falloff centred barely 60px below the top
+ * edge. The red therefore washed across the full width of the section and up
+ * over its top edge, which is what read as the gradient bleeding into the
+ * navigation and past the section boundaries.
+ *
+ * Both radii are now stated in rem, so the glow no longer scales with the
+ * viewport, and its centre sits mid-height on the right -- behind the pricing
+ * cards -- which keeps the whole falloff clear of the hero's top edge.
+ */
+.pricing-hero-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(20rem 14rem at 76% 56%, rgb(166 31 46 / 24%), rgb(166 31 46 / 8%) 55%, transparent 76%),
+    linear-gradient(135deg, transparent 45%, rgb(255 255 255 / 3%) 45%, rgb(255 255 255 / 3%) 46%, transparent 46%);
 }
 
 /* Zone A and Zone B pricing summary cards in hero */
