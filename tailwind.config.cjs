@@ -3,6 +3,14 @@ module.exports = {
   content: [
     './public/**/*.html',
     './public/**/*.js',
+    // The browser scripts' own sources. public/js/*.js above is only the
+    // minified copy that build-js.mjs emits, and build-css.mjs runs before it,
+    // so scanning the output alone means a first build on a clean checkout
+    // classifies last deploy's class names. Several of these files build markup
+    // from class-name strings -- the review cards and the owner's admin
+    // controls in reviews-page.js, the quick-view dialog in home.js -- and a
+    // class Tailwind never sees is a class that is not in the stylesheet.
+    './scripts/js/**/*.js',
     // The nav markup lives in a shared module rather than in the generated
     // pages, and the CSS build runs before those pages exist, so it has to be
     // scanned directly or its utilities never reach the stylesheet.
