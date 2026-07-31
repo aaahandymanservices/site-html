@@ -781,6 +781,24 @@ body > header.bg-gradient-to-r > * {
   animation: pulse-attention-green-ring 2s ease-in-out infinite;
 }
 
+/* Primary call-to-action button styling — static without pulse animation or glowing ring */
+.pulse-btn {
+  position: relative;
+  animation: none !important;
+  background-color: var(--brand-crimson, #a61f2e);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.pulse-btn:hover {
+  background-color: var(--brand-crimson-dark, #781925);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.pulse-btn::before {
+  display: none !important;
+}
+
 form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
   border-width: 1px;
   border-color: #b8c2d0;

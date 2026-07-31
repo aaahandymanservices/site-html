@@ -417,31 +417,20 @@
             animation: siren-glow 1s infinite ease-in-out;
         }
 
-        /* The expanding halo was a box-shadow spread, which repaints the button
-           and the area around it on every frame. A pseudo-element carrying a
-           fixed ring that scales up and fades out renders identically and stays
-           on the GPU. The ring is drawn outside the pseudo-element's box, so the
-           button's own background and label are never covered. */
-        @keyframes pulse-attention {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        @keyframes pulse-attention-ring {
-            0%, 100% { opacity: 0.7; transform: scale(1); }
-            50% { opacity: 0; transform: scale(1.14); }
-        }
+        /* Primary call-to-action button styling — static without pulse animation or glowing ring */
         .pulse-btn {
             position: relative;
-            animation: pulse-attention 2s infinite;
+            animation: none !important;
+            background-color: #a61f2e;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+            transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .pulse-btn:hover {
+            background-color: #8e1f26;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
         .pulse-btn::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            box-shadow: 0 0 0 5px rgba(142, 31, 38, 0.7);
-            pointer-events: none;
-            animation: pulse-attention-ring 2s infinite;
+            display: none !important;
         }
 
         section[id], header[id] {
@@ -577,7 +566,7 @@
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="/book" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white text-base sm:text-lg px-8 py-4 rounded-2xl font-extrabold inline-flex items-center justify-center gap-2.5 transition shadow-xl hover:shadow-red-600/40 pulse-btn">
+                <a href="/book" class="w-full sm:w-auto bg-[#a61f2e] hover:bg-[#8e1f26] text-white text-base sm:text-lg px-8 py-4 rounded-2xl font-extrabold inline-flex items-center justify-center gap-2.5 transition shadow-lg hover:shadow-xl pulse-btn">
                     <i class="fas fa-calendar-check text-xl" aria-hidden="true"></i> Book Online &mdash; Free Quote
                 </a>
                 <a href="tel:+12483853432" class="w-full sm:w-auto bg-slate-900/90 hover:bg-slate-900 text-white text-base sm:text-lg px-8 py-4 rounded-2xl font-extrabold inline-flex items-center justify-center gap-2.5 transition border-2 border-white/40 hover:border-white shadow-xl backdrop-blur-md">
