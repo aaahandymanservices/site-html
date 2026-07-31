@@ -1181,10 +1181,9 @@ body::after {
   animation: aurora-drift 19s var(--ease) infinite alternate;
 }
 
-/* Give the hero headline crisp depth and high-contrast readability */
+/* Give the hero headline a subtle metallic depth */
 .hero-title {
-  color: #ffffff !important;
-  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 1px 0 rgb(0 0 0 / 18%), 0 12px 40px rgb(0 0 0 / 35%);
 }
 
 @keyframes aurora-drift {
