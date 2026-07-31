@@ -279,7 +279,9 @@ ${getUnifiedNav('service-areas')}
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
                         <li class="flex items-start gap-2"><i class="fas fa-tag text-red-600 mt-1" aria-hidden="true"></i><span><strong>${esc(zone.rate)} minimum service call</strong> &mdash; covers travel, diagnostics, and the first hour of labor.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>                        <li class="flex items-start gap-2"><i class="fas fa-map-pin text-red-600 mt-1" aria-hidden="true"></i><span>ZIP codes served: ${esc(city.zips.join(', '))}.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-box-open text-red-600 mt-1" aria-hidden="true"></i><span>Labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-map-pin text-red-600 mt-1" aria-hidden="true"></i><span>ZIP codes served: ${esc(city.zips.join(', '))}.</span></li>
                         <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1" aria-hidden="true"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
                     </ul>
                     <a href="${quoteHref(city.name)}" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30">
