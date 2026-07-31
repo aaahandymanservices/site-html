@@ -387,7 +387,7 @@
               title: 'Gutter Cleaning & Repairs',
               category: 'Exterior Maintenance',
               price: '$100',
-              icon: 'fa-bucket',
+              icon: 'fa-droplet',
               description: 'Full clearing of leaves and roof debris, downspout flushing, bracket re-securing, and gutter guard installation.',
               bullets: [
                   'Full gutter & downspout clearing',
@@ -402,7 +402,7 @@
               title: 'Smart Locks & Hardware',
               category: 'Home Security',
               price: '$100',
-              icon: 'fa-key',
+              icon: 'fa-lock',
               description: 'Upgrade your entry security with keyless electronic smart locks, deadbolts, handlesets, and heavy-duty strike plates.',
               bullets: [
                   'Keyless smart lock & keypad installation',

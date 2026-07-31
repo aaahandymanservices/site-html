@@ -288,15 +288,25 @@ textarea {
 input:where(:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="button"]):not([type="submit"]):not([type="reset"])),
 select,
 textarea {
-  background-color: #fff;
+  background-color: #ffffff;
   color: var(--brand-ink);
+  border: 2px solid #cbd5e1;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:where(:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="button"]):not([type="submit"]):not([type="reset"])):focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--brand-crimson);
+  box-shadow: 0 0 0 4px rgba(166, 31, 46, 0.22);
 }
 
 /* Derived from whatever colour actually won above, so a placeholder can never
    come out the same shade as the field it sits in. */
 input::placeholder, textarea::placeholder {
-  color: currentColor;
-  opacity: .7;
+  color: #64748b;
+  opacity: .85;
 }
 
 /* Primary call-to-action buttons — one cohesive crimson treatment site-wide */
@@ -1171,9 +1181,10 @@ body::after {
   animation: aurora-drift 19s var(--ease) infinite alternate;
 }
 
-/* Give the hero headline a subtle metallic depth */
+/* Give the hero headline crisp depth and high-contrast readability */
 .hero-title {
-  text-shadow: 0 1px 0 rgb(0 0 0 / 18%), 0 12px 40px rgb(0 0 0 / 35%);
+  color: #ffffff !important;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.85);
 }
 
 @keyframes aurora-drift {
