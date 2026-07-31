@@ -118,10 +118,15 @@ main, section, header, footer, nav {
 }
 
 @supports (content-visibility: auto) {
+  body > section,
   main > section,
-  footer {
+  body > footer {
     content-visibility: auto;
     contain-intrinsic-block-size: auto 48rem;
+  }
+
+  body > #services {
+    contain-intrinsic-block-size: auto 96rem;
   }
 }
 
