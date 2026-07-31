@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Self-hosted brand fonts + icon subset; @font-face lives in site-theme.css -->
     <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
-    <link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
 
 
     <title>Handyman Services — Our Expertise | AAA Handyman Services</title>
@@ -218,8 +215,9 @@
     </style>
     <link rel="preload" href="/css/tailwind.css?v=20260729d" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729d"></noscript>
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260729d">
-    <link rel="stylesheet" href="/css/icons.css?v=20260729d">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260731b">
+    <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
 
     <style>
 
@@ -305,7 +303,7 @@
 <nav id="site-nav" aria-label="Primary" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
     <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
         <a href="/" class="flex min-w-0 items-center space-x-3 group" aria-label="AAA Handyman Services home">
-            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="AAA Handyman Services Logo" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600 transition group-hover:scale-105">
+            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0 border-2 border-red-600 transition group-hover:scale-105">
             <div class="min-w-0">
                 <p class="text-base min-[390px]:text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
                 <p class="text-[10px] sm:text-xs text-gray-500 font-medium">Oakland County, Michigan</p>
@@ -314,7 +312,7 @@
 
         <!-- Desktop Navigation -->
         <div class="hidden lg:flex space-x-6 xl:space-x-8 text-base xl:text-lg font-medium items-center">
-            <a href="/services" class="nav-link py-1 text-red-600 font-bold border-b-2 border-red-600 transition">Services</a>
+            <a href="/services" class="nav-link py-1 text-red-600 font-bold border-b-2 border-red-600 transition" aria-current="page">Services</a>
             <a href="/service-areas" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a>
             <a href="/rates" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Rates</a>
             <a href="/guarantee" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Guarantee</a>
@@ -324,7 +322,7 @@
 
             <!-- Social Media Icons -->
             <div class="flex items-center space-x-3 pl-2 border-l border-gray-200">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
                 <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
                 <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
             </div>
@@ -341,7 +339,7 @@
     <!-- Mobile Navigation Drawer / Menu -->
     <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-2xl max-h-[calc(100vh-70px)] overflow-y-auto">
         <div class="space-y-1">
-            <a href="/services" class="block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition">Services</a>
+            <a href="/services" class="block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition" aria-current="page">Services</a>
             <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
             <a href="/rates" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
             <a href="/guarantee" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Guarantee</a>
@@ -351,9 +349,9 @@
         </div>
 
         <div class="pt-3 border-t border-gray-100 flex items-center justify-center space-x-6 text-2xl">
-            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Facebook Page" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Yelp Page" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
-            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor Page" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
         </div>
     </div>
 </nav>
@@ -690,7 +688,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/carpentry" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/carpentry" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Carpentry & Assembly">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -707,7 +705,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/doors-windows" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/doors-windows" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Doors & Windows">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -726,7 +724,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/energy-efficiency" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/energy-efficiency" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Energy-Efficiency Tune-Up">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -744,7 +742,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/dryer-vent" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/dryer-vent" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Dryer Vent Cleaning">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -760,7 +758,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/drywall-repair" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/drywall-repair" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Drywall Repair">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -777,7 +775,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/painting-staining" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/painting-staining" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Painting & Staining">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -790,7 +788,7 @@
                         <p class="text-gray-600 mb-4">Durable beauty underfoot. From hardwood to laminate and carpet, we provide expert maintenance and repair services, ensuring your floors are level, secure, and built to last.</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/flooring-solutions" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/flooring-solutions" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Flooring Solutions">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -813,7 +811,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/minor-plumbing" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/minor-plumbing" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Minor Plumbing & Leak Prevention">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -831,7 +829,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/tub-shower-recaulk" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/tub-shower-recaulk" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Tub & Shower Re-Caulk">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -848,7 +846,7 @@
                         <p class="text-gray-600 mb-4 text-sm leading-relaxed">Safe, reliable updates. Keep your home powered and bright. We replace outdated switches, outlets, dimmers, light fixtures, and ceiling fans with safety precision.</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/minor-electrical" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/minor-electrical" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Minor Electrical Services">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -869,7 +867,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/installation" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/installation" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Installation">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -887,7 +885,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/furniture-assembly" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/furniture-assembly" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Furniture Assembly">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -906,7 +904,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/garage-storage" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/garage-storage" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Garage & Storage Organization">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -919,7 +917,7 @@
                         <p class="text-gray-600">Restore your outdoor sanctuary. Extend the life of your wood structures with craftsman resurfacing, structural repairs, and expert staining to protect your investment against the elements.</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/decks-fences" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/decks-fences" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Decks & Fences">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -937,7 +935,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/gutters" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/gutters" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Gutters">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -957,7 +955,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/power-washing" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/power-washing" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Power Washing">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -975,7 +973,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/projects-for-pets" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/projects-for-pets" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Projects For Pets">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -994,7 +992,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/home-repair-upkeep" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/home-repair-upkeep" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Home Repair & Upkeep">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -1011,7 +1009,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/preventative-maintenance" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/preventative-maintenance" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Preventative Maintenance">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -1024,7 +1022,7 @@
                         <p class="text-gray-600">Seasonal care, year-round peace of mind. Cross off your to-do list with comprehensive gutter cleaning, power washing, and general home maintenance designed to keep your property in peak condition. <strong><br>Spring: Gutter cleaning, deck repair, window inspections.<br>Autumn: Weatherproofing, door sealing, winterization repairs.</strong></p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/maintenance-cleaning" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/maintenance-cleaning" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Maintenance & Cleaning">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -1044,7 +1042,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/senior-care" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/senior-care" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Senior Care & Aging-in-Place">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -1063,7 +1061,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/home-security" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/home-security" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Home Security & Smart Home">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -1080,7 +1078,7 @@
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/commercial" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition">
+                        <a href="/services/commercial" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Commercial Services">
                             Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
