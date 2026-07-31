@@ -71,28 +71,57 @@ function optimizeFontsAndAssets(html) {
   );
 
   /*
-   * Eliminate render-blocking Tailwind CSS.
+   * Tailwind is render-blocking, deliberately.
    *
-   * The pattern is stamp-agnostic on purpose: it used to name one exact ?v=
-   * value, which meant every stylesheet cache-bust silently switched this
-   * rewrite off and handed the next deploy a render-blocking 64kB stylesheet
-   * again. The `id="critical-above-the-fold"` guard is what keeps it from
-   * running twice on an already-converted page.
+   * It used to be loaded with the `rel="preload" ... onload="this.rel='style-
+   * sheet'"` trick behind a six-rule inline "critical" block. That wins the
+   * render-blocking-resources diagnostic, which is worth nothing, and loses
+   * Cumulative Layout Shift, which is worth a quarter of the performance
+   * score.
+   *
+   * Every above-the-fold element on this site is laid out by Tailwind
+   * utilities -- `sticky top-0 z-50` on the nav bar, `flex justify-between
+   * items-center` on its inner row, `h-10 w-10` on the logo, and `hidden
+   * lg:flex` on both the desktop link row and the mobile drawer. Painting
+   * before that stylesheet arrives does not paint an approximation of the
+   * page, it paints a single unstyled column with the drawer and the desktop
+   * nav stacked on top of each other, because `hidden` does not exist yet.
+   * Tailwind then lands and every element on the page moves.
+   *
+   * The stylesheet is 11kB over the wire (64kB minified, but Brotli likes
+   * utility CSS) and is pinned in cache for a year, so blocking on it costs
+   * one round trip on a first visit and nothing after that. That is a far
+   * cheaper way to buy a correct first paint than a hand-maintained critical
+   * block could ever be.
+   *
+   * All three rewrites below are stamp-agnostic and idempotent, so a cache
+   * bust cannot silently switch them off.
    */
-  const renderBlockingTailwind = /<link\s+rel="stylesheet"\s+href="\/css\/tailwind\.css(\?v=[^"]*)?">/gi;
-  if (renderBlockingTailwind.test(html) && !html.includes('id="critical-above-the-fold"')) {
-    const replacement = `    <style id="critical-above-the-fold">
-        *, ::before, ::after { box-sizing: border-box; }
-        html { font-family: "Roboto", system-ui, -apple-system, sans-serif; -webkit-text-size-adjust: 100%; }
-        body { margin: 0; background-color: #f4f6fa; color: #1f2937; line-height: 1.6; }
-        header, nav, main, section, footer { display: block; }
-        img { max-width: 100%; height: auto; display: block; }
-        a { color: inherit; text-decoration: none; }
-    </style>
-    <link rel="preload" href="/css/tailwind.css?v=20260729d" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260729d"></noscript>`;
-    html = html.replace(renderBlockingTailwind, replacement);
-  }
+  const TAILWIND_CSS = '/css/tailwind.css?v=20260729d';
+
+  // The old async pattern, plus the <noscript> twin that would otherwise
+  // become a second copy of the stylesheet.
+  html = html.replace(
+    /[ \t]*<link\s+rel="preload"\s+href="\/css\/tailwind\.css(?:\?v=[^"]*)?"\s+as="style"[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel="stylesheet"\s+href="\/css\/tailwind\.css(?:\?v=[^"]*)?"><\/noscript>\r?\n?)?/gi,
+    `    <link rel="stylesheet" href="${TAILWIND_CSS}">\n`,
+  );
+
+  /*
+   * The inline critical block is dead weight now: every rule in it is restated
+   * by Tailwind's preflight and by the `@layer base` rules in
+   * scripts/tailwind-input.css, both of which sit later in the cascade and
+   * already won. Its `html { font-family: "Roboto" }` in particular has never
+   * applied -- preflight's own `html { font-family: ui-sans-serif ... }` comes
+   * after it, and the Roboto that visitors actually see comes from the `body`
+   * rule in tailwind-input.css.
+   */
+  html = html.replace(/[ \t]*<style id="critical-above-the-fold">[\s\S]*?<\/style>\r?\n?/gi, '');
+
+  // Keep the stamp current on whichever link survived the two passes above.
+  html = html.replace(
+    /<link\s+rel="stylesheet"\s+href="\/css\/tailwind\.css(?:\?v=[^"]*)?">/gi,
+    `<link rel="stylesheet" href="${TAILWIND_CSS}">`,
+  );
 
   // Defer GTM script until user interaction or 5s idle post-load
   const oldGtmPattern = /\(function\s*\(\)\s*\{\s*var\s+injected\s*=\s*false,\s*armed\s*=\s*false;[\s\S]*?\['pointerdown',\s*'keydown',\s*'scroll',\s*'touchstart'\][\s\S]*?\}\)\(\);/gi;

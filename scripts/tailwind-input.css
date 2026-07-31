@@ -54,15 +54,23 @@
 }
 
 @layer components {
-  .card-container, 
+  /* Floating badges -- the step numbers, the "25+ years" plaque -- are absolutely
+     positioned outside their card's box, so the card must not clip them.
+     `overflow: visible` is the whole job here.
+
+     This rule used to also carry `will-change: transform`, `transform:
+     translateZ(0)`, and `backface-visibility: hidden`. Each of those promotes
+     the element to its own compositor layer, and these four selectors match
+     21-24 elements on a typical page of this site, so every page was holding
+     two dozen GPU layers alive from first paint to unload. That is texture
+     memory and per-layer rasterisation spent on elements whose only animations
+     are `hover:shadow-*` and a border colour change -- neither of which needs
+     a layer, and neither of which was any smoother for having one. */
+  .card-container,
   .pricing-card,
   .service-card,
   .generated-service-card {
-    overflow: visible !important; /* Prevent clipping floating absolute elements */
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    will-change: transform;
-    transform: translateZ(0);
+    overflow: visible !important;
   }
 }
 
