@@ -88,6 +88,115 @@
             .careers-card { animation: none !important; }
             .careers-card { opacity: 1 !important; transform: none !important; }
         }
+
+        /*
+         * The application card is the page's one long-form task, so it reads as
+         * a centred sheet rather than a column pushed against one edge. The
+         * bottom margin is deliberate: the fixed "Call Now" button and the chat
+         * launcher both sit in the bottom-right corner, and without a gap here
+         * they land on top of the submit button and the equal-opportunity fine
+         * print at the scroll position where applicants finish the form.
+         */
+        .careers-form-shell {
+            max-width: 800px;
+            margin: 0 auto 100px;
+        }
+        /* Breathing room under the fine print, inside the card's own padding. */
+        .careers-form-card {
+            padding-bottom: 2.5rem;
+        }
+
+        /*
+         * Form controls are pinned to a light scheme. Left to the user agent,
+         * a visitor whose OS is in dark mode gets dark select boxes, a dark
+         * option popup, and a near-black file input inside this white card --
+         * unreadable against the card and against the labels beside them.
+         */
+        #careers-form {
+            color-scheme: light;
+        }
+
+        /*
+         * Native select chrome is replaced with a drawn chevron so the closed
+         * field matches the text inputs, and both the field and the option list
+         * carry explicit colours instead of inheriting whatever the platform
+         * would paint.
+         */
+        select.careers-select {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: #f9fafb;
+            color: #111827;
+            font-weight: 500;
+            padding-right: 2.75rem;
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%231b2a4a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 8l5 5 5-5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 0.85rem auto;
+        }
+        select.careers-select:focus {
+            background-color: #ffffff;
+        }
+        /* Nothing chosen yet: dimmer than a real answer, still well past 4.5:1. */
+        select.careers-select:invalid {
+            color: #4b5563;
+            font-weight: 400;
+        }
+        select.careers-select option {
+            background-color: #ffffff;
+            color: #111827;
+            font-weight: 400;
+        }
+        select.careers-select option:disabled {
+            color: #6b7280;
+        }
+
+        /*
+         * Resume upload: a soft dashed drop target in the same greys as the rest
+         * of the fields. The native input fills the box, so files can be dragged
+         * onto it without any JavaScript standing in for the browser.
+         */
+        .careers-upload {
+            border: 2px dashed #cbd5e1;
+            background-color: #f9fafb;
+            border-radius: 1rem;
+            padding: 1rem 1.25rem;
+            transition: border-color 0.16s ease, background-color 0.16s ease;
+        }
+        .careers-upload:hover,
+        .careers-upload:focus-within {
+            border-color: #a61f2e;
+            background-color: #ffffff;
+        }
+        input.careers-upload-input {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background-color: transparent;
+            color: #374151;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+        input.careers-upload-input:focus {
+            box-shadow: none;
+        }
+        input.careers-upload-input::file-selector-button {
+            margin-right: 0.875rem;
+            padding: 0.5rem 1.125rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.75rem;
+            background-color: #ffffff;
+            color: #1b2a4a;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.16s ease, border-color 0.16s ease;
+        }
+        input.careers-upload-input::file-selector-button:hover {
+            background-color: #eef2f7;
+            border-color: #94a3b8;
+        }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -307,176 +416,176 @@
                 <p class="text-center text-[11px] text-slate-500 mt-5">Team member names shown as first name and initial to protect privacy.</p>
             </section>
 
-            <div class="grid lg:grid-cols-5 gap-12 items-start">
-
-                <div class="lg:col-span-2 space-y-6">
-                    <div>
-                        <h2 class="text-2xl font-bold text-white mb-2">Why Work With Us</h2>
-                        <p class="text-slate-400 text-sm">Real work, close to home, with a team that values doing it right.</p>
-                    </div>
-                    <ul class="space-y-4">
-                        <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style="animation-delay: 0ms;">
-                            <div class="w-11 h-11 bg-red-600 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden="true"><i class="fas fa-dollar-sign" aria-hidden="true"></i></div>
-                            <div><strong class="block text-white">Transparent pay &amp; bonuses</strong><span class="text-slate-300 text-sm">Clear starting rates, mileage covered, and bonuses for 5-star work.</span></div>
-                        </li>
-                        <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style="animation-delay: 60ms;">
-                            <div class="w-11 h-11 bg-blue-500 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden="true"><i class="fas fa-calendar-check" aria-hidden="true"></i></div>
-                            <div><strong class="block text-white">Weekends off &amp; flexible schedules</strong><span class="text-slate-300 text-sm">No mandatory Sundays; 4-day workweeks and part-time options available.</span></div>
-                        </li>
-                        <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style="animation-delay: 120ms;">
-                            <div class="w-11 h-11 bg-red-600 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden="true"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>
-                            <div><strong class="block text-white">Work close to home</strong><span class="text-slate-300 text-sm">Serve homeowners right here in your Oakland County community.</span></div>
-                        </li>
-                        <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style="animation-delay: 180ms;">
-                            <div class="w-11 h-11 bg-blue-500 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden="true"><i class="fas fa-people-group" aria-hidden="true"></i></div>
-                            <div><strong class="block text-white">A locally owned team</strong><span class="text-slate-300 text-sm">Grow with a trusted, community-focused business, not a faceless franchise.</span></div>
-                        </li>
-                    </ul>
-                    <div class="bg-white/5 border border-white/10 rounded-3xl p-5 text-sm text-slate-300">
-                        <p class="mb-2"><i class="fas fa-circle-question text-red-500 mr-2" aria-hidden="true"></i>Questions before you apply?</p>
-                        <a href="tel:+12483853432" class="font-semibold text-white hover:text-red-400 transition">Call ‪(248) 385-3432‬</a>
-                        <span class="text-slate-500 mx-2">·</span>
-                        <a href="mailto:contact@aaahandyman.services" class="font-semibold text-white hover:text-red-400 transition break-all">contact@aaahandyman.services</a>
-                    </div>
+            <section class="mb-12 sm:mb-16">
+                <div class="text-center max-w-3xl mx-auto mb-8">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">Why Work With Us</h2>
+                    <p class="text-slate-400 text-sm sm:text-base">Real work, close to home, with a team that values doing it right.</p>
                 </div>
+                <ul class="grid sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
+                    <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style="animation-delay: 0ms;">
+                        <div class="w-11 h-11 bg-red-600 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden="true"><i class="fas fa-dollar-sign" aria-hidden="true"></i></div>
+                        <div><strong class="block text-white">Transparent pay &amp; bonuses</strong><span class="text-slate-300 text-sm">Clear starting rates, mileage covered, and bonuses for 5-star work.</span></div>
+                    </li>
+                    <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style="animation-delay: 60ms;">
+                        <div class="w-11 h-11 bg-blue-500 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden="true"><i class="fas fa-calendar-check" aria-hidden="true"></i></div>
+                        <div><strong class="block text-white">Weekends off &amp; flexible schedules</strong><span class="text-slate-300 text-sm">No mandatory Sundays; 4-day workweeks and part-time options available.</span></div>
+                    </li>
+                    <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style="animation-delay: 120ms;">
+                        <div class="w-11 h-11 bg-red-600 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden="true"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>
+                        <div><strong class="block text-white">Work close to home</strong><span class="text-slate-300 text-sm">Serve homeowners right here in your Oakland County community.</span></div>
+                    </li>
+                    <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style="animation-delay: 180ms;">
+                        <div class="w-11 h-11 bg-blue-500 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden="true"><i class="fas fa-people-group" aria-hidden="true"></i></div>
+                        <div><strong class="block text-white">A locally owned team</strong><span class="text-slate-300 text-sm">Grow with a trusted, community-focused business, not a faceless franchise.</span></div>
+                    </li>
+                </ul>
+                <div class="mt-5 max-w-4xl mx-auto bg-white/5 border border-white/10 rounded-3xl p-5 text-sm text-slate-300 text-center">
+                    <p class="mb-2"><i class="fas fa-circle-question text-red-500 mr-2" aria-hidden="true"></i>Questions before you apply?</p>
+                    <a href="tel:+12483853432" class="font-semibold text-white hover:text-red-400 transition">Call ‪(248) 385-3432‬</a>
+                    <span class="text-slate-500 mx-2">·</span>
+                    <a href="mailto:contact@aaahandyman.services" class="font-semibold text-white hover:text-red-400 transition break-all">contact@aaahandyman.services</a>
+                </div>
+            </section>
 
-                <div class="lg:col-span-3">
-                    <div class="careers-card bg-white text-gray-900 border border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8" style="animation-delay: 120ms;">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-2">Craftsman Application</h2>
-                        <p class="text-sm text-gray-500 mb-4">Tell us about your trade and experience. All fields are required unless marked optional.</p>
+            <div class="careers-form-shell">
+                <div class="careers-card careers-form-card bg-white text-gray-900 border border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8" style="animation-delay: 120ms;">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Craftsman Application</h2>
+                    <p class="text-sm text-gray-500 mb-4">Tell us about your trade and experience. All fields are required unless marked optional.</p>
 
-                        <div class="mb-5 rounded-2xl bg-blue-50 border border-blue-100 p-4">
-                            <p class="text-sm font-bold text-gray-900 mb-1"><i class="fas fa-bolt text-red-600 mr-1.5" aria-hidden="true"></i>Short on time? Apply in 1 minute.</p>
-                            <p class="text-xs text-gray-600 mb-3">Text or call us your name and trade — you can send a full resume later. No forms required.</p>
-                            <div class="flex flex-col sm:flex-row gap-2">
-                                <a href="sms:+12483853432?&body=Hi,%20I'd%20like%20to%20apply.%20Name%20and%20trade:" class="flex-1 inline-flex items-center justify-center gap-2 bg-blue-900 hover:bg-blue-950 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition"><i class="fas fa-comment-sms" aria-hidden="true"></i>Text to Apply</a>
-                                <a href="tel:+12483853432" class="flex-1 inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-blue-900 border border-blue-200 text-sm font-semibold px-4 py-2.5 rounded-xl transition"><i class="fas fa-phone" aria-hidden="true"></i>Call ‪(248) 385-3432‬</a>
-                            </div>
+                    <div class="mb-5 rounded-2xl bg-blue-50 border border-blue-100 p-4">
+                        <p class="text-sm font-bold text-gray-900 mb-1"><i class="fas fa-bolt text-red-600 mr-1.5" aria-hidden="true"></i>Short on time? Apply in 1 minute.</p>
+                        <p class="text-xs text-gray-600 mb-3">Text or call us your name and trade — you can send a full resume later. No forms required.</p>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <a href="sms:+12483853432?&body=Hi,%20I'd%20like%20to%20apply.%20Name%20and%20trade:" class="flex-1 inline-flex items-center justify-center gap-2 bg-blue-900 hover:bg-blue-950 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition"><i class="fas fa-comment-sms" aria-hidden="true"></i>Text to Apply</a>
+                            <a href="tel:+12483853432" class="flex-1 inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-blue-900 border border-blue-200 text-sm font-semibold px-4 py-2.5 rounded-xl transition"><i class="fas fa-phone" aria-hidden="true"></i>Call ‪(248) 385-3432‬</a>
                         </div>
-
-                        <div class="mb-6 flex items-center gap-2 text-xs font-medium text-green-700 bg-green-50 border border-green-100 rounded-xl px-4 py-2.5">
-                            <i class="fas fa-clock" aria-hidden="true"></i>
-                            <span>We review applications daily and will reach out within 24–48 hours.</span>
-                        </div>
-
-                        <form id="careers-form" name="careers" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" class="space-y-5">
-
-                            <input type="hidden" name="form-name" value="careers" />
-                            <input type="hidden" name="subject" value="New craftsman application from %{formName}" />
-
-                            <p class="hidden">
-                                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-                            </p>
-
-                            <div class="grid sm:grid-cols-2 gap-5">
-                                <div>
-                                    <label for="careers-name" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Full Name</label>
-                                    <input id="careers-name" name="name" type="text" required maxlength="80" autocomplete="name" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
-                                </div>
-                                <div>
-                                    <label for="careers-phone" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Phone</label>
-                                    <input id="careers-phone" name="phone" type="tel" required maxlength="30" autocomplete="tel" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
-                                    <p class="text-[10px] text-gray-400 mt-1 leading-normal">By applying, you agree to receive text messages regarding your application, interview scheduling, and employment. Msg/data rates may apply. Reply STOP to opt out.</p>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label for="careers-email" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Email Address</label>
-                                <input id="careers-email" name="email" type="email" required maxlength="120" autocomplete="email" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
-                            </div>
-
-                            <div class="grid sm:grid-cols-2 gap-5">
-                                <div>
-                                    <label for="careers-trade" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Primary Trade</label>
-                                    <select id="careers-trade" name="trade" required class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
-                                        <option value="" disabled selected>Select a trade...</option>
-                                        <option value="General Handyman">General Handyman</option>
-                                        <option value="Carpentry & Trim">Carpentry & Trim</option>
-                                        <option value="Doors">Doors</option>
-                                        <option value="Plumbing">Plumbing</option>
-                                        <option value="Drywall">Drywall</option>
-                                        <option value="Electrical">Electrical</option>
-                                        <option value="Flooring">Flooring</option>
-                                        <option value="Painting">Painting</option>
-                                        <option value="Decks & Fences">Decks & Fences</option>
-                                        <option value="Maintenance & Cleaning">Maintenance & Cleaning</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="careers-experience" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Years of Experience</label>
-                                    <select id="careers-experience" name="experience" required class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
-                                        <option value="" disabled selected>Select...</option>
-                                        <option value="Less than 1 year">Less than 1 year</option>
-                                        <option value="1-3 years">1–3 years</option>
-                                        <option value="3-5 years">3–5 years</option>
-                                        <option value="5-10 years">5–10 years</option>
-                                        <option value="10+ years">10+ years</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="grid sm:grid-cols-2 gap-5">
-                                <div>
-                                    <label for="careers-location" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">City / Area</label>
-                                    <input id="careers-location" name="location" type="text" required maxlength="90" placeholder="Waterford, MI" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
-                                </div>
-                                <div>
-                                    <label for="careers-availability" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Availability</label>
-                                    <select id="careers-availability" name="availability" required class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
-                                        <option value="" disabled selected>Select...</option>
-                                        <option value="Full-time">Full-time</option>
-                                        <option value="Part-time">Part-time</option>
-                                        <option value="Seasonal">Seasonal</option>
-                                        <option value="Contract / As-needed">Contract / As-needed</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label for="careers-tools" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Own Tools &amp; Reliable Transportation?</label>
-                                <select id="careers-tools" name="toolsAndTransport" required class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
-                                    <option value="" disabled selected>Select...</option>
-                                    <option value="Yes — both tools and transportation">Yes — both tools and transportation</option>
-                                    <option value="Tools only">Tools only</option>
-                                    <option value="Transportation only">Transportation only</option>
-                                    <option value="Neither yet">Neither yet</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label for="careers-felony" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Have you been convicted of a felony in the last 5 years?</label>
-                                <select id="careers-felony" name="felonyConviction" required class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
-                                    <option value="" disabled selected>Select...</option>
-                                    <option value="No">No</option>
-                                    <option value="Yes">Yes</option>
-                                </select>
-                                <p class="text-[10px] text-gray-400 mt-1 leading-normal">A conviction is not an automatic bar to employment. Each application is considered individually, taking into account the nature of the offense, how much time has passed, and its relevance to the job.</p>
-                            </div>
-
-                            <div id="careers-felony-details-wrap" class="hidden">
-                                <label for="careers-felony-details" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">If yes, please explain <span class="text-gray-400 normal-case tracking-normal font-medium">(optional)</span></label>
-                                <textarea id="careers-felony-details" name="felonyDetails" rows="3" maxlength="1000" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Nature of the offense and any context you'd like us to consider."></textarea>
-                            </div>
-
-                            <div>
-                                <label for="careers-message" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Tell Us About Your Experience</label>
-                                <textarea id="careers-message" name="message" rows="4" required maxlength="1000" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Describe the work you do best, past projects, and why you'd be a great fit."></textarea>
-                            </div>
-
-                            <div>
-                                <label for="careers-resume" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Resume <span class="text-gray-400 normal-case tracking-normal font-medium">(optional, PDF or image, 8 MB max)</span></label>
-                                <input id="careers-resume" name="resume" type="file" accept=".pdf,.doc,.docx,image/*" class="w-full text-sm text-gray-600 file:mr-4 file:py-3 file:px-5 file:rounded-2xl file:border-0 file:font-semibold file:bg-blue-100 file:text-blue-900 hover:file:bg-blue-200 cursor-pointer">
-                            </div>
-
-                            <p id="careers-message-status" class="hidden text-sm font-semibold"></p>
-
-                            <button id="careers-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
-                                Submit Application <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                            </button>
-                            <p class="text-xs text-gray-500 text-center">By applying, you agree to be contacted about employment opportunities at AAA Handyman Services. AAA Handyman Services is an Equal Opportunity Employer. We do not discriminate on the basis of race, color, religion, sex, national origin, age, disability, genetic information, or any other status protected by applicable law.</p>
-                        </form>
                     </div>
+
+                    <div class="mb-6 flex items-center gap-2 text-xs font-medium text-green-700 bg-green-50 border border-green-100 rounded-xl px-4 py-2.5">
+                        <i class="fas fa-clock" aria-hidden="true"></i>
+                        <span>We review applications daily and will reach out within 24–48 hours.</span>
+                    </div>
+
+                    <form id="careers-form" name="careers" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" class="space-y-5">
+
+                        <input type="hidden" name="form-name" value="careers" />
+                        <input type="hidden" name="subject" value="New craftsman application from %{formName}" />
+
+                        <p class="hidden">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="careers-name" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Full Name</label>
+                                <input id="careers-name" name="name" type="text" required maxlength="80" autocomplete="name" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                            </div>
+                            <div>
+                                <label for="careers-phone" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Phone</label>
+                                <input id="careers-phone" name="phone" type="tel" required maxlength="30" autocomplete="tel" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <p class="text-[10px] text-gray-400 mt-1 leading-normal">By applying, you agree to receive text messages regarding your application, interview scheduling, and employment. Msg/data rates may apply. Reply STOP to opt out.</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="careers-email" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Email Address</label>
+                            <input id="careers-email" name="email" type="email" required maxlength="120" autocomplete="email" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="careers-trade" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Primary Trade</label>
+                                <select id="careers-trade" name="trade" required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                    <option value="" disabled selected>Select a trade...</option>
+                                    <option value="General Handyman">General Handyman</option>
+                                    <option value="Carpentry & Trim">Carpentry & Trim</option>
+                                    <option value="Doors">Doors</option>
+                                    <option value="Plumbing">Plumbing</option>
+                                    <option value="Drywall">Drywall</option>
+                                    <option value="Electrical">Electrical</option>
+                                    <option value="Flooring">Flooring</option>
+                                    <option value="Painting">Painting</option>
+                                    <option value="Decks & Fences">Decks & Fences</option>
+                                    <option value="Maintenance & Cleaning">Maintenance & Cleaning</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="careers-experience" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Years of Experience</label>
+                                <select id="careers-experience" name="experience" required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                    <option value="" disabled selected>Select...</option>
+                                    <option value="Less than 1 year">Less than 1 year</option>
+                                    <option value="1-3 years">1–3 years</option>
+                                    <option value="3-5 years">3–5 years</option>
+                                    <option value="5-10 years">5–10 years</option>
+                                    <option value="10+ years">10+ years</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="careers-location" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">City / Area</label>
+                                <input id="careers-location" name="location" type="text" required maxlength="90" placeholder="Waterford, MI" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                            </div>
+                            <div>
+                                <label for="careers-availability" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Availability</label>
+                                <select id="careers-availability" name="availability" required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                    <option value="" disabled selected>Select...</option>
+                                    <option value="Full-time">Full-time</option>
+                                    <option value="Part-time">Part-time</option>
+                                    <option value="Seasonal">Seasonal</option>
+                                    <option value="Contract / As-needed">Contract / As-needed</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="careers-tools" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Own Tools &amp; Reliable Transportation?</label>
+                            <select id="careers-tools" name="toolsAndTransport" required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <option value="" disabled selected>Select...</option>
+                                <option value="Yes — both tools and transportation">Yes — both tools and transportation</option>
+                                <option value="Tools only">Tools only</option>
+                                <option value="Transportation only">Transportation only</option>
+                                <option value="Neither yet">Neither yet</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="careers-felony" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Have you been convicted of a felony in the last 5 years?</label>
+                            <select id="careers-felony" name="felonyConviction" required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <option value="" disabled selected>Select...</option>
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                            <p class="text-[10px] text-gray-400 mt-1 leading-normal">A conviction is not an automatic bar to employment. Each application is considered individually, taking into account the nature of the offense, how much time has passed, and its relevance to the job.</p>
+                        </div>
+
+                        <div id="careers-felony-details-wrap" class="hidden">
+                            <label for="careers-felony-details" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">If yes, please explain <span class="text-gray-400 normal-case tracking-normal font-medium">(optional)</span></label>
+                            <textarea id="careers-felony-details" name="felonyDetails" rows="3" maxlength="1000" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Nature of the offense and any context you'd like us to consider."></textarea>
+                        </div>
+
+                        <div>
+                            <label for="careers-message" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Tell Us About Your Experience</label>
+                            <textarea id="careers-message" name="message" rows="4" required maxlength="1000" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Describe the work you do best, past projects, and why you'd be a great fit."></textarea>
+                        </div>
+
+                        <div>
+                            <label for="careers-resume" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Resume <span class="text-gray-400 normal-case tracking-normal font-medium">(optional, PDF or image, 8 MB max)</span></label>
+                            <div class="careers-upload">
+                                <input id="careers-resume" name="resume" type="file" accept=".pdf,.doc,.docx,image/*" class="careers-upload-input" aria-describedby="careers-resume-hint">
+                                <p id="careers-resume-hint" class="mt-2 text-xs text-gray-500">Choose a file or drag it here. PDF, DOC, or image, up to 8 MB.</p>
+                            </div>
+                        </div>
+
+                        <p id="careers-message-status" class="hidden text-sm font-semibold"></p>
+
+                        <button id="careers-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
+                            Submit Application <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                        </button>
+                        <p class="text-xs text-gray-500 text-center">By applying, you agree to be contacted about employment opportunities at AAA Handyman Services. AAA Handyman Services is an Equal Opportunity Employer. We do not discriminate on the basis of race, color, religion, sex, national origin, age, disability, genetic information, or any other status protected by applicable law.</p>
+                    </form>
                 </div>
             </div>
         </div>
