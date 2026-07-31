@@ -8,15 +8,6 @@
 
   window.__aaaChatLoaderReady = true;
 
-  function hideExistingFloating() {
-    var els = document.querySelectorAll(".fixed.bottom-5.right-5, [class*='fixed'][class*='bottom-5'][class*='right-5']");
-    for (var i = 0; i < els.length; i++) {
-      var el = els[i];
-      if (el.id === "aaa-chat-loader" || el.contains(group)) continue;
-      el.style.setProperty("display", "none", "important");
-    }
-  }
-
   function initChatFab() {
     if (document.getElementById("aaa-chat-loader")) return;
 
@@ -57,7 +48,6 @@
     group.appendChild(launch);
     group.appendChild(callButton);
     document.body.appendChild(group);
-    hideExistingFloating();
 
     launch.addEventListener("click", openChat);
   }

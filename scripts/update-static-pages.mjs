@@ -61,8 +61,13 @@ function optimizeFontsAndAssets(html) {
     /[ \t]*<link\s+rel="preload"\s+href="\/fonts\/roboto-latin\.woff2"[^>]*>\r?\n/gi,
     '',
   );
+  // The lookbehind matters: without it this pattern also matches the icons
+  // link *inside* the <noscript> fallback it is meant to write, replacing the
+  // fallback's contents with a second async block and leaving the surrounding
+  // <noscript> wrapped around it. One pass over a page whose head had drifted
+  // was enough to nest the block inside its own fallback.
   html = html.replace(
-    /[ \t]*<link\s+rel="(?:stylesheet|preload)"\s+href="\/css\/icons\.css(?:\?v=[^"]*)?"[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel="stylesheet"\s+href="\/css\/icons\.css(?:\?v=[^"]*)?"><\/noscript>\r?\n?)?/gi,
+    /(?<!<noscript>)[ \t]*<link\s+rel="(?:stylesheet|preload)"\s+href="\/css\/icons\.css(?:\?v=[^"]*)?"[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel="stylesheet"\s+href="\/css\/icons\.css(?:\?v=[^"]*)?"><\/noscript>\r?\n?)?/gi,
     `${ASYNC_ICONS_CSS}\n`,
   );
   html = html.replace(
