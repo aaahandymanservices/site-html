@@ -194,7 +194,9 @@ for (const { path, active, removeSectionNav } of STATIC_NAV_PAGES) {
   const SEASONAL_BANNER_TAIL = '(?:\\s*<aside[^>]*id="seasonal-banner"[\\s\\S]*?<\\/aside>)?';
   const mainNavRegex = new RegExp(
     '(?:<a[^>]*class="[^"]*skip-link[^"]*"[^>]*>[\\s\\S]*?<\\/a>\\s*)?' +
-      '(?:<header[^>]*class="sticky top-0 z-50 bg-white[\\s\\S]*?<\\/header>' +
+      '(?:<header[^>]*id="site-header"[\\s\\S]*?<\\/header>' +
+      '|<header[^>]*class="[^"]*site-header[^"]*"[\\s\\S]*?<\\/header>' +
+      '|<header[^>]*class="sticky top-0 z-50 bg-white[\\s\\S]*?<\\/header>' +
       '|<nav[^>]*id="site-nav"[\\s\\S]*?<\\/nav>' + ORPHAN_DRAWER_TAIL + ')' +
       SEASONAL_BANNER_TAIL
   );
