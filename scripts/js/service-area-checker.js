@@ -21,7 +21,7 @@
 
     let zones = {
       A: { label: 'Zone A', rate: '$100 First Hour' },
-      B: { label: 'Zone B', rate: '$145 First Hour' }
+      B: { label: 'Zone B', rate: '$120 First Hour' }
     };
 
     let cities = [];

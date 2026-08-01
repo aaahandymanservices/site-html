@@ -317,7 +317,7 @@
           'tv-mounting': {
               title: 'TV Wall Mounting',
               category: 'Installation & Mounting',
-              price: '$155',
+              price: '$160',
               icon: 'fa-tv',
               description: 'Professional TV wall mounting up to 65" securely anchored into wood or metal studs. Covers leveling, wire management options, and a stud and anchor safety check.',
               bullets: [
@@ -347,7 +347,7 @@
           'doors': {
               title: 'Door Alignment & Repair',
               category: 'Doors & Windows',
-              price: '$120',
+              price: '$100',
               icon: 'fa-door-open',
               description: 'Expert adjustment for doors that stick, rub, or won\'t latch properly. Alignment, hinge shimming, strike plate adjustment, and draft weatherstripping.',
               bullets: [
@@ -362,7 +362,7 @@
           'plumbing': {
               title: 'Minor Plumbing & Fixture Swap',
               category: 'Plumbing Services',
-              price: '$135',
+              price: '$130',
               icon: 'fa-faucet-drip',
               description: 'Fast, clean replacement of kitchen & bathroom faucets, toilet rebuilds, supply line swaps, and garbage disposal installs.',
               bullets: [
@@ -377,7 +377,7 @@
           'electrical': {
               title: 'Minor Electrical & Light Swaps',
               category: 'Electrical & Smart Home',
-              price: '$125',
+              price: '$130',
               icon: 'fa-lightbulb',
               description: 'Safe replacement of ceiling fans, light fixtures, wall switches, dimmers, outlets, and smart video doorbells.',
               bullets: [
@@ -422,7 +422,7 @@
           'locks': {
               title: 'Smart Locks & Hardware',
               category: 'Home Security',
-              price: '$100',
+              price: '$130',
               icon: 'fa-lock',
               description: 'Upgrade your entry security with keyless electronic smart locks, deadbolts, handlesets, and heavy-duty strike plates.',
               bullets: [
@@ -446,7 +446,7 @@
 
           document.getElementById('quick-view-title').textContent = data.title;
           document.getElementById('quick-view-category').textContent = data.category;
-          document.getElementById('quick-view-price').innerHTML = `Starting at <strong class="text-white text-base font-extrabold">${data.price}</strong> (Zone A)`;
+          document.getElementById('quick-view-price').innerHTML = `Starting at <strong class="text-white text-base font-extrabold">${data.price}</strong> (Zone A) &middot; labor only, materials not included`;
           document.getElementById('quick-view-description').textContent = data.description;
           document.getElementById('quick-view-icon').className = `fas ${data.icon}`;
           document.getElementById('quick-view-page-link').href = data.link;
