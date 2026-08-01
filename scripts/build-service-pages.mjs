@@ -52,7 +52,7 @@ function serviceFaq(service) {
   if (service.faq) faqs.push({ q: service.faq.q, a: service.faq.a });
   faqs.push({
     q: `Do you offer emergency service for urgent issues?`,
-    a: `Yes. After-hours emergency service is available 7 days a week for urgent repairs that affect home safety or security, such as leaks or door and window problems ($135 first hour / $85 per hour after). Call ${PHONE_DISPLAY} for priority response.`
+    a: `Yes. After-hours emergency service is available 7 days a week for urgent repairs that affect home safety or security, such as leaks or door and window problems ($155 first hour / $85 per hour after). Call ${PHONE_DISPLAY} for priority response.`
   });
   return faqs;
 }
