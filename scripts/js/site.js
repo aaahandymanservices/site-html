@@ -89,8 +89,8 @@
     // Crossing into the desktop layout hides the drawer through CSS alone, which
     // would leave the toggle reporting aria-expanded="true" behind a close icon,
     // and the drawer already open the next time the window narrows. Keep the
-    // two in step. 1024px is Tailwind's `lg`, where the full link row appears.
-    const desktopLayout = window.matchMedia('(min-width: 1024px)');
+    // two in step. 993px matches the header media query breakpoint.
+    const desktopLayout = window.matchMedia('(min-width: 993px)');
     const closeOnDesktop = (event) => {
       if (event.matches && isOpen()) setMenuOpen(false);
     };

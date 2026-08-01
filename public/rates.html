@@ -135,8 +135,8 @@
     }
     </script>
 
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260729d">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260731b">
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260801a">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260801a">
     <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
 
@@ -210,28 +210,30 @@
 
     <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
-<nav id="site-nav" aria-label="Primary" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
-    <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
-        <a href="/" class="flex min-w-0 items-center space-x-2.5 sm:space-x-3 group flex-shrink-0" aria-label="AAA Handyman Services home">
+<header id="site-header" class="site-header sticky top-0 z-[100] bg-white shadow-md border-b-[3px] border-red-600">
+    <div class="header-container site-nav__bar max-w-7xl mx-auto flex items-center justify-between">
+        <a href="/" class="brand site-nav__brand group flex items-center gap-3 min-w-0" aria-label="AAA Handyman Services home">
             <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 transition group-hover:scale-105">
-            <div class="min-w-0">
-                <p class="text-base min-[390px]:text-lg sm:text-xl lg:text-xl xl:text-2xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
-                <p class="text-[10px] sm:text-xs text-gray-500 font-medium">Oakland County, Michigan</p>
+            <div class="brand-text min-w-0">
+                <p class="brand-title text-base min-[390px]:text-lg sm:text-xl lg:text-xl xl:text-2xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
+                <p class="brand-tagline text-[10px] sm:text-xs text-gray-500 font-medium">Oakland County, Michigan</p>
             </div>
         </a>
 
-        <!-- Desktop Navigation -->
-        <div class="hidden lg:flex lg:space-x-3 xl:space-x-6 lg:text-sm xl:text-base font-medium items-center flex-shrink-0">
-            <a href="/services" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a>
-            <a href="/service-areas" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a>
-            <a href="/rates" class="nav-link py-1 text-red-600 font-bold border-b-2 border-red-600 transition" aria-current="page">Rates</a>
-            <a href="/guarantee" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Guarantee</a>
-            <a href="/reviews" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Reviews</a>
-            <a href="/careers" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Careers</a>
-            <a href="/contact" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Contact</a>
+        <!-- Desktop Navigation Container -->
+        <div class="site-nav__desktop flex items-center">
+            <ul class="nav-links site-nav__links flex items-center gap-5 list-none m-0 p-0 text-sm xl:text-base font-medium">
+                <li><a href="/services" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a></li>
+                <li><a href="/service-areas" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a></li>
+                <li><a href="/rates" class="nav-link py-1 text-red-600 font-bold border-b-2 border-red-600 transition" aria-current="page">Rates</a></li>
+                <li><a href="/guarantee" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Guarantee</a></li>
+                <li><a href="/reviews" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Reviews</a></li>
+                <li><a href="/careers" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Careers</a></li>
+                <li><a href="/contact" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Contact</a></li>
+            </ul>
 
             <!-- Social Media Icons -->
-            <div class="flex items-center space-x-3 pl-2 border-l border-gray-200">
+            <div class="social-icons site-nav__social flex items-center gap-3 pl-4 border-l border-gray-200 ml-3">
                 <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
                 <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
                 <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
@@ -239,15 +241,13 @@
         </div>
 
         <!-- Mobile Hamburger Button -->
-        <div class="flex items-center lg:hidden space-x-2">
-            <button id="mobile-menu-btn" class="text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-lg transition border border-gray-200 hover:border-gray-300" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-menu">
-                <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
-            </button>
-        </div>
+        <button id="mobile-menu-btn" class="site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-lg transition border border-gray-200 hover:border-gray-300" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-menu">
+            <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
+        </button>
     </div>
 
     <!-- Mobile Navigation Drawer / Menu -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-2xl max-h-[calc(100vh-70px)] overflow-y-auto">
+    <div id="mobile-menu" class="hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3">
         <div class="space-y-1">
             <a href="/services" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
             <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
@@ -258,13 +258,13 @@
             <a href="/contact" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Contact</a>
         </div>
 
-        <div class="pt-3 border-t border-gray-100 flex items-center justify-center space-x-6 text-2xl">
+        <div class="pt-3 border-t border-gray-100 flex items-center justify-center gap-6 text-2xl">
             <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
             <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
             <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
         </div>
     </div>
-</nav>
+</header>
 
 <aside id="seasonal-banner" class="seasonal-banner" data-season="summer" aria-label="Seasonal offer">
     <div class="seasonal-banner__inner">
