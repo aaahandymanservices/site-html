@@ -544,30 +544,90 @@ nav.sticky,
   width: 100%;
 }
 
-/* Hide the hamburger menu on screens wider than 768px (Desktop/Tablet) */
+/*
+ * Responsive & Mobile Viewports.
+ *
+ * 768px is the single handover width: the hamburger stops here and the desktop
+ * row starts here. Those two numbers have to stay equal. While the toggle was
+ * hidden from 768px up but the desktop row only appeared at 993px, every
+ * viewport in between had no navigation at all -- no links and no hamburger.
+ *
+ * The toggle button carries both .hamburger-menu and .site-nav__toggle, so the
+ * hide rule has to name both. A standalone `.hamburger-menu { display: none }`
+ * block sitting above these loses the cascade to the equally specific
+ * `.site-nav__toggle { display: flex !important }` below, and the hamburger
+ * stays on screen at exactly the widths it was meant to disappear at.
+ */
 @media screen and (min-width: 768px) {
-  .hamburger-menu {
+  .site-nav__desktop {
+    display: flex !important;
+  }
+
+  /* Hide the hamburger menu on screens wider than 768px (Desktop/Tablet) */
+  .hamburger-menu,
+  .site-nav__toggle,
+  #site-nav .site-nav__toggle {
+    display: none !important;
+  }
+
+  /* The drawer only opens from the toggle, so once the toggle is gone the
+     drawer must not be left on screen if the window grew while it was open. */
+  #mobile-menu {
     display: none !important;
   }
 }
 
 /*
- * Responsive & Mobile Viewports (@media (max-width: 992px))
+ * 768px--1023px. The desktop row now begins at the width the hamburger used to
+ * cover, which is 225px narrower than it was built for, so the brand, seven
+ * links and the social cluster no longer fit on one line. The links are the
+ * navigation and the social icons are repeated in the footer, so the icons are
+ * what gives way; the rest of the row just tightens up.
  */
-@media (min-width: 993px) {
-  .site-nav__desktop {
-    display: flex !important;
+@media (min-width: 768px) and (max-width: 1023px) {
+  .header-container,
+  .site-nav__bar,
+  #site-nav .site-nav__bar {
+    gap: 0.75rem;
+    padding-inline: 0.75rem;
   }
-  .site-nav__toggle {
-    display: none !important;
+
+  .brand .brand-title,
+  .site-nav__brand .brand-title {
+    font-size: 1.0625rem;
+  }
+
+  .brand .brand-tagline,
+  .site-nav__brand .brand-tagline {
+    font-size: 0.625rem;
+  }
+
+  .social-icons,
+  .site-nav__social {
+    display: none;
+  }
+
+  .nav-links,
+  .site-nav__links,
+  #site-nav .site-nav__links {
+    gap: 0.375rem;
+  }
+
+  .nav-link,
+  .nav-links a,
+  .site-nav__links a {
+    padding: 0.25rem 0.3rem;
+    font-size: 0.8125rem;
+    white-space: nowrap;
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   .site-nav__desktop {
     display: none !important;
   }
 
+  .hamburger-menu,
   .site-nav__toggle {
     display: flex !important;
   }
