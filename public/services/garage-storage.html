@@ -236,6 +236,14 @@
       ]
     }
     </script>
+    <style id="critical-above-the-fold">
+        *, ::before, ::after { box-sizing: border-box; }
+        html { font-family: "Roboto", system-ui, -apple-system, sans-serif; -webkit-text-size-adjust: 100%; }
+        body { margin: 0; background-color: #f4f6fa; color: #1f2937; line-height: 1.6; }
+        header, nav, main, section, footer { display: block; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; }
+    </style>
     <link rel="stylesheet" href="/css/tailwind.css?v=20260801b">
     <link rel="stylesheet" href="/css/site-theme.css?v=20260801b">
     <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
@@ -273,11 +281,6 @@
                 <li><a href="/careers" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Careers</a></li>
                 <li><a href="/contact" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Contact</a></li>
             </ul>
-            <div class="ml-4 flex items-center gap-2">
-                <a href="/book" class="inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs xl:text-sm font-bold text-white bg-red-600 hover:bg-red-700 rounded-xl shadow-md hover:shadow-red-600/30 transition transform hover:-translate-y-0.5">
-                    <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online
-                </a>
-            </div>
             <div class="social-icons site-nav__social flex items-center gap-3 pl-4 border-l border-gray-200 ml-3">
                 <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
                 <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
