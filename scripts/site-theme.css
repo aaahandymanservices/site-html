@@ -78,6 +78,23 @@
   --grad-navy: linear-gradient(135deg, var(--brand-navy-deep), var(--brand-navy));
 
   --font-display: "Archivo", "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Sticky-header geometry.
+   *
+   * Four separate places have to know how tall the top bar is: the bar's own
+   * min-height, the pricing page's jump-link strip that parks under it, the
+   * mobile drawer's scroll cap, and the scroll-margin that keeps an anchored
+   * heading from landing behind it. Those were four hand-typed numbers that
+   * had already drifted apart -- 4.75rem, 70px, 6rem, and an inline 60px on
+   * the rates page -- so a change to the bar's height silently broke the
+   * other three. They all read these tokens now.
+   *
+   * --nav-h is the bar's box; --nav-offset adds the crimson rule beneath it,
+   * which is the line the page content actually has to clear.
+   */
+  --nav-h: 4.75rem;
+  --nav-border: 3px;
+  --nav-offset: calc(var(--nav-h) + var(--nav-border));
 }
 
 html {
@@ -157,10 +174,12 @@ main, section, header, footer, nav {
   background-clip: content-box;
 }
 
+/* Anchored sections have to clear the sticky bar plus a little breathing room,
+   so the offset is derived from the bar rather than guessed at. */
 section[id],
 header[id],
 div[id] {
-  scroll-margin-top: 6rem;
+  scroll-margin-top: calc(var(--nav-offset) + 1rem);
 }
 
 /* Text may break between words and, only as a last resort for a token with no
@@ -384,13 +403,23 @@ input::placeholder, textarea::placeholder {
   box-shadow: var(--shadow-sm);
 }
 
-body > nav.sticky,
 header.sticky,
 nav.sticky {
   z-index: 100;
 }
 
-body > nav.sticky {
+/* ---------------------------------------------------------------------------
+ * Primary navigation bar.
+ *
+ * Everything below hangs off #site-nav instead of `body > nav.sticky` and
+ * `> div:first-child`. Those matched by position rather than by identity: the
+ * first only applied while the bar was a direct child of <body>, and the second
+ * addressed the bar row as "whichever div comes first", so inserting a wrapper
+ * or moving the header inside a layout element silently dropped the bar's
+ * height and its brand ring. The id and the two block classes are handles that
+ * survive markup edits.
+ * ------------------------------------------------------------------------- */
+#site-nav {
   border-bottom-color: var(--brand-crimson);
   /* Opaque, not 90% white: the bar sits over whatever scrolls beneath it, and at
      90% the dark hero and its crimson glow tinted the bar red as the page moved
@@ -406,11 +435,86 @@ body > nav.sticky {
      element for the life of every page. */
 }
 
-body > nav.sticky > div:first-child {
-  min-height: 4.75rem;
+/*
+ * The bar row: brand on one side, links on the other, one flex line, never
+ * wrapping.
+ *
+ * `justify-content: space-between` was doing this job alone, and it has nothing
+ * to give once the brand and the seven links together measure more than the
+ * container. From 1024px -- where the full link row appears -- to about 1200px
+ * the row has no slack left to absorb that, so it takes very little to cross
+ * the line: the wider fallback font that renders while Archivo is still
+ * downloading, a zoomed page, or a larger default font size. Both sides were
+ * `flex-shrink-0`, so when it did cross, the gutter between them closed to
+ * nothing and the row ran past the container -- where `overflow-x: hidden` on
+ * <html> clipped the last links and the social icons rather than letting a
+ * visitor scroll to them.
+ *
+ * The `gap` is the fix: it is a gutter the two groups cannot close, so the
+ * squeeze has to be resolved by the brand truncating (see .site-nav__brand)
+ * instead of by the two groups colliding.
+ */
+#site-nav .site-nav__bar {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(0.75rem, 2.5vw, 2rem);
+  min-height: var(--nav-h);
+  /*
+   * One fluid pair of paddings in place of the `px-4 py-2 sm:px-6 sm:py-3`
+   * stack that used to sit on the markup. The block half of that stack was
+   * dead weight -- --nav-h is taller than the tallest thing in the row, so the
+   * bar's height came from the min-height and the `py-*` values never decided
+   * anything -- while the inline half stepped between two fixed values at a
+   * breakpoint that has nothing to do with when the row actually gets tight.
+   */
+  padding-block: 0.5rem;
+  padding-inline: clamp(1rem, 3vw, 1.5rem);
 }
 
-body > nav.sticky img {
+/*
+ * The brand is the side that yields when the row is tight. Two declarations
+ * make that work, and the markup's `truncate` on the title needs both: the
+ * anchor has to be allowed to shrink, and `min-width: 0` has to lift the
+ * min-content floor a flex item gets by default (the width of "Handyman").
+ * The markup already carried `min-w-0`, but it was inert for as long as the
+ * anchor next to it said `flex-shrink-0` -- so the title could never ellipsis,
+ * and the row overflowed instead.
+ */
+#site-nav .site-nav__brand {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+/*
+ * The link row keeps its intrinsic width -- it is the half a visitor navigates
+ * with, so the brand gives up space first.
+ *
+ * `display` is deliberately absent here, and must stay absent: the row is shown
+ * and hidden by the `hidden lg:flex` utilities on the markup, and an id-level
+ * `display` in this file would outrank both and pin the row to one state at
+ * every width. The same applies to #mobile-menu below, whose `hidden` class the
+ * menu script toggles.
+ */
+#site-nav .site-nav__links {
+  flex: 0 0 auto;
+  align-items: center;
+  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+}
+
+/* The hamburger is the one control on the row that must never be squeezed or
+   clipped, whatever the brand next to it is doing. */
+#site-nav .site-nav__toggle {
+  flex: 0 0 auto;
+  background: transparent;
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+
+#site-nav .site-nav__brand img {
   border-color: var(--brand-crimson);
   box-shadow: 0 0 0 3px rgb(166 31 46 / 10%);
 }
@@ -449,20 +553,56 @@ body > nav.sticky img {
   width: 100%;
 }
 
+/*
+ * Mobile drawer.
+ *
+ * It overlays the page rather than sitting in the bar's flow. In flow it was a
+ * block inside the sticky bar, so opening it grew the bar's own box by the
+ * height of seven links and a row of icons, and everything below -- the
+ * seasonal offer strip, the hero, the whole page -- was pushed down by that
+ * much and sprang back on close. js/site.js already treats the drawer as an
+ * overlay (it traps Tab inside it "while it covers the page"), so the flow
+ * position was also the reason that focus trap guarded content the drawer was
+ * not actually covering.
+ *
+ * Offsetting by --nav-border rather than using a bare `top: 100%` keeps the
+ * crimson rule under the bar visible: percentage offsets resolve against the
+ * containing block's padding box, so `100%` alone would put the drawer's own
+ * top edge over the border and the rule would vanish while the menu is open.
+ *
+ * `display` is left to the `hidden` class the menu script toggles -- see the
+ * note on .site-nav__links.
+ */
 #mobile-menu {
+  position: absolute;
+  top: calc(100% + var(--nav-border));
+  inset-inline: 0;
   z-index: 110;
+  /* dvh, with the vh line beneath it as the fallback for engines that lack it.
+     On mobile Safari and Chrome `100vh` is the viewport measured with the
+     browser chrome retracted, so the old `calc(100vh - 70px)` cap -- 70px being
+     a guess at a bar that is 79px tall -- let the drawer run taller than the
+     screen and put its last links and the social row out of reach. */
+  max-height: calc(100vh - var(--nav-offset));
+  max-height: calc(100dvh - var(--nav-offset));
+  overflow-y: auto;
+  /* Reaching the end of the menu must not hand the scroll on to the page
+     behind it. */
+  overscroll-behavior: contain;
   border-top-color: rgb(166 31 46 / 18%);
-  background: rgb(255 255 255 / 98%);
-}
-
-#mobile-menu-btn {
-  background: transparent;
-  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  /* Fully opaque now that it floats over the hero rather than sitting above it
+     in the flow; at 98% the dark hero showed through the link text. */
+  background: var(--brand-surface);
+  box-shadow: var(--shadow-lg);
 }
 
 #section-nav {
   position: sticky;
-  top: 4.75rem;
+  /* Parks against the underside of the crimson rule. It used to be told
+     `top: 4.75rem`, the bar's height with its border left out, so the strip
+     rode 3px into the rule; the rates page then overrode even that with an
+     inline `top: 60px`, which tucked the strip 19px up behind the bar. */
+  top: var(--nav-offset);
   z-index: 40;
   /* This strip overlaps the section below it once the page scrolls, so a
      transparent background let the pricing hero -- and the crimson glow inside
@@ -1111,18 +1251,17 @@ body > footer a {
 }
 
 @media (max-width: 767px) {
+  /* Retuning the one token shortens the bar and, with it, the jump strip's
+     resting offset, the drawer's height cap, and the anchor scroll-margin
+     below -- the four values that used to be edited by hand one at a time. */
+  :root {
+    --nav-h: 4.25rem;
+  }
+
   section[id],
   header[id],
   div[id] {
-    scroll-margin-top: 5rem;
-  }
-
-  body > nav.sticky > div:first-child {
-    min-height: 4.25rem;
-  }
-
-  #section-nav {
-    top: 4.25rem;
+    scroll-margin-top: calc(var(--nav-offset) + 0.75rem);
   }
 
   body > footer {
