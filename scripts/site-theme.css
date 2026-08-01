@@ -526,7 +526,7 @@ form label,
 
 /* Star rating component */
 .rating-stars {
-  color: #f59e0b;
+  color: #a16207;
   display: inline-flex;
   gap: 0.2rem;
   font-size: 1.15rem;
@@ -2076,10 +2076,37 @@ body > header.bg-gradient-to-r::after {
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: rgb(27 42 74 / 45%);
+  color: var(--brand-muted);
   cursor: pointer;
   transform: translateY(-50%);
   transition: color var(--dur) var(--ease);
+}
+
+/* WCAG AA safeguards for utility combinations shared across generated pages. */
+.bg-green-600.text-white {
+  background-color: #166534;
+}
+
+.hover\:bg-green-700:hover {
+  background-color: #14532d;
+}
+
+.bg-emerald-600.text-white {
+  background-color: #047857;
+}
+
+.hover\:bg-emerald-700:hover {
+  background-color: #065f46;
+}
+
+:where(.bg-white, .bg-gray-50, .bg-gray-100, .bg-blue-50, .bg-red-50, .bg-green-50) :where(.text-gray-400),
+:where(.bg-white.text-gray-400, .bg-gray-50.text-gray-400, .bg-gray-100.text-gray-400, .bg-blue-50.text-gray-400, .bg-red-50.text-gray-400, .bg-green-50.text-gray-400) {
+  color: #5f6b7a;
+}
+
+:where(.bg-white, .bg-gray-50, .bg-gray-100) :where(.text-amber-500),
+:where(.bg-white.text-amber-500, .bg-gray-50.text-amber-500, .bg-gray-100.text-amber-500) {
+  color: #a16207;
 }
 
 /* The touch target is deliberately larger than the mark should look, so
