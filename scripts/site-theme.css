@@ -347,7 +347,13 @@ textarea {
   border: 2px solid #cbd5e1;
   border-radius: 0.75rem;
   padding: 0.75rem 1rem;
-  font-size: 0.95rem;
+  /* 16px is a threshold, not a taste call: iOS Safari zooms the viewport in on
+   * a focused field whose text is any smaller, and it does not zoom back out
+   * when the field is left. Fields that state their own size (contact, book,
+   * the home quote form) already clear it; the careers and reviews fields
+   * state none and inherit this, so anything under 1rem here means every tap
+   * into those forms leaves the visitor scrolled sideways on a phone. */
+  font-size: 1rem;
   font-weight: 500;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
@@ -381,6 +387,104 @@ textarea:where(:focus) {
 input::placeholder, textarea::placeholder {
   color: #64748b;
   opacity: .85;
+}
+
+/* Autofilled fields.
+ *
+ * This is the one field state no author declaration reaches. When Chrome or
+ * Safari fills a saved name, email, phone, or city, it paints its own pale
+ * background over the field -- `background-color` cannot override it -- while
+ * still honouring the author's `color`. On the light forms that is merely off
+ * palette. On the dark contact, book, and guide fields it is `text-white` on
+ * near-white: the visitor's own name and email land in the field invisibly,
+ * and they only find out something is there when they try to type over it.
+ *
+ * The two properties that do reach the state are an inset box-shadow, which
+ * covers the UA background with a spread larger than any field, and
+ * `-webkit-text-fill-color`, which outranks `color` on the filled text. Both
+ * read the pair of variables below, so a form declares its field colours once
+ * and every autofill state follows -- rather than this rule hard-coding a
+ * light pair that would repeat the same white-on-white bug the moment a dark
+ * form was added.
+ */
+:root {
+  --field-bg: #ffffff;
+  --field-ink: var(--brand-ink);
+  --field-ring: rgba(166, 31, 46, 0.22);
+}
+
+/* The dark forms. Named here rather than in each page's own <style> block so
+ * that the generated service and city pages, which are rewritten from a
+ * template on every build, cannot drift away from the hand-edited ones.
+ * `color-scheme` is part of the same fix: it is what tells the browser to draw
+ * the caret, the date picker's calendar indicator, and the select option popup
+ * in light-on-dark. Left at its default those native bits are painted dark and
+ * effectively vanish against a `bg-gray-800` field -- careers already pins the
+ * opposite value for the same reason. */
+#contact-form,
+#booking-form,
+#lead-magnet-form {
+  color-scheme: dark;
+  --field-ink: #ffffff;
+  --field-ring: rgba(248, 113, 113, 0.35);
+}
+
+#contact-form,
+#booking-form {
+  /* Matches the `bg-gray-800` the fields themselves carry. */
+  --field-bg: #1f2937;
+}
+
+#lead-magnet-form {
+  /* The guide's fields are `bg-white/10` over a blue-900 -> blue-950 gradient,
+   * and a translucent inset shadow would let the UA background show straight
+   * through. This is that blend flattened: white at 10% lands between #283246
+   * and #323f5c across the gradient, so the midpoint stands in for it. */
+  --field-bg: #2d3951;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+select:-webkit-autofill,
+textarea:-webkit-autofill {
+  -webkit-text-fill-color: var(--field-ink);
+  caret-color: var(--field-ink);
+  -webkit-box-shadow: 0 0 0 1000px var(--field-bg) inset;
+  box-shadow: 0 0 0 1000px var(--field-bg) inset;
+}
+
+/* Kept separate on purpose. `:autofill` and `:-webkit-autofill` cannot share a
+ * selector list: a browser that knows only one of them discards the whole rule,
+ * which would drop the fix in whichever engine it was meant to serve. */
+input:autofill,
+input:autofill:hover,
+select:autofill,
+textarea:autofill {
+  -webkit-text-fill-color: var(--field-ink);
+  caret-color: var(--field-ink);
+  -webkit-box-shadow: 0 0 0 1000px var(--field-bg) inset;
+  box-shadow: 0 0 0 1000px var(--field-bg) inset;
+}
+
+/* The focus ring has to be restated alongside the fill, because the inset
+ * shadow occupies the same property the ring is drawn with -- a focused
+ * autofilled field would otherwise lose one or the other. Two pseudo-classes
+ * on an element selector also puts this above the page-level
+ * `.booking-control:focus-visible` rule, which sets its own box-shadow and
+ * would otherwise uncover the pale UA background exactly while someone was
+ * looking at the field. */
+input:-webkit-autofill:focus,
+select:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--field-bg) inset, 0 0 0 4px var(--field-ring);
+  box-shadow: 0 0 0 1000px var(--field-bg) inset, 0 0 0 4px var(--field-ring);
+}
+
+input:autofill:focus,
+select:autofill:focus,
+textarea:autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--field-bg) inset, 0 0 0 4px var(--field-ring);
+  box-shadow: 0 0 0 1000px var(--field-bg) inset, 0 0 0 4px var(--field-ring);
 }
 
 /* Form Container Card & Labels */

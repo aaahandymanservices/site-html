@@ -28,7 +28,15 @@ const STATIC_NAV_PAGES = [
  * rules and scripts/build-icon-css.mjs for the icon stylesheet.
  */
 const ICONS_CSS = '/css/icons.css?v=20260729d';
-const ASSET_VERSION = '20260801d';
+/*
+ * Bump this whenever the theme stylesheet or a versioned script changes.
+ * netlify.toml serves /css/* and /js/* as `immutable, max-age=31536000`, so the
+ * stamp in the URL is the only thing that can retire a cached copy: a
+ * stylesheet fix shipped without a bump reaches new visitors and no one else,
+ * which is how the previous pass at the dark form fields appeared to land and
+ * then not to.
+ */
+const ASSET_VERSION = '20260801e';
 const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
 const SCRIPT_VERSIONS = new Map([
   ['site.js', ASSET_VERSION],
