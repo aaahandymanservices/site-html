@@ -28,7 +28,7 @@ const STATIC_NAV_PAGES = [
  * rules and scripts/build-icon-css.mjs for the icon stylesheet.
  */
 const ICONS_CSS = '/css/icons.css?v=20260729d';
-const SITE_THEME_CSS = '/css/site-theme.css?v=20260731b';
+const SITE_THEME_CSS = '/css/site-theme.css?v=20260801a';
 const ASYNC_ICONS_CSS =
   `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +
   `    <noscript><link rel="stylesheet" href="${ICONS_CSS}"></noscript>`;
@@ -102,7 +102,7 @@ function optimizeFontsAndAssets(html) {
    * All three rewrites below are stamp-agnostic and idempotent, so a cache
    * bust cannot silently switch them off.
    */
-  const TAILWIND_CSS = '/css/tailwind.css?v=20260729d';
+  const TAILWIND_CSS = '/css/tailwind.css?v=20260801a';
 
   // The old async pattern, plus the <noscript> twin that would otherwise
   // become a second copy of the stylesheet.

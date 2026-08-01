@@ -115,8 +115,8 @@ export function getUnifiedNav(activePage = 'none') {
   return `<a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
 <nav id="site-nav" aria-label="Primary" class="bg-white shadow-md sticky top-0 z-50 border-b-[3px] border-red-600">
-    <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 sm:py-3 flex justify-between items-center">
-        <a href="/" class="flex min-w-0 items-center space-x-2.5 sm:space-x-3 group flex-shrink-0" aria-label="AAA Handyman Services home">
+    <div class="site-nav__bar max-w-7xl mx-auto">
+        <a href="/" class="site-nav__brand group" aria-label="AAA Handyman Services home">
             <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 transition group-hover:scale-105">
             <div class="min-w-0">
                 <p class="text-base min-[390px]:text-lg sm:text-xl lg:text-xl xl:text-2xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
@@ -124,8 +124,10 @@ export function getUnifiedNav(activePage = 'none') {
             </div>
         </a>
 
-        <!-- Desktop Navigation -->
-        <div class="hidden lg:flex lg:space-x-3 xl:space-x-6 lg:text-sm xl:text-base font-medium items-center flex-shrink-0">
+        <!-- Desktop Navigation. The hidden/lg:flex pair owns whether this row
+             shows; its alignment and spacing come from .site-nav__links in
+             site-theme.css. -->
+        <div class="site-nav__links hidden lg:flex lg:text-sm xl:text-base font-medium">
             <a href="/services" class="${linkCls(isServices)}"${ariaCurrent(isServices)}>Services</a>
             <a href="/service-areas" class="${linkCls(isServiceAreas)}"${ariaCurrent(isServiceAreas)}>Service Areas</a>
             <a href="/rates" class="${linkCls(isRates)}"${ariaCurrent(isRates)}>Rates</a>
@@ -135,23 +137,26 @@ export function getUnifiedNav(activePage = 'none') {
             <a href="/contact" class="${linkCls(isContact)}"${ariaCurrent(isContact)}>Contact</a>
 
             <!-- Social Media Icons -->
-            <div class="flex items-center space-x-3 pl-2 border-l border-gray-200">
+            <div class="flex items-center gap-3 pl-2 border-l border-gray-200">
                 <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
                 <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
                 <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
             </div>
         </div>
 
-        <!-- Mobile Hamburger Button -->
-        <div class="flex items-center lg:hidden space-x-2">
-            <button id="mobile-menu-btn" class="text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-lg transition border border-gray-200 hover:border-gray-300" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-menu">
-                <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
-            </button>
-        </div>
+        <!-- Mobile Hamburger Button. It is a flex child of the bar directly:
+             the wrapper it used to sit in only carried spacing for a second
+             control that no longer exists. -->
+        <button id="mobile-menu-btn" class="site-nav__toggle flex items-center justify-center lg:hidden text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-lg transition border border-gray-200 hover:border-gray-300" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-menu">
+            <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
+        </button>
     </div>
 
-    <!-- Mobile Navigation Drawer / Menu -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-2xl max-h-[calc(100vh-70px)] overflow-y-auto">
+    <!-- Mobile Navigation Drawer / Menu. It is positioned as an overlay by
+         #mobile-menu in site-theme.css, so opening it no longer changes the
+         bar's height or the position of anything below it. The height cap and
+         scrolling live there too. -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3">
         <div class="space-y-1">
             <a href="/services" class="${mobileLinkCls(isServices)}"${ariaCurrent(isServices)}>Services</a>
             <a href="/service-areas" class="${mobileLinkCls(isServiceAreas)}"${ariaCurrent(isServiceAreas)}>Service Areas</a>
@@ -162,7 +167,7 @@ export function getUnifiedNav(activePage = 'none') {
             <a href="/contact" class="${mobileLinkCls(isContact)}"${ariaCurrent(isContact)}>Contact</a>
         </div>
 
-        <div class="pt-3 border-t border-gray-100 flex items-center justify-center space-x-6 text-2xl">
+        <div class="pt-3 border-t border-gray-100 flex items-center justify-center gap-6 text-2xl">
             <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
             <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
             <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
