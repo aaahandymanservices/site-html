@@ -79,7 +79,7 @@
           link: "/rates"
       },
       "Priority / After-Hours Service": {
-          text: "7-Day priority response service for urgent repairs that affect immediate home safety, plumbing leaks, or door/window security ($175 first hour / $100 per hour after).",
+          text: "7-Day priority response service for urgent repairs that affect immediate home safety, plumbing leaks, or door/window security ($135 first hour / $85 per hour after).",
           link: "/rates"
       }
   };
