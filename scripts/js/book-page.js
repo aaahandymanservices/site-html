@@ -43,6 +43,8 @@
   const bookingError = document.getElementById('booking-error');
   const bookingDateInput = document.getElementById('booking-date');
   const timeSlotsContainer = document.getElementById('time-slots-container');
+  const timeSlotNote = document.getElementById('time-slot-note');
+  const availabilityBadge = document.getElementById('booking-availability');
   const hiddenTimeInput = document.getElementById('booking-time');
   const requiredBookingFields = bookingForm ? Array.from(bookingForm.querySelectorAll('[required]:not(#booking-time)')) : [];
 
@@ -53,9 +55,62 @@
   }
 
   function updateBookingCompletion() {
+      updateProgress();
       if (!bookingForm || !submitBtn) return;
       const fieldsComplete = requiredBookingFields.every(field => field.value.trim() && field.checkValidity());
       submitBtn.disabled = !(fieldsComplete && hiddenTimeInput.value);
+  }
+
+  /*
+   * The three-step rail above the form.
+   *
+   * It reports progress rather than gating it -- every field is on one screen
+   * and always reachable -- so each step is simply "are the fields behind it
+   * answered", and the first unanswered one is the active step.
+   */
+  const progressSteps = Array.from(document.querySelectorAll('#booking-progress .booking-progress__step'));
+  const progressStatus = document.getElementById('booking-progress-status');
+
+  function setStepState(step, state) {
+      if (step.dataset.state === state) return;
+      step.dataset.state = state;
+      const dot = step.querySelector('.booking-progress__dot');
+      if (!dot) return;
+      if (state === 'done') {
+          const check = document.createElement('i');
+          check.className = 'fas fa-check text-[11px]';
+          check.setAttribute('aria-hidden', 'true');
+          dot.replaceChildren(check);
+      } else {
+          dot.textContent = step.dataset.step || '';
+      }
+  }
+
+  function updateProgress() {
+      if (!progressSteps.length) return;
+      // Looked up per call rather than closed over: this runs from
+      // updateBookingCompletion, which fires before the later declarations in
+      // this file have been initialised.
+      const serviceField = document.getElementById('booking-service');
+      const detailFields = ['booking-name', 'booking-email', 'booking-phone'].map(id => document.getElementById(id));
+
+      const done = [
+          Boolean(serviceField && serviceField.value),
+          Boolean(bookingDateInput && bookingDateInput.value && hiddenTimeInput && hiddenTimeInput.value),
+          detailFields.every(field => field && field.value.trim() && field.checkValidity())
+      ];
+
+      const activeIndex = done.indexOf(false);
+      progressSteps.forEach((step, index) => {
+          setStepState(step, done[index] ? 'done' : (index === activeIndex ? 'active' : 'todo'));
+      });
+
+      if (progressStatus) {
+          const completed = done.filter(Boolean).length;
+          progressStatus.textContent = completed === done.length
+              ? 'All three steps complete — your booking request is ready to send.'
+              : `Step ${completed + 1} of 3.`;
+      }
   }
 
   if (bookingDateInput) {
@@ -73,6 +128,7 @@
           hiddenTimeInput.value = '';
           if (!dateVal) {
               renderTimeSlots('weekday');
+              describeAvailability();
               updateBookingCompletion();
               return;
           }
@@ -85,75 +141,246 @@
               setBookingError('AAA Handyman Services is closed on Sundays. Please choose a Monday–Saturday date.');
               this.value = '';
               renderTimeSlots('weekday');
+              describeAvailability();
               updateBookingCompletion();
               return;
           }
 
           renderTimeSlots(dayOfWeek === 6 ? 'saturday' : 'weekday');
+          describeAvailability();
           updateBookingCompletion();
       });
   }
 
-  function setupTimeSlotListeners() {
-      const timeSlotBtns = document.querySelectorAll('.time-slot-btn');
-      timeSlotBtns.forEach(btn => {
-          btn.addEventListener('click', function() {
-              timeSlotBtns.forEach(b => {
-                  b.classList.remove('selected');
-                  b.classList.remove('bg-red-600');
-                  b.classList.add('bg-gray-800');
-                  b.setAttribute('aria-pressed', 'false');
-              });
+  /*
+   * Arrival windows.
+   *
+   * These labels are the value the form submits and the string stored in the
+   * booking's `booking_time` column, and /api/booking/availability matches its
+   * rows against them, so the two lists have to stay identical to the ones in
+   * netlify/functions/booking-availability.ts.
+   */
+  const ARRIVAL_WINDOWS = {
+      weekday: [
+          { value: '9:00 AM - 11:00 AM', start: '9:00 AM', end: '11:00 AM' },
+          { value: '12:00 PM - 2:00 PM', start: '12:00 PM', end: '2:00 PM' },
+          { value: '3:00 PM - 5:00 PM', start: '3:00 PM', end: '5:00 PM' }
+      ],
+      saturday: [
+          { value: '10:00 AM - 12:00 PM', start: '10:00 AM', end: '12:00 PM' },
+          { value: '12:30 PM - 2:30 PM', start: '12:30 PM', end: '2:30 PM' },
+          { value: '3:00 PM - 5:00 PM', start: '3:00 PM', end: '5:00 PM' }
+      ]
+  };
 
-              this.classList.add('selected');
-              this.classList.remove('bg-gray-800');
-              this.classList.add('bg-red-600');
-              this.setAttribute('aria-pressed', 'true');
-              hiddenTimeInput.value = this.getAttribute('data-value');
-              setBookingError();
-              updateBookingCompletion();
-          });
+  // Filled from /api/booking/availability. Left null until (and unless) that
+  // call answers, and every read below treats null as "offer every window",
+  // which is exactly how the form behaved before availability existed.
+  let availabilityDays = null;
+  let availabilityToday = '';
+
+  const availabilityFor = (date) => (date && availabilityDays ? availabilityDays.get(date) || null : null);
+
+  /* Day of the week for a YYYY-MM-DD string, read as a plain calendar date. */
+  const isSaturday = (isoDate) => {
+      if (!isoDate) return false;
+      const [year, month, day] = isoDate.split('-').map(Number);
+      return new Date(Date.UTC(year, month - 1, day, 12)).getUTCDay() === 6;
+  };
+
+  function selectTimeSlot(button) {
+      const buttons = timeSlotsContainer ? Array.from(timeSlotsContainer.querySelectorAll('.time-slot-btn')) : [];
+      buttons.forEach(other => {
+          other.classList.remove('selected', 'bg-red-600');
+          other.classList.add('bg-gray-800');
+          other.setAttribute('aria-pressed', 'false');
       });
+
+      button.classList.add('selected', 'bg-red-600');
+      button.classList.remove('bg-gray-800');
+      button.setAttribute('aria-pressed', 'true');
+      hiddenTimeInput.value = button.dataset.value || '';
+      setBookingError();
+      updateBookingCompletion();
+  }
+
+  function buildTimeSlotButton(arrival, day) {
+      const slot = day ? day.slots.find(entry => entry.value === arrival.value) : null;
+      const booked = Boolean(slot && slot.available === false);
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center';
+      button.dataset.value = arrival.value;
+      button.setAttribute('aria-pressed', 'false');
+      button.appendChild(document.createTextNode(arrival.start));
+
+      const detail = document.createElement('span');
+      detail.className = 'block text-[10px] text-gray-400 font-normal';
+      detail.textContent = booked ? 'Already booked' : `to ${arrival.end}`;
+      button.appendChild(detail);
+
+      if (booked) {
+          button.disabled = true;
+          button.setAttribute('aria-label', `${arrival.start} to ${arrival.end} — already booked`);
+      } else {
+          button.addEventListener('click', () => selectTimeSlot(button));
+      }
+
+      return button;
   }
 
   function renderTimeSlots(type) {
       if (!timeSlotsContainer) return;
+      const windows = ARRIVAL_WINDOWS[type === 'saturday' ? 'saturday' : 'weekday'];
+      const day = availabilityFor(bookingDateInput ? bookingDateInput.value : '');
 
-      if (type === "saturday") {
-          timeSlotsContainer.innerHTML = `
-              <button type="button" data-value="10:00 AM - 12:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
-                  10:00 AM
-                  <span class="block text-[10px] text-gray-400 font-normal">to 12:00 PM</span>
-              </button>
-              <button type="button" data-value="12:30 PM - 2:30 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
-                  12:30 PM
-                  <span class="block text-[10px] text-gray-400 font-normal">to 2:30 PM</span>
-              </button>
-              <button type="button" data-value="3:00 PM - 5:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
-                  3:00 PM
-                  <span class="block text-[10px] text-gray-400 font-normal">to 5:00 PM</span>
-              </button>
-          `;
-      } else {
-          timeSlotsContainer.innerHTML = `
-              <button type="button" data-value="9:00 AM - 11:00 AM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
-                  9:00 AM
-                  <span class="block text-[10px] text-gray-400 font-normal">to 11:00 AM</span>
-              </button>
-              <button type="button" data-value="12:00 PM - 2:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
-                  12:00 PM
-                  <span class="block text-[10px] text-gray-400 font-normal">to 2:00 PM</span>
-              </button>
-              <button type="button" data-value="3:00 PM - 5:00 PM" aria-pressed="false" class="time-slot-btn px-3 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl font-semibold text-sm hover:border-gray-500 focus:outline-none text-center">
-                  3:00 PM
-                  <span class="block text-[10px] text-gray-400 font-normal">to 5:00 PM</span>
-              </button>
-          `;
+      timeSlotsContainer.replaceChildren(...windows.map(arrival => buildTimeSlotButton(arrival, day)));
+
+      // Availability arrives after the first paint, so the grid can be redrawn
+      // under a visitor who has already picked a window. Put their choice back
+      // -- or, if it is the one that just filled up, take it away and say so
+      // rather than letting them submit a window we cannot honour.
+      const chosen = hiddenTimeInput ? hiddenTimeInput.value : '';
+      if (chosen) {
+          const match = Array.from(timeSlotsContainer.querySelectorAll('.time-slot-btn'))
+              .find(button => button.dataset.value === chosen && !button.disabled);
+          if (match) {
+              selectTimeSlot(match);
+          } else {
+              hiddenTimeInput.value = '';
+              setBookingError('That arrival window has just been booked. Please choose another.');
+          }
       }
-      setupTimeSlotListeners();
+
+      if (timeSlotNote) {
+          const bookedCount = day ? day.slots.filter(slot => slot.available === false).length : 0;
+          timeSlotNote.textContent = bookedCount
+              ? 'Struck-through windows are already reserved for another visit.'
+              : '';
+          timeSlotNote.classList.toggle('hidden', bookedCount === 0);
+      }
+  }
+
+  /*
+   * The availability badge under the date field.
+   *
+   * Every number it shows comes from real bookings, so it stays silent rather
+   * than guessing: no data means no badge, and the form behaves as it always
+   * has.
+   */
+  const AVAILABILITY_TONES = {
+      open: 'mt-2 flex items-center gap-2 rounded-lg border border-emerald-500/25 bg-emerald-500/10 px-3 py-2 text-xs font-semibold text-emerald-300',
+      tight: 'mt-2 flex items-center gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs font-semibold text-amber-200',
+      full: 'mt-2 flex items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs font-semibold text-red-200'
+  };
+
+  function setAvailabilityBadge(tone, iconClass, text) {
+      if (!availabilityBadge) return;
+      if (!text) {
+          availabilityBadge.className = 'hidden';
+          availabilityBadge.replaceChildren();
+          return;
+      }
+      const icon = document.createElement('i');
+      icon.className = `fas ${iconClass} shrink-0`;
+      icon.setAttribute('aria-hidden', 'true');
+      const label = document.createElement('span');
+      label.textContent = text;
+      availabilityBadge.className = AVAILABILITY_TONES[tone] || AVAILABILITY_TONES.open;
+      availabilityBadge.replaceChildren(icon, label);
+  }
+
+  const formatBookingDay = (isoDate) => {
+      const [year, month, day] = isoDate.split('-').map(Number);
+      const formatted = new Date(year, month - 1, day).toLocaleDateString('en-US', {
+          weekday: 'long',
+          month: 'short',
+          day: 'numeric'
+      });
+      // The API reports the calendar in Detroit time, which is the calendar the
+      // business keeps; flagging tomorrow is worth it for the one day most
+      // visitors are looking for.
+      if (availabilityToday) {
+          const [ty, tm, td] = availabilityToday.split('-').map(Number);
+          const tomorrow = new Date(Date.UTC(ty, tm - 1, td + 1, 12)).toISOString().slice(0, 10);
+          if (isoDate === tomorrow) return `${formatted} (tomorrow)`;
+      }
+      return formatted;
+  };
+
+  const nextOpenDay = (afterDate = '') =>
+      (availabilityDays
+          ? Array.from(availabilityDays.values())
+              .filter(day => day.openCount > 0 && day.date > afterDate)
+              .sort((a, b) => a.date.localeCompare(b.date))[0]
+          : null) || null;
+
+  function describeAvailability() {
+      if (!availabilityBadge || !availabilityDays) return;
+
+      const selected = bookingDateInput ? bookingDateInput.value : '';
+
+      if (!selected) {
+          const next = nextOpenDay();
+          if (!next) {
+              setAvailabilityBadge('full', 'fa-phone', 'The next three weeks are fully booked. Call (248) 385-3432 and we will find you a slot.');
+              return;
+          }
+          const windows = next.openCount === 1 ? '1 arrival window open' : `${next.openCount} arrival windows open`;
+          setAvailabilityBadge('open', 'fa-bolt', `Next opening: ${formatBookingDay(next.date)} — ${windows}`);
+          return;
+      }
+
+      const day = availabilityDays.get(selected);
+      if (!day) {
+          // Beyond the three weeks the API reports on. Everything is open that
+          // far out, so there is nothing worth claiming.
+          setAvailabilityBadge('open', 'fa-calendar-check', '');
+          return;
+      }
+
+      if (day.openCount === 0) {
+          const next = nextOpenDay(selected);
+          const suffix = next ? ` Next opening: ${formatBookingDay(next.date)}.` : ' Call (248) 385-3432 and we will find you a slot.';
+          setAvailabilityBadge('full', 'fa-calendar-xmark', `${formatBookingDay(selected)} is fully booked.${suffix}`);
+          return;
+      }
+
+      if (day.openCount === 1) {
+          setAvailabilityBadge('tight', 'fa-bolt', `Only 1 arrival window left on ${formatBookingDay(selected)}.`);
+          return;
+      }
+
+      setAvailabilityBadge('open', 'fa-bolt', `${day.openCount} of ${day.slots.length} arrival windows open on ${formatBookingDay(selected)}.`);
+  }
+
+  async function loadAvailability() {
+      if (!availabilityBadge && !timeSlotsContainer) return;
+      try {
+          const response = await fetch('/api/booking/availability', { headers: { accept: 'application/json' } });
+          if (!response.ok) return;
+          const data = await response.json();
+          if (!data || !Array.isArray(data.days)) return;
+
+          availabilityToday = typeof data.today === 'string' ? data.today : '';
+          availabilityDays = new Map(data.days.map(day => [day.date, day]));
+
+          // Re-draw whatever the visitor is already looking at, now that the
+          // booked windows are known.
+          const selected = bookingDateInput ? bookingDateInput.value : '';
+          renderTimeSlots(isSaturday(selected) ? 'saturday' : 'weekday');
+          describeAvailability();
+          updateBookingCompletion();
+      } catch (error) {
+          // A booking form that offers every window is a working booking form;
+          // a broken availability call must never stand between a customer and
+          // the submit button.
+      }
   }
 
   renderTimeSlots('weekday');
+  loadAvailability();
   requiredBookingFields.forEach(field => {
       field.addEventListener('input', updateBookingCompletion);
       field.addEventListener('change', updateBookingCompletion);
@@ -268,9 +495,223 @@
       }
   };
 
+  /*
+   * The live cost estimate under the service picker.
+   *
+   * Every number here is the published rate: a $100 Zone A service call that
+   * covers travel, diagnosis, and the first hour, $60 for each hour after that
+   * in 15-minute increments, and a flat $20 more in Zone B (20+ miles). The
+   * packages are those same hours less their published discount, so the panel
+   * can show the arithmetic rather than a number the customer has to trust.
+   */
+  const SERVICE_CALL = 100;
+  const HOURLY_RATE = 60;
+  const ZONE_B_DIFFERENTIAL = 20;
+
+  const standardLabor = (hours) => SERVICE_CALL + HOURLY_RATE * (hours - 1);
+  const money = (amount) => `$${Math.round(amount).toLocaleString('en-US')}`;
+  const formatHours = (hours) => (hours % 1 === 0.5 ? `${Math.floor(hours)}½` : String(hours));
+  const plural = (hours) => `${formatHours(hours)} hour${hours === 1 ? '' : 's'}`;
+
+  // Keys are the exact <option> values, so the panel and the submitted service
+  // can never drift apart. Hours and discounts are the ones published on
+  // /rates and /services, so the arithmetic shown here matches those pages.
+  const SERVICE_ESTIMATES = {
+      'Minor Repair & Upkeep (1 Hour)': { hours: 1 },
+      'Fixture or Outlet Replacement (1.5 Hours)': { hours: 1.5 },
+      'Carpentry & Installation (2 Hours)': { hours: 2 },
+      '4-Hour Handyman Package': { hours: 4, price: 250, discount: '10%' },
+      '6-Hour Handyman Package': { hours: 6, price: 340, discount: '15%' },
+      '8-Hour Handyman Package': { hours: 8, price: 415, discount: '20%' },
+      'Seasonal Prep Package': { hours: 4.5, price: 265, discount: '15%' },
+      'Move-In / Move-Out Bundle': { hours: 5, price: 290, discount: '15%' },
+      'Senior Safety & Accessibility Package': { hours: 4, price: 250, discount: '10%' },
+      'Maintenance Membership': { membership: true },
+      'General Estimate / Quote': { quote: true }
+  };
+
+  const bookingEstimate = document.getElementById('booking-estimate');
+
+  const estimateRow = (label, value, emphasis = false) => {
+      const row = document.createElement('li');
+      row.className = 'flex items-baseline justify-between gap-4';
+
+      const term = document.createElement('span');
+      term.className = 'text-gray-400';
+      term.textContent = label;
+
+      const amount = document.createElement('span');
+      amount.className = emphasis ? 'font-bold text-emerald-300 whitespace-nowrap' : 'font-semibold text-gray-200 whitespace-nowrap';
+      amount.textContent = value;
+
+      row.append(term, amount);
+      return row;
+  };
+
+  /* The headline figure, its caption, and the rows beneath it, per service. */
+  const describeEstimate = (service) => {
+      const entry = Object.prototype.hasOwnProperty.call(SERVICE_ESTIMATES, service)
+          ? SERVICE_ESTIMATES[service]
+          : null;
+
+      if (entry && entry.membership) {
+          return {
+              headline: '$49',
+              suffix: '/month',
+              caption: 'Membership plan — labor for each visit is quoted at the member rate',
+              rows: [
+                  ['Scheduled seasonal visits', '2–4 per year'],
+                  ['Priority scheduling', 'Included'],
+                  ['Seasonal home health checklist', 'Included']
+              ]
+          };
+      }
+
+      if (entry && entry.quote) {
+          return {
+              headline: 'Free',
+              suffix: '',
+              caption: 'The estimate itself is free and carries no obligation',
+              rows: [
+                  ['If you go ahead — first hour, Zone A', money(SERVICE_CALL)],
+                  ['Each additional hour', `${money(HOURLY_RATE)} in 15-min increments`],
+                  ['Zone B (20+ miles)', `${money(SERVICE_CALL + ZONE_B_DIFFERENTIAL)} first hour`]
+              ]
+          };
+      }
+
+      if (entry && entry.price) {
+          const standard = standardLabor(entry.hours);
+          const hoursLabel = `${plural(entry.hours)} at standard rates`;
+          return {
+              headline: money(entry.price),
+              suffix: 'Zone A',
+              caption: `${plural(entry.hours)} of reserved labor, ${money(standard - entry.price)} below the standard rate`,
+              rows: [
+                  [hoursLabel, money(standard)],
+                  [`Package discount (${entry.discount})`, `−${money(standard - entry.price)}`],
+                  ['Zone B (20+ miles)', money(entry.price + ZONE_B_DIFFERENTIAL)]
+              ]
+          };
+      }
+
+      if (entry && entry.hours) {
+          const total = standardLabor(entry.hours);
+          const extraHours = entry.hours - 1;
+          const rows = [['Service call — travel, diagnosis, first hour', money(SERVICE_CALL)]];
+          if (extraHours > 0) {
+              rows.push([`${plural(extraHours)} more at ${money(HOURLY_RATE)}/hr`, money(HOURLY_RATE * extraHours)]);
+          }
+          rows.push(['Zone B (20+ miles)', money(total + ZONE_B_DIFFERENTIAL)]);
+          return {
+              headline: money(total),
+              suffix: 'Zone A',
+              caption: `Budgeted at ${plural(entry.hours)} on site`,
+              rows
+          };
+      }
+
+      // Everything else is quoted off the standard rate once we know the scope.
+      return {
+          headline: money(SERVICE_CALL),
+          suffix: 'first hour, Zone A',
+          caption: 'Priced by time on site — describe the job below for a closer figure',
+          rows: [
+              ['Service call — travel, diagnosis, first hour', money(SERVICE_CALL)],
+              ['Each additional hour', `${money(HOURLY_RATE)} in 15-min increments`],
+              ['Zone B (20+ miles)', `${money(SERVICE_CALL + ZONE_B_DIFFERENTIAL)} first hour`]
+          ]
+      };
+  };
+
+  const renderEstimate = () => {
+      if (!bookingEstimate) return;
+      const service = bookingService ? bookingService.value : '';
+      if (!service) {
+          bookingEstimate.classList.add('hidden');
+          bookingEstimate.replaceChildren();
+          return;
+      }
+
+      const estimate = describeEstimate(service);
+
+      const heading = document.createElement('p');
+      heading.className = 'flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-emerald-300';
+      const headingIcon = document.createElement('i');
+      headingIcon.className = 'fas fa-calculator';
+      headingIcon.setAttribute('aria-hidden', 'true');
+      heading.append(headingIcon, document.createTextNode('Estimated cost'));
+
+      const headline = document.createElement('p');
+      headline.className = 'mt-2 text-3xl font-black leading-none text-white';
+      headline.textContent = estimate.headline;
+      if (estimate.suffix) {
+          const suffix = document.createElement('span');
+          suffix.className = 'ml-2 text-sm font-semibold text-gray-400';
+          suffix.textContent = estimate.suffix;
+          headline.appendChild(suffix);
+      }
+
+      const caption = document.createElement('p');
+      caption.className = 'mt-1 text-xs text-gray-400';
+      caption.textContent = estimate.caption;
+
+      const rows = document.createElement('ul');
+      rows.className = 'mt-3 space-y-1.5 border-t border-emerald-600/20 pt-3 text-xs';
+      estimate.rows.forEach(([label, value]) => {
+          // The savings line is the one number worth colouring.
+          rows.appendChild(estimateRow(label, value, value.startsWith('−')));
+      });
+
+      const note = document.createElement('p');
+      note.className = 'mt-3 text-[11px] leading-relaxed text-gray-500';
+      note.textContent = 'Labor only. Hardware and materials are billed separately with a 10–15% supply fee, or supply your own at no markup. Nothing is charged today — Victor confirms the final price with you before any work begins. ';
+
+      const rateLink = document.createElement('a');
+      rateLink.href = '/rates';
+      rateLink.className = 'font-semibold text-emerald-300 underline hover:text-emerald-200';
+      rateLink.textContent = 'See full rates';
+      note.appendChild(rateLink);
+
+      bookingEstimate.replaceChildren(heading, headline, caption, rows, note);
+      bookingEstimate.classList.remove('hidden');
+  };
+
+  /*
+   * Quick-pick tiles.
+   *
+   * The <select> stays the field that validates and submits; the tiles are a
+   * faster way to set it for the six services most people come here for, and
+   * their pressed state is always read back off the select so the two cannot
+   * disagree.
+   */
+  const serviceQuickPicks = Array.from(document.querySelectorAll('#service-quick-picks .service-tile'));
+
+  const syncServiceUi = () => {
+      const value = bookingService ? bookingService.value : '';
+      serviceQuickPicks.forEach(tile => {
+          tile.setAttribute('aria-pressed', String(tile.dataset.service === value));
+      });
+      updatePackageDetails();
+      renderEstimate();
+      updateBookingCompletion();
+  };
+
   if (bookingService) {
-      bookingService.addEventListener('change', updatePackageDetails);
+      bookingService.addEventListener('change', syncServiceUi);
   }
+
+  serviceQuickPicks.forEach(tile => {
+      tile.addEventListener('click', () => {
+          if (!bookingService) return;
+          const wanted = tile.dataset.service || '';
+          const match = Array.from(bookingService.options).find(option => option.value === wanted);
+          if (!match) return;
+          bookingService.value = wanted;
+          setBookingError();
+          syncServiceUi();
+      });
+  });
 
   (function prefillServiceFromQuery() {
       const params = new URLSearchParams(window.location.search);
@@ -297,7 +738,7 @@
           const mappedPkg = pkgMap[requestedPkg];
           if (mappedPkg) {
               bookingService.value = mappedPkg;
-              updatePackageDetails();
+              syncServiceUi();
               return;
           }
       }
@@ -306,10 +747,102 @@
           const match = Array.from(bookingService.options).find(opt => opt.value === requested);
           if (match) {
               bookingService.value = requested;
-              updatePackageDetails();
           }
       }
+
+      // Also covers the case where the browser restored a previously chosen
+      // service on a back-navigation, which fires no change event.
+      syncServiceUi();
   })();
+
+  /*
+   * The most recent homeowner reviews, under the rating summary.
+   *
+   * Whatever /api/reviews returns is what shows, newest first and unfiltered by
+   * rating -- a strip that quietly dropped anything below five stars would not
+   * be social proof. It stays hidden when the call finds nothing.
+   */
+  const liveReviews = document.getElementById('booking-live-reviews');
+  const MAX_LIVE_REVIEWS = 3;
+  const MAX_QUOTE_LENGTH = 130;
+
+  const initialsOf = (name) => String(name || '')
+      .trim()
+      .split(/\s+/)
+      .slice(0, 2)
+      .map(part => part.charAt(0).toUpperCase())
+      .join('');
+
+  const starRow = (rating) => {
+      const rounded = Math.max(1, Math.min(5, Math.round(Number(rating) || 0)));
+      const row = document.createElement('span');
+      row.className = 'flex items-center gap-0.5 text-[10px] text-yellow-500';
+      row.setAttribute('role', 'img');
+      row.setAttribute('aria-label', `${rounded} out of 5 stars`);
+      for (let index = 0; index < rounded; index += 1) {
+          const star = document.createElement('i');
+          star.className = 'fas fa-star';
+          star.setAttribute('aria-hidden', 'true');
+          row.appendChild(star);
+      }
+      return row;
+  };
+
+  const buildReviewCard = (review) => {
+      const card = document.createElement('article');
+      card.className = 'flex items-start gap-3';
+
+      const avatar = document.createElement('span');
+      avatar.className = 'flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-600/90 text-xs font-black text-white';
+      avatar.setAttribute('aria-hidden', 'true');
+      avatar.textContent = initialsOf(review.customerName) || '★';
+
+      const body = document.createElement('div');
+      body.className = 'min-w-0';
+
+      const header = document.createElement('p');
+      header.className = 'flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-bold text-white';
+      const who = document.createElement('span');
+      who.textContent = review.location
+          ? `${review.customerName} — ${review.location}`
+          : String(review.customerName);
+      header.append(who, starRow(review.rating));
+
+      const quote = document.createElement('p');
+      quote.className = 'mt-0.5 text-xs leading-relaxed text-gray-400';
+      const text = String(review.review || '').trim();
+      quote.textContent = text.length > MAX_QUOTE_LENGTH
+          ? `“${text.slice(0, MAX_QUOTE_LENGTH - 1).trimEnd()}…”`
+          : `“${text}”`;
+
+      body.append(header, quote);
+      card.append(avatar, body);
+      return card;
+  };
+
+  async function loadBookingReviews() {
+      if (!liveReviews) return;
+      try {
+          const response = await fetch('/api/reviews', { headers: { accept: 'application/json' } });
+          if (!response.ok) return;
+          const data = await response.json();
+          const recent = (Array.isArray(data) ? data : [])
+              .filter(review => review && review.customerName && review.review)
+              .slice(0, MAX_LIVE_REVIEWS);
+          if (!recent.length) return;
+
+          const heading = document.createElement('p');
+          heading.className = 'text-[11px] font-bold uppercase tracking-widest text-gray-500';
+          heading.textContent = 'Most recent reviews';
+
+          liveReviews.replaceChildren(heading, ...recent.map(buildReviewCard));
+          liveReviews.classList.remove('hidden');
+      } catch (error) {
+          // Social proof is a bonus; the page already carries a testimonial.
+      }
+  }
+
+  loadBookingReviews();
 
   const bookingPhoto = document.getElementById('booking-photo');
   const bookingPhotoDropzone = document.getElementById('booking-photo-dropzone');
