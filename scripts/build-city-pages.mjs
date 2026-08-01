@@ -119,9 +119,9 @@ function navLink(href, label, active) {
 }
 
 function serviceChip(s) {
-  return `                <a href="/services#${esc(s.anchor)}" class="generated-service-card group flex items-center gap-3 bg-white border border-slate-200/80 p-4 rounded-2xl shadow-sm hover:border-red-600/30 transition hover:text-red-600">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100 rounded-xl flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas ${esc(s.icon)}" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600">${esc(s.label)}</span>
+  return `                <a href="/services#${esc(s.anchor)}" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas ${esc(s.icon)}" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">${esc(s.label)}</span>
                 </a>`;
 }
 
