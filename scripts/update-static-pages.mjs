@@ -36,7 +36,7 @@ const ICONS_CSS = '/css/icons.css?v=20260729d';
  * which is how the previous pass at the dark form fields appeared to land and
  * then not to.
  */
-const ASSET_VERSION = '20260801f';
+const ASSET_VERSION = '20260801g';
 const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
 const SCRIPT_VERSIONS = new Map([
   ['site.js', ASSET_VERSION],
