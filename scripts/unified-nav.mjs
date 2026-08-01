@@ -125,7 +125,7 @@ export function getUnifiedNav(activePage = 'none') {
         </a>
 
         <!-- Desktop Navigation Container -->
-        <div class="site-nav__desktop flex items-center">
+        <div class="site-nav__desktop hidden md:flex items-center">
             <ul class="nav-links site-nav__links flex items-center gap-5 list-none m-0 p-0 text-sm xl:text-base font-medium">
                 <li><a href="/services" class="${linkCls(isServices)}"${ariaCurrent(isServices)}>Services</a></li>
                 <li><a href="/service-areas" class="${linkCls(isServiceAreas)}"${ariaCurrent(isServiceAreas)}>Service Areas</a></li>
