@@ -51,7 +51,7 @@
         {
           "@type": "Offer",
           "name": "Zone A Minimum Service Call (within 20 miles)",
-          "description": "Includes travel, diagnostics, and the first hour of labor for locations within 20 miles.",
+          "description": "Includes travel, diagnostics, and the first hour of labor for locations within 20 miles. Labor only \u2014 hardware and materials are not included and are billed separately.",
           "priceCurrency": "USD",
           "price": "100",
           "priceSpecification": {
@@ -64,7 +64,7 @@
         {
           "@type": "Offer",
           "name": "Zone B Minimum Service Call (20+ miles)",
-          "description": "Includes travel, diagnostics, and the first hour of labor for locations beyond 20 miles.",
+          "description": "Includes travel, diagnostics, and the first hour of labor for locations beyond 20 miles. Labor only \u2014 hardware and materials are not included and are billed separately.",
           "priceCurrency": "USD",
           "price": "145",
           "priceSpecification": {
@@ -95,23 +95,51 @@
         {
           "@type": "Offer",
           "name": "Home Safety Audit",
-          "description": "Flat-fee, room-by-room home safety inspection focused on fall prevention, detectors, trip hazards, and entry security. Ends with a same-day punch-list with line-item pricing. Fee credited toward same-day repairs over $250. Zone A price.",
+          "description": "One hour on site at the Zone A service-call rate: a room-by-room home safety inspection focused on fall prevention, detectors, trip hazards, and entry security. Ends with a same-day punch-list with line-item pricing. Fee credited toward same-day repairs over $250. Labor only; materials not included. Zone A price.",
           "priceCurrency": "USD",
-          "price": "99"
+          "price": "100"
         },
         {
           "@type": "Offer",
           "name": "Energy Tune-Up",
-          "description": "Flat-fee energy audit that locates drafts and air leaks and includes minor on-the-spot draft sealing. Ends with a same-day punch-list with line-item pricing. Fee credited toward same-day repairs over $250. Zone A price.",
+          "description": "One hour on site at the Zone A service-call rate: an energy audit that locates drafts and air leaks and includes minor on-the-spot draft sealing. Ends with a same-day punch-list with line-item pricing. Fee credited toward same-day repairs over $250. Labor only; materials not included. Zone A price.",
           "priceCurrency": "USD",
-          "price": "99"
+          "price": "100"
         },
         {
           "@type": "Offer",
           "name": "Storm-Prep Check",
-          "description": "Flat-fee storm-readiness inspection of gutters, drainage, exterior seals, sump pump, and water shutoffs. Ends with a same-day punch-list with line-item pricing. Fee credited toward same-day repairs over $250. Zone A price.",
+          "description": "One hour on site at the Zone A service-call rate: a storm-readiness inspection of gutters, drainage, exterior seals, sump pump, and water shutoffs. Ends with a same-day punch-list with line-item pricing. Fee credited toward same-day repairs over $250. Labor only; materials not included. Zone A price.",
           "priceCurrency": "USD",
-          "price": "99"
+          "price": "100"
+        },
+        {
+          "@type": "Offer",
+          "name": "Whole-Home Assessment (all three audits in one visit)",
+          "description": "Three hours on site, priced at the standard rate ($240) less a 10% bundle discount. Labor only; materials not included. Zone A price.",
+          "priceCurrency": "USD",
+          "price": "200"
+        },
+        {
+          "@type": "Offer",
+          "name": "4-Hour Handyman Time Package",
+          "description": "Four reserved hours of labor. Four hours at standard rates ($280) less a 10% package discount. Labor only; hardware and materials are not included. Zone A price; Zone B adds a $20 extended-travel differential.",
+          "priceCurrency": "USD",
+          "price": "250"
+        },
+        {
+          "@type": "Offer",
+          "name": "6-Hour Handyman Time Package",
+          "description": "Six reserved hours of labor. Six hours at standard rates ($400) less a 15% package discount. Labor only; hardware and materials are not included. Zone A price; Zone B adds a $20 extended-travel differential.",
+          "priceCurrency": "USD",
+          "price": "340"
+        },
+        {
+          "@type": "Offer",
+          "name": "8-Hour Handyman Time Package",
+          "description": "A full reserved workday of labor. Eight hours at standard rates ($520) less a 20% package discount. Labor only; hardware and materials are not included. Zone A price; Zone B adds a $20 extended-travel differential.",
+          "priceCurrency": "USD",
+          "price": "415"
         },
         {
           "@type": "Offer",
@@ -348,17 +376,17 @@
                     </div>
                     <div class="pricing-summary-card bg-red-600 text-white rounded-3xl p-5 sm:p-6 shadow-2xl flex flex-col items-center justify-center text-center min-h-[9rem]">
                         <div class="pricing-card-header text-xs uppercase tracking-widest text-red-100 font-bold whitespace-nowrap">Zone B</div>
-                        <div class="pricing-card-amount text-4xl sm:text-5xl font-black mt-2 mb-1.5 leading-none">$145</div>
+                        <div class="pricing-card-amount text-4xl sm:text-5xl font-black mt-2 mb-1.5 leading-none">$120</div>
                         <p class="pricing-card-desc text-xs sm:text-sm text-red-100 leading-snug">First hour included</p>
                     </div>
                     <div class="col-span-2 rounded-3xl border border-white/15 bg-white/10 backdrop-blur p-6 sm:p-8">
                         <div class="text-xs uppercase tracking-widest text-blue-200 font-bold">After the first hour</div>
-                        <div class="flex items-end gap-2 mt-2"><span class="text-5xl sm:text-6xl font-black">$70</span><span class="text-slate-300 pb-2">/ hour</span></div>
-                        <p class="text-sm text-slate-300 mt-2">That is $17.50 per 15 minutes.</p>
+                        <div class="flex items-end gap-2 mt-2"><span class="text-5xl sm:text-6xl font-black">$60</span><span class="text-slate-300 pb-2">/ hour</span></div>
+                        <p class="text-sm text-slate-300 mt-2">That is $15 per 15 minutes.</p>
                     </div>
                     <div class="col-span-2 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 p-5 text-left text-yellow-300 text-xs sm:text-sm font-semibold flex items-start gap-3">
                         <i class="fas fa-circle-info text-yellow-400 text-lg shrink-0 mt-0.5" aria-hidden="true"></i>
-                        <span><strong>One charge for your first hour:</strong> the $100 / $145 service call already includes travel, diagnosis, and your first hour of labor — there's no separate hourly fee stacked on top.</span>
+                        <span><strong>One charge for your first hour:</strong> the $100 / $120 service call already includes travel, diagnosis, and your first hour of labor — there's no separate hourly fee stacked on top.</span>
                     </div>
                 </div>
             </div>
@@ -376,10 +404,13 @@
                             <table class="w-full text-left">
                                 <thead class="bg-gray-50 text-xs uppercase tracking-wider text-gray-500"><tr><th class="px-5 py-4">Time on site</th><th class="px-5 py-4">Zone A</th><th class="px-5 py-4">Zone B</th></tr></thead>
                                 <tbody class="divide-y divide-gray-100 text-gray-700">
-                                    <tr><td class="px-5 py-4 font-semibold">Up to 1 hour</td><td class="px-5 py-4 font-black text-green-700">$100</td><td class="px-5 py-4 font-black text-orange-700">$145</td></tr>
-                                    <tr><td class="px-5 py-4 font-semibold">2 hours</td><td class="px-5 py-4 font-black text-green-700">$170</td><td class="px-5 py-4 font-black text-orange-700">$215</td></tr>
-                                    <tr><td class="px-5 py-4 font-semibold">3 hours</td><td class="px-5 py-4 font-black text-green-700">$240</td><td class="px-5 py-4 font-black text-orange-700">$285</td></tr>
-                                    <tr><td class="px-5 py-4 font-semibold">4 hours at standard rates</td><td class="px-5 py-4 font-black text-green-700">$310</td><td class="px-5 py-4 font-black text-orange-700">$355</td></tr>
+                                    <tr><td class="px-5 py-4 font-semibold">Up to 1 hour</td><td class="px-5 py-4 font-black text-green-700">$100</td><td class="px-5 py-4 font-black text-orange-700">$120</td></tr>
+                                    <tr><td class="px-5 py-4 font-semibold">1&frac12; hours</td><td class="px-5 py-4 font-black text-green-700">$130</td><td class="px-5 py-4 font-black text-orange-700">$150</td></tr>
+                                    <tr><td class="px-5 py-4 font-semibold">2 hours</td><td class="px-5 py-4 font-black text-green-700">$160</td><td class="px-5 py-4 font-black text-orange-700">$180</td></tr>
+                                    <tr><td class="px-5 py-4 font-semibold">2&frac12; hours</td><td class="px-5 py-4 font-black text-green-700">$190</td><td class="px-5 py-4 font-black text-orange-700">$210</td></tr>
+                                    <tr><td class="px-5 py-4 font-semibold">3 hours</td><td class="px-5 py-4 font-black text-green-700">$220</td><td class="px-5 py-4 font-black text-orange-700">$240</td></tr>
+                                    <tr><td class="px-5 py-4 font-semibold">3&frac12; hours</td><td class="px-5 py-4 font-black text-green-700">$250</td><td class="px-5 py-4 font-black text-orange-700">$270</td></tr>
+                                    <tr><td class="px-5 py-4 font-semibold">4 hours</td><td class="px-5 py-4 font-black text-green-700">$280</td><td class="px-5 py-4 font-black text-orange-700">$300</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -401,6 +432,7 @@
                         <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">No Clock-Watching Anxiety</span>
                         <h2 class="text-2xl sm:text-3xl font-black text-gray-950 mt-3">The💲Flat-Rate Menu</h2>
                         <p class="text-gray-600 mt-2 max-w-2xl mx-auto">For the most common, repetitive tasks, you can bypass hourly estimates entirely. We provide standard fixed prices for both Zone A and Zone B, so you know exactly what you will pay upfront. Every price below is for installation and service labor only &mdash; hardware and materials are not included.</p>
+                        <p class="text-sm text-gray-700 mt-4 max-w-2xl mx-auto bg-white border border-gray-200 rounded-2xl p-4"><i class="fas fa-calculator text-red-600 mr-1" aria-hidden="true"></i> <strong>How every menu price is calculated:</strong> we budget the typical labor time for the task, then price it straight off our published rate &mdash; <strong>$100 service call</strong> (travel, diagnosis, and the first hour) <strong>+ $60 per additional hour</strong>. So 1 hour is $100, 1.5 hours is $130, 2 hours is $160, 2.5 hours is $190, and 3 hours is $220. Zone B is the same labor math plus our flat <strong>$20</strong> extended-travel differential. No materials, hardware, or parts are built into any of these numbers.</p>
                     </div>
                     <div class="space-y-10">
 
@@ -413,46 +445,13 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Ceiling Fan & Light Fixtures</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Replacement on existing approved junction boxes and brackets.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Replacement on existing approved junction boxes and brackets.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>2 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$175</span>
-                                        </div>
-                                        <div class="text-right">
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$220</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
-                                    <div>
-                                        <h4 class="font-bold text-gray-900 text-base mb-1">Smart Doorbell & Thermostats</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Mounting and connecting to your existing low-voltage system wiring.</p>
-                                    </div>
-                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
-                                        <div>
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$145</span>
-                                        </div>
-                                        <div class="text-right">
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$190</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
-                                    <div>
-                                        <h4 class="font-bold text-gray-900 text-base mb-1">Smart Lock & Deadbolt</h4>
-                                        <p class="text-gray-500 text-xs mb-3">App-connected deadbolt or keypad lock fitted to existing, aligned door prep and paired to your app.</p>
-                                    </div>
-                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
-                                        <div>
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$135</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$160</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
@@ -463,17 +462,54 @@
 
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
-                                        <h4 class="font-bold text-gray-900 text-base mb-1">Security Cameras & Floodlights</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Mounting and app-pairing Wi-Fi cameras or smart floodlights at existing exterior fixtures.</p>
+                                        <h4 class="font-bold text-gray-900 text-base mb-1">Smart Doorbell & Thermostats</h4>
+                                        <p class="text-gray-500 text-xs mb-1.5">Mounting and connecting to your existing low-voltage system wiring.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1.5 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$185</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$130</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$230</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 text-base mb-1">Smart Lock & Deadbolt</h4>
+                                        <p class="text-gray-500 text-xs mb-1.5">App-connected deadbolt or keypad lock fitted to existing, aligned door prep and paired to your app.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1.5 labor hours &middot; materials not included</p>
+                                    </div>
+                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
+                                        <div>
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$130</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 text-base mb-1">Security Cameras & Floodlights</h4>
+                                        <p class="text-gray-500 text-xs mb-1.5">Mounting and app-pairing Wi-Fi cameras or smart floodlights at existing exterior fixtures.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>2 labor hours &middot; materials not included</p>
+                                    </div>
+                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
+                                        <div>
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$160</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$180</span>
                                         </div>
                                     </div>
                                 </div>
@@ -481,16 +517,17 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Smart Switches & Plugs</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Swapping standard switches or outlets for smart controls and setting up the app ecosystem.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Swapping standard switches or outlets for smart controls and setting up the app ecosystem.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1.5 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$145</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$130</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$190</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
                                         </div>
                                     </div>
                                 </div>
@@ -498,16 +535,17 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Smoke & CO Detectors</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Installing or replacing combined safety alarm units.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Installing or replacing combined safety alarm units.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1.5 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$145</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$130</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$190</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
                                         </div>
                                     </div>
                                 </div>
@@ -523,16 +561,17 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Garbage Disposal Replacement</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Swapping out existing disposal with a customer-supplied unit.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Swapping out existing disposal with a customer-supplied unit.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>2 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$165</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$160</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$210</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$180</span>
                                         </div>
                                     </div>
                                 </div>
@@ -540,16 +579,17 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Toilet Component Rebuilds</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Replacement of flush valve, fill valve, flapper, and tank lever.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Replacement of flush valve, fill valve, flapper, and tank lever.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1.5 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$130</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$195</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
                                         </div>
                                     </div>
                                 </div>
@@ -557,16 +597,17 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Kitchen & Bath Faucets</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Complete kitchen or bathroom sink faucet and supply line replacement.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Complete kitchen or bathroom sink faucet and supply line replacement.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1.5 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$135</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$130</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$180</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
                                         </div>
                                     </div>
                                 </div>
@@ -582,7 +623,8 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Door Locks & Deadbolts</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Standard lockset or deadbolt swap on existing correctly aligned door prep.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Standard lockset or deadbolt swap on existing correctly aligned door prep.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1 labor hour &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
@@ -591,7 +633,7 @@
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$145</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$120</span>
                                         </div>
                                     </div>
                                 </div>
@@ -599,16 +641,17 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Storm Door Installations</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Full install of standard pre-hung storm/screen doors in ready framing.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Full install of standard pre-hung storm/screen doors in ready framing.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>3 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$245</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$220</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$290</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$240</span>
                                         </div>
                                     </div>
                                 </div>
@@ -616,7 +659,8 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Window Blinds & Curtain Rods</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Hanging standard pre-sized blinds or decorative window hardware.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Hanging standard pre-sized blinds or decorative window hardware.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1 labor hour &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
@@ -625,7 +669,7 @@
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$145</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$120</span>
                                         </div>
                                     </div>
                                 </div>
@@ -641,29 +685,13 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">TV Wall Mounting</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Up to 65" TV on standard wood or metal studs (bracket not included).</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Up to 65" TV on standard wood or metal studs (bracket not included).</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>2 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$155</span>
-                                        </div>
-                                        <div class="text-right">
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$200</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
-                                    <div>
-                                        <h4 class="font-bold text-gray-900 text-base mb-1">Gallery Wall & Picture Hanging</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Laid-out hanging of a gallery wall, heavy mirror, or framed art set (per package).</p>
-                                    </div>
-                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
-                                        <div>
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$135</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$160</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
@@ -674,8 +702,27 @@
 
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
+                                        <h4 class="font-bold text-gray-900 text-base mb-1">Gallery Wall & Picture Hanging</h4>
+                                        <p class="text-gray-500 text-xs mb-1.5">Laid-out hanging of a gallery wall, heavy mirror, or framed art set (per package).</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1.5 labor hours &middot; materials not included</p>
+                                    </div>
+                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
+                                        <div>
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$130</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                                    <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Cabinet Hardware Upgrades</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Swapping out knobs or pulls with exact-size replacements.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Swapping out knobs or pulls with exact-size replacements.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1 labor hour &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
@@ -684,7 +731,7 @@
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$145</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$120</span>
                                         </div>
                                     </div>
                                 </div>
@@ -700,7 +747,8 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Dryer Vent Cleaning</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Exhaust line cleaning from dryer back to wall terminal to maximize airflow.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Exhaust line cleaning from dryer back to wall terminal to maximize airflow.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1.5 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
@@ -709,7 +757,7 @@
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$175</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
                                         </div>
                                     </div>
                                 </div>
@@ -717,12 +765,31 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Gutter Cleaning</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Removal of debris, clearing downspouts, and testing flow (up to 145 linear feet, single-story).</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Removal of debris, clearing downspouts, and testing flow (up to 145 linear feet, single-story).</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1.5 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$135</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$130</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 text-base mb-1">Power Washing</h4>
+                                        <p class="text-gray-500 text-xs mb-1.5">Professional wash for standard driveways, walkways, patios, or decks to remove grime and mildew (up to 1,000 sq ft).</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>2 labor hours &middot; materials not included</p>
+                                    </div>
+                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
+                                        <div>
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$160</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
@@ -733,34 +800,18 @@
 
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
-                                        <h4 class="font-bold text-gray-900 text-base mb-1">Power Washing</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Professional wash for standard driveways, walkways, patios, or decks to remove grime and mildew (up to 1,000 sq ft).</p>
+                                        <h4 class="font-bold text-gray-900 text-base mb-1">House Soft Washing</h4>
+                                        <p class="text-gray-500 text-xs mb-1.5">Low-pressure soft wash for siding to safely lift mildew and algae (up to 1,500 sq ft).</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>3 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$175</span>
-                                        </div>
-                                        <div class="text-right">
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
                                             <span class="text-gray-900 font-extrabold text-base">$220</span>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
-                                    <div>
-                                        <h4 class="font-bold text-gray-900 text-base mb-1">House Soft Washing</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Low-pressure soft wash for siding to safely lift mildew and algae (up to 1,500 sq ft).</p>
-                                    </div>
-                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
-                                        <div>
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$225</span>
-                                        </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$270</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$240</span>
                                         </div>
                                     </div>
                                 </div>
@@ -768,16 +819,17 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Gutter Guard Installation</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Fitting leaf-guard gutter protection, typically paired with a cleaning (up to 145 linear feet).</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Fitting leaf-guard gutter protection, typically paired with a cleaning (up to 145 linear feet).</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>2.5 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$215</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$190</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$260</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$210</span>
                                         </div>
                                     </div>
                                 </div>
@@ -785,16 +837,17 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Fence & Gate Repair</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Latch repair, sagging-gate realignment, and replacement of a few fence boards.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Latch repair, sagging-gate realignment, and replacement of a few fence boards.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>2 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$155</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$160</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$200</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$180</span>
                                         </div>
                                     </div>
                                 </div>
@@ -810,12 +863,49 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Overhead Garage Ceiling Rack</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Heavy-duty overhead storage rack anchored into ceiling joists (one 4x8 rack).</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Heavy-duty overhead storage rack anchored into ceiling joists (one 4x8 rack).</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>2.5 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$195</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$190</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$210</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 text-base mb-1">Garage Slatwall & Wall Storage</h4>
+                                        <p class="text-gray-500 text-xs mb-1.5">Mounting Slatwall or Flow Wall panels with accessory hooks to studs (per 4-ft section).</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>2 labor hours &middot; materials not included</p>
+                                    </div>
+                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
+                                        <div>
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$160</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$180</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 text-base mb-1">Closet & Pantry System Install</h4>
+                                        <p class="text-gray-500 text-xs mb-1.5">Installing a wire or wood closet system (e.g., Rubbermaid, IKEA PAX) on a single wall.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>3 labor hours &middot; materials not included</p>
+                                    </div>
+                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
+                                        <div>
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$220</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
@@ -826,51 +916,18 @@
 
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
-                                        <h4 class="font-bold text-gray-900 text-base mb-1">Garage Slatwall & Wall Storage</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Mounting Slatwall or Flow Wall panels with accessory hooks to studs (per 4-ft section).</p>
-                                    </div>
-                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
-                                        <div>
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$185</span>
-                                        </div>
-                                        <div class="text-right">
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$230</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
-                                    <div>
-                                        <h4 class="font-bold text-gray-900 text-base mb-1">Closet & Pantry System Install</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Installing a wire or wood closet system (e.g., Rubbermaid, IKEA PAX) on a single wall.</p>
-                                    </div>
-                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
-                                        <div>
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$225</span>
-                                        </div>
-                                        <div class="text-right">
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$270</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
-                                    <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Workbench Assembly</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Assembly and leveling of a customer-supplied workbench or storage cabinet.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Assembly and leveling of a customer-supplied workbench or storage cabinet.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1.5 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$135</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$130</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$180</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
                                         </div>
                                     </div>
                                 </div>
@@ -886,24 +943,8 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Babyproofing Package</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Cabinet safety latches, edge guards, and outlet covers installed room by room.</p>
-                                    </div>
-                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
-                                        <div>
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$145</span>
-                                        </div>
-                                        <div class="text-right">
-                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$190</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
-                                    <div>
-                                        <h4 class="font-bold text-gray-900 text-base mb-1">Furniture & TV Anti-Tip Anchoring</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Anchoring heavy dressers, bookcases, and TVs to wall studs to prevent tip-overs.</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Cabinet safety latches, edge guards, and outlet covers installed room by room.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1.5 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
@@ -912,7 +953,25 @@
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$175</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 text-base mb-1">Furniture & TV Anti-Tip Anchoring</h4>
+                                        <p class="text-gray-500 text-xs mb-1.5">Anchoring heavy dressers, bookcases, and TVs to wall studs to prevent tip-overs.</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1.5 labor hours &middot; materials not included</p>
+                                    </div>
+                                    <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
+                                        <div>
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$130</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
                                         </div>
                                     </div>
                                 </div>
@@ -920,16 +979,17 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Baby Gate Installation</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Hardware-mounted safety gate fitted to a stairway or hallway (per gate).</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Hardware-mounted safety gate fitted to a stairway or hallway (per gate).</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>1.5 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$120</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$130</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$165</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$150</span>
                                         </div>
                                     </div>
                                 </div>
@@ -937,16 +997,17 @@
                                 <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
                                     <div>
                                         <h4 class="font-bold text-gray-900 text-base mb-1">Pet Door Installation</h4>
-                                        <p class="text-gray-500 text-xs mb-3">Interior door or wall pet portal fitted and finished (exterior/glass quoted on site).</p>
+                                        <p class="text-gray-500 text-xs mb-1.5">Interior door or wall pet portal fitted and finished (exterior/glass quoted on site).</p>
+                                        <p class="text-[11px] font-semibold text-blue-900 mb-3"><i class="fas fa-clock text-red-600 mr-1" aria-hidden="true"></i>3 labor hours &middot; materials not included</p>
                                     </div>
                                     <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-auto">
                                         <div>
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-green-700 block">Zone A</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$225</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$220</span>
                                         </div>
                                         <div class="text-right">
                                             <span class="text-[10px] uppercase font-bold tracking-wider text-red-600 block">Zone B</span>
-                                            <span class="text-gray-900 font-extrabold text-base">$270</span>
+                                            <span class="text-gray-900 font-extrabold text-base">$240</span>
                                         </div>
                                     </div>
                                 </div>
@@ -988,7 +1049,7 @@
                 <div class="text-center max-w-3xl mx-auto mb-12">
                     <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Book a Visit, Not a Guess</span>
                     <h2 class="text-3xl sm:text-4xl font-black text-gray-950 mt-4">Flat-Fee Home Audits</h2>
-                    <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">Not sure where to start? Book a flat-fee audit and put a trained craftsman's eyes on your home. Each audit is a focused, hands-on inspection that ends with a <strong>same-day punch-list</strong> &mdash; every recommended fix written down with its own line-item price, so you can approve exactly what you want on the spot. The audit fee is <strong>credited back</strong> toward any same-day repairs over $250.</p>
+                    <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">Not sure where to start? Book a flat-fee audit and put a trained craftsman's eyes on your home. Each audit is one hour on site, priced at our standard Zone A service-call rate &mdash; a focused, hands-on inspection that ends with a <strong>same-day punch-list</strong>, every recommended fix written down with its own line-item price, so you can approve exactly what you want on the spot. The audit fee is <strong>credited back</strong> toward any same-day repairs over $250.</p>
                 </div>
 
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -1001,8 +1062,8 @@
                             <div class="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center text-2xl text-red-600 mb-4 mx-auto" aria-hidden="true"><i class="fas fa-house-medical" aria-hidden="true"></i></div>
                             <h3 class="text-2xl font-bold">Home Safety Audit</h3>
                             <div class="mt-3 text-xs uppercase tracking-widest font-semibold text-gray-500">Flat Audit Fee</div>
-                            <div class="text-5xl font-black text-red-600 tracking-tight mt-2">$99</div>
-                            <div class="text-sm text-gray-500 mt-1">credited toward same-day work</div>
+                            <div class="text-5xl font-black text-red-600 tracking-tight mt-2">$100</div>
+                            <div class="text-sm text-gray-500 mt-1">1 hour on site &middot; credited toward same-day work</div>
                         </div>
                         <p class="text-gray-600 text-sm leading-relaxed mb-5">A room-by-room walk-through built around fall prevention and everyday safety &mdash; ideal for aging-in-place, young families, or a home you've just moved into.</p>
                         <div class="border-t border-gray-100 pt-5">
@@ -1027,8 +1088,8 @@
                             <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl text-blue-900 mb-4 mx-auto" aria-hidden="true"><i class="fas fa-temperature-arrow-down" aria-hidden="true"></i></div>
                             <h3 class="text-2xl font-bold">Energy Tune-Up</h3>
                             <div class="mt-3 text-xs uppercase tracking-widest font-semibold text-gray-500">Flat Audit Fee</div>
-                            <div class="text-5xl font-black text-red-600 tracking-tight mt-2">$99</div>
-                            <div class="text-sm text-gray-500 mt-1">credited toward same-day work</div>
+                            <div class="text-5xl font-black text-red-600 tracking-tight mt-2">$100</div>
+                            <div class="text-sm text-gray-500 mt-1">1 hour on site &middot; credited toward same-day work</div>
                         </div>
                         <p class="text-gray-600 text-sm leading-relaxed mb-5">We hunt down the drafts and air leaks quietly driving up your heating and cooling bills &mdash; and seal the quick ones on the spot as part of the visit.</p>
                         <div class="border-t border-gray-100 pt-5">
@@ -1053,8 +1114,8 @@
                             <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl text-blue-900 mb-4 mx-auto" aria-hidden="true"><i class="fas fa-house-flood-water" aria-hidden="true"></i></div>
                             <h3 class="text-2xl font-bold">Storm-Prep Check</h3>
                             <div class="mt-3 text-xs uppercase tracking-widest font-semibold text-gray-500">Flat Audit Fee</div>
-                            <div class="text-5xl font-black text-red-600 tracking-tight mt-2">$99</div>
-                            <div class="text-sm text-gray-500 mt-1">credited toward same-day work</div>
+                            <div class="text-5xl font-black text-red-600 tracking-tight mt-2">$100</div>
+                            <div class="text-sm text-gray-500 mt-1">1 hour on site &middot; credited toward same-day work</div>
                         </div>
                         <p class="text-gray-600 text-sm leading-relaxed mb-5">Before the next Michigan storm rolls through, we check the places water and wind find their way in &mdash; so a bad night doesn't turn into an expensive repair.</p>
                         <div class="border-t border-gray-100 pt-5">
@@ -1076,11 +1137,11 @@
                     <div class="text-center md:text-left">
                         <div class="inline-block bg-white/10 border border-white/20 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3"><i class="fas fa-layer-group mr-1" aria-hidden="true"></i> Best Value</div>
                         <h3 class="text-2xl sm:text-3xl font-bold">Whole-Home Assessment</h3>
-                        <p class="text-blue-100 mt-2 max-w-xl text-sm sm:text-base">All three audits &mdash; Safety, Energy, and Storm-Prep &mdash; in one visit, with a single combined punch-list. <span class="font-semibold text-white">Save $58</span> versus booking each on its own.</p>
+                        <p class="text-blue-100 mt-2 max-w-xl text-sm sm:text-base">All three audits &mdash; Safety, Energy, and Storm-Prep &mdash; in one visit, with a single combined punch-list. Three hours on site ($220 at our standard rate) less a <strong class="text-white">10% bundle discount</strong>, so you <span class="font-semibold text-white">save $100</span> versus booking each on its own.</p>
                     </div>
                     <div class="text-center md:text-right flex-shrink-0">
-                        <div class="text-sm line-through text-blue-200/80">$297</div>
-                        <div class="text-5xl font-black tracking-tight">$239</div>
+                        <div class="text-sm line-through text-blue-200/80">$300</div>
+                        <div class="text-5xl font-black tracking-tight">$200</div>
                         <a href="/contact?service=Whole-Home+Assessment" class="mt-4 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-2xl transition shadow-lg shadow-red-600/30">
                             Book All Three <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
@@ -1102,31 +1163,31 @@
                             </div>
                             <ul class="divide-y divide-gray-200 text-sm">
                                 <li class="flex items-center justify-between gap-4 py-2.5">
-                                    <span class="text-gray-700">Re-anchor loose stair handrail</span>
-                                    <span class="font-extrabold text-gray-900 whitespace-nowrap">$65</span>
+                                    <span class="text-gray-700">Re-anchor loose stair handrail<span class="block text-[11px] text-gray-400">1 hour &times; $60</span></span>
+                                    <span class="font-extrabold text-gray-900 whitespace-nowrap">$60</span>
                                 </li>
                                 <li class="flex items-center justify-between gap-4 py-2.5">
-                                    <span class="text-gray-700">Replace aged smoke &amp; CO detector</span>
-                                    <span class="font-extrabold text-gray-900 whitespace-nowrap">$145</span>
+                                    <span class="text-gray-700">Replace aged smoke &amp; CO detector<span class="block text-[11px] text-gray-400">&frac12; hour &times; $60</span></span>
+                                    <span class="font-extrabold text-gray-900 whitespace-nowrap">$30</span>
                                 </li>
                                 <li class="flex items-center justify-between gap-4 py-2.5">
-                                    <span class="text-gray-700">Weatherstrip &amp; sweep drafty front door</span>
-                                    <span class="font-extrabold text-gray-900 whitespace-nowrap">$95</span>
+                                    <span class="text-gray-700">Weatherstrip &amp; sweep drafty front door<span class="block text-[11px] text-gray-400">1&frac12; hours &times; $60</span></span>
+                                    <span class="font-extrabold text-gray-900 whitespace-nowrap">$90</span>
                                 </li>
                                 <li class="flex items-center justify-between gap-4 py-2.5">
-                                    <span class="text-gray-700">Re-caulk tub &amp; shower surround</span>
-                                    <span class="font-extrabold text-gray-900 whitespace-nowrap">$120</span>
+                                    <span class="text-gray-700">Re-caulk tub &amp; shower surround<span class="block text-[11px] text-gray-400">1&frac12; hours &times; $60</span></span>
+                                    <span class="font-extrabold text-gray-900 whitespace-nowrap">$90</span>
                                 </li>
                                 <li class="flex items-center justify-between gap-4 py-2.5">
-                                    <span class="text-gray-700">Clear gutters &amp; secure loose downspout</span>
-                                    <span class="font-extrabold text-gray-900 whitespace-nowrap">$135</span>
+                                    <span class="text-gray-700">Clear gutters &amp; secure loose downspout<span class="block text-[11px] text-gray-400">1&frac12; hours &times; $60</span></span>
+                                    <span class="font-extrabold text-gray-900 whitespace-nowrap">$90</span>
                                 </li>
                             </ul>
                             <div class="mt-3 pt-3 border-t-2 border-gray-300 flex items-center justify-between text-sm">
-                                <span class="text-gray-500">Less $99 audit fee credit</span>
-                                <span class="font-bold text-green-600 whitespace-nowrap">&minus;$99</span>
+                                <span class="text-gray-500">Less $100 audit fee credit</span>
+                                <span class="font-bold text-green-600 whitespace-nowrap">&minus;$100</span>
                             </div>
-                            <p class="text-[11px] text-gray-400 mt-3 leading-relaxed">Illustrative example. Your list and prices reflect what's actually found in your home. Materials priced separately.</p>
+                            <p class="text-[11px] text-gray-400 mt-3 leading-relaxed">Illustrative example. Because we are already on site, punch-list work is billed as continuous labor at $60/hour in quarter-hour increments &mdash; no second service call. Your list and prices reflect what's actually found in your home. Materials priced separately.</p>
                         </div>
 
                         <div>
@@ -1140,7 +1201,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="text-center text-xs text-gray-500 mt-8 max-w-2xl mx-auto"><i class="fas fa-location-dot text-red-500 mr-1" aria-hidden="true"></i> Audit fees shown are Zone A (within 20 miles); Zone B adds our standard $45 extended-travel differential. The audit fee is credited toward same-day repairs totaling $250 or more.</p>
+                <p class="text-center text-xs text-gray-500 mt-8 max-w-2xl mx-auto"><i class="fas fa-location-dot text-red-500 mr-1" aria-hidden="true"></i> Audit fees shown are Zone A (within 20 miles); Zone B adds our standard $20 extended-travel differential. The audit fee is credited toward same-day repairs totaling $250 or more.</p>
             </div>
         </section>
 
@@ -1153,7 +1214,7 @@
                     <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">The fixes we recommend most often, packaged into three clear levels. Because every tier covers a defined, pre-scoped list of work, we can quote you on the spot &mdash; no waiting on a custom estimate. Just pick the level that fits your home and budget.</p>
                     <div class="mt-6 inline-flex items-start gap-3 bg-gray-50 border border-gray-200 rounded-2xl px-5 py-4 text-left text-sm text-gray-600 max-w-2xl">
                         <i class="fas fa-boxes-stacked text-red-600 mt-0.5" aria-hidden="true"></i>
-                        <span><strong>Menu prices are for installation labor only.</strong> Hardware and materials are not included and are billed separately &mdash; supply your own at no markup, or we source them for our standard 10&ndash;15% supply fee. Prefer a specific brand or model? We'll happily quote it custom.</span>
+                        <span><strong>Menu prices are for installation labor only.</strong> Hardware and materials are not included and are billed separately &mdash; supply your own at no markup, or we source them for our standard 10&ndash;15% supply fee. Prefer a specific brand or model? We'll happily quote it custom.<br><br><strong>How each tier is priced:</strong> we add up the labor hours the tier's task list takes, price them at our published rate ($100 service call + $60/hour after the first), then subtract a package discount for bundling the work into one visit &mdash; <strong>10% up to 4 hours, 15% for 4&frac12;&ndash;6 hours, 20% for 6&frac12; hours or more</strong>. Nothing else is baked in.</span>
                     </div>
                 </div>
 
@@ -1171,8 +1232,8 @@
                             <div class="text-center mb-5">
                                 <span class="inline-block bg-gray-100 text-gray-600 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Good</span>
                                 <h4 class="text-xl font-bold mt-3 text-gray-900">Safe Step</h4>
-                                <div class="text-4xl font-black text-gray-900 tracking-tight mt-2">$189</div>
-
+                                <div class="text-4xl font-black text-gray-900 tracking-tight mt-2">$170</div>
+                                <div class="text-xs font-semibold text-gray-500 mt-2 leading-relaxed">2&frac12; labor hours at our standard rate = $190<br>less 10% package discount &mdash; <span class="text-green-700 font-bold">save $20</span></div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> One (1) ADA grab bar installed</li>
@@ -1188,8 +1249,8 @@
                             <div class="text-center mb-5 mt-2">
                                 <span class="inline-block bg-red-100 text-red-600 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Better</span>
                                 <h4 class="text-xl font-bold mt-3 text-gray-900">Secure Home</h4>
-                                <div class="text-4xl font-black text-red-600 tracking-tight mt-2">$369</div>
-
+                                <div class="text-4xl font-black text-red-600 tracking-tight mt-2">$290</div>
+                                <div class="text-xs font-semibold text-gray-500 mt-2 leading-relaxed">5 labor hours at our standard rate = $340<br>less 15% package discount &mdash; <span class="text-green-700 font-bold">save $50</span></div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Everything in <strong>Good</strong></li>
@@ -1206,8 +1267,8 @@
                             <div class="text-center mb-5">
                                 <span class="inline-block bg-blue-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Best</span>
                                 <h4 class="text-xl font-bold mt-3 text-gray-900">Age-in-Place Lite</h4>
-                                <div class="text-4xl font-black text-gray-900 tracking-tight mt-2">$475</div>
-
+                                <div class="text-4xl font-black text-gray-900 tracking-tight mt-2">$390</div>
+                                <div class="text-xs font-semibold text-gray-500 mt-2 leading-relaxed">7&frac12; labor hours at our standard rate = $490<br>less 20% package discount &mdash; <span class="text-green-700 font-bold">save $100</span></div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Everything in <strong>Better</strong></li>
@@ -1235,8 +1296,8 @@
                             <div class="text-center mb-5">
                                 <span class="inline-block bg-gray-100 text-gray-600 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Good</span>
                                 <h4 class="text-xl font-bold mt-3 text-gray-900">Draft Stopper</h4>
-                                <div class="text-4xl font-black text-gray-900 tracking-tight mt-2">$169</div>
-
+                                <div class="text-4xl font-black text-gray-900 tracking-tight mt-2">$145</div>
+                                <div class="text-xs font-semibold text-gray-500 mt-2 leading-relaxed">2 labor hours at our standard rate = $160<br>less 10% package discount &mdash; <span class="text-green-700 font-bold">save $15</span></div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Weatherstrip up to 1 exterior door</li>
@@ -1252,8 +1313,8 @@
                             <div class="text-center mb-5 mt-2">
                                 <span class="inline-block bg-red-100 text-red-600 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Better</span>
                                 <h4 class="text-xl font-bold mt-3 text-gray-900">Whole-Home Seal</h4>
-                                <div class="text-4xl font-black text-red-600 tracking-tight mt-2">$329</div>
-
+                                <div class="text-4xl font-black text-red-600 tracking-tight mt-2">$315</div>
+                                <div class="text-xs font-semibold text-gray-500 mt-2 leading-relaxed">5&frac12; labor hours at our standard rate = $370<br>less 15% package discount &mdash; <span class="text-green-700 font-bold">save $55</span></div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Everything in <strong>Good</strong></li>
@@ -1269,8 +1330,8 @@
                             <div class="text-center mb-5">
                                 <span class="inline-block bg-blue-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Best</span>
                                 <h4 class="text-xl font-bold mt-3 text-gray-900">Efficiency Pro</h4>
-                                <div class="text-4xl font-black text-gray-900 tracking-tight mt-2">$439</div>
-
+                                <div class="text-4xl font-black text-gray-900 tracking-tight mt-2">$415</div>
+                                <div class="text-xs font-semibold text-gray-500 mt-2 leading-relaxed">8 labor hours at our standard rate = $520<br>less 20% package discount &mdash; <span class="text-green-700 font-bold">save $105</span></div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Everything in <strong>Better</strong></li>
@@ -1298,8 +1359,8 @@
                             <div class="text-center mb-5">
                                 <span class="inline-block bg-gray-100 text-gray-600 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Good</span>
                                 <h4 class="text-xl font-bold mt-3 text-gray-900">Storm Ready</h4>
-                                <div class="text-4xl font-black text-gray-900 tracking-tight mt-2">$139</div>
-
+                                <div class="text-4xl font-black text-gray-900 tracking-tight mt-2">$145</div>
+                                <div class="text-xs font-semibold text-gray-500 mt-2 leading-relaxed">2 labor hours at our standard rate = $160<br>less 10% package discount &mdash; <span class="text-green-700 font-bold">save $15</span></div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Gutter clear (up to 50 linear ft)</li>
@@ -1315,8 +1376,8 @@
                             <div class="text-center mb-5 mt-2">
                                 <span class="inline-block bg-red-100 text-red-600 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Better</span>
                                 <h4 class="text-xl font-bold mt-3 text-gray-900">Water Guard</h4>
-                                <div class="text-4xl font-black text-red-600 tracking-tight mt-2">$259</div>
-
+                                <div class="text-4xl font-black text-red-600 tracking-tight mt-2">$250</div>
+                                <div class="text-xs font-semibold text-gray-500 mt-2 leading-relaxed">4 labor hours at our standard rate = $280<br>less 10% package discount &mdash; <span class="text-green-700 font-bold">save $30</span></div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Everything in <strong>Good</strong></li>
@@ -1332,8 +1393,8 @@
                             <div class="text-center mb-5">
                                 <span class="inline-block bg-blue-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Best</span>
                                 <h4 class="text-xl font-bold mt-3 text-gray-900">Flood Defense</h4>
-                                <div class="text-4xl font-black text-gray-900 tracking-tight mt-2">$399</div>
-
+                                <div class="text-4xl font-black text-gray-900 tracking-tight mt-2">$340</div>
+                                <div class="text-xs font-semibold text-gray-500 mt-2 leading-relaxed">6 labor hours at our standard rate = $400<br>less 15% package discount &mdash; <span class="text-green-700 font-bold">save $60</span></div>
                             </div>
                             <ul class="space-y-2.5 text-sm text-gray-600 border-t border-gray-100 pt-5 flex-grow">
                                 <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1" aria-hidden="true"></i> Everything in <strong>Better</strong></li>
@@ -1347,7 +1408,7 @@
                     </div>
                 </div>
 
-                <p class="text-center text-xs text-gray-500 mt-10 max-w-2xl mx-auto"><i class="fas fa-circle-info text-red-500 mr-1" aria-hidden="true"></i> Menu prices cover installation labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Prices are Zone A (within 20 miles); Zone B adds our standard $45 extended-travel differential. Choosing a specific brand, premium finish, or non-standard part moves the job to a quick custom quote. Every tier is backed by our 1-Year Workmanship Guarantee.</p>
+                <p class="text-center text-xs text-gray-500 mt-10 max-w-2xl mx-auto"><i class="fas fa-circle-info text-red-500 mr-1" aria-hidden="true"></i> Menu prices cover installation labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Prices are Zone A (within 20 miles); Zone B adds our standard $20 extended-travel differential. Choosing a specific brand, premium finish, or non-standard part moves the job to a quick custom quote. Every tier is backed by our 1-Year Workmanship Guarantee.</p>
             </div>
         </section>
 
@@ -1358,6 +1419,7 @@
                     <span class="bg-red-100 text-red-800 font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full border border-red-200 inline-flex items-center gap-1.5"><i class="fas fa-box-open text-red-600 shrink-0" aria-hidden="true"></i> Bundle &amp; Save</span>
                     <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-4">Handyman Time Packages</h2>
                     <p class="text-slate-700 mt-4 text-base sm:text-lg leading-relaxed">Have a running list of small repairs, upgrades, and maintenance jobs? Instead of booking them one at a time, reserve a block of our craftsman's day and knock them out in a single visit. It's the same transparent, no-haggle pricing you see above &mdash; just pre-planned, so you get more done for one predictable rate.</p>
+                    <p class="text-slate-700 mt-4 text-sm sm:text-base leading-relaxed bg-white border border-slate-200 rounded-2xl p-4 max-w-2xl mx-auto"><i class="fas fa-calculator text-red-600 mr-1" aria-hidden="true"></i> <strong>How the package price is built:</strong> take the hours at our published rate &mdash; $100 service call plus $60 for every hour after the first &mdash; then subtract the packaging discount for reserving the block up front: <strong>10% at 4 hours, 15% at 6 hours, 20% at 8 hours</strong>. Every package is <strong>labor only</strong>; hardware and materials are never included.</p>
                     <p class="text-slate-800 font-bold mt-4">Every package here in Oakland County includes:</p>
                     <ul class="mt-4 space-y-2 text-left sm:text-center text-sm sm:text-base text-slate-800 font-medium max-w-2xl mx-auto">
                         <li class="flex items-start gap-2 sm:justify-center"><i class="fas fa-check text-emerald-700 mt-1 shrink-0" aria-hidden="true"></i> A reserved block of hands-on labor for your to-do list.</li>
@@ -1378,15 +1440,16 @@
                             <div class="inline-block bg-blue-100 text-blue-900 border border-blue-200 px-4 py-1 rounded-full text-sm font-bold">Quick List</div>
                             <h3 class="text-2xl font-bold mt-4 text-slate-900">4-Hour Package</h3>
                             <div class="mt-3 text-xs uppercase tracking-widest font-bold text-slate-600">Value Bundle Price</div>
+                            <div class="text-[11px] font-semibold text-slate-500 mt-1 leading-snug">4 hours at standard rates = $280, less a 10% package discount &middot; labor only</div>
                             <div class="mt-3 grid grid-cols-2 gap-3">
                                 <div class="bg-emerald-50 border border-emerald-200 rounded-2xl py-3 px-2">
                                     <div class="inline-block bg-emerald-100 text-emerald-900 px-2.5 py-0.5 rounded-full text-[11px] font-bold">Within 20 Miles</div>
-                                    <div class="text-3xl font-black text-slate-900 tracking-tight mt-2">$280</div>
+                                    <div class="text-3xl font-black text-slate-900 tracking-tight mt-2">$250</div>
                                     <div class="text-[11px] font-extrabold text-emerald-900 mt-1">Save $30</div>
                                 </div>
                                 <div class="bg-amber-50 border border-amber-200 rounded-2xl py-3 px-2">
                                     <div class="inline-block bg-amber-100 text-amber-900 px-2.5 py-0.5 rounded-full text-[11px] font-bold">Outside 20 Miles</div>
-                                    <div class="text-3xl font-black text-slate-900 tracking-tight mt-2">$325</div>
+                                    <div class="text-3xl font-black text-slate-900 tracking-tight mt-2">$270</div>
                                     <div class="text-[11px] font-extrabold text-amber-900 mt-1">Save $30</div>
                                 </div>
                             </div>
@@ -1418,16 +1481,17 @@
                             <div class="inline-block bg-red-100 text-red-800 border border-red-200 px-4 py-1 rounded-full text-sm font-bold">Most Popular</div>
                             <h3 class="text-2xl font-bold mt-4 text-slate-900">6-Hour Package</h3>
                             <div class="mt-3 text-xs uppercase tracking-widest font-bold text-slate-600">Value Bundle Price</div>
+                            <div class="text-[11px] font-semibold text-slate-500 mt-1 leading-snug">6 hours at standard rates = $400, less a 15% package discount &middot; labor only</div>
                             <div class="mt-3 grid grid-cols-2 gap-3">
                                 <div class="bg-emerald-50 border border-emerald-200 rounded-2xl py-3 px-2">
                                     <div class="inline-block bg-emerald-100 text-emerald-900 px-2.5 py-0.5 rounded-full text-[11px] font-bold">Within 20 Miles</div>
-                                    <div class="text-3xl font-black text-slate-900 tracking-tight mt-2">$380</div>
-                                    <div class="text-[11px] font-extrabold text-emerald-900 mt-1">Save $70</div>
+                                    <div class="text-3xl font-black text-slate-900 tracking-tight mt-2">$340</div>
+                                    <div class="text-[11px] font-extrabold text-emerald-900 mt-1">Save $60</div>
                                 </div>
                                 <div class="bg-amber-50 border border-amber-200 rounded-2xl py-3 px-2">
                                     <div class="inline-block bg-amber-100 text-amber-900 px-2.5 py-0.5 rounded-full text-[11px] font-bold">Outside 20 Miles</div>
-                                    <div class="text-3xl font-black text-slate-900 tracking-tight mt-2">$425</div>
-                                    <div class="text-[11px] font-extrabold text-amber-900 mt-1">Save $70</div>
+                                    <div class="text-3xl font-black text-slate-900 tracking-tight mt-2">$360</div>
+                                    <div class="text-[11px] font-extrabold text-amber-900 mt-1">Save $60</div>
                                 </div>
                             </div>
                         </div>
@@ -1458,16 +1522,17 @@
                             <div class="inline-block bg-emerald-100 text-emerald-900 border border-emerald-200 px-4 py-1 rounded-full text-sm font-bold">Full Day</div>
                             <h3 class="text-2xl font-bold mt-4 text-slate-900">8-Hour Package</h3>
                             <div class="mt-3 text-xs uppercase tracking-widest font-bold text-slate-600">Best Bundle Price</div>
+                            <div class="text-[11px] font-semibold text-slate-500 mt-1 leading-snug">8 hours at standard rates = $520, less a 20% package discount &middot; labor only</div>
                             <div class="mt-3 grid grid-cols-2 gap-3">
                                 <div class="bg-emerald-50 border border-emerald-200 rounded-2xl py-3 px-2">
                                     <div class="inline-block bg-emerald-100 text-emerald-900 px-2.5 py-0.5 rounded-full text-[11px] font-bold">Within 20 Miles</div>
-                                    <div class="text-3xl font-black text-slate-900 tracking-tight mt-2">$480</div>
-                                    <div class="text-[11px] font-extrabold text-emerald-900 mt-1">Save $110</div>
+                                    <div class="text-3xl font-black text-slate-900 tracking-tight mt-2">$415</div>
+                                    <div class="text-[11px] font-extrabold text-emerald-900 mt-1">Save $105</div>
                                 </div>
                                 <div class="bg-amber-50 border border-amber-200 rounded-2xl py-3 px-2">
                                     <div class="inline-block bg-amber-100 text-amber-900 px-2.5 py-0.5 rounded-full text-[11px] font-bold">Outside 20 Miles</div>
-                                    <div class="text-3xl font-black text-slate-900 tracking-tight mt-2">$525</div>
-                                    <div class="text-[11px] font-extrabold text-amber-900 mt-1">Save $110</div>
+                                    <div class="text-3xl font-black text-slate-900 tracking-tight mt-2">$435</div>
+                                    <div class="text-[11px] font-extrabold text-amber-900 mt-1">Save $105</div>
                                 </div>
                             </div>
                         </div>
@@ -1524,7 +1589,7 @@
                     </div>
                 </div>
                 <p class="text-center text-sm font-bold text-red-800 mt-8 max-w-4xl mx-auto"><i class="fas fa-circle-exclamation mr-1 shrink-0" aria-hidden="true"></i> Time packages cover general labor list items such as drywall patches, door adjustments, hanging blinds, and minor carpentry. Hardware and materials are not included in the package price and are billed separately, unless you supply them yourself. Standardized Flat-Rate Menu items have fixed productized pricing and are excluded from general labor packages.</p>
-                <p class="text-center text-xs font-medium text-slate-700 mt-8 max-w-2xl mx-auto"><i class="fas fa-location-dot text-red-600 mr-1 shrink-0" aria-hidden="true"></i> <strong>Within 20 Miles</strong> (Zone A) prices apply to our core service area. <strong>Outside 20 Miles</strong> (Zone B) prices include a $45 extended-travel differential, matching our standard zone pricing.</p>
+                <p class="text-center text-xs font-medium text-slate-700 mt-8 max-w-2xl mx-auto"><i class="fas fa-location-dot text-red-600 mr-1 shrink-0" aria-hidden="true"></i> <strong>Within 20 Miles</strong> (Zone A) prices apply to our core service area. <strong>Outside 20 Miles</strong> (Zone B) prices include a $20 extended-travel differential, matching our standard zone pricing.</p>
             </div>
         </section>
 
@@ -1547,7 +1612,7 @@
                             <div class="mt-3 text-xs uppercase tracking-widest font-semibold text-gray-500">Flat Convenience Fee</div>
                             <div class="text-6xl font-black text-red-600 tracking-tight mt-3">+$50</div>
                             <div class="text-sm text-gray-500 mt-1">added to your service call</div>
-                            <div class="mt-2 text-xs text-gray-500"><i class="fas fa-clock text-gray-400 mr-1" aria-hidden="true"></i> Scheduling premium only &mdash; no added labor; your job is still billed by Zone first hour & $70/hr after rate</div>
+                            <div class="mt-2 text-xs text-gray-500"><i class="fas fa-clock text-gray-400 mr-1" aria-hidden="true"></i> Scheduling premium only &mdash; no added labor; your job is still billed by Zone first hour & $60/hr after rate</div>
                         </div>
                         <div>
                             <div class="space-y-4 text-gray-600 text-sm leading-relaxed">

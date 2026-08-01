@@ -15,7 +15,7 @@ const PHONE_TEL = '+12483853432';
 
 const ZONE_INFO = {
   A: { label: 'Zone A (Within 20 Miles)', rate: '$100', color: 'green', miles: 'within about 20 miles of our Waterford base' },
-  B: { label: 'Zone B (Extended County / 20+ Miles)', rate: '$145', color: 'red', miles: 'in the extended county, about 20+ miles from Waterford' }
+  B: { label: 'Zone B (Extended County / 20+ Miles)', rate: '$120', color: 'red', miles: 'in the extended county, about 20+ miles from Waterford' }
 };
 
 // Popular services shown on every city page, linked to the deep anchors on /services.
@@ -48,7 +48,7 @@ function cityFaq(city) {
     },
     {
       q: `How much does a handyman cost in ${city.name}?`,
-      a: `${city.name} falls in our ${zone.label}, so it carries a ${zone.rate} minimum service call that covers travel, diagnostics, and up to the first hour of labor. Continuous labor after the first hour is billed at a flat $70 per hour in quarter-hour increments. Materials are billed separately.`
+      a: `${city.name} falls in our ${zone.label}, so it carries a ${zone.rate} minimum service call that covers travel, diagnostics, and up to the first hour of labor. Continuous labor after the first hour is billed at a flat $60 per hour in quarter-hour increments. Materials are billed separately.`
     },
     {
       q: `Do you offer emergency handyman service near ${city.name}?`,
@@ -278,7 +278,7 @@ ${getUnifiedNav('service-areas')}
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
                         <li class="flex items-start gap-2"><i class="fas fa-tag text-red-600 mt-1" aria-hidden="true"></i><span><strong>${esc(zone.rate)} minimum service call</strong> &mdash; covers travel, diagnostics, and the first hour of labor.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$60/hour</strong> in quarter-hour increments.</span></li>
                         <li class="flex items-start gap-2"><i class="fas fa-box-open text-red-600 mt-1" aria-hidden="true"></i><span>Labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself.</span></li>
                         <li class="flex items-start gap-2"><i class="fas fa-map-pin text-red-600 mt-1" aria-hidden="true"></i><span>ZIP codes served: ${esc(city.zips.join(', '))}.</span></li>
                         <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1" aria-hidden="true"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>

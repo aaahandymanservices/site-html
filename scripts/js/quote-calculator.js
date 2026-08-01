@@ -80,7 +80,7 @@
                 '<i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432</a>' +
             '</div>' +
           '</div>' +
-          '<p class="text-xs text-gray-500 leading-relaxed mt-4">Estimates use our standard flat-rate menu and are not a binding quote. Booking several tasks in one visit usually costs <strong>less</strong> than the total shown, because you only pay one trip charge. Every price shown is for installation and service labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Your final price is always confirmed free, upfront.</p>' +
+          '<p class="text-xs text-gray-500 leading-relaxed mt-4">Estimates use our standard flat-rate menu and are not a binding quote. Every menu price is calculated straight from our published labor rate &mdash; a $100 Zone A service call covering travel, diagnosis, and the first hour, plus $60 for each additional hour (Zone B adds a flat $20 extended-travel differential). Booking several tasks in one visit usually costs <strong>less</strong> than the total shown, because you only pay one trip charge. Every price shown is for installation and service labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Your final price is always confirmed free, upfront.</p>' +
         '</div>' +
       '</div>';
   };
@@ -101,6 +101,7 @@
               '<span class="flex-1 min-w-0">' +
                 '<span class="block font-bold text-gray-900 text-sm">' + t.name + '</span>' +
                 '<span class="block text-gray-500 text-xs">' + t.desc + '</span>' +
+                (t.hours ? '<span class="block text-blue-900 text-[11px] font-semibold mt-0.5">' + t.hours + ' labor hours &middot; materials not included</span>' : '') +
               '</span>' +
               '<span class="quote-price text-right font-extrabold text-gray-900 whitespace-nowrap" data-a="' + t.a + '" data-b="' + t.b + '">' + money(t.a) + '</span>' +
             '</label>'
