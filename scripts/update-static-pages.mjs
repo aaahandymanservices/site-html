@@ -28,7 +28,7 @@ const STATIC_NAV_PAGES = [
  * rules and scripts/build-icon-css.mjs for the icon stylesheet.
  */
 const ICONS_CSS = '/css/icons.css?v=20260729d';
-const ASSET_VERSION = '20260801b';
+const ASSET_VERSION = '20260801c';
 const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
 const SCRIPT_VERSIONS = new Map([
   ['site.js', ASSET_VERSION],

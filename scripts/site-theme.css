@@ -47,6 +47,41 @@
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
+/* Icon glyph boxes, reserved ahead of the icon stylesheet.
+
+   public/css/icons.css is fetched asynchronously (see the ASYNC_ICONS_CSS block
+   in scripts/update-static-pages.mjs) so that decorative icons stay off the
+   critical path. The catch is that an `<i class="fas fa-phone">` draws nothing
+   at all until that file lands: both the glyph, which comes from a `content`
+   declaration, and `display: inline-block` live in icons.css. So the element is
+   zero-width in the first paint and about one em wide in the second.
+
+   Nineteen of them sit above the fold on the home page -- the nav bar's phone
+   and social links and the hero's three trust badges -- and each one pushes the
+   text beside it when the stylesheet arrives. The badges are centred inline-flex
+   rows, so a single icon gaining width re-flows and re-centres the whole row.
+   The nav is shared, so this happens above the fold on every page.
+
+   Reserving a square em here, in render-blocking CSS, means the box is already
+   the size the glyph will need during the first paint. icons.css sets no width
+   of its own, so this stays the used value once it arrives and nothing moves.
+   It is the same trick as Font Awesome's own `fa-fw`, applied to every icon.
+
+   `:where()` keeps the selector at zero specificity, so the handful of icons
+   that carry explicit sizing -- `icon-tile w-16 h-16` on the service tiles --
+   still win. The site uses no stacking (`fa-stack`) or size (`fa-2x`) utilities
+   that would fight a fixed width.
+
+   Layout shift is a quarter of the Lighthouse performance score, which is the
+   same reasoning that keeps Tailwind render-blocking rather than deferred. */
+:where(.fa, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands) {
+  display: inline-block;
+  width: 1em;
+  line-height: 1;
+  font-style: normal;
+  text-align: center;
+}
+
 :root {
   --brand-navy: #1b2a4a;
   --brand-navy-deep: #101b31;

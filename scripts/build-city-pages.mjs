@@ -198,8 +198,8 @@ ${jsonLd(city)}
         img { max-width: 100%; height: auto; display: block; }
         a { color: inherit; text-decoration: none; }
     </style>
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260801b">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260801b">
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260801c">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260801c">
     <!-- Font Awesome subset (generated, see scripts/build-icon-css.mjs) -->
     <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
@@ -424,7 +424,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
 
     <!-- Back to top -->
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
-    <script src="/js/site.js?v=20260801b" defer></script>
+    <script src="/js/site.js?v=20260801c" defer></script>
 
     <!-- Google tag (gtag.js) -->
     <script>
