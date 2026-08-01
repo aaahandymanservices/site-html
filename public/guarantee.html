@@ -106,9 +106,7 @@
 
         @media (prefers-reduced-motion: reduce) {
 
-            .service-card,
             .promise-card { animation: none !important; }
-            .service-card:hover { transform: none !important; }
             .promise-card { opacity: 1 !important; transform: none !important; }
         }
     </style>
@@ -122,7 +120,7 @@
     <meta name="apple-mobile-web-app-title" content="AAA Handyman">
     <meta name="application-name" content="AAA Handyman">
 </head>
-<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
+<body class="bg-blue-900 text-slate-300 flex flex-col min-h-screen overflow-x-hidden">
 
     <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
@@ -206,134 +204,199 @@
     <script>(function(){try{var b=document.getElementById('seasonal-banner');if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();</script>
 </aside>
 
-    <main id="main-content" class="flex-grow">
+    <main id="main-content" class="flex-grow bg-blue-900">
 
-        <header id="guarantee-hero" class="py-14 sm:py-20 bg-gradient-to-b from-blue-950 to-slate-900 text-white relative overflow-hidden">
-            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(142,31,38,0.15),transparent_55%)]"></div>
-            <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
-                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/15 px-4 py-1.5 rounded-full mb-5 text-sm font-semibold">
-                    <span class="text-yellow-400"><i class="fas fa-shield-heart" aria-hidden="true"></i></span> Safe, Secure &amp; 100% Satisfaction Guaranteed.
+        <header id="guarantee-hero" class="px-4 sm:px-6 pt-10 sm:pt-14 pb-8 sm:pb-10">
+            <div class="max-w-5xl mx-auto">
+                <div class="relative overflow-hidden rounded-2xl border border-amber-500 bg-gradient-to-br from-slate-900/95 to-blue-950/95 p-6 sm:p-10 lg:p-12 shadow-2xl text-center">
+                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.12),transparent_60%)]" aria-hidden="true"></div>
+                    <div class="relative z-10">
+                        <i class="fas fa-shield-heart icon-tile mx-auto mb-5 h-16 w-16 sm:h-20 sm:w-20 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 text-3xl sm:text-4xl shadow-xl border-2 border-amber-200" aria-hidden="true"></i>
+                        <span class="inline-flex items-center gap-2 rounded-full border border-amber-500/50 bg-slate-950/60 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-400 mb-5">Our Guarantee</span>
+                        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-5">Your Home, Protected.<br class="hidden sm:block"> Your <span class="text-amber-400">Peace of Mind</span>, Guaranteed.</h1>
+                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto">Inviting someone into your home takes trust. Here is our personal promise to keep you safe, secure, and <strong class="font-bold text-white border-b-2 border-amber-500">100% satisfied</strong> with every dollar you spend.</p>
+                        <div class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm sm:text-base font-semibold text-slate-200">
+                            <span class="inline-flex items-center gap-2"><i class="fas fa-circle-check text-amber-400 shrink-0 text-lg" aria-hidden="true"></i> Background-Checked Technicians</span>
+                            <span class="inline-flex items-center gap-2"><i class="fas fa-circle-check text-amber-400 shrink-0 text-lg" aria-hidden="true"></i> 1-Year Workmanship Guarantee</span>
+                            <span class="inline-flex items-center gap-2"><i class="fas fa-circle-check text-amber-400 shrink-0 text-lg" aria-hidden="true"></i> Payment Upon Completion</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Our Guarantee</div>
-                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-5">Your Home, Protected.<br class="hidden sm:block"> Your Peace of Mind, Guaranteed.</h1>
-                <p class="text-slate-300 text-base sm:text-lg leading-relaxed">Inviting someone into your home takes trust. Here is our personal promise to keep you safe, secure, and 100% satisfied with every dollar you spend.</p>
             </div>
         </header>
 
-        <section id="safety-security" class="py-12 sm:py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-8 sm:mb-12 max-w-2xl mx-auto">
-                    <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm sm:text-base">Your Safety &amp; Security</div>
-                    <h2 class="text-3xl sm:text-4xl font-bold mt-3">The People You Let Through Your Door</h2>
-                    <p class="mt-4 text-base sm:text-lg text-gray-600">Your family's safety comes first. Every visit is built around your comfort, your privacy, and knowing exactly who is coming and when.</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div class="service-card bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition">
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-user-shield" aria-hidden="true"></i></div>
-                        <h3 class="text-xl sm:text-2xl font-semibold mb-3">Background-Checked &amp; Vetted</h3>
-                        <p class="text-gray-600">Every technician is thoroughly screened before they ever set foot on your property, so you can welcome us in with complete confidence for your family's safety.</p>
+        <section id="safety-security" class="px-4 sm:px-6 py-6 sm:py-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="rounded-2xl border border-amber-500 bg-gradient-to-br from-slate-900/95 to-blue-950/95 p-6 sm:p-10 lg:p-12 shadow-2xl">
+                    <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+                        <span class="inline-flex items-center gap-2 rounded-full border border-amber-500/50 bg-slate-950/60 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-400 mb-4">Safety &amp; Security</span>
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight">The People You Let Through <span class="text-amber-400">Your Door</span></h2>
+                        <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">Your family's safety comes first. Every visit is built around your comfort, your privacy, and knowing exactly who is coming and when.</p>
                     </div>
-                    <div class="service-card bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition">
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-house-chimney-user" aria-hidden="true"></i></div>
-                        <h3 class="text-xl sm:text-2xl font-semibold mb-3">Respectful of Your Space</h3>
-                        <p class="text-gray-600">Shoe covers, tidy workspaces, and polite, professional communication from start to finish. We treat your home like it's our own and leave it clean.</p>
-                    </div>
-                    <div class="service-card bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition">
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-bell" aria-hidden="true"></i></div>
-                        <h3 class="text-xl sm:text-2xl font-semibold mb-3">Clear &amp; Secure Communication</h3>
-                        <p class="text-gray-600">No guessing who is coming. You get arrival alerts and transparent updates every step of the way, so there are never any surprises at your door.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="honest-value" class="py-12 sm:py-16 bg-gray-100">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-8 sm:mb-12 max-w-2xl mx-auto">
-                    <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm sm:text-base">Your Money's Worth</div>
-                    <h2 class="text-3xl sm:text-4xl font-bold mt-3">Quality Work, Honest Value</h2>
-                    <p class="mt-4 text-base sm:text-lg text-gray-600">Fair pricing you can trust, with no games and no pressure. You stay in control of every decision and every dollar.</p>
-                </div>
-                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                    <div class="service-card bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition">
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-handshake" aria-hidden="true"></i></div>
-                        <h3 class="text-xl sm:text-2xl font-semibold mb-3">Payment Upon Completion</h3>
-                        <p class="text-gray-600">You don't pay a dime until the work is finished to your complete satisfaction. We want you to feel confident in the results before the job is ever considered done.</p>
-                    </div>
-                    <div class="service-card bg-white border border-slate-200/80 p-8 rounded-3xl shadow-sm hover:border-red-600/30 transition">
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-comments-dollar" aria-hidden="true"></i></div>
-                        <h3 class="text-xl sm:text-2xl font-semibold mb-3">No Surprise Charges</h3>
-                        <p class="text-gray-600">If unexpected challenges pop up, we stop, discuss your options with you, and get your approval before moving forward. The final bill will never catch you off guard.</p>
+                    <div class="grid md:grid-cols-3 gap-5 sm:gap-6">
+                        <div class="rounded-2xl border border-amber-500/30 bg-slate-950/40 p-6 transition hover:border-amber-500/70">
+                            <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-2xl text-amber-400" aria-hidden="true"><i class="fas fa-user-shield" aria-hidden="true"></i></div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white mb-3">Background-Checked &amp; Vetted</h3>
+                            <p class="text-slate-400 leading-relaxed">Every technician is thoroughly screened before they ever set foot on your property, so you can welcome us in with complete confidence for your family's safety.</p>
+                        </div>
+                        <div class="rounded-2xl border border-amber-500/30 bg-slate-950/40 p-6 transition hover:border-amber-500/70">
+                            <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-2xl text-amber-400" aria-hidden="true"><i class="fas fa-house-chimney-user" aria-hidden="true"></i></div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white mb-3">Respectful of Your Space</h3>
+                            <p class="text-slate-400 leading-relaxed">Shoe covers, tidy workspaces, and polite, professional communication from start to finish. We treat your home like it's our own and leave it clean.</p>
+                        </div>
+                        <div class="rounded-2xl border border-amber-500/30 bg-slate-950/40 p-6 transition hover:border-amber-500/70">
+                            <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-2xl text-amber-400" aria-hidden="true"><i class="fas fa-bell" aria-hidden="true"></i></div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white mb-3">Clear &amp; Secure Communication</h3>
+                            <p class="text-slate-400 leading-relaxed">No guessing who is coming. You get arrival alerts and transparent updates every step of the way, so there are never any surprises at your door.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="workmanship-promise" class="py-12 sm:py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-10 sm:mb-14 max-w-2xl mx-auto">
-                    <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm sm:text-base">Our Workmanship Promise</div>
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">Backed for a Full Year</h2>
-                    <p class="mt-4 text-base sm:text-lg text-gray-600">The cornerstone of our promise to you: craftsmanship you can count on, long after we've packed up and gone home.</p>
+        <section id="honest-value" class="px-4 sm:px-6 py-6 sm:py-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="rounded-2xl border border-amber-500 bg-gradient-to-br from-slate-900/95 to-blue-950/95 p-6 sm:p-10 lg:p-12 shadow-2xl">
+                    <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+                        <span class="inline-flex items-center gap-2 rounded-full border border-amber-500/50 bg-slate-950/60 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-400 mb-4">Your Money's Worth</span>
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight">Quality Work, <span class="text-amber-400">Honest Value</span></h2>
+                        <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">Fair pricing you can trust, with no games and no pressure. You stay in control of every decision and every dollar.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-5 sm:gap-6">
+                        <div class="rounded-2xl border border-amber-500/30 bg-slate-950/40 p-6 transition hover:border-amber-500/70">
+                            <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-2xl text-amber-400" aria-hidden="true"><i class="fas fa-handshake" aria-hidden="true"></i></div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white mb-3">Payment Upon Completion</h3>
+                            <p class="text-slate-400 leading-relaxed">You <strong class="font-bold text-white border-b-2 border-amber-500">don't pay a dime</strong> until the work is finished to your complete satisfaction. We want you to feel confident in the results before the job is ever considered done.</p>
+                        </div>
+                        <div class="rounded-2xl border border-amber-500/30 bg-slate-950/40 p-6 transition hover:border-amber-500/70">
+                            <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-2xl text-amber-400" aria-hidden="true"><i class="fas fa-comments-dollar" aria-hidden="true"></i></div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white mb-3">No Surprise Charges</h3>
+                            <p class="text-slate-400 leading-relaxed">If unexpected challenges pop up, we stop, discuss your options with you, and get your approval before moving forward. The final bill will never catch you off guard.</p>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="promise-card max-w-4xl mx-auto bg-gradient-to-br from-red-600 to-red-800 text-white rounded-3xl shadow-xl overflow-hidden">
-                    <div class="grid md:grid-cols-[auto_1fr] gap-6 sm:gap-8 items-center p-8 sm:p-12">
+        <section id="workmanship-promise" class="px-4 sm:px-6 py-6 sm:py-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="promise-card rounded-2xl border border-amber-500 bg-gradient-to-br from-slate-900/95 to-blue-950/95 p-6 sm:p-10 lg:p-12 shadow-2xl">
+                    <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+                        <span class="inline-flex items-center gap-2 rounded-full border border-amber-500/50 bg-slate-950/60 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-400 mb-4">Guarantee Terms</span>
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight">Our Workmanship Promise, <span class="text-amber-400">Backed for a Full Year</span></h2>
+                        <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">The cornerstone of our promise to you: craftsmanship you can count on, long after we've packed up and gone home.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-[auto_1fr] gap-6 sm:gap-8 items-center rounded-2xl border border-amber-500/40 bg-slate-950/50 p-6 sm:p-8">
                         <div class="flex md:block justify-center">
-                            <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-white/15 border-2 border-white/40 flex flex-col items-center justify-center text-center shadow-inner">
-                                <span class="text-4xl sm:text-5xl font-black leading-none">1</span>
-                                <span class="text-xs uppercase tracking-widest font-bold mt-1">Year</span>
+                            <div class="flex h-28 w-28 sm:h-32 sm:w-32 flex-col items-center justify-center rounded-full border-2 border-amber-500/60 bg-amber-500/15 text-center shadow-inner">
+                                <span class="text-4xl sm:text-5xl font-black leading-none text-amber-400">1</span>
+                                <span class="mt-1 text-xs font-bold uppercase tracking-wider text-amber-400">Year</span>
                             </div>
                         </div>
                         <div class="text-center md:text-left">
-                            <h3 class="text-2xl sm:text-3xl font-bold mb-3">1-Year Labor Guarantee</h3>
-                            <p class="text-white/90 leading-relaxed text-lg">If anything related to our craftsmanship acts up within 12 months, we come back and fix it free of charge. No fine print, no hassle—just dependable, high-quality work you can count on.</p>
-                            <div class="mt-6 grid sm:grid-cols-2 gap-3 text-left">
-                                <div class="flex items-start gap-3 bg-white/10 rounded-2xl p-4">
-                                    <span class="text-yellow-300 mt-0.5"><i class="fas fa-circle-check" aria-hidden="true"></i></span>
-                                    <span class="text-sm text-white/95">All labor performed by our Craftsman.</span>
-                                </div>
-                                <div class="flex items-start gap-3 bg-white/10 rounded-2xl p-4">
-                                    <span class="text-yellow-300 mt-0.5"><i class="fas fa-circle-check" aria-hidden="true"></i></span>
-                                    <span class="text-sm text-white/95">Quality-related concerns that emerge within 12 months of project completion.</span>
-                                </div>
-                            </div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white mb-3">1-Year Labor Guarantee</h3>
+                            <p class="text-slate-300 leading-relaxed text-base sm:text-lg">If anything related to our craftsmanship acts up within 12 months, we come back and fix it <strong class="font-bold text-white border-b-2 border-amber-500">free of charge</strong>. No fine print, no hassle—just dependable, high-quality work you can count on.</p>
                         </div>
                     </div>
-                </div>
-
-                <div class="max-w-4xl mx-auto mt-6 flex items-start gap-4 bg-blue-50 border border-blue-100 rounded-2xl p-5 sm:p-6">
-                    <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center text-lg" aria-hidden="true"><i class="fas fa-scale-balanced" aria-hidden="true"></i></span>
-                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed"><span class="font-semibold text-gray-800">A friendly note on project scope:</span> We specialize in minor home repairs, maintenance, and small-scale projects under the minor project exemption of Michigan's Occupational Code (MCL&nbsp;339.2403). Your project stays firmly within our professional expertise, and anything requiring a licensed residential builder is happily referred to a trusted licensed pro—so your work is always in safe, capable hands.</p>
                 </div>
             </div>
         </section>
 
-        <section id="guarantee-cta" class="py-12 sm:py-16 bg-gray-100">
-            <div class="max-w-4xl mx-auto px-6">
-                <div class="bg-gradient-to-br from-blue-950 to-slate-900 text-white rounded-3xl p-8 sm:p-12 text-center shadow-lg relative overflow-hidden">
-                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(142,31,38,0.15),transparent_55%)]"></div>
+        <section id="coverage-details" class="px-4 sm:px-6 py-6 sm:py-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="rounded-2xl border border-amber-500 bg-gradient-to-br from-slate-900/95 to-blue-950/95 p-6 sm:p-10 lg:p-12 shadow-2xl">
+                    <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+                        <span class="inline-flex items-center gap-2 rounded-full border border-amber-500/50 bg-slate-950/60 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-400 mb-4">Coverage Details</span>
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight">What the Guarantee <span class="text-amber-400">Covers</span></h2>
+                        <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">Plain language, no fine print. Here is exactly what stands behind every project we complete—and where our scope of work begins and ends.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-5 sm:gap-6">
+                        <div class="rounded-2xl border border-amber-500/30 bg-slate-950/40 p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-white mb-4">Included in Your Coverage</h3>
+                            <ul class="space-y-3.5 list-none p-0 m-0">
+                                <li class="flex items-start gap-3">
+                                    <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-[10px] font-bold text-amber-400" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
+                                    <span class="text-sm sm:text-base text-slate-300 leading-relaxed">All labor performed by our Craftsman.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-[10px] font-bold text-amber-400" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
+                                    <span class="text-sm sm:text-base text-slate-300 leading-relaxed">Quality-related concerns that emerge within 12 months of project completion.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-[10px] font-bold text-amber-400" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
+                                    <span class="text-sm sm:text-base text-slate-300 leading-relaxed">A return visit to correct the work at <strong class="font-bold text-white border-b-2 border-amber-500">no cost to you</strong>.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-[10px] font-bold text-amber-400" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
+                                    <span class="text-sm sm:text-base text-slate-300 leading-relaxed">Work you approve and pay for only once it is finished to your satisfaction.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="rounded-2xl border border-amber-500/30 bg-slate-950/40 p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-white mb-4">Good to Know</h3>
+                            <ul class="space-y-3.5 list-none p-0 m-0">
+                                <li class="flex items-start gap-3">
+                                    <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-[10px] font-bold text-amber-400" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
+                                    <span class="text-sm sm:text-base text-slate-300 leading-relaxed">We specialize in <strong class="font-bold text-white border-b-2 border-amber-500">minor home repairs</strong>, maintenance, and small-scale projects.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-[10px] font-bold text-amber-400" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
+                                    <span class="text-sm sm:text-base text-slate-300 leading-relaxed">Anything requiring a licensed residential builder is happily referred to a trusted licensed pro.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-[10px] font-bold text-amber-400" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
+                                    <span class="text-sm sm:text-base text-slate-300 leading-relaxed">If unexpected challenges appear mid-project, we stop and get your approval before moving forward.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-[10px] font-bold text-amber-400" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
+                                    <span class="text-sm sm:text-base text-slate-300 leading-relaxed">Have a guarantee question? Call <a href="tel:+12483853432" class="font-semibold text-amber-400 hover:text-amber-300 transition">(248) 385-3432</a> and we will walk you through it.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex items-start gap-4 rounded-2xl border border-amber-500/40 bg-slate-950/50 p-5 sm:p-6">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-amber-500/50 bg-amber-500/15 text-lg text-amber-400" aria-hidden="true"><i class="fas fa-scale-balanced" aria-hidden="true"></i></span>
+                        <p class="text-sm sm:text-base text-slate-400 leading-relaxed"><span class="font-semibold text-white">A friendly note on project scope:</span> We specialize in minor home repairs, maintenance, and small-scale projects under the minor project exemption of Michigan's Occupational Code (MCL&nbsp;339.2403). Your project stays firmly within our professional expertise, and anything requiring a licensed residential builder is happily referred to a trusted licensed pro—so your work is always in safe, capable hands.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="guarantee-cta" class="px-4 sm:px-6 py-6 sm:py-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="relative overflow-hidden rounded-2xl border border-amber-500 bg-gradient-to-br from-slate-900/95 to-blue-950/95 p-6 sm:p-10 lg:p-12 shadow-2xl text-center">
+                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.12),transparent_60%)]" aria-hidden="true"></div>
                     <div class="relative z-10">
-                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">We're Here When You're Ready</h2>
-                        <p class="text-base sm:text-lg text-white/90 max-w-2xl mx-auto mb-8">Have questions about a project or want a transparent quote? We're just a call or click away.</p>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="/book" class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
-                                <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online
+                        <span class="inline-flex items-center gap-2 rounded-full border border-amber-500/50 bg-slate-950/60 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-400 mb-4">Next Steps</span>
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">We're Here <span class="text-amber-400">When You're Ready</span></h2>
+                        <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto mb-8 leading-relaxed">Have questions about a project or want a transparent quote? We're just a call or click away—and every job we take on carries the full 1-Year Workmanship Guarantee.</p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+                            <a href="/book" class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-amber-500 px-6 py-3 font-semibold text-slate-950 shadow-md transition hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/20">
+                                <i class="fas fa-calendar-check text-xs shrink-0" aria-hidden="true"></i>
+                                <span>Book Guaranteed Repair</span>
                             </a>
-                            <a href="tel:+12483853432" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-green-600/30">
-                                <i class="fas fa-phone" aria-hidden="true"></i> Call Now!
+                            <a href="tel:+12483853432" class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-red-600 px-6 py-3 font-semibold text-white shadow-md transition hover:bg-red-500 hover:shadow-lg hover:shadow-red-600/20">
+                                <i class="fas fa-phone text-xs shrink-0" aria-hidden="true"></i>
+                                <span>Call (248) 385-3432</span>
                             </a>
                         </div>
-                        <p class="mt-6 text-sm text-white/70">Prefer email? Reach us at <a href="mailto:contact@aaahandyman.services" class="underline hover:text-white">contact@aaahandyman.services</a></p>
+                        <p class="mt-6 text-sm text-slate-400">Prefer email? Reach us at <a href="mailto:contact@aaahandyman.services" class="font-semibold text-amber-400 underline decoration-amber-500/60 underline-offset-2 hover:text-amber-300 transition">contact@aaahandyman.services</a></p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="max-w-7xl mx-auto px-6 mb-12">
-            <div class="text-center bg-blue-900 text-white py-12 px-8 sm:py-20 sm:px-16 rounded-3xl">
-                <p class="text-xl sm:text-2xl md:text-3xl font-medium">Available Monday–Friday, 9 a.m.–6 p.m.; Saturday, 10 a.m.–5 p.m.</p>
-                <p class="mt-6 text-base sm:text-lg md:text-xl opacity-90"><span class="flash-siren" aria-hidden="true"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i></span> After-Hours Emergency Services Available—Competitive hourly rates • No job too small!</p>
+        <div class="px-4 sm:px-6 pb-12 sm:pb-16 pt-6 sm:pt-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="rounded-2xl border border-amber-500 bg-gradient-to-br from-slate-900/95 to-blue-950/95 p-6 sm:p-10 lg:p-12 shadow-2xl text-center">
+                    <span class="inline-flex items-center gap-2 rounded-full border border-amber-500/50 bg-slate-950/60 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-400 mb-4">Hours &amp; Availability</span>
+                    <p class="text-lg sm:text-xl md:text-2xl font-semibold text-white leading-relaxed">Available Monday–Friday, 9 a.m.–6 p.m.; Saturday, <span class="text-amber-400">10 a.m.–5 p.m.</span></p>
+                    <p class="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed"><span class="flash-siren" aria-hidden="true"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i></span> After-Hours Emergency Services Available—Competitive hourly rates • No job too small!</p>
+                </div>
             </div>
         </div>
     </main>
