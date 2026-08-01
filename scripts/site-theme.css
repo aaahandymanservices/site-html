@@ -499,6 +499,7 @@ nav.sticky,
 
 /* The hamburger is the one control on the row that must never be squeezed or
    clipped, whatever the brand next to it is doing. */
+#mobile-menu-btn,
 .hamburger-menu,
 .site-nav__toggle,
 #site-nav .site-nav__toggle {
@@ -564,6 +565,7 @@ nav.sticky,
   }
 
   /* Hide the hamburger menu on screens wider than 768px (Desktop/Tablet) */
+  #mobile-menu-btn,
   .hamburger-menu,
   .site-nav__toggle,
   #site-nav .site-nav__toggle {
@@ -627,8 +629,10 @@ nav.sticky,
     display: none !important;
   }
 
+  #mobile-menu-btn,
   .hamburger-menu,
-  .site-nav__toggle {
+  .site-nav__toggle,
+  #site-nav .site-nav__toggle {
     display: flex !important;
   }
 
