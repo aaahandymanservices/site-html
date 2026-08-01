@@ -352,11 +352,26 @@ textarea {
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-input:where(:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="button"]):not([type="submit"]):not([type="reset"])):focus,
-select:focus,
-textarea:focus {
+/* The focused half of the pair above, and it has to obey the same two rules.
+ *
+ * `:focus` written bare is a pseudo-class, worth as much as a class, so
+ * `input:focus` outranks a `bg-gray-800` utility while the plain `input`
+ * selector above does not. That is how the dark contact and book fields turned
+ * white the moment they were clicked into, with `text-white` still winning the
+ * colour -- white letters on a white field, for exactly as long as someone was
+ * typing in it. Wrapping the pseudo-class in `:where()` drops it back to
+ * element-level specificity: it still beats the unfocused rule by source order
+ * on pages that state no field colour, and now loses to a page's own `bg-*`
+ * the same way the unfocused rule does.
+ *
+ * Colour travels with the background here for the same reason it does above --
+ * either both land or neither does. */
+input:where(:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="button"]):not([type="submit"]):not([type="reset"])):where(:focus),
+select:where(:focus),
+textarea:where(:focus) {
   outline: none;
   background-color: #ffffff;
+  color: var(--brand-ink);
   border-color: var(--brand-crimson);
   box-shadow: 0 0 0 4px rgba(166, 31, 46, 0.22);
 }
