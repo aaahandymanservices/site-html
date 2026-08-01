@@ -548,10 +548,10 @@ nav.sticky,
 /*
  * Responsive & Mobile Viewports.
  *
- * 768px is the single handover width: the hamburger stops here and the desktop
- * row starts here. Those two numbers have to stay equal. While the toggle was
- * hidden from 768px up but the desktop row only appeared at 993px, every
- * viewport in between had no navigation at all -- no links and no hamburger.
+ * 1024px is the single handover width: the hamburger stops here and the desktop
+ * row starts here. Seven links plus the business name do not fit reliably in
+ * the 768px tablet band, so tablets keep the compact drawer instead of forcing
+ * the desktop row to overflow or shrink below a comfortable tap/read size.
  *
  * The toggle button carries both .hamburger-menu and .site-nav__toggle, so the
  * hide rule has to name both. A standalone `.hamburger-menu { display: none }`
@@ -559,7 +559,7 @@ nav.sticky,
  * `.site-nav__toggle { display: flex !important }` below, and the hamburger
  * stays on screen at exactly the widths it was meant to disappear at.
  */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
   .site-nav__desktop {
     display: flex !important;
   }
@@ -580,13 +580,10 @@ nav.sticky,
 }
 
 /*
- * 768px--1023px. The desktop row now begins at the width the hamburger used to
- * cover, which is 225px narrower than it was built for, so the brand, seven
- * links and the social cluster no longer fit on one line. The links are the
- * navigation and the social icons are repeated in the footer, so the icons are
- * what gives way; the rest of the row just tightens up.
+ * 1024px--1199px. The desktop row fits at this width once the repeated social
+ * cluster gives way and the remaining gaps tighten slightly.
  */
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 1024px) and (max-width: 1199px) {
   .header-container,
   .site-nav__bar,
   #site-nav .site-nav__bar {
@@ -624,7 +621,7 @@ nav.sticky,
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .site-nav__desktop {
     display: none !important;
   }

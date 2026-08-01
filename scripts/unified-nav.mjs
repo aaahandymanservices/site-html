@@ -125,7 +125,7 @@ export function getUnifiedNav(activePage = 'none') {
         </a>
 
         <!-- Desktop Navigation Container -->
-        <div class="site-nav__desktop hidden md:flex items-center">
+        <div class="site-nav__desktop hidden lg:flex items-center">
             <ul class="nav-links site-nav__links flex items-center gap-5 list-none m-0 p-0 text-sm xl:text-base font-medium">
                 <li><a href="/services" class="${linkCls(isServices)}"${ariaCurrent(isServices)}>Services</a></li>
                 <li><a href="/service-areas" class="${linkCls(isServiceAreas)}"${ariaCurrent(isServiceAreas)}>Service Areas</a></li>
@@ -145,13 +145,13 @@ export function getUnifiedNav(activePage = 'none') {
         </div>
 
         <!-- Mobile Hamburger Button -->
-        <button id="mobile-menu-btn" class="flex md:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-lg transition border border-gray-200 hover:border-gray-300" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-lg transition border border-gray-200 hover:border-gray-300" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-menu">
             <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
         </button>
     </div>
 
     <!-- Mobile Navigation Drawer / Menu -->
-    <div id="mobile-menu" class="hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3">
+    <div id="mobile-menu" class="hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3" hidden aria-hidden="true">
         <div class="space-y-1">
             <a href="/services" class="${mobileLinkCls(isServices)}"${ariaCurrent(isServices)}>Services</a>
             <a href="/service-areas" class="${mobileLinkCls(isServiceAreas)}"${ariaCurrent(isServiceAreas)}>Service Areas</a>

@@ -29,6 +29,7 @@
           buttons.forEach(function(btn) {
               var isTarget = btn.id === btnId;
               btn.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+              btn.tabIndex = isTarget ? 0 : -1;
               if (isTarget) {
                   btn.className = 'pricing-tab-btn px-5 py-3 rounded-xl font-bold text-sm sm:text-base transition bg-red-600 text-white shadow-md flex items-center gap-2';
               } else {
@@ -39,8 +40,10 @@
               if (panels[id]) {
                   if (id === btnId) {
                       panels[id].classList.remove('hidden');
+                      panels[id].hidden = false;
                   } else {
                       panels[id].classList.add('hidden');
+                      panels[id].hidden = true;
                   }
               }
           });
@@ -49,6 +52,18 @@
       buttons.forEach(function(btn) {
           btn.addEventListener('click', function() {
               window.aaaActivateTab(btn.id);
+          });
+          btn.addEventListener('keydown', function(event) {
+              var current = Array.prototype.indexOf.call(buttons, btn);
+              var next = current;
+              if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (current + 1) % buttons.length;
+              else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (current - 1 + buttons.length) % buttons.length;
+              else if (event.key === 'Home') next = 0;
+              else if (event.key === 'End') next = buttons.length - 1;
+              else return;
+              event.preventDefault();
+              window.aaaActivateTab(buttons[next].id);
+              buttons[next].focus();
           });
       });
 
@@ -65,6 +80,8 @@
       }
       window.addEventListener('hashchange', checkHash);
       checkHash();
+      var selected = document.querySelector('.pricing-tab-btn[aria-selected="true"]');
+      window.aaaActivateTab(selected ? selected.id : 'tab-btn-time');
   })();
 })();
 
@@ -220,8 +237,12 @@
               list.innerHTML = items.slice(0, 3).map(renderCard).join('');
               section.classList.remove('hidden');
               if (window.location.hash) {
-                  const targetId = window.location.hash;
-                  const targetEl = document.querySelector(targetId);
+                  let targetEl = null;
+                  try {
+                      targetEl = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+                  } catch (error) {
+                      targetEl = null;
+                  }
                   if (targetEl) {
                       setTimeout(() => {
                           const rect = targetEl.getBoundingClientRect();
@@ -416,10 +437,12 @@
       };
 
       const modal = document.getElementById('quick-view-modal');
+      let quickViewOpener = null;
 
       window.openServiceQuickView = function(key) {
           const data = servicesData[key];
           if (!data || !modal) return;
+          quickViewOpener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
 
           document.getElementById('quick-view-title').textContent = data.title;
           document.getElementById('quick-view-category').textContent = data.category;
@@ -464,6 +487,8 @@
           });
           modal.addEventListener('close', function() {
               document.body.style.overflow = '';
+              if (quickViewOpener && quickViewOpener.isConnected) quickViewOpener.focus();
+              quickViewOpener = null;
           });
       }
   })();

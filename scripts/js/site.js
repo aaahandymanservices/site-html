@@ -19,12 +19,17 @@
   const menuIcon = document.getElementById('menu-icon');
   if (menuButton && mobileMenu) {
     if (mobileMenu.id) menuButton.setAttribute('aria-controls', mobileMenu.id);
-    menuButton.setAttribute('aria-expanded', String(!mobileMenu.classList.contains('hidden')));
+    const initiallyOpen = !mobileMenu.classList.contains('hidden') && !mobileMenu.hidden;
+    mobileMenu.hidden = !initiallyOpen;
+    mobileMenu.setAttribute('aria-hidden', String(!initiallyOpen));
+    menuButton.setAttribute('aria-expanded', String(initiallyOpen));
 
-    const isOpen = () => !mobileMenu.classList.contains('hidden');
+    const isOpen = () => !mobileMenu.hidden;
 
     const setMenuOpen = (open, { restoreFocus = false } = {}) => {
+      mobileMenu.hidden = !open;
       mobileMenu.classList.toggle('hidden', !open);
+      mobileMenu.setAttribute('aria-hidden', String(!open));
       menuButton.setAttribute('aria-expanded', String(open));
       if (menuIcon) {
         menuIcon.classList.toggle('fa-bars', !open);
@@ -89,8 +94,8 @@
     // Crossing into the desktop layout hides the drawer through CSS alone, which
     // would leave the toggle reporting aria-expanded="true" behind a close icon,
     // and the drawer already open the next time the window narrows. Keep the
-    // two in step. 768px matches the header media query breakpoint.
-    const desktopLayout = window.matchMedia('(min-width: 768px)');
+    // two in step. 1024px matches the header media query breakpoint.
+    const desktopLayout = window.matchMedia('(min-width: 1024px)');
     const closeOnDesktop = (event) => {
       if (event.matches && isOpen()) setMenuOpen(false);
     };

@@ -174,10 +174,11 @@
     var email = normalize(value);
     if (!isEmail(email)) return Promise.resolve(false);
 
-    remember(email, true, opts.redeemedAt);
-    hide();
-
-    if (opts.serverConfirmed) return Promise.resolve(true);
+    if (opts.serverConfirmed) {
+      remember(email, true, opts.redeemedAt);
+      hide();
+      return Promise.resolve(true);
+    }
 
     return fetch(ENDPOINT, {
       method: 'POST',
@@ -188,12 +189,15 @@
         source: opts.source || 'manual'
       })
     })
-      .then(function () {
+      .then(function (response) {
+        if (!response.ok) throw new Error('Unable to record gift certificate redemption.');
+        remember(email, true, opts.redeemedAt);
+        hide();
         return true;
       })
       .catch(function () {
-        // The card is hidden either way; the next submission re-attempts it.
-        return true;
+        // Keep the offer available so a later submission can retry the write.
+        return false;
       });
   }
 

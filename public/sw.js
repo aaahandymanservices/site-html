@@ -25,8 +25,10 @@
 // render-blocking Tailwind link, the card layers dropped from tailwind.css, and
 // the home page behaviour lifted out into /js/home.js: the stylesheet's bytes
 // change behind an unchanged pathname again, and a returning visitor holding v5
-// would otherwise pair this deploy's markup with last deploy's CSS.
-const CACHE_VERSION = 'v6';
+// would otherwise pair this deploy's markup with last deploy's CSS. v7 moves
+// the tablet navigation back to the drawer breakpoint and repairs shared form,
+// tab, and gift-certificate behavior, so the shell and assets update together.
+const CACHE_VERSION = 'v7';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

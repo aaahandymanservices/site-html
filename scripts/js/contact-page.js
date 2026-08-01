@@ -165,8 +165,14 @@
   });
   const form = document.getElementById('contact-form');
   if (form) {
+      const submitButton = form.querySelector('button[type="submit"]');
       form.addEventListener('submit', function(e) {
           e.preventDefault();
+          if (submitButton && submitButton.disabled) return;
+          if (submitButton) {
+              submitButton.disabled = true;
+              submitButton.classList.add('opacity-70', 'cursor-not-allowed');
+          }
 
           const formData = new FormData(form);
           const isSubscribed = document.getElementById('seasonal-opt-in')?.checked;
@@ -207,6 +213,12 @@
               })
               .catch(error => {
                   alert("Sorry — your message didn't go through. Please call us at (248) 385-3432 or email contact@aaahandyman.services and we'll help right away.");
+              })
+              .finally(() => {
+                  if (submitButton) {
+                      submitButton.disabled = false;
+                      submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+                  }
               });
           };
 
