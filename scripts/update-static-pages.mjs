@@ -28,7 +28,14 @@ const STATIC_NAV_PAGES = [
  * rules and scripts/build-icon-css.mjs for the icon stylesheet.
  */
 const ICONS_CSS = '/css/icons.css?v=20260729d';
-const SITE_THEME_CSS = '/css/site-theme.css?v=20260801a';
+const ASSET_VERSION = '20260801b';
+const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
+const SCRIPT_VERSIONS = new Map([
+  ['site.js', ASSET_VERSION],
+  ['home.js', ASSET_VERSION],
+  ['contact-page.js', ASSET_VERSION],
+  ['gift-certificate.js', ASSET_VERSION],
+]);
 const ASYNC_ICONS_CSS =
   `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +
   `    <noscript><link rel="stylesheet" href="${ICONS_CSS}"></noscript>`;
@@ -102,7 +109,7 @@ function optimizeFontsAndAssets(html) {
    * All three rewrites below are stamp-agnostic and idempotent, so a cache
    * bust cannot silently switch them off.
    */
-  const TAILWIND_CSS = '/css/tailwind.css?v=20260801a';
+  const TAILWIND_CSS = `/css/tailwind.css?v=${ASSET_VERSION}`;
 
   // The old async pattern, plus the <noscript> twin that would otherwise
   // become a second copy of the stylesheet.
@@ -127,6 +134,11 @@ function optimizeFontsAndAssets(html) {
     /<link\s+rel="stylesheet"\s+href="\/css\/tailwind\.css(?:\?v=[^"]*)?">/gi,
     `<link rel="stylesheet" href="${TAILWIND_CSS}">`,
   );
+
+  html = html.replace(/src="\/js\/([^"?]+\.js)(?:\?v=[^"]*)?"/gi, (match, fileName) => {
+    const version = SCRIPT_VERSIONS.get(fileName);
+    return version ? `src="/js/${fileName}?v=${version}"` : match;
+  });
 
   // Defer GTM script until user interaction or 5s idle post-load
   const oldGtmPattern = /\(function\s*\(\)\s*\{\s*var\s+injected\s*=\s*false,\s*armed\s*=\s*false;[\s\S]*?\['pointerdown',\s*'keydown',\s*'scroll',\s*'touchstart'\][\s\S]*?\}\)\(\);/gi;
