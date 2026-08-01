@@ -43,6 +43,10 @@ const SCRIPT_VERSIONS = new Map([
   ['home.js', ASSET_VERSION],
   ['contact-page.js', ASSET_VERSION],
   ['gift-certificate.js', ASSET_VERSION],
+  // The booking page's markup and its behaviour ship as a pair -- the progress
+  // rail, quick-pick tiles, estimator, and availability badge are all inert
+  // markup until this file runs -- so its stamp has to move with the rest.
+  ['book-page.js', ASSET_VERSION],
 ]);
 const ASYNC_ICONS_CSS =
   `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +

@@ -39,6 +39,39 @@
     }
     </script>
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What if I need to reschedule my handyman appointment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Call or text (248) 385-3432, or reply to the email we send you, and we will move your visit to another window. There is no rescheduling fee. As much notice as you can give helps us offer the window to another Oakland County homeowner."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are hardware and materials handled?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every rate, package, and flat-rate menu price covers installation and service labor only. Hardware and materials are billed separately at a standard 10-15% supply markup, or you can supply them yourself at no markup. We confirm what a job needs before we buy anything."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When do I pay for my booking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nothing is due when you book. There is no deposit and no card on file. You pay after the work is finished and you are happy with it, and every visit is backed by our 1-year workmanship guarantee."
+          }
+        }
+      ]
+    }
+    </script>
+
     <link rel="stylesheet" href="/css/tailwind.css?v=20260801b">
     <link rel="stylesheet" href="/css/site-theme.css?v=20260801b">
     <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
@@ -81,6 +114,98 @@
         .booking-control:focus-visible {
             border-color: #f87171;
             box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.16);
+        }
+
+        /* A window someone else already booked stays visible -- seeing that
+           Tuesday afternoon is gone is information -- but it cannot be picked. */
+        .time-slot-btn[disabled] {
+            opacity: 0.45;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+        .time-slot-btn[disabled]:hover {
+            border-color: #374151;
+        }
+        /* The strike-through belongs on the time itself, not on the line that
+           explains why it is struck through. */
+        .time-slot-btn[disabled] span {
+            text-decoration: none;
+        }
+
+        /* Quick-pick service tiles. The <select> below them stays the source of
+           truth; these are a faster way to reach its six most-booked options. */
+        .service-tile {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.7rem 0.85rem;
+            border: 2px solid #374151;
+            border-radius: 0.85rem;
+            background-color: #1f2937;
+            color: #e5e7eb;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            line-height: 1.2;
+            text-align: left;
+            transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+        }
+        .service-tile:hover {
+            border-color: #6b7280;
+            color: #ffffff;
+        }
+        .service-tile:focus-visible {
+            outline: 3px solid rgba(248, 113, 113, 0.5);
+            outline-offset: 2px;
+        }
+        .service-tile[aria-pressed="true"] {
+            border-color: #a61f2e;
+            background-color: rgba(166, 31, 46, 0.18);
+            color: #ffffff;
+        }
+        .service-tile__icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.85rem;
+            height: 1.85rem;
+            flex-shrink: 0;
+            border-radius: 0.6rem;
+            background-color: rgba(166, 31, 46, 0.16);
+            color: #f87171;
+        }
+        .service-tile[aria-pressed="true"] .service-tile__icon {
+            background-color: #a61f2e;
+            color: #ffffff;
+        }
+
+        /* Three-step progress rail above the form. Steps light up as the
+           fields behind them are answered; book-page.js sets data-state. */
+        .booking-progress__step[data-state="active"] .booking-progress__dot {
+            background-color: #a61f2e;
+            border-color: #a61f2e;
+            color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(166, 31, 46, 0.18);
+        }
+        .booking-progress__step[data-state="active"] .booking-progress__label {
+            color: #ffffff;
+        }
+        .booking-progress__step[data-state="done"] .booking-progress__dot {
+            background-color: #047857;
+            border-color: #047857;
+            color: #ffffff;
+        }
+        .booking-progress__step[data-state="done"] .booking-progress__label {
+            color: #6ee7b7;
+        }
+
+        .booking-faq details[open] .booking-faq__chevron {
+            transform: rotate(180deg);
+        }
+        .booking-faq summary::-webkit-details-marker {
+            display: none;
+        }
+        .booking-faq summary {
+            list-style: none;
         }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -182,13 +307,43 @@
         <section id="booking-section" class="py-12 sm:py-16 bg-gray-900 text-white relative">
             <div class="max-w-7xl mx-auto px-6">
                 
-                <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+                <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
                     <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Instant Booking</div>
                     <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Book Your Handyman Online</h1>
                     <p class="text-gray-400 text-base sm:text-lg leading-relaxed">
                         Reserve your preferred date and time slot in under a minute. No upfront payment required. We'll contact you shortly to confirm the details.
                     </p>
                 </div>
+
+                <!-- Trust strip: the three objections that stop a first-time
+                     visitor from booking, answered before the form starts. -->
+                <ul class="mx-auto mb-10 sm:mb-14 flex max-w-4xl flex-wrap items-center justify-center gap-2.5 sm:gap-3 list-none p-0">
+                    <li class="flex items-center gap-2.5 rounded-2xl border border-gray-800 bg-gray-800/50 px-4 py-2.5">
+                        <i class="fas fa-shield-halved text-blue-400" aria-hidden="true"></i>
+                        <span class="text-sm font-bold text-white">1-Year Craftsman Warranty</span>
+                    </li>
+                    <li class="flex items-center gap-2.5 rounded-2xl border border-gray-800 bg-gray-800/50 px-4 py-2.5">
+                        <i class="fas fa-credit-card text-green-400" aria-hidden="true"></i>
+                        <span class="text-sm font-bold text-white">Zero Upfront Deposit</span>
+                    </li>
+                    <li class="flex items-center gap-2.5 rounded-2xl border border-gray-800 bg-gray-800/50 px-4 py-2.5">
+                        <i class="fas fa-clock text-red-400" aria-hidden="true"></i>
+                        <span class="text-sm font-bold text-white">Punctual &amp; Local — Oakland County</span>
+                    </li>
+                    <li>
+                        <a href="/reviews" class="flex items-center gap-2.5 rounded-2xl border border-yellow-500/30 bg-yellow-500/10 px-4 py-2.5 transition hover:border-yellow-400/60 hover:bg-yellow-500/20">
+                            <span class="text-sm font-black text-yellow-400">4.9</span>
+                            <span class="flex items-center gap-0.5 text-xs text-yellow-500" role="img" aria-label="Rated 4.9 out of 5 stars">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star-half-stroke" aria-hidden="true"></i>
+                            </span>
+                            <span class="text-sm font-bold text-white">85 homeowner reviews</span>
+                        </a>
+                    </li>
+                </ul>
 
                 <div class="grid lg:grid-cols-12 gap-12 items-start">
                     
@@ -234,6 +389,32 @@
                             </div>
                         </div>
 
+                        <!-- Social proof. The rating summary is the site-wide
+                             figure published in our structured data; the strip
+                             below it is filled by book-page.js with the most
+                             recent reviews homeowners submitted themselves, and
+                             stays hidden if that call finds nothing. -->
+                        <div class="rounded-2xl border border-gray-800 bg-gray-800/50 p-6 space-y-5">
+                            <div class="flex items-center gap-4">
+                                <div class="text-center">
+                                    <p class="text-4xl font-black leading-none text-white">4.9</p>
+                                    <span class="mt-1.5 flex items-center gap-0.5 text-xs text-yellow-500" role="img" aria-label="Rated 4.9 out of 5 stars">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star-half-stroke" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div class="min-w-0">
+                                    <p class="text-sm font-bold text-white">85 homeowner reviews</p>
+                                    <p class="mt-1 text-xs leading-relaxed text-gray-400">Neighbors across Oakland County rate our punctuality, tidiness, and fair pricing. Photos and full write-ups are on the <a href="/reviews" class="font-semibold text-red-400 underline decoration-red-500/40 underline-offset-2 hover:text-red-300">reviews page</a>.</p>
+                                </div>
+                            </div>
+
+                            <div id="booking-live-reviews" class="hidden space-y-3 border-t border-gray-800 pt-5" aria-live="polite"></div>
+                        </div>
+
                         <!-- Real Customer Review Snippet -->
                         <div class="bg-gray-800/50 rounded-2xl p-6 border border-gray-800 space-y-4">
                             <div class="flex items-center gap-1.5 text-yellow-500 text-sm" role="img" aria-label="Rated 5 out of 5 stars">
@@ -270,6 +451,32 @@
                                     <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" aria-hidden="true" aria-label="Do not fill out this field" /></label>
                                 </p>
 
+                                <!-- Three-step rail. It is a status display, not
+                                     a wizard: every field stays on one screen,
+                                     and book-page.js lights each step as the
+                                     fields behind it are answered. -->
+                                <ol id="booking-progress" class="m-0 grid list-none grid-cols-3 gap-2 p-0 sm:gap-3" aria-label="Booking progress">
+                                    <li class="booking-progress__step" data-step="1" data-state="active">
+                                        <div class="flex items-center gap-2.5 rounded-2xl border border-gray-700 bg-gray-900/50 px-3 py-2.5">
+                                            <span class="booking-progress__dot flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-gray-600 bg-gray-800 text-xs font-bold text-gray-300">1</span>
+                                            <span class="booking-progress__label text-[11px] font-bold uppercase leading-tight tracking-wide text-gray-400 sm:text-xs">Select Service</span>
+                                        </div>
+                                    </li>
+                                    <li class="booking-progress__step" data-step="2" data-state="todo">
+                                        <div class="flex items-center gap-2.5 rounded-2xl border border-gray-700 bg-gray-900/50 px-3 py-2.5">
+                                            <span class="booking-progress__dot flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-gray-600 bg-gray-800 text-xs font-bold text-gray-300">2</span>
+                                            <span class="booking-progress__label text-[11px] font-bold uppercase leading-tight tracking-wide text-gray-400 sm:text-xs">Date &amp; Time</span>
+                                        </div>
+                                    </li>
+                                    <li class="booking-progress__step" data-step="3" data-state="todo">
+                                        <div class="flex items-center gap-2.5 rounded-2xl border border-gray-700 bg-gray-900/50 px-3 py-2.5">
+                                            <span class="booking-progress__dot flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-gray-600 bg-gray-800 text-xs font-bold text-gray-300">3</span>
+                                            <span class="booking-progress__label text-[11px] font-bold uppercase leading-tight tracking-wide text-gray-400 sm:text-xs">Your Details</span>
+                                        </div>
+                                    </li>
+                                </ol>
+                                <p id="booking-progress-status" class="sr-only" aria-live="polite"></p>
+
                                 <div id="first-service-offer-booking" data-gift-certificate class="bg-gray-800 border-2 border-red-400 rounded-2xl p-4 sm:p-5 shadow-lg">
                                     <div class="flex items-center gap-3 sm:gap-4 mb-3 pb-3 border-b border-gray-700">
                                         <div class="bg-red-600 text-white text-2xl sm:text-3xl font-extrabold px-3 py-1.5 rounded-xl leading-none flex-shrink-0 shadow">
@@ -295,13 +502,46 @@
                                             <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden="true">1</span>
                                             <div>
                                                 <label for="booking-service" class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Select Service Package or Project *</label>
+
+                                                <!-- Quick picks for the six most-booked options. Each one
+                                                     sets the <select> below, which remains the field that
+                                                     is validated and submitted, so a customer who prefers
+                                                     the full list loses nothing. -->
+                                                <div id="service-quick-picks" class="mb-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3" role="group" aria-label="Popular services">
+                                                    <button type="button" class="service-tile" data-service="Carpentry & Trim" aria-pressed="false">
+                                                        <span class="service-tile__icon"><i class="fas fa-hammer" aria-hidden="true"></i></span>
+                                                        <span>Carpentry &amp; Trim</span>
+                                                    </button>
+                                                    <button type="button" class="service-tile" data-service="Minor Electrical" aria-pressed="false">
+                                                        <span class="service-tile__icon"><i class="fas fa-bolt" aria-hidden="true"></i></span>
+                                                        <span>Minor Electrical</span>
+                                                    </button>
+                                                    <button type="button" class="service-tile" data-service="Doors & Windows" aria-pressed="false">
+                                                        <span class="service-tile__icon"><i class="fas fa-door-open" aria-hidden="true"></i></span>
+                                                        <span>Doors &amp; Windows</span>
+                                                    </button>
+                                                    <button type="button" class="service-tile" data-service="Drywall Repair" aria-pressed="false">
+                                                        <span class="service-tile__icon"><i class="fas fa-paint-roller" aria-hidden="true"></i></span>
+                                                        <span>Drywall Repair</span>
+                                                    </button>
+                                                    <button type="button" class="service-tile" data-service="Installation & Mounting" aria-pressed="false">
+                                                        <span class="service-tile__icon"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></span>
+                                                        <span>Install &amp; Mounting</span>
+                                                    </button>
+                                                    <button type="button" class="service-tile" data-service="4-Hour Handyman Package" aria-pressed="false">
+                                                        <span class="service-tile__icon"><i class="fas fa-box-open" aria-hidden="true"></i></span>
+                                                        <span>4-Hour Package</span>
+                                                    </button>
+                                                </div>
+                                                <p class="mb-2 text-[11px] text-gray-500">Something else? Pick from the full list of packages and projects below.</p>
+
                                                 <div class="relative">
                                                     <select id="booking-service" name="service" required aria-describedby="booking-service-help" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white appearance-none">
                                                         <option value="" disabled selected class="bg-gray-800 text-gray-400">Choose a package or project...</option>
                                                         <option value="Minor Repair & Upkeep (1 Hour)" class="bg-gray-800 text-white">Minor Repair &amp; Upkeep (1 Hour)</option>
                                                         <option value="Carpentry & Installation (2 Hours)" class="bg-gray-800 text-white">Carpentry &amp; Installation (2 Hours)</option>
                                                         <option value="Fixture or Outlet Replacement (1.5 Hours)" class="bg-gray-800 text-white">Fixture or Outlet Replacement (1.5 Hours)</option>
-                                                        <option value="Seasonal Prep Package" class="bg-gray-800 text-white">Seasonal Prep Package ($295)</option>
+                                                        <option value="Seasonal Prep Package" class="bg-gray-800 text-white">Seasonal Prep Package ($265)</option>
                                                         <option value="Move-In / Move-Out Bundle" class="bg-gray-800 text-white">Move-In / Move-Out Bundle ($290)</option>
                                                         <option value="Senior Safety & Accessibility Package" class="bg-gray-800 text-white">Senior Safety &amp; Accessibility Package ($250)</option>
                                                         <option value="General Estimate / Quote" class="bg-gray-800 text-white">General Estimate / Quote</option>
@@ -325,6 +565,10 @@
                                                 </div>
                                                 <p id="booking-service-help" class="mt-2 text-xs text-gray-400">All prices and packages cover installation and service labor only. Hardware and materials are not included and are billed separately, unless you supply them yourself at no markup.</p>
                                                 <div id="service-package-info" class="hidden mt-3 p-4 bg-gray-950/60 border border-gray-700 rounded-xl text-xs sm:text-sm text-gray-300"></div>
+                                                <!-- Live cost breakdown for the selected package or
+                                                     project, written by book-page.js from the published
+                                                     rates. Empty until a service is chosen. -->
+                                                <div id="booking-estimate" class="hidden mt-3 rounded-xl border border-emerald-600/30 bg-emerald-950/25 p-4" aria-live="polite"></div>
                                             </div>
                                         </div>
 
@@ -332,7 +576,11 @@
                                             <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden="true">2</span>
                                             <div>
                                                 <label for="booking-date" class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Choose a Date *</label>
-                                                <input id="booking-date" type="date" name="bookingDate" required aria-describedby="booking-date-help booking-error" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
+                                                <input id="booking-date" type="date" name="bookingDate" required aria-describedby="booking-date-help booking-availability booking-error" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
+                                                <!-- Openings counted from real bookings by
+                                                     /api/booking/availability; hidden when that
+                                                     call cannot answer. -->
+                                                <p id="booking-availability" class="mt-2 hidden items-center gap-2 rounded-lg border border-emerald-500/25 bg-emerald-500/10 px-3 py-2 text-xs font-semibold text-emerald-300" aria-live="polite"></p>
                                                 <p id="booking-date-help" class="mt-2 text-xs text-gray-400">The earliest available date is tomorrow. We book Monday–Saturday.</p>
                                             </div>
                                         </div>
@@ -343,6 +591,7 @@
                                                 <span id="time-slot-label" class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Select Arrival Window *</span>
                                                 <input type="hidden" id="booking-time" name="bookingTime" required>
                                                 <div id="time-slots-container" class="grid sm:grid-cols-3 gap-3" role="group" aria-labelledby="time-slot-label"></div>
+                                                <p id="time-slot-note" class="mt-2 hidden text-xs text-gray-400"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -378,8 +627,12 @@
                                 <div>
                                     <div class="flex items-end justify-between gap-4 mb-2">
                                         <label for="booking-photo" class="block text-xs uppercase tracking-wider font-semibold text-gray-400">Repair Photo <span class="text-gray-500 lowercase font-normal">(optional)</span></label>
-                                        <span class="text-[11px] text-gray-500">JPG, PNG, WebP or GIF · 10 MB max</span>
+                                        <span class="text-[11px] text-gray-500">JPG, PNG or WebP · 10 MB max</span>
                                     </div>
+                                    <p class="mb-2 flex items-start gap-2.5 rounded-xl border border-red-500/25 bg-red-500/10 px-3.5 py-2.5 text-xs leading-relaxed text-red-100">
+                                        <i class="fas fa-wand-magic-sparkles mt-0.5 shrink-0 text-red-400" aria-hidden="true"></i>
+                                        <span><strong class="font-bold text-white">Snap a quick photo with your phone</strong> and we can size up the job, price it more accurately, and bring the right materials on the first visit.</span>
+                                    </p>
                                     <label id="booking-photo-dropzone" for="booking-photo" class="group block cursor-pointer rounded-2xl border-2 border-dashed border-gray-700 bg-gray-900/45 p-4 transition hover:border-red-500/80 hover:bg-gray-900/70 focus-within:border-red-500">
                                         <input id="booking-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" capture="environment" class="sr-only">
                                         <div id="booking-photo-empty" class="flex items-center gap-4">
@@ -414,6 +667,10 @@
                                 <button type="submit" id="submit-btn" disabled class="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-600 disabled:text-gray-300 disabled:shadow-none disabled:cursor-not-allowed py-4 text-lg font-bold rounded-2xl transition flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
                                     Request My Booking <i class="fas fa-calendar-check" aria-hidden="true"></i>
                                 </button>
+                                <p class="-mt-2 text-center text-xs leading-relaxed text-gray-400">
+                                    <i class="fas fa-lock mr-1 text-gray-500" aria-hidden="true"></i>
+                                    No payment required today · No card on file · Victor confirms your window by call or text within a few business hours
+                                </p>
                             </form>
 
                             <!-- Success State -->
@@ -437,6 +694,54 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Three questions the booking form reliably raises, answered without
+             sending anyone off the page. Native <details> elements, so they
+             open, print, and find-in-page without a line of JavaScript. -->
+        <section id="booking-faq" class="booking-faq border-t border-gray-800 bg-gray-950 py-12 text-white sm:py-16">
+            <div class="mx-auto max-w-3xl px-6">
+                <div class="mb-8 text-center">
+                    <div class="text-sm font-semibold uppercase tracking-widest text-red-500">Before You Book</div>
+                    <h2 class="mt-2 text-2xl font-bold text-white sm:text-3xl">Quick Answers</h2>
+                </div>
+
+                <div class="space-y-3">
+                    <details class="group rounded-2xl border border-gray-800 bg-gray-900/60 px-5 open:border-red-500/40">
+                        <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 text-left text-base font-bold text-white">
+                            What if I need to reschedule?
+                            <i class="booking-faq__chevron fas fa-chevron-down shrink-0 text-sm text-red-500 transition" aria-hidden="true"></i>
+                        </summary>
+                        <p class="pb-5 text-sm leading-relaxed text-gray-400">
+                            Call or text <a href="tel:+12483853432" class="font-semibold text-red-400 hover:text-red-300">(248) 385-3432</a>, or reply to the email we send you, and we'll move your visit to another window. There is no rescheduling fee. Whatever notice you can give helps — it lets us offer the window to another neighbor.
+                        </p>
+                    </details>
+
+                    <details class="group rounded-2xl border border-gray-800 bg-gray-900/60 px-5 open:border-red-500/40">
+                        <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 text-left text-base font-bold text-white">
+                            How are hardware and materials handled?
+                            <i class="booking-faq__chevron fas fa-chevron-down shrink-0 text-sm text-red-500 transition" aria-hidden="true"></i>
+                        </summary>
+                        <p class="pb-5 text-sm leading-relaxed text-gray-400">
+                            Every rate, package, and menu price on this site covers installation and service labor only. Hardware and materials are billed separately at a standard 10–15% supply markup, or you can supply them yourself at no markup. We confirm what your job needs before buying anything. Full details are on the <a href="/rates" class="font-semibold text-red-400 hover:text-red-300">rates page</a>.
+                        </p>
+                    </details>
+
+                    <details class="group rounded-2xl border border-gray-800 bg-gray-900/60 px-5 open:border-red-500/40">
+                        <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 text-left text-base font-bold text-white">
+                            When do I pay?
+                            <i class="booking-faq__chevron fas fa-chevron-down shrink-0 text-sm text-red-500 transition" aria-hidden="true"></i>
+                        </summary>
+                        <p class="pb-5 text-sm leading-relaxed text-gray-400">
+                            Nothing is due when you book — no deposit, no card on file. You pay once the work is finished and you're happy with it, and every visit is backed by our <a href="/guarantee" class="font-semibold text-red-400 hover:text-red-300">1-year workmanship guarantee</a>.
+                        </p>
+                    </details>
+                </div>
+
+                <p class="mt-8 text-center text-sm text-gray-500">
+                    More questions? Read the <a href="/#faq" class="font-semibold text-red-400 hover:text-red-300">full FAQ</a> or call <a href="tel:+12483853432" class="font-semibold text-red-400 hover:text-red-300">(248) 385-3432</a>.
+                </p>
             </div>
         </section>
     </main>
@@ -529,7 +834,7 @@
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
 
-    <script src="/js/book-page.js?v=20260731a" defer></script>
+    <script src="/js/book-page.js?v=20260801g" defer></script>
     <script src="/js/site.js?v=20260801b" defer></script>
     <script src="/js/gift-certificate.js?v=20260801b" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>

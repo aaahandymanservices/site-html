@@ -39,7 +39,12 @@
 // only reads correctly against this deploy's copy of both. Same pathnames, new
 // bytes, so a returning visitor holding v8 would get navy fields wearing the
 // old gray autofill fill and a form that still answered with alert() boxes.
-const CACHE_VERSION = 'v9';
+// v10 lands the rebuilt /book page: the trust strip, progress rail, quick-pick
+// service tiles, live cost estimate, and real-availability badge are markup and
+// behaviour that only work together, and /js/book-page.js keeps its pathname
+// across the change, so a returning visitor holding v9 would otherwise pair the
+// new page with the old script for one more view.
+const CACHE_VERSION = 'v10';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
