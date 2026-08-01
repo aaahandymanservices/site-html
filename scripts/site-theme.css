@@ -438,16 +438,51 @@ input::placeholder, textarea::placeholder {
   --field-ring: rgba(248, 113, 113, 0.35);
   /* Slate-400. Deliberately dimmer than the field text it sits above -- a label
    * that matched the typed value at full white would compete with it -- while
-   * still clearing AA on both dark canvases in play here: 6.8:1 on the gray-900
-   * contact section the labels actually sit on, and 5.7:1 against a gray-800
-   * field card, so a label moved onto one stays legible. */
+   * still clearing AA on every dark canvas in play here: 5.6:1 on the brand
+   * navy (#1b2a4a) card the contact labels sit on, 6.7:1 against the blue-950
+   * the contact fields themselves are filled with, and 5.7:1 against booking's
+   * gray-800 field, so a label moved onto one stays legible. */
   --label-ink: #94a3b8;
 }
 
-#contact-form,
 #booking-form {
   /* Matches the `bg-gray-800` the fields themselves carry. */
   --field-bg: #1f2937;
+}
+
+#contact-form {
+  /* Matches the `bg-blue-950` the contact fields carry. The page moved off the
+   * neutral grays onto the brand navy, and this variable is what the autofill
+   * inset shadow paints -- left at gray-800 a filled name or email would sit in
+   * a visibly different colour from the field around it. */
+  --field-bg: #101b31;
+}
+
+/* The site-wide placeholder grey is slate-500, which clears AA against the pale
+ * fields it was written for and lands at 3.6:1 on the contact form's near-black
+ * navy. One step lighter takes it to 6.7:1 there without letting it read as
+ * typed text. */
+#contact-form ::placeholder {
+  color: #94a3b8;
+}
+
+/* The shared focus ring is crimson, which is the point of it everywhere else on
+ * the site and almost invisible here: #a61f2e against the navy these fields sit
+ * on is barely over 1:1, so a keyboard user tabbing the form would have only
+ * the border colour change to go on. A pale crimson tint carries the same brand
+ * read at 11:1 against the field and 9:1 against the section behind it. The
+ * selector is id-scoped so it outranks both the `outline: none` on the shared
+ * focus rule above and Tailwind's `.focus\:outline-none`. */
+#contact-form :where(input, select, textarea):focus-visible {
+  outline: 3px solid #efc8cd;
+  outline-offset: 2px;
+}
+
+/* An invalid field is flagged in three ways at once -- this border, the message
+ * below it, and aria-invalid for anything not reading colour. The id prefix is
+ * what lets it beat the `border-blue-500` utility the field carries. */
+#contact-form [aria-invalid="true"] {
+  border-color: #f87171;
 }
 
 #lead-magnet-form {

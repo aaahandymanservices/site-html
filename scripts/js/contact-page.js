@@ -166,9 +166,143 @@
   const form = document.getElementById('contact-form');
   if (form) {
       const submitButton = form.querySelector('button[type="submit"]');
+      const status = document.getElementById('contact-form-status');
+
+      /*
+       * The form carries `novalidate`, so none of this is duplicating the
+       * browser. Native validation puts one bubble on one field, dismisses it
+       * on the next keystroke, and is never read by a screen reader that is not
+       * focused on that field -- which on a form this long means a visitor can
+       * be told "Message is required" while three fields further up are also
+       * empty. Every rule below writes its message into a paragraph that the
+       * field already points at with aria-describedby, so the whole set is
+       * announced on focus and stays on screen until it is fixed.
+       */
+      const STATUS_TONES = {
+          error: 'border-red-400 bg-red-950 text-red-100',
+          success: 'border-emerald-400 bg-emerald-950 text-emerald-50'
+      };
+      const ALL_TONE_CLASSES = Object.values(STATUS_TONES).join(' ').split(' ');
+
+      const setStatus = (message, tone) => {
+          if (!status) return;
+          status.classList.remove(...ALL_TONE_CLASSES);
+          if (!message) {
+              status.textContent = '';
+              status.classList.add('hidden');
+              return;
+          }
+          status.textContent = message;
+          status.classList.add(...STATUS_TONES[tone].split(' '));
+          status.classList.remove('hidden');
+      };
+
+      // A phone number is only usable if it can actually be dialled, so the
+      // check is on the digit count rather than on the punctuation the input
+      // handler above adds.
+      const digitsOf = (value) => value.replace(/\D/g, '');
+
+      const FIELDS = [
+          {
+              id: 'contact-name',
+              label: 'Full name',
+              validate: (value) => value.length >= 2
+                  ? ''
+                  : 'Please enter your full name.'
+          },
+          {
+              id: 'contact-email',
+              label: 'Email address',
+              validate: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)
+                  ? ''
+                  : 'Please enter an email address we can reply to, e.g. you@example.com.'
+          },
+          {
+              id: 'contact-phone',
+              label: 'Phone number',
+              validate: (value) => {
+                  const digits = digitsOf(value);
+                  if (!digits) return 'Please enter a phone number we can reach you on.';
+                  // 10 digits, or 11 with the US country code in front.
+                  if (digits.length === 10 || (digits.length === 11 && digits[0] === '1')) return '';
+                  return 'Please enter a 10-digit phone number, e.g. (248) 555-0123.';
+              }
+          },
+          {
+              id: 'contact-service',
+              label: 'Service needed',
+              validate: (value) => value ? '' : 'Please choose the service you need.'
+          },
+          {
+              id: 'contact-message',
+              label: 'Message',
+              validate: (value) => value.length >= 10
+                  ? ''
+                  : 'Please tell us a little about the work — at least a sentence.'
+          }
+      ];
+
+      const showFieldError = (field, message) => {
+          const input = document.getElementById(field.id);
+          const errorBox = document.getElementById(`${field.id}-error`);
+          if (!input) return;
+          if (message) {
+              input.setAttribute('aria-invalid', 'true');
+              if (errorBox) {
+                  errorBox.textContent = message;
+                  errorBox.classList.remove('hidden');
+              }
+          } else {
+              input.removeAttribute('aria-invalid');
+              if (errorBox) {
+                  errorBox.textContent = '';
+                  errorBox.classList.add('hidden');
+              }
+          }
+      };
+
+      const validateField = (field) => {
+          const input = document.getElementById(field.id);
+          if (!input) return '';
+          const message = field.validate(input.value.trim());
+          showFieldError(field, message);
+          return message;
+      };
+
+      FIELDS.forEach(field => {
+          const input = document.getElementById(field.id);
+          if (!input) return;
+          // Nothing is flagged before the visitor has had a go at it: `blur`
+          // for a first pass, then `input`/`change` to clear the message the
+          // moment it stops being true rather than on the next submit.
+          input.addEventListener('blur', () => validateField(field));
+          const liveEvent = input.tagName === 'SELECT' ? 'change' : 'input';
+          input.addEventListener(liveEvent, () => {
+              if (input.getAttribute('aria-invalid') === 'true') validateField(field);
+          });
+      });
+
       form.addEventListener('submit', function(e) {
           e.preventDefault();
           if (submitButton && submitButton.disabled) return;
+
+          const invalid = FIELDS.filter(field => validateField(field));
+          if (invalid.length) {
+              setStatus(
+                  invalid.length === 1
+                      ? `${invalid[0].label} needs your attention before we can send this.`
+                      : `${invalid.length} fields need your attention before we can send this.`,
+                  'error'
+              );
+              const firstInvalid = document.getElementById(invalid[0].id);
+              if (firstInvalid) {
+                  firstInvalid.focus();
+                  firstInvalid.scrollIntoView({ block: 'center', behavior: 'smooth' });
+              }
+              return;
+          }
+
+          setStatus('');
           if (submitButton) {
               submitButton.disabled = true;
               submitButton.classList.add('opacity-70', 'cursor-not-allowed');
@@ -205,14 +339,19 @@
                           }).catch(err => console.error('Subscription error:', err));
                       }
 
-                      alert('Thank you! Your message has been sent. We will contact you soon.');
+                      setStatus('Thank you! Your message is on its way and we will be in touch shortly.', 'success');
                       form.reset();
+                      FIELDS.forEach(field => showFieldError(field, ''));
+                      if (servicePackageInfo) {
+                          servicePackageInfo.classList.add('hidden');
+                          servicePackageInfo.innerHTML = '';
+                      }
                   } else {
-                      alert("Sorry — your message didn't go through. Please call us at (248) 385-3432 or email contact@aaahandyman.services and we'll help right away.");
+                      setStatus("Sorry — your message didn't go through. Please call us at (248) 385-3432 or email contact@aaahandyman.services and we'll help right away.", 'error');
                   }
               })
-              .catch(error => {
-                  alert("Sorry — your message didn't go through. Please call us at (248) 385-3432 or email contact@aaahandyman.services and we'll help right away.");
+              .catch(() => {
+                  setStatus("Sorry — your message didn't go through. Please call us at (248) 385-3432 or email contact@aaahandyman.services and we'll help right away.", 'error');
               })
               .finally(() => {
                   if (submitButton) {

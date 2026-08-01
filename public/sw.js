@@ -34,7 +34,12 @@
 // is keyed on the URL minus ?v=, so a returning visitor holding v7 would be
 // served last deploy's stylesheet -- and the shift it causes -- for one more
 // page view before the revalidation caught up.
-const CACHE_VERSION = 'v8';
+// v9 rebuilds /contact on the brand navy: the page's field colours moved into
+// site-theme.css and its validation moved into contact-page.js, so the markup
+// only reads correctly against this deploy's copy of both. Same pathnames, new
+// bytes, so a returning visitor holding v8 would get navy fields wearing the
+// old gray autofill fill and a form that still answered with alert() boxes.
+const CACHE_VERSION = 'v9';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

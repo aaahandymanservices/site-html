@@ -9,7 +9,7 @@
 
     <title>Contact Us — Get a Free Quote | AAA Handyman Services</title>
 
-    <meta name="description" content="Contact AAA Handyman Services in Waterford, MI. Call (248) 385-3432 or message us for a free quote on home repairs and maintenance across Oakland County.">
+    <meta name="description" content="Contact AAA Handyman Services in Waterford, MI. Call (248) 385-3432, email us, or send the form for a free quote. Open Mon–Fri 9–6, Sat 10–5, with after-hours emergency response 7 days a week ($135 first hour / $85 per hour after).">
     <meta name="theme-color" content="#A61F2E">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://aaahandyman.services/contact">
@@ -39,6 +39,65 @@
     }
     </script>
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact AAA Handyman Services",
+      "url": "https://aaahandyman.services/contact",
+      "mainEntity": {
+        "@type": "LocalBusiness",
+        "name": "AAA Handyman Services",
+        "url": "https://aaahandyman.services/",
+        "telephone": "+1-248-385-3432",
+        "email": "contact@aaahandyman.services",
+        "areaServed": "Oakland County, Michigan",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Waterford",
+          "addressRegion": "MI",
+          "addressCountry": "US"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "10:00",
+            "closes": "17:00"
+          }
+        ],
+        "makesOffer": {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "After-hours emergency handyman service",
+            "description": "Priority emergency response seven days a week for urgent repairs affecting home safety or security."
+          },
+          "priceSpecification": [
+            {
+              "@type": "UnitPriceSpecification",
+              "price": "135",
+              "priceCurrency": "USD",
+              "unitText": "first hour"
+            },
+            {
+              "@type": "UnitPriceSpecification",
+              "price": "85",
+              "priceCurrency": "USD",
+              "unitText": "each additional hour"
+            }
+          ]
+        }
+      }
+    }
+    </script>
+
     <link rel="stylesheet" href="/css/tailwind.css?v=20260801b">
     <link rel="stylesheet" href="/css/site-theme.css?v=20260801b">
     <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
@@ -52,11 +111,14 @@
 
     <style>
 
-        section[id], header[id] {
+        /* #contact-form is linked from the hero button here and from the
+           service pages, and the header is sticky, so the form needs the same
+           offset the sections get or its first field lands underneath the nav. */
+        section[id], header[id], #contact-form {
             scroll-margin-top: 80px;
         }
         @media (max-width: 768px) {
-            section[id], header[id] {
+            section[id], header[id], #contact-form {
                 scroll-margin-top: 100px;
             }
         }
@@ -156,45 +218,116 @@
     <script>(function(){try{var b=document.getElementById('seasonal-banner');if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();</script>
 </aside>
 
-    <main id="main-content" class="flex-grow">
-    <section id="contact" class="py-12 sm:py-16 bg-gray-900 text-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-                <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Contact Us</div>
-                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Get in Touch Today</h1>
-                <p class="text-gray-400 text-base sm:text-lg leading-relaxed">
-                    Have a repair, project, or question? Call, email, or send the form below and we'll get back to you with a free, no-obligation quote.
-                </p>
+    <main id="main-content" class="flex-grow bg-blue-950 text-white">
+    <header id="contact-hero" class="relative overflow-hidden border-b-4 border-red-600 bg-blue-950 py-14 sm:py-20">
+        <!-- Decorative wash only; the navy underneath is what carries the text contrast. -->
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_80%_at_50%_0%,rgba(166,31,46,0.28),transparent_70%)]" aria-hidden="true"></div>
+        <div class="relative max-w-3xl mx-auto px-6 text-center">
+            <p class="uppercase tracking-[0.2em] text-red-300 font-bold text-xs sm:text-sm mb-3">Contact AAA Handyman Services</p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">Get in Touch</h1>
+            <p class="mt-5 text-base sm:text-lg leading-relaxed text-blue-200">
+                Whether you need a free quote, have a question about a repair, or want to book a service visit, we would like to hear from you. Call, email, or send the form below and a real person will get back to you.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
+                <a href="tel:+12483853432" class="inline-flex items-center justify-center gap-2.5 rounded-2xl bg-red-600 px-7 py-3.5 font-bold text-white shadow-lg shadow-red-950/40 transition hover:bg-red-700">
+                    <i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432
+                </a>
+                <a href="#contact-form" class="inline-flex items-center justify-center gap-2.5 rounded-2xl border-2 border-blue-400 px-7 py-3.5 font-bold text-white transition hover:border-red-400 hover:bg-blue-900">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i> Send a message
+                </a>
             </div>
-            <div class="grid md:grid-cols-2 gap-12 sm:gap-16">
-                <div>
-                    <h2 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8" style="color: #fff;">Reach AAA Handyman Services</h2>
-                    <div class="space-y-6 sm:space-y-8">
-                        <div class="flex items-start gap-4 sm:gap-6">
-                            <i class="fas fa-phone text-3xl sm:text-4xl text-green-500 mt-1 flex-shrink-0" aria-hidden="true"></i>
-                            <div>
-                                <a href="tel:+12483853432" class="text-xl sm:text-2xl md:text-3xl font-semibold hover:text-red-400 break-all">‪(248) 385-3432‬</a>
-                                <p class="text-sm sm:text-base text-gray-400">Call for immediate assistance</p>
+        </div>
+    </header>
+
+    <section id="contact" class="py-12 sm:py-16 bg-blue-950 text-white" aria-labelledby="contact-heading">
+        <h2 id="contact-heading" class="sr-only">Contact details and enquiry form</h2>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+                <div class="space-y-6">
+                    <div class="rounded-3xl border border-blue-600 bg-blue-900 p-6 sm:p-8">
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white">Reach AAA Handyman Services</h3>
+                        <p class="mt-2 text-sm sm:text-base text-blue-200">Locally owned and operated in Waterford, Michigan.</p>
+                        <ul class="mt-7 space-y-6 list-none p-0 m-0">
+                            <li class="flex items-start gap-4">
+                                <i class="fas fa-phone text-2xl sm:text-3xl text-green-400 mt-1 flex-shrink-0 w-8 text-center" aria-hidden="true"></i>
+                                <div class="min-w-0">
+                                    <a href="tel:+12483853432" class="text-xl sm:text-2xl font-bold text-white underline decoration-red-400 decoration-2 underline-offset-4 transition hover:text-red-300">(248) 385-3432</a>
+                                    <p class="mt-1 text-sm text-blue-200">Fastest way to reach us — call or text for immediate assistance.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <i class="fas fa-envelope text-2xl sm:text-3xl text-blue-300 mt-1 flex-shrink-0 w-8 text-center" aria-hidden="true"></i>
+                                <div class="min-w-0">
+                                    <a href="mailto:contact@aaahandyman.services" class="text-base sm:text-xl font-bold text-white underline decoration-red-400 decoration-2 underline-offset-4 transition hover:text-red-300 break-words">contact@aaahandyman.services</a>
+                                    <p class="mt-1 text-sm text-blue-200">Email us photos or details and we will reply with a quote.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <i class="fas fa-map-marker-alt text-2xl sm:text-3xl text-red-300 mt-1 flex-shrink-0 w-8 text-center" aria-hidden="true"></i>
+                                <div class="min-w-0">
+                                    <p class="text-lg font-bold text-white">Waterford, Michigan</p>
+                                    <p class="mt-1 text-sm text-blue-200">Proudly serving homeowners across Oakland County. <a href="/service-areas" class="font-semibold text-red-300 underline underline-offset-2 transition hover:text-white">See all service areas</a>.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="hours" class="rounded-3xl border border-blue-600 bg-blue-900 p-6 sm:p-8">
+                        <h3 class="flex items-center gap-3 text-xl sm:text-2xl font-bold text-white">
+                            <i class="fas fa-clock text-red-300" aria-hidden="true"></i> Hours of Operation
+                        </h3>
+                        <dl class="mt-5 divide-y divide-blue-800 text-sm sm:text-base">
+                            <div class="flex items-baseline justify-between gap-4 py-2.5">
+                                <dt class="font-semibold text-white">Monday &ndash; Friday</dt>
+                                <dd class="text-right text-blue-200">9:00 AM &ndash; 6:00 PM</dd>
+                            </div>
+                            <div class="flex items-baseline justify-between gap-4 py-2.5">
+                                <dt class="font-semibold text-white">Saturday</dt>
+                                <dd class="text-right text-blue-200">10:00 AM &ndash; 5:00 PM</dd>
+                            </div>
+                            <div class="flex items-baseline justify-between gap-4 py-2.5">
+                                <dt class="font-semibold text-white">Sunday</dt>
+                                <dd class="text-right text-blue-200">Emergency calls only</dd>
+                            </div>
+                        </dl>
+                        <p class="mt-4 text-sm leading-relaxed text-blue-200">
+                            Messages left outside these hours are answered the next business morning. Emergencies are answered any time — see below.
+                        </p>
+                    </div>
+
+                    <div id="emergency" class="rounded-3xl border-2 border-red-600 bg-blue-900 p-6 sm:p-8">
+                        <p class="inline-flex items-center gap-2 rounded-full bg-red-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white">
+                            <i class="fas fa-triangle-exclamation" aria-hidden="true"></i> After-hours emergency
+                        </p>
+                        <h3 class="mt-4 text-xl sm:text-2xl font-bold text-white">Emergency response, 7 days a week</h3>
+                        <p class="mt-3 text-sm sm:text-base leading-relaxed text-blue-200">
+                            Urgent repairs that affect your home's safety or security — active leaks, a door or window that will not lock, a failed sump pump — get priority response outside of normal business hours, every day of the week.
+                        </p>
+                        <div class="mt-5 grid grid-cols-2 gap-3">
+                            <div class="rounded-2xl border border-red-600 bg-blue-950 p-4 text-center">
+                                <p class="text-3xl font-black text-white">$135</p>
+                                <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-red-300">First hour</p>
+                            </div>
+                            <div class="rounded-2xl border border-red-600 bg-blue-950 p-4 text-center">
+                                <p class="text-3xl font-black text-white">$85</p>
+                                <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-red-300">Per hour after</p>
                             </div>
                         </div>
-                        <div class="flex items-start gap-4 sm:gap-6">
-                            <i class="fas fa-envelope text-3xl sm:text-4xl text-blue-500 mt-1 flex-shrink-0" aria-hidden="true"></i>
-                            <div>
-                                <a href="mailto:contact@aaahandyman.services" class="text-lg sm:text-xl md:text-2xl hover:text-red-400 break-all">contact@aaahandyman.services</a>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4 sm:gap-6">
-                            <i class="fas fa-map-marker-alt text-3xl sm:text-4xl text-red-500 mt-1 flex-shrink-0" aria-hidden="true"></i>
-                            <div>
-                                <p class="text-lg sm:text-xl font-medium">Waterford, Michigan</p>
-                                <p class="text-sm sm:text-base text-gray-400">Proudly Serving Oakland County</p>
-                            </div>
-                        </div>
+                        <p class="mt-4 text-xs leading-relaxed text-blue-200">
+                            Emergency rates cover labor only; hardware and materials are billed separately, or supplied by you at no markup.
+                        </p>
+                        <a href="tel:+12483853432" class="mt-5 inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-red-600 px-6 py-3.5 font-bold text-white transition hover:bg-red-700">
+                            <i class="fas fa-phone" aria-hidden="true"></i> Call the emergency line
+                        </a>
                     </div>
                 </div>
 
-                <div>
-                    <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
+                <div class="rounded-3xl border border-blue-600 bg-blue-900 p-6 sm:p-8">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-white">Request a free quote</h3>
+                    <p class="mt-2 mb-7 text-sm sm:text-base text-blue-200">
+                        Tell us what you need and we will get back to you with a no-obligation estimate. Fields marked <span class="font-bold text-red-300">*</span> are required.
+                    </p>
+                    <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate class="space-y-6">
 
                         <input type="hidden" name="form-name" value="contact" />
 
@@ -202,96 +335,110 @@
                             <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" aria-hidden="true" aria-label="Do not fill out this field" /></label>
                         </p>
 
-                        <div id="first-service-offer" data-gift-certificate class="bg-gray-800 border-2 border-red-400 rounded-2xl p-4 sm:p-5 shadow-lg">
-                            <div class="flex items-center gap-3 sm:gap-4 mb-3 pb-3 border-b border-gray-700">
+                        <div id="first-service-offer" data-gift-certificate class="rounded-2xl border-2 border-red-500 bg-blue-950 p-4 sm:p-5 shadow-lg">
+                            <div class="flex items-center gap-3 sm:gap-4 mb-3 pb-3 border-b border-blue-700">
                                 <div class="bg-red-600 text-white text-2xl sm:text-3xl font-extrabold px-3 py-1.5 rounded-xl leading-none flex-shrink-0 shadow">
                                     $50
                                 </div>
                                 <div>
-                                    <p class="text-xs font-bold uppercase tracking-wider text-red-300">FIRST-SERVICE GIFT CERTIFICATE</p>
-                                    <p class="text-xs sm:text-sm text-gray-300 mt-0.5 leading-snug">Receive a $50 gift certificate toward your first service.</p>
+                                    <p class="text-xs font-bold uppercase tracking-wider text-red-300">First-service gift certificate</p>
+                                    <p class="text-xs sm:text-sm text-blue-100 mt-0.5 leading-snug">Receive a $50 gift certificate toward your first service.</p>
                                 </div>
                             </div>
-                            <label for="first-service-certificate" class="flex cursor-pointer items-start gap-3 p-3 rounded-xl bg-gray-900/70 border border-gray-700 hover:border-red-500/60 transition group">
-                                <input id="first-service-certificate" type="checkbox" name="first-service-gift-certificate" value="Requested — customer confirms first service" class="mt-0.5 h-4 w-4 shrink-0 accent-red-600 rounded focus:ring-red-500">
+                            <label for="first-service-certificate" class="flex cursor-pointer items-start gap-3 p-3 rounded-xl bg-blue-900 border border-blue-600 hover:border-red-400 transition group">
+                                <input id="first-service-certificate" type="checkbox" name="first-service-gift-certificate" value="Requested — customer confirms first service" class="mt-0.5 h-4 w-4 shrink-0 accent-red-600 rounded">
                                 <span class="text-xs sm:text-sm font-semibold text-white group-hover:text-red-300 transition leading-snug">Yes, I’m a new customer booking my first service!</span>
                             </label>
                         </div>
 
                         <div>
-                            <label for="contact-name" class="block text-sm uppercase tracking-widest mb-2">Your Name</label>
-                            <input id="contact-name" type="text" name="name" required autocomplete="name" autocapitalize="words" class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg text-white">
+                            <label for="contact-name" class="block text-sm uppercase tracking-widest mb-2">Full name <span class="text-red-300" aria-hidden="true">*</span></label>
+                            <input id="contact-name" type="text" name="name" required autocomplete="name" autocapitalize="words" aria-describedby="contact-name-error" placeholder="Jane Doe" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
+                            <p id="contact-name-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
                         </div>
                         <div>
-                            <label for="contact-email" class="block text-sm uppercase tracking-widest mb-2">Email Address</label>
-                            <input id="contact-email" type="email" name="email" required autocomplete="email" inputmode="email" autocapitalize="off" autocorrect="off" class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg text-white">
+                            <label for="contact-email" class="block text-sm uppercase tracking-widest mb-2">Email address <span class="text-red-300" aria-hidden="true">*</span></label>
+                            <input id="contact-email" type="email" name="email" required autocomplete="email" inputmode="email" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="contact-email-error" placeholder="you@example.com" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
+                            <p id="contact-email-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
                         </div>
                         <div>
-                            <label for="contact-phone" class="block text-sm uppercase tracking-widest mb-2">Phone</label>
-                            <input id="contact-phone" type="tel" name="phone" autocomplete="tel" inputmode="tel" autocapitalize="off" class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg text-white">
-                            <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">
+                            <label for="contact-phone" class="block text-sm uppercase tracking-widest mb-2">Phone number <span class="text-red-300" aria-hidden="true">*</span></label>
+                            <input id="contact-phone" type="tel" name="phone" required autocomplete="tel" inputmode="tel" autocapitalize="off" aria-describedby="contact-phone-error contact-phone-consent" placeholder="(248) 555-0123" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
+                            <p id="contact-phone-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
+                            <p id="contact-phone-consent" class="text-xs text-blue-200 mt-1.5 leading-relaxed">
                                 By providing your phone number, you agree to receive text messages from AAA Handyman Services regarding your service inquiries, quotes, and scheduled appointments. Messaging/data rates may apply. Reply STOP to opt out at any time.
                             </p>
                         </div>
                         <div>
-                            <label for="contact-city" class="block text-sm uppercase tracking-widest mb-2">City / Location <span class="text-gray-500 normal-case tracking-normal">(optional)</span></label>
-                            <input id="contact-city" type="text" name="city" autocomplete="address-level2" autocapitalize="words" placeholder="e.g. Troy, MI" class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg text-white">
+                            <label for="contact-city" class="block text-sm uppercase tracking-widest mb-2">City / location <span class="text-blue-200 normal-case tracking-normal">(optional)</span></label>
+                            <input id="contact-city" type="text" name="city" autocomplete="address-level2" autocapitalize="words" placeholder="e.g. Troy, MI" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
                         </div>
                         <div>
-                            <label for="contact-service" class="block text-sm uppercase tracking-widest mb-2">Service / Project Type</label>
+                            <label for="contact-service" class="block text-sm uppercase tracking-widest mb-2">Service needed <span class="text-red-300" aria-hidden="true">*</span></label>
                             <div class="relative">
-                                <select id="contact-service" name="service" required aria-describedby="contact-service-help" class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-lg text-white appearance-none">
-                                    <option value="" disabled selected class="bg-gray-800 text-gray-400">Select a Service...</option>
-                                    <option value="Maintenance Membership" class="bg-gray-800 text-white font-bold text-emerald-400">Maintenance Membership ($49/mo)</option>
-                                    <option value="Seasonal Prep Package" class="bg-gray-800 text-white font-bold text-red-400">Seasonal Prep Package ($295)</option>
-                                    <option value="Move-In / Move-Out Bundle" class="bg-gray-800 text-white font-bold text-blue-400">Move-In / Move-Out Bundle ($290)</option>
-                                    <option value="Senior Safety & Accessibility Package" class="bg-gray-800 text-white font-bold text-emerald-400">Senior Safety &amp; Accessibility Package ($250)</option>
-                                    <option value="General Estimate / Quote" class="bg-gray-800 text-white">General Estimate / Quote</option>
-                                    <option value="4-Hour Handyman Package" class="bg-gray-800 text-white">4-Hour Handyman Package</option>
-                                    <option value="6-Hour Handyman Package" class="bg-gray-800 text-white">6-Hour Handyman Package</option>
-                                    <option value="8-Hour Handyman Package" class="bg-gray-800 text-white">8-Hour Handyman Package</option>
-                                    <option value="Priority / After-Hours Service" class="bg-gray-800 text-white">Priority / After-Hours Service</option>
-                                    <option value="Fall Home Prep Package" class="bg-gray-800 text-white">Fall Home Prep Package</option>
-                                    <option value="Spring Home Refresh Package" class="bg-gray-800 text-white">Spring Home Refresh Package</option>
-                                    <option value="Home Safety Audit" class="bg-gray-800 text-white">Home Safety Audit</option>
-                                    <option value="Energy Tune-Up Audit" class="bg-gray-800 text-white">Energy Tune-Up Audit</option>
-                                    <option value="Storm-Prep Check" class="bg-gray-800 text-white">Storm-Prep Check</option>
-                                    <option value="Whole-Home Assessment" class="bg-gray-800 text-white">Whole-Home Assessment (3-Audit Bundle)</option>
-                                    <option value="Home Safety Menu" class="bg-gray-800 text-white">Home Safety Menu (Good/Better/Best)</option>
-                                    <option value="Energy Efficiency Menu" class="bg-gray-800 text-white">Energy Efficiency Menu (Good/Better/Best)</option>
-                                    <option value="Storm & Water Defense Menu" class="bg-gray-800 text-white">Storm & Water Defense Menu (Good/Better/Best)</option>
-                                    <option value="Carpentry & Trim" class="bg-gray-800 text-white">Carpentry & Trim</option>
-                                    <option value="Doors" class="bg-gray-800 text-white">Doors</option>
-                                    <option value="Plumbing" class="bg-gray-800 text-white">Plumbing</option>
-                                    <option value="Drywall" class="bg-gray-800 text-white">Drywall</option>
-                                    <option value="Electrical" class="bg-gray-800 text-white">Electrical</option>
-                                    <option value="Flooring" class="bg-gray-800 text-white">Flooring</option>
-                                    <option value="Painting" class="bg-gray-800 text-white">Painting</option>
-                                    <option value="Decks & Fences" class="bg-gray-800 text-white">Decks & Fences</option>
-                                    <option value="Maintenance & Cleaning" class="bg-gray-800 text-white">Maintenance</option>
-                                    <option value="Other" class="bg-gray-800 text-white">Other (Specify in details below)</option>
+                                <select id="contact-service" name="service" required aria-describedby="contact-service-error contact-service-help" class="w-full px-5 py-4 pr-14 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white appearance-none">
+                                    <option value="" disabled selected>Select a service…</option>
+                                    <option value="Maintenance Membership">Maintenance Membership ($49/mo)</option>
+                                    <option value="Seasonal Prep Package">Seasonal Prep Package ($295)</option>
+                                    <option value="Move-In / Move-Out Bundle">Move-In / Move-Out Bundle ($290)</option>
+                                    <option value="Senior Safety &amp; Accessibility Package">Senior Safety &amp; Accessibility Package ($250)</option>
+                                    <option value="General Estimate / Quote">General Estimate / Quote</option>
+                                    <option value="4-Hour Handyman Package">4-Hour Handyman Package</option>
+                                    <option value="6-Hour Handyman Package">6-Hour Handyman Package</option>
+                                    <option value="8-Hour Handyman Package">8-Hour Handyman Package</option>
+                                    <option value="Priority / After-Hours Service">Priority / After-Hours Service</option>
+                                    <option value="Fall Home Prep Package">Fall Home Prep Package</option>
+                                    <option value="Spring Home Refresh Package">Spring Home Refresh Package</option>
+                                    <option value="Home Safety Audit">Home Safety Audit</option>
+                                    <option value="Energy Tune-Up Audit">Energy Tune-Up Audit</option>
+                                    <option value="Storm-Prep Check">Storm-Prep Check</option>
+                                    <option value="Whole-Home Assessment">Whole-Home Assessment (3-Audit Bundle)</option>
+                                    <option value="Home Safety Menu">Home Safety Menu (Good/Better/Best)</option>
+                                    <option value="Energy Efficiency Menu">Energy Efficiency Menu (Good/Better/Best)</option>
+                                    <option value="Storm &amp; Water Defense Menu">Storm &amp; Water Defense Menu (Good/Better/Best)</option>
+                                    <option value="Carpentry &amp; Trim">Carpentry &amp; Trim</option>
+                                    <option value="Doors">Doors</option>
+                                    <option value="Plumbing">Plumbing</option>
+                                    <option value="Drywall">Drywall</option>
+                                    <option value="Electrical">Electrical</option>
+                                    <option value="Flooring">Flooring</option>
+                                    <option value="Painting">Painting</option>
+                                    <option value="Decks &amp; Fences">Decks &amp; Fences</option>
+                                    <option value="Maintenance &amp; Cleaning">Maintenance</option>
+                                    <option value="Other">Other (specify in details below)</option>
                                 </select>
-                                <div class="absolute inset-y-0 right-0 flex items-center pr-6 pointer-events-none text-gray-400">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none text-blue-200">
                                     <i class="fas fa-chevron-down" aria-hidden="true"></i>
                                 </div>
                             </div>
-                            <p id="contact-service-help" class="mt-2 text-xs text-gray-400">Every rate, package, and menu price covers installation and service labor only. Hardware and materials are not included and are billed separately, unless you supply them yourself at no markup.</p>
-                            <div id="service-package-info" class="hidden mt-3 p-4 bg-gray-900/60 border border-gray-800 rounded-2xl text-xs sm:text-sm text-gray-300"></div>
+                            <p id="contact-service-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
+                            <p id="contact-service-help" class="mt-2 text-xs text-blue-200 leading-relaxed">Every rate, package, and menu price covers installation and service labor only. Hardware and materials are not included and are billed separately, unless you supply them yourself at no markup.</p>
+                            <div id="service-package-info" class="hidden mt-3 p-4 bg-blue-950 border border-blue-600 rounded-2xl text-xs sm:text-sm text-blue-100"></div>
                         </div>
                         <div>
-                            <label for="contact-message" class="block text-sm uppercase tracking-widest mb-2">Message / Project Details</label>
-                            <textarea id="contact-message" name="message" rows="6" required class="w-full px-6 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-3xl focus:outline-none focus:border-red-500 text-lg text-white resize-none"></textarea>
+                            <label for="contact-message" class="block text-sm uppercase tracking-widest mb-2">Message / project details <span class="text-red-300" aria-hidden="true">*</span></label>
+                            <textarea id="contact-message" name="message" rows="6" required aria-describedby="contact-message-error" placeholder="Tell us what needs doing, roughly when you would like it done, and anything else that helps us quote accurately." class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-3xl focus:border-red-400 text-lg text-white resize-y"></textarea>
+                            <p id="contact-message-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
                         </div>
-                        <div class="flex items-start gap-3 bg-gray-900 p-4 rounded-2xl border border-gray-800">
+                        <div class="flex items-start gap-3 bg-blue-950 p-4 rounded-2xl border border-blue-600">
                             <input id="seasonal-opt-in" type="checkbox" name="seasonal-opt-in" class="mt-1 h-5 w-5 accent-red-600 rounded cursor-pointer">
-                            <label for="seasonal-opt-in" class="text-sm text-gray-300 cursor-pointer select-none">
-                                <span class="font-semibold text-white block mb-0.5">Preventative & Seasonal Reminders</span>
-                                Send me free home maintenance tips & reminders (e.g. Spring gutter & deck checks, Fall weatherproofing & winterization).
+                            <label for="seasonal-opt-in" class="text-sm text-blue-100 cursor-pointer select-none">
+                                <span class="font-semibold text-white block mb-0.5">Preventative &amp; seasonal reminders</span>
+                                Send me free home maintenance tips &amp; reminders (e.g. spring gutter &amp; deck checks, fall weatherproofing &amp; winterization).
                             </label>
                         </div>
-                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-5 text-xl font-semibold rounded-3xl transition flex items-center justify-center gap-3">
-                            Send Message <i class="fas fa-paper-plane" aria-hidden="true"></i>
+
+                        <!-- Submission outcome and the "n fields need attention" summary both
+                             land here, so a screen reader hears the result without the field
+                             errors having to be hunted for one at a time. -->
+                        <p id="contact-form-status" class="hidden rounded-2xl border px-4 py-3 text-sm font-semibold" role="status" aria-live="polite"></p>
+
+                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-5 text-xl font-bold text-white rounded-3xl transition flex items-center justify-center gap-3">
+                            Send message <i class="fas fa-paper-plane" aria-hidden="true"></i>
                         </button>
+                        <p class="text-center text-xs text-blue-200">
+                            Prefer to talk it through? Call <a href="tel:+12483853432" class="font-semibold text-red-300 underline underline-offset-2 transition hover:text-white">(248) 385-3432</a>.
+                        </p>
                     </form>
                 </div>
             </div>
