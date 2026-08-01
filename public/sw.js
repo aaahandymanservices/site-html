@@ -28,7 +28,13 @@
 // would otherwise pair this deploy's markup with last deploy's CSS. v7 moves
 // the tablet navigation back to the drawer breakpoint and repairs shared form,
 // tab, and gift-certificate behavior, so the shell and assets update together.
-const CACHE_VERSION = 'v7';
+// v8 reserves the icon glyph boxes in site-theme.css so the asynchronous icon
+// stylesheet stops shifting the nav and hero as it lands. That is another
+// change to the bytes behind an unchanged /css/ pathname, and the asset cache
+// is keyed on the URL minus ?v=, so a returning visitor holding v7 would be
+// served last deploy's stylesheet -- and the shift it causes -- for one more
+// page view before the revalidation caught up.
+const CACHE_VERSION = 'v8';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
