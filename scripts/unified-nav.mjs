@@ -114,10 +114,10 @@ export function getUnifiedNav(activePage = 'none') {
 
   return `<a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
-<header id="site-header" class="site-header sticky top-0 z-[100] bg-white shadow-md border-b-[3px] border-red-600">
+<header id="site-header" class="site-header sticky top-0 z-[100] bg-white/95 backdrop-blur-md shadow-md border-b-[3px] border-red-600">
     <div class="header-container site-nav__bar max-w-7xl mx-auto flex items-center justify-between">
         <a href="/" class="brand site-nav__brand group flex items-center gap-3 min-w-0" aria-label="AAA Handyman Services home">
-            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 transition group-hover:scale-105">
+            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 shadow-sm transition group-hover:scale-105">
             <div class="brand-text min-w-0">
                 <p class="brand-title text-base min-[390px]:text-lg sm:text-xl lg:text-xl xl:text-2xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services</p>
                 <p class="brand-tagline text-[10px] sm:text-xs text-gray-500 font-medium">Oakland County, Michigan</p>
@@ -145,13 +145,13 @@ export function getUnifiedNav(activePage = 'none') {
         </div>
 
         <!-- Mobile Hamburger Button -->
-        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-lg transition border border-gray-200 hover:border-gray-300" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-menu">
             <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
         </button>
     </div>
 
     <!-- Mobile Navigation Drawer / Menu -->
-    <div id="mobile-menu" class="hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3" hidden aria-hidden="true">
+    <div id="mobile-menu" class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden="true">
         <div class="space-y-1">
             <a href="/services" class="${mobileLinkCls(isServices)}"${ariaCurrent(isServices)}>Services</a>
             <a href="/service-areas" class="${mobileLinkCls(isServiceAreas)}"${ariaCurrent(isServiceAreas)}>Service Areas</a>
@@ -162,10 +162,15 @@ export function getUnifiedNav(activePage = 'none') {
             <a href="/contact" class="${mobileLinkCls(isContact)}"${ariaCurrent(isContact)}>Contact</a>
         </div>
 
-        <div class="pt-3 border-t border-gray-100 flex items-center justify-center gap-6 text-2xl">
-            <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-            <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
-            <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+        <div class="pt-3 border-t border-gray-100 flex flex-col gap-3">
+            <a href="tel:+12483853432" class="flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition text-center">
+                <i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432
+            </a>
+            <div class="flex items-center justify-center gap-6 text-2xl pt-1">
+                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+            </div>
         </div>
     </div>
 </header>

@@ -307,16 +307,21 @@ textarea {
 input:where(:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="button"]):not([type="submit"]):not([type="reset"])),
 select,
 textarea {
-  background-color: #ffffff;
+  background-color: #f8fafc;
   color: var(--brand-ink);
   border: 2px solid #cbd5e1;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 input:where(:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="button"]):not([type="submit"]):not([type="reset"])):focus,
 select:focus,
 textarea:focus {
   outline: none;
+  background-color: #ffffff;
   border-color: var(--brand-crimson);
   box-shadow: 0 0 0 4px rgba(166, 31, 46, 0.22);
 }
@@ -326,6 +331,70 @@ textarea:focus {
 input::placeholder, textarea::placeholder {
   color: #64748b;
   opacity: .85;
+}
+
+/* Form Container Card & Labels */
+.form-card,
+.contact-form-card,
+.book-form-card,
+.career-form-card {
+  background: #ffffff;
+  border: 1px solid rgba(216, 222, 232, 0.9);
+  border-radius: 1.25rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  box-shadow: 0 20px 40px -15px rgba(27, 42, 74, 0.08);
+}
+
+form label,
+.form-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--brand-navy);
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+/* Star rating component */
+.rating-stars {
+  color: #f59e0b;
+  display: inline-flex;
+  gap: 0.2rem;
+  font-size: 1.15rem;
+  filter: drop-shadow(0 1px 2px rgba(245, 158, 11, 0.25));
+}
+
+/* Utility Badges */
+.badge-crimson {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--brand-crimson-soft);
+  color: var(--brand-crimson-dark);
+  border: 1px solid rgba(166, 31, 46, 0.2);
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-navy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #e8edf5;
+  color: var(--brand-navy);
+  border: 1px solid rgba(27, 42, 74, 0.2);
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 /* Primary call-to-action buttons — one cohesive crimson treatment site-wide */
