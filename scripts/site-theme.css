@@ -411,6 +411,15 @@ input::placeholder, textarea::placeholder {
   --field-bg: #ffffff;
   --field-ink: var(--brand-ink);
   --field-ring: rgba(166, 31, 46, 0.22);
+  /* The label colour joins the field pair for the same reason the autofill
+   * colours did: a form's chrome has to be declared in one place or the halves
+   * drift apart. `form label` below is two element names deep, so it beats
+   * nothing a page can write except plain inheritance -- which is exactly the
+   * case it caught on contact, where the labels carry layout classes
+   * (`block text-sm uppercase tracking-widest`) and no colour, and so took this
+   * navy onto a `bg-gray-900` section and disappeared. A label that does state
+   * a `text-*` class (all of book's) is a class selector and still wins. */
+  --label-ink: var(--brand-navy);
 }
 
 /* The dark forms. Named here rather than in each page's own <style> block so
@@ -427,6 +436,12 @@ input::placeholder, textarea::placeholder {
   color-scheme: dark;
   --field-ink: #ffffff;
   --field-ring: rgba(248, 113, 113, 0.35);
+  /* Slate-400. Deliberately dimmer than the field text it sits above -- a label
+   * that matched the typed value at full white would compete with it -- while
+   * still clearing AA on both dark canvases in play here: 6.8:1 on the gray-900
+   * contact section the labels actually sit on, and 5.7:1 against a gray-800
+   * field card, so a label moved onto one stays legible. */
+  --label-ink: #94a3b8;
 }
 
 #contact-form,
@@ -504,7 +519,7 @@ form label,
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.9rem;
-  color: var(--brand-navy);
+  color: var(--label-ink);
   margin-bottom: 0.35rem;
   display: block;
 }
