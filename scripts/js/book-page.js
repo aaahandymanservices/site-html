@@ -850,13 +850,15 @@
   })();
 
   /*
-   * The most recent homeowner reviews, under the rating summary.
+   * The most recent homeowner reviews, above Douglas Mitchell's card.
    *
    * Whatever /api/reviews returns is what shows, newest first and unfiltered by
    * rating -- a strip that quietly dropped anything below five stars would not
-   * be social proof. It stays hidden when the call finds nothing.
+   * be social proof. The card written into book.html stays put either way, so
+   * the strip still reads as reviews when the call finds nothing.
    */
   const liveReviews = document.getElementById('booking-live-reviews');
+  const featuredReview = liveReviews ? liveReviews.querySelector('[data-featured-review]') : null;
   const MAX_LIVE_REVIEWS = 3;
   const MAX_QUOTE_LENGTH = 130;
 
@@ -925,12 +927,12 @@
               .slice(0, MAX_LIVE_REVIEWS);
           if (!recent.length) return;
 
-          const heading = document.createElement('p');
-          heading.className = 'text-[11px] font-bold uppercase tracking-widest text-gray-500';
-          heading.textContent = 'Most recent reviews';
-
-          liveReviews.replaceChildren(heading, ...recent.map(buildReviewCard));
-          liveReviews.classList.remove('hidden');
+          const cards = recent.map(buildReviewCard);
+          if (featuredReview) {
+              featuredReview.before(...cards);
+          } else {
+              liveReviews.append(...cards);
+          }
       } catch (error) {
           // Social proof is a bonus; the page already carries a testimonial.
       }
