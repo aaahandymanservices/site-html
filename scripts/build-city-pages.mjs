@@ -13,9 +13,29 @@ const SITE = 'https://aaahandyman.services';
 const PHONE_DISPLAY = '(248) 385-3432';
 const PHONE_TEL = '+12483853432';
 
+/*
+ * `badge` carries the finished utility strings rather than a colour name that
+ * gets interpolated into a class. Tailwind scans this file for literal class
+ * names, so a `text-${zone.color}-600` built at render time only ever reaches
+ * the stylesheet by accident -- because some other file happened to spell the
+ * same class out. The zone tags match /service-areas: Zone A green, Zone B
+ * amber, so a customer sees the same colour for their tier on both pages.
+ */
 const ZONE_INFO = {
-  A: { label: 'Zone A (Within 20 Miles)', rate: '$100', color: 'green', miles: 'within about 20 miles of our Waterford base' },
-  B: { label: 'Zone B (Extended County / 20+ Miles)', rate: '$120', color: 'red', miles: 'in the extended county, about 20+ miles from Waterford' }
+  A: {
+    label: 'Zone A (Within 20 Miles)',
+    tag: 'Zone A',
+    rate: '$100',
+    badge: 'bg-green-600 text-white',
+    miles: 'within about 20 miles of our Waterford base'
+  },
+  B: {
+    label: 'Zone B (Extended County / 20+ Miles)',
+    tag: 'Zone B',
+    rate: '$120',
+    badge: 'bg-amber-500 text-amber-950',
+    miles: 'in the extended county, about 20+ miles from Waterford'
+  }
 };
 
 // Popular services shown on every city page, linked to the deep anchors on /services.
@@ -269,12 +289,14 @@ ${getUnifiedNav('service-areas')}
                     <p>Whether it is a single nagging repair or a full seasonal to-do list, we bring the same craftsmanship, clean job sites, and clear communication to every ${esc(city.name)} home. From drywall and doors to painting, flooring, gutters, and minor plumbing or electrical work, we help you protect your home's comfort and value.</p>
                 </div>
                 <aside class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-lg">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="text-2xl text-${esc(zone.color)}-600" aria-hidden="true"><i class="fas fa-location-dot" aria-hidden="true"></i></span>
-                        <div>
+                    <div class="mb-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
                             <h3 class="text-lg font-bold text-gray-900">${esc(city.name)} Coverage</h3>
-                            <p class="text-sm text-gray-500">${esc(zone.label)}</p>
+                            <span class="inline-flex items-center gap-1.5 rounded-full ${esc(zone.badge)} px-3 py-1 text-[11px] font-extrabold uppercase tracking-widest">
+                                <i class="fas fa-location-dot" aria-hidden="true"></i> ${esc(zone.tag)}
+                            </span>
                         </div>
+                        <p class="text-sm text-gray-500 mt-1">${esc(zone.label)}</p>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
                         <li class="flex items-start gap-2"><i class="fas fa-tag text-red-600 mt-1" aria-hidden="true"></i><span><strong>${esc(zone.rate)} minimum service call</strong> &mdash; covers travel, diagnostics, and the first hour of labor.</span></li>
