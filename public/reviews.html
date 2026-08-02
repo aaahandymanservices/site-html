@@ -90,8 +90,16 @@
         .review-zoom:focus-visible img { transform: scale(1.07); }
         .review-zoom { cursor: zoom-in; }
 
-        /* Filter tabs */
-        .filter-tab {
+        /* ------------------------------------------------------------------
+         * Filter pills
+         *
+         * Two axes narrow the showcase grid -- service category and city --
+         * and they combine, so each axis needs its own selected colour or a
+         * visitor cannot tell which of the two a lit pill belongs to. The
+         * category row keeps the brand crimson; the city row inverts to white.
+         * ------------------------------------------------------------------ */
+        .filter-tab,
+        .city-tab {
             transition: all 0.2s ease;
         }
         .filter-tab[aria-pressed="true"] {
@@ -99,6 +107,194 @@
             border-color: #A61F2E;
             color: #fff;
             box-shadow: 0 8px 20px -8px rgba(166, 31, 46, 0.7);
+        }
+        .city-tab[aria-pressed="true"] {
+            background-color: #fff;
+            border-color: #fff;
+            color: #101b31;
+            box-shadow: 0 8px 20px -10px rgba(255, 255, 255, 0.55);
+        }
+        .filter-tab svg,
+        .city-tab svg {
+            flex: none;
+        }
+
+        /* ------------------------------------------------------------------
+         * Oakland County project map
+         *
+         * The county body, lakes, and highways are one decorative SVG; every
+         * pin on top of it is an HTML button positioned by percentage. Pins
+         * need a focus ring, an accessible label, and a popup card, all of
+         * which come free on a <button> and would be hand-rolled inside SVG.
+         * ------------------------------------------------------------------ */
+        .county-map {
+            position: relative;
+            aspect-ratio: 640 / 560;
+        }
+        .county-map__svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .map-pin {
+            position: absolute;
+            width: 0;
+            height: 0;
+            padding: 0;
+            border: 0;
+            background: none;
+            cursor: pointer;
+        }
+        .map-pin:focus {
+            outline: none;
+        }
+        .map-pin__dot,
+        .map-pin__pulse {
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 9999px;
+            transform: translate(-50%, -50%);
+        }
+        .map-pin__dot {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 26px;
+            width: 26px;
+            background-color: #A61F2E;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 16px -6px rgba(0, 0, 0, 0.75);
+            transition: transform 0.18s ease, background-color 0.18s ease;
+        }
+        .map-pin__dot svg {
+            height: 13px;
+            width: 13px;
+            color: #fff;
+        }
+        .map-pin.is-empty .map-pin__dot {
+            height: 13px;
+            width: 13px;
+            background-color: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.45);
+            box-shadow: none;
+        }
+        .map-pin__pulse {
+            height: 26px;
+            width: 26px;
+            border: 2px solid rgba(166, 31, 46, 0.8);
+            animation: pinPulse 2.8s ease-out infinite;
+        }
+        .map-pin.is-empty .map-pin__pulse {
+            display: none;
+        }
+        @keyframes pinPulse {
+            0% { opacity: 0.75; transform: translate(-50%, -50%) scale(1); }
+            70%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(2.5); }
+        }
+        .map-pin:hover .map-pin__dot,
+        .map-pin.is-open .map-pin__dot,
+        .map-pin:focus-visible .map-pin__dot {
+            transform: translate(-50%, -50%) scale(1.2);
+            background-color: #b83242;
+        }
+        .map-pin.is-empty:hover .map-pin__dot,
+        .map-pin.is-empty.is-open .map-pin__dot,
+        .map-pin.is-empty:focus-visible .map-pin__dot {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        .map-pin:focus-visible .map-pin__dot {
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
+        }
+        .map-pin__name {
+            position: absolute;
+            left: 0;
+            top: 0;
+            white-space: nowrap;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            color: rgba(226, 232, 240, 0.95);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+            pointer-events: none;
+        }
+        .map-pin.is-empty .map-pin__name {
+            font-weight: 600;
+            color: rgba(148, 163, 184, 0.9);
+        }
+        .map-pin__count {
+            display: inline-block;
+            margin-left: 2px;
+            color: #fca5af;
+        }
+        .map-pin[data-label="below"] .map-pin__name { transform: translate(-50%, 15px); }
+        .map-pin[data-label="above"] .map-pin__name { transform: translate(-50%, calc(-100% - 15px)); }
+        .map-pin[data-label="left"]  .map-pin__name { transform: translate(calc(-100% - 17px), -50%); }
+        .map-pin[data-label="right"] .map-pin__name { transform: translate(17px, -50%); }
+        @media (max-width: 480px) {
+            /* Twelve labels crowd into each other on a phone; the popup still
+               names the city, so the standing labels are the part to drop. */
+            .map-pin.is-empty .map-pin__name { display: none; }
+            .map-pin__name { font-size: 10px; }
+        }
+
+        .map-popup {
+            position: absolute;
+            z-index: 20;
+            width: min(255px, 78vw);
+            background-color: #fff;
+            color: #101b31;
+            border-radius: 1rem;
+            padding: 0.9rem 1rem 1rem;
+            box-shadow: 0 22px 45px -14px rgba(0, 0, 0, 0.8);
+            text-align: left;
+        }
+        .map-popup[hidden] { display: none; }
+        .map-popup__caret {
+            position: absolute;
+            bottom: -5px;
+            height: 12px;
+            width: 12px;
+            background-color: #fff;
+            transform: translateX(-50%) rotate(45deg);
+        }
+        .map-popup.is-below .map-popup__caret {
+            bottom: auto;
+            top: -5px;
+        }
+
+        /* ------------------------------------------------------------------
+         * Pull-quote
+         *
+         * There is no separate headline field on a review, so the quote is
+         * pulled out of the body the way a magazine does it: the customer's
+         * verdict set large in the display face, the detail beneath it.
+         * ------------------------------------------------------------------ */
+        .review-pullquote {
+            font-family: var(--font-display, sans-serif);
+            font-weight: 800;
+            font-size: 1.15rem;
+            line-height: 1.3;
+            letter-spacing: -0.015em;
+            color: #7f1723;
+            border-left: 4px solid #A61F2E;
+            padding-left: 0.85rem;
+        }
+        @media (min-width: 640px) {
+            .review-pullquote { font-size: 1.25rem; }
+        }
+
+        /* A card arrived at from a map pin gets outlined so it is obvious
+           which of a dozen showcases the pin meant. */
+        .review-card.is-targeted {
+            opacity: 1;
+            outline: 3px solid #A61F2E;
+            outline-offset: 4px;
+        }
+        .review-card { scroll-margin-top: 96px; }
+        @media (max-width: 768px) {
+            .review-card { scroll-margin-top: 112px; }
         }
 
         /* Attribute chips */
@@ -143,6 +339,8 @@
             .review-card { animation: none !important; }
             .review-card { opacity: 1 !important; transform: none !important; }
             .review-zoom img, #reviews-lightbox, #reviews-lightbox img { transition: none !important; animation: none !important; }
+            .map-pin__pulse { animation: none !important; opacity: 0 !important; }
+            .map-pin__dot { transition: none !important; }
         }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -250,7 +448,7 @@
             </div>
 
             <!-- Aggregate trust banner -->
-            <div class="max-w-4xl mx-auto mb-8">
+            <div class="max-w-4xl mx-auto mb-4">
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 bg-white/5 border border-white/15 rounded-3xl px-6 py-5 text-center">
                     <div class="flex items-center gap-3">
                         <span class="text-4xl sm:text-5xl font-black text-white leading-none">5.0</span>
@@ -260,12 +458,45 @@
                         </div>
                     </div>
                     <div class="hidden sm:block h-12 w-px bg-white/20"></div>
-                    <div class="flex items-center gap-2 text-emerald-300 font-bold text-base sm:text-lg">
-                        <i class="fas fa-shield-heart text-emerald-400" aria-hidden="true"></i>
-                        <span>100% Satisfaction Guaranteed</span>
+                    <div class="flex items-center gap-2 text-slate-200 font-semibold text-sm sm:text-base">
+                        <i class="fas fa-location-dot text-red-500" aria-hidden="true"></i>
+                        <span>Every review below is a real Oakland County home</span>
                     </div>
-                    <span class="sr-only">AAA Handyman Services holds a 5.0 out of 5 average rating across Oakland County and guarantees 100% satisfaction.</span>
+                    <span class="sr-only">AAA Handyman Services holds a 5.0 out of 5 average rating across Oakland County.</span>
                 </div>
+            </div>
+
+            <!-- Trust & stats counter bar -->
+            <div class="max-w-4xl mx-auto mb-10">
+                <dl class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="flex items-center gap-3 bg-white/5 border border-white/15 rounded-2xl px-4 py-3.5">
+                        <span class="inline-flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-300">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.2c4.7-2 7-5.4 7-9.7V5.9L12 2.8 5 5.9v5.6c0 4.3 2.3 7.7 7 9.7Z"/><path d="m8.8 11.6 2.3 2.3 4.1-4.4"/></svg>
+                        </span>
+                        <div>
+                            <dt class="text-white font-bold text-sm sm:text-base leading-snug">100% Satisfaction Guaranteed</dt>
+                            <dd class="text-xs text-slate-400 font-medium mt-0.5">We come back until it is right</dd>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white/5 border border-white/15 rounded-2xl px-4 py-3.5">
+                        <span class="inline-flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-red-500/15 text-red-400">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s7-5.7 7-11.2a7 7 0 1 0-14 0c0 5.5 7 11.2 7 11.2Z"/><circle cx="12" cy="10.2" r="2.6"/></svg>
+                        </span>
+                        <div>
+                            <dt class="text-white font-bold text-sm sm:text-base leading-snug">12+ Oakland County Cities Served</dt>
+                            <dd class="text-xs text-slate-400 font-medium mt-0.5">Waterford to Southfield</dd>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white/5 border border-white/15 rounded-2xl px-4 py-3.5">
+                        <span class="inline-flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-amber-400/15 text-amber-300">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3.8 13.4h6.4L11 22l9.2-11.4h-6.4L13 2Z"/></svg>
+                        </span>
+                        <div>
+                            <dt class="text-white font-bold text-sm sm:text-base leading-snug">Fast &amp; Reliable Local Service</dt>
+                            <dd class="text-xs text-slate-400 font-medium mt-0.5">Owner-operated, same-week openings</dd>
+                        </div>
+                    </div>
+                </dl>
             </div>
 
             <!-- Trust badges / review platform links -->
@@ -284,6 +515,97 @@
                 </a>
             </div>
 
+            <!-- Interactive Oakland County project map.
+                 The SVG below is the terrain only: county line, township grid,
+                 the lakes belt through Waterford, and the two highways every
+                 local navigates by. Pins are injected as buttons over it by
+                 /js/reviews-page.js from the reviews the page just loaded, so
+                 the map can never advertise a project the grid does not hold. -->
+            <section id="project-map" class="mb-12 sm:mb-16" aria-labelledby="project-map-title">
+                <div class="bg-white/5 border border-white/15 rounded-3xl p-5 sm:p-7">
+                    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-5">
+                        <div>
+                            <div class="uppercase tracking-widest text-red-500 font-semibold text-xs mb-2">Where we have been working</div>
+                            <h2 id="project-map-title" class="text-2xl sm:text-3xl font-bold text-white">The Oakland County Project Map</h2>
+                            <p class="text-slate-400 text-sm mt-2 max-w-xl leading-relaxed">Every crimson pin is a finished job with a homeowner's review behind it. Hover or tap one to read what they said, then jump straight to their showcase.</p>
+                        </div>
+                        <p id="map-summary" class="text-xs font-bold uppercase tracking-widest text-slate-300 bg-white/5 border border-white/15 rounded-full px-4 py-2.5 self-start lg:self-auto whitespace-nowrap" role="status">Loading the map…</p>
+                    </div>
+
+                    <div id="county-map" class="county-map">
+                        <svg class="county-map__svg" viewBox="0 0 640 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+                            <defs>
+                                <linearGradient id="county-fill" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.10"/>
+                                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.025"/>
+                                </linearGradient>
+                            </defs>
+
+                            <!-- County line: Oakland County is very nearly a rectangle. -->
+                            <rect x="40" y="30" width="560" height="500" rx="16" fill="url(#county-fill)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+
+                            <!-- Township grid -->
+                            <g stroke="rgba(255,255,255,0.075)" stroke-width="1" stroke-dasharray="4 7" fill="none">
+                                <path d="M152 30v500M264 30v500M376 30v500M488 30v500"/>
+                                <path d="M40 130h560M40 230h560M40 330h560M40 430h560"/>
+                            </g>
+
+                            <!-- The lakes belt: Pontiac, Cass, Orchard, Union, Walled -->
+                            <g fill="rgba(56,132,196,0.35)" stroke="rgba(147,197,235,0.32)" stroke-width="1.2">
+                                <ellipse cx="232" cy="296" rx="20" ry="11" transform="rotate(-12 232 296)"/>
+                                <ellipse cx="266" cy="322" rx="24" ry="13" transform="rotate(8 266 322)"/>
+                                <ellipse cx="303" cy="348" rx="15" ry="10" transform="rotate(-18 303 348)"/>
+                                <ellipse cx="180" cy="312" rx="16" ry="9"/>
+                                <ellipse cx="333" cy="378" rx="13" ry="8" transform="rotate(14 333 378)"/>
+                                <ellipse cx="148" cy="352" rx="11" ry="7"/>
+                            </g>
+
+                            <!-- M-59 (Highland Rd) and Woodward Ave -->
+                            <g fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-linecap="round">
+                                <path d="M60 292h372"/>
+                                <path d="M305 272 452 404 518 528"/>
+                            </g>
+                            <!-- I-75 -->
+                            <g fill="none" stroke="rgba(255,255,255,0.24)" stroke-width="2.6" stroke-linecap="round">
+                                <path d="M248 30 276 196 404 252 470 330 522 432 556 530"/>
+                            </g>
+                            <g fill="rgba(226,232,240,0.42)" font-size="10" font-weight="700" letter-spacing="0.1em">
+                                <text x="290" y="212">I-75</text>
+                                <text x="64" y="284">M-59</text>
+                            </g>
+
+                            <!-- Compass -->
+                            <g transform="translate(566 72)">
+                                <circle r="15" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                                <path d="M0 -9 4 3 0 0.4 -4 3Z" fill="rgba(255,255,255,0.7)"/>
+                                <text y="-19" text-anchor="middle" font-size="9" font-weight="700" fill="rgba(255,255,255,0.55)">N</text>
+                            </g>
+
+                            <text x="60" y="514" font-size="11" font-weight="700" letter-spacing="0.2em" fill="rgba(255,255,255,0.3)">OAKLAND COUNTY, MI</text>
+                        </svg>
+
+                        <div id="map-pins" role="group" aria-label="Completed project locations across Oakland County"></div>
+
+                        <div id="map-popup" class="map-popup" hidden></div>
+                    </div>
+
+                    <ul class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2.5 text-xs font-semibold text-slate-400 list-none m-0 p-0">
+                        <li class="flex items-center gap-2">
+                            <span class="h-3.5 w-3.5 rounded-full bg-red-600 border-2 border-white/80 flex-none" aria-hidden="true"></span>
+                            Completed project with a review
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="h-2.5 w-2.5 rounded-full bg-white/15 border-2 border-white/45 flex-none" aria-hidden="true"></span>
+                            Service area, no showcase yet
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="h-2.5 w-4 rounded-full bg-sky-600/40 border border-sky-300/30 flex-none" aria-hidden="true"></span>
+                            Lakes
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
             <div class="grid lg:grid-cols-5 gap-12 items-start">
 
                 <div class="lg:col-span-2 space-y-6">
@@ -292,7 +614,11 @@
                             <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-red-100 text-red-600 text-xl"><i class="fas fa-pen-nib" aria-hidden="true"></i></span>
                             <h2 class="text-2xl font-bold text-gray-900">Share Your Experience</h2>
                         </div>
-                        <p class="text-sm text-gray-500 mb-6">A quick rating, a photo of the finished work, and a few words — that’s all it takes to help a neighbor choose with confidence.</p>
+                        <p class="text-sm text-gray-600 mb-4"><strong class="text-gray-900">Show off your transformed space!</strong> Upload a photo to be featured in our Oakland County Showcase.</p>
+                        <p class="inline-flex items-center gap-2 mb-6 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full pl-2.5 pr-3.5 py-1.5 text-xs font-bold">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 flex-none" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="m8.2 12.4 2.5 2.5 5-5.4"/></svg>
+                            Published as a Verified Local Project
+                        </p>
 
                         <form id="reviews-form" class="space-y-5">
                             <div>
@@ -407,24 +733,81 @@
                         </div>
                     </div>
 
-                    <!-- Interactive category filters -->
-                    <div id="reviews-filters" class="flex flex-wrap gap-2" role="group" aria-label="Filter reviews by project category">
-                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="all" aria-pressed="true">All Projects</button>
-                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Carpentry" aria-pressed="false">Carpentry</button>
-                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Plumbing" aria-pressed="false">Plumbing</button>
-                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Electrical" aria-pressed="false">Electrical</button>
-                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Decks & Fences" aria-pressed="false">Decks &amp; Fences</button>
-                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Drywall" aria-pressed="false">Drywall</button>
-                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Painting" aria-pressed="false">Painting</button>
-                        <button type="button" class="filter-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Maintenance" aria-pressed="false">Maintenance</button>
+                    <!-- Interactive filters: service category and city, combined.
+                         Both rows are plain buttons carrying aria-pressed, so the
+                         lit state is announced and not only coloured in. -->
+                    <div class="space-y-4">
+                        <div>
+                            <span id="reviews-filter-label" class="block text-[11px] uppercase tracking-widest font-bold text-slate-400 mb-2.5">Filter by service</span>
+                            <div id="reviews-filters" class="flex flex-wrap gap-2" role="group" aria-labelledby="reviews-filter-label">
+                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="all" aria-pressed="true">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+                                    All Projects
+                                </button>
+                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Carpentry" aria-pressed="false">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 5h10.2l2.8 2.6-2.8 2.6H4.5Z"/><path d="M10.4 10.2 13 21"/></svg>
+                                    Carpentry
+                                </button>
+                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Plumbing" aria-pressed="false">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-8 8l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 8-8l-3.8 3.8Z"/></svg>
+                                    Plumbing
+                                </button>
+                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Electrical" aria-pressed="false">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3.8 13.4h6.4L11 22l9.2-11.4h-6.4L13 2Z"/></svg>
+                                    Electrical
+                                </button>
+                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Decks & Fences" aria-pressed="false">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V7.6L7.5 4.5 10 7.6V21M14 21V7.6l2.5-3.1L19 7.6V21"/><path d="M2.5 10.5h19M2.5 15.5h19"/></svg>
+                                    Decks &amp; Fences
+                                </button>
+                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Drywall" aria-pressed="false">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9.3h18M3 14.7h18M9 4v5.3M15 9.3v5.4M9 14.7V20"/></svg>
+                                    Drywall
+                                </button>
+                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Painting" aria-pressed="false">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="13" height="5.5" rx="1.5"/><path d="M10 9v3.5"/><rect x="7.5" y="12.5" width="5" height="8" rx="2"/></svg>
+                                    Painting
+                                </button>
+                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Maintenance" aria-pressed="false">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/></svg>
+                                    Maintenance
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span id="reviews-city-label" class="block text-[11px] uppercase tracking-widest font-bold text-slate-400 mb-2.5">Filter by city</span>
+                            <div id="reviews-cities" class="flex flex-wrap gap-2" role="group" aria-labelledby="reviews-city-label">
+                                <button type="button" class="city-tab inline-flex items-center gap-1.5 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="all" aria-pressed="true">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.4 2.5 3.7 5.7 3.7 9.2s-1.3 6.7-3.7 9.2c-2.4-2.5-3.7-5.7-3.7-9.2S9.6 5.3 12 2.8Z"/></svg>
+                                    All Cities
+                                </button>
+                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Waterford" aria-pressed="false">Waterford</button>
+                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Birmingham" aria-pressed="false">Birmingham</button>
+                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Troy" aria-pressed="false">Troy</button>
+                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Rochester Hills" aria-pressed="false">Rochester Hills</button>
+                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Clarkston" aria-pressed="false">Clarkston</button>
+                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Southfield" aria-pressed="false">Southfield</button>
+                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Auburn Hills" aria-pressed="false">Auburn Hills</button>
+                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Commerce" aria-pressed="false">Commerce</button>
+                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Highland" aria-pressed="false">Highland</button>
+                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="White Lake" aria-pressed="false">White Lake</button>
+                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Bloomfield" aria-pressed="false">Bloomfield</button>
+                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="West Bloomfield" aria-pressed="false">West Bloomfield</button>
+                            </div>
+                        </div>
                     </div>
 
                     <div id="reviews-list" class="reviews-masonry" aria-live="polite"></div>
 
                     <div id="reviews-filter-empty" class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
                         <i class="fas fa-filter-circle-xmark text-4xl text-slate-500 mb-3 block" aria-hidden="true"></i>
-                        <h3 class="text-xl font-bold text-white mb-2">No projects in this category yet</h3>
-                        <p class="text-sm">Try another category, or view all projects.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">No showcases match these filters yet</h3>
+                        <p class="text-sm" id="reviews-filter-empty-copy">Try another service or city — or clear the filters to see every Oakland County project.</p>
+                        <button id="reviews-clear-filters" type="button" class="mt-5 inline-flex items-center gap-2 bg-white text-blue-950 hover:bg-slate-100 font-bold px-5 py-2.5 rounded-full text-sm transition">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18M6.5 12h11M10 19h4"/></svg>
+                            Clear all filters
+                        </button>
                     </div>
 
                     <div id="reviews-empty" class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
@@ -556,7 +939,7 @@
     </div>
 
 
-    <script src="/js/reviews-page.js?v=20260731a" defer></script>
+    <script src="/js/reviews-page.js?v=20260802a" defer></script>
     <script src="/js/site.js?v=20260801b" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
     <script>
