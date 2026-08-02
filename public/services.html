@@ -260,11 +260,145 @@
         }
 
         h3[id] { scroll-margin-top: 96px; }
+        details[id] { scroll-margin-top: 88px; }
         @media (max-width: 768px) {
             section[id], header[id] {
                 scroll-margin-top: 100px;
             }
             h3[id] { scroll-margin-top: 112px; }
+            details[id] { scroll-margin-top: 104px; }
+        }
+
+        /* ------------------------------------------------------------------
+           Service catalog: four collapsible categories.
+
+           The category row doubles as a filter bar and as the jump nav that
+           used to sit above the flat card grid. The accordion itself is a
+           <details>, so the open/closed state, keyboard operation, and the
+           browser's own find-in-page expansion come for free.
+           ------------------------------------------------------------------ */
+        .svc-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .svc-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 0.95rem;
+            border-radius: 999px;
+            border: 1px solid #e5e7eb;
+            background: #fff;
+            color: #1b2a4a;
+            font-size: 0.8125rem;
+            font-weight: 700;
+            line-height: 1.1;
+            box-shadow: 0 1px 2px rgba(16, 27, 49, 0.06);
+            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .svc-tab:hover { border-color: rgba(166, 31, 46, 0.5); color: #a61f2e; }
+        .svc-tab i { color: #a61f2e; font-size: 0.875rem; }
+        .svc-tab__count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 1.35rem;
+            height: 1.35rem;
+            border-radius: 999px;
+            background: #e8edf5;
+            color: #30476d;
+            font-size: 0.6875rem;
+            font-weight: 800;
+        }
+        .svc-tab--toggle { cursor: pointer; border-style: dashed; }
+        .svc-tab--toggle i { transition: transform 0.2s ease; }
+        .svc-tab--toggle[aria-expanded="true"] i { transform: rotate(180deg); }
+
+        .svc-group {
+            background: #fff;
+            border: 2px solid #e5e7eb;
+            border-radius: 1.5rem;
+            overflow: hidden;
+        }
+        .svc-group + .svc-group { margin-top: 1rem; }
+        .svc-group[open] { border-color: rgba(166, 31, 46, 0.55); }
+        .svc-group__summary {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem;
+            cursor: pointer;
+            list-style: none;
+            transition: background-color 0.2s ease;
+        }
+        .svc-group__summary::-webkit-details-marker { display: none; }
+        .svc-group__summary:hover { background: #f9fafb; }
+        .svc-group__summary:focus-visible { outline: 3px solid #1b2a4a; outline-offset: -3px; }
+        .svc-group__icon {
+            flex: none;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        .svc-group__text { flex: 1 1 auto; min-width: 0; }
+        .svc-group__title {
+            display: block;
+            font-size: 1.0625rem;
+            font-weight: 800;
+            color: #1b2a4a;
+            line-height: 1.25;
+        }
+        .svc-group__num { color: #a61f2e; }
+        .svc-group__best { display: block; margin-top: 0.2rem; font-size: 0.8125rem; color: #4b5563; }
+        .svc-group__chips { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.6rem; }
+        .svc-group[open] .svc-group__chips { display: none; }
+        .svc-chip {
+            border: 1px solid #cbd6e6;
+            background: #f4f6fa;
+            color: #30476d;
+            border-radius: 999px;
+            padding: 0.1rem 0.5rem;
+            font-size: 0.6875rem;
+            font-weight: 600;
+        }
+        .svc-group__meta { flex: none; display: flex; align-items: center; gap: 0.75rem; }
+        .svc-group__count {
+            white-space: nowrap;
+            border: 1px solid #e5e7eb;
+            background: #f3f4f6;
+            color: #1b2a4a;
+            border-radius: 999px;
+            padding: 0.25rem 0.6rem;
+            font-size: 0.6875rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .svc-group__chevron {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 999px;
+            background: #f3f4f6;
+            color: #1b2a4a;
+            transition: transform 0.25s ease, background-color 0.2s ease;
+        }
+        .svc-group[open] .svc-group__chevron { transform: rotate(180deg); background: #f8e9eb; color: #a61f2e; }
+        .svc-group__panel { padding: 1.5rem 1.25rem 1.75rem; border-top: 1px solid #f3f4f6; }
+        @media (max-width: 640px) {
+            .svc-group__summary { padding: 1rem; gap: 0.75rem; }
+            .svc-group__count { display: none; }
+            .svc-group__icon { width: 2.5rem; height: 2.5rem; font-size: 1.05rem; }
+            .svc-group__panel { padding: 1.25rem 1rem 1.5rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -275,6 +409,8 @@
             .header-card { animation: none !important; }
             .service-card:hover { transform: none !important; }
             .header-card { opacity: 1 !important; transform: none !important; }
+            .svc-group__chevron { transition: none !important; }
+            .svc-tab--toggle i { transition: none !important; }
         }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -462,62 +598,82 @@
                     <p class="text-gray-600 text-xs sm:text-sm max-w-3xl mx-auto mt-3 font-medium"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> All prices shown across this page are for installation and service labor only. <strong>Hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-                    <!-- Category 1: Carpentry & Assembly -->
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8">
+                    <!-- Category 1: Structural & Interior Repairs -->
                     <div class="bg-white border-2 border-red-600/90 rounded-3xl p-7 shadow-md flex flex-col justify-between hover:shadow-xl transition group">
                         <div>
                             <div class="flex items-center justify-between mb-5">
                                 <div class="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600"><i class="fas fa-hammer" aria-hidden="true"></i></div>
                                 <span class="text-xs font-bold bg-gray-100 text-blue-900 px-3 py-1 rounded-full border border-gray-200">From $100</span>
                             </div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition">Carpentry &amp; Assembly</h3>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-5">Precision woodwork, custom trim installation, structural rot repairs, and hassle-free furniture assembly for any room.</p>
+                            <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition">Structural &amp; Interior Repairs</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Best for everyday home upkeep, repairs, and wall updates.</p>
                             <ul class="space-y-2 text-xs sm:text-sm text-gray-700 mb-6">
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-red-600 shrink-0" aria-hidden="true"></i> Baseboards, crown molding &amp; interior trim</li>
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-red-600 shrink-0" aria-hidden="true"></i> Exterior wood trim &amp; fascia rot repair</li>
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-red-600 shrink-0" aria-hidden="true"></i> IKEA, Wayfair &amp; office furniture assembly</li>
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-red-600 shrink-0" aria-hidden="true"></i> Cabinet, shelving &amp; closet system installs</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 shrink-0 mt-0.5" aria-hidden="true"></i> Carpentry — baseboards, crown molding, woodwork</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 shrink-0 mt-0.5" aria-hidden="true"></i> Drywall repair — patching, smoothing, paint-ready</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 shrink-0 mt-0.5" aria-hidden="true"></i> Painting &amp; staining — interior &amp; exterior prep</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 shrink-0 mt-0.5" aria-hidden="true"></i> Flooring &amp; tile — laminate, hardwood, tile repairs</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-red-600 shrink-0 mt-0.5" aria-hidden="true"></i> Doors &amp; windows — alignment and weather-tightness</li>
                             </ul>
                         </div>
-                        <a href="#carpentry" class="cta-button w-full text-sm font-bold shadow hover:shadow-md">Jump to Carpentry &amp; Assembly <i class="fas fa-arrow-down text-xs" aria-hidden="true"></i></a>
+                        <a href="#cat-structural" class="cta-button w-full text-sm font-bold shadow hover:shadow-md">Open this category <i class="fas fa-arrow-down text-xs" aria-hidden="true"></i></a>
                     </div>
-
-                    <!-- Category 2: Plumbing & Electrical -->
+                    <!-- Category 2: Plumbing, Electrical & Smart Home -->
                     <div class="bg-white border-2 border-blue-900/90 rounded-3xl p-7 shadow-md flex flex-col justify-between hover:shadow-xl transition group">
                         <div>
                             <div class="flex items-center justify-between mb-5">
                                 <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900"><i class="fas fa-bolt-lightning" aria-hidden="true"></i></div>
                                 <span class="text-xs font-bold bg-gray-100 text-blue-900 px-3 py-1 rounded-full border border-gray-200">From $130</span>
                             </div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-900 transition">Plumbing &amp; Electrical</h3>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-5">Safe fixture replacements, leak fixes, smart home device installs, and essential minor home utility upgrades.</p>
+                            <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-2 group-hover:text-blue-900 transition">Plumbing, Electrical &amp; Smart Home</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Best for functional home safety, fixtures, and upgrades.</p>
                             <ul class="space-y-2 text-xs sm:text-sm text-gray-700 mb-6">
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-900 shrink-0" aria-hidden="true"></i> Kitchen &amp; bath faucet &amp; sink replacement</li>
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-900 shrink-0" aria-hidden="true"></i> Toilet rebuilds, flappers &amp; leak repairs</li>
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-900 shrink-0" aria-hidden="true"></i> Light fixture, dimmer &amp; ceiling fan swaps</li>
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-900 shrink-0" aria-hidden="true"></i> TV wall mounting &amp; cable concealment</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-900 shrink-0 mt-0.5" aria-hidden="true"></i> Minor plumbing — faucets, drains, supply lines</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-900 shrink-0 mt-0.5" aria-hidden="true"></i> Tub &amp; shower re-caulk — watertight, mold-free seals</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-900 shrink-0 mt-0.5" aria-hidden="true"></i> Minor electrical — switches, outlets, fans, fixtures</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-900 shrink-0 mt-0.5" aria-hidden="true"></i> Smart home &amp; security — doorbells, locks, thermostats</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-900 shrink-0 mt-0.5" aria-hidden="true"></i> Energy tune-up — draft sealing and weatherstripping</li>
                             </ul>
                         </div>
-                        <a href="#minor-plumbing" class="cta-button bg-blue-900 hover:bg-blue-950 w-full text-sm font-bold shadow hover:shadow-md">Jump to Plumbing &amp; Electrical <i class="fas fa-arrow-down text-xs" aria-hidden="true"></i></a>
+                        <a href="#cat-systems" class="cta-button bg-blue-900 hover:bg-blue-950 w-full text-sm font-bold shadow hover:shadow-md">Open this category <i class="fas fa-arrow-down text-xs" aria-hidden="true"></i></a>
                     </div>
-
-                    <!-- Category 3: General Repairs & Maintenance -->
+                    <!-- Category 3: Assembly, Mounting & Projects -->
                     <div class="bg-white border-2 border-emerald-600/90 rounded-3xl p-7 shadow-md flex flex-col justify-between hover:shadow-xl transition group">
                         <div>
                             <div class="flex items-center justify-between mb-5">
-                                <div class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center text-3xl text-emerald-800"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></div>
+                                <div class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center text-3xl text-emerald-700"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></div>
                                 <span class="text-xs font-bold bg-gray-100 text-blue-900 px-3 py-1 rounded-full border border-gray-200">From $100</span>
                             </div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-emerald-700 transition">General Repairs &amp; Upkeep</h3>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-5">Comprehensive surface fixes, weatherization, door alignments, caulking, and ongoing home upkeep tasks.</p>
+                            <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-2 group-hover:text-emerald-700 transition">Assembly, Mounting &amp; Projects</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Best for convenience, lifestyle needs, and room setups.</p>
                             <ul class="space-y-2 text-xs sm:text-sm text-gray-700 mb-6">
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0" aria-hidden="true"></i> Drywall hole patching, crack fix &amp; sanding</li>
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0" aria-hidden="true"></i> Interior painting, touch-ups &amp; deck staining</li>
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0" aria-hidden="true"></i> Tub &amp; shower recaulking &amp; tile sealing</li>
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0" aria-hidden="true"></i> Entry door alignment, locks &amp; weatherstripping</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0 mt-0.5" aria-hidden="true"></i> Installation &amp; mounting — TVs, handrails, baby-proofing</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0 mt-0.5" aria-hidden="true"></i> Furniture assembly — flat-pack, brand-name, outdoor</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0 mt-0.5" aria-hidden="true"></i> Garage &amp; storage — shelving, racks, wall systems</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0 mt-0.5" aria-hidden="true"></i> Projects for pets — dog doors and custom fencing</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0 mt-0.5" aria-hidden="true"></i> Senior care — grab bars, audits, accessibility</li>
                             </ul>
                         </div>
-                        <a href="#home-repair-upkeep" class="cta-button bg-emerald-700 hover:bg-emerald-800 w-full text-sm font-bold shadow hover:shadow-md">Jump to General Repairs <i class="fas fa-arrow-down text-xs" aria-hidden="true"></i></a>
+                        <a href="#cat-projects" class="cta-button bg-emerald-700 hover:bg-emerald-800 w-full text-sm font-bold shadow hover:shadow-md">Open this category <i class="fas fa-arrow-down text-xs" aria-hidden="true"></i></a>
+                    </div>
+                    <!-- Category 4: Exterior, Seasonal & Maintenance -->
+                    <div class="bg-white border-2 border-amber-500/60 rounded-3xl p-7 shadow-md flex flex-col justify-between hover:shadow-xl transition group">
+                        <div>
+                            <div class="flex items-center justify-between mb-5">
+                                <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-3xl text-amber-700"><i class="fas fa-leaf" aria-hidden="true"></i></div>
+                                <span class="text-xs font-bold bg-gray-100 text-blue-900 px-3 py-1 rounded-full border border-gray-200">From $100</span>
+                            </div>
+                            <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-2 group-hover:text-amber-700 transition">Exterior, Seasonal &amp; Maintenance</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Best for curb appeal, weather protection, and upkeep.</p>
+                            <ul class="space-y-2 text-xs sm:text-sm text-gray-700 mb-6">
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-amber-600 shrink-0 mt-0.5" aria-hidden="true"></i> Decks &amp; fences — resurfacing, staining, repairs</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-amber-600 shrink-0 mt-0.5" aria-hidden="true"></i> Gutters — cleaning, repairs, cover installs</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-amber-600 shrink-0 mt-0.5" aria-hidden="true"></i> Power washing — siding, driveways, outdoor surfaces</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-amber-600 shrink-0 mt-0.5" aria-hidden="true"></i> Dryer vent cleaning — fire safety and efficiency</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check-circle text-amber-600 shrink-0 mt-0.5" aria-hidden="true"></i> Seasonal upkeep, home repair &amp; commercial work</li>
+                            </ul>
+                        </div>
+                        <a href="#cat-exterior" class="cta-button w-full text-sm font-bold shadow hover:shadow-md">Open this category <i class="fas fa-arrow-down text-xs" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -719,7 +875,7 @@
             <section id="home-care-plans" aria-labelledby="home-care-heading" class="mb-16 rounded-3xl bg-blue-900 p-6 sm:p-10 text-white shadow-xl">
                 <div class="text-center max-w-3xl mx-auto">
                     <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-red-300">
-                        <i class="fas fa-repeat" aria-hidden="true"></i> New — Recurring Home Care
+                        <i class="fas fa-arrows-rotate" aria-hidden="true"></i> New — Recurring Home Care
                     </span>
                     <h2 id="home-care-heading" class="mt-3 text-2xl sm:text-3xl md:text-4xl font-bold">Quarterly Home Care Subscription</h2>
                     <p class="mt-3 text-sm sm:text-base leading-relaxed text-blue-100">
@@ -886,471 +1042,543 @@
                 </p>
             </section>
 
-            <!-- Grouped Jump Links -->
-            <nav aria-label="Jump to a service group" class="max-w-6xl mx-auto mb-12 bg-white p-6 rounded-3xl border border-gray-200 shadow-sm">
-                <p class="text-center text-xs uppercase tracking-widest text-blue-900 font-bold mb-4"><i class="fas fa-compass mr-1" aria-hidden="true"></i> Browse Services by Category</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 text-xs font-semibold">
-                    <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
-                        <span class="block text-red-600 font-bold uppercase tracking-wider mb-2"><i class="fas fa-wrench mr-1" aria-hidden="true"></i> Repairs</span>
-                        <div class="space-y-1 flex flex-col text-gray-700">
-                            <a href="#carpentry" class="hover:text-red-600">Carpentry</a>
-                            <a href="#doors-windows" class="hover:text-red-600">Doors &amp; Windows</a>
-                            <a href="#drywall-repair" class="hover:text-red-600">Drywall Repair</a>
-                            <a href="#painting-staining" class="hover:text-red-600">Painting &amp; Staining</a>
-                            <a href="#flooring-solutions" class="hover:text-red-600">Flooring Solutions</a>
+            <!-- Categorised service catalog.
+
+                 Twenty-plus service cards in one flat grid meant a very long
+                 scroll before a homeowner reached the one they came for. The
+                 same cards now sit inside four <details> groups so the page
+                 opens as a short, scannable menu and only the chosen category
+                 expands. <details> was picked over a JS tab widget so the
+                 grouping still works, and still renders every card to crawlers,
+                 with scripting unavailable; the script at the end of the page
+                 only adds hash-target opening and the expand/collapse-all
+                 control on top of that. Every card keeps its original id, so
+                 the deep links on the city pages (/services#gutters and the
+                 rest) still land on the right card. -->
+            <section id="service-catalog" aria-labelledby="service-catalog-heading" class="mb-4">
+                <div class="text-center mb-8">
+                    <span class="bg-blue-100 text-blue-900 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border border-blue-200"><i class="fas fa-list-check mr-1.5 text-red-600" aria-hidden="true"></i> Full Service Catalog</span>
+                    <h2 id="service-catalog-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mt-3">Browse by Category</h2>
+                    <p class="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto mt-2">Pick the category that matches your project and open it to see every service inside. Everything else stays tucked away.</p>
+                </div>
+
+                <nav aria-label="Service categories" class="svc-tabs">
+                    <a href="#cat-structural" data-svc-jump class="svc-tab"><i class="fas fa-hammer" aria-hidden="true"></i>Structural &amp; Interior Repairs<span class="svc-tab__count">5</span></a>
+                    <a href="#cat-systems" data-svc-jump class="svc-tab"><i class="fas fa-bolt-lightning" aria-hidden="true"></i>Plumbing, Electrical &amp; Smart Home<span class="svc-tab__count">5</span></a>
+                    <a href="#cat-projects" data-svc-jump class="svc-tab"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i>Assembly, Mounting &amp; Specialized Projects<span class="svc-tab__count">5</span></a>
+                    <a href="#cat-exterior" data-svc-jump class="svc-tab"><i class="fas fa-leaf" aria-hidden="true"></i>Exterior, Seasonal &amp; Maintenance<span class="svc-tab__count">8</span></a>
+                    <button type="button" class="svc-tab svc-tab--toggle" data-svc-toggle-all aria-expanded="false"><i class="fas fa-chevron-down" aria-hidden="true"></i><span data-svc-toggle-label>Expand all</span></button>
+                </nav>
+
+                <details id="cat-structural" class="svc-group" data-svc-group open>
+                    <summary class="svc-group__summary">
+                        <span class="svc-group__icon bg-red-100 text-red-600" aria-hidden="true"><i class="fas fa-hammer"></i></span>
+                        <span class="svc-group__text">
+                            <span class="svc-group__title"><span class="svc-group__num" aria-hidden="true">1.</span> Structural &amp; Interior Repairs</span>
+                            <span class="svc-group__best">Best for everyday home upkeep, repairs, and wall updates.</span>
+                            <span class="svc-group__chips">
+                                <span class="svc-chip">Carpentry</span>
+                                <span class="svc-chip">Drywall Repair</span>
+                                <span class="svc-chip">Painting &amp; Staining</span>
+                                <span class="svc-chip">Flooring &amp; Tile</span>
+                                <span class="svc-chip">Doors &amp; Windows</span>
+                            </span>
+                        </span>
+                        <span class="svc-group__meta">
+                            <span class="svc-group__count">5 services</span>
+                            <span class="svc-group__chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                        </span>
+                    </summary>
+                    <div class="svc-group__panel">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-hammer" aria-hidden="true"></i></div>
+                                    <h3 id="carpentry" class="text-2xl font-semibold mb-3 text-blue-900">Carpentry</h3>
+                                    <p class="text-gray-600 mb-4">Revive your home’s character. From baseboards and crown molding to custom exterior woodwork, we provide precision craftsmanship that restores the aesthetic and structural integrity of your living space.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/carpentry" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Carpentry & Assembly">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-border-all" aria-hidden="true"></i></div>
+                                    <h3 id="drywall-repair" class="text-2xl font-semibold mb-3 text-blue-900">Drywall Repair</h3>
+                                    <p class="text-gray-600 mb-4">Seamless surfaces, flawless finishes. Don’t let cracks or holes distract from your home’s interior. We deliver craftsman-grade patching and smoothing, leaving your walls paint-ready and pristine.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Drywall Repair</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/drywall-repair" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Drywall Repair">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-paint-roller" aria-hidden="true"></i></div>
+                                    <h3 id="painting-staining" class="text-2xl font-semibold mb-3 text-blue-900">Painting &amp; Staining</h3>
+                                    <p class="text-gray-600 mb-4">A fresh look, perfectly executed. Painting is 90% preparation. We focus on meticulous surface prep, crisp edging, and smooth, craftsman finishes to revitalize your home’s appearance inside and out.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/painting-staining" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Painting & Staining">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-ruler-combined" aria-hidden="true"></i></div>
+                                    <h3 id="flooring-solutions" class="text-2xl font-semibold mb-3 text-blue-900">Flooring Solutions</h3>
+                                    <p class="text-gray-600 mb-4">Durable beauty underfoot. From hardwood to laminate and carpet, we provide expert maintenance and repair services, ensuring your floors are level, secure, and built to last.</p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/flooring-solutions" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Flooring Solutions">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-door-open" aria-hidden="true"></i></div>
+                                    <h3 id="doors-windows" class="text-2xl font-semibold mb-3 text-blue-900">Doors &amp; Windows</h3>
+                                    <p class="text-gray-600 mb-4">Secure, smooth, and weather-tight. Whether it’s an elegant new entry door for curb appeal, an interior door that sticks, or a window that needs installing or adjusting, we handle expert installation and alignment so every opening works perfectly and seals out the elements.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Door Installation &amp; Repair</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Window Installation &amp; Repair</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/doors-windows" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Doors & Windows">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
-                        <span class="block text-blue-900 font-bold uppercase tracking-wider mb-2"><i class="fas fa-plug mr-1" aria-hidden="true"></i> Installations</span>
-                        <div class="space-y-1 flex flex-col text-gray-700">
-                            <a href="#installation" class="hover:text-red-600">TV Mounting &amp; Installs</a>
-                            <a href="#minor-electrical" class="hover:text-red-600">Minor Electrical</a>
-                            <a href="#minor-plumbing" class="hover:text-red-600">Minor Plumbing</a>
-                            <a href="#furniture-assembly" class="hover:text-red-600">Furniture Assembly</a>
-                            <a href="#garage-storage" class="hover:text-red-600">Garage Storage</a>
+                </details>
+
+                <details id="cat-systems" class="svc-group" data-svc-group>
+                    <summary class="svc-group__summary">
+                        <span class="svc-group__icon bg-blue-100 text-blue-900" aria-hidden="true"><i class="fas fa-bolt-lightning"></i></span>
+                        <span class="svc-group__text">
+                            <span class="svc-group__title"><span class="svc-group__num" aria-hidden="true">2.</span> Plumbing, Electrical &amp; Smart Home</span>
+                            <span class="svc-group__best">Best for functional home safety, fixtures, and upgrades.</span>
+                            <span class="svc-group__chips">
+                                <span class="svc-chip">Minor Plumbing</span>
+                                <span class="svc-chip">Tub &amp; Shower Re-Caulk</span>
+                                <span class="svc-chip">Minor Electrical</span>
+                                <span class="svc-chip">Smart Home &amp; Security</span>
+                                <span class="svc-chip">Energy Tune-Up</span>
+                            </span>
+                        </span>
+                        <span class="svc-group__meta">
+                            <span class="svc-group__count">5 services</span>
+                            <span class="svc-group__chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                        </span>
+                    </summary>
+                    <div class="svc-group__panel">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-start mb-6">
+                                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600" aria-hidden="true"><i class="fas fa-faucet-drip" aria-hidden="true"></i></div>
+                                        <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $130</span>
+                                    </div>
+                                    <h3 id="minor-plumbing" class="text-2xl font-semibold mb-2 text-blue-900">Minor Plumbing &amp; Leak Prevention</h3>
+                                    <p class="text-[11px] font-semibold text-blue-900 bg-blue-50 p-2.5 rounded-xl border border-blue-100 mb-3"><i class="fas fa-info-circle text-blue-600 mr-1" aria-hidden="true"></i>Ideal for minor repairs, fixture replacements &amp; hardware upgrades. For major re-wiring or full replumbing, we can coordinate with licensed trades.</p>
+                                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">Stop the drip, protect your home. We provide fast, clean solutions for leaky faucets, showerheads, and stubborn drains—plus preventative fixes that stop water damage.</p>
+                                    <ul class="space-y-1.5 text-xs text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Faucet, Showerhead &amp; Drain Repair</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Under-Sink Valve &amp; Supply-Line Swaps</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Toilet Rebuilds &amp; Wax Ring Replacement</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Leak Sensor &amp; Washer Hose Upgrades</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/minor-plumbing" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Minor Plumbing & Leak Prevention">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-shower" aria-hidden="true"></i></div>
+                                    <h3 id="tub-shower-recaulk" class="text-2xl font-semibold mb-3 text-blue-900">Tub &amp; Shower Re-Caulk</h3>
+                                    <p class="text-gray-600 mb-4">Fresh, waterproof, and mold-free. Old, cracked, or discolored caulk is an eyesore—and it lets water seep into the places that cause costly damage. We strip out the failing caulk and lay down a clean, watertight seal that protects your walls, floors, and peace of mind.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Tub &amp; Shower Re-Caulk</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Mold &amp; Mildew Caulk Removal</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Kitchen &amp; Wet-Area Sealing</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/tub-shower-recaulk" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Tub & Shower Re-Caulk">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-start mb-6">
+                                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900" aria-hidden="true"><i class="fas fa-lightbulb" aria-hidden="true"></i></div>
+                                        <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $130</span>
+                                    </div>
+                                    <h3 id="minor-electrical" class="text-2xl font-semibold mb-2 text-blue-900">Minor Electrical Services</h3>
+                                    <p class="text-[11px] font-semibold text-blue-900 bg-blue-50 p-2.5 rounded-xl border border-blue-100 mb-3"><i class="fas fa-info-circle text-blue-600 mr-1" aria-hidden="true"></i>Ideal for minor repairs, fixture replacements &amp; hardware upgrades. For major re-wiring or full replumbing, we can coordinate with licensed trades.</p>
+                                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">Safe, reliable updates. Keep your home powered and bright. We replace outdated switches, outlets, dimmers, light fixtures, and ceiling fans with safety precision.</p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/minor-electrical" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Minor Electrical Services">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-shield-halved" aria-hidden="true"></i></div>
+                                    <h3 id="home-security" class="text-2xl font-semibold mb-3 text-blue-900">Home Security &amp; Smart Home</h3>
+                                    <p class="text-gray-600 mb-4">Peace of mind, professionally installed. From smart devices to security hardware, we set up the products that make your home safer and more convenient—day and night. (Note: We focus on device installs and setup; any work requiring licensed electrical or HVAC scope is coordinated with a licensed pro.)</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Video Doorbells &amp; Security Cameras</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Smart Locks &amp; Deadbolts</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Leak &amp; Freeze Sensors</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Smart Switches, Dimmers &amp; Thermostats</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/home-security" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Home Security & Smart Home">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-wind" aria-hidden="true"></i></div>
+                                    <h3 id="energy-efficiency" class="text-2xl font-semibold mb-3 text-blue-900">Energy-Efficiency Tune-Up</h3>
+                                    <p class="text-gray-600 mb-4">Comfort up, energy bills down. Drafts around doors and windows quietly drive up your heating and cooling costs all year. We replace worn weatherstripping and door sweeps, seal hidden air leaks, and close the small gaps that waste conditioned air—so your home stays comfortable and efficient.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Weatherstripping &amp; Door Sweep Replacement</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Draft-Stopping &amp; Air-Leak Sealing</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Attic Hatch &amp; Outlet Gasket Sealing</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Window Sash &amp; Lock Repair</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/energy-efficiency" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Energy-Efficiency Tune-Up">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
-                        <span class="block text-amber-700 font-bold uppercase tracking-wider mb-2"><i class="fas fa-leaf mr-1" aria-hidden="true"></i> Maintenance</span>
-                        <div class="space-y-1 flex flex-col text-gray-700">
-                            <a href="#gutters" class="hover:text-red-600">Gutters</a>
-                            <a href="#dryer-vent" class="hover:text-red-600">Dryer Vent Cleaning</a>
-                            <a href="#energy-efficiency" class="hover:text-red-600">Energy Tune-Up</a>
-                            <a href="#decks-fences" class="hover:text-red-600">Decks &amp; Fences</a>
-                            <a href="#power-washing" class="hover:text-red-600">Power Washing</a>
-                            <a href="#home-repair-upkeep" class="hover:text-red-600">Home Upkeep</a>
+                </details>
+
+                <details id="cat-projects" class="svc-group" data-svc-group>
+                    <summary class="svc-group__summary">
+                        <span class="svc-group__icon bg-emerald-100 text-emerald-700" aria-hidden="true"><i class="fas fa-screwdriver-wrench"></i></span>
+                        <span class="svc-group__text">
+                            <span class="svc-group__title"><span class="svc-group__num" aria-hidden="true">3.</span> Assembly, Mounting &amp; Specialized Projects</span>
+                            <span class="svc-group__best">Best for convenience, lifestyle needs, and room setups.</span>
+                            <span class="svc-group__chips">
+                                <span class="svc-chip">Installation &amp; Mounting</span>
+                                <span class="svc-chip">Furniture Assembly</span>
+                                <span class="svc-chip">Garage &amp; Storage</span>
+                                <span class="svc-chip">Projects For Pets</span>
+                                <span class="svc-chip">Senior Care</span>
+                            </span>
+                        </span>
+                        <span class="svc-group__meta">
+                            <span class="svc-group__count">5 services</span>
+                            <span class="svc-group__chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                        </span>
+                    </summary>
+                    <div class="svc-group__panel">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></div>
+                                    <h3 id="installation" class="text-2xl font-semibold mb-3 text-blue-900">Installation</h3>
+                                    <p class="text-gray-600 mb-4">Mounted, anchored, and ready to go. Whatever needs putting up or putting in, we handle it with clean, code-conscious installation you can rely on.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Baby &amp; Child Proofing</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>All Your Installation Projects</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Handrail &amp; Stairs Installation</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Kitchen Installation</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bathroom Installation</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>TV Wall Mounting</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/installation" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Installation">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-couch" aria-hidden="true"></i></div>
+                                    <h3 id="furniture-assembly" class="text-2xl font-semibold mb-3 text-blue-900">Furniture Assembly</h3>
+                                    <p class="text-gray-600 mb-4">Assembled right, the first time. Skip the confusing instructions and leftover parts—we put together flat-pack, brand-name, and outdoor pieces so they’re sturdy, safe, and ready to use.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Deck Furniture &amp; BBQ</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Brand Name Assembly</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Furniture Assembly</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/furniture-assembly" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Furniture Assembly">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-warehouse" aria-hidden="true"></i></div>
+                                    <h3 id="garage-storage" class="text-2xl font-semibold mb-3 text-blue-900">Garage &amp; Storage Organization</h3>
+                                    <p class="text-gray-600 mb-4">Reclaim your space. Turn a cluttered garage into organized, usable square footage. We install shelving, overhead racks, and wall storage so everything has its place—and you get your floor back.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Shelving &amp; Overhead Storage Racks</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Wall Slat Boards &amp; Tool Storage</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bike, Ladder &amp; Gear Hooks</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Workbench &amp; Lighting Upgrades</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/garage-storage" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Garage & Storage Organization">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-dog" aria-hidden="true"></i></div>
+                                    <h3 id="projects-for-pets" class="text-2xl font-semibold mb-3 text-blue-900">Projects For Pets</h3>
+                                    <p class="text-gray-600 mb-4">Thoughtful projects for your whole family—pets included. From secure fencing to dog doors and trim repair, we create safe, convenient spaces for your four-legged friends.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Fence Installation &amp; Repair</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Dog Door Installation</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Trim Repair</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/projects-for-pets" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Projects For Pets">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-wheelchair" aria-hidden="true"></i></div>
+                                    <h3 id="senior-care" class="text-2xl font-semibold mb-3 text-blue-900">Senior Care &amp; Aging-in-Place</h3>
+                                    <p class="text-gray-600 mb-4">Comfort and safety at every stage of life. Falls are a leading cause of injury at home, but small changes make a big difference. We offer a Home Safety Audit plus practical modifications so you or your loved ones can live independently and confidently.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Grab Bars &amp; Handrail Installation</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Handheld Shower Heads &amp; Comfort-Height Toilets</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Lever Handles &amp; Threshold Adjustments</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bathroom, Kitchen &amp; Exterior Modifications</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Whole-Home Safety Modifications</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/senior-care" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Senior Care & Aging-in-Place">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
-                        <span class="block text-emerald-700 font-bold uppercase tracking-wider mb-2"><i class="fas fa-shield-cat mr-1" aria-hidden="true"></i> Safety &amp; Smart</span>
-                        <div class="space-y-1 flex flex-col text-gray-700">
-                            <a href="#senior-care" class="hover:text-red-600">Senior Care &amp; Grab Bars</a>
-                            <a href="#home-security" class="hover:text-red-600">Smart Home &amp; Locks</a>
-                            <a href="#tub-shower-recaulk" class="hover:text-red-600">Tub &amp; Shower Re-Caulk</a>
-                            <a href="#projects-for-pets" class="hover:text-red-600">Projects for Pets</a>
+                </details>
+
+                <details id="cat-exterior" class="svc-group" data-svc-group>
+                    <summary class="svc-group__summary">
+                        <span class="svc-group__icon bg-amber-100 text-amber-700" aria-hidden="true"><i class="fas fa-leaf"></i></span>
+                        <span class="svc-group__text">
+                            <span class="svc-group__title"><span class="svc-group__num" aria-hidden="true">4.</span> Exterior, Seasonal &amp; Maintenance</span>
+                            <span class="svc-group__best">Best for curb appeal, weather protection, and property upkeep.</span>
+                            <span class="svc-group__chips">
+                                <span class="svc-chip">Decks &amp; Fences</span>
+                                <span class="svc-chip">Gutters</span>
+                                <span class="svc-chip">Power Washing</span>
+                                <span class="svc-chip">Dryer Vent Cleaning</span>
+                                <span class="svc-chip">Preventative Maintenance</span>
+                                <span class="svc-chip">Maintenance &amp; Cleaning</span>
+                                <span class="svc-chip">Home Repair &amp; Upkeep</span>
+                                <span class="svc-chip">Commercial</span>
+                            </span>
+                        </span>
+                        <span class="svc-group__meta">
+                            <span class="svc-group__count">8 services</span>
+                            <span class="svc-group__chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                        </span>
+                    </summary>
+                    <div class="svc-group__panel">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-tree" aria-hidden="true"></i></div>
+                                    <h3 id="decks-fences" class="text-2xl font-semibold mb-3 text-blue-900">Decks &amp; Fences</h3>
+                                    <p class="text-gray-600">Restore your outdoor sanctuary. Extend the life of your wood structures with craftsman resurfacing, structural repairs, and expert staining to protect your investment against the elements.</p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/decks-fences" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Decks & Fences">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-house-flood-water" aria-hidden="true"></i></div>
+                                    <h3 id="gutters" class="text-2xl font-semibold mb-3 text-blue-900">Gutters</h3>
+                                    <p class="text-gray-600 mb-4">Protect your home from the top down. Clogged or damaged gutters lead to costly water damage—we clean, repair, and cover them to keep water flowing away from your foundation.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Gutter Cover Install</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Gutter Repair</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Gutter Cleaning</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/gutters" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Gutters">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-spray-can-sparkles" aria-hidden="true"></i></div>
+                                    <h3 id="power-washing" class="text-2xl font-semibold mb-3 text-blue-900">Power Washing</h3>
+                                    <p class="text-gray-600 mb-4">Restore that like-new shine. Blast away years of grime, mildew, and buildup from the surfaces around your home for instant curb appeal.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>BBQ</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Siding</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Sidewalks</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Driveway</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Fence</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/power-washing" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Power Washing">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-fire-flame-curved" aria-hidden="true"></i></div>
+                                    <h3 id="dryer-vent" class="text-2xl font-semibold mb-3 text-blue-900">Dryer Vent Cleaning</h3>
+                                    <p class="text-gray-600 mb-4">A quick job that prevents a house fire. Lint buildup in dryer vents is a leading cause of home fires and forces your dryer to work overtime. We clear the full vent run so your laundry dries faster, your energy use drops, and your home stays safe—an easy add-on to any visit.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Full Vent &amp; Duct Cleaning</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Lint Buildup &amp; Airflow Check</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Faster Drying &amp; Lower Fire Risk</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/dryer-vent" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Dryer Vent Cleaning">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-clipboard-check" aria-hidden="true"></i></div>
+                                    <h3 id="preventative-maintenance" class="text-2xl font-semibold mb-3 text-blue-900">Preventative Maintenance</h3>
+                                    <p class="text-gray-600 mb-4">Stop small problems before they start. Regular seasonal check-ups inside and out catch wear early—saving you money and headaches down the road.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/preventative-maintenance" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Preventative Maintenance">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-broom" aria-hidden="true"></i></div>
+                                    <h3 id="maintenance-cleaning" class="text-2xl font-semibold mb-3 text-blue-900">Maintenance &amp; Cleaning</h3>
+                                    <p class="text-gray-600">Seasonal care, year-round peace of mind. Cross off your to-do list with comprehensive gutter cleaning, power washing, and general home maintenance designed to keep your property in peak condition. <strong><br>Spring: Gutter cleaning, deck repair, window inspections.<br>Autumn: Weatherproofing, door sealing, winterization repairs.</strong></p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/maintenance-cleaning" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Maintenance & Cleaning">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-house-chimney" aria-hidden="true"></i></div>
+                                    <h3 id="home-repair-upkeep" class="text-2xl font-semibold mb-3 text-blue-900">Home Repair &amp; Upkeep</h3>
+                                    <p class="text-gray-600 mb-4">Keep every room in peak condition. From the laundry room to the kitchen, bath, and exterior, we tackle the ongoing repairs and upkeep that protect your home’s comfort and value.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Laundry Room Maintenance</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bathroom Maintenance &amp; Upkeep</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Kitchen Maintenance &amp; Upkeep</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior Home Maintenance</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/home-repair-upkeep" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Home Repair & Upkeep">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="service-card bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-building" aria-hidden="true"></i></div>
+                                    <h3 id="commercial" class="text-2xl font-semibold mb-3 text-blue-900">Commercial Services</h3>
+                                    <p class="text-gray-600 mb-4">Reliable help for your business, too. We keep commercial properties looking sharp and running smoothly with dependable interior and exterior services.</p>
+                                    <ul class="space-y-2 text-sm text-gray-600">
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
+                                        <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <a href="/services/commercial" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Commercial Services">
+                                        Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200">
-                        <span class="block text-purple-700 font-bold uppercase tracking-wider mb-2"><i class="fas fa-layer-group mr-1" aria-hidden="true"></i> Bundles &amp; Rates</span>
-                        <div class="space-y-1 flex flex-col text-gray-700">
-                            <a href="/rates" class="hover:text-red-600">Flat-Rate Menu</a>
-                            <a href="/rates#packages" class="hover:text-red-600">Half/Full-Day Packages</a>
-                            <a href="#commercial" class="hover:text-red-600">Commercial Services</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+                </details>
+            </section>
 
-            <div class="flex flex-wrap justify-center gap-8">
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-hammer" aria-hidden="true"></i></div>
-                        <h3 id="carpentry" class="text-2xl font-semibold mb-3 text-blue-900">Carpentry</h3>
-                        <p class="text-gray-600 mb-4">Revive your home’s character. From baseboards and crown molding to custom exterior woodwork, we provide precision craftsmanship that restores the aesthetic and structural integrity of your living space.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/carpentry" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Carpentry & Assembly">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-door-open" aria-hidden="true"></i></div>
-                        <h3 id="doors-windows" class="text-2xl font-semibold mb-3 text-blue-900">Doors &amp; Windows</h3>
-                        <p class="text-gray-600 mb-4">Secure, smooth, and weather-tight. Whether it’s an elegant new entry door for curb appeal, an interior door that sticks, or a window that needs installing or adjusting, we handle expert installation and alignment so every opening works perfectly and seals out the elements.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Door Installation &amp; Repair</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Window Installation &amp; Repair</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/doors-windows" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Doors & Windows">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-wind" aria-hidden="true"></i></div>
-                        <h3 id="energy-efficiency" class="text-2xl font-semibold mb-3 text-blue-900">Energy-Efficiency Tune-Up</h3>
-                        <p class="text-gray-600 mb-4">Comfort up, energy bills down. Drafts around doors and windows quietly drive up your heating and cooling costs all year. We replace worn weatherstripping and door sweeps, seal hidden air leaks, and close the small gaps that waste conditioned air—so your home stays comfortable and efficient.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Weatherstripping &amp; Door Sweep Replacement</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Draft-Stopping &amp; Air-Leak Sealing</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Attic Hatch &amp; Outlet Gasket Sealing</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Window Sash &amp; Lock Repair</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/energy-efficiency" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Energy-Efficiency Tune-Up">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-fire-flame-curved" aria-hidden="true"></i></div>
-                        <h3 id="dryer-vent" class="text-2xl font-semibold mb-3 text-blue-900">Dryer Vent Cleaning</h3>
-                        <p class="text-gray-600 mb-4">A quick job that prevents a house fire. Lint buildup in dryer vents is a leading cause of home fires and forces your dryer to work overtime. We clear the full vent run so your laundry dries faster, your energy use drops, and your home stays safe—an easy add-on to any visit.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Full Vent &amp; Duct Cleaning</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Lint Buildup &amp; Airflow Check</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Faster Drying &amp; Lower Fire Risk</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/dryer-vent" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Dryer Vent Cleaning">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-border-all" aria-hidden="true"></i></div>
-                        <h3 id="drywall-repair" class="text-2xl font-semibold mb-3 text-blue-900">Drywall Repair</h3>
-                        <p class="text-gray-600 mb-4">Seamless surfaces, flawless finishes. Don’t let cracks or holes distract from your home’s interior. We deliver craftsman-grade patching and smoothing, leaving your walls paint-ready and pristine.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Drywall Repair</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/drywall-repair" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Drywall Repair">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-paint-roller" aria-hidden="true"></i></div>
-                        <h3 id="painting-staining" class="text-2xl font-semibold mb-3 text-blue-900">Painting &amp; Staining</h3>
-                        <p class="text-gray-600 mb-4">A fresh look, perfectly executed. Painting is 90% preparation. We focus on meticulous surface prep, crisp edging, and smooth, craftsman finishes to revitalize your home’s appearance inside and out.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/painting-staining" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Painting & Staining">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-ruler-combined" aria-hidden="true"></i></div>
-                        <h3 id="flooring-solutions" class="text-2xl font-semibold mb-3 text-blue-900">Flooring Solutions</h3>
-                        <p class="text-gray-600 mb-4">Durable beauty underfoot. From hardwood to laminate and carpet, we provide expert maintenance and repair services, ensuring your floors are level, secure, and built to last.</p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/flooring-solutions" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Flooring Solutions">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600" aria-hidden="true"><i class="fas fa-faucet-drip" aria-hidden="true"></i></div>
-                            <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $130</span>
-                        </div>
-                        <h3 id="minor-plumbing" class="text-2xl font-semibold mb-2 text-blue-900">Minor Plumbing &amp; Leak Prevention</h3>
-                        <p class="text-[11px] font-semibold text-blue-900 bg-blue-50 p-2.5 rounded-xl border border-blue-100 mb-3"><i class="fas fa-info-circle text-blue-600 mr-1" aria-hidden="true"></i>Ideal for minor repairs, fixture replacements &amp; hardware upgrades. For major re-wiring or full replumbing, we can coordinate with licensed trades.</p>
-                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">Stop the drip, protect your home. We provide fast, clean solutions for leaky faucets, showerheads, and stubborn drains—plus preventative fixes that stop water damage.</p>
-                        <ul class="space-y-1.5 text-xs text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Faucet, Showerhead &amp; Drain Repair</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Under-Sink Valve &amp; Supply-Line Swaps</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Toilet Rebuilds &amp; Wax Ring Replacement</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-0.5">•</span>Leak Sensor &amp; Washer Hose Upgrades</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/minor-plumbing" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Minor Plumbing & Leak Prevention">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-shower" aria-hidden="true"></i></div>
-                        <h3 id="tub-shower-recaulk" class="text-2xl font-semibold mb-3 text-blue-900">Tub &amp; Shower Re-Caulk</h3>
-                        <p class="text-gray-600 mb-4">Fresh, waterproof, and mold-free. Old, cracked, or discolored caulk is an eyesore—and it lets water seep into the places that cause costly damage. We strip out the failing caulk and lay down a clean, watertight seal that protects your walls, floors, and peace of mind.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Tub &amp; Shower Re-Caulk</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Mold &amp; Mildew Caulk Removal</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Kitchen &amp; Wet-Area Sealing</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/tub-shower-recaulk" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Tub & Shower Re-Caulk">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900" aria-hidden="true"><i class="fas fa-lightbulb" aria-hidden="true"></i></div>
-                            <span class="text-xs font-bold bg-gray-100 text-blue-900 px-2.5 py-1 rounded-full border border-gray-200">From $130</span>
-                        </div>
-                        <h3 id="minor-electrical" class="text-2xl font-semibold mb-2 text-blue-900">Minor Electrical Services</h3>
-                        <p class="text-[11px] font-semibold text-blue-900 bg-blue-50 p-2.5 rounded-xl border border-blue-100 mb-3"><i class="fas fa-info-circle text-blue-600 mr-1" aria-hidden="true"></i>Ideal for minor repairs, fixture replacements &amp; hardware upgrades. For major re-wiring or full replumbing, we can coordinate with licensed trades.</p>
-                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">Safe, reliable updates. Keep your home powered and bright. We replace outdated switches, outlets, dimmers, light fixtures, and ceiling fans with safety precision.</p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/minor-electrical" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Minor Electrical Services">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></div>
-                        <h3 id="installation" class="text-2xl font-semibold mb-3 text-blue-900">Installation</h3>
-                        <p class="text-gray-600 mb-4">Mounted, anchored, and ready to go. Whatever needs putting up or putting in, we handle it with clean, code-conscious installation you can rely on.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Baby &amp; Child Proofing</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>All Your Installation Projects</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Handrail &amp; Stairs Installation</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Kitchen Installation</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bathroom Installation</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>TV Wall Mounting</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/installation" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Installation">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-couch" aria-hidden="true"></i></div>
-                        <h3 id="furniture-assembly" class="text-2xl font-semibold mb-3 text-blue-900">Furniture Assembly</h3>
-                        <p class="text-gray-600 mb-4">Assembled right, the first time. Skip the confusing instructions and leftover parts—we put together flat-pack, brand-name, and outdoor pieces so they’re sturdy, safe, and ready to use.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Deck Furniture &amp; BBQ</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Brand Name Assembly</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Furniture Assembly</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/furniture-assembly" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Furniture Assembly">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-warehouse" aria-hidden="true"></i></div>
-                        <h3 id="garage-storage" class="text-2xl font-semibold mb-3 text-blue-900">Garage &amp; Storage Organization</h3>
-                        <p class="text-gray-600 mb-4">Reclaim your space. Turn a cluttered garage into organized, usable square footage. We install shelving, overhead racks, and wall storage so everything has its place—and you get your floor back.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Shelving &amp; Overhead Storage Racks</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Wall Slat Boards &amp; Tool Storage</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bike, Ladder &amp; Gear Hooks</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Workbench &amp; Lighting Upgrades</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/garage-storage" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Garage & Storage Organization">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-tree" aria-hidden="true"></i></div>
-                        <h3 id="decks-fences" class="text-2xl font-semibold mb-3 text-blue-900">Decks &amp; Fences</h3>
-                        <p class="text-gray-600">Restore your outdoor sanctuary. Extend the life of your wood structures with craftsman resurfacing, structural repairs, and expert staining to protect your investment against the elements.</p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/decks-fences" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Decks & Fences">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-house-flood-water" aria-hidden="true"></i></div>
-                        <h3 id="gutters" class="text-2xl font-semibold mb-3 text-blue-900">Gutters</h3>
-                        <p class="text-gray-600 mb-4">Protect your home from the top down. Clogged or damaged gutters lead to costly water damage—we clean, repair, and cover them to keep water flowing away from your foundation.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Gutter Cover Install</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Gutter Repair</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Gutter Cleaning</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/gutters" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Gutters">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-spray-can-sparkles" aria-hidden="true"></i></div>
-                        <h3 id="power-washing" class="text-2xl font-semibold mb-3 text-blue-900">Power Washing</h3>
-                        <p class="text-gray-600 mb-4">Restore that like-new shine. Blast away years of grime, mildew, and buildup from the surfaces around your home for instant curb appeal.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>BBQ</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Siding</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Sidewalks</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Driveway</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Fence</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/power-washing" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Power Washing">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-dog" aria-hidden="true"></i></div>
-                        <h3 id="projects-for-pets" class="text-2xl font-semibold mb-3 text-blue-900">Projects For Pets</h3>
-                        <p class="text-gray-600 mb-4">Thoughtful projects for your whole family—pets included. From secure fencing to dog doors and trim repair, we create safe, convenient spaces for your four-legged friends.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Fence Installation &amp; Repair</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Dog Door Installation</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Trim Repair</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/projects-for-pets" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Projects For Pets">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-house-chimney" aria-hidden="true"></i></div>
-                        <h3 id="home-repair-upkeep" class="text-2xl font-semibold mb-3 text-blue-900">Home Repair &amp; Upkeep</h3>
-                        <p class="text-gray-600 mb-4">Keep every room in peak condition. From the laundry room to the kitchen, bath, and exterior, we tackle the ongoing repairs and upkeep that protect your home’s comfort and value.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Laundry Room Maintenance</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bathroom Maintenance &amp; Upkeep</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Kitchen Maintenance &amp; Upkeep</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior Home Maintenance</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/home-repair-upkeep" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Home Repair & Upkeep">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-clipboard-check" aria-hidden="true"></i></div>
-                        <h3 id="preventative-maintenance" class="text-2xl font-semibold mb-3 text-blue-900">Preventative Maintenance</h3>
-                        <p class="text-gray-600 mb-4">Stop small problems before they start. Regular seasonal check-ups inside and out catch wear early—saving you money and headaches down the road.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/preventative-maintenance" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Preventative Maintenance">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-broom" aria-hidden="true"></i></div>
-                        <h3 id="maintenance-cleaning" class="text-2xl font-semibold mb-3 text-blue-900">Maintenance &amp; Cleaning</h3>
-                        <p class="text-gray-600">Seasonal care, year-round peace of mind. Cross off your to-do list with comprehensive gutter cleaning, power washing, and general home maintenance designed to keep your property in peak condition. <strong><br>Spring: Gutter cleaning, deck repair, window inspections.<br>Autumn: Weatherproofing, door sealing, winterization repairs.</strong></p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/maintenance-cleaning" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Maintenance & Cleaning">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-wheelchair" aria-hidden="true"></i></div>
-                        <h3 id="senior-care" class="text-2xl font-semibold mb-3 text-blue-900">Senior Care &amp; Aging-in-Place</h3>
-                        <p class="text-gray-600 mb-4">Comfort and safety at every stage of life. Falls are a leading cause of injury at home, but small changes make a big difference. We offer a Home Safety Audit plus practical modifications so you or your loved ones can live independently and confidently.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Grab Bars &amp; Handrail Installation</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Handheld Shower Heads &amp; Comfort-Height Toilets</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Lever Handles &amp; Threshold Adjustments</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Bathroom, Kitchen &amp; Exterior Modifications</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Whole-Home Safety Modifications</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/senior-care" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Senior Care & Aging-in-Place">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl text-blue-900 mb-6" aria-hidden="true"><i class="fas fa-shield-halved" aria-hidden="true"></i></div>
-                        <h3 id="home-security" class="text-2xl font-semibold mb-3 text-blue-900">Home Security &amp; Smart Home</h3>
-                        <p class="text-gray-600 mb-4">Peace of mind, professionally installed. From smart devices to security hardware, we set up the products that make your home safer and more convenient—day and night. (Note: We focus on device installs and setup; any work requiring licensed electrical or HVAC scope is coordinated with a licensed pro.)</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Video Doorbells &amp; Security Cameras</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Smart Locks &amp; Deadbolts</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Leak &amp; Freeze Sensors</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Smart Switches, Dimmers &amp; Thermostats</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/home-security" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Home Security & Smart Home">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6" aria-hidden="true"><i class="fas fa-building" aria-hidden="true"></i></div>
-                        <h3 id="commercial" class="text-2xl font-semibold mb-3 text-blue-900">Commercial Services</h3>
-                        <p class="text-gray-600 mb-4">Reliable help for your business, too. We keep commercial properties looking sharp and running smoothly with dependable interior and exterior services.</p>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Exterior</li>
-                            <li class="flex items-start gap-2"><span class="text-red-600 mt-1">•</span>Interior</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/commercial" class="text-red-600 hover:text-red-700 font-bold inline-flex items-center gap-1 text-sm transition" aria-label="Learn more about Commercial Services">
-                            Learn More <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="service-card w-full md:w-full lg:w-[calc(66.666%-0.668rem)] bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 text-center">
+            <div class="mt-10">
+                <div class="service-card max-w-4xl mx-auto bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow ring-1 ring-red-600 text-center">
                     <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600 mb-6 mx-auto" aria-hidden="true"><span class="flash-siren"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i></span></div>
                     <h3 class="text-2xl font-semibold mb-3 text-red-600">After-Hours Emergency Services Available</h3>
                     <p class="text-gray-600 mb-4 max-w-2xl mx-auto">Help when you need it most. Available 7 days a week for urgent repairs—such as leaks or security-compromising door/window issues—we provide priority response to keep your home safe and secure ($155 first hour / $85 per hour after).</p>
@@ -1368,30 +1596,50 @@
                     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">Service Detail Pages</h2>
                     <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Open any service for full details, what is included, pricing, and answers to common questions.</p>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-6xl mx-auto">
-                    <a href="/services/carpentry" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-hammer" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Carpentry</span></a>
-                    <a href="/services/doors-windows" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-door-open" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Doors &amp; Windows</span></a>
-                    <a href="/services/energy-efficiency" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-wind" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Energy-Efficiency Tune-Up</span></a>
-                    <a href="/services/dryer-vent" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-fire-flame-curved" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Dryer Vent Cleaning</span></a>
-                    <a href="/services/drywall-repair" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-border-all" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Drywall Repair</span></a>
-                    <a href="/services/painting-staining" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-paint-roller" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Painting &amp; Staining</span></a>
-                    <a href="/services/flooring-solutions" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-ruler-combined" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Flooring Solutions</span></a>
-                    <a href="/services/minor-plumbing" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-faucet-drip" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Minor Plumbing &amp; Leak Prevention</span></a>
-                    <a href="/services/tub-shower-recaulk" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-shower" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Tub &amp; Shower Re-Caulk</span></a>
-                    <a href="/services/minor-electrical" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-lightbulb" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Minor Electrical Services</span></a>
-                    <a href="/services/installation" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Installation &amp; Mounting</span></a>
-                    <a href="/services/furniture-assembly" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-couch" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Furniture Assembly</span></a>
-                    <a href="/services/garage-storage" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-warehouse" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Garage &amp; Storage Organization</span></a>
-                    <a href="/services/decks-fences" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-tree" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Decks &amp; Fences</span></a>
-                    <a href="/services/gutters" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-house-flood-water" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Gutters</span></a>
-                    <a href="/services/power-washing" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-spray-can-sparkles" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Power Washing</span></a>
-                    <a href="/services/projects-for-pets" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-dog" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Projects For Pets</span></a>
-                    <a href="/services/home-repair-upkeep" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-house-chimney" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Home Repair &amp; Upkeep</span></a>
-                    <a href="/services/preventative-maintenance" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Preventative Maintenance</span></a>
-                    <a href="/services/maintenance-cleaning" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-broom" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Maintenance &amp; Cleaning</span></a>
-                    <a href="/services/senior-care" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-wheelchair" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Senior Care &amp; Aging-in-Place</span></a>
-                    <a href="/services/home-security" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-shield-halved" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Home Security &amp; Smart Home</span></a>
-                    <a href="/services/commercial" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-building" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Commercial Services</span></a>
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
+                    <div>
+                        <p class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-blue-900 mb-3"><i class="fas fa-hammer text-red-600" aria-hidden="true"></i> Structural &amp; Interior Repairs</p>
+                        <div class="space-y-2">
+                            <a href="/services/carpentry" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-hammer" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Carpentry</span></a>
+                            <a href="/services/drywall-repair" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-border-all" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Drywall Repair</span></a>
+                            <a href="/services/painting-staining" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-paint-roller" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Painting &amp; Staining</span></a>
+                            <a href="/services/flooring-solutions" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-ruler-combined" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Flooring Solutions</span></a>
+                            <a href="/services/doors-windows" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-door-open" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Doors &amp; Windows</span></a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-blue-900 mb-3"><i class="fas fa-bolt-lightning text-red-600" aria-hidden="true"></i> Plumbing, Electrical &amp; Smart Home</p>
+                        <div class="space-y-2">
+                            <a href="/services/minor-plumbing" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-faucet-drip" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Minor Plumbing &amp; Leak Prevention</span></a>
+                            <a href="/services/tub-shower-recaulk" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-shower" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Tub &amp; Shower Re-Caulk</span></a>
+                            <a href="/services/minor-electrical" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-lightbulb" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Minor Electrical Services</span></a>
+                            <a href="/services/home-security" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-shield-halved" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Home Security &amp; Smart Home</span></a>
+                            <a href="/services/energy-efficiency" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-wind" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Energy-Efficiency Tune-Up</span></a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-blue-900 mb-3"><i class="fas fa-screwdriver-wrench text-red-600" aria-hidden="true"></i> Assembly, Mounting &amp; Projects</p>
+                        <div class="space-y-2">
+                            <a href="/services/installation" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Installation &amp; Mounting</span></a>
+                            <a href="/services/furniture-assembly" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-couch" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Furniture Assembly</span></a>
+                            <a href="/services/garage-storage" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-warehouse" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Garage &amp; Storage Organization</span></a>
+                            <a href="/services/projects-for-pets" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-dog" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Projects For Pets</span></a>
+                            <a href="/services/senior-care" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-wheelchair" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Senior Care &amp; Aging-in-Place</span></a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-blue-900 mb-3"><i class="fas fa-leaf text-red-600" aria-hidden="true"></i> Exterior, Seasonal &amp; Maintenance</p>
+                        <div class="space-y-2">
+                            <a href="/services/decks-fences" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-tree" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Decks &amp; Fences</span></a>
+                            <a href="/services/gutters" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-house-flood-water" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Gutters</span></a>
+                            <a href="/services/power-washing" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-spray-can-sparkles" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Power Washing</span></a>
+                            <a href="/services/dryer-vent" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-fire-flame-curved" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Dryer Vent Cleaning</span></a>
+                            <a href="/services/preventative-maintenance" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Preventative Maintenance</span></a>
+                            <a href="/services/maintenance-cleaning" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-broom" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Maintenance &amp; Cleaning</span></a>
+                            <a href="/services/home-repair-upkeep" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-house-chimney" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Home Repair &amp; Upkeep</span></a>
+                            <a href="/services/commercial" class="group flex items-center gap-3 p-3 bg-gray-50 hover:bg-red-50 rounded-xl transition border border-gray-200"><span class="w-9 h-9 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600" aria-hidden="true"><i class="fas fa-building" aria-hidden="true"></i></span><span class="font-semibold text-gray-800 group-hover:text-red-600">Commercial Services</span></a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1495,6 +1743,84 @@
     <script src="/js/service-zone-selector.js?v=20260802a" defer></script>
     <script src="/js/home-care-plans.js?v=20260802a" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
+    <script>
+      /*
+       * Service catalog accordions. The grouping itself is plain <details>, so
+       * everything below is enhancement only:
+       *
+       *  - A deep link into a collapsed group (the city pages all point at
+       *    /services#gutters and friends) has to open its group before the
+       *    browser can scroll to the card, so hash targets are resolved on load
+       *    and on every hashchange and same-page click.
+       *  - "Expand all" gives anyone who wants the old single-scroll view a way
+       *    back to it, and makes Ctrl+F across every service possible in the
+       *    browsers that do not expand <details> for find-in-page on their own.
+       */
+      (function () {
+        var groups = Array.prototype.slice.call(document.querySelectorAll('details[data-svc-group]'));
+        if (!groups.length) return;
+
+        function groupFor(hash) {
+          if (!hash || hash.length < 2) return null;
+          var target;
+          try {
+            target = document.querySelector(hash);
+          } catch (err) {
+            return null;
+          }
+          if (!target) return null;
+          return { target: target, group: target.closest('details[data-svc-group]') };
+        }
+
+        function reveal(hash, scroll) {
+          var found = groupFor(hash);
+          if (!found) return;
+          if (found.group && !found.group.open) found.group.open = true;
+          if (!scroll) return;
+          window.requestAnimationFrame(function () {
+            found.target.scrollIntoView({ block: 'start' });
+          });
+        }
+
+        // A hash present at load has already been scrolled to (past a closed
+        // group, so almost certainly to the wrong place) before this runs.
+        reveal(window.location.hash, true);
+        window.addEventListener('hashchange', function () {
+          reveal(window.location.hash, true);
+        });
+
+        document.addEventListener('click', function (event) {
+          var link = event.target.closest ? event.target.closest('a[href^="#"]') : null;
+          if (!link) return;
+          reveal(link.getAttribute('href'), false);
+        });
+
+        var toggle = document.querySelector('[data-svc-toggle-all]');
+        var toggleLabel = document.querySelector('[data-svc-toggle-label]');
+        if (!toggle) return;
+
+        function sync() {
+          var allOpen = groups.every(function (group) {
+            return group.open;
+          });
+          toggle.setAttribute('aria-expanded', allOpen ? 'true' : 'false');
+          if (toggleLabel) toggleLabel.textContent = allOpen ? 'Collapse all' : 'Expand all';
+        }
+
+        toggle.addEventListener('click', function () {
+          var expand = toggle.getAttribute('aria-expanded') !== 'true';
+          groups.forEach(function (group) {
+            group.open = expand;
+          });
+          sync();
+        });
+
+        groups.forEach(function (group) {
+          group.addEventListener('toggle', sync);
+        });
+        sync();
+      })();
+    </script>
     <script>
       // Registered after load so it never competes with the first render.
       if ('serviceWorker' in navigator) {
