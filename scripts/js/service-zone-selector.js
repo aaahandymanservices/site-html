@@ -53,6 +53,14 @@
     return null;
   }
 
+  /**
+   * "Mondays & Thursdays" -> "Monday". The button reads "Book a Monday slot",
+   * so it wants one day, singular.
+   */
+  function firstDayName(route) {
+    return route.dayLabel.split(' & ')[0].replace(/s$/, '');
+  }
+
   /** Today's weekday in Detroit, so "today is a route day" is true locally. */
   function detroitWeekday() {
     try {
@@ -170,11 +178,19 @@
     actions.className = 'mt-3 flex flex-wrap gap-3';
 
     var book = document.createElement('a');
-    book.href = '/book';
-    book.setAttribute('data-booking-widget', '');
+    // On the booking page itself the modal script is not loaded and /book is
+    // the page we are already on, so the button scrolls to the form instead of
+    // reloading. Everywhere else it opens the shared booking dialog.
+    var bookingForm = document.getElementById('booking-form');
+    if (bookingForm) {
+      book.href = '#booking-form';
+    } else {
+      book.href = '/book';
+      book.setAttribute('data-booking-widget', '');
+    }
     book.className =
       'inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-extrabold text-white transition-colors hover:bg-red-700';
-    book.textContent = 'Book a ' + (route ? route.dayLabel.split(' & ')[0].toLowerCase() : 'visit') + ' slot ';
+    book.textContent = 'Book a ' + (route ? firstDayName(route) : 'visit') + ' slot ';
     var bookIcon = document.createElement('i');
     bookIcon.className = 'fas fa-calendar-day text-xs';
     bookIcon.setAttribute('aria-hidden', 'true');
@@ -182,7 +198,10 @@
     actions.appendChild(book);
 
     var page = document.createElement('a');
-    page.href = '/service-areas/' + city.slug;
+    // City pages are published under /handyman/<slug> -- see the _redirects
+    // rule. /service-areas is the single index page, not a directory, so a
+    // slug appended to it is a 404.
+    page.href = '/handyman/' + city.slug;
     page.className = 'inline-flex items-center gap-2 px-1 py-2 text-sm font-bold text-red-300 hover:text-red-200';
     page.textContent = 'Handyman in ' + city.name + ' ';
     var pageIcon = document.createElement('i');
