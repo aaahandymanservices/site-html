@@ -105,7 +105,7 @@
   const attributesInput = document.getElementById('reviews-attributes-input');
   const ownerResponseInput = document.getElementById('reviews-owner-response');
   const filterButtons = document.querySelectorAll('.filter-tab');
-  const cityButtons = document.querySelectorAll('.city-tab');
+  const cityTabsHost = document.getElementById('reviews-cities');
   const clearFiltersBtn = document.getElementById('reviews-clear-filters');
   const reviewsFilterEmpty = document.getElementById('reviews-filter-empty');
   const reviewsFilterEmptyCopy = document.getElementById('reviews-filter-empty-copy');
@@ -302,6 +302,45 @@
   };
 
   /*
+   * Place words: every city we serve, broken into single words, plus the state
+   * and township tokens that trail them. Used only to recognise an opening
+   * line that is a location rather than a sentence -- see pullQuoteOf below.
+   * Matching is word by word and an opener has to be made of nothing else, so
+   * "Troy was great." keeps its verb and is left alone.
+   */
+  const PLACE_WORDS = new Set([
+      'auburn', 'beverly', 'birmingham', 'bloomfield', 'clarkston', 'commerce',
+      'farmington', 'franklin', 'highland', 'hills', 'huntington', 'independence',
+      'lake', 'novi', 'oak', 'oakland', 'orchard', 'orion', 'oxford', 'pontiac',
+      'rochester', 'royal', 'southfield', 'troy', 'village', 'waterford', 'west',
+      'white', 'woods', 'county', 'township', 'twp', 'mi', 'mich', 'michigan'
+  ]);
+
+  const placeTokens = (value) =>
+      String(value || '')
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, ' ')
+          .trim()
+          .split(' ')
+          .filter(Boolean);
+
+  /*
+   * True when an opening line says only where the customer lives -- "Waterford,
+   * MI.", "West Bloomfield Twp.", "Troy 48083." -- either by repeating the
+   * record's own location field or by being built from place words alone. The
+   * word cap keeps a real sentence that happens to name a city out of it.
+   */
+  const isLocationOnly = (opener, location) => {
+      const words = placeTokens(opener);
+      if (!words.length || words.length > 6) return false;
+
+      const locationWords = placeTokens(location);
+      if (locationWords.length && words.join(' ') === locationWords.join(' ')) return true;
+
+      return words.every((word) => PLACE_WORDS.has(word) || /^\d{5}$/.test(word));
+  };
+
+  /*
    * Pull-quote.
    *
    * A review is one free-text field -- there is no separate headline to set
@@ -313,19 +352,63 @@
    * becomes the quote alone rather than the same words printed twice; a
    * run-on with no sentence break is trimmed at a word boundary for the quote
    * and left whole in the body, which is literally what pulling a quote is.
+   *
+   * Before any of that, a dateline is stepped over. Customers often head their
+   * review with where they live -- "Waterford, MI. Victor rebuilt our deck..."
+   * -- and that opener is metadata, not their verdict, so handing it to the
+   * quote would put a city name in the one slot that is meant to carry the
+   * customer's words. It matters most on the project map, where a pin's popup
+   * shows the quote and nothing else: the pin would then advertise the city it
+   * is already labelled with instead of the review behind it. The opener is
+   * only moved, never dropped -- it stays at the head of the body, and the
+   * city keeps its own field on the card, in the popup header, and in the
+   * byline beneath it.
    */
-  const pullQuoteOf = (text) => {
+  const pullQuoteOf = (text, location) => {
       const full = String(text || '').trim();
       if (!full) return { quote: '', body: '' };
 
-      const sentence = full.match(/^(.{12,140}?[.!?]+)(?:\s|$)/);
-      if (sentence) {
-          const quote = sentence[1];
-          return { quote, body: full.slice(quote.length).trim() };
+      let offset = 0;
+      // Two openers is already more than anyone writes ("Troy, MI. 5 stars.").
+      for (let skipped = 0; skipped < 2; skipped += 1) {
+          const opener = full.slice(offset).match(/^(.{1,60}?[.!?:;—–-]+)(?:\s|$)/);
+          if (!opener || !isLocationOnly(opener[1], location)) break;
+          offset += opener[0].length;
       }
 
-      if (full.length <= 150) return { quote: full, body: '' };
-      return { quote: truncate(full, 100), body: full };
+      // The opener is kept, not discarded -- it is the customer's text. A
+      // dash or colon that only made sense as a lead-in becomes a full stop
+      // now that the line stands at the head of the body.
+      const dateline = full.slice(0, offset).trim().replace(/[\s—–:;-]+$/, '').replace(/[.!?]*$/, '.');
+      const rest = full.slice(offset).trim();
+      // A review that is nothing but a location has no verdict to pull; the
+      // callers fall back to the body rather than quoting the city.
+      if (!rest) return { quote: '', body: full };
+
+      const withDateline = (body) => (offset ? `${dateline} ${body}`.trim() : body);
+      // "Waterford, MI - the crew..." reads as a fragment once the lead-in is
+      // gone, so the quote is given back its capital.
+      const asQuote = (quote) => (offset && quote ? quote.charAt(0).toUpperCase() + quote.slice(1) : quote);
+
+      const sentence = rest.match(/^(.{12,140}?[.!?]+)(?:\s|$)/);
+      if (sentence) {
+          const quote = sentence[1];
+          return { quote: asQuote(quote), body: withDateline(rest.slice(quote.length).trim()) };
+      }
+
+      if (rest.length <= 150) return { quote: asQuote(rest), body: withDateline('') };
+      return { quote: asQuote(truncate(rest, 100)), body: withDateline(rest) };
+  };
+
+  /*
+   * The single line of review text a map pin's popup gets. It is the pull
+   * quote when there is one, and the review itself when there is not, so the
+   * popup always carries the customer's words -- never the city, which the
+   * popup names for itself in its header and byline.
+   */
+  const mapExcerptOf = (item) => {
+      const { quote, body } = pullQuoteOf(item.review, item.location);
+      return truncate(quote || body || item.review, 110);
   };
 
   // Inline SVG rather than an icon font for the badges and pins: these carry
@@ -455,39 +538,60 @@
    * map pins, and the "12+ cities" claim in the stats bar -- so a city is
    * added here and nowhere else. Order is north to south, which is also the
    * order the pins take in the tab sequence.
+   *
+   * `core: true` marks the twelve cities that are always drawn, hollow dot and
+   * all, because together they describe the shape of the service area. The
+   * rest are drawn only once a customer from there has posted, which keeps the
+   * map legible while still guaranteeing every reviewer gets a pin: a review
+   * from any city listed here lands on the county, not in a silent gap.
    */
   const MAP_VIEWBOX = { width: 640, height: 560 };
   const MAP_CITIES = [
-      { name: 'Clarkston', x: 278, y: 205, label: 'above' },
-      { name: 'Auburn Hills', x: 435, y: 257, label: 'above' },
-      { name: 'Waterford', x: 298, y: 282, label: 'below' },
-      { name: 'White Lake', x: 185, y: 287, label: 'above' },
-      { name: 'Rochester Hills', x: 507, y: 287, label: 'left' },
-      { name: 'Highland', x: 110, y: 300, label: 'below' },
-      { name: 'Troy', x: 507, y: 344, label: 'left' },
-      { name: 'Commerce', x: 228, y: 364, label: 'below' },
-      { name: 'Bloomfield', x: 426, y: 366, label: 'left' },
-      { name: 'West Bloomfield', x: 309, y: 383, label: 'below' },
-      { name: 'Birmingham', x: 453, y: 405, label: 'right' },
-      { name: 'Southfield', x: 446, y: 484, label: 'below' }
+      { name: 'Oxford', x: 408, y: 109, label: 'above' },
+      { name: 'Lake Orion', x: 429, y: 152, label: 'right', aliases: ['Orion'] },
+      { name: 'Clarkston', x: 278, y: 205, label: 'above', core: true, aliases: ['Independence'] },
+      { name: 'Auburn Hills', x: 435, y: 257, label: 'above', core: true },
+      { name: 'Waterford', x: 298, y: 282, label: 'below', core: true },
+      { name: 'White Lake', x: 185, y: 287, label: 'above', core: true },
+      { name: 'Rochester Hills', x: 507, y: 287, label: 'left', core: true, aliases: ['Rochester'] },
+      { name: 'Highland', x: 110, y: 300, label: 'below', core: true },
+      { name: 'Pontiac', x: 385, y: 305, label: 'below' },
+      { name: 'Troy', x: 507, y: 344, label: 'left', core: true },
+      { name: 'Orchard Lake', x: 334, y: 352, label: 'above' },
+      { name: 'Commerce', x: 228, y: 364, label: 'below', core: true },
+      { name: 'Bloomfield', x: 426, y: 366, label: 'left', core: true },
+      { name: 'West Bloomfield', x: 309, y: 383, label: 'below', core: true },
+      { name: 'Birmingham', x: 453, y: 405, label: 'right', core: true },
+      { name: 'Franklin', x: 373, y: 428, label: 'left' },
+      { name: 'Beverly Hills', x: 424, y: 437, label: 'below' },
+      { name: 'Farmington Hills', x: 320, y: 453, label: 'below', aliases: ['Farmington'] },
+      { name: 'Royal Oak', x: 513, y: 458, label: 'right' },
+      { name: 'Novi', x: 227, y: 472, label: 'below' },
+      { name: 'Huntington Woods', x: 487, y: 483, label: 'right' },
+      { name: 'Southfield', x: 446, y: 484, label: 'below', core: true }
   ];
 
   // Customers type their own city, so matching is by substring -- "Waterford
-  // Twp", "Waterford, MI", and "waterford" are all the same place. Longest
-  // name first is what keeps "West Bloomfield, MI" from being filed under
-  // Bloomfield, which shares the tail of its name and has its own pin.
+  // Twp", "Waterford, MI", and "waterford" are all the same place. Aliases
+  // carry the places that go by more than one name: Independence Township is
+  // Clarkston's mailing address, and most people write "Rochester" for
+  // Rochester Hills. Longest needle first is what keeps "West Bloomfield, MI"
+  // from being filed under Bloomfield, which shares the tail of its name and
+  // has its own pin.
   const CITY_MATCH_ORDER = MAP_CITIES
-      .map((city) => city.name)
-      .sort((a, b) => b.length - a.length);
+      .flatMap((city) => [city.name, ...(city.aliases || [])]
+          .map((needle) => ({ needle: needle.toLowerCase(), name: city.name })))
+      .sort((a, b) => b.needle.length - a.needle.length);
 
   const cityOf = (location) => {
       const text = String(location || '').toLowerCase();
-      return CITY_MATCH_ORDER.find((name) => text.includes(name.toLowerCase())) || '';
+      return CITY_MATCH_ORDER.find((entry) => text.includes(entry.needle))?.name || '';
   };
 
   // The two filter rows narrow the grid together, so a review has to clear
-  // both. A city we do not list (say Royal Oak) has no pill of its own and so
-  // only ever appears under "All Cities".
+  // both. A location we cannot place -- somewhere outside the county, or a
+  // typo -- has no pill of its own and so only ever appears under "All
+  // Cities".
   const matchesFilter = (item) => {
       const category = String(item.projectType || '').toLowerCase();
       const categoryOk = activeFilter === 'all' || category.includes(activeFilter.toLowerCase());
@@ -579,7 +683,7 @@
       const photoPath = photoPathOf(item);
       const thumbUrl = photoPath ? transformedPhoto(photoPath, 800, 80) : '';
       const fullUrl = photoPath ? transformedPhoto(photoPath, 1600, 82) : '';
-      const { quote, body } = pullQuoteOf(item.review);
+      const { quote, body } = pullQuoteOf(item.review, item.location);
 
       const previewHtml = photoPath ? `
               <button type="button" class="review-zoom block w-full h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50" data-full="${escapeHTML(fullUrl)}" data-original="${escapeHTML(photoPath)}" data-caption="${escapeHTML(item.projectType)} · ${escapeHTML(item.location)}" data-alt="${escapeHTML(item.imageAlt)}" aria-label="Zoom photo: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
@@ -686,24 +790,63 @@
   };
 
   // --- Filter rows: service category and city, applied together ---
+  // The city row is queried live rather than captured once, because a pin for
+  // a city outside the hard-coded twelve adds its pill at render time and that
+  // pill has to answer to the same aria-pressed bookkeeping as the rest.
+  const cityTabs = () => (cityTabsHost ? Array.from(cityTabsHost.querySelectorAll('.city-tab')) : []);
+
   const applyFilters = ({ filter, city } = {}) => {
       if (typeof filter === 'string') activeFilter = filter;
       if (typeof city === 'string') activeCity = city;
       filterButtons.forEach((btn) => {
           btn.setAttribute('aria-pressed', String((btn.dataset.filter || 'all') === activeFilter));
       });
-      cityButtons.forEach((btn) => {
+      cityTabs().forEach((btn) => {
           btn.setAttribute('aria-pressed', String((btn.dataset.city || 'all') === activeCity));
       });
       renderReviews();
+  };
+
+  // Gives a pill to any city holding a review that the page ships without one,
+  // so a map popup's "See all N projects" always has a filter pill to light up
+  // and the visitor can find their way back to "All Cities".
+  const syncCityTabs = (byCity) => {
+      if (!cityTabsHost) return;
+      // A pill this function added earlier is taken back once its last review
+      // is gone, so the row never offers a filter that can only come up empty.
+      let orphaned = false;
+      cityTabs().forEach((btn) => {
+          if (btn.dataset.dynamic !== 'true' || (byCity.get(btn.dataset.city) || []).length) return;
+          orphaned = orphaned || activeCity === btn.dataset.city;
+          btn.remove();
+      });
+
+      const known = new Set(cityTabs().map((btn) => btn.dataset.city || 'all'));
+      MAP_CITIES.forEach((city) => {
+          if (known.has(city.name) || !(byCity.get(city.name) || []).length) return;
+          const tab = document.createElement('button');
+          tab.type = 'button';
+          tab.className = 'city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold';
+          tab.dataset.city = city.name;
+          tab.dataset.dynamic = 'true';
+          tab.setAttribute('aria-pressed', String(activeCity === city.name));
+          tab.textContent = city.name;
+          cityTabsHost.appendChild(tab);
+          known.add(city.name);
+      });
+
+      if (orphaned) applyFilters({ city: 'all' });
   };
 
   filterButtons.forEach((btn) => {
       btn.addEventListener('click', () => applyFilters({ filter: btn.dataset.filter || 'all' }));
   });
 
-  cityButtons.forEach((btn) => {
-      btn.addEventListener('click', () => applyFilters({ city: btn.dataset.city || 'all' }));
+  // Delegated so the pills added by syncCityTabs are clickable without any
+  // extra wiring of their own.
+  cityTabsHost?.addEventListener('click', (event) => {
+      const tab = event.target instanceof Element ? event.target.closest('.city-tab') : null;
+      if (tab) applyFilters({ city: tab.dataset.city || 'all' });
   });
 
   if (clearFiltersBtn) {
@@ -789,20 +932,31 @@
       }
 
       const featured = items[0];
-      const { quote } = pullQuoteOf(featured.review);
       const more = items.length > 1
           ? `<button type="button" class="map-popup__more mt-2.5 block w-full text-[11px] font-bold uppercase tracking-wider text-blue-900/70 hover:text-red-700 transition">See all ${items.length} ${escapeHTML(city.name)} projects</button>`
+          : '';
+
+      // The photo is the proof the review is real, so it leads the card. It is
+      // requested at roughly 2x the rendered width for retina, kept to a fixed
+      // strip so a tall photo cannot push the card off the map, and reuses the
+      // same Image CDN transform and fallback chain as the grid below.
+      const photoPath = photoPathOf(featured);
+      const photo = photoPath
+          ? `<div class="review-preview map-popup__photo mt-2 rounded-xl overflow-hidden bg-blue-900 h-24 sm:h-28">
+                  <img src="${escapeHTML(transformedPhoto(photoPath, 520, 72))}" data-original="${escapeHTML(photoPath)}" alt="${escapeHTML(featured.imageAlt || `${featured.projectType} project in ${city.name}`)}" class="review-photo w-full h-full object-cover" loading="lazy" decoding="async">
+              </div>`
           : '';
 
       return `${caret}${closeButton}
           <div class="flex items-baseline justify-between gap-2 pr-6">
               <p class="text-[11px] font-bold uppercase tracking-widest text-red-700">${escapeHTML(city.name)}, MI</p>
           </div>
+          ${photo}
           <div class="flex items-center gap-2 mt-2">
               <span class="text-amber-500 text-[13px] flex gap-0.5" role="img" aria-label="${escapeHTML(featured.rating)} out of 5 stars">${stars(Number(featured.rating) || 0)}</span>
               <span class="text-[11px] font-bold text-gray-500 truncate">${escapeHTML(featured.projectType)}</span>
           </div>
-          <p class="text-sm text-gray-800 font-semibold leading-snug mt-2">“${escapeHTML(truncate(quote || featured.review, 110))}”</p>
+          <p class="text-sm text-gray-800 font-semibold leading-snug mt-2">“${escapeHTML(mapExcerptOf(featured))}”</p>
           <p class="text-[11px] text-gray-500 font-medium mt-1.5">— ${escapeHTML(featured.customerName)}, ${escapeHTML(featured.location)}</p>
           <button type="button" class="map-popup__jump mt-3 w-full inline-flex items-center justify-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-3 py-2.5 rounded-xl transition" data-id="${escapeHTML(featured.id)}">Read this review <span aria-hidden="true">→</span></button>
           ${more}`;
@@ -810,13 +964,24 @@
 
   // Anchoring the card by the same fraction of its own width as the pin's
   // distance across the map slides it back inside the frame as the pin nears
-  // an edge, and keeps the caret over the pin, without measuring anything.
+  // an edge, and keeps the caret over the pin, without measuring anything
+  // horizontally. Vertically it does measure: the card carries a photo now, so
+  // whether it fits above the pin depends on the card's real height and the
+  // map's, not on a fixed fraction. The card is already visible when this
+  // runs, so both are readable.
   const positionMapPopup = (pin) => {
       if (!mapPopup) return;
       const xPct = Number.parseFloat(pin.style.left) || 50;
       const yPct = Number.parseFloat(pin.style.top) || 50;
       const anchor = Math.min(85, Math.max(15, xPct));
-      const below = yPct < 38;
+      const frameHeight = mapPopup.offsetParent ? mapPopup.offsetParent.clientHeight : 0;
+      const cardHeight = mapPopup.offsetHeight;
+      let below = yPct < 38;
+      if (frameHeight && cardHeight) {
+          const roomAbove = (yPct / 100) * frameHeight - 26;
+          const roomBelow = frameHeight - (yPct / 100) * frameHeight - 26;
+          below = roomAbove < cardHeight && roomBelow > roomAbove;
+      }
 
       mapPopup.style.left = `${xPct}%`;
       mapPopup.style.top = `${yPct}%`;
@@ -839,6 +1004,7 @@
       }
       if (popupState.city !== city.name) {
           mapPopup.innerHTML = mapPopupHtml(city, items);
+          attachPhotoFallback(mapPopup.querySelector('.review-photo'));
           popupState.city = city.name;
       }
       popupState.sticky = popupState.sticky && openPin === pin ? true : Boolean(sticky);
@@ -861,15 +1027,23 @@
       closeMapPopup();
 
       const byCity = new Map();
+      let unplaced = 0;
       allReviews.forEach((item) => {
           const city = cityOf(item.location);
-          if (!city) return;
+          if (!city) {
+              unplaced += 1;
+              return;
+          }
           if (!byCity.has(city)) byCity.set(city, []);
           byCity.get(city).push(item);
       });
 
+      // Every city holding a review is drawn, whether or not it is one of the
+      // twelve that anchor the map. A reviewer who typed a service-area city
+      // we do not anchor -- Royal Oak, Beverly Hills -- gets their pin the
+      // moment they post, instead of dropping off the map entirely.
       mapPinsHost.innerHTML = '';
-      MAP_CITIES.forEach((city) => {
+      MAP_CITIES.filter((city) => city.core || (byCity.get(city.name) || []).length).forEach((city) => {
           const items = byCity.get(city.name) || [];
           const pin = document.createElement('button');
           pin.type = 'button';
@@ -897,11 +1071,16 @@
           mapPinsHost.appendChild(pin);
       });
 
+      syncCityTabs(byCity);
+
       const pinned = Array.from(byCity.values()).reduce((total, list) => total + list.length, 0);
       const cities = byCity.size;
       if (mapSummary) {
+          // A review whose location we cannot place still exists in the grid,
+          // so the count says so rather than quietly leaving it out.
+          const elsewhere = unplaced ? ` · ${unplaced} more not on the map` : '';
           mapSummary.textContent = pinned
-              ? `${pinned} pinned ${pinned === 1 ? 'project' : 'projects'} · ${cities} ${cities === 1 ? 'city' : 'cities'}`
+              ? `${pinned} pinned ${pinned === 1 ? 'project' : 'projects'} · ${cities} ${cities === 1 ? 'city' : 'cities'}${elsewhere}`
               : `${MAP_CITIES.length} cities in our service area`;
       }
   };
