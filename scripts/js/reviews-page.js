@@ -105,7 +105,13 @@
   const attributesInput = document.getElementById('reviews-attributes-input');
   const ownerResponseInput = document.getElementById('reviews-owner-response');
   const filterButtons = document.querySelectorAll('.filter-tab');
+  const cityButtons = document.querySelectorAll('.city-tab');
+  const clearFiltersBtn = document.getElementById('reviews-clear-filters');
   const reviewsFilterEmpty = document.getElementById('reviews-filter-empty');
+  const reviewsFilterEmptyCopy = document.getElementById('reviews-filter-empty-copy');
+  const mapPinsHost = document.getElementById('map-pins');
+  const mapPopup = document.getElementById('map-popup');
+  const mapSummary = document.getElementById('map-summary');
   const lightbox = document.getElementById('reviews-lightbox');
   const lightboxImg = document.getElementById('reviews-lightbox-img');
   const lightboxCaption = document.getElementById('reviews-lightbox-caption');
@@ -113,7 +119,10 @@
   let reviewsEditId = null;
   let allReviews = [];
   let activeFilter = 'all';
+  let activeCity = 'all';
   let lastFocusedBeforeLightbox = null;
+  const prefersReducedMotion = () =>
+      Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const MAX_SOURCE_BYTES = 10 * 1024 * 1024;
   // A buffered Netlify function request is capped at 6 MB, so the bytes we
   // actually put on the wire have to stay well under that once multipart
@@ -283,6 +292,52 @@
       `<i class="${index < rating ? 'fas' : 'far'} fa-star" aria-hidden="true"></i>`
   ).join('');
 
+  const truncate = (value, max) => {
+      const text = String(value || '').trim();
+      if (text.length <= max) return text;
+      const head = text.slice(0, max);
+      const lastSpace = head.lastIndexOf(' ');
+      const cut = lastSpace > max * 0.6 ? head.slice(0, lastSpace) : head;
+      return `${cut.replace(/[\s,;:.—-]+$/, '')}…`;
+  };
+
+  /*
+   * Pull-quote.
+   *
+   * A review is one free-text field -- there is no separate headline to set
+   * large -- so the quote is pulled out of the body the way print does it. The
+   * customer's verdict is almost always their opening sentence ("Solved my
+   * drainage issues completely!") and everything after it reads as the detail
+   * behind that verdict. Three cases, in order: a review with more than one
+   * sentence splits into quote plus body; a short single-sentence review
+   * becomes the quote alone rather than the same words printed twice; a
+   * run-on with no sentence break is trimmed at a word boundary for the quote
+   * and left whole in the body, which is literally what pulling a quote is.
+   */
+  const pullQuoteOf = (text) => {
+      const full = String(text || '').trim();
+      if (!full) return { quote: '', body: '' };
+
+      const sentence = full.match(/^(.{12,140}?[.!?]+)(?:\s|$)/);
+      if (sentence) {
+          const quote = sentence[1];
+          return { quote, body: full.slice(quote.length).trim() };
+      }
+
+      if (full.length <= 150) return { quote: full, body: '' };
+      return { quote: truncate(full, 100), body: full };
+  };
+
+  // Inline SVG rather than an icon font for the badges and pins: these carry
+  // meaning ("this is verified", "a project happened here"), so they must be
+  // drawn even on the first paint, before the deferred icon stylesheet lands.
+  const CHECK_CIRCLE_SVG =
+      '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="flex-none text-emerald-600" aria-hidden="true"><circle cx="12" cy="12" r="9.2"></circle><path d="m8.2 12.4 2.5 2.5 5-5.4"></path></svg>';
+  const HAMMER_SVG =
+      '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="flex-none" aria-hidden="true"><path d="M4.5 5h10.2l2.8 2.6-2.8 2.6H4.5Z"></path><path d="M10.4 10.2 13 21"></path></svg>';
+  const PIN_CHECK_SVG =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7"></path></svg>';
+
   const showReviewsMessage = (text, isError) => {
       if (!reviewsMessage) return;
       reviewsMessage.textContent = text;
@@ -393,8 +448,52 @@
       'Other Service': 'bg-blue-100 text-blue-800 border-blue-200'
   };
 
-  const matchesFilter = (item, filter) =>
-      filter === 'all' || String(item.projectType || '').toLowerCase().includes(filter.toLowerCase());
+  /*
+   * The service-area cities, with each one's real position inside Oakland
+   * County projected once into the 640x560 viewBox the map SVG draws in. The
+   * list drives three things at once -- the city filter row's matching, the
+   * map pins, and the "12+ cities" claim in the stats bar -- so a city is
+   * added here and nowhere else. Order is north to south, which is also the
+   * order the pins take in the tab sequence.
+   */
+  const MAP_VIEWBOX = { width: 640, height: 560 };
+  const MAP_CITIES = [
+      { name: 'Clarkston', x: 278, y: 205, label: 'above' },
+      { name: 'Auburn Hills', x: 435, y: 257, label: 'above' },
+      { name: 'Waterford', x: 298, y: 282, label: 'below' },
+      { name: 'White Lake', x: 185, y: 287, label: 'above' },
+      { name: 'Rochester Hills', x: 507, y: 287, label: 'left' },
+      { name: 'Highland', x: 110, y: 300, label: 'below' },
+      { name: 'Troy', x: 507, y: 344, label: 'left' },
+      { name: 'Commerce', x: 228, y: 364, label: 'below' },
+      { name: 'Bloomfield', x: 426, y: 366, label: 'left' },
+      { name: 'West Bloomfield', x: 309, y: 383, label: 'below' },
+      { name: 'Birmingham', x: 453, y: 405, label: 'right' },
+      { name: 'Southfield', x: 446, y: 484, label: 'below' }
+  ];
+
+  // Customers type their own city, so matching is by substring -- "Waterford
+  // Twp", "Waterford, MI", and "waterford" are all the same place. Longest
+  // name first is what keeps "West Bloomfield, MI" from being filed under
+  // Bloomfield, which shares the tail of its name and has its own pin.
+  const CITY_MATCH_ORDER = MAP_CITIES
+      .map((city) => city.name)
+      .sort((a, b) => b.length - a.length);
+
+  const cityOf = (location) => {
+      const text = String(location || '').toLowerCase();
+      return CITY_MATCH_ORDER.find((name) => text.includes(name.toLowerCase())) || '';
+  };
+
+  // The two filter rows narrow the grid together, so a review has to clear
+  // both. A city we do not list (say Royal Oak) has no pill of its own and so
+  // only ever appears under "All Cities".
+  const matchesFilter = (item) => {
+      const category = String(item.projectType || '').toLowerCase();
+      const categoryOk = activeFilter === 'all' || category.includes(activeFilter.toLowerCase());
+      const cityOk = activeCity === 'all' || cityOf(item.location) === activeCity;
+      return categoryOk && cityOk;
+  };
 
   const attributesHtml = (attributes) => {
       if (!Array.isArray(attributes) || attributes.length === 0) return '';
@@ -404,13 +503,18 @@
       return `<div class="mt-4 flex flex-wrap gap-1.5">${chips}</div>`;
   };
 
+  // The owner's reply is the one voice on the page that is not a customer's,
+  // so it is badged rather than merely indented: "Craftsman Note" plus
+  // Victor's name makes it unmistakable who is speaking.
   const ownerResponseHtml = (item) => {
       if (!item.ownerResponse) return '';
       return `
           <div class="mt-4 bg-blue-950/95 text-slate-100 rounded-2xl p-4 border-l-4 border-red-600">
-              <div class="flex items-center gap-2 mb-1.5">
-                  <i class="fas fa-reply text-red-400 text-xs" aria-hidden="true"></i>
-                  <span class="text-xs font-bold uppercase tracking-wider text-red-300">AAA Handyman Response</span>
+              <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 mb-2">
+                  <span class="inline-flex items-center gap-1.5 bg-amber-400/15 text-amber-200 border border-amber-300/40 rounded-full pl-2 pr-2.5 py-1 text-[10px] font-bold uppercase tracking-wider">
+                      ${HAMMER_SVG} Craftsman Note
+                  </span>
+                  <span class="text-[11px] font-semibold text-slate-400">Victor · Owner, AAA Handyman Services</span>
               </div>
               <p class="text-sm leading-relaxed text-slate-200">${escapeHTML(item.ownerResponse)}</p>
           </div>
@@ -464,12 +568,18 @@
       const card = document.createElement('article');
       card.className = 'review-card bg-white text-gray-900 rounded-3xl overflow-hidden shadow-xl border border-gray-150 flex flex-col';
       card.dataset.category = item.projectType || '';
+      card.dataset.city = cityOf(item.location);
+      // A map pin scrolls to its review and moves focus there, so each card
+      // needs a stable id and a programmatic focus target of its own.
+      card.id = `review-${item.id}`;
+      card.tabIndex = -1;
       card.style.animationDelay = `${Math.min(index, 8) * 60}ms`;
       const badgeStyle = badgeColors[item.projectType] || 'bg-gray-100 text-gray-800 border-gray-200';
       const canManage = Boolean(localStorage.getItem('aaaAdminToken'));
       const photoPath = photoPathOf(item);
       const thumbUrl = photoPath ? transformedPhoto(photoPath, 800, 80) : '';
       const fullUrl = photoPath ? transformedPhoto(photoPath, 1600, 82) : '';
+      const { quote, body } = pullQuoteOf(item.review);
 
       const previewHtml = photoPath ? `
               <button type="button" class="review-zoom block w-full h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50" data-full="${escapeHTML(fullUrl)}" data-original="${escapeHTML(photoPath)}" data-caption="${escapeHTML(item.projectType)} · ${escapeHTML(item.location)}" data-alt="${escapeHTML(item.imageAlt)}" aria-label="Zoom photo: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
@@ -495,13 +605,13 @@
                   <span class="${badgeStyle} text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md border">
                       ${escapeHTML(item.projectType)}
                   </span>
-                  <span class="bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full shadow-md flex items-center gap-1 whitespace-nowrap">
-                      <i class="fas fa-circle-check" aria-hidden="true"></i> Verified Local Project
+                  <span class="bg-white/95 text-emerald-800 border border-emerald-300 text-[10px] font-bold uppercase tracking-wider pl-2 pr-2.5 py-1.5 rounded-full shadow-md flex items-center gap-1.5 whitespace-nowrap">
+                      ${CHECK_CIRCLE_SVG} Verified Local Project
                   </span>
               </div>
           </div>
           <div class="p-6 flex flex-col flex-1">
-              <div class="flex items-center justify-between gap-3 mb-3">
+              <div class="flex items-center justify-between gap-3 mb-4">
                   <div class="text-amber-500 text-lg flex gap-1" role="img" aria-label="${escapeHTML(item.rating)} out of 5 stars">
                       ${stars(Number(item.rating) || 0)}
                   </div>
@@ -509,17 +619,18 @@
                       <i class="fas fa-location-dot text-red-500" aria-hidden="true"></i> ${escapeHTML(item.location)}
                   </span>
               </div>
-              <p class="text-gray-700 leading-relaxed italic text-base">"${escapeHTML(item.review)}"</p>
+              ${quote ? `<p class="review-pullquote mb-3">“${escapeHTML(quote)}”</p>` : ''}
+              ${body ? `<p class="text-gray-700 leading-relaxed text-[15px]">${escapeHTML(body)}</p>` : ''}
               ${attributesHtml(item.attributes)}
               ${ownerResponseHtml(item)}
               <div class="mt-5 pt-4 border-t border-gray-100 flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm uppercase">
+                  <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm uppercase flex-none">
                       ${escapeHTML(item.customerName.charAt(0))}
                   </div>
                   <div>
                       <strong class="text-gray-900 block text-sm">${escapeHTML(item.customerName)}</strong>
-                      <span class="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-                          <i class="fas fa-shield-halved" aria-hidden="true"></i> Verified customer
+                      <span class="mt-1 inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full pl-1.5 pr-2.5 py-0.5 text-[11px] font-bold">
+                          ${CHECK_CIRCLE_SVG} Verified Customer
                       </span>
                   </div>
               </div>
@@ -541,6 +652,15 @@
       return card;
   };
 
+  // Names the filters currently in force, for the empty state's copy:
+  // "plumbing in Troy", "Troy", "plumbing", or nothing at all.
+  const activeFilterSummary = () => {
+      const parts = [];
+      if (activeFilter !== 'all') parts.push(activeFilter.toLowerCase());
+      if (activeCity !== 'all') parts.push(activeCity);
+      return parts.join(' in ');
+  };
+
   const renderReviews = () => {
       if (!reviewsList || !reviewsEmpty || !reviewsLoading) return;
       reviewsLoading.classList.add('hidden');
@@ -549,9 +669,15 @@
       const hasAny = allReviews.length > 0;
       reviewsEmpty.classList.toggle('hidden', hasAny);
 
-      const filtered = allReviews.filter((item) => matchesFilter(item, activeFilter));
+      const filtered = allReviews.filter((item) => matchesFilter(item));
       if (reviewsFilterEmpty) {
           reviewsFilterEmpty.classList.toggle('hidden', !hasAny || filtered.length > 0);
+      }
+      if (reviewsFilterEmptyCopy) {
+          const summary = activeFilterSummary();
+          reviewsFilterEmptyCopy.textContent = summary
+              ? `No showcase for ${summary} is published yet. Try another service or city, or clear the filters to see every Oakland County project.`
+              : 'Try another service or city — or clear the filters to see every Oakland County project.';
       }
 
       filtered.forEach((item, index) => {
@@ -559,16 +685,290 @@
       });
   };
 
-  // --- Filter tabs ---
-  filterButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-          activeFilter = btn.dataset.filter || 'all';
-          filterButtons.forEach((other) => {
-              other.setAttribute('aria-pressed', other === btn ? 'true' : 'false');
-          });
-          renderReviews();
+  // --- Filter rows: service category and city, applied together ---
+  const applyFilters = ({ filter, city } = {}) => {
+      if (typeof filter === 'string') activeFilter = filter;
+      if (typeof city === 'string') activeCity = city;
+      filterButtons.forEach((btn) => {
+          btn.setAttribute('aria-pressed', String((btn.dataset.filter || 'all') === activeFilter));
       });
+      cityButtons.forEach((btn) => {
+          btn.setAttribute('aria-pressed', String((btn.dataset.city || 'all') === activeCity));
+      });
+      renderReviews();
+  };
+
+  filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => applyFilters({ filter: btn.dataset.filter || 'all' }));
   });
+
+  cityButtons.forEach((btn) => {
+      btn.addEventListener('click', () => applyFilters({ city: btn.dataset.city || 'all' }));
+  });
+
+  if (clearFiltersBtn) {
+      clearFiltersBtn.addEventListener('click', () => applyFilters({ filter: 'all', city: 'all' }));
+  }
+
+  /* ------------------------------------------------------------------------
+   * Oakland County project map
+   *
+   * The county line, lakes, and highways are a static SVG in the page; the
+   * pins are HTML buttons positioned over it from the reviews just loaded, so
+   * the map can never advertise a project the grid below does not hold. They
+   * are buttons rather than SVG shapes because each needs a focus ring, an
+   * accessible name, and a popup it owns -- all free on a <button>.
+   * ---------------------------------------------------------------------- */
+  const popupState = { city: '', sticky: false };
+  let openPin = null;
+  let popupCloseTimer = null;
+
+  const closeMapPopup = () => {
+      window.clearTimeout(popupCloseTimer);
+      if (!mapPopup) return;
+      mapPopup.hidden = true;
+      popupState.city = '';
+      popupState.sticky = false;
+      if (openPin) {
+          openPin.classList.remove('is-open');
+          openPin.setAttribute('aria-expanded', 'false');
+          openPin = null;
+      }
+  };
+
+  // A pointer travelling from the pin to the card it opened passes over the
+  // map for a moment, so closing is delayed long enough to survive the gap.
+  const scheduleMapPopupClose = () => {
+      if (popupState.sticky) return;
+      window.clearTimeout(popupCloseTimer);
+      popupCloseTimer = window.setTimeout(closeMapPopup, 260);
+  };
+
+  const scrollToShowcases = () => {
+      if (!reviewsList) return;
+      reviewsList.scrollIntoView({
+          behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+          block: 'start'
+      });
+  };
+
+  const jumpToReview = (id) => {
+      closeMapPopup();
+      let card = document.getElementById(`review-${id}`);
+      if (!card) {
+          // The review may be filtered out of the grid right now. Clearing the
+          // filters is far less surprising than a link that does nothing.
+          applyFilters({ filter: 'all', city: 'all' });
+          card = document.getElementById(`review-${id}`);
+      }
+      if (!card) return;
+
+      card.scrollIntoView({
+          behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+          block: 'center'
+      });
+      // preventScroll: the browser's own focus scroll would land instantly and
+      // cancel the smooth one above.
+      card.focus({ preventScroll: true });
+      card.classList.add('is-targeted');
+      window.setTimeout(() => card.classList.remove('is-targeted'), 2600);
+  };
+
+  const mapPopupHtml = (city, items) => {
+      const closeButton = `
+          <button type="button" class="map-popup__close absolute top-2 right-2 h-7 w-7 rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 flex items-center justify-center transition" aria-label="Close ${escapeHTML(city.name)} details">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"></path></svg>
+          </button>`;
+      const caret = '<span class="map-popup__caret" aria-hidden="true"></span>';
+
+      if (!items.length) {
+          return `${caret}${closeButton}
+              <p class="text-[11px] font-bold uppercase tracking-widest text-red-700 pr-6">${escapeHTML(city.name)}, MI</p>
+              <p class="text-sm text-gray-600 leading-relaxed mt-1.5">In our service area — no customer showcase from ${escapeHTML(city.name)} yet.</p>
+              <button type="button" class="map-popup__form mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-red-700 hover:text-red-800 transition">Be the first to post one <span aria-hidden="true">→</span></button>`;
+      }
+
+      const featured = items[0];
+      const { quote } = pullQuoteOf(featured.review);
+      const more = items.length > 1
+          ? `<button type="button" class="map-popup__more mt-2.5 block w-full text-[11px] font-bold uppercase tracking-wider text-blue-900/70 hover:text-red-700 transition">See all ${items.length} ${escapeHTML(city.name)} projects</button>`
+          : '';
+
+      return `${caret}${closeButton}
+          <div class="flex items-baseline justify-between gap-2 pr-6">
+              <p class="text-[11px] font-bold uppercase tracking-widest text-red-700">${escapeHTML(city.name)}, MI</p>
+          </div>
+          <div class="flex items-center gap-2 mt-2">
+              <span class="text-amber-500 text-[13px] flex gap-0.5" role="img" aria-label="${escapeHTML(featured.rating)} out of 5 stars">${stars(Number(featured.rating) || 0)}</span>
+              <span class="text-[11px] font-bold text-gray-500 truncate">${escapeHTML(featured.projectType)}</span>
+          </div>
+          <p class="text-sm text-gray-800 font-semibold leading-snug mt-2">“${escapeHTML(truncate(quote || featured.review, 110))}”</p>
+          <p class="text-[11px] text-gray-500 font-medium mt-1.5">— ${escapeHTML(featured.customerName)}, ${escapeHTML(featured.location)}</p>
+          <button type="button" class="map-popup__jump mt-3 w-full inline-flex items-center justify-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-3 py-2.5 rounded-xl transition" data-id="${escapeHTML(featured.id)}">Read this review <span aria-hidden="true">→</span></button>
+          ${more}`;
+  };
+
+  // Anchoring the card by the same fraction of its own width as the pin's
+  // distance across the map slides it back inside the frame as the pin nears
+  // an edge, and keeps the caret over the pin, without measuring anything.
+  const positionMapPopup = (pin) => {
+      if (!mapPopup) return;
+      const xPct = Number.parseFloat(pin.style.left) || 50;
+      const yPct = Number.parseFloat(pin.style.top) || 50;
+      const anchor = Math.min(85, Math.max(15, xPct));
+      const below = yPct < 38;
+
+      mapPopup.style.left = `${xPct}%`;
+      mapPopup.style.top = `${yPct}%`;
+      mapPopup.style.transform = below
+          ? `translate(-${anchor}%, 26px)`
+          : `translate(-${anchor}%, calc(-100% - 26px))`;
+      mapPopup.classList.toggle('is-below', below);
+
+      const caret = mapPopup.querySelector('.map-popup__caret');
+      if (caret) caret.style.left = `${anchor}%`;
+  };
+
+  const openMapPopup = (city, items, pin, sticky) => {
+      if (!mapPopup) return;
+      window.clearTimeout(popupCloseTimer);
+
+      if (openPin && openPin !== pin) {
+          openPin.classList.remove('is-open');
+          openPin.setAttribute('aria-expanded', 'false');
+      }
+      if (popupState.city !== city.name) {
+          mapPopup.innerHTML = mapPopupHtml(city, items);
+          popupState.city = city.name;
+      }
+      popupState.sticky = popupState.sticky && openPin === pin ? true : Boolean(sticky);
+      openPin = pin;
+      pin.classList.add('is-open');
+      pin.setAttribute('aria-expanded', 'true');
+      mapPopup.hidden = false;
+      positionMapPopup(pin);
+
+      // Opening deliberately (click or Enter) hands focus to the card's first
+      // action. Without that a keyboard visitor would have to tab past every
+      // remaining pin to reach the review the pin was pointing at.
+      if (sticky) {
+          mapPopup.querySelector('.map-popup__jump, .map-popup__form, .map-popup__close')?.focus();
+      }
+  };
+
+  const renderMap = () => {
+      if (!mapPinsHost) return;
+      closeMapPopup();
+
+      const byCity = new Map();
+      allReviews.forEach((item) => {
+          const city = cityOf(item.location);
+          if (!city) return;
+          if (!byCity.has(city)) byCity.set(city, []);
+          byCity.get(city).push(item);
+      });
+
+      mapPinsHost.innerHTML = '';
+      MAP_CITIES.forEach((city) => {
+          const items = byCity.get(city.name) || [];
+          const pin = document.createElement('button');
+          pin.type = 'button';
+          pin.className = `map-pin ${items.length ? 'is-active' : 'is-empty'}`;
+          pin.style.left = `${(city.x / MAP_VIEWBOX.width) * 100}%`;
+          pin.style.top = `${(city.y / MAP_VIEWBOX.height) * 100}%`;
+          pin.dataset.label = city.label;
+          pin.setAttribute('aria-expanded', 'false');
+          pin.setAttribute('aria-label', items.length
+              ? `${city.name}: ${items.length} completed ${items.length === 1 ? 'project' : 'projects'} with a customer review. Show details.`
+              : `${city.name}: in our service area, no customer showcase yet.`);
+          pin.innerHTML = `
+              <span class="map-pin__pulse" aria-hidden="true"></span>
+              <span class="map-pin__dot" aria-hidden="true">${items.length ? PIN_CHECK_SVG : ''}</span>
+              <span class="map-pin__name" aria-hidden="true">${escapeHTML(city.name)}${items.length > 1 ? `<span class="map-pin__count">${items.length}</span>` : ''}</span>`;
+
+          pin.addEventListener('mouseenter', () => openMapPopup(city, items, pin, false));
+          pin.addEventListener('focus', () => openMapPopup(city, items, pin, false));
+          pin.addEventListener('click', () => openMapPopup(city, items, pin, true));
+          pin.addEventListener('mouseleave', scheduleMapPopupClose);
+          pin.addEventListener('blur', (event) => {
+              if (mapPopup && mapPopup.contains(event.relatedTarget)) return;
+              scheduleMapPopupClose();
+          });
+          mapPinsHost.appendChild(pin);
+      });
+
+      const pinned = Array.from(byCity.values()).reduce((total, list) => total + list.length, 0);
+      const cities = byCity.size;
+      if (mapSummary) {
+          mapSummary.textContent = pinned
+              ? `${pinned} pinned ${pinned === 1 ? 'project' : 'projects'} · ${cities} ${cities === 1 ? 'city' : 'cities'}`
+              : `${MAP_CITIES.length} cities in our service area`;
+      }
+  };
+
+  if (mapPopup) {
+      mapPopup.addEventListener('mouseenter', () => window.clearTimeout(popupCloseTimer));
+      mapPopup.addEventListener('mouseleave', scheduleMapPopupClose);
+
+      mapPopup.addEventListener('click', (event) => {
+          const target = event.target instanceof Element ? event.target : null;
+          if (!target) return;
+
+          const jump = target.closest('.map-popup__jump');
+          if (jump) {
+              jumpToReview(jump.dataset.id);
+              return;
+          }
+          if (target.closest('.map-popup__more')) {
+              const city = popupState.city;
+              closeMapPopup();
+              applyFilters({ filter: 'all', city });
+              scrollToShowcases();
+              return;
+          }
+          if (target.closest('.map-popup__form')) {
+              closeMapPopup();
+              reviewsForm?.scrollIntoView({
+                  behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+                  block: 'center'
+              });
+              document.getElementById('reviews-name')?.focus({ preventScroll: true });
+              return;
+          }
+          if (target.closest('.map-popup__close')) {
+              const pin = openPin;
+              closeMapPopup();
+              pin?.focus();
+          }
+      });
+
+      // Focus leaving the card entirely closes it, unless it went back to the
+      // pin that opened it -- which has its own blur handling.
+      mapPopup.addEventListener('focusout', (event) => {
+          if (mapPopup.contains(event.relatedTarget) || event.relatedTarget === openPin) return;
+          closeMapPopup();
+      });
+
+      document.addEventListener('keydown', (event) => {
+          if (event.key !== 'Escape' || mapPopup.hidden) return;
+          const pin = openPin;
+          closeMapPopup();
+          pin?.focus();
+      });
+
+      document.addEventListener('click', (event) => {
+          if (mapPopup.hidden) return;
+          const target = event.target instanceof Element ? event.target : null;
+          if (target && (target.closest('.map-pin') || target.closest('#map-popup'))) return;
+          closeMapPopup();
+      });
+
+      // The pins are placed in percentages, so a resize needs no re-layout --
+      // but the open card's caret was anchored to where the pin used to be.
+      window.addEventListener('resize', () => {
+          if (!mapPopup.hidden && openPin) positionMapPopup(openPin);
+      });
+  }
 
   // --- Lightbox ---
   const openLightbox = (src, alt, caption, original) => {
@@ -643,9 +1043,11 @@
           .then((items) => {
               allReviews = Array.isArray(items) ? items : [];
               renderReviews();
+              renderMap();
           })
           .catch(() => {
               allReviews = [];
+              renderMap();
               reviewsLoading.classList.add('hidden');
               reviewsEmpty.classList.remove('hidden');
               const emptyText = reviewsEmpty.querySelector('p');
