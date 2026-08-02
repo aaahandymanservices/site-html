@@ -2986,6 +2986,14 @@ html.bw-open body {
    and the bubble is a real element in the accessibility tree (referenced by
    aria-describedby) rather than a title attribute, which screen readers and
    touch devices treat inconsistently.
+
+   The trigger draws its "i in a circle" with an inline <svg>, not an icon
+   font. The icon subset in public/css/icons.css is generated from the glyphs
+   the markup uses, and a name that resolves to a codepoint outside the
+   subsetted webfont renders as an empty box rather than failing loudly --
+   which is exactly what `fa-info` did here. An inline SVG carries its own
+   geometry, so it cannot miss: it survives a blocked or slow stylesheet, and
+   it inherits colour through `currentColor` like the glyph did.
    ========================================================================== */
 
 .fee-tip {
@@ -2999,16 +3007,31 @@ html.bw-open body {
   width: 1.125rem;
   height: 1.125rem;
   border-radius: 9999px;
-  border: 1px solid currentColor;
-  font-size: 0.625rem;
   line-height: 1;
   opacity: 0.75;
   cursor: help;
 }
 
+/*
+ * Sized off the button rather than the font, so the icon keeps its circle
+ * even before the brand webfonts settle and no baseline gap opens under it.
+ */
+.fee-tip__icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .fee-tip__trigger:hover,
 .fee-tip__trigger:focus-visible {
   opacity: 1;
+}
+
+/* The ring was the border until the SVG took it over; keep a focus ring that
+   is clearly not just the icon getting darker. */
+.fee-tip__trigger:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
 }
 
 .fee-tip__bubble {
@@ -3036,8 +3059,14 @@ html.bw-open body {
   transition: opacity 0.15s ease;
 }
 
+/*
+ * `:focus-within` rather than `:focus-visible` alone: a tap on a touch screen
+ * focuses the button but does not match `:focus-visible` in most engines, so
+ * keying off it exclusively left the bubble unopenable on phones -- the very
+ * devices with no hover to fall back on.
+ */
 .fee-tip:hover .fee-tip__bubble,
-.fee-tip__trigger:focus-visible + .fee-tip__bubble {
+.fee-tip:focus-within .fee-tip__bubble {
   opacity: 1;
   visibility: visible;
 }
