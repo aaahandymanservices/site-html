@@ -37,6 +37,100 @@
       });
   }
 
+  /*
+   * Service address ZIP.
+   *
+   * Oakland County ZIPs all fall in 480xx-484xx, so the range check is a cheap
+   * first pass that runs with no network at all. The lookup that follows fills
+   * in the city and the route days from the same service-areas file the zone
+   * banner reads -- it is a courtesy, not a gate, so a failed fetch never stops
+   * anyone booking. /api/booking re-checks the ZIP either way.
+   */
+  const OAKLAND_ZIP = /^48[0-4]\d{2}$/;
+  const bookingZip = document.getElementById('booking-zip');
+  const bookingCity = document.getElementById('booking-city');
+  const bookingZipNote = document.getElementById('booking-zip-note');
+
+  if (bookingZip) {
+      let areaData = null;
+      let areaPromise = null;
+
+      const loadAreas = () => {
+          if (areaPromise) return areaPromise;
+          areaPromise = fetch('/data/service-areas.json', { headers: { accept: 'application/json' } })
+              .then(response => (response.ok ? response.json() : null))
+              .then(json => {
+                  areaData = json && Array.isArray(json.cities) ? json : null;
+                  return areaData;
+              })
+              .catch(() => null);
+          return areaPromise;
+      };
+
+      const cityForZip = zip => {
+          if (!areaData) return null;
+          // First match wins: a couple of ZIPs straddle two cities and the file
+          // lists the one we actually route to first.
+          return areaData.cities.find(entry => Array.isArray(entry.zips) && entry.zips.indexOf(zip) !== -1) || null;
+      };
+
+      const setZipNote = (text, tone) => {
+          if (!bookingZipNote) return;
+          bookingZipNote.textContent = text;
+          bookingZipNote.className = tone === 'ok'
+              ? 'mt-2 text-xs font-semibold text-emerald-400'
+              : tone === 'bad'
+                  ? 'mt-2 text-xs font-semibold text-red-300'
+                  : 'mt-2 text-xs text-gray-400';
+      };
+
+      const describeZip = zip => {
+          const match = cityForZip(zip);
+          if (!match) {
+              setZipNote('Inside our Oakland County service area.', 'ok');
+              return;
+          }
+          if (bookingCity && !bookingCity.value.trim()) bookingCity.value = match.name;
+          const route = areaData.routes && match.route ? areaData.routes[match.route] : null;
+          // zones[].rate already reads "$100 Minimum Service Call".
+          const rate = areaData.zones && areaData.zones[match.zone] ? areaData.zones[match.zone].rate : '';
+          setZipNote(
+              route
+                  ? `${match.name} — Zone ${match.zone}${rate ? ', ' + rate : ''}. We are on your street ${route.dayLabel.toLowerCase()}.`
+                  : `${match.name} — Zone ${match.zone}${rate ? ', ' + rate : ''}.`,
+              'ok'
+          );
+      };
+
+      bookingZip.addEventListener('input', () => {
+          bookingZip.value = bookingZip.value.replace(/\D/g, '').slice(0, 5);
+          const zip = bookingZip.value;
+
+          if (zip.length < 5) {
+              bookingZip.setCustomValidity('');
+              setZipNote('Oakland County only. We fill in the city and your service days for you.', '');
+              updateBookingCompletion();
+              return;
+          }
+
+          if (!OAKLAND_ZIP.test(zip)) {
+              bookingZip.setCustomValidity('We service Oakland County, Michigan only.');
+              setZipNote(`${zip} is outside Oakland County — call (248) 385-3432 and we will see what we can do.`, 'bad');
+              updateBookingCompletion();
+              return;
+          }
+
+          bookingZip.setCustomValidity('');
+          setZipNote('Checking your service days…', '');
+          loadAreas().then(() => {
+              // Guard against a slow lookup landing after the field moved on.
+              if (bookingZip.value !== zip) return;
+              describeZip(zip);
+          });
+          updateBookingCompletion();
+      });
+  }
+
   // Setup the guided booking widget and date constraints.
   const bookingForm = document.getElementById('booking-form');
   const submitBtn = document.getElementById('submit-btn');
@@ -92,7 +186,7 @@
       // updateBookingCompletion, which fires before the later declarations in
       // this file have been initialised.
       const serviceField = document.getElementById('booking-service');
-      const detailFields = ['booking-name', 'booking-email', 'booking-phone'].map(id => document.getElementById(id));
+      const detailFields = ['booking-name', 'booking-email', 'booking-phone', 'booking-address', 'booking-zip'].map(id => document.getElementById(id));
 
       const done = [
           Boolean(serviceField && serviceField.value),
@@ -974,6 +1068,9 @@
           const name = document.getElementById('booking-name').value.trim();
           const email = document.getElementById('booking-email').value.trim();
           const phone = document.getElementById('booking-phone').value.trim();
+          const address = document.getElementById('booking-address').value.trim();
+          const city = document.getElementById('booking-city').value.trim();
+          const zip = document.getElementById('booking-zip').value.trim();
           const service = document.getElementById('booking-service').value;
           const bookingDate = document.getElementById('booking-date').value;
           const bookingTime = hiddenTimeInput.value;
@@ -995,6 +1092,11 @@
               return;
           }
 
+          if (!OAKLAND_ZIP.test(zip)) {
+              setBookingError('That ZIP code is outside our Oakland County service area. Call (248) 385-3432 and we will let you know if we can make the trip.');
+              return;
+          }
+
           submitBtn.disabled = true;
           submitBtn.innerHTML = 'PROCESSING BOOKING... <i class="fas fa-spinner animate-spin" aria-hidden="true"></i>';
 
@@ -1009,6 +1111,9 @@
               requestData.append('customerName', name);
               requestData.append('email', email);
               requestData.append('phone', phone);
+              requestData.append('address', address);
+              requestData.append('city', city);
+              requestData.append('zip', zip);
               requestData.append('service', service);
               requestData.append('bookingDate', bookingDate);
               requestData.append('bookingTime', bookingTime);
@@ -1057,6 +1162,11 @@
               netlifyFormData.append('name', name);
               netlifyFormData.append('email', email);
               netlifyFormData.append('phone', phone);
+              netlifyFormData.append('address', address);
+              // The server may have resolved a nicer city name from the ZIP than
+              // whatever was typed, so prefer its answer for the owner's copy.
+              netlifyFormData.append('city', data.serviceArea?.city || city);
+              netlifyFormData.append('zip', zip);
               netlifyFormData.append('service', service);
               netlifyFormData.append('bookingDate', bookingDate);
               netlifyFormData.append('bookingTime', bookingTime);

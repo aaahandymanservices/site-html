@@ -205,8 +205,8 @@
     }
     </script>
 
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260801b">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260801b">
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260802a">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260802a">
     <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
 
@@ -396,7 +396,7 @@
                 No job is too small! We provide reliable, high-quality, and transparently priced home repair, maintenance, and bundled packages across Oakland County, Michigan.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="/book" class="bg-red-600 hover:bg-red-700 text-white font-bold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-red-600/30 transition flex items-center justify-center gap-2.5">
+                <a href="/book" data-booking-widget class="bg-red-600 hover:bg-red-700 text-white font-bold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-red-600/30 transition flex items-center justify-center gap-2.5">
                     <i class="fas fa-calendar-check" aria-hidden="true"></i>
                     Book Online / Get a Free Quote
                 </a>
@@ -410,6 +410,48 @@
 
     <main id="main-content" class="py-12 sm:py-16 bg-gray-50 flex-grow">
         <div class="max-w-7xl mx-auto px-6">
+
+            <!-- Route-day banner. One van covers the county on three standing
+                 routes, so showing a homeowner the days we are already on their
+                 street books the visit and keeps the route dense at the same
+                 time. The list below is the no-JavaScript fallback; the selector
+                 in /js/service-zone-selector.js replaces it with a city picker. -->
+            <section id="service-zones" aria-labelledby="service-zones-heading" class="mb-14 rounded-3xl bg-blue-900 text-white p-6 sm:p-8 shadow-lg">
+                <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+                    <div class="lg:max-w-md">
+                        <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-red-300">
+                            <i class="fas fa-route" aria-hidden="true"></i> Service Zones
+                        </span>
+                        <h2 id="service-zones-heading" class="mt-3 text-2xl sm:text-3xl font-bold">Find your service day</h2>
+                        <p class="mt-2 text-sm sm:text-base leading-relaxed text-blue-100">
+                            We work Oakland County on three standing routes. Booking the day we are already in your area means a shorter wait, less drive time, and a tighter arrival window.
+                        </p>
+                    </div>
+                    <div class="flex-1 lg:max-w-xl" data-zone-selector>
+                        <ul class="grid gap-3 sm:grid-cols-3 text-sm">
+                            <li class="rounded-xl border border-white/15 bg-blue-950/40 p-4">
+                                <span class="block text-[11px] font-extrabold uppercase tracking-wider text-red-300">Mondays &amp; Thursdays</span>
+                                <span class="mt-1 block font-bold">North &amp; Lakes</span>
+                                <span class="mt-1 block text-blue-100">Waterford, Pontiac, Clarkston, Lake Orion, Oxford</span>
+                            </li>
+                            <li class="rounded-xl border border-white/15 bg-blue-950/40 p-4">
+                                <span class="block text-[11px] font-extrabold uppercase tracking-wider text-red-300">Tuesdays &amp; Fridays</span>
+                                <span class="mt-1 block font-bold">West Corridor</span>
+                                <span class="mt-1 block text-blue-100">West Bloomfield, Orchard Lake, Farmington Hills, Novi, Southfield</span>
+                            </li>
+                            <li class="rounded-xl border border-white/15 bg-blue-950/40 p-4">
+                                <span class="block text-[11px] font-extrabold uppercase tracking-wider text-red-300">Wednesdays &amp; Saturdays</span>
+                                <span class="mt-1 block font-bold">East &amp; South Metro</span>
+                                <span class="mt-1 block text-blue-100">Troy, Rochester Hills, Birmingham, Royal Oak, the Villages</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="mt-5 text-xs text-blue-200">
+                    Off-route days are still available — they just confirm a little slower. Zone A is a $100 minimum service call; Zone B (20+ miles) is $120.
+                    <a href="/service-areas" class="font-bold text-red-300 hover:text-red-200 underline">See every city we cover</a>.
+                </p>
+            </section>
 
             <!-- Grouped Core Service Offerings -->
             <div class="mb-16">
@@ -544,19 +586,23 @@
             </div>
 
             <!-- Popular Themed Packages Section -->
-            <div class="mb-16">
+            <div class="mb-16" id="bundles">
                 <div class="text-center mb-8">
                     <span class="bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full"><i class="fas fa-layer-group mr-1" aria-hidden="true"></i> Bundled Savings</span>
                     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mt-2">Popular Service Packages &amp; Bundles</h2>
                     <p class="mt-2 text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">Group popular home maintenance projects into one streamlined appointment for faster results and better value. Every package rate covers installation and service labor only.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7">
                     <!-- Seasonal Prep Package -->
-                    <div class="bg-white border-2 border-red-600 rounded-3xl p-6 shadow-md flex flex-col justify-between hover:shadow-xl transition relative">
+                    <div class="relative flex flex-col justify-between rounded-3xl border-2 border-red-600 bg-white p-6 pt-9 shadow-md transition hover:shadow-xl">
+                        <span class="absolute -top-3.5 left-6 inline-flex items-center gap-1.5 rounded-full bg-red-600 px-3.5 py-1.5 text-[11px] font-black uppercase tracking-wider text-white shadow-md shadow-red-600/30">
+                            <i class="fas fa-tags" aria-hidden="true"></i> Save 15% on labor
+                        </span>
                         <div>
                             <div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl text-amber-700 mb-4"><i class="fas fa-cloud-sun" aria-hidden="true"></i></div>
-                            <h3 class="text-xl font-bold text-blue-900 mb-2">Seasonal Prep Package</h3>
+                            <h3 class="text-xl font-bold text-blue-900 mb-1">Seasonal Prep Package</h3>
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2">About 4&frac12; hours on site</p>
                             <p class="text-gray-600 text-xs leading-relaxed mb-4">Protect your home before seasonal weather shifts. Includes gutter clearing, draft-stopping weatherstripping, window sash checks, and deck maintenance inspection.</p>
                             <ul class="space-y-2 text-xs text-gray-600 mb-6">
                                 <li class="flex items-center gap-2"><i class="fas fa-check text-green-600" aria-hidden="true"></i> Full gutter &amp; downspout clearing</li>
@@ -564,21 +610,36 @@
                                 <li class="flex items-center gap-2"><i class="fas fa-check text-green-600" aria-hidden="true"></i> Deck board, railing &amp; seal inspection</li>
                             </ul>
                         </div>
-                        <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-gray-500 block font-medium">Package Rate</span>
-                                <span class="text-2xl font-black text-blue-900">$265 <span class="text-xs font-normal text-gray-500">(Labor Only)</span></span>
-                                <span class="block text-[11px] text-gray-500 font-semibold leading-snug mt-1">4&frac12; labor hours = $310, less a 15% package discount</span>
+                        <div class="border-t border-gray-100 pt-4">
+                            <div class="flex items-end justify-between gap-3">
+                                <div>
+                                    <span class="text-xs text-gray-500 block font-medium">Package Rate</span>
+                                    <span class="text-3xl font-black text-blue-900">$265</span>
+                                    <span class="mt-1.5 flex items-center gap-1.5">
+                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wide text-blue-900 border border-gray-200">Labor Only</span>
+                                        <span class="fee-tip">
+                                            <button type="button" class="fee-tip__trigger text-gray-500" aria-describedby="tip-materials-seasonal"><i class="fas fa-info" aria-hidden="true"></i><span class="sr-only">How materials and hardware are priced</span></button>
+                                            <span role="tooltip" id="tip-materials-seasonal" class="fee-tip__bubble">Hardware and materials are not in this price. Supply them yourself and we add nothing; ask us to shop and parts are billed at cost plus a 10&ndash;15% supply sourcing fee.</span>
+                                        </span>
+                                    </span>
+                                    <span class="mt-2 block text-[11px] text-gray-500 font-semibold leading-snug">4&frac12; labor hours = $310, less a 15% package discount</span>
+                                </div>
                             </div>
-                            <a href="/book?package=seasonal-prep" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition">Schedule Package</a>
+                            <a href="/book?package=seasonal-prep" data-booking-widget data-booking-service="Seasonal Prep Package" class="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-red-700 hover:shadow-md hover:shadow-red-600/30">
+                                <i class="fas fa-calendar-check" aria-hidden="true"></i> Schedule Package
+                            </a>
                         </div>
                     </div>
 
                     <!-- Move-In / Move-Out Bundle -->
-                    <div class="bg-white border-2 border-blue-900 rounded-3xl p-6 shadow-md flex flex-col justify-between hover:shadow-xl transition relative">
+                    <div class="relative flex flex-col justify-between rounded-3xl border-2 border-blue-900 bg-white p-6 pt-9 shadow-md transition hover:shadow-xl">
+                        <span class="absolute -top-3.5 left-6 inline-flex items-center gap-1.5 rounded-full bg-blue-900 px-3.5 py-1.5 text-[11px] font-black uppercase tracking-wider text-white shadow-md shadow-blue-900/30">
+                            <i class="fas fa-tags" aria-hidden="true"></i> Save 15% on labor
+                        </span>
                         <div>
                             <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl text-blue-900 mb-4"><i class="fas fa-truck-ramp-box" aria-hidden="true"></i></div>
-                            <h3 class="text-xl font-bold text-blue-900 mb-2">Move-In / Move-Out Bundle</h3>
+                            <h3 class="text-xl font-bold text-blue-900 mb-1">Move-In / Move-Out Bundle</h3>
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2">About 5 hours on site</p>
                             <p class="text-gray-600 text-xs leading-relaxed mb-4">Settle in or prep for sale seamlessly. Covers TV wall mounting, drywall wall patching, paint touch-ups, and fresh deadbolt or smart lock upgrades.</p>
                             <ul class="space-y-2 text-xs text-gray-600 mb-6">
                                 <li class="flex items-center gap-2"><i class="fas fa-check text-green-600" aria-hidden="true"></i> Flat-screen TV mounting (up to 65")</li>
@@ -586,21 +647,36 @@
                                 <li class="flex items-center gap-2"><i class="fas fa-check text-green-600" aria-hidden="true"></i> Lock / deadbolt installation &amp; adjustment</li>
                             </ul>
                         </div>
-                        <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-gray-500 block font-medium">Package Rate</span>
-                                <span class="text-2xl font-black text-blue-900">$290 <span class="text-xs font-normal text-gray-500">(Labor Only)</span></span>
-                                <span class="block text-[11px] text-gray-500 font-semibold leading-snug mt-1">5 labor hours = $340, less a 15% package discount</span>
+                        <div class="border-t border-gray-100 pt-4">
+                            <div class="flex items-end justify-between gap-3">
+                                <div>
+                                    <span class="text-xs text-gray-500 block font-medium">Package Rate</span>
+                                    <span class="text-3xl font-black text-blue-900">$290</span>
+                                    <span class="mt-1.5 flex items-center gap-1.5">
+                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wide text-blue-900 border border-gray-200">Labor Only</span>
+                                        <span class="fee-tip">
+                                            <button type="button" class="fee-tip__trigger text-gray-500" aria-describedby="tip-materials-movein"><i class="fas fa-info" aria-hidden="true"></i><span class="sr-only">How materials and hardware are priced</span></button>
+                                            <span role="tooltip" id="tip-materials-movein" class="fee-tip__bubble">Mounts, locks, patching compound, and paint are billed separately. Supply them yourself at no markup, or we source them at cost plus a 10&ndash;15% supply sourcing fee.</span>
+                                        </span>
+                                    </span>
+                                    <span class="mt-2 block text-[11px] text-gray-500 font-semibold leading-snug">5 labor hours = $340, less a 15% package discount</span>
+                                </div>
                             </div>
-                            <a href="/book?package=move-in-out" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-md hover:shadow-red-600/30">Schedule Package</a>
+                            <a href="/book?package=move-in-out" data-booking-widget data-booking-service="Move-In / Move-Out Bundle" class="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-red-700 hover:shadow-md hover:shadow-red-600/30">
+                                <i class="fas fa-calendar-check" aria-hidden="true"></i> Schedule Package
+                            </a>
                         </div>
                     </div>
 
                     <!-- Senior Safety & Accessibility Package -->
-                    <div class="bg-white border-2 border-emerald-600 rounded-3xl p-6 shadow-md flex flex-col justify-between hover:shadow-xl transition relative">
+                    <div class="relative flex flex-col justify-between rounded-3xl border-2 border-emerald-600 bg-white p-6 pt-9 shadow-md transition hover:shadow-xl">
+                        <span class="absolute -top-3.5 left-6 inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-3.5 py-1.5 text-[11px] font-black uppercase tracking-wider text-white shadow-md shadow-emerald-600/30">
+                            <i class="fas fa-tags" aria-hidden="true"></i> Save 10% on labor
+                        </span>
                         <div>
                             <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-2xl text-emerald-800 mb-4"><i class="fas fa-hands-holding-child" aria-hidden="true"></i></div>
-                            <h3 class="text-xl font-bold text-blue-900 mb-2">Senior Safety &amp; Accessibility</h3>
+                            <h3 class="text-xl font-bold text-blue-900 mb-1">Senior Safety &amp; Accessibility</h3>
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2">About 4 hours on site</p>
                             <p class="text-gray-600 text-xs leading-relaxed mb-4">Independent living made secure and comfortable. Includes heavy-duty grab bar anchoring, easy-lever door handle swaps, and trip-hazard elimination.</p>
                             <ul class="space-y-2 text-xs text-gray-600 mb-6">
                                 <li class="flex items-center gap-2"><i class="fas fa-check text-green-600" aria-hidden="true"></i> Bathroom grab bar mounting (up to 2)</li>
@@ -608,19 +684,207 @@
                                 <li class="flex items-center gap-2"><i class="fas fa-check text-green-600" aria-hidden="true"></i> Non-slip stair treads &amp; handrail checks</li>
                             </ul>
                         </div>
-                        <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-gray-500 block font-medium">Package Rate</span>
-                                <span class="text-2xl font-black text-blue-900">$250 <span class="text-xs font-normal text-gray-500">(Labor Only)</span></span>
-                                <span class="block text-[11px] text-gray-500 font-semibold leading-snug mt-1">4 labor hours = $280, less a 10% package discount</span>
+                        <div class="border-t border-gray-100 pt-4">
+                            <div class="flex items-end justify-between gap-3">
+                                <div>
+                                    <span class="text-xs text-gray-500 block font-medium">Package Rate</span>
+                                    <span class="text-3xl font-black text-blue-900">$250</span>
+                                    <span class="mt-1.5 flex items-center gap-1.5">
+                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wide text-blue-900 border border-gray-200">Labor Only</span>
+                                        <span class="fee-tip">
+                                            <button type="button" class="fee-tip__trigger text-gray-500" aria-describedby="tip-materials-senior"><i class="fas fa-info" aria-hidden="true"></i><span class="sr-only">How materials and hardware are priced</span></button>
+                                            <span role="tooltip" id="tip-materials-senior" class="fee-tip__bubble">Grab bars, lever handles, and stair treads are billed separately. Buy them yourself at no markup, or we pick them up at cost plus a 10&ndash;15% supply sourcing fee.</span>
+                                        </span>
+                                    </span>
+                                    <span class="mt-2 block text-[11px] text-gray-500 font-semibold leading-snug">4 labor hours = $280, less a 10% package discount</span>
+                                </div>
                             </div>
-                            <a href="/book?package=senior-safety" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-md hover:shadow-red-600/30">Schedule Package</a>
+                            <a href="/book?package=senior-safety" data-booking-widget data-booking-service="Senior Safety &amp; Accessibility Package" class="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-red-700 hover:shadow-md hover:shadow-red-600/30">
+                                <i class="fas fa-calendar-check" aria-hidden="true"></i> Schedule Package
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <p class="text-center text-xs sm:text-sm text-gray-600 mt-8 max-w-3xl mx-auto font-medium"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> Package rates cover installation and service labor only. <strong>Hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Prefer we shop for you? We source parts for our standard 10&ndash;15% supply fee. <a href="/rates#materials" class="text-red-600 font-bold hover:underline">See how materials are handled</a>.</p>
+                <div class="mt-8 max-w-3xl mx-auto rounded-2xl border border-gray-200 bg-white p-5 text-center">
+                    <p class="text-xs sm:text-sm text-gray-600 font-medium"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> Package rates cover installation and service labor only. <strong>Hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Prefer we shop for you? We source parts at cost plus our standard 10&ndash;15% supply sourcing fee. <a href="/rates#materials" class="text-red-600 font-bold hover:underline">See how materials are handled</a>.</p>
+                    <p class="mt-2 text-xs sm:text-sm text-gray-600 font-medium"><i class="fas fa-credit-card text-red-600 mr-1" aria-hidden="true"></i> Cash, check, Zelle&reg;, Venmo&reg;, and Cash App accepted. A <strong>5% processing fee</strong> applies to all non-cash payments.</p>
+                </div>
             </div>
+
+            <!-- Quarterly Home Care Plans.
+                 Both prices ship in the markup as data attributes so the cards
+                 are correct before /js/home-care-plans.js runs; the toggle only
+                 swaps which one is showing. -->
+            <section id="home-care-plans" aria-labelledby="home-care-heading" class="mb-16 rounded-3xl bg-blue-900 p-6 sm:p-10 text-white shadow-xl">
+                <div class="text-center max-w-3xl mx-auto">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-red-300">
+                        <i class="fas fa-repeat" aria-hidden="true"></i> New — Recurring Home Care
+                    </span>
+                    <h2 id="home-care-heading" class="mt-3 text-2xl sm:text-3xl md:text-4xl font-bold">Quarterly Home Care Subscription</h2>
+                    <p class="mt-3 text-sm sm:text-base leading-relaxed text-blue-100">
+                        Four scheduled visits a year, one per season. We walk the same checklist every time — gutters, weatherization, and a room-by-room safety audit — so the small things get caught while they are still small. Members skip the service-call minimum and get first call on the schedule.
+                    </p>
+                </div>
+
+                <div class="mt-7 flex flex-col items-center gap-2">
+                    <div class="plan-toggle" role="group" aria-label="Choose monthly or annual billing">
+                        <button type="button" class="plan-toggle__btn" data-plan-cycle="monthly" aria-pressed="true">Monthly</button>
+                        <button type="button" class="plan-toggle__btn" data-plan-cycle="annual" aria-pressed="false">Annual <span class="text-emerald-300">&middot; 2 months free</span></button>
+                    </div>
+                    <p class="text-xs text-blue-200">Cancel any time. No contract, no cancellation fee.</p>
+                </div>
+
+                <div class="mt-8 grid gap-6 md:grid-cols-3">
+                    <!-- Essential -->
+                    <div class="plan-card" data-plan-card="essential">
+                        <h3 class="text-lg font-extrabold text-white">Essential</h3>
+                        <p class="mt-1 text-xs font-bold uppercase tracking-wider text-blue-200">1 hour per seasonal visit</p>
+                        <p class="mt-4 flex items-baseline gap-1">
+                            <span class="plan-card__price" data-plan-price data-monthly="39" data-annual="390">$39</span>
+                            <span class="text-sm font-semibold text-blue-200" data-plan-period>/month</span>
+                        </p>
+                        <p class="mt-1 text-xs font-bold text-emerald-300 hidden" data-plan-saving>Two months free vs. paying monthly</p>
+                        <ul class="plan-card__features">
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Four visits a year, one each season</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Gutter and downspout flow check</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Seasonal weatherization walkthrough</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Written home safety audit</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>No service-call minimum on plan visits</span></li>
+                        </ul>
+                        <button type="button" data-plan-subscribe="essential" class="mt-6 w-full rounded-xl border border-white/30 px-4 py-3 text-sm font-extrabold text-white transition hover:border-white hover:bg-white/10">Subscribe Now</button>
+                    </div>
+
+                    <!-- Complete -->
+                    <div class="plan-card plan-card--featured" data-plan-card="complete">
+                        <div class="flex items-center justify-between gap-2">
+                            <h3 class="text-lg font-extrabold text-white">Complete</h3>
+                            <span class="rounded-full bg-red-600 px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wide text-white">Most popular</span>
+                        </div>
+                        <p class="mt-1 text-xs font-bold uppercase tracking-wider text-blue-200">2 hours per seasonal visit</p>
+                        <p class="mt-4 flex items-baseline gap-1">
+                            <span class="plan-card__price" data-plan-price data-monthly="59" data-annual="590">$59</span>
+                            <span class="text-sm font-semibold text-blue-200" data-plan-period>/month</span>
+                        </p>
+                        <p class="mt-1 text-xs font-bold text-emerald-300 hidden" data-plan-saving>Two months free vs. paying monthly</p>
+                        <ul class="plan-card__features">
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Everything in Essential</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Twice the time on site for the punch list</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Caulk, seal, and door adjustment pass</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Smoke and CO alarm test and battery swap</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Priority scheduling and 10% off extra labor</span></li>
+                        </ul>
+                        <button type="button" data-plan-subscribe="complete" class="mt-6 w-full rounded-xl bg-red-600 px-4 py-3 text-sm font-extrabold text-white transition hover:bg-red-700">Subscribe Now</button>
+                    </div>
+
+                    <!-- Complete Plus -->
+                    <div class="plan-card" data-plan-card="complete-plus">
+                        <h3 class="text-lg font-extrabold text-white">Complete Plus</h3>
+                        <p class="mt-1 text-xs font-bold uppercase tracking-wider text-blue-200">3 hours per seasonal visit</p>
+                        <p class="mt-4 flex items-baseline gap-1">
+                            <span class="plan-card__price" data-plan-price data-monthly="89" data-annual="890">$89</span>
+                            <span class="text-sm font-semibold text-blue-200" data-plan-period>/month</span>
+                        </p>
+                        <p class="mt-1 text-xs font-bold text-emerald-300 hidden" data-plan-saving>Two months free vs. paying monthly</p>
+                        <ul class="plan-card__features">
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Everything in Complete</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Dryer vent and exhaust fan cleaning</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Deck, fence, and exterior trim inspection</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>15% off extra labor, any visit</span></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Service call waived on unscheduled repairs</span></li>
+                        </ul>
+                        <button type="button" data-plan-subscribe="complete-plus" class="mt-6 w-full rounded-xl border border-white/30 px-4 py-3 text-sm font-extrabold text-white transition hover:border-white hover:bg-white/10">Subscribe Now</button>
+                    </div>
+                </div>
+
+                <!-- Signup. One form for all three plans; the button that opened
+                     it sets the plan. Netlify detects the form at build time from
+                     this static markup, and /js/home-care-plans.js posts it. -->
+                <div id="home-care-form-wrap" class="hidden mt-8 rounded-2xl border border-white/20 bg-blue-950/50 p-6">
+                    <h3 class="text-lg font-extrabold text-white">Start your plan</h3>
+                    <p class="mt-1 text-sm text-blue-100" data-plan-summary></p>
+                    <p class="mt-1 text-xs text-blue-200">Nothing is charged now. Victor calls within one business day to confirm the first visit and set up billing.</p>
+
+                    <form id="home-care-form" name="home-care-plans" method="POST" data-netlify="true" netlify-honeypot="plan-bot-field" class="mt-5 grid gap-4">
+                        <input type="hidden" name="form-name" value="home-care-plans">
+                        <p class="hidden"><label>Do not fill this out: <input name="plan-bot-field"></label></p>
+                        <input type="hidden" id="home-care-cycle" name="billingCycle" value="monthly">
+
+                        <div>
+                            <label class="bw-label !mt-0" for="home-care-plan">Plan</label>
+                            <select id="home-care-plan" name="plan" class="bw-input" required>
+                                <option value="essential">Essential — 1 hour per seasonal visit</option>
+                                <option value="complete" selected>Complete — 2 hours per seasonal visit</option>
+                                <option value="complete-plus">Complete Plus — 3 hours per seasonal visit</option>
+                            </select>
+                        </div>
+
+                        <div class="bw-field-grid">
+                            <div>
+                                <label class="bw-label !mt-0" for="home-care-name">Full name</label>
+                                <input type="text" id="home-care-name" name="name" class="bw-input" autocomplete="name" maxlength="120" required>
+                            </div>
+                            <div>
+                                <label class="bw-label !mt-0" for="home-care-phone">Phone</label>
+                                <input type="tel" id="home-care-phone" name="phone" class="bw-input" autocomplete="tel" maxlength="25" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="bw-label !mt-0" for="home-care-email">Email</label>
+                            <input type="email" id="home-care-email" name="email" class="bw-input" autocomplete="email" maxlength="160" required>
+                        </div>
+
+                        <div>
+                            <label class="bw-label !mt-0" for="home-care-address">Service address</label>
+                            <input type="text" id="home-care-address" name="address" class="bw-input" autocomplete="street-address" maxlength="160" required>
+                        </div>
+
+                        <div class="bw-field-grid">
+                            <div>
+                                <label class="bw-label !mt-0" for="home-care-city">City</label>
+                                <input type="text" id="home-care-city" name="city" class="bw-input" autocomplete="address-level2" maxlength="80">
+                            </div>
+                            <div>
+                                <label class="bw-label !mt-0" for="home-care-zip">ZIP code</label>
+                                <input type="text" id="home-care-zip" name="zip" class="bw-input" autocomplete="postal-code" inputmode="numeric" maxlength="5" pattern="\d{5}" required>
+                                <p class="mt-1 text-xs text-gray-400" data-plan-zipnote role="status" aria-live="polite"></p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="bw-label !mt-0" for="home-care-notes">Anything we should look at first? <span class="font-normal normal-case tracking-normal text-blue-200">(optional)</span></label>
+                            <textarea id="home-care-notes" name="notes" rows="3" maxlength="700" class="bw-input"></textarea>
+                        </div>
+
+                        <div class="rounded-xl border border-white/15 bg-blue-900/50 p-4 text-xs leading-relaxed text-blue-100">
+                            <p class="font-extrabold uppercase tracking-wider text-white">Before you subscribe</p>
+                            <ul class="mt-2 list-disc space-y-1 pl-4">
+                                <li>Plan pricing covers <strong>labor only</strong>.</li>
+                                <li>Materials and hardware are billed separately at cost plus a 10&ndash;15% supply sourcing fee. Supply your own and there is no markup.</li>
+                                <li>Cash, check, Zelle&reg;, Venmo&reg;, and Cash App accepted. A 5% processing fee applies to all non-cash payments.</li>
+                                <li>Quarterly plans are Oakland County only. Cancel any time.</li>
+                            </ul>
+                        </div>
+
+                        <p class="hidden rounded-xl border border-red-400/50 bg-red-900/40 p-3 text-sm text-red-100" data-plan-error role="alert"></p>
+
+                        <button type="submit" id="home-care-submit" class="w-full rounded-xl bg-red-600 px-5 py-3.5 text-base font-extrabold text-white transition hover:bg-red-700 sm:w-auto sm:justify-self-start">
+                            Request My Plan <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                        </button>
+                    </form>
+
+                    <div class="hidden rounded-xl border border-emerald-400/40 bg-emerald-900/30 p-6 text-center" data-plan-success tabindex="-1">
+                        <span class="inline-grid h-14 w-14 place-items-center rounded-full bg-emerald-500/20 text-2xl text-emerald-300"><i class="fas fa-check" aria-hidden="true"></i></span>
+                        <p class="mt-3 text-lg font-extrabold text-white">Plan request received</p>
+                        <p class="mt-1 text-sm text-emerald-100" data-plan-success-message></p>
+                    </div>
+                </div>
+
+                <p class="mt-6 text-center text-xs text-blue-200">
+                    Prefer a one-off visit? <a href="/book" data-booking-widget class="font-bold text-red-300 underline hover:text-red-200">Book a single appointment</a> instead — the plan is only worth it if you would call us four times a year anyway.
+                </p>
+            </section>
 
             <!-- Grouped Jump Links -->
             <nav aria-label="Jump to a service group" class="max-w-6xl mx-auto mb-12 bg-white p-6 rounded-3xl border border-gray-200 shadow-sm">
@@ -1226,7 +1490,10 @@
 
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
-    <script src="/js/site.js?v=20260801b" defer></script>
+    <script src="/js/site.js?v=20260802a" defer></script>
+    <script src="/js/booking-widget.js?v=20260802a" defer></script>
+    <script src="/js/service-zone-selector.js?v=20260802a" defer></script>
+    <script src="/js/home-care-plans.js?v=20260802a" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
     <script>
       // Registered after load so it never competes with the first render.
@@ -1238,20 +1505,3 @@
     </script>
 </body>
 </html>
-ml>
->
-);
-    </script>
-</body>
-</html>
-ml>
->
-tml>
-ml>
->
-tml>
-ml>
->
-tml>
-ml>
->

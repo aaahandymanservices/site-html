@@ -9,9 +9,12 @@ import {
   recordRedemption,
   releaseRedemption,
 } from "../lib/gift-certificate.js";
+import { resolveServiceLocation } from "../lib/service-area.js";
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+const MAX_ADDRESS_LENGTH = 160;
+const MAX_CITY_LENGTH = 80;
 
 const json = (body: unknown, init?: ResponseInit) =>
   Response.json(body, {
@@ -65,6 +68,9 @@ export default async (request: Request) => {
     let bookingDate = "";
     let bookingTime = "";
     let message = "";
+    let address = "";
+    let city = "";
+    let zip = "";
     let optIn = false;
     let giftCertificateRequested = false;
     let photo: File | null = null;
@@ -80,6 +86,9 @@ export default async (request: Request) => {
       bookingDate = String(body.bookingDate || "").trim();
       bookingTime = String(body.bookingTime || "").trim();
       message = String(body.message || "").trim();
+      address = String(body.address || "").trim();
+      city = String(body.city || "").trim();
+      zip = String(body.zip || body.zipCode || "").trim();
       optIn = Boolean(body.optIn || body["seasonal-opt-in"] || false);
       giftCertificateRequested = isCertificateRequested(
         body.firstServiceGiftCertificate ?? body["first-service-gift-certificate"],
@@ -93,6 +102,9 @@ export default async (request: Request) => {
       bookingDate = String(formData.get("bookingDate") || "").trim();
       bookingTime = String(formData.get("bookingTime") || "").trim();
       message = String(formData.get("message") || "").trim();
+      address = String(formData.get("address") || "").trim();
+      city = String(formData.get("city") || "").trim();
+      zip = String(formData.get("zip") || formData.get("zipCode") || "").trim();
       optIn = formData.get("seasonal-opt-in") === "on" || formData.get("seasonal-opt-in") === "true";
       giftCertificateRequested = isCertificateRequested(
         formData.get("firstServiceGiftCertificate") ?? formData.get("first-service-gift-certificate"),
@@ -133,6 +145,25 @@ export default async (request: Request) => {
     if (parsedBookingDate.getUTCDay() === 0) {
       return errorJson("AAA Handyman Services is closed on Sundays. Please choose a Monday–Saturday date.", 400);
     }
+
+    // Address is optional so the owner can still key in a phone booking that has
+    // nothing but a name and a number, but a ZIP that *is* supplied has to be one
+    // we drive to -- otherwise the appointment is confirmed for a house outside
+    // the service area and someone finds out on the morning of the visit.
+    const location = zip ? resolveServiceLocation(zip) : null;
+    if (zip && !location) {
+      return errorJson("Please provide a valid 5-digit ZIP code.", 400);
+    }
+    if (location && !location.served) {
+      return errorJson(
+        "That ZIP code is outside our Oakland County service area. Call us at (248) 385-3432 and we'll let you know if we can make the trip.",
+        400,
+      );
+    }
+    address = address.slice(0, MAX_ADDRESS_LENGTH);
+    // A ZIP we recognise names its own city, which beats a typo in the city
+    // field; anything the customer typed is only kept when we have nothing better.
+    city = (location?.city || city).slice(0, MAX_CITY_LENGTH);
 
     if (photo && photo.size > MAX_IMAGE_SIZE) {
       return errorJson("The repair photo must be 5 MB or smaller.", 400);
@@ -184,6 +215,10 @@ export default async (request: Request) => {
         bookingTime,
         message: message || null,
         photoKey,
+        address: address || null,
+        city: city || null,
+        zip: location ? location.zip : null,
+        zone: location?.zone || null,
         giftCertificateApplied,
         status: "pending"
       }).returning();
@@ -235,9 +270,16 @@ export default async (request: Request) => {
         service: newBooking.service,
         bookingDate: newBooking.bookingDate,
         bookingTime: newBooking.bookingTime,
+        city: newBooking.city,
+        zone: newBooking.zone,
         giftCertificateApplied: newBooking.giftCertificateApplied,
         photoUrl: newBooking.photoKey ? `/api/booking/photo/${newBooking.photoKey}` : null
       },
+      // Echoed back so the confirmation screen can name the route the address
+      // falls on ("Wednesdays & Saturdays") instead of a generic thank-you.
+      serviceArea: location
+        ? { city: location.city, zone: location.zone, route: location.route, routeLabel: location.routeLabel, routeDays: location.routeDays }
+        : null,
       // The browser mirrors this into local storage so the offer stops being
       // rendered for this visitor on every page.
       giftCertificate: {
