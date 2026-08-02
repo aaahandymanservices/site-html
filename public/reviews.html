@@ -735,42 +735,21 @@
 
                     <!-- Interactive filters: service category and city, combined.
                          Both rows are plain buttons carrying aria-pressed, so the
-                         lit state is announced and not only coloured in. -->
+                         lit state is announced and not only coloured in.
+
+                         The service row ships with "All Projects" alone and is
+                         finished by /js/reviews-page.js from the reviews the page
+                         just loaded, so it can only ever offer a category that has
+                         a showcase behind it. The whole row stays hidden until at
+                         least two categories are published -- with one, there is
+                         nothing to narrow. -->
                     <div class="space-y-4">
-                        <div>
+                        <div id="reviews-service-filter" class="hidden">
                             <span id="reviews-filter-label" class="block text-[11px] uppercase tracking-widest font-bold text-slate-400 mb-2.5">Filter by service</span>
                             <div id="reviews-filters" class="flex flex-wrap gap-2" role="group" aria-labelledby="reviews-filter-label">
                                 <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="all" aria-pressed="true">
                                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
                                     All Projects
-                                </button>
-                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Carpentry" aria-pressed="false">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 5h10.2l2.8 2.6-2.8 2.6H4.5Z"/><path d="M10.4 10.2 13 21"/></svg>
-                                    Carpentry
-                                </button>
-                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Plumbing" aria-pressed="false">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-8 8l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 8-8l-3.8 3.8Z"/></svg>
-                                    Plumbing
-                                </button>
-                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Electrical" aria-pressed="false">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3.8 13.4h6.4L11 22l9.2-11.4h-6.4L13 2Z"/></svg>
-                                    Electrical
-                                </button>
-                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Decks & Fences" aria-pressed="false">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V7.6L7.5 4.5 10 7.6V21M14 21V7.6l2.5-3.1L19 7.6V21"/><path d="M2.5 10.5h19M2.5 15.5h19"/></svg>
-                                    Decks &amp; Fences
-                                </button>
-                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Drywall" aria-pressed="false">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9.3h18M3 14.7h18M9 4v5.3M15 9.3v5.4M9 14.7V20"/></svg>
-                                    Drywall
-                                </button>
-                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Painting" aria-pressed="false">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="13" height="5.5" rx="1.5"/><path d="M10 9v3.5"/><rect x="7.5" y="12.5" width="5" height="8" rx="2"/></svg>
-                                    Painting
-                                </button>
-                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="Maintenance" aria-pressed="false">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/></svg>
-                                    Maintenance
                                 </button>
                             </div>
                         </div>
@@ -939,7 +918,7 @@
     </div>
 
 
-    <script src="/js/reviews-page.js?v=20260802c" defer></script>
+    <script src="/js/reviews-page.js?v=20260802d" defer></script>
     <script src="/js/site.js?v=20260801b" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
     <script>

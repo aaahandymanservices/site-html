@@ -104,7 +104,8 @@
   const attrChips = document.querySelectorAll('.attr-chip');
   const attributesInput = document.getElementById('reviews-attributes-input');
   const ownerResponseInput = document.getElementById('reviews-owner-response');
-  const filterButtons = document.querySelectorAll('.filter-tab');
+  const serviceFilterBlock = document.getElementById('reviews-service-filter');
+  const serviceTabsHost = document.getElementById('reviews-filters');
   const cityTabsHost = document.getElementById('reviews-cities');
   const clearFiltersBtn = document.getElementById('reviews-clear-filters');
   const reviewsFilterEmpty = document.getElementById('reviews-filter-empty');
@@ -592,9 +593,18 @@
   // both. A location we cannot place -- somewhere outside the county, or a
   // typo -- has no pill of its own and so only ever appears under "All
   // Cities".
+  //
+  // Service pills carry the category exactly as it was stored, because the row
+  // is built from the reviews themselves (see syncServiceTabs), so the match is
+  // an equality rather than the substring it used to be. That substring was
+  // what let a hand-written "Carpentry" pill stand in for "Carpentry & Trim";
+  // with the label taken from the data there is nothing left to approximate,
+  // and a category that is a prefix of another can no longer drag its
+  // neighbour's showcases into view.
+  const serviceKey = (name) => String(name || '').trim().toLowerCase();
+
   const matchesFilter = (item) => {
-      const category = String(item.projectType || '').toLowerCase();
-      const categoryOk = activeFilter === 'all' || category.includes(activeFilter.toLowerCase());
+      const categoryOk = activeFilter === 'all' || serviceKey(item.projectType) === serviceKey(activeFilter);
       const cityOk = activeCity === 'all' || cityOf(item.location) === activeCity;
       return categoryOk && cityOk;
   };
@@ -790,21 +800,123 @@
   };
 
   // --- Filter rows: service category and city, applied together ---
-  // The city row is queried live rather than captured once, because a pin for
-  // a city outside the hard-coded twelve adds its pill at render time and that
-  // pill has to answer to the same aria-pressed bookkeeping as the rest.
+  // Neither row is captured once: both are built up from the reviews that came
+  // back, and every pill they gain has to answer to the same aria-pressed
+  // bookkeeping as the ones the page shipped with.
+  const serviceTabs = () => (serviceTabsHost ? Array.from(serviceTabsHost.querySelectorAll('.filter-tab')) : []);
   const cityTabs = () => (cityTabsHost ? Array.from(cityTabsHost.querySelectorAll('.city-tab')) : []);
 
   const applyFilters = ({ filter, city } = {}) => {
       if (typeof filter === 'string') activeFilter = filter;
       if (typeof city === 'string') activeCity = city;
-      filterButtons.forEach((btn) => {
+      serviceTabs().forEach((btn) => {
           btn.setAttribute('aria-pressed', String((btn.dataset.filter || 'all') === activeFilter));
       });
       cityTabs().forEach((btn) => {
           btn.setAttribute('aria-pressed', String((btn.dataset.city || 'all') === activeCity));
       });
       renderReviews();
+  };
+
+  /*
+   * The service row is generated from the gallery rather than hard-coded.
+   *
+   * It used to be eight pills written into the HTML, which drifted from the
+   * submission form in both directions at once: it offered Plumbing and
+   * Electrical whether or not anyone had posted such a job, and it had no pill
+   * at all for Doors, Flooring, or Other Service, so those showcases could only
+   * ever be reached under "All Projects". Deriving the row from the reviews
+   * settles both -- a category appears the moment its first showcase is
+   * published and disappears again with its last -- and it means a category the
+   * owner types by hand while editing a review gets a working pill for free.
+   *
+   * The icons stay hard-coded, keyed by the exact value the form stores, since
+   * they are the one part that cannot come from the data. An unrecognised
+   * category falls back to the toolbox rather than losing its pill.
+   */
+  const SERVICE_ICONS = {
+      'Carpentry & Trim': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 5h10.2l2.8 2.6-2.8 2.6H4.5Z"/><path d="M10.4 10.2 13 21"/></svg>',
+      'Doors': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M15.2 12h.01"/></svg>',
+      'Drywall': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9.3h18M3 14.7h18M9 4v5.3M15 9.3v5.4M9 14.7V20"/></svg>',
+      'Painting': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="13" height="5.5" rx="1.5"/><path d="M10 9v3.5"/><rect x="7.5" y="12.5" width="5" height="8" rx="2"/></svg>',
+      'Electrical': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3.8 13.4h6.4L11 22l9.2-11.4h-6.4L13 2Z"/></svg>',
+      'Plumbing': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-8 8l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 8-8l-3.8 3.8Z"/></svg>',
+      'Decks & Fences': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V7.6L7.5 4.5 10 7.6V21M14 21V7.6l2.5-3.1L19 7.6V21"/><path d="M2.5 10.5h19M2.5 15.5h19"/></svg>',
+      'Flooring': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 8.5h18M3 13h18M3 17.5h18"/></svg>',
+      'Maintenance': '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/></svg>'
+  };
+  const SERVICE_ICON_FALLBACK = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5h17v10a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5Z"/><path d="M9 8.5V6a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 6v2.5"/><path d="M3.5 13h17"/></svg>';
+
+  // Pills read left to right in the order the submission form lists its
+  // options, so the row looks the same from one visit to the next instead of
+  // reshuffling with whichever review happened to be posted most recently.
+  // Anything the owner typed by hand sorts alphabetically after the known set.
+  const SERVICE_ORDER = [
+      'Carpentry & Trim', 'Doors', 'Drywall', 'Painting', 'Electrical',
+      'Plumbing', 'Decks & Fences', 'Flooring', 'Maintenance', 'Other Service'
+  ];
+
+  const publishedServices = () => {
+      const seen = new Map();
+      allReviews.forEach((item) => {
+          const name = String(item.projectType || '').trim();
+          if (name && !seen.has(serviceKey(name))) seen.set(serviceKey(name), name);
+      });
+      const rank = (name) => {
+          const index = SERVICE_ORDER.indexOf(name);
+          return index === -1 ? SERVICE_ORDER.length : index;
+      };
+      return Array.from(seen.values())
+          .sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
+  };
+
+  const syncServiceTabs = () => {
+      if (!serviceTabsHost) return;
+      const services = publishedServices();
+      const wanted = new Set(services);
+
+      // A pill whose last showcase has been deleted is taken back, so the row
+      // never offers a filter that can only come up empty. If it was the one in
+      // force, the grid falls back to "All Projects" rather than sitting on a
+      // category no longer on screen.
+      let orphaned = false;
+      serviceTabs().forEach((btn) => {
+          if (btn.dataset.dynamic !== 'true' || wanted.has(btn.dataset.filter)) return;
+          orphaned = orphaned || activeFilter === btn.dataset.filter;
+          btn.remove();
+      });
+
+      const known = new Set(serviceTabs().map((btn) => btn.dataset.filter || 'all'));
+      services.forEach((name) => {
+          if (known.has(name)) return;
+          const tab = document.createElement('button');
+          tab.type = 'button';
+          tab.className = 'filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold';
+          tab.dataset.filter = name;
+          tab.dataset.dynamic = 'true';
+          tab.setAttribute('aria-pressed', String(activeFilter === name));
+          tab.innerHTML = SERVICE_ICONS[name] || SERVICE_ICON_FALLBACK;
+          // The label is appended as text, never as markup: it is customer- or
+          // owner-supplied and an ampersand in "Decks & Fences" has to survive
+          // as an ampersand.
+          tab.appendChild(document.createTextNode(name));
+          serviceTabsHost.appendChild(tab);
+          known.add(name);
+      });
+
+      // Re-appending in rank order puts a newly published category in its
+      // proper place rather than on the end. "All Projects" is not dynamic, so
+      // it is never moved and stays first.
+      services.forEach((name) => {
+          const tab = serviceTabs().find((btn) => btn.dataset.filter === name);
+          if (tab) serviceTabsHost.appendChild(tab);
+      });
+
+      // One category is not a choice, so the row only appears once there are
+      // two to pick between.
+      serviceFilterBlock?.classList.toggle('hidden', services.length < 2);
+
+      if (orphaned) applyFilters({ filter: 'all' });
   };
 
   // Gives a pill to any city holding a review that the page ships without one,
@@ -838,12 +950,13 @@
       if (orphaned) applyFilters({ city: 'all' });
   };
 
-  filterButtons.forEach((btn) => {
-      btn.addEventListener('click', () => applyFilters({ filter: btn.dataset.filter || 'all' }));
+  // Both rows are delegated so the pills these functions add are clickable
+  // without any extra wiring of their own.
+  serviceTabsHost?.addEventListener('click', (event) => {
+      const tab = event.target instanceof Element ? event.target.closest('.filter-tab') : null;
+      if (tab) applyFilters({ filter: tab.dataset.filter || 'all' });
   });
 
-  // Delegated so the pills added by syncCityTabs are clickable without any
-  // extra wiring of their own.
   cityTabsHost?.addEventListener('click', (event) => {
       const tab = event.target instanceof Element ? event.target.closest('.city-tab') : null;
       if (tab) applyFilters({ city: tab.dataset.city || 'all' });
@@ -1221,11 +1334,16 @@
           .then(response => response.ok ? response.json() : Promise.reject())
           .then((items) => {
               allReviews = Array.isArray(items) ? items : [];
+              // The pills are rebuilt before the grid draws, so a filter that
+              // no longer has anything behind it is already gone by the time
+              // renderReviews decides what to show.
+              syncServiceTabs();
               renderReviews();
               renderMap();
           })
           .catch(() => {
               allReviews = [];
+              syncServiceTabs();
               renderMap();
               reviewsLoading.classList.add('hidden');
               reviewsEmpty.classList.remove('hidden');
