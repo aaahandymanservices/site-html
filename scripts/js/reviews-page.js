@@ -113,6 +113,8 @@
   const mapPinsHost = document.getElementById('map-pins');
   const mapPopup = document.getElementById('map-popup');
   const mapSummary = document.getElementById('map-summary');
+  const citiesServedCount = document.querySelector('[data-cities-served-count]');
+  const citiesServedRange = document.querySelector('[data-cities-served-range]');
   const lightbox = document.getElementById('reviews-lightbox');
   const lightboxImg = document.getElementById('reviews-lightbox-img');
   const lightboxCaption = document.getElementById('reviews-lightbox-caption');
@@ -1135,6 +1137,34 @@
       }
   };
 
+  // The trust tile above the map makes the same claim the pins do, so it is
+  // written from the same list rather than kept in the page by hand. Hard-coded,
+  // it stayed on twelve while a thirteenth city's pin was already on the map.
+  //
+  // The subtitle keeps the home base on one end and names whichever served city
+  // sits furthest from it, which is Southfield until a review arrives from
+  // somewhere further out -- so the phrase is always a span we can show work
+  // across.
+  const HOME_CITY = 'Waterford';
+
+  const renderCitiesServed = (served) => {
+      if (citiesServedCount) {
+          citiesServedCount.textContent =
+              `${served.length} Oakland County ${served.length === 1 ? 'City' : 'Cities'} Served`;
+      }
+
+      const home = MAP_CITIES.find((city) => city.name === HOME_CITY);
+      if (!citiesServedRange || !home) return;
+
+      const furthest = served.reduce((far, city) => {
+          if (city.name === HOME_CITY) return far;
+          const distance = Math.hypot(city.x - home.x, city.y - home.y);
+          return !far || distance > far.distance ? { name: city.name, distance } : far;
+      }, null);
+
+      citiesServedRange.textContent = furthest ? `${HOME_CITY} to ${furthest.name}` : HOME_CITY;
+  };
+
   const renderMap = () => {
       if (!mapPinsHost) return;
       closeMapPopup();
@@ -1156,7 +1186,8 @@
       // we do not anchor -- Royal Oak, Beverly Hills -- gets their pin the
       // moment they post, instead of dropping off the map entirely.
       mapPinsHost.innerHTML = '';
-      MAP_CITIES.filter((city) => city.core || (byCity.get(city.name) || []).length).forEach((city) => {
+      const served = MAP_CITIES.filter((city) => city.core || (byCity.get(city.name) || []).length);
+      served.forEach((city) => {
           const items = byCity.get(city.name) || [];
           const pin = document.createElement('button');
           pin.type = 'button';
@@ -1185,6 +1216,7 @@
       });
 
       syncCityTabs(byCity);
+      renderCitiesServed(served);
 
       const pinned = Array.from(byCity.values()).reduce((total, list) => total + list.length, 0);
       const cities = byCity.size;
