@@ -36,7 +36,7 @@ const ICONS_CSS = '/css/icons.css?v=20260729d';
  * which is how the previous pass at the dark form fields appeared to land and
  * then not to.
  */
-const ASSET_VERSION = '20260801g';
+const ASSET_VERSION = '20260802a';
 const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
 const SCRIPT_VERSIONS = new Map([
   ['site.js', ASSET_VERSION],
@@ -47,6 +47,12 @@ const SCRIPT_VERSIONS = new Map([
   // rail, quick-pick tiles, estimator, and availability badge are all inert
   // markup until this file runs -- so its stamp has to move with the rest.
   ['book-page.js', ASSET_VERSION],
+  // The booking modal, the route-day banner, and the home care plan cards are
+  // the same deal: the markup that triggers them is inert without the script,
+  // so a stale cached copy is worse than no copy.
+  ['booking-widget.js', ASSET_VERSION],
+  ['service-zone-selector.js', ASSET_VERSION],
+  ['home-care-plans.js', ASSET_VERSION],
 ]);
 const ASYNC_ICONS_CSS =
   `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +

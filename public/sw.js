@@ -44,7 +44,13 @@
 // behaviour that only work together, and /js/book-page.js keeps its pathname
 // across the change, so a returning visitor holding v9 would otherwise pair the
 // new page with the old script for one more view.
-const CACHE_VERSION = 'v10';
+// v11 lands the booking modal, the route-day banner, and the quarterly home
+// care plans. The three new behaviour files arrive under new pathnames and are
+// picked up cleanly, but every rule that styles them -- the modal shell, the
+// bundle tooltips, the plan cards -- was added to site-theme.css and
+// tailwind.css behind their unchanged pathnames, so a returning visitor holding
+// v10 would open an unstyled modal over last deploy's stylesheet.
+const CACHE_VERSION = 'v11';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

@@ -37,11 +37,45 @@ export const bookings = pgTable("bookings", {
   bookingTime: text("booking_time").notNull(),
   message: text("message"),
   photoKey: text("photo_key"),
+  // Where the work happens. Nullable because every booking taken before the
+  // widget asked for an address predates these columns, and the phone-in
+  // bookings the owner enters by hand still only carry a name and a number.
+  // `zip` is what decides `zone` (and therefore the travel differential), so
+  // the two are stored together rather than re-derived at read time.
+  address: text("address"),
+  city: text("city"),
+  zip: text("zip"),
+  zone: text("zone"),
   status: text("status").default("pending").notNull(),
   // True when this booking is the one that consumed the customer's $50
   // first-service gift certificate, so the owner can see the discount owed
   // without cross-referencing the redemption table.
   giftCertificateApplied: boolean("gift_certificate_applied").default(false).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
+// Quarterly Home Care Plan signups: the recurring counterpart to the one-off
+// bookings above. Nothing is charged here -- the row is a request the owner
+// calls back to confirm and set up billing for -- so there is no payment state
+// to model, only which plan was chosen and how the customer wants to be billed.
+export const homeCareSubscriptions = pgTable("home_care_subscriptions", {
+  id: serial("id").primaryKey(),
+  customerName: text("customer_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  address: text("address"),
+  city: text("city"),
+  zip: text("zip"),
+  zone: text("zone"),
+  // Plan slug: 'essential', 'complete', or 'complete-plus'.
+  plan: text("plan").notNull(),
+  // 'monthly' or 'annual'. Annual is billed once and skips two months.
+  billingCycle: text("billing_cycle").default("monthly").notNull(),
+  // Price in whole dollars for the chosen plan and cycle, captured at signup so
+  // a later price change cannot rewrite what someone was quoted.
+  quotedPrice: integer("quoted_price"),
+  notes: text("notes"),
+  status: text("status").default("pending").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
 

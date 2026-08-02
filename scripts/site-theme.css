@@ -2379,6 +2379,745 @@ body > header.bg-gradient-to-r::after {
   white-space: nowrap;
 }
 
+/* ==========================================================================
+   Booking widget (scripts/js/booking-widget.js)
+
+   The modal is injected by JavaScript rather than shipped in every page's
+   markup, so its chrome lives here instead of in a per-page <style> block.
+   Everything inside the panel that is layout-only stays in Tailwind classes on
+   the generated nodes; what is here is the dialog shell, the pieces with
+   states (tiles, arrival windows), and anything Tailwind cannot express
+   cleanly.
+   ========================================================================== */
+
+/* Stops the page behind the dialog from scrolling under the backdrop. */
+html.bw-open,
+html.bw-open body {
+  overflow: hidden;
+}
+
+.bw-root {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+}
+
+.bw-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 16, 32, 0.82);
+  backdrop-filter: blur(3px);
+}
+
+.bw-shell {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .bw-shell {
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+.bw-panel {
+  width: 100%;
+  max-width: 46rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: linear-gradient(160deg, #16233d 0%, #101a2e 100%);
+  box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+}
+
+.bw-header {
+  padding: 1.25rem 1.25rem 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(27, 42, 74, 0.55);
+}
+
+@media (min-width: 640px) {
+  .bw-header {
+    padding: 1.5rem 1.75rem 0;
+  }
+}
+
+.bw-close {
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  color: #e2e8f0;
+  background: rgba(15, 23, 42, 0.6);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.bw-close:hover {
+  background: #a61f2e;
+  border-color: #a61f2e;
+  color: #fff;
+}
+
+.bw-steps {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  padding: 0 0 1rem;
+  list-style: none;
+}
+
+.bw-step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.bw-step__dot {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: none;
+  border-radius: 9999px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  font-size: 0.8125rem;
+}
+
+.bw-step.is-active {
+  color: #fff;
+}
+
+.bw-step.is-active .bw-step__dot {
+  background: #a61f2e;
+  border-color: #a61f2e;
+  color: #fff;
+}
+
+.bw-step.is-done {
+  color: #6ee7b7;
+}
+
+.bw-step.is-done .bw-step__dot {
+  border-color: #6ee7b7;
+  color: #6ee7b7;
+}
+
+.bw-body {
+  padding: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .bw-body {
+    padding: 1.75rem;
+  }
+}
+
+.bw-pane__title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.bw-pane__hint,
+.bw-note {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: #94a3b8;
+}
+
+.bw-note--warn {
+  color: #fca5a5;
+}
+
+.bw-subhead {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #cbd5e1;
+}
+
+.bw-grid {
+  display: grid;
+  gap: 0.625rem;
+  margin-top: 0.875rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 640px) {
+  .bw-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.bw-tile {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem;
+  text-align: left;
+  border-radius: 0.875rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(15, 23, 42, 0.55);
+  color: #e2e8f0;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.bw-tile:hover {
+  border-color: rgba(166, 31, 46, 0.7);
+  background: rgba(30, 41, 59, 0.75);
+  transform: translateY(-1px);
+}
+
+.bw-tile:focus-visible {
+  outline: 2px solid #f87171;
+  outline-offset: 2px;
+}
+
+.bw-tile[aria-pressed="true"] {
+  border-color: #a61f2e;
+  background: rgba(166, 31, 46, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(166, 31, 46, 0.5);
+}
+
+.bw-tile--bundle {
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.bw-tile--quote {
+  border-style: dashed;
+}
+
+.bw-tile__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: rgba(166, 31, 46, 0.18);
+  color: #fca5a5;
+}
+
+.bw-tile--bundle .bw-tile__icon {
+  background: rgba(16, 185, 129, 0.16);
+  color: #6ee7b7;
+}
+
+.bw-tile__body {
+  display: block;
+  min-width: 0;
+}
+
+.bw-tile__label {
+  display: block;
+  font-weight: 700;
+  color: #fff;
+}
+
+.bw-tile__blurb {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #94a3b8;
+}
+
+.bw-tile__meta {
+  display: block;
+  margin-top: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.bw-chip {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.bw-chip--save {
+  background: rgba(16, 185, 129, 0.18);
+  color: #6ee7b7;
+}
+
+.bw-chip--labor {
+  background: rgba(148, 163, 184, 0.18);
+  color: #cbd5e1;
+}
+
+.bw-estimate {
+  margin: 0.875rem 0 1.25rem;
+  padding: 0.875rem 1rem;
+  border-radius: 0.875rem;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(6, 78, 59, 0.28);
+}
+
+.bw-estimate__title {
+  font-weight: 800;
+  color: #fff;
+}
+
+.bw-estimate__detail {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #d1fae5;
+}
+
+.bw-estimate__tag {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: #a7f3d0;
+}
+
+.bw-label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #cbd5e1;
+}
+
+.bw-input {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.625rem;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(15, 23, 42, 0.75);
+  color: #f8fafc;
+  font-size: 0.9375rem;
+}
+
+.bw-input::placeholder {
+  color: #64748b;
+}
+
+.bw-input:focus {
+  outline: none;
+  border-color: #a61f2e;
+  box-shadow: 0 0 0 3px rgba(166, 31, 46, 0.25);
+}
+
+/* The native picker indicator is nearly invisible on a dark field. */
+.bw-input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.bw-field-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 640px) {
+  .bw-field-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.bw-windows {
+  display: grid;
+  gap: 0.625rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 640px) {
+  .bw-windows {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.bw-window {
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(15, 23, 42, 0.6);
+  text-align: center;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.bw-window:hover:not(:disabled) {
+  border-color: rgba(166, 31, 46, 0.7);
+}
+
+.bw-window[aria-pressed="true"] {
+  border-color: #a61f2e;
+  background: rgba(166, 31, 46, 0.2);
+}
+
+.bw-window:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.bw-window__part {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.bw-window__value {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.bw-window__status {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #6ee7b7;
+}
+
+.bw-window__status--taken {
+  color: #fca5a5;
+}
+
+.bw-zip-note {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: #94a3b8;
+}
+
+.bw-zip-note--ok {
+  color: #6ee7b7;
+}
+
+.bw-zip-note--bad {
+  color: #fca5a5;
+}
+
+.bw-fees {
+  margin-top: 1.25rem;
+  padding: 0.875rem 1rem;
+  border-radius: 0.875rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.bw-fees__title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #e2e8f0;
+}
+
+.bw-fees__list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: #94a3b8;
+}
+
+.bw-fees__list li + li {
+  margin-top: 0.25rem;
+}
+
+.bw-error {
+  margin-top: 1rem;
+  padding: 0.75rem 0.875rem;
+  border-radius: 0.625rem;
+  border: 1px solid rgba(248, 113, 113, 0.45);
+  background: rgba(127, 29, 29, 0.35);
+  font-size: 0.875rem;
+  color: #fecaca;
+}
+
+.bw-done-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.18);
+  color: #6ee7b7;
+  font-size: 1.5rem;
+}
+
+.bw-summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.375rem 1rem;
+  margin: 1.25rem auto 0;
+  max-width: 28rem;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.bw-summary__term {
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  color: #94a3b8;
+  align-self: center;
+}
+
+.bw-summary__value {
+  color: #f1f5f9;
+  margin: 0;
+}
+
+.bw-secondary-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 1.5rem;
+  font-weight: 700;
+  color: #fca5a5;
+}
+
+.bw-secondary-link:hover {
+  color: #fecaca;
+}
+
+.bw-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(9, 16, 32, 0.6);
+}
+
+@media (min-width: 640px) {
+  .bw-footer {
+    padding: 1rem 1.75rem;
+  }
+}
+
+.bw-btn-ghost {
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.bw-btn-ghost:hover {
+  color: #fff;
+  border-color: rgba(226, 232, 240, 0.6);
+}
+
+.bw-btn-primary {
+  padding: 0.625rem 1.125rem;
+  border-radius: 0.625rem;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: #fff;
+  background: #a61f2e;
+  box-shadow: 0 10px 25px -12px rgba(166, 31, 46, 0.9);
+}
+
+.bw-btn-primary:hover:not(:disabled) {
+  background: #8e1a27;
+}
+
+.bw-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.bw-call {
+  display: none;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+.bw-call:hover {
+  color: #fff;
+}
+
+@media (min-width: 640px) {
+  .bw-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+}
+
+/* ==========================================================================
+   Fee tooltips
+
+   Used beside every "Labor Only" tag. Hover and keyboard focus both open it,
+   and the bubble is a real element in the accessibility tree (referenced by
+   aria-describedby) rather than a title attribute, which screen readers and
+   touch devices treat inconsistently.
+   ========================================================================== */
+
+.fee-tip {
+  position: relative;
+  display: inline-flex;
+}
+
+.fee-tip__trigger {
+  display: inline-grid;
+  place-items: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 9999px;
+  border: 1px solid currentColor;
+  font-size: 0.625rem;
+  line-height: 1;
+  opacity: 0.75;
+  cursor: help;
+}
+
+.fee-tip__trigger:hover,
+.fee-tip__trigger:focus-visible {
+  opacity: 1;
+}
+
+.fee-tip__bubble {
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+  left: 50%;
+  z-index: 30;
+  width: 17rem;
+  max-width: 70vw;
+  transform: translateX(-50%);
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.625rem;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.55;
+  text-align: left;
+  text-transform: none;
+  letter-spacing: normal;
+  box-shadow: 0 18px 35px -18px rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease;
+}
+
+.fee-tip:hover .fee-tip__bubble,
+.fee-tip__trigger:focus-visible + .fee-tip__bubble {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ==========================================================================
+   Quarterly Home Care Plans (scripts/js/home-care-plans.js)
+   ========================================================================== */
+
+.plan-toggle {
+  display: inline-flex;
+  padding: 0.25rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.plan-toggle__btn {
+  padding: 0.5rem 1.125rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #cbd5e1;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.plan-toggle__btn[aria-pressed="true"] {
+  background: #a61f2e;
+  color: #fff;
+}
+
+.plan-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(15, 23, 42, 0.55);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.plan-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(166, 31, 46, 0.6);
+}
+
+.plan-card--featured {
+  border-color: #a61f2e;
+  box-shadow: 0 25px 50px -25px rgba(166, 31, 46, 0.8);
+}
+
+.plan-card__price {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #fff;
+}
+
+.plan-card__features {
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #cbd5e1;
+}
+
+.plan-card__features li {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.plan-card__features i {
+  margin-top: 0.25rem;
+  color: #6ee7b7;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -2416,6 +3155,8 @@ body > header.bg-gradient-to-r::after {
   .nav-link:hover,
   .seasonal-banner__cta:hover,
   .seasonal-banner__cta:hover svg,
+  .bw-tile:hover,
+  .plan-card:hover,
   #back-to-top:hover {
     transform: none;
   }

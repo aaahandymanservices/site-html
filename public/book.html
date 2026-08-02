@@ -72,8 +72,8 @@
     }
     </script>
 
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260801b">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260801b">
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260802a">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260802a">
     <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
 
@@ -349,8 +349,26 @@
                     
                     <!-- Left column: Info and values -->
                     <div class="lg:col-span-5 space-y-8">
+                        <!-- Route-day banner. /js/service-zone-selector.js
+                             replaces the fallback list below with a city picker;
+                             the list is what non-JS visitors see. -->
+                        <div class="rounded-2xl border border-white/15 bg-blue-900 p-5 sm:p-6 shadow-lg">
+                            <h2 class="flex items-center gap-2 text-lg font-bold text-white">
+                                <i class="fas fa-route text-red-400" aria-hidden="true"></i> We are already in your neighborhood
+                            </h2>
+                            <p class="mt-1.5 text-sm leading-relaxed text-gray-300">Picking a day we already drive your street usually means a same-week confirmation.</p>
+                            <div class="mt-4" data-zone-selector>
+                                <ul class="space-y-2.5 text-sm text-gray-200">
+                                    <li><strong class="text-white">Mondays &amp; Thursdays</strong> — North &amp; Lakes: Waterford, Clarkston, White Lake, Highland, Independence Twp.</li>
+                                    <li><strong class="text-white">Tuesdays &amp; Fridays</strong> — West Corridor: Novi, Farmington Hills, Walled Lake, Wixom, Commerce Twp.</li>
+                                    <li><strong class="text-white">Wednesdays &amp; Saturdays</strong> — East &amp; South Metro: Troy, Rochester Hills, Birmingham, Royal Oak, Auburn Hills.</li>
+                                </ul>
+                            </div>
+                            <p class="mt-3 text-xs leading-relaxed text-gray-400">Off-route days are still bookable — they just take an extra call to confirm. Zone A minimum $100, Zone B minimum $120.</p>
+                        </div>
+
                         <h2 class="text-2xl sm:text-3xl font-bold text-white leading-tight">Why Book Online with AAA Handyman?</h2>
-                        
+
                         <div class="space-y-6">
                             <div class="flex items-start gap-4">
                                 <div class="w-12 h-12 rounded-2xl bg-red-600/10 border border-red-500/20 flex items-center justify-center text-red-500 flex-shrink-0 text-xl">
@@ -619,6 +637,28 @@
                                     <input id="booking-phone" type="tel" name="phone" required autocomplete="tel" inputmode="tel" autocapitalize="off" placeholder="(248) 385-3432" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
                                 </div>
 
+                                <!-- Service address. The ZIP is checked against
+                                     the Oakland County range as it is typed and
+                                     again on the server, so nobody gets a
+                                     confirmed window for a house we do not
+                                     drive to. -->
+                                <div>
+                                    <label for="booking-address" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Service Address *</label>
+                                    <input id="booking-address" type="text" name="address" required autocomplete="street-address" maxlength="160" placeholder="123 Maple St." class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
+                                </div>
+
+                                <div class="grid sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="booking-city" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">City</label>
+                                        <input id="booking-city" type="text" name="city" autocomplete="address-level2" maxlength="80" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
+                                    </div>
+                                    <div>
+                                        <label for="booking-zip" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">ZIP Code *</label>
+                                        <input id="booking-zip" type="text" name="zip" required autocomplete="postal-code" inputmode="numeric" maxlength="5" pattern="\d{5}" placeholder="48328" aria-describedby="booking-zip-note" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
+                                        <p id="booking-zip-note" class="mt-2 text-xs text-gray-400" role="status" aria-live="polite">Oakland County only. We fill in the city and your service days for you.</p>
+                                    </div>
+                                </div>
+
                                 <div>
                                     <label for="booking-message" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Project Details & Special Notes <span class="text-gray-500 lowercase font-normal">(optional)</span></label>
                                     <textarea id="booking-message" name="message" rows="4" placeholder="Tell us what needs fixing, installing, or looking at…" class="w-full px-5 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-base text-white resize-none"></textarea>
@@ -660,6 +700,15 @@
                                         <span class="font-semibold text-white block mb-0.5">Free Preventative & Seasonal Reminders</span>
                                         Send me free home maintenance tips (e.g. spring gutter checks, winter weatherproofing). Unsubscribe anytime.
                                     </label>
+                                </div>
+
+                                <!-- Fee micro-copy. Same two numbers, same
+                                     wording, as the booking modal, the bundle
+                                     cards, and /terms. -->
+                                <div class="rounded-xl border border-gray-700 bg-gray-900/60 p-4 text-xs leading-relaxed text-gray-300 space-y-2">
+                                    <p class="text-[11px] font-extrabold uppercase tracking-[0.14em] text-gray-400">Before you submit</p>
+                                    <p><i class="fas fa-screwdriver-wrench mr-1.5 text-red-400" aria-hidden="true"></i><strong class="text-white">Labor only.</strong> Materials and hardware are billed separately at cost plus a <strong class="text-white">10&ndash;15% supply sourcing fee</strong> when we shop for them. Supply your own and we add nothing. <a href="/rates#materials" class="font-semibold text-red-400 underline decoration-red-500/40 underline-offset-2 hover:text-red-300">How materials are priced</a></p>
+                                    <p><i class="fas fa-credit-card mr-1.5 text-red-400" aria-hidden="true"></i>Cash, check, Zelle&reg;, Venmo&reg;, and Cash App accepted. A <strong class="text-white">5% processing fee</strong> applies to all non-cash payments.</p>
                                 </div>
 
                                 <p id="booking-error" class="hidden rounded-xl border border-red-500/30 bg-red-950/40 px-4 py-3 text-sm text-red-200" role="alert" aria-live="polite"></p>
@@ -834,9 +883,10 @@
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
 
-    <script src="/js/book-page.js?v=20260801g" defer></script>
-    <script src="/js/site.js?v=20260801b" defer></script>
-    <script src="/js/gift-certificate.js?v=20260801b" defer></script>
+    <script src="/js/book-page.js?v=20260802a" defer></script>
+    <script src="/js/service-zone-selector.js?v=20260802a" defer></script>
+    <script src="/js/site.js?v=20260802a" defer></script>
+    <script src="/js/gift-certificate.js?v=20260802a" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
     <script>
       // Registered after load so it never competes with the first render.
