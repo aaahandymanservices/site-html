@@ -409,9 +409,11 @@
 
                         <!-- Social proof. The rating summary is the site-wide
                              figure published in our structured data; the strip
-                             below it is filled by book-page.js with the most
-                             recent reviews homeowners submitted themselves, and
-                             stays hidden if that call finds nothing. -->
+                             below it holds Douglas Mitchell's booking review,
+                             and book-page.js inserts the most recent reviews
+                             homeowners submitted themselves above it. The
+                             written-in card is what shows if that call finds
+                             nothing. -->
                         <div class="rounded-2xl border border-gray-800 bg-gray-800/50 p-6 space-y-5">
                             <div class="flex items-center gap-4">
                                 <div class="text-center">
@@ -430,29 +432,24 @@
                                 </div>
                             </div>
 
-                            <div id="booking-live-reviews" class="hidden space-y-3 border-t border-gray-800 pt-5" aria-live="polite"></div>
-                        </div>
-
-                        <!-- Real Customer Review Snippet -->
-                        <div class="bg-gray-800/50 rounded-2xl p-6 border border-gray-800 space-y-4">
-                            <div class="flex items-center gap-1.5 text-yellow-500 text-sm" role="img" aria-label="Rated 5 out of 5 stars">
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                            </div>
-                            <p class="text-gray-300 text-sm italic leading-relaxed">
-                                "Booking AAA Handyman Services online was an absolute breeze. Selected a Tuesday morning slot for gutter maintenance and drywall repair. Victor showed up exactly on time, was extremely polite, and finished ahead of schedule. Outstanding service!"
-                            </p>
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm">
-                                    DM
-                                </div>
-                                <div>
-                                    <p class="text-sm font-bold text-white">Douglas Mitchell</p>
-                                    <p class="text-xs text-gray-500">Birmingham, MI</p>
-                                </div>
+                            <div id="booking-live-reviews" class="space-y-3 border-t border-gray-800 pt-5" aria-live="polite">
+                                <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500">What homeowners say</p>
+                                <article class="flex items-start gap-3" data-featured-review>
+                                    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-600/90 text-xs font-black text-white" aria-hidden="true">DM</span>
+                                    <div class="min-w-0">
+                                        <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-bold text-white">
+                                            <span>Douglas Mitchell — Birmingham, MI</span>
+                                            <span class="flex items-center gap-0.5 text-[10px] text-yellow-500" role="img" aria-label="5 out of 5 stars">
+                                                <i class="fas fa-star" aria-hidden="true"></i>
+                                                <i class="fas fa-star" aria-hidden="true"></i>
+                                                <i class="fas fa-star" aria-hidden="true"></i>
+                                                <i class="fas fa-star" aria-hidden="true"></i>
+                                                <i class="fas fa-star" aria-hidden="true"></i>
+                                            </span>
+                                        </p>
+                                        <p class="mt-0.5 text-xs leading-relaxed text-gray-400">“Booking AAA Handyman Services online was an absolute breeze. Selected a Tuesday morning slot for gutter maintenance and drywall repair. Victor showed up exactly on time, was extremely polite, and finished ahead of schedule. Outstanding service!”</p>
+                                    </div>
+                                </article>
                             </div>
                         </div>
                     </div>
