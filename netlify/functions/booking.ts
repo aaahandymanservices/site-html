@@ -10,6 +10,7 @@ import {
   releaseRedemption,
 } from "../lib/gift-certificate.js";
 import { resolveServiceLocation } from "../lib/service-area.js";
+import { WRONG_METHOD_MESSAGE } from "../lib/messages.js";
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
@@ -57,7 +58,7 @@ export default async (request: Request) => {
   }
 
   if (request.method !== "POST") {
-    return errorJson("Method not allowed", 405);
+    return errorJson(WRONG_METHOD_MESSAGE, 405);
   }
 
   try {
@@ -114,7 +115,7 @@ export default async (request: Request) => {
     }
 
     if (!customerName || !email || !phone || !service || !bookingDate || !bookingTime) {
-      return errorJson("Please fill out all required fields.", 400);
+      return errorJson("Please fill in the highlighted fields.", 400);
     }
 
     // Basic email validation regex
@@ -139,7 +140,7 @@ export default async (request: Request) => {
     }
 
     if (bookingDate < getTomorrowInDetroit()) {
-      return errorJson("Booking requests must be scheduled at least one day in advance.", 400);
+      return errorJson("The earliest date we can book is tomorrow. Please choose another day.", 400);
     }
 
     if (parsedBookingDate.getUTCDay() === 0) {
@@ -263,7 +264,10 @@ export default async (request: Request) => {
     }
 
     return json({
-      message: "Successfully booked! We will contact you shortly to confirm your appointment details.",
+      // Deliberately not "successfully booked": the whole flow is a request, the
+      // submit button says so, and the confirmation screen says so. Promising a
+      // confirmed appointment here only creates something to walk back on the call.
+      message: "Request received. Victor will call or text within one business day to lock in your arrival window.",
       booking: {
         id: newBooking.id,
         customerName: newBooking.customerName,

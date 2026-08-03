@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 222 icon names in use.
+ * Generated subset - 225 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -33,8 +33,6 @@
 .fa-truck-loading:before,.fa-truck-ramp-box:before{content:"\f4de"}
 .fa-circle-notch:before{content:"\f1ce"}
 .fa-gavel:before,.fa-legal:before{content:"\f0e3"}
-.fa-mail-reply:before,.fa-reply:before{content:"\f3e5"}
-.fa-compass:before{content:"\f14e"}
 .fa-bars:before,.fa-navicon:before{content:"\f0c9"}
 .fa-people-group:before{content:"\e533"}
 .fa-ruler-horizontal:before{content:"\f547"}
@@ -95,6 +93,8 @@
 .fa-clipboard-check:before{content:"\f46c"}
 .fa-wrench:before{content:"\f0ad"}
 .fa-circle-question:before,.fa-question-circle:before{content:"\f059"}
+.fa-route:before{content:"\f4d7"}
+.fa-clipboard-question:before{content:"\e4e3"}
 .fa-tags:before{content:"\f02c"}
 .fa-faucet-drip:before{content:"\e006"}
 .fa-home-lg:before,.fa-house-chimney:before{content:"\e3af"}
@@ -102,6 +102,8 @@
 .fa-comment-dots:before,.fa-commenting:before{content:"\f4ad"}
 .fa-hand-holding-dollar:before,.fa-hand-holding-usd:before{content:"\f4c0"}
 .fa-phone:before{content:"\f095"}
+.fa-calendar-times:before,.fa-calendar-xmark:before{content:"\f273"}
+.fa-arrow-left:before{content:"\f060"}
 .fa-file-pdf:before{content:"\f1c1"}
 .fa-tag:before{content:"\f02b"}
 .fa-envelope:before{content:"\f0e0"}
@@ -114,7 +116,6 @@
 .fa-map-pin:before{content:"\f276"}
 .fa-calculator:before{content:"\f1ec"}
 .fa-home-alt:before,.fa-home-lg-alt:before,.fa-home:before,.fa-house:before{content:"\f015"}
-.fa-shield-cat:before{content:"\e572"}
 .fa-bolt:before,.fa-zap:before{content:"\f0e7"}
 .fa-sun:before{content:"\f185"}
 .fa-credit-card-alt:before,.fa-credit-card:before{content:"\f09d"}
@@ -166,10 +167,12 @@
 .fa-check:before{content:"\f00c"}
 .fa-exclamation-triangle:before,.fa-triangle-exclamation:before,.fa-warning:before{content:"\f071"}
 .fa-paper-plane:before{content:"\f1d8"}
+.fa-calendar-day:before{content:"\f783"}
 .fa-circle-xmark:before,.fa-times-circle:before,.fa-xmark-circle:before{content:"\f057"}
 .fa-magnifying-glass-plus:before,.fa-search-plus:before{content:"\f00e"}
 .fa-cloud-sun:before{content:"\f6c4"}
 .fa-print:before{content:"\f02f"}
 .fa-dollar-sign:before,.fa-dollar:before,.fa-usd:before{content:"\24"}
+.fa-trowel:before{content:"\e589"}
 .fa-yelp:before{content:"\f1e9"}
 .fa-facebook:before{content:"\f09a"}

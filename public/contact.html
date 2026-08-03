@@ -98,8 +98,8 @@
     }
     </script>
 
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260802a">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260802a">
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260802b">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260802b">
     <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
 
@@ -169,7 +169,7 @@
         </div>
 
         <!-- Mobile Hamburger Button -->
-        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
             <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
         </button>
     </div>
@@ -352,17 +352,17 @@
                         </div>
 
                         <div>
-                            <label for="contact-name" class="block text-sm uppercase tracking-widest mb-2">Full name <span class="text-red-300" aria-hidden="true">*</span></label>
+                            <label for="contact-name" class="block text-sm uppercase tracking-widest mb-2">Your Name <span class="text-red-300" aria-hidden="true">*</span></label>
                             <input id="contact-name" type="text" name="name" required autocomplete="name" autocapitalize="words" aria-describedby="contact-name-error" placeholder="Jane Doe" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
                             <p id="contact-name-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
                         </div>
                         <div>
-                            <label for="contact-email" class="block text-sm uppercase tracking-widest mb-2">Email address <span class="text-red-300" aria-hidden="true">*</span></label>
+                            <label for="contact-email" class="block text-sm uppercase tracking-widest mb-2">Email Address <span class="text-red-300" aria-hidden="true">*</span></label>
                             <input id="contact-email" type="email" name="email" required autocomplete="email" inputmode="email" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="contact-email-error" placeholder="you@example.com" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
                             <p id="contact-email-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
                         </div>
                         <div>
-                            <label for="contact-phone" class="block text-sm uppercase tracking-widest mb-2">Phone number <span class="text-red-300" aria-hidden="true">*</span></label>
+                            <label for="contact-phone" class="block text-sm uppercase tracking-widest mb-2">Best Number to Reach You <span class="text-red-300" aria-hidden="true">*</span></label>
                             <input id="contact-phone" type="tel" name="phone" required autocomplete="tel" inputmode="tel" autocapitalize="off" aria-describedby="contact-phone-error contact-phone-consent" placeholder="(248) 555-0123" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
                             <p id="contact-phone-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
                             <p id="contact-phone-consent" class="text-xs text-blue-200 mt-1.5 leading-relaxed">
@@ -370,11 +370,11 @@
                             </p>
                         </div>
                         <div>
-                            <label for="contact-city" class="block text-sm uppercase tracking-widest mb-2">City / location <span class="text-blue-200 normal-case tracking-normal">(optional)</span></label>
+                            <label for="contact-city" class="block text-sm uppercase tracking-widest mb-2">Your City <span class="text-blue-200 normal-case tracking-normal">(optional)</span></label>
                             <input id="contact-city" type="text" name="city" autocomplete="address-level2" autocapitalize="words" placeholder="e.g. Troy, MI" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
                         </div>
                         <div>
-                            <label for="contact-service" class="block text-sm uppercase tracking-widest mb-2">Service needed <span class="text-red-300" aria-hidden="true">*</span></label>
+                            <label for="contact-service" class="block text-sm uppercase tracking-widest mb-2">Service Needed <span class="text-red-300" aria-hidden="true">*</span></label>
                             <div class="relative">
                                 <select id="contact-service" name="service" required aria-describedby="contact-service-error contact-service-help" class="w-full px-5 py-4 pr-14 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white appearance-none">
                                     <option value="" disabled selected>Select a service…</option>
@@ -416,9 +416,12 @@
                             <div id="service-package-info" class="hidden mt-3 p-4 bg-blue-950 border border-blue-600 rounded-2xl text-xs sm:text-sm text-blue-100"></div>
                         </div>
                         <div>
-                            <label for="contact-message" class="block text-sm uppercase tracking-widest mb-2">Message / project details <span class="text-red-300" aria-hidden="true">*</span></label>
-                            <textarea id="contact-message" name="message" rows="6" required aria-describedby="contact-message-error" placeholder="Tell us what needs doing, roughly when you would like it done, and anything else that helps us quote accurately." class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-3xl focus:border-red-400 text-lg text-white resize-y"></textarea>
+                            <label for="contact-message" class="block text-sm uppercase tracking-widest mb-2">What Can We Fix? <span class="text-red-300" aria-hidden="true">*</span></label>
+                            <textarea id="contact-message" name="message" rows="6" required aria-describedby="contact-message-error contact-message-help" placeholder="e.g. Leaky kitchen faucet and a door that won't latch" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-3xl focus:border-red-400 text-lg text-white resize-y"></textarea>
                             <p id="contact-message-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
+                            <!-- Guidance that used to live in the placeholder, where it
+                                 vanished the moment anyone started typing. -->
+                            <p id="contact-message-help" class="mt-2 text-xs text-blue-200 leading-relaxed">Roughly when you'd like it done, and anything else that helps us quote accurately.</p>
                         </div>
                         <div class="flex items-start gap-3 bg-blue-950 p-4 rounded-2xl border border-blue-600">
                             <input id="seasonal-opt-in" type="checkbox" name="seasonal-opt-in" class="mt-1 h-5 w-5 accent-red-600 rounded cursor-pointer">
@@ -535,9 +538,9 @@
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
 
-    <script src="/js/contact-page.js?v=20260802a" defer></script>
-    <script src="/js/site.js?v=20260802a" defer></script>
-    <script src="/js/gift-certificate.js?v=20260802a" defer></script>
+    <script src="/js/contact-page.js?v=20260802b" defer></script>
+    <script src="/js/site.js?v=20260802b" defer></script>
+    <script src="/js/gift-certificate.js?v=20260802b" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
     <script>
       // Registered after load so it never competes with the first render.

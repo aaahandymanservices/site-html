@@ -2,6 +2,7 @@ import type { Config } from "@netlify/functions";
 import { desc, eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { homeCareSubscriptions } from "../../db/schema.js";
+import { WRONG_METHOD_MESSAGE } from "../lib/messages.js";
 import { resolveServiceLocation } from "../lib/service-area.js";
 
 const json = (body: unknown, init?: ResponseInit) =>
@@ -50,7 +51,7 @@ export default async (request: Request) => {
   }
 
   if (request.method !== "POST") {
-    return errorJson("Method not allowed", 405);
+    return errorJson(WRONG_METHOD_MESSAGE, 405);
   }
 
   try {

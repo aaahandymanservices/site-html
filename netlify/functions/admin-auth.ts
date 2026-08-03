@@ -1,5 +1,6 @@
 import type { Config } from "@netlify/functions";
 import { MAX_PASSCODE_LENGTH, submittedPasscode, verifyAdminPasscode } from "../lib/admin-credential.js";
+import { OWNER_SIGN_IN_UNAVAILABLE_MESSAGE, WRONG_METHOD_MESSAGE } from "../lib/messages.js";
 
 const json = (body: unknown, init?: ResponseInit) =>
   Response.json(body, {
@@ -28,18 +29,20 @@ const submittedSecret = async (request: Request) => {
 // stored and compared.
 const handleAuthRequest = async (request: Request) => {
   if (request.method !== "POST") {
-    return json({ error: "Method not allowed" }, { status: 405 });
+    return json({ error: WRONG_METHOD_MESSAGE }, { status: 405 });
   }
 
   const result = verifyAdminPasscode(await submittedSecret(request));
 
   if (result.status === "not-configured") {
     console.error("No admin credential is configured; refusing admin verification.");
-    return json({ error: "Admin access is not configured." }, { status: 503 });
+    return json({ error: OWNER_SIGN_IN_UNAVAILABLE_MESSAGE }, { status: 503 });
   }
 
   if (result.status === "rejected") {
-    return json({ error: "That access key was not recognized." }, { status: 401 });
+    // "Owner key" is what the control that collects it is called on the reviews
+    // page; "access key" appeared nowhere the owner can see it.
+    return json({ error: "We don't recognize that owner key. Check it and try again." }, { status: 401 });
   }
 
   return json({ ok: true });

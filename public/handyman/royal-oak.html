@@ -218,8 +218,16 @@
       ]
     }
     </script>
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260802a">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260802a">
+    <style id="critical-above-the-fold">
+        *, ::before, ::after { box-sizing: border-box; }
+        html { font-family: "Roboto", system-ui, -apple-system, sans-serif; -webkit-text-size-adjust: 100%; }
+        body { margin: 0; background-color: #f4f6fa; color: #1f2937; line-height: 1.6; }
+        header, nav, main, section, footer { display: block; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; }
+    </style>
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260801e">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260801e">
     <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
     <style>
@@ -261,7 +269,7 @@
                 <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
             </div>
         </div>
-        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
             <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
         </button>
     </div>
@@ -348,12 +356,14 @@
                     <p>Whether it is a single nagging repair or a full seasonal to-do list, we bring the same craftsmanship, clean job sites, and clear communication to every Royal Oak home. From drywall and doors to painting, flooring, gutters, and minor plumbing or electrical work, we help you protect your home's comfort and value.</p>
                 </div>
                 <aside class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-lg">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="text-2xl text-red-600" aria-hidden="true"><i class="fas fa-location-dot" aria-hidden="true"></i></span>
-                        <div>
+                    <div class="mb-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
                             <h3 class="text-lg font-bold text-gray-900">Royal Oak Coverage</h3>
-                            <p class="text-sm text-gray-500">Zone B (Extended County / 20+ Miles)</p>
+                            <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-500 text-amber-950 px-3 py-1 text-[11px] font-extrabold uppercase tracking-widest">
+                                <i class="fas fa-location-dot" aria-hidden="true"></i> Zone B
+                            </span>
                         </div>
+                        <p class="text-sm text-gray-500 mt-1">Zone B (Extended County / 20+ Miles)</p>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
                         <li class="flex items-start gap-2"><i class="fas fa-tag text-red-600 mt-1" aria-hidden="true"></i><span><strong>$120 minimum service call</strong> &mdash; covers travel, diagnostics, and the first hour of labor.</span></li>
@@ -556,7 +566,7 @@
         </div>
     </footer>
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
-    <script src="/js/site.js?v=20260802a" defer></script>
+    <script src="/js/site.js?v=20260801e" defer></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
