@@ -4,6 +4,7 @@ import { desc, eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { reviews } from "../../db/schema.js";
 import { submittedPasscode, verifyAdminPasscode } from "../lib/admin-credential.js";
+import { OWNER_SIGN_IN_UNAVAILABLE_MESSAGE, WRONG_METHOD_MESSAGE } from "../lib/messages.js";
 
 // Netlify caps a buffered function request/response at 6 MB, so anything larger
 // is rejected by the platform before this code runs. Staying under that ceiling
@@ -127,7 +128,7 @@ const authorizeAdmin = (submitted: string): Response | null => {
 
   if (result.status === "not-configured") {
     console.error("No admin credential is configured; refusing review mutation.");
-    return errorJson("Review management is not available right now.", 503);
+    return errorJson(OWNER_SIGN_IN_UNAVAILABLE_MESSAGE, 503);
   }
 
   if (result.status === "rejected") {
@@ -195,7 +196,7 @@ const handleReviewsRequest = async (request: Request) => {
   }
 
   if (request.method !== "POST" && request.method !== "PUT") {
-    return errorJson("Method not allowed", 405);
+    return errorJson(WRONG_METHOD_MESSAGE, 405);
   }
 
   const isUpdate = request.method === "PUT";

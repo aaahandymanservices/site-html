@@ -26,7 +26,16 @@
 
     let cities = [];
 
+    // Set once the city list fails to load, so render() answers with the county
+    // fallback instead of leaving the field silent -- see loadAreas() below.
+    let lookupUnavailable = false;
+
     const hideResult = () => { resultBox.className = 'hidden'; resultBox.innerHTML = ''; };
+
+    const showFallback = (html) => {
+      resultBox.className = 'mt-3 text-sm font-semibold text-center p-3 rounded-xl bg-amber-50 text-amber-800 border border-amber-200';
+      resultBox.innerHTML = html;
+    };
 
     const findMatch = (query) => {
       const isNumeric = /^\d+$/.test(query);
@@ -44,6 +53,20 @@
     const render = (query) => {
       if (!query) { hideResult(); return; }
 
+      /*
+       * The city list never arrived. Typing an address into a box that promises an
+       * answer and getting nothing back is indistinguishable from being told no,
+       * so answer with the part that is true regardless of the lookup.
+       */
+      if (lookupUnavailable) {
+        if (query.length < 3) { hideResult(); return; }
+        showFallback(
+          '<i class="fas fa-info-circle text-amber-700 mr-1.5" aria-hidden="true"></i> We can\'t check addresses right now &mdash; but we serve all of Oakland County, MI. ' +
+          '<a href="tel:+12483853432" class="underline hover:text-amber-950 font-bold ml-1.5">Call (248) 385-3432 to confirm your street</a>'
+        );
+        return;
+      }
+
       const match = findMatch(query);
       if (match) {
         const zone = zones[match.zone] || zones.A;
@@ -57,10 +80,13 @@
       }
 
       if (query.length >= 3) {
-        resultBox.className = 'mt-3 text-sm font-semibold text-center p-3 rounded-xl bg-amber-50 text-amber-800 border border-amber-200';
-        resultBox.innerHTML =
-          '<i class="fas fa-info-circle text-amber-700 mr-1.5" aria-hidden="true"></i> Location not explicitly listed. We serve all of Oakland County, MI! ' +
-          '<a href="tel:+12483853432" class="underline hover:text-amber-950 font-bold ml-1.5">Call (248) 385-3432 to confirm</a>';
+        // "Not explicitly listed" described the state of a lookup table rather
+        // than answering the question that was asked, which was whether we drive
+        // to this house. Lead with the answer instead.
+        showFallback(
+          '<i class="fas fa-info-circle text-amber-700 mr-1.5" aria-hidden="true"></i> We serve all of Oakland County, MI &mdash; including you, most likely. ' +
+          '<a href="tel:+12483853432" class="underline hover:text-amber-950 font-bold ml-1.5">Call (248) 385-3432 to confirm your street</a>'
+        );
       } else {
         hideResult();
       }
@@ -90,10 +116,18 @@
           if (data.zones) {
             zones = data.zones;
           }
+          lookupUnavailable = cities.length === 0;
           const query = input.value.trim().toLowerCase();
           if (query) render(query);
         })
-        .catch(() => undefined);
+        .catch(() => {
+          // Was silent, which left anyone who had already typed an address
+          // staring at a field that never answered. render() now has something
+          // to say, so give it the chance to say it.
+          lookupUnavailable = true;
+          const query = input.value.trim().toLowerCase();
+          if (query) render(query);
+        });
       return areasPromise;
     };
 

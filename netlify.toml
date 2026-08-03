@@ -5,6 +5,62 @@
 [build.environment]
   NETLIFY_SKIP_GATSBY_BUILD_PLUGIN = "true"
 
+# ---------------------------------------------------------------------------
+# Link checking
+#
+# netlify-plugin-checklinks is installed from the Netlify UI, which passes it no
+# inputs. Declaring it here is how its inputs get set. On defaults it fails the
+# build on four reports that are not broken links. The two filters below are not
+# interchangeable -- which one applies depends on when the failure is knowable:
+#
+#   skipPatterns is matched before a check runs, against the report's operator,
+#   name, expected and at fields. It cannot match an error message, because at
+#   that point there is no error yet.
+#
+#   todoPatterns is matched after a check fails, so it can match the error text.
+#   The check still runs and still prints, but counts as a TODO instead of a
+#   failure, so it no longer fails the build.
+#
+# Skipped, being identifiable before the check runs:
+#
+#   fragment-redirect -- Every internal link here is extensionless
+#   (/rates#materials), the same form the canonical tags and sitemap.xml use.
+#   The plugin scans the built public/ directory, where only rates.html exists
+#   on disk, so it reads the clean URL as a redirect and asks for
+#   /rates.html#materials. Rewriting the 319 internal fragment links that way
+#   would invert the site's URL strategy: Netlify serves /rates with a 200 and
+#   301s /rates.html back to it, so every link would gain a redirect hop and
+#   stop matching its own canonical URL. The anchors themselves are sound -- all
+#   20 fragment targets resolve -- and a missing id still fails under its own
+#   operator, which is not skipped here.
+#
+#   .netlify/images -- The Image CDN transform endpoint. Netlify answers it at
+#   request time, so it has no file in public/ for a filesystem scan to open.
+#   The images it resizes (icon.jpg, logo-banner.jpg, logo-circular.png) are all
+#   present and get checked on their own.
+#
+#   public/services/index.html -- public/services is the directory of generated
+#   service pages and public/services.html is the landing page, so the directory
+#   shadows the clean URL when /services is resolved against the filesystem and
+#   the plugin goes looking for an index file that should not exist. The
+#   redirects are what actually serve this: /services returns services.html with
+#   a 200, /services/ 301s to /services, and /services/* maps to
+#   /services/:splat.html.
+#
+# Allowed to fail, being knowable only from the error text:
+#
+#   self-signed certificate -- The build container terminates TLS with its own
+#   CA, so looking up an outside host fails certificate verification rather than
+#   resolution. Scoped to that one message, so a host that has genuinely gone
+#   away still fails the build with a DNS error.
+# ---------------------------------------------------------------------------
+[[plugins]]
+  package = "netlify-plugin-checklinks"
+
+  [plugins.inputs]
+    skipPatterns = ["fragment-redirect", ".netlify/images", "public/services/index.html"]
+    todoPatterns = ["self-signed certificate"]
+
 [[headers]]
   for = "/*"
   [headers.values]

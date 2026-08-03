@@ -2,6 +2,16 @@ import type { Config } from "@netlify/functions";
 import { eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { seasonalSubscribers } from "../../db/schema.js";
+import { WRONG_METHOD_MESSAGE } from "../lib/messages.js";
+
+/*
+ * One flow, one voice. This used to answer with a thank-you on one code path, a
+ * flat status statement on another, and an adverb-led system confirmation on a
+ * third -- and it named the product two different ways while doing it. Which one
+ * a visitor saw came down to whether they had signed up before.
+ */
+const SIGNED_UP_MESSAGE = "You're signed up for seasonal maintenance reminders.";
+const ALREADY_SIGNED_UP_MESSAGE = "You're already signed up for seasonal maintenance reminders.";
 
 const json = (body: unknown, init?: ResponseInit) =>
   Response.json(body, {
@@ -26,7 +36,7 @@ export default async (request: Request) => {
   }
 
   if (request.method !== "POST") {
-    return errorJson("Method not allowed", 405);
+    return errorJson(WRONG_METHOD_MESSAGE, 405);
   }
 
   try {
@@ -49,7 +59,7 @@ export default async (request: Request) => {
     }
 
     if (!email) {
-      return errorJson("An email address is required.", 400);
+      return errorJson("Please enter your email address.", 400);
     }
 
     // Basic email validation regex
@@ -72,9 +82,9 @@ export default async (request: Request) => {
           .update(seasonalSubscribers)
           .set({ optIn: true, name: name || existing[0].name })
           .where(eq(seasonalSubscribers.email, email));
-        return json({ message: "Thank you for subscribing to our seasonal maintenance reminders!" });
+        return json({ message: SIGNED_UP_MESSAGE });
       }
-      return json({ message: "You are already subscribed to our seasonal maintenance reminders!" });
+      return json({ message: ALREADY_SIGNED_UP_MESSAGE });
     }
 
     // Insert new subscription
@@ -85,9 +95,12 @@ export default async (request: Request) => {
       optIn: true,
     });
 
-    return json({ message: "Successfully subscribed to seasonal reminders!" }, { status: 201 });
+    return json({ message: SIGNED_UP_MESSAGE }, { status: 201 });
   } catch (err: any) {
-    return errorJson(err.message || "Failed to process subscription.", 500);
+    return errorJson(
+      err.message || "We couldn't sign you up for seasonal reminders. Please try again in a moment, or call (248) 385-3432.",
+      500,
+    );
   }
 };
 

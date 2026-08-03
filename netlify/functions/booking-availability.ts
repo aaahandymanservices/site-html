@@ -2,6 +2,7 @@ import type { Config } from "@netlify/functions";
 import { and, gte, lte, ne } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { bookings } from "../../db/schema.js";
+import { WRONG_METHOD_MESSAGE } from "../lib/messages.js";
 
 /*
  * Read-only companion to /api/booking: which arrival windows are still open.
@@ -73,7 +74,7 @@ export default async (request: Request) => {
   }
 
   if (request.method !== "GET") {
-    return json({ error: "Method not allowed" }, { status: 405 });
+    return json({ error: WRONG_METHOD_MESSAGE }, { status: 405 });
   }
 
   const today = getDetroitDateString(new Date());
@@ -101,8 +102,15 @@ export default async (request: Request) => {
   } catch (error) {
     console.error("Failed to read booking availability:", error);
     // The form falls back to offering every window rather than showing a
-    // number it cannot stand behind, so say so plainly instead of guessing.
-    return json({ error: "Availability is unavailable right now." }, { status: 503 });
+    // number it cannot stand behind, so say so plainly instead of guessing --
+    // and say that submitting still works, because it does.
+    return json(
+      {
+        error:
+          "We can't load open arrival windows right now. Pick a date and submit your request anyway, or call (248) 385-3432 and we'll check for you.",
+      },
+      { status: 503 },
+    );
   }
 
   const days = [];

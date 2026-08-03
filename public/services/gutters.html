@@ -229,8 +229,16 @@
       ]
     }
     </script>
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260802a">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260802a">
+    <style id="critical-above-the-fold">
+        *, ::before, ::after { box-sizing: border-box; }
+        html { font-family: "Roboto", system-ui, -apple-system, sans-serif; -webkit-text-size-adjust: 100%; }
+        body { margin: 0; background-color: #f4f6fa; color: #1f2937; line-height: 1.6; }
+        header, nav, main, section, footer { display: block; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; }
+    </style>
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260801e">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260801e">
     <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
     <style>
@@ -272,7 +280,7 @@
                 <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
             </div>
         </div>
-        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
             <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
         </button>
     </div>
@@ -625,7 +633,7 @@
         </div>
     </footer>
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
-    <script src="/js/site.js?v=20260802a" defer></script>
+    <script src="/js/site.js?v=20260801e" defer></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}

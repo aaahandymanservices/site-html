@@ -23,7 +23,7 @@
       const adminToken = localStorage.getItem('aaaAdminToken');
       if (adminAccessLabel && adminAccessBtn) {
           if (adminToken) {
-              adminAccessLabel.textContent = 'Admin Mode (Active)';
+              adminAccessLabel.textContent = 'Owner Access On';
               adminAccessBtn.className = 'bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 px-4 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md';
           } else {
               adminAccessLabel.textContent = 'Owner Access';
@@ -47,18 +47,18 @@
           if (!response.ok) {
               const payload = await response.json().catch(() => ({}));
               const message = payload.error || (response.status === 401
-                  ? 'That access key was not recognized.'
-                  : 'Admin access could not be verified right now.');
+                  ? "We don't recognize that owner key. Check it and try again."
+                  : "We couldn't verify that owner key right now. Please try again in a moment.");
               showReviewsMessage(message, true);
               return false;
           }
           localStorage.setItem('aaaAdminToken', key);
           updateAdminUI();
           loadReviews();
-          showReviewsMessage('Admin mode unlocked.', false);
+          showReviewsMessage('Owner access is on.', false);
           return true;
       } catch {
-          showReviewsMessage('Admin access could not be verified. Please check your connection and try again.', true);
+          showReviewsMessage("We couldn't reach the server to check that key. Check your connection and try again.", true);
           return false;
       }
   };
@@ -68,7 +68,7 @@
       const adminKeyFromUrl = urlParams.get('admin') || urlParams.get('adminKey') || urlParams.get('token');
       if (adminKeyFromUrl && adminKeyFromUrl !== 'false' && adminKeyFromUrl !== '0') {
           if (adminKeyFromUrl === 'true' || adminKeyFromUrl === '1') {
-              const key = prompt('Enter Owner / Admin Access Key:');
+              const key = prompt('Enter your owner access key:');
               if (key) verifyAdminKey(key);
           } else {
               verifyAdminKey(adminKeyFromUrl);
@@ -80,13 +80,13 @@
       adminAccessBtn.addEventListener('click', () => {
           const currentToken = localStorage.getItem('aaaAdminToken');
           if (currentToken) {
-              if (confirm('You are currently in Admin Mode. Log out of Admin Mode?')) {
+              if (confirm('Turn off owner access on this device?')) {
                   localStorage.removeItem('aaaAdminToken');
                   updateAdminUI();
                   loadReviews();
               }
           } else {
-              const key = prompt('Enter Owner / Admin Access Key:');
+              const key = prompt('Enter your owner access key:');
               if (key) verifyAdminKey(key);
           }
       });
@@ -497,7 +497,7 @@
   const deleteReviewsItem = (id) => {
       const adminToken = localStorage.getItem('aaaAdminToken') || '';
       if (!adminToken) {
-          showReviewsMessage('Administrator access is required to delete reviews.', true);
+          showReviewsMessage('Turn on owner access to delete reviews.', true);
           return;
       }
       if (!confirm("Delete this review permanently? This can't be undone.")) return;
@@ -792,7 +792,7 @@
       if (reviewsFilterEmptyCopy) {
           const summary = activeFilterSummary();
           reviewsFilterEmptyCopy.textContent = summary
-              ? `No showcase for ${summary} is published yet. Try another service or city, or clear the filters to see every Oakland County project.`
+              ? `No projects for ${summary} yet. Try another service or city, or clear the filters to see every Oakland County project.`
               : 'Try another service or city — or clear the filters to see every Oakland County project.';
       }
 
@@ -1042,7 +1042,7 @@
       if (!items.length) {
           return `${caret}${closeButton}
               <p class="text-[11px] font-bold uppercase tracking-widest text-red-700 pr-6">${escapeHTML(city.name)}, MI</p>
-              <p class="text-sm text-gray-600 leading-relaxed mt-1.5">In our service area — no customer showcase from ${escapeHTML(city.name)} yet.</p>
+              <p class="text-sm text-gray-600 leading-relaxed mt-1.5">In our service area — no customer reviews from ${escapeHTML(city.name)} yet.</p>
               <button type="button" class="map-popup__form mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-red-700 hover:text-red-800 transition">Be the first to post one <span aria-hidden="true">→</span></button>`;
       }
 
@@ -1198,7 +1198,7 @@
           pin.setAttribute('aria-expanded', 'false');
           pin.setAttribute('aria-label', items.length
               ? `${city.name}: ${items.length} completed ${items.length === 1 ? 'project' : 'projects'} with a customer review. Show details.`
-              : `${city.name}: in our service area, no customer showcase yet.`);
+              : `${city.name}: in our service area, no customer reviews yet.`);
           pin.innerHTML = `
               <span class="map-pin__pulse" aria-hidden="true"></span>
               <span class="map-pin__dot" aria-hidden="true">${items.length ? PIN_CHECK_SVG : ''}</span>
@@ -1454,7 +1454,7 @@
 
           const adminToken = localStorage.getItem('aaaAdminToken') || '';
           if (isEditing && !adminToken) {
-              showReviewsMessage('Administrator access is required to edit reviews.', true);
+              showReviewsMessage('Turn on owner access to edit reviews.', true);
               setReviewsSubmitting(false);
               return;
           }

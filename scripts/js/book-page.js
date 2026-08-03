@@ -148,6 +148,28 @@
       bookingError.classList.toggle('hidden', !message);
   }
 
+  /*
+   * "Please fill in the highlighted fields" is only honest when more than one is
+   * empty. The browser already knows which field failed, so when it is a single
+   * one we name it -- read off its own <label>, minus the required asterisk and
+   * the "(optional)" qualifier, so the message and the form always agree.
+   */
+  function fieldLabel(field) {
+      if (!field || !field.id || !bookingForm) return '';
+      const label = bookingForm.querySelector('label[for="' + field.id + '"]');
+      if (!label) return '';
+      return label.textContent.replace(/\(optional\)/i, '').replace(/\*/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
+  }
+
+  function missingFieldsMessage() {
+      const empty = requiredBookingFields.filter(field => !field.value.trim() || !field.checkValidity());
+      if (empty.length === 1) {
+          const name = fieldLabel(empty[0]);
+          if (name) return 'Please fill in your ' + name + ' to continue.';
+      }
+      return 'Please fill in the highlighted fields.';
+  }
+
   function updateBookingCompletion() {
       updateProgress();
       if (!bookingForm || !submitBtn) return;
@@ -573,7 +595,7 @@
           // navigate the booking form away to a look-alike page.
           link.rel = 'noopener noreferrer';
           link.className = 'text-red-300 hover:text-red-200 underline font-semibold whitespace-nowrap ml-1';
-          link.textContent = 'Learn details ';
+          link.textContent = "See what's included ";
 
           const linkIcon = document.createElement('i');
           linkIcon.className = 'fas fa-arrow-up-right-from-square text-xs';
@@ -952,6 +974,12 @@
   const MAX_UPLOAD_PHOTO_BYTES = 5 * 1024 * 1024;
   const MAX_PHOTO_DIMENSION = 2000;
   const BOOKING_PHOTO_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+  /*
+   * The photo is optional, and the three ways the browser can fail to downscale
+   * one are indistinguishable to whoever picked it -- so they get one message,
+   * and it says the thing worth knowing: the booking can still go in without it.
+   */
+  const PHOTO_UNREADABLE_MESSAGE = "We couldn't read that photo. Please choose a different image, or submit without one.";
   let bookingPhotoPreviewUrl = '';
 
   const showBookingPhotoError = (message = '') => {
@@ -1012,13 +1040,13 @@
           canvas.height = Math.max(1, Math.round(image.height * scale));
           const context = canvas.getContext('2d');
           if (!context) {
-              reject(new Error('That photo could not be prepared for upload.'));
+              reject(new Error(PHOTO_UNREADABLE_MESSAGE));
               return;
           }
           context.drawImage(image, 0, 0, canvas.width, canvas.height);
           canvas.toBlob((blob) => {
               if (!blob) {
-                  reject(new Error('That photo could not be prepared for upload.'));
+                  reject(new Error(PHOTO_UNREADABLE_MESSAGE));
                   return;
               }
               const name = `${(file.name || 'repair-photo').replace(/\.[^.]+$/, '')}.jpg`;
@@ -1027,7 +1055,7 @@
       };
       image.onerror = () => {
           URL.revokeObjectURL(url);
-          reject(new Error('That photo could not be read. Please choose a different image.'));
+          reject(new Error(PHOTO_UNREADABLE_MESSAGE));
       };
       image.src = url;
   });
@@ -1084,7 +1112,7 @@
           setBookingError();
           if (!bookingForm.checkValidity()) {
               bookingForm.reportValidity();
-              setBookingError('Please complete each required field before confirming your booking request.');
+              setBookingError(missingFieldsMessage());
               updateBookingCompletion();
               return;
           }
@@ -1100,13 +1128,13 @@
           }
 
           submitBtn.disabled = true;
-          submitBtn.innerHTML = 'PROCESSING BOOKING... <i class="fas fa-spinner animate-spin" aria-hidden="true"></i>';
+          submitBtn.innerHTML = 'Sending your request… <i class="fas fa-spinner animate-spin" aria-hidden="true"></i>';
 
           try {
               const sourcePhoto = bookingPhoto?.files?.[0] || null;
               const uploadPhoto = sourcePhoto ? await prepareBookingPhoto(sourcePhoto) : null;
               if (uploadPhoto && uploadPhoto.size > MAX_UPLOAD_PHOTO_BYTES) {
-                  throw new Error('The photo is still too large after processing. Please choose a smaller image.');
+                  throw new Error('That photo is too large to send. Please choose one under 5 MB.');
               }
 
               const requestData = new FormData();
@@ -1129,7 +1157,7 @@
                   body: requestData
               });
               const data = await response.json().catch(() => ({}));
-              if (!response.ok) throw new Error(data.error || 'Failed to submit booking.');
+              if (!response.ok) throw new Error(data.error || "We couldn't send your booking request.");
 
               // The API decides whether the certificate was actually applied
               // -- it is one per customer and the booking may be a repeat. Any
@@ -1201,7 +1229,8 @@
               bookingForm.classList.add('hidden');
               document.getElementById('success-state').classList.remove('hidden');
           } catch (error) {
-              setBookingError(`${error.message} Please double-check your details or call us directly.`);
+              // The message already says what failed; this adds the way out.
+              setBookingError(`${error.message} You can also call (248) 385-3432 and we'll book it over the phone.`);
               submitBtn.disabled = false;
               submitBtn.innerHTML = 'Request My Booking <i class="fas fa-calendar-check" aria-hidden="true"></i>';
           }

@@ -6,6 +6,7 @@ import {
   normalizeEmail,
   recordRedemption,
 } from "../lib/gift-certificate.js";
+import { WRONG_METHOD_MESSAGE } from "../lib/messages.js";
 
 const json = (body: unknown, init?: ResponseInit) =>
   Response.json(body, {
@@ -45,7 +46,7 @@ export default async (request: Request) => {
     if (request.method === "GET") {
       const email = normalizeEmail(new URL(request.url).searchParams.get("email"));
       if (!email) {
-        return errorJson("An email address is required.", 400);
+        return errorJson("Please enter your email address.", 400);
       }
       if (!isValidEmail(email)) {
         return errorJson("Please provide a valid email address.", 400);
@@ -55,7 +56,7 @@ export default async (request: Request) => {
     }
 
     if (request.method !== "POST") {
-      return errorJson("Method not allowed", 405);
+      return errorJson(WRONG_METHOD_MESSAGE, 405);
     }
 
     let email = "";
@@ -80,7 +81,7 @@ export default async (request: Request) => {
     }
 
     if (!email) {
-      return errorJson("An email address is required.", 400);
+      return errorJson("Please enter your email address.", 400);
     }
     if (!isValidEmail(email)) {
       return errorJson("Please provide a valid email address.", 400);

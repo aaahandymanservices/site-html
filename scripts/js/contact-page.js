@@ -110,7 +110,7 @@
           detailsLink.href = desc.link;
           detailsLink.target = '_blank';
           detailsLink.className = 'text-red-300 hover:text-red-200 underline font-semibold whitespace-nowrap ml-1';
-          detailsLink.textContent = 'Learn details ';
+          detailsLink.textContent = "See what's included ";
 
           const linkIcon = document.createElement('i');
           linkIcon.className = 'fas fa-arrow-up-right-from-square text-xs';
@@ -205,21 +205,21 @@
       const FIELDS = [
           {
               id: 'contact-name',
-              label: 'Full name',
+              label: 'Your name',
               validate: (value) => value.length >= 2
                   ? ''
                   : 'Please enter your full name.'
           },
           {
               id: 'contact-email',
-              label: 'Email address',
+              label: 'Your email address',
               validate: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)
                   ? ''
                   : 'Please enter an email address we can reply to, e.g. you@example.com.'
           },
           {
               id: 'contact-phone',
-              label: 'Phone number',
+              label: 'Your phone number',
               validate: (value) => {
                   const digits = digitsOf(value);
                   if (!digits) return 'Please enter a phone number we can reach you on.';
@@ -230,12 +230,12 @@
           },
           {
               id: 'contact-service',
-              label: 'Service needed',
+              label: 'The service you need',
               validate: (value) => value ? '' : 'Please choose the service you need.'
           },
           {
               id: 'contact-message',
-              label: 'Message',
+              label: 'Your project details',
               validate: (value) => value.length >= 10
                   ? ''
                   : 'Please tell us a little about the work — at least a sentence.'

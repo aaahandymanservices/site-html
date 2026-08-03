@@ -9,6 +9,21 @@
   const careersForm = document.getElementById('careers-form');
   const careersSubmit = document.getElementById('careers-submit');
   const careersStatus = document.getElementById('careers-message-status');
+
+  /*
+   * The old failure message told applicants to call or email without giving them
+   * either the number or the address, so the way out dead-ended. Both are here
+   * now, matching what the contact form already does.
+   *
+   * The success message names a channel and a timeframe for the same reason: an
+   * applicant told only that they will be contacted "soon" has no idea whether
+   * that means a day or a month.
+   */
+  const CAREERS_SENT_MESSAGE =
+      "Thanks! We've got your application. Victor reviews these personally and will call or email within a few business days.";
+  const CAREERS_FAILED_MESSAGE =
+      "Your application didn't go through. Call (248) 385-3432 or email contact@aaahandyman.services and we'll take it down directly.";
+
   if (careersForm) {
       const setCareersStatus = (text, isError) => {
           if (!careersStatus) return;
@@ -25,21 +40,21 @@
                   careersSubmit.disabled = true;
                   careersSubmit.classList.add('opacity-70', 'cursor-not-allowed');
               }
-              setCareersStatus('Sending your application...', false);
+              setCareersStatus('Sending your application…', false);
               fetch('/careers.html', {
                   method: 'POST',
                   body: new FormData(careersForm)
               })
               .then(response => {
                   if (response.ok) {
-                      setCareersStatus('Thank you! Your application has been received. We will be in touch soon.', false);
+                      setCareersStatus(CAREERS_SENT_MESSAGE, false);
                       careersForm.reset();
                   } else {
-                      setCareersStatus('There was a problem submitting your application. Please try calling or emailing us directly.', true);
+                      setCareersStatus(CAREERS_FAILED_MESSAGE, true);
                   }
               })
               .catch(() => {
-                  setCareersStatus('There was a problem submitting your application. Please try calling or emailing us directly.', true);
+                  setCareersStatus(CAREERS_FAILED_MESSAGE, true);
               })
               .finally(() => {
                   if (careersSubmit) {
