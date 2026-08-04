@@ -250,7 +250,7 @@
       .then(response => {
           if (response.ok) {
               setStatus(
-                  'Thank you — your report is in. We will acknowledge it within 24 business hours, and sooner if we can.',
+                  'Thank you — your request has been received. It will be reviewed during regular business hours, and we will follow up with what we found and what comes next.',
                   'success'
               );
               form.reset();
@@ -258,7 +258,7 @@
               showPhotoError('');
           } else {
               setStatus(
-                  "Sorry — your report didn't go through. Please call us at (248) 385-3432 or email contact@aaahandyman.services and we'll pick it up right away.",
+                  "Sorry — your request didn't go through. Please call us at (248) 385-3432 or email contact@aaahandyman.services and we'll pick it up right away.",
                   'error'
               );
           }
