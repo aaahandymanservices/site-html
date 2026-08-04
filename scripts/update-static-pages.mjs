@@ -15,6 +15,7 @@ const STATIC_NAV_PAGES = [
   { path: 'public/reviews.html', active: 'reviews' },
   { path: 'public/careers.html', active: 'careers' },
   { path: 'public/contact.html', active: 'contact' },
+  { path: 'public/customer-care.html', active: 'none' },
   { path: 'public/book.html', active: 'none' },
   { path: 'public/privacy.html', active: 'none' },
   { path: 'public/terms.html', active: 'none' },
@@ -42,6 +43,10 @@ const SCRIPT_VERSIONS = new Map([
   ['site.js', ASSET_VERSION],
   ['home.js', ASSET_VERSION],
   ['contact-page.js', ASSET_VERSION],
+  // The issue intake form is inert without its script: validation messages, the
+  // photo size guard, and the multipart submit all live there, so a stale copy
+  // would leave a visitor's report going nowhere.
+  ['customer-care-page.js', ASSET_VERSION],
   ['gift-certificate.js', ASSET_VERSION],
   // The booking page's markup and its behaviour ship as a pair -- the progress
   // rail, quick-pick tiles, estimator, and availability badge are all inert
