@@ -4,7 +4,7 @@
                   <span class="inline-flex items-center gap-1.5 bg-amber-400/15 text-amber-200 border border-amber-300/40 rounded-full pl-2 pr-2.5 py-1 text-[10px] font-bold uppercase tracking-wider">
                       ${Qe} Craftsman Note
                   </span>
-                  <span class="text-[11px] font-semibold text-slate-400">Victor · Owner, AAA Handyman Services</span>
+                  <span class="text-[11px] font-semibold text-slate-400">Victor · Owner, AAA Handyman Services LLC</span>
               </div>
               <p class="text-sm leading-relaxed text-slate-200">${l(e.ownerResponse)}</p>
           </div>

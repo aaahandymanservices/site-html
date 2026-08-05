@@ -144,7 +144,7 @@ export default async (request: Request) => {
     }
 
     if (parsedBookingDate.getUTCDay() === 0) {
-      return errorJson("AAA Handyman Services is closed on Sundays. Please choose a Monday–Saturday date.", 400);
+      return errorJson("AAA Handyman Services LLC is closed on Sundays. Please choose a Monday–Saturday date.", 400);
     }
 
     // Address is optional so the owner can still key in a phone booking that has

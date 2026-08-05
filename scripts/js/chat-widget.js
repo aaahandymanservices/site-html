@@ -116,7 +116,7 @@
   var launch = document.createElement("button");
   launch.type = "button";
   launch.className = "aaa-fab-btn aaa-chat-launch";
-  launch.setAttribute("aria-label", "Open chat with AAA Handyman Services");
+  launch.setAttribute("aria-label", "Open chat with AAA Handyman Services LLC");
   launch.setAttribute("aria-expanded", "false");
   launch.setAttribute("aria-controls", "aaa-chat-panel");
   launch.innerHTML = '<i class="fas fa-comments" aria-hidden="true"></i><span class="aaa-fab-label">AI Chat</span>';
@@ -124,8 +124,8 @@
   var callBtn = document.createElement("a");
   callBtn.className = "aaa-fab-btn aaa-call";
   callBtn.href = "tel:+12483853432";
-  callBtn.title = "Call AAA Handyman Services";
-  callBtn.setAttribute("aria-label", "Call AAA Handyman Services at (248) 385-3432");
+  callBtn.title = "Call AAA Handyman Services LLC";
+  callBtn.setAttribute("aria-label", "Call AAA Handyman Services LLC at (248) 385-3432");
   callBtn.innerHTML = '<i class="fas fa-phone" aria-hidden="true"></i><span class="aaa-fab-label">Call Now!</span>';
 
   group.appendChild(launch);
@@ -135,11 +135,11 @@
   panel.className = "aaa-chat-panel";
   panel.id = "aaa-chat-panel";
   panel.setAttribute("role", "dialog");
-  panel.setAttribute("aria-label", "Chat with AAA Handyman Services");
+  panel.setAttribute("aria-label", "Chat with AAA Handyman Services LLC");
   panel.innerHTML =
     '<div class="aaa-chat-header">' +
       '<div class="aaa-avatar"><img src="/logo-circular.png?v=20260718-1" alt="" aria-hidden="true"></div>' +
-      '<div><h2>AAA Handyman Services</h2><p>Ask about our services &amp; areas</p></div>' +
+      '<div><h2>AAA Handyman Services LLC</h2><p>Ask about our services &amp; areas</p></div>' +
       '<div class="aaa-chat-header-actions">' +
         '<button type="button" class="aaa-chat-control-btn aaa-chat-new" title="Refresh chat" aria-label="Refresh chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8.1 8.1 0 0 0-15.5-2M4 4v5h5"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2M20 20v-5h-5"/></svg></button>' +
         '<button type="button" class="aaa-chat-control-btn aaa-chat-close" title="Close chat" aria-label="Close chat">&times;</button>' +
@@ -187,7 +187,7 @@
   var promptList = panel.querySelector(".aaa-chat-prompts-list");
   var promptButtons = panel.querySelectorAll(".aaa-chat-prompt");
 
-  var GREETING = "Hi! 👋 I'm the AAA Handyman Services assistant. Ask me about our services, the areas we cover, or how to get a quote.";
+  var GREETING = "Hi! 👋 I'm the AAA Handyman Services LLC assistant. Ask me about our services, the areas we cover, or how to get a quote.";
   function hideExistingFloating() {
     // Hide static (noscript) floating "Call Now" CTAs baked into the markup.
     var els = document.querySelectorAll(".fixed.bottom-5.right-5, [class*='fixed'][class*='bottom-5'][class*='right-5']");
@@ -228,7 +228,7 @@
       var avatar = document.createElement("img");
       avatar.className = "aaa-msg-avatar";
       avatar.src = "/logo-circular.png?v=20260718-1";
-      avatar.alt = "AAA Handyman Services";
+      avatar.alt = "AAA Handyman Services LLC";
       row.appendChild(avatar);
     }
 
@@ -283,7 +283,7 @@
     launch.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i><span class="aaa-fab-label">Close</span>';
     // The button toggles, so its name and state have to follow suit —
     // otherwise it keeps announcing "Open chat" while it actually closes.
-    launch.setAttribute("aria-label", "Close chat with AAA Handyman Services");
+    launch.setAttribute("aria-label", "Close chat with AAA Handyman Services LLC");
     launch.setAttribute("aria-expanded", "true");
     if (!opened) {
       opened = true;
@@ -298,7 +298,7 @@
   function closePanel() {
     panel.classList.remove("aaa-open");
     launch.innerHTML = '<i class="fas fa-comments" aria-hidden="true"></i><span class="aaa-fab-label">AI Chat</span>';
-    launch.setAttribute("aria-label", "Open chat with AAA Handyman Services");
+    launch.setAttribute("aria-label", "Open chat with AAA Handyman Services LLC");
     launch.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";
     // Focus was inside the panel that just disappeared; hand it back to the

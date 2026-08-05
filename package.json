@@ -1,7 +1,7 @@
 {
   "name": "repo",
   "version": "1.0.0",
-  "description": "AAA Handyman Services static site with customer gallery submissions.",
+  "description": "AAA Handyman Services LLC static site with customer gallery submissions.",
   "type": "module",
   "license": "UNLICENSED",
   "scripts": {

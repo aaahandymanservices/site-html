@@ -254,8 +254,7 @@
           const dayOfWeek = selectedDate.getDay();
 
           if (dayOfWeek === 0) {
-              setBookingError('AAA Handyman Services is closed on Sundays. Please choose a Monday–Saturday date.');
-              this.value = '';
+              setBookingError('AAA Handyman Services LLC is closed on Sundays. Please choose a Monday–Saturday date.');              this.value = '';
               renderTimeSlots('weekday');
               describeAvailability();
               updateBookingCompletion();
