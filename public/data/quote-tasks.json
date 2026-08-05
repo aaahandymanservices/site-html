@@ -182,7 +182,7 @@
         {
           "id": "soft-washing",
           "name": "House Soft Washing",
-          "desc": "Low-pressure soft wash for siding to safely lift mildew and algae (up to 1,500 sq ft).",
+          "desc": "Low-pressure soft wash for siding to safely lift mildew and algae (up to 1,000 sq ft).",
           "hours": 3,
           "a": 220,
           "b": 240
