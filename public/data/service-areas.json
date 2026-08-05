@@ -1,6 +1,6 @@
 {
   "type": "ServiceAreasData",
-  "note": "Single source of truth for AAA Handyman Services coverage. Consumed by the browser service-area checker (/js/service-area-checker.js), the booking widget (/js/booking-widget.js), the booking page (/js/book-page.js), and the city landing-page generator (scripts/build-city-pages.mjs). Zone A = $100 minimum service call (within ~20 miles of Waterford). Zone B = $120 minimum service call (extended county / 20+ miles).",
+  "note": "Single source of truth for AAA Handyman Services LLC coverage. Consumed by the browser service-area checker (/js/service-area-checker.js), the booking widget (/js/booking-widget.js), the booking page (/js/book-page.js), and the city landing-page generator (scripts/build-city-pages.mjs). Zone A = $100 minimum service call (within ~20 miles of Waterford). Zone B = $120 minimum service call (extended county / 20+ miles).",
   "zones": {
     "A": { "label": "Zone A (Within 20 Miles)", "rate": "$100 Minimum Service Call" },
     "B": { "label": "Zone B (Extended County / 20+ Miles)", "rate": "$120 Minimum Service Call" }
@@ -35,7 +35,7 @@
       "zone": "A",
       "route": "north-lakes",
       "region": "North & West Metro",
-      "blurb": "As our home base, Waterford is where AAA Handyman Services got its start. From the lakes area to the neighborhoods off Dixie Highway, we know these homes and turn up fast for repairs, maintenance, and small projects.",
+      "blurb": "As our home base, Waterford is where AAA Handyman Services LLC got its start. From the lakes area to the neighborhoods off Dixie Highway, we know these homes and turn up fast for repairs, maintenance, and small projects.",
       "nearby": ["pontiac", "west-bloomfield", "clarkston"]
     },
     {

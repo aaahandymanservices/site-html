@@ -35,14 +35,14 @@
     var launch = document.createElement("button");
     launch.type = "button";
     launch.className = "aaa-fab-btn aaa-chat-launch";
-    launch.setAttribute("aria-label", "Open chat with AAA Handyman Services");
+    launch.setAttribute("aria-label", "Open chat with AAA Handyman Services LLC");
     launch.innerHTML = '<i class="fas fa-comments" aria-hidden="true"></i><span class="aaa-fab-label">AI Chat</span>';
 
     var callButton = document.createElement("a");
     callButton.className = "aaa-fab-btn aaa-call";
     callButton.href = "tel:+12483853432";
-    callButton.title = "Call AAA Handyman Services";
-    callButton.setAttribute("aria-label", "Call AAA Handyman Services at (248) 385-3432");
+    callButton.title = "Call AAA Handyman Services LLC";
+    callButton.setAttribute("aria-label", "Call AAA Handyman Services LLC at (248) 385-3432");
     callButton.innerHTML = '<i class="fas fa-phone" aria-hidden="true"></i><span class="aaa-fab-label">Call Now!</span>';
 
     group.appendChild(launch);

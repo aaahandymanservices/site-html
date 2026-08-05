@@ -96,8 +96,8 @@ function extractHtml(html) {
 function extractJson(raw, relativePath) {
   const parsed = JSON.parse(raw);
   const title = relativePath.endsWith("services.json")
-    ? "AAA Handyman Services service catalog"
-    : "AAA Handyman Services service areas";
+    ? "AAA Handyman Services LLC service catalog"
+    : "AAA Handyman Services LLC service areas";
   return { title, text: cleanText(JSON.stringify(parsed, null, 2)) };
 }
 
