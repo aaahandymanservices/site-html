@@ -138,7 +138,7 @@
   panel.setAttribute("aria-label", "Chat with AAA Handyman Services LLC");
   panel.innerHTML =
     '<div class="aaa-chat-header">' +
-      '<div class="aaa-avatar"><img src="/logo-circular.png?v=20260718-1" alt="" aria-hidden="true"></div>' +
+      '<div class="aaa-avatar"><img src="/logo-circular.png?v=20260805-1" alt="" aria-hidden="true"></div>' +
       '<div><h2>AAA Handyman Services LLC</h2><p>Ask about our services &amp; areas</p></div>' +
       '<div class="aaa-chat-header-actions">' +
         '<button type="button" class="aaa-chat-control-btn aaa-chat-new" title="Refresh chat" aria-label="Refresh chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8.1 8.1 0 0 0-15.5-2M4 4v5h5"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2M20 20v-5h-5"/></svg></button>' +
@@ -227,7 +227,7 @@
     if (role !== "user") {
       var avatar = document.createElement("img");
       avatar.className = "aaa-msg-avatar";
-      avatar.src = "/logo-circular.png?v=20260718-1";
+      avatar.src = "/logo-circular.png?v=20260805-1";
       avatar.alt = "AAA Handyman Services LLC";
       row.appendChild(avatar);
     }
