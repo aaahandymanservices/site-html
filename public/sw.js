@@ -1,5 +1,5 @@
 /*
- * Service worker for AAA Handyman Services.
+ * Service worker for AAA Handyman Services LLC.
  *
  * Goals, in order: never serve stale content to an online visitor, keep the
  * shell instant on repeat visits, and show a branded page instead of the

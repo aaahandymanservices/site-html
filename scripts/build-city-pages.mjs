@@ -64,7 +64,7 @@ function cityFaq(city) {
   return [
     {
       q: `Do you offer handyman services in ${city.name}, MI?`,
-      a: `Yes. AAA Handyman Services is based in Waterford and regularly serves ${city.name} and the surrounding Oakland County area. We handle minor home repairs, maintenance, and small projects, from carpentry and drywall to painting, flooring, doors, gutters, and minor plumbing or electrical work.`
+      a: `Yes. AAA Handyman Services LLC is based in Waterford and regularly serves ${city.name} and the surrounding Oakland County area. We handle minor home repairs, maintenance, and small projects, from carpentry and drywall to painting, flooring, doors, gutters, and minor plumbing or electrical work.`
     },
     {
       q: `How much does a handyman cost in ${city.name}?`,
@@ -83,7 +83,7 @@ function jsonLd(city) {
   const localBusiness = {
     '@context': 'https://schema.org',
     '@type': 'HomeAndConstructionBusiness',
-    name: `AAA Handyman Services — ${city.name}, MI`,
+    name: `AAA Handyman Services LLC — ${city.name}, MI`,
     image: `${SITE}/logo-circular.png`,
     '@id': `${url}#business`,
     url,
@@ -168,7 +168,7 @@ function page(city) {
   // Raw text, escaped at each sink below. Escaping here instead would double up
   // wherever these are interpolated into markup.
   const url = `${SITE}/handyman/${city.slug}`;
-  const title = `Handyman in ${city.name}, MI | AAA Handyman Services`;
+  const title = `Handyman in ${city.name}, MI | AAA Handyman Services LLC`;
   const desc = `Reliable local handyman services in ${city.name}, MI. Carpentry, drywall, painting, doors, gutters, plumbing & electrical. ${zone.rate} minimum. Call ${PHONE_DISPLAY}.`;
   const faqs = cityFaq(city);
 
@@ -193,7 +193,7 @@ function page(city) {
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="${esc(url)}">
-    <meta property="og:site_name" content="AAA Handyman Services">
+    <meta property="og:site_name" content="AAA Handyman Services LLC">
     <meta property="og:title" content="${esc(title)}">
     <meta property="og:description" content="${esc(desc)}">
     <meta property="og:image" content="${SITE}/logo-banner.jpg">
@@ -242,7 +242,7 @@ ${getUnifiedNav('service-areas')}
 
     <!-- Floating Call Action -->
     <noscript>
-        <a href="tel:${PHONE_TEL}" class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services Now" aria-label="Call AAA Handyman Services Now">
+        <a href="tel:${PHONE_TEL}" class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services LLC Now" aria-label="Call AAA Handyman Services LLC Now">
             <i class="fas fa-phone" aria-hidden="true"></i>
             <span class="hidden md:inline">Call Now! <span class="hidden lg:inline">${PHONE_DISPLAY}</span></span>
         </a>
@@ -365,12 +365,12 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
                 <div class="flex flex-col items-center md:items-start">
-                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
+                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services LLC Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable minor home repairs, maintenance, and small-scale projects for homeowners across Oakland County, Michigan.</p>
                     <div class="mt-4 flex items-center gap-4">
-                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <nav aria-label="Footer">
@@ -435,7 +435,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
-                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services specializes in minor home repairs, maintenance, and small-scale projects ($600 job limit under MCL 339.2403).<br>Locally Serving Oakland County, MI.</p>
+                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services LLC. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services LLC specializes in minor home repairs, maintenance, and small-scale projects ($600 job limit under MCL 339.2403).<br>Locally Serving Oakland County, MI.</p>
                 <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
                     <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
                     <span class="text-gray-600">|</span>

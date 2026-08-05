@@ -311,7 +311,7 @@
     '    <header class="bw-header">',
     '      <div class="flex items-start justify-between gap-4">',
     '        <div>',
-    '          <p class="text-xs font-bold uppercase tracking-[0.2em] text-red-300">AAA Handyman Services</p>',
+    '          <p class="text-xs font-bold uppercase tracking-[0.2em] text-red-300">AAA Handyman Services LLC</p>',
     '          <h2 id="bw-title" class="mt-1 text-xl font-extrabold text-white sm:text-2xl">Book Online / Get a Free Quote</h2>',
     '        </div>',
     '        <button type="button" class="bw-close" data-bw-close aria-label="Close booking form">',

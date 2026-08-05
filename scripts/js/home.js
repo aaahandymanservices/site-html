@@ -213,7 +213,7 @@
           return `
               <article class="bg-white text-gray-900 rounded-3xl overflow-hidden shadow-xl flex flex-col">
                   <div class="relative bg-gray-50" style="aspect-ratio: 4 / 3; overflow: hidden;">
-                      <img src="/.netlify/images?url=${encodeURIComponent(item.imageUrl)}&w=600&fm=avif&q=80" alt="${escapeHTML(item.imageAlt || (item.projectType + ' project by AAA Handyman Services'))}" width="600" height="450" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                      <img src="/.netlify/images?url=${encodeURIComponent(item.imageUrl)}&w=600&fm=avif&q=80" alt="${escapeHTML(item.imageAlt || (item.projectType + ' project by AAA Handyman Services LLC'))}" width="600" height="450" class="w-full h-full object-cover" loading="lazy" decoding="async">
                       <span class="absolute top-4 left-4 ${badgeStyle} text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md">${escapeHTML(item.projectType || 'Service')}</span>
                   </div>
                   <div class="p-6 flex flex-col flex-grow">

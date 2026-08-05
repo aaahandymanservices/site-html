@@ -37,11 +37,11 @@ for (const page of staticPages) {
     imagesMarkup = `
     <image:image>
       <image:loc>${SITE}/logo-banner.jpg</image:loc>
-      <image:title>AAA Handyman Services serving Oakland County, Michigan</image:title>
+      <image:title>AAA Handyman Services LLC serving Oakland County, Michigan</image:title>
     </image:image>
     <image:image>
       <image:loc>${SITE}/logo-circular.png</image:loc>
-      <image:title>AAA Handyman Services logo</image:title>
+      <image:title>AAA Handyman Services LLC logo</image:title>
     </image:image>`;
   }
   urls.push(`  <url>
