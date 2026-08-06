@@ -218,8 +218,16 @@
       ]
     }
     </script>
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260802b">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260802b">
+    <style id="critical-above-the-fold">
+        *, ::before, ::after { box-sizing: border-box; }
+        html { font-family: "Roboto", system-ui, -apple-system, sans-serif; -webkit-text-size-adjust: 100%; }
+        body { margin: 0; background-color: #f4f6fa; color: #1f2937; line-height: 1.6; }
+        header, nav, main, section, footer { display: block; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; }
+    </style>
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260801e">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260801e">
     <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
     <style>
@@ -549,7 +557,7 @@
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
-                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services LLC. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Notice: AAA Handyman Services LLC specializes in minor home repairs, maintenance, and small-scale projects ($600 job limit under MCL 339.2403).<br>Locally Serving Oakland County, MI.</p>
+                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services LLC. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Locally Serving Oakland County, MI.</p>
                 <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
                     <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
                     <span class="text-gray-600">|</span>
@@ -559,7 +567,7 @@
         </div>
     </footer>
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
-    <script src="/js/site.js?v=20260802b" defer></script>
+    <script src="/js/site.js?v=20260801e" defer></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
