@@ -435,7 +435,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
-                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services LLC. All Rights Reserved. Operating under the minor project exemption of Michigan's Occupational Code (MCL 339.2403).<br>Locally Serving Oakland County, MI.</p>
+                <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services LLC. All Rights Reserved.<br>Locally Serving Oakland County, MI.</p>
                 <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
                     <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
                     <span class="text-gray-600">|</span>
