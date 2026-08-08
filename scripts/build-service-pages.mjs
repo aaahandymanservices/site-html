@@ -46,7 +46,7 @@ function serviceFaq(service) {
     },
     {
       q: `How much does ${service.name.toLowerCase().replace(/ services$/, '')} cost?`,
-      a: `Pricing starts with a minimum service call: $100 in Zone A (within about 20 miles of our Waterford base) or $120 in Zone B (extended county, 20+ miles). That covers travel, diagnostics, and up to the first hour of labor. Continuous labor after the first hour is billed at a flat $60 per hour in quarter-hour increments, and materials are billed separately.`
+      a: `Pricing starts with a minimum service call: $100 in Zone A (within about 20 miles of our Waterford base) or $145 in Zone B (extended county, 20+ miles). That covers travel, diagnostics, and up to the first hour of labor. Continuous labor after the first hour is billed at a flat $70 per hour in quarter-hour increments, and materials are billed separately.`
     }
   ];
   if (service.faq) faqs.push({ q: service.faq.q, a: service.faq.a });
@@ -195,7 +195,7 @@ function costGuideSection(service) {
                     </div>
                     <div class="mt-5 flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-2xl p-4">
                         <i class="fas fa-calculator text-blue-600 mt-1" aria-hidden="true"></i>
-                        <p class="text-sm text-gray-700"><strong>Example:</strong> Cleaning 150 linear feet of gutters on a single-story ranch usually runs about <strong>$140 to $185</strong> under this model &mdash; right in line with AAA Handyman's flat <strong>$130 (Zone A) / $150 (Zone B)</strong> gutter-cleaning rate for a comparable home.</p>
+                        <p class="text-sm text-gray-700"><strong>Example:</strong> Cleaning 150 linear feet of gutters on a single-story ranch usually runs about <strong>$140 to $185</strong> under this model &mdash; right in line with AAA Handyman's flat <strong>$135 (Zone A) / $180 (Zone B)</strong> gutter-cleaning rate for a comparable home.</p>
                     </div>
                 </div>
 
@@ -219,7 +219,7 @@ function costGuideSection(service) {
                             <p class="text-sm text-gray-600">Mesh or surface-tension guards that must be unscrewed and re-secured to clean underneath add labor time, and usually increase the cost.</p>
                         </div>
                     </div>
-                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: rather than charging by the foot, we quote a flat rate up front, then bill continuous labor at <strong>$60/hour</strong> in quarter-hour increments for anything beyond a standard clean. You will always know the price before we start.</p>
+                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: rather than charging by the foot, we quote a flat rate up front, then bill continuous labor at <strong>$70/hour</strong> in quarter-hour increments for anything beyond a standard clean. You will always know the price before we start.</p>
                 </div>
             </div>
 `;
@@ -292,7 +292,7 @@ function powerWashingCostGuide() {
                             <p class="text-sm text-gray-600">Moving heavy patio furniture or wrapping delicate landscaping, lighting, and outlets in protective plastic adds prep labor to the final cost.</p>
                         </div>
                     </div>
-                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: a <strong>$100 (Zone A) / $120 (Zone B)</strong> minimum covers travel and the first hour, then continuous washing is billed at a flat <strong>$60/hour</strong> in quarter-hour increments. You will always know the price before we start.</p>
+                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: a <strong>$100 (Zone A) / $145 (Zone B)</strong> minimum covers travel and the first hour, then continuous washing is billed at a flat <strong>$70/hour</strong> in quarter-hour increments. You will always know the price before we start.</p>
                 </div>
             </div>
 `;
@@ -439,8 +439,8 @@ ${service.intro.map((p) => `                    <p>${esc(p)}</p>`).join('\n')}
                         </div>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
-                        <li class="flex items-start gap-2"><i class="fas fa-location-dot text-red-600 mt-1" aria-hidden="true"></i><span><strong>$100 minimum</strong> in Zone A (within ~20 miles) &middot; <strong>$120</strong> in Zone B (extended county).</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$60/hour</strong> in quarter-hour increments.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-location-dot text-red-600 mt-1" aria-hidden="true"></i><span><strong>$100 minimum</strong> in Zone A (within ~20 miles) &middot; <strong>$145</strong> in Zone B (extended county).</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>
                         <li class="flex items-start gap-2"><i class="fas fa-box-open text-red-600 mt-1" aria-hidden="true"></i><span>Labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself.</span></li>
                         <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1" aria-hidden="true"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
                         <li class="flex items-start gap-2"><i class="fas fa-map text-red-600 mt-1" aria-hidden="true"></i><span>Available across <a href="/service-areas" class="text-red-600 font-semibold underline underline-offset-2">Oakland County</a>.</span></li>

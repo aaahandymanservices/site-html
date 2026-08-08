@@ -317,7 +317,7 @@
           'tv-mounting': {
               title: 'TV Wall Mounting',
               category: 'Installation & Mounting',
-              price: '$160',
+              price: '$170',
               icon: 'fa-tv',
               description: 'Professional TV wall mounting up to 65" securely anchored into wood or metal studs. Covers leveling, wire management options, and a stud and anchor safety check.',
               bullets: [
@@ -362,7 +362,7 @@
           'plumbing': {
               title: 'Minor Plumbing & Fixture Swap',
               category: 'Plumbing Services',
-              price: '$130',
+              price: '$135',
               icon: 'fa-faucet-drip',
               description: 'Fast, clean replacement of kitchen & bathroom faucets, toilet rebuilds, supply line swaps, and garbage disposal installs.',
               bullets: [
@@ -377,7 +377,7 @@
           'electrical': {
               title: 'Minor Electrical & Light Swaps',
               category: 'Electrical & Smart Home',
-              price: '$130',
+              price: '$135',
               icon: 'fa-lightbulb',
               description: 'Safe replacement of ceiling fans, light fixtures, wall switches, dimmers, outlets, and smart video doorbells.',
               bullets: [
@@ -422,7 +422,7 @@
           'locks': {
               title: 'Smart Locks & Hardware',
               category: 'Home Security',
-              price: '$130',
+              price: '$135',
               icon: 'fa-lock',
               description: 'Upgrade your entry security with keyless electronic smart locks, deadbolts, handlesets, and heavy-duty strike plates.',
               bullets: [

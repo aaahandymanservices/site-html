@@ -28,10 +28,10 @@
    * `hours` is the typical time on site, which is what turns a category into
    * an estimated time slot and a labor estimate. Pricing is the published
    * rate: a $100 service call covering travel, diagnosis, and the first hour,
-   * then $60/hour. Bundles carry their own fixed price and discount.
+   * then $70/hour. Bundles carry their own fixed price and discount.
    * --------------------------------------------------------------------- */
   var SERVICE_CALL = 100;
-  var HOURLY_RATE = 60;
+  var HOURLY_RATE = 70;
 
   var CATEGORIES = [
     { service: 'Carpentry & Trim', label: 'Carpentry', icon: 'fa-hammer', hours: 2, blurb: 'Trim, shelving, stairs, deck boards, and finish work.' },
@@ -50,7 +50,7 @@
       label: 'Seasonal Prep',
       icon: 'fa-leaf',
       hours: 4.5,
-      price: 265,
+      price: 293,
       discount: '15%',
       blurb: 'Gutter clean, weatherstripping, window sash checks, and a deck inspection.'
     },
@@ -59,7 +59,7 @@
       label: 'Move-In / Move-Out',
       icon: 'fa-boxes-packing',
       hours: 5,
-      price: 290,
+      price: 323,
       discount: '15%',
       blurb: 'TV mounting, wall patching, paint touch-ups, and lock upgrades.'
     },
@@ -68,7 +68,7 @@
       label: 'Senior Safety',
       icon: 'fa-shield-heart',
       hours: 4,
-      price: 250,
+      price: 279,
       discount: '10%',
       blurb: 'Grab bars, lever handles, non-slip treads, and handrail checks.'
     }
@@ -589,7 +589,7 @@
       detail.textContent =
         'We block about ' + plural(state.service.hours) + ' on site — roughly ' + money(labor) + ' in labor' +
         (state.service.discount ? ' (already ' + state.service.discount + ' off the hourly rate)' : '') +
-        '. Zone B adds $20 for travel.';
+        '. Zone B adds $45 for travel.';
     }
     els.estimate.appendChild(detail);
 
@@ -709,7 +709,7 @@
     if (els.city && !els.city.value.trim()) els.city.value = resolved.city;
 
     els.zipNote.className = 'bw-zip-note bw-zip-note--ok';
-    var zoneRate = resolved.zone === 'B' ? '$120 minimum service call (Zone B, 20+ miles)' : '$100 minimum service call (Zone A)';
+    var zoneRate = resolved.zone === 'B' ? '$145 minimum service call (Zone B, 20+ miles)' : '$100 minimum service call (Zone A)';
     els.zipNote.textContent =
       resolved.city + ' — ' + zoneRate +
       (resolved.dayLabel ? '. We run the ' + resolved.routeLabel + ' on ' + resolved.dayLabel + '.' : '.');

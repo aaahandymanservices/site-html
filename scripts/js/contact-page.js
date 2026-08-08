@@ -31,15 +31,15 @@
           link: "/rates#time-packages"
       },
       "4-Hour Handyman Package": {
-          text: "4 Hours of reserved labor to work straight through a punch list of smaller repairs, adjustments, or upgrades. Save $30!",
+          text: "4 Hours of reserved labor to work straight through a punch list of smaller repairs, adjustments, or upgrades. Save $31!",
           link: "/rates#packages"
       },
       "6-Hour Handyman Package": {
-          text: "6 Productive hours for a longer punch list with room for repairs, maintenance, and light improvement projects. Save $60!",
+          text: "6 Productive hours for a longer punch list with room for repairs, maintenance, and light improvement projects. Save $67!",
           link: "/rates#packages"
       },
       "8-Hour Handyman Package": {
-          text: "A full 8-hour workday for larger punch lists and projects that benefit from uninterrupted, back-to-back progress. Save $105!",
+          text: "A full 8-hour workday for larger punch lists and projects that benefit from uninterrupted, back-to-back progress. Save $118!",
           link: "/rates#packages"
       },
       "Home Safety Audit": {
@@ -55,19 +55,19 @@
           link: "/rates#audits"
       },
       "Whole-Home Assessment": {
-          text: "Get all three specialized audits (Safety, Energy, Storm-Prep) in a single visit with a unified punch list. Save $100!",
+          text: "Get all three specialized audits (Safety, Energy, Storm-Prep) in a single visit with a unified punch list. Save $84!",
           link: "/rates#audits"
       },
       "Home Safety Menu": {
-          text: "Standardized package safety menus: Good ($170 - Standard checks), Better ($290 - Upgraded safety additions), Best ($390 - Deluxe coverage). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
+          text: "Standardized package safety menus: Good ($185 - Standard checks), Better ($323 - Upgraded safety additions), Best ($444 - Deluxe coverage). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
           link: "/rates#menus"
       },
       "Energy Efficiency Menu": {
-          text: "Standardized package energy menus: Good ($145 - Draft checks & standard sweeps), Better ($315 - Enhanced seals & hatch insulation), Best ($415 - Maximum thermal sealing). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
+          text: "Standardized package energy menus: Good ($153 - Draft checks & standard sweeps), Better ($353 - Enhanced seals & hatch insulation), Best ($472 - Maximum thermal sealing). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
           link: "/rates#menus"
       },
       "Storm & Water Defense Menu": {
-          text: "Standardized package storm/water menus: Good ($145 - Basic checks & spot caulking), Better ($250 - Gutter tune-up & pump checks), Best ($340 - Full perimeter sealing & defense). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
+          text: "Standardized package storm/water menus: Good ($153 - Basic checks & spot caulking), Better ($279 - Gutter tune-up & pump checks), Best ($383 - Full perimeter sealing & defense). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
           link: "/rates#menus"
       },
       "Fall Home Prep Package": {

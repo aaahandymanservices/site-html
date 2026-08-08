@@ -1,9 +1,9 @@
 {
   "type": "ServiceAreasData",
-  "note": "Single source of truth for AAA Handyman Services LLC coverage. Consumed by the browser service-area checker (/js/service-area-checker.js), the booking widget (/js/booking-widget.js), the booking page (/js/book-page.js), and the city landing-page generator (scripts/build-city-pages.mjs). Zone A = $100 minimum service call (within ~20 miles of Waterford). Zone B = $120 minimum service call (extended county / 20+ miles).",
+  "note": "Single source of truth for AAA Handyman Services LLC coverage. Consumed by the browser service-area checker (/js/service-area-checker.js), the booking widget (/js/booking-widget.js), the booking page (/js/book-page.js), and the city landing-page generator (scripts/build-city-pages.mjs). Zone A = $100 minimum service call (within ~20 miles of Waterford). Zone B = $145 minimum service call (extended county / 20+ miles).",
   "zones": {
     "A": { "label": "Zone A (Within 20 Miles)", "rate": "$100 Minimum Service Call" },
-    "B": { "label": "Zone B (Extended County / 20+ Miles)", "rate": "$120 Minimum Service Call" }
+    "B": { "label": "Zone B (Extended County / 20+ Miles)", "rate": "$145 Minimum Service Call" }
   },
   "routeNote": "Standing route days. One van covers the county, so each cluster of cities is worked on fixed days to keep drive time between jobs short. `days` uses JavaScript day numbers (0 = Sunday). Booking outside a city's route day is still accepted -- it is a preference, not a restriction -- but on-route days confirm fastest.",
   "routes": {
