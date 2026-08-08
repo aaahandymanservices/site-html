@@ -545,15 +545,15 @@
           link: "/services#services"
       },
       "4-Hour Handyman Package": {
-          text: "4 Hours of reserved labor to work straight through a punch list of smaller repairs, adjustments, or upgrades. Save $30!",
+          text: "4 Hours of reserved labor to work straight through a punch list of smaller repairs, adjustments, or upgrades. Save $31!",
           link: "/rates#packages"
       },
       "6-Hour Handyman Package": {
-          text: "6 Productive hours for a longer punch list with room for repairs, maintenance, and light improvement projects. Save $60!",
+          text: "6 Productive hours for a longer punch list with room for repairs, maintenance, and light improvement projects. Save $67!",
           link: "/rates#packages"
       },
       "8-Hour Handyman Package": {
-          text: "A full 8-hour workday for larger punch lists and projects that benefit from uninterrupted, back-to-back progress. Save $105!",
+          text: "A full 8-hour workday for larger punch lists and projects that benefit from uninterrupted, back-to-back progress. Save $118!",
           link: "/rates#packages"
       }
   };
@@ -614,14 +614,14 @@
    * The live cost estimate under the service picker.
    *
    * Every number here is the published rate: a $100 Zone A service call that
-   * covers travel, diagnosis, and the first hour, $60 for each hour after that
-   * in 15-minute increments, and a flat $20 more in Zone B (20+ miles). The
+   * covers travel, diagnosis, and the first hour, $70 for each hour after that
+   * in 15-minute increments, and a flat $45 more in Zone B (20+ miles). The
    * packages are those same hours less their published discount, so the panel
    * can show the arithmetic rather than a number the customer has to trust.
    */
   const SERVICE_CALL = 100;
-  const HOURLY_RATE = 60;
-  const ZONE_B_DIFFERENTIAL = 20;
+  const HOURLY_RATE = 70;
+  const ZONE_B_DIFFERENTIAL = 45;
 
   const standardLabor = (hours) => SERVICE_CALL + HOURLY_RATE * (hours - 1);
   const money = (amount) => `$${Math.round(amount).toLocaleString('en-US')}`;
@@ -635,12 +635,12 @@
       'Minor Repair & Upkeep (1 Hour)': { hours: 1 },
       'Fixture or Outlet Replacement (1.5 Hours)': { hours: 1.5 },
       'Carpentry & Installation (2 Hours)': { hours: 2 },
-      '4-Hour Handyman Package': { hours: 4, price: 250, discount: '10%' },
-      '6-Hour Handyman Package': { hours: 6, price: 340, discount: '15%' },
-      '8-Hour Handyman Package': { hours: 8, price: 415, discount: '20%' },
-      'Seasonal Prep Package': { hours: 4.5, price: 265, discount: '15%' },
-      'Move-In / Move-Out Bundle': { hours: 5, price: 290, discount: '15%' },
-      'Senior Safety & Accessibility Package': { hours: 4, price: 250, discount: '10%' },
+      '4-Hour Handyman Package': { hours: 4, price: 279, discount: '10%' },
+      '6-Hour Handyman Package': { hours: 6, price: 383, discount: '15%' },
+      '8-Hour Handyman Package': { hours: 8, price: 472, discount: '20%' },
+      'Seasonal Prep Package': { hours: 4.5, price: 293, discount: '15%' },
+      'Move-In / Move-Out Bundle': { hours: 5, price: 323, discount: '15%' },
+      'Senior Safety & Accessibility Package': { hours: 4, price: 279, discount: '10%' },
       'Maintenance Membership': { membership: true },
       'General Estimate / Quote': { quote: true }
   };

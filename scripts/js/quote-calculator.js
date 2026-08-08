@@ -80,7 +80,7 @@
                 '<i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432</a>' +
             '</div>' +
           '</div>' +
-          '<p class="text-xs text-gray-500 leading-relaxed mt-4">Estimates use our standard flat-rate menu and are not a binding quote. Every menu price is calculated straight from our published labor rate &mdash; a $100 Zone A service call covering travel, diagnosis, and the first hour, plus $60 for each additional hour (Zone B adds a flat $20 extended-travel differential). Booking several tasks in one visit usually costs <strong>less</strong> than the total shown, because you only pay one trip charge. Every price shown is for installation and service labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Your final price is always confirmed free, upfront.</p>' +
+          '<p class="text-xs text-gray-500 leading-relaxed mt-4">Estimates use our standard flat-rate menu and are not a binding quote. Every menu price is calculated straight from our published labor rate &mdash; a $100 Zone A service call covering travel, diagnosis, and the first hour, plus $70 for each additional hour (Zone B adds a flat $45 extended-travel differential). Booking several tasks in one visit usually costs <strong>less</strong> than the total shown, because you only pay one trip charge. Every price shown is for installation and service labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Your final price is always confirmed free, upfront.</p>' +
         '</div>' +
       '</div>';
   };
