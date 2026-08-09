@@ -3099,12 +3099,23 @@ html.bw-open body {
 }
 
 /*
- * Pricing and plan cards sit in one horizontal row, each taking an equal share
- * of the row's width. `flex: 1` alone would let a card shrink without limit, so
- * the cards would just get narrower and narrower instead of wrapping on a
- * mid-size screen -- `min-width` is what gives the wrap a trigger point. Above
- * that width the basis of 0 keeps every column identical regardless of how much
- * text each card carries.
+ * Pricing and plan cards sit in one horizontal row on desktop, each taking an
+ * equal share of the row's width, and stack in a single column on phones.
+ *
+ * This is a grid rather than a flex row because the rows do not all hold the
+ * same number of cards -- the home page runs three (4-hour, 6-hour, membership)
+ * while the rates page has rows of three and of four -- and `auto-fit` fits as
+ * many equal columns as the container can give a readable width to, without
+ * each row having to declare its own count. The 16rem floor is what makes the
+ * response automatic: three cards go three-across on a laptop, drop to two on a
+ * tablet, and stack on a phone, at whatever width the container actually hits.
+ * A flex row with `flex-wrap: nowrap` had no such floor, so at the low end of
+ * the desktop range it kept squeezing all three cards into one line instead.
+ *
+ * `min-width: 0` on the children overrides the automatic minimum size of a grid
+ * item, which is its content's min-content width; without it a long unbroken
+ * price line or button label would push a column past its 1fr share and spill
+ * the row sideways.
  *
  * `.pricing-card-row` is the general-purpose version, used by the pricing and
  * package sections on the home page and the rates page, whose cards carry their
@@ -3115,31 +3126,28 @@ html.bw-open body {
  */
 .plan-card-row,
 .pricing-card-row {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   align-items: stretch;
   gap: 1.5rem;
 }
 
+/*
+ * The cards themselves are column flex containers that pin their call to action
+ * with `mt-auto`, so stretching each one to the full height of its grid row is
+ * what lines those buttons up across the row.
+ */
 .plan-card-row > *,
 .pricing-card-row > * {
-  width: 100%;
-  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
 }
 
 /* Desktop screens: side-by-side horizontal row with equal column widths */
 @media (min-width: 768px) {
   .plan-card-row,
   .pricing-card-row {
-    flex-direction: row;
-    flex-wrap: nowrap;
-  }
-
-  .plan-card-row > *,
-  .pricing-card-row > * {
-    flex: 1 1 0px;
-    min-width: 0;
-    width: auto;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   }
 }
 
