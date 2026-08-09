@@ -3099,14 +3099,22 @@ html.bw-open body {
 }
 
 /*
- * The three plan cards sit in one horizontal row, each taking an equal share of
- * the row's width. `flex: 1` alone would let a card shrink without limit, so the
- * cards would just get narrower and narrower instead of wrapping on a mid-size
- * screen -- `min-width` is what gives the wrap a trigger point. Above that
- * width the basis of 0 keeps all three columns identical regardless of how much
+ * Pricing and plan cards sit in one horizontal row, each taking an equal share
+ * of the row's width. `flex: 1` alone would let a card shrink without limit, so
+ * the cards would just get narrower and narrower instead of wrapping on a
+ * mid-size screen -- `min-width` is what gives the wrap a trigger point. Above
+ * that width the basis of 0 keeps every column identical regardless of how much
  * text each card carries.
+ *
+ * `.pricing-card-row` is the general-purpose version, used by the pricing and
+ * package sections on the home page and the rates page, whose cards carry their
+ * own visual classes (.service-card and friends) rather than a single shared
+ * card class -- hence the `> *` child selector instead of a class list. Any
+ * direct child of the row becomes a column. `.plan-card-row` is the same layout
+ * under the name the home care plans already use.
  */
-.plan-card-row {
+.plan-card-row,
+.pricing-card-row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -3114,21 +3122,22 @@ html.bw-open body {
   gap: 1.5rem;
 }
 
-.plan-card-row > .plan-card,
-.plan-card-row > .pricing-card {
+.plan-card-row > *,
+.pricing-card-row > * {
   flex: 1;
   min-width: 16rem;
 }
 
 /* Phones: one full-width card per line, stacked. */
 @media (max-width: 640px) {
-  .plan-card-row {
+  .plan-card-row,
+  .pricing-card-row {
     flex-direction: column;
     flex-wrap: nowrap;
   }
 
-  .plan-card-row > .plan-card,
-  .plan-card-row > .pricing-card {
+  .plan-card-row > *,
+  .pricing-card-row > * {
     flex: 1 1 auto;
     min-width: 0;
     width: 100%;
