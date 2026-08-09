@@ -1048,7 +1048,9 @@
                  scroll before a homeowner reached the one they came for. The
                  same cards now sit inside four <details> groups so the page
                  opens as a short, scannable menu and only the chosen category
-                 expands. <details> was picked over a JS tab widget so the
+                 expands. Every group starts collapsed, so the menu is the whole
+                 first view and no category is implicitly recommended over the
+                 others. <details> was picked over a JS tab widget so the
                  grouping still works, and still renders every card to crawlers,
                  with scripting unavailable; the script at the end of the page
                  only adds hash-target opening and the expand/collapse-all
@@ -1070,7 +1072,7 @@
                     <button type="button" class="svc-tab svc-tab--toggle" data-svc-toggle-all aria-expanded="false"><i class="fas fa-chevron-down" aria-hidden="true"></i><span data-svc-toggle-label>Expand all</span></button>
                 </nav>
 
-                <details id="cat-structural" class="svc-group" data-svc-group open>
+                <details id="cat-structural" class="svc-group" data-svc-group>
                     <summary class="svc-group__summary">
                         <span class="svc-group__icon bg-red-100 text-red-600" aria-hidden="true"><i class="fas fa-hammer"></i></span>
                         <span class="svc-group__text">
