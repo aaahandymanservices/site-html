@@ -3116,31 +3116,30 @@ html.bw-open body {
 .plan-card-row,
 .pricing-card-row {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: stretch;
   gap: 1.5rem;
 }
 
 .plan-card-row > *,
 .pricing-card-row > * {
-  flex: 1;
-  min-width: 16rem;
+  width: 100%;
+  flex: 1 1 auto;
 }
 
-/* Phones: one full-width card per line, stacked. */
-@media (max-width: 640px) {
+/* Desktop screens: side-by-side horizontal row with equal column widths */
+@media (min-width: 768px) {
   .plan-card-row,
   .pricing-card-row {
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: nowrap;
   }
 
   .plan-card-row > *,
   .pricing-card-row > * {
-    flex: 1 1 auto;
+    flex: 1 1 0px;
     min-width: 0;
-    width: 100%;
+    width: auto;
   }
 }
 
