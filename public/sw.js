@@ -50,7 +50,13 @@
 // bundle tooltips, the plan cards -- was added to site-theme.css and
 // tailwind.css behind their unchanged pathnames, so a returning visitor holding
 // v10 would open an unstyled modal over last deploy's stylesheet.
-const CACHE_VERSION = 'v11';
+// v12 lands the side-by-side pricing and package cards. The layout is entirely
+// new rules on site-theme.css behind its unchanged pathname, and an asset
+// request's cache key drops ?v= (see assetCacheKey), so the stamp in the page's
+// <link> cannot reach a visitor holding v11 -- they would keep last deploy's
+// stylesheet, where .pricing-card-row matches nothing and the row falls back to
+// a block, stacking the cards down the page. Only this bump refetches it.
+const CACHE_VERSION = 'v12';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
