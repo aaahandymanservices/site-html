@@ -551,10 +551,6 @@
       "6-Hour Handyman Package": {
           text: "6 Productive hours for a longer punch list with room for repairs, maintenance, and light improvement projects. Save $67!",
           link: "/rates#packages"
-      },
-      "8-Hour Handyman Package": {
-          text: "A full 8-hour workday for larger punch lists and projects that benefit from uninterrupted, back-to-back progress. Save $118!",
-          link: "/rates#packages"
       }
   };
 
@@ -637,7 +633,6 @@
       'Carpentry & Installation (2 Hours)': { hours: 2 },
       '4-Hour Handyman Package': { hours: 4, price: 279, discount: '10%' },
       '6-Hour Handyman Package': { hours: 6, price: 383, discount: '15%' },
-      '8-Hour Handyman Package': { hours: 8, price: 472, discount: '20%' },
       'Seasonal Prep Package': { hours: 4.5, price: 293, discount: '15%' },
       'Move-In / Move-Out Bundle': { hours: 5, price: 323, discount: '15%' },
       'Senior Safety & Accessibility Package': { hours: 4, price: 279, discount: '10%' },

@@ -38,10 +38,6 @@
           text: "6 Productive hours for a longer punch list with room for repairs, maintenance, and light improvement projects. Save $67!",
           link: "/rates#packages"
       },
-      "8-Hour Handyman Package": {
-          text: "A full 8-hour workday for larger punch lists and projects that benefit from uninterrupted, back-to-back progress. Save $118!",
-          link: "/rates#packages"
-      },
       "Home Safety Audit": {
           text: "A focused $100 audit examining fall prevention, safety detectors, lighting, entry points, and lock security.",
           link: "/rates#audits"
