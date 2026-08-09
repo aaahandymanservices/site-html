@@ -3098,6 +3098,43 @@ html.bw-open body {
   color: #fff;
 }
 
+/*
+ * The three plan cards sit in one horizontal row, each taking an equal share of
+ * the row's width. `flex: 1` alone would let a card shrink without limit, so the
+ * cards would just get narrower and narrower instead of wrapping on a mid-size
+ * screen -- `min-width` is what gives the wrap a trigger point. Above that
+ * width the basis of 0 keeps all three columns identical regardless of how much
+ * text each card carries.
+ */
+.plan-card-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 1.5rem;
+}
+
+.plan-card-row > .plan-card,
+.plan-card-row > .pricing-card {
+  flex: 1;
+  min-width: 16rem;
+}
+
+/* Phones: one full-width card per line, stacked. */
+@media (max-width: 640px) {
+  .plan-card-row {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .plan-card-row > .plan-card,
+  .plan-card-row > .pricing-card {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+  }
+}
+
 .plan-card {
   display: flex;
   flex-direction: column;
