@@ -3253,52 +3253,95 @@ html.bw-open body {
   }
 }
 
-/* Service Area Zone Cards Styling */
+/*
+ * Service Area Zone Cards
+ *
+ * The zone tier is the only thing that changes between the two cards, so the
+ * accent is a custom property set once on the card and every part inside --
+ * top border, header wash, badge, icon, price, city chips, callout -- reads it
+ * from there. Adding a zone or retuning a hue is a one-line change, and it is
+ * no longer possible for a card to end up with a green badge above an amber
+ * price because one selector in a long list was missed.
+ *
+ * These rules are what colours the cards; the markup carries layout utilities
+ * only. site-theme.css loads after tailwind.css, so a stray colour utility on
+ * a zone element would lose to the component class rather than fight it.
+ */
+.zone-card,
+.zone-tag,
+.zone-dot {
+  /* Zone A -- Standard, within 20 miles. Forest green. */
+  --zone-accent: #107c41;
+  --zone-accent-wash: rgba(16, 124, 65, 0.06);
+  --zone-accent-line: rgba(16, 124, 65, 0.2);
+}
+
+.zone-card-b,
+.zone-tag-b,
+.zone-dot-b {
+  /* Zone B -- Extended county, 20+ miles. Warm gold / amber. */
+  --zone-accent: #d97706;
+  --zone-accent-wash: rgba(217, 119, 6, 0.06);
+  --zone-accent-line: rgba(217, 119, 6, 0.2);
+}
+
 .zone-card {
   background-color: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-top: 4px solid var(--zone-accent);
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid #f0f0f0;
   overflow: hidden;
 }
 
-.zone-card-a {
-  border-top: 4px solid #107c41;
+.zone-card .zone-header {
+  background-color: var(--zone-accent-wash);
+  border-bottom: 1px solid var(--zone-accent-line);
 }
 
-.zone-card-b {
-  border-top: 4px solid #d97706;
-}
-
-.zone-card-a .zone-header {
-  background-color: rgba(16, 124, 65, 0.04);
-  border-bottom: 1px solid rgba(16, 124, 65, 0.12);
-}
-
-.zone-card-a .zone-badge {
-  background-color: #107c41;
+.zone-card .zone-badge {
+  background-color: var(--zone-accent);
   color: #ffffff;
 }
 
-.zone-card-a .zone-accent-text,
-.zone-card-a .zone-price,
-.zone-card-a .zone-icon {
-  color: #107c41;
+.zone-card .zone-badge .zone-icon {
+  color: inherit;
 }
 
-.zone-card-b .zone-header {
-  background-color: rgba(217, 119, 6, 0.04);
-  border-bottom: 1px solid rgba(217, 119, 6, 0.12);
+.zone-card .zone-title,
+.zone-card .zone-accent-text,
+.zone-card .zone-price,
+.zone-card .zone-icon {
+  color: var(--zone-accent);
 }
 
-.zone-card-b .zone-badge {
-  background-color: #d97706;
-  color: #ffffff;
+/* City and township pills inside a card. */
+.zone-card .zone-chip {
+  background-color: var(--zone-accent-wash);
+  border: 1px solid var(--zone-accent-line);
+  border-radius: 0.5rem;
+  color: #1f2937;
 }
 
-.zone-card-b .zone-accent-text,
-.zone-card-b .zone-price,
-.zone-card-b .zone-icon {
-  color: #d97706;
+/* The tinted footnote box, e.g. Zone B's extended-travel differential. */
+.zone-card .zone-note {
+  background-color: var(--zone-accent-wash);
+  border: 1px solid var(--zone-accent-line);
+  border-radius: 1rem;
+}
+
+/*
+ * Standalone zone pill, used outside the cards themselves -- the city grid
+ * tiles and the legend above it -- so a customer sees their tier in the same
+ * colour wherever it appears.
+ */
+.zone-tag {
+  background-color: var(--zone-accent-wash);
+  border: 1px solid var(--zone-accent-line);
+  color: var(--zone-accent);
+}
+
+.zone-dot {
+  background-color: var(--zone-accent);
 }
 
