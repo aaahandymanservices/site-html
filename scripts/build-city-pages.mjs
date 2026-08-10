@@ -18,22 +18,24 @@ const PHONE_TEL = '+12483853432';
  * gets interpolated into a class. Tailwind scans this file for literal class
  * names, so a `text-${zone.color}-600` built at render time only ever reaches
  * the stylesheet by accident -- because some other file happened to spell the
- * same class out. The zone tags match /service-areas: Zone A green, Zone B
- * amber, so a customer sees the same colour for their tier on both pages.
+ * same class out. The zone tags match /service-areas: Zone A deep forest green,
+ * Zone B metallic gold, so a customer sees the same colour for their tier on
+ * both pages. Gold is light enough that its badge takes near-black text where
+ * the green one takes white; white on #d4af37 is not readable.
  */
 const ZONE_INFO = {
   A: {
     label: 'Zone A (Within 20 Miles)',
     tag: 'Zone A',
     rate: '$100',
-    badge: 'bg-[#107c41] text-white',
+    badge: 'bg-[#1e5631] text-white',
     miles: 'within about 20 miles of our Waterford base'
   },
   B: {
     label: 'Zone B (Extended County / 20+ Miles)',
     tag: 'Zone B',
     rate: '$145',
-    badge: 'bg-[#d97706] text-white',
+    badge: 'bg-[#d4af37] text-[#1a1a1a]',
     miles: 'in the extended county, about 20+ miles from Waterford'
   }
 };
