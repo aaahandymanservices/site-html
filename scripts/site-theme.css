@@ -3257,68 +3257,28 @@ html.bw-open body {
 /*
  * Service Area Zone Cards
  *
- * The zone tier is the only thing that changes between the two cards, so the
- * accent is a small set of custom properties declared once on the card and
- * every part inside -- borders, header wash, badge, icon, price, sub-headings,
- * city chips, callout -- reads from there. Adding a zone or retuning a hue
- * means editing one block, and it is no longer possible for a card to end up
- * with a green badge above a gold price because one selector in a long list
- * was missed.
+ * Each zone carries its own explicit colour rules. An earlier pass wired these
+ * cards to a set of --zone-accent custom properties declared on the card root
+ * with every descendant reading var(--zone-accent-*). In production that
+ * inheritance chain broke: when the cascade resets on the card root the custom
+ * properties never reach the descendants, so var(--zone-accent-*) resolves to
+ * its initial value and the whole card -- top border, badge, price, header
+ * tint, chips, note -- renders blank. Rather than debug the inheritance across
+ * every deployed browser, the colours are now pinned as literal values on
+ * explicit .zone-card-a / .zone-card-b rules. Every part of a card reads a
+ * concrete colour, so a zone card can never lose its accent no matter how the
+ * surrounding cascade behaves.
  *
  * These rules are what colours the cards; the markup carries layout utilities
  * only. site-theme.css loads after tailwind.css, so a stray colour utility on
- * a zone element would lose to the component class rather than fight it.
+ * a zone element loses to the component class rather than fighting it.
  */
-.zone-card,
-.zone-tag,
-.zone-dot {
-  /*
-   * Zone A -- Standard, within 20 miles. Deep forest green.
-   *
-   * Four tokens rather than one because a single hue cannot do every job at
-   * once. --zone-accent is the fill and border colour, --zone-accent-on is
-   * whatever text sits on top of that fill, and the two ink values are the
-   * accent used as text on white. Green is dark enough that all three text
-   * roles collapse back to the same value here; gold is where they diverge.
-   */
-  --zone-accent: #1e5631;
-  --zone-accent-on: #ffffff;
-  --zone-accent-ink: #1e5631;
-  --zone-accent-ink-lg: #1e5631;
-  --zone-accent-wash: rgba(30, 86, 49, 0.06);
-  --zone-accent-line: rgba(30, 86, 49, 0.2);
-}
-
-.zone-card-b,
-.zone-tag-b,
-.zone-dot-b {
-  /*
-   * Zone B -- Extended county, 20+ miles. Warm metallic gold.
-   *
-   * #d4af37 is a light hue, which is what makes the other three tokens earn
-   * their place. White on it is unreadable, so the badge takes near-black.
-   * As text on white it lands around 1.9:1, so the price steps down to
-   * #b8860b -- 3.3:1, which clears AA at display sizes and nowhere else --
-   * and every smaller run of accent text takes #8a6508 at 5.3:1. The wash and
-   * line alphas run higher than Zone A's for the same reason: a 6% gold tint
-   * on white is invisible where a 6% forest green tint is not.
-   */
-  --zone-accent: #d4af37;
-  --zone-accent-on: #1a1a1a;
-  --zone-accent-ink: #8a6508;
-  --zone-accent-ink-lg: #b8860b;
-  --zone-accent-wash: rgba(212, 175, 55, 0.12);
-  --zone-accent-line: rgba(212, 175, 55, 0.35);
-}
-
 .zone-card {
   background-color: #ffffff;
-  border: 2px solid var(--zone-accent);
-  border-top: 6px solid var(--zone-accent);
   border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .zone-card:hover {
@@ -3326,41 +3286,90 @@ html.bw-open body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-.zone-card .zone-header {
-  background-color: var(--zone-accent-wash);
-  border-bottom: 1px solid var(--zone-accent-line);
+/*
+ * Zone A -- Standard, within 20 miles. Deep forest green.
+ *
+ * Green is dark enough that the fill, the text on the fill, and the accent as
+ * text on white all collapse to the same value, so a single literal does every
+ * job here.
+ */
+.zone-card-a {
+  border-top: 6px solid #1e5631 !important;
 }
-
-.zone-card .zone-badge {
-  background-color: var(--zone-accent);
-  color: var(--zone-accent-on);
+.zone-card-a .zone-badge {
+  background-color: #1e5631;
+  color: #ffffff;
 }
-
-.zone-card .zone-badge .zone-icon {
+.zone-card-a .zone-badge .zone-icon {
   color: inherit;
 }
-
-.zone-card .zone-title,
-.zone-card .zone-accent-text,
-.zone-card .zone-icon {
-  color: var(--zone-accent-ink);
+.zone-card-a .zone-price {
+  color: #1e5631;
+}
+.zone-card-a .zone-header {
+  background-color: rgba(30, 86, 49, 0.06);
+  border-bottom: 1px solid rgba(30, 86, 49, 0.2);
+}
+.zone-card-a .zone-title,
+.zone-card-a .zone-icon,
+.zone-card-a .zone-accent-text {
+  color: #1e5631;
+}
+.zone-card-a .zone-chip,
+.zone-card-a .zone-note {
+  background-color: rgba(30, 86, 49, 0.06);
+  border: 1px solid rgba(30, 86, 49, 0.2);
 }
 
-/* Display sizes only -- see the Zone B contrast note above. */
-.zone-card .zone-price {
-  color: var(--zone-accent-ink-lg);
+/*
+ * Zone B -- Extended county, 20+ miles. Warm metallic gold.
+ *
+ * #d4af37 is a light hue: white on it is unreadable, so the badge takes
+ * near-black. As text on white it lands around 1.9:1, so the price steps down
+ * to #b8860b (3.3:1, AA at display sizes) and every smaller accent run takes
+ * #8a6508 (5.3:1). The wash and line alphas run higher than Zone A's because a
+ * 6% gold tint on white is invisible where a 6% forest green tint is not.
+ */
+.zone-card-b {
+  background-color: #fffdf5;
+  border-top: 6px solid #d4af37 !important;
+}
+.zone-card-b .zone-badge {
+  background-color: #d4af37;
+  color: #1c1917;
+}
+.zone-card-b .zone-badge .zone-icon {
+  color: inherit;
+}
+.zone-card-b .zone-price {
+  color: #b8860b;
+}
+.zone-card-b .zone-accent-text {
+  color: #8a6508;
+}
+.zone-card-b .zone-header {
+  background-color: rgba(212, 175, 55, 0.12);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+}
+.zone-card-b .zone-title,
+.zone-card-b .zone-icon {
+  color: #8a6508;
+}
+.zone-card-b .zone-chip,
+.zone-card-b .zone-note {
+  background-color: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.35);
 }
 
 /*
  * City-group sub-headings inside a card. These override the type utilities on
  * the markup rather than sitting alongside them: site-theme.css loads after
  * tailwind.css and `.zone-card h4` outranks a bare `.text-xs`, so the heading
- * scale lives here with the rest of the component. The colour reads from the
- * accent token instead of being pinned to green, so a Zone B card does not end
- * up with green sub-headings above a gold price.
+ * scale lives here with the rest of the component. The colour is pinned per
+ * zone so a Zone B card does not end up with green sub-headings above a gold
+ * price.
  */
 .zone-card h4 {
-  color: var(--zone-accent-ink);
   font-size: 0.9rem;
   /* The utility this overrides paired .75rem with a 1rem line-height, which a
    * wrapped 0.9rem heading would collide with on a narrow screen. */
@@ -3372,19 +3381,21 @@ html.bw-open body {
   border-bottom: 1px solid #e0e0e0;
   padding-bottom: 4px;
 }
+.zone-card-a h4 {
+  color: #1e5631;
+}
+.zone-card-b h4 {
+  color: #8a6508;
+}
 
 /* City and township pills inside a card. */
 .zone-card .zone-chip {
-  background-color: var(--zone-accent-wash);
-  border: 1px solid var(--zone-accent-line);
   border-radius: 0.5rem;
   color: #1f2937;
 }
 
 /* The tinted footnote box, e.g. Zone B's extended-travel differential. */
 .zone-card .zone-note {
-  background-color: var(--zone-accent-wash);
-  border: 1px solid var(--zone-accent-line);
   border-radius: 1rem;
 }
 
@@ -3394,12 +3405,20 @@ html.bw-open body {
  * colour wherever it appears.
  */
 .zone-tag {
-  background-color: var(--zone-accent-wash);
-  border: 1px solid var(--zone-accent-line);
-  color: var(--zone-accent-ink);
+  background-color: rgba(30, 86, 49, 0.06);
+  border: 1px solid rgba(30, 86, 49, 0.2);
+  color: #1e5631;
+}
+.zone-tag-b {
+  background-color: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #8a6508;
 }
 
 .zone-dot {
-  background-color: var(--zone-accent);
+  background-color: #1e5631;
+}
+.zone-dot-b {
+  background-color: #d4af37;
 }
 
