@@ -359,12 +359,13 @@
 
 <header id="site-header" class="site-header sticky top-0 z-[100] bg-white/95 backdrop-blur-md shadow-md border-b-[3px] border-red-600">
     <div class="header-container site-nav__bar max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" class="brand site-nav__brand group flex items-center gap-3 min-w-0" aria-label="AAA Handyman Services LLC home">
+        <a href="/" class="brand site-nav__brand group flex items-center gap-3 min-w-0">
             <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 shadow-sm transition group-hover:scale-105">
             <div class="brand-text min-w-0">
                 <p class="brand-title text-base min-[390px]:text-lg sm:text-xl lg:text-xl xl:text-2xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services LLC</p>
                 <p class="brand-tagline text-[10px] sm:text-xs text-gray-500 font-medium">Oakland County, Michigan</p>
             </div>
+            <span class="sr-only">home</span>
         </a>
 
         <!-- Desktop Navigation Container -->
@@ -466,35 +467,45 @@
                 </div>
             </div>
 
-            <!-- Trust & stats counter bar -->
+            <!-- Trust & stats counter bar
+                 Each card is a dl > div group, and such a group may contain only dt
+                 and dd -- the icon tile used to sit beside a wrapper div holding the
+                 pair, which pushed the dt/dd a level too deep and invalidated the
+                 list. The tile is decorative, so it moves inside the dt and
+                 .reviews-stat lifts it out of flow to centre it against the card,
+                 reproducing the old flex row without a wrapper.
+
+                 The term text is wrapped rather than left bare because reviews-page.js
+                 writes textContent to [data-cities-served-count]: on the dt itself
+                 that write would replace the icon along with the text. -->
             <div class="max-w-4xl mx-auto mb-10">
                 <dl class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div class="flex items-center gap-3 bg-white/5 border border-white/15 rounded-2xl px-4 py-3.5">
-                        <span class="inline-flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-300">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.2c4.7-2 7-5.4 7-9.7V5.9L12 2.8 5 5.9v5.6c0 4.3 2.3 7.7 7 9.7Z"/><path d="m8.8 11.6 2.3 2.3 4.1-4.4"/></svg>
-                        </span>
-                        <div>
-                            <dt class="text-white font-bold text-sm sm:text-base leading-snug">100% Satisfaction Guaranteed</dt>
-                            <dd class="text-xs text-slate-400 font-medium mt-0.5">We come back until it is right</dd>
-                        </div>
+                    <div class="reviews-stat bg-white/5 border border-white/15 rounded-2xl">
+                        <dt class="text-white font-bold text-sm sm:text-base leading-snug">
+                            <span class="reviews-stat__icon inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-300">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.2c4.7-2 7-5.4 7-9.7V5.9L12 2.8 5 5.9v5.6c0 4.3 2.3 7.7 7 9.7Z"/><path d="m8.8 11.6 2.3 2.3 4.1-4.4"/></svg>
+                            </span>
+                            <span>100% Satisfaction Guaranteed</span>
+                        </dt>
+                        <dd class="text-xs text-slate-400 font-medium mt-0.5">We come back until it is right</dd>
                     </div>
-                    <div class="flex items-center gap-3 bg-white/5 border border-white/15 rounded-2xl px-4 py-3.5">
-                        <span class="inline-flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-red-500/15 text-red-400">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s7-5.7 7-11.2a7 7 0 1 0-14 0c0 5.5 7 11.2 7 11.2Z"/><circle cx="12" cy="10.2" r="2.6"/></svg>
-                        </span>
-                        <div>
-                            <dt class="text-white font-bold text-sm sm:text-base leading-snug" data-cities-served-count>12 Oakland County Cities Served</dt>
-                            <dd class="text-xs text-slate-400 font-medium mt-0.5" data-cities-served-range>Waterford to Southfield</dd>
-                        </div>
+                    <div class="reviews-stat bg-white/5 border border-white/15 rounded-2xl">
+                        <dt class="text-white font-bold text-sm sm:text-base leading-snug">
+                            <span class="reviews-stat__icon inline-flex h-10 w-10 items-center justify-center rounded-xl bg-red-500/15 text-red-400">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s7-5.7 7-11.2a7 7 0 1 0-14 0c0 5.5 7 11.2 7 11.2Z"/><circle cx="12" cy="10.2" r="2.6"/></svg>
+                            </span>
+                            <span data-cities-served-count>12 Oakland County Cities Served</span>
+                        </dt>
+                        <dd class="text-xs text-slate-400 font-medium mt-0.5" data-cities-served-range>Waterford to Southfield</dd>
                     </div>
-                    <div class="flex items-center gap-3 bg-white/5 border border-white/15 rounded-2xl px-4 py-3.5">
-                        <span class="inline-flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-amber-400/15 text-amber-300">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3.8 13.4h6.4L11 22l9.2-11.4h-6.4L13 2Z"/></svg>
-                        </span>
-                        <div>
-                            <dt class="text-white font-bold text-sm sm:text-base leading-snug">Fast &amp; Reliable Local Service</dt>
-                            <dd class="text-xs text-slate-400 font-medium mt-0.5">Owner-operated, same-week openings</dd>
-                        </div>
+                    <div class="reviews-stat bg-white/5 border border-white/15 rounded-2xl">
+                        <dt class="text-white font-bold text-sm sm:text-base leading-snug">
+                            <span class="reviews-stat__icon inline-flex h-10 w-10 items-center justify-center rounded-xl bg-amber-400/15 text-amber-300">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3.8 13.4h6.4L11 22l9.2-11.4h-6.4L13 2Z"/></svg>
+                            </span>
+                            <span>Fast &amp; Reliable Local Service</span>
+                        </dt>
+                        <dd class="text-xs text-slate-400 font-medium mt-0.5">Owner-operated, same-week openings</dd>
                     </div>
                 </dl>
             </div>
@@ -659,13 +670,13 @@
                                         <button type="button" role="radio" aria-checked="false" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="4" aria-label="4 stars"><i class="fas fa-star" aria-hidden="true"></i></button>
                                         <button type="button" role="radio" aria-checked="false" class="star-rating-btn text-2xl text-amber-400 focus:outline-none" data-value="5" aria-label="5 stars"><i class="fas fa-star" aria-hidden="true"></i></button>
                                     </div>
-                                    <span id="rating-text" class="text-sm font-semibold text-amber-600">Perfect!</span>
+                                    <span id="rating-text" class="text-sm font-semibold text-amber-700">Perfect!</span>
                                     <input type="hidden" id="reviews-rating" name="rating" value="5" required>
                                 </div>
                             </div>
 
                             <div>
-                                <span class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">What stood out? <span class="normal-case text-gray-400 font-medium tracking-normal">(optional)</span></span>
+                                <span class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">What stood out? <span class="normal-case text-gray-500 font-medium tracking-normal">(optional)</span></span>
                                 <div id="reviews-attributes" class="flex flex-wrap gap-2" role="group" aria-label="Highlight tags">
                                     <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Punctual" aria-pressed="false"><i class="fas fa-clock mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Punctual</button>
                                     <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Clean Workspace" aria-pressed="false"><i class="fas fa-broom mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Clean Workspace</button>
@@ -691,7 +702,7 @@
                                     </div>
                                     <i class="fas fa-cloud-arrow-up text-3xl text-red-500 mb-2 block" aria-hidden="true"></i>
                                     <span id="reviews-file-name" class="block font-semibold text-slate-800">Choose a photo or drag it here</span>
-                                    <span class="text-xs text-gray-400 block mt-1">JPG, PNG, WebP or GIF · 10 MB max</span>
+                                    <span class="text-xs text-gray-500 block mt-1">JPG, PNG, WebP or GIF · 10 MB max</span>
                                 </label>
                             </div>
 
