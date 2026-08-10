@@ -56,7 +56,15 @@
 // <link> cannot reach a visitor holding v11 -- they would keep last deploy's
 // stylesheet, where .pricing-card-row matches nothing and the row falls back to
 // a block, stacking the cards down the page. Only this bump refetches it.
-const CACHE_VERSION = 'v12';
+// v13 rewrites the service-area zone cards to pin their colours as literal
+// values on explicit .zone-card-a / .zone-card-b rules, replacing the
+// --zone-accent custom properties that rendered blank in production. Every
+// styling rule for the cards lives on site-theme.css behind its unchanged
+// pathname, and an asset request's cache key drops ?v= (see assetCacheKey), so
+// the stamp in the page's <link> cannot reach a visitor holding v12 -- they
+// would keep last deploy's stylesheet, where the cards render as plain white
+// with no accent borders or tints. Only this bump refetches it.
+const CACHE_VERSION = 'v13';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
