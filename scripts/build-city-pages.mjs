@@ -26,14 +26,14 @@ const ZONE_INFO = {
     label: 'Zone A (Within 20 Miles)',
     tag: 'Zone A',
     rate: '$100',
-    badge: 'bg-green-600 text-white',
+    badge: 'bg-[#107c41] text-white',
     miles: 'within about 20 miles of our Waterford base'
   },
   B: {
     label: 'Zone B (Extended County / 20+ Miles)',
     tag: 'Zone B',
     rate: '$145',
-    badge: 'bg-amber-500 text-amber-950',
+    badge: 'bg-[#d97706] text-white',
     miles: 'in the extended county, about 20+ miles from Waterford'
   }
 };

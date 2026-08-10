@@ -3252,3 +3252,53 @@ html.bw-open body {
     animation: none;
   }
 }
+
+/* Service Area Zone Cards Styling */
+.zone-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+}
+
+.zone-card-a {
+  border-top: 4px solid #107c41;
+}
+
+.zone-card-b {
+  border-top: 4px solid #d97706;
+}
+
+.zone-card-a .zone-header {
+  background-color: rgba(16, 124, 65, 0.04);
+  border-bottom: 1px solid rgba(16, 124, 65, 0.12);
+}
+
+.zone-card-a .zone-badge {
+  background-color: #107c41;
+  color: #ffffff;
+}
+
+.zone-card-a .zone-accent-text,
+.zone-card-a .zone-price,
+.zone-card-a .zone-icon {
+  color: #107c41;
+}
+
+.zone-card-b .zone-header {
+  background-color: rgba(217, 119, 6, 0.04);
+  border-bottom: 1px solid rgba(217, 119, 6, 0.12);
+}
+
+.zone-card-b .zone-badge {
+  background-color: #d97706;
+  color: #ffffff;
+}
+
+.zone-card-b .zone-accent-text,
+.zone-card-b .zone-price,
+.zone-card-b .zone-icon {
+  color: #d97706;
+}
+
