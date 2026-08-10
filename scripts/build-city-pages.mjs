@@ -74,7 +74,7 @@ function cityFaq(city) {
     },
     {
       q: `Do you offer emergency handyman service near ${city.name}?`,
-      a: `Yes. After-hours emergency service is available 7 days a week for urgent repairs such as leaks or door and window problems that affect home safety or security ($155 first hour / $85 per hour after). Call ${PHONE_DISPLAY} for priority response.`
+      a: `Yes. After-hours emergency service is available 7 days a week for urgent repairs such as leaks or door and window problems that affect home safety or security ($155 first hour / $100 per hour after). Call ${PHONE_DISPLAY} for priority response.`
     }
   ];
 }
