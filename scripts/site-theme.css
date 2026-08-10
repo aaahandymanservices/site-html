@@ -1714,6 +1714,29 @@ body > footer a {
   background: var(--brand-crimson-dark);
 }
 
+/*
+ * Reviews trust bar. The three cards sit inside a <dl>, and a dl > div group is
+ * only allowed to contain dt and dd -- the icon tile cannot be a flex sibling
+ * of the text without pushing the dt/dd a level deeper and invalidating the
+ * list. The tile is decorative, so it comes out of flow and is centred against
+ * the card instead, which reproduces the old `flex items-center` result.
+ *
+ * The padding replaces the px-4/py-3.5 the card used to carry, and the left
+ * inset is the icon's own 1rem offset plus its 2.5rem width plus the 0.75rem
+ * gap it held as a flex child, so the text column starts exactly where it did.
+ */
+.reviews-stat {
+  position: relative;
+  padding: 0.875rem 1rem 0.875rem 4.25rem;
+}
+
+.reviews-stat__icon {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+}
+
 @media (max-width: 767px) {
   /* Retuning the one token shortens the bar and, with it, the jump strip's
      resting offset, the drawer's height cap, and the anchor scroll-margin
@@ -3325,10 +3348,17 @@ html.bw-open body {
  * Zone B -- Extended county, 20+ miles. Warm metallic gold.
  *
  * #d4af37 is a light hue: white on it is unreadable, so the badge takes
- * near-black. As text on white it lands around 1.9:1, so the price steps down
- * to #b8860b (3.3:1, AA at display sizes) and every smaller accent run takes
- * #8a6508 (5.3:1). The wash and line alphas run higher than Zone A's because a
- * 6% gold tint on white is invisible where a 6% forest green tint is not.
+ * near-black. As text on white it lands around 1.9:1, so every accent run --
+ * the price included -- takes #8a6508. The wash and line alphas run higher
+ * than Zone A's because a 6% gold tint on white is invisible where a 6% forest
+ * green tint is not.
+ *
+ * That wash is why the price cannot use a lighter gold. It is not on white: it
+ * sits inside .zone-header, where a 12% #d4af37 tint over the #fffdf5 card
+ * resolves to #faf4de. #b8860b measures 3.25:1 on white but only 2.95:1 there,
+ * which fails even the 3:1 large-text threshold it was chosen against.
+ * #8a6508 holds 4.83:1 on the same wash, clearing AA for normal-size text and
+ * leaving the price legible if it is ever set smaller than the display size.
  */
 .zone-card-b {
   background-color: #fffdf5;
@@ -3342,7 +3372,7 @@ html.bw-open body {
   color: inherit;
 }
 .zone-card-b .zone-price {
-  color: #b8860b;
+  color: #8a6508;
 }
 .zone-card-b .zone-accent-text {
   color: #8a6508;

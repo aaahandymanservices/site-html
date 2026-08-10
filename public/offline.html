@@ -82,8 +82,13 @@
             outline-offset: 3px;
         }
 
-        .call { background: #16a34a; }
-        .call:hover { background: #15803d; }
+        /* Brand green, matching green-600/700 in tailwind.config.cjs. The
+           lighter #16a34a this used to carry is Tailwind's stock green-600, and
+           bold white on it measures 3.29:1 -- short of the 4.5:1 that 16px text
+           needs. #166534 holds 7.13:1 and matches the green buttons on the rest
+           of the site, which the crimson pair below already did. */
+        .call { background: #166534; }
+        .call:hover { background: #14532d; }
         .retry { background: #a61f2e; }
         .retry:hover { background: #7f1723; }
 

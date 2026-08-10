@@ -64,7 +64,7 @@
 // the stamp in the page's <link> cannot reach a visitor holding v12 -- they
 // would keep last deploy's stylesheet, where the cards render as plain white
 // with no accent borders or tints. Only this bump refetches it.
-const CACHE_VERSION = 'v14';
+const CACHE_VERSION = 'v15';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
