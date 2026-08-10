@@ -105,7 +105,7 @@
   // Canonical fee wording. Source of truth is /terms (Payment & Materials);
   // /rates and /book carry the same two sentences.
   var MATERIALS_FEE_COPY =
-    'Materials and hardware are billed separately at cost plus a 10–15% supply sourcing fee. Supply your own and there is no markup.';
+    'Materials and hardware are billed separately at cost plus a 20% supply sourcing fee. Supply your own and there is no markup.';
   var NON_CASH_FEE_COPY =
     'Cash, check, Zelle®, Venmo®, and Cash App accepted. A 5% processing fee applies to all non-cash payments.';
 

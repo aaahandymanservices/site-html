@@ -246,7 +246,7 @@
           "name": "How much does handyman service cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We use a Fair Upfront Pricing Model with a Minimum Service Call of $100 for Zone A (within 20 miles) or $145 for Zone B (outside 20 miles), which includes travel, diagnosis, and the first hour of labor. If the job goes beyond the first hour, continuous labor is billed in transparent quarter-hour increments at a flat rate of $70 per hour. All rates, packages, and flat-rate menu prices cover installation and service labor only. Hardware and materials are not included and are billed separately; you may supply them yourself at no markup, or we can source them with a standard 10-15% supply markup."
+            "text": "We use a Fair Upfront Pricing Model with a Minimum Service Call of $100 for Zone A (within 20 miles) or $145 for Zone B (outside 20 miles), which includes travel, diagnosis, and the first hour of labor. If the job goes beyond the first hour, continuous labor is billed in transparent quarter-hour increments at a flat rate of $70 per hour. All rates, packages, and flat-rate menu prices cover installation and service labor only. Hardware and materials are not included and are billed separately; you may supply them yourself at no markup, or we can source them with a standard 20% supply markup."
           }
         }
       ]
@@ -417,6 +417,85 @@
                 scroll-margin-top: 100px;
             }
         }
+        /* Filterable FAQ: each category is a native <details> group, so the
+           open/closed state, keyboard operation, and find-in-page all work
+           without JavaScript. Questions inside each group are also <details>,
+           so only the answers a visitor opens add to the scroll length. */
+        .faq-group {
+            border: 1px solid rgb(203 213 225 / .8);
+            border-radius: 1.5rem;
+            background: #fff;
+            overflow: hidden;
+            transition: border-color var(--dur, .2s) ease, box-shadow var(--dur, .2s) ease;
+        }
+        .faq-group[open] {
+            border-color: rgb(166 31 46 / .3);
+            box-shadow: 0 10px 30px -18px rgb(15 23 42 / .25);
+        }
+        .faq-group > summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            font-size: 1.125rem;
+            line-height: 1.4rem;
+            font-weight: 700;
+            color: #1b2a4a;
+            transition: color var(--dur, .2s) ease, background-color var(--dur, .2s) ease;
+        }
+        .faq-group > summary::-webkit-details-marker { display: none; }
+        .faq-group > summary:hover { background: #f9fafb; }
+        .faq-group > summary:focus-visible { outline: 3px solid #1b2a4a; outline-offset: -3px; }
+        .faq-group[open] > summary { color: #a61f2e; border-bottom: 1px solid rgb(226 232 240 / .9); }
+        .faq-group__heading { display: flex; align-items: center; gap: .75rem; }
+        .faq-group__count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 1.5rem;
+            height: 1.5rem;
+            padding: 0 .5rem;
+            border-radius: 9999px;
+            background: rgb(166 31 46 / .1);
+            color: #a61f2e;
+            font-size: .75rem;
+            font-weight: 700;
+        }
+        .faq-group__chevron { transition: transform var(--dur, .2s) ease; }
+        .faq-group[open] > summary .faq-group__chevron { transform: rotate(180deg); }
+        .faq-group__body { padding: 1rem 1.25rem 1.5rem; display: grid; gap: .75rem; }
+        .faq-item {
+            border: 1px solid rgb(226 232 240 / .9);
+            border-radius: 1rem;
+            background: #fff;
+            transition: border-color var(--dur, .2s) ease;
+        }
+        .faq-item[open] { border-color: rgb(166 31 46 / .25); }
+        .faq-item > summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+            line-height: 1.4rem;
+            font-weight: 700;
+            color: #1b2a4a;
+            transition: color var(--dur, .2s) ease;
+        }
+        .faq-item > summary::-webkit-details-marker { display: none; }
+        .faq-item > summary:hover { color: #a61f2e; }
+        .faq-item > summary:focus-visible { outline: 3px solid #1b2a4a; outline-offset: -3px; }
+        .faq-item__chevron { transition: transform var(--dur, .2s) ease; color: #a61f2e; }
+        .faq-item[open] > summary .faq-item__chevron { transform: rotate(180deg); }
+        .faq-item__answer { padding: 0 1.25rem 1.25rem; color: #4b5563; font-size: .875rem; line-height: 1.7; }
+        .faq-item__answer a { color: #a61f2e; font-weight: 700; text-decoration: none; }
+        .faq-item__answer a:hover { text-decoration: underline; }
         @media (prefers-reduced-motion: reduce) {
             .flash-siren,
             .flash-siren::after,
@@ -881,7 +960,7 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-center text-xs sm:text-sm text-slate-600 mt-8 max-w-2xl mx-auto font-medium">Packages cover general labor list items and are billed at booking. Prices shown are Zone A (within 20 miles); Zone B (20+ miles) adds our standard $45 extended-travel differential. <strong>Package rates cover installation and service labor only — hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Prefer we shop for you? We source parts for our standard 10–15% supply fee.</p>
+                    <p class="text-center text-xs sm:text-sm text-slate-600 mt-8 max-w-2xl mx-auto font-medium">Packages cover general labor list items and are billed at booking. Prices shown are Zone A (within 20 miles); Zone B (20+ miles) adds our standard $45 extended-travel differential. <strong>Package rates cover installation and service labor only — hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Prefer we shop for you? We source parts for our standard 20% supply fee.</p>
                 </div>
                 <!-- Tab Panel 2: Popular Themed Bundles -->
                 <div id="themed-packages" role="tabpanel" aria-labelledby="tab-btn-themed" class="pricing-panel scroll-mt-24 hidden">
@@ -956,7 +1035,7 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-center text-xs sm:text-sm text-slate-600 mt-8 max-w-2xl mx-auto font-medium"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> Bundle rates cover installation and service labor only. <strong>Hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Prefer we shop for you? We source parts for our standard 10–15% supply fee.</p>
+                    <p class="text-center text-xs sm:text-sm text-slate-600 mt-8 max-w-2xl mx-auto font-medium"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> Bundle rates cover installation and service labor only. <strong>Hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Prefer we shop for you? We source parts for our standard 20% supply fee.</p>
                 </div>
                 <!-- Tab Panel 3: Upfront Pricing Menu (Flat-Rates) -->
                 <div id="flat-rates" role="tabpanel" aria-labelledby="tab-btn-flat" class="pricing-panel scroll-mt-24 hidden">
@@ -1022,7 +1101,7 @@
                         </div>
                     </div>
                     <div class="text-center mt-8">
-                        <p class="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto font-medium mb-5"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> Flat rates cover installation and service labor only. <strong>Hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Prefer we shop for you? We source parts for our standard 10–15% supply fee.</p>
+                        <p class="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto font-medium mb-5"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> Flat rates cover installation and service labor only. <strong>Hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Prefer we shop for you? We source parts for our standard 20% supply fee.</p>
                         <a href="/rates" class="inline-flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 text-white font-semibold px-6 py-3.5 rounded-xl transition shadow-lg hover:shadow-green-700/30">
                             View Complete Flat-Rate Menus <i class="fas fa-receipt" aria-hidden="true"></i>
                         </a>
@@ -1397,37 +1476,77 @@
             <div class="text-center mb-10 sm:mb-14">
                 <div class="uppercase text-red-600 font-semibold tracking-widest text-sm sm:text-base">Local Handyman Questions</div>
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">AAA Handyman Services LLC FAQ</h2>
-                <p class="mt-4 text-base sm:text-lg text-gray-600">Got questions about our services, flat rates, audits, menus, packages, or coverage? Find clear, direct answers below.</p>
+                <p class="mt-4 text-base sm:text-lg text-gray-600">Got questions about our services, flat rates, audits, menus, packages, or coverage? Browse the category that matches, then tap any question to open its answer.</p>
             </div>
-            <div class="grid md:grid-cols-2 gap-6">
-                <article class="service-card bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm hover:border-red-600/30 transition flex flex-col">
-                    <h3 class="text-xl font-bold text-blue-900 mb-3"><i class="fas fa-hammer text-red-600 mr-2" aria-hidden="true"></i>What is AAA Handyman Services LLC?</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">AAA Handyman Services LLC is a professional local handyman company specializing in reliable home repairs, maintenance, punch lists, and minor updates. Under Victor Hale's ownership, we serve homeowners across Oakland County, Michigan. We guarantee high-quality and transparently priced craftsmanship.</p>
-                </article>
-                <article class="service-card bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm hover:border-red-600/30 transition flex flex-col">
-                    <h3 class="text-xl font-bold text-blue-900 mb-3"><i class="fas fa-dollar-sign text-red-600 mr-2" aria-hidden="true"></i>How do your standard hourly rates work?</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">We use a Fair Upfront Pricing Model with zero hidden fees. Your visit begins with a Minimum Service Call of $100 for Zone A (within 20 miles) or $145 for Zone B (20+ miles), covering travel, diagnosis, and the first hour of labor. Any continuous labor after the first hour is billed in transparent 15-minute increments at a flat rate of $70 per hour. Our labor rates cover installation and service only — hardware and materials are not included. They are billed separately at a standard 10–15% supply markup, or you can supply them yourself at zero markup!</p>
-                </article>
-                <article class="service-card bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm hover:border-red-600/30 transition flex flex-col">
-                    <h3 class="text-xl font-bold text-blue-900 mb-3"><i class="fas fa-list-check text-red-600 mr-2" aria-hidden="true"></i>Do you offer flat-rate pricing menus?</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Yes! For common, straightforward repairs, we provide flat-rate menu items. This gives you absolute certainty over costs before we even begin. Flat-rate items include straightforward installations (like deadbolts, faucets, ceiling fans, or smart doorbells), drywall patches, TV mounting, and gutter cleanings. Every flat rate covers the installation or service labor only — hardware and materials are not included and are billed separately, unless you supply them yourself. Check our full <a href="/rates" class="text-red-600 font-bold hover:underline">Rates page</a> for a detailed pricing menu.</p>
-                </article>
-                <article class="service-card bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm hover:border-red-600/30 transition flex flex-col">
-                    <h3 class="text-xl font-bold text-blue-900 mb-3"><i class="fas fa-clipboard-check text-red-600 mr-2" aria-hidden="true"></i>What are your specialized audits?</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">We offer three high-value specialized audits designed to inspect, diagnose, and secure your home:
-                    <br><strong class="text-blue-900">1. Home Safety Audit ($100):</strong> Fall prevention, detector checks, trip hazards, and entry security.
-                    <br><strong class="text-blue-900">2. Energy Tune-Up Audit ($100):</strong> Detect and seal minor on-the-spot drafts or air leaks.
-                    <br><strong class="text-blue-900">3. Storm-Prep Check ($100):</strong> Exterior caulk seals, drainage, and gutter inspection.
-                    <br><em class="text-xs text-gray-600">Note: Audit fees are credited toward same-day repairs over $250.</em></p>
-                </article>
-                <article class="service-card bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm hover:border-red-600/30 transition flex flex-col">
-                    <h3 class="text-xl font-bold text-blue-900 mb-3"><i class="fas fa-box text-red-600 mr-2" aria-hidden="true"></i>Do you offer service packages and add-ons?</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">We do! Our 4-hour and 6-hour Handyman Time Packages help homeowners knock out a punch list in one scheduled visit. We also offer service add-ons such as dryer vent cleaning, smart lock setup, and smoke detector battery replacement that can be added to a standard service call.</p>
-                </article>
-                <article class="service-card bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm hover:border-red-600/30 transition flex flex-col">
-                    <h3 class="text-xl font-bold text-blue-900 mb-3"><i class="fas fa-map-location-dot text-red-600 mr-2" aria-hidden="true"></i>What are your service areas?</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">We are based in Waterford, Michigan, and serve homeowners across Oakland County. Our service area is divided into Zone A (Standard — within 20 miles) and Zone B (Extended — 20+ miles). <a href="#travel-zones" class="text-red-600 font-bold hover:underline">View our full coverage breakdown and interactive ZIP code checker above</a>.</p>
-                </article>
+            <div class="space-y-4" id="faq-groups">
+                <details class="faq-group" open>
+                    <summary>
+                        <span class="faq-group__heading"><i class="fas fa-dollar-sign text-red-600" aria-hidden="true"></i>Pricing</span>
+                        <span class="flex items-center gap-3"><span class="faq-group__count">2</span><i class="faq-group__chevron fas fa-chevron-down text-red-600" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="faq-group__body">
+                        <details class="faq-item" open>
+                            <summary>
+                                <span>How do your standard hourly rates work?</span>
+                                <i class="faq-item__chevron fas fa-chevron-down text-sm shrink-0" aria-hidden="true"></i>
+                            </summary>
+                            <div class="faq-item__answer">We use a Fair Upfront Pricing Model with zero hidden fees. Your visit begins with a Minimum Service Call of $100 for Zone A (within 20 miles) or $145 for Zone B (20+ miles), covering travel, diagnosis, and the first hour of labor. Any continuous labor after the first hour is billed in transparent 15-minute increments at a flat rate of $70 per hour. Our labor rates cover installation and service only — hardware and materials are not included. They are billed separately at a standard 20% supply markup, or you can supply them yourself at zero markup!</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>
+                                <span>Do you offer flat-rate pricing menus?</span>
+                                <i class="faq-item__chevron fas fa-chevron-down text-sm shrink-0" aria-hidden="true"></i>
+                            </summary>
+                            <div class="faq-item__answer">Yes! For common, straightforward repairs, we provide flat-rate menu items. This gives you absolute certainty over costs before we even begin. Flat-rate items include straightforward installations (like deadbolts, faucets, ceiling fans, or smart doorbells), drywall patches, TV mounting, and gutter cleanings. Every flat rate covers the installation or service labor only — hardware and materials are not included and are billed separately, unless you supply them yourself. Check our full <a href="/rates">Rates page</a> for a detailed pricing menu.</div>
+                        </details>
+                    </div>
+                </details>
+
+                <details class="faq-group">
+                    <summary>
+                        <span class="faq-group__heading"><i class="fas fa-hammer text-red-600" aria-hidden="true"></i>Services</span>
+                        <span class="flex items-center gap-3"><span class="faq-group__count">3</span><i class="faq-group__chevron fas fa-chevron-down text-red-600" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="faq-group__body">
+                        <details class="faq-item" open>
+                            <summary>
+                                <span>What is AAA Handyman Services LLC?</span>
+                                <i class="faq-item__chevron fas fa-chevron-down text-sm shrink-0" aria-hidden="true"></i>
+                            </summary>
+                            <div class="faq-item__answer">AAA Handyman Services LLC is a professional local handyman company specializing in reliable home repairs, maintenance, punch lists, and minor updates. Under Victor Hale's ownership, we serve homeowners across Oakland County, Michigan. We guarantee high-quality and transparently priced craftsmanship.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>
+                                <span>What are your specialized audits?</span>
+                                <i class="faq-item__chevron fas fa-chevron-down text-sm shrink-0" aria-hidden="true"></i>
+                            </summary>
+                            <div class="faq-item__answer">We offer three high-value specialized audits designed to inspect, diagnose, and secure your home:<br><strong class="text-blue-900">1. Home Safety Audit ($100):</strong> Fall prevention, detector checks, trip hazards, and entry security.<br><strong class="text-blue-900">2. Energy Tune-Up Audit ($100):</strong> Detect and seal minor on-the-spot drafts or air leaks.<br><strong class="text-blue-900">3. Storm-Prep Check ($100):</strong> Exterior caulk seals, drainage, and gutter inspection.<br><em class="text-xs text-gray-600">Note: Audit fees are credited toward same-day repairs over $250.</em></div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>
+                                <span>Do you offer service packages and add-ons?</span>
+                                <i class="faq-item__chevron fas fa-chevron-down text-sm shrink-0" aria-hidden="true"></i>
+                            </summary>
+                            <div class="faq-item__answer">We do! Our 4-hour and 6-hour Handyman Time Packages help homeowners knock out a punch list in one scheduled visit. We also offer service add-ons such as dryer vent cleaning, smart lock setup, and smoke detector battery replacement that can be added to a standard service call.</div>
+                        </details>
+                    </div>
+                </details>
+
+                <details class="faq-group">
+                    <summary>
+                        <span class="faq-group__heading"><i class="fas fa-map-location-dot text-red-600" aria-hidden="true"></i>Coverage</span>
+                        <span class="flex items-center gap-3"><span class="faq-group__count">1</span><i class="faq-group__chevron fas fa-chevron-down text-red-600" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="faq-group__body">
+                        <details class="faq-item" open>
+                            <summary>
+                                <span>What are your service areas?</span>
+                                <i class="faq-item__chevron fas fa-chevron-down text-sm shrink-0" aria-hidden="true"></i>
+                            </summary>
+                            <div class="faq-item__answer">We are based in Waterford, Michigan, and serve homeowners across Oakland County. Our service area is divided into Zone A (Standard — within 20 miles) and Zone B (Extended — 20+ miles). <a href="#travel-zones">View our full coverage breakdown and interactive ZIP code checker above</a>.</div>
+                        </details>
+                    </div>
+                </details>
             </div>
         </div>
     </section>
@@ -1606,7 +1725,7 @@
                         <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0" aria-hidden="true"></i> Members book at a discounted hourly labor rate on any additional service call or project.</li>
                         <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0" aria-hidden="true"></i> Priority scheduling — members go to the front of the calendar, including seasonal rushes.</li>
                         <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0" aria-hidden="true"></i> The standard trip charge is waived within Zone A on covered visits.</li>
-                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0" aria-hidden="true"></i> Materials stay at our everyday pricing — supply your own at no markup, or we source them at our standard 10–15% supply fee.</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0" aria-hidden="true"></i> Materials stay at our everyday pricing — supply your own at no markup, or we source them at our standard 20% supply fee.</li>
                     </ul>
                 </section>
                 <section class="border-t border-gray-100 pt-5">

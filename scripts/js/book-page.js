@@ -775,7 +775,7 @@
 
       const note = document.createElement('p');
       note.className = 'mt-3 text-[11px] leading-relaxed text-gray-500';
-      note.textContent = 'Labor only. Hardware and materials are billed separately with a 10–15% supply fee, or supply your own at no markup. Nothing is charged today — Victor confirms the final price with you before any work begins. ';
+      note.textContent = 'Labor only. Hardware and materials are billed separately with a 20% supply fee, or supply your own at no markup. Nothing is charged today — Victor confirms the final price with you before any work begins. ';
 
       const rateLink = document.createElement('a');
       rateLink.href = '/rates';
