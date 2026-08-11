@@ -1865,7 +1865,8 @@
     <script>
 
         (function () {
-            var siteNav = document.getElementById('site-nav');
+            var siteNav = document.getElementById('site-header');
+            var mobileMenu = document.getElementById('mobile-menu');
             var sectionNav = document.getElementById('section-nav');
             var links = Array.prototype.slice.call(document.querySelectorAll('.section-nav-link'));
             if (!sectionNav || !links.length) return;
@@ -1877,12 +1878,18 @@
 
             function metrics() {
                 var navH = siteNav ? siteNav.getBoundingClientRect().height : 0;
+                /* The mobile drawer lives inside the sticky header. It overlays the
+                   page while open, so it must not push the sub-menu down. */
+                if (navH && mobileMenu && !mobileMenu.hidden) {
+                    navH -= mobileMenu.getBoundingClientRect().height;
+                }
                 var secH = sectionNav.getBoundingClientRect().height;
                 return { navH: navH, total: navH + secH };
             }
             function updateOffsets() {
                 var m = metrics();
-                sectionNav.style.top = m.navH + 'px';
+                /* Fall back to the stylesheet's --nav-offset if the header is missing. */
+                if (m.navH) sectionNav.style.top = m.navH + 'px';
                 document.documentElement.style.setProperty('--sticky-offset', (m.total + 16) + 'px');
             }
 
@@ -1920,6 +1927,12 @@
             window.addEventListener('scroll', onScroll, { passive: true });
             window.addEventListener('resize', function () { updateOffsets(); onScroll(); });
             window.addEventListener('load', function () { updateOffsets(); onScroll(); });
+            /* Header height also shifts when webfonts land or the brand text wraps. */
+            if (window.ResizeObserver) {
+                var ro = new ResizeObserver(function () { updateOffsets(); onScroll(); });
+                if (siteNav) ro.observe(siteNav);
+                ro.observe(sectionNav);
+            }
         })();
     </script>
 
