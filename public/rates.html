@@ -383,6 +383,23 @@
             </div>
         </header>
 
+        <!-- Single prominent base-rate formula banner -->
+        <section id="base-rate-formula" class="bg-red-600 text-white">
+            <div class="max-w-7xl mx-auto px-6 py-5 sm:py-6">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3 sm:gap-6 text-center sm:text-left">
+                    <div class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-bold text-red-100 whitespace-nowrap justify-center">
+                        <i class="fas fa-calculator" aria-hidden="true"></i> Our Pricing Formula
+                    </div>
+                    <p class="text-base sm:text-lg font-semibold leading-snug">
+                        <span class="font-black text-white">$100 service call</span> for Zone A &mdash; travel, diagnosis & your first hour included.
+                        <span class="font-black text-white">$70/hour</span> after that, billed in 15-minute increments.
+                        <span class="block sm:inline mt-1 sm:mt-0 sm:ml-2 text-red-100">Zone B adds a flat <span class="font-black text-white">$45</span> extended-travel differential.</span>
+                    </p>
+                </div>
+                <p class="text-center text-xs text-red-100 mt-2 sm:mt-1">Every price on this page is built from this one formula. Labor only &mdash; hardware & materials billed separately.</p>
+            </div>
+        </section>
+
         <section id="rates" class="py-12 sm:py-16 bg-white">
             <div class="max-w-5xl mx-auto px-6">
                 <div class="grid lg:grid-cols-[1.35fr_.65fr] gap-6 items-stretch">
@@ -441,12 +458,15 @@
 
                 <span id="flat-rate" class="nav-anchor-alias" aria-hidden="true"></span>
                 <div id="flat-rate-menu" class="mt-16 bg-gray-50 border-[2px] border-red-600 rounded-3xl p-8 sm:p-12 max-w-5xl mx-auto shadow-lg">
-                    <div class="text-center mb-8">
-                        <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">No Clock-Watching Anxiety</span>
-                        <h2 class="text-2xl sm:text-3xl font-black text-gray-950 mt-3">The💲Flat-Rate Menu</h2>
-                        <p class="text-gray-600 mt-2 max-w-2xl mx-auto">For the most common, repetitive tasks, you can bypass hourly estimates entirely. We provide standard fixed prices for both Zone A and Zone B, so you know exactly what you will pay upfront. Every price below is for installation and service labor only &mdash; hardware and materials are not included.</p>
-                        <p class="text-sm text-gray-700 mt-4 max-w-2xl mx-auto bg-white border border-gray-200 rounded-2xl p-4"><i class="fas fa-calculator text-red-600 mr-1" aria-hidden="true"></i> <strong>How every menu price is calculated:</strong> we budget the typical labor time for the task, then price it straight off our published rate &mdash; <strong>$100 service call</strong> (travel, diagnosis, and the first hour) <strong>+ $70 per additional hour</strong>. So 1 hour is $100, 1.5 hours is $135, 2 hours is $170, 2.5 hours is $205, and 3 hours is $240. Zone B is the same labor math plus our flat <strong>$45</strong> extended-travel differential. No materials, hardware, or parts are built into any of these numbers.</p>
-                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-gray-950 text-center">
+                        <button type="button" data-accordion-toggle aria-expanded="true" aria-controls="flat-rate-body" class="aaa-accordion-trigger w-full flex items-center justify-center gap-3 text-2xl sm:text-3xl font-black text-gray-950 py-2 px-2 rounded-2xl hover:bg-red-50 transition min-h-[44px]">
+                            <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full align-middle">No Clock-Watching</span>
+                            <span>The Flat-Rate Menu</span>
+                            <i class="fas fa-chevron-down aaa-accordion-icon text-red-600 transition-transform" aria-hidden="true"></i>
+                        </button>
+                    </h2>
+                    <p class="text-gray-600 mt-2 max-w-2xl mx-auto text-center">For the most common, repetitive tasks, you can bypass hourly estimates entirely. We provide standard fixed prices for both Zone A and Zone B, so you know exactly what you will pay upfront. Every price below is for installation and service labor only &mdash; hardware and materials are not included.</p>
+                    <div id="flat-rate-body" data-accordion-body class="aaa-accordion-body">
                     <div class="space-y-10">
 
                         <div>
@@ -1027,6 +1047,7 @@
                             </div>
                         </div>
                     </div>
+                    </div>
                 </div>
 
                 <div class="mt-12 text-center text-sm text-gray-500 max-w-xl mx-auto">
@@ -1062,7 +1083,7 @@
                 <div class="text-center max-w-3xl mx-auto mb-12">
                     <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Book a Visit, Not a Guess</span>
                     <h2 class="text-3xl sm:text-4xl font-black text-gray-950 mt-4">Flat-Fee Home Audits</h2>
-                    <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">Not sure where to start? Book a flat-fee audit and put a trained craftsman's eyes on your home. Each audit is one hour on site, priced at our standard Zone A service-call rate &mdash; a focused, hands-on inspection that ends with a <strong>same-day punch-list</strong>, every recommended fix written down with its own line-item price, so you can approve exactly what you want on the spot. The audit fee is <strong>credited back</strong> toward any same-day repairs over $250.</p>
+                    <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">Not sure where to start? Book a flat-fee audit and put a trained craftsman's eyes on your home. Each audit is one hour on site at our standard Zone A service-call rate &mdash; a focused, hands-on inspection that ends with a <strong>same-day punch-list</strong>, every recommended fix written down with its own line-item price, so you can approve exactly what you want on the spot. The audit fee is <strong>credited back</strong> toward any same-day repairs over $250.</p>
                 </div>
 
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
