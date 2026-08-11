@@ -12,6 +12,7 @@
 /service-areas /service-areas.html 200
 /contact    /contact.html    200
 /customer-care /customer-care.html 200
+/pricing-policy /pricing-policy.html 200
 
 /handyman/  /service-areas   301!
 /handyman/* /handyman/:splat.html 200
