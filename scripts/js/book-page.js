@@ -612,8 +612,9 @@
    * Every number here is the published rate: a $100 Zone A service call that
    * covers travel, diagnosis, and the first hour, $70 for each hour after that
    * in 15-minute increments, and a flat $45 more in Zone B (20+ miles). The
-   * packages are those same hours less their published discount, so the panel
-   * can show the arithmetic rather than a number the customer has to trust.
+   * packages are those same hours less their package discount, shown as a dollar
+   * amount so the panel can show the arithmetic rather than a number the
+   * customer has to trust.
    */
   const SERVICE_CALL = 100;
   const HOURLY_RATE = 70;
@@ -631,11 +632,11 @@
       'Minor Repair & Upkeep (1 Hour)': { hours: 1 },
       'Fixture or Outlet Replacement (1.5 Hours)': { hours: 1.5 },
       'Carpentry & Installation (2 Hours)': { hours: 2 },
-      '4-Hour Handyman Package': { hours: 4, price: 279, discount: '10%' },
-      '6-Hour Handyman Package': { hours: 6, price: 383, discount: '15%' },
-      'Seasonal Prep Package': { hours: 4.5, price: 293, discount: '15%' },
-      'Move-In / Move-Out Bundle': { hours: 5, price: 323, discount: '15%' },
-      'Senior Safety & Accessibility Package': { hours: 4, price: 279, discount: '10%' },
+      '4-Hour Handyman Package': { hours: 4, price: 279 },
+      '6-Hour Handyman Package': { hours: 6, price: 383 },
+      'Seasonal Prep Package': { hours: 4.5, price: 293 },
+      'Move-In / Move-Out Bundle': { hours: 5, price: 323 },
+      'Senior Safety & Accessibility Package': { hours: 4, price: 279 },
       'Maintenance Membership': { membership: true },
       'General Estimate / Quote': { quote: true }
   };
@@ -699,7 +700,7 @@
               caption: `${plural(entry.hours)} of reserved labor, ${money(standard - entry.price)} below the standard rate`,
               rows: [
                   [hoursLabel, money(standard)],
-                  [`Package discount (${entry.discount})`, `−${money(standard - entry.price)}`],
+                  ['Package discount', `−${money(standard - entry.price)}`],
                   ['Zone B (20+ miles)', money(entry.price + ZONE_B_DIFFERENTIAL)]
               ]
           };

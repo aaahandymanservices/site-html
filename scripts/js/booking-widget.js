@@ -51,7 +51,7 @@
       icon: 'fa-leaf',
       hours: 4.5,
       price: 293,
-      discount: '15%',
+      discount: '10%',
       blurb: 'Gutter clean, weatherstripping, window sash checks, and a deck inspection.'
     },
     {
@@ -60,7 +60,7 @@
       icon: 'fa-boxes-packing',
       hours: 5,
       price: 323,
-      discount: '15%',
+      discount: '10%',
       blurb: 'TV mounting, wall patching, paint touch-ups, and lock upgrades.'
     },
     {
@@ -331,7 +331,7 @@
     '        <h3 class="bw-pane__title">What do you need done?</h3>',
     '        <p class="bw-pane__hint">Pick the closest match. Each one shows the visit length we normally block out, so you can see the time slot before you choose a day.</p>',
     '        <div class="bw-grid" data-bw-categories></div>',
-    '        <h4 class="bw-subhead">Bundled savings <span class="bw-chip bw-chip--save">10–15% off labor</span></h4>',
+    '        <h4 class="bw-subhead">Bundled savings <span class="bw-chip bw-chip--save">10% off labor</span></h4>',
     '        <div class="bw-grid" data-bw-bundles></div>',
     '        <div data-bw-quote class="mt-3"></div>',
     '      </section>',
