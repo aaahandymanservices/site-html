@@ -16,6 +16,7 @@ const STATIC_NAV_PAGES = [
   { path: 'public/careers.html', active: 'careers' },
   { path: 'public/contact.html', active: 'contact' },
   { path: 'public/customer-care.html', active: 'none' },
+  { path: 'public/pricing-policy.html', active: 'none' },
   { path: 'public/book.html', active: 'none' },
   { path: 'public/privacy.html', active: 'none' },
   { path: 'public/terms.html', active: 'none' },
