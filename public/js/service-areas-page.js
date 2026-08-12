@@ -176,18 +176,81 @@
   }
 
   // ---- Interactive zone map ----
-  // Oakland County pin coordinates inside a 640x560 viewBox (matches the reviews-page map
-  // geometry so the two pages read consistently). Zone A vs B colouring follows the city list.
-  var MAP_PINS = [
-    { name: "Waterford", x: 298, y: 282, zone: "A" },
-    { name: "Troy", x: 507, y: 344, zone: "A" },
-    { name: "Rochester Hills", x: 507, y: 287, zone: "A" },
-    { name: "Royal Oak", x: 513, y: 458, zone: "B" },
-    { name: "Birmingham", x: 453, y: 405, zone: "A" },
-    { name: "Clarkston", x: 278, y: 205, zone: "A" },
-    { name: "Farmington Hills", x: 320, y: 453, zone: "A" },
-    { name: "Southfield", x: 446, y: 484, zone: "B" }
+  // Centralized dataset of every Oakland County city we serve, mapped to its
+  // pricing zone + GPS coordinates. Waterford is the HQ. The map projects these
+  // lat/lng values onto the 640x560 SVG viewBox used by the page's zone art so
+  // every city gets a clickable marker instead of only a handful of hubs.
+  var SERVICE_AREA_CITIES = [
+    // --- ZONE A ($100 Minimum) ---
+    { name: "Waterford", zone: "A", lat: 42.6656, lng: -83.4005, hq: true },
+    { name: "Pontiac", zone: "A", lat: 42.6389, lng: -83.2910 },
+    { name: "West Bloomfield", zone: "A", lat: 42.5642, lng: -83.3591 },
+    { name: "Orchard Lake", zone: "A", lat: 42.5831, lng: -83.3577 },
+    { name: "Bloomfield Hills", zone: "A", lat: 42.5836, lng: -83.2455 },
+    { name: "White Lake", zone: "A", lat: 42.6534, lng: -83.5133 },
+    { name: "Commerce", zone: "A", lat: 42.5867, lng: -83.4897 },
+    { name: "Walled Lake", zone: "A", lat: 42.5375, lng: -83.4838 },
+    { name: "Wixom", zone: "A", lat: 42.5245, lng: -83.5363 },
+    { name: "Union Lake", zone: "A", lat: 42.6178, lng: -83.4380 },
+    { name: "Davisburg", zone: "A", lat: 42.7534, lng: -83.5349 },
+    { name: "Clarkston", zone: "A", lat: 42.7356, lng: -83.4183 },
+    { name: "Independence Twp.", zone: "A", lat: 42.7481, lng: -83.4038 },
+    { name: "Auburn Hills", zone: "A", lat: 42.6875, lng: -83.2341 },
+    { name: "Oakland Twp.", zone: "A", lat: 42.7661, lng: -83.1613 },
+    { name: "Utica", zone: "A", lat: 42.6273, lng: -83.0299 },
+    { name: "Oxford", zone: "A", lat: 42.8242, lng: -83.2499 },
+    { name: "Lake Orion", zone: "A", lat: 42.7842, lng: -83.2399 },
+    { name: "Orion Twp.", zone: "A", lat: 42.7711, lng: -83.2560 },
+    { name: "Rochester", zone: "A", lat: 42.6806, lng: -83.1338 },
+    { name: "Rochester Hills", zone: "A", lat: 42.6584, lng: -83.1499 },
+    { name: "Troy", zone: "A", lat: 42.5803, lng: -83.1499 },
+    { name: "Berkley", zone: "A", lat: 42.5031, lng: -83.1838 },
+    { name: "Pleasant Ridge", zone: "A", lat: 42.4711, lng: -83.1408 },
+    { name: "Birmingham", zone: "A", lat: 42.5467, lng: -83.2113 },
+    { name: "Franklin", zone: "A", lat: 42.5223, lng: -83.3038 },
+    { name: "Beverly Hills", zone: "A", lat: 42.5250, lng: -83.2388 },
+    { name: "Clawson", zone: "A", lat: 42.5334, lng: -83.1463 },
+    { name: "Madison Heights", zone: "A", lat: 42.4859, lng: -83.1052 },
+    { name: "Hazel Park", zone: "A", lat: 42.4631, lng: -83.1022 },
+    { name: "Oak Park", zone: "A", lat: 42.4595, lng: -83.1819 },
+    { name: "Ferndale", zone: "A", lat: 42.4606, lng: -83.1346 },
+    { name: "Farmington Hills", zone: "A", lat: 42.4853, lng: -83.3772 },
+    { name: "Novi", zone: "A", lat: 42.4806, lng: -83.4755 },
+    { name: "Milford", zone: "A", lat: 42.5861, lng: -83.5999 },
+    { name: "Highland", zone: "A", lat: 42.6389, lng: -83.6180 },
+    // --- ZONE B ($145 Minimum) ---
+    { name: "Holly", zone: "B", lat: 42.7919, lng: -83.6272 },
+    { name: "Groveland Twp.", zone: "B", lat: 42.8253, lng: -83.5383 },
+    { name: "Ortonville", zone: "B", lat: 42.8531, lng: -83.4430 },
+    { name: "Brandon Twp.", zone: "B", lat: 42.8464, lng: -83.4219 },
+    { name: "Leonard", zone: "B", lat: 42.8647, lng: -83.1444 },
+    { name: "Addison Twp.", zone: "B", lat: 42.8525, lng: -83.1205 },
+    { name: "Royal Oak", zone: "B", lat: 42.4895, lng: -83.1446 },
+    { name: "Huntington Woods", zone: "B", lat: 42.4764, lng: -83.1633 },
+    { name: "Southfield", zone: "B", lat: 42.4734, lng: -83.2219 },
+    { name: "South Lyon", zone: "B", lat: 42.4606, lng: -83.6519 },
+    { name: "Lyon Twp.", zone: "B", lat: 42.4981, lng: -83.6238 }
   ];
+
+  // Dimensions of the zone-map SVG viewBox.
+  var MAP_W = 640, MAP_H = 560;
+
+  // Project lat/lng onto the map viewBox. Coefficients come from a least-squares
+  // fit against the original hand-placed pin coordinates so the GPS-based markers
+  // line up with the existing zone rings + roads, then clamped into the visible
+  // county rectangle so no city bleeds off the canvas.
+  function project(lat, lng) {
+    var x = 799.05 * lng + 66961.55;
+    var y = -1023.6 * lat + 43945.1;
+    return {
+      x: Math.max(48, Math.min(592, x)),
+      y: Math.max(36, Math.min(522, y))
+    };
+  }
+
+  function pinId(name) {
+    return "zone-map-pin-" + name.replace(/[^a-z0-9]+/gi, "-").toLowerCase();
+  }
 
   function initMap() {
     var map = document.getElementById("zone-map");
@@ -197,53 +260,250 @@
     popup.setAttribute("role", "dialog");
     popup.setAttribute("aria-label", "City service details");
 
-    var activePin = null;
+    // ---- Portal the popup out of the clipped map subtree ----
+    // The map sits inside `.zone-map { overflow: hidden }` which itself sits inside
+    // a `rounded-3xl overflow-hidden` wrapper, so any descendant (no matter how
+    // high its z-index) is clipped to the map canvas and cut off at the edges.
+    // Moving the popup to document.body places it in the root stacking context
+    // with no overflow:hidden ancestor, so it can overflow the map freely and
+    // sit above page chrome via z-index. Position is then computed in viewport
+    // coordinates (position: fixed) from the trigger's getBoundingClientRect().
+    document.body.appendChild(popup);
 
-    function showPopup(pin) {
-      activePin = pin;
-      MAP_PINS.forEach(function (p) {
-        var el = document.querySelector('#zone-map-pin-' + p.name.replace(/[^a-z0-9]+/gi, "-").toLowerCase());
-        if (el) el.classList.toggle("is-active", p === pin);
-      });
-      var z = ZONES[pin.zone];
-      var citySlug = pin.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    var activePin = null;
+    var activeAnchor = null; // element the popup is currently anchored to (pin/cluster)
+    var pinModels = SERVICE_AREA_CITIES.map(function (c) {
+      var p = project(c.lat, c.lng);
+      return { name: c.name, zone: c.zone, hq: !!c.hq, x: p.x, y: p.y, id: pinId(c.name), element: null };
+    });
+    var clusterElements = [];
+
+    // Cluster layer holds the count bubbles that replace overlapping pins on
+    // small viewports. It sits above the pins so taps always hit a cluster.
+    var clusterLayer = document.createElement("div");
+    clusterLayer.className = "zone-map__clusters";
+    pinLayer.appendChild(clusterLayer);
+
+    function createPinElement(m) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.id = m.id;
+      var cls = "zone-map__pin";
+      if (m.zone === "B") cls += " is-zone-b";
+      if (m.hq) cls += " is-hq";
+      btn.className = cls;
+      btn.style.left = (m.x / MAP_W * 100) + "%";
+      btn.style.top = (m.y / MAP_H * 100) + "%";
+      var z = ZONES[m.zone];
+      btn.setAttribute("aria-label", m.name + ", MI — " + z.label + ", minimum " + z.rate);
+      if (m.hq) {
+        btn.innerHTML = '<i class="fas fa-star" aria-hidden="true"></i><span class="zone-map__hq-label">HQ</span>';
+      } else {
+        btn.textContent = m.name.charAt(0);
+      }
+      btn.addEventListener("click", function (e) { e.stopPropagation(); showCityPopup(m); });
+      btn.addEventListener("focus", function () { showCityPopup(m); });
+      return btn;
+    }
+
+    function showCityPopup(m) {
+      activePin = m;
+      activeAnchor = m.element;
+      pinModels.forEach(function (p) { if (p.element) p.element.classList.toggle("is-active", p === m); });
+      clusterElements.forEach(function (el) { el.classList.remove("is-active"); });
+      var z = ZONES[m.zone];
+      var min = m.zone === "A" ? "100" : "145";
       popup.innerHTML =
         '<button type="button" class="zmp-close" aria-label="Close">' + esc("×") + '</button>' +
-        '<h4>' + esc(pin.name) + ', MI</h4>' +
-        '<span class="zmp-zone ' + (pin.zone === "A" ? "is-a" : "is-b") + '">' + esc(z.label) + '</span>' +
-        '<div class="zmp-rate">Minimum service call: ' + esc(z.rate) + ' (' + esc(z.blurb) + ')</div>' +
-        '<a class="zmp-book" href="/book?city=' + encodeURIComponent(pin.name) + '">' +
-        '<i class="fas fa-calendar-check" aria-hidden="true"></i> Book Service in ' + esc(pin.name) + '</a>';
-      // Position popup relative to pin (% of map).
-      var rect = map.getBoundingClientRect();
-      var pinRect = pin.element.getBoundingClientRect();
-      var px = (pinRect.left - rect.left + pinRect.width / 2) / rect.width * 100;
-      var py = (pinRect.top - rect.top + pinRect.height / 2) / rect.height * 100;
-      popup.style.left = px + "%";
-      popup.style.top = py + "%";
+        '<h4>' + esc(m.name) + ', MI</h4>' +
+        '<span class="zmp-zone ' + (m.zone === "A" ? "is-a" : "is-b") + '">' + esc(z.label) + '</span>' +
+        '<div class="zmp-rate">Pricing tier: ' + esc(z.label) + " ($" + min + " Minimum Service Call)" + '</div>' +
+        '<div class="zmp-blurb">' + esc(z.blurb) + '</div>' +
+        '<a class="zmp-book" href="/book?city=' + encodeURIComponent(m.name) + '">' +
+        '<i class="fas fa-calendar-check" aria-hidden="true"></i> Book Service in ' + esc(m.name) + '</a>';
+      openPopup();
+    }
+
+    function showClusterPopup(cluster) {
+      activePin = null;
+      activeAnchor = cluster.element;
+      pinModels.forEach(function (p) { if (p.element) p.classList.remove("is-active"); });
+      clusterElements.forEach(function (el) { el.classList.toggle("is-active", el === cluster.element); });
+      var items = cluster.models.map(function (m) {
+        var z = ZONES[m.zone];
+        return '<li class="zmp-cluster-item"><a href="/book?city=' + encodeURIComponent(m.name) + '">' +
+          '<span class="zmp-cluster-name">' + esc(m.name) + '</span>' +
+          '<span class="zmp-zone-pill ' + (m.zone === "A" ? "is-a" : "is-b") + '">' + esc(z.label) + " · " + esc(z.rate) + '</span>' +
+          '</a></li>';
+      }).join("");
+      popup.innerHTML =
+        '<button type="button" class="zmp-close" aria-label="Close">' + esc("×") + '</button>' +
+        '<h4>' + cluster.models.length + ' cities in this area</h4>' +
+        '<ul class="zmp-cluster-list">' + items + '</ul>';
+      openPopup();
+    }
+
+    // Reveal the popup for measurement without a visible flash, then position
+    // and show it. The [hidden] attribute sets display:none, which makes
+    // offsetWidth/offsetHeight return 0 — so we must unhide before measuring
+    // or the flip/clamp math runs against a zero-size box and edge pins render
+    // with the card hanging off the viewport.
+    function openPopup() {
+      popup.style.visibility = "hidden";
       popup.hidden = false;
+      positionPopup();
+      popup.style.visibility = "";
+    }
+
+    // Auto-flipping + edge-collision positioning for the portaled (position:fixed)
+    // popup. The card is placed above the anchor by default and flips below when
+    // there is not enough room (e.g. pins near the top of the map). It is then
+    // clamped to the viewport with padding so right/left/bottom edge pins never
+    // push the card off-screen, and the arrow is repositioned to keep pointing at
+    // the anchor even after horizontal clamping. The top boundary accounts for
+    // the sticky site header so the card never hides behind it.
+    var POPUP_GAP = 10;     // gap between anchor and card
+    var POPUP_PAD = 12;      // viewport edge padding
+    var ARROW_MARGIN = 16;   // keep arrow clear of the card's rounded corners
+
+    function positionPopup() {
+      if (!activeAnchor) return;
+      var a = activeAnchor.getBoundingClientRect();
+      var ax = a.left + a.width / 2;   // anchor center X
+      var aTop = a.top, aBottom = a.bottom;
+
+      // Top boundary: don't render under the sticky header.
+      var topBound = POPUP_PAD;
+      var header = document.getElementById("site-header");
+      if (header) {
+        var hb = header.getBoundingClientRect();
+        if (hb.bottom > topBound) topBound = hb.bottom + POPUP_PAD;
+      }
+
+      var vw = window.innerWidth, vh = window.innerHeight;
+      var pw = popup.offsetWidth, ph = popup.offsetHeight;
+      // Fall back to sensible estimates if measurement isn't ready yet.
+      if (!pw) pw = 230;
+      if (!ph) ph = 170;
+
+      // ---- Vertical placement: prefer above, flip below when needed ----
+      var spaceAbove = aTop - topBound;
+      var spaceBelow = vh - aBottom - POPUP_PAD;
+      var placeAbove = spaceAbove >= ph + POPUP_GAP || spaceAbove >= spaceBelow;
+      var top;
+      if (placeAbove) {
+        top = aTop - ph - POPUP_GAP;
+      } else {
+        top = aBottom + POPUP_GAP;
+      }
+      // If it still overflows vertically (very short viewport), clamp to the
+      // usable region and let the card sit inside it.
+      top = Math.max(topBound, Math.min(vh - ph - POPUP_PAD, top));
+
+      // ---- Horizontal placement: center on anchor, clamp to viewport ----
+      var left = ax - pw / 2;
+      left = Math.max(POPUP_PAD, Math.min(vw - pw - POPUP_PAD, left));
+
+      popup.style.left = left + "px";
+      popup.style.top = top + "px";
+
+      // ---- Arrow: point at the anchor, clamped away from the card corners ----
+      var arrowX = ax - left;
+      arrowX = Math.max(ARROW_MARGIN, Math.min(pw - ARROW_MARGIN, arrowX));
+      popup.style.setProperty("--zmp-arrow-x", arrowX + "px");
+      popup.classList.toggle("is-below", !placeAbove);
     }
 
     function closePopup() {
       popup.hidden = true;
+      popup.style.visibility = "";
       activePin = null;
-      document.querySelectorAll(".zone-map__pin.is-active").forEach(function (el) { el.classList.remove("is-active"); });
+      activeAnchor = null;
+      document.querySelectorAll(".zone-map__pin.is-active, .zone-map__cluster.is-active").forEach(function (el) { el.classList.remove("is-active"); });
     }
 
-    MAP_PINS.forEach(function (p) {
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.id = "zone-map-pin-" + p.name.replace(/[^a-z0-9]+/gi, "-").toLowerCase();
-      btn.className = "zone-map__pin" + (p.zone === "B" ? " is-zone-b" : "");
-      btn.style.left = (p.x / 640 * 100) + "%";
-      btn.style.top = (p.y / 560 * 100) + "%";
-      btn.setAttribute("aria-label", p.name + ", MI — " + ZONES[p.zone].label + ", minimum " + ZONES[p.zone].rate);
-      btn.textContent = p.name.charAt(0);
-      p.element = btn;
-      btn.addEventListener("click", function () { showPopup(p); });
-      btn.addEventListener("focus", function () { showPopup(p); });
-      pinLayer.appendChild(btn);
-    });
+    // ---- Responsive clustering ----
+    // Greedily group pins whose live pixel centers sit within MIN_CLUSTER_PX
+    // of each other. Singletons render as the city marker; groups collapse into
+    // a count bubble that opens a list of its cities. Re-run on resize so the
+    // map stays readable on mobile and spreads out on desktop.
+    var MIN_CLUSTER_PX = 26;
+
+    function render() {
+      // Ensure every pin element exists and is visible.
+      pinModels.forEach(function (m) {
+        if (!m.element) { m.element = createPinElement(m); pinLayer.appendChild(m.element); }
+        m.element.style.display = "";
+      });
+
+      // Clear previous clusters.
+      clusterElements.forEach(function (el) { el.remove(); });
+      clusterElements = [];
+      clusterLayer.innerHTML = "";
+
+      var rect = map.getBoundingClientRect();
+      if (!rect.width) return;
+      var pts = pinModels.map(function (m) {
+        return { model: m, px: (m.x / MAP_W) * rect.width, py: (m.y / MAP_H) * rect.height };
+      });
+
+      var assigned = new Array(pts.length).fill(false);
+      var clusters = [];
+      for (var i = 0; i < pts.length; i++) {
+        if (assigned[i]) continue;
+        var group = [pts[i]];
+        assigned[i] = true;
+        for (var j = i + 1; j < pts.length; j++) {
+          if (assigned[j]) continue;
+          var dx = pts[j].px - pts[i].px;
+          var dy = pts[j].py - pts[i].py;
+          if (dx * dx + dy * dy <= MIN_CLUSTER_PX * MIN_CLUSTER_PX) {
+            group.push(pts[j]);
+            assigned[j] = true;
+          }
+        }
+        clusters.push(group);
+      }
+
+      clusters.forEach(function (group) {
+        if (group.length < 2) return; // singleton stays as a normal pin
+        group.forEach(function (g) { g.model.element.style.display = "none"; });
+        var cx = 0, cy = 0;
+        group.forEach(function (g) { cx += g.model.x; cy += g.model.y; });
+        cx /= group.length; cy /= group.length;
+        var models = group.map(function (g) { return g.model; });
+        var aCount = models.filter(function (m) { return m.zone === "A"; }).length;
+        var dominant = aCount >= models.length / 2 ? "A" : "B";
+        var el = document.createElement("button");
+        el.type = "button";
+        el.className = "zone-map__cluster" + (dominant === "B" ? " is-zone-b" : "");
+        el.style.left = (cx / MAP_W * 100) + "%";
+        el.style.top = (cy / MAP_H * 100) + "%";
+        el.setAttribute("aria-label", models.length + " service cities clustered here — open list");
+        el.textContent = String(models.length);
+        var clusterObj = { models: models, cx: cx, cy: cy, element: el };
+        el.addEventListener("click", function (e) { e.stopPropagation(); showClusterPopup(clusterObj); });
+        clusterLayer.appendChild(el);
+        clusterElements.push(el);
+      });
+    }
+
+    render();
+
+    // Keep the portaled popup glued to its anchor on scroll/resize. Capture-phase
+    // scroll listeners catch scrolling in any ancestor container (not just the
+    // window), which is exactly what a position:fixed element needs since it
+    // does not move with its origin element automatically.
+    var resizeTimer = null;
+    function onViewportChange() {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(function () {
+        if (popup.hidden) render();
+        else positionPopup();
+      }, 120);
+    }
+    window.addEventListener("resize", onViewportChange);
+    window.addEventListener("scroll", function () { if (!popup.hidden) positionPopup(); }, { capture: true, passive: true });
 
     popup.addEventListener("click", function (e) {
       if (e.target.closest(".zmp-close")) closePopup();

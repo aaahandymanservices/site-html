@@ -116,6 +116,32 @@
 .zone-map__pin.is-zone-b { background: #ea580c; }
 .zone-map__pin.is-zone-b:hover,
 .zone-map__pin.is-zone-b:focus-visible { background: #c2410c; }
+.zone-map__pin.is-hq {
+  width: 2.1rem;
+  height: 2.1rem;
+  font-size: .8rem;
+  background: linear-gradient(180deg, #fbbf24, #f59e0b);
+  color: #7c2d12;
+  border-color: #fff;
+  box-shadow: 0 6px 16px -3px rgba(245,158,11,.7);
+  z-index: 5;
+}
+.zone-map__pin.is-hq:hover,
+.zone-map__pin.is-hq:focus-visible {
+  background: linear-gradient(180deg, #fcd34d, #f59e0b);
+}
+.zone-map__pin.is-hq .zone-map__hq-label {
+  position: absolute;
+  top: -1.05rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: .55rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: #fbbf24;
+  text-shadow: 0 1px 2px rgba(0,0,0,.7);
+  white-space: nowrap;
+}
 .zone-map__pin.is-active::after {
   content: "";
   position: absolute;
@@ -123,6 +149,44 @@
   border-radius: 9999px;
   border: 2px solid rgba(255,255,255,.55);
   animation: zmping 1.6s ease-out infinite;
+}
+
+/* Cluster bubbles for high-density / zoomed-out views */
+.zone-map__clusters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+.zone-map__cluster {
+  pointer-events: auto;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: rgba(56,189,248,.92);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 9999px;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  padding: 0 .5rem;
+  font-size: .75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px -2px rgba(0,0,0,.5);
+  transition: transform .15s ease, background .15s ease;
+}
+.zone-map__cluster.is-zone-b { background: rgba(234,88,12,.95); }
+.zone-map__cluster:hover,
+.zone-map__cluster:focus-visible {
+  transform: translate(-50%, -50%) scale(1.15);
+  outline: none;
+}
+.zone-map__cluster.is-active {
+  outline: 3px solid rgba(255,255,255,.7);
+  outline-offset: 2px;
 }
 @keyframes zmping {
   0% { transform: scale(.8); opacity: .9; }
@@ -150,9 +214,16 @@
   border-radius: 2px;
   display: inline-block;
 }
+/* The popup is portaled to document.body in JS (escapes the map's overflow:hidden
+   and the rounded-3xl overflow-hidden wrapper) so it can overflow the canvas and
+   sit above page chrome. It is positioned with viewport px coords (position:fixed)
+   computed from the trigger's getBoundingClientRect(). z-index sits above the
+   sticky header (100) and mobile menu (110) but below the booking-widget modal
+   (120) and the skip-link (200). */
 .zone-map__popup {
-  position: absolute;
-  transform: translate(-50%, calc(-100% - 14px));
+  position: fixed;
+  top: 0;
+  left: 0;
   background: #fff;
   color: #1f2937;
   border-radius: .75rem;
@@ -160,21 +231,33 @@
   padding: .85rem 1rem;
   min-width: 200px;
   max-width: 260px;
-  z-index: 4;
+  z-index: 150;
   font-size: .85rem;
 }
 .zone-map__popup[hidden] { display: none; }
+/* Arrow points up at the anchor by default (card sits above the pin). The
+   horizontal position is driven by --zmp-arrow-x (set in JS) so the arrow
+   keeps pointing at the pin even after the card is clamped away from it. */
 .zone-map__popup::after {
   content: "";
   position: absolute;
-  left: 50%;
+  left: var(--zmp-arrow-x, 50%);
   bottom: -7px;
   transform: translateX(-50%);
   border: 7px solid transparent;
   border-top-color: #fff;
 }
+/* When the card flips below the anchor, the arrow moves to the top edge and
+   points down instead. */
+.zone-map__popup.is-below::after {
+  bottom: auto;
+  top: -7px;
+  border-top-color: transparent;
+  border-bottom-color: #fff;
+}
 .zone-map__popup h4 { font-weight: 800; font-size: .95rem; margin: 0 0 .2rem; }
 .zone-map__popup .zmp-rate { font-weight: 700; color: var(--brand-crimson); font-size: .82rem; }
+.zone-map__popup .zmp-blurb { font-size: .75rem; color: #6b7280; margin-top: .25rem; font-weight: 500; }
 .zone-map__popup .zmp-zone {
   display: inline-block;
   font-size: .68rem;
@@ -201,6 +284,40 @@
   text-decoration: none;
 }
 .zone-map__popup .zmp-book:hover { background: var(--brand-crimson-dark); }
+.zone-map__popup .zmp-cluster-list {
+  list-style: none;
+  margin: .35rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.zone-map__popup .zmp-cluster-item a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .6rem;
+  padding: .3rem .35rem;
+  border-radius: .4rem;
+  text-decoration: none;
+  color: #1f2937;
+  font-weight: 600;
+  font-size: .78rem;
+}
+.zone-map__popup .zmp-cluster-item a:hover { background: #f3f4f6; }
+.zone-map__popup .zmp-zone-pill {
+  font-size: .62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  padding: .15rem .4rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+.zone-map__popup .zmp-zone-pill.is-a { background: #ecfdf5; color: #065f46; }
+.zone-map__popup .zmp-zone-pill.is-b { background: #fff7ed; color: #9a3412; }
 .zone-map__popup .zmp-close {
   position: absolute;
   top: .3rem;
@@ -316,5 +433,6 @@
 @media (prefers-reduced-motion: reduce) {
   .zone-map__pin.is-active::after { animation: none; opacity: 0; }
   .zone-map__pin,
+  .zone-map__cluster,
   .zone-lookup-result .zlr-cta { transition: none; }
 }
