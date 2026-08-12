@@ -68,10 +68,50 @@
         },
         {
           "@type": "Question",
+          "name": "What does the 20% supply markup actually pay for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sourcing time, vehicle use and transport, and the liability we take on for the part itself. It is applied to what the materials actually cost, not to a padded figure, and it is what allows us to warranty the part alongside the installation and handle any return or exchange ourselves."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "What happens if you find hidden damage during the job?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Work in the affected area stops immediately. We document and photograph the condition, explain the repair options and what each would cost, and no additional work proceeds and no additional cost is incurred until you approve a written change order."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I decline the extra work in a change order?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and there is no penalty for it. We finish the original scope wherever it is safe and code-compliant to do so, and bill only for that. If a concealed condition makes the original scope unsafe or impossible to complete properly, we will tell you plainly rather than working around it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if the part I supply is wrong or defective?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The return or exchange stays between you and the retailer, and the visit may need to be rescheduled to finish the work. Labor already performed is still billable. If we source the part instead, handling a wrong or defective item is our responsibility, not yours."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I mix the two options on the same job?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Homeowners often supply the visible fixture they picked out and let us bring the connectors, fasteners, and consumables. The 20% markup applies only to the items we source, and your invoice itemizes which is which."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will I know the cost before you start?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You get the labor figure up front from our published rates or flat-rate menu, and materials are quoted or itemized separately. The only thing that can change the total is a concealed condition, and that cannot be billed without your written approval."
           }
         }
       ]
@@ -95,13 +135,160 @@
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
 
     <style>
-        /* Anchored sections clear the sticky header when linked to directly. */
-        section[id] {
+        /* Anchored sections clear the sticky header when linked to directly.
+           The legacy anchor stubs are inline spans, so they are covered too. */
+        section[id], header[id], .anchor-stub {
             scroll-margin-top: 120px;
         }
         @media (max-width: 768px) {
-            section[id] {
+            section[id], header[id], .anchor-stub {
                 scroll-margin-top: 100px;
+            }
+        }
+
+        /* Common-scenario comparison.
+           A real <table> at desktop width, where the two material options are
+           genuinely easier to compare across a row. Below 760px the columns
+           would either overflow or squeeze to a few characters each, so every
+           row restacks into a card and each cell reprints its column heading
+           from data-label -- the markup stays a table for assistive tech and
+           for find-in-page, only the presentation changes. */
+        .scenario-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .875rem;
+        }
+        .scenario-table caption {
+            caption-side: top;
+            text-align: left;
+            padding: 0 0 .85rem;
+            font-size: .8125rem;
+            color: #4b5563;
+        }
+        .scenario-table th,
+        .scenario-table td {
+            text-align: left;
+            vertical-align: top;
+            padding: .85rem 1rem;
+            border-bottom: 1px solid rgb(226 232 240 / .9);
+        }
+        .scenario-table thead th {
+            background: #1b2a4a;
+            color: #fff;
+            font-size: .6875rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            border-bottom: 0;
+        }
+        .scenario-table thead th:first-child { border-top-left-radius: .9rem; }
+        .scenario-table thead th:last-child { border-top-right-radius: .9rem; }
+        .scenario-table tbody th {
+            font-weight: 700;
+            color: #0f172a;
+            width: 30%;
+        }
+        .scenario-table tbody td { color: #4b5563; }
+        .scenario-table tbody tr:nth-child(even) { background: rgb(248 250 252 / .7); }
+        .scenario-table tbody tr:last-child th,
+        .scenario-table tbody tr:last-child td { border-bottom: 0; }
+
+        @media (max-width: 760px) {
+            .scenario-table thead {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                overflow: hidden;
+                clip: rect(0 0 0 0);
+                white-space: nowrap;
+                border: 0;
+            }
+            .scenario-table,
+            .scenario-table tbody,
+            .scenario-table tr,
+            .scenario-table th,
+            .scenario-table td { display: block; }
+            .scenario-table tr {
+                border: 1px solid rgb(226 232 240);
+                border-radius: 1rem;
+                background: #fff;
+                margin-bottom: .85rem;
+                padding: .25rem 0 .6rem;
+                box-shadow: 0 8px 20px -18px rgb(15 23 42 / .45);
+            }
+            .scenario-table tbody tr:nth-child(even) { background: #fff; }
+            .scenario-table tbody th {
+                width: auto;
+                font-size: 1rem;
+                border-bottom: 1px solid rgb(241 245 249);
+                padding: .85rem 1rem .7rem;
+            }
+            .scenario-table td {
+                border-bottom: 0;
+                padding: .7rem 1rem 0;
+            }
+            .scenario-table td::before {
+                content: attr(data-label);
+                display: block;
+                margin-bottom: .2rem;
+                font-size: .6875rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: .08em;
+                color: #a61f2e;
+            }
+        }
+
+        /* FAQ accordion: native <details>, so open/closed state, keyboard
+           operation, and find-in-page all work before any JavaScript runs. */
+        .pp-faq {
+            border: 1px solid rgb(203 213 225 / .85);
+            border-radius: 1rem;
+            background: #fff;
+            overflow: hidden;
+            transition: border-color var(--dur, .2s) ease;
+        }
+        .pp-faq + .pp-faq { margin-top: .75rem; }
+        .pp-faq[open] { border-color: rgb(166 31 46 / .35); }
+        .pp-faq > summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.1rem 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.45;
+        }
+        .pp-faq > summary::-webkit-details-marker { display: none; }
+        .pp-faq > summary:hover { color: #a61f2e; background: #f9fafb; }
+        .pp-faq > summary:focus-visible { outline: 3px solid #1b2a4a; outline-offset: -3px; }
+        .pp-faq[open] > summary { color: #a61f2e; border-bottom: 1px solid rgb(226 232 240 / .9); }
+        .pp-faq__chevron { color: #a61f2e; flex-shrink: 0; transition: transform var(--dur, .2s) ease; }
+        .pp-faq[open] > summary .pp-faq__chevron { transform: rotate(180deg); }
+        .pp-faq__answer {
+            padding: 1rem 1.25rem 1.25rem;
+            color: #4b5563;
+            font-size: .9375rem;
+            line-height: 1.75;
+        }
+        .pp-faq__answer a { color: #a61f2e; font-weight: 700; }
+        .pp-faq__answer a:hover { text-decoration: underline; }
+
+        /* The rail joining the three guarantee steps. Decorative, so it is
+           drawn only where all three cards sit on one row. */
+        @media (min-width: 768px) {
+            .step-rail::before {
+                content: "";
+                position: absolute;
+                top: 3.25rem;
+                left: 16%;
+                right: 16%;
+                height: 2px;
+                background: linear-gradient(90deg, rgb(166 31 46 / .35), rgb(27 42 74 / .35), rgb(22 101 52 / .35));
             }
         }
     </style>
@@ -209,117 +396,322 @@
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-red-950/80 border border-red-800/60 text-red-300 uppercase tracking-[0.2em] font-bold text-xs mb-4 shadow-sm backdrop-blur-sm">
                         <i class="fas fa-file-invoice-dollar text-red-400" aria-hidden="true"></i> Pricing Policies
                     </div>
-                    <h1 class="text-3xl sm:text-4xl lg:text-[clamp(2.25rem,3.2vw,3.25rem)] font-black tracking-tight text-white leading-[1.08] [text-shadow:_0_2px_12px_rgba(0,0,0,0.85)]">Clear pricing, before the work starts.</h1>
+                    <h1 class="text-3xl sm:text-4xl lg:text-[clamp(2.25rem,3.2vw,3.25rem)] font-black tracking-tight text-white leading-[1.08] [text-shadow:_0_2px_12px_rgba(0,0,0,0.85)]">Clear Pricing, Before the Work Starts</h1>
                     <p class="text-slate-100 text-base sm:text-lg lg:text-xl leading-relaxed mt-5 sm:mt-6 [text-shadow:_0_1px_8px_rgba(0,0,0,0.75)]">Two policies shape every invoice we send: how parts and materials are handled, and what happens the moment we find something nobody could see when the job was quoted. Both are written out here in plain language, so nothing on your final bill is a surprise.</p>
-                    <div class="mt-8 flex flex-wrap items-center gap-3">
-                        <a href="#materials" class="inline-flex items-center justify-center gap-2.5 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3.5 rounded-xl transition duration-200 shadow-lg hover:shadow-red-600/30 hover:-translate-y-0.5"><i class="fas fa-box-open" aria-hidden="true"></i> Parts &amp; Materials</a>
-                        <a href="#no-surprise-invoices" class="inline-flex items-center justify-center gap-2.5 bg-slate-800/90 hover:bg-slate-700 text-white font-bold px-5 py-3.5 rounded-xl border border-slate-700 transition duration-200 shadow-lg hover:-translate-y-0.5"><i class="fas fa-shield-halved text-red-400" aria-hidden="true"></i> No Surprise Invoices</a>
-                    </div>
+
+                    <nav class="mt-8" aria-label="On this page">
+                        <ul class="flex flex-wrap items-center gap-3 list-none m-0 p-0">
+                            <li><a href="#materials-options" class="inline-flex items-center justify-center gap-2.5 bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3.5 rounded-xl transition duration-200 shadow-lg hover:shadow-red-600/30 hover:-translate-y-0.5"><i class="fas fa-box-open" aria-hidden="true"></i> Parts &amp; Materials</a></li>
+                            <li><a href="#no-surprise-guarantee" class="inline-flex items-center justify-center gap-2.5 bg-slate-800/90 hover:bg-slate-700 text-white font-bold px-5 py-3.5 rounded-xl border border-slate-700 transition duration-200 shadow-lg hover:-translate-y-0.5"><i class="fas fa-shield-halved text-red-400" aria-hidden="true"></i> No Surprise Invoices</a></li>
+                            <li><a href="#faq" class="inline-flex items-center justify-center gap-2.5 bg-slate-800/90 hover:bg-slate-700 text-white font-bold px-5 py-3.5 rounded-xl border border-slate-700 transition duration-200 shadow-lg hover:-translate-y-0.5"><i class="fas fa-circle-question text-red-400" aria-hidden="true"></i> FAQ</a></li>
+                        </ul>
+                    </nav>
+
+                    <p class="mt-6 text-sm text-slate-300 flex flex-wrap items-center gap-x-5 gap-y-2">
+                        <span class="inline-flex items-center gap-2"><i class="fas fa-check text-green-500" aria-hidden="true"></i> Written change orders, always</span>
+                        <span class="inline-flex items-center gap-2"><i class="fas fa-check text-green-500" aria-hidden="true"></i> No markup when you supply parts</span>
+                        <span class="inline-flex items-center gap-2"><i class="fas fa-check text-green-500" aria-hidden="true"></i> Serving Oakland County, MI</span>
+                    </p>
                 </div>
             </div>
         </header>
 
-        <!-- ============ Section 1: Parts & Materials ============ -->
-        <section id="materials" class="py-12 sm:py-16 bg-white border-t border-gray-100">
+        <!-- ============ Section 1: Parts & Materials Options ============ -->
+        <!-- Legacy anchor: /pricing-policy#materials was linked from the rates,
+             services, and booking pages before this section was renamed, and is
+             a plausible bookmark, so the old fragment still lands here. -->
+        <span id="materials" class="anchor-stub block" aria-hidden="true"></span>
+        <section id="materials-options" class="py-12 sm:py-16 bg-white border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="bg-gray-50 border-[2px] border-red-600 rounded-3xl p-8 sm:p-12 max-w-5xl mx-auto shadow-lg">
-                    <div class="text-center mb-8">
-                        <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Parts &amp; Materials</span>
-                        <h2 class="text-2xl sm:text-3xl font-black text-gray-950 mt-3">Parts &amp; Materials Options</h2>
-                        <p class="text-gray-600 mt-2 max-w-2xl mx-auto">Every standard service price, hourly rate, flat-rate menu item, and package we publish covers <strong>installation and service labor only</strong>. Hardware and materials are never folded into those numbers &mdash; they are handled separately, so you can always see exactly what you are paying for labor and exactly what you are paying for parts. That leaves you two straightforward options on any job.</p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="max-w-5xl mx-auto">
 
-                        <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-blue-600 shrink-0"><i class="fas fa-box-open" aria-hidden="true"></i></span>
-                                <div>
-                                    <p class="text-[0.7rem] font-bold uppercase tracking-widest text-blue-600">Option A</p>
-                                    <h3 class="font-bold text-gray-900 text-lg leading-tight">You Supply the Materials</h3>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-4">Have the parts on site and ready to go, and we simply install them. There is <strong>no markup at all</strong> &mdash; you pay for labor and nothing else. Please confirm the exact make, model, and specifications before your appointment so nothing stalls the job mid-visit.</p>
-                            <p class="text-blue-600 font-extrabold text-lg mt-auto">$0 <span class="text-xs text-gray-400 font-normal">materials markup</span></p>
-                        </div>
-
-                        <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-red-100 text-red-600 shrink-0"><i class="fas fa-truck-fast" aria-hidden="true"></i></span>
-                                <div>
-                                    <p class="text-[0.7rem] font-bold uppercase tracking-widest text-red-600">Option B</p>
-                                    <h3 class="font-bold text-gray-900 text-lg leading-tight">We Source the Materials</h3>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-4">Skip the store run entirely. We shop, select the correct part, transport it, and warranty it. Materials are billed at cost plus a standard <strong>20% supply markup</strong>, which covers our sourcing time, vehicle use, and the liability we take on for the parts themselves.</p>
-                            <p class="text-red-600 font-extrabold text-lg mt-auto">20% <span class="text-xs text-gray-400 font-normal">supply markup</span></p>
-                        </div>
+                    <div class="text-center mb-8 sm:mb-10">
+                        <span class="bg-red-100 text-red-700 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Parts &amp; Materials</span>
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-950 mt-3">Parts &amp; Materials Options</h2>
+                        <p class="text-gray-600 mt-3 max-w-3xl mx-auto">Every service price, hourly rate, flat-rate menu item, and package we publish covers <strong class="text-gray-900">installation and service labor only</strong>. Hardware and materials are never folded into those numbers &mdash; they are handled separately, so you can always see exactly what you pay for labor and exactly what you pay for parts. That leaves you two straightforward options on any job.</p>
                     </div>
 
-                    <div class="mt-6 flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 sm:p-5 max-w-3xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-stretch">
+
+                        <article class="relative flex flex-col p-6 sm:p-7 bg-white border-2 border-blue-200 rounded-3xl shadow-md">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 shrink-0 text-lg"><i class="fas fa-box-open" aria-hidden="true"></i></span>
+                                <div>
+                                    <p class="text-[0.7rem] font-bold uppercase tracking-widest text-blue-700">Option A</p>
+                                    <h3 class="font-black text-gray-950 text-xl leading-tight">You Supply the Materials</h3>
+                                </div>
+                            </div>
+
+                            <p class="text-4xl font-black text-blue-900 leading-none">$0<span class="ml-2 align-middle text-xs font-bold uppercase tracking-widest text-gray-500">materials markup</span></p>
+
+                            <p class="text-gray-600 text-sm mt-4">Have the parts on site and ready to go, and we simply install them. You pay for labor and nothing else. Confirm the exact make, model, and specifications before your appointment so nothing stalls the job mid-visit.</p>
+
+                            <ul class="mt-5 space-y-2.5 text-sm text-gray-700 list-none p-0">
+                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden="true"></i> No markup, no sourcing fee &mdash; labor only on your invoice</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden="true"></i> You choose the exact brand, finish, and model</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-circle-exclamation text-amber-600 mt-1 shrink-0" aria-hidden="true"></i> A wrong-size or defective part can pause the visit</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-circle-exclamation text-amber-600 mt-1 shrink-0" aria-hidden="true"></i> Returns and exchanges stay with you and the retailer</li>
+                            </ul>
+
+                            <div class="mt-6 pt-5 border-t border-gray-100 space-y-2.5">
+                                <p class="text-[0.7rem] font-bold uppercase tracking-widest text-gray-500">Warranty coverage</p>
+                                <p class="inline-flex items-center gap-2 w-full rounded-xl border border-green-200 bg-green-50 px-3 py-2 text-sm font-bold text-green-800"><i class="fas fa-shield-halved shrink-0" aria-hidden="true"></i> Labor: 1-Year Workmanship Guarantee</p>
+                                <p class="inline-flex items-center gap-2 w-full rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-sm font-bold text-amber-900"><i class="fas fa-triangle-exclamation shrink-0" aria-hidden="true"></i> Parts: not covered by us</p>
+                            </div>
+                        </article>
+
+                        <article class="relative flex flex-col p-6 sm:p-7 bg-white border-2 border-red-600 rounded-3xl shadow-lg">
+                            <span class="absolute -top-3 right-5 bg-red-600 text-white text-[0.65rem] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md">Parts warrantied</span>
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-red-100 text-red-700 shrink-0 text-lg"><i class="fas fa-truck-fast" aria-hidden="true"></i></span>
+                                <div>
+                                    <p class="text-[0.7rem] font-bold uppercase tracking-widest text-red-700">Option B</p>
+                                    <h3 class="font-black text-gray-950 text-xl leading-tight">We Source the Materials</h3>
+                                </div>
+                            </div>
+
+                            <p class="text-4xl font-black text-red-700 leading-none">20%<span class="ml-2 align-middle text-xs font-bold uppercase tracking-widest text-gray-500">supply markup</span></p>
+
+                            <p class="text-gray-600 text-sm mt-4">Skip the store run entirely. We shop, select the correct part, transport it, and warranty it. Materials are billed at cost plus a standard 20% supply markup covering sourcing time, vehicle use, and the liability we take on for the parts themselves.</p>
+
+                            <ul class="mt-5 space-y-2.5 text-sm text-gray-700 list-none p-0">
+                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden="true"></i> We pick the right part the first time, for your fixture</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden="true"></i> A defective part is our problem to return and replace</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden="true"></i> Receipts available &mdash; the markup applies to cost, not a guess</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden="true"></i> One invoice covering both labor and materials</li>
+                            </ul>
+
+                            <div class="mt-6 pt-5 border-t border-gray-100 space-y-2.5">
+                                <p class="text-[0.7rem] font-bold uppercase tracking-widest text-gray-500">Warranty coverage</p>
+                                <p class="inline-flex items-center gap-2 w-full rounded-xl border border-green-200 bg-green-50 px-3 py-2 text-sm font-bold text-green-800"><i class="fas fa-shield-halved shrink-0" aria-hidden="true"></i> Labor: 1-Year Workmanship Guarantee</p>
+                                <p class="inline-flex items-center gap-2 w-full rounded-xl border border-green-200 bg-green-50 px-3 py-2 text-sm font-bold text-green-800"><i class="fas fa-shield-halved shrink-0" aria-hidden="true"></i> Parts: covered by our workmanship warranty</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="mt-6 flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 sm:p-5">
                         <i class="fas fa-triangle-exclamation text-amber-600 mt-1 shrink-0" aria-hidden="true"></i>
-                        <p class="text-sm text-amber-900 leading-relaxed"><strong class="font-bold">Please note:</strong> materials we purchase under the 20% markup are covered by our <a href="/guarantee" class="font-semibold text-red-700 underline decoration-red-400/50 underline-offset-2 hover:text-red-800">workmanship warranty</a>. <strong class="font-bold">Customer-supplied parts are not covered</strong> &mdash; we stand behind our installation either way, but we cannot warranty a part we did not select or source.</p>
+                        <p class="text-sm text-amber-900 leading-relaxed"><strong class="font-bold">The one real difference:</strong> materials we purchase under the 20% markup are covered by our <a href="/guarantee" class="font-semibold text-red-700 underline decoration-red-400/50 underline-offset-2 hover:text-red-800">workmanship warranty</a>. <strong class="font-bold">Customer-supplied parts are not covered</strong> &mdash; we stand behind our installation either way, but we cannot warranty a part we did not select or source.</p>
+                    </div>
+
+                    <!-- ---- Scenario comparison ---- -->
+                    <div class="mt-10 sm:mt-12">
+                        <h3 class="text-xl sm:text-2xl font-black text-gray-950">Which option fits your job?</h3>
+                        <p class="text-gray-600 mt-2 text-sm sm:text-base">Neither option is cheaper by default &mdash; it depends on whether you would rather spend the time or have us carry it. Here is how the two compare on jobs we book most often around Oakland County.</p>
+
+                        <div class="mt-5 sm:rounded-3xl sm:border sm:border-gray-200 sm:bg-white sm:shadow-md sm:overflow-hidden">
+                            <table class="scenario-table">
+                                <caption class="sm:px-5 sm:pt-5">Common homeowner scenarios, and what each option means for the visit.</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Scenario</th>
+                                        <th scope="col">Option A &mdash; you supply ($0 markup)</th>
+                                        <th scope="col">Option B &mdash; we supply (+20%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Kitchen or bath faucet replacement</th>
+                                        <td data-label="Option A — you supply">Good fit when you have already picked a finish and model you want. Have the faucet and supply lines on site.</td>
+                                        <td data-label="Option B — we supply">We match the part to your sink and existing valves, and the faucet is warrantied alongside the install.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Ceiling fan or light fixture swap</th>
+                                        <td data-label="Option A — you supply">Common choice &mdash; fixtures are a design decision. Unbox and check for missing hardware before we arrive.</td>
+                                        <td data-label="Option B — we supply">Best when you want a like-for-like replacement and would rather not shop for it at all.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Smart lock or deadbolt install</th>
+                                        <td data-label="Option A — you supply">Fine if the lock is already bought, but confirm it fits your door thickness and existing bore.</td>
+                                        <td data-label="Option B — we supply">We verify compatibility with your door prep first, which is where most customer-supplied locks stall.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Drywall patch and paint touch-up</th>
+                                        <td data-label="Option A — you supply">Ideal when you still have the original paint &mdash; an exact match beats anything we could buy.</td>
+                                        <td data-label="Option B — we supply">We bring compound, tape, primer, and a color-matched paint, billed at cost plus 20%.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Emergency or same-week repair</th>
+                                        <td data-label="Option A — you supply">Workable only if the part is already in hand. A store run on your end can cost a day.</td>
+                                        <td data-label="Option B — we supply">Usually faster. We source on the way, so the repair happens in a single visit.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Part turns out to be wrong or defective</th>
+                                        <td data-label="Option A — you supply">The return and the reschedule are yours. Labor already performed is still billable.</td>
+                                        <td data-label="Option B — we supply">We handle the return and replacement, and the corrected part is covered under our warranty.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p class="mt-5 text-sm text-gray-600">Labor pricing itself does not change between the two options. See the <a href="/rates" class="text-red-700 font-bold hover:underline">full rates and flat-rate menu</a> for what the labor side costs.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ============ Section 2: No Surprise Invoices ============ -->
-        <section id="no-surprise-invoices" class="py-12 sm:py-16 bg-gray-50 border-t border-gray-100">
+        <!-- ============ Section 2: No Surprise Invoices Guarantee ============ -->
+        <!-- Legacy anchor, same reasoning as #materials above. -->
+        <span id="no-surprise-invoices" class="anchor-stub block" aria-hidden="true"></span>
+        <section id="no-surprise-guarantee" class="py-12 sm:py-16 bg-gray-50 border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-12 max-w-5xl mx-auto shadow-sm">
-                    <div class="text-center mb-8">
+                <div class="max-w-5xl mx-auto">
+
+                    <div class="text-center mb-8 sm:mb-10">
                         <span class="bg-blue-100 text-blue-900 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">No Surprise Invoices</span>
-                        <h2 class="text-2xl sm:text-3xl font-black text-gray-950 mt-3">No Surprise Invoices Guarantee</h2>
-                        <p class="text-gray-500 font-semibold mt-1">How we handle unexpected issues or hidden damage.</p>
-                        <p class="text-gray-600 mt-3 max-w-3xl mx-auto text-sm sm:text-base">Your quote reflects the conditions we can see when we price the job. Open up a wall, a fixture, or a component and a house sometimes has other ideas &mdash; concealed rot, mold, damaged wiring, or old work that never met code. When that happens, the process below runs every single time, without exception.</p>
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-950 mt-3">No Surprise Invoices Guarantee</h2>
+                        <p class="text-gray-600 mt-3 max-w-3xl mx-auto">Your quote reflects the conditions we can see when we price the job. Open up a wall, a fixture, or a component and a house sometimes has other ideas &mdash; concealed rot, mold, damaged wiring, or old work that never met code. When that happens, the three steps below run every single time, without exception.</p>
                     </div>
 
-                    <ol class="grid grid-cols-1 md:grid-cols-3 gap-5 list-none p-0 m-0">
+                    <ol class="step-rail relative grid grid-cols-1 md:grid-cols-3 gap-5 list-none p-0 m-0">
 
-                        <li class="relative p-6 bg-gray-50 border border-gray-200 rounded-2xl flex flex-col overflow-hidden">
-                            <span class="absolute top-3 right-5 text-5xl font-black text-red-600/10 leading-none select-none" aria-hidden="true">1</span>
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-red-100 text-red-600 shrink-0"><i class="fas fa-circle-exclamation" aria-hidden="true"></i></span>
-                                <h3 class="font-bold text-gray-900 text-lg">1. We Stop</h3>
-                            </div>
-                            <p class="text-gray-600 text-sm">Active work in the affected area pauses immediately the moment concealed damage, rot, mold, or a code violation turns up. Nothing further gets done while you are still in the dark about it.</p>
+                        <li class="relative flex flex-col items-center text-center p-6 sm:p-7 bg-white border border-gray-200 rounded-3xl shadow-md">
+                            <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-700 text-2xl shadow-sm ring-8 ring-gray-50" aria-hidden="true"><i class="fas fa-circle-exclamation"></i></span>
+                            <p class="mt-4 text-[0.7rem] font-black uppercase tracking-[0.2em] text-red-700">Step 1</p>
+                            <h3 class="font-black text-gray-950 text-lg mt-1">We Stop</h3>
+                            <p class="text-gray-600 text-sm mt-2.5">Work in the affected area pauses immediately the moment concealed damage, rot, mold, or a code violation turns up. Nothing further gets done while you are still in the dark about it.</p>
                         </li>
 
-                        <li class="relative p-6 bg-gray-50 border border-gray-200 rounded-2xl flex flex-col overflow-hidden">
-                            <span class="absolute top-3 right-5 text-5xl font-black text-blue-900/10 leading-none select-none" aria-hidden="true">2</span>
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-blue-900 shrink-0"><i class="fas fa-camera" aria-hidden="true"></i></span>
-                                <h3 class="font-bold text-gray-900 text-lg">2. We Show You</h3>
-                            </div>
-                            <p class="text-gray-600 text-sm">The condition is documented and photographed. We walk you through what we found, what it means for the job and the timeline, the options for repairing it, and what each option would cost.</p>
+                        <li class="relative flex flex-col items-center text-center p-6 sm:p-7 bg-white border border-gray-200 rounded-3xl shadow-md">
+                            <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-900 text-2xl shadow-sm ring-8 ring-gray-50" aria-hidden="true"><i class="fas fa-camera"></i></span>
+                            <p class="mt-4 text-[0.7rem] font-black uppercase tracking-[0.2em] text-blue-900">Step 2</p>
+                            <h3 class="font-black text-gray-950 text-lg mt-1">We Show You</h3>
+                            <p class="text-gray-600 text-sm mt-2.5">The condition is documented and photographed. We walk you through what we found, what it means for the job and the timeline, the options for repairing it, and what each option would cost.</p>
                         </li>
 
-                        <li class="relative p-6 bg-gray-50 border border-gray-200 rounded-2xl flex flex-col overflow-hidden">
-                            <span class="absolute top-3 right-5 text-5xl font-black text-green-700/10 leading-none select-none" aria-hidden="true">3</span>
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-100 text-green-700 shrink-0"><i class="fas fa-file-signature" aria-hidden="true"></i></span>
-                                <h3 class="font-bold text-gray-900 text-lg">3. You Decide</h3>
-                            </div>
-                            <p class="text-gray-600 text-sm">No additional work proceeds and no additional charge is incurred without your explicit approval through a <strong>written change order</strong>. Say no and we finish the original scope and bill only for that.</p>
+                        <li class="relative flex flex-col items-center text-center p-6 sm:p-7 bg-white border border-gray-200 rounded-3xl shadow-md">
+                            <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-700 text-2xl shadow-sm ring-8 ring-gray-50" aria-hidden="true"><i class="fas fa-file-signature"></i></span>
+                            <p class="mt-4 text-[0.7rem] font-black uppercase tracking-[0.2em] text-green-700">Step 3</p>
+                            <h3 class="font-black text-gray-950 text-lg mt-1">You Decide</h3>
+                            <p class="text-gray-600 text-sm mt-2.5">No additional work proceeds and no additional charge is incurred without your explicit approval through a written change order. Say no and we finish the original scope and bill only for that.</p>
                         </li>
                     </ol>
 
-                    <p class="text-gray-500 text-xs text-center mt-6 max-w-3xl mx-auto">Concealed conditions such as code violations, structural rot, mold, or damaged wiring fall outside the initial scope of work. The full wording is in <a href="/terms#unforeseen-conditions" class="text-red-600 hover:underline font-semibold">Section 4 of our Terms of Service</a>.</p>
+                    <article class="mt-8 rounded-3xl border-2 border-blue-900/15 bg-white p-6 sm:p-8 shadow-md">
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-blue-950 text-white shrink-0"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span>
+                            <h3 class="text-xl font-black text-gray-950">What a change order actually is</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm sm:text-base mt-4">A change order is a written amendment to the original scope of work. It is not a verbal &ldquo;while I&rsquo;m in here&rdquo; conversation, and it is never assumed from a nod in a hallway. Before any additional work begins, you get it in writing and you approve it.</p>
+
+                        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="rounded-2xl border border-green-200 bg-green-50 p-4">
+                                <p class="font-bold text-green-900 text-sm flex items-center gap-2"><i class="fas fa-check-circle" aria-hidden="true"></i> Every change order spells out</p>
+                                <ul class="mt-2.5 space-y-1.5 text-sm text-green-900/90 list-none p-0">
+                                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> What was found, with photos</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> The repair options available to you</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> Added labor and materials cost for each</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> Any change to the schedule</li>
+                                </ul>
+                            </div>
+                            <div class="rounded-2xl border border-red-200 bg-red-50 p-4">
+                                <p class="font-bold text-red-900 text-sm flex items-center gap-2"><i class="fas fa-circle-xmark" aria-hidden="true"></i> What never happens</p>
+                                <ul class="mt-2.5 space-y-1.5 text-sm text-red-900/90 list-none p-0">
+                                    <li class="flex items-start gap-2"><i class="fas fa-xmark text-red-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> Extra work billed without your approval</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-xmark text-red-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> A charge that first appears on the invoice</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-xmark text-red-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> Pressure to decide on the spot</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-xmark text-red-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> A penalty for declining the extra scope</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-500 text-xs sm:text-sm mt-5">Concealed conditions such as code violations, structural rot, mold, or damaged wiring fall outside the initial scope of work. The full wording is in <a href="/terms#unforeseen-conditions" class="text-red-700 font-bold hover:underline">Section 4 of our Terms of Service</a>, and the workmanship promise behind it is on our <a href="/guarantee" class="text-red-700 font-bold hover:underline">Guarantee page</a>.</p>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- ============ Closing CTA ============ -->
-        <section class="py-12 sm:py-16 bg-white border-t border-gray-100">
+        <!-- ============ Section 3: FAQ ============ -->
+        <section id="faq" class="py-12 sm:py-16 bg-white border-t border-gray-100">
+            <div class="max-w-3xl mx-auto px-6">
+                <div class="text-center mb-8 sm:mb-10">
+                    <span class="bg-red-100 text-red-700 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Questions</span>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-950 mt-3">Frequently Asked Questions</h2>
+                    <p class="text-gray-600 mt-3">The questions homeowners ask us most about parts, markups, and what happens when a job turns out bigger than it looked.</p>
+                </div>
+
+                <div>
+                    <details class="pp-faq" open>
+                        <summary>
+                            <span>Are parts and materials included in your service prices?</span>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                        </summary>
+                        <div class="pp-faq__answer">No. Every service price, hourly rate, flat-rate menu item, and package covers installation and service labor only. Hardware and materials are billed separately. You may supply them yourself at no markup, or we can source them at cost plus a standard 20% supply markup covering sourcing time, transport, and parts liability.</div>
+                    </details>
+
+                    <details class="pp-faq">
+                        <summary>
+                            <span>Are customer-supplied parts covered under your workmanship warranty?</span>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                        </summary>
+                        <div class="pp-faq__answer">No. Materials we purchase under the 20% supply markup carry our workmanship warranty. Parts supplied by the customer are not covered, because we did not select or source them. Our installation labor is still backed by the <a href="/guarantee">1-Year Workmanship Guarantee</a> either way.</div>
+                    </details>
+
+                    <details class="pp-faq">
+                        <summary>
+                            <span>What does the 20% supply markup actually pay for?</span>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                        </summary>
+                        <div class="pp-faq__answer">Sourcing time, vehicle use and transport, and the liability we take on for the part itself. It is applied to what the materials actually cost, not to a padded figure, and it is what allows us to warranty the part alongside the installation and handle any return or exchange ourselves.</div>
+                    </details>
+
+                    <details class="pp-faq">
+                        <summary>
+                            <span>What happens if you find hidden damage during the job?</span>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                        </summary>
+                        <div class="pp-faq__answer">Work in the affected area stops immediately. We document and photograph the condition, explain the repair options and what each would cost, and no additional work proceeds and no additional cost is incurred until you approve a written change order.</div>
+                    </details>
+
+                    <details class="pp-faq">
+                        <summary>
+                            <span>Can I decline the extra work in a change order?</span>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                        </summary>
+                        <div class="pp-faq__answer">Yes, and there is no penalty for it. We finish the original scope wherever it is safe and code-compliant to do so, and bill only for that. If a concealed condition makes the original scope unsafe or impossible to complete properly, we will tell you plainly rather than working around it.</div>
+                    </details>
+
+                    <details class="pp-faq">
+                        <summary>
+                            <span>What if the part I supply is wrong or defective?</span>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                        </summary>
+                        <div class="pp-faq__answer">The return or exchange stays between you and the retailer, and the visit may need to be rescheduled to finish the work. Labor already performed is still billable. If we source the part instead, handling a wrong or defective item is our responsibility, not yours.</div>
+                    </details>
+
+                    <details class="pp-faq">
+                        <summary>
+                            <span>Can I mix the two options on the same job?</span>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                        </summary>
+                        <div class="pp-faq__answer">Yes. Homeowners often supply the visible fixture they picked out and let us bring the connectors, fasteners, and consumables. The 20% markup applies only to the items we source, and your invoice itemizes which is which.</div>
+                    </details>
+
+                    <details class="pp-faq">
+                        <summary>
+                            <span>Will I know the cost before you start?</span>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                        </summary>
+                        <div class="pp-faq__answer">Yes. You get the labor figure up front from our published rates or flat-rate menu, and materials are quoted or itemized separately. The only thing that can change the total is a concealed condition, and that cannot be billed without your written approval. See the <a href="/rates">Rates page</a> for the full pricing menu.</div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ Section 4: Closing CTA ============ -->
+        <section id="get-started" class="py-12 sm:py-16 bg-gray-50 border-t border-gray-100">
             <div class="max-w-4xl mx-auto px-6">
                 <div class="rounded-3xl bg-blue-950 text-white p-8 sm:p-12 text-center shadow-xl">
                     <h2 class="text-2xl sm:text-3xl font-black text-white">Questions about a quote?</h2>
-                    <p class="text-slate-300 mt-3 max-w-2xl mx-auto">We would rather answer it now than have it come up on an invoice. Reach out and we will walk you through exactly how your job is priced.</p>
+                    <p class="text-slate-300 mt-3 max-w-2xl mx-auto">We would rather answer it now than have it come up on an invoice. Reach out and we will walk you through exactly how your job is priced &mdash; labor, materials, and all.</p>
                     <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
-                        <a href="tel:+12483853432" class="inline-flex items-center justify-center gap-2.5 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3.5 rounded-xl transition duration-200 shadow-lg hover:shadow-green-600/30 hover:-translate-y-0.5"><i class="fas fa-phone" aria-hidden="true"></i> Call Now! (248) 385-3432</a>
                         <a href="/book" class="inline-flex items-center justify-center gap-2.5 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3.5 rounded-xl transition duration-200 shadow-lg hover:shadow-red-600/30 hover:-translate-y-0.5"><i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Get a Free Quote</a>
-                        <a href="/rates" class="inline-flex items-center justify-center gap-2.5 bg-slate-800/90 hover:bg-slate-700 text-white font-bold px-5 py-3.5 rounded-xl border border-slate-700 transition duration-200 shadow-lg hover:-translate-y-0.5"><i class="fas fa-tags text-red-400" aria-hidden="true"></i> See Full Rates</a>
+                        <a href="tel:+12483853432" class="inline-flex items-center justify-center gap-2.5 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3.5 rounded-xl transition duration-200 shadow-lg hover:shadow-green-600/30 hover:-translate-y-0.5"><i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432</a>
                     </div>
+                    <p class="mt-6">
+                        <a href="/rates" class="inline-flex items-center gap-2 text-sm font-bold text-red-300 hover:text-white underline decoration-red-400/40 underline-offset-4 transition">See our full rates and flat-rate menu <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    </p>
+                    <p class="mt-4 text-xs text-slate-400">Serving homeowners across Oakland County, Michigan.</p>
                 </div>
             </div>
         </section>
