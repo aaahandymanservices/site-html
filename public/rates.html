@@ -216,6 +216,11 @@
             .service-card { animation: none !important; }
             .service-card:hover { transform: none !important; }
         }
+
+        /* Flat-rate menu accordion. Collapsed by default via the `hidden`
+           attribute on the body; the toggle button flips aria-expanded and
+           this CSS rotates the chevron accordingly. */
+        [data-accordion-toggle][aria-expanded="true"] .aaa-accordion-icon { transform: rotate(180deg); }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -1898,6 +1903,19 @@
     <script src="/js/booking-widget.js?v=20260810b" defer></script>
     <script src="/js/quote-calculator.js?v=20260729b" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
+    <script>
+        (function () {
+            var btn = document.querySelector('[data-accordion-toggle][aria-controls="flat-rate-body"]');
+            var body = document.getElementById('flat-rate-body');
+            if (!btn || !body) return;
+            btn.addEventListener('click', function () {
+                var open = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+                if (open) body.setAttribute('hidden', '');
+                else body.removeAttribute('hidden');
+            });
+        })();
+    </script>
     <script>
       // Registered after load so it never competes with the first render.
       if ('serviceWorker' in navigator) {
