@@ -240,6 +240,12 @@
             }
         }
 
+        /* Give the heading extra top margin so the "Parts warrantied" badge
+           doesn't overlap it. */
+        .option-b-card h3 {
+            margin-top: 1.5rem; /* Adjust value as needed */
+        }
+
         /* FAQ accordion: native <details>, so open/closed state, keyboard
            operation, and find-in-page all work before any JavaScript runs. */
         .pp-faq {
@@ -460,7 +466,7 @@
                             </div>
                         </article>
 
-                        <article class="relative flex flex-col p-6 sm:p-7 bg-white border-2 border-red-600 rounded-3xl shadow-lg">
+                        <article class="option-b-card relative flex flex-col p-6 sm:p-7 bg-white border-2 border-red-600 rounded-3xl shadow-lg">
                             <span class="absolute -top-3 right-5 bg-red-600 text-white text-[0.65rem] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md">Parts warrantied</span>
                             <div class="flex items-center gap-3 mb-4">
                                 <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-red-100 text-red-700 shrink-0 text-lg"><i class="fas fa-truck-fast" aria-hidden="true"></i></span>
