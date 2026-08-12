@@ -361,45 +361,6 @@
   font-weight: 600;
 }
 
-/* ---------- Mobile sticky CTA bar ---------- */
-.mobile-cta-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 45;
-  display: none;
-  grid-template-columns: 1fr 1fr;
-  gap: .5rem;
-  padding: .5rem .75rem calc(.5rem + env(safe-area-inset-bottom, 0px));
-  background: rgba(255,255,255,.97);
-  backdrop-filter: blur(8px);
-  border-top: 1px solid #e5e7eb;
-  box-shadow: 0 -6px 18px -10px rgba(0,0,0,.35);
-}
-.mobile-cta-bar a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: .45rem;
-  font-weight: 800;
-  font-size: .9rem;
-  padding: .85rem .5rem;
-  border-radius: .6rem;
-  text-decoration: none;
-  color: #fff;
-}
-.mobile-cta-bar .mcta-call { background: #16a34a; }
-.mobile-cta-bar .mcta-call:hover { background: #15803d; }
-.mobile-cta-bar .mcta-book { background: var(--brand-crimson); }
-.mobile-cta-bar .mcta-book:hover { background: var(--brand-crimson-dark); }
-@media (max-width: 767px) {
-  .mobile-cta-bar { display: grid; }
-  /* Push the floating AI chat / call FABs up so they no longer cover the bar. */
-  body.has-mobile-cta .aaa-fab { bottom: calc(72px + env(safe-area-inset-bottom, 0px) + 16px) !important; }
-  body.has-mobile-cta #back-to-top { bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important; }
-}
-
 /* ---------- Review filter chips (service-areas local section) ---------- */
 .sa-review-filters {
   display: flex;

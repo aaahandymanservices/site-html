@@ -520,13 +520,6 @@
     });
   }
 
-  // ---- Mobile sticky CTA bar ----
-  function initStickyBar() {
-    var bar = document.getElementById("mobile-cta-bar");
-    if (!bar) return;
-    document.body.classList.add("has-mobile-cta");
-  }
-
   // ---- Local review filter chips ----
   // The service-areas page has its own small review section (not the full /reviews grid).
   // We tag each card with the reviewer's city's zone + the service type mentioned in the
@@ -573,7 +566,6 @@
   ready(function () {
     initLookup();
     initMap();
-    initStickyBar();
     initReviewFilters();
   });
 })();
