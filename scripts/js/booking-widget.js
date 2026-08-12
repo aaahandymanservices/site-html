@@ -1005,6 +1005,9 @@
 
     var preselect = options && options.service ? findService(options.service) : null;
     if (preselect) state.service = preselect;
+    if (options && options.city && els.city && !els.city.value.trim()) {
+      els.city.value = options.city;
+    }
     reset();
 
     root.classList.remove('hidden');
@@ -1048,6 +1051,13 @@
     // away, so a link from another page can land someone in the flow.
     if (window.location.hash === '#book-online' && document.querySelector(TRIGGER_SELECTOR)) {
       open({});
+    }
+
+    // A ?city= query param (used by the service-areas page CTAs) opens the
+    // widget with the city pre-filled so the customer keeps their context.
+    var queryCity = new URLSearchParams(window.location.search).get('city');
+    if (queryCity && document.querySelector(TRIGGER_SELECTOR)) {
+      open({ city: queryCity });
     }
   }
 

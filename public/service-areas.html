@@ -76,8 +76,9 @@
     }
     </script>
 
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260802b">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260802b">
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260810b">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260810b">
+    <link rel="stylesheet" href="/css/service-areas.css?v=20260812a">
     <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
 
@@ -273,20 +274,78 @@
                     <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">We proudly serve Oakland County, Michigan. Every city sits in one of two travel zones, and your zone sets the minimum service call for the visit.</p>
                 </div>
 
+                <!-- Interactive zone map with color-coded overlays + clickable city markers -->
                 <div class="max-w-5xl mx-auto mb-8 sm:mb-12">
-                    <div class="rounded-3xl overflow-hidden shadow-lg ring-1 ring-red-600 border-[2px] border-red-600 bg-white">
-                        <iframe
-                            title="Map of our Oakland County, Michigan service area"
-                            src="https://maps.google.com/maps?q=Oakland%20County%2C%20Michigan&z=10&output=embed"
-                            class="w-full h-[320px] sm:h-[420px] border-0"
-                            style="filter: grayscale(0.1);"
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            allowfullscreen></iframe>
+                    <div class="rounded-3xl overflow-hidden shadow-lg ring-1 ring-red-600 border-[2px] border-red-600 bg-slate-900">
+                        <div id="zone-map" class="zone-map" role="region" aria-label="Interactive Oakland County service zone map">
+                            <svg class="zone-map__svg" viewBox="0 0 640 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+                                <defs>
+                                    <radialGradient id="za-fill" cx="46%" cy="50%" r="42%">
+                                        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+                                        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.08"/>
+                                    </radialGradient>
+                                    <radialGradient id="zb-fill" cx="46%" cy="50%" r="48%">
+                                        <stop offset="0%" stop-color="#fb923c" stop-opacity="0"/>
+                                        <stop offset="78%" stop-color="#fb923c" stop-opacity="0.04"/>
+                                        <stop offset="100%" stop-color="#fb923c" stop-opacity="0.28"/>
+                                    </radialGradient>
+                                    <linearGradient id="county-fill2" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#1e293b"/>
+                                        <stop offset="100%" stop-color="#0f172a"/>
+                                    </linearGradient>
+                                </defs>
+
+                                <rect x="40" y="30" width="560" height="500" rx="16" fill="url(#county-fill2)" stroke="rgba(148,163,184,0.35)" stroke-width="2"/>
+
+                                <circle cx="298" cy="282" r="150" fill="url(#za-fill)" stroke="rgba(56,189,248,0.65)" stroke-width="2" stroke-dasharray="5 6"/>
+                                <circle cx="298" cy="282" r="225" fill="url(#zb-fill)" stroke="rgba(251,146,60,0.6)" stroke-width="2" stroke-dasharray="5 6"/>
+
+                                <g stroke="rgba(148,163,184,0.08)" stroke-width="1" stroke-dasharray="4 7" fill="none">
+                                    <path d="M152 30v500M264 30v500M376 30v500M488 30v500"/>
+                                    <path d="M40 130h560M40 230h560M40 330h560M40 430h560"/>
+                                </g>
+
+                                <g fill="rgba(56,132,196,0.4)" stroke="rgba(147,197,235,0.32)" stroke-width="1.2">
+                                    <ellipse cx="232" cy="296" rx="20" ry="11" transform="rotate(-12 232 296)"/>
+                                    <ellipse cx="266" cy="322" rx="24" ry="13" transform="rotate(8 266 322)"/>
+                                    <ellipse cx="303" cy="348" rx="15" ry="10" transform="rotate(-18 303 348)"/>
+                                    <ellipse cx="180" cy="312" rx="16" ry="9"/>
+                                    <ellipse cx="333" cy="378" rx="13" ry="8" transform="rotate(14 333 378)"/>
+                                </g>
+
+                                <g fill="none" stroke="rgba(148,163,184,0.28)" stroke-width="2.6" stroke-linecap="round">
+                                    <path d="M248 30 276 196 404 252 470 330 522 432 556 530"/>
+                                </g>
+                                <text x="290" y="212" font-size="10" font-weight="700" letter-spacing="0.1em" fill="rgba(226,232,240,0.5)">I-75</text>
+
+                                <g transform="translate(298 282)">
+                                    <circle r="4" fill="#10b981" stroke="#fff" stroke-width="1.5"/>
+                                    <text y="-10" text-anchor="middle" font-size="9" font-weight="700" fill="rgba(226,232,240,0.7)">Waterford</text>
+                                </g>
+
+                                <g transform="translate(566 72)">
+                                    <circle r="15" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                                    <path d="M0 -9 4 3 0 0.4 -4 3Z" fill="rgba(255,255,255,0.7)"/>
+                                    <text y="-19" text-anchor="middle" font-size="9" font-weight="700" fill="rgba(255,255,255,0.55)">N</text>
+                                </g>
+
+                                <text x="60" y="514" font-size="11" font-weight="700" letter-spacing="0.2em" fill="rgba(226,232,240,0.35)">OAKLAND COUNTY, MI</text>
+                            </svg>
+
+                            <div id="zone-map-pins" role="group" aria-label="Clickable city service markers"></div>
+                            <div id="zone-map-popup" class="zone-map__popup" hidden></div>
+
+                            <div class="zone-map__legend">
+                                <span><i style="background:#38bdf8;opacity:.6"></i> Zone A · within ~20 mi</span>
+                                <span><i style="background:#fb923c;opacity:.6"></i> Zone B · 20+ mi</span>
+                                <span><i class="fas fa-hand-pointer" aria-hidden="true"></i> Tap a marker</span>
+                            </div>
+                        </div>
                     </div>
-                    <p class="text-center text-xs sm:text-sm text-gray-500 mt-3">Based in Waterford, MI &middot; Serving all of Oakland County</p>
+                    <p class="text-center text-xs sm:text-sm text-gray-500 mt-3">Based in Waterford, MI &middot; Serving all of Oakland County &middot; Tap a marker for the local minimum.</p>
                 </div>
 
+                <!-- Visual Zone Cards — side-by-side comparison -->
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
 
                     <article class="zone-card zone-card-a h-full flex flex-col">
@@ -295,90 +354,53 @@
                                 <h3 class="zone-badge inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-widest">
                                     <i class="zone-icon fas fa-circle-check" aria-hidden="true"></i> Zone A
                                 </h3>
-                                <span class="zone-accent-text text-xs sm:text-sm font-bold uppercase tracking-wider">Within 20 Miles</span>
+                                <span class="zone-accent-text text-xs sm:text-sm font-bold uppercase tracking-wider">Within 20 miles of Waterford</span>
                             </div>
                             <p class="mt-5 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                                <span class="zone-price text-4xl sm:text-5xl font-extrabold tracking-tight">$100</span>
-                                <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-600">Minimum service call</span>
+                                <span class="zone-price text-4xl sm:text-5xl font-extrabold tracking-tight">$100 Minimum</span>
                             </p>
                             <p class="mt-2 text-sm text-gray-600">Covers travel, diagnostics, and the first hour of labor.</p>
                         </div>
 
                         <div class="p-6 sm:p-8 flex-1">
-                            <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">Cities &amp; townships in this zone</p>
-                            <div class="space-y-5">
-                                <div>
-                                    <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2.5">North &amp; West Metro</h4>
-                                    <ul class="flex flex-wrap gap-1.5 list-none m-0 p-0">
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Waterford</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Pontiac</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">West Bloomfield</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Orchard Lake</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Bloomfield Hills</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">White Lake</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Commerce Township</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Walled Lake</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Wixom</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Union Lake</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Davisburg</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2.5">North &amp; East Metro</h4>
-                                    <ul class="flex flex-wrap gap-1.5 list-none m-0 p-0">
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Clarkston</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Independence Township</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Auburn Hills</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Oakland Township</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Utica</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2.5">Northeast &amp; East</h4>
-                                    <ul class="flex flex-wrap gap-1.5 list-none m-0 p-0">
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Oxford</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Lake Orion</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Orion Township</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Rochester</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Rochester Hills</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Troy</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2.5">South &amp; Southeast Metro</h4>
-                                    <ul class="flex flex-wrap gap-1.5 list-none m-0 p-0">
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Berkley</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Pleasant Ridge</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Birmingham</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Franklin</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Beverly Hills</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Clawson</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Madison Heights</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Hazel Park</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Oak Park</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Ferndale</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Pontiac Heights</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Farmington Hills</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2.5">Southwest</h4>
-                                    <ul class="flex flex-wrap gap-1.5 list-none m-0 p-0">
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Novi</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2.5">West Outlying Areas</h4>
-                                    <ul class="flex flex-wrap gap-1.5 list-none m-0 p-0">
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Milford</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Highland</li>
-                                    </ul>
-                                </div>
+                            <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">Cities in this zone</p>
+                            <div class="zone-chip-grid">
+                                <span class="zone-chip">Waterford</span>
+                                <span class="zone-chip">Pontiac</span>
+                                <span class="zone-chip">West Bloomfield</span>
+                                <span class="zone-chip">Orchard Lake</span>
+                                <span class="zone-chip">Bloomfield Hills</span>
+                                <span class="zone-chip">White Lake</span>
+                                <span class="zone-chip">Commerce</span>
+                                <span class="zone-chip">Walled Lake</span>
+                                <span class="zone-chip">Wixom</span>
+                                <span class="zone-chip">Union Lake</span>
+                                <span class="zone-chip">Davisburg</span>
+                                <span class="zone-chip">Clarkston</span>
+                                <span class="zone-chip">Independence Twp.</span>
+                                <span class="zone-chip">Auburn Hills</span>
+                                <span class="zone-chip">Oakland Twp.</span>
+                                <span class="zone-chip">Utica</span>
+                                <span class="zone-chip">Oxford</span>
+                                <span class="zone-chip">Lake Orion</span>
+                                <span class="zone-chip">Orion Twp.</span>
+                                <span class="zone-chip">Rochester</span>
+                                <span class="zone-chip">Rochester Hills</span>
+                                <span class="zone-chip">Troy</span>
+                                <span class="zone-chip">Berkley</span>
+                                <span class="zone-chip">Pleasant Ridge</span>
+                                <span class="zone-chip">Birmingham</span>
+                                <span class="zone-chip">Franklin</span>
+                                <span class="zone-chip">Beverly Hills</span>
+                                <span class="zone-chip">Clawson</span>
+                                <span class="zone-chip">Madison Heights</span>
+                                <span class="zone-chip">Hazel Park</span>
+                                <span class="zone-chip">Oak Park</span>
+                                <span class="zone-chip">Ferndale</span>
+                                <span class="zone-chip">Farmington Hills</span>
+                                <span class="zone-chip">Novi</span>
+                                <span class="zone-chip">Milford</span>
+                                <span class="zone-chip">Highland</span>
                             </div>
                         </div>
                     </article>
@@ -389,63 +411,42 @@
                                 <h3 class="zone-badge inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-widest">
                                     <i class="zone-icon fas fa-circle-info" aria-hidden="true"></i> Zone B
                                 </h3>
-                                <span class="zone-accent-text text-xs sm:text-sm font-bold uppercase tracking-wider">Extended County / 20+ Miles</span>
+                                <span class="zone-accent-text text-xs sm:text-sm font-bold uppercase tracking-wider">Extended Travel / 20+ miles</span>
                             </div>
                             <p class="mt-5 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                                <span class="zone-price text-4xl sm:text-5xl font-extrabold tracking-tight">$145</span>
-                                <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-600">Minimum service call</span>
+                                <span class="zone-price text-4xl sm:text-5xl font-extrabold tracking-tight">$145 Minimum</span>
                             </p>
                             <p class="mt-2 text-sm text-gray-600">Covers the longer drive, diagnostics, and the first hour of labor.</p>
+                            <p class="mt-3">
+                                <span class="zone-diff-badge"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> +$45 extended-travel differential</span>
+                            </p>
                         </div>
 
                         <div class="p-6 sm:p-8 flex-1">
-                            <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">Cities &amp; townships in this zone</p>
-                            <div class="space-y-5">
-                                <div>
-                                    <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2.5">Far North &amp; Northwest</h4>
-                                    <ul class="flex flex-wrap gap-1.5 list-none m-0 p-0">
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Holly</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Groveland Township</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Ortonville</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Brandon Township</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2.5">Northeast &amp; East</h4>
-                                    <ul class="flex flex-wrap gap-1.5 list-none m-0 p-0">
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Leonard</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Addison Township</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2.5">South &amp; Southeast</h4>
-                                    <ul class="flex flex-wrap gap-1.5 list-none m-0 p-0">
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Royal Oak</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Huntington Woods</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Southfield</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-bold text-gray-700 uppercase tracking-wider text-xs mb-2.5">Southwest</h4>
-                                    <ul class="flex flex-wrap gap-1.5 list-none m-0 p-0">
-                                        <li class="zone-chip px-2.5 py-1 text-sm">South Lyon</li>
-                                        <li class="zone-chip px-2.5 py-1 text-sm">Lyon Township</li>
-                                    </ul>
-                                </div>
+                            <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">Cities in this zone</p>
+                            <div class="zone-chip-grid">
+                                <span class="zone-chip">Holly</span>
+                                <span class="zone-chip">Groveland Twp.</span>
+                                <span class="zone-chip">Ortonville</span>
+                                <span class="zone-chip">Brandon Twp.</span>
+                                <span class="zone-chip">Leonard</span>
+                                <span class="zone-chip">Addison Twp.</span>
+                                <span class="zone-chip">Royal Oak</span>
+                                <span class="zone-chip">Huntington Woods</span>
+                                <span class="zone-chip">Southfield</span>
+                                <span class="zone-chip">South Lyon</span>
+                                <span class="zone-chip">Lyon Twp.</span>
                             </div>
 
                             <p class="zone-note mt-6 flex items-start gap-2 p-4 text-sm text-gray-600">
-                                <i class="zone-icon fas fa-triangle-exclamation mt-0.5" aria-hidden="true"></i>
-                                <span>Zone B is the same labor math as Zone A plus a flat <strong class="text-gray-800">$45</strong> extended-travel differential.</span>
+                                <i class="zone-icon fas fa-circle-info mt-0.5" aria-hidden="true"></i>
+                                <span>Zone B is the same labor math as Zone A, plus a flat <strong class="text-gray-800">$45</strong> extended-travel differential for the longer drive.</span>
                             </p>
                         </div>
                     </article>
                 </div>
 
-                <p class="max-w-3xl mx-auto mt-8 text-center text-sm sm:text-base text-gray-600">
+<p class="max-w-3xl mx-auto mt-8 text-center text-sm sm:text-base text-gray-600">
                     Your zone sets only the Minimum Service Call, which covers travel, diagnostics, and up to the first hour of labor. Continuous labor after the first hour is billed at a flat <strong>$70/hour</strong> in quarter-hour increments. See the <a href="/rates" class="text-red-600 font-semibold underline underline-offset-2 hover:text-red-700">full rates &amp; packages</a> for details.
                 </p>
 
@@ -593,12 +594,25 @@
                                 <i class="fas fa-search-location text-lg" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <div id="checker-result" class="mt-3 text-sm font-semibold text-center hidden p-3 rounded-xl"></div>
+                        <div id="checker-result" class="zone-lookup-result hidden" aria-live="polite" role="status" hidden></div>
                     </div>
-                    <div class="mt-8 text-center">
+                    <p class="text-center text-xs text-gray-500 mt-3">Type to see your zone instantly &mdash; Zone A ($100), Zone B ($145), or outside Oakland County.</p>
+                    <div class="mt-10">
 
-                        <div class="flex flex-col md:flex-row justify-center gap-6 max-w-4xl mx-auto mb-8 text-left">
-                            <div class="bg-gray-50 p-5 rounded-2xl border border-gray-150 flex-1 shadow-sm">
+                        <div class="text-center mb-5">
+                            <h3 class="text-xl sm:text-2xl font-bold text-blue-900">What Customers in Your Area Are Saying</h3>
+                            <p class="text-sm text-gray-600 mt-1">Filter by zone or service type to find stories from your neighborhood.</p>
+                            <div class="sa-review-filters mt-4" role="group" aria-label="Filter customer reviews">
+                            <button type="button" class="sa-review-filter" data-filter="all" aria-pressed="true">All</button>
+                            <button type="button" class="sa-review-filter" data-filter="zone-a" aria-pressed="false">Zone A</button>
+                            <button type="button" class="sa-review-filter" data-filter="zone-b" aria-pressed="false">Zone B</button>
+                            <button type="button" class="sa-review-filter" data-filter="drywall" aria-pressed="false">Drywall</button>
+                            <button type="button" class="sa-review-filter" data-filter="deck" aria-pressed="false">Deck Repair</button>
+                        </div>
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
+                            <div class="sa-review-card bg-gray-50 p-5 rounded-2xl border border-gray-150 flex-1 shadow-sm" data-city="Troy, MI" data-tag="Drywall, Deck Repair">
                                 <div class="flex items-center gap-1 text-yellow-500 mb-2" role="img" aria-label="Rated 5 out of 5 stars">
                                     <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
                                     <span class="text-xs font-bold text-gray-500 ml-2">Verified Customer</span>
@@ -606,7 +620,7 @@
                                 <p class="text-sm text-gray-700 italic">"This team is fantastic! They repaired our drywall and deck quickly, professionally, and stayed exactly within the initial quote. Absolute lifesaver."</p>
                                 <p class="text-xs font-bold text-gray-600 mt-2">&mdash; Sarah K., Troy, MI</p>
                             </div>
-                            <div class="bg-gray-50 p-5 rounded-2xl border border-gray-150 flex-1 shadow-sm">
+                            <div class="sa-review-card bg-gray-50 p-5 rounded-2xl border border-gray-150 flex-1 shadow-sm" data-city="Waterford, MI" data-tag="General Repair">
                                 <div class="flex items-center gap-1 text-yellow-500 mb-2" role="img" aria-label="Rated 5 out of 5 stars">
                                     <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
                                     <span class="text-xs font-bold text-gray-500 ml-2">Verified Customer</span>
@@ -719,9 +733,18 @@
 
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
-    <script src="/js/service-area-checker.js?v=20260729b" defer></script>
+    <!-- Mobile-only sticky bottom CTA bar — keeps Call + Book one tap away on small screens.
+         The floating AI Chat / Call FABs are lifted above this bar via body.has-mobile-cta
+         in service-areas.css so they no longer overlap the map or text. -->
+    <nav id="mobile-cta-bar" class="mobile-cta-bar" aria-label="Quick actions">
+        <a class="mcta-call" href="tel:+12483853432"><i class="fas fa-phone" aria-hidden="true"></i> <span>Call Now: (248) 385-3432</span></a>
+        <a class="mcta-book" href="/book" data-booking-widget><i class="fas fa-calendar-check" aria-hidden="true"></i> <span>Book Online</span></a>
+    </nav>
 
-    <script src="/js/site.js?v=20260802b" defer></script>
+    <script src="/js/service-areas-page.js?v=20260812a" defer></script>
+
+    <script src="/js/site.js?v=20260810b" defer></script>
+    <script src="/js/booking-widget.js?v=20260810b" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
     <script>
       // Registered after load so it never competes with the first render.

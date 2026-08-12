@@ -54,7 +54,6 @@
 .fa-money-bill-wave:before{content:"\f53a"}
 .fa-air-freshener:before,.fa-spray-can-sparkles:before{content:"\f5d0"}
 .fa-star:before{content:"\f005"}
-.fa-box:before{content:"\f466"}
 .fa-file-invoice-dollar:before{content:"\f571"}
 .fa-wheelchair:before{content:"\f193"}
 .fa-fire:before{content:"\f06d"}
@@ -101,6 +100,7 @@
 .fa-floppy-disk:before,.fa-save:before{content:"\f0c7"}
 .fa-comment-dots:before,.fa-commenting:before{content:"\f4ad"}
 .fa-hand-holding-dollar:before,.fa-hand-holding-usd:before{content:"\f4c0"}
+.fa-hand-pointer:before{content:"\f25a"}
 .fa-phone:before{content:"\f095"}
 .fa-calendar-times:before,.fa-calendar-xmark:before{content:"\f273"}
 .fa-arrow-left:before{content:"\f060"}
