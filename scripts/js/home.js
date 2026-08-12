@@ -280,8 +280,8 @@
                   setTimeout(loadReviews, 1200);
               }
           };
-          if (document.readyState === 'complete') whenIdle();
-          else window.addEventListener('load', whenIdle, { once: true });
+        if (document.readyState === 'complete') whenIdle();
+        else window.addEventListener('load', whenIdle, { once: true });
       }
   })();
 })();
