@@ -33,7 +33,7 @@
     const hideResult = () => { resultBox.className = 'hidden'; resultBox.innerHTML = ''; };
 
     const showFallback = (html) => {
-      resultBox.className = 'mt-3 text-sm font-semibold text-center p-3 rounded-xl bg-amber-50 text-amber-800 border border-amber-200';
+      resultBox.className = 'mt-3 text-sm font-semibold text-center p-3 rounded-xl bg-red-50 text-red-800 border border-red-200';
       resultBox.innerHTML = html;
     };
 
@@ -61,8 +61,8 @@
       if (lookupUnavailable) {
         if (query.length < 3) { hideResult(); return; }
         showFallback(
-          '<i class="fas fa-info-circle text-amber-700 mr-1.5" aria-hidden="true"></i> We can\'t check addresses right now &mdash; but we serve all of Oakland County, MI. ' +
-          '<a href="tel:+12483853432" class="underline hover:text-amber-950 font-bold ml-1.5">Call (248) 385-3432 to confirm your street</a>'
+          '<i class="fas fa-info-circle text-red-700 mr-1.5" aria-hidden="true"></i> We can\'t check addresses right now &mdash; but we serve all of Oakland County, MI. ' +
+          '<a href="tel:+12483853432" class="underline hover:text-red-900 font-bold ml-1.5">Call (248) 385-3432 to confirm your street</a>'
         );
         return;
       }
@@ -84,8 +84,8 @@
         // than answering the question that was asked, which was whether we drive
         // to this house. Lead with the answer instead.
         showFallback(
-          '<i class="fas fa-info-circle text-amber-700 mr-1.5" aria-hidden="true"></i> We serve all of Oakland County, MI &mdash; including you, most likely. ' +
-          '<a href="tel:+12483853432" class="underline hover:text-amber-950 font-bold ml-1.5">Call (248) 385-3432 to confirm your street</a>'
+          '<i class="fas fa-info-circle text-red-700 mr-1.5" aria-hidden="true"></i> We serve all of Oakland County, MI &mdash; including you, most likely. ' +
+          '<a href="tel:+12483853432" class="underline hover:text-red-900 font-bold ml-1.5">Call (248) 385-3432 to confirm your street</a>'
         );
       } else {
         hideResult();

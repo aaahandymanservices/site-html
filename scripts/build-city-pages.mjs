@@ -141,9 +141,9 @@ function navLink(href, label, active) {
 }
 
 function serviceChip(s) {
-  return `                <a href="/services#${esc(s.anchor)}" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas ${esc(s.icon)}" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">${esc(s.label)}</span>
+  return `                <a href="/services#${esc(s.anchor)}" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas ${esc(s.icon)}" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-red-800 transition-colors">${esc(s.label)}</span>
                 </a>`;
 }
 
@@ -264,17 +264,17 @@ ${getUnifiedNav('service-areas')}
                 <span class="mx-2">/</span>
                 <span class="text-white font-semibold">${esc(city.name)}</span>
             </nav>
-            <div class="badge-craftsman-gold text-xs sm:text-base mb-3 inline-flex">${esc(city.region)} &middot; Oakland County, MI</div>
+            <div class="badge-craftsman text-xs sm:text-base mb-3 inline-flex">${esc(city.region)} &middot; Oakland County, MI</div>
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">Handyman in ${esc(city.name)}, Michigan</h1>
-            <p class="text-sm sm:text-base font-semibold text-amber-300 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving ${esc(city.name)} &amp; surrounding Oakland County communities</p>
+            <p class="text-sm sm:text-base font-semibold text-red-200 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving ${esc(city.name)} &amp; surrounding Oakland County communities</p>
             <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
                 Trusted, locally owned home repair and maintenance for ${esc(city.name)} homeowners. No job too small &mdash; backed by our 1-Year Workmanship Guarantee and honest, upfront pricing.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="/book?service=General+Estimate+%2F+Quote&amp;city=${enc(city.name)}" class="btn-craftsman-gold text-base px-6 py-3.5 rounded-xl shadow-lg">
+                <a href="/book?service=General+Estimate+%2F+Quote&amp;city=${enc(city.name)}" class="btn-craftsman text-base px-6 py-3.5 rounded-xl shadow-lg">
                     <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Get a Free Quote
                 </a>
-                <a href="tel:${PHONE_TEL}" class="bg-slate-900/90 hover:bg-slate-900 text-white font-bold text-base px-6 py-3.5 rounded-xl border border-amber-400/40 hover:border-amber-400 shadow-lg transition flex items-center justify-center gap-2">
+                <a href="tel:${PHONE_TEL}" class="bg-slate-900/90 hover:bg-slate-900 text-white font-bold text-base px-6 py-3.5 rounded-xl border border-red-500/40 hover:border-red-500 shadow-lg transition flex items-center justify-center gap-2">
                     <i class="fas fa-phone text-emerald-400" aria-hidden="true"></i> Call Now! ${PHONE_DISPLAY}
                 </a>
             </div>
@@ -301,13 +301,13 @@ ${getUnifiedNav('service-areas')}
                         <p class="text-sm text-gray-500 mt-1">${esc(zone.label)}</p>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
-                        <li class="flex items-start gap-2"><i class="fas fa-tag text-[#F5A623] mt-1" aria-hidden="true"></i><span><strong>${esc(zone.rate)} minimum service call</strong> &mdash; covers travel, diagnostics, and the first hour of labor.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-clock text-[#F5A623] mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-box-open text-[#F5A623] mt-1" aria-hidden="true"></i><span>Labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-map-pin text-[#F5A623] mt-1" aria-hidden="true"></i><span>ZIP codes served: ${esc(city.zips.join(', '))}.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-[#F5A623] mt-1" aria-hidden="true"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-tag text-red-600 mt-1" aria-hidden="true"></i><span><strong>${esc(zone.rate)} minimum service call</strong> &mdash; covers travel, diagnostics, and the first hour of labor.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-box-open text-red-600 mt-1" aria-hidden="true"></i><span>Labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-map-pin text-red-600 mt-1" aria-hidden="true"></i><span>ZIP codes served: ${esc(city.zips.join(', '))}.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1" aria-hidden="true"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
                     </ul>
-                    <a href="${quoteHref(city.name)}" class="btn-craftsman-gold mt-6 w-full text-center font-bold px-6 py-3 rounded-xl shadow-md">
+                    <a href="${quoteHref(city.name)}" class="btn-craftsman mt-6 w-full text-center font-bold px-6 py-3 rounded-xl shadow-md">
                         <i class="fas fa-calendar-check" aria-hidden="true"></i> Request Service in ${esc(city.name)}
                     </a>
                     <a href="/rates" class="mt-3 block text-center text-sm text-gray-500 hover:text-red-600 underline underline-offset-2">See full rates &amp; packages</a>

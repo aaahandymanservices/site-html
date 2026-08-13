@@ -194,7 +194,7 @@
       ).join('');
 
       const badgeColors = {
-          'Carpentry & Trim': 'bg-amber-100 text-amber-800',
+          'Carpentry & Trim': 'bg-red-100 text-red-800',
           'Doors': 'bg-emerald-100 text-emerald-800',
           'Drywall': 'bg-neutral-100 text-neutral-800',
           'Painting': 'bg-pink-100 text-pink-800',
@@ -217,7 +217,7 @@
                       <span class="absolute top-4 left-4 ${badgeStyle} text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md">${escapeHTML(item.projectType || 'Service')}</span>
                   </div>
                   <div class="p-6 flex flex-col flex-grow">
-                      <div class="text-amber-500 text-lg flex gap-1 mb-3" role="img" aria-label="${escapeHTML(item.rating)} out of 5 stars">${stars(Number(item.rating) || 0)}</div>
+                      <div class="text-red-600 text-lg flex gap-1 mb-3" role="img" aria-label="${escapeHTML(item.rating)} out of 5 stars">${stars(Number(item.rating) || 0)}</div>
                       <p class="text-gray-700 leading-relaxed italic flex-grow">"${escapeHTML(item.review || '')}"</p>
                       <div class="mt-5 pt-4 border-t border-gray-100 flex items-center gap-3">
                           <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm uppercase">${initial}</div>

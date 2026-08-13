@@ -143,7 +143,7 @@
     var zoneChip = document.createElement('span');
     zoneChip.className =
       city.zone === 'B'
-        ? 'rounded-full bg-amber-500/20 px-2.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wide text-amber-200'
+        ? 'rounded-full bg-red-600/20 px-2.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wide text-red-200'
         : 'rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wide text-emerald-200';
     var zone = Object.prototype.hasOwnProperty.call(data.zones, city.zone) ? data.zones[city.zone] : null;
     // zones[].rate reads "$100 Minimum Service Call" -- too long for a chip, so

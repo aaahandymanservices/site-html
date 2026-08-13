@@ -24,7 +24,7 @@
       if (adminAccessLabel && adminAccessBtn) {
           if (adminToken) {
               adminAccessLabel.textContent = 'Owner Access On';
-              adminAccessBtn.className = 'bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 px-4 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md';
+              adminAccessBtn.className = 'bg-red-600/20 text-red-200 border border-red-600/40 hover:bg-red-600/30 px-4 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md';
           } else {
               adminAccessLabel.textContent = 'Owner Access';
               adminAccessBtn.className = 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md';
@@ -208,10 +208,10 @@
           if (icon) {
               if (val <= rating) {
                   icon.className = 'fas fa-star';
-                  btn.className = 'star-rating-btn text-2xl text-amber-400 focus:outline-none';
+                  btn.className = 'star-rating-btn text-2xl text-red-300 focus:outline-none';
               } else {
                   icon.className = 'far fa-star';
-                  btn.className = 'star-rating-btn text-2xl text-gray-300 hover:text-amber-300 focus:outline-none';
+                  btn.className = 'star-rating-btn text-2xl text-gray-300 hover:text-red-200 focus:outline-none';
               }
               icon.setAttribute('aria-hidden', 'true');
           }
@@ -522,7 +522,7 @@
   };
 
   const badgeColors = {
-      'Carpentry & Trim': 'bg-amber-100 text-amber-800 border-amber-200',
+      'Carpentry & Trim': 'bg-red-100 text-red-800 border-red-200',
       'Doors': 'bg-emerald-100 text-emerald-800 border-emerald-200',
       'Drywall': 'bg-neutral-100 text-neutral-800 border-neutral-200',
       'Painting': 'bg-pink-100 text-pink-800 border-pink-200',
@@ -627,7 +627,7 @@
       return `
           <div class="mt-4 bg-blue-950/95 text-slate-100 rounded-2xl p-4 border-l-4 border-red-600">
               <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 mb-2">
-                  <span class="inline-flex items-center gap-1.5 bg-amber-400/15 text-amber-200 border border-amber-300/40 rounded-full pl-2 pr-2.5 py-1 text-[10px] font-bold uppercase tracking-wider">
+                  <span class="inline-flex items-center gap-1.5 bg-red-500/15 text-red-200 border border-red-300/40 rounded-full pl-2 pr-2.5 py-1 text-[10px] font-bold uppercase tracking-wider">
                       ${HAMMER_SVG} Craftsman Note
                   </span>
                   <span class="text-[11px] font-semibold text-slate-400">Victor · Owner, AAA Handyman Services LLC</span>
@@ -728,7 +728,7 @@
           </div>
           <div class="p-6 flex flex-col flex-1">
               <div class="flex items-center justify-between gap-3 mb-4">
-                  <div class="text-amber-500 text-lg flex gap-1" role="img" aria-label="${escapeHTML(item.rating)} out of 5 stars">
+                  <div class="text-red-600 text-lg flex gap-1" role="img" aria-label="${escapeHTML(item.rating)} out of 5 stars">
                       ${stars(Number(item.rating) || 0)}
                   </div>
                   <span class="inline-flex items-center gap-1 text-xs font-semibold text-gray-500">
@@ -1068,7 +1068,7 @@
           </div>
           ${photo}
           <div class="flex items-center gap-2 mt-2">
-              <span class="text-amber-500 text-[13px] flex gap-0.5" role="img" aria-label="${escapeHTML(featured.rating)} out of 5 stars">${stars(Number(featured.rating) || 0)}</span>
+              <span class="text-red-600 text-[13px] flex gap-0.5" role="img" aria-label="${escapeHTML(featured.rating)} out of 5 stars">${stars(Number(featured.rating) || 0)}</span>
               <span class="text-[11px] font-bold text-gray-500 truncate">${escapeHTML(featured.projectType)}</span>
           </div>
           <p class="text-sm text-gray-800 font-semibold leading-snug mt-2">“${escapeHTML(mapExcerptOf(featured))}”</p>
