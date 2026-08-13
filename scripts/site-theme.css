@@ -3458,177 +3458,157 @@ html.bw-open body {
    A cohesive, high-end dark-mode polish layered on top of the base theme:
    vivid crimson CTAs with expanding glow, frosted-glass cards on dark
    surfaces, metallic headline gradients, ambient radial spotlights, and a
-   gentle pulse on floating action buttons. Every rule here inherits the
-   reduced-motion safeguards near the top of the file (animation-duration is
-   clamped to 0.01ms under `prefers-reduced-motion: reduce`), so nothing
-   below moves for visitors who ask it not to.
-
-   The site is light-mode by default with dark hero/footer/forms, so the
-   glassmorphism and metallic-text treatments are scoped to elements that
-   already sit on dark canvases. Applying a white -> slate metallic fill to
-   a light-background heading would render it invisible, and a 4% white
-   frosted fill on a white card would erase it.
+   gentle pulse on floating action buttons.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    1. Color palette & primary action glow
    --------------------------------------------------------------------------
-   Primary CTAs ("Book Online — Free Quote", .cta-button, the hero book
-   button) move to a vivid crimson gradient with a soft outer glow that
-   expands on hover. The 0.3s ease timing is the directive's; the site's
-   --dur token stays 200ms for the rest of the theme. */
+   Primary CTAs ("Book Online — Free Quote", .cta-button, .pulse-btn, etc.)
+   upgrade to a vivid crimson gradient with a soft outer glow that expands
+   on hover with smooth 0.3s ease transitions. */
 
 :root {
   --grad-crimson-vivid: linear-gradient(135deg, #e63946 0%, #d62828 100%);
   --crimson-glow: rgba(230, 57, 70, 0.4);
-  --crimson-glow-hover: rgba(230, 57, 70, 0.55);
+  --crimson-glow-hover: rgba(230, 57, 70, 0.65);
 }
 
-/* Primary call-to-action buttons — vivid crimson gradient with expanding glow */
-.cta-button {
-  background: var(--grad-crimson-vivid);
-  box-shadow: 0 8px 22px -6px var(--crimson-glow), var(--shadow-sm);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+/* Primary call-to-action buttons — vivid crimson gradient with expanding outer glow */
+.cta-button,
+.pulse-btn,
+.btn-primary,
+.btn-crimson,
+a.btn-crimson,
+button.btn-crimson,
+.aaa-chat-launch,
+.btn-vivid-cta,
+a[href*="/book"].btn {
+  background: var(--grad-crimson-vivid) !important;
+  box-shadow: 0 8px 24px var(--crimson-glow) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, filter 0.3s ease !important;
 }
 
-.cta-button:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 16px 34px -8px var(--crimson-glow-hover), 0 4px 10px -3px var(--crimson-glow), var(--shadow-md);
+.cta-button:hover,
+.pulse-btn:hover,
+.btn-primary:hover,
+.btn-crimson:hover,
+a.btn-crimson:hover,
+button.btn-crimson:hover,
+.aaa-chat-launch:hover,
+.btn-vivid-cta:hover,
+a[href*="/book"].btn:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 12px 32px var(--crimson-glow-hover), 0 0 20px var(--crimson-glow) !important;
+  background: linear-gradient(135deg, #ee4250 0%, #dc2828 100%) !important;
 }
 
-.cta-button:active {
-  transform: translateY(0) scale(0.99);
-}
-
-/* The hero "Book Online — Free Quote" button carries .pulse-btn, which the
-   base theme renders as a flat crimson square. Upgrade it to the same vivid
-   gradient + glow so the two primary actions read as one component. */
-.pulse-btn {
-  background: var(--grad-crimson-vivid);
-  box-shadow: 0 10px 26px -6px var(--crimson-glow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-}
-
-.pulse-btn:hover {
-  background: linear-gradient(135deg, #e63946 0%, #c41e1e 100%);
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 18px 38px -8px var(--crimson-glow-hover);
+.cta-button:active,
+.pulse-btn:active,
+.btn-primary:active,
+.btn-crimson:active,
+a.btn-crimson:active,
+button.btn-crimson:active {
+  transform: translateY(0) scale(0.99) !important;
 }
 
 /* --------------------------------------------------------------------------
-   2. Glassmorphism & depth on dark-surfaced structural elements
+   2. Glassmorphism & depth on structural cards, badges & service blocks
    --------------------------------------------------------------------------
-   Frosted-glass cards, hero pills, badges, and service blocks that sit on
-   dark canvases. Light-surface service cards keep their existing treatment
-   but pick up the crimson accent border + lift on hover. */
+   Translucent frosted-glass style applied to structural cards, badges, hero
+   pills, and service blocks with subtle crimson accent shift on hover. */
 
-/* Reusable frosted-glass surface — opt in with .glass-premium, or inherit it
-   via the dark-context selectors below. */
-.glass-premium {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(12px) saturate(140%);
-  -webkit-backdrop-filter: blur(12px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 40px -20px rgba(0, 0, 0, 0.6);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+.glass-card,
+.glass-premium,
+.glass-panel,
+.stat-card,
+.pricing-summary-card,
+.hero-pill,
+.form-card,
+.contact-form-card,
+.book-form-card,
+.badge-crimson,
+.badge-navy,
+.pill-tab {
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(12px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
-.glass-premium:hover {
-  border-color: rgba(230, 57, 70, 0.5);
-  transform: translateY(-4px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 26px 50px -22px rgba(230, 57, 70, 0.35);
+.glass-card:hover,
+.glass-premium:hover,
+.glass-panel:hover,
+.stat-card:hover,
+.pricing-summary-card:hover,
+.hero-pill:hover,
+.form-card:hover,
+.contact-form-card:hover,
+.book-form-card:hover,
+.badge-crimson:hover,
+.badge-navy:hover,
+.pill-tab:hover,
+.service-card:hover,
+.generated-service-card:hover,
+.bw-tile:hover,
+.bw-window:hover:not(:disabled),
+.plan-card:hover {
+  border-color: rgba(230, 57, 70, 0.5) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.5), 0 0 15px rgba(230, 57, 70, 0.25) !important;
 }
 
-/* Hero trust pill ("Master Trade Craftsmanship ...") — already translucent,
-   now tuned to the spec's frosted values with a crimson-accent hover. */
-.hero .inline-flex.items-center.gap-2.rounded-full[class*="backdrop-blur"] {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  backdrop-filter: blur(12px) saturate(140%);
-  -webkit-backdrop-filter: blur(12px) saturate(140%);
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hero .inline-flex.items-center.gap-2.rounded-full[class*="backdrop-blur"]:hover {
-  border-color: rgba(230, 57, 70, 0.5);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px -10px var(--crimson-glow);
-}
-
-/* Booking widget tiles and plan cards already render as translucent dark
-   surfaces — add the spec's frosted hover accent on top of their existing
-   rules. These are lower-specificity class selectors that compound with the
-   base styles rather than fighting them. */
+/* Service blocks & cards frosted base rules */
+.service-card,
+.generated-service-card,
 .bw-tile,
 .bw-window,
 .plan-card {
   backdrop-filter: blur(12px) saturate(130%);
   -webkit-backdrop-filter: blur(12px) saturate(130%);
-}
-
-.bw-tile:hover,
-.bw-window:hover:not(:disabled),
-.plan-card:hover {
-  border-color: rgba(230, 57, 70, 0.5);
-}
-
-/* Light-surface service cards: keep the existing light glass, but align the
-   hover accent to the directive's crimson border + 4px lift. The base theme
-   lifts these 6px for a tuned sheen reveal; the directive asks for 4px, so
-   the hover is restated here at the spec value. */
-.service-card:hover,
-.generated-service-card:hover {
-  border-color: rgba(230, 57, 70, 0.5);
-  transform: translateY(-4px) translateZ(0);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* --------------------------------------------------------------------------
-   3. Metallic headline typography (dark canvases only)
+   3. Metallic headline typography
    --------------------------------------------------------------------------
-   Major section titles and H1 headers get a clean metallic linear gradient
-   (white -> slate-300) clipped to the text. Applied only where the heading
-   sits on a dark background; the fill is transparent, so on a light canvas
-   it would vanish. */
+   Major section titles and H1 headers styled with clean metallic linear
+   gradient (#FFFFFF down to #CBD5E1) and subtle text-shadows for high
+   contrast against dark backdrops. */
 
 .title-metallic,
 .hero-title,
-body > footer :where(h1, h2, h3),
+.headline-metallic,
+.section-title,
 .legal-hero .legal-title,
-.bw-pane__title {
-  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  /* Subtle text-shadow to hold readability against the dark backdrop. The
-     gradient fill turns off `color`, so the shadow is what keeps the glyphs
-     from floating on busy ambient glows. */
+.bw-pane__title,
+body > footer :where(h1, h2, h3),
+header.bg-gradient-to-r h1,
+section.bg-brand-navy h1,
+section.bg-navy-deep h1,
+main h1 {
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35)) !important;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18), 0 12px 34px rgba(0, 0, 0, 0.38);
 }
-
-/* The hero title already carries a text-shadow from the "Spectacular
-   enhancement layer"; the metallic fill above restates it for the gradient
-   case, so suppress the earlier shadow to avoid a double-drop. */
-.hero-title {
-  /* the rule above wins for text-shadow; nothing else needed here */
-}
-
-/* Footer link headings keep their underline-offset behavior, so only the
-   fill changes — the gradient reads as a soft brushed-metal on navy. */
 
 /* --------------------------------------------------------------------------
    4. Background ambience — radial spotlight glows on dark sections
    --------------------------------------------------------------------------
-   Layered radial-gradients (crimson + dark slate) painted under the hero
-   and primary callout sections to give the dark canvas depth without
-   delaying LCP content (the layers sit at z-index 0 / behind content). */
+   Layered radial-gradients (crimson and dark slate accents) painted under
+   hero and primary callout sections over base background color. */
 
-/* Homepage hero: a static ambient spotlight pair behind the drifting
-   aurora. Sits below the existing .hero::after aurora (z-index -1) so the
-   two layers composite without competing. */
-.hero::before {
+.hero::before,
+#pricing-hero::before,
+body > header.bg-gradient-to-r::before,
+.callout-ambient::before,
+.dark-ambience-bg::before {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -3636,41 +3616,18 @@ body > footer :where(h1, h2, h3),
   pointer-events: none;
   background:
     radial-gradient(42rem 32rem at 14% 8%, rgba(230, 57, 70, 0.18), transparent 64%),
-    radial-gradient(38rem 30rem at 88% 96%, rgba(27, 42, 74, 0.55), transparent 62%);
+    radial-gradient(38rem 30rem at 88% 96%, rgba(27, 42, 74, 0.55), transparent 62%),
+    radial-gradient(32rem 24rem at 50% 0%, rgba(230, 57, 70, 0.12), transparent 50%);
 }
 
-/* Interior-page headers share the same ambient treatment as a ::before
-   behind the existing ::after highlight. */
-body > header.bg-gradient-to-r::before {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  content: "";
-  pointer-events: none;
-  background:
-    radial-gradient(34rem 26rem at 18% 16%, rgba(230, 57, 70, 0.16), transparent 60%),
-    radial-gradient(30rem 24rem at 82% 88%, rgba(16, 27, 49, 0.5), transparent 60%);
-}
-
-/* Primary callout section opt-in: pages can add .callout-ambient to any
-   dark callout to pick up the layered spotlight pair. */
-.callout-ambient {
+.callout-ambient,
+.dark-ambience-bg {
   position: relative;
   isolation: isolate;
 }
 
-.callout-ambient::before {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  content: "";
-  pointer-events: none;
-  background:
-    radial-gradient(32rem 24rem at 16% 12%, rgba(230, 57, 70, 0.16), transparent 62%),
-    radial-gradient(28rem 22rem at 86% 92%, rgba(16, 27, 49, 0.48), transparent 60%);
-}
-
-.callout-ambient > * {
+.callout-ambient > *,
+.dark-ambience-bg > * {
   position: relative;
   z-index: 1;
 }
@@ -3678,52 +3635,55 @@ body > header.bg-gradient-to-r::before {
 /* --------------------------------------------------------------------------
    5. Sticky widgets & floating triggers — gentle soft-pulse
    --------------------------------------------------------------------------
-   A calm, transform + box-shadow pulse on the fixed floating action buttons
-   (AI Chat FAB, Call Now FAB, back-to-top) to draw the eye without
-   intruding. The compositor handles transform and box-shadow, so it stays
-   off the main thread. The legacy .pulse-btn-green already carries its own
-   attention pulse, so it is left alone here. */
+   Gentle CSS keyframe pulse animation (@keyframes soft-pulse) on fixed
+   floating action buttons (AI Chat FAB, Call Now, Back-to-Top) to attract
+   attention without intruding. */
 
 @keyframes soft-pulse {
   0%,
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.35), 0 12px 28px -6px rgba(15, 23, 42, 0.3);
+    box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.4), 0 12px 28px -6px rgba(15, 23, 42, 0.35);
   }
 
   50% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 12px rgba(230, 57, 70, 0), 0 16px 34px -6px rgba(15, 23, 42, 0.35);
+    transform: scale(1.04);
+    box-shadow: 0 0 0 12px rgba(230, 57, 70, 0), 0 16px 34px -6px rgba(15, 23, 42, 0.45);
   }
 }
 
-/* AI Chat and Call FABs injected by the chat widget. The widget's own
-   inline stylesheet sets their resting transform/box-shadow; the animation
-   overrides those on the 2s cycle, and the widget's :hover transform still
-   wins on pointer-over because :hover is a state change the cascade layers
-   on top. */
 .aaa-fab-btn,
-#back-to-top {
-  animation: soft-pulse 2.4s ease-in-out infinite;
+.aaa-chat-launch,
+.aaa-call,
+#back-to-top,
+.pulse-btn-green,
+.fixed-floating-trigger,
+a[href^="tel:"].fixed,
+.fixed.bottom-5 {
+  animation: soft-pulse 2.4s ease-in-out infinite !important;
 }
 
-/* The green "Call Now!" legacy button keeps its existing pulse-attention
-   treatment; the AI-chat crimson FABs and back-to-top now share soft-pulse
-   for a cohesive floating-widget rhythm. */
-
-/* On hover, freeze the pulse so the button settles under the pointer. */
 .aaa-fab-btn:hover,
-#back-to-top:hover {
-  animation-play-state: paused;
+.aaa-chat-launch:hover,
+.aaa-call:hover,
+#back-to-top:hover,
+.pulse-btn-green:hover,
+.fixed-floating-trigger:hover,
+a[href^="tel:"].fixed:hover,
+.fixed.bottom-5:hover {
+  animation-play-state: paused !important;
 }
 
-/* Honor reduced motion explicitly for the new animation as well, so a
-   visitor who prefers reduced motion sees the buttons at rest even if the
-   global * clamp is ever loosened. */
 @media (prefers-reduced-motion: reduce) {
   .aaa-fab-btn,
-  #back-to-top {
-    animation: none;
+  .aaa-chat-launch,
+  .aaa-call,
+  #back-to-top,
+  .pulse-btn-green,
+  .fixed-floating-trigger,
+  a[href^="tel:"].fixed,
+  .fixed.bottom-5 {
+    animation: none !important;
   }
 }
 
