@@ -442,6 +442,16 @@
             .svc-group__chevron { transition: none !important; }
             .svc-tab--toggle i { transition: none !important; }
         }
+
+        /* Quick-view modal opened by the "Browse by Category" filter pills.
+           The native <dialog> centers itself when shown with showModal(); these
+           rules just guarantee a sensible max size and a centered fallback for
+           browsers that need it. */
+        dialog#svc-quick-view { margin: auto; }
+        dialog#svc-quick-view::backdrop { background: rgba(2, 6, 23, 0.7); backdrop-filter: blur(4px); }
+        @media (max-width: 640px) {
+            dialog#svc-quick-view { width: 94vw; max-height: 90vh; }
+        }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -1036,14 +1046,14 @@
 
                 <!-- Interactive Service Filter Chips -->
                 <div class="service-filter-chips my-6" role="group" aria-label="Filter services by specific trade">
-                    <button type="button" class="svc-filter-chip active" data-filter-category="all" aria-pressed="true"><i class="fas fa-border-all text-red-600" aria-hidden="true"></i> All Services</button>
-                    <button type="button" class="svc-filter-chip" data-filter-category="carpentry" aria-pressed="false"><i class="fas fa-hammer text-red-600" aria-hidden="true"></i> Carpentry</button>
-                    <button type="button" class="svc-filter-chip" data-filter-category="plumbing" aria-pressed="false"><i class="fas fa-faucet-drip text-red-600" aria-hidden="true"></i> Plumbing</button>
-                    <button type="button" class="svc-filter-chip" data-filter-category="drywall" aria-pressed="false"><i class="fas fa-fill-drip text-red-600" aria-hidden="true"></i> Drywall</button>
-                    <button type="button" class="svc-filter-chip" data-filter-category="painting" aria-pressed="false"><i class="fas fa-paint-roller text-red-600" aria-hidden="true"></i> Painting</button>
-                    <button type="button" class="svc-filter-chip" data-filter-category="electrical" aria-pressed="false"><i class="fas fa-bolt text-red-600" aria-hidden="true"></i> Electrical</button>
-                    <button type="button" class="svc-filter-chip" data-filter-category="exterior" aria-pressed="false"><i class="fas fa-house-chimney-window text-red-600" aria-hidden="true"></i> Exterior</button>
-                    <button type="button" class="svc-filter-chip" data-filter-category="assembly" aria-pressed="false"><i class="fas fa-screwdriver-wrench text-red-600" aria-hidden="true"></i> Assembly</button>
+                    <button type="button" class="svc-filter-chip active" data-filter-category="all" data-target="service-catalog" aria-pressed="true"><i class="fas fa-border-all text-red-600" aria-hidden="true"></i> All Services</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="carpentry" data-target="carpentry" aria-pressed="false"><i class="fas fa-hammer text-red-600" aria-hidden="true"></i> Carpentry</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="plumbing" data-target="minor-plumbing" aria-pressed="false"><i class="fas fa-faucet-drip text-red-600" aria-hidden="true"></i> Plumbing</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="drywall" data-target="drywall-repair" aria-pressed="false"><i class="fas fa-fill-drip text-red-600" aria-hidden="true"></i> Drywall</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="painting" data-target="painting-staining" aria-pressed="false"><i class="fas fa-paint-roller text-red-600" aria-hidden="true"></i> Painting</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="electrical" data-target="minor-electrical" aria-pressed="false"><i class="fas fa-bolt text-red-600" aria-hidden="true"></i> Electrical</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="exterior" data-target="cat-exterior" aria-pressed="false"><i class="fas fa-house-chimney-window text-red-600" aria-hidden="true"></i> Exterior</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="assembly" data-target="cat-projects" aria-pressed="false"><i class="fas fa-screwdriver-wrench text-red-600" aria-hidden="true"></i> Assembly</button>
                 </div>
 
                 <nav aria-label="Service categories" class="svc-tabs">
@@ -1824,7 +1834,45 @@
 
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
-    <script src="/js/site.js?v=20260810b" defer></script>
+    <!-- Quick-view modal: opened by the "Browse by Category" filter pills -->
+    <dialog id="svc-quick-view" aria-labelledby="svc-qv-title" class="svc-quick-view-dialog w-[94vw] max-w-xl rounded-3xl p-0 shadow-2xl backdrop:bg-slate-950/70 backdrop:backdrop-blur-md">
+        <div class="flex flex-col max-h-[90vh] bg-white rounded-3xl overflow-hidden">
+            <div class="flex items-start justify-between gap-4 bg-gradient-to-r from-blue-950 to-slate-900 text-white p-6 rounded-t-3xl">
+                <div class="flex items-center gap-4">
+                    <div id="svc-qv-icon-box" class="w-14 h-14 rounded-2xl bg-red-600/90 text-white flex items-center justify-center text-2xl shrink-0 shadow-lg border border-red-400/40">
+                        <i id="svc-qv-icon" class="fas fa-hammer" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <span id="svc-qv-category" class="block text-xs font-bold uppercase tracking-widest text-red-200">Service</span>
+                        <h2 id="svc-qv-title" class="text-2xl font-extrabold text-white leading-snug">Service Name</h2>
+                    </div>
+                </div>
+                <button type="button" data-svc-qv-close class="shrink-0 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white" aria-label="Close quick view dialog"><i class="fas fa-times" aria-hidden="true"></i></button>
+            </div>
+            <div class="overflow-y-auto p-6 space-y-5 text-gray-700">
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <p id="svc-qv-description" class="text-sm sm:text-base leading-relaxed text-slate-800 font-medium">Service description goes here...</p>
+                </div>
+                <div id="svc-qv-bullets-wrap" class="hidden">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-red-600 mb-2.5 flex items-center gap-1.5"><i class="fas fa-circle-check text-red-600" aria-hidden="true"></i> What's Included</h3>
+                    <ul id="svc-qv-bullets" class="space-y-2 text-xs sm:text-sm text-gray-700"></ul>
+                </div>
+                <div class="p-4 rounded-2xl bg-red-50 border border-red-200/80 flex items-center gap-3 text-xs sm:text-sm text-red-900 font-medium">
+                    <i class="fas fa-shield-halved text-red-600 text-xl shrink-0" aria-hidden="true"></i>
+                    <span>Backed by our <strong>1-Year Workmanship Guarantee</strong> &bull; Clear upfront flat pricing with no hidden fees. Prices are for installation and service labor only; hardware and materials are billed separately or supplied by you.</span>
+                </div>
+            </div>
+            <div class="p-5 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row gap-3 items-center justify-between">
+                <a id="svc-qv-page-link" href="/services" class="text-xs font-bold text-slate-700 hover:text-red-600 underline underline-offset-2 transition text-center order-3 sm:order-1">View Full Service Page <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+                <div class="flex gap-2 w-full sm:w-auto order-1 sm:order-2">
+                    <a href="tel:+12483853432" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm transition"><i class="fas fa-phone text-green-400" aria-hidden="true"></i> Call Now</a>
+                    <a id="svc-qv-book-btn" href="/book" data-booking-widget class="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm transition shadow"><i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online</a>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="/js/site.js?v=20260813a" defer></script>
     <script src="/js/booking-widget.js?v=20260810b" defer></script>
     <script src="/js/service-zone-selector.js?v=20260810b" defer></script>
     <script src="/js/home-care-plans.js?v=20260810b" defer></script>
