@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/css/tailwind.css?v=20260810b">
     <link rel="stylesheet" href="/css/site-theme.css?v=20260810b">
-    <link rel="stylesheet" href="/css/service-areas.css?v=20260812e">
+    <link rel="stylesheet" href="/css/service-areas.css?v=20260813b">
     <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
 
@@ -275,7 +275,7 @@
                 </div>
 
                 <!-- Interactive zone map with color-coded overlays + clickable city markers -->
-                <div class="max-w-5xl mx-auto mb-8 sm:mb-12">
+                <div id="service-area-map" class="max-w-5xl mx-auto mb-8 sm:mb-12">
                     <div class="rounded-3xl overflow-hidden shadow-lg ring-1 ring-red-600 border-[2px] border-red-600 bg-slate-900">
                         <div id="zone-map" class="zone-map" role="region" aria-label="Interactive Oakland County service zone map">
                             <svg class="zone-map__svg" viewBox="0 0 640 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
@@ -346,8 +346,35 @@
                     <p class="text-center text-xs sm:text-sm text-gray-500 mt-3">Based in Waterford, MI &middot; Serving all of Oakland County &middot; Tap a marker for the local minimum.</p>
                 </div>
 
+                <!-- Fully interactive Google Map (pan, zoom, satellite, street view).
+                     Uses the no-API-key embed endpoint already permitted by the site CSP
+                     (frame-src https://maps.google.com https://www.google.com). Clicking a
+                     city pin above recenters this map and opens its info window, mirroring
+                     marker.addListener("click", () => infoWindow.open(map, marker)). -->
+                <div class="max-w-5xl mx-auto mb-8 sm:mb-12">
+                    <div class="rounded-3xl overflow-hidden shadow-lg ring-1 ring-gray-300 border-[2px] border-gray-200 bg-white">
+                        <div class="zone-gmap__bar flex flex-wrap items-center justify-between gap-2 px-5 sm:px-6 py-3 bg-slate-900 text-white">
+                            <span class="inline-flex items-center gap-2 text-sm font-bold tracking-wide">
+                                <i class="fas fa-street-view text-amber-400" aria-hidden="true"></i>
+                                Explore the service area
+                            </span>
+                            <span id="zone-gmap-label" class="text-xs sm:text-sm text-slate-300 font-semibold">Waterford, MI &middot; Oakland County</span>
+                        </div>
+                        <iframe
+                            id="zone-gmap"
+                            class="zone-gmap__frame"
+                            title="Interactive Google Map of the AAA Handyman Services Oakland County service area"
+                            src="https://maps.google.com/maps?q=Waterford+Township,+MI&amp;z=10&amp;output=embed"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                    <p class="text-center text-xs sm:text-sm text-gray-500 mt-3">Drag to pan, pinch or scroll to zoom, and tap a marker above to fly the map to that city.</p>
+                </div>
+
                 <!-- Visual Zone Cards — side-by-side comparison -->
-                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="zone-cards-grid max-w-5xl mx-auto">
 
                     <article class="zone-card zone-card-a h-full flex flex-col">
                         <div class="zone-header px-6 sm:px-8 py-6">
@@ -366,42 +393,42 @@
                         <div class="p-6 sm:p-8 flex-1">
                             <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">Cities in this zone</p>
                             <div class="zone-chip-grid">
-                                <span class="zone-chip">Waterford</span>
-                                <span class="zone-chip">Pontiac</span>
-                                <span class="zone-chip">West Bloomfield</span>
-                                <span class="zone-chip">Orchard Lake</span>
-                                <span class="zone-chip">Bloomfield Hills</span>
-                                <span class="zone-chip">White Lake</span>
-                                <span class="zone-chip">Commerce</span>
-                                <span class="zone-chip">Walled Lake</span>
-                                <span class="zone-chip">Wixom</span>
-                                <span class="zone-chip">Union Lake</span>
-                                <span class="zone-chip">Davisburg</span>
-                                <span class="zone-chip">Clarkston</span>
-                                <span class="zone-chip">Independence Twp.</span>
-                                <span class="zone-chip">Auburn Hills</span>
-                                <span class="zone-chip">Oakland Twp.</span>
-                                <span class="zone-chip">Utica</span>
-                                <span class="zone-chip">Oxford</span>
-                                <span class="zone-chip">Lake Orion</span>
-                                <span class="zone-chip">Orion Twp.</span>
-                                <span class="zone-chip">Rochester</span>
-                                <span class="zone-chip">Rochester Hills</span>
-                                <span class="zone-chip">Troy</span>
-                                <span class="zone-chip">Berkley</span>
-                                <span class="zone-chip">Pleasant Ridge</span>
-                                <span class="zone-chip">Birmingham</span>
-                                <span class="zone-chip">Franklin</span>
-                                <span class="zone-chip">Beverly Hills</span>
-                                <span class="zone-chip">Clawson</span>
-                                <span class="zone-chip">Madison Heights</span>
-                                <span class="zone-chip">Hazel Park</span>
-                                <span class="zone-chip">Oak Park</span>
-                                <span class="zone-chip">Ferndale</span>
-                                <span class="zone-chip">Farmington Hills</span>
-                                <span class="zone-chip">Novi</span>
-                                <span class="zone-chip">Milford</span>
-                                <span class="zone-chip">Highland</span>
+                                <button type="button" class="zone-chip" data-city="Waterford" data-lat="42.6656" data-lng="-83.4005">Waterford</button>
+                                <button type="button" class="zone-chip" data-city="Pontiac" data-lat="42.6389" data-lng="-83.291">Pontiac</button>
+                                <button type="button" class="zone-chip" data-city="West Bloomfield" data-lat="42.5642" data-lng="-83.3591">West Bloomfield</button>
+                                <button type="button" class="zone-chip" data-city="Orchard Lake" data-lat="42.5831" data-lng="-83.3577">Orchard Lake</button>
+                                <button type="button" class="zone-chip" data-city="Bloomfield Hills" data-lat="42.5836" data-lng="-83.2455">Bloomfield Hills</button>
+                                <button type="button" class="zone-chip" data-city="White Lake" data-lat="42.6534" data-lng="-83.5133">White Lake</button>
+                                <button type="button" class="zone-chip" data-city="Commerce" data-lat="42.5867" data-lng="-83.4897">Commerce</button>
+                                <button type="button" class="zone-chip" data-city="Walled Lake" data-lat="42.5375" data-lng="-83.4838">Walled Lake</button>
+                                <button type="button" class="zone-chip" data-city="Wixom" data-lat="42.5245" data-lng="-83.5363">Wixom</button>
+                                <button type="button" class="zone-chip" data-city="Union Lake" data-lat="42.6178" data-lng="-83.438">Union Lake</button>
+                                <button type="button" class="zone-chip" data-city="Davisburg" data-lat="42.7534" data-lng="-83.5349">Davisburg</button>
+                                <button type="button" class="zone-chip" data-city="Clarkston" data-lat="42.7356" data-lng="-83.4183">Clarkston</button>
+                                <button type="button" class="zone-chip" data-city="Independence Twp." data-lat="42.7481" data-lng="-83.4038">Independence Twp.</button>
+                                <button type="button" class="zone-chip" data-city="Auburn Hills" data-lat="42.6875" data-lng="-83.2341">Auburn Hills</button>
+                                <button type="button" class="zone-chip" data-city="Oakland Twp." data-lat="42.7661" data-lng="-83.1613">Oakland Twp.</button>
+                                <button type="button" class="zone-chip" data-city="Utica" data-lat="42.6273" data-lng="-83.0299">Utica</button>
+                                <button type="button" class="zone-chip" data-city="Oxford" data-lat="42.8242" data-lng="-83.2499">Oxford</button>
+                                <button type="button" class="zone-chip" data-city="Lake Orion" data-lat="42.7842" data-lng="-83.2399">Lake Orion</button>
+                                <button type="button" class="zone-chip" data-city="Orion Twp." data-lat="42.7711" data-lng="-83.256">Orion Twp.</button>
+                                <button type="button" class="zone-chip" data-city="Rochester" data-lat="42.6806" data-lng="-83.1338">Rochester</button>
+                                <button type="button" class="zone-chip" data-city="Rochester Hills" data-lat="42.6584" data-lng="-83.1499">Rochester Hills</button>
+                                <button type="button" class="zone-chip" data-city="Troy" data-lat="42.5803" data-lng="-83.1499">Troy</button>
+                                <button type="button" class="zone-chip" data-city="Berkley" data-lat="42.5031" data-lng="-83.1838">Berkley</button>
+                                <button type="button" class="zone-chip" data-city="Pleasant Ridge" data-lat="42.4711" data-lng="-83.1408">Pleasant Ridge</button>
+                                <button type="button" class="zone-chip" data-city="Birmingham" data-lat="42.5467" data-lng="-83.2113">Birmingham</button>
+                                <button type="button" class="zone-chip" data-city="Franklin" data-lat="42.5223" data-lng="-83.3038">Franklin</button>
+                                <button type="button" class="zone-chip" data-city="Beverly Hills" data-lat="42.525" data-lng="-83.2388">Beverly Hills</button>
+                                <button type="button" class="zone-chip" data-city="Clawson" data-lat="42.5334" data-lng="-83.1463">Clawson</button>
+                                <button type="button" class="zone-chip" data-city="Madison Heights" data-lat="42.4859" data-lng="-83.1052">Madison Heights</button>
+                                <button type="button" class="zone-chip" data-city="Hazel Park" data-lat="42.4631" data-lng="-83.1022">Hazel Park</button>
+                                <button type="button" class="zone-chip" data-city="Oak Park" data-lat="42.4595" data-lng="-83.1819">Oak Park</button>
+                                <button type="button" class="zone-chip" data-city="Ferndale" data-lat="42.4606" data-lng="-83.1346">Ferndale</button>
+                                <button type="button" class="zone-chip" data-city="Farmington Hills" data-lat="42.4853" data-lng="-83.3772">Farmington Hills</button>
+                                <button type="button" class="zone-chip" data-city="Novi" data-lat="42.4806" data-lng="-83.4755">Novi</button>
+                                <button type="button" class="zone-chip" data-city="Milford" data-lat="42.5861" data-lng="-83.5999">Milford</button>
+                                <button type="button" class="zone-chip" data-city="Highland" data-lat="42.6389" data-lng="-83.618">Highland</button>
                             </div>
                         </div>
                     </article>
@@ -426,17 +453,17 @@
                         <div class="p-6 sm:p-8 flex-1">
                             <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">Cities in this zone</p>
                             <div class="zone-chip-grid">
-                                <span class="zone-chip">Holly</span>
-                                <span class="zone-chip">Groveland Twp.</span>
-                                <span class="zone-chip">Ortonville</span>
-                                <span class="zone-chip">Brandon Twp.</span>
-                                <span class="zone-chip">Leonard</span>
-                                <span class="zone-chip">Addison Twp.</span>
-                                <span class="zone-chip">Royal Oak</span>
-                                <span class="zone-chip">Huntington Woods</span>
-                                <span class="zone-chip">Southfield</span>
-                                <span class="zone-chip">South Lyon</span>
-                                <span class="zone-chip">Lyon Twp.</span>
+                                <button type="button" class="zone-chip" data-city="Holly" data-lat="42.7919" data-lng="-83.6272">Holly</button>
+                                <button type="button" class="zone-chip" data-city="Groveland Twp." data-lat="42.8253" data-lng="-83.5383">Groveland Twp.</button>
+                                <button type="button" class="zone-chip" data-city="Ortonville" data-lat="42.8531" data-lng="-83.443">Ortonville</button>
+                                <button type="button" class="zone-chip" data-city="Brandon Twp." data-lat="42.8464" data-lng="-83.4219">Brandon Twp.</button>
+                                <button type="button" class="zone-chip" data-city="Leonard" data-lat="42.8647" data-lng="-83.1444">Leonard</button>
+                                <button type="button" class="zone-chip" data-city="Addison Twp." data-lat="42.8525" data-lng="-83.1205">Addison Twp.</button>
+                                <button type="button" class="zone-chip" data-city="Royal Oak" data-lat="42.4895" data-lng="-83.1446">Royal Oak</button>
+                                <button type="button" class="zone-chip" data-city="Huntington Woods" data-lat="42.4764" data-lng="-83.1633">Huntington Woods</button>
+                                <button type="button" class="zone-chip" data-city="Southfield" data-lat="42.4734" data-lng="-83.2219">Southfield</button>
+                                <button type="button" class="zone-chip" data-city="South Lyon" data-lat="42.4606" data-lng="-83.6519">South Lyon</button>
+                                <button type="button" class="zone-chip" data-city="Lyon Twp." data-lat="42.4981" data-lng="-83.6238">Lyon Twp.</button>
                             </div>
 
                             <p class="zone-note mt-6 flex items-start gap-2 p-4 text-sm text-gray-600">
@@ -734,7 +761,7 @@
 
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
-    <script src="/js/service-areas-page.js?v=20260812e" defer></script>
+    <script src="/js/service-areas-page.js?v=20260813d" defer></script>
 
     <script src="/js/site.js?v=20260810b" defer></script>
     <script src="/js/booking-widget.js?v=20260810b" defer></script>
