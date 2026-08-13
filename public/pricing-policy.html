@@ -297,6 +297,21 @@
                 background: linear-gradient(90deg, rgb(166 31 46 / .35), rgb(27 42 74 / .35), rgb(22 101 52 / .35));
             }
         }
+
+        /* The policy hero heading reads as crisp white over the navy
+           background, so the metallic gradient, drop-shadow filter, and blurred
+           ambient glow pseudo-element behind the hero wrapper are disabled here
+           to keep the text legible without a foggy halo. */
+        header#policy-hero.ambient-glow-hero h1 {
+            background: none;
+            -webkit-text-fill-color: #ffffff;
+            color: #ffffff;
+            filter: none;
+        }
+        header#policy-hero.ambient-glow-hero::before,
+        header#policy-hero.ambient-glow-hero::after {
+            content: none;
+        }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -402,7 +417,7 @@
                     <span class="badge-craftsman px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5 mb-4">
                         <i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Pricing Policies
                     </span>
-                    <h1 class="text-3xl sm:text-4xl lg:text-[clamp(2.25rem,3.2vw,3.25rem)] font-black tracking-tight text-white leading-[1.08] [text-shadow:_0_2px_12px_rgba(0,0,0,0.85)]">Clear Pricing, Before the Work Starts</h1>
+                    <h1 class="text-3xl sm:text-4xl lg:text-[clamp(2.25rem,3.2vw,3.25rem)] font-black tracking-tight text-white leading-[1.08]">Clear Pricing, Before the Work Starts</h1>
                     <p class="text-slate-100 text-base sm:text-lg lg:text-xl leading-relaxed mt-5 sm:mt-6 [text-shadow:_0_1px_8px_rgba(0,0,0,0.75)]">Two policies shape every invoice we send: how parts and materials are handled, and what happens the moment we find something nobody could see when the job was quoted. Both are written out here in plain language, so nothing on your final bill is a surprise.</p>
 
                     <nav class="mt-8" aria-label="On this page">

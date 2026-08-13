@@ -288,7 +288,6 @@
             max-width: 22ch;
             margin-inline: auto;
             text-wrap: balance;
-            text-shadow: 0 3px 18px rgba(0,0,0,0.75), 0 1px 3px rgba(0,0,0,0.5);
         }
         .hero-copy {
             max-width: 42rem;
@@ -506,6 +505,21 @@
             .nav-link { transition: none !important; }
             .service-card:hover,
             .nav-link:hover { transform: none !important; }
+        }
+
+        /* The hero heading is crisp white over a darkened photo background, so
+           the metallic gradient, drop-shadow filter, and blurred ambient glow
+           pseudo-element behind the hero wrapper are disabled here to keep the
+           text legible without a foggy halo. */
+        header.hero.ambient-glow-hero h1.hero-title {
+            background: none;
+            -webkit-text-fill-color: #ffffff;
+            color: #ffffff;
+            filter: none;
+        }
+        header.hero.ambient-glow-hero::before,
+        header.hero.ambient-glow-hero::after {
+            content: none;
         }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
