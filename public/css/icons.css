@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 225 icon names in use.
+ * Generated subset - 242 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -32,7 +32,9 @@
 .fa-clipboard-list:before{content:"\f46d"}
 .fa-truck-loading:before,.fa-truck-ramp-box:before{content:"\f4de"}
 .fa-circle-notch:before{content:"\f1ce"}
+.fa-paw:before{content:"\f1b0"}
 .fa-gavel:before,.fa-legal:before{content:"\f0e3"}
+.fa-users-slash:before{content:"\e073"}
 .fa-bars:before,.fa-navicon:before{content:"\f0c9"}
 .fa-people-group:before{content:"\e533"}
 .fa-ruler-horizontal:before{content:"\f547"}
@@ -47,11 +49,14 @@
 .fa-tree:before{content:"\f1bb"}
 .fa-sack-dollar:before{content:"\f81d"}
 .fa-edit:before,.fa-pen-to-square:before{content:"\f044"}
+.fa-hand-paper:before,.fa-hand:before{content:"\f256"}
 .fa-plug:before{content:"\f1e6"}
 .fa-stairs:before{content:"\e289"}
 .fa-v:before{content:"\56"}
 .fa-magic-wand-sparkles:before,.fa-wand-magic-sparkles:before{content:"\e2ca"}
+.fa-key:before{content:"\f084"}
 .fa-money-bill-wave:before{content:"\f53a"}
+.fa-ban:before,.fa-cancel:before{content:"\f05e"}
 .fa-air-freshener:before,.fa-spray-can-sparkles:before{content:"\f5d0"}
 .fa-star:before{content:"\f005"}
 .fa-file-invoice-dollar:before{content:"\f571"}
@@ -60,12 +65,14 @@
 .fa-bath:before,.fa-bathtub:before{content:"\f2cd"}
 .fa-map-location-dot:before,.fa-map-marked-alt:before{content:"\f5a0"}
 .fa-cloud-showers-water:before{content:"\e4e4"}
+.fa-window-restore:before{content:"\f2d2"}
 .fa-rotate-back:before,.fa-rotate-backward:before,.fa-rotate-left:before,.fa-undo-alt:before{content:"\f2ea"}
 .fa-handshake:before{content:"\f2b5"}
 .fa-check-circle:before,.fa-circle-check:before{content:"\f058"}
 .fa-user-tie:before{content:"\f508"}
 .fa-camera-retro:before{content:"\f083"}
 .fa-box-open:before{content:"\f49e"}
+.fa-pause:before{content:"\f04c"}
 .fa-cloud-arrow-up:before,.fa-cloud-upload-alt:before,.fa-cloud-upload:before{content:"\f0ee"}
 .fa-seedling:before,.fa-sprout:before{content:"\f4d8"}
 .fa-boxes-packing:before{content:"\e4c7"}
@@ -75,6 +82,7 @@
 .fa-couch:before{content:"\f4b8"}
 .fa-comments-dollar:before{content:"\f653"}
 .fa-temperature-arrow-down:before,.fa-temperature-down:before{content:"\e03f"}
+.fa-snowflake:before{content:"\f2dc"}
 .fa-filter-circle-xmark:before{content:"\e17b"}
 .fa-money-check-alt:before,.fa-money-check-dollar:before{content:"\f53d"}
 .fa-file-signature:before{content:"\f573"}
@@ -101,8 +109,11 @@
 .fa-comment-dots:before,.fa-commenting:before{content:"\f4ad"}
 .fa-hand-holding-dollar:before,.fa-hand-holding-usd:before{content:"\f4c0"}
 .fa-hand-pointer:before{content:"\f25a"}
+.fa-biohazard:before{content:"\f780"}
 .fa-phone:before{content:"\f095"}
 .fa-calendar-times:before,.fa-calendar-xmark:before{content:"\f273"}
+.fa-door-closed:before{content:"\f52a"}
+.fa-shield-virus:before{content:"\e06c"}
 .fa-arrow-left:before{content:"\f060"}
 .fa-file-pdf:before{content:"\f1c1"}
 .fa-tag:before{content:"\f02b"}
@@ -110,6 +121,8 @@
 .fa-circle-info:before,.fa-info-circle:before{content:"\f05a"}
 .fa-camera-alt:before,.fa-camera:before{content:"\f030"}
 .fa-calendar-check:before{content:"\f274"}
+.fa-truck:before{content:"\f0d1"}
+.fa-street-view:before{content:"\f21d"}
 .fa-cog:before,.fa-gear:before{content:"\f013"}
 .fa-clock-four:before,.fa-clock:before{content:"\f017"}
 .fa-faucet:before{content:"\e005"}
@@ -118,6 +131,7 @@
 .fa-home-alt:before,.fa-home-lg-alt:before,.fa-home:before,.fa-house:before{content:"\f015"}
 .fa-bolt:before,.fa-zap:before{content:"\f0e7"}
 .fa-sun:before{content:"\f185"}
+.fa-grip-lines:before{content:"\f7a4"}
 .fa-credit-card-alt:before,.fa-credit-card:before{content:"\f09d"}
 .fa-automobile:before,.fa-car:before{content:"\f1b9"}
 .fa-medal:before{content:"\f5a2"}
@@ -140,11 +154,11 @@
 .fa-close:before,.fa-multiply:before,.fa-remove:before,.fa-times:before,.fa-xmark:before{content:"\f00d"}
 .fa-quote-left-alt:before,.fa-quote-left:before{content:"\f10d"}
 .fa-ruler-combined:before{content:"\f546"}
+.fa-blender:before{content:"\f517"}
 .fa-map:before{content:"\f279"}
 .fa-store:before{content:"\f54e"}
 .fa-arrow-trend-up:before{content:"\e098"}
-.fa-bacteria:before{content:"\e059"}
-.fa-chevron-right:before{content:"\f054"}
+.fa-sign-hanging:before,.fa-sign:before{content:"\f4d9"}
 .fa-face-smile:before,.fa-smile:before{content:"\f118"}
 .fa-hammer:before{content:"\f6e3"}
 .fa-spinner:before{content:"\f110"}
