@@ -438,10 +438,12 @@
     <script>(function(){try{var b=document.getElementById('seasonal-banner');if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();</script>
 </aside>
 
-    <main id="main-content" class="flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-                <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Trusted by your neighbors</div>
+    <main id="main-content" class="ambient-glow-hero flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12 reveal-on-scroll">
+                <span class="badge-craftsman-gold px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5 mb-3">
+                    <i class="fas fa-star text-[#F5A623]" aria-hidden="true"></i> Trusted by your neighbors
+                </span>
                 <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">See How We’ve Helped Your Neighbors Across Oakland County</h1>
                 <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
                     Real photos and honest words from homeowners we’ve worked with — right here in Waterford, Troy, Birmingham, and all around Oakland County. Take a look, then share your own story below.
@@ -449,18 +451,18 @@
             </div>
 
             <!-- Aggregate trust banner -->
-            <div class="max-w-4xl mx-auto mb-4">
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 bg-white/5 border border-white/15 rounded-3xl px-6 py-5 text-center">
+            <div class="max-w-4xl mx-auto mb-4 reveal-on-scroll">
+                <div class="card-dark-layered flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 bg-white/5 border border-white/20 rounded-3xl px-6 py-5 text-center shadow-xl">
                     <div class="flex items-center gap-3">
                         <span class="text-4xl sm:text-5xl font-black text-white leading-none">5.0</span>
                         <div class="text-left">
-                            <div class="text-amber-400 text-xl leading-none tracking-wide" aria-hidden="true">★★★★★</div>
+                            <div class="text-[#F5A623] text-xl leading-none tracking-wide" aria-hidden="true">★★★★★</div>
                             <div class="text-xs text-slate-300 mt-1.5 font-medium">Average Rating Across Oakland County</div>
                         </div>
                     </div>
                     <div class="hidden sm:block h-12 w-px bg-white/20"></div>
                     <div class="flex items-center gap-2 text-slate-200 font-semibold text-sm sm:text-base">
-                        <i class="fas fa-location-dot text-red-500" aria-hidden="true"></i>
+                        <i class="fas fa-location-dot text-[#F5A623]" aria-hidden="true"></i>
                         <span>Every review below is a real Oakland County home</span>
                     </div>
                     <span class="sr-only">AAA Handyman Services LLC holds a 5.0 out of 5 average rating across Oakland County.</span>

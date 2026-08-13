@@ -218,8 +218,16 @@
       ]
     }
     </script>
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260810b">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260810b">
+    <style id="critical-above-the-fold">
+        *, ::before, ::after { box-sizing: border-box; }
+        html { font-family: "Roboto", system-ui, -apple-system, sans-serif; -webkit-text-size-adjust: 100%; }
+        body { margin: 0; background-color: #f4f6fa; color: #1f2937; line-height: 1.6; }
+        header, nav, main, section, footer { display: block; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; }
+    </style>
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260810a">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260810a">
     <link rel="preload" href="/css/icons.css?v=20260813a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260813a"></noscript>
     <style>
@@ -312,7 +320,7 @@
             <span class="hidden md:inline">Call Now! <span class="hidden lg:inline">(248) 385-3432</span></span>
         </a>
     </noscript>
-    <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-950 text-white py-16 sm:py-20 relative overflow-hidden">
+    <header class="ambient-glow-hero bg-gradient-to-r from-blue-950 via-blue-900 to-slate-950 text-white py-16 sm:py-20 relative overflow-hidden">
         <div class="absolute inset-0 opacity-5">
             <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
         </div>
@@ -324,31 +332,31 @@
                 <span class="mx-2">/</span>
                 <span class="text-white font-semibold">Franklin</span>
             </nav>
-            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-2">South &amp; Southeast Metro &middot; Oakland County, MI</div>
+            <div class="badge-craftsman-gold text-xs sm:text-base mb-3 inline-flex">South &amp; Southeast Metro &middot; Oakland County, MI</div>
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">Handyman in Franklin, Michigan</h1>
-            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving Franklin &amp; surrounding Oakland County communities</p>
+            <p class="text-sm sm:text-base font-semibold text-amber-300 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving Franklin &amp; surrounding Oakland County communities</p>
             <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
                 Trusted, locally owned home repair and maintenance for Franklin homeowners. No job too small &mdash; backed by our 1-Year Workmanship Guarantee and honest, upfront pricing.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="/book?service=General+Estimate+%2F+Quote&amp;city=Franklin" class="bg-red-600 hover:bg-red-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-red-600/30 transition flex items-center justify-center gap-2">
+                <a href="/book?service=General+Estimate+%2F+Quote&amp;city=Franklin" class="btn-craftsman-gold text-base px-6 py-3.5 rounded-xl shadow-lg">
                     <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Get a Free Quote
                 </a>
-                <a href="tel:+12483853432" class="bg-green-600 hover:bg-green-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-green-600/30 transition flex items-center justify-center gap-2">
-                    <i class="fas fa-phone" aria-hidden="true"></i> Call Now! (248) 385-3432
+                <a href="tel:+12483853432" class="bg-slate-900/90 hover:bg-slate-900 text-white font-bold text-base px-6 py-3.5 rounded-xl border border-amber-400/40 hover:border-amber-400 shadow-lg transition flex items-center justify-center gap-2">
+                    <i class="fas fa-phone text-emerald-400" aria-hidden="true"></i> Call Now! (248) 385-3432
                 </a>
             </div>
         </div>
     </header>
     <main id="main-content" class="flex-grow py-12 sm:py-16">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
+            <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start reveal-on-scroll">
                 <div class="lg:col-span-2 prose prose-lg max-w-none text-gray-600">
                     <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4">Your Local Handyman for Franklin</h2>
                     <p>In the Village of Franklin, character homes need a careful hand. We provide restoration-minded carpentry, painting, and repairs that respect the age and detail of your property.</p>
                     <p>Whether it is a single nagging repair or a full seasonal to-do list, we bring the same craftsmanship, clean job sites, and clear communication to every Franklin home. From drywall and doors to painting, flooring, gutters, and minor plumbing or electrical work, we help you protect your home's comfort and value.</p>
                 </div>
-                <aside class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-lg">
+                <aside class="card-layered bg-white border border-slate-200/80 rounded-3xl p-6 shadow-lg">
                     <div class="mb-4">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <h3 class="text-lg font-bold text-gray-900">Franklin Coverage</h3>
@@ -359,15 +367,18 @@
                         <p class="text-sm text-gray-500 mt-1">Zone A (Within 20 Miles)</p>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
-                        <li class="flex items-start gap-2"><i class="fas fa-tag text-red-600 mt-1" aria-hidden="true"></i><span><strong>$100 minimum service call</strong> &mdash; covers travel, diagnostics, and the first hour of labor.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-box-open text-red-600 mt-1" aria-hidden="true"></i><span>Labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-map-pin text-red-600 mt-1" aria-hidden="true"></i><span>ZIP codes served: 48025.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1" aria-hidden="true"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-tag text-[#F5A623] mt-1" aria-hidden="true"></i><span><strong>$100 minimum service call</strong> &mdash; covers travel, diagnostics, and the first hour of labor.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-clock text-[#F5A623] mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-box-open text-[#F5A623] mt-1" aria-hidden="true"></i><span>Labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-map-pin text-[#F5A623] mt-1" aria-hidden="true"></i><span>ZIP codes served: 48025.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-[#F5A623] mt-1" aria-hidden="true"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
                     </ul>
-                    <a href="/contact?service=General+Estimate+%2F+Quote&amp;city=Franklin" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30">
+                    <a href="/contact?service=General+Estimate+%2F+Quote&amp;city=Franklin" class="btn-craftsman-gold mt-6 w-full text-center font-bold px-6 py-3 rounded-xl shadow-md">
                         <i class="fas fa-calendar-check" aria-hidden="true"></i> Request Service in Franklin
                     </a>
+                    <a href="/rates" class="mt-3 block text-center text-sm text-gray-500 hover:text-red-600 underline underline-offset-2">See full rates &amp; packages</a>
+                </aside>
+            </div>
                     <a href="/rates" class="mt-3 block text-center text-sm text-gray-500 hover:text-red-600 underline underline-offset-2">See full rates &amp; packages</a>
                 </aside>
             </div>
@@ -378,53 +389,53 @@
                     <p class="mt-3 text-gray-600 max-w-2xl mx-auto">A few of the most requested repairs and projects. Tap any service for details, or see the full list.</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <a href="/services#carpentry" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-hammer" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Carpentry &amp; Trim</span>
+                <a href="/services#carpentry" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-hammer" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Carpentry &amp; Trim</span>
                 </a>
-                <a href="/services#doors-windows" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-door-open" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Doors &amp; Windows</span>
+                <a href="/services#doors-windows" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-door-open" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Doors &amp; Windows</span>
                 </a>
-                <a href="/services#drywall-repair" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-border-all" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Drywall Repair</span>
+                <a href="/services#drywall-repair" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-border-all" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Drywall Repair</span>
                 </a>
-                <a href="/services#painting-staining" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-paint-roller" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Painting &amp; Staining</span>
+                <a href="/services#painting-staining" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-paint-roller" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Painting &amp; Staining</span>
                 </a>
-                <a href="/services#flooring-solutions" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-ruler-combined" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Flooring Solutions</span>
+                <a href="/services#flooring-solutions" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-ruler-combined" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Flooring Solutions</span>
                 </a>
-                <a href="/services#minor-plumbing" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-faucet-drip" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Minor Plumbing</span>
+                <a href="/services#minor-plumbing" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-faucet-drip" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Minor Plumbing</span>
                 </a>
-                <a href="/services#minor-electrical" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-lightbulb" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Minor Electrical</span>
+                <a href="/services#minor-electrical" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-lightbulb" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Minor Electrical</span>
                 </a>
-                <a href="/services#installation" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Installation &amp; Mounting</span>
+                <a href="/services#installation" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Installation &amp; Mounting</span>
                 </a>
-                <a href="/services#decks-fences" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-tree" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Decks &amp; Fences</span>
+                <a href="/services#decks-fences" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-tree" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Decks &amp; Fences</span>
                 </a>
-                <a href="/services#gutters" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-house-flood-water" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Gutters</span>
+                <a href="/services#gutters" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-house-flood-water" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Gutters</span>
                 </a>
-                <a href="/services#home-repair-upkeep" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-house-chimney" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Home Repair &amp; Upkeep</span>
+                <a href="/services#home-repair-upkeep" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-house-chimney" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Home Repair &amp; Upkeep</span>
                 </a>
-                <a href="/services#senior-care" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-wheelchair" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Senior &amp; Aging-in-Place</span>
+                <a href="/services#senior-care" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-wheelchair" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Senior &amp; Aging-in-Place</span>
                 </a>
                 </div>
                 <div class="mt-8 text-center">
@@ -561,7 +572,7 @@
         </div>
     </footer>
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
-    <script src="/js/site.js?v=20260810b" defer></script>
+    <script src="/js/site.js?v=20260810a" defer></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}

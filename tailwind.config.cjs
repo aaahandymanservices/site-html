@@ -36,6 +36,26 @@ module.exports = {
           'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, transform, filter, backdrop-filter',
       },
       colors: {
+        amber: {
+          50: '#fffbe6',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#fbbf24',
+          500: '#F5A623',
+          600: '#d97706',
+          700: '#b45309',
+          800: '#92400e',
+          900: '#78350f',
+          950: '#451a03',
+        },
+        craftsman: {
+          gold: '#F5A623',
+          'gold-hover': '#E09212',
+          'gold-dark': '#C87F0A',
+          'gold-soft': 'rgba(245, 166, 35, 0.15)',
+          'gold-glow': 'rgba(245, 166, 35, 0.35)',
+        },
         red: {
           50: '#fdf2f2',
           100: '#f8e9eb',

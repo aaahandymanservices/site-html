@@ -282,40 +282,42 @@
     <script>(function(){try{var b=document.getElementById('seasonal-banner');if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();</script>
 </aside>
 
-    <main id="main-content" class="flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                <div class="uppercase tracking-widest text-red-500 font-semibold text-sm mb-2">Now Hiring</div>
+    <main id="main-content" class="ambient-glow-hero flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16 reveal-on-scroll">
+                <span class="badge-craftsman-gold px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5 mb-3">
+                    <i class="fas fa-[#F5A623] fa-user-plus text-[#F5A623]" aria-hidden="true"></i> Now Hiring
+                </span>
                 <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Join Our Team of Craftsmen</h1>
                 <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
                     Are you a skilled handyman or tradesperson who takes pride in quality work and honest service? AAA Handyman Services LLC is growing across Oakland County, MI. We offer transparent pay, real perks, weekends off, and a clear path to advance. Apply below and we'll be in touch within 24–48 hours.
                 </p>
             </div>
 
-            <section class="mb-12 sm:mb-16">
+            <section class="mb-12 sm:mb-16 reveal-on-scroll">
                 <div class="text-center max-w-3xl mx-auto mb-8">
                     <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">A Real Career Path, Not Just a Job</h2>
                     <p class="text-slate-400 text-sm sm:text-base">Whether you're just starting out or a seasoned pro ready to lead, there's a clear way to grow with us — and we're upfront about the pay at every step.</p>
                 </div>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col" style="animation-delay: 0ms;">
-                        <div class="w-14 h-14 mb-4 bg-blue-500 rounded-2xl flex items-center justify-center text-2xl text-white" aria-hidden="true"><i class="fas fa-hammer" aria-hidden="true"></i></div>
+                    <div class="card-dark-layered careers-card bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col" style="animation-delay: 0ms;">
+                        <div class="w-14 h-14 mb-4 bg-amber-500 rounded-2xl flex items-center justify-center text-2xl text-slate-950 shadow-md" aria-hidden="true"><i class="fas fa-hammer" aria-hidden="true"></i></div>
                         <h3 class="text-lg font-bold text-white mb-1">Craftsman</h3>
-                        <div class="inline-flex items-center gap-1.5 text-sm font-bold text-red-300 mb-3"><i class="fas fa-tag text-xs" aria-hidden="true"></i>$22–$30/hr</div>
+                        <div class="inline-flex items-center gap-1.5 text-sm font-bold text-[#F5A623] mb-3"><i class="fas fa-tag text-xs" aria-hidden="true"></i>$22–$30/hr</div>
                         <p class="text-slate-300 text-sm flex-grow">Deliver quality repairs and installations across a wide range of home projects.</p>
                         <p class="text-xs text-slate-400 mt-4 pt-4 border-t border-white/10"><span class="font-semibold text-slate-200">To advance:</span> Consistent 5-star work and the ability to run jobs solo.</p>
                     </div>
-                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col" style="animation-delay: 120ms;">
-                        <div class="w-14 h-14 mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-2xl text-white" aria-hidden="true"><i class="fas fa-medal" aria-hidden="true"></i></div>
+                    <div class="card-dark-layered careers-card bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col" style="animation-delay: 120ms;">
+                        <div class="w-14 h-14 mb-4 bg-amber-500 rounded-2xl flex items-center justify-center text-2xl text-slate-950 shadow-md" aria-hidden="true"><i class="fas fa-medal" aria-hidden="true"></i></div>
                         <h3 class="text-lg font-bold text-white mb-1">Lead Craftsman</h3>
-                        <div class="inline-flex items-center gap-1.5 text-sm font-bold text-red-300 mb-3"><i class="fas fa-tag text-xs" aria-hidden="true"></i>$32–$40/hr</div>
+                        <div class="inline-flex items-center gap-1.5 text-sm font-bold text-[#F5A623] mb-3"><i class="fas fa-tag text-xs" aria-hidden="true"></i>$32–$40/hr</div>
                         <p class="text-slate-300 text-sm flex-grow">Take ownership of complex jobs and mentor newer crew members while you work.</p>
                         <p class="text-xs text-slate-400 mt-4 pt-4 border-t border-white/10"><span class="font-semibold text-slate-200">To advance:</span> Lead multi-day projects and help bring newer team members up to speed.</p>
                     </div>
-                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col" style="animation-delay: 180ms;">
-                        <div class="w-14 h-14 mb-4 bg-blue-500 rounded-2xl flex items-center justify-center text-2xl text-white" aria-hidden="true"><i class="fas fa-hard-hat" aria-hidden="true"></i></div>
+                    <div class="card-dark-layered careers-card bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col" style="animation-delay: 180ms;">
+                        <div class="w-14 h-14 mb-4 bg-amber-500 rounded-2xl flex items-center justify-center text-2xl text-slate-950 shadow-md" aria-hidden="true"><i class="fas fa-hard-hat" aria-hidden="true"></i></div>
                         <h3 class="text-lg font-bold text-white mb-1">Field Supervisor</h3>
-                        <div class="inline-flex items-center gap-1.5 text-sm font-bold text-red-300 mb-3"><i class="fas fa-tag text-xs" aria-hidden="true"></i>$42–$50/hr</div>
+                        <div class="inline-flex items-center gap-1.5 text-sm font-bold text-[#F5A623] mb-3"><i class="fas fa-tag text-xs" aria-hidden="true"></i>$42–$50/hr</div>
                         <p class="text-slate-300 text-sm flex-grow">Coordinate crews, manage schedules, and ensure every job meets our standards.</p>
                         <p class="text-xs text-slate-400 mt-4 pt-4 border-t border-white/10"><span class="font-semibold text-slate-200">The goal:</span> Trusted crew leadership with the pay to match.</p>
                     </div>
