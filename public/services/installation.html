@@ -229,8 +229,16 @@
       ]
     }
     </script>
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260810b">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260810b">
+    <style id="critical-above-the-fold">
+        *, ::before, ::after { box-sizing: border-box; }
+        html { font-family: "Roboto", system-ui, -apple-system, sans-serif; -webkit-text-size-adjust: 100%; }
+        body { margin: 0; background-color: #f4f6fa; color: #1f2937; line-height: 1.6; }
+        header, nav, main, section, footer { display: block; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; }
+    </style>
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260810a">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260810a">
     <link rel="preload" href="/css/icons.css?v=20260813a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260813a"></noscript>
     <style>
@@ -323,7 +331,7 @@
             <span class="hidden md:inline">Call Now! <span class="hidden lg:inline">(248) 385-3432</span></span>
         </a>
     </noscript>
-    <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-950 text-white py-16 sm:py-20 relative overflow-hidden">
+    <header class="ambient-glow-hero bg-gradient-to-r from-blue-950 via-blue-900 to-slate-950 text-white py-16 sm:py-20 relative overflow-hidden">
         <div class="absolute inset-0 opacity-5">
             <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
         </div>
@@ -335,47 +343,47 @@
                 <span class="mx-2">/</span>
                 <span class="text-white font-semibold">Installation &amp; Mounting</span>
             </nav>
-            <div class="w-16 h-16 mx-auto bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center text-3xl text-red-400 mb-5" aria-hidden="true"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></div>
-            <div class="uppercase tracking-widest text-red-500 font-semibold text-sm sm:text-base mb-2">Installation &amp; Assembly &middot; Oakland County, MI</div>
+            <div class="w-16 h-16 mx-auto bg-amber-500/10 border border-amber-400/30 rounded-2xl flex items-center justify-center text-3xl text-[#F5A623] mb-5 shadow-inner" aria-hidden="true"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></div>
+            <div class="badge-craftsman-gold text-xs sm:text-base mb-3 inline-flex">Installation &amp; Assembly &middot; Oakland County, MI</div>
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3">Installation &amp; Mounting</h1>
-            <p class="text-sm sm:text-base font-semibold text-red-400 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving Oakland County</p>
+            <p class="text-sm sm:text-base font-semibold text-amber-300 mb-4"><i class="fas fa-location-dot mr-1.5" aria-hidden="true"></i>Serving Oakland County</p>
             <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
                 Mounted, anchored, and ready to go, with clean, code-conscious installs.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="/book?service=General%20Estimate%20%2F%20Quote" class="bg-red-600 hover:bg-red-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-red-600/30 transition flex items-center justify-center gap-2">
+                <a href="/book?service=General%20Estimate%20%2F%20Quote" class="btn-craftsman-gold text-base px-6 py-3.5 rounded-xl shadow-lg">
                     <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Get a Free Quote
                 </a>
-                <a href="tel:+12483853432" class="bg-green-600 hover:bg-green-700 text-white font-bold text-base px-6 py-3.5 rounded-xl shadow-lg hover:shadow-green-600/30 transition flex items-center justify-center gap-2">
-                    <i class="fas fa-phone" aria-hidden="true"></i> Call Now! (248) 385-3432
+                <a href="tel:+12483853432" class="bg-slate-900/90 hover:bg-slate-900 text-white font-bold text-base px-6 py-3.5 rounded-xl border border-amber-400/40 hover:border-amber-400 shadow-lg transition flex items-center justify-center gap-2">
+                    <i class="fas fa-phone text-emerald-400" aria-hidden="true"></i> Call Now! (248) 385-3432
                 </a>
             </div>
         </div>
     </header>
     <main id="main-content" class="flex-grow py-12 sm:py-16">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
+            <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start reveal-on-scroll">
                 <div class="lg:col-span-2 prose prose-lg max-w-none text-gray-600">
                     <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4">Installation &amp; Mounting in Waterford, Troy, West Bloomfield &amp; Oakland County, MI</h2>
                     <p>Mounted, anchored, and ready to go. Whatever needs putting up or putting in, we handle it with clean, code-conscious installation you can rely on.</p>
                     <p>From TV wall mounts and handrails to full kitchen and bath fixtures, we anchor everything securely and leave the job site clean.</p>
                 </div>
-                <aside class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-lg">
+                <aside class="card-layered bg-white border border-slate-200/80 rounded-3xl p-6 shadow-lg">
                     <div class="flex items-center gap-3 mb-4">
-                        <span class="text-2xl text-red-600" aria-hidden="true"><i class="fas fa-tag" aria-hidden="true"></i></span>
+                        <span class="text-2xl text-[#F5A623]" aria-hidden="true"><i class="fas fa-tag" aria-hidden="true"></i></span>
                         <div>
                             <h3 class="text-lg font-bold text-gray-900">Simple, Upfront Pricing</h3>
                             <p class="text-sm text-gray-500">Installation &amp; Mounting</p>
                         </div>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700">
-                        <li class="flex items-start gap-2"><i class="fas fa-location-dot text-red-600 mt-1" aria-hidden="true"></i><span><strong>$100 minimum</strong> in Zone A (within ~20 miles) &middot; <strong>$145</strong> in Zone B (extended county).</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-clock text-red-600 mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-box-open text-red-600 mt-1" aria-hidden="true"></i><span>Labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-red-600 mt-1" aria-hidden="true"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
-                        <li class="flex items-start gap-2"><i class="fas fa-map text-red-600 mt-1" aria-hidden="true"></i><span>Available across <a href="/service-areas" class="text-red-600 font-semibold underline underline-offset-2">Oakland County</a>.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-location-dot text-[#F5A623] mt-1" aria-hidden="true"></i><span><strong>$100 minimum</strong> in Zone A (within ~20 miles) &middot; <strong>$145</strong> in Zone B (extended county).</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-clock text-[#F5A623] mt-1" aria-hidden="true"></i><span>Then a flat <strong>$70/hour</strong> in quarter-hour increments.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-box-open text-[#F5A623] mt-1" aria-hidden="true"></i><span>Labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-shield-halved text-[#F5A623] mt-1" aria-hidden="true"></i><span>Every job backed by our <a href="/guarantee" class="text-red-600 font-semibold underline underline-offset-2">1-Year Workmanship Guarantee</a>.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-map text-[#F5A623] mt-1" aria-hidden="true"></i><span>Available across <a href="/service-areas" class="text-red-600 font-semibold underline underline-offset-2">Oakland County</a>.</span></li>
                     </ul>
-                    <a href="/contact?service=General%20Estimate%20%2F%20Quote" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30">
+                    <a href="/contact?service=General%20Estimate%20%2F%20Quote" class="btn-craftsman-gold mt-6 w-full text-center font-bold px-6 py-3 rounded-xl shadow-md">
                         <i class="fas fa-calendar-check" aria-hidden="true"></i> Request This Service
                     </a>
                     <a href="/rates" class="mt-3 block text-center text-sm text-gray-500 hover:text-red-600 underline underline-offset-2">See full rates &amp; packages</a>
@@ -388,20 +396,20 @@
                     <p class="mt-3 text-gray-600 max-w-2xl mx-auto">A few of the most requested tasks in this category. Do not see yours? Just ask, no job too small.</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="flex items-start gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-0.5 group">
-                    <span class="w-9 h-9 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
+                <div class="card-layered flex items-start gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-0.5 group">
+                    <span class="w-9 h-9 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800 self-center">TV Wall Mounting: Secure mounting for flat-screen TVs up to 65&quot; ($170+)</span>
                 </div>
-                <div class="flex items-start gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-0.5 group">
-                    <span class="w-9 h-9 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
+                <div class="card-layered flex items-start gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-0.5 group">
+                    <span class="w-9 h-9 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800 self-center">Hardware &amp; Accessibility: Installation of grab bars, handrails, kitchen hardware, and baby proofing</span>
                 </div>
-                <div class="flex items-start gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-0.5 group">
-                    <span class="w-9 h-9 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
+                <div class="card-layered flex items-start gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-0.5 group">
+                    <span class="w-9 h-9 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800 self-center">Handrail &amp; stairs installation</span>
                 </div>
-                <div class="flex items-start gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-0.5 group">
-                    <span class="w-9 h-9 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
+                <div class="card-layered flex items-start gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-0.5 group">
+                    <span class="w-9 h-9 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-check" aria-hidden="true"></i></span>
                     <span class="font-semibold text-gray-800 self-center">Kitchen &amp; bathroom fixtures</span>
                 </div>
                 </div>
@@ -415,17 +423,17 @@
                 <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 text-center mb-6">Related Services</h2>
                 <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">Homeowners who booked installation &amp; mounting also asked about:</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <a href="/services/furniture-assembly" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-couch" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Furniture Assembly</span>
+                <a href="/services/furniture-assembly" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-couch" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Furniture Assembly</span>
                 </a>
-                <a href="/services/garage-storage" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-warehouse" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Garage &amp; Storage Organization</span>
+                <a href="/services/garage-storage" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-warehouse" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Garage &amp; Storage Organization</span>
                 </a>
-                <a href="/services/carpentry" class="generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-red-600/40 transition-all transform hover:-translate-y-1">
-                    <span class="w-10 h-10 flex-shrink-0 bg-red-100/80 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors" aria-hidden="true"><i class="fas fa-hammer" aria-hidden="true"></i></span>
-                    <span class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Carpentry</span>
+                <a href="/services/carpentry" class="card-layered generated-service-card group flex items-center gap-3.5 bg-white border border-slate-200/90 p-4.5 rounded-2xl shadow-sm hover:shadow-md hover:border-amber-500/40 transition-all transform hover:-translate-y-1">
+                    <span class="w-10 h-10 flex-shrink-0 bg-amber-100/80 rounded-xl flex items-center justify-center text-amber-600 group-hover:bg-[#F5A623] group-hover:text-slate-950 transition-colors" aria-hidden="true"><i class="fas fa-hammer" aria-hidden="true"></i></span>
+                    <span class="font-semibold text-gray-800 group-hover:text-amber-800 transition-colors">Carpentry</span>
                 </a>
                 </div>
                 <div class="mt-6 text-center">
@@ -577,7 +585,7 @@
         </div>
     </footer>
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
-    <script src="/js/site.js?v=20260810b" defer></script>
+    <script src="/js/site.js?v=20260810a" defer></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}

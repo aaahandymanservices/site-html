@@ -90,6 +90,11 @@
   --brand-crimson-bright: #c62839;
   --brand-crimson-dark: #781925;
   --brand-crimson-soft: #f8e9eb;
+  --brand-craftsman-gold: #F5A623;
+  --brand-craftsman-gold-hover: #E09212;
+  --brand-craftsman-gold-dark: #C87F0A;
+  --brand-craftsman-gold-soft: rgba(245, 166, 35, 0.15);
+  --brand-craftsman-gold-glow: rgba(245, 166, 35, 0.35);
   --brand-ink: #1f2937;
   --brand-muted: #526174;
   --brand-line: #d8dee8;
@@ -101,6 +106,8 @@
   --shadow-md: 0 8px 24px rgb(27 42 74 / 8%);
   --shadow-lg: 0 18px 44px rgb(27 42 74 / 12%);
   --shadow-crimson: 0 12px 26px rgb(120 25 37 / 26%);
+  --shadow-gold: 0 12px 28px -4px rgba(245, 166, 35, 0.35);
+  --shadow-layered-dark: 0 20px 40px -10px rgba(0, 0, 0, 0.45), 0 0 20px rgba(245, 166, 35, 0.08);
   --brand-shadow: var(--shadow-lg);
 
   /* Motion + shape tokens */
@@ -111,6 +118,7 @@
   /* Signature gradients */
   --grad-crimson: linear-gradient(135deg, var(--brand-crimson-bright), var(--brand-crimson) 55%, var(--brand-crimson-dark));
   --grad-navy: linear-gradient(135deg, var(--brand-navy-deep), var(--brand-navy));
+  --grad-craftsman-gold: linear-gradient(135deg, #FFC107, #F5A623 60%, #D97706);
 
   --font-display: "Archivo", "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
 
@@ -3686,4 +3694,282 @@ a[href^="tel:"].fixed:hover,
     animation: none !important;
   }
 }
+
+/* ============================================================
+   Craftsman Gold / Amber Accents & CTA Buttons
+   ============================================================ */
+.btn-craftsman-gold,
+.btn-amber-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--grad-craftsman-gold, linear-gradient(135deg, #FFC107, #F5A623 60%, #D97706));
+  color: #0F172A !important;
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 0.85rem;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 4px 14px rgba(245, 166, 35, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-craftsman-gold:hover,
+.btn-amber-cta:hover {
+  background: linear-gradient(135deg, #FFCA28, #E09212 60%, #B45309);
+  color: #000000 !important;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(245, 166, 35, 0.5), 0 0 15px rgba(245, 166, 35, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.btn-craftsman-gold:active,
+.btn-amber-cta:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.badge-craftsman-gold,
+.badge-amber-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: rgba(245, 166, 35, 0.16);
+  color: #F5A623;
+  border: 1px solid rgba(245, 166, 35, 0.45);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 12px rgba(245, 166, 35, 0.2);
+}
+
+.text-craftsman-gold {
+  color: #F5A623 !important;
+}
+
+.bg-craftsman-gold {
+  background-color: #F5A623 !important;
+}
+
+.border-craftsman-gold {
+  border-color: rgba(245, 166, 35, 0.5) !important;
+}
+
+/* ============================================================
+   Layered Card UI Containers
+   ============================================================ */
+.card-layered {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px -5px rgba(27, 42, 74, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.card-layered:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -8px rgba(27, 42, 74, 0.14), 0 0 20px rgba(245, 166, 35, 0.15);
+  border-color: rgba(245, 166, 35, 0.4);
+}
+
+.card-dark-layered {
+  position: relative;
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.96), rgba(15, 23, 42, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.card-dark-layered:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55), 0 0 25px rgba(245, 166, 35, 0.22);
+  border-color: rgba(245, 166, 35, 0.45);
+}
+
+.card-dark-layered::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245, 166, 35, 0.4), transparent);
+  pointer-events: none;
+}
+
+/* ============================================================
+   Warm Ambient Gradient Glows (Hero & Pricing Sections)
+   ============================================================ */
+.ambient-glow-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.ambient-glow-hero::before {
+  content: "";
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1100px;
+  height: 80%;
+  background: radial-gradient(ellipse at center, rgba(245, 166, 35, 0.2) 0%, rgba(166, 31, 46, 0.12) 40%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
+  opacity: 0.9;
+}
+
+.ambient-glow-pricing {
+  position: relative;
+}
+
+.ambient-glow-pricing::before {
+  content: "";
+  position: absolute;
+  top: -8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 70%;
+  background: radial-gradient(ellipse at center, rgba(245, 166, 35, 0.18) 0%, rgba(27, 42, 74, 0.15) 50%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(35px);
+}
+
+.pricing-card-highlight {
+  position: relative;
+  border: 2px solid #F5A623 !important;
+  box-shadow: 0 16px 38px -6px rgba(245, 166, 35, 0.25), 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+.pricing-card-highlight::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #F5A623, transparent);
+  box-shadow: 0 0 12px #F5A623;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Micro-Interactions & Card Transitions
+   ============================================================ */
+.service-card,
+.pricing-card,
+.svc-group,
+.process-step-card,
+.generated-service-card {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease, background-color 0.28s ease !important;
+}
+
+.service-card:hover,
+.pricing-card:hover,
+.process-step-card:hover,
+.generated-service-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 36px -6px rgba(27, 42, 74, 0.14), 0 0 20px rgba(245, 166, 35, 0.18) !important;
+}
+
+.cta-button,
+.pricing-tab-btn,
+.service-tag-btn {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, background-color 0.22s ease, border-color 0.22s ease !important;
+}
+
+.cta-button:hover,
+.service-tag-btn:hover {
+  transform: translateY(-2px) !important;
+}
+
+/* ============================================================
+   Scroll-Triggered Reveals
+   ============================================================ */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal-delay-100 { transition-delay: 100ms; }
+.reveal-delay-200 { transition-delay: 200ms; }
+.reveal-delay-300 { transition-delay: 300ms; }
+.reveal-delay-400 { transition-delay: 400ms; }
+
+/* ============================================================
+   Interactive Service Filter Chips
+   ============================================================ */
+.service-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.svc-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 9999px;
+  border: 1.5px solid #d1d5db;
+  background: #ffffff;
+  color: #1b2a4a;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(16, 27, 49, 0.05);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.svc-filter-chip:hover {
+  border-color: #F5A623;
+  color: #B45309;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(245, 166, 35, 0.25);
+}
+
+.svc-filter-chip[aria-pressed="true"],
+.svc-filter-chip.active {
+  background: linear-gradient(135deg, #FFC107, #F5A623 60%, #D97706);
+  border-color: #F5A623;
+  color: #0F172A;
+  box-shadow: 0 4px 16px rgba(245, 166, 35, 0.4);
+}
+
+.svc-card-animated {
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s ease;
+  will-change: opacity, transform;
+}
+
+.svc-card-animated.is-filtered-out {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  display: none !important;
+}
+
+
 

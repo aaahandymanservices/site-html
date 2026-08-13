@@ -1027,9 +1027,23 @@
                  rest) still land on the right card. -->
             <section id="service-catalog" aria-labelledby="service-catalog-heading" class="mb-4">
                 <div class="text-center mb-8">
-                    <span class="bg-blue-100 text-blue-900 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border border-blue-200"><i class="fas fa-list-check mr-1.5 text-red-600" aria-hidden="true"></i> Full Service Catalog</span>
+                    <span class="badge-craftsman-gold px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5">
+                        <i class="fas fa-list-check text-[#F5A623]" aria-hidden="true"></i> Full Service Catalog
+                    </span>
                     <h2 id="service-catalog-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mt-3">Browse by Category</h2>
-                    <p class="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto mt-2">Pick the category that matches your project and open it to see every service inside. Everything else stays tucked away.</p>
+                    <p class="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto mt-2">Filter by trade or pick a category below to see every service inside. Seamless interactive filtering with zero page reload.</p>
+                </div>
+
+                <!-- Interactive Service Filter Chips -->
+                <div class="service-filter-chips my-6" role="group" aria-label="Filter services by specific trade">
+                    <button type="button" class="svc-filter-chip active" data-filter-category="all" aria-pressed="true"><i class="fas fa-border-all text-[#F5A623]" aria-hidden="true"></i> All Services</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="carpentry" aria-pressed="false"><i class="fas fa-hammer text-[#F5A623]" aria-hidden="true"></i> Carpentry</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="plumbing" aria-pressed="false"><i class="fas fa-faucet-drip text-[#F5A623]" aria-hidden="true"></i> Plumbing</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="drywall" aria-pressed="false"><i class="fas fa-fill-drip text-[#F5A623]" aria-hidden="true"></i> Drywall</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="painting" aria-pressed="false"><i class="fas fa-paint-roller text-[#F5A623]" aria-hidden="true"></i> Painting</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="electrical" aria-pressed="false"><i class="fas fa-bolt text-[#F5A623]" aria-hidden="true"></i> Electrical</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="exterior" aria-pressed="false"><i class="fas fa-house-chimney-window text-[#F5A623]" aria-hidden="true"></i> Exterior</button>
+                    <button type="button" class="svc-filter-chip" data-filter-category="assembly" aria-pressed="false"><i class="fas fa-screwdriver-wrench text-[#F5A623]" aria-hidden="true"></i> Assembly</button>
                 </div>
 
                 <nav aria-label="Service categories" class="svc-tabs">
