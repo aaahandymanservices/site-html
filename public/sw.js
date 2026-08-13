@@ -73,7 +73,11 @@
 // cache key, and every new icon rendered blank. Bumping both the stamp in the
 // page (scripts/update-static-pages.mjs) and this version refetches the
 // stylesheet and its fonts for every client.
-const CACHE_VERSION = 'v16';
+// v17 ships the upgraded AI chat widget: a guided in-chat estimator (zone +
+// task selection with live ballpark totals) and inline repair-photo upload.
+// chat-loader.js and chat-widget.js are both cached by pathname here, so the
+// bumped ?v= stamps alone cannot reach a returning visitor — this bump does.
+const CACHE_VERSION = 'v17';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

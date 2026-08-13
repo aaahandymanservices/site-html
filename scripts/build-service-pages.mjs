@@ -670,7 +670,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
     </script>
 
     <!-- AI chat assistant widget -->
-    <script src="/js/chat-loader.js?v=20260729b" defer></script>
+    <script src="/js/chat-loader.js?v=20260813a" defer></script>
 
     <script>
       // Registered after load so it never competes with the first render.

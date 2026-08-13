@@ -278,6 +278,89 @@
           });
       });
 
+      // ---- Optional repair photo -------------------------------------------
+      // The form is submitted via AJAX, so the file has to ride along in the
+      // multipart FormData the browser builds — URLSearchParams would drop the
+      // binary. The preview and the small file-type/size guard mirror the
+      // booking form's photo handling.
+      const contactPhotoInput = document.getElementById('contact-photos');
+      const contactPhotoLabel = document.getElementById('contact-photo-label');
+      const contactPhotoPreviewWrap = document.getElementById('contact-photo-preview-wrap');
+      const contactPhotoPreview = document.getElementById('contact-photo-preview');
+      const contactPhotoName = document.getElementById('contact-photo-name');
+      const contactPhotoRemove = document.getElementById('contact-photo-remove');
+      const contactPhotoDropzone = document.getElementById('contact-photo-dropzone');
+      const contactPhotoError = document.getElementById('contact-photo-error');
+      const CONTACT_PHOTO_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+      const CONTACT_PHOTO_MAX_BYTES = 10 * 1024 * 1024;
+      let contactPhotoPreviewUrl = '';
+
+      const showContactPhotoError = (message = '') => {
+          if (!contactPhotoError) return;
+          contactPhotoError.textContent = message;
+          contactPhotoError.classList.toggle('hidden', !message);
+      };
+
+      const clearContactPhoto = () => {
+          if (contactPhotoInput) contactPhotoInput.value = '';
+          if (contactPhotoPreviewUrl) URL.revokeObjectURL(contactPhotoPreviewUrl);
+          contactPhotoPreviewUrl = '';
+          contactPhotoPreview?.removeAttribute('src');
+          contactPhotoPreviewWrap?.classList.add('hidden');
+          contactPhotoPreviewWrap?.classList.remove('flex');
+          if (contactPhotoLabel) contactPhotoLabel.textContent = 'Snap a quick photo of the repair';
+          showContactPhotoError();
+      };
+
+      const updateContactPhotoPreview = () => {
+          const file = contactPhotoInput?.files?.[0];
+          if (!file) { clearContactPhoto(); return; }
+          if (!CONTACT_PHOTO_TYPES.has(file.type)) {
+              clearContactPhoto();
+              showContactPhotoError('Choose a JPG, PNG, or WebP image.');
+              return;
+          }
+          if (file.size > CONTACT_PHOTO_MAX_BYTES) {
+              clearContactPhoto();
+              showContactPhotoError('Choose a photo that is 10 MB or smaller.');
+              return;
+          }
+          if (contactPhotoPreviewUrl) URL.revokeObjectURL(contactPhotoPreviewUrl);
+          contactPhotoPreviewUrl = URL.createObjectURL(file);
+          if (contactPhotoPreview) contactPhotoPreview.src = contactPhotoPreviewUrl;
+          if (contactPhotoName) contactPhotoName.textContent = file.name || 'Repair photo';
+          contactPhotoPreviewWrap?.classList.remove('hidden');
+          contactPhotoPreviewWrap?.classList.add('flex');
+          if (contactPhotoLabel) contactPhotoLabel.textContent = 'Photo attached ✓';
+          showContactPhotoError();
+      };
+
+      contactPhotoInput?.addEventListener('change', updateContactPhotoPreview);
+      contactPhotoRemove?.addEventListener('click', (event) => { event.preventDefault(); clearContactPhoto(); });
+
+      if (contactPhotoDropzone && contactPhotoInput) {
+          ['dragenter', 'dragover'].forEach((eventName) => {
+              contactPhotoDropzone.addEventListener(eventName, (event) => {
+                  event.preventDefault();
+                  contactPhotoDropzone.classList.add('border-red-400', 'bg-blue-900/70');
+              });
+          });
+          ['dragleave', 'drop'].forEach((eventName) => {
+              contactPhotoDropzone.addEventListener(eventName, (event) => {
+                  event.preventDefault();
+                  contactPhotoDropzone.classList.remove('border-red-400', 'bg-blue-900/70');
+              });
+          });
+          contactPhotoDropzone.addEventListener('drop', (event) => {
+              const file = event.dataTransfer?.files?.[0];
+              if (!file) return;
+              const transfer = new DataTransfer();
+              transfer.items.add(file);
+              contactPhotoInput.files = transfer.files;
+              updateContactPhotoPreview();
+          });
+      }
+
       form.addEventListener('submit', function(e) {
           e.preventDefault();
           if (submitButton && submitButton.disabled) return;
@@ -310,13 +393,22 @@
           const name = formData.get('name');
           const certificateBox = document.getElementById('first-service-certificate');
           const claimedCertificate = Boolean(certificateBox && certificateBox.checked && !certificateBox.disabled);
+          // A photo turns this into a multipart submit: the file cannot survive
+          // URLSearchParams encoding, so send the FormData straight through and
+          // let the browser set the multipart Content-Type + boundary. Without a
+          // photo, the original URL-encoded body keeps working unchanged.
+          const hasPhoto = contactPhotoInput?.files?.[0] instanceof File && contactPhotoInput.files[0].size > 0;
 
           const sendMessage = function() {
-              fetch('/contact.html', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                  body: new URLSearchParams(formData).toString()
-              })
+              const fetchOptions = { method: 'POST' };
+              if (hasPhoto) {
+                  // No Content-Type header — the browser sets the multipart boundary.
+                  fetchOptions.body = formData;
+              } else {
+                  fetchOptions.headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+                  fetchOptions.body = new URLSearchParams(formData).toString();
+              }
+              fetch('/contact.html', fetchOptions)
               .then(response => {
                   if (response.ok) {
                       // The certificate is one per customer, so spend it the
@@ -337,6 +429,7 @@
 
                       setStatus('Thank you! Your message is on its way and we will be in touch shortly.', 'success');
                       form.reset();
+                      clearContactPhoto();
                       FIELDS.forEach(field => showFieldError(field, ''));
                       if (servicePackageInfo) {
                           servicePackageInfo.classList.add('hidden');

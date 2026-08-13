@@ -67,7 +67,7 @@
 
     loadPromise = new Promise(function (resolve, reject) {
       var script = document.createElement("script");
-      script.src = "/js/chat-widget.js?v=20260729b";
+      script.src = "/js/chat-widget.js?v=20260813a";
       script.onload = resolve;
       script.onerror = reject;
       document.head.appendChild(script);

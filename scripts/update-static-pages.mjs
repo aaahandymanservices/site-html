@@ -63,6 +63,10 @@ const SCRIPT_VERSIONS = new Map([
   ['booking-widget.js', ASSET_VERSION],
   ['service-zone-selector.js', ASSET_VERSION],
   ['home-care-plans.js', ASSET_VERSION],
+  // The loader is what boots the AI chat widget. It points at chat-widget.js
+  // by version, so a stale cached loader keeps serving the previous widget even
+  // after the new one ships — move its stamp with the widget changes.
+  ['chat-loader.js', '20260813a'],
 ]);
 const ASYNC_ICONS_CSS =
   `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +

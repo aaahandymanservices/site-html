@@ -9,6 +9,10 @@
   var streaming = false;
   var activeRequest = null;
   var conversationVersion = 0;
+  // Photos the visitor has attached to the in-progress message, before it is
+  // sent. Each is a File; they are downscaled to a data URL on send so they can
+  // travel inline in the JSON body alongside the text.
+  var pendingPhotos = [];
   var style = document.createElement("style");
   style.textContent = [
     ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:40;display:flex;flex-direction:column;gap:12px;align-items:flex-end}",
@@ -106,6 +110,80 @@
     ".dark .aaa-chat-disclaimer{background:#0f172a;color:#94a3b8}",
     ".dark .aaa-chat-log::-webkit-scrollbar-thumb{background:#334155}",
     ".dark .aaa-chat-log::-webkit-scrollbar-thumb:hover{background:" + CRIMSON + "}",
+    // ---- Toolbar (estimator + photo buttons above the prompts) ----
+    ".aaa-chat-toolbar{display:flex;gap:6px;padding:8px 14px 0;background:#ffffff;border-top:1px solid #e2e8f0}",
+    ".aaa-chat-tool{flex:1 1 0;display:flex;align-items:center;justify-content:center;gap:6px;border:1.5px solid #cbd5e1;border-radius:12px;background:#f8fafc;color:#0f172a;padding:8px 10px;font:700 12px/1 'Roboto',system-ui,-apple-system,sans-serif;cursor:pointer;transition:all .15s ease}",
+    ".aaa-chat-tool i{font-size:13px;color:" + CRIMSON + "}",
+    ".aaa-chat-tool:hover:not(:disabled){background:#0f172a;color:#ffffff;border-color:#0f172a}",
+    ".aaa-chat-tool:hover:not(:disabled) i{color:#f87171}",
+    ".aaa-chat-tool:focus-visible{outline:none;box-shadow:0 0 0 2px " + CRIMSON + "}",
+    ".aaa-chat-tool[aria-pressed='true']{background:" + CRIMSON + ";color:#ffffff;border-color:" + CRIMSON + "}",
+    ".aaa-chat-tool[aria-pressed='true'] i{color:#ffffff}",
+    ".dark .aaa-chat-toolbar{background:#0f172a;border-top-color:#1e293b}",
+    ".dark .aaa-chat-tool{background:#1e293b;color:#f8fafc;border-color:#334155}",
+    ".dark .aaa-chat-tool i{color:#f87171}",
+    ".dark .aaa-chat-tool:hover:not(:disabled){background:" + CRIMSON + ";border-color:" + CRIMSON + "}",
+    // ---- Pending photo chips (next to the text input) ----
+    ".aaa-chat-photos{display:flex;flex-wrap:wrap;gap:6px;padding:6px 4px 0}",
+    ".aaa-chat-photo-chip{position:relative;width:48px;height:48px;border-radius:10px;overflow:hidden;border:1.5px solid #e2e8f0;flex:0 0 48px}",
+    ".aaa-chat-photo-chip img{width:100%;height:100%;object-fit:cover;display:block}",
+    ".aaa-chat-photo-remove{position:absolute;top:1px;right:1px;width:18px;height:18px;border-radius:50%;border:none;background:rgba(15,23,42,.78);color:#fff;font-size:11px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}",
+    ".aaa-chat-photo-remove:hover{background:" + CRIMSON + "}",
+    ".dark .aaa-chat-photo-chip{border-color:#334155}",
+    // ---- Guided estimator overlay ----
+    ".aaa-chat-estimator{display:none;flex-direction:column;flex:1;min-height:0;background:#f8fafc}",
+    ".aaa-chat-estimator.aaa-open{display:flex}",
+    ".aaa-est-header{display:flex;align-items:center;gap:10px;padding:14px 16px;background:#0f172a;color:#fff;border-bottom:2px solid " + CRIMSON + "}",
+    ".aaa-est-header h3{margin:0;font-family:'Archivo','Roboto',system-ui,-apple-system,sans-serif;font-size:14px;font-weight:800}",
+    ".aaa-est-close{margin-left:auto;background:none;border:none;color:#fff;font-size:20px;line-height:1;cursor:pointer;opacity:.85;padding:4px 8px;border-radius:8px}",
+    ".aaa-est-close:hover{opacity:1;background:rgba(255,255,255,.15)}",
+    ".aaa-est-body{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:16px}",
+    ".aaa-est-body::-webkit-scrollbar{width:6px}",
+    ".aaa-est-body::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}",
+    ".aaa-est-section h4{margin:0 0 8px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#475569;display:flex;align-items:center;gap:6px}",
+    ".aaa-est-section h4 i{color:" + CRIMSON + "}",
+    ".aaa-est-zones{display:grid;grid-template-columns:1fr 1fr;gap:8px}",
+    ".aaa-est-zone{border:1.5px solid #cbd5e1;border-radius:12px;background:#fff;padding:10px 12px;cursor:pointer;text-align:left;transition:all .15s ease}",
+    ".aaa-est-zone b{display:block;font-size:13px;color:#0f172a}",
+    ".aaa-est-zone span{display:block;font-size:11px;color:#64748b;margin-top:2px}",
+    ".aaa-est-zone:hover{border-color:#94a3b8}",
+    ".aaa-est-zone[aria-pressed='true']{border-color:" + CRIMSON + ";background:#fff5f6;box-shadow:0 0 0 2px rgba(166,31,46,.18)}",
+    ".aaa-est-cats{display:flex;flex-direction:column;gap:10px}",
+    ".aaa-est-cat{border:1.5px solid #e2e8f0;border-radius:14px;background:#fff;overflow:hidden}",
+    ".aaa-est-cat-head{display:flex;align-items:center;gap:8px;width:100%;border:none;background:#fff;padding:11px 13px;cursor:pointer;text-align:left;font:700 13px/1.2 'Roboto',system-ui,-apple-system,sans-serif;color:#0f172a}",
+    ".aaa-est-cat-head i{color:" + CRIMSON + ";font-size:14px}",
+    ".aaa-est-cat-head .aaa-est-chev{margin-left:auto;font-size:12px;color:#94a3b8;transition:transform .2s ease}",
+    ".aaa-est-cat[aria-expanded='true'] .aaa-est-chev{transform:rotate(180deg)}",
+    ".aaa-est-cat-tasks{display:none;flex-direction:column;gap:6px;padding:0 10px 10px}",
+    ".aaa-est-cat[aria-expanded='true'] .aaa-est-cat-tasks{display:flex}",
+    ".aaa-est-task{display:flex;align-items:flex-start;gap:8px;padding:9px 10px;border:1.5px solid #e2e8f0;border-radius:10px;background:#f8fafc;cursor:pointer;transition:all .15s ease}",
+    ".aaa-est-task:hover{border-color:#94a3b8}",
+    ".aaa-est-task input{margin-top:2px;accent-color:" + CRIMSON + "}",
+    ".aaa-est-task-info{flex:1;min-width:0}",
+    ".aaa-est-task-name{display:block;font-weight:700;font-size:12px;color:#0f172a;line-height:1.25}",
+    ".aaa-est-task-desc{display:block;font-size:11px;color:#64748b;line-height:1.3;margin-top:1px}",
+    ".aaa-est-task-price{font:800 13px/1 'Roboto',system-ui,sans-serif;color:#0f172a;white-space:nowrap}",
+    ".aaa-est-task[aria-pressed='true']{border-color:" + CRIMSON + ";background:#fff5f6}",
+    ".aaa-est-summary{background:#0f172a;color:#fff;border-radius:16px;padding:14px 16px;margin-top:auto}",
+    ".aaa-est-total-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px}",
+    ".aaa-est-total-label{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#f87171}",
+    ".aaa-est-total{font:900 26px/1 'Archivo','Roboto',system-ui,sans-serif;letter-spacing:-.01em}",
+    ".aaa-est-lines{margin:10px 0 0;padding:10px 0 0;border-top:1px solid rgba(255,255,255,.15);display:flex;flex-direction:column;gap:4px;list-style:none}",
+    ".aaa-est-line{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#cbd5e1}",
+    ".aaa-est-line b{color:#fff;font-weight:700}",
+    ".aaa-est-ctas{display:flex;flex-direction:column;gap:8px;margin-top:12px}",
+    ".aaa-est-cta{display:flex;align-items:center;justify-content:center;gap:7px;border:none;border-radius:12px;padding:11px 14px;font:700 13px/1 'Roboto',system-ui,-apple-system,sans-serif;cursor:pointer;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease}",
+    ".aaa-est-cta:hover{transform:translateY(-1px)}",
+    ".aaa-est-cta-book{background:" + CRIMSON + ";color:#fff;box-shadow:0 4px 12px rgba(166,31,46,.3)}",
+    ".aaa-est-cta-call{background:#10b981;color:#fff;box-shadow:0 4px 12px rgba(16,185,129,.28)}",
+    ".aaa-est-fineprint{margin:8px 0 0;font-size:10px;line-height:1.35;color:#94a3b8}",
+    ".dark .aaa-chat-estimator{background:#020817}",
+    ".dark .aaa-est-cat,.dark .aaa-est-cat-head{background:#1e293b;border-color:#334155;color:#f8fafc}",
+    ".dark .aaa-est-task{background:#0f172a;border-color:#334155}",
+    ".dark .aaa-est-zone{background:#1e293b;border-color:#334155}",
+    ".dark .aaa-est-zone b{color:#f8fafc}",
+    ".dark .aaa-est-task-name{color:#f8fafc}",
+    ".dark .aaa-est-section h4{color:#94a3b8}",
     "@media(max-width:767px){.aaa-fab{right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));flex-direction:column;gap:12px;align-items:flex-end}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}.aaa-fab-btn.aaa-chat-launch,.aaa-fab-btn.aaa-call{display:flex!important}.aaa-chat-panel{position:fixed;top:0;left:0;right:0;bottom:0;width:100%!important;max-width:100%!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important;border:none!important;z-index:2147483005}.aaa-chat-header{padding:calc(16px + env(safe-area-inset-top,0px)) 18px 16px!important}.aaa-chat-disclaimer{padding:0 12px calc(10px + env(safe-area-inset-bottom,0px))!important}}",
     "@media(max-width:359px){.aaa-fab .aaa-fab-btn{width:50px;height:50px;flex-basis:50px}.aaa-fab{gap:10px}}"
   ].join("");
@@ -146,6 +224,10 @@
       '</div>' +
     '</div>' +
     '<div class="aaa-chat-log" id="aaa-chat-log" role="log" aria-live="polite"></div>' +
+    '<div class="aaa-chat-toolbar" id="aaa-chat-toolbar">' +
+      '<button type="button" class="aaa-chat-tool" id="aaa-chat-est-tool" aria-pressed="false"><i class="fas fa-calculator" aria-hidden="true"></i> Get an estimate</button>' +
+      '<button type="button" class="aaa-chat-tool" id="aaa-chat-photo-tool" aria-pressed="false"><i class="fas fa-camera" aria-hidden="true"></i> Add a photo</button>' +
+    '</div>' +
     '<div class="aaa-chat-prompts" aria-label="Suggested questions">' +
       '<p class="aaa-chat-prompts-label">Popular questions</p>' +
       '<div class="aaa-chat-prompts-list">' +
@@ -168,10 +250,28 @@
     '</div>' +
     '<form class="aaa-chat-form" id="aaa-chat-form">' +
       '<button type="button" class="aaa-chat-emoji-trigger" id="aaa-chat-emoji-trigger" title="Add an emoji" aria-label="Add an emoji" aria-expanded="false" aria-controls="aaa-chat-emoji-bar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg></button>' +
+      '<button type="button" class="aaa-chat-emoji-trigger" id="aaa-chat-photo-trigger" title="Attach a repair photo" aria-label="Attach a repair photo" style="color:#A61F2E"><i class="fas fa-paperclip" aria-hidden="true"></i></button>' +
       '<textarea id="aaa-chat-input" rows="1" placeholder="Type your question…" aria-label="Your message"></textarea>' +
       '<button type="submit" class="aaa-chat-send" id="aaa-chat-send" aria-label="Send message"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>' +
     '</form>' +
-    '<div class="aaa-chat-disclaimer">Automated assistant. For quotes or booking call (248) 385-3432.</div>';
+    '<div class="aaa-chat-photos" id="aaa-chat-photos"></div>' +
+    '<input type="file" id="aaa-chat-photo-input" accept="image/jpeg,image/png,image/webp" capture="environment" hidden>' +
+    '<div class="aaa-chat-disclaimer">Automated assistant. For quotes or booking call (248) 385-3432.</div>' +
+    // The guided estimator overlays the log/prompts/form area, so it reads as a
+    // focused step rather than another message thread. Closing it returns to the
+    // conversation, and a summary of the selections is dropped into the chat.
+    '<div class="aaa-chat-estimator" id="aaa-chat-estimator" aria-label="Instant estimate builder">' +
+      '<div class="aaa-est-header">' +
+        '<i class="fas fa-calculator" aria-hidden="true"></i>' +
+        '<h3>Instant ballpark estimate</h3>' +
+        '<button type="button" class="aaa-est-close" id="aaa-est-close" aria-label="Close estimator">&times;</button>' +
+      '</div>' +
+      '<div class="aaa-est-body" id="aaa-est-body">' +
+        '<div class="aaa-est-section" id="aaa-est-zone-section"></div>' +
+        '<div class="aaa-est-section" id="aaa-est-cats-section"></div>' +
+        '<div class="aaa-est-summary" id="aaa-est-summary"></div>' +
+      '</div>' +
+    '</div>';
 
   document.body.appendChild(group);
   document.body.appendChild(panel);
@@ -186,8 +286,15 @@
   var emojiBar = panel.querySelector("#aaa-chat-emoji-bar");
   var promptList = panel.querySelector(".aaa-chat-prompts-list");
   var promptButtons = panel.querySelectorAll(".aaa-chat-prompt");
+  var estTool = panel.querySelector("#aaa-chat-est-tool");
+  var photoTool = panel.querySelector("#aaa-chat-photo-tool");
+  var photoTrigger = panel.querySelector("#aaa-chat-photo-trigger");
+  var photoInput = panel.querySelector("#aaa-chat-photo-input");
+  var photosWrap = panel.querySelector("#aaa-chat-photos");
+  var estimator = panel.querySelector("#aaa-chat-estimator");
+  var estClose = panel.querySelector("#aaa-est-close");
 
-  var GREETING = "Hi! 👋 I'm the AAA Handyman Services LLC assistant. Ask me about our services, the areas we cover, or how to get a quote.";
+  var GREETING = "Hi! 👋 I'm the AAA Handyman Services LLC assistant. Ask me about our services, the areas we cover, or how to get a quote. You can also tap **Get an estimate** to build an instant ballpark, or **Add a photo** so a tech can see your repair.";
   function hideExistingFloating() {
     // Hide static (noscript) floating "Call Now" CTAs baked into the markup.
     var els = document.querySelectorAll(".fixed.bottom-5.right-5, [class*='fixed'][class*='bottom-5'][class*='right-5']");
@@ -220,7 +327,7 @@
     scrollToBottom();
   }
 
-  function addMessage(role, text) {
+  function addMessage(role, text, photos) {
     var row = document.createElement("div");
     row.className = "aaa-msg-row " + (role === "user" ? "aaa-user-row" : "aaa-bot-row");
 
@@ -236,6 +343,23 @@
     el.className = "aaa-msg " + (role === "user" ? "aaa-user" : "aaa-bot");
     el.textContent = text;
     row.appendChild(el);
+
+    // Render any photos attached to this user turn as a strip beneath the bubble.
+    // The thumbnails here are the same data URLs that were sent to the model,
+    // so they persist after the pending-photo chips above the input are cleared.
+    if (role === "user" && photos && photos.length) {
+      var strip = document.createElement("div");
+      strip.style.cssText = "display:flex;flex-wrap:wrap;gap:4px;margin-top:4px;align-self:flex-end";
+      photos.forEach(function (p) {
+        var thumb = document.createElement("img");
+        thumb.src = p.dataUrl;
+        thumb.alt = "Attached repair photo";
+        thumb.style.cssText = "width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,.4)";
+        strip.appendChild(thumb);
+      });
+      row.appendChild(strip);
+    }
+
     log.appendChild(row);
     scrollToBottom();
     return el;
@@ -243,6 +367,308 @@
 
   function scrollToBottom() {
     log.scrollTop = log.scrollHeight;
+  }
+
+  var money = function (n) { return "$" + Math.round(n).toLocaleString("en-US"); };
+
+  // ---- Pending photo chips ------------------------------------------------
+  // Photos the visitor attaches show up as little thumbnails above the input
+  // until the message is sent, at which point they ride along in the JSON body
+  // as inline base64 so the model can see them.
+  function renderPhotoChips() {
+    if (!photosWrap) return;
+    photosWrap.innerHTML = "";
+    for (var i = 0; i < pendingPhotos.length; i++) {
+      var chip = document.createElement("div");
+      chip.className = "aaa-chat-photo-chip";
+      var img = document.createElement("img");
+      img.alt = "Attached repair photo " + (i + 1);
+      img.src = pendingPhotos[i].preview;
+      chip.appendChild(img);
+      var remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "aaa-chat-photo-remove";
+      remove.setAttribute("aria-label", "Remove photo " + (i + 1));
+      remove.innerHTML = "&times;";
+      (function (index) {
+        remove.addEventListener("click", function () {
+          URL.revokeObjectURL(pendingPhotos[index].preview);
+          pendingPhotos.splice(index, 1);
+          renderPhotoChips();
+          updatePhotoToolState();
+        });
+      })(i);
+      chip.appendChild(remove);
+      photosWrap.appendChild(chip);
+    }
+  }
+
+  function updatePhotoToolState() {
+    if (!photoTool) return;
+    photoTool.setAttribute("aria-pressed", String(pendingPhotos.length > 0));
+  }
+
+  // Downscale a File to a JPEG data URL no larger than ~1.4 MB so it can travel
+  // inline in the request body without blowing the server's data-URL cap. This
+  // mirrors the booking form's downscale: a phone photo is often 3+ MB, and a
+  // quick cap to 1280px on the long edge at 0.8 quality lands comfortably under.
+  var MAX_PHOTO_BYTES = 10 * 1024 * 1024;
+  var MAX_PHOTO_DIMENSION = 1280;
+  var PHOTO_TYPES = { "image/jpeg": true, "image/png": true, "image/webp": true };
+
+  function downscalePhoto(file) {
+    return new Promise(function (resolve, reject) {
+      if (!(file instanceof File)) { reject(new Error("not a file")); return; }
+      if (!PHOTO_TYPES[file.type]) { reject(new Error("unsupported type")); return; }
+      if (file.size > MAX_PHOTO_BYTES) { reject(new Error("too large")); return; }
+      var url = URL.createObjectURL(file);
+      var image = new Image();
+      image.onload = function () {
+        URL.revokeObjectURL(url);
+        var scale = Math.min(1, MAX_PHOTO_DIMENSION / Math.max(image.width, image.height));
+        var canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(image.width * scale));
+        canvas.height = Math.max(1, Math.round(image.height * scale));
+        var ctx = canvas.getContext("2d");
+        if (!ctx) { reject(new Error("no canvas context")); return; }
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(function (blob) {
+          if (!blob) { reject(new Error("blob failed")); return; }
+          var reader = new FileReader();
+          reader.onload = function () { resolve({ dataUrl: reader.result, mediaType: "image/jpeg" }); };
+          reader.onerror = function () { reject(new Error("read failed")); };
+          reader.readAsDataURL(blob);
+        }, "image/jpeg", 0.8);
+      };
+      image.onerror = function () { URL.revokeObjectURL(url); reject(new Error("load failed")); };
+      image.src = url;
+    });
+  }
+
+  function addPhotoFromFile(file) {
+    downscalePhoto(file).then(function (result) {
+      pendingPhotos.push({ preview: result.dataUrl, dataUrl: result.dataUrl, mediaType: result.mediaType });
+      if (pendingPhotos.length > 4) pendingPhotos.shift();
+      renderPhotoChips();
+      updatePhotoToolState();
+      setEstimatorOpen(false);
+    }).catch(function () {
+      addMessage("assistant", "Sorry, I couldn't read that photo. Please try a JPG, PNG, or WebP image under 10 MB, or send your question without one.");
+    });
+  }
+
+  function clearPendingPhotos() {
+    pendingPhotos.forEach(function (p) { URL.revokeObjectURL(p.preview); });
+    pendingPhotos = [];
+    renderPhotoChips();
+    updatePhotoToolState();
+  }
+
+  // ---- Guided estimator ---------------------------------------------------
+  // Loads the same /data/quote-tasks.json the rates-page calculator uses, so the
+  // ballpark figures in the chat match the website to the dollar. The flow is:
+  // pick a zone, tick tasks, see a live total, then book or call.
+  var estimateState = {
+    zone: "A",
+    selected: new Set(),
+    catalog: null,
+    zoneMinimum: { A: 100, B: 145 },
+    taskIndex: {},
+    loaded: false
+  };
+
+  function priceFor(task) { return estimateState.zone === "B" ? task.b : task.a; }
+
+  function loadQuoteCatalog() {
+    if (estimateState.loaded) return Promise.resolve();
+    estimateState.loaded = true;
+    return fetch("/data/quote-tasks.json", { cache: "force-cache" })
+      .then(function (res) { return res.ok ? res.json() : Promise.reject(res.status); })
+      .then(function (data) {
+        estimateState.catalog = Array.isArray(data.categories) ? data.categories : [];
+        if (data.zoneMinimum) estimateState.zoneMinimum = data.zoneMinimum;
+        estimateState.catalog.forEach(function (cat) {
+          cat.tasks.forEach(function (t) { estimateState.taskIndex[t.id] = t; });
+        });
+      })
+      .catch(function () { estimateState.catalog = []; });
+  }
+
+  function setEstimatorOpen(isOpen) {
+    if (!estimator) return;
+    estimator.classList.toggle("aaa-open", isOpen);
+    if (estTool) estTool.setAttribute("aria-pressed", String(isOpen));
+    if (isOpen) {
+      setEmojiBarOpen(false);
+      loadQuoteCatalog().then(renderEstimator);
+    }
+  }
+
+  function renderEstimator() {
+    var zoneSection = panel.querySelector("#aaa-est-zone-section");
+    var catsSection = panel.querySelector("#aaa-est-cats-section");
+    var summaryEl = panel.querySelector("#aaa-est-summary");
+    if (!zoneSection || !catsSection || !summaryEl) return;
+
+    if (!estimateState.catalog || estimateState.catalog.length === 0) {
+      catsSection.innerHTML = '<div style="font-size:12px;color:#64748b;text-align:center;padding:20px 0">Our task list is loading. You can still ask me for a ballpark in chat, or call (248) 385-3432.</div>';
+      renderEstimateSummary();
+      return;
+    }
+
+    zoneSection.innerHTML =
+      '<h4><i class="fas fa-location-dot" aria-hidden="true"></i> 1. Your zone</h4>' +
+      '<div class="aaa-est-zones">' +
+        '<button type="button" class="aaa-est-zone" data-zone="A" aria-pressed="' + (estimateState.zone === "A") + '"><b>Zone A</b><span>Within ~20 miles · ' + money(estimateState.zoneMinimum.A) + ' first hour</span></button>' +
+        '<button type="button" class="aaa-est-zone" data-zone="B" aria-pressed="' + (estimateState.zone === "B") + '"><b>Zone B</b><span>20+ miles · ' + money(estimateState.zoneMinimum.B) + ' first hour</span></button>' +
+      '</div>';
+
+    var catsHtml = '<h4><i class="fas fa-list-check" aria-hidden="true"></i> 2. Pick your tasks</h4><div class="aaa-est-cats">';
+    estimateState.catalog.forEach(function (cat, ci) {
+      var open = cat.tasks.some(function (t) { return estimateState.selected.has(t.id); });
+      catsHtml +=
+        '<div class="aaa-est-cat" data-cat="' + ci + '" aria-expanded="' + (open ? "true" : "false") + '">' +
+          '<button type="button" class="aaa-est-cat-head">' +
+            '<i class="fas ' + (cat.icon || "fa-folder") + '" aria-hidden="true"></i> ' + escapeHTML(cat.label) +
+            '<i class="fas fa-chevron-down aaa-est-chev" aria-hidden="true"></i>' +
+          '</button>' +
+          '<div class="aaa-est-cat-tasks">' +
+            cat.tasks.map(function (t) {
+              var checked = estimateState.selected.has(t.id);
+              return '<label class="aaa-est-task" aria-pressed="' + checked + '" data-id="' + t.id + '">' +
+                '<input type="checkbox" ' + (checked ? "checked" : "") + ' />' +
+                '<span class="aaa-est-task-info">' +
+                  '<span class="aaa-est-task-name">' + escapeHTML(t.name) + '</span>' +
+                  '<span class="aaa-est-task-desc">' + escapeHTML(t.desc || "") + '</span>' +
+                '</span>' +
+                '<span class="aaa-est-task-price">' + money(priceFor(t)) + '</span>' +
+              '</label>';
+            }).join("") +
+          '</div>' +
+        '</div>';
+    });
+    catsHtml += '</div>';
+    catsSection.innerHTML = catsHtml;
+    renderEstimateSummary();
+  }
+
+  function renderEstimateSummary() {
+    var summaryEl = panel.querySelector("#aaa-est-summary");
+    if (!summaryEl) return;
+
+    var chosen = [];
+    estimateState.selected.forEach(function (id) {
+      if (estimateState.taskIndex[id]) chosen.push(estimateState.taskIndex[id]);
+    });
+    chosen.sort(function (a, b) { return priceFor(b) - priceFor(a); });
+    var sum = chosen.reduce(function (acc, t) { return acc + priceFor(t); }, 0);
+    var minimum = estimateState.zoneMinimum[estimateState.zone];
+    var total = Math.max(sum, minimum);
+    var zoneLabel = estimateState.zone === "B" ? "Zone B (20+ miles)" : "Zone A (within ~20 miles)";
+
+    var linesHtml = "";
+    chosen.forEach(function (t) {
+      linesHtml += '<li class="aaa-est-line"><span>' + escapeHTML(t.name) + '</span><b>' + money(priceFor(t)) + '</b></li>';
+    });
+    if (sum < minimum && chosen.length > 0) {
+      linesHtml += '<li class="aaa-est-line"><span>Zone minimum applied</span><b>' + money(minimum) + '</b></li>';
+    }
+
+    // Deep-link to the booking form with the selection pre-filled in the notes.
+    var bookParams = new URLSearchParams();
+    bookParams.set("service", "General Estimate / Quote");
+    if (chosen.length) {
+      var notes = "Instant estimate request (" + zoneLabel + "):\n" +
+        chosen.map(function (t) { return "- " + t.name + " (" + money(priceFor(t)) + ")"; }).join("\n") +
+        "\nEstimated total: " + money(total);
+      bookParams.set("notes", notes);
+    }
+    var bookHref = "/book?" + bookParams.toString();
+
+    var ctaText = chosen.length
+      ? "Book these " + chosen.length + " task" + (chosen.length === 1 ? "" : "s")
+      : "Book a visit";
+
+    summaryEl.innerHTML =
+      '<div class="aaa-est-total-row">' +
+        '<span class="aaa-est-total-label">Ballpark total</span>' +
+        '<span class="aaa-est-total">' + money(total) + '</span>' +
+      '</div>' +
+      (chosen.length
+        ? '<ul class="aaa-est-lines">' + linesHtml + '</ul>'
+        : '<p style="font-size:11px;color:#94a3b8;margin:6px 0 0">Starting price for a ' + zoneLabel + ' visit. Tick tasks above to build your estimate.</p>') +
+      '<div class="aaa-est-ctas">' +
+        '<a class="aaa-est-cta aaa-est-cta-book" href="' + bookHref + '"><i class="fas fa-calendar-check" aria-hidden="true"></i> ' + ctaText + '</a>' +
+        '<a class="aaa-est-cta aaa-est-cta-call" href="tel:+12483853432"><i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432</a>' +
+        (chosen.length ? '<button type="button" class="aaa-est-cta" id="aaa-est-to-chat" style="background:#1e293b;color:#fff"><i class="fas fa-comment-dots" aria-hidden="true"></i> Ask the assistant about this</button>' : '') +
+      '</div>' +
+      '<p class="aaa-est-fineprint">Labor only — hardware &amp; materials not included. Bundling tasks into one visit usually costs less than the sum. Final price is confirmed free, upfront.</p>';
+  }
+
+  // Delegate estimator interactions (zones, category accordions, task toggles).
+  function wireEstimator() {
+    var body = panel.querySelector("#aaa-est-body");
+    if (!body || body.__aaaEstWired) return;
+    body.__aaaEstWired = true;
+
+    body.addEventListener("click", function (e) {
+      var zoneBtn = e.target.closest(".aaa-est-zone");
+      if (zoneBtn) {
+        estimateState.zone = zoneBtn.getAttribute("data-zone");
+        renderEstimator();
+        return;
+      }
+      var head = e.target.closest(".aaa-est-cat-head");
+      if (head) {
+        var cat = head.closest(".aaa-est-cat");
+        if (cat) {
+          var expanded = cat.getAttribute("aria-expanded") === "true";
+          cat.setAttribute("aria-expanded", expanded ? "false" : "true");
+        }
+        return;
+      }
+      var task = e.target.closest(".aaa-est-task");
+      if (task) {
+        var id = task.getAttribute("data-id");
+        var checkbox = task.querySelector("input[type=checkbox]");
+        if (estimateState.selected.has(id)) {
+          estimateState.selected.delete(id);
+          if (checkbox) checkbox.checked = false;
+          task.setAttribute("aria-pressed", "false");
+        } else {
+          estimateState.selected.add(id);
+          if (checkbox) checkbox.checked = true;
+          task.setAttribute("aria-pressed", "true");
+        }
+        renderEstimateSummary();
+        return;
+      }
+      var toChat = e.target.closest("#aaa-est-to-chat");
+      if (toChat) {
+        postEstimateToChat();
+        return;
+      }
+    });
+  }
+
+  // Drop a plain-language summary of the estimate into the chat conversation,
+  // so the assistant can pick up the context and the visitor has a record.
+  function postEstimateToChat() {
+    var chosen = [];
+    estimateState.selected.forEach(function (id) {
+      if (estimateState.taskIndex[id]) chosen.push(estimateState.taskIndex[id]);
+    });
+    if (!chosen.length) { setEstimatorOpen(false); return; }
+    chosen.sort(function (a, b) { return priceFor(b) - priceFor(a); });
+    var minimum = estimateState.zoneMinimum[estimateState.zone];
+    var total = Math.max(chosen.reduce(function (acc, t) { return acc + priceFor(t); }, 0), minimum);
+    var zoneLabel = estimateState.zone === "B" ? "Zone B (20+ miles)" : "Zone A (within ~20 miles)";
+    var text = "Here's my instant ballpark for " + zoneLabel + ":\n" +
+      chosen.map(function (t) { return "- " + t.name + ": " + money(priceFor(t)); }).join("\n") +
+      "\n\n**Estimated total: " + money(total) + "** (labor only, materials not included). " +
+      "Bundling these into one visit usually costs less. Want a sharper figure? Add a photo of the area, or tap **Book a call** to lock it in.";
+    sendMessage(text);
+    setEstimatorOpen(false);
   }
 
   function autoGrow() {
@@ -272,6 +698,8 @@
     log.innerHTML = "";
     addMessage("assistant", GREETING);
     setEmojiBarOpen(false);
+    setEstimatorOpen(false);
+    clearPendingPhotos();
     input.value = "";
     autoGrow();
     input.focus();
@@ -337,8 +765,18 @@
     var requestVersion = conversationVersion;
     activeRequest = new AbortController();
 
-    addMessage("user", text);
-    messages.push({ role: "user", content: text });
+    // Snapshot the pending photos so they belong to this turn only; clearing
+    // the chips below lets the visitor attach fresh ones to the next message.
+    var photos = pendingPhotos.slice();
+    clearPendingPhotos();
+    setEstimatorOpen(false);
+
+    addMessage("user", text, photos);
+    var userEntry = { role: "user", content: text };
+    if (photos.length) {
+      userEntry.images = photos.map(function (p) { return { type: "image", mediaType: p.mediaType, data: p.dataUrl }; });
+    }
+    messages.push(userEntry);
     var botEl = addMessage("assistant", "");
     botEl.innerHTML = '<span class="aaa-typing"><span></span><span></span><span></span></span>';
 
@@ -462,17 +900,57 @@
     input.value = "";
     autoGrow();
     setEmojiBarOpen(false);
+    setEstimatorOpen(false);
     sendMessage(promptButton.getAttribute("data-question"));
+  });
+
+  // ---- Estimator + photo toolbar wiring ----
+  estTool.addEventListener("click", function () {
+    setEstimatorOpen(!estimator.classList.contains("aaa-open"));
+    if (estimator.classList.contains("aaa-open")) {
+      wireEstimator();
+      var firstZone = panel.querySelector(".aaa-est-zone");
+      if (firstZone) firstZone.focus();
+    }
+  });
+
+  estClose.addEventListener("click", function () { setEstimatorOpen(false); });
+
+  // Both the toolbar button and the paperclip by the input open the same picker.
+  function openPhotoPicker() {
+    if (photoInput) photoInput.click();
+  }
+  photoTool.addEventListener("click", openPhotoPicker);
+  photoTrigger.addEventListener("click", openPhotoPicker);
+
+  photoInput.addEventListener("change", function () {
+    var files = photoInput ? Array.prototype.slice.call(photoInput.files) : [];
+    photoInput.value = "";
+    files.forEach(function (f) { addPhotoFromFile(f); });
+  });
+
+  // Let the visitor paste a screenshot straight from the clipboard into the chat.
+  input.addEventListener("paste", function (e) {
+    var items = e.clipboardData && e.clipboardData.items;
+    if (!items) return;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].kind === "file" && items[i].type.indexOf("image/") === 0) {
+        var file = items[i].getAsFile();
+        if (file) addPhotoFromFile(file);
+      }
+    }
   });
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var text = input.value.trim();
-    if (!text || streaming) return;
+    // A message can be a photo with no text — e.g. a quick snap of a leak — so
+    // we only block an empty submit when there's nothing to send at all.
+    if ((!text && pendingPhotos.length === 0) || streaming) return;
     input.value = "";
     autoGrow();
     setEmojiBarOpen(false);
-    sendMessage(text);
+    sendMessage(text || "Here's a photo of my repair — what do you think this might run, and what should I watch for?");
   });
 
   input.addEventListener("input", autoGrow);
