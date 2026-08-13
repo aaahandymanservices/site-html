@@ -78,7 +78,7 @@
 
     <link rel="stylesheet" href="/css/tailwind.css?v=20260810b">
     <link rel="stylesheet" href="/css/site-theme.css?v=20260810b">
-    <link rel="stylesheet" href="/css/service-areas.css?v=20260813b">
+    <link rel="stylesheet" href="/css/service-areas.css?v=20260813c">
     <link rel="preload" href="/css/icons.css?v=20260813a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260813a"></noscript>
 
@@ -277,84 +277,12 @@
                     <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">We proudly serve Oakland County, Michigan. Every city sits in one of two travel zones, and your zone sets the minimum service call for the visit.</p>
                 </div>
 
-                <!-- Interactive zone map with color-coded overlays + clickable city markers -->
-                <div id="service-area-map" class="max-w-5xl mx-auto mb-8 sm:mb-12">
-                    <div class="rounded-3xl overflow-hidden shadow-lg ring-1 ring-red-600 border-[2px] border-red-600 bg-slate-900">
-                        <div id="zone-map" class="zone-map" role="region" aria-label="Interactive Oakland County service zone map">
-                            <svg class="zone-map__svg" viewBox="0 0 640 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-                                <defs>
-                                    <radialGradient id="za-fill" cx="46%" cy="50%" r="42%">
-                                        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
-                                        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.08"/>
-                                    </radialGradient>
-                                    <radialGradient id="zb-fill" cx="46%" cy="50%" r="48%">
-                                        <stop offset="0%" stop-color="#fb923c" stop-opacity="0"/>
-                                        <stop offset="78%" stop-color="#fb923c" stop-opacity="0.04"/>
-                                        <stop offset="100%" stop-color="#fb923c" stop-opacity="0.28"/>
-                                    </radialGradient>
-                                    <linearGradient id="county-fill2" x1="0" y1="0" x2="1" y2="1">
-                                        <stop offset="0%" stop-color="#1e293b"/>
-                                        <stop offset="100%" stop-color="#0f172a"/>
-                                    </linearGradient>
-                                </defs>
-
-                                <rect x="40" y="30" width="560" height="500" rx="16" fill="url(#county-fill2)" stroke="rgba(148,163,184,0.35)" stroke-width="2"/>
-
-                                <circle cx="298" cy="282" r="150" fill="url(#za-fill)" stroke="rgba(56,189,248,0.65)" stroke-width="2" stroke-dasharray="5 6"/>
-                                <circle cx="298" cy="282" r="225" fill="url(#zb-fill)" stroke="rgba(251,146,60,0.6)" stroke-width="2" stroke-dasharray="5 6"/>
-
-                                <g stroke="rgba(148,163,184,0.08)" stroke-width="1" stroke-dasharray="4 7" fill="none">
-                                    <path d="M152 30v500M264 30v500M376 30v500M488 30v500"/>
-                                    <path d="M40 130h560M40 230h560M40 330h560M40 430h560"/>
-                                </g>
-
-                                <g fill="rgba(56,132,196,0.4)" stroke="rgba(147,197,235,0.32)" stroke-width="1.2">
-                                    <ellipse cx="232" cy="296" rx="20" ry="11" transform="rotate(-12 232 296)"/>
-                                    <ellipse cx="266" cy="322" rx="24" ry="13" transform="rotate(8 266 322)"/>
-                                    <ellipse cx="303" cy="348" rx="15" ry="10" transform="rotate(-18 303 348)"/>
-                                    <ellipse cx="180" cy="312" rx="16" ry="9"/>
-                                    <ellipse cx="333" cy="378" rx="13" ry="8" transform="rotate(14 333 378)"/>
-                                </g>
-
-                                <g fill="none" stroke="rgba(148,163,184,0.28)" stroke-width="2.6" stroke-linecap="round">
-                                    <path d="M248 30 276 196 404 252 470 330 522 432 556 530"/>
-                                </g>
-                                <text x="290" y="212" font-size="10" font-weight="700" letter-spacing="0.1em" fill="rgba(226,232,240,0.5)">I-75</text>
-
-                                <g transform="translate(298 282)">
-                                    <circle r="4" fill="#10b981" stroke="#fff" stroke-width="1.5"/>
-                                    <text y="-10" text-anchor="middle" font-size="9" font-weight="700" fill="rgba(226,232,240,0.7)">Waterford</text>
-                                </g>
-
-                                <g transform="translate(566 72)">
-                                    <circle r="15" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                                    <path d="M0 -9 4 3 0 0.4 -4 3Z" fill="rgba(255,255,255,0.7)"/>
-                                    <text y="-19" text-anchor="middle" font-size="9" font-weight="700" fill="rgba(255,255,255,0.55)">N</text>
-                                </g>
-
-                                <text x="60" y="514" font-size="11" font-weight="700" letter-spacing="0.2em" fill="rgba(226,232,240,0.35)">OAKLAND COUNTY, MI</text>
-                            </svg>
-
-                            <div id="zone-map-pins" role="group" aria-label="Clickable city service markers"></div>
-                            <div id="zone-map-popup" class="zone-map__popup" hidden></div>
-
-                            <div class="zone-map__legend">
-                                <span><i style="background:#38bdf8;opacity:.6"></i> Zone A · within ~20 mi</span>
-                                <span><i style="background:#fb923c;opacity:.6"></i> Zone B · 20+ mi</span>
-                                <span><i class="fas fa-star" style="color:#f59e0b;font-style:normal" aria-hidden="true"></i> Waterford HQ</span>
-                                <span><i class="fas fa-hand-pointer" aria-hidden="true"></i> Tap a marker</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-center text-xs sm:text-sm text-gray-500 mt-3">Based in Waterford, MI &middot; Serving all of Oakland County &middot; Tap a marker for the local minimum.</p>
-                </div>
-
                 <!-- Fully interactive Google Map (pan, zoom, satellite, street view).
                      Uses the no-API-key embed endpoint already permitted by the site CSP
                      (frame-src https://maps.google.com https://www.google.com). Clicking a
-                     city pin above recenters this map and opens its info window, mirroring
-                     marker.addListener("click", () => infoWindow.open(map, marker)). -->
-                <div class="max-w-5xl mx-auto mb-8 sm:mb-12">
+                     city chip in a zone card below recenters this map and opens its info window,
+                     mirroring marker.addListener("click", () => infoWindow.open(map, marker)). -->
+                <div id="service-area-map" class="max-w-5xl mx-auto mb-8 sm:mb-12">
                     <div class="rounded-3xl overflow-hidden shadow-lg ring-1 ring-gray-300 border-[2px] border-gray-200 bg-white">
                         <div class="zone-gmap__bar flex flex-wrap items-center justify-between gap-2 px-5 sm:px-6 py-3 bg-slate-900 text-white">
                             <span class="inline-flex items-center gap-2 text-sm font-bold tracking-wide">
@@ -373,7 +301,7 @@
                             allowfullscreen
                         ></iframe>
                     </div>
-                    <p class="text-center text-xs sm:text-sm text-gray-500 mt-3">Drag to pan, pinch or scroll to zoom, and tap a marker above to fly the map to that city.</p>
+                    <p class="text-center text-xs sm:text-sm text-gray-500 mt-3">Drag to pan, pinch or scroll to zoom, and tap a city chip below to fly the map to that city.</p>
                 </div>
 
                 <!-- Visual Zone Cards — side-by-side comparison -->
@@ -770,7 +698,7 @@
 
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
-    <script src="/js/service-areas-page.js?v=20260813d" defer></script>
+    <script src="/js/service-areas-page.js?v=20260813e" defer></script>
 
     <script src="/js/site.js?v=20260810b" defer></script>
     <script src="/js/booking-widget.js?v=20260810b" defer></script>
