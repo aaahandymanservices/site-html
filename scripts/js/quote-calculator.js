@@ -216,7 +216,7 @@
       setZone(city.zone);
     } else if (query.length >= 5) {
       state.matchCity = null;
-      msg.className = 'mt-3 text-sm font-semibold p-3 rounded-xl bg-amber-50 text-amber-800 border border-amber-200';
+      msg.className = 'mt-3 text-sm font-semibold p-3 rounded-xl bg-red-50 text-red-800 border border-red-200';
       msg.innerHTML = '<i class="fas fa-info-circle mr-1" aria-hidden="true"></i> Zip not listed. We serve all of Oakland County, MI — pick a zone above or ' +
         '<a href="tel:+12483853432" class="underline font-bold">call to confirm</a>.';
     } else {
@@ -276,7 +276,7 @@
       update();
     })
     .catch(() => {
-      root.innerHTML = '<div class="bg-amber-50 border border-amber-200 text-amber-800 rounded-2xl p-6 text-center text-sm font-semibold">' +
+      root.innerHTML = '<div class="bg-red-50 border border-red-200 text-red-800 rounded-2xl p-6 text-center text-sm font-semibold">' +
         'Our instant calculator isn\'t loading right now. <a href="/book" class="underline font-bold">Book online</a> or call ' +
         '<a href="tel:+12483853432" class="underline font-bold">(248) 385-3432</a> for a fast, free quote.</div>';
     });

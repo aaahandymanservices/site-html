@@ -90,11 +90,15 @@
   --brand-crimson-bright: #c62839;
   --brand-crimson-dark: #781925;
   --brand-crimson-soft: #f8e9eb;
-  --brand-craftsman-gold: #F5A623;
-  --brand-craftsman-gold-hover: #E09212;
-  --brand-craftsman-gold-dark: #C87F0A;
-  --brand-craftsman-gold-soft: rgba(245, 166, 35, 0.15);
-  --brand-craftsman-gold-glow: rgba(245, 166, 35, 0.35);
+  /* Accent scale for crimson sitting on the navy surfaces. Brand crimson is
+     dark enough that on #1b2a4a it reads as a smudge rather than an accent, so
+     dark-surface icons, hairlines, and badge text step up to these lighter
+     tints instead. They are the same hue, just lifted far enough to clear the
+     background. */
+  --brand-crimson-on-navy: #df929c;
+  --brand-crimson-on-navy-strong: #c95160;
+  --brand-crimson-soft-glow: rgb(166 31 46 / 15%);
+  --brand-crimson-glow: rgb(166 31 46 / 35%);
   --brand-ink: #1f2937;
   --brand-muted: #526174;
   --brand-line: #d8dee8;
@@ -106,8 +110,8 @@
   --shadow-md: 0 8px 24px rgb(27 42 74 / 8%);
   --shadow-lg: 0 18px 44px rgb(27 42 74 / 12%);
   --shadow-crimson: 0 12px 26px rgb(120 25 37 / 26%);
-  --shadow-gold: 0 12px 28px -4px rgba(245, 166, 35, 0.35);
-  --shadow-layered-dark: 0 20px 40px -10px rgba(0, 0, 0, 0.45), 0 0 20px rgba(245, 166, 35, 0.08);
+  --shadow-accent: 0 12px 28px -4px rgb(166 31 46 / 32%);
+  --shadow-layered-dark: 0 20px 40px -10px rgb(0 0 0 / 45%), 0 0 20px rgb(166 31 46 / 12%);
   --brand-shadow: var(--shadow-lg);
 
   /* Motion + shape tokens */
@@ -118,7 +122,7 @@
   /* Signature gradients */
   --grad-crimson: linear-gradient(135deg, var(--brand-crimson-bright), var(--brand-crimson) 55%, var(--brand-crimson-dark));
   --grad-navy: linear-gradient(135deg, var(--brand-navy-deep), var(--brand-navy));
-  --grad-craftsman-gold: linear-gradient(135deg, #FFC107, #F5A623 60%, #D97706);
+  --grad-craftsman: linear-gradient(135deg, var(--brand-crimson-bright), var(--brand-crimson) 60%, var(--brand-crimson-dark));
 
   --font-display: "Archivo", "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
 
@@ -2170,10 +2174,10 @@ body > header.bg-gradient-to-r::after {
   color: #5f6b7a;
 }
 
-:where(.bg-white, .bg-gray-50, .bg-gray-100) :where(.text-amber-500),
-:where(.bg-white.text-amber-500, .bg-gray-50.text-amber-500, .bg-gray-100.text-amber-500) {
-  color: #a16207;
-}
+/* A companion rule darkened `.text-amber-500` on light backgrounds to reach
+   contrast. Amber is no longer part of the palette -- those accents are brand
+   crimson now, and `red-600` (#a61f2e) already clears AA on white -- so the
+   rule had nothing left to match and is gone. */
 
 /* The touch target is deliberately larger than the mark should look, so
    the hover state is drawn on an inset circle instead of the button box. */
@@ -3657,66 +3661,66 @@ header.ambient-glow-hero::after,
 }
 
 /* ============================================================
-   Craftsman Gold / Amber Accents & CTA Buttons
+   Craftsman accent buttons & badges
+
+   These were a gold/amber set (#F5A623) that had no basis in the brand:
+   the palette is navy #1b2a4a and crimson #a61f2e, and gold competed with
+   the crimson CTAs instead of supporting them. Both components now render
+   in crimson.
+
+   Solid crimson with white text, rather than the tinted-background-plus-
+   coloured-text treatment the gold version used, because these sit on both
+   the white pricing cards and the navy service-page headers. A crimson
+   light enough to read on navy is too light to read on white and vice
+   versa; white on #a61f2e clears 7:1 against either.
    ============================================================ */
-.btn-craftsman-gold,
-.btn-amber-cta {
+.btn-craftsman {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: var(--grad-craftsman-gold, linear-gradient(135deg, #FFC107, #F5A623 60%, #D97706));
-  color: #0F172A !important;
+  background: var(--grad-craftsman);
+  color: #ffffff !important;
   font-weight: 800;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgb(255 255 255 / 18%);
   border-radius: 0.85rem;
   padding: 0.75rem 1.5rem;
-  box-shadow: 0 4px 14px rgba(245, 166, 35, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+  box-shadow: 0 4px 14px rgb(166 31 46 / 32%), inset 0 1px 0 rgb(255 255 255 / 18%);
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease, filter 0.25s ease;
   cursor: pointer;
   text-decoration: none;
 }
 
-.btn-craftsman-gold:hover,
-.btn-amber-cta:hover {
-  background: linear-gradient(135deg, #FFCA28, #E09212 60%, #B45309);
-  color: #000000 !important;
+.btn-craftsman:hover {
+  filter: saturate(1.06) brightness(1.04);
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 24px rgba(245, 166, 35, 0.5), 0 0 15px rgba(245, 166, 35, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 24px rgb(166 31 46 / 45%), 0 0 15px rgb(166 31 46 / 28%), inset 0 1px 0 rgb(255 255 255 / 24%);
 }
 
-.btn-craftsman-gold:active,
-.btn-amber-cta:active {
+.btn-craftsman:active {
   transform: translateY(-1px) scale(0.99);
 }
 
-.badge-craftsman-gold,
-.badge-amber-accent {
+.badge-craftsman {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  background: rgba(245, 166, 35, 0.16);
-  color: #F5A623;
-  border: 1px solid rgba(245, 166, 35, 0.45);
+  background: var(--brand-crimson);
+  color: #ffffff;
+  border: 1px solid rgb(255 255 255 / 22%);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.04em;
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 0 12px rgba(245, 166, 35, 0.2);
+  box-shadow: 0 2px 10px rgb(166 31 46 / 28%);
 }
 
-.text-craftsman-gold {
-  color: #F5A623 !important;
-}
-
-.bg-craftsman-gold {
-  background-color: #F5A623 !important;
-}
-
-.border-craftsman-gold {
-  border-color: rgba(245, 166, 35, 0.5) !important;
+/* Icons inside the badge inherit the badge's white rather than keeping the
+   accent colour they carried on the gold pill, which would now be crimson
+   on crimson. */
+.badge-craftsman i {
+  color: #ffffff;
 }
 
 /* ============================================================
@@ -3725,33 +3729,33 @@ header.ambient-glow-hero::after,
 .card-layered {
   position: relative;
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgb(0 0 0 / 8%);
   border-radius: 1.5rem;
-  box-shadow: 0 10px 30px -5px rgba(27, 42, 74, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  box-shadow: 0 10px 30px -5px rgb(27 42 74 / 8%), 0 4px 12px rgb(0 0 0 / 3%);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s ease;
 }
 
 .card-layered:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px -8px rgba(27, 42, 74, 0.14), 0 0 20px rgba(245, 166, 35, 0.15);
-  border-color: rgba(245, 166, 35, 0.4);
+  box-shadow: 0 20px 40px -8px rgb(27 42 74 / 14%), 0 0 20px rgb(166 31 46 / 12%);
+  border-color: rgb(166 31 46 / 35%);
 }
 
 .card-dark-layered {
   position: relative;
-  background: linear-gradient(145deg, rgba(30, 41, 59, 0.96), rgba(15, 23, 42, 0.98));
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  background: linear-gradient(145deg, rgb(38 57 90 / 96%), rgb(16 27 49 / 98%));
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-top: 1px solid rgb(255 255 255 / 22%);
   border-radius: 1.5rem;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-layered-dark);
   backdrop-filter: blur(12px);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s ease;
 }
 
 .card-dark-layered:hover {
   transform: translateY(-5px);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55), 0 0 25px rgba(245, 166, 35, 0.22);
-  border-color: rgba(245, 166, 35, 0.45);
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 55%), 0 0 25px rgb(166 31 46 / 25%);
+  border-color: rgb(201 81 96 / 50%);
 }
 
 .card-dark-layered::before {
@@ -3761,12 +3765,12 @@ header.ambient-glow-hero::after,
   left: 10%;
   right: 10%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(245, 166, 35, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgb(201 81 96 / 45%), transparent);
   pointer-events: none;
 }
 
 /* ============================================================
-   Warm Ambient Gradient Glows (Hero & Pricing Sections)
+   Ambient Gradient Glows (Hero & Pricing Sections)
    ============================================================ */
 .ambient-glow-hero {
   position: relative;
@@ -3782,7 +3786,7 @@ header.ambient-glow-hero::after,
   width: 90%;
   max-width: 1100px;
   height: 80%;
-  background: radial-gradient(ellipse at center, rgba(245, 166, 35, 0.2) 0%, rgba(166, 31, 46, 0.12) 40%, transparent 75%);
+  background: radial-gradient(ellipse at center, rgb(166 31 46 / 22%) 0%, rgb(27 42 74 / 30%) 45%, transparent 75%);
   pointer-events: none;
   z-index: 0;
   filter: blur(40px);
@@ -3801,7 +3805,7 @@ header.ambient-glow-hero::after,
   transform: translateX(-50%);
   width: 85%;
   height: 70%;
-  background: radial-gradient(ellipse at center, rgba(245, 166, 35, 0.18) 0%, rgba(27, 42, 74, 0.15) 50%, transparent 80%);
+  background: radial-gradient(ellipse at center, rgb(166 31 46 / 12%) 0%, rgb(27 42 74 / 12%) 50%, transparent 80%);
   pointer-events: none;
   z-index: 0;
   filter: blur(35px);
@@ -3809,8 +3813,8 @@ header.ambient-glow-hero::after,
 
 .pricing-card-highlight {
   position: relative;
-  border: 2px solid #F5A623 !important;
-  box-shadow: 0 16px 38px -6px rgba(245, 166, 35, 0.25), 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+  border: 2px solid var(--brand-crimson) !important;
+  box-shadow: 0 16px 38px -6px rgb(166 31 46 / 25%), 0 10px 25px rgb(0 0 0 / 10%) !important;
 }
 
 .pricing-card-highlight::after {
@@ -3821,8 +3825,8 @@ header.ambient-glow-hero::after,
   transform: translateX(-50%);
   width: 60%;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #F5A623, transparent);
-  box-shadow: 0 0 12px #F5A623;
+  background: linear-gradient(90deg, transparent, var(--brand-crimson), transparent);
+  box-shadow: 0 0 12px rgb(166 31 46 / 65%);
   pointer-events: none;
 }
 
@@ -3834,7 +3838,7 @@ header.ambient-glow-hero::after,
 .svc-group,
 .process-step-card,
 .generated-service-card {
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease, background-color 0.28s ease !important;
+  transition: transform 0.28s var(--ease-out), box-shadow 0.28s ease, border-color 0.28s ease, background-color 0.28s ease !important;
 }
 
 .service-card:hover,
@@ -3842,13 +3846,13 @@ header.ambient-glow-hero::after,
 .process-step-card:hover,
 .generated-service-card:hover {
   transform: translateY(-4px) !important;
-  box-shadow: 0 16px 36px -6px rgba(27, 42, 74, 0.14), 0 0 20px rgba(245, 166, 35, 0.18) !important;
+  box-shadow: 0 16px 36px -6px rgb(27 42 74 / 14%), 0 0 20px rgb(166 31 46 / 15%) !important;
 }
 
 .cta-button,
 .pricing-tab-btn,
 .service-tag-btn {
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, background-color 0.22s ease, border-color 0.22s ease !important;
+  transition: transform 0.22s var(--ease-out), box-shadow 0.22s ease, background-color 0.22s ease, border-color 0.22s ease !important;
 }
 
 .cta-button:hover,
@@ -3862,7 +3866,7 @@ header.ambient-glow-hero::after,
 .reveal-on-scroll {
   opacity: 0;
   transform: translate3d(0, 28px, 0);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
   will-change: opacity, transform;
 }
 
@@ -3896,32 +3900,41 @@ header.ambient-glow-hero::after,
   border-radius: 9999px;
   border: 1.5px solid #d1d5db;
   background: #ffffff;
-  color: #1b2a4a;
+  color: var(--brand-navy);
   font-size: 0.85rem;
   font-weight: 700;
-  box-shadow: 0 2px 6px rgba(16, 27, 49, 0.05);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgb(16 27 49 / 5%);
+  transition: all 0.22s var(--ease-out);
   cursor: pointer;
   user-select: none;
 }
 
 .svc-filter-chip:hover {
-  border-color: #F5A623;
-  color: #B45309;
+  border-color: rgb(166 31 46 / 55%);
+  color: var(--brand-crimson);
+  background: var(--brand-crimson-soft);
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(245, 166, 35, 0.25);
+  box-shadow: 0 4px 14px rgb(166 31 46 / 20%);
 }
 
 .svc-filter-chip[aria-pressed="true"],
 .svc-filter-chip.active {
-  background: linear-gradient(135deg, #FFC107, #F5A623 60%, #D97706);
-  border-color: #F5A623;
-  color: #0F172A;
-  box-shadow: 0 4px 16px rgba(245, 166, 35, 0.4);
+  background: var(--grad-crimson);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: var(--shadow-crimson);
+}
+
+/* The chip icons carry their own accent colour in the markup so they read on
+   the white resting chip; once the chip is selected the background is crimson
+   and that accent would disappear into it. */
+.svc-filter-chip[aria-pressed="true"] i,
+.svc-filter-chip.active i {
+  color: #ffffff;
 }
 
 .svc-card-animated {
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s ease;
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out), height 0.3s ease;
   will-change: opacity, transform;
 }
 
@@ -3931,6 +3944,3 @@ header.ambient-glow-hero::after,
   pointer-events: none;
   display: none !important;
 }
-
-
-

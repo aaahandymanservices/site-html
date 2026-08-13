@@ -36,26 +36,20 @@ module.exports = {
           'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, transform, filter, backdrop-filter',
       },
       colors: {
-        amber: {
-          50: '#fffbe6',
-          100: '#fef3c7',
-          200: '#fde68a',
-          300: '#fcd34d',
-          400: '#fbbf24',
-          500: '#F5A623',
-          600: '#d97706',
-          700: '#b45309',
-          800: '#92400e',
-          900: '#78350f',
-          950: '#451a03',
-        },
-        craftsman: {
-          gold: '#F5A623',
-          'gold-hover': '#E09212',
-          'gold-dark': '#C87F0A',
-          'gold-soft': 'rgba(245, 166, 35, 0.15)',
-          'gold-glow': 'rgba(245, 166, 35, 0.35)',
-        },
+        /*
+         * The brand is navy #1B2A4A and crimson #A61F2E. Both scales below are
+         * built around those two: `blue-900` is the navy and `red-600` is the
+         * crimson, with the rest of each ramp mixed toward white and black so
+         * a tint or shade of the brand colour is always a utility class away.
+         *
+         * An `amber` ramp and a `craftsman` gold set used to live here, with
+         * `amber-500` remapped to #F5A623. Nothing in the brand called for a
+         * third accent, and in practice the gold displaced crimson on CTAs,
+         * badges, and card hovers across every page. Both are gone; anything
+         * that reached for gold now reaches for `red-*`. Removing the `amber`
+         * override also means the name is simply undefined rather than
+         * silently resolving to an off-brand gold if it ever reappears.
+         */
         red: {
           50: '#fdf2f2',
           100: '#f8e9eb',
@@ -67,6 +61,11 @@ module.exports = {
           700: '#7f1723',
           800: '#68151e',
           900: '#521219',
+          /* The markup uses `red-950` (deep crimson panels behind light text).
+             Without an entry here it deep-merged to Tailwind's stock #450a0a,
+             which is browner than this ramp and read as a mismatch next to
+             `red-900`. */
+          950: '#3a0d12',
         },
         blue: {
           50: '#f4f6fa',

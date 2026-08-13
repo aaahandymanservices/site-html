@@ -386,7 +386,7 @@
    */
   const AVAILABILITY_TONES = {
       open: 'mt-2 flex items-center gap-2 rounded-lg border border-emerald-500/25 bg-emerald-500/10 px-3 py-2 text-xs font-semibold text-emerald-300',
-      tight: 'mt-2 flex items-center gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs font-semibold text-amber-200',
+      tight: 'mt-2 flex items-center gap-2 rounded-lg border border-red-600/30 bg-red-600/10 px-3 py-2 text-xs font-semibold text-red-200',
       full: 'mt-2 flex items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs font-semibold text-red-200'
   };
 
