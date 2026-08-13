@@ -164,9 +164,26 @@
 
       units.forEach((unit) => observer.observe(unit.el));
 
+      // Observe explicit .reveal-on-scroll elements
+      const explicitReveals = document.querySelectorAll('.reveal-on-scroll');
+      if (explicitReveals.length) {
+        const revealObs = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        explicitReveals.forEach((el) => revealObs.observe(el));
+      }
+
       // Safety net: never leave content hidden, even if the observer misbehaves
       // or the page is restored from the back/forward cache.
-      const revealEverything = () => units.forEach(reveal);
+      const revealEverything = () => {
+        units.forEach(reveal);
+        explicitReveals.forEach((el) => el.classList.add('is-visible'));
+      };
       window.setTimeout(revealEverything, 4500);
       window.addEventListener('pageshow', revealEverything);
     } catch (err) {
@@ -174,10 +191,80 @@
     }
   }
 
+  // --- Interactive Service Category Filter Chips ---
+  function initInteractiveServiceChips() {
+    const chipButtons = document.querySelectorAll('[data-filter-category], .svc-filter-chip');
+    if (!chipButtons.length) return;
+
+    chipButtons.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const category = btn.getAttribute('data-filter-category') || btn.getAttribute('data-category') || 'all';
+
+        // Update active chip states
+        chipButtons.forEach((other) => {
+          const isTarget = (other.getAttribute('data-filter-category') || other.getAttribute('data-category') || 'all') === category;
+          other.setAttribute('aria-pressed', String(isTarget));
+          other.classList.toggle('active', isTarget);
+        });
+
+        // Target service cards across services page, homepage, or catalog
+        const serviceCards = document.querySelectorAll('.service-card, [data-service-category], .generated-service-card');
+        const serviceGroups = document.querySelectorAll('.svc-group, [data-svc-group]');
+
+        if (!serviceCards.length && !serviceGroups.length) return;
+
+        // Smoothly filter cards without jumpy layout shifts
+        serviceCards.forEach((card) => {
+          const cardCat = (card.getAttribute('data-service-category') || card.getAttribute('data-category') || card.innerText || '').toLowerCase();
+          const matches = category === 'all' || cardCat.includes(category.toLowerCase());
+
+          if (matches) {
+            card.classList.remove('is-filtered-out');
+            card.style.display = '';
+            requestAnimationFrame(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'scale(1)';
+            });
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95)';
+            card.classList.add('is-filtered-out');
+          }
+        });
+
+        // Filter group accordions if present
+        serviceGroups.forEach((group) => {
+          if (category === 'all') {
+            group.style.display = '';
+            group.classList.remove('is-filtered-out');
+          } else {
+            const groupText = (group.innerText || group.textContent || '').toLowerCase();
+            const matches = groupText.includes(category.toLowerCase());
+            if (matches) {
+              group.style.display = '';
+              if (group.tagName === 'DETAILS') group.open = true;
+              group.classList.remove('is-filtered-out');
+            } else {
+              group.style.display = 'none';
+              group.classList.add('is-filtered-out');
+            }
+          }
+        });
+      });
+    });
+  }
+
   if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => initScrollReveal(), { timeout: 2000 });
+    requestIdleCallback(() => {
+      initScrollReveal();
+      initInteractiveServiceChips();
+    }, { timeout: 2000 });
   } else {
-    requestAnimationFrame(() => setTimeout(initScrollReveal, 100));
+    requestAnimationFrame(() => setTimeout(() => {
+      initScrollReveal();
+      initInteractiveServiceChips();
+    }, 100));
   }
 
   // --- Seasonal offer bar ---
