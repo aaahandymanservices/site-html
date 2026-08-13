@@ -752,11 +752,11 @@ form label,
 }
 
 .cta-button.bg-blue-900 {
-  background: #1e3a8a;
+  background: var(--grad-navy);
 }
 
 .cta-button.bg-blue-900:hover {
-  background: #172554;
+  background: var(--brand-navy-deep);
 }
 
 /* Moving sheen on hover for a tactile, polished feel */
@@ -3461,28 +3461,21 @@ html.bw-open body {
 }
 
 /* ==========================================================================
-   Premium dark-mode aesthetic enhancement layer
+   Premium polish — scoped to brand navy + crimson
 
-   A cohesive, high-end dark-mode polish layered on top of the base theme:
-   vivid crimson CTAs with expanding glow, frosted-glass cards on dark
-   surfaces, metallic headline gradients, ambient radial spotlights, and a
-   gentle pulse on floating action buttons.
+   Earlier this layer used a bright tomato red (#e63946) and forced glass /
+   metallic text onto light surfaces, which washed out badges, form cards,
+   and every main h1. CTAs, glows, and dark-surface treatments now stay on
+   --brand-crimson / --brand-navy, and light UI keeps its original tokens.
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   1. Color palette & primary action glow
-   --------------------------------------------------------------------------
-   Primary CTAs ("Book Online — Free Quote", .cta-button, .pulse-btn, etc.)
-   upgrade to a vivid crimson gradient with a soft outer glow that expands
-   on hover with smooth 0.3s ease transitions. */
-
 :root {
-  --grad-crimson-vivid: linear-gradient(135deg, #e63946 0%, #d62828 100%);
-  --crimson-glow: rgba(230, 57, 70, 0.4);
-  --crimson-glow-hover: rgba(230, 57, 70, 0.65);
+  --grad-crimson-vivid: var(--grad-crimson);
+  --crimson-glow: rgb(166 31 46 / 32%);
+  --crimson-glow-hover: rgb(166 31 46 / 48%);
 }
 
-/* Primary call-to-action buttons — vivid crimson gradient with expanding outer glow */
+/* Primary CTAs stay on the brand crimson gradient with a soft outer glow. */
 .cta-button,
 .pulse-btn,
 .btn-primary,
@@ -3490,11 +3483,35 @@ html.bw-open body {
 a.btn-crimson,
 button.btn-crimson,
 .aaa-chat-launch,
-.btn-vivid-cta,
-a[href*="/book"].btn {
-  background: var(--grad-crimson-vivid) !important;
+.btn-vivid-cta {
+  background: var(--grad-crimson) !important;
+  color: #fff !important;
   box-shadow: 0 8px 24px var(--crimson-glow) !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, filter 0.3s ease !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease !important;
+}
+
+/* Navy secondary CTAs must not inherit the crimson override above. */
+.cta-button.bg-blue-900 {
+  background: var(--grad-navy) !important;
+  box-shadow: 0 8px 22px rgb(16 27 49 / 28%) !important;
+}
+
+.cta-button.bg-blue-900:hover {
+  background: var(--brand-navy-deep) !important;
+  box-shadow: 0 12px 28px rgb(16 27 49 / 36%) !important;
+}
+
+/* Emerald / green CTAs keep their semantic success colour. */
+.cta-button.bg-emerald-700,
+.cta-button.bg-green-600 {
+  background: #047857 !important;
+  box-shadow: 0 8px 22px rgb(4 120 87 / 28%) !important;
+}
+
+.cta-button.bg-emerald-700:hover,
+.cta-button.bg-green-600:hover,
+.hover\:bg-green-700:hover.cta-button {
+  background: #065f46 !important;
 }
 
 .cta-button:hover,
@@ -3504,11 +3521,10 @@ a[href*="/book"].btn {
 a.btn-crimson:hover,
 button.btn-crimson:hover,
 .aaa-chat-launch:hover,
-.btn-vivid-cta:hover,
-a[href*="/book"].btn:hover {
-  transform: translateY(-2px) scale(1.02) !important;
-  box-shadow: 0 12px 32px var(--crimson-glow-hover), 0 0 20px var(--crimson-glow) !important;
-  background: linear-gradient(135deg, #ee4250 0%, #dc2828 100%) !important;
+.btn-vivid-cta:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 32px var(--crimson-glow-hover), var(--shadow-crimson) !important;
+  filter: saturate(1.05) brightness(1.03);
 }
 
 .cta-button:active,
@@ -3517,104 +3533,67 @@ a[href*="/book"].btn:hover {
 .btn-crimson:active,
 a.btn-crimson:active,
 button.btn-crimson:active {
-  transform: translateY(0) scale(0.99) !important;
+  transform: translateY(0) !important;
+  filter: none;
 }
 
-/* --------------------------------------------------------------------------
-   2. Glassmorphism & depth on structural cards, badges & service blocks
-   --------------------------------------------------------------------------
-   Translucent frosted-glass style applied to structural cards, badges, hero
-   pills, and service blocks with subtle crimson accent shift on hover. */
-
+/* Glassmorphism only on intentionally dark / glass surfaces — never on
+   light badges, pill tabs, or white form cards. */
 .glass-card,
 .glass-premium,
 .glass-panel,
-.stat-card,
-.pricing-summary-card,
-.hero-pill,
-.form-card,
-.contact-form-card,
-.book-form-card,
-.badge-crimson,
-.badge-navy,
-.pill-tab {
-  background: rgba(255, 255, 255, 0.04) !important;
+.hero-pill {
+  background: rgba(255, 255, 255, 0.06) !important;
   backdrop-filter: blur(12px) saturate(140%) !important;
   -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 .glass-card:hover,
 .glass-premium:hover,
 .glass-panel:hover,
-.stat-card:hover,
-.pricing-summary-card:hover,
-.hero-pill:hover,
-.form-card:hover,
-.contact-form-card:hover,
-.book-form-card:hover,
-.badge-crimson:hover,
-.badge-navy:hover,
-.pill-tab:hover,
-.service-card:hover,
-.generated-service-card:hover,
-.bw-tile:hover,
-.bw-window:hover:not(:disabled),
-.plan-card:hover {
-  border-color: rgba(230, 57, 70, 0.5) !important;
-  transform: translateY(-4px) !important;
-  box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.5), 0 0 15px rgba(230, 57, 70, 0.25) !important;
+.hero-pill:hover {
+  border-color: rgb(166 31 46 / 45%) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 14px 30px -10px rgb(16 27 49 / 45%), 0 0 14px rgb(166 31 46 / 18%) !important;
 }
 
-/* Service blocks & cards frosted base rules */
 .service-card,
 .generated-service-card,
 .bw-tile,
 .bw-window,
 .plan-card {
-  backdrop-filter: blur(12px) saturate(130%);
-  -webkit-backdrop-filter: blur(12px) saturate(130%);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* --------------------------------------------------------------------------
-   3. Metallic headline typography
-   --------------------------------------------------------------------------
-   Major section titles and H1 headers styled with clean metallic linear
-   gradient (#FFFFFF down to #CBD5E1) and subtle text-shadows for high
-   contrast against dark backdrops. */
-
+/* Metallic headlines only on dark surfaces where white→slate reads clearly. */
 .title-metallic,
 .hero-title,
 .headline-metallic,
-.section-title,
 .legal-hero .legal-title,
 .bw-pane__title,
 body > footer :where(h1, h2, h3),
 header.bg-gradient-to-r h1,
+header.ambient-glow-hero h1,
+#pricing-hero h1,
 section.bg-brand-navy h1,
 section.bg-navy-deep h1,
-main h1 {
-  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%) !important;
-  background-clip: text !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  color: transparent !important;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35)) !important;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18), 0 12px 34px rgba(0, 0, 0, 0.38);
+section.bg-blue-900 h1,
+section.bg-blue-950 h1 {
+  background: linear-gradient(180deg, #ffffff 0%, #cbd6e6 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
 }
 
-/* --------------------------------------------------------------------------
-   4. Background ambience — radial spotlight glows on dark sections
-   --------------------------------------------------------------------------
-   Layered radial-gradients (crimson and dark slate accents) painted under
-   hero and primary callout sections over base background color. */
-
+/* Ambient brand glows on dark heroes — crimson + navy, not tomato red. */
 .hero::before,
 #pricing-hero::before,
 body > header.bg-gradient-to-r::before,
+header.ambient-glow-hero::after,
 .callout-ambient::before,
 .dark-ambience-bg::before {
   position: absolute;
@@ -3623,9 +3602,9 @@ body > header.bg-gradient-to-r::before,
   content: "";
   pointer-events: none;
   background:
-    radial-gradient(42rem 32rem at 14% 8%, rgba(230, 57, 70, 0.18), transparent 64%),
-    radial-gradient(38rem 30rem at 88% 96%, rgba(27, 42, 74, 0.55), transparent 62%),
-    radial-gradient(32rem 24rem at 50% 0%, rgba(230, 57, 70, 0.12), transparent 50%);
+    radial-gradient(42rem 32rem at 14% 8%, rgb(166 31 46 / 16%), transparent 64%),
+    radial-gradient(38rem 30rem at 88% 96%, rgb(27 42 74 / 55%), transparent 62%),
+    radial-gradient(32rem 24rem at 50% 0%, rgb(166 31 46 / 10%), transparent 50%);
 }
 
 .callout-ambient,
@@ -3640,57 +3619,39 @@ body > header.bg-gradient-to-r::before,
   z-index: 1;
 }
 
-/* --------------------------------------------------------------------------
-   5. Sticky widgets & floating triggers — gentle soft-pulse
-   --------------------------------------------------------------------------
-   Gentle CSS keyframe pulse animation (@keyframes soft-pulse) on fixed
-   floating action buttons (AI Chat FAB, Call Now, Back-to-Top) to attract
-   attention without intruding. */
-
+/* Soft pulse on floating brand actions. */
 @keyframes soft-pulse {
   0%,
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.4), 0 12px 28px -6px rgba(15, 23, 42, 0.35);
+    box-shadow: 0 0 0 0 rgb(166 31 46 / 35%), 0 12px 28px -6px rgb(16 27 49 / 35%);
   }
 
   50% {
     transform: scale(1.04);
-    box-shadow: 0 0 0 12px rgba(230, 57, 70, 0), 0 16px 34px -6px rgba(15, 23, 42, 0.45);
+    box-shadow: 0 0 0 12px rgb(166 31 46 / 0%), 0 16px 34px -6px rgb(16 27 49 / 45%);
   }
 }
 
 .aaa-fab-btn,
 .aaa-chat-launch,
 .aaa-call,
-#back-to-top,
-.pulse-btn-green,
-.fixed-floating-trigger,
-a[href^="tel:"].fixed,
-.fixed.bottom-5 {
-  animation: soft-pulse 2.4s ease-in-out infinite !important;
+#back-to-top {
+  animation: soft-pulse 2.4s ease-in-out infinite;
 }
 
 .aaa-fab-btn:hover,
 .aaa-chat-launch:hover,
 .aaa-call:hover,
-#back-to-top:hover,
-.pulse-btn-green:hover,
-.fixed-floating-trigger:hover,
-a[href^="tel:"].fixed:hover,
-.fixed.bottom-5:hover {
-  animation-play-state: paused !important;
+#back-to-top:hover {
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .aaa-fab-btn,
   .aaa-chat-launch,
   .aaa-call,
-  #back-to-top,
-  .pulse-btn-green,
-  .fixed-floating-trigger,
-  a[href^="tel:"].fixed,
-  .fixed.bottom-5 {
+  #back-to-top {
     animation: none !important;
   }
 }
