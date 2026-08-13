@@ -81,6 +81,38 @@
     ".aaa-chat-send:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(166,31,46,0.35)}",
     ".aaa-chat-send:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}",
     ".aaa-chat-disclaimer{font-size:10px;color:#64748b;text-align:center;padding:0 12px 10px;background:#ffffff;line-height:1.3}",
+    ".aaa-chat-estimator{padding:10px 14px 6px;background:#f8fafc;border-top:1px solid #e2e8f0}",
+    ".aaa-chat-estimator-label{margin:0 0 6px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:" + CRIMSON + ";display:flex;align-items:center;gap:4px}",
+    ".aaa-chat-estimator-list{display:flex;gap:6px;overflow-x:auto;padding:2px 1px 4px;scrollbar-width:none}",
+    ".aaa-chat-estimator-list::-webkit-scrollbar{display:none}",
+    ".aaa-estimator-pill{flex:0 0 auto;border:1px solid #cbd5e1;border-radius:9999px;background:#ffffff;color:#0f172a;padding:6px 12px;font:700 12px/1.2 'Roboto',system-ui,sans-serif;cursor:pointer;white-space:nowrap;transition:all .18s ease;box-shadow:0 1px 3px rgba(0,0,0,0.05)}",
+    ".aaa-estimator-pill:hover:not(:disabled){background:" + CRIMSON + ";color:#ffffff;border-color:" + CRIMSON + ";transform:translateY(-1px);box-shadow:0 3px 8px rgba(166,31,46,0.3)}",
+    ".aaa-chat-photo-callout{font-size:11px;font-weight:600;color:#047857;background:#ecfdf5;border-top:1px solid #a7f3d0;padding:6px 12px;display:flex;align-items:center;gap:6px;cursor:pointer}",
+    ".aaa-chat-photo-callout:hover{background:#d1fae5}",
+    ".aaa-chat-photo-trigger{flex-shrink:0;width:42px;height:42px;border-radius:14px;border:2px solid #e2e8f0;background:#f8fafc;color:#059669;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s ease}",
+    ".aaa-chat-photo-trigger:hover,.aaa-chat-photo-trigger[aria-expanded='true']{background:#ecfdf5;color:#047857;border-color:#10b981}",
+    ".aaa-chat-photo-trigger:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(16,185,129,0.2);border-color:#10b981}",
+    ".aaa-chat-photo-preview-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#f0fdf4;border-top:1px solid #bbf7d0}",
+    ".aaa-chat-photo-preview-bar[hidden]{display:none}",
+    ".aaa-chat-photo-thumb{width:36px;height:36px;border-radius:8px;object-fit:cover;border:1px solid #86efac;flex-shrink:0}",
+    ".aaa-chat-photo-name{font-size:12px;font-weight:600;color:#166534;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+    ".aaa-chat-photo-remove{background:none;border:none;color:#dc2626;font-size:18px;cursor:pointer;font-weight:bold;padding:2px 6px;line-height:1}",
+    ".aaa-msg-photo{max-width:100%;max-height:180px;border-radius:12px;margin-top:6px;display:block;border:1.5px solid rgba(255,255,255,0.6);object-fit:cover;box-shadow:0 2px 8px rgba(0,0,0,0.15)}",
+    ".aaa-chat-action-bar{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:8px;border-top:1px solid #e2e8f0}",
+    ".aaa-action-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:10px;font-size:12px;font-weight:700;text-decoration:none!important;cursor:pointer;transition:all .15s ease;border:none}",
+    ".aaa-action-book{background:" + CRIMSON + ";color:#ffffff!important;box-shadow:0 2px 6px rgba(166,31,46,0.3)}",
+    ".aaa-action-book:hover{background:#d32f2f;transform:translateY(-1px)}",
+    ".aaa-action-call{background:#059669;color:#ffffff!important;box-shadow:0 2px 6px rgba(5,150,105,0.3)}",
+    ".aaa-action-call:hover{background:#047857;transform:translateY(-1px)}",
+    ".dark .aaa-chat-estimator{background:#0f172a;border-top-color:#1e293b}",
+    ".dark .aaa-estimator-pill{background:#1e293b;color:#f8fafc;border-color:#334155}",
+    ".dark .aaa-estimator-pill:hover:not(:disabled){background:" + CRIMSON + ";border-color:" + CRIMSON + ";color:#ffffff}",
+    ".dark .aaa-chat-photo-callout{background:#064e3b;color:#a7f3d0;border-color:#047857}",
+    ".dark .aaa-chat-photo-trigger{background:#1e293b;border-color:#334155;color:#34d399}",
+    ".dark .aaa-chat-photo-trigger:hover{background:#064e3b;color:#ffffff;border-color:#10b981}",
+    ".dark .aaa-chat-photo-preview-bar{background:#064e3b;border-top-color:#047857}",
+    ".dark .aaa-chat-photo-name{color:#a7f3d0}",
+    ".dark .aaa-chat-action-bar{border-top-color:#334155}",
     ".dark .aaa-chat-panel{background:#0f172a;border-color:#1e293b;box-shadow:0 20px 50px rgba(0,0,0,0.6)}",
     ".dark .aaa-chat-header{background:#0f172a;border-bottom-color:" + CRIMSON + "}",
     ".dark .aaa-chat-header h2{color:#ffffff}",
@@ -139,13 +171,25 @@
   panel.innerHTML =
     '<div class="aaa-chat-header">' +
       '<div class="aaa-avatar"><img src="/logo-circular.png?v=20260805-1" alt="" aria-hidden="true"></div>' +
-      '<div><h2>AAA Handyman Services LLC</h2><p>Ask about our services &amp; areas</p></div>' +
+      '<div><h2>AAA Handyman Services LLC</h2><p>Interactive Estimator &amp; AI Chat</p></div>' +
       '<div class="aaa-chat-header-actions">' +
         '<button type="button" class="aaa-chat-control-btn aaa-chat-new" title="Refresh chat" aria-label="Refresh chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8.1 8.1 0 0 0-15.5-2M4 4v5h5"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2M20 20v-5h-5"/></svg></button>' +
         '<button type="button" class="aaa-chat-control-btn aaa-chat-close" title="Close chat" aria-label="Close chat">&times;</button>' +
       '</div>' +
     '</div>' +
     '<div class="aaa-chat-log" id="aaa-chat-log" role="log" aria-live="polite"></div>' +
+    '<div class="aaa-chat-estimator" aria-label="Interactive Estimator Categories">' +
+      '<p class="aaa-chat-estimator-label"><i class="fas fa-calculator" aria-hidden="true"></i> Guided Estimator Categories</p>' +
+      '<div class="aaa-chat-estimator-list" id="aaa-chat-estimator-list">' +
+        '<button type="button" class="aaa-estimator-pill" data-question="How much does TV Wall Mounting cost?">📺 TV Mounting ($170+)</button>' +
+        '<button type="button" class="aaa-estimator-pill" data-question="How much does a Faucet Swap cost?">🚰 Faucet Swap ($135+)</button>' +
+        '<button type="button" class="aaa-estimator-pill" data-question="How much to install a Ceiling Fan or Light Fixture?">💡 Ceiling Fan ($170+)</button>' +
+        '<button type="button" class="aaa-estimator-pill" data-question="How much to replace a Garbage Disposal?">🗑️ Disposal ($170+)</button>' +
+        '<button type="button" class="aaa-estimator-pill" data-question="How much to install a Smart Lock or Deadbolt?">🚪 Smart Lock ($135+)</button>' +
+        '<button type="button" class="aaa-estimator-pill" data-question="How much for Dryer Vent Cleaning?">🧹 Dryer Vent ($135+)</button>' +
+        '<button type="button" class="aaa-estimator-pill" data-question="How much for Gutter Cleaning?">🏠 Gutter Clean ($135+)</button>' +
+      '</div>' +
+    '</div>' +
     '<div class="aaa-chat-prompts" aria-label="Suggested questions">' +
       '<p class="aaa-chat-prompts-label">Popular questions</p>' +
       '<div class="aaa-chat-prompts-list">' +
@@ -166,12 +210,20 @@
       '<button type="button" class="aaa-chat-emoji" data-emoji="🏠" aria-label="House">🏠</button>' +
       '<button type="button" class="aaa-chat-emoji" data-emoji="🎨" aria-label="Painting">🎨</button>' +
     '</div>' +
+    '<div class="aaa-chat-photo-preview-bar" id="aaa-chat-photo-preview-bar" hidden>' +
+      '<img class="aaa-chat-photo-thumb" id="aaa-chat-photo-thumb" alt="Repair photo preview">' +
+      '<span class="aaa-chat-photo-name" id="aaa-chat-photo-name"></span>' +
+      '<button type="button" class="aaa-chat-photo-remove" id="aaa-chat-photo-remove" title="Remove photo" aria-label="Remove photo">&times;</button>' +
+    '</div>' +
+    '<div class="aaa-chat-photo-callout" id="aaa-chat-photo-callout" role="button" tabindex="0" title="Click to upload repair photo"><i class="fas fa-camera" aria-hidden="true"></i> <span><strong>Snap a quick photo!</strong> Upload a repair photo for Victor&rsquo;s feedback.</span></div>' +
     '<form class="aaa-chat-form" id="aaa-chat-form">' +
+      '<button type="button" class="aaa-chat-photo-trigger" id="aaa-chat-photo-trigger" title="Attach a repair photo" aria-label="Attach a repair photo"><i class="fas fa-camera" aria-hidden="true"></i></button>' +
+      '<input type="file" id="aaa-chat-photo-input" accept="image/jpeg,image/png,image/webp" capture="environment" style="display:none">' +
       '<button type="button" class="aaa-chat-emoji-trigger" id="aaa-chat-emoji-trigger" title="Add an emoji" aria-label="Add an emoji" aria-expanded="false" aria-controls="aaa-chat-emoji-bar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg></button>' +
-      '<textarea id="aaa-chat-input" rows="1" placeholder="Type your question…" aria-label="Your message"></textarea>' +
+      '<textarea id="aaa-chat-input" rows="1" placeholder="Type question or pick a category…" aria-label="Your message"></textarea>' +
       '<button type="submit" class="aaa-chat-send" id="aaa-chat-send" aria-label="Send message"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>' +
     '</form>' +
-    '<div class="aaa-chat-disclaimer">Automated assistant. For quotes or booking call (248) 385-3432.</div>';
+    '<div class="aaa-chat-disclaimer">Automated assistant &amp; estimator. For direct booking or calls: (248) 385-3432.</div>';
 
   document.body.appendChild(group);
   document.body.appendChild(panel);
@@ -186,8 +238,18 @@
   var emojiBar = panel.querySelector("#aaa-chat-emoji-bar");
   var promptList = panel.querySelector(".aaa-chat-prompts-list");
   var promptButtons = panel.querySelectorAll(".aaa-chat-prompt");
+  var estimatorList = panel.querySelector("#aaa-chat-estimator-list");
+  var photoTrigger = panel.querySelector("#aaa-chat-photo-trigger");
+  var photoInput = panel.querySelector("#aaa-chat-photo-input");
+  var photoCallout = panel.querySelector("#aaa-chat-photo-callout");
+  var photoPreviewBar = panel.querySelector("#aaa-chat-photo-preview-bar");
+  var photoThumb = panel.querySelector("#aaa-chat-photo-thumb");
+  var photoName = panel.querySelector("#aaa-chat-photo-name");
+  var photoRemove = panel.querySelector("#aaa-chat-photo-remove");
 
-  var GREETING = "Hi! 👋 I'm the AAA Handyman Services LLC assistant. Ask me about our services, the areas we cover, or how to get a quote.";
+  var attachedPhoto = null; // { data: base64Data, mimeType: fileType, previewUrl: blobUrl, fileName: name }
+
+  var GREETING = "Hi! 👋 I'm the AAA Handyman Services LLC Virtual Assistant & Interactive Estimator. Select a category above (like TV Mounting or Faucet Swap), upload a quick photo of your repair, or ask me any question!";
   function hideExistingFloating() {
     // Hide static (noscript) floating "Call Now" CTAs baked into the markup.
     var els = document.querySelectorAll(".fixed.bottom-5.right-5, [class*='fixed'][class*='bottom-5'][class*='right-5']");
@@ -212,15 +274,27 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
+
   function renderBot(el, text) {
     var html = escapeHTML(text)
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
       .replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
     el.innerHTML = html;
+
+    if (text.indexOf("Schedule") !== -1 || text.indexOf("book") !== -1 || text.indexOf("Estimate") !== -1 || text.indexOf("call") !== -1 || text.indexOf("(248) 385-3432") !== -1) {
+      if (!el.querySelector(".aaa-chat-action-bar")) {
+        var actionDiv = document.createElement("div");
+        actionDiv.className = "aaa-chat-action-bar";
+        actionDiv.innerHTML =
+          '<button type="button" class="aaa-action-btn aaa-action-book" onclick="if(window.AAABookingWidget){window.AAABookingWidget.open();}else{window.location.href=\'/book.html\';}"><i class="fas fa-calendar-check" aria-hidden="true"></i> Book / Schedule Call</button>' +
+          '<a href="tel:+12483853432" class="aaa-action-btn aaa-action-call"><i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432</a>';
+        el.appendChild(actionDiv);
+      }
+    }
     scrollToBottom();
   }
 
-  function addMessage(role, text) {
+  function addMessage(role, text, photoUrl) {
     var row = document.createElement("div");
     row.className = "aaa-msg-row " + (role === "user" ? "aaa-user-row" : "aaa-bot-row");
 
@@ -234,7 +308,18 @@
 
     var el = document.createElement("div");
     el.className = "aaa-msg " + (role === "user" ? "aaa-user" : "aaa-bot");
-    el.textContent = text;
+    if (text) {
+      var txtSpan = document.createElement("span");
+      txtSpan.textContent = text;
+      el.appendChild(txtSpan);
+    }
+    if (photoUrl) {
+      var imgEl = document.createElement("img");
+      imgEl.className = "aaa-msg-photo";
+      imgEl.src = photoUrl;
+      imgEl.alt = "Uploaded repair photo";
+      el.appendChild(imgEl);
+    }
     row.appendChild(el);
     log.appendChild(row);
     scrollToBottom();
@@ -259,6 +344,62 @@
     for (var i = 0; i < promptButtons.length; i++) {
       promptButtons[i].disabled = isDisabled;
     }
+    var estBtns = estimatorList.querySelectorAll(".aaa-estimator-pill");
+    for (var j = 0; j < estBtns.length; j++) {
+      estBtns[j].disabled = isDisabled;
+    }
+  }
+
+  function processPhotoFile(file) {
+    return new Promise(function (resolve, reject) {
+      if (!file || !file.type || !file.type.startsWith("image/")) {
+        reject("Invalid image file");
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = new Image();
+        img.onload = function () {
+          var canvas = document.createElement("canvas");
+          var maxDim = 1200;
+          var w = img.width;
+          var h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            } else {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+          canvas.width = Math.max(1, w);
+          canvas.height = Math.max(1, h);
+          var ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          var mimeType = "image/jpeg";
+          var base64 = canvas.toDataURL(mimeType, 0.85);
+          resolve({
+            data: base64,
+            mimeType: mimeType,
+            previewUrl: base64,
+            fileName: file.name
+          });
+        };
+        img.onerror = function () { reject("Failed to load image"); };
+        img.src = e.target.result;
+      };
+      reader.onerror = function () { reject("Failed to read file"); };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function clearAttachedPhoto() {
+    attachedPhoto = null;
+    photoInput.value = "";
+    photoPreviewBar.hidden = true;
+    photoThumb.src = "";
+    photoName.textContent = "";
   }
 
   function resetChat() {
@@ -268,6 +409,7 @@
     streaming = false;
     sendBtn.disabled = false;
     setPromptButtonsDisabled(false);
+    clearAttachedPhoto();
     messages = [];
     log.innerHTML = "";
     addMessage("assistant", GREETING);
@@ -329,7 +471,7 @@
       launch.focus();
     }
   });
-  async function sendMessage(text) {
+  async function sendMessage(text, photoObj) {
     if (streaming) return;
     streaming = true;
     sendBtn.disabled = true;
@@ -337,17 +479,32 @@
     var requestVersion = conversationVersion;
     activeRequest = new AbortController();
 
-    addMessage("user", text);
-    messages.push({ role: "user", content: text });
+    var currentPhoto = photoObj || attachedPhoto;
+    clearAttachedPhoto();
+
+    var userText = text || (currentPhoto ? "Here is a photo of my repair area." : "");
+    addMessage("user", userText, currentPhoto ? currentPhoto.previewUrl : null);
+    messages.push({ role: "user", content: userText });
     var botEl = addMessage("assistant", "");
     botEl.innerHTML = '<span class="aaa-typing"><span></span><span></span><span></span></span>';
+
+    var reqBody = {
+      messages: messages,
+      page: window.location.pathname
+    };
+    if (currentPhoto) {
+      reqBody.image = {
+        data: currentPhoto.data,
+        mimeType: currentPhoto.mimeType
+      };
+    }
 
     var full = "";
     try {
       var res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: messages, page: window.location.pathname }),
+        body: JSON.stringify(reqBody),
         signal: activeRequest.signal,
       });
 
@@ -465,10 +622,59 @@
     sendMessage(promptButton.getAttribute("data-question"));
   });
 
+  if (estimatorList) {
+    estimatorList.addEventListener("click", function (e) {
+      var estBtn = e.target.closest(".aaa-estimator-pill");
+      if (!estBtn || streaming) return;
+      input.value = "";
+      autoGrow();
+      setEmojiBarOpen(false);
+      sendMessage(estBtn.getAttribute("data-question"));
+    });
+  }
+
+  if (photoTrigger) {
+    photoTrigger.addEventListener("click", function () {
+      if (photoInput) photoInput.click();
+    });
+  }
+
+  if (photoCallout) {
+    photoCallout.addEventListener("click", function () {
+      if (photoInput) photoInput.click();
+    });
+    photoCallout.addEventListener("keydown", function (e) {
+      if ((e.key === "Enter" || e.key === " ") && photoInput) {
+        e.preventDefault();
+        photoInput.click();
+      }
+    });
+  }
+
+  if (photoInput) {
+    photoInput.addEventListener("change", async function () {
+      var file = photoInput.files && photoInput.files[0];
+      if (!file) return;
+      try {
+        var processed = await processPhotoFile(file);
+        attachedPhoto = processed;
+        photoThumb.src = processed.previewUrl;
+        photoName.textContent = processed.fileName || "Repair photo";
+        photoPreviewBar.hidden = false;
+      } catch (err) {
+        console.error("Photo processing error:", err);
+      }
+    });
+  }
+
+  if (photoRemove) {
+    photoRemove.addEventListener("click", clearAttachedPhoto);
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var text = input.value.trim();
-    if (!text || streaming) return;
+    if ((!text && !attachedPhoto) || streaming) return;
     input.value = "";
     autoGrow();
     setEmojiBarOpen(false);

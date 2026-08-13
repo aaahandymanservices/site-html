@@ -376,9 +376,34 @@
     '          </div>',
     '        </div>',
     '        <p class="bw-zip-note" data-bw-zipnote role="status" aria-live="polite"></p>',
-    '        <label class="bw-label" for="bw-notes">What should we know? <span class="font-normal normal-case tracking-normal text-gray-400">(optional)</span></label>',
-    '        <textarea id="bw-notes" class="bw-input" rows="3" maxlength="700" placeholder="Two interior doors stick, and the hall light flickers."></textarea>',
-    '        <div class="bw-fees" data-bw-fees></div>',
+    '<label class="bw-label" for="bw-notes">What should we know? <span class="font-normal normal-case tracking-normal text-gray-400">(optional)</span></label>',
+    '<textarea id="bw-notes" class="bw-input" rows="3" maxlength="700" placeholder="Two interior doors stick, and the hall light flickers."></textarea>',
+    '<div class="mt-4">',
+    '  <label class="bw-label" for="bw-photo">',
+    '    <i class="fas fa-camera text-red-400 mr-1.5" aria-hidden="true"></i> Snap &amp; Upload Repair Photo <span class="font-normal normal-case text-emerald-400">(strongly recommended)</span>',
+    '  </label>',
+    '  <label id="bw-photo-dropzone" for="bw-photo" class="group block cursor-pointer rounded-2xl border-2 border-dashed border-gray-700 bg-gray-900/40 p-4 transition hover:border-red-500/80 hover:bg-gray-900/70">',
+    '    <input id="bw-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" capture="environment" class="sr-only">',
+    '    <div id="bw-photo-empty" class="flex items-center gap-3">',
+    '      <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-600/20 text-red-400 text-lg">',
+    '        <i class="fas fa-cloud-arrow-up" aria-hidden="true"></i>',
+    '      </span>',
+    '      <div>',
+    '        <strong class="block font-bold text-white text-sm">Snap or upload a photo of your repair</strong>',
+    '        <span class="text-xs text-gray-300">A quick photo helps Victor provide faster, accurate feedback and bring the right materials.</span>',
+    '      </div>',
+    '    </div>',
+    '    <div id="bw-photo-preview-wrap" class="hidden items-center justify-between gap-3">',
+    '      <div class="flex items-center gap-3 overflow-hidden">',
+    '        <img id="bw-photo-preview" class="h-12 w-14 shrink-0 rounded-lg border border-gray-700 object-cover" alt="Selected repair preview">',
+    '        <span id="bw-photo-name" class="truncate font-bold text-white text-xs"></span>',
+    '      </div>',
+    '      <button id="bw-photo-remove" type="button" class="shrink-0 rounded-lg border border-gray-700 px-2.5 py-1.5 text-xs font-semibold text-gray-300 transition hover:border-red-500 hover:text-white">Remove</button>',
+    '    </div>',
+    '  </label>',
+    '  <p id="bw-photo-error" class="mt-1 hidden text-xs font-semibold text-red-300" role="alert"></p>',
+    '</div>',
+    '<div class="bw-fees" data-bw-fees></div>',
     '      </section>',
     // Success ------------------------------------------------------------
     '      <section class="bw-pane hidden text-center" data-bw-pane="done">',
@@ -506,6 +531,14 @@
       zip: root.querySelector('#bw-zip'),
       zipNote: root.querySelector('[data-bw-zipnote]'),
       notes: root.querySelector('#bw-notes'),
+      photo: root.querySelector('#bw-photo'),
+      photoDropzone: root.querySelector('#bw-photo-dropzone'),
+      photoEmpty: root.querySelector('#bw-photo-empty'),
+      photoPreviewWrap: root.querySelector('#bw-photo-preview-wrap'),
+      photoPreview: root.querySelector('#bw-photo-preview'),
+      photoName: root.querySelector('#bw-photo-name'),
+      photoRemove: root.querySelector('#bw-photo-remove'),
+      photoError: root.querySelector('#bw-photo-error'),
       fees: root.querySelector('[data-bw-fees]'),
       error: root.querySelector('[data-bw-error]'),
       status: root.querySelector('[data-bw-status]'),
@@ -833,6 +866,49 @@
     });
   }
 
+  var photoPreviewUrl = '';
+  function clearPhoto() {
+    if (els.photo) els.photo.value = '';
+    if (photoPreviewUrl) URL.revokeObjectURL(photoPreviewUrl);
+    photoPreviewUrl = '';
+    if (els.photoPreview) els.photoPreview.removeAttribute('src');
+    if (els.photoPreviewWrap) els.photoPreviewWrap.classList.add('hidden');
+    if (els.photoEmpty) els.photoEmpty.classList.remove('hidden');
+    if (els.photoError) {
+      els.photoError.textContent = '';
+      els.photoError.classList.add('hidden');
+    }
+  }
+
+  function updatePhotoPreview() {
+    var file = els.photo && els.photo.files && els.photo.files[0];
+    if (!file) {
+      clearPhoto();
+      return;
+    }
+    if (!file.type.startsWith('image/')) {
+      clearPhoto();
+      if (els.photoError) {
+        els.photoError.textContent = 'Please select a JPG, PNG, or WebP image.';
+        els.photoError.classList.remove('hidden');
+      }
+      return;
+    }
+    if (photoPreviewUrl) URL.revokeObjectURL(photoPreviewUrl);
+    photoPreviewUrl = URL.createObjectURL(file);
+    if (els.photoPreview) els.photoPreview.src = photoPreviewUrl;
+    if (els.photoName) els.photoName.textContent = file.name || 'Repair photo';
+    if (els.photoEmpty) els.photoEmpty.classList.add('hidden');
+    if (els.photoPreviewWrap) {
+      els.photoPreviewWrap.classList.remove('hidden');
+      els.photoPreviewWrap.classList.add('flex');
+    }
+    if (els.photoError) {
+      els.photoError.textContent = '';
+      els.photoError.classList.add('hidden');
+    }
+  }
+
   function submit() {
     var payload = {
       customerName: sanitizeText(els.name.value, 120),
@@ -852,10 +928,33 @@
     els.next.disabled = true;
     els.next.innerHTML = 'Sending... <i class="fas fa-spinner animate-spin text-xs" aria-hidden="true"></i>';
 
+    var photoFile = els.photo && els.photo.files && els.photo.files[0];
+    var reqBody, reqHeaders;
+    if (photoFile) {
+      var formData = new FormData();
+      formData.append('customerName', payload.customerName);
+      formData.append('email', payload.email);
+      formData.append('phone', payload.phone);
+      formData.append('service', payload.service);
+      formData.append('bookingDate', payload.bookingDate);
+      formData.append('bookingTime', payload.bookingTime);
+      formData.append('address', payload.address);
+      formData.append('city', payload.city);
+      formData.append('zip', payload.zip);
+      formData.append('message', payload.message);
+      formData.append('source', payload.source);
+      formData.append('photo', photoFile, photoFile.name);
+      reqBody = formData;
+      reqHeaders = { accept: 'application/json' };
+    } else {
+      reqBody = JSON.stringify(payload);
+      reqHeaders = { 'Content-Type': 'application/json', accept: 'application/json' };
+    }
+
     fetch('/api/booking', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', accept: 'application/json' },
-      body: JSON.stringify(payload)
+      headers: reqHeaders,
+      body: reqBody
     })
       .then(function (response) {
         return response.json().then(function (data) {
@@ -894,6 +993,34 @@
    * --------------------------------------------------------------------- */
 
   function bindEvents() {
+    if (els.photo) els.photo.addEventListener('change', updatePhotoPreview);
+    if (els.photoRemove) els.photoRemove.addEventListener('click', clearPhoto);
+
+    if (els.photoDropzone && els.photo) {
+      ['dragenter', 'dragover'].forEach(function (eventName) {
+        els.photoDropzone.addEventListener(eventName, function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          els.photoDropzone.classList.add('border-red-500', 'bg-gray-900/70');
+        });
+      });
+      ['dragleave', 'drop'].forEach(function (eventName) {
+        els.photoDropzone.addEventListener(eventName, function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          els.photoDropzone.classList.remove('border-red-500', 'bg-gray-900/70');
+        });
+      });
+      els.photoDropzone.addEventListener('drop', function (event) {
+        var file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
+        if (!file) return;
+        var transfer = new DataTransfer();
+        transfer.items.add(file);
+        els.photo.files = transfer.files;
+        updatePhotoPreview();
+      });
+    }
+
     root.addEventListener('click', function (event) {
       if (event.target.closest('[data-bw-close]')) {
         close();
