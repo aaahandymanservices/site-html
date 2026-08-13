@@ -321,13 +321,14 @@
         '<div class="zmp-blurb">' + esc(z.blurb) + '</div>' +
         '<a class="zmp-book" href="/book?city=' + encodeURIComponent(m.name) + '">' +
         '<i class="fas fa-calendar-check" aria-hidden="true"></i> Book Service in ' + esc(m.name) + '</a>';
+      focusGmap(m.name, z.label);
       openPopup();
     }
 
     function showClusterPopup(cluster) {
       activePin = null;
       activeAnchor = cluster.element;
-      pinModels.forEach(function (p) { if (p.element) p.classList.remove("is-active"); });
+      pinModels.forEach(function (p) { if (p.element) p.element.classList.remove("is-active"); });
       clusterElements.forEach(function (el) { el.classList.toggle("is-active", el === cluster.element); });
       var items = cluster.models.map(function (m) {
         var z = ZONES[m.zone];
@@ -451,15 +452,26 @@
       var clusters = [];
       for (var i = 0; i < pts.length; i++) {
         if (assigned[i]) continue;
+        // Single-linkage (transitive) clustering: grow the group by adding any
+        // unassigned pin within MIN_CLUSTER_PX of any pin already in it. The
+        // previous seed-only check left chain-of-overlaps split, so a pin that
+        // sat on top of a cluster member but was farther than the seed rendered
+        // as a stray singleton bleeding out from under the count bubble.
         var group = [pts[i]];
         assigned[i] = true;
-        for (var j = i + 1; j < pts.length; j++) {
-          if (assigned[j]) continue;
-          var dx = pts[j].px - pts[i].px;
-          var dy = pts[j].py - pts[i].py;
-          if (dx * dx + dy * dy <= MIN_CLUSTER_PX * MIN_CLUSTER_PX) {
-            group.push(pts[j]);
-            assigned[j] = true;
+        var queue = [i];
+        var head = 0;
+        while (head < queue.length) {
+          var s = queue[head++];
+          for (var j = 0; j < pts.length; j++) {
+            if (assigned[j]) continue;
+            var dx = pts[j].px - pts[s].px;
+            var dy = pts[j].py - pts[s].py;
+            if (dx * dx + dy * dy <= MIN_CLUSTER_PX * MIN_CLUSTER_PX) {
+              group.push(pts[j]);
+              assigned[j] = true;
+              queue.push(j);
+            }
           }
         }
         clusters.push(group);
@@ -468,20 +480,31 @@
       clusters.forEach(function (group) {
         if (group.length < 2) return; // singleton stays as a normal pin
         group.forEach(function (g) { g.model.element.style.display = "none"; });
+        // Centroid of the group, then snap the bubble to the member nearest that
+        // point so it sits on top of an actual overlapping pin instead of in the
+        // empty gap between two pins.
         var cx = 0, cy = 0;
         group.forEach(function (g) { cx += g.model.x; cy += g.model.y; });
         cx /= group.length; cy /= group.length;
+        var nearest = group[0];
+        var bestD = Infinity;
+        group.forEach(function (g) {
+          var ddx = g.model.x - cx, ddy = g.model.y - cy;
+          var d = ddx * ddx + ddy * ddy;
+          if (d < bestD) { bestD = d; nearest = g; }
+        });
+        var nx = nearest.model.x, ny = nearest.model.y;
         var models = group.map(function (g) { return g.model; });
         var aCount = models.filter(function (m) { return m.zone === "A"; }).length;
         var dominant = aCount >= models.length / 2 ? "A" : "B";
         var el = document.createElement("button");
         el.type = "button";
         el.className = "zone-map__cluster" + (dominant === "B" ? " is-zone-b" : "");
-        el.style.left = (cx / MAP_W * 100) + "%";
-        el.style.top = (cy / MAP_H * 100) + "%";
+        el.style.left = (nx / MAP_W * 100) + "%";
+        el.style.top = (ny / MAP_H * 100) + "%";
         el.setAttribute("aria-label", models.length + " service cities clustered here — open list");
         el.textContent = String(models.length);
-        var clusterObj = { models: models, cx: cx, cy: cy, element: el };
+        var clusterObj = { models: models, cx: nx, cy: ny, element: el };
         el.addEventListener("click", function (e) { e.stopPropagation(); showClusterPopup(clusterObj); });
         clusterLayer.appendChild(el);
         clusterElements.push(el);
@@ -517,6 +540,66 @@
         closePopup();
         if (activePin && activePin.element) activePin.element.focus();
       }
+    });
+  }
+
+  // ---- Embedded Google Map recentering ----
+  // The page hosts a no-API-key Google Maps embed (see /service-areas.html).
+  // Clicking a city pin (or a cluster's city link) reloads that iframe to the
+  // clicked city, mirroring marker.addListener("click", () =>
+  // infoWindow.open(map, marker)): the embed shows the city's pin + info card
+  // and the visitor keeps full pan/zoom/street-view interactivity.
+  function focusGmap(cityName, zoneLabel) {
+    return focusGmapAt(cityName, null, null, zoneLabel);
+  }
+
+  // Recenter the embedded map on a city, optionally at explicit lat/lng + zoom.
+  // The no-key `output=embed` endpoint accepts a `q=lat,lng` query (centered with
+  // a marker + info card — the embed equivalent of opening an InfoWindow on a
+  // marker) and a `z=` zoom level. A bare `q=lat,lng` shows a single dropped pin
+  // with its info card at that coordinate.
+  function focusGmapAt(cityName, lat, lng, zoneLabel, zoom) {
+    var frame = document.getElementById("zone-gmap");
+    var label = document.getElementById("zone-gmap-label");
+    if (!frame) return;
+    var q;
+    if (lat != null && lng != null) {
+      q = encodeURIComponent(String(lat) + "," + String(lng));
+    } else {
+      q = encodeURIComponent(cityName + ", Oakland County, MI");
+    }
+    var z = zoom != null ? zoom : 12;
+    frame.src = "https://maps.google.com/maps?q=" + q + "&z=" + z + "&output=embed";
+    if (label) {
+      label.innerHTML = esc(cityName) + ", MI" + (zoneLabel ? ' &middot; ' + esc(zoneLabel) : '');
+    }
+  }
+
+  // ---- Zone A/B city chip -> map wiring ----
+  // Every city button in the Zone A and Zone B cards carries data-city,
+  // data-lat, and data-lng. Clicking one scrolls up to #service-area-map and
+  // pans the embedded Google Map to those coordinates at zoom 13, surfacing the
+  // city's marker info card (the embed's analogue of infoWindow.open(map, marker)).
+  function initCityChips() {
+    var chips = document.querySelectorAll(".zone-chip[data-city][data-lat][data-lng]");
+    if (!chips.length) return;
+    var mapAnchor = document.getElementById("service-area-map");
+    chips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        var city = chip.getAttribute("data-city") || "";
+        var lat = parseFloat(chip.getAttribute("data-lat"));
+        var lng = parseFloat(chip.getAttribute("data-lng"));
+        if (!isFinite(lat) || !isFinite(lng)) return;
+        var zone = findMatch(city);
+        var zoneLabel = (zone && (zone.zone === "A" || zone.zone === "B")) ? ZONES[zone.zone].label : null;
+        // Pan the embedded map to the city's coordinates at zoom 13 — the
+        // no-key embed renders a dropped pin with an info card at that point,
+        // reproducing infoWindow.open(map, marker).
+        focusGmapAt(city, lat, lng, zoneLabel, 13);
+        if (mapAnchor && "scrollIntoView" in mapAnchor) {
+          mapAnchor.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
     });
   }
 
@@ -566,6 +649,7 @@
   ready(function () {
     initLookup();
     initMap();
+    initCityChips();
     initReviewFilters();
   });
 })();
