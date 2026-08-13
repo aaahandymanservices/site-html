@@ -223,8 +223,8 @@ ${jsonLd(city)}
     <link rel="stylesheet" href="/css/tailwind.css?v=20260810a">
     <link rel="stylesheet" href="/css/site-theme.css?v=20260810a">
     <!-- Font Awesome subset (generated, see scripts/build-icon-css.mjs) -->
-    <link rel="preload" href="/css/icons.css?v=20260729d" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260729d"></noscript>
+    <link rel="preload" href="/css/icons.css?v=20260813a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260813a"></noscript>
 
     <style>
     </style>

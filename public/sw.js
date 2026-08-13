@@ -64,7 +64,16 @@
 // the stamp in the page's <link> cannot reach a visitor holding v12 -- they
 // would keep last deploy's stylesheet, where the cards render as plain white
 // with no accent borders or tints. Only this bump refetches it.
-const CACHE_VERSION = 'v15';
+// v16 lands the expanded service catalog: seventeen new icon rules were added
+// to /css/icons.css (sign-hanging, window-restore, grip-lines, paw, and friends
+// used by the new service detail pages), but the cache-buster stamp on the
+// <link> was not bumped and neither was this version. An asset request's cache
+// key drops ?v= (see assetCacheKey), so a returning visitor holding v15 kept
+// last deploy's icons.css -- the one without those rules -- behind the same
+// cache key, and every new icon rendered blank. Bumping both the stamp in the
+// page (scripts/update-static-pages.mjs) and this version refetches the
+// stylesheet and its fonts for every client.
+const CACHE_VERSION = 'v16';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

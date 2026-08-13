@@ -29,7 +29,7 @@ const STATIC_NAV_PAGES = [
  * the local subset instead. See scripts/site-theme.css for the @font-face
  * rules and scripts/build-icon-css.mjs for the icon stylesheet.
  */
-const ICONS_CSS = '/css/icons.css?v=20260729d';
+const ICONS_CSS = '/css/icons.css?v=20260813a';
 /*
  * Bump this whenever the theme stylesheet or a versioned script changes.
  * netlify.toml serves /css/* and /js/* as `immutable, max-age=31536000`, so the
