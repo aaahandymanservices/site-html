@@ -80,8 +80,10 @@
     if (email) known[email] = true;
     state.emails = known;
     state.firstServiceGiftRedeemed = true;
-    state.email = email || state.email || null;
-    state.redeemedAt = redeemedAt || state.redeemedAt || null;
+    // Do not persist cleartext personal/timestamp fields in localStorage.
+    // They are not required for render gating logic.
+    delete state.email;
+    delete state.redeemedAt;
     writeState(state);
   }
 
