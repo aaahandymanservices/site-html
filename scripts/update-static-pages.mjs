@@ -15,6 +15,7 @@ const STATIC_NAV_PAGES = [
   { path: 'public/reviews.html', active: 'reviews' },
   { path: 'public/careers.html', active: 'careers' },
   { path: 'public/contact.html', active: 'contact' },
+  { path: 'public/ai-estimate.html', active: 'ai-estimate' },
   { path: 'public/customer-care.html', active: 'none' },
   { path: 'public/pricing-policy.html', active: 'none' },
   { path: 'public/book.html', active: 'none' },
@@ -29,7 +30,7 @@ const STATIC_NAV_PAGES = [
  * the local subset instead. See scripts/site-theme.css for the @font-face
  * rules and scripts/build-icon-css.mjs for the icon stylesheet.
  */
-const ICONS_CSS = '/css/icons.css?v=20260813a';
+const ICONS_CSS = '/css/icons.css?v=20260814a';
 /*
  * Bump this whenever the theme stylesheet or a versioned script changes.
  * netlify.toml serves /css/* and /js/* as `immutable, max-age=31536000`, so the
@@ -63,6 +64,12 @@ const SCRIPT_VERSIONS = new Map([
   ['booking-widget.js', ASSET_VERSION],
   ['service-zone-selector.js', ASSET_VERSION],
   ['home-care-plans.js', ASSET_VERSION],
+  // The AI estimator page's upload, ZIP→zone lookup, analyze call, and submit-
+  // to-dispatch flow are all inert markup until this runs, so a stale cached
+  // copy leaves a visitor's photo going nowhere -- same reason contact-page.js
+  // is versioned here. Its own stamp (20260814a) is independent of ASSET_VERSION
+  // because it shipped in a later deploy than the rest of the scripts.
+  ['ai-estimate-page.js', '20260814a'],
 ]);
 const ASYNC_ICONS_CSS =
   `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +

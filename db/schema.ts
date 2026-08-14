@@ -1,5 +1,39 @@
 import { boolean, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
+// AI Estimate submissions: one row per photo-driven repair estimate the
+// customer generates through the AI Construction Estimator. The model's
+// structured read of the damage is stored alongside the raw estimate text
+// so the dispatch team can confirm pricing before calling back. The original
+// photo is kept in Netlify Blobs and referenced by `photoKey`.
+export const aiEstimates = pgTable("ai_estimates", {
+  id: serial("id").primaryKey(),
+  // Optional contact info the customer may enter after reviewing the estimate.
+  customerName: text("customer_name"),
+  email: text("email"),
+  phone: text("phone"),
+  // Where the work happens, so dispatch knows where to route the follow-up.
+  address: text("address"),
+  city: text("city"),
+  zip: text("zip"),
+  // Short headline the model produces, e.g. "~6\" x 6\" drywall puncture".
+  detectedIssue: text("detected_issue"),
+  // Broad bucket: "Drywall Repair", "Minor Plumbing", etc.
+  serviceCategory: text("service_category"),
+  // Model's narrative estimate rendered in the site's output format.
+  estimateText: text("estimate_text").notNull(),
+  // Low/high of the preliminary range the model quoted, in whole dollars.
+  priceLow: integer("price_low"),
+  priceHigh: integer("price_high"),
+  // True when the model flagged the job as out of minor scope.
+  outOfScope: boolean("out_of_scope").default(false).notNull(),
+  // Blob key for the uploaded photo (served by /api/ai-estimate/photo/:key).
+  photoKey: text("photo_key"),
+  // 'pending' until the customer clicks Submit, then 'submitted'; 'claimed'
+  // once dispatch converts it into a booking.
+  status: text("status").default("pending").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
 export const reviews = pgTable("gallery_reviews", {
   id: serial("id").primaryKey(),
   customerName: text("customer_name").notNull(),
