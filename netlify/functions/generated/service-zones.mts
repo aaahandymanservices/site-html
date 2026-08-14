@@ -34,9 +34,21 @@ export const SERVED_ZIPS: Record<string, ServedZip> = {
     "zone": "A",
     "route": "east-metro"
   },
+  "48017": {
+    "city": "Clawson",
+    "slug": "clawson",
+    "zone": "A",
+    "route": "east-metro"
+  },
   "48025": {
     "city": "Franklin",
     "slug": "franklin",
+    "zone": "A",
+    "route": "east-metro"
+  },
+  "48030": {
+    "city": "Hazel Park",
+    "slug": "hazel-park",
     "zone": "A",
     "route": "east-metro"
   },
@@ -70,10 +82,28 @@ export const SERVED_ZIPS: Record<string, ServedZip> = {
     "zone": "B",
     "route": "east-metro"
   },
+  "48069": {
+    "city": "Pleasant Ridge",
+    "slug": "pleasant-ridge",
+    "zone": "A",
+    "route": "east-metro"
+  },
   "48070": {
     "city": "Huntington Woods",
     "slug": "huntington-woods",
     "zone": "B",
+    "route": "east-metro"
+  },
+  "48071": {
+    "city": "Madison Heights",
+    "slug": "madison-heights",
+    "zone": "A",
+    "route": "east-metro"
+  },
+  "48072": {
+    "city": "Berkley",
+    "slug": "berkley",
+    "zone": "A",
     "route": "east-metro"
   },
   "48073": {
@@ -124,6 +154,48 @@ export const SERVED_ZIPS: Record<string, ServedZip> = {
     "zone": "A",
     "route": "east-metro"
   },
+  "48178": {
+    "city": "Lyon Twp.",
+    "slug": "lyon-twp",
+    "zone": "B",
+    "route": "west-corridor"
+  },
+  "48179": {
+    "city": "South Lyon",
+    "slug": "south-lyon",
+    "zone": "B",
+    "route": "west-corridor"
+  },
+  "48220": {
+    "city": "Ferndale",
+    "slug": "ferndale",
+    "zone": "A",
+    "route": "east-metro"
+  },
+  "48237": {
+    "city": "Oak Park",
+    "slug": "oak-park",
+    "zone": "A",
+    "route": "east-metro"
+  },
+  "48301": {
+    "city": "Bloomfield Hills",
+    "slug": "bloomfield-hills",
+    "zone": "A",
+    "route": "west-corridor"
+  },
+  "48302": {
+    "city": "Bloomfield Hills",
+    "slug": "bloomfield-hills",
+    "zone": "A",
+    "route": "west-corridor"
+  },
+  "48304": {
+    "city": "Bloomfield Hills",
+    "slug": "bloomfield-hills",
+    "zone": "A",
+    "route": "west-corridor"
+  },
   "48306": {
     "city": "Rochester Hills",
     "slug": "rochester-hills",
@@ -148,6 +220,12 @@ export const SERVED_ZIPS: Record<string, ServedZip> = {
     "zone": "A",
     "route": "east-metro"
   },
+  "48317": {
+    "city": "Utica",
+    "slug": "utica",
+    "zone": "A",
+    "route": "west-corridor"
+  },
   "48322": {
     "city": "West Bloomfield",
     "slug": "west-bloomfield",
@@ -165,6 +243,12 @@ export const SERVED_ZIPS: Record<string, ServedZip> = {
     "slug": "west-bloomfield",
     "zone": "A",
     "route": "west-corridor"
+  },
+  "48326": {
+    "city": "Auburn Hills",
+    "slug": "auburn-hills",
+    "zone": "A",
+    "route": "east-metro"
   },
   "48327": {
     "city": "Waterford",
@@ -262,6 +346,24 @@ export const SERVED_ZIPS: Record<string, ServedZip> = {
     "zone": "A",
     "route": "north-lakes"
   },
+  "48350": {
+    "city": "Davisburg",
+    "slug": "davisburg",
+    "zone": "A",
+    "route": "north-lakes"
+  },
+  "48356": {
+    "city": "Highland",
+    "slug": "highland",
+    "zone": "A",
+    "route": "north-lakes"
+  },
+  "48357": {
+    "city": "Highland",
+    "slug": "highland",
+    "zone": "A",
+    "route": "north-lakes"
+  },
   "48359": {
     "city": "Lake Orion",
     "slug": "lake-orion",
@@ -284,6 +386,18 @@ export const SERVED_ZIPS: Record<string, ServedZip> = {
     "city": "Lake Orion",
     "slug": "lake-orion",
     "zone": "A",
+    "route": "north-lakes"
+  },
+  "48363": {
+    "city": "Groveland Twp.",
+    "slug": "groveland-twp",
+    "zone": "B",
+    "route": "north-lakes"
+  },
+  "48367": {
+    "city": "Leonard",
+    "slug": "leonard",
+    "zone": "B",
     "route": "north-lakes"
   },
   "48370": {
@@ -321,6 +435,78 @@ export const SERVED_ZIPS: Record<string, ServedZip> = {
     "slug": "novi",
     "zone": "A",
     "route": "west-corridor"
+  },
+  "48380": {
+    "city": "Milford",
+    "slug": "milford",
+    "zone": "A",
+    "route": "west-corridor"
+  },
+  "48381": {
+    "city": "Milford",
+    "slug": "milford",
+    "zone": "A",
+    "route": "west-corridor"
+  },
+  "48382": {
+    "city": "Commerce",
+    "slug": "commerce",
+    "zone": "A",
+    "route": "north-lakes"
+  },
+  "48383": {
+    "city": "White Lake",
+    "slug": "white-lake",
+    "zone": "A",
+    "route": "north-lakes"
+  },
+  "48386": {
+    "city": "White Lake",
+    "slug": "white-lake",
+    "zone": "A",
+    "route": "north-lakes"
+  },
+  "48387": {
+    "city": "Union Lake",
+    "slug": "union-lake",
+    "zone": "A",
+    "route": "north-lakes"
+  },
+  "48390": {
+    "city": "Commerce",
+    "slug": "commerce",
+    "zone": "A",
+    "route": "north-lakes"
+  },
+  "48391": {
+    "city": "Walled Lake",
+    "slug": "walled-lake",
+    "zone": "A",
+    "route": "west-corridor"
+  },
+  "48393": {
+    "city": "Wixom",
+    "slug": "wixom",
+    "zone": "A",
+    "route": "west-corridor"
+  },
+  "48422": {
+    "city": "Lyon Twp.",
+    "slug": "lyon-twp",
+    "zone": "B",
+    "route": "west-corridor"
+  },
+  "48442": {
+    "city": "Holly",
+    "slug": "holly",
+    "zone": "B",
+    "route": "north-lakes"
+  },
+  "48462": {
+    "city": "Ortonville",
+    "slug": "ortonville",
+    "zone": "B",
+    "route": "north-lakes"
   }
 };
 
