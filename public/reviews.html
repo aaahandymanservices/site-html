@@ -808,9 +808,26 @@
                         <p class="text-sm">Be the first to share your experience with AAA Handyman Services LLC!</p>
                     </div>
 
-                    <div id="reviews-loading" class="reviews-masonry">
-                        <div class="bg-white/5 border border-white/10 rounded-3xl p-6 h-[400px] animate-pulse review-card" style="opacity:1"></div>
-                        <div class="bg-white/5 border border-white/10 rounded-3xl p-6 h-[320px] animate-pulse review-card" style="opacity:1"></div>
+                    <div id="reviews-loading" class="reviews-masonry" role="status" aria-label="Loading customer projects">
+                        <!-- Placeholder cards, not content: the label above is what a
+                             screen reader announces, so the bars themselves are hidden. -->
+                        <div class="review-card skeleton-card skeleton-card--on-navy" style="opacity:1" aria-hidden="true">
+                            <div class="skeleton-card__thumb"></div>
+                            <div class="skeleton-card__body">
+                                <div class="skeleton-card__line skeleton-card__line--title"></div>
+                                <div class="skeleton-card__line skeleton-card__line--long"></div>
+                                <div class="skeleton-card__line skeleton-card__line--medium"></div>
+                                <div class="skeleton-card__line skeleton-card__line--short"></div>
+                            </div>
+                        </div>
+                        <div class="review-card skeleton-card skeleton-card--on-navy" style="opacity:1" aria-hidden="true">
+                            <div class="skeleton-card__thumb"></div>
+                            <div class="skeleton-card__body">
+                                <div class="skeleton-card__line skeleton-card__line--title"></div>
+                                <div class="skeleton-card__line skeleton-card__line--long"></div>
+                                <div class="skeleton-card__line skeleton-card__line--short"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
