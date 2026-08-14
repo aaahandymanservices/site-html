@@ -4317,3 +4317,138 @@ header.ambient-glow-hero::after,
   pointer-events: none;
   display: none !important;
 }
+
+/* ==========================================================================
+ * Skeleton loading cards
+ *
+ * The placeholder a card renders as while its real content is still in flight
+ * -- the review feed's first paint, and anywhere else a card grid waits on a
+ * fetch. Four declarations carry the whole effect, and each one is there
+ * because of a specific way this pattern breaks without it:
+ *
+ *   position: relative + overflow: hidden -- the sheen is an ::after sized in
+ *     percentages of the card, so the card has to be its containing block and
+ *     has to clip it. Unclipped, the gradient paints past the rounded corners,
+ *     and once it translates beyond the right edge it extends the page's
+ *     scrollable area: a horizontal scrollbar that appears only while loading.
+ *
+ *   isolation: isolate -- gives each card its own stacking context, so the
+ *     sheen's z-index is spent inside the card and can never rise over the
+ *     sticky nav, the mobile drawer, or the floating chat launcher.
+ *
+ *   pointer-events: none -- the sheen covers the whole card. Without this it
+ *     sits between the cursor and everything underneath, so the moment real
+ *     content swaps in beneath a placeholder that is still on screen, its
+ *     links and buttons are dead.
+ *
+ * The sweep animates `transform` only. The usual `background-position` version
+ * of this effect re-rasterises the gradient every frame on the main thread;
+ * a translated layer stays on the compositor and costs the main thread nothing
+ * while a page is already busy parsing the response it is waiting for.
+ * ========================================================================== */
+.skeleton-card {
+  --skeleton-block: #e6eaf1;
+  --skeleton-sheen: rgb(255 255 255 / 85%);
+
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 1.25rem;
+  border: 1px solid var(--brand-line);
+  border-radius: 1.5rem;
+  background: var(--brand-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Dark surfaces need the pair inverted: a block lighter than its background,
+   and a far fainter sheen, because white at 85% over navy reads as a strobe
+   rather than a shimmer. */
+.skeleton-card--on-navy {
+  --skeleton-block: rgb(255 255 255 / 9%);
+  --skeleton-sheen: rgb(255 255 255 / 14%);
+
+  border-color: rgb(255 255 255 / 10%);
+  background: rgb(255 255 255 / 5%);
+  box-shadow: none;
+}
+
+.skeleton-card__thumb,
+.skeleton-card__line {
+  background-color: var(--skeleton-block);
+}
+
+/* Matches .review-preview, so the placeholder reserves the height the real
+   photo will take and the feed does not jump when it arrives. */
+.skeleton-card__thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 1rem;
+}
+
+.skeleton-card__body {
+  margin-top: 1.25rem;
+}
+
+.skeleton-card__line {
+  height: 0.75rem;
+  border-radius: 9999px;
+}
+
+.skeleton-card__line + .skeleton-card__line {
+  margin-top: 0.75rem;
+}
+
+/* Ragged widths are what make a stack of bars read as a paragraph instead of
+   as a table. */
+.skeleton-card__line--title {
+  height: 1.15rem;
+  width: 65%;
+}
+
+.skeleton-card__line--long {
+  width: 100%;
+}
+
+.skeleton-card__line--medium {
+  width: 80%;
+}
+
+.skeleton-card__line--short {
+  width: 45%;
+}
+
+.skeleton-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--skeleton-sheen), transparent);
+  /* The band is half the card wide, so -100% parks it one full band clear of
+     the left edge and 200% carries its trailing edge past the right one. */
+  transform: translateX(-100%);
+  animation: skeleton-sweep 1.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes skeleton-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(200%);
+  }
+}
+
+/* Stopping the sweep leaves the band at its `from` position, which is off the
+   card and clipped away, so the placeholder settles into a plain static block
+   rather than a frozen highlight stranded mid-card. */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-card::after {
+    animation: none;
+  }
+}
