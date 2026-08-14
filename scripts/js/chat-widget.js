@@ -208,16 +208,39 @@
     var loaderStyle = document.getElementById("aaa-chat-loader-style");
     if (loaderStyle && loaderStyle.parentNode) loaderStyle.parentNode.removeChild(loaderStyle);
   }
-  function escapeHTML(str) {
-    return str.replace(/[&<>"']/g, function (c) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
-    });
-  }
   function renderBot(el, text) {
-    var html = escapeHTML(text)
-      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-    el.innerHTML = html;
+    var source = String(text == null ? "" : text);
+    var tokenPattern = /\*\*(.+?)\*\*|\[([^\]]+?)\]\((https?:\/\/[^\s)]+)\)/g;
+    var fragment = document.createDocumentFragment();
+    var lastIndex = 0;
+    var match;
+
+    while ((match = tokenPattern.exec(source)) !== null) {
+      if (match.index > lastIndex) {
+        fragment.appendChild(document.createTextNode(source.slice(lastIndex, match.index)));
+      }
+
+      if (match[1] != null) {
+        var strong = document.createElement("strong");
+        strong.textContent = match[1];
+        fragment.appendChild(strong);
+      } else {
+        var link = document.createElement("a");
+        link.textContent = match[2];
+        link.href = match[3];
+        link.target = "_blank";
+        link.rel = "noopener";
+        fragment.appendChild(link);
+      }
+
+      lastIndex = tokenPattern.lastIndex;
+    }
+
+    if (lastIndex < source.length) {
+      fragment.appendChild(document.createTextNode(source.slice(lastIndex)));
+    }
+
+    el.replaceChildren(fragment);
     scrollToBottom();
   }
 
