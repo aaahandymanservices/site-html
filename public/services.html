@@ -880,66 +880,84 @@
                     <p class="text-xs text-blue-200">Cancel any time. No contract, no cancellation fee.</p>
                 </div>
 
-                <div class="mt-8 plan-card-row">
+                <div class="mt-8 plan-card-row plan-card-row--accordion">
                     <!-- Essential -->
-                    <div class="plan-card" data-plan-card="essential">
-                        <h3 class="text-lg font-extrabold text-white">Essential</h3>
-                        <p class="mt-1 text-xs font-bold uppercase tracking-wider text-blue-200">1 hour per seasonal visit</p>
-                        <p class="mt-4 flex items-baseline gap-1">
-                            <span class="plan-card__price" data-plan-price data-monthly="39" data-annual="390">$39</span>
-                            <span class="text-sm font-semibold text-blue-200" data-plan-period>/month</span>
-                        </p>
-                        <p class="mt-1 text-xs font-bold text-emerald-300 hidden" data-plan-saving>Two months free vs. paying monthly</p>
-                        <ul class="plan-card__features">
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Four visits a year, one each season</span></li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Gutter and downspout flow check</span></li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Seasonal weatherization walkthrough</span></li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Written home safety audit</span></li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>No service-call minimum on plan visits</span></li>
-                        </ul>
-                        <button type="button" data-plan-subscribe="essential" class="mt-6 w-full rounded-xl border border-white/30 px-4 py-3 text-sm font-extrabold text-white transition hover:border-white hover:bg-white/10">Subscribe Now</button>
-                    </div>
+                    <details class="plan-card plan-card--accordion" data-plan-card="essential">
+                        <summary class="plan-card__summary">
+                            <span class="plan-card__heading">
+                                <span class="plan-card__name">Essential</span>
+                                <span class="plan-card__tag">1 hour per seasonal visit</span>
+                            </span>
+                            <span class="plan-card__price-wrap">
+                                <span class="plan-card__price" data-plan-price data-monthly="39" data-annual="390">$39</span>
+                                <span class="plan-card__period" data-plan-period>/month</span>
+                            </span>
+                            <span class="plan-card__chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                        </summary>
+                        <div class="plan-card__body">
+                            <p class="plan-card__saving text-xs font-bold text-emerald-300 hidden" data-plan-saving>Two months free vs. paying monthly</p>
+                            <ul class="plan-card__features">
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>Four visits a year, one each season</span></li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>Gutter and downspout flow check</span></li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>Seasonal weatherization walkthrough</span></li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>Written home safety audit</span></li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>No service-call minimum on plan visits</span></li>
+                            </ul>
+                            <button type="button" data-plan-subscribe="essential" class="plan-card__cta mt-6 w-full rounded-xl border border-white/30 px-4 py-3 text-sm font-extrabold text-white transition hover:border-white hover:bg-white/10">Subscribe Now</button>
+                        </div>
+                    </details>
 
                     <!-- Complete -->
-                    <div class="plan-card plan-card--featured" data-plan-card="complete">
-                        <div class="flex items-center justify-between gap-2">
-                            <h3 class="text-lg font-extrabold text-white">Complete</h3>
-                            <span class="rounded-full bg-red-600 px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wide text-white">Most popular</span>
+                    <details class="plan-card plan-card--accordion plan-card--featured" data-plan-card="complete" open>
+                        <summary class="plan-card__summary">
+                            <span class="plan-card__heading">
+                                <span class="plan-card__name">Complete <span class="plan-card__badge">Most popular</span></span>
+                                <span class="plan-card__tag">2 hours per seasonal visit</span>
+                            </span>
+                            <span class="plan-card__price-wrap">
+                                <span class="plan-card__price" data-plan-price data-monthly="59" data-annual="590">$59</span>
+                                <span class="plan-card__period" data-plan-period>/month</span>
+                            </span>
+                            <span class="plan-card__chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                        </summary>
+                        <div class="plan-card__body">
+                            <p class="plan-card__saving text-xs font-bold text-emerald-300 hidden" data-plan-saving>Two months free vs. paying monthly</p>
+                            <ul class="plan-card__features">
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>Everything in Essential</span></li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>Twice the time on site for the punch list</span></li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>Caulk, seal, and door adjustment pass</span></li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>Smoke and CO alarm test and battery swap</span></li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>Priority scheduling and 10% off extra labor</span></li>
+                            </ul>
+                            <button type="button" data-plan-subscribe="complete" class="plan-card__cta mt-6 w-full rounded-xl bg-red-600 px-4 py-3 text-sm font-extrabold text-white transition hover:bg-red-700">Subscribe Now</button>
                         </div>
-                        <p class="mt-1 text-xs font-bold uppercase tracking-wider text-blue-200">2 hours per seasonal visit</p>
-                        <p class="mt-4 flex items-baseline gap-1">
-                            <span class="plan-card__price" data-plan-price data-monthly="59" data-annual="590">$59</span>
-                            <span class="text-sm font-semibold text-blue-200" data-plan-period>/month</span>
-                        </p>
-                        <p class="mt-1 text-xs font-bold text-emerald-300 hidden" data-plan-saving>Two months free vs. paying monthly</p>
-                        <ul class="plan-card__features">
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Everything in Essential</span></li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Twice the time on site for the punch list</span></li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Caulk, seal, and door adjustment pass</span></li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Smoke and CO alarm test and battery swap</span></li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Priority scheduling and 10% off extra labor</span></li>
-                        </ul>
-                        <button type="button" data-plan-subscribe="complete" class="mt-6 w-full rounded-xl bg-red-600 px-4 py-3 text-sm font-extrabold text-white transition hover:bg-red-700">Subscribe Now</button>
-                    </div>
+                    </details>
 
                     <!-- Complete Plus -->
-                    <div class="plan-card" data-plan-card="complete-plus">
-                        <h3 class="text-lg font-extrabold text-white">Complete Plus</h3>
-                        <p class="mt-1 text-xs font-bold uppercase tracking-wider text-blue-200">3 hours per seasonal visit</p>
-                        <p class="mt-4 flex items-baseline gap-1">
-                            <span class="plan-card__price" data-plan-price data-monthly="89" data-annual="890">$89</span>
-                            <span class="text-sm font-semibold text-blue-200" data-plan-period>/month</span>
-                        </p>
-                        <p class="mt-1 text-xs font-bold text-emerald-300 hidden" data-plan-saving>Two months free vs. paying monthly</p>
-                        <ul class="plan-card__features">
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Everything in Complete</span></li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Dryer vent and exhaust fan cleaning</span></li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Deck, fence, and exterior trim inspection</span></li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>15% off extra labor, any visit</span></li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i><span>Service call waived on unscheduled repairs</span></li>
-                        </ul>
-                        <button type="button" data-plan-subscribe="complete-plus" class="mt-6 w-full rounded-xl border border-white/30 px-4 py-3 text-sm font-extrabold text-white transition hover:border-white hover:bg-white/10">Subscribe Now</button>
-                    </div>
+                    <details class="plan-card plan-card--accordion" data-plan-card="complete-plus">
+                        <summary class="plan-card__summary">
+                            <span class="plan-card__heading">
+                                <span class="plan-card__name">Complete Plus</span>
+                                <span class="plan-card__tag">3 hours per seasonal visit</span>
+                            </span>
+                            <span class="plan-card__price-wrap">
+                                <span class="plan-card__price" data-plan-price data-monthly="89" data-annual="890">$89</span>
+                                <span class="plan-card__period" data-plan-period>/month</span>
+                            </span>
+                            <span class="plan-card__chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                        </summary>
+                        <div class="plan-card__body">
+                            <p class="plan-card__saving text-xs font-bold text-emerald-300 hidden" data-plan-saving>Two months free vs. paying monthly</p>
+                            <ul class="plan-card__features">
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>Everything in Complete</span></li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>Dryer vent and exhaust fan cleaning</span></li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>Deck, fence, and exterior trim inspection</span></li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>15% off extra labor, any visit</span></li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i><span>Service call waived on unscheduled repairs</span></li>
+                            </ul>
+                            <button type="button" data-plan-subscribe="complete-plus" class="plan-card__cta mt-6 w-full rounded-xl border border-white/30 px-4 py-3 text-sm font-extrabold text-white transition hover:border-white hover:bg-white/10">Subscribe Now</button>
+                        </div>
+                    </details>
                 </div>
 
                 <!-- Signup. One form for all three plans; the button that opened

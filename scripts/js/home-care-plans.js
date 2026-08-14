@@ -223,5 +223,38 @@
     });
   }
 
+  /* ------------------------------------------------------------------ *
+   * Accordion behaviour for the plan cards.
+   *
+   * Each plan is a <details>. On desktop (>= 768px) all three are forced
+   * open so the side-by-side card layout reads as it always did; on phones
+   * only the Featured (Complete) card opens by default and the visitor can
+   * expand the others. The desktop lock is reapplied on resize so a card a
+   * visitor closed on their phone does not stay closed after rotating or
+   * widening the window.
+   * ------------------------------------------------------------------ */
+  var accordions = Array.prototype.slice.call(section.querySelectorAll('.plan-card--accordion'));
+  var DESKTOP_MQ = window.matchMedia('(min-width: 768px)');
+
+  function syncAccordionState() {
+    var desktop = DESKTOP_MQ.matches;
+    accordions.forEach(function (node) {
+      if (desktop) {
+        node.open = true;
+      }
+      // On mobile, leave the open attribute alone so the visitor controls it;
+      // the markup ships with only the Complete card open.
+    });
+  }
+
+  if (accordions.length) {
+    syncAccordionState();
+    if (typeof DESKTOP_MQ.addEventListener === 'function') {
+      DESKTOP_MQ.addEventListener('change', syncAccordionState);
+    } else if (typeof DESKTOP_MQ.addListener === 'function') {
+      DESKTOP_MQ.addListener(syncAccordionState);
+    }
+  }
+
   renderPrices();
 })();

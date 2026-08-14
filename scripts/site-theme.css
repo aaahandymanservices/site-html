@@ -3376,6 +3376,149 @@ html.bw-open body {
   color: #6ee7b7;
 }
 
+/*
+ * Accordion plan cards (Quarterly Home Care Subscription).
+ *
+ * The three tiers used to render as three always-open cards, which on a phone
+ * was a long wall of feature lists to scroll past before reaching the signup
+ * form. Each card is now a native <details> element: collapsed, its summary
+ * shows the plan name, the per-visit hours, and the live price (the same
+ * data-plan-price / data-plan-period hooks the billing toggle already
+ * updates), so a mobile visitor can scan all three prices without scrolling
+ * through every feature list. Expanding one reveals its features and
+ * subscribe button.
+ *
+ * On desktop (>= 768px) the cards are forced open and the summary reverts to
+ * a heading-style header, so the side-by-side three-up layout is preserved
+ * and the page looks identical to before on a laptop. <details> was picked
+ * over a JS tab widget so the grouping still works with scripting
+ * unavailable; the existing home-care-plans.js only reads data attributes and
+ * does not care whether the card is a <div> or a <details>.
+ */
+.plan-card--accordion {
+  padding: 0;
+}
+
+.plan-card__summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+}
+
+.plan-card__summary::-webkit-details-marker {
+  display: none;
+}
+
+.plan-card__summary:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+}
+
+.plan-card__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.plan-card__name {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.plan-card__badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  background: #a61f2e;
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+}
+
+.plan-card__tag {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #93c5fd;
+}
+
+.plan-card__price-wrap {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.plan-card__period {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #93c5fd;
+}
+
+.plan-card__chevron {
+  color: #cbd5e1;
+  font-size: 0.875rem;
+  transition: transform 0.2s ease;
+}
+
+.plan-card--accordion[open] > .plan-card__summary .plan-card__chevron {
+  transform: rotate(180deg);
+}
+
+.plan-card__body {
+  padding: 0 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.plan-card__saving {
+  margin: 0 0 0.75rem;
+}
+
+/* Desktop: force every accordion open and restore the always-visible card
+   layout. The chevron is hidden because there is nothing to expand. */
+@media (min-width: 768px) {
+  .plan-card-row--accordion .plan-card--accordion {
+    padding: 1.5rem;
+  }
+
+  .plan-card-row--accordion .plan-card--accordion[open] {
+    /* summary marker stays hidden; body always shows */
+  }
+
+  /* Keep the native disclosure open on desktop by styling the summary as a
+     static header. (The <details> elements are given the `open` attribute in
+     the markup for Complete; the script below mirrors that to the others so
+     all three are open on desktop regardless of mobile interaction.) */
+  .plan-card-row--accordion .plan-card__summary {
+    cursor: default;
+    padding: 0 0 1rem;
+    border-radius: 0;
+  }
+
+  .plan-card-row--accordion .plan-card__chevron {
+    display: none;
+  }
+
+  .plan-card-row--accordion .plan-card__body {
+    padding: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
