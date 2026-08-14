@@ -80,7 +80,28 @@
 // the service/city generators) and this version refetches the stylesheet and
 // its newly subsetted fonts for every client, so the new glyphs don't render
 // blank on a returning visitor's first page view.
-const CACHE_VERSION = 'v20';
+// v21 fixes the large blank white space above "Popular Handyman Services" on
+// the city landing pages. The .ambient-glow-hero rule on site-theme.css now
+// declares a plain-CSS navy gradient + background-color fallback so the hero
+// is never white-with-white-text if the Tailwind gradient utilities are slow
+// to parse or stripped by an extension, and .reveal-on-scroll is now guarded
+// behind .js-reveal so the intro/pricing section is visible without JS
+// instead of sitting at opacity:0 as a blank gap. Both live on site-theme.css
+// behind its unchanged pathname; the asset cache key drops ?v=, so a returning
+// visitor holding v20 would keep last deploy's stylesheet and still see the
+// gap. Only this bump refetches it.
+// v22 fixes the city landing pages where the intro/pricing section stayed
+// invisible after JS ran. site.js's initScrollReveal() set up the
+// .reveal-on-scroll observer only after an `if (!units.length) return` guard,
+// and city pages have no <section> elements, so the guard returned early --
+// leaving .reveal-on-scroll at opacity:0 (js-reveal had already been added to
+// <html>) with no observer to add is-visible and no safety-net fallback. The
+// observer and safety net now run regardless of whether any <section> units
+// were found. The fix lives on /js/site.js behind its unchanged pathname; the
+// asset cache key drops ?v=, so bumping both the site.js stamp
+// (update-static-pages.mjs) and this version refetches the script for every
+// client.
+const CACHE_VERSION = 'v22';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

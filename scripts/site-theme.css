@@ -4145,9 +4145,22 @@ header.ambient-glow-hero::after,
 /* ============================================================
    Ambient Gradient Glows (Hero & Pricing Sections)
    ============================================================ */
+/* A solid brand-navy background plus the brand gradient is declared here so
+   the hero is never a blank white block. The city landing pages paint their
+   dark background with Tailwind utilities (`bg-gradient-to-r from-blue-950
+   via-blue-900 to-slate-950`), which depend on the `--tw-gradient-stops`
+   custom-property chain and on the Tailwind stylesheet having parsed. If that
+   stylesheet is still loading, is stripped by a content blocker, or the
+   custom properties are reset, the utilities contribute nothing and the hero
+   would fall back to the page's white background with white text on top --
+   rendering as a tall empty white gap. Declaring the same navy gradient here
+   in plain CSS makes the hero readable in every one of those cases. The
+   Tailwind gradient layers on top once its stylesheet is parsed. */
 .ambient-glow-hero {
   position: relative;
   overflow: hidden;
+  background-color: #1b2a4a;
+  background-image: linear-gradient(to right, #101b31 0%, #1b2a4a 50%, #020617 100%);
 }
 
 .ambient-glow-hero::before {
@@ -4236,16 +4249,33 @@ header.ambient-glow-hero::after,
 /* ============================================================
    Scroll-Triggered Reveals
    ============================================================ */
-.reveal-on-scroll {
+/* Scroll-reveal entrance for ad-hoc elements.
+   The hidden start state is applied only when JS opts in via `.js-reveal`
+   (added to <html> by site.js), mirroring the `.reveal-block` guard above.
+   Without JS -- or if site.js is blocked by an extension or fails to load --
+   the element is fully visible, so it can never strand content as a blank,
+   space-occupying gap. This was the cause of the large empty white block
+   between the hero and "Popular Handyman Services" on the city pages: the
+   intro/pricing card carried `reveal-on-scroll`, started at opacity:0, and
+   only became visible once the IntersectionObserver fired. */
+.js-reveal .reveal-on-scroll {
   opacity: 0;
   transform: translate3d(0, 28px, 0);
   transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
   will-change: opacity, transform;
 }
 
-.reveal-on-scroll.is-visible {
+.js-reveal .reveal-on-scroll.is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .reveal-delay-100 { transition-delay: 100ms; }
