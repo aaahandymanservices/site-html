@@ -340,9 +340,23 @@
 
                 <div class="rounded-3xl border border-blue-600 bg-blue-900 p-6 sm:p-8">
                     <h3 class="text-2xl sm:text-3xl font-bold text-white">Request a free quote</h3>
-                    <p class="mt-2 mb-7 text-sm sm:text-base text-blue-200">
+                    <p class="mt-2 mb-5 text-sm sm:text-base text-blue-200">
                         Tell us what you need and we will get back to you with a no-obligation estimate. Fields marked <span class="font-bold text-red-300">*</span> are required.
                     </p>
+
+                    <div class="mb-6 p-4 rounded-2xl bg-blue-950/70 border border-red-500/40 text-blue-100 text-xs sm:text-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center text-base shrink-0 shadow-sm"><i class="fas fa-camera" aria-hidden="true"></i></span>
+                            <div>
+                                <p class="font-bold text-white">Need an instant price estimate right now?</p>
+                                <p class="text-xs text-blue-200">Upload a repair photo to our AI estimator for instant labor &amp; materials pricing.</p>
+                            </div>
+                        </div>
+                        <a href="/ai-estimate" class="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs transition shadow-md">
+                            Try AI Estimator &rarr;
+                        </a>
+                    </div>
+
                     <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate class="space-y-6">
 
                         <input type="hidden" name="form-name" value="contact" />

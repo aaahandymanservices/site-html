@@ -584,6 +584,10 @@
     detail.className = 'bw-estimate__detail';
     if (state.service.quote) {
       detail.textContent = 'We will review your notes and send a written estimate before scheduling anything.';
+      var aiP = document.createElement('p');
+      aiP.className = 'mt-2 text-xs text-blue-200';
+      aiP.innerHTML = 'Want an instant estimate right now? <a href="/ai-estimate" class="text-red-400 underline font-bold hover:text-white">Try our AI Repair Estimator &rarr;</a>';
+      els.estimate.appendChild(aiP);
     } else {
       var labor = laborFor(state.service);
       detail.textContent =

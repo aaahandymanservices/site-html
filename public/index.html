@@ -637,6 +637,9 @@
                 <a href="/book" class="w-full sm:w-auto btn-craftsman text-base sm:text-lg px-8 py-4 rounded-2xl font-extrabold inline-flex items-center justify-center gap-2.5 shadow-xl">
                     <i class="fas fa-calendar-check text-xl" aria-hidden="true"></i> Book Online — Free Quote
                 </a>
+                <a href="/ai-estimate" class="w-full sm:w-auto bg-blue-950/90 hover:bg-slate-900 text-white text-base sm:text-lg px-8 py-4 rounded-2xl font-extrabold inline-flex items-center justify-center gap-2.5 transition border-2 border-red-500/50 hover:border-red-500 shadow-xl backdrop-blur-md">
+                    <i class="fas fa-camera text-red-400 text-xl" aria-hidden="true"></i> Instant AI Estimate
+                </a>
                 <a href="tel:+12483853432" class="w-full sm:w-auto bg-slate-900/90 hover:bg-slate-900 text-white text-base sm:text-lg px-8 py-4 rounded-2xl font-extrabold inline-flex items-center justify-center gap-2.5 transition border-2 border-red-500/40 hover:border-red-500 shadow-xl backdrop-blur-md">
                     <i class="fas fa-phone text-emerald-400 text-xl" aria-hidden="true"></i> Call Now: (248) 385-3432
                 </a>
@@ -675,6 +678,7 @@
                     <i class="fas fa-file-invoice-dollar icon-tile w-16 h-16 bg-blue-100 rounded-2xl text-3xl text-blue-900 mb-6 mt-2" aria-hidden="true"></i>
                     <h3 class="text-xl font-bold text-blue-900 mb-3">Get Upfront Pricing</h3>
                     <p class="text-gray-600 text-sm leading-relaxed">Receive a clear, honest estimate with absolutely no hidden fees. Know exactly what your starting cost is before we arrive.</p>
+                    <a href="/ai-estimate" class="mt-2.5 inline-flex items-center gap-1 text-xs font-bold text-red-600 hover:text-red-700 underline underline-offset-2">Try AI Photo Estimate &rarr;</a>
                 </div>
                 <!-- Step 3 -->
                 <div class="bg-white border border-slate-200/80 rounded-3xl p-8 shadow-sm flex flex-col items-center text-center relative hover:border-red-600/30 hover:shadow-md transition">
@@ -1446,6 +1450,18 @@
                         <span>Average Response Time: <strong class="text-white font-bold">Under 1 Hour</strong> during business hours</span>
                     </div>
                     <span class="hidden sm:inline-block text-xs bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-full font-bold border border-emerald-400/30">Fast Reply</span>
+                </div>
+                <div class="mb-5 p-4 rounded-2xl bg-blue-50 border border-blue-200 text-blue-950 text-xs sm:text-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center text-base shrink-0 shadow-sm"><i class="fas fa-camera" aria-hidden="true"></i></span>
+                        <div>
+                            <p class="font-bold text-blue-950">Want an instant price estimate right now?</p>
+                            <p class="text-xs text-gray-600">Snap a photo and get preliminary labor &amp; materials estimates in seconds.</p>
+                        </div>
+                    </div>
+                    <a href="/ai-estimate" class="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs transition shadow-md">
+                        Try AI Estimator &rarr;
+                    </a>
                 </div>
                 <form id="quote-form" name="quote" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" class="space-y-5">
                     <input type="hidden" name="form-name" value="quote" />

@@ -76,6 +76,8 @@
             '<div class="mt-6 space-y-3">' +
               '<a id="quote-book" href="/book?service=General%20Estimate%20%2F%20Quote" class="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3.5 rounded-xl transition shadow-lg">' +
                 '<i class="fas fa-calendar-check" aria-hidden="true"></i> Book these tasks</a>' +
+              '<a href="/ai-estimate" class="flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 border border-red-500/40 text-white font-bold px-5 py-3 rounded-xl transition shadow-md">' +
+                '<i class="fas fa-camera text-red-400" aria-hidden="true"></i> Snap photo for AI estimate</a>' +
               '<a href="tel:+12483853432" class="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-5 py-3.5 rounded-xl transition shadow-lg shadow-green-600/30">' +
                 '<i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432</a>' +
             '</div>' +
