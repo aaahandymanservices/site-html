@@ -785,6 +785,18 @@
       note.appendChild(rateLink);
 
       bookingEstimate.replaceChildren(heading, headline, caption, rows, note);
+
+      const entry = Object.prototype.hasOwnProperty.call(SERVICE_ESTIMATES, service)
+          ? SERVICE_ESTIMATES[service]
+          : null;
+      if (entry && entry.quote) {
+          const aiLink = document.createElement('a');
+          aiLink.href = '/ai-estimate';
+          aiLink.className = 'mt-3 flex items-center justify-between gap-2 p-2.5 rounded-lg bg-emerald-900/40 border border-emerald-500/40 text-xs font-semibold text-emerald-200 hover:text-white hover:bg-emerald-900/60 transition';
+          aiLink.innerHTML = '<span><i class="fas fa-wand-magic-sparkles text-emerald-400 mr-1.5" aria-hidden="true"></i>Want an instant estimate right now?</span> <span class="font-bold underline">Try AI Estimator &rarr;</span>';
+          bookingEstimate.appendChild(aiLink);
+      }
+
       bookingEstimate.classList.remove('hidden');
   };
 

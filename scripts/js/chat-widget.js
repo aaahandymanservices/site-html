@@ -150,6 +150,7 @@
       '<p class="aaa-chat-prompts-label">Popular questions</p>' +
       '<div class="aaa-chat-prompts-list">' +
         '<button type="button" class="aaa-chat-prompt" data-question="What handyman services do you offer?">What services do you offer?</button>' +
+        '<button type="button" class="aaa-chat-prompt" data-question="How can I get an instant AI estimate?">How do I get an AI estimate?</button>' +
         '<button type="button" class="aaa-chat-prompt" data-question="Do you serve my area?">Do you serve my area?</button>' +
         '<button type="button" class="aaa-chat-prompt" data-question="How can I get a quote for my project?">How do I get a quote?</button>' +
       '</div>' +
@@ -171,7 +172,7 @@
       '<textarea id="aaa-chat-input" rows="1" placeholder="Type your question…" aria-label="Your message"></textarea>' +
       '<button type="submit" class="aaa-chat-send" id="aaa-chat-send" aria-label="Send message"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>' +
     '</form>' +
-    '<div class="aaa-chat-disclaimer">Automated assistant. For quotes or booking call (248) 385-3432.</div>';
+    '<div class="aaa-chat-disclaimer">Automated assistant. For instant estimates <a href="/ai-estimate" class="text-red-400 underline font-semibold">try our AI Estimator</a> or call (248) 385-3432.</div>';
 
   document.body.appendChild(group);
   document.body.appendChild(panel);

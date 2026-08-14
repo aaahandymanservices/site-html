@@ -219,7 +219,7 @@ function costGuideSection(service) {
                             <p class="text-sm text-gray-600">Mesh or surface-tension guards that must be unscrewed and re-secured to clean underneath add labor time, and usually increase the cost.</p>
                         </div>
                     </div>
-                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: rather than charging by the foot, we quote a flat rate up front, then bill continuous labor at <strong>$70/hour</strong> in quarter-hour increments for anything beyond a standard clean. You will always know the price before we start.</p>
+                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: rather than charging by the foot, we quote a flat rate up front, then bill continuous labor at <strong>$70/hour</strong> in quarter-hour increments for anything beyond a standard clean. You will always know the price before we start. Prefer an instant quote? <a href="/ai-estimate" class="text-red-600 font-semibold underline underline-offset-2">Try our AI Repair Estimator</a>.</p>
                 </div>
             </div>
 `;
@@ -448,7 +448,10 @@ ${service.intro.map((p) => `                    <p>${esc(p)}</p>`).join('\n')}
                     <a href="${quoteHref(service.formService)}" class="btn-craftsman mt-6 w-full text-center font-bold px-6 py-3 rounded-xl shadow-md">
                         <i class="fas fa-calendar-check" aria-hidden="true"></i> Request This Service
                     </a>
-                    <a href="/rates" class="mt-3 block text-center text-sm text-gray-500 hover:text-red-600 underline underline-offset-2">See full rates &amp; packages</a>
+                    <a href="/ai-estimate" class="mt-2.5 flex items-center justify-center gap-1.5 text-center text-xs font-bold text-red-600 hover:text-red-700 transition">
+                        <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i> Instant AI Photo Estimate &rarr;
+                    </a>
+                    <a href="/rates" class="mt-2 block text-center text-xs text-gray-500 hover:text-red-600 underline underline-offset-2">See full rates &amp; packages</a>
                 </aside>
             </div>
 ${costGuideSection(service)}
@@ -524,6 +527,9 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
                     </a>
                     <a href="/book?service=${enc(service.formService)}" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/30">
                         <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online Now
+                    </a>
+                    <a href="/ai-estimate" class="inline-flex items-center gap-2 bg-slate-950/90 hover:bg-slate-900 border border-red-500/50 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/20">
+                        <i class="fas fa-wand-magic-sparkles text-red-400" aria-hidden="true"></i> Instant AI Estimate
                     </a>
                 </div>
             </div>
