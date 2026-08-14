@@ -281,8 +281,8 @@ ${getUnifiedNav('service-areas')}
         </div>
     </header>
 
-    <main id="main-content" class="flex-grow py-12 sm:py-16">
-        <div class="max-w-7xl mx-auto px-6">
+    <main id="main-content" class="flex-grow">
+        <div class="max-w-7xl mx-auto px-6 pt-10 sm:pt-14">
             <!-- Intro + pricing -->
             <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start reveal-on-scroll">
                 <div class="lg:col-span-2 prose prose-lg max-w-none text-gray-600">

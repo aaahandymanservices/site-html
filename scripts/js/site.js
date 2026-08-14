@@ -146,25 +146,30 @@
         units.push({ el: section, children });
       });
 
-      if (!units.length) return;
-
       const reveal = (unit) => {
         unit.el.classList.add('reveal-shown');
         unit.children.forEach((child) => child.classList.add('reveal-shown'));
       };
 
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const unit = units.find((u) => u.el === entry.target);
-          if (unit) reveal(unit);
-          obs.unobserve(entry.target);
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+      if (units.length) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const unit = units.find((u) => u.el === entry.target);
+            if (unit) reveal(unit);
+            obs.unobserve(entry.target);
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
-      units.forEach((unit) => observer.observe(unit.el));
+        units.forEach((unit) => observer.observe(unit.el));
+      }
 
-      // Observe explicit .reveal-on-scroll elements
+      // Observe explicit .reveal-on-scroll elements. This is independent of the
+      // <section>-based units above: pages like the city landing pages use
+      // `reveal-on-scroll` on a <div> with no <section> siblings, so wiring it
+      // only after `units.length` would leave that element stranded at
+      // opacity:0 (js-reveal was already added to <html>) with no observer to
+      // reveal it and no safety net to fall back on.
       const explicitReveals = document.querySelectorAll('.reveal-on-scroll');
       if (explicitReveals.length) {
         const revealObs = new IntersectionObserver((entries, obs) => {
@@ -179,7 +184,8 @@
       }
 
       // Safety net: never leave content hidden, even if the observer misbehaves
-      // or the page is restored from the back/forward cache.
+      // or the page is restored from the back/forward cache. Runs for both the
+      // section units and the explicit reveal-on-scroll elements.
       const revealEverything = () => {
         units.forEach(reveal);
         explicitReveals.forEach((el) => el.classList.add('is-visible'));
