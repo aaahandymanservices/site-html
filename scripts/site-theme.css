@@ -1380,8 +1380,20 @@ nav.sticky,
 }
 
 .hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   background-position: center;
   background-size: cover;
+}
+
+/* Pricing-policy hero: center all children both axes with centered text */
+#policy-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 /* Truly fluid hero headline — scales continuously instead of in breakpoint steps */
@@ -1929,6 +1941,10 @@ body::after {
 .hero {
   position: relative;
   isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .hero::after {
