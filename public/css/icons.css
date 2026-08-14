@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 242 icon names in use.
+ * Generated subset - 244 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -60,12 +60,14 @@
 .fa-air-freshener:before,.fa-spray-can-sparkles:before{content:"\f5d0"}
 .fa-star:before{content:"\f005"}
 .fa-file-invoice-dollar:before{content:"\f571"}
+.fa-microchip:before{content:"\f2db"}
 .fa-wheelchair:before{content:"\f193"}
 .fa-fire:before{content:"\f06d"}
 .fa-bath:before,.fa-bathtub:before{content:"\f2cd"}
 .fa-map-location-dot:before,.fa-map-marked-alt:before{content:"\f5a0"}
 .fa-cloud-showers-water:before{content:"\e4e4"}
 .fa-window-restore:before{content:"\f2d2"}
+.fa-image:before{content:"\f03e"}
 .fa-rotate-back:before,.fa-rotate-backward:before,.fa-rotate-left:before,.fa-undo-alt:before{content:"\f2ea"}
 .fa-handshake:before{content:"\f2b5"}
 .fa-check-circle:before,.fa-circle-check:before{content:"\f058"}
@@ -87,6 +89,7 @@
 .fa-money-check-alt:before,.fa-money-check-dollar:before{content:"\f53d"}
 .fa-file-signature:before{content:"\f573"}
 .fa-house-chimney-user:before{content:"\e065"}
+.fa-hand-holding-heart:before{content:"\f4be"}
 .fa-arrow-up-right-from-square:before,.fa-external-link:before{content:"\f08e"}
 .fa-leaf:before{content:"\f06c"}
 .fa-bolt-lightning:before{content:"\e0b7"}
@@ -108,7 +111,6 @@
 .fa-floppy-disk:before,.fa-save:before{content:"\f0c7"}
 .fa-comment-dots:before,.fa-commenting:before{content:"\f4ad"}
 .fa-hand-holding-dollar:before,.fa-hand-holding-usd:before{content:"\f4c0"}
-.fa-hand-pointer:before{content:"\f25a"}
 .fa-biohazard:before{content:"\f780"}
 .fa-phone:before{content:"\f095"}
 .fa-calendar-times:before,.fa-calendar-xmark:before{content:"\f273"}

@@ -73,7 +73,14 @@
 // cache key, and every new icon rendered blank. Bumping both the stamp in the
 // page (scripts/update-static-pages.mjs) and this version refetches the
 // stylesheet and its fonts for every client.
-const CACHE_VERSION = 'v16';
+// v17 lands the AI Repair Estimator (/ai-estimate) and its icons (camera,
+// wand-magic-sparkles, microchip, image, cloud-arrow-up, triangle-exclamation,
+// xmark) on /css/icons.css behind its unchanged pathname. The asset cache key
+// drops ?v=, so bumping both the icons.css stamp (update-static-pages.mjs and
+// the service/city generators) and this version refetches the stylesheet and
+// its newly subsetted fonts for every client, so the new glyphs don't render
+// blank on a returning visitor's first page view.
+const CACHE_VERSION = 'v17';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

@@ -254,8 +254,8 @@
     </script>
     <link rel="stylesheet" href="/css/tailwind.css?v=20260810b">
     <link rel="stylesheet" href="/css/site-theme.css?v=20260810b">
-    <link rel="preload" href="/css/icons.css?v=20260813a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260813a"></noscript>
+    <link rel="preload" href="/css/icons.css?v=20260814a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260814a"></noscript>
     <!-- The first-service gift certificate is one per customer. Visitors who
          have already claimed it must never see it offered again, so it is hidden
          here from local storage before first paint rather than after; the
@@ -1403,6 +1403,27 @@
             </div>
         </div>
     </section>
+    <!-- AI Repair Estimator promo -->
+    <section class="py-12 sm:py-16 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 border-y border-blue-800">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="rounded-3xl border-2 border-red-600 bg-blue-950/60 p-8 sm:p-10 shadow-xl flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+                <div class="flex-shrink-0 mx-auto md:mx-0">
+                    <div class="w-20 h-20 bg-red-600 rounded-3xl flex items-center justify-center text-4xl text-white shadow-lg shadow-red-600/30" aria-hidden="true"><i class="fas fa-camera"></i></div>
+                </div>
+                <div class="text-center md:text-left flex-grow">
+                    <span class="bg-red-600/20 text-red-300 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">New &middot; AI Powered</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mt-3">Snap a Photo, Get a Price</h2>
+                    <p class="mt-2 text-blue-200 text-sm sm:text-base max-w-xl mx-auto md:mx-0">Upload a picture of your home repair and our AI handyman estimator instantly identifies the issue, lists materials, and gives you a preliminary price range &mdash; no phone tag required. Then send it straight to our dispatch team.</p>
+                </div>
+                <div class="flex-shrink-0 text-center">
+                    <a href="/ai-estimate" class="inline-flex items-center justify-center gap-2.5 bg-red-600 hover:bg-red-700 text-white font-extrabold px-7 py-4 rounded-2xl shadow-lg shadow-red-600/30 transition text-base sm:text-lg">
+                        <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i> Try the AI Estimator
+                    </a>
+                    <p class="mt-3 text-xs text-blue-300">Free &middot; instant &middot; no signup</p>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Frictionless Quote Form -->
     <section id="quote" class="py-12 sm:py-16 bg-blue-900 text-white">
         <div class="max-w-3xl mx-auto px-6">
@@ -1592,6 +1613,7 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="/services" class="hover:text-white transition">Services</a></li>
                         <li><a href="/rates" class="hover:text-white transition">Rates & Packages</a></li>
+                        <li><a href="/ai-estimate" class="hover:text-white transition">AI Repair Estimator</a></li>
                         <li><a href="/pricing-policy" class="hover:text-white transition">Pricing Policies</a></li>
                         <li><a href="/guarantee" class="hover:text-white transition">Our Guarantee</a></li>
                         <li><a href="/customer-care" class="hover:text-white transition">Customer Care</a></li>

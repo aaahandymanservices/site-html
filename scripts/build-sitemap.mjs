@@ -22,6 +22,7 @@ const staticPages = [
   { path: 'careers', priority: '0.7', changefreq: 'monthly' },
   { path: 'book', priority: '0.9', changefreq: 'monthly' },
   { path: 'contact', priority: '0.9', changefreq: 'monthly' },
+  { path: 'ai-estimate', priority: '0.8', changefreq: 'monthly' },
   { path: 'customer-care', priority: '0.7', changefreq: 'monthly' },
   { path: 'pricing-policy', priority: '0.7', changefreq: 'monthly' },
   { path: 'services/aging-in-place-guide', priority: '0.8', changefreq: 'monthly' },

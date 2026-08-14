@@ -100,8 +100,8 @@
 
     <link rel="stylesheet" href="/css/tailwind.css?v=20260810b">
     <link rel="stylesheet" href="/css/site-theme.css?v=20260810b">
-    <link rel="preload" href="/css/icons.css?v=20260813a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260813a"></noscript>
+    <link rel="preload" href="/css/icons.css?v=20260814a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260814a"></noscript>
 
     <!-- The first-service gift certificate is one per customer. Visitors who
          have already claimed it must never see it offered again, so it is hidden
@@ -301,6 +301,16 @@
                         </p>
                     </div>
 
+                    <a href="/ai-estimate" class="block rounded-3xl border-2 border-red-600 bg-gradient-to-br from-blue-900 to-blue-950 p-6 sm:p-8 hover:from-blue-800 hover:to-blue-950 transition group">
+                        <p class="inline-flex items-center gap-2 rounded-full bg-red-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white">
+                            <i class="fas fa-camera" aria-hidden="true"></i> AI Repair Estimator
+                        </p>
+                        <h3 class="mt-4 text-xl sm:text-2xl font-bold text-white group-hover:text-red-200 transition">Snap a photo, get a price</h3>
+                        <p class="mt-3 text-sm sm:text-base leading-relaxed text-blue-200">
+                            Upload a picture of the repair and our AI handyman estimator will identify the issue, list the materials, and give you a preliminary price range in seconds &mdash; then send it straight to our dispatch team. No phone tag required.
+                        </p>
+                        <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-red-300 group-hover:text-red-200 transition">Try it now <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
                     <div id="emergency" class="rounded-3xl border-2 border-red-600 bg-blue-900 p-6 sm:p-8">
                         <p class="inline-flex items-center gap-2 rounded-full bg-red-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white">
                             <i class="fas fa-triangle-exclamation" aria-hidden="true"></i> After-hours emergency
@@ -473,6 +483,7 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="/services" class="hover:text-white transition">Services</a></li>
                         <li><a href="/rates" class="hover:text-white transition">Rates &amp; Packages</a></li>
+                        <li><a href="/ai-estimate" class="hover:text-white transition">AI Repair Estimator</a></li>
                         <li><a href="/pricing-policy" class="hover:text-white transition">Pricing Policies</a></li>
                         <li><a href="/guarantee" class="hover:text-white transition">Our Guarantee</a></li>
                         <li><a href="/customer-care" class="hover:text-white transition">Customer Care</a></li>
