@@ -408,7 +408,7 @@ ${getUnifiedNav('services')}
                 <a href="/book?service=${enc(service.formService)}" class="btn-craftsman text-base px-6 py-3.5 rounded-xl shadow-lg">
                     <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Get a Free Quote
                 </a>
-                <a href="tel:${PHONE_TEL}" class="bg-slate-900/90 hover:bg-slate-900 text-white font-bold text-base px-6 py-3.5 rounded-xl border border-red-500/40 hover:border-red-500 shadow-lg transition flex items-center justify-center gap-2">
+                <a href="tel:${PHONE_TEL}" class="aaa-btn bg-slate-900/90 hover:bg-slate-900 text-white font-bold text-base px-6 py-3.5 rounded-xl border border-red-500/40 hover:border-red-500 shadow-lg transition flex items-center justify-center gap-2">
                     <i class="fas fa-phone text-emerald-400" aria-hidden="true"></i> Call Now! ${PHONE_DISPLAY}
                 </a>
             </div>
@@ -483,7 +483,7 @@ ${costGuideSection(service)}
 ${service.features.map(featureCard).join('\n')}
                 </div>
                 <div class="mt-8 text-center">
-                    <a href="/services" class="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-semibold transition shadow-lg hover:shadow-green-600/30">
+                    <a href="/services" class="aaa-btn inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white text-base sm:text-lg px-8 py-4 rounded-xl font-semibold transition shadow-lg hover:shadow-green-600/30">
                         View All Services <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </div>
@@ -522,13 +522,13 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
                 <p class="text-xl sm:text-2xl md:text-3xl font-medium">Ready for ${esc(displayName.toLowerCase())}?</p>
                 <p class="mt-4 text-base sm:text-lg opacity-90">Call for availability and same-week scheduling, or request a free quote online. No job too small.</p>
                 <div class="mt-8 flex flex-wrap justify-center gap-4">
-                    <a href="tel:${PHONE_TEL}" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-green-600/30">
+                    <a href="tel:${PHONE_TEL}" class="aaa-btn inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-green-600/30">
                         <i class="fas fa-phone" aria-hidden="true"></i> ${PHONE_DISPLAY}
                     </a>
-                    <a href="/book?service=${enc(service.formService)}" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/30">
+                    <a href="/book?service=${enc(service.formService)}" class="aaa-btn inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/30">
                         <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online Now
                     </a>
-                    <a href="/ai-estimate" class="inline-flex items-center gap-2 bg-slate-950/90 hover:bg-slate-900 border border-red-500/50 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/20">
+                    <a href="/ai-estimate" class="aaa-btn inline-flex items-center gap-2 bg-slate-950/90 hover:bg-slate-900 border border-red-500/50 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/20">
                         <i class="fas fa-wand-magic-sparkles text-red-400" aria-hidden="true"></i> Instant AI Estimate
                     </a>
                 </div>
@@ -572,7 +572,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
                         <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
                         <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Waterford, MI &middot; Oakland County</li>
                     </ul>
-                    <a href="/book?service=${enc(service.formService)}" class="mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
+                    <a href="/book?service=${enc(service.formService)}" class="aaa-btn mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
                 </div>
             </div>
             <!-- Quick-access sitemap: popular services + service areas reachable in one click from any page -->

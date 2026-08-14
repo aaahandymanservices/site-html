@@ -722,12 +722,14 @@ form label,
   justify-content: center;
   gap: 0.5rem;
   min-height: 48px;
-  padding: 0.8rem 1.6rem;
+  padding: 14px 28px;
   overflow: hidden;
-  border-radius: 0.75rem;
+  border-radius: 7px;
   background: var(--grad-crimson);
   color: #fff;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.25;
   letter-spacing: 0.01em;
   text-decoration: none;
   box-shadow: var(--shadow-sm);
@@ -751,8 +753,9 @@ form label,
    padding buys no visual breathing room -- it only narrows the label. Inside a
    three-up card row that was the difference between "Explore Plumbing &
    Electrical" fitting on two comfortable lines and breaking awkwardly. */
-.cta-button.w-full {
-  padding-inline: 1.1rem;
+.cta-button.w-full,
+.btn-craftsman.w-full {
+  padding-inline: 20px;
 }
 
 .cta-button.bg-blue-900 {
@@ -787,6 +790,128 @@ form label,
 .cta-button:active {
   transform: translateY(0);
   box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+   Global CTA button normalization
+   ============================================================
+
+   The site has several button classes (.cta-button, .btn-craftsman,
+   .btn-primary, .btn-crimson, .btn-vivid-cta, .pulse-btn), an inline
+   "Book Online Now" link rendered from the footer templates, and a set of
+   form submit buttons that are styled purely with Tailwind utilities
+   (`bg-red-600 rounded-2xl py-4`). Each had drifted to its own padding,
+   font-size, and corner radius, so the same label changed height, weight,
+   and shape from one page to the next. This block pins every primary and
+   secondary action button on the site to one proportionate desktop size:
+   a 14px / 28px padding pair, 15px text at weight 600, and a 7px corner
+   radius. The selectors below are kept at class specificity so the existing
+   colour and hover overrides (which use `!important` for the crimson/navy
+   gradient treatments further down the file) keep winning the visual
+   properties; only the box geometry and typography are normalised here.
+
+   Forms keep their `width: 100%` submit buttons full-width on desktop
+   (they sit alone in a card and have nothing beside them), so the
+   inline-block / max-width cap below is scoped to hero sections and to
+   the side-by-side CTA rows, not to form cards.
+   ============================================================ */
+.cta-button,
+.btn-craftsman,
+.btn-primary,
+.btn-crimson,
+a.btn-crimson,
+button.btn-crimson,
+.btn-vivid-cta,
+.pulse-btn,
+.aaa-btn,
+form button[type="submit"] {
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.25;
+  border-radius: 7px;
+  min-height: 48px;
+}
+
+/* Hero CTAs and any row that places two or more actions side by side should
+   stay compact on desktop so the buttons line up neatly without stretching
+   across the whole header. The hero header is the widest offender; the
+   `.flex-col.sm:flex-row` CTA rows below it use the same anchor classes and
+   inherit this cap. */
+header.hero .cta-button,
+header.hero .btn-craftsman,
+header.hero .aaa-btn,
+header.ambient-glow-hero .cta-button,
+header.ambient-glow-hero .btn-craftsman,
+header.ambient-glow-hero .aaa-btn,
+#pricing-hero .cta-button,
+#pricing-hero .btn-craftsman,
+#pricing-hero .aaa-btn,
+#policy-hero .cta-button,
+#policy-hero .btn-craftsman,
+#policy-hero .aaa-btn,
+#contact-hero .cta-button,
+#contact-hero .btn-craftsman,
+#contact-hero .aaa-btn,
+#estimate-hero .cta-button,
+#estimate-hero .btn-craftsman,
+#estimate-hero .aaa-btn,
+header.bg-gradient-to-r .cta-button,
+header.bg-gradient-to-r .btn-craftsman,
+header.bg-gradient-to-r .aaa-btn {
+  display: inline-flex;
+  width: auto;
+  max-width: 240px;
+  flex: 0 1 auto;
+}
+
+/* Mobile: full-width buttons are easier to tap on a phone and stack cleanly
+   under the hero copy. The hero cap above is reset here so a stacked hero CTA
+   can fill the column without being clipped at 240px. */
+@media (max-width: 768px) {
+  .cta-button,
+  .btn-craftsman,
+  .btn-primary,
+  .btn-crimson,
+  a.btn-crimson,
+  button.btn-crimson,
+  .btn-vivid-cta,
+  .pulse-btn,
+  .aaa-btn {
+    width: 100%;
+    padding: 14px 20px;
+  }
+
+  header.hero .cta-button,
+  header.hero .btn-craftsman,
+  header.hero .aaa-btn,
+  header.ambient-glow-hero .cta-button,
+  header.ambient-glow-hero .btn-craftsman,
+  header.ambient-glow-hero .aaa-btn,
+  #pricing-hero .cta-button,
+  #pricing-hero .btn-craftsman,
+  #pricing-hero .aaa-btn,
+  #policy-hero .cta-button,
+  #policy-hero .btn-craftsman,
+  #policy-hero .aaa-btn,
+  #contact-hero .cta-button,
+  #contact-hero .btn-craftsman,
+  #contact-hero .aaa-btn,
+  #estimate-hero .cta-button,
+  #estimate-hero .btn-craftsman,
+  #estimate-hero .aaa-btn,
+  header.bg-gradient-to-r .cta-button,
+  header.bg-gradient-to-r .btn-craftsman,
+  header.bg-gradient-to-r .aaa-btn {
+    max-width: 100%;
+  }
+
+  /* Form submit buttons keep full width but inherit the same comfortable
+     touch padding rather than the oversized py-4/py-5 utility sizes. */
+  form button[type="submit"] {
+    width: 100%;
+    padding: 14px 20px;
+  }
 }
 
 header.sticky,
@@ -3681,10 +3806,13 @@ header.ambient-glow-hero::after,
   gap: 0.5rem;
   background: var(--grad-craftsman);
   color: #ffffff !important;
-  font-weight: 800;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.25;
   border: 1px solid rgb(255 255 255 / 18%);
-  border-radius: 0.85rem;
-  padding: 0.75rem 1.5rem;
+  border-radius: 7px;
+  padding: 14px 28px;
+  min-height: 48px;
   box-shadow: 0 4px 14px rgb(166 31 46 / 32%), inset 0 1px 0 rgb(255 255 255 / 18%);
   transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease, filter 0.25s ease;
   cursor: pointer;
