@@ -135,7 +135,7 @@ export default async (request: Request) => {
       const response = await ai.models.generateContent({
         model: MODEL,
         contents: [
-          { parts: [createPartFromBase64(imageBase64, photo.type)] },
+          { role: "user", parts: [createPartFromBase64(imageBase64, photo.type)] },
         ],
         config: { systemInstruction: SYSTEM_PROMPT, responseMimeType: "application/json" },
       });
