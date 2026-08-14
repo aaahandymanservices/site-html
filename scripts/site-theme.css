@@ -4056,6 +4056,46 @@ header.ambient-glow-hero::after,
   color: #ffffff;
 }
 
+/*
+ * A pill badge pinned across the top border of a highlighted card, as the
+ * "MOST POPULAR CHOICE" flag on the 6-hour package uses.
+ *
+ * The pin has to own its own sizing. An absolutely positioned box with only
+ * `left` set shrink-to-fits against the space between that edge and the end of
+ * its containing block, so at `left: 50%` the badge is only ever offered half
+ * the card to lay itself out in. `.pricing-card-row` columns bottom out at
+ * 16rem, which leaves roughly 126px for a ~185px label, and the flag wrapped
+ * onto two or three ragged lines. `width: max-content` opts out of that
+ * measurement and `white-space: nowrap` holds the label on one line.
+ *
+ * Vertical placement is `top: 0` plus `translateY(-50%)` rather than a
+ * hardcoded negative offset, so the pill stays centred on the card's top
+ * border whatever height it ends up rendering at.
+ *
+ * The z-index lifts it above `.pricing-card-highlight::after` -- the glowing
+ * crimson bar along the card's top edge -- which, as a later box in the same
+ * stacking context, would otherwise paint straight across the badge.
+ */
+.badge-card-topper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  justify-content: center;
+  padding: 0.4rem 0.875rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Letter-spacing is applied after the final character as well as between
+   characters, which leaves the label sitting a hair left of centre between the
+   two paddings. Pulling that trailing sliver back re-centres it optically. */
+.badge-card-topper > span:last-child {
+  margin-right: -0.04em;
+}
+
 /* ============================================================
    Layered Card UI Containers
    ============================================================ */
