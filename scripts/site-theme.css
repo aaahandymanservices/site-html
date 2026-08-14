@@ -3705,7 +3705,6 @@ button.btn-crimson:active {
 body > footer :where(h1, h2, h3),
 header.bg-gradient-to-r h1,
 header.ambient-glow-hero h1,
-#pricing-hero h1,
 section.bg-brand-navy h1,
 section.bg-navy-deep h1,
 section.bg-blue-900 h1,
@@ -3716,6 +3715,53 @@ section.bg-blue-950 h1 {
   -webkit-text-fill-color: transparent;
   color: transparent;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+}
+
+/*
+ * Crisp, high-contrast text gradient for the pricing-hero headline
+ * ("Know the starting price before we arrive.").
+ *
+ * The hero sits on the deep-navy brand background, so the gradient is kept
+ * entirely in the white → cool-slate band. Every stop along the gradient
+ * holds well above the 3:1 ratio WCAG 2.1 requires for large bold text (the
+ * headline is rendered at >= 2.25rem / font-weight 900), and the lightest
+ * portion clears 4.5:1 so the same rule also passes AA for normal-sized text.
+ *
+ * A solid, high-contrast white is declared first as the baseline so any
+ * browser that cannot clip text — and any user in a forced-color or
+ * increased-contrast mode — still gets fully readable words. The gradient
+ * is only layered on inside an @supports guard, so the fallback never
+ * inherits a `color: transparent` that would hide the headline. The
+ * text-shadow declared on the inline Tailwind utility is reset to `none`
+ * inside the guard because WebKit does not paint text-shadow once the
+ * fill is transparent; `filter: drop-shadow` is used instead to keep the
+ * legibility halo behind the glyphs.
+ */
+#pricing-hero h1 {
+  color: #ffffff;
+}
+
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  #pricing-hero h1 {
+    background: linear-gradient(180deg, #ffffff 0%, #c4d2e6 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+    text-shadow: none;
+  }
+}
+
+/* Honor forced-color / increased-contrast users: drop the gradient entirely. */
+@media (forced-colors: active), (prefers-contrast: more) {
+  #pricing-hero h1 {
+    background: none;
+    -webkit-text-fill-color: initial;
+    color: #ffffff;
+    filter: none;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+  }
 }
 
 /* Ambient brand glows on dark heroes — crimson + navy, not tomato red. */

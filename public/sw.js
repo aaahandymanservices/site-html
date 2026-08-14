@@ -80,7 +80,7 @@
 // the service/city generators) and this version refetches the stylesheet and
 // its newly subsetted fonts for every client, so the new glyphs don't render
 // blank on a returning visitor's first page view.
-const CACHE_VERSION = 'v18';
+const CACHE_VERSION = 'v19';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
