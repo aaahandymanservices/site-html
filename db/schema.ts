@@ -26,8 +26,14 @@ export const aiEstimates = pgTable("ai_estimates", {
   priceHigh: integer("price_high"),
   // True when the model flagged the job as out of minor scope.
   outOfScope: boolean("out_of_scope").default(false).notNull(),
-  // Blob key for the uploaded photo (served by /api/ai-estimate/photo/:key).
+  // Blob keys for the uploaded photos (served by /api/ai-estimate/photo/:key).
+  // The estimator accepts up to three repair photos — a close-up, a wide/context
+  // shot, and an optional extra angle — so a human tech can see the damage from
+  // more than one vantage point during the in-person follow-up. The primary
+  // photo (photoKey) is the one sent to the model; the others are reference only.
   photoKey: text("photo_key"),
+  photoKey2: text("photo_key_2"),
+  photoKey3: text("photo_key_3"),
   // 'pending' until the customer clicks Submit, then 'submitted'; 'claimed'
   // once dispatch converts it into a booking.
   status: text("status").default("pending").notNull(),

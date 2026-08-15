@@ -12,6 +12,10 @@ const MODEL = "gemini-2.5-flash";
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+// The estimator accepts a primary photo plus up to two optional extra angles
+// (a wide/context shot and an additional angle). Only the primary photo is
+// sent to the model; the others are stored for the human dispatch review.
+const MAX_PHOTOS = 3;
 const MAX_NAME_LENGTH = 120;
 const MAX_ADDRESS_LENGTH = 160;
 const MAX_CITY_LENGTH = 80;
@@ -82,16 +86,33 @@ export default async (request: Request) => {
 
   try {
     const formData = await request.formData();
-    const photo = formData.get("photo");
 
-    if (!(photo instanceof File) || photo.size === 0) {
+    // Collect the primary photo plus up to two optional extra angles. The
+    // form sends them as `photo`, `photo2`, `photo3`. Older callers that only
+    // send `photo` keep working unchanged.
+    const rawPhotos = [formData.get("photo"), formData.get("photo2"), formData.get("photo3")];
+    const photos: File[] = [];
+    for (const entry of rawPhotos) {
+      if (entry == null) continue;
+      // `formData.get` returns a File for file uploads and a string for plain
+      // fields; a stray empty string here just means "no photo in this slot".
+      if (typeof entry === "string") continue;
+      if (entry.size === 0) continue;
+      if (entry.size > MAX_IMAGE_SIZE) {
+        return errorJson("Each photo must be 5 MB or smaller.", 400);
+      }
+      if (!IMAGE_TYPES.has(entry.type)) {
+        return errorJson("Upload JPG, PNG, or WebP photos only.", 400);
+      }
+      photos.push(entry);
+      if (photos.length > MAX_PHOTOS) {
+        return errorJson("You can upload at most 3 photos.", 400);
+      }
+    }
+
+    const photo = photos[0];
+    if (!photo) {
       return errorJson("Please upload a photo of the repair so we can analyze it.", 400);
-    }
-    if (photo.size > MAX_IMAGE_SIZE) {
-      return errorJson("The photo must be 5 MB or smaller.", 400);
-    }
-    if (!IMAGE_TYPES.has(photo.type)) {
-      return errorJson("Upload a JPG, PNG, or WebP photo.", 400);
     }
 
     // Optional contact + location fields the customer may include on a first
@@ -119,14 +140,30 @@ export default async (request: Request) => {
       }
     }
 
-    // Store the original photo in Netlify Blobs so a human tech can pull it up
-    // later during the in-person follow-up, exactly like the booking photos.
+    // Store every uploaded photo in Netlify Blobs so a human tech can pull
+    // them up later during the in-person follow-up, exactly like the booking
+    // photos. Only the primary photo is sent to the model for analysis; the
+    // others are reference angles for dispatch.
     const photoStore = getStore("ai-estimate-photos");
-    const extension = photo.type.split("/")[1]?.replace("jpeg", "jpg") ?? "jpg";
-    const photoKey = `${Date.now()}-${crypto.randomUUID()}.${extension}`;
-    await photoStore.set(photoKey, await photo.arrayBuffer());
+    const storedKeys: string[] = [];
+    const storePhoto = async (file: File) => {
+      const ext = file.type.split("/")[1]?.replace("jpeg", "jpg") ?? "jpg";
+      const key = `${Date.now()}-${crypto.randomUUID()}.${ext}`;
+      await photoStore.set(key, await file.arrayBuffer());
+      storedKeys.push(key);
+      return key;
+    };
 
-    // Send the photo to Gemini for visual analysis.
+    const photoKey = await storePhoto(photo);
+    const photoKey2 = photos[1] ? await storePhoto(photos[1]) : null;
+    const photoKey3 = photos[2] ? await storePhoto(photos[2]) : null;
+
+    // Best-effort cleanup of every blob already written if anything below
+    // throws, so an orphaned photo never outlives the request that failed.
+    const cleanupStoredPhotos = () =>
+      Promise.all(storedKeys.map((k) => photoStore.delete(k).catch(() => undefined)));
+
+    // Send the primary photo to Gemini for visual analysis.
     const imageBase64 = Buffer.from(await photo.arrayBuffer()).toString("base64");
     const ai = new GoogleGenAI({});
 
@@ -142,8 +179,7 @@ export default async (request: Request) => {
       modelText = (response.text ?? "").trim();
     } catch (err) {
       console.error("AI Gateway vision request failed:", err);
-      // Don't strand an orphaned blob if the model call dies.
-      await photoStore.delete(photoKey).catch(() => undefined);
+      await cleanupStoredPhotos();
       return errorJson(
         "We couldn't analyze the photo right now. Please try again in a moment, or call us at (248) 385-3432.",
         502,
@@ -151,13 +187,13 @@ export default async (request: Request) => {
     }
 
     // Parse the strict JSON the model was asked to emit. If it is malformed we
-    // still surface a friendly failure rather than crashing, and drop the blob.
+    // still surface a friendly failure rather than crashing, and drop the blobs.
     let parsed: any;
     try {
       parsed = JSON.parse(modelText);
     } catch {
       console.error("Model returned non-JSON:", modelText.slice(0, 500));
-      await photoStore.delete(photoKey).catch(() => undefined);
+      await cleanupStoredPhotos();
       return errorJson(
         "The estimate came back in a format we couldn't read. Please try a clearer photo, or call us at (248) 385-3432.",
         502,
@@ -210,6 +246,8 @@ export default async (request: Request) => {
         priceHigh,
         outOfScope,
         photoKey,
+        photoKey2,
+        photoKey3,
         status: mode === "submit" ? "submitted" : "pending",
       })
       .returning();
@@ -230,6 +268,7 @@ export default async (request: Request) => {
         rendered: estimateText,
       },
       photoUrl: `/api/ai-estimate/photo/${photoKey}`,
+      photoUrls: storedKeys.map((k) => `/api/ai-estimate/photo/${k}`),
       submitted: mode === "submit",
     }, { status: 201 });
   } catch (err: any) {
