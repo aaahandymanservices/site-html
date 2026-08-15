@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 246 icon names in use.
+ * Generated subset - 247 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -63,6 +63,7 @@
 .fa-microchip:before{content:"\f2db"}
 .fa-wheelchair:before{content:"\f193"}
 .fa-fire:before{content:"\f06d"}
+.fa-folder-open:before{content:"\f07c"}
 .fa-bath:before,.fa-bathtub:before{content:"\f2cd"}
 .fa-map-location-dot:before,.fa-map-marked-alt:before{content:"\f5a0"}
 .fa-cloud-showers-water:before{content:"\e4e4"}

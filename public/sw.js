@@ -122,7 +122,15 @@
 // the new form with the old script and see the dropzone render inert. Bumping
 // this version (and the contact-page.js stamp above) refetches the script for
 // every client.
-const CACHE_VERSION = 'v25';
+// v26 removes the last window.alert/confirm/prompt calls from the customer
+// site: the home page quote form, the /reviews owner access flow, and the
+// aging-in-place checklist reset now use inline <dialog> elements instead.
+// The behaviour and markup ship together, and reviews-page.js keeps its
+// pathname, so a returning visitor holding v25 would otherwise pair the new
+// /reviews page with the old script and find the Owner Access button inert.
+// Bumping this version (and the ASSET_VERSION stamp in update-static-
+// pages.mjs) refetches the script for every client.
+const CACHE_VERSION = 'v26';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
