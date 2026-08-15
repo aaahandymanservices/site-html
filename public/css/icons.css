@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 244 icon names in use.
+ * Generated subset - 246 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -67,7 +67,6 @@
 .fa-map-location-dot:before,.fa-map-marked-alt:before{content:"\f5a0"}
 .fa-cloud-showers-water:before{content:"\e4e4"}
 .fa-window-restore:before{content:"\f2d2"}
-.fa-image:before{content:"\f03e"}
 .fa-rotate-back:before,.fa-rotate-backward:before,.fa-rotate-left:before,.fa-undo-alt:before{content:"\f2ea"}
 .fa-handshake:before{content:"\f2b5"}
 .fa-check-circle:before,.fa-circle-check:before{content:"\f058"}
@@ -129,6 +128,7 @@
 .fa-clock-four:before,.fa-clock:before{content:"\f017"}
 .fa-faucet:before{content:"\e005"}
 .fa-map-pin:before{content:"\f276"}
+.fa-images:before{content:"\f302"}
 .fa-calculator:before{content:"\f1ec"}
 .fa-home-alt:before,.fa-home-lg-alt:before,.fa-home:before,.fa-house:before{content:"\f015"}
 .fa-bolt:before,.fa-zap:before{content:"\f0e7"}
@@ -153,6 +153,7 @@
 .fa-user-shield:before{content:"\f505"}
 .fa-wind:before{content:"\f72e"}
 .fa-shipping-fast:before,.fa-truck-fast:before{content:"\f48b"}
+.fa-add:before,.fa-plus:before{content:"\2b"}
 .fa-close:before,.fa-multiply:before,.fa-remove:before,.fa-times:before,.fa-xmark:before{content:"\f00d"}
 .fa-quote-left-alt:before,.fa-quote-left:before{content:"\f10d"}
 .fa-ruler-combined:before{content:"\f546"}

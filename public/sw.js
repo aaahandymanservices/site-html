@@ -101,7 +101,15 @@
 // asset cache key drops ?v=, so bumping both the site.js stamp
 // (update-static-pages.mjs) and this version refetches the script for every
 // client.
-const CACHE_VERSION = 'v22';
+// v23 lands the upgraded AI Repair Estimator upload flow, which introduced two
+// new icons (images, plus) on /css/icons.css behind its unchanged pathname.
+// The asset cache key drops ?v=, so a returning visitor holding v22 keeps last
+// deploy's icons.css and subsetted fonts -- the ones without those glyphs --
+// and the dropzone's images icon and the empty-slot plus placeholder render
+// blank. Bumping this version refetches the stylesheet and its newly subsetted
+// fonts for every client, so the new glyphs don't render blank on a returning
+// visitor's first page view.
+const CACHE_VERSION = 'v23';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

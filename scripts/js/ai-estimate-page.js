@@ -1,30 +1,56 @@
 /*
- * Behaviour for /ai-estimate: drag-and-drop photo upload, client-side size/
- * type validation, ZIP→zone lookup, the analyze call to /api/ai-estimate, and
- * the second-pass submit that forwards contact details to dispatch.
+ * Behaviour for /ai-estimate: multi-photo drag-and-drop upload with live
+ * thumbnail previews, client-side size/type validation, ZIP→zone lookup, the
+ * analyze call to /api/ai-estimate, and the second-pass submit that forwards
+ * contact details to dispatch.
  *
  * Two phases over the same endpoint:
- *   1. analyze  — photo + optional zip/city, returns the AI estimate.
- *   2. submit   — same photo re-uploaded alongside contact details, flagged
+ *   1. analyze  — primary photo + optional wide/extra angles + optional
+ *                 zip/city, returns the AI estimate.
+ *   2. submit   — same photos re-uploaded alongside contact details, flagged
  *                 with mode=submit so the row is marked "submitted" for
  *                 dispatch and the contact fields are persisted.
  *
- * The photo is re-sent on submit because the estimate row and the dispatch
- * review both reference one blob, and the analyze call already proved the
- * upload is valid. Keeping a handle to the chosen File makes that free.
+ * The photos are re-sent on submit because the estimate row and the dispatch
+ * review both reference the blobs, and the analyze call already proved the
+ * upload is valid. Keeping handles to the chosen Files makes that free.
  */
 (function () {
   const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
   const IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
   const OAKLAND_ZIP = /^48[0-4]\d{2}$/;
+  const MAX_PHOTOS = 3;
+
+  // The three upload slots: 0 is the required close-up, 1 the wide/context
+  // shot, 2 the optional extra angle. The labels surface in the thumbnail tag
+  // so the customer can tell at a glance which angle goes where.
+  const SLOT_META = [
+    { tag: 'Close-up', label: 'Close-up', hint: 'The damage itself' },
+    { tag: 'Wide shot', label: 'Wide / Context', hint: 'The surrounding area' },
+    { tag: 'Extra', label: 'Extra angle', hint: 'Optional — another view' },
+  ];
+
+  // Progress messages cycled under the spinner while the analyzer runs. The
+  // first is shown immediately; the rest follow every 2 seconds until the
+  // request resolves.
+  const PROGRESS_MESSAGES = [
+    'Analyzing damage dimensions…',
+    'Checking repair scope…',
+    'Calculating labor & material rates…',
+    'Cross-checking Oakland County rates…',
+    'Finalizing your preliminary estimate…',
+  ];
 
   const dropzone = document.getElementById('ai-dropzone');
-  const fileInput = document.getElementById('ai-photo-input');
+  const fileInputs = [
+    document.getElementById('ai-photo-input'),
+    document.getElementById('ai-photo-input-2'),
+    document.getElementById('ai-photo-input-3'),
+  ];
   const idleEl = document.getElementById('ai-dropzone-idle');
-  const previewEl = document.getElementById('ai-dropzone-preview');
-  const previewImg = document.getElementById('ai-photo-preview');
-  const filenameEl = document.getElementById('ai-photo-filename');
-  const removeBtn = document.getElementById('ai-photo-remove');
+  const previewsEl = document.getElementById('ai-dropzone-previews');
+  const slotsEl = document.getElementById('ai-photo-slots');
+  const countEl = document.getElementById('ai-photo-count');
   const photoError = document.getElementById('ai-photo-error');
 
   const zipInput = document.getElementById('ai-zip');
@@ -34,6 +60,10 @@
   const form = document.getElementById('ai-estimate-form');
   const analyzeBtn = document.getElementById('ai-analyze-btn');
   const analyzeLabel = document.getElementById('ai-analyze-btn-label');
+  const analyzeIcon = document.getElementById('ai-analyze-btn-icon');
+  const progressEl = document.getElementById('ai-analyze-progress');
+  const statusText = document.getElementById('ai-analyze-status-text');
+  const statusA11y = document.getElementById('ai-analyze-status');
 
   const resultEl = document.getElementById('ai-estimate-result');
   const outOfScopeBanner = document.getElementById('ai-out-of-scope-banner');
@@ -47,7 +77,13 @@
   const submitError = document.getElementById('ai-submit-error');
   const submitSuccess = document.getElementById('ai-submit-success');
 
-  let chosenFile = null;
+  // chosenFiles[i] holds the File chosen for slot i, or null. The primary
+  // slot (0) is required before the analyze call will fire.
+  const chosenFiles = [null, null, null];
+  // Object URLs are revoked on swap/remove to avoid leaking the preview.
+  const objectUrls = [null, null, null];
+  let progressTimer = null;
+  let progressIndex = 0;
   let areasPromise = null;
 
   const showPhotoError = (msg) => {
@@ -64,50 +100,147 @@
   const validateFile = (file) => {
     if (!file) return 'Please choose a photo to upload.';
     if (file.size === 0) return 'That photo looks empty. Please choose another.';
-    if (file.size > MAX_IMAGE_SIZE) return 'The photo must be 5 MB or smaller.';
+    if (file.size > MAX_IMAGE_SIZE) return 'Each photo must be 5 MB or smaller.';
     if (!IMAGE_TYPES.has(file.type)) return 'Upload a JPG, PNG, or WebP photo.';
     return '';
   };
 
-  const renderPreview = (file) => {
-    chosenFile = file;
-    previewImg.src = URL.createObjectURL(file);
-    previewImg.onload = () => URL.revokeObjectURL(previewImg.src);
-    filenameEl.textContent = file.name;
-    idleEl.classList.add('hidden');
-    previewEl.classList.remove('hidden');
-    showPhotoError('');
+  const escapeHtml = (s) =>
+    String(s).replace(/[&<>"']/g, (c) =>
+      ({ '&': '&', '<': '<', '>': '>', '"': '"', "'": '&#39;' })[c],
+    );
+
+  const renderSlots = () => {
+    if (!slotsEl) return;
+    slotsEl.innerHTML = '';
+    for (let i = 0; i < MAX_PHOTOS; i++) {
+      const meta = SLOT_META[i];
+      const file = chosenFiles[i];
+      const slot = document.createElement('div');
+      slot.className = 'ai-photo-slot' + (file ? ' is-filled' : '');
+      slot.setAttribute('role', 'listitem');
+      slot.dataset.slot = String(i);
+
+      if (file) {
+        slot.innerHTML =
+          '<span class="ai-photo-slot__tag">' + escapeHtml(meta.tag) + '</span>' +
+          '<img src="' + objectUrls[i] + '" alt="Repair photo preview, ' + escapeHtml(meta.label) + '">' +
+          '<div class="ai-photo-slot__actions">' +
+            '<button type="button" class="ai-photo-slot__btn ai-photo-slot__btn--change" data-action="change" aria-label="Replace ' + escapeHtml(meta.label.toLowerCase()) + ' photo">' +
+              '<i class="fas fa-arrows-rotate" aria-hidden="true"></i> Change' +
+            '</button>' +
+            '<button type="button" class="ai-photo-slot__btn" data-action="remove" aria-label="Remove ' + escapeHtml(meta.label.toLowerCase()) + ' photo">' +
+              '<i class="fas fa-xmark" aria-hidden="true"></i> Remove' +
+            '</button>' +
+          '</div>';
+      } else {
+        slot.innerHTML =
+          '<span class="ai-photo-slot__tag">' + escapeHtml(meta.tag) + '</span>' +
+          '<div class="w-9 h-9 bg-red-600/15 rounded-xl flex items-center justify-center text-lg text-red-400 mb-1.5" aria-hidden="true"><i class="fas fa-plus"></i></div>' +
+          '<span class="ai-photo-slot__label">' + escapeHtml(meta.label) + '</span>' +
+          '<span class="ai-photo-slot__hint">' + escapeHtml(meta.hint) + '</span>';
+      }
+      slotsEl.appendChild(slot);
+    }
   };
 
-  const resetPreview = () => {
-    chosenFile = null;
-    fileInput.value = '';
-    previewImg.removeAttribute('src');
-    idleEl.classList.remove('hidden');
-    previewEl.classList.add('hidden');
+  const updatePreviewState = () => {
+    const hasAny = chosenFiles.some(Boolean);
+    if (idleEl) idleEl.classList.toggle('hidden', hasAny);
+    if (previewsEl) previewsEl.classList.toggle('hidden', !hasAny);
+    if (countEl) {
+      const n = chosenFiles.filter(Boolean).length;
+      if (n === 0) {
+        countEl.textContent = '';
+      } else if (n === 1) {
+        countEl.textContent = '1 photo selected · add a wide shot and an extra angle for a better estimate.';
+      } else {
+        countEl.textContent = n + ' photos selected · tap any filled slot to change or remove it.';
+      }
+    }
   };
 
-  const handleFileChosen = (file) => {
+  const setSlotFile = (index, file) => {
+    if (objectUrls[index]) URL.revokeObjectURL(objectUrls[index]);
+    chosenFiles[index] = file;
+    objectUrls[index] = file ? URL.createObjectURL(file) : null;
+    renderSlots();
+    updatePreviewState();
+  };
+
+  const clearSlot = (index) => {
+    if (fileInputs[index]) fileInputs[index].value = '';
+    setSlotFile(index, null);
+  };
+
+  const nextEmptySlot = () => {
+    for (let i = 0; i < MAX_PHOTOS; i++) {
+      if (!chosenFiles[i]) return i;
+    }
+    return -1;
+  };
+
+  const assignFile = (file, preferSlot) => {
     const err = validateFile(file);
     if (err) {
       showPhotoError(err);
-      return;
+      return false;
     }
-    renderPreview(file);
+    showPhotoError('');
+
+    let slot = preferSlot;
+    if (slot == null || chosenFiles[slot]) {
+      slot = nextEmptySlot();
+    }
+    if (slot === -1) {
+      showPhotoError('You can upload at most 3 photos. Remove one first.');
+      return false;
+    }
+    setSlotFile(slot, file);
+    return true;
   };
 
+  const openPickerForSlot = (index) => {
+    if (fileInputs[index]) fileInputs[index].click();
+  };
+
+  // Clicking anywhere in the dropzone opens the picker for the first empty
+  // slot — unless the click landed on a filled slot's action button, in which
+  // case that button's behaviour runs instead.
   if (dropzone) {
     dropzone.addEventListener('click', (e) => {
-      // Don't re-trigger the picker when the "remove" button is clicked.
-      if (e.target.closest('#ai-photo-remove')) return;
-      fileInput.click();
+      const slotEl = e.target.closest('[data-slot]');
+      const actionBtn = e.target.closest('[data-action]');
+
+      if (slotEl && actionBtn) {
+        const slot = Number(slotEl.dataset.slot);
+        const action = actionBtn.dataset.action;
+        if (action === 'remove') clearSlot(slot);
+        else if (action === 'change') openPickerForSlot(slot);
+        return;
+      }
+
+      if (slotEl) {
+        // Clicking a filled slot's body (not its buttons) is a no-op; only an
+        // empty slot should open its picker.
+        const slot = Number(slotEl.dataset.slot);
+        if (!chosenFiles[slot]) openPickerForSlot(slot);
+        return;
+      }
+
+      const empty = nextEmptySlot();
+      if (empty !== -1) openPickerForSlot(empty);
+      else if (chosenFiles[0]) openPickerForSlot(0);
     });
+
     dropzone.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        fileInput.click();
+        const empty = nextEmptySlot();
+        if (empty !== -1) openPickerForSlot(empty);
       }
     });
+
     ['dragenter', 'dragover'].forEach((evt) =>
       dropzone.addEventListener(evt, (e) => {
         e.preventDefault();
@@ -120,24 +253,31 @@
         dropzone.classList.remove('dropzone--dragging');
       }),
     );
+
     dropzone.addEventListener('drop', (e) => {
-      const file = e.dataTransfer?.files?.[0];
-      if (file) handleFileChosen(file);
+      const files = e.dataTransfer?.files;
+      if (!files || !files.length) return;
+      // Drop fills empty slots in order; the first dropped file lands in the
+      // primary slot if it is empty.
+      for (const f of files) {
+        if (nextEmptySlot() === -1) break;
+        assignFile(f);
+      }
     });
   }
 
-  if (fileInput) {
-    fileInput.addEventListener('change', () => {
-      const file = fileInput.files?.[0];
-      if (file) handleFileChosen(file);
+  // Each hidden input is bound to a slot. When a slot's "Change" button opens
+  // its own input, the picked file replaces just that slot.
+  fileInputs.forEach((input, i) => {
+    if (!input) return;
+    input.addEventListener('change', () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      assignFile(file, i);
+      // Reset value so re-selecting the same file still fires change.
+      input.value = '';
     });
-  }
-  if (removeBtn) {
-    removeBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      resetPreview();
-    });
-  }
+  });
 
   // --- ZIP → zone lookup, mirroring the booking widget but trimmed to the
   // two things this page needs: a served/not-served answer and the city name.
@@ -208,20 +348,43 @@
     });
   };
 
-  const escapeHtml = (s) =>
-    String(s).replace(/[&<>"']/g, (c) =>
-      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c],
-    );
-
   // --- Analyze phase -------------------------------------------------------
+  const startProgressCycle = () => {
+    progressIndex = 0;
+    const setStatus = (i) => {
+      const msg = PROGRESS_MESSAGES[i] || PROGRESS_MESSAGES[0];
+      if (statusText) statusText.textContent = msg;
+      if (statusA11y) statusA11y.textContent = msg;
+    };
+    setStatus(0);
+    if (progressEl) progressEl.classList.remove('hidden');
+    progressTimer = setInterval(() => {
+      progressIndex = (progressIndex + 1) % PROGRESS_MESSAGES.length;
+      setStatus(progressIndex);
+    }, 2000);
+  };
+
+  const stopProgressCycle = () => {
+    if (progressTimer) {
+      clearInterval(progressTimer);
+      progressTimer = null;
+    }
+    if (progressEl) progressEl.classList.add('hidden');
+    if (statusA11y) statusA11y.textContent = '';
+  };
+
   const setAnalyzing = (busy) => {
     if (analyzeBtn) analyzeBtn.disabled = busy;
     if (busy) {
-      analyzeLabel.textContent = 'Analyzing your photo…';
+      if (analyzeLabel) analyzeLabel.textContent = 'Analyzing your photos…';
+      if (analyzeIcon) analyzeIcon.innerHTML = '<span class="ai-spinner" aria-hidden="true"></span>';
       analyzeBtn.setAttribute('aria-busy', 'true');
+      startProgressCycle();
     } else {
-      analyzeLabel.textContent = 'Get My AI Estimate';
+      if (analyzeLabel) analyzeLabel.textContent = 'Get My AI Estimate';
+      if (analyzeIcon) analyzeIcon.innerHTML = '<i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>';
       analyzeBtn.removeAttribute('aria-busy');
+      stopProgressCycle();
     }
   };
 
@@ -309,11 +472,20 @@
       e.preventDefault();
       if (analyzeBtn.disabled) return;
 
-      const fileErr = validateFile(chosenFile);
-      if (fileErr) {
-        showPhotoError(fileErr);
-        if (!chosenFile) fileInput.click();
+      if (!chosenFiles[0]) {
+        showPhotoError('Please upload at least one close-up photo to analyze.');
+        openPickerForSlot(0);
         return;
+      }
+      // Re-validate every chosen file in case the page state drifted.
+      for (let i = 0; i < MAX_PHOTOS; i++) {
+        const f = chosenFiles[i];
+        if (!f) continue;
+        const err = validateFile(f);
+        if (err) {
+          showPhotoError(err);
+          return;
+        }
       }
       showPhotoError('');
 
@@ -325,7 +497,9 @@
 
       try {
         const fd = new FormData();
-        fd.append('photo', chosenFile);
+        fd.append('photo', chosenFiles[0]);
+        if (chosenFiles[1]) fd.append('photo2', chosenFiles[1]);
+        if (chosenFiles[2]) fd.append('photo3', chosenFiles[2]);
         fd.append('mode', 'analyze');
         if (zipInput.value.trim()) fd.append('zip', zipInput.value.trim());
         if (cityInput.value.trim()) fd.append('city', cityInput.value.trim());
@@ -389,8 +563,8 @@
         return;
       }
 
-      if (!chosenFile) {
-        showSubmitError('Your photo is missing. Please upload one above and get a new estimate first.');
+      if (!chosenFiles[0]) {
+        showSubmitError('Your primary photo is missing. Please upload one above and get a new estimate first.');
         return;
       }
 
@@ -399,7 +573,9 @@
 
       try {
         const fd = new FormData();
-        fd.append('photo', chosenFile);
+        fd.append('photo', chosenFiles[0]);
+        if (chosenFiles[1]) fd.append('photo2', chosenFiles[1]);
+        if (chosenFiles[2]) fd.append('photo3', chosenFiles[2]);
         fd.append('mode', 'submit');
         fd.append('customerName', name);
         fd.append('phone', phone);
@@ -432,4 +608,9 @@
     submitError.classList.remove('hidden');
     submitError.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
+
+  // Initial paint of the (empty) slot grid so the three upload targets are
+  // visible the moment the page loads.
+  renderSlots();
+  updatePreviewState();
 })();
