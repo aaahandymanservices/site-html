@@ -109,7 +109,13 @@
 // blank. Bumping this version refetches the stylesheet and its newly subsetted
 // fonts for every client, so the new glyphs don't render blank on a returning
 // visitor's first page view.
-const CACHE_VERSION = 'v23';
+// v24 lands the /reviews layout fixes (map pin styling, FAB clearance, form and
+// card grid responsiveness) on /css/site-theme.css behind its unchanged pathname.
+// The asset cache key drops ?v=, so bumping both the stylesheet's ?v= stamp in
+// update-static-pages.mjs and this version refetches the new CSS for every
+// client; otherwise a returning visitor keeps last deploy's stylesheet and the
+// review page's pins and grids keep their old, broken layout.
+const CACHE_VERSION = 'v24';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
