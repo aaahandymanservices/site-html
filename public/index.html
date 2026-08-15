@@ -1134,7 +1134,7 @@
                         Try AI Estimator &rarr;
                     </a>
                 </div>
-                <form id=quote-form name=quote method=POST data-netlify=true netlify-honeypot=bot-field enctype=multipart/form-data class=space-y-5>
+                <form id=quote-form name=quote method=POST data-netlify=true data-netlify-recaptcha=true netlify-honeypot=bot-field enctype=multipart/form-data class=space-y-5>
                     <input type=hidden name=form-name value=quote>
                     <input type=hidden name=subject value="New quote request from aaahandyman.services">
                     <p class=hidden><label>Don't fill this out if you're human: <input name=bot-field tabindex=-1 aria-hidden=true aria-label="Do not fill out this field"></label></p>
@@ -1185,6 +1185,7 @@
                         </label>
                         <input id=q-photos type=file name=photos accept=image/* multiple capture=environment class=sr-only>
                     </div>
+                    <div data-netlify-recaptcha="true"></div>
                     <button type=submit class="w-full bg-red-600 hover:bg-red-700 py-5 text-xl font-bold rounded-3xl transition flex items-center justify-center gap-3 text-white">Get My Free Quote <i class="fas fa-arrow-right" aria-hidden=true></i></button>
                     <p class="text-center text-xs text-gray-600"><i class="fas fa-lock" aria-hidden=true></i> No spam, ever. We only use this to get back to you about your project.</p>
                 </form>

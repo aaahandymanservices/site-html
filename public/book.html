@@ -325,7 +325,7 @@
                         <div class="bg-gray-800/30 rounded-3xl p-6 sm:p-8 border border-gray-800/80 shadow-2xl relative">
                             
                             
-                            <form id=booking-form name=bookings method=POST enctype=multipart/form-data data-netlify=true netlify-honeypot=bot-field class=space-y-6>
+                            <form id=booking-form name=bookings method=POST enctype=multipart/form-data data-netlify=true data-netlify-recaptcha=true netlify-honeypot=bot-field class=space-y-6>
                                 <input type=hidden name=form-name value=bookings>
                                 <input type=hidden name=photoUrl>
                                 <p class=hidden>
@@ -560,6 +560,7 @@
 
                                 <p id=booking-error class="hidden rounded-xl border border-red-500/30 bg-red-950/40 px-4 py-3 text-sm text-red-200" role=alert aria-live=polite></p>
 
+                                <div data-netlify-recaptcha="true"></div>
                                 <button type=submit id=submit-btn disabled class="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-600 disabled:text-gray-300 disabled:shadow-none disabled:cursor-not-allowed py-4 text-lg font-bold rounded-2xl transition flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
                                     Request My Booking <i class="fas fa-calendar-check" aria-hidden=true></i>
                                 </button>
