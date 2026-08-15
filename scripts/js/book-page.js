@@ -856,7 +856,11 @@
           const pkgMap = {
               'seasonal-prep': 'Seasonal Prep Package',
               'move-in-out': 'Move-In / Move-Out Bundle',
-              'senior-safety': 'Senior Safety & Accessibility Package'
+              'senior-safety': 'Senior Safety & Accessibility Package',
+              '4-hour': '4-Hour Handyman Package',
+              '6-hour': '6-Hour Handyman Package',
+              'membership': 'Maintenance Membership',
+              'maintenance-membership': 'Maintenance Membership'
           };
           const mappedPkg = pkgMap[requestedPkg];
           if (mappedPkg) {
