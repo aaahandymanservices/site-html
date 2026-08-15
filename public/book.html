@@ -1,34 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang=en>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Self-hosted brand fonts + icon subset; @font-face lives in site-theme.css -->
-    <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta charset=UTF-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    
+    <link rel=preload href=/fonts/archivo-latin.woff2 as=font type=font/woff2 crossorigin>
 
 
     <title>Book Online — Schedule Your Service | AAA Handyman Services LLC</title>
 
-    <meta name="description" content="Schedule a local handyman online with AAA Handyman Services LLC. Select your service, date, and time slot to reserve your appointment in Oakland County, MI.">
-    <meta name="theme-color" content="#A61F2E">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://aaahandyman.services/book">
+    <meta name=description content="Schedule a local handyman online with AAA Handyman Services LLC. Select your service, date, and time slot to reserve your appointment in Oakland County, MI.">
+    <meta name=theme-color content=#A61F2E>
+    <meta name=robots content="index, follow">
+    <link rel=canonical href=https://aaahandyman.services/book>
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aaahandyman.services/book">
-    <meta property="og:site_name" content="AAA Handyman Services LLC">
-    <meta property="og:title" content="Book Online — Schedule Your Service | AAA Handyman Services LLC">
-    <meta property="og:description" content="Book a handyman online in Oakland County, MI. Select your service, date, and preferred time. No upfront payments.">
-    <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
-    <meta property="og:locale" content="en_US">
+    <meta property=og:type content=website>
+    <meta property=og:url content=https://aaahandyman.services/book>
+    <meta property=og:site_name content="AAA Handyman Services LLC">
+    <meta property=og:title content="Book Online — Schedule Your Service | AAA Handyman Services LLC">
+    <meta property=og:description content="Book a handyman online in Oakland County, MI. Select your service, date, and preferred time. No upfront payments.">
+    <meta property=og:image content=https://aaahandyman.services/logo-banner.jpg>
+    <meta property=og:locale content=en_US>
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://aaahandyman.services/book">
-    <meta name="twitter:title" content="Book Online — Schedule Your Service | AAA Handyman Services LLC">
-    <meta name="twitter:description" content="Book a handyman online in Oakland County, MI. Select your service, date, and preferred time. No upfront payments.">
-    <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
+    <meta name=twitter:card content=summary_large_image>
+    <meta name=twitter:url content=https://aaahandyman.services/book>
+    <meta name=twitter:title content="Book Online — Schedule Your Service | AAA Handyman Services LLC">
+    <meta name=twitter:description content="Book a handyman online in Oakland County, MI. Select your service, date, and preferred time. No upfront payments.">
+    <meta name=twitter:image content=https://aaahandyman.services/logo-banner.jpg>
 
-    <script type="application/ld+json">
+    <script type=application/ld+json>
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -39,7 +39,7 @@
     }
     </script>
 
-    <script type="application/ld+json">
+    <script type=application/ld+json>
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -72,245 +72,118 @@
     }
     </script>
 
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260814e">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260815a">
-    <link rel="preload" href="/css/icons.css?v=20260815a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260815a"></noscript>
+    <link rel=stylesheet href="/css/tailwind.css?v=20260814e">
+    <link rel=stylesheet href="/css/site-theme.css?v=20260814e">
+    <link rel=preload href="/css/icons.css?v=20260815a" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
+    <noscript><link rel=stylesheet href="/css/icons.css?v=20260815a"></noscript>
 
-    <!-- The first-service gift certificate is one per customer. Visitors who
-         have already claimed it must never see it offered again, so it is hidden
-         here from local storage before first paint rather than after; the
-         deferred /js/gift-certificate.js then confirms against the server. -->
-    <script>(function(){try{var s=JSON.parse(localStorage.getItem('aaa-first-service-gift')||'{}');if(!s||s.firstServiceGiftRedeemed!==true)return;var t=document.createElement('style');t.id='gift-certificate-hidden';t.textContent='[data-gift-certificate]{display:none!important}';document.head.appendChild(t);}catch(e){}})();</script>
+    
+    <script>(()=>{try{var e,t=JSON.parse(localStorage.getItem("aaa-first-service-gift")||"{}");t&&!0===t.firstServiceGiftRedeemed&&((e=document.createElement("style")).id="gift-certificate-hidden",e.textContent="[data-gift-certificate]{display:none!important}",document.head.appendChild(e))}catch(e){}})()</script>
 
-    <style>
-        section[id], header[id] {
-            scroll-margin-top: 80px;
-        }
-        @media (max-width: 768px) {
-            section[id], header[id] {
-                scroll-margin-top: 100px;
-            }
-        }
-        
-        /* Interactive time slots styling */
-        .time-slot-btn {
-            transition: all 0.2s ease-in-out;
-        }
-        .time-slot-btn.selected {
-            background-color: #A61F2E;
-            border-color: #A61F2E;
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(166, 31, 46, 0.3);
-        }
-        .time-slot-btn:focus-visible {
-            outline: 3px solid rgba(248, 113, 113, 0.5);
-            outline-offset: 3px;
-        }
-        .booking-step-number {
-            background: #a61f2e;
-            box-shadow: 0 0 0 5px rgba(166, 31, 46, 0.16);
-        }
-        .booking-control:focus-visible {
-            border-color: #f87171;
-            box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.16);
-        }
-
-        /* A window someone else already booked stays visible -- seeing that
-           Tuesday afternoon is gone is information -- but it cannot be picked. */
-        .time-slot-btn[disabled] {
-            opacity: 0.45;
-            cursor: not-allowed;
-            text-decoration: line-through;
-        }
-        .time-slot-btn[disabled]:hover {
-            border-color: #374151;
-        }
-        /* The strike-through belongs on the time itself, not on the line that
-           explains why it is struck through. */
-        .time-slot-btn[disabled] span {
-            text-decoration: none;
-        }
-
-        /* Quick-pick service tiles. The <select> below them stays the source of
-           truth; these are a faster way to reach its six most-booked options. */
-        .service-tile {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.7rem 0.85rem;
-            border: 2px solid #374151;
-            border-radius: 0.85rem;
-            background-color: #1f2937;
-            color: #e5e7eb;
-            font-size: 0.8125rem;
-            font-weight: 600;
-            line-height: 1.2;
-            text-align: left;
-            transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
-        }
-        .service-tile:hover {
-            border-color: #6b7280;
-            color: #ffffff;
-        }
-        .service-tile:focus-visible {
-            outline: 3px solid rgba(248, 113, 113, 0.5);
-            outline-offset: 2px;
-        }
-        .service-tile[aria-pressed="true"] {
-            border-color: #a61f2e;
-            background-color: rgba(166, 31, 46, 0.18);
-            color: #ffffff;
-        }
-        .service-tile__icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 1.85rem;
-            height: 1.85rem;
-            flex-shrink: 0;
-            border-radius: 0.6rem;
-            background-color: rgba(166, 31, 46, 0.16);
-            color: #f87171;
-        }
-        .service-tile[aria-pressed="true"] .service-tile__icon {
-            background-color: #a61f2e;
-            color: #ffffff;
-        }
-
-        /* Three-step progress rail above the form. Steps light up as the
-           fields behind them are answered; book-page.js sets data-state. */
-        .booking-progress__step[data-state="active"] .booking-progress__dot {
-            background-color: #a61f2e;
-            border-color: #a61f2e;
-            color: #ffffff;
-            box-shadow: 0 0 0 4px rgba(166, 31, 46, 0.18);
-        }
-        .booking-progress__step[data-state="active"] .booking-progress__label {
-            color: #ffffff;
-        }
-        .booking-progress__step[data-state="done"] .booking-progress__dot {
-            background-color: #047857;
-            border-color: #047857;
-            color: #ffffff;
-        }
-        .booking-progress__step[data-state="done"] .booking-progress__label {
-            color: #6ee7b7;
-        }
-
-        .booking-faq details[open] .booking-faq__chevron {
-            transform: rotate(180deg);
-        }
-        .booking-faq summary::-webkit-details-marker {
-            display: none;
-        }
-        .booking-faq summary {
-            list-style: none;
-        }
-    </style>
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/manifest.webmanifest">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="AAA Handyman">
-    <meta name="application-name" content="AAA Handyman">
+    <style>header[id],section[id]{scroll-margin-top:80px}@media (max-width:768px){header[id],section[id]{scroll-margin-top:100px}}.time-slot-btn{transition:all .2s ease-in-out}.time-slot-btn.selected{background-color:#a61f2e;border-color:#a61f2e;color:#fff;box-shadow:0 4px 12px rgba(166,31,46,.3)}.time-slot-btn:focus-visible{outline:3px solid rgba(248,113,113,.5);outline-offset:3px}.booking-step-number{background:#a61f2e;box-shadow:0 0 0 5px rgba(166,31,46,.16)}.booking-control:focus-visible{border-color:#f87171;box-shadow:0 0 0 3px rgba(248,113,113,.16)}.time-slot-btn[disabled]{opacity:.45;cursor:not-allowed;text-decoration:line-through}.time-slot-btn[disabled]:hover{border-color:#374151}.time-slot-btn[disabled] span{text-decoration:none}.service-tile{display:flex;align-items:center;gap:.6rem;padding:.7rem .85rem;border:2px solid #374151;border-radius:.85rem;background-color:#1f2937;color:#e5e7eb;font-size:.8125rem;font-weight:600;line-height:1.2;text-align:left;transition:border-color .15s ease,background-color .15s ease,color .15s ease}.service-tile:hover{border-color:#6b7280;color:#fff}.service-tile:focus-visible{outline:3px solid rgba(248,113,113,.5);outline-offset:2px}.service-tile[aria-pressed=true]{border-color:#a61f2e;background-color:rgba(166,31,46,.18);color:#fff}.service-tile__icon{display:inline-flex;align-items:center;justify-content:center;width:1.85rem;height:1.85rem;flex-shrink:0;border-radius:.6rem;background-color:rgba(166,31,46,.16);color:#f87171}.service-tile[aria-pressed=true] .service-tile__icon{background-color:#a61f2e;color:#fff}.booking-progress__step[data-state=active] .booking-progress__dot{background-color:#a61f2e;border-color:#a61f2e;color:#fff;box-shadow:0 0 0 4px rgba(166,31,46,.18)}.booking-progress__step[data-state=active] .booking-progress__label{color:#fff}.booking-progress__step[data-state=done] .booking-progress__dot{background-color:#047857;border-color:#047857;color:#fff}.booking-progress__step[data-state=done] .booking-progress__label{color:#6ee7b7}.booking-faq details[open] .booking-faq__chevron{transform:rotate(180deg)}.booking-faq summary::-webkit-details-marker{display:none}.booking-faq summary{list-style:none}</style>
+    <link rel=icon href=/favicon.ico sizes=any>
+    <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+    <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+    <link rel=manifest href=/manifest.webmanifest>
+    <meta name=mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+    <meta name=apple-mobile-web-app-title content="AAA Handyman">
+    <meta name=application-name content="AAA Handyman">
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
 
-    <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
+    <a href=#main-content class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
-<header id="site-header" class="site-header sticky top-0 z-[100] bg-white/95 backdrop-blur-md shadow-md border-b-[3px] border-red-600">
+<header id=site-header class="site-header sticky top-0 z-[100] bg-white/95 backdrop-blur-md shadow-md border-b-[3px] border-red-600">
     <div class="header-container site-nav__bar max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" class="brand site-nav__brand group flex items-center gap-3 min-w-0">
-            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 shadow-sm transition group-hover:scale-105">
+        <a href=/ class="brand site-nav__brand group flex items-center gap-3 min-w-0">
+            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width=48 height=48 decoding=async fetchpriority=high alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 shadow-sm transition group-hover:scale-105">
             <div class="brand-text min-w-0">
                 <p class="brand-title text-base min-[390px]:text-lg sm:text-xl lg:text-xl xl:text-2xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services LLC</p>
                 <p class="brand-tagline text-[10px] sm:text-xs text-gray-500 font-medium">Oakland County, Michigan</p>
             </div>
-            <span class="sr-only">home</span>
+            <span class=sr-only>home</span>
         </a>
 
-        <!-- Desktop Navigation Container -->
+        
         <div class="site-nav__desktop hidden lg:flex items-center">
             <ul class="nav-links site-nav__links flex items-center gap-5 list-none m-0 p-0 text-sm xl:text-base font-medium">
-                <li><a href="/services" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a></li>
-                <li><a href="/service-areas" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a></li>
-                <li><a href="/rates" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Rates</a></li>
-                <li><a href="/guarantee" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Guarantee</a></li>
-                <li><a href="/reviews" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Reviews</a></li>
-                <li><a href="/careers" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Careers</a></li>
-                <li><a href="/contact" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Contact</a></li>
+                <li><a href=/services class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a></li>
+                <li><a href=/service-areas class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a></li>
+                <li><a href=/rates class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Rates</a></li>
+                <li><a href=/guarantee class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Guarantee</a></li>
+                <li><a href=/reviews class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Reviews</a></li>
+                <li><a href=/careers class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Careers</a></li>
+                <li><a href=/contact class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Contact</a></li>
             </ul>
 
-            <!-- Social Media Icons -->
+            
             <div class="social-icons site-nav__social flex items-center gap-3 pl-4 border-l border-gray-200 ml-3">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
             </div>
         </div>
 
-        <!-- Mobile Hamburger Button -->
-        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
-            <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
+        
+        <button id=mobile-menu-btn class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label=Menu aria-expanded=false aria-controls=mobile-menu>
+            <i class="fas fa-bars text-2xl" id=menu-icon aria-hidden=true></i>
         </button>
     </div>
 
-    <!-- Mobile Navigation Drawer / Menu -->
-    <div id="mobile-menu" class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden="true">
-        <div class="space-y-1">
-            <a href="/services" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
-            <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
-            <a href="/rates" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
-            <a href="/guarantee" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Guarantee</a>
-            <a href="/reviews" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Reviews</a>
-            <a href="/careers" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Careers</a>
-            <a href="/contact" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Contact</a>
+    
+    <div id=mobile-menu class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden=true>
+        <div class=space-y-1>
+            <a href=/services class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
+            <a href=/service-areas class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
+            <a href=/rates class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
+            <a href=/guarantee class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Guarantee</a>
+            <a href=/reviews class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Reviews</a>
+            <a href=/careers class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Careers</a>
+            <a href=/contact class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Contact</a>
         </div>
 
         <div class="pt-3 border-t border-gray-100 flex flex-col gap-3">
-            <a href="tel:+12483853432" class="flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition text-center">
-                <i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432
+            <a href=tel:+12483853432 class="flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition text-center">
+                <i class="fas fa-phone" aria-hidden=true></i> Call (248) 385-3432
             </a>
             <div class="flex items-center justify-center gap-6 text-2xl pt-1">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
             </div>
         </div>
     </div>
 </header>
 
-<aside id="seasonal-banner" class="seasonal-banner" data-season="summer" aria-label="Seasonal offer">
-    <div class="seasonal-banner__inner">
-        <p class="seasonal-badge">
-            <span class="seasonal-badge__icon" data-banner-icon aria-hidden="true">🌤️</span>
+<aside id=seasonal-banner class=seasonal-banner data-season=summer aria-label="Seasonal offer">
+    <div class=seasonal-banner__inner>
+        <p class=seasonal-badge>
+            <span class=seasonal-badge__icon data-banner-icon aria-hidden=true>🌤️</span>
             <span data-banner-label>Summer Exterior Refresh</span>
         </p>
-        <p class="seasonal-banner__copy">
-            <span class="seasonal-banner__lead"><span data-banner-lead>Book your summer exterior refresh and</span> <strong class="seasonal-banner__save" data-banner-save>save $50</strong></span>
-            <span class="seasonal-banner__note" data-banner-note>Oakland County homeowners · limited summer openings</span>
+        <p class=seasonal-banner__copy>
+            <span class=seasonal-banner__lead><span data-banner-lead>Book your summer exterior refresh and</span> <strong class=seasonal-banner__save data-banner-save>save $50</strong></span>
+            <span class=seasonal-banner__note data-banner-note>Oakland County homeowners · limited summer openings</span>
         </p>
-        <a class="seasonal-banner__cta" href="/#quote" data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+        <a class=seasonal-banner__cta href=/#quote data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width=14 height=14 fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
     </div>
-    <button type="button" class="seasonal-banner__close" data-banner-close aria-label="Dismiss seasonal offer">
-        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"></path></svg>
+    <button type=button class=seasonal-banner__close data-banner-close aria-label="Dismiss seasonal offer">
+        <svg viewBox="0 0 16 16" width=14 height=14 fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round aria-hidden=true><path d="m4 4 8 8M12 4l-8 8"></path></svg>
     </button>
-    <script type="application/json" data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck \u0026 Gutter Prep","lead":"Book your spring deck \u0026 gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
-    <script>(function(){try{var b=document.getElementById('seasonal-banner');if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();</script>
+    <script type=application/json data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck \u0026 Gutter Prep","lead":"Book your spring deck \u0026 gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
+    <script>(()=>{try{var e,a,t,n,l=document.getElementById("seasonal-banner");l&&(a=(e=new Date).getMonth(),t=e.getFullYear(),n=(a<=1||11===a?"winter":a<=4?"spring":a<=7?"summer":"fall")+"-"+(11===a?t+1:t),l.dataset.seasonKey=n,localStorage.getItem("aaa-seasonal-banner")===n)&&(l.hidden=!0)}catch(e){}})()</script>
 </aside>
 
-    <main id="main-content" class="flex-grow">
-        <!-- Hero and content splitscreen Section -->
-        <section id="booking-section" class="ambient-glow-hero py-12 sm:py-16 bg-gray-950 text-white relative">
+    <main id=main-content class=flex-grow>
+        
+        <section id=booking-section class="ambient-glow-hero py-12 sm:py-16 bg-gray-950 text-white relative">
             <div class="max-w-7xl mx-auto px-6 relative z-10">
                 
                 <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-10 reveal-on-scroll">
                     <span class="badge-craftsman px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5 mb-3">
-                        <i class="fas fa-calendar-check" aria-hidden="true"></i> Instant Booking
+                        <i class="fas fa-calendar-check" aria-hidden=true></i> Instant Booking
                     </span>
                     <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Book Your Handyman Online</h1>
                     <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
@@ -318,30 +191,29 @@
                     </p>
                 </div>
 
-                <!-- Trust strip: the three objections that stop a first-time
-                     visitor from booking, answered before the form starts. -->
+                
                 <ul class="mx-auto mb-10 sm:mb-14 flex max-w-4xl flex-wrap items-center justify-center gap-2.5 sm:gap-3 list-none p-0">
                     <li class="card-dark-layered flex items-center gap-2.5 rounded-2xl border border-gray-700/60 bg-gray-800/80 px-4 py-2.5 shadow-md">
-                        <i class="fas fa-shield-halved text-red-300" aria-hidden="true"></i>
+                        <i class="fas fa-shield-halved text-red-300" aria-hidden=true></i>
                         <span class="text-sm font-bold text-white">1-Year Craftsman Warranty</span>
                     </li>
                     <li class="card-dark-layered flex items-center gap-2.5 rounded-2xl border border-gray-700/60 bg-gray-800/80 px-4 py-2.5 shadow-md">
-                        <i class="fas fa-credit-card text-emerald-400" aria-hidden="true"></i>
+                        <i class="fas fa-credit-card text-emerald-400" aria-hidden=true></i>
                         <span class="text-sm font-bold text-white">Upfront Rates</span>
                     </li>
                     <li class="card-dark-layered flex items-center gap-2.5 rounded-2xl border border-gray-700/60 bg-gray-800/80 px-4 py-2.5 shadow-md">
-                        <i class="fas fa-clock text-red-300" aria-hidden="true"></i>
+                        <i class="fas fa-clock text-red-300" aria-hidden=true></i>
                         <span class="text-sm font-bold text-white">Punctual &amp; Local — Oakland County</span>
                     </li>
                     <li>
-                        <a href="/reviews" class="flex items-center gap-2.5 rounded-2xl border border-yellow-500/30 bg-yellow-500/10 px-4 py-2.5 transition hover:border-yellow-400/60 hover:bg-yellow-500/20">
+                        <a href=/reviews class="flex items-center gap-2.5 rounded-2xl border border-yellow-500/30 bg-yellow-500/10 px-4 py-2.5 transition hover:border-yellow-400/60 hover:bg-yellow-500/20">
                             <span class="text-sm font-black text-yellow-400">5.0</span>
-                            <span class="flex items-center gap-0.5 text-xs text-yellow-500" role="img" aria-label="Rated 5 out of 5 stars">
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
-                                <i class="fas fa-star" aria-hidden="true"></i>
+                            <span class="flex items-center gap-0.5 text-xs text-yellow-500" role=img aria-label="Rated 5 out of 5 stars">
+                                <i class="fas fa-star" aria-hidden=true></i>
+                                <i class="fas fa-star" aria-hidden=true></i>
+                                <i class="fas fa-star" aria-hidden=true></i>
+                                <i class="fas fa-star" aria-hidden=true></i>
+                                <i class="fas fa-star" aria-hidden=true></i>
                             </span>
                             <span class="text-sm font-bold text-white">Homeowner Reviews</span>
                         </a>
@@ -350,21 +222,19 @@
 
                 <div class="grid lg:grid-cols-12 gap-12 items-start">
                     
-                    <!-- Left column: Info and values -->
+                    
                     <div class="lg:col-span-5 space-y-8">
-                        <!-- Route-day banner. /js/service-zone-selector.js
-                             replaces the fallback list below with a city picker;
-                             the list is what non-JS visitors see. -->
+                        
                         <div class="rounded-2xl border border-white/15 bg-blue-900 p-5 sm:p-6 shadow-lg">
                             <h2 class="flex items-center gap-2 text-lg font-bold text-white">
-                                <i class="fas fa-route text-red-400" aria-hidden="true"></i> We are already in your neighborhood
+                                <i class="fas fa-route text-red-400" aria-hidden=true></i> We are already in your neighborhood
                             </h2>
                             <p class="mt-1.5 text-sm leading-relaxed text-gray-300">Picking a day we already drive your street usually means a same-week confirmation.</p>
-                            <div class="mt-4" data-zone-selector>
+                            <div class=mt-4 data-zone-selector>
                                 <ul class="space-y-2.5 text-sm text-gray-200">
-                                    <li><strong class="text-white">Mondays & Thursdays</strong> — North & Lakes: Waterford, Pontiac, Clarkston, Lake Orion, Oxford, White Lake, Highland, Commerce, Union Lake, Davisburg, Independence Twp., Orion Twp., Leonard, Ortonville, Brandon Twp., Addison Twp., Groveland Twp., Holly</li>
-                                    <li><strong class="text-white">Tuesdays & Fridays</strong> — West Corridor: West Bloomfield, Orchard Lake, Farmington Hills, Novi, Southfield, Walled Lake, Wixom, Milford, Utica, Bloomfield Hills, Lyon Twp., South Lyon</li>
-                                    <li><strong class="text-white">Wednesdays & Saturdays</strong> — East & South Metro: Troy, Rochester Hills, Rochester, Birmingham, Royal Oak, Franklin, Huntington Woods, Beverly Hills, Auburn Hills, Berkley, Clawson, Ferndale, Hazel Park, Madison Heights, Oak Park, Pleasant Ridge, Oakland Twp.</li>
+                                    <li><strong class=text-white>Mondays & Thursdays</strong> — North & Lakes: Waterford, Pontiac, Clarkston, Lake Orion, Oxford, White Lake, Highland, Commerce, Union Lake, Davisburg, Independence Twp., Orion Twp., Leonard, Ortonville, Brandon Twp., Addison Twp., Groveland Twp., Holly</li>
+                                    <li><strong class=text-white>Tuesdays & Fridays</strong> — West Corridor: West Bloomfield, Orchard Lake, Farmington Hills, Novi, Southfield, Walled Lake, Wixom, Milford, Utica, Bloomfield Hills, Lyon Twp., South Lyon</li>
+                                    <li><strong class=text-white>Wednesdays & Saturdays</strong> — East & South Metro: Troy, Rochester Hills, Rochester, Birmingham, Royal Oak, Franklin, Huntington Woods, Beverly Hills, Auburn Hills, Berkley, Clawson, Ferndale, Hazel Park, Madison Heights, Oak Park, Pleasant Ridge, Oakland Twp.</li>
                                 </ul>
                             </div>
                             <p class="mt-3 text-xs leading-relaxed text-gray-400">Off-route days are still bookable — they just take an extra call to confirm. Zone A minimum $100, Zone B minimum $145.</p>
@@ -372,10 +242,10 @@
 
                         <h2 class="text-2xl sm:text-3xl font-bold text-white leading-tight">Why Book Online with AAA Handyman?</h2>
 
-                        <div class="space-y-6">
+                        <div class=space-y-6>
                             <div class="flex items-start gap-4">
                                 <div class="w-12 h-12 rounded-2xl bg-red-600/10 border border-red-500/20 flex items-center justify-center text-red-500 flex-shrink-0 text-xl">
-                                    <i class="fas fa-clock" aria-hidden="true"></i>
+                                    <i class="fas fa-clock" aria-hidden=true></i>
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-bold text-white">Save Time & Hassle</h3>
@@ -387,7 +257,7 @@
 
                             <div class="flex items-start gap-4">
                                 <div class="w-12 h-12 rounded-2xl bg-green-600/10 border border-green-500/20 flex items-center justify-center text-green-500 flex-shrink-0 text-xl">
-                                    <i class="fas fa-dollar-sign" aria-hidden="true"></i>
+                                    <i class="fas fa-dollar-sign" aria-hidden=true></i>
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-bold text-white">No Deposit Required on Labor</h3>
@@ -399,7 +269,7 @@
 
                             <div class="flex items-start gap-4">
                                 <div class="w-12 h-12 rounded-2xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-500 flex-shrink-0 text-xl">
-                                    <i class="fas fa-shield-halved" aria-hidden="true"></i>
+                                    <i class="fas fa-shield-halved" aria-hidden=true></i>
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-bold text-white">100% Satisfaction Guarantee</h3>
@@ -410,44 +280,38 @@
                             </div>
                         </div>
 
-                        <!-- Social proof. The rating summary is the site-wide
-                             figure published in our structured data; the strip
-                             below it holds Douglas Mitchell's booking review,
-                             and book-page.js inserts the most recent reviews
-                             homeowners submitted themselves above it. The
-                             written-in card is what shows if that call finds
-                             nothing. -->
+                        
                         <div class="rounded-2xl border border-gray-800 bg-gray-800/50 p-6 space-y-5">
                             <div class="flex items-center gap-4">
-                                <div class="text-center">
+                                <div class=text-center>
                                     <p class="text-4xl font-black leading-none text-white">5.0</p>
-                                    <span class="mt-1.5 flex items-center gap-0.5 text-xs text-yellow-500" role="img" aria-label="Rated 5 out of 5 stars">
-                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                    <span class="mt-1.5 flex items-center gap-0.5 text-xs text-yellow-500" role=img aria-label="Rated 5 out of 5 stars">
+                                        <i class="fas fa-star" aria-hidden=true></i>
+                                        <i class="fas fa-star" aria-hidden=true></i>
+                                        <i class="fas fa-star" aria-hidden=true></i>
+                                        <i class="fas fa-star" aria-hidden=true></i>
+                                        <i class="fas fa-star" aria-hidden=true></i>
                                     </span>
                                 </div>
-                                <div class="min-w-0">
+                                <div class=min-w-0>
                                     <p class="text-sm font-bold text-white">Homeowner Reviews</p>
-                                    <p class="mt-1 text-xs leading-relaxed text-gray-400">Neighbors across Oakland County rate our punctuality, tidiness, and fair pricing. Photos and full write-ups are on the <a href="/reviews" class="font-semibold text-red-400 underline decoration-red-500/40 underline-offset-2 hover:text-red-300">reviews page</a>.</p>
+                                    <p class="mt-1 text-xs leading-relaxed text-gray-400">Neighbors across Oakland County rate our punctuality, tidiness, and fair pricing. Photos and full write-ups are on the <a href=/reviews class="font-semibold text-red-400 underline decoration-red-500/40 underline-offset-2 hover:text-red-300">reviews page</a>.</p>
                                 </div>
                             </div>
 
-                            <div id="booking-live-reviews" class="space-y-3 border-t border-gray-800 pt-5" aria-live="polite">
+                            <div id=booking-live-reviews class="space-y-3 border-t border-gray-800 pt-5" aria-live=polite>
                                 <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500">What homeowners say</p>
                                 <article class="flex items-start gap-3" data-featured-review>
-                                    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-600/90 text-xs font-black text-white" aria-hidden="true">DM</span>
-                                    <div class="min-w-0">
+                                    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-600/90 text-xs font-black text-white" aria-hidden=true>DM</span>
+                                    <div class=min-w-0>
                                         <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-bold text-white">
                                             <span>Douglas Mitchell — Birmingham, MI</span>
-                                            <span class="flex items-center gap-0.5 text-[10px] text-yellow-500" role="img" aria-label="5 out of 5 stars">
-                                                <i class="fas fa-star" aria-hidden="true"></i>
-                                                <i class="fas fa-star" aria-hidden="true"></i>
-                                                <i class="fas fa-star" aria-hidden="true"></i>
-                                                <i class="fas fa-star" aria-hidden="true"></i>
-                                                <i class="fas fa-star" aria-hidden="true"></i>
+                                            <span class="flex items-center gap-0.5 text-[10px] text-yellow-500" role=img aria-label="5 out of 5 stars">
+                                                <i class="fas fa-star" aria-hidden=true></i>
+                                                <i class="fas fa-star" aria-hidden=true></i>
+                                                <i class="fas fa-star" aria-hidden=true></i>
+                                                <i class="fas fa-star" aria-hidden=true></i>
+                                                <i class="fas fa-star" aria-hidden=true></i>
                                             </span>
                                         </p>
                                         <p class="mt-0.5 text-xs leading-relaxed text-gray-400">“Booking AAA Handyman Services LLC online was an absolute breeze. Selected a Tuesday morning slot for gutter maintenance and drywall repair. Victor showed up exactly on time, was extremely polite, and finished ahead of schedule. Outstanding service!”</p>
@@ -457,45 +321,42 @@
                         </div>
                     </div>
 
-                    <!-- Right column: The interactive form -->
-                    <div class="lg:col-span-7">
+                    
+                    <div class=lg:col-span-7>
                         <div class="bg-gray-800/30 rounded-3xl p-6 sm:p-8 border border-gray-800/80 shadow-2xl relative">
                             
-                            <!-- Form State Container -->
-                            <form id="booking-form" name="bookings" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
-                                <input type="hidden" name="form-name" value="bookings" />
-                                <input type="hidden" name="photoUrl" value="" />
-                                <p class="hidden">
-                                    <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" aria-hidden="true" aria-label="Do not fill out this field" /></label>
+                            
+                            <form id=booking-form name=bookings method=POST enctype=multipart/form-data data-netlify=true netlify-honeypot=bot-field class=space-y-6>
+                                <input type=hidden name=form-name value=bookings>
+                                <input type=hidden name=photoUrl>
+                                <p class=hidden>
+                                    <label>Don't fill this out if you're human: <input name=bot-field tabindex=-1 aria-hidden=true aria-label="Do not fill out this field"></label>
                                 </p>
 
-                                <!-- Three-step rail. It is a status display, not
-                                     a wizard: every field stays on one screen,
-                                     and book-page.js lights each step as the
-                                     fields behind it are answered. -->
-                                <ol id="booking-progress" class="m-0 grid list-none grid-cols-3 gap-2 p-0 sm:gap-3" aria-label="Booking progress">
-                                    <li class="booking-progress__step" data-step="1" data-state="active">
+                                
+                                <ol id=booking-progress class="m-0 grid list-none grid-cols-3 gap-2 p-0 sm:gap-3" aria-label="Booking progress">
+                                    <li class=booking-progress__step data-step=1 data-state=active>
                                         <div class="flex items-center gap-2.5 rounded-2xl border border-gray-700 bg-gray-900/50 px-3 py-2.5">
                                             <span class="booking-progress__dot flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-gray-600 bg-gray-800 text-xs font-bold text-gray-300">1</span>
                                             <span class="booking-progress__label text-[11px] font-bold uppercase leading-tight tracking-wide text-gray-400 sm:text-xs">Select Service</span>
                                         </div>
                                     </li>
-                                    <li class="booking-progress__step" data-step="2" data-state="todo">
+                                    <li class=booking-progress__step data-step=2 data-state=todo>
                                         <div class="flex items-center gap-2.5 rounded-2xl border border-gray-700 bg-gray-900/50 px-3 py-2.5">
                                             <span class="booking-progress__dot flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-gray-600 bg-gray-800 text-xs font-bold text-gray-300">2</span>
                                             <span class="booking-progress__label text-[11px] font-bold uppercase leading-tight tracking-wide text-gray-400 sm:text-xs">Date &amp; Time</span>
                                         </div>
                                     </li>
-                                    <li class="booking-progress__step" data-step="3" data-state="todo">
+                                    <li class=booking-progress__step data-step=3 data-state=todo>
                                         <div class="flex items-center gap-2.5 rounded-2xl border border-gray-700 bg-gray-900/50 px-3 py-2.5">
                                             <span class="booking-progress__dot flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-gray-600 bg-gray-800 text-xs font-bold text-gray-300">3</span>
                                             <span class="booking-progress__label text-[11px] font-bold uppercase leading-tight tracking-wide text-gray-400 sm:text-xs">Your Details</span>
                                         </div>
                                     </li>
                                 </ol>
-                                <p id="booking-progress-status" class="sr-only" aria-live="polite"></p>
+                                <p id=booking-progress-status class=sr-only aria-live=polite></p>
 
-                                <div id="first-service-offer-booking" data-gift-certificate class="bg-gray-800 border-2 border-red-400 rounded-2xl p-4 sm:p-5 shadow-lg">
+                                <div id=first-service-offer-booking data-gift-certificate class="bg-gray-800 border-2 border-red-400 rounded-2xl p-4 sm:p-5 shadow-lg">
                                     <div class="flex items-center gap-3 sm:gap-4 mb-3 pb-3 border-b border-gray-700">
                                         <div class="bg-red-600 text-white text-2xl sm:text-3xl font-extrabold px-3 py-1.5 rounded-xl leading-none flex-shrink-0 shadow">
                                             $50
@@ -505,8 +366,8 @@
                                             <p class="text-xs sm:text-sm text-gray-300 mt-0.5 leading-snug">Receive a $50 gift certificate toward your first service.</p>
                                         </div>
                                     </div>
-                                    <label for="booking-first-service-certificate" class="flex cursor-pointer items-start gap-3 p-3 rounded-xl bg-gray-900/70 border border-gray-700 hover:border-red-500/60 transition group">
-                                        <input id="booking-first-service-certificate" type="checkbox" name="first-service-gift-certificate" value="Requested — customer confirms first service" class="mt-0.5 h-4 w-4 shrink-0 accent-red-600 rounded focus:ring-red-500">
+                                    <label for=booking-first-service-certificate class="flex cursor-pointer items-start gap-3 p-3 rounded-xl bg-gray-900/70 border border-gray-700 hover:border-red-500/60 transition group">
+                                        <input id=booking-first-service-certificate type=checkbox name=first-service-gift-certificate value="Requested — customer confirms first service" class="mt-0.5 h-4 w-4 shrink-0 accent-red-600 rounded focus:ring-red-500">
                                         <span class="text-xs sm:text-sm font-semibold text-white group-hover:text-red-300 transition leading-snug">Yes, I’m a new customer booking my first service!</span>
                                     </label>
                                 </div>
@@ -515,46 +376,43 @@
                                     <legend class="px-3 text-lg sm:text-xl font-bold text-white">Schedule Your Service</legend>
                                     <p class="mb-6 text-sm leading-relaxed text-gray-400">Choose a project, date, and arrival window. Your appointment remains a request until our team confirms it with you.</p>
 
-                                    <div class="space-y-6">
+                                    <div class=space-y-6>
                                         <div class="grid grid-cols-[2.25rem_1fr] gap-4 items-start">
-                                            <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden="true">1</span>
+                                            <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden=true>1</span>
                                             <div>
-                                                <label for="booking-service" class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Select Service Package or Project *</label>
+                                                <label for=booking-service class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Select Service Package or Project *</label>
 
-                                                <!-- Quick picks for the six most-booked options. Each one
-                                                     sets the <select> below, which remains the field that
-                                                     is validated and submitted, so a customer who prefers
-                                                     the full list loses nothing. -->
-                                                <div id="service-quick-picks" class="mb-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3" role="group" aria-label="Popular services">
-                                                    <button type="button" class="service-tile" data-service="Carpentry & Trim" aria-pressed="false">
-                                                        <span class="service-tile__icon"><i class="fas fa-hammer" aria-hidden="true"></i></span>
+                                                
+                                                <div id=service-quick-picks class="mb-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3" role=group aria-label="Popular services">
+                                                    <button type=button class=service-tile data-service="Carpentry & Trim" aria-pressed=false>
+                                                        <span class=service-tile__icon><i class="fas fa-hammer" aria-hidden=true></i></span>
                                                         <span>Carpentry &amp; Trim</span>
                                                     </button>
-                                                    <button type="button" class="service-tile" data-service="Minor Electrical" aria-pressed="false">
-                                                        <span class="service-tile__icon"><i class="fas fa-bolt" aria-hidden="true"></i></span>
+                                                    <button type=button class=service-tile data-service="Minor Electrical" aria-pressed=false>
+                                                        <span class=service-tile__icon><i class="fas fa-bolt" aria-hidden=true></i></span>
                                                         <span>Minor Electrical</span>
                                                     </button>
-                                                    <button type="button" class="service-tile" data-service="Doors & Windows" aria-pressed="false">
-                                                        <span class="service-tile__icon"><i class="fas fa-door-open" aria-hidden="true"></i></span>
+                                                    <button type=button class=service-tile data-service="Doors & Windows" aria-pressed=false>
+                                                        <span class=service-tile__icon><i class="fas fa-door-open" aria-hidden=true></i></span>
                                                         <span>Doors &amp; Windows</span>
                                                     </button>
-                                                    <button type="button" class="service-tile" data-service="Drywall Repair" aria-pressed="false">
-                                                        <span class="service-tile__icon"><i class="fas fa-paint-roller" aria-hidden="true"></i></span>
+                                                    <button type=button class=service-tile data-service="Drywall Repair" aria-pressed=false>
+                                                        <span class=service-tile__icon><i class="fas fa-paint-roller" aria-hidden=true></i></span>
                                                         <span>Drywall Repair</span>
                                                     </button>
-                                                    <button type="button" class="service-tile" data-service="Installation & Mounting" aria-pressed="false">
-                                                        <span class="service-tile__icon"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></span>
+                                                    <button type=button class=service-tile data-service="Installation & Mounting" aria-pressed=false>
+                                                        <span class=service-tile__icon><i class="fas fa-screwdriver-wrench" aria-hidden=true></i></span>
                                                         <span>Install &amp; Mounting</span>
                                                     </button>
-                                                    <button type="button" class="service-tile" data-service="4-Hour Handyman Package" aria-pressed="false">
-                                                        <span class="service-tile__icon"><i class="fas fa-box-open" aria-hidden="true"></i></span>
+                                                    <button type=button class=service-tile data-service="4-Hour Handyman Package" aria-pressed=false>
+                                                        <span class=service-tile__icon><i class="fas fa-box-open" aria-hidden=true></i></span>
                                                         <span>4-Hour Package</span>
                                                     </button>
                                                 </div>
                                                 <p class="mb-2 text-[11px] text-gray-500">Something else? Pick from the full list of packages and projects below.</p>
 
-                                                <div class="relative">
-                                                    <select id="booking-service" name="service" required aria-describedby="booking-service-help" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white appearance-none">
+                                                <div class=relative>
+                                                    <select id=booking-service name=service required aria-describedby=booking-service-help class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white appearance-none">
                                                         <option value="" disabled selected class="bg-gray-800 text-gray-400">Choose a package or project...</option>
                                                         <option value="Minor Repair & Upkeep (1 Hour)" class="bg-gray-800 text-white">Minor Repair &amp; Upkeep (1 Hour)</option>
                                                         <option value="Carpentry & Installation (2 Hours)" class="bg-gray-800 text-white">Carpentry &amp; Installation (2 Hours)</option>
@@ -575,46 +433,42 @@
                                                         <option value="Minor Electrical" class="bg-gray-800 text-white">Minor Electrical</option>
                                                         <option value="Installation & Mounting" class="bg-gray-800 text-white">Installation &amp; Mounting</option>
                                                         <option value="Decks & Fences" class="bg-gray-800 text-white">Decks &amp; Fences</option>
-                                                        <option value="Gutters" class="bg-gray-800 text-white">Gutters</option>
+                                                        <option value=Gutters class="bg-gray-800 text-white">Gutters</option>
                                                         <option value="Other / Custom Project" class="bg-gray-800 text-white">Other (Specify below)</option>
                                                     </select>
-                                                    <div class="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none text-gray-400"><i class="fas fa-chevron-down" aria-hidden="true"></i></div>
+                                                    <div class="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none text-gray-400"><i class="fas fa-chevron-down" aria-hidden=true></i></div>
                                                 </div>
-                                                <p id="booking-service-help" class="mt-2 text-xs text-gray-400">All prices and packages cover installation and service labor only. Hardware and materials are not included and are billed separately, unless you supply them yourself at no markup.</p>
-                                                <div id="service-package-info" class="hidden mt-3 p-4 bg-gray-950/60 border border-gray-700 rounded-xl text-xs sm:text-sm text-gray-300"></div>
-                                                <!-- Live cost breakdown for the selected package or
-                                                     project, written by book-page.js from the published
-                                                     rates. Empty until a service is chosen. -->
-                                                <div id="booking-estimate" class="hidden mt-3 rounded-xl border border-emerald-600/30 bg-emerald-950/25 p-4" aria-live="polite"></div>
+                                                <p id=booking-service-help class="mt-2 text-xs text-gray-400">All prices and packages cover installation and service labor only. Hardware and materials are not included and are billed separately, unless you supply them yourself at no markup.</p>
+                                                <div id=service-package-info class="hidden mt-3 p-4 bg-gray-950/60 border border-gray-700 rounded-xl text-xs sm:text-sm text-gray-300"></div>
+                                                
+                                                <div id=booking-estimate class="hidden mt-3 rounded-xl border border-emerald-600/30 bg-emerald-950/25 p-4" aria-live=polite></div>
                                             </div>
                                         </div>
 
                                         <div class="grid grid-cols-[2.25rem_1fr] gap-4 items-start">
-                                            <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden="true">2</span>
+                                            <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden=true>2</span>
                                             <div>
-                                                <label for="booking-date" class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Choose a Date *</label>
-                                                <input id="booking-date" type="date" name="bookingDate" required aria-describedby="booking-date-help booking-availability booking-error" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
-                                                <!-- Openings counted from real bookings by
-                                                     /api/booking/availability; hidden when that
-                                                     call cannot answer. -->
-                                                <p id="booking-availability" class="mt-2 hidden items-center gap-2 rounded-lg border border-emerald-500/25 bg-emerald-500/10 px-3 py-2 text-xs font-semibold text-emerald-300" aria-live="polite"></p>
-                                                <p id="booking-date-help" class="mt-2 text-xs text-gray-400">The earliest available date is tomorrow. We book Monday–Saturday.</p>
+                                                <label for=booking-date class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Choose a Date *</label>
+                                                <input id=booking-date type=date name=bookingDate required aria-describedby="booking-date-help booking-availability booking-error" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
+                                                
+                                                <p id=booking-availability class="mt-2 hidden items-center gap-2 rounded-lg border border-emerald-500/25 bg-emerald-500/10 px-3 py-2 text-xs font-semibold text-emerald-300" aria-live=polite></p>
+                                                <p id=booking-date-help class="mt-2 text-xs text-gray-400">The earliest available date is tomorrow. We book Monday–Saturday.</p>
                                             </div>
                                         </div>
 
                                         <div class="grid grid-cols-[2.25rem_1fr] gap-4 items-start">
-                                            <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden="true">3</span>
+                                            <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden=true>3</span>
                                             <div>
-                                                <span id="time-slot-label" class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Select Arrival Window *</span>
-                                                <input type="hidden" id="booking-time" name="bookingTime" required>
-                                                <div id="time-slots-container" class="grid sm:grid-cols-3 gap-3" role="group" aria-labelledby="time-slot-label"></div>
-                                                <p id="time-slot-note" class="mt-2 hidden text-xs text-gray-400"></p>
+                                                <span id=time-slot-label class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Select Arrival Window *</span>
+                                                <input type=hidden id=booking-time name=bookingTime required>
+                                                <div id=time-slots-container class="grid sm:grid-cols-3 gap-3" role=group aria-labelledby=time-slot-label></div>
+                                                <p id=time-slot-note class="mt-2 hidden text-xs text-gray-400"></p>
                                             </div>
                                         </div>
                                     </div>
                                 </fieldset>
 
-                                <div class="flex items-center gap-3 pt-1" aria-hidden="true">
+                                <div class="flex items-center gap-3 pt-1" aria-hidden=true>
                                     <span class="h-px flex-1 bg-gray-700"></span>
                                     <span class="text-xs font-bold uppercase tracking-[0.18em] text-gray-400">Contact Details</span>
                                     <span class="h-px flex-1 bg-gray-700"></span>
@@ -622,121 +476,115 @@
 
                                 <div class="grid sm:grid-cols-2 gap-6">
                                     <div>
-                                        <label for="booking-name" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Your Name *</label>
-                                        <input id="booking-name" type="text" name="name" required autocomplete="name" autocapitalize="words" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
+                                        <label for=booking-name class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Your Name *</label>
+                                        <input id=booking-name name=name required autocomplete=name autocapitalize=words class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
                                     </div>
                                     <div>
-                                        <label for="booking-email" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Email Address *</label>
-                                        <input id="booking-email" type="email" name="email" required autocomplete="email" inputmode="email" autocapitalize="off" autocorrect="off" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
+                                        <label for=booking-email class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Email Address *</label>
+                                        <input id=booking-email type=email name=email required autocomplete=email inputmode=email autocapitalize=off autocorrect=off class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label for="booking-phone" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Phone Number *</label>
-                                    <input id="booking-phone" type="tel" name="phone" required autocomplete="tel" inputmode="tel" autocapitalize="off" placeholder="(248) 385-3432" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
+                                    <label for=booking-phone class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Phone Number *</label>
+                                    <input id=booking-phone type=tel name=phone required autocomplete=tel inputmode=tel autocapitalize=off placeholder="(248) 385-3432" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
                                 </div>
 
-                                <!-- Service address. The ZIP is checked against
-                                     the Oakland County range as it is typed and
-                                     again on the server, so nobody gets a
-                                     confirmed window for a house we do not
-                                     drive to. -->
+                                
                                 <div>
-                                    <label for="booking-address" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Service Address *</label>
-                                    <input id="booking-address" type="text" name="address" required autocomplete="street-address" maxlength="160" placeholder="123 Maple St." class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
+                                    <label for=booking-address class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Service Address *</label>
+                                    <input id=booking-address name=address required autocomplete=street-address maxlength=160 placeholder="123 Maple St." class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
                                 </div>
 
                                 <div class="grid sm:grid-cols-2 gap-6">
                                     <div>
-                                        <label for="booking-city" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">City</label>
-                                        <input id="booking-city" type="text" name="city" autocomplete="address-level2" maxlength="80" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
+                                        <label for=booking-city class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">City</label>
+                                        <input id=booking-city name=city autocomplete=address-level2 maxlength=80 class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
                                     </div>
                                     <div>
-                                        <label for="booking-zip" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">ZIP Code *</label>
-                                        <input id="booking-zip" type="text" name="zip" required autocomplete="postal-code" inputmode="numeric" maxlength="5" pattern="\d{5}" placeholder="48328" aria-describedby="booking-zip-note" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
-                                        <p id="booking-zip-note" class="mt-2 text-xs text-gray-400" role="status" aria-live="polite">Oakland County only. We fill in the city and your service days for you.</p>
+                                        <label for=booking-zip class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">ZIP Code *</label>
+                                        <input id=booking-zip name=zip required autocomplete=postal-code inputmode=numeric maxlength=5 pattern=\d{5} placeholder=48328 aria-describedby=booking-zip-note class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
+                                        <p id=booking-zip-note class="mt-2 text-xs text-gray-400" role=status aria-live=polite>Oakland County only. We fill in the city and your service days for you.</p>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label for="booking-message" class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Project Details & Special Notes <span class="text-gray-500 lowercase font-normal">(optional)</span></label>
-                                    <textarea id="booking-message" name="message" rows="4" placeholder="Tell us what needs fixing, installing, or looking at…" class="w-full px-5 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-base text-white resize-none"></textarea>
+                                    <label for=booking-message class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Project Details & Special Notes <span class="text-gray-500 lowercase font-normal">(optional)</span></label>
+                                    <textarea id=booking-message name=message rows=4 placeholder="Tell us what needs fixing, installing, or looking at…" class="w-full px-5 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-base text-white resize-none"></textarea>
                                 </div>
 
                                 <div>
                                     <div class="flex items-end justify-between gap-4 mb-2">
-                                        <label for="booking-photo" class="block text-xs uppercase tracking-wider font-semibold text-gray-400">Repair Photo <span class="text-gray-500 lowercase font-normal">(optional)</span></label>
+                                        <label for=booking-photo class="block text-xs uppercase tracking-wider font-semibold text-gray-400">Repair Photo <span class="text-gray-500 lowercase font-normal">(optional)</span></label>
                                         <span class="text-[11px] text-gray-500">JPG, PNG or WebP · 10 MB max</span>
                                     </div>
                                     <p class="mb-2 flex items-start gap-2.5 rounded-xl border border-red-500/25 bg-red-500/10 px-3.5 py-2.5 text-xs leading-relaxed text-red-100">
-                                        <i class="fas fa-wand-magic-sparkles mt-0.5 shrink-0 text-red-400" aria-hidden="true"></i>
-                                        <span><strong class="font-bold text-white">Snap a quick photo with your phone</strong> and we can size up the job, price it more accurately, and bring the right materials on the first visit. Want an instant preliminary price range? <a href="/ai-estimate" class="font-bold text-red-300 underline underline-offset-2 hover:text-white">Try our AI Repair Estimator &rarr;</a></span>
+                                        <i class="fas fa-wand-magic-sparkles mt-0.5 shrink-0 text-red-400" aria-hidden=true></i>
+                                        <span><strong class="font-bold text-white">Snap a quick photo with your phone</strong> and we can size up the job, price it more accurately, and bring the right materials on the first visit. Want an instant preliminary price range? <a href=/ai-estimate class="font-bold text-red-300 underline underline-offset-2 hover:text-white">Try our AI Repair Estimator &rarr;</a></span>
                                     </p>
-                                    <label id="booking-photo-dropzone" for="booking-photo" class="group block cursor-pointer rounded-2xl border-2 border-dashed border-gray-700 bg-gray-900/45 p-4 transition hover:border-red-500/80 hover:bg-gray-900/70 focus-within:border-red-500">
-                                        <input id="booking-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" capture="environment" class="sr-only">
-                                        <div id="booking-photo-empty" class="flex items-center gap-4">
-                                            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-600/15 text-xl text-red-400 transition group-hover:bg-red-600 group-hover:text-white"><i class="fas fa-camera" aria-hidden="true"></i></span>
+                                    <label id=booking-photo-dropzone for=booking-photo class="group block cursor-pointer rounded-2xl border-2 border-dashed border-gray-700 bg-gray-900/45 p-4 transition hover:border-red-500/80 hover:bg-gray-900/70 focus-within:border-red-500">
+                                        <input id=booking-photo name=photo type=file accept=image/jpeg,image/png,image/webp capture=environment class=sr-only>
+                                        <div id=booking-photo-empty class="flex items-center gap-4">
+                                            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-600/15 text-xl text-red-400 transition group-hover:bg-red-600 group-hover:text-white"><i class="fas fa-camera" aria-hidden=true></i></span>
                                             <span>
                                                 <span class="block font-bold text-white">Snap or upload the repair</span>
                                                 <span class="mt-1 block text-sm leading-relaxed text-gray-400">A clear photo helps us diagnose the issue and prepare materials before your visit.</span>
                                             </span>
                                         </div>
-                                        <div id="booking-photo-preview-wrap" class="hidden items-center gap-4">
-                                            <img id="booking-photo-preview" class="h-20 w-24 shrink-0 rounded-xl border border-gray-700 object-cover" alt="Selected repair preview">
+                                        <div id=booking-photo-preview-wrap class="hidden items-center gap-4">
+                                            <img id=booking-photo-preview class="h-20 w-24 shrink-0 rounded-xl border border-gray-700 object-cover" alt="Selected repair preview">
                                             <span class="min-w-0 flex-1">
-                                                <span id="booking-photo-name" class="block truncate font-bold text-white"></span>
-                                                <span class="mt-1 block text-sm text-green-400"><i class="fas fa-check-circle mr-1" aria-hidden="true"></i>Ready to upload</span>
+                                                <span id=booking-photo-name class="block truncate font-bold text-white"></span>
+                                                <span class="mt-1 block text-sm text-green-400"><i class="fas fa-check-circle mr-1" aria-hidden=true></i>Ready to upload</span>
                                             </span>
-                                            <button id="booking-photo-remove" type="button" class="rounded-lg border border-gray-700 px-3 py-2 text-sm font-semibold text-gray-300 transition hover:border-red-500 hover:text-white">Remove</button>
+                                            <button id=booking-photo-remove type=button class="rounded-lg border border-gray-700 px-3 py-2 text-sm font-semibold text-gray-300 transition hover:border-red-500 hover:text-white">Remove</button>
                                         </div>
                                     </label>
-                                    <p id="booking-photo-error" class="mt-2 hidden text-sm font-semibold text-red-300" role="alert"></p>
+                                    <p id=booking-photo-error class="mt-2 hidden text-sm font-semibold text-red-300" role=alert></p>
                                 </div>
 
                                 <div class="flex items-start gap-3 bg-gray-900/50 p-4 rounded-xl border border-gray-800">
-                                    <input id="seasonal-opt-in" type="checkbox" name="seasonal-opt-in" class="mt-1 h-5 w-5 accent-red-600 rounded cursor-pointer">
-                                    <label for="seasonal-opt-in" class="text-sm text-gray-300 cursor-pointer select-none">
+                                    <input id=seasonal-opt-in type=checkbox name=seasonal-opt-in class="mt-1 h-5 w-5 accent-red-600 rounded cursor-pointer">
+                                    <label for=seasonal-opt-in class="text-sm text-gray-300 cursor-pointer select-none">
                                         <span class="font-semibold text-white block mb-0.5">Free Preventative & Seasonal Reminders</span>
                                         Send me free home maintenance tips (e.g. spring gutter checks, winter weatherproofing). Unsubscribe anytime.
                                     </label>
                                 </div>
 
-                                <!-- Fee micro-copy. Same two numbers, same
-                                     wording, as the booking modal, the bundle
-                                     cards, and /terms. -->
+                                
                                 <div class="rounded-xl border border-gray-700 bg-gray-900/60 p-4 text-xs leading-relaxed text-gray-300 space-y-2">
                                     <p class="text-[11px] font-extrabold uppercase tracking-[0.14em] text-gray-400">Before you submit</p>
-                                    <p><i class="fas fa-screwdriver-wrench mr-1.5 text-red-400" aria-hidden="true"></i><strong class="text-white">Labor only.</strong> Materials and hardware are billed separately at cost plus a <strong class="text-white">20% supply sourcing fee</strong> when we shop for them. Supply your own and we add nothing. <a href="/pricing-policy#materials-options" class="font-semibold text-red-400 underline decoration-red-500/40 underline-offset-2 hover:text-red-300">How materials are priced</a></p>
-                                    <p><i class="fas fa-credit-card mr-1.5 text-red-400" aria-hidden="true"></i>Cash, check, Zelle&reg;, Venmo&reg;, and Cash App accepted. A <strong class="text-white">5% processing fee</strong> applies to all non-cash payments.</p>
-                                    <p><i class="fas fa-triangle-exclamation mr-1.5 text-red-400" aria-hidden="true"></i><strong class="text-white">Hidden conditions.</strong> Concealed issues found after opening a wall or fixture &mdash; rot, mold, damaged wiring, code violations &mdash; sit outside the quoted scope. We stop, show you, and only continue once you approve a <strong class="text-white">written change order</strong>. <a href="/pricing-policy#no-surprise-guarantee" class="font-semibold text-red-400 underline decoration-red-500/40 underline-offset-2 hover:text-red-300">How this works</a></p>
+                                    <p><i class="fas fa-screwdriver-wrench mr-1.5 text-red-400" aria-hidden=true></i><strong class=text-white>Labor only.</strong> Materials and hardware are billed separately at cost plus a <strong class=text-white>20% supply sourcing fee</strong> when we shop for them. Supply your own and we add nothing. <a href=/pricing-policy#materials-options class="font-semibold text-red-400 underline decoration-red-500/40 underline-offset-2 hover:text-red-300">How materials are priced</a></p>
+                                    <p><i class="fas fa-credit-card mr-1.5 text-red-400" aria-hidden=true></i>Cash, check, Zelle&reg;, Venmo&reg;, and Cash App accepted. A <strong class=text-white>5% processing fee</strong> applies to all non-cash payments.</p>
+                                    <p><i class="fas fa-triangle-exclamation mr-1.5 text-red-400" aria-hidden=true></i><strong class=text-white>Hidden conditions.</strong> Concealed issues found after opening a wall or fixture &mdash; rot, mold, damaged wiring, code violations &mdash; sit outside the quoted scope. We stop, show you, and only continue once you approve a <strong class=text-white>written change order</strong>. <a href=/pricing-policy#no-surprise-guarantee class="font-semibold text-red-400 underline decoration-red-500/40 underline-offset-2 hover:text-red-300">How this works</a></p>
                                 </div>
 
-                                <p id="booking-error" class="hidden rounded-xl border border-red-500/30 bg-red-950/40 px-4 py-3 text-sm text-red-200" role="alert" aria-live="polite"></p>
+                                <p id=booking-error class="hidden rounded-xl border border-red-500/30 bg-red-950/40 px-4 py-3 text-sm text-red-200" role=alert aria-live=polite></p>
 
-                                <button type="submit" id="submit-btn" disabled class="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-600 disabled:text-gray-300 disabled:shadow-none disabled:cursor-not-allowed py-4 text-lg font-bold rounded-2xl transition flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
-                                    Request My Booking <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                                <button type=submit id=submit-btn disabled class="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-600 disabled:text-gray-300 disabled:shadow-none disabled:cursor-not-allowed py-4 text-lg font-bold rounded-2xl transition flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
+                                    Request My Booking <i class="fas fa-calendar-check" aria-hidden=true></i>
                                 </button>
                                 <p class="-mt-2 text-center text-xs leading-relaxed text-gray-400">
-                                    <i class="fas fa-lock mr-1 text-gray-500" aria-hidden="true"></i>
+                                    <i class="fas fa-lock mr-1 text-gray-500" aria-hidden=true></i>
                                     No payment today · If we supply materials, a deposit is due before work starts · We confirm your window by call or text
                                 </p>
                             </form>
 
-                            <!-- Success State -->
-                            <div id="success-state" class="hidden text-center py-12 px-4 space-y-6">
+                            
+                            <div id=success-state class="hidden text-center py-12 px-4 space-y-6">
                                 <div class="w-20 h-20 bg-green-600/10 border border-green-500/20 text-green-500 rounded-full flex items-center justify-center text-4xl mx-auto animate-bounce">
-                                    <i class="fas fa-check-circle" aria-hidden="true"></i>
+                                    <i class="fas fa-check-circle" aria-hidden=true></i>
                                 </div>
                                 <h2 class="text-2xl sm:text-3xl font-bold text-white">Booking Request Received!</h2>
                                 <p class="text-gray-300 max-w-md mx-auto leading-relaxed text-sm sm:text-base">
-                                    Thank you! Your booking for <span id="summary-service" class="font-bold text-white">gutter maintenance</span> on <span id="summary-date" class="font-bold text-white">July 22nd</span> is reserved.
+                                    Thank you! Your booking for <span id=summary-service class="font-bold text-white">gutter maintenance</span> on <span id=summary-date class="font-bold text-white">July 22nd</span> is reserved.
                                 </p>
                                 <p class="text-gray-400 text-xs max-w-sm mx-auto leading-relaxed">
                                     Victor or a team member will reach out to you within a few business hours to confirm your project scope and coordinate timing.
                                 </p>
                                 <div class="pt-4 flex flex-col sm:flex-row justify-center gap-4">
-                                    <a href="/" class="px-6 py-3 bg-red-600 hover:bg-red-700 font-bold rounded-xl text-sm transition shadow-md hover:shadow-red-600/30 text-white">Back to Home</a>
-                                    <a href="/services" class="px-6 py-3 bg-green-600 hover:bg-green-700 font-bold rounded-xl text-sm transition text-white shadow-md hover:shadow-green-600/30">View Services</a>
+                                    <a href=/ class="px-6 py-3 bg-red-600 hover:bg-red-700 font-bold rounded-xl text-sm transition shadow-md hover:shadow-red-600/30 text-white">Back to Home</a>
+                                    <a href=/services class="px-6 py-3 bg-green-600 hover:bg-green-700 font-bold rounded-xl text-sm transition text-white shadow-md hover:shadow-green-600/30">View Services</a>
                                 </div>
                             </div>
 
@@ -746,50 +594,48 @@
             </div>
         </section>
 
-        <!-- Three questions the booking form reliably raises, answered without
-             sending anyone off the page. Native <details> elements, so they
-             open, print, and find-in-page without a line of JavaScript. -->
-        <section id="booking-faq" class="booking-faq border-t border-gray-800 bg-gray-950 py-12 text-white sm:py-16">
+        
+        <section id=booking-faq class="booking-faq border-t border-gray-800 bg-gray-950 py-12 text-white sm:py-16">
             <div class="mx-auto max-w-3xl px-6">
                 <div class="mb-8 text-center">
                     <div class="text-sm font-semibold uppercase tracking-widest text-red-500">Before You Book</div>
                     <h2 class="mt-2 text-2xl font-bold text-white sm:text-3xl">Quick Answers</h2>
                 </div>
 
-                <div class="space-y-3">
+                <div class=space-y-3>
                     <details class="group rounded-2xl border border-gray-800 bg-gray-900/60 px-5 open:border-red-500/40">
                         <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 text-left text-base font-bold text-white">
                             What if I need to reschedule?
-                            <i class="booking-faq__chevron fas fa-chevron-down shrink-0 text-sm text-red-500 transition" aria-hidden="true"></i>
+                            <i class="booking-faq__chevron fas fa-chevron-down shrink-0 text-sm text-red-500 transition" aria-hidden=true></i>
                         </summary>
                         <p class="pb-5 text-sm leading-relaxed text-gray-400">
-                            Call or text <a href="tel:+12483853432" class="font-semibold text-red-400 hover:text-red-300">(248) 385-3432</a>, or reply to the email we send you, and we'll move your visit to another window. There is no rescheduling fee. Whatever notice you can give helps — it lets us offer the window to another neighbor.
+                            Call or text <a href=tel:+12483853432 class="font-semibold text-red-400 hover:text-red-300">(248) 385-3432</a>, or reply to the email we send you, and we'll move your visit to another window. There is no rescheduling fee. Whatever notice you can give helps — it lets us offer the window to another neighbor.
                         </p>
                     </details>
 
                     <details class="group rounded-2xl border border-gray-800 bg-gray-900/60 px-5 open:border-red-500/40">
                         <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 text-left text-base font-bold text-white">
                             How are hardware and materials handled?
-                            <i class="booking-faq__chevron fas fa-chevron-down shrink-0 text-sm text-red-500 transition" aria-hidden="true"></i>
+                            <i class="booking-faq__chevron fas fa-chevron-down shrink-0 text-sm text-red-500 transition" aria-hidden=true></i>
                         </summary>
                         <p class="pb-5 text-sm leading-relaxed text-gray-400">
-                            If AAA Handyman is handling, purchasing, or supplying materials for your project, a material deposit is required prior to starting the work. For labor-only jobs where the customer provides all materials, no upfront deposit is required. Materials provided by AAA Handyman carry a standard 20% supply markup, or you can supply them yourself at no markup. Full details are on the <a href="/rates" class="font-semibold text-red-400 hover:text-red-300">rates page</a>.
+                            If AAA Handyman is handling, purchasing, or supplying materials for your project, a material deposit is required prior to starting the work. For labor-only jobs where the customer provides all materials, no upfront deposit is required. Materials provided by AAA Handyman carry a standard 20% supply markup, or you can supply them yourself at no markup. Full details are on the <a href=/rates class="font-semibold text-red-400 hover:text-red-300">rates page</a>.
                         </p>
                     </details>
 
                     <details class="group rounded-2xl border border-gray-800 bg-gray-900/60 px-5 open:border-red-500/40">
                         <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 text-left text-base font-bold text-white">
                             When do I pay?
-                            <i class="booking-faq__chevron fas fa-chevron-down shrink-0 text-sm text-red-500 transition" aria-hidden="true"></i>
+                            <i class="booking-faq__chevron fas fa-chevron-down shrink-0 text-sm text-red-500 transition" aria-hidden=true></i>
                         </summary>
                         <p class="pb-5 text-sm leading-relaxed text-gray-400">
-                            If AAA Handyman is handling, purchasing, or supplying materials for your project, a material deposit is required prior to starting the work. For labor-only jobs where the customer provides all materials, no upfront deposit is required. Remaining labor balances are paid once the work is finished and you're happy with it, backed by our <a href="/guarantee" class="font-semibold text-red-400 hover:text-red-300">1-year workmanship guarantee</a>.
+                            If AAA Handyman is handling, purchasing, or supplying materials for your project, a material deposit is required prior to starting the work. For labor-only jobs where the customer provides all materials, no upfront deposit is required. Remaining labor balances are paid once the work is finished and you're happy with it, backed by our <a href=/guarantee class="font-semibold text-red-400 hover:text-red-300">1-year workmanship guarantee</a>.
                         </p>
                     </details>
                 </div>
 
                 <p class="mt-8 text-center text-sm text-gray-500">
-                    More questions? Read the <a href="/#faq" class="font-semibold text-red-400 hover:text-red-300">full FAQ</a> or call <a href="tel:+12483853432" class="font-semibold text-red-400 hover:text-red-300">(248) 385-3432</a>.
+                    More questions? Read the <a href=/#faq class="font-semibold text-red-400 hover:text-red-300">full FAQ</a> or call <a href=tel:+12483853432 class="font-semibold text-red-400 hover:text-red-300">(248) 385-3432</a>.
                 </p>
             </div>
         </section>
@@ -799,40 +645,40 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
                 <div class="flex flex-col items-center md:items-start">
-                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services LLC Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
+                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width=80 height=80 loading=lazy decoding=async alt="AAA Handyman Services LLC Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable home repairs, maintenance, punch lists, and minor updates for homeowners across Oakland County, Michigan.</p>
                     <div class="mt-4 flex items-center gap-4">
-                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+                        <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel=noopener aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
+                        <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
                     </div>
                 </div>
 
-                <nav aria-label="Footer">
+                <nav aria-label=Footer>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="/services" class="hover:text-white transition">Services</a></li>
-                        <li><a href="/rates" class="hover:text-white transition">Rates &amp; Packages</a></li>
-                        <li><a href="/ai-estimate" class="hover:text-white transition">AI Repair Estimator</a></li>
-                        <li><a href="/pricing-policy" class="hover:text-white transition">Pricing Policies</a></li>
-                        <li><a href="/guarantee" class="hover:text-white transition">Our Guarantee</a></li>
-                        <li><a href="/customer-care" class="hover:text-white transition">Customer Care</a></li>
-                        <li><a href="/reviews" class="hover:text-white transition">Reviews</a></li>
-                        <li><a href="/careers" class="hover:text-white transition">Careers</a></li>
-                        <li><a href="/book" class="hover:text-white transition">Book Online</a></li>
-                        <li><a href="/service-areas" class="hover:text-white transition">Service Areas</a></li>
-                        <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
+                        <li><a href=/services class="hover:text-white transition">Services</a></li>
+                        <li><a href=/rates class="hover:text-white transition">Rates &amp; Packages</a></li>
+                        <li><a href=/ai-estimate class="hover:text-white transition">AI Repair Estimator</a></li>
+                        <li><a href=/pricing-policy class="hover:text-white transition">Pricing Policies</a></li>
+                        <li><a href=/guarantee class="hover:text-white transition">Our Guarantee</a></li>
+                        <li><a href=/customer-care class="hover:text-white transition">Customer Care</a></li>
+                        <li><a href=/reviews class="hover:text-white transition">Reviews</a></li>
+                        <li><a href=/careers class="hover:text-white transition">Careers</a></li>
+                        <li><a href=/book class="hover:text-white transition">Book Online</a></li>
+                        <li><a href=/service-areas class="hover:text-white transition">Service Areas</a></li>
+                        <li><a href=/#faq class="hover:text-white transition">FAQ</a></li>
                     </ul>
                 </nav>
 
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden="true"></i>(248) 385-3432</a></li>
-                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
-                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Waterford, MI &middot; Oakland County</li>
+                        <li><a href=tel:+12483853432 class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden=true></i>(248) 385-3432</a></li>
+                        <li><a href=mailto:contact@aaahandyman.services class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden=true></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden=true></i>Waterford, MI &middot; Oakland County</li>
                     </ul>
-                    <a href="/book" class="aaa-btn mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
+                    <a href=/book class="aaa-btn mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden=true></i>Book Online Now</a>
                 </div>
             </div>
 
@@ -840,50 +686,50 @@
                 <nav aria-label="Popular services">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Popular Services</h3>
                     <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-                        <li><a href="/services/carpentry" class="hover:text-white transition">Carpentry</a></li>
-                        <li><a href="/services/drywall-repair" class="hover:text-white transition">Drywall Repair</a></li>
-                        <li><a href="/services/painting-staining" class="hover:text-white transition">Painting &amp; Staining</a></li>
-                        <li><a href="/services/doors-windows" class="hover:text-white transition">Doors &amp; Windows</a></li>
-                        <li><a href="/services/flooring-solutions" class="hover:text-white transition">Flooring Solutions</a></li>
-                        <li><a href="/services/minor-plumbing" class="hover:text-white transition">Minor Plumbing</a></li>
-                        <li><a href="/services/minor-electrical" class="hover:text-white transition">Minor Electrical</a></li>
-                        <li><a href="/services/decks-fences" class="hover:text-white transition">Decks &amp; Fences</a></li>
-                        <li><a href="/services/gutters" class="hover:text-white transition">Gutters</a></li>
-                        <li><a href="/services/power-washing" class="hover:text-white transition">Power Washing</a></li>
+                        <li><a href=/services/carpentry class="hover:text-white transition">Carpentry</a></li>
+                        <li><a href=/services/drywall-repair class="hover:text-white transition">Drywall Repair</a></li>
+                        <li><a href=/services/painting-staining class="hover:text-white transition">Painting &amp; Staining</a></li>
+                        <li><a href=/services/doors-windows class="hover:text-white transition">Doors &amp; Windows</a></li>
+                        <li><a href=/services/flooring-solutions class="hover:text-white transition">Flooring Solutions</a></li>
+                        <li><a href=/services/minor-plumbing class="hover:text-white transition">Minor Plumbing</a></li>
+                        <li><a href=/services/minor-electrical class="hover:text-white transition">Minor Electrical</a></li>
+                        <li><a href=/services/decks-fences class="hover:text-white transition">Decks &amp; Fences</a></li>
+                        <li><a href=/services/gutters class="hover:text-white transition">Gutters</a></li>
+                        <li><a href=/services/power-washing class="hover:text-white transition">Power Washing</a></li>
                     </ul>
-                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    <a href=/services class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden=true></i></a>
                 </nav>
                 <nav aria-label="Service areas">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Service Areas</h3>
                     <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-                        <li><a href="/handyman/waterford" class="hover:text-white transition">Waterford</a></li>
-                        <li><a href="/handyman/troy" class="hover:text-white transition">Troy</a></li>
-                        <li><a href="/handyman/west-bloomfield" class="hover:text-white transition">West Bloomfield</a></li>
-                        <li><a href="/handyman/rochester-hills" class="hover:text-white transition">Rochester Hills</a></li>
-                        <li><a href="/handyman/royal-oak" class="hover:text-white transition">Royal Oak</a></li>
-                        <li><a href="/handyman/birmingham" class="hover:text-white transition">Birmingham</a></li>
-                        <li><a href="/handyman/clarkston" class="hover:text-white transition">Clarkston</a></li>
-                        <li><a href="/handyman/farmington-hills" class="hover:text-white transition">Farmington Hills</a></li>
-                        <li><a href="/handyman/novi" class="hover:text-white transition">Novi</a></li>
-                        <li><a href="/handyman/southfield" class="hover:text-white transition">Southfield</a></li>
-                        <li><a href="/handyman/franklin" class="hover:text-white transition">Franklin</a></li>
-                        <li><a href="/handyman/orchard-lake" class="hover:text-white transition">Orchard Lake</a></li>
+                        <li><a href=/handyman/waterford class="hover:text-white transition">Waterford</a></li>
+                        <li><a href=/handyman/troy class="hover:text-white transition">Troy</a></li>
+                        <li><a href=/handyman/west-bloomfield class="hover:text-white transition">West Bloomfield</a></li>
+                        <li><a href=/handyman/rochester-hills class="hover:text-white transition">Rochester Hills</a></li>
+                        <li><a href=/handyman/royal-oak class="hover:text-white transition">Royal Oak</a></li>
+                        <li><a href=/handyman/birmingham class="hover:text-white transition">Birmingham</a></li>
+                        <li><a href=/handyman/clarkston class="hover:text-white transition">Clarkston</a></li>
+                        <li><a href=/handyman/farmington-hills class="hover:text-white transition">Farmington Hills</a></li>
+                        <li><a href=/handyman/novi class="hover:text-white transition">Novi</a></li>
+                        <li><a href=/handyman/southfield class="hover:text-white transition">Southfield</a></li>
+                        <li><a href=/handyman/franklin class="hover:text-white transition">Franklin</a></li>
+                        <li><a href=/handyman/orchard-lake class="hover:text-white transition">Orchard Lake</a></li>
                     </ul>
-                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    <a href=/service-areas class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden=true></i></a>
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
                 <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services LLC All Rights Reserved. We operate in compliance with Michigan&rsquo;s minor project exemption (MCL 339.2403).<br>Locally Serving Oakland County, MI.</p>
                 <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
-                    <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
-                    <span class="text-gray-600">|</span>
-                    <a href="/terms" class="hover:text-white transition">Terms of Service</a>
+                    <a href=/privacy class="hover:text-white transition">Privacy Policy</a>
+                    <span class=text-gray-600>|</span>
+                    <a href=/terms class="hover:text-white transition">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
+    <button id=back-to-top type=button aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden=true></i></button>
 
 
     <script src="/js/book-page.js?v=20260814e" defer></script>
@@ -891,13 +737,6 @@
     <script src="/js/site.js?v=20260814e" defer></script>
     <script src="/js/gift-certificate.js?v=20260814e" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
-    <script>
-      // Registered after load so it never competes with the first render.
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/sw.js').catch(function () {});
-        });
-      }
-    </script>
-</body>
-</html>
+    <script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})})</script>
+
+

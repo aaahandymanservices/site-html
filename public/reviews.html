@@ -1,34 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang=en>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Self-hosted brand fonts + icon subset; @font-face lives in site-theme.css -->
-    <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta charset=UTF-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    
+    <link rel=preload href=/fonts/archivo-latin.woff2 as=font type=font/woff2 crossorigin>
 
 
     <title>Customer Reviews & Testimonials | AAA Handyman Services LLC</title>
 
-    <meta name="description" content="Read reviews and testimonials from homeowners in Waterford, Troy, West Bloomfield, and across Oakland County, MI. Submit your own project photo and review.">
-    <meta name="theme-color" content="#A61F2E">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://aaahandyman.services/reviews">
+    <meta name=description content="Read reviews and testimonials from homeowners in Waterford, Troy, West Bloomfield, and across Oakland County, MI. Submit your own project photo and review.">
+    <meta name=theme-color content=#A61F2E>
+    <meta name=robots content="index, follow">
+    <link rel=canonical href=https://aaahandyman.services/reviews>
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aaahandyman.services/reviews">
-    <meta property="og:site_name" content="AAA Handyman Services LLC">
-    <meta property="og:title" content="Customer Reviews & Testimonials | AAA Handyman Services LLC">
-    <meta property="og:description" content="See recent home repair projects and customer testimonials from around Oakland County, Michigan. Submit your own review today.">
-    <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
-    <meta property="og:locale" content="en_US">
+    <meta property=og:type content=website>
+    <meta property=og:url content=https://aaahandyman.services/reviews>
+    <meta property=og:site_name content="AAA Handyman Services LLC">
+    <meta property=og:title content="Customer Reviews & Testimonials | AAA Handyman Services LLC">
+    <meta property=og:description content="See recent home repair projects and customer testimonials from around Oakland County, Michigan. Submit your own review today.">
+    <meta property=og:image content=https://aaahandyman.services/logo-banner.jpg>
+    <meta property=og:locale content=en_US>
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://aaahandyman.services/reviews">
-    <meta name="twitter:title" content="Customer Reviews & Testimonials | AAA Handyman Services LLC">
-    <meta name="twitter:description" content="See recent home repair projects and customer testimonials from around Oakland County, Michigan. Submit your own review today.">
-    <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
+    <meta name=twitter:card content=summary_large_image>
+    <meta name=twitter:url content=https://aaahandyman.services/reviews>
+    <meta name=twitter:title content="Customer Reviews & Testimonials | AAA Handyman Services LLC">
+    <meta name=twitter:description content="See recent home repair projects and customer testimonials from around Oakland County, Michigan. Submit your own review today.">
+    <meta name=twitter:image content=https://aaahandyman.services/logo-banner.jpg>
 
-    <script type="application/ld+json">
+    <script type=application/ld+json>
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -39,410 +39,112 @@
     }
     </script>
 
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260814e">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260815a">
-    <link rel="preload" href="/css/icons.css?v=20260815a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260815a"></noscript>
+    <link rel=stylesheet href="/css/tailwind.css?v=20260814e">
+    <link rel=stylesheet href="/css/site-theme.css?v=20260814e">
+    <link rel=preload href="/css/icons.css?v=20260815a" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
+    <noscript><link rel=stylesheet href="/css/icons.css?v=20260815a"></noscript>
 
-    <style>
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translate3d(0, 20px, 0);
-            }
-            to {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
-            }
-        }
-        .review-card {
-            opacity: 0;
-            will-change: transform, opacity;
-            backface-visibility: hidden;
-            animation: fadeInUp 0.5s ease forwards;
-        }
-        .review-preview {
-            aspect-ratio: 4 / 3;
-        }
-
-        /* Masonry feed via CSS multi-column; cards must not split across columns. */
-        .reviews-masonry {
-            column-gap: 1.25rem;
-        }
-        .reviews-masonry > .review-card {
-            break-inside: avoid;
-            margin-bottom: 1.25rem;
-            display: inline-block;
-            width: 100%;
-        }
-        @media (min-width: 640px) {
-            .reviews-masonry { column-count: 2; }
-        }
-        @media (min-width: 1280px) {
-            .reviews-masonry { column-count: 3; }
-        }
-        .review-card.is-hidden { display: none; }
-
-        /* Zoomable project photo */
-        .review-zoom img { transition: transform 0.4s ease; }
-        .review-zoom:hover img,
-        .review-zoom:focus-visible img { transform: scale(1.07); }
-        .review-zoom { cursor: zoom-in; }
-
-        /* ------------------------------------------------------------------
-         * Filter pills
-         *
-         * Two axes narrow the showcase grid -- service category and city --
-         * and they combine, so each axis needs its own selected colour or a
-         * visitor cannot tell which of the two a lit pill belongs to. The
-         * category row keeps the brand crimson; the city row inverts to white.
-         * ------------------------------------------------------------------ */
-        .filter-tab,
-        .city-tab {
-            transition: all 0.2s ease;
-        }
-        .filter-tab[aria-pressed="true"] {
-            background-color: #A61F2E;
-            border-color: #A61F2E;
-            color: #fff;
-            box-shadow: 0 8px 20px -8px rgba(166, 31, 46, 0.7);
-        }
-        .city-tab[aria-pressed="true"] {
-            background-color: #fff;
-            border-color: #fff;
-            color: #101b31;
-            box-shadow: 0 8px 20px -10px rgba(255, 255, 255, 0.55);
-        }
-        .filter-tab svg,
-        .city-tab svg {
-            flex: none;
-        }
-
-        /* ------------------------------------------------------------------
-         * Oakland County project map
-         *
-         * The county body, lakes, and highways are one decorative SVG; every
-         * pin on top of it is an HTML button positioned by percentage. Pins
-         * need a focus ring, an accessible label, and a popup card, all of
-         * which come free on a <button> and would be hand-rolled inside SVG.
-         * ------------------------------------------------------------------ */
-        .county-map {
-            position: relative;
-            aspect-ratio: 640 / 560;
-        }
-        .county-map__svg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .map-pin {
-            position: absolute;
-            width: 0;
-            height: 0;
-            padding: 0;
-            border: 0;
-            background: none;
-            cursor: pointer;
-        }
-        .map-pin:focus {
-            outline: none;
-        }
-        .map-pin__dot,
-        .map-pin__pulse {
-            position: absolute;
-            left: 0;
-            top: 0;
-            border-radius: 9999px;
-            transform: translate(-50%, -50%);
-        }
-        .map-pin__dot {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 26px;
-            width: 26px;
-            background-color: #A61F2E;
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 8px 16px -6px rgba(0, 0, 0, 0.75);
-            transition: transform 0.18s ease, background-color 0.18s ease;
-        }
-        .map-pin__dot svg {
-            height: 13px;
-            width: 13px;
-            color: #fff;
-        }
-        .map-pin.is-empty .map-pin__dot {
-            height: 13px;
-            width: 13px;
-            background-color: rgba(255, 255, 255, 0.14);
-            border-color: rgba(255, 255, 255, 0.45);
-            box-shadow: none;
-        }
-        .map-pin__pulse {
-            height: 26px;
-            width: 26px;
-            border: 2px solid rgba(166, 31, 46, 0.8);
-            animation: pinPulse 2.8s ease-out infinite;
-        }
-        .map-pin.is-empty .map-pin__pulse {
-            display: none;
-        }
-        @keyframes pinPulse {
-            0% { opacity: 0.75; transform: translate(-50%, -50%) scale(1); }
-            70%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(2.5); }
-        }
-        .map-pin:hover .map-pin__dot,
-        .map-pin.is-open .map-pin__dot,
-        .map-pin:focus-visible .map-pin__dot {
-            transform: translate(-50%, -50%) scale(1.2);
-            background-color: #b83242;
-        }
-        .map-pin.is-empty:hover .map-pin__dot,
-        .map-pin.is-empty.is-open .map-pin__dot,
-        .map-pin.is-empty:focus-visible .map-pin__dot {
-            background-color: rgba(255, 255, 255, 0.4);
-        }
-        .map-pin:focus-visible .map-pin__dot {
-            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
-        }
-        .map-pin__name {
-            position: absolute;
-            left: 0;
-            top: 0;
-            white-space: nowrap;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.01em;
-            color: rgba(226, 232, 240, 0.95);
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
-            pointer-events: none;
-        }
-        .map-pin.is-empty .map-pin__name {
-            font-weight: 600;
-            color: rgba(148, 163, 184, 0.9);
-        }
-        .map-pin__count {
-            display: inline-block;
-            margin-left: 2px;
-            color: #fca5af;
-        }
-        .map-pin[data-label="below"] .map-pin__name { transform: translate(-50%, 15px); }
-        .map-pin[data-label="above"] .map-pin__name { transform: translate(-50%, calc(-100% - 15px)); }
-        .map-pin[data-label="left"]  .map-pin__name { transform: translate(calc(-100% - 17px), -50%); }
-        .map-pin[data-label="right"] .map-pin__name { transform: translate(17px, -50%); }
-        @media (max-width: 480px) {
-            /* Twelve labels crowd into each other on a phone; the popup still
-               names the city, so the standing labels are the part to drop. */
-            .map-pin.is-empty .map-pin__name { display: none; }
-            .map-pin__name { font-size: 10px; }
-        }
-
-        .map-popup {
-            position: absolute;
-            z-index: 20;
-            width: min(255px, 78vw);
-            background-color: #fff;
-            color: #101b31;
-            border-radius: 1rem;
-            padding: 0.9rem 1rem 1rem;
-            box-shadow: 0 22px 45px -14px rgba(0, 0, 0, 0.8);
-            text-align: left;
-        }
-        .map-popup[hidden] { display: none; }
-        .map-popup__caret {
-            position: absolute;
-            bottom: -5px;
-            height: 12px;
-            width: 12px;
-            background-color: #fff;
-            transform: translateX(-50%) rotate(45deg);
-        }
-        .map-popup.is-below .map-popup__caret {
-            bottom: auto;
-            top: -5px;
-        }
-
-        /* ------------------------------------------------------------------
-         * Pull-quote
-         *
-         * There is no separate headline field on a review, so the quote is
-         * pulled out of the body the way a magazine does it: the customer's
-         * verdict set large in the display face, the detail beneath it.
-         * ------------------------------------------------------------------ */
-        .review-pullquote {
-            font-family: var(--font-display, sans-serif);
-            font-weight: 800;
-            font-size: 1.15rem;
-            line-height: 1.3;
-            letter-spacing: -0.015em;
-            color: #7f1723;
-            border-left: 4px solid #A61F2E;
-            padding-left: 0.85rem;
-        }
-        @media (min-width: 640px) {
-            .review-pullquote { font-size: 1.25rem; }
-        }
-
-        /* A card arrived at from a map pin gets outlined so it is obvious
-           which of a dozen showcases the pin meant. */
-        .review-card.is-targeted {
-            opacity: 1;
-            outline: 3px solid #A61F2E;
-            outline-offset: 4px;
-        }
-        .review-card { scroll-margin-top: 96px; }
-        @media (max-width: 768px) {
-            .review-card { scroll-margin-top: 112px; }
-        }
-
-        /* Attribute chips */
-        .attr-chip { transition: all 0.15s ease; }
-        .attr-chip[aria-pressed="true"] {
-            background-color: #A61F2E;
-            border-color: #A61F2E;
-            color: #fff;
-        }
-
-        /* Lightbox */
-        #reviews-lightbox { transition: opacity 0.25s ease; }
-        #reviews-lightbox.hidden { opacity: 0; pointer-events: none; }
-        #reviews-lightbox img {
-            animation: lightboxIn 0.25s ease;
-        }
-        @keyframes lightboxIn {
-            from { opacity: 0; transform: scale(0.94); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .review-dropzone {
-            transition: all 0.2s ease;
-        }
-        .review-dropzone.dragging {
-            border-color: #A61F2E;
-            background-color: #fdf2f2;
-            transform: scale(1.02);
-        }
-
-        section[id], header[id] {
-            scroll-margin-top: 80px;
-        }
-        @media (max-width: 768px) {
-            section[id], header[id] {
-                scroll-margin-top: 100px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-
-            .review-card { animation: none !important; }
-            .review-card { opacity: 1 !important; transform: none !important; }
-            .review-zoom img, #reviews-lightbox, #reviews-lightbox img { transition: none !important; animation: none !important; }
-            .map-pin__pulse { animation: none !important; opacity: 0 !important; }
-            .map-pin__dot { transition: none !important; }
-        }
-    </style>
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/manifest.webmanifest">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="AAA Handyman">
-    <meta name="application-name" content="AAA Handyman">
+    <style>@keyframes fadeInUp{from{opacity:0;transform:translate3d(0,20px,0)}to{opacity:1;transform:translate3d(0,0,0)}}.review-card{opacity:0;will-change:transform,opacity;backface-visibility:hidden;animation:fadeInUp .5s ease forwards}.review-preview{aspect-ratio:4/3}.reviews-masonry{column-gap:1.25rem}.reviews-masonry>.review-card{break-inside:avoid;margin-bottom:1.25rem;display:inline-block;width:100%}@media (min-width:640px){.reviews-masonry{column-count:2}}@media (min-width:1280px){.reviews-masonry{column-count:3}}.review-card.is-hidden{display:none}.review-zoom img{transition:transform .4s ease}.review-zoom:focus-visible img,.review-zoom:hover img{transform:scale(1.07)}.review-zoom{cursor:zoom-in}.city-tab,.filter-tab{transition:all .2s ease}.filter-tab[aria-pressed=true]{background-color:#a61f2e;border-color:#a61f2e;color:#fff;box-shadow:0 8px 20px -8px rgba(166,31,46,.7)}.city-tab[aria-pressed=true]{background-color:#fff;border-color:#fff;color:#101b31;box-shadow:0 8px 20px -10px rgba(255,255,255,.55)}.city-tab svg,.filter-tab svg{flex:none}.county-map{position:relative;aspect-ratio:640/560}.county-map__svg{position:absolute;inset:0;width:100%;height:100%}.map-pin{position:absolute;width:0;height:0;padding:0;border:0;background:0 0;cursor:pointer}.map-pin:focus{outline:0}.map-pin__dot,.map-pin__pulse{position:absolute;left:0;top:0;border-radius:9999px;transform:translate(-50%,-50%)}.map-pin__dot{display:flex;align-items:center;justify-content:center;height:26px;width:26px;background-color:#a61f2e;border:2px solid rgba(255,255,255,.9);box-shadow:0 8px 16px -6px rgba(0,0,0,.75);transition:transform .18s ease,background-color .18s ease}.map-pin__dot svg{height:13px;width:13px;color:#fff}.map-pin.is-empty .map-pin__dot{height:13px;width:13px;background-color:rgba(255,255,255,.14);border-color:rgba(255,255,255,.45);box-shadow:none}.map-pin__pulse{height:26px;width:26px;border:2px solid rgba(166,31,46,.8);animation:pinPulse 2.8s ease-out infinite}.map-pin.is-empty .map-pin__pulse{display:none}@keyframes pinPulse{0%{opacity:.75;transform:translate(-50%,-50%) scale(1)}100%,70%{opacity:0;transform:translate(-50%,-50%) scale(2.5)}}.map-pin.is-open .map-pin__dot,.map-pin:focus-visible .map-pin__dot,.map-pin:hover .map-pin__dot{transform:translate(-50%,-50%) scale(1.2);background-color:#b83242}.map-pin.is-empty.is-open .map-pin__dot,.map-pin.is-empty:focus-visible .map-pin__dot,.map-pin.is-empty:hover .map-pin__dot{background-color:rgba(255,255,255,.4)}.map-pin:focus-visible .map-pin__dot{box-shadow:0 0 0 4px rgba(255,255,255,.5)}.map-pin__name{position:absolute;left:0;top:0;white-space:nowrap;font-size:11px;font-weight:700;letter-spacing:.01em;color:rgba(226,232,240,.95);text-shadow:0 1px 4px rgba(0,0,0,.9);pointer-events:none}.map-pin.is-empty .map-pin__name{font-weight:600;color:rgba(148,163,184,.9)}.map-pin__count{display:inline-block;margin-left:2px;color:#fca5af}.map-pin[data-label=below] .map-pin__name{transform:translate(-50%,15px)}.map-pin[data-label=above] .map-pin__name{transform:translate(-50%,calc(-100% - 15px))}.map-pin[data-label=left] .map-pin__name{transform:translate(calc(-100% - 17px),-50%)}.map-pin[data-label=right] .map-pin__name{transform:translate(17px,-50%)}@media (max-width:480px){.map-pin.is-empty .map-pin__name{display:none}.map-pin__name{font-size:10px}}.map-popup{position:absolute;z-index:20;width:min(255px,78vw);background-color:#fff;color:#101b31;border-radius:1rem;padding:.9rem 1rem 1rem;box-shadow:0 22px 45px -14px rgba(0,0,0,.8);text-align:left}.map-popup[hidden]{display:none}.map-popup__caret{position:absolute;bottom:-5px;height:12px;width:12px;background-color:#fff;transform:translateX(-50%) rotate(45deg)}.map-popup.is-below .map-popup__caret{bottom:auto;top:-5px}.review-pullquote{font-family:var(--font-display,sans-serif);font-weight:800;font-size:1.15rem;line-height:1.3;letter-spacing:-.015em;color:#7f1723;border-left:4px solid #a61f2e;padding-left:.85rem}@media (min-width:640px){.review-pullquote{font-size:1.25rem}}.review-card.is-targeted{opacity:1;outline:3px solid #a61f2e;outline-offset:4px}.review-card{scroll-margin-top:96px}@media (max-width:768px){.review-card{scroll-margin-top:112px}}.attr-chip{transition:all .15s ease}.attr-chip[aria-pressed=true]{background-color:#a61f2e;border-color:#a61f2e;color:#fff}#reviews-lightbox{transition:opacity .25s ease}#reviews-lightbox.hidden{opacity:0;pointer-events:none}#reviews-lightbox img{animation:lightboxIn .25s ease}@keyframes lightboxIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}.review-dropzone{transition:all .2s ease}.review-dropzone.dragging{border-color:#a61f2e;background-color:#fdf2f2;transform:scale(1.02)}header[id],section[id]{scroll-margin-top:80px}@media (max-width:768px){header[id],section[id]{scroll-margin-top:100px}}@media (prefers-reduced-motion:reduce){.review-card{animation:none!important}.review-card{opacity:1!important;transform:none!important}#reviews-lightbox,#reviews-lightbox img,.review-zoom img{transition:none!important;animation:none!important}.map-pin__pulse{animation:none!important;opacity:0!important}.map-pin__dot{transition:none!important}}</style>
+    <link rel=icon href=/favicon.ico sizes=any>
+    <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+    <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+    <link rel=manifest href=/manifest.webmanifest>
+    <meta name=mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+    <meta name=apple-mobile-web-app-title content="AAA Handyman">
+    <meta name=application-name content="AAA Handyman">
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
 
-    <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
+    <a href=#main-content class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
-<header id="site-header" class="site-header sticky top-0 z-[100] bg-white/95 backdrop-blur-md shadow-md border-b-[3px] border-red-600">
+<header id=site-header class="site-header sticky top-0 z-[100] bg-white/95 backdrop-blur-md shadow-md border-b-[3px] border-red-600">
     <div class="header-container site-nav__bar max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" class="brand site-nav__brand group flex items-center gap-3 min-w-0">
-            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 shadow-sm transition group-hover:scale-105">
+        <a href=/ class="brand site-nav__brand group flex items-center gap-3 min-w-0">
+            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width=48 height=48 decoding=async fetchpriority=high alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 shadow-sm transition group-hover:scale-105">
             <div class="brand-text min-w-0">
                 <p class="brand-title text-base min-[390px]:text-lg sm:text-xl lg:text-xl xl:text-2xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services LLC</p>
                 <p class="brand-tagline text-[10px] sm:text-xs text-gray-500 font-medium">Oakland County, Michigan</p>
             </div>
-            <span class="sr-only">home</span>
+            <span class=sr-only>home</span>
         </a>
 
-        <!-- Desktop Navigation Container -->
+        
         <div class="site-nav__desktop hidden lg:flex items-center">
             <ul class="nav-links site-nav__links flex items-center gap-5 list-none m-0 p-0 text-sm xl:text-base font-medium">
-                <li><a href="/services" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a></li>
-                <li><a href="/service-areas" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a></li>
-                <li><a href="/rates" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Rates</a></li>
-                <li><a href="/guarantee" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Guarantee</a></li>
-                <li><a href="/reviews" class="nav-link py-1 text-red-600 font-bold border-b-2 border-red-600 transition" aria-current="page">Reviews</a></li>
-                <li><a href="/careers" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Careers</a></li>
-                <li><a href="/contact" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Contact</a></li>
+                <li><a href=/services class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a></li>
+                <li><a href=/service-areas class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a></li>
+                <li><a href=/rates class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Rates</a></li>
+                <li><a href=/guarantee class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Guarantee</a></li>
+                <li><a href=/reviews class="nav-link py-1 text-red-600 font-bold border-b-2 border-red-600 transition" aria-current=page>Reviews</a></li>
+                <li><a href=/careers class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Careers</a></li>
+                <li><a href=/contact class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Contact</a></li>
             </ul>
 
-            <!-- Social Media Icons -->
+            
             <div class="social-icons site-nav__social flex items-center gap-3 pl-4 border-l border-gray-200 ml-3">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
             </div>
         </div>
 
-        <!-- Mobile Hamburger Button -->
-        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
-            <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
+        
+        <button id=mobile-menu-btn class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label=Menu aria-expanded=false aria-controls=mobile-menu>
+            <i class="fas fa-bars text-2xl" id=menu-icon aria-hidden=true></i>
         </button>
     </div>
 
-    <!-- Mobile Navigation Drawer / Menu -->
-    <div id="mobile-menu" class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden="true">
-        <div class="space-y-1">
-            <a href="/services" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
-            <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
-            <a href="/rates" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
-            <a href="/guarantee" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Guarantee</a>
-            <a href="/reviews" class="block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition" aria-current="page">Reviews</a>
-            <a href="/careers" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Careers</a>
-            <a href="/contact" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Contact</a>
+    
+    <div id=mobile-menu class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden=true>
+        <div class=space-y-1>
+            <a href=/services class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
+            <a href=/service-areas class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
+            <a href=/rates class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
+            <a href=/guarantee class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Guarantee</a>
+            <a href=/reviews class="block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition" aria-current=page>Reviews</a>
+            <a href=/careers class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Careers</a>
+            <a href=/contact class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Contact</a>
         </div>
 
         <div class="pt-3 border-t border-gray-100 flex flex-col gap-3">
-            <a href="tel:+12483853432" class="flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition text-center">
-                <i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432
+            <a href=tel:+12483853432 class="flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition text-center">
+                <i class="fas fa-phone" aria-hidden=true></i> Call (248) 385-3432
             </a>
             <div class="flex items-center justify-center gap-6 text-2xl pt-1">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
             </div>
         </div>
     </div>
 </header>
 
-<aside id="seasonal-banner" class="seasonal-banner" data-season="summer" aria-label="Seasonal offer">
-    <div class="seasonal-banner__inner">
-        <p class="seasonal-badge">
-            <span class="seasonal-badge__icon" data-banner-icon aria-hidden="true">🌤️</span>
+<aside id=seasonal-banner class=seasonal-banner data-season=summer aria-label="Seasonal offer">
+    <div class=seasonal-banner__inner>
+        <p class=seasonal-badge>
+            <span class=seasonal-badge__icon data-banner-icon aria-hidden=true>🌤️</span>
             <span data-banner-label>Summer Exterior Refresh</span>
         </p>
-        <p class="seasonal-banner__copy">
-            <span class="seasonal-banner__lead"><span data-banner-lead>Book your summer exterior refresh and</span> <strong class="seasonal-banner__save" data-banner-save>save $50</strong></span>
-            <span class="seasonal-banner__note" data-banner-note>Oakland County homeowners · limited summer openings</span>
+        <p class=seasonal-banner__copy>
+            <span class=seasonal-banner__lead><span data-banner-lead>Book your summer exterior refresh and</span> <strong class=seasonal-banner__save data-banner-save>save $50</strong></span>
+            <span class=seasonal-banner__note data-banner-note>Oakland County homeowners · limited summer openings</span>
         </p>
-        <a class="seasonal-banner__cta" href="/#quote" data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+        <a class=seasonal-banner__cta href=/#quote data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width=14 height=14 fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
     </div>
-    <button type="button" class="seasonal-banner__close" data-banner-close aria-label="Dismiss seasonal offer">
-        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"></path></svg>
+    <button type=button class=seasonal-banner__close data-banner-close aria-label="Dismiss seasonal offer">
+        <svg viewBox="0 0 16 16" width=14 height=14 fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round aria-hidden=true><path d="m4 4 8 8M12 4l-8 8"></path></svg>
     </button>
-    <script type="application/json" data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck \u0026 Gutter Prep","lead":"Book your spring deck \u0026 gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
-    <script>(function(){try{var b=document.getElementById('seasonal-banner');if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();</script>
+    <script type=application/json data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck \u0026 Gutter Prep","lead":"Book your spring deck \u0026 gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
+    <script>(()=>{try{var e,a,t,n,l=document.getElementById("seasonal-banner");l&&(a=(e=new Date).getMonth(),t=e.getFullYear(),n=(a<=1||11===a?"winter":a<=4?"spring":a<=7?"summer":"fall")+"-"+(11===a?t+1:t),l.dataset.seasonKey=n,localStorage.getItem("aaa-seasonal-banner")===n)&&(l.hidden=!0)}catch(e){}})()</script>
 </aside>
 
-    <main id="main-content" class="ambient-glow-hero flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
+    <main id=main-content class="ambient-glow-hero flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12 reveal-on-scroll">
                 <span class="badge-craftsman px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5 mb-3">
-                    <i class="fas fa-star" aria-hidden="true"></i> Trusted by your neighbors
+                    <i class="fas fa-star" aria-hidden=true></i> Trusted by your neighbors
                 </span>
                 <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">See How We’ve Helped Your Neighbors Across Oakland County</h1>
                 <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
@@ -450,42 +152,32 @@
                 </p>
             </div>
 
-            <!-- Aggregate trust banner -->
+            
             <div class="max-w-4xl mx-auto mb-4 reveal-on-scroll">
                 <div class="card-dark-layered flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 bg-white/5 border border-white/20 rounded-3xl px-6 py-5 text-center shadow-xl">
                     <div class="flex items-center gap-3">
                         <span class="text-4xl sm:text-5xl font-black text-white leading-none">5.0</span>
-                        <div class="text-left">
-                            <div class="text-red-300 text-xl leading-none tracking-wide" aria-hidden="true">★★★★★</div>
+                        <div class=text-left>
+                            <div class="text-red-300 text-xl leading-none tracking-wide" aria-hidden=true>★★★★★</div>
                             <div class="text-xs text-slate-300 mt-1.5 font-medium">Average Rating Across Oakland County</div>
                         </div>
                     </div>
                     <div class="hidden sm:block h-12 w-px bg-white/20"></div>
                     <div class="flex items-center gap-2 text-slate-200 font-semibold text-sm sm:text-base">
-                        <i class="fas fa-location-dot text-red-300" aria-hidden="true"></i>
+                        <i class="fas fa-location-dot text-red-300" aria-hidden=true></i>
                         <span>Every review below is a real Oakland County home</span>
                     </div>
-                    <span class="sr-only">AAA Handyman Services LLC holds a 5.0 out of 5 average rating across Oakland County.</span>
+                    <span class=sr-only>AAA Handyman Services LLC holds a 5.0 out of 5 average rating across Oakland County.</span>
                 </div>
             </div>
 
-            <!-- Trust & stats counter bar
-                 Each card is a dl > div group, and such a group may contain only dt
-                 and dd -- the icon tile used to sit beside a wrapper div holding the
-                 pair, which pushed the dt/dd a level too deep and invalidated the
-                 list. The tile is decorative, so it moves inside the dt and
-                 .reviews-stat lifts it out of flow to centre it against the card,
-                 reproducing the old flex row without a wrapper.
-
-                 The term text is wrapped rather than left bare because reviews-page.js
-                 writes textContent to [data-cities-served-count]: on the dt itself
-                 that write would replace the icon along with the text. -->
+            
             <div class="max-w-4xl mx-auto mb-10">
                 <dl class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div class="reviews-stat bg-white/5 border border-white/15 rounded-2xl">
                         <dt class="text-white font-bold text-sm sm:text-base leading-snug">
                             <span class="reviews-stat__icon inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-300">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.2c4.7-2 7-5.4 7-9.7V5.9L12 2.8 5 5.9v5.6c0 4.3 2.3 7.7 7 9.7Z"/><path d="m8.8 11.6 2.3 2.3 4.1-4.4"/></svg>
+                                <svg width=20 height=20 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M12 21.2c4.7-2 7-5.4 7-9.7V5.9L12 2.8 5 5.9v5.6c0 4.3 2.3 7.7 7 9.7Z"/><path d="m8.8 11.6 2.3 2.3 4.1-4.4"/></svg>
                             </span>
                             <span>100% Satisfaction Guaranteed</span>
                         </dt>
@@ -494,7 +186,7 @@
                     <div class="reviews-stat bg-white/5 border border-white/15 rounded-2xl">
                         <dt class="text-white font-bold text-sm sm:text-base leading-snug">
                             <span class="reviews-stat__icon inline-flex h-10 w-10 items-center justify-center rounded-xl bg-red-500/15 text-red-400">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s7-5.7 7-11.2a7 7 0 1 0-14 0c0 5.5 7 11.2 7 11.2Z"/><circle cx="12" cy="10.2" r="2.6"/></svg>
+                                <svg width=20 height=20 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M12 21.5s7-5.7 7-11.2a7 7 0 1 0-14 0c0 5.5 7 11.2 7 11.2Z"/><circle cx=12 cy=10.2 r=2.6 /></svg>
                             </span>
                             <span data-cities-served-count>12 Oakland County Cities Served</span>
                         </dt>
@@ -503,7 +195,7 @@
                     <div class="reviews-stat bg-white/5 border border-white/15 rounded-2xl">
                         <dt class="text-white font-bold text-sm sm:text-base leading-snug">
                             <span class="reviews-stat__icon inline-flex h-10 w-10 items-center justify-center rounded-xl bg-red-500/15 text-red-200">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3.8 13.4h6.4L11 22l9.2-11.4h-6.4L13 2Z"/></svg>
+                                <svg width=20 height=20 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M13 2 3.8 13.4h6.4L11 22l9.2-11.4h-6.4L13 2Z"/></svg>
                             </span>
                             <span>Fast &amp; Reliable Local Service</span>
                         </dt>
@@ -512,107 +204,102 @@
                 </dl>
             </div>
 
-            <!-- Trust badges / review platform links -->
+            
             <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16">
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white hover:bg-emerald-50 text-slate-900 font-bold px-5 py-3 rounded-2xl shadow-lg transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-emerald-400/40">
-                    <i class="fa-solid fa-house-chimney text-[#00B24F] text-xl" aria-hidden="true"></i>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white hover:bg-emerald-50 text-slate-900 font-bold px-5 py-3 rounded-2xl shadow-lg transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-emerald-400/40">
+                    <i class="fa-solid fa-house-chimney text-[#00B24F] text-xl" aria-hidden=true></i>
                     <span class="text-sm sm:text-base">Reviews on Nextdoor</span>
                 </a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white hover:bg-red-50 text-slate-900 font-bold px-5 py-3 rounded-2xl shadow-lg transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-red-400/40">
-                    <i class="fa-brands fa-yelp text-[#FF1A1A] text-xl" aria-hidden="true"></i>
+                <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white hover:bg-red-50 text-slate-900 font-bold px-5 py-3 rounded-2xl shadow-lg transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-red-400/40">
+                    <i class="fa-brands fa-yelp text-[#FF1A1A] text-xl" aria-hidden=true></i>
                     <span class="text-sm sm:text-base">Reviews on Yelp</span>
                 </a>
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 bg-white hover:bg-blue-50 text-slate-900 font-bold px-5 py-3 rounded-2xl shadow-lg transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-blue-400/40">
-                    <i class="fa-brands fa-facebook text-[#1877F2] text-xl" aria-hidden="true"></i>
+                <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel=noopener class="inline-flex items-center gap-2.5 bg-white hover:bg-blue-50 text-slate-900 font-bold px-5 py-3 rounded-2xl shadow-lg transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-blue-400/40">
+                    <i class="fa-brands fa-facebook text-[#1877F2] text-xl" aria-hidden=true></i>
                     <span class="text-sm sm:text-base">Reviews on Facebook</span>
                 </a>
             </div>
 
-            <!-- Interactive Oakland County project map.
-                 The SVG below is the terrain only: county line, township grid,
-                 the lakes belt through Waterford, and the two highways every
-                 local navigates by. Pins are injected as buttons over it by
-                 /js/reviews-page.js from the reviews the page just loaded, so
-                 the map can never advertise a project the grid does not hold. -->
-            <section id="project-map" class="mb-12 sm:mb-16" aria-labelledby="project-map-title">
+            
+            <section id=project-map class="mb-12 sm:mb-16" aria-labelledby=project-map-title>
                 <div class="bg-white/5 border border-white/15 rounded-3xl p-5 sm:p-7">
                     <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-5">
                         <div>
                             <div class="uppercase tracking-widest text-red-500 font-semibold text-xs mb-2">Where we have been working</div>
-                            <h2 id="project-map-title" class="text-2xl sm:text-3xl font-bold text-white">The Oakland County Project Map</h2>
+                            <h2 id=project-map-title class="text-2xl sm:text-3xl font-bold text-white">The Oakland County Project Map</h2>
                             <p class="text-slate-400 text-sm mt-2 max-w-xl leading-relaxed">Every crimson pin is a finished job with a homeowner's review behind it. Hover or tap one to read what they said, then jump straight to their project.</p>
                         </div>
-                        <p id="map-summary" class="text-xs font-bold uppercase tracking-widest text-slate-300 bg-white/5 border border-white/15 rounded-full px-4 py-2.5 self-start lg:self-auto whitespace-nowrap" role="status">Loading the map…</p>
+                        <p id=map-summary class="text-xs font-bold uppercase tracking-widest text-slate-300 bg-white/5 border border-white/15 rounded-full px-4 py-2.5 self-start lg:self-auto whitespace-nowrap" role=status>Loading the map…</p>
                     </div>
 
-                    <div id="county-map" class="county-map">
-                        <svg class="county-map__svg" viewBox="0 0 640 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+                    <div id=county-map class=county-map>
+                        <svg class=county-map__svg viewBox="0 0 640 560" preserveAspectRatio="xMidYMid meet" aria-hidden=true focusable=false>
                             <defs>
-                                <linearGradient id="county-fill" x1="0" y1="0" x2="1" y2="1">
-                                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.10"/>
-                                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.025"/>
+                                <linearGradient id=county-fill x1=0 y1=0 x2=1 y2=1>
+                                    <stop offset=0% stop-color=#ffffff stop-opacity=0.10 />
+                                    <stop offset=100% stop-color=#ffffff stop-opacity=0.025 />
                                 </linearGradient>
                             </defs>
 
-                            <!-- County line: Oakland County is very nearly a rectangle. -->
-                            <rect x="40" y="30" width="560" height="500" rx="16" fill="url(#county-fill)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                            
+                            <rect x=40 y=30 width=560 height=500 rx=16 fill=url(#county-fill) stroke=rgba(255,255,255,0.3) stroke-width=2 />
 
-                            <!-- Township grid -->
-                            <g stroke="rgba(255,255,255,0.075)" stroke-width="1" stroke-dasharray="4 7" fill="none">
+                            
+                            <g stroke=rgba(255,255,255,0.075) stroke-width=1 stroke-dasharray="4 7" fill=none>
                                 <path d="M152 30v500M264 30v500M376 30v500M488 30v500"/>
                                 <path d="M40 130h560M40 230h560M40 330h560M40 430h560"/>
                             </g>
 
-                            <!-- The lakes belt: Pontiac, Cass, Orchard, Union, Walled -->
-                            <g fill="rgba(56,132,196,0.35)" stroke="rgba(147,197,235,0.32)" stroke-width="1.2">
-                                <ellipse cx="232" cy="296" rx="20" ry="11" transform="rotate(-12 232 296)"/>
-                                <ellipse cx="266" cy="322" rx="24" ry="13" transform="rotate(8 266 322)"/>
-                                <ellipse cx="303" cy="348" rx="15" ry="10" transform="rotate(-18 303 348)"/>
-                                <ellipse cx="180" cy="312" rx="16" ry="9"/>
-                                <ellipse cx="333" cy="378" rx="13" ry="8" transform="rotate(14 333 378)"/>
-                                <ellipse cx="148" cy="352" rx="11" ry="7"/>
+                            
+                            <g fill=rgba(56,132,196,0.35) stroke=rgba(147,197,235,0.32) stroke-width=1.2>
+                                <ellipse cx=232 cy=296 rx=20 ry=11 transform="rotate(-12 232 296)"/>
+                                <ellipse cx=266 cy=322 rx=24 ry=13 transform="rotate(8 266 322)"/>
+                                <ellipse cx=303 cy=348 rx=15 ry=10 transform="rotate(-18 303 348)"/>
+                                <ellipse cx=180 cy=312 rx=16 ry=9 />
+                                <ellipse cx=333 cy=378 rx=13 ry=8 transform="rotate(14 333 378)"/>
+                                <ellipse cx=148 cy=352 rx=11 ry=7 />
                             </g>
 
-                            <!-- M-59 (Highland Rd) and Woodward Ave -->
-                            <g fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-linecap="round">
+                            
+                            <g fill=none stroke=rgba(255,255,255,0.15) stroke-width=2 stroke-linecap=round>
                                 <path d="M60 292h372"/>
                                 <path d="M305 272 452 404 518 528"/>
                             </g>
-                            <!-- I-75 -->
-                            <g fill="none" stroke="rgba(255,255,255,0.24)" stroke-width="2.6" stroke-linecap="round">
+                            
+                            <g fill=none stroke=rgba(255,255,255,0.24) stroke-width=2.6 stroke-linecap=round>
                                 <path d="M248 30 276 196 404 252 470 330 522 432 556 530"/>
                             </g>
-                            <g fill="rgba(226,232,240,0.42)" font-size="10" font-weight="700" letter-spacing="0.1em">
-                                <text x="290" y="212">I-75</text>
-                                <text x="64" y="284">M-59</text>
+                            <g fill=rgba(226,232,240,0.42) font-size=10 font-weight=700 letter-spacing=0.1em>
+                                <text x=290 y=212>I-75</text>
+                                <text x=64 y=284>M-59</text>
                             </g>
 
-                            <!-- Compass -->
+                            
                             <g transform="translate(566 72)">
-                                <circle r="15" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                                <path d="M0 -9 4 3 0 0.4 -4 3Z" fill="rgba(255,255,255,0.7)"/>
-                                <text y="-19" text-anchor="middle" font-size="9" font-weight="700" fill="rgba(255,255,255,0.55)">N</text>
+                                <circle r=15 fill=rgba(255,255,255,0.06) stroke=rgba(255,255,255,0.2) stroke-width=1 />
+                                <path d="M0 -9 4 3 0 0.4 -4 3Z" fill=rgba(255,255,255,0.7) />
+                                <text y=-19 text-anchor=middle font-size=9 font-weight=700 fill=rgba(255,255,255,0.55)>N</text>
                             </g>
 
-                            <text x="60" y="514" font-size="11" font-weight="700" letter-spacing="0.2em" fill="rgba(255,255,255,0.3)">OAKLAND COUNTY, MI</text>
+                            <text x=60 y=514 font-size=11 font-weight=700 letter-spacing=0.2em fill=rgba(255,255,255,0.3)>OAKLAND COUNTY, MI</text>
                         </svg>
 
-                        <div id="map-pins" role="group" aria-label="Completed project locations across Oakland County"></div>
+                        <div id=map-pins role=group aria-label="Completed project locations across Oakland County"></div>
 
-                        <div id="map-popup" class="map-popup" hidden></div>
+                        <div id=map-popup class=map-popup hidden></div>
                     </div>
 
                     <ul class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2.5 text-xs font-semibold text-slate-400 list-none m-0 p-0">
                         <li class="flex items-center gap-2">
-                            <span class="h-3.5 w-3.5 rounded-full bg-red-600 border-2 border-white/80 flex-none" aria-hidden="true"></span>
+                            <span class="h-3.5 w-3.5 rounded-full bg-red-600 border-2 border-white/80 flex-none" aria-hidden=true></span>
                             Completed project with a review
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="h-2.5 w-2.5 rounded-full bg-white/15 border-2 border-white/45 flex-none" aria-hidden="true"></span>
+                            <span class="h-2.5 w-2.5 rounded-full bg-white/15 border-2 border-white/45 flex-none" aria-hidden=true></span>
                             Service area, no project yet
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="h-2.5 w-4 rounded-full bg-sky-600/40 border border-sky-300/30 flex-none" aria-hidden="true"></span>
+                            <span class="h-2.5 w-4 rounded-full bg-sky-600/40 border border-sky-300/30 flex-none" aria-hidden=true></span>
                             Lakes
                         </li>
                     </ul>
@@ -624,114 +311,111 @@
                 <div class="lg:col-span-2 space-y-6">
                     <div class="bg-white text-gray-900 border border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8">
                         <div class="flex items-center gap-3 mb-2">
-                            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-red-100 text-red-600 text-xl"><i class="fas fa-pen-nib" aria-hidden="true"></i></span>
+                            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-red-100 text-red-600 text-xl"><i class="fas fa-pen-nib" aria-hidden=true></i></span>
                             <h2 class="text-2xl font-bold text-gray-900">Share Your Experience</h2>
                         </div>
-                        <p class="text-sm text-gray-600 mb-4"><strong class="text-gray-900">Show off your transformed space!</strong> Upload a photo to be featured in our Oakland County Showcase.</p>
+                        <p class="text-sm text-gray-600 mb-4"><strong class=text-gray-900>Show off your transformed space!</strong> Upload a photo to be featured in our Oakland County Showcase.</p>
                         <p class="inline-flex items-center gap-2 mb-6 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full pl-2.5 pr-3.5 py-1.5 text-xs font-bold">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 flex-none" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="m8.2 12.4 2.5 2.5 5-5.4"/></svg>
+                            <svg width=15 height=15 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2.4 stroke-linecap=round stroke-linejoin=round class="text-emerald-600 flex-none" aria-hidden=true><circle cx=12 cy=12 r=9.2 /><path d="m8.2 12.4 2.5 2.5 5-5.4"/></svg>
                             Published as a Verified Local Project
                         </p>
 
-                        <form id="reviews-form" class="space-y-5">
+                        <form id=reviews-form class=space-y-5>
                             <div>
-                                <label for="reviews-name" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Name</label>
-                                <input id="reviews-name" name="customerName" type="text" required maxlength="80" autocomplete="name" autocapitalize="words" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 text-gray-900">
+                                <label for=reviews-name class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Name</label>
+                                <input id=reviews-name name=customerName required maxlength=80 autocomplete=name autocapitalize=words class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 text-gray-900">
                             </div>
 
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label for="reviews-location" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">City / Area</label>
-                                    <input id="reviews-location" name="location" type="text" required maxlength="90" placeholder="Waterford, MI" autocapitalize="words" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 text-gray-900">
+                                    <label for=reviews-location class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">City / Area</label>
+                                    <input id=reviews-location name=location required maxlength=90 placeholder="Waterford, MI" autocapitalize=words class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 text-gray-900">
                                 </div>
                                 <div>
-                                    <label for="reviews-project" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Type</label>
-                                    <select id="reviews-project" name="projectType" required class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 text-gray-900">
+                                    <label for=reviews-project class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Type</label>
+                                    <select id=reviews-project name=projectType required class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 text-gray-900">
                                         <option value="" disabled selected>Select...</option>
                                         <option value="Carpentry & Trim">Carpentry & Trim</option>
-                                        <option value="Doors">Doors</option>
-                                        <option value="Drywall">Drywall</option>
-                                        <option value="Painting">Painting</option>
-                                        <option value="Electrical">Electrical</option>
-                                        <option value="Plumbing">Plumbing</option>
+                                        <option value=Doors>Doors</option>
+                                        <option value=Drywall>Drywall</option>
+                                        <option value=Painting>Painting</option>
+                                        <option value=Electrical>Electrical</option>
+                                        <option value=Plumbing>Plumbing</option>
                                         <option value="Decks & Fences">Decks & Fences</option>
-                                        <option value="Flooring">Flooring</option>
-                                        <option value="Maintenance">Maintenance</option>
+                                        <option value=Flooring>Flooring</option>
+                                        <option value=Maintenance>Maintenance</option>
                                         <option value="Other Service">Other Service</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div>
-                                <span id="reviews-rating-label" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Rating</span>
+                                <span id=reviews-rating-label class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Your Rating</span>
                                 <div class="flex items-center gap-3">
-                                    <div class="flex gap-1" role="radiogroup" aria-labelledby="reviews-rating-label">
-                                        <button type="button" role="radio" aria-checked="false" class="star-rating-btn text-2xl text-red-300 focus:outline-none" data-value="1" aria-label="1 star"><i class="fas fa-star" aria-hidden="true"></i></button>
-                                        <button type="button" role="radio" aria-checked="false" class="star-rating-btn text-2xl text-red-300 focus:outline-none" data-value="2" aria-label="2 stars"><i class="fas fa-star" aria-hidden="true"></i></button>
-                                        <button type="button" role="radio" aria-checked="false" class="star-rating-btn text-2xl text-red-300 focus:outline-none" data-value="3" aria-label="3 stars"><i class="fas fa-star" aria-hidden="true"></i></button>
-                                        <button type="button" role="radio" aria-checked="false" class="star-rating-btn text-2xl text-red-300 focus:outline-none" data-value="4" aria-label="4 stars"><i class="fas fa-star" aria-hidden="true"></i></button>
-                                        <button type="button" role="radio" aria-checked="false" class="star-rating-btn text-2xl text-red-300 focus:outline-none" data-value="5" aria-label="5 stars"><i class="fas fa-star" aria-hidden="true"></i></button>
+                                    <div class="flex gap-1" role=radiogroup aria-labelledby=reviews-rating-label>
+                                        <button type=button role=radio aria-checked=false class="star-rating-btn text-2xl text-red-300 focus:outline-none" data-value=1 aria-label="1 star"><i class="fas fa-star" aria-hidden=true></i></button>
+                                        <button type=button role=radio aria-checked=false class="star-rating-btn text-2xl text-red-300 focus:outline-none" data-value=2 aria-label="2 stars"><i class="fas fa-star" aria-hidden=true></i></button>
+                                        <button type=button role=radio aria-checked=false class="star-rating-btn text-2xl text-red-300 focus:outline-none" data-value=3 aria-label="3 stars"><i class="fas fa-star" aria-hidden=true></i></button>
+                                        <button type=button role=radio aria-checked=false class="star-rating-btn text-2xl text-red-300 focus:outline-none" data-value=4 aria-label="4 stars"><i class="fas fa-star" aria-hidden=true></i></button>
+                                        <button type=button role=radio aria-checked=false class="star-rating-btn text-2xl text-red-300 focus:outline-none" data-value=5 aria-label="5 stars"><i class="fas fa-star" aria-hidden=true></i></button>
                                     </div>
-                                    <span id="rating-text" class="text-sm font-semibold text-red-700">Perfect!</span>
-                                    <input type="hidden" id="reviews-rating" name="rating" value="5" required>
+                                    <span id=rating-text class="text-sm font-semibold text-red-700">Perfect!</span>
+                                    <input type=hidden id=reviews-rating name=rating value=5 required>
                                 </div>
                             </div>
 
                             <div>
                                 <span class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">What stood out? <span class="normal-case text-gray-500 font-medium tracking-normal">(optional)</span></span>
-                                <div id="reviews-attributes" class="flex flex-wrap gap-2" role="group" aria-label="Highlight tags">
-                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Punctual" aria-pressed="false"><i class="fas fa-clock mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Punctual</button>
-                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Clean Workspace" aria-pressed="false"><i class="fas fa-broom mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Clean Workspace</button>
-                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Fair Pricing" aria-pressed="false"><i class="fas fa-tag mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Fair Pricing</button>
-                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Great Communication" aria-pressed="false"><i class="fas fa-comments mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Great Communication</button>
-                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Quality Work" aria-pressed="false"><i class="fas fa-award mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Quality Work</button>
-                                    <button type="button" class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Friendly" aria-pressed="false"><i class="fas fa-face-smile mr-1.5 text-xs opacity-70" aria-hidden="true"></i>Friendly</button>
+                                <div id=reviews-attributes class="flex flex-wrap gap-2" role=group aria-label="Highlight tags">
+                                    <button type=button class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr=Punctual aria-pressed=false><i class="fas fa-clock mr-1.5 text-xs opacity-70" aria-hidden=true></i>Punctual</button>
+                                    <button type=button class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Clean Workspace" aria-pressed=false><i class="fas fa-broom mr-1.5 text-xs opacity-70" aria-hidden=true></i>Clean Workspace</button>
+                                    <button type=button class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Fair Pricing" aria-pressed=false><i class="fas fa-tag mr-1.5 text-xs opacity-70" aria-hidden=true></i>Fair Pricing</button>
+                                    <button type=button class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Great Communication" aria-pressed=false><i class="fas fa-comments mr-1.5 text-xs opacity-70" aria-hidden=true></i>Great Communication</button>
+                                    <button type=button class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr="Quality Work" aria-pressed=false><i class="fas fa-award mr-1.5 text-xs opacity-70" aria-hidden=true></i>Quality Work</button>
+                                    <button type=button class="attr-chip bg-gray-50 border-[2px] border-gray-200 text-gray-700 hover:border-red-300 rounded-full px-4 py-2 text-sm font-semibold" data-attr=Friendly aria-pressed=false><i class="fas fa-face-smile mr-1.5 text-xs opacity-70" aria-hidden=true></i>Friendly</button>
                                 </div>
-                                <input type="hidden" id="reviews-attributes-input" name="attributes" value="">
+                                <input type=hidden id=reviews-attributes-input name=attributes>
                             </div>
 
                             <div>
-                                <label for="reviews-review" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Review</label>
-                                <textarea id="reviews-review" name="review" rows="4" required maxlength="700" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none text-gray-900" placeholder="Tell neighbors what was fixed and how it went."></textarea>
+                                <label for=reviews-review class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Review</label>
+                                <textarea id=reviews-review name=review rows=4 required maxlength=700 class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none text-gray-900" placeholder="Tell neighbors what was fixed and how it went."></textarea>
                             </div>
 
                             <div>
                                 <span class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Photos <span class="normal-case text-gray-500 font-medium tracking-normal">(up to 3 · at least one required)</span></span>
-                                <div id="reviews-dropzone" class="review-dropzone block cursor-pointer border-[2px] border-dashed border-red-200 hover:border-red-500 rounded-3xl p-5 text-center transition">
-                                    <!-- The three slots share one dropzone: each <input> is hidden, the
-                                         first empty slot accepts the next pick, and a click on the dropzone
-                                         opens whichever slot is next. The slot grid below renders live
-                                         previews and remove buttons once a file lands. -->
-                                    <input id="reviews-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif" class="sr-only pointer-events-none">
-                                    <input id="reviews-photo-2" name="photo2" type="file" accept="image/jpeg,image/png,image/webp,image/gif" class="sr-only pointer-events-none">
-                                    <input id="reviews-photo-3" name="photo3" type="file" accept="image/jpeg,image/png,image/webp,image/gif" class="sr-only pointer-events-none">
-                                    <div id="reviews-previews" class="hidden grid grid-cols-3 gap-3 mb-3"></div>
-                                    <div id="reviews-preview-wrap" class="hidden mb-3">
-                                        <img id="reviews-preview" src="" alt="Preview of the photo you selected" class="mx-auto max-h-48 w-auto rounded-2xl object-cover shadow-md">
+                                <div id=reviews-dropzone class="review-dropzone block cursor-pointer border-[2px] border-dashed border-red-200 hover:border-red-500 rounded-3xl p-5 text-center transition">
+                                    
+                                    <input id=reviews-photo name=photo type=file accept=image/jpeg,image/png,image/webp,image/gif class="sr-only pointer-events-none">
+                                    <input id=reviews-photo-2 name=photo2 type=file accept=image/jpeg,image/png,image/webp,image/gif class="sr-only pointer-events-none">
+                                    <input id=reviews-photo-3 name=photo3 type=file accept=image/jpeg,image/png,image/webp,image/gif class="sr-only pointer-events-none">
+                                    <div id=reviews-previews class="hidden grid grid-cols-3 gap-3 mb-3"></div>
+                                    <div id=reviews-preview-wrap class="hidden mb-3">
+                                        <img id=reviews-preview src="" alt="Preview of the photo you selected" class="mx-auto max-h-48 w-auto rounded-2xl object-cover shadow-md">
                                     </div>
-                                    <i class="fas fa-cloud-arrow-up text-3xl text-red-500 mb-2 block" aria-hidden="true"></i>
-                                    <span id="reviews-file-name" class="block font-semibold text-slate-800">Choose up to 3 photos or drag them here</span>
+                                    <i class="fas fa-cloud-arrow-up text-3xl text-red-500 mb-2 block" aria-hidden=true></i>
+                                    <span id=reviews-file-name class="block font-semibold text-slate-800">Choose up to 3 photos or drag them here</span>
                                     <span class="text-xs text-gray-500 block mt-1">JPG, PNG, WebP or GIF · 10 MB max each</span>
                                 </div>
                             </div>
 
-                            <p id="reviews-message" class="hidden text-sm font-semibold" role="status" aria-live="polite"></p>
+                            <p id=reviews-message class="hidden text-sm font-semibold" role=status aria-live=polite></p>
 
-                            <div id="reviews-editing" class="hidden bg-blue-50 border-[2px] border-blue-200 rounded-2xl p-4 text-sm text-blue-900 space-y-3">
+                            <div id=reviews-editing class="hidden bg-blue-50 border-[2px] border-blue-200 rounded-2xl p-4 text-sm text-blue-900 space-y-3">
                                 <div>
                                     <span class="block mb-1 font-semibold">✍️ You are editing an existing review.</span>
-                                    <button id="reviews-cancel-edit" type="button" class="font-bold text-red-600 hover:text-red-700">Cancel</button>
+                                    <button id=reviews-cancel-edit type=button class="font-bold text-red-600 hover:text-red-700">Cancel</button>
                                 </div>
                                 <div>
-                                    <label for="reviews-owner-response" class="block text-xs uppercase tracking-widest font-bold text-blue-900/70 mb-1.5">Owner Response <span class="normal-case font-medium">(public reply)</span></label>
-                                    <textarea id="reviews-owner-response" name="ownerResponse" rows="2" maxlength="500" class="w-full px-3 py-2 bg-white border-[2px] border-blue-200 rounded-xl focus:outline-none focus:border-blue-400 resize-none text-blue-950" placeholder="Thanks Bruce! Glad we could fix that drainage issue for you."></textarea>
+                                    <label for=reviews-owner-response class="block text-xs uppercase tracking-widest font-bold text-blue-900/70 mb-1.5">Owner Response <span class="normal-case font-medium">(public reply)</span></label>
+                                    <textarea id=reviews-owner-response name=ownerResponse rows=2 maxlength=500 class="w-full px-3 py-2 bg-white border-[2px] border-blue-200 rounded-xl focus:outline-none focus:border-blue-400 resize-none text-blue-950" placeholder="Thanks Bruce! Glad we could fix that drainage issue for you."></textarea>
                                 </div>
                             </div>
 
-                            <button id="reviews-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
-                                Post My Review <i class="fas fa-camera-retro" aria-hidden="true"></i>
+                            <button id=reviews-submit type=submit class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
+                                Post My Review <i class="fas fa-camera-retro" aria-hidden=true></i>
                             </button>
-                            <p class="text-center text-sm font-semibold text-red-600 flex items-center justify-center gap-2"><i class="fas fa-heart" aria-hidden="true"></i> Thank you for supporting a local, family-owned business in Oakland County!</p>
+                            <p class="text-center text-sm font-semibold text-red-600 flex items-center justify-center gap-2"><i class="fas fa-heart" aria-hidden=true></i> Thank you for supporting a local, family-owned business in Oakland County!</p>
                             <p class="text-xs text-gray-500 text-center">By submitting, you confirm this review reflects your genuine experience and agree that your first name, city, rating, review, and photo may be published publicly on this website.</p>
                         </form>
                     </div>
@@ -744,92 +428,82 @@
                             <p class="text-slate-400 text-sm">Verified local projects submitted by customers across Oakland County, MI.</p>
                         </div>
                         <div class="flex flex-wrap items-center gap-3">
-                            <button id="admin-access-btn" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md">
-                                <i class="fas fa-user-shield" aria-hidden="true"></i> <span id="admin-access-label">Owner Access</span>
+                            <button id=admin-access-btn type=button class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md">
+                                <i class="fas fa-user-shield" aria-hidden=true></i> <span id=admin-access-label>Owner Access</span>
                             </button>
-                            <button id="reviews-refresh" type="button" class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md hover:shadow-green-600/30">
-                                <i class="fas fa-arrows-rotate" aria-hidden="true"></i> Refresh Reviews
+                            <button id=reviews-refresh type=button class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md hover:shadow-green-600/30">
+                                <i class="fas fa-arrows-rotate" aria-hidden=true></i> Refresh Reviews
                             </button>
                         </div>
                     </div>
 
-                    <!-- Interactive filters: service category and city, combined.
-                         Both rows are plain buttons carrying aria-pressed, so the
-                         lit state is announced and not only coloured in.
-
-                         The service row ships with "All Projects" alone and is
-                         finished by /js/reviews-page.js from the reviews the page
-                         just loaded, so it can only ever offer a category that has
-                         a showcase behind it. The whole row stays hidden until at
-                         least two categories are published -- with one, there is
-                         nothing to narrow. -->
-                    <div class="space-y-4">
-                        <div id="reviews-service-filter" class="hidden">
-                            <span id="reviews-filter-label" class="block text-[11px] uppercase tracking-widest font-bold text-slate-400 mb-2.5">Filter by service</span>
-                            <div id="reviews-filters" class="flex flex-wrap gap-2" role="group" aria-labelledby="reviews-filter-label">
-                                <button type="button" class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter="all" aria-pressed="true">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+                    
+                    <div class=space-y-4>
+                        <div id=reviews-service-filter class=hidden>
+                            <span id=reviews-filter-label class="block text-[11px] uppercase tracking-widest font-bold text-slate-400 mb-2.5">Filter by service</span>
+                            <div id=reviews-filters class="flex flex-wrap gap-2" role=group aria-labelledby=reviews-filter-label>
+                                <button type=button class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter=all aria-pressed=true>
+                                    <svg width=15 height=15 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><rect x=3.5 y=3.5 width=7 height=7 rx=1.5 /><rect x=13.5 y=3.5 width=7 height=7 rx=1.5 /><rect x=3.5 y=13.5 width=7 height=7 rx=1.5 /><rect x=13.5 y=13.5 width=7 height=7 rx=1.5 /></svg>
                                     All Projects
                                 </button>
                             </div>
                         </div>
 
                         <div>
-                            <span id="reviews-city-label" class="block text-[11px] uppercase tracking-widest font-bold text-slate-400 mb-2.5">Filter by city</span>
-                            <div id="reviews-cities" class="flex flex-wrap gap-2" role="group" aria-labelledby="reviews-city-label">
-                                <button type="button" class="city-tab inline-flex items-center gap-1.5 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="all" aria-pressed="true">
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.4 2.5 3.7 5.7 3.7 9.2s-1.3 6.7-3.7 9.2c-2.4-2.5-3.7-5.7-3.7-9.2S9.6 5.3 12 2.8Z"/></svg>
+                            <span id=reviews-city-label class="block text-[11px] uppercase tracking-widest font-bold text-slate-400 mb-2.5">Filter by city</span>
+                            <div id=reviews-cities class="flex flex-wrap gap-2" role=group aria-labelledby=reviews-city-label>
+                                <button type=button class="city-tab inline-flex items-center gap-1.5 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=all aria-pressed=true>
+                                    <svg width=13 height=13 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><circle cx=12 cy=12 r=9.2 /><path d="M2.8 12h18.4M12 2.8c2.4 2.5 3.7 5.7 3.7 9.2s-1.3 6.7-3.7 9.2c-2.4-2.5-3.7-5.7-3.7-9.2S9.6 5.3 12 2.8Z"/></svg>
                                     All Cities
                                 </button>
-                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Waterford" aria-pressed="false">Waterford</button>
-                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Birmingham" aria-pressed="false">Birmingham</button>
-                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Troy" aria-pressed="false">Troy</button>
-                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Rochester Hills" aria-pressed="false">Rochester Hills</button>
-                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Clarkston" aria-pressed="false">Clarkston</button>
-                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Southfield" aria-pressed="false">Southfield</button>
-                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Auburn Hills" aria-pressed="false">Auburn Hills</button>
-                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Commerce" aria-pressed="false">Commerce</button>
-                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Highland" aria-pressed="false">Highland</button>
-                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="White Lake" aria-pressed="false">White Lake</button>
-                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Bloomfield" aria-pressed="false">Bloomfield</button>
-                                <button type="button" class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="West Bloomfield" aria-pressed="false">West Bloomfield</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Waterford aria-pressed=false>Waterford</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Birmingham aria-pressed=false>Birmingham</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Troy aria-pressed=false>Troy</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Rochester Hills" aria-pressed=false>Rochester Hills</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Clarkston aria-pressed=false>Clarkston</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Southfield aria-pressed=false>Southfield</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Auburn Hills" aria-pressed=false>Auburn Hills</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Commerce aria-pressed=false>Commerce</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Highland aria-pressed=false>Highland</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="White Lake" aria-pressed=false>White Lake</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Bloomfield aria-pressed=false>Bloomfield</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="West Bloomfield" aria-pressed=false>West Bloomfield</button>
                             </div>
                         </div>
                     </div>
 
-                    <div id="reviews-list" class="reviews-masonry" aria-live="polite"></div>
+                    <div id=reviews-list class=reviews-masonry aria-live=polite></div>
 
-                    <div id="reviews-filter-empty" class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
-                        <i class="fas fa-filter-circle-xmark text-4xl text-slate-500 mb-3 block" aria-hidden="true"></i>
+                    <div id=reviews-filter-empty class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
+                        <i class="fas fa-filter-circle-xmark text-4xl text-slate-500 mb-3 block" aria-hidden=true></i>
                         <h3 class="text-xl font-bold text-white mb-2">No projects match these filters yet</h3>
-                        <p class="text-sm" id="reviews-filter-empty-copy">Try another service or city — or clear the filters to see every Oakland County project.</p>
-                        <button id="reviews-clear-filters" type="button" class="mt-5 inline-flex items-center gap-2 bg-white text-blue-950 hover:bg-slate-100 font-bold px-5 py-2.5 rounded-full text-sm transition">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18M6.5 12h11M10 19h4"/></svg>
+                        <p class=text-sm id=reviews-filter-empty-copy>Try another service or city — or clear the filters to see every Oakland County project.</p>
+                        <button id=reviews-clear-filters type=button class="mt-5 inline-flex items-center gap-2 bg-white text-blue-950 hover:bg-slate-100 font-bold px-5 py-2.5 rounded-full text-sm transition">
+                            <svg width=15 height=15 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M3 5h18M6.5 12h11M10 19h4"/></svg>
                             Clear all filters
                         </button>
                     </div>
 
-                    <div id="reviews-empty" class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
-                        <i class="fas fa-comment-slash text-4xl text-slate-500 mb-3 block" aria-hidden="true"></i>
+                    <div id=reviews-empty class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
+                        <i class="fas fa-comment-slash text-4xl text-slate-500 mb-3 block" aria-hidden=true></i>
                         <h3 class="text-xl font-bold text-white mb-2">No customer reviews yet</h3>
-                        <p class="text-sm">Be the first to share your experience with AAA Handyman Services LLC!</p>
+                        <p class=text-sm>Be the first to share your experience with AAA Handyman Services LLC!</p>
                     </div>
 
-                    <div id="reviews-loading" class="reviews-masonry" role="status" aria-label="Loading customer projects">
-                        <!-- Placeholder cards, not content: the label above is what a
-                             screen reader announces, so the bars themselves are hidden. -->
-                        <div class="review-card skeleton-card skeleton-card--on-navy" style="opacity:1" aria-hidden="true">
-                            <div class="skeleton-card__thumb"></div>
-                            <div class="skeleton-card__body">
+                    <div id=reviews-loading class=reviews-masonry role=status aria-label="Loading customer projects">
+                        
+                        <div class="review-card skeleton-card skeleton-card--on-navy" style=opacity:1 aria-hidden=true>
+                            <div class=skeleton-card__thumb></div>
+                            <div class=skeleton-card__body>
                                 <div class="skeleton-card__line skeleton-card__line--title"></div>
                                 <div class="skeleton-card__line skeleton-card__line--long"></div>
                                 <div class="skeleton-card__line skeleton-card__line--medium"></div>
                                 <div class="skeleton-card__line skeleton-card__line--short"></div>
                             </div>
                         </div>
-                        <div class="review-card skeleton-card skeleton-card--on-navy" style="opacity:1" aria-hidden="true">
-                            <div class="skeleton-card__thumb"></div>
-                            <div class="skeleton-card__body">
+                        <div class="review-card skeleton-card skeleton-card--on-navy" style=opacity:1 aria-hidden=true>
+                            <div class=skeleton-card__thumb></div>
+                            <div class=skeleton-card__body>
                                 <div class="skeleton-card__line skeleton-card__line--title"></div>
                                 <div class="skeleton-card__line skeleton-card__line--long"></div>
                                 <div class="skeleton-card__line skeleton-card__line--short"></div>
@@ -843,7 +517,7 @@
         <div class="max-w-7xl mx-auto px-6 mb-4">
             <div class="availability-banner text-center bg-blue-900 text-white py-12 px-8 sm:py-20 sm:px-16 rounded-3xl">
                 <p class="text-xl sm:text-2xl md:text-3xl font-medium">Available Monday–Friday, 9 a.m.–6 p.m.; Saturday, 10 a.m.–5 p.m.</p>
-                <p class="mt-6 text-base sm:text-lg md:text-xl opacity-90"><span class="flash-siren" aria-hidden="true"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i></span> After-Hours Emergency Services Available—Competitive hourly rates • No job too small!</p>
+                <p class="mt-6 text-base sm:text-lg md:text-xl opacity-90"><span class=flash-siren aria-hidden=true><i class="fas fa-triangle-exclamation" aria-hidden=true></i></span> After-Hours Emergency Services Available—Competitive hourly rates • No job too small!</p>
             </div>
         </div>
     </main>
@@ -853,40 +527,40 @@
             <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
 
                 <div class="flex flex-col items-center md:items-start">
-                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services LLC Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
+                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width=80 height=80 loading=lazy decoding=async alt="AAA Handyman Services LLC Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable home repairs, maintenance, punch lists, and minor updates for homeowners across Oakland County, Michigan.</p>
                     <div class="mt-4 flex items-center gap-4">
-                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+                        <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel=noopener aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
+                        <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
                     </div>
                 </div>
 
-                <nav aria-label="Footer">
+                <nav aria-label=Footer>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="/services" class="hover:text-white transition">Services</a></li>
-                        <li><a href="/rates" class="hover:text-white transition">Rates &amp; Packages</a></li>
-                        <li><a href="/ai-estimate" class="hover:text-white transition">AI Repair Estimator</a></li>
-                        <li><a href="/pricing-policy" class="hover:text-white transition">Pricing Policies</a></li>
-                        <li><a href="/guarantee" class="hover:text-white transition">Our Guarantee</a></li>
-                        <li><a href="/customer-care" class="hover:text-white transition">Customer Care</a></li>
-                        <li><a href="/reviews" class="hover:text-white transition">Reviews</a></li>
-                        <li><a href="/careers" class="hover:text-white transition">Careers</a></li>
-                        <li><a href="/book" class="hover:text-white transition">Book Online</a></li>
-                        <li><a href="/service-areas" class="hover:text-white transition">Service Areas</a></li>
-                        <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
+                        <li><a href=/services class="hover:text-white transition">Services</a></li>
+                        <li><a href=/rates class="hover:text-white transition">Rates &amp; Packages</a></li>
+                        <li><a href=/ai-estimate class="hover:text-white transition">AI Repair Estimator</a></li>
+                        <li><a href=/pricing-policy class="hover:text-white transition">Pricing Policies</a></li>
+                        <li><a href=/guarantee class="hover:text-white transition">Our Guarantee</a></li>
+                        <li><a href=/customer-care class="hover:text-white transition">Customer Care</a></li>
+                        <li><a href=/reviews class="hover:text-white transition">Reviews</a></li>
+                        <li><a href=/careers class="hover:text-white transition">Careers</a></li>
+                        <li><a href=/book class="hover:text-white transition">Book Online</a></li>
+                        <li><a href=/service-areas class="hover:text-white transition">Service Areas</a></li>
+                        <li><a href=/#faq class="hover:text-white transition">FAQ</a></li>
                     </ul>
                 </nav>
 
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden="true"></i>(248) 385-3432</a></li>
-                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
-                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Waterford, MI &middot; Oakland County</li>
+                        <li><a href=tel:+12483853432 class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden=true></i>(248) 385-3432</a></li>
+                        <li><a href=mailto:contact@aaahandyman.services class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden=true></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden=true></i>Waterford, MI &middot; Oakland County</li>
                     </ul>
-                    <a href="/book" class="aaa-btn mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
+                    <a href=/book class="aaa-btn mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden=true></i>Book Online Now</a>
                 </div>
             </div>
 
@@ -894,66 +568,66 @@
                 <nav aria-label="Popular services">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Popular Services</h3>
                     <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-                        <li><a href="/services/carpentry" class="hover:text-white transition">Carpentry</a></li>
-                        <li><a href="/services/drywall-repair" class="hover:text-white transition">Drywall Repair</a></li>
-                        <li><a href="/services/painting-staining" class="hover:text-white transition">Painting &amp; Staining</a></li>
-                        <li><a href="/services/doors-windows" class="hover:text-white transition">Doors &amp; Windows</a></li>
-                        <li><a href="/services/flooring-solutions" class="hover:text-white transition">Flooring Solutions</a></li>
-                        <li><a href="/services/minor-plumbing" class="hover:text-white transition">Minor Plumbing</a></li>
-                        <li><a href="/services/minor-electrical" class="hover:text-white transition">Minor Electrical</a></li>
-                        <li><a href="/services/decks-fences" class="hover:text-white transition">Decks &amp; Fences</a></li>
-                        <li><a href="/services/gutters" class="hover:text-white transition">Gutters</a></li>
-                        <li><a href="/services/power-washing" class="hover:text-white transition">Power Washing</a></li>
+                        <li><a href=/services/carpentry class="hover:text-white transition">Carpentry</a></li>
+                        <li><a href=/services/drywall-repair class="hover:text-white transition">Drywall Repair</a></li>
+                        <li><a href=/services/painting-staining class="hover:text-white transition">Painting &amp; Staining</a></li>
+                        <li><a href=/services/doors-windows class="hover:text-white transition">Doors &amp; Windows</a></li>
+                        <li><a href=/services/flooring-solutions class="hover:text-white transition">Flooring Solutions</a></li>
+                        <li><a href=/services/minor-plumbing class="hover:text-white transition">Minor Plumbing</a></li>
+                        <li><a href=/services/minor-electrical class="hover:text-white transition">Minor Electrical</a></li>
+                        <li><a href=/services/decks-fences class="hover:text-white transition">Decks &amp; Fences</a></li>
+                        <li><a href=/services/gutters class="hover:text-white transition">Gutters</a></li>
+                        <li><a href=/services/power-washing class="hover:text-white transition">Power Washing</a></li>
                     </ul>
-                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    <a href=/services class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden=true></i></a>
                 </nav>
                 <nav aria-label="Service areas">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Service Areas</h3>
                     <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-                        <li><a href="/handyman/waterford" class="hover:text-white transition">Waterford</a></li>
-                        <li><a href="/handyman/troy" class="hover:text-white transition">Troy</a></li>
-                        <li><a href="/handyman/west-bloomfield" class="hover:text-white transition">West Bloomfield</a></li>
-                        <li><a href="/handyman/rochester-hills" class="hover:text-white transition">Rochester Hills</a></li>
-                        <li><a href="/handyman/royal-oak" class="hover:text-white transition">Royal Oak</a></li>
-                        <li><a href="/handyman/birmingham" class="hover:text-white transition">Birmingham</a></li>
-                        <li><a href="/handyman/clarkston" class="hover:text-white transition">Clarkston</a></li>
-                        <li><a href="/handyman/farmington-hills" class="hover:text-white transition">Farmington Hills</a></li>
-                        <li><a href="/handyman/novi" class="hover:text-white transition">Novi</a></li>
-                        <li><a href="/handyman/southfield" class="hover:text-white transition">Southfield</a></li>
-                        <li><a href="/handyman/franklin" class="hover:text-white transition">Franklin</a></li>
-                        <li><a href="/handyman/orchard-lake" class="hover:text-white transition">Orchard Lake</a></li>
+                        <li><a href=/handyman/waterford class="hover:text-white transition">Waterford</a></li>
+                        <li><a href=/handyman/troy class="hover:text-white transition">Troy</a></li>
+                        <li><a href=/handyman/west-bloomfield class="hover:text-white transition">West Bloomfield</a></li>
+                        <li><a href=/handyman/rochester-hills class="hover:text-white transition">Rochester Hills</a></li>
+                        <li><a href=/handyman/royal-oak class="hover:text-white transition">Royal Oak</a></li>
+                        <li><a href=/handyman/birmingham class="hover:text-white transition">Birmingham</a></li>
+                        <li><a href=/handyman/clarkston class="hover:text-white transition">Clarkston</a></li>
+                        <li><a href=/handyman/farmington-hills class="hover:text-white transition">Farmington Hills</a></li>
+                        <li><a href=/handyman/novi class="hover:text-white transition">Novi</a></li>
+                        <li><a href=/handyman/southfield class="hover:text-white transition">Southfield</a></li>
+                        <li><a href=/handyman/franklin class="hover:text-white transition">Franklin</a></li>
+                        <li><a href=/handyman/orchard-lake class="hover:text-white transition">Orchard Lake</a></li>
                     </ul>
-                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    <a href=/service-areas class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden=true></i></a>
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
                 <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services LLC All Rights Reserved. We operate in compliance with Michigan&rsquo;s minor project exemption (MCL 339.2403).<br>Locally Serving Oakland County, MI.</p>
                 <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
-                    <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
-                    <span class="text-gray-600">|</span>
-                    <a href="/terms" class="hover:text-white transition">Terms of Service</a>
+                    <a href=/privacy class="hover:text-white transition">Privacy Policy</a>
+                    <span class=text-gray-600>|</span>
+                    <a href=/terms class="hover:text-white transition">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <noscript>
-        <a href="tel:+12483853432" class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services LLC Now" aria-label="Call AAA Handyman Services LLC Now">
-            <i class="fas fa-phone" aria-hidden="true"></i>
+        <a href=tel:+12483853432 class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services LLC Now" aria-label="Call AAA Handyman Services LLC Now">
+            <i class="fas fa-phone" aria-hidden=true></i>
             <span class="hidden md:inline">Call Now! <span class="hidden lg:inline">(248) 385-3432</span></span>
         </a>
     </noscript>
 
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
+    <button id=back-to-top type=button aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden=true></i></button>
 
-    <!-- Lightbox overlay for zooming project photos -->
-    <div id="reviews-lightbox" class="hidden fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4" role="dialog" aria-modal="true" aria-label="Project photo viewer">
-        <button id="reviews-lightbox-close" type="button" aria-label="Close photo viewer" class="absolute top-5 right-5 h-11 w-11 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-xl transition focus:outline-none focus:ring-4 focus:ring-white/40">
-            <i class="fas fa-xmark" aria-hidden="true"></i>
+    
+    <div id=reviews-lightbox class="hidden fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4" role=dialog aria-modal=true aria-label="Project photo viewer">
+        <button id=reviews-lightbox-close type=button aria-label="Close photo viewer" class="absolute top-5 right-5 h-11 w-11 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-xl transition focus:outline-none focus:ring-4 focus:ring-white/40">
+            <i class="fas fa-xmark" aria-hidden=true></i>
         </button>
         <figure class="max-w-4xl w-full text-center">
-            <img id="reviews-lightbox-img" src="" alt="" class="mx-auto max-h-[80vh] w-auto rounded-2xl shadow-2xl object-contain">
-            <figcaption id="reviews-lightbox-caption" class="mt-4 text-slate-200 text-sm font-medium"></figcaption>
+            <img id=reviews-lightbox-img src="" alt="" class="mx-auto max-h-[80vh] w-auto rounded-2xl shadow-2xl object-contain">
+            <figcaption id=reviews-lightbox-caption class="mt-4 text-slate-200 text-sm font-medium"></figcaption>
         </figure>
     </div>
 
@@ -961,13 +635,6 @@
     <script src="/js/reviews-page.js?v=20260802e" defer></script>
     <script src="/js/site.js?v=20260814e" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
-    <script>
-      // Registered after load so it never competes with the first render.
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/sw.js').catch(function () {});
-        });
-      }
-    </script>
-</body>
-</html>
+    <script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})})</script>
+
+

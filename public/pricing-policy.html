@@ -1,34 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang=en>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Self-hosted brand fonts + icon subset; @font-face lives in site-theme.css -->
-    <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta charset=UTF-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    
+    <link rel=preload href=/fonts/archivo-latin.woff2 as=font type=font/woff2 crossorigin>
 
 
     <title>Pricing Policies — Parts, Materials &amp; No Surprise Invoices | AAA Handyman Services LLC</title>
 
-    <meta name="description" content="How we handle parts and materials — supply your own at $0 markup, or we source them at cost plus a 20% supply markup — plus our No Surprise Invoices guarantee: we stop, we show you, you decide.">
-    <meta name="theme-color" content="#A61F2E">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://aaahandyman.services/pricing-policy">
+    <meta name=description content="How we handle parts and materials — supply your own at $0 markup, or we source them at cost plus a 20% supply markup — plus our No Surprise Invoices guarantee: we stop, we show you, you decide.">
+    <meta name=theme-color content=#A61F2E>
+    <meta name=robots content="index, follow">
+    <link rel=canonical href=https://aaahandyman.services/pricing-policy>
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aaahandyman.services/pricing-policy">
-    <meta property="og:site_name" content="AAA Handyman Services LLC">
-    <meta property="og:title" content="Pricing Policies — Parts, Materials &amp; No Surprise Invoices | AAA Handyman Services LLC">
-    <meta property="og:description" content="Two transparent material options and a three-step promise that no invoice ever catches you off guard.">
-    <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
-    <meta property="og:locale" content="en_US">
+    <meta property=og:type content=website>
+    <meta property=og:url content=https://aaahandyman.services/pricing-policy>
+    <meta property=og:site_name content="AAA Handyman Services LLC">
+    <meta property=og:title content="Pricing Policies — Parts, Materials &amp; No Surprise Invoices | AAA Handyman Services LLC">
+    <meta property=og:description content="Two transparent material options and a three-step promise that no invoice ever catches you off guard.">
+    <meta property=og:image content=https://aaahandyman.services/logo-banner.jpg>
+    <meta property=og:locale content=en_US>
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://aaahandyman.services/pricing-policy">
-    <meta name="twitter:title" content="Pricing Policies — Parts, Materials &amp; No Surprise Invoices | AAA Handyman Services LLC">
-    <meta name="twitter:description" content="Two transparent material options and a three-step promise that no invoice ever catches you off guard.">
-    <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
+    <meta name=twitter:card content=summary_large_image>
+    <meta name=twitter:url content=https://aaahandyman.services/pricing-policy>
+    <meta name=twitter:title content="Pricing Policies — Parts, Materials &amp; No Surprise Invoices | AAA Handyman Services LLC">
+    <meta name=twitter:description content="Two transparent material options and a three-step promise that no invoice ever catches you off guard.">
+    <meta name=twitter:image content=https://aaahandyman.services/logo-banner.jpg>
 
-    <script type="application/ld+json">
+    <script type=application/ld+json>
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
@@ -45,7 +45,7 @@
     }
     </script>
 
-    <script type="application/ld+json">
+    <script type=application/ld+json>
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -118,7 +118,7 @@
     }
     </script>
 
-    <script type="application/ld+json">
+    <script type=application/ld+json>
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -129,334 +129,154 @@
     }
     </script>
 
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260814e">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260815a">
-    <link rel="preload" href="/css/icons.css?v=20260815a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260815a"></noscript>
+    <link rel=stylesheet href="/css/tailwind.css?v=20260814e">
+    <link rel=stylesheet href="/css/site-theme.css?v=20260814e">
+    <link rel=preload href="/css/icons.css?v=20260815a" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
+    <noscript><link rel=stylesheet href="/css/icons.css?v=20260815a"></noscript>
 
-    <style>
-        /* Anchored sections clear the sticky header when linked to directly.
-           The legacy anchor stubs are inline spans, so they are covered too. */
-        section[id], header[id], .anchor-stub {
-            scroll-margin-top: 120px;
-        }
-        @media (max-width: 768px) {
-            section[id], header[id], .anchor-stub {
-                scroll-margin-top: 100px;
-            }
-        }
-
-        /* Common-scenario comparison.
-           A real <table> at desktop width, where the two material options are
-           genuinely easier to compare across a row. Below 760px the columns
-           would either overflow or squeeze to a few characters each, so every
-           row restacks into a card and each cell reprints its column heading
-           from data-label -- the markup stays a table for assistive tech and
-           for find-in-page, only the presentation changes. */
-        .scenario-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: .875rem;
-        }
-        .scenario-table caption {
-            caption-side: top;
-            text-align: left;
-            padding: 0 0 .85rem;
-            font-size: .8125rem;
-            color: #4b5563;
-        }
-        .scenario-table th,
-        .scenario-table td {
-            text-align: left;
-            vertical-align: top;
-            padding: .85rem 1rem;
-            border-bottom: 1px solid rgb(226 232 240 / .9);
-        }
-        .scenario-table thead th {
-            background: #1b2a4a;
-            color: #fff;
-            font-size: .6875rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: .1em;
-            border-bottom: 0;
-        }
-        .scenario-table thead th:first-child { border-top-left-radius: .9rem; }
-        .scenario-table thead th:last-child { border-top-right-radius: .9rem; }
-        .scenario-table tbody th {
-            font-weight: 700;
-            color: #0f172a;
-            width: 30%;
-        }
-        .scenario-table tbody td { color: #4b5563; }
-        .scenario-table tbody tr:nth-child(even) { background: rgb(248 250 252 / .7); }
-        .scenario-table tbody tr:last-child th,
-        .scenario-table tbody tr:last-child td { border-bottom: 0; }
-
-        @media (max-width: 760px) {
-            .scenario-table thead {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                padding: 0;
-                overflow: hidden;
-                clip: rect(0 0 0 0);
-                white-space: nowrap;
-                border: 0;
-            }
-            .scenario-table,
-            .scenario-table tbody,
-            .scenario-table tr,
-            .scenario-table th,
-            .scenario-table td { display: block; }
-            .scenario-table tr {
-                border: 1px solid rgb(226 232 240);
-                border-radius: 1rem;
-                background: #fff;
-                margin-bottom: .85rem;
-                padding: .25rem 0 .6rem;
-                box-shadow: 0 8px 20px -18px rgb(15 23 42 / .45);
-            }
-            .scenario-table tbody tr:nth-child(even) { background: #fff; }
-            .scenario-table tbody th {
-                width: auto;
-                font-size: 1rem;
-                border-bottom: 1px solid rgb(241 245 249);
-                padding: .85rem 1rem .7rem;
-            }
-            .scenario-table td {
-                border-bottom: 0;
-                padding: .7rem 1rem 0;
-            }
-            .scenario-table td::before {
-                content: attr(data-label);
-                display: block;
-                margin-bottom: .2rem;
-                font-size: .6875rem;
-                font-weight: 800;
-                text-transform: uppercase;
-                letter-spacing: .08em;
-                color: #a61f2e;
-            }
-        }
-
-        /* Give the heading extra top margin so the "Parts warrantied" badge
-           doesn't overlap it. */
-        .option-b-card h3 {
-            margin-top: 1.5rem; /* Adjust value as needed */
-        }
-
-        /* FAQ accordion: native <details>, so open/closed state, keyboard
-           operation, and find-in-page all work before any JavaScript runs. */
-        .pp-faq {
-            border: 1px solid rgb(203 213 225 / .85);
-            border-radius: 1rem;
-            background: #fff;
-            overflow: hidden;
-            transition: border-color var(--dur, .2s) ease;
-        }
-        .pp-faq + .pp-faq { margin-top: .75rem; }
-        .pp-faq[open] { border-color: rgb(166 31 46 / .35); }
-        .pp-faq > summary {
-            list-style: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            padding: 1.1rem 1.25rem;
-            font-weight: 700;
-            color: #0f172a;
-            line-height: 1.45;
-        }
-        .pp-faq > summary::-webkit-details-marker { display: none; }
-        .pp-faq > summary:hover { color: #a61f2e; background: #f9fafb; }
-        .pp-faq > summary:focus-visible { outline: 3px solid #1b2a4a; outline-offset: -3px; }
-        .pp-faq[open] > summary { color: #a61f2e; border-bottom: 1px solid rgb(226 232 240 / .9); }
-        .pp-faq__chevron { color: #a61f2e; flex-shrink: 0; transition: transform var(--dur, .2s) ease; }
-        .pp-faq[open] > summary .pp-faq__chevron { transform: rotate(180deg); }
-        .pp-faq__answer {
-            padding: 1rem 1.25rem 1.25rem;
-            color: #4b5563;
-            font-size: .9375rem;
-            line-height: 1.75;
-        }
-        .pp-faq__answer a { color: #a61f2e; font-weight: 700; }
-        .pp-faq__answer a:hover { text-decoration: underline; }
-
-        /* The rail joining the three guarantee steps. Decorative, so it is
-           drawn only where all three cards sit on one row. */
-        @media (min-width: 768px) {
-            .step-rail::before {
-                content: "";
-                position: absolute;
-                top: 3.25rem;
-                left: 16%;
-                right: 16%;
-                height: 2px;
-                background: linear-gradient(90deg, rgb(166 31 46 / .35), rgb(27 42 74 / .35), rgb(22 101 52 / .35));
-            }
-        }
-
-        /* The policy hero heading reads as crisp white over the navy
-           background, so the metallic gradient, drop-shadow filter, and blurred
-           ambient glow pseudo-element behind the hero wrapper are disabled here
-           to keep the text legible without a foggy halo. */
-        header#policy-hero.ambient-glow-hero h1 {
-            background: none;
-            -webkit-text-fill-color: #ffffff;
-            color: #ffffff;
-            filter: none;
-        }
-        header#policy-hero.ambient-glow-hero::before,
-        header#policy-hero.ambient-glow-hero::after {
-            content: none;
-        }
-    </style>
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/manifest.webmanifest">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="AAA Handyman">
-    <meta name="application-name" content="AAA Handyman">
+    <style>.anchor-stub,header[id],section[id]{scroll-margin-top:120px}@media (max-width:768px){.anchor-stub,header[id],section[id]{scroll-margin-top:100px}}.scenario-table{width:100%;border-collapse:collapse;font-size:.875rem}.scenario-table caption{caption-side:top;text-align:left;padding:0 0 .85rem;font-size:.8125rem;color:#4b5563}.scenario-table td,.scenario-table th{text-align:left;vertical-align:top;padding:.85rem 1rem;border-bottom:1px solid rgb(226 232 240 / .9)}.scenario-table thead th{background:#1b2a4a;color:#fff;font-size:.6875rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;border-bottom:0}.scenario-table thead th:first-child{border-top-left-radius:.9rem}.scenario-table thead th:last-child{border-top-right-radius:.9rem}.scenario-table tbody th{font-weight:700;color:#0f172a;width:30%}.scenario-table tbody td{color:#4b5563}.scenario-table tbody tr:nth-child(even){background:rgb(248 250 252 / .7)}.scenario-table tbody tr:last-child td,.scenario-table tbody tr:last-child th{border-bottom:0}@media (max-width:760px){.scenario-table thead{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}.scenario-table,.scenario-table tbody,.scenario-table td,.scenario-table th,.scenario-table tr{display:block}.scenario-table tr{border:1px solid rgb(226 232 240);border-radius:1rem;background:#fff;margin-bottom:.85rem;padding:.25rem 0 .6rem;box-shadow:0 8px 20px -18px rgb(15 23 42 / .45)}.scenario-table tbody tr:nth-child(even){background:#fff}.scenario-table tbody th{width:auto;font-size:1rem;border-bottom:1px solid rgb(241 245 249);padding:.85rem 1rem .7rem}.scenario-table td{border-bottom:0;padding:.7rem 1rem 0}.scenario-table td::before{content:attr(data-label);display:block;margin-bottom:.2rem;font-size:.6875rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#a61f2e}}.option-b-card h3{margin-top:1.5rem}.pp-faq{border:1px solid rgb(203 213 225 / .85);border-radius:1rem;background:#fff;overflow:hidden;transition:border-color var(--dur,.2s) ease}.pp-faq+.pp-faq{margin-top:.75rem}.pp-faq[open]{border-color:rgb(166 31 46 / .35)}.pp-faq>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 1.25rem;font-weight:700;color:#0f172a;line-height:1.45}.pp-faq>summary::-webkit-details-marker{display:none}.pp-faq>summary:hover{color:#a61f2e;background:#f9fafb}.pp-faq>summary:focus-visible{outline:3px solid #1b2a4a;outline-offset:-3px}.pp-faq[open]>summary{color:#a61f2e;border-bottom:1px solid rgb(226 232 240 / .9)}.pp-faq__chevron{color:#a61f2e;flex-shrink:0;transition:transform var(--dur,.2s) ease}.pp-faq[open]>summary .pp-faq__chevron{transform:rotate(180deg)}.pp-faq__answer{padding:1rem 1.25rem 1.25rem;color:#4b5563;font-size:.9375rem;line-height:1.75}.pp-faq__answer a{color:#a61f2e;font-weight:700}.pp-faq__answer a:hover{text-decoration:underline}@media (min-width:768px){.step-rail::before{content:"";position:absolute;top:3.25rem;left:16%;right:16%;height:2px;background:linear-gradient(90deg,rgb(166 31 46 / .35),rgb(27 42 74 / .35),rgb(22 101 52 / .35))}}header#policy-hero.ambient-glow-hero h1{background:0 0;-webkit-text-fill-color:#fff;color:#fff;filter:none}header#policy-hero.ambient-glow-hero::after,header#policy-hero.ambient-glow-hero::before{content:none}</style>
+    <link rel=icon href=/favicon.ico sizes=any>
+    <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+    <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+    <link rel=manifest href=/manifest.webmanifest>
+    <meta name=mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+    <meta name=apple-mobile-web-app-title content="AAA Handyman">
+    <meta name=application-name content="AAA Handyman">
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
 
-    <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
+    <a href=#main-content class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
-<header id="site-header" class="site-header sticky top-0 z-[100] bg-white/95 backdrop-blur-md shadow-md border-b-[3px] border-red-600">
+<header id=site-header class="site-header sticky top-0 z-[100] bg-white/95 backdrop-blur-md shadow-md border-b-[3px] border-red-600">
     <div class="header-container site-nav__bar max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" class="brand site-nav__brand group flex items-center gap-3 min-w-0">
-            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 shadow-sm transition group-hover:scale-105">
+        <a href=/ class="brand site-nav__brand group flex items-center gap-3 min-w-0">
+            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width=48 height=48 decoding=async fetchpriority=high alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 shadow-sm transition group-hover:scale-105">
             <div class="brand-text min-w-0">
                 <p class="brand-title text-base min-[390px]:text-lg sm:text-xl lg:text-xl xl:text-2xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services LLC</p>
                 <p class="brand-tagline text-[10px] sm:text-xs text-gray-500 font-medium">Oakland County, Michigan</p>
             </div>
-            <span class="sr-only">home</span>
+            <span class=sr-only>home</span>
         </a>
 
-        <!-- Desktop Navigation Container -->
+        
         <div class="site-nav__desktop hidden lg:flex items-center">
             <ul class="nav-links site-nav__links flex items-center gap-5 list-none m-0 p-0 text-sm xl:text-base font-medium">
-                <li><a href="/services" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a></li>
-                <li><a href="/service-areas" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a></li>
-                <li><a href="/rates" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Rates</a></li>
-                <li><a href="/guarantee" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Guarantee</a></li>
-                <li><a href="/reviews" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Reviews</a></li>
-                <li><a href="/careers" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Careers</a></li>
-                <li><a href="/contact" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Contact</a></li>
+                <li><a href=/services class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a></li>
+                <li><a href=/service-areas class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a></li>
+                <li><a href=/rates class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Rates</a></li>
+                <li><a href=/guarantee class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Guarantee</a></li>
+                <li><a href=/reviews class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Reviews</a></li>
+                <li><a href=/careers class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Careers</a></li>
+                <li><a href=/contact class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Contact</a></li>
             </ul>
 
-            <!-- Social Media Icons -->
+            
             <div class="social-icons site-nav__social flex items-center gap-3 pl-4 border-l border-gray-200 ml-3">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
             </div>
         </div>
 
-        <!-- Mobile Hamburger Button -->
-        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
-            <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
+        
+        <button id=mobile-menu-btn class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label=Menu aria-expanded=false aria-controls=mobile-menu>
+            <i class="fas fa-bars text-2xl" id=menu-icon aria-hidden=true></i>
         </button>
     </div>
 
-    <!-- Mobile Navigation Drawer / Menu -->
-    <div id="mobile-menu" class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden="true">
-        <div class="space-y-1">
-            <a href="/services" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
-            <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
-            <a href="/rates" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
-            <a href="/guarantee" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Guarantee</a>
-            <a href="/reviews" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Reviews</a>
-            <a href="/careers" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Careers</a>
-            <a href="/contact" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Contact</a>
+    
+    <div id=mobile-menu class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden=true>
+        <div class=space-y-1>
+            <a href=/services class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
+            <a href=/service-areas class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
+            <a href=/rates class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
+            <a href=/guarantee class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Guarantee</a>
+            <a href=/reviews class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Reviews</a>
+            <a href=/careers class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Careers</a>
+            <a href=/contact class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Contact</a>
         </div>
 
         <div class="pt-3 border-t border-gray-100 flex flex-col gap-3">
-            <a href="tel:+12483853432" class="flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition text-center">
-                <i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432
+            <a href=tel:+12483853432 class="flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition text-center">
+                <i class="fas fa-phone" aria-hidden=true></i> Call (248) 385-3432
             </a>
             <div class="flex items-center justify-center gap-6 text-2xl pt-1">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
             </div>
         </div>
     </div>
 </header>
 
-<aside id="seasonal-banner" class="seasonal-banner" data-season="summer" aria-label="Seasonal offer">
-    <div class="seasonal-banner__inner">
-        <p class="seasonal-badge">
-            <span class="seasonal-badge__icon" data-banner-icon aria-hidden="true">🌤️</span>
+<aside id=seasonal-banner class=seasonal-banner data-season=summer aria-label="Seasonal offer">
+    <div class=seasonal-banner__inner>
+        <p class=seasonal-badge>
+            <span class=seasonal-badge__icon data-banner-icon aria-hidden=true>🌤️</span>
             <span data-banner-label>Summer Exterior Refresh</span>
         </p>
-        <p class="seasonal-banner__copy">
-            <span class="seasonal-banner__lead"><span data-banner-lead>Book your summer exterior refresh and</span> <strong class="seasonal-banner__save" data-banner-save>save $50</strong></span>
-            <span class="seasonal-banner__note" data-banner-note>Oakland County homeowners · limited summer openings</span>
+        <p class=seasonal-banner__copy>
+            <span class=seasonal-banner__lead><span data-banner-lead>Book your summer exterior refresh and</span> <strong class=seasonal-banner__save data-banner-save>save $50</strong></span>
+            <span class=seasonal-banner__note data-banner-note>Oakland County homeowners · limited summer openings</span>
         </p>
-        <a class="seasonal-banner__cta" href="/#quote" data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+        <a class=seasonal-banner__cta href=/#quote data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width=14 height=14 fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
     </div>
-    <button type="button" class="seasonal-banner__close" data-banner-close aria-label="Dismiss seasonal offer">
-        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"></path></svg>
+    <button type=button class=seasonal-banner__close data-banner-close aria-label="Dismiss seasonal offer">
+        <svg viewBox="0 0 16 16" width=14 height=14 fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round aria-hidden=true><path d="m4 4 8 8M12 4l-8 8"></path></svg>
     </button>
-    <script type="application/json" data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck \u0026 Gutter Prep","lead":"Book your spring deck \u0026 gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
-    <script>(function(){try{var b=document.getElementById('seasonal-banner');if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();</script>
+    <script type=application/json data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck \u0026 Gutter Prep","lead":"Book your spring deck \u0026 gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
+    <script>(()=>{try{var e,a,t,n,l=document.getElementById("seasonal-banner");l&&(a=(e=new Date).getMonth(),t=e.getFullYear(),n=(a<=1||11===a?"winter":a<=4?"spring":a<=7?"summer":"fall")+"-"+(11===a?t+1:t),l.dataset.seasonKey=n,localStorage.getItem("aaa-seasonal-banner")===n)&&(l.hidden=!0)}catch(e){}})()</script>
 </aside>
 
-    <main id="main-content" class="flex-grow">
+    <main id=main-content class=flex-grow>
 
-        <header id="policy-hero" class="ambient-glow-hero relative overflow-hidden bg-blue-950 text-white">
-            <div class="absolute inset-0 z-0 bg-slate-950/40 pointer-events-none" aria-hidden="true"></div>
+        <header id=policy-hero class="ambient-glow-hero relative overflow-hidden bg-blue-950 text-white">
+            <div class="absolute inset-0 z-0 bg-slate-950/40 pointer-events-none" aria-hidden=true></div>
             <div class="relative z-10 max-w-7xl mx-auto px-6 py-12 sm:py-16 lg:py-20 reveal-on-scroll">
                 <div class="max-w-3xl mx-auto text-center">
                     <span class="badge-craftsman px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5 mb-4">
-                        <i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Pricing Policies
+                        <i class="fas fa-file-invoice-dollar" aria-hidden=true></i> Pricing Policies
                     </span>
                     <h1 class="text-3xl sm:text-4xl lg:text-[clamp(2.25rem,3.2vw,3.25rem)] font-black tracking-tight text-white leading-[1.08]">Clear Pricing, Before the Work Starts</h1>
                     <p class="text-slate-100 text-base sm:text-lg lg:text-xl leading-relaxed mt-5 sm:mt-6 [text-shadow:_0_1px_8px_rgba(0,0,0,0.75)]">Two policies shape every invoice we send: how parts and materials are handled, and what happens the moment we find something nobody could see when the job was quoted. Both are written out here in plain language, so nothing on your final bill is a surprise.</p>
 
-                    <nav class="mt-8" aria-label="On this page">
+                    <nav class=mt-8 aria-label="On this page">
                         <ul class="flex flex-wrap items-center justify-center gap-3 list-none m-0 p-0">
-                            <li><a href="#materials-options" class="aaa-btn btn-craftsman font-extrabold px-5 py-3.5 shadow-lg"><i class="fas fa-box-open" aria-hidden="true"></i> Parts &amp; Materials</a></li>
-                            <li><a href="#no-surprise-guarantee" class="aaa-btn inline-flex items-center justify-center gap-2.5 bg-slate-900/90 hover:bg-slate-900 text-white font-bold px-5 py-3.5 rounded-xl border border-red-500/40 hover:border-red-500 transition duration-200 shadow-lg hover:-translate-y-0.5"><i class="fas fa-shield-halved text-red-300" aria-hidden="true"></i> No Surprise Invoices</a></li>
-                            <li><a href="#faq" class="aaa-btn inline-flex items-center justify-center gap-2.5 bg-slate-900/90 hover:bg-slate-900 text-white font-bold px-5 py-3.5 rounded-xl border border-red-500/40 hover:border-red-500 transition duration-200 shadow-lg hover:-translate-y-0.5"><i class="fas fa-circle-question text-red-300" aria-hidden="true"></i> FAQ</a></li>
+                            <li><a href=#materials-options class="aaa-btn btn-craftsman font-extrabold px-5 py-3.5 shadow-lg"><i class="fas fa-box-open" aria-hidden=true></i> Parts &amp; Materials</a></li>
+                            <li><a href=#no-surprise-guarantee class="aaa-btn inline-flex items-center justify-center gap-2.5 bg-slate-900/90 hover:bg-slate-900 text-white font-bold px-5 py-3.5 rounded-xl border border-red-500/40 hover:border-red-500 transition duration-200 shadow-lg hover:-translate-y-0.5"><i class="fas fa-shield-halved text-red-300" aria-hidden=true></i> No Surprise Invoices</a></li>
+                            <li><a href=#faq class="aaa-btn inline-flex items-center justify-center gap-2.5 bg-slate-900/90 hover:bg-slate-900 text-white font-bold px-5 py-3.5 rounded-xl border border-red-500/40 hover:border-red-500 transition duration-200 shadow-lg hover:-translate-y-0.5"><i class="fas fa-circle-question text-red-300" aria-hidden=true></i> FAQ</a></li>
                         </ul>
                     </nav>
 
                     <p class="mt-6 text-sm text-slate-300 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-                        <span class="inline-flex items-center gap-2"><i class="fas fa-check text-green-500" aria-hidden="true"></i> Written change orders, always</span>
-                        <span class="inline-flex items-center gap-2"><i class="fas fa-check text-green-500" aria-hidden="true"></i> No markup when you supply parts</span>
-                        <span class="inline-flex items-center gap-2"><i class="fas fa-check text-green-500" aria-hidden="true"></i> Serving Oakland County, MI</span>
+                        <span class="inline-flex items-center gap-2"><i class="fas fa-check text-green-500" aria-hidden=true></i> Written change orders, always</span>
+                        <span class="inline-flex items-center gap-2"><i class="fas fa-check text-green-500" aria-hidden=true></i> No markup when you supply parts</span>
+                        <span class="inline-flex items-center gap-2"><i class="fas fa-check text-green-500" aria-hidden=true></i> Serving Oakland County, MI</span>
                     </p>
                 </div>
             </div>
         </header>
 
-        <!-- ============ Section 1: Parts & Materials Options ============ -->
-        <!-- Legacy anchor: /pricing-policy#materials was linked from the rates,
-             services, and booking pages before this section was renamed, and is
-             a plausible bookmark, so the old fragment still lands here. -->
-        <span id="materials" class="anchor-stub block" aria-hidden="true"></span>
-        <section id="materials-options" class="py-12 sm:py-16 bg-white border-t border-gray-100">
+        
+        
+        <span id=materials class="anchor-stub block" aria-hidden=true></span>
+        <section id=materials-options class="py-12 sm:py-16 bg-white border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="max-w-5xl mx-auto">
 
                     <div class="text-center mb-8 sm:mb-10">
                         <span class="bg-red-100 text-red-700 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Parts &amp; Materials</span>
                         <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-950 mt-3">Parts &amp; Materials Options</h2>
-                        <p class="text-gray-600 mt-3 max-w-3xl mx-auto">Every service price, hourly rate, flat-rate menu item, and package we publish covers <strong class="text-gray-900">installation and service labor only</strong>. Hardware and materials are never folded into those numbers &mdash; they are handled separately, so you can always see exactly what you pay for labor and exactly what you pay for parts. That leaves you two straightforward options on any job.</p>
+                        <p class="text-gray-600 mt-3 max-w-3xl mx-auto">Every service price, hourly rate, flat-rate menu item, and package we publish covers <strong class=text-gray-900>installation and service labor only</strong>. Hardware and materials are never folded into those numbers &mdash; they are handled separately, so you can always see exactly what you pay for labor and exactly what you pay for parts. That leaves you two straightforward options on any job.</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-stretch">
 
                         <article class="relative flex flex-col p-6 sm:p-7 bg-white border-2 border-blue-200 rounded-3xl shadow-md">
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 shrink-0 text-lg"><i class="fas fa-box-open" aria-hidden="true"></i></span>
+                                <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 shrink-0 text-lg"><i class="fas fa-box-open" aria-hidden=true></i></span>
                                 <div>
                                     <p class="text-[0.7rem] font-bold uppercase tracking-widest text-blue-700">Option A</p>
                                     <h3 class="font-black text-gray-950 text-xl leading-tight">You Supply the Materials</h3>
@@ -468,23 +288,23 @@
                             <p class="text-gray-600 text-sm mt-4">Have the parts on site and ready to go, and we simply install them. You pay for labor and nothing else. Confirm the exact make, model, and specifications before your appointment so nothing stalls the job mid-visit.</p>
 
                             <ul class="mt-5 space-y-2.5 text-sm text-gray-700 list-none p-0">
-                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden="true"></i> No markup, no sourcing fee &mdash; labor only on your invoice</li>
-                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden="true"></i> You choose the exact brand, finish, and model</li>
-                                <li class="flex items-start gap-2.5"><i class="fas fa-circle-exclamation text-red-600 mt-1 shrink-0" aria-hidden="true"></i> A wrong-size or defective part can pause the visit</li>
-                                <li class="flex items-start gap-2.5"><i class="fas fa-circle-exclamation text-red-600 mt-1 shrink-0" aria-hidden="true"></i> Returns and exchanges stay with you and the retailer</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden=true></i> No markup, no sourcing fee &mdash; labor only on your invoice</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden=true></i> You choose the exact brand, finish, and model</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-circle-exclamation text-red-600 mt-1 shrink-0" aria-hidden=true></i> A wrong-size or defective part can pause the visit</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-circle-exclamation text-red-600 mt-1 shrink-0" aria-hidden=true></i> Returns and exchanges stay with you and the retailer</li>
                             </ul>
 
                             <div class="mt-6 pt-5 border-t border-gray-100 space-y-2.5">
                                 <p class="text-[0.7rem] font-bold uppercase tracking-widest text-gray-500">Warranty coverage</p>
-                                <p class="inline-flex items-center gap-2 w-full rounded-xl border border-green-200 bg-green-50 px-3 py-2 text-sm font-bold text-green-800"><i class="fas fa-shield-halved shrink-0" aria-hidden="true"></i> Labor: <a href="/guarantee" class="underline decoration-green-500/50 underline-offset-2 hover:text-green-950">1-Year Workmanship Guarantee</a></p>
-                                <p class="inline-flex items-center gap-2 w-full rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm font-bold text-red-900"><i class="fas fa-triangle-exclamation shrink-0" aria-hidden="true"></i> Parts: not covered by us</p>
+                                <p class="inline-flex items-center gap-2 w-full rounded-xl border border-green-200 bg-green-50 px-3 py-2 text-sm font-bold text-green-800"><i class="fas fa-shield-halved shrink-0" aria-hidden=true></i> Labor: <a href=/guarantee class="underline decoration-green-500/50 underline-offset-2 hover:text-green-950">1-Year Workmanship Guarantee</a></p>
+                                <p class="inline-flex items-center gap-2 w-full rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm font-bold text-red-900"><i class="fas fa-triangle-exclamation shrink-0" aria-hidden=true></i> Parts: not covered by us</p>
                             </div>
                         </article>
 
                         <article class="option-b-card relative flex flex-col p-6 sm:p-7 bg-white border-2 border-red-600 rounded-3xl shadow-lg">
                             <span class="absolute -top-3 right-5 bg-red-600 text-white text-[0.65rem] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md">Parts warrantied</span>
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-red-100 text-red-700 shrink-0 text-lg"><i class="fas fa-truck-fast" aria-hidden="true"></i></span>
+                                <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-red-100 text-red-700 shrink-0 text-lg"><i class="fas fa-truck-fast" aria-hidden=true></i></span>
                                 <div>
                                     <p class="text-[0.7rem] font-bold uppercase tracking-widest text-red-700">Option B</p>
                                     <h3 class="font-black text-gray-950 text-xl leading-tight">We Source the Materials</h3>
@@ -496,68 +316,68 @@
                             <p class="text-gray-600 text-sm mt-4">Skip the store run entirely. We shop, select the correct part, transport it, and warranty it. Materials are billed at cost plus a standard 20% supply markup covering sourcing time, vehicle use, and the liability we take on for the parts themselves.</p>
 
                             <ul class="mt-5 space-y-2.5 text-sm text-gray-700 list-none p-0">
-                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden="true"></i> We pick the right part the first time, for your fixture</li>
-                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden="true"></i> A defective part is our problem to return and replace</li>
-                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden="true"></i> Receipts available &mdash; the markup applies to cost, not a guess</li>
-                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden="true"></i> One invoice covering both labor and materials</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden=true></i> We pick the right part the first time, for your fixture</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden=true></i> A defective part is our problem to return and replace</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden=true></i> Receipts available &mdash; the markup applies to cost, not a guess</li>
+                                <li class="flex items-start gap-2.5"><i class="fas fa-check text-green-600 mt-1 shrink-0" aria-hidden=true></i> One invoice covering both labor and materials</li>
                             </ul>
 
                             <div class="mt-6 pt-5 border-t border-gray-100 space-y-2.5">
                                 <p class="text-[0.7rem] font-bold uppercase tracking-widest text-gray-500">Warranty coverage</p>
-                                <p class="inline-flex items-center gap-2 w-full rounded-xl border border-green-200 bg-green-50 px-3 py-2 text-sm font-bold text-green-800"><i class="fas fa-shield-halved shrink-0" aria-hidden="true"></i> Labor: <a href="/guarantee" class="underline decoration-green-500/50 underline-offset-2 hover:text-green-950">1-Year Workmanship Guarantee</a></p>
-                                <p class="inline-flex items-center gap-2 w-full rounded-xl border border-green-200 bg-green-50 px-3 py-2 text-sm font-bold text-green-800"><i class="fas fa-shield-halved shrink-0" aria-hidden="true"></i> Parts: covered by our workmanship warranty</p>
+                                <p class="inline-flex items-center gap-2 w-full rounded-xl border border-green-200 bg-green-50 px-3 py-2 text-sm font-bold text-green-800"><i class="fas fa-shield-halved shrink-0" aria-hidden=true></i> Labor: <a href=/guarantee class="underline decoration-green-500/50 underline-offset-2 hover:text-green-950">1-Year Workmanship Guarantee</a></p>
+                                <p class="inline-flex items-center gap-2 w-full rounded-xl border border-green-200 bg-green-50 px-3 py-2 text-sm font-bold text-green-800"><i class="fas fa-shield-halved shrink-0" aria-hidden=true></i> Parts: covered by our workmanship warranty</p>
                             </div>
                         </article>
                     </div>
 
                     <div class="mt-6 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 p-4 sm:p-5">
-                        <i class="fas fa-triangle-exclamation text-red-600 mt-1 shrink-0" aria-hidden="true"></i>
-                        <p class="text-sm text-red-900 leading-relaxed"><strong class="font-bold">The one real difference:</strong> materials we purchase under the 20% markup are covered by our <a href="/guarantee" class="font-semibold text-red-700 underline decoration-red-400/50 underline-offset-2 hover:text-red-800">workmanship warranty</a>. <strong class="font-bold">Customer-supplied parts are not covered</strong> &mdash; we stand behind our installation either way, but we cannot warranty a part we did not select or source.</p>
+                        <i class="fas fa-triangle-exclamation text-red-600 mt-1 shrink-0" aria-hidden=true></i>
+                        <p class="text-sm text-red-900 leading-relaxed"><strong class=font-bold>The one real difference:</strong> materials we purchase under the 20% markup are covered by our <a href=/guarantee class="font-semibold text-red-700 underline decoration-red-400/50 underline-offset-2 hover:text-red-800">workmanship warranty</a>. <strong class=font-bold>Customer-supplied parts are not covered</strong> &mdash; we stand behind our installation either way, but we cannot warranty a part we did not select or source.</p>
                     </div>
 
-                    <!-- ---- Scenario comparison ---- -->
+                    
                     <div class="mt-10 sm:mt-12">
                         <h3 class="text-xl sm:text-2xl font-black text-gray-950">Which option fits your job?</h3>
                         <p class="text-gray-600 mt-2 text-sm sm:text-base">Neither option is cheaper by default &mdash; it depends on whether you would rather spend the time or have us carry it. Here is how the two compare on jobs we book most often around Oakland County.</p>
 
                         <div class="mt-5 sm:rounded-3xl sm:border sm:border-gray-200 sm:bg-white sm:shadow-md sm:overflow-hidden">
-                            <table class="scenario-table">
+                            <table class=scenario-table>
                                 <caption class="sm:px-5 sm:pt-5">Common homeowner scenarios, and what each option means for the visit.</caption>
                                 <thead>
                                     <tr>
-                                        <th scope="col">Scenario</th>
-                                        <th scope="col">Option A &mdash; you supply ($0 markup)</th>
-                                        <th scope="col">Option B &mdash; we supply (+20%)</th>
+                                        <th scope=col>Scenario</th>
+                                        <th scope=col>Option A &mdash; you supply ($0 markup)</th>
+                                        <th scope=col>Option B &mdash; we supply (+20%)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th scope="row">Kitchen or bath faucet replacement</th>
+                                        <th scope=row>Kitchen or bath faucet replacement</th>
                                         <td data-label="Option A — you supply">Good fit when you have already picked a finish and model you want. Have the faucet and supply lines on site.</td>
                                         <td data-label="Option B — we supply">We match the part to your sink and existing valves, and the faucet is warrantied alongside the install.</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Ceiling fan or light fixture swap</th>
+                                        <th scope=row>Ceiling fan or light fixture swap</th>
                                         <td data-label="Option A — you supply">Common choice &mdash; fixtures are a design decision. Unbox and check for missing hardware before we arrive.</td>
                                         <td data-label="Option B — we supply">Best when you want a like-for-like replacement and would rather not shop for it at all.</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Smart lock or deadbolt install</th>
+                                        <th scope=row>Smart lock or deadbolt install</th>
                                         <td data-label="Option A — you supply">Fine if the lock is already bought, but confirm it fits your door thickness and existing bore.</td>
                                         <td data-label="Option B — we supply">We verify compatibility with your door prep first, which is where most customer-supplied locks stall.</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Drywall patch and paint touch-up</th>
+                                        <th scope=row>Drywall patch and paint touch-up</th>
                                         <td data-label="Option A — you supply">Ideal when you still have the original paint &mdash; an exact match beats anything we could buy.</td>
                                         <td data-label="Option B — we supply">We bring compound, tape, primer, and a color-matched paint, billed at cost plus 20%.</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Emergency or same-week repair</th>
+                                        <th scope=row>Emergency or same-week repair</th>
                                         <td data-label="Option A — you supply">Workable only if the part is already in hand. A store run on your end can cost a day.</td>
                                         <td data-label="Option B — we supply">Usually faster. We source on the way, so the repair happens in a single visit.</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Part turns out to be wrong or defective</th>
+                                        <th scope=row>Part turns out to be wrong or defective</th>
                                         <td data-label="Option A — you supply">The return and the reschedule are yours. Labor already performed is still billable.</td>
                                         <td data-label="Option B — we supply">We handle the return and replacement, and the corrected part is covered under our warranty.</td>
                                     </tr>
@@ -565,16 +385,16 @@
                             </table>
                         </div>
 
-                        <p class="mt-5 text-sm text-gray-600">Labor pricing itself does not change between the two options. See the <a href="/rates" class="text-red-700 font-bold hover:underline">full rates and flat-rate menu</a> for what the labor side costs.</p>
+                        <p class="mt-5 text-sm text-gray-600">Labor pricing itself does not change between the two options. See the <a href=/rates class="text-red-700 font-bold hover:underline">full rates and flat-rate menu</a> for what the labor side costs.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ============ Section 2: No Surprise Invoices Guarantee ============ -->
-        <!-- Legacy anchor, same reasoning as #materials above. -->
-        <span id="no-surprise-invoices" class="anchor-stub block" aria-hidden="true"></span>
-        <section id="no-surprise-guarantee" class="py-12 sm:py-16 bg-gray-50 border-t border-gray-100">
+        
+        
+        <span id=no-surprise-invoices class="anchor-stub block" aria-hidden=true></span>
+        <section id=no-surprise-guarantee class="py-12 sm:py-16 bg-gray-50 border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="max-w-5xl mx-auto">
 
@@ -587,21 +407,21 @@
                     <ol class="step-rail relative grid grid-cols-1 md:grid-cols-3 gap-5 list-none p-0 m-0">
 
                         <li class="relative flex flex-col items-center text-center p-6 sm:p-7 bg-white border border-gray-200 rounded-3xl shadow-md">
-                            <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-700 text-2xl shadow-sm ring-8 ring-gray-50" aria-hidden="true"><i class="fas fa-circle-exclamation"></i></span>
+                            <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-700 text-2xl shadow-sm ring-8 ring-gray-50" aria-hidden=true><i class="fas fa-circle-exclamation"></i></span>
                             <p class="mt-4 text-[0.7rem] font-black uppercase tracking-[0.2em] text-red-700">Step 1</p>
                             <h3 class="font-black text-gray-950 text-lg mt-1">We Stop</h3>
                             <p class="text-gray-600 text-sm mt-2.5">Work in the affected area pauses immediately the moment concealed damage, rot, mold, or a code violation turns up. Nothing further gets done while you are still in the dark about it.</p>
                         </li>
 
                         <li class="relative flex flex-col items-center text-center p-6 sm:p-7 bg-white border border-gray-200 rounded-3xl shadow-md">
-                            <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-900 text-2xl shadow-sm ring-8 ring-gray-50" aria-hidden="true"><i class="fas fa-camera"></i></span>
+                            <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-900 text-2xl shadow-sm ring-8 ring-gray-50" aria-hidden=true><i class="fas fa-camera"></i></span>
                             <p class="mt-4 text-[0.7rem] font-black uppercase tracking-[0.2em] text-blue-900">Step 2</p>
                             <h3 class="font-black text-gray-950 text-lg mt-1">We Show You</h3>
                             <p class="text-gray-600 text-sm mt-2.5">The condition is documented and photographed. We walk you through what we found, what it means for the job and the timeline, the options for repairing it, and what each option would cost.</p>
                         </li>
 
                         <li class="relative flex flex-col items-center text-center p-6 sm:p-7 bg-white border border-gray-200 rounded-3xl shadow-md">
-                            <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-700 text-2xl shadow-sm ring-8 ring-gray-50" aria-hidden="true"><i class="fas fa-file-signature"></i></span>
+                            <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-700 text-2xl shadow-sm ring-8 ring-gray-50" aria-hidden=true><i class="fas fa-file-signature"></i></span>
                             <p class="mt-4 text-[0.7rem] font-black uppercase tracking-[0.2em] text-green-700">Step 3</p>
                             <h3 class="font-black text-gray-950 text-lg mt-1">You Decide</h3>
                             <p class="text-gray-600 text-sm mt-2.5">No additional work proceeds and no additional charge is incurred without your explicit approval through a written change order. Say no and we finish the original scope and bill only for that.</p>
@@ -610,45 +430,45 @@
 
                     <article class="mt-8 rounded-3xl border-2 border-blue-900/15 bg-white p-6 sm:p-8 shadow-md">
                         <div class="flex items-center gap-3">
-                            <span class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-blue-950 text-white shrink-0"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span>
+                            <span class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-blue-950 text-white shrink-0"><i class="fas fa-clipboard-check" aria-hidden=true></i></span>
                             <h3 class="text-xl font-black text-gray-950">What a change order actually is</h3>
                         </div>
                         <p class="text-gray-600 text-sm sm:text-base mt-4">A change order is a written amendment to the original scope of work. It is not a verbal &ldquo;while I&rsquo;m in here&rdquo; conversation, and it is never assumed from a nod in a hallway. Before any additional work begins, you get it in writing and you approve it.</p>
 
                         <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="rounded-2xl border border-green-200 bg-green-50 p-4">
-                                <p class="font-bold text-green-900 text-sm flex items-center gap-2"><i class="fas fa-check-circle" aria-hidden="true"></i> Every change order spells out</p>
+                                <p class="font-bold text-green-900 text-sm flex items-center gap-2"><i class="fas fa-check-circle" aria-hidden=true></i> Every change order spells out</p>
                                 <ul class="mt-2.5 space-y-1.5 text-sm text-green-900/90 list-none p-0">
-                                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> What was found, with photos</li>
-                                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> The repair options available to you</li>
-                                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> Added labor and materials cost for each</li>
-                                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> Any change to the schedule</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-700 mt-1 shrink-0 text-xs" aria-hidden=true></i> What was found, with photos</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-700 mt-1 shrink-0 text-xs" aria-hidden=true></i> The repair options available to you</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-700 mt-1 shrink-0 text-xs" aria-hidden=true></i> Added labor and materials cost for each</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-700 mt-1 shrink-0 text-xs" aria-hidden=true></i> Any change to the schedule</li>
                                 </ul>
                             </div>
                             <div class="rounded-2xl border border-red-200 bg-red-50 p-4">
-                                <p class="font-bold text-red-900 text-sm flex items-center gap-2"><i class="fas fa-circle-xmark" aria-hidden="true"></i> What never happens</p>
+                                <p class="font-bold text-red-900 text-sm flex items-center gap-2"><i class="fas fa-circle-xmark" aria-hidden=true></i> What never happens</p>
                                 <ul class="mt-2.5 space-y-1.5 text-sm text-red-900/90 list-none p-0">
-                                    <li class="flex items-start gap-2"><i class="fas fa-xmark text-red-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> Extra work billed without your approval</li>
-                                    <li class="flex items-start gap-2"><i class="fas fa-xmark text-red-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> A charge that first appears on the invoice</li>
-                                    <li class="flex items-start gap-2"><i class="fas fa-xmark text-red-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> Pressure to decide on the spot</li>
-                                    <li class="flex items-start gap-2"><i class="fas fa-xmark text-red-700 mt-1 shrink-0 text-xs" aria-hidden="true"></i> A penalty for declining the extra scope</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-xmark text-red-700 mt-1 shrink-0 text-xs" aria-hidden=true></i> Extra work billed without your approval</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-xmark text-red-700 mt-1 shrink-0 text-xs" aria-hidden=true></i> A charge that first appears on the invoice</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-xmark text-red-700 mt-1 shrink-0 text-xs" aria-hidden=true></i> Pressure to decide on the spot</li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-xmark text-red-700 mt-1 shrink-0 text-xs" aria-hidden=true></i> A penalty for declining the extra scope</li>
                                 </ul>
                             </div>
                         </div>
 
-                        <p class="text-gray-500 text-xs sm:text-sm mt-5">Concealed conditions such as code violations, structural rot, mold, or damaged wiring fall outside the initial scope of work. The full wording is in <a href="/terms#unforeseen-conditions" class="text-red-700 font-bold hover:underline">Section 4 of our Terms of Service</a>, and the workmanship promise behind it is on our <a href="/guarantee" class="text-red-700 font-bold hover:underline">Guarantee page</a>.</p>
+                        <p class="text-gray-500 text-xs sm:text-sm mt-5">Concealed conditions such as code violations, structural rot, mold, or damaged wiring fall outside the initial scope of work. The full wording is in <a href=/terms#unforeseen-conditions class="text-red-700 font-bold hover:underline">Section 4 of our Terms of Service</a>, and the workmanship promise behind it is on our <a href=/guarantee class="text-red-700 font-bold hover:underline">Guarantee page</a>.</p>
 
                         <div class="mt-5 flex items-start gap-3 rounded-2xl border border-blue-200 bg-blue-50 p-4 sm:p-5">
-                            <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-blue-950 text-white shrink-0 text-sm" aria-hidden="true"><i class="fas fa-hand-holding-dollar"></i></span>
-                            <p class="text-sm text-blue-900 leading-relaxed"><strong class="font-bold">A quick note on payment timing:</strong> Labor-only projects require payment upon completion. Projects where AAA Handyman sources materials require a material deposit prior to starting work, with the remaining balance due upon completion.</p>
+                            <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-blue-950 text-white shrink-0 text-sm" aria-hidden=true><i class="fas fa-hand-holding-dollar"></i></span>
+                            <p class="text-sm text-blue-900 leading-relaxed"><strong class=font-bold>A quick note on payment timing:</strong> Labor-only projects require payment upon completion. Projects where AAA Handyman sources materials require a material deposit prior to starting work, with the remaining balance due upon completion.</p>
                         </div>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- ============ Section 3: FAQ ============ -->
-        <section id="faq" class="py-12 sm:py-16 bg-white border-t border-gray-100">
+        
+        <section id=faq class="py-12 sm:py-16 bg-white border-t border-gray-100">
             <div class="max-w-3xl mx-auto px-6">
                 <div class="text-center mb-8 sm:mb-10">
                     <span class="bg-red-100 text-red-700 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Questions</span>
@@ -657,86 +477,86 @@
                 </div>
 
                 <div>
-                    <details class="pp-faq">
+                    <details class=pp-faq>
                         <summary>
                             <span>Are parts and materials included in your service prices?</span>
-                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden=true></i>
                         </summary>
-                        <div class="pp-faq__answer">No. Every service price, hourly rate, flat-rate menu item, and package covers installation and service labor only. Hardware and materials are billed separately. You may supply them yourself at no markup, or we can source them at cost plus a standard 20% supply markup covering sourcing time, transport, and parts liability.</div>
+                        <div class=pp-faq__answer>No. Every service price, hourly rate, flat-rate menu item, and package covers installation and service labor only. Hardware and materials are billed separately. You may supply them yourself at no markup, or we can source them at cost plus a standard 20% supply markup covering sourcing time, transport, and parts liability.</div>
                     </details>
 
-                    <details class="pp-faq">
+                    <details class=pp-faq>
                         <summary>
                             <span>Are customer-supplied parts covered under your workmanship warranty?</span>
-                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden=true></i>
                         </summary>
-                        <div class="pp-faq__answer">No. Materials we purchase under the 20% supply markup carry our workmanship warranty. Parts supplied by the customer are not covered, because we did not select or source them. Our installation labor is still backed by the <a href="/guarantee">1-Year Workmanship Guarantee</a> either way.</div>
+                        <div class=pp-faq__answer>No. Materials we purchase under the 20% supply markup carry our workmanship warranty. Parts supplied by the customer are not covered, because we did not select or source them. Our installation labor is still backed by the <a href=/guarantee>1-Year Workmanship Guarantee</a> either way.</div>
                     </details>
 
-                    <details class="pp-faq">
+                    <details class=pp-faq>
                         <summary>
                             <span>What does the 20% supply markup actually pay for?</span>
-                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden=true></i>
                         </summary>
-                        <div class="pp-faq__answer">Sourcing time, vehicle use and transport, and the liability we take on for the part itself. It is applied to what the materials actually cost, not to a padded figure, and it is what allows us to warranty the part alongside the installation and handle any return or exchange ourselves.</div>
+                        <div class=pp-faq__answer>Sourcing time, vehicle use and transport, and the liability we take on for the part itself. It is applied to what the materials actually cost, not to a padded figure, and it is what allows us to warranty the part alongside the installation and handle any return or exchange ourselves.</div>
                     </details>
 
-                    <details class="pp-faq">
+                    <details class=pp-faq>
                         <summary>
                             <span>What happens if you find hidden damage during the job?</span>
-                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden=true></i>
                         </summary>
-                        <div class="pp-faq__answer">Work in the affected area stops immediately. We document and photograph the condition, explain the repair options and what each would cost, and no additional work proceeds and no additional cost is incurred until you approve a written change order.</div>
+                        <div class=pp-faq__answer>Work in the affected area stops immediately. We document and photograph the condition, explain the repair options and what each would cost, and no additional work proceeds and no additional cost is incurred until you approve a written change order.</div>
                     </details>
 
-                    <details class="pp-faq">
+                    <details class=pp-faq>
                         <summary>
                             <span>Can I decline the extra work in a change order?</span>
-                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden=true></i>
                         </summary>
-                        <div class="pp-faq__answer">Yes, and there is no penalty for it. We finish the original scope wherever it is safe and code-compliant to do so, and bill only for that. If a concealed condition makes the original scope unsafe or impossible to complete properly, we will tell you plainly rather than working around it.</div>
+                        <div class=pp-faq__answer>Yes, and there is no penalty for it. We finish the original scope wherever it is safe and code-compliant to do so, and bill only for that. If a concealed condition makes the original scope unsafe or impossible to complete properly, we will tell you plainly rather than working around it.</div>
                     </details>
 
-                    <details class="pp-faq">
+                    <details class=pp-faq>
                         <summary>
                             <span>What if the part I supply is wrong or defective?</span>
-                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden=true></i>
                         </summary>
-                        <div class="pp-faq__answer">The return or exchange stays between you and the retailer, and the visit may need to be rescheduled to finish the work. Labor already performed is still billable. If we source the part instead, handling a wrong or defective item is our responsibility, not yours.</div>
+                        <div class=pp-faq__answer>The return or exchange stays between you and the retailer, and the visit may need to be rescheduled to finish the work. Labor already performed is still billable. If we source the part instead, handling a wrong or defective item is our responsibility, not yours.</div>
                     </details>
 
-                    <details class="pp-faq">
+                    <details class=pp-faq>
                         <summary>
                             <span>Can I mix the two options on the same job?</span>
-                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden=true></i>
                         </summary>
-                        <div class="pp-faq__answer">Yes. Homeowners often supply the visible fixture they picked out and let us bring the connectors, fasteners, and consumables. The 20% markup applies only to the items we source, and your invoice itemizes which is which.</div>
+                        <div class=pp-faq__answer>Yes. Homeowners often supply the visible fixture they picked out and let us bring the connectors, fasteners, and consumables. The 20% markup applies only to the items we source, and your invoice itemizes which is which.</div>
                     </details>
 
-                    <details class="pp-faq">
+                    <details class=pp-faq>
                         <summary>
                             <span>Will I know the cost before you start?</span>
-                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden="true"></i>
+                            <i class="pp-faq__chevron fas fa-chevron-down text-sm" aria-hidden=true></i>
                         </summary>
-                        <div class="pp-faq__answer">Yes. You get the labor figure up front from our published rates or flat-rate menu, and materials are quoted or itemized separately. The only thing that can change the total is a concealed condition, and that cannot be billed without your written approval. See the <a href="/rates">Rates page</a> for the full pricing menu.</div>
+                        <div class=pp-faq__answer>Yes. You get the labor figure up front from our published rates or flat-rate menu, and materials are quoted or itemized separately. The only thing that can change the total is a concealed condition, and that cannot be billed without your written approval. See the <a href=/rates>Rates page</a> for the full pricing menu.</div>
                     </details>
                 </div>
             </div>
         </section>
 
-        <!-- ============ Section 4: Closing CTA ============ -->
-        <section id="get-started" class="py-12 sm:py-16 bg-gray-50 border-t border-gray-100">
+        
+        <section id=get-started class="py-12 sm:py-16 bg-gray-50 border-t border-gray-100">
             <div class="max-w-4xl mx-auto px-6">
                 <div class="rounded-3xl bg-blue-950 text-white p-8 sm:p-12 text-center shadow-xl">
                     <h2 class="text-2xl sm:text-3xl font-black text-white">Questions about a quote?</h2>
                     <p class="text-slate-300 mt-3 max-w-2xl mx-auto">We would rather answer it now than have it come up on an invoice. Reach out and we will walk you through exactly how your job is priced &mdash; labor, materials, and all.</p>
                     <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
-                        <a href="/book" class="aaa-btn inline-flex items-center justify-center gap-2.5 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3.5 rounded-xl transition duration-200 shadow-lg hover:shadow-red-600/30 hover:-translate-y-0.5"><i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Get a Free Quote</a>
-                        <a href="/ai-estimate" class="aaa-btn inline-flex items-center justify-center gap-2.5 bg-slate-900 hover:bg-slate-800 border border-red-500/50 text-white font-bold px-6 py-3.5 rounded-xl transition duration-200 shadow-lg hover:shadow-red-600/20 hover:-translate-y-0.5"><i class="fas fa-wand-magic-sparkles text-red-400" aria-hidden="true"></i> Instant AI Estimate</a>
-                        <a href="tel:+12483853432" class="aaa-btn inline-flex items-center justify-center gap-2.5 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3.5 rounded-xl transition duration-200 shadow-lg hover:shadow-green-600/30 hover:-translate-y-0.5"><i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432</a>
+                        <a href=/book class="aaa-btn inline-flex items-center justify-center gap-2.5 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3.5 rounded-xl transition duration-200 shadow-lg hover:shadow-red-600/30 hover:-translate-y-0.5"><i class="fas fa-calendar-check" aria-hidden=true></i> Book Online / Get a Free Quote</a>
+                        <a href=/ai-estimate class="aaa-btn inline-flex items-center justify-center gap-2.5 bg-slate-900 hover:bg-slate-800 border border-red-500/50 text-white font-bold px-6 py-3.5 rounded-xl transition duration-200 shadow-lg hover:shadow-red-600/20 hover:-translate-y-0.5"><i class="fas fa-wand-magic-sparkles text-red-400" aria-hidden=true></i> Instant AI Estimate</a>
+                        <a href=tel:+12483853432 class="aaa-btn inline-flex items-center justify-center gap-2.5 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3.5 rounded-xl transition duration-200 shadow-lg hover:shadow-green-600/30 hover:-translate-y-0.5"><i class="fas fa-phone" aria-hidden=true></i> Call (248) 385-3432</a>
                     </div>
-                    <p class="mt-6">
-                        <a href="/rates" class="inline-flex items-center gap-2 text-sm font-bold text-red-300 hover:text-white underline decoration-red-400/40 underline-offset-4 transition">See our full rates and flat-rate menu <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    <p class=mt-6>
+                        <a href=/rates class="inline-flex items-center gap-2 text-sm font-bold text-red-300 hover:text-white underline decoration-red-400/40 underline-offset-4 transition">See our full rates and flat-rate menu <i class="fas fa-arrow-right text-xs" aria-hidden=true></i></a>
                     </p>
                     <p class="mt-4 text-xs text-slate-400">Serving homeowners across Oakland County, Michigan.</p>
                 </div>
@@ -751,40 +571,40 @@
             <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
 
                 <div class="flex flex-col items-center md:items-start">
-                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services LLC Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
+                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width=80 height=80 loading=lazy decoding=async alt="AAA Handyman Services LLC Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable home repairs, maintenance, punch lists, and minor updates for homeowners across Oakland County, Michigan.</p>
                     <div class="mt-4 flex items-center gap-4">
-                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+                        <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel=noopener aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
+                        <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
                     </div>
                 </div>
 
-                <nav aria-label="Footer">
+                <nav aria-label=Footer>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="/services" class="hover:text-white transition">Services</a></li>
-                        <li><a href="/rates" class="hover:text-white transition">Rates &amp; Packages</a></li>
-                        <li><a href="/ai-estimate" class="hover:text-white transition">AI Repair Estimator</a></li>
-                        <li><a href="/pricing-policy" class="hover:text-white transition">Pricing Policies</a></li>
-                        <li><a href="/guarantee" class="hover:text-white transition">Our Guarantee</a></li>
-                        <li><a href="/customer-care" class="hover:text-white transition">Customer Care</a></li>
-                        <li><a href="/reviews" class="hover:text-white transition">Reviews</a></li>
-                        <li><a href="/careers" class="hover:text-white transition">Careers</a></li>
-                        <li><a href="/book" class="hover:text-white transition">Book Online</a></li>
-                        <li><a href="/service-areas" class="hover:text-white transition">Service Areas</a></li>
-                        <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
+                        <li><a href=/services class="hover:text-white transition">Services</a></li>
+                        <li><a href=/rates class="hover:text-white transition">Rates &amp; Packages</a></li>
+                        <li><a href=/ai-estimate class="hover:text-white transition">AI Repair Estimator</a></li>
+                        <li><a href=/pricing-policy class="hover:text-white transition">Pricing Policies</a></li>
+                        <li><a href=/guarantee class="hover:text-white transition">Our Guarantee</a></li>
+                        <li><a href=/customer-care class="hover:text-white transition">Customer Care</a></li>
+                        <li><a href=/reviews class="hover:text-white transition">Reviews</a></li>
+                        <li><a href=/careers class="hover:text-white transition">Careers</a></li>
+                        <li><a href=/book class="hover:text-white transition">Book Online</a></li>
+                        <li><a href=/service-areas class="hover:text-white transition">Service Areas</a></li>
+                        <li><a href=/#faq class="hover:text-white transition">FAQ</a></li>
                     </ul>
                 </nav>
 
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden="true"></i>(248) 385-3432</a></li>
-                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
-                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Waterford, MI &middot; Oakland County</li>
+                        <li><a href=tel:+12483853432 class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden=true></i>(248) 385-3432</a></li>
+                        <li><a href=mailto:contact@aaahandyman.services class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden=true></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden=true></i>Waterford, MI &middot; Oakland County</li>
                     </ul>
-                    <a href="/book" class="aaa-btn mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
+                    <a href=/book class="aaa-btn mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden=true></i>Book Online Now</a>
                 </div>
             </div>
 
@@ -792,67 +612,60 @@
                 <nav aria-label="Popular services">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Popular Services</h3>
                     <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-                        <li><a href="/services/carpentry" class="hover:text-white transition">Carpentry</a></li>
-                        <li><a href="/services/drywall-repair" class="hover:text-white transition">Drywall Repair</a></li>
-                        <li><a href="/services/painting-staining" class="hover:text-white transition">Painting &amp; Staining</a></li>
-                        <li><a href="/services/doors-windows" class="hover:text-white transition">Doors &amp; Windows</a></li>
-                        <li><a href="/services/flooring-solutions" class="hover:text-white transition">Flooring Solutions</a></li>
-                        <li><a href="/services/minor-plumbing" class="hover:text-white transition">Minor Plumbing</a></li>
-                        <li><a href="/services/minor-electrical" class="hover:text-white transition">Minor Electrical</a></li>
-                        <li><a href="/services/decks-fences" class="hover:text-white transition">Decks &amp; Fences</a></li>
-                        <li><a href="/services/gutters" class="hover:text-white transition">Gutters</a></li>
-                        <li><a href="/services/power-washing" class="hover:text-white transition">Power Washing</a></li>
+                        <li><a href=/services/carpentry class="hover:text-white transition">Carpentry</a></li>
+                        <li><a href=/services/drywall-repair class="hover:text-white transition">Drywall Repair</a></li>
+                        <li><a href=/services/painting-staining class="hover:text-white transition">Painting &amp; Staining</a></li>
+                        <li><a href=/services/doors-windows class="hover:text-white transition">Doors &amp; Windows</a></li>
+                        <li><a href=/services/flooring-solutions class="hover:text-white transition">Flooring Solutions</a></li>
+                        <li><a href=/services/minor-plumbing class="hover:text-white transition">Minor Plumbing</a></li>
+                        <li><a href=/services/minor-electrical class="hover:text-white transition">Minor Electrical</a></li>
+                        <li><a href=/services/decks-fences class="hover:text-white transition">Decks &amp; Fences</a></li>
+                        <li><a href=/services/gutters class="hover:text-white transition">Gutters</a></li>
+                        <li><a href=/services/power-washing class="hover:text-white transition">Power Washing</a></li>
                     </ul>
-                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    <a href=/services class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden=true></i></a>
                 </nav>
                 <nav aria-label="Service areas">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Service Areas</h3>
                     <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-                        <li><a href="/handyman/waterford" class="hover:text-white transition">Waterford</a></li>
-                        <li><a href="/handyman/troy" class="hover:text-white transition">Troy</a></li>
-                        <li><a href="/handyman/west-bloomfield" class="hover:text-white transition">West Bloomfield</a></li>
-                        <li><a href="/handyman/rochester-hills" class="hover:text-white transition">Rochester Hills</a></li>
-                        <li><a href="/handyman/royal-oak" class="hover:text-white transition">Royal Oak</a></li>
-                        <li><a href="/handyman/birmingham" class="hover:text-white transition">Birmingham</a></li>
-                        <li><a href="/handyman/clarkston" class="hover:text-white transition">Clarkston</a></li>
-                        <li><a href="/handyman/farmington-hills" class="hover:text-white transition">Farmington Hills</a></li>
-                        <li><a href="/handyman/novi" class="hover:text-white transition">Novi</a></li>
-                        <li><a href="/handyman/southfield" class="hover:text-white transition">Southfield</a></li>
-                        <li><a href="/handyman/franklin" class="hover:text-white transition">Franklin</a></li>
-                        <li><a href="/handyman/orchard-lake" class="hover:text-white transition">Orchard Lake</a></li>
+                        <li><a href=/handyman/waterford class="hover:text-white transition">Waterford</a></li>
+                        <li><a href=/handyman/troy class="hover:text-white transition">Troy</a></li>
+                        <li><a href=/handyman/west-bloomfield class="hover:text-white transition">West Bloomfield</a></li>
+                        <li><a href=/handyman/rochester-hills class="hover:text-white transition">Rochester Hills</a></li>
+                        <li><a href=/handyman/royal-oak class="hover:text-white transition">Royal Oak</a></li>
+                        <li><a href=/handyman/birmingham class="hover:text-white transition">Birmingham</a></li>
+                        <li><a href=/handyman/clarkston class="hover:text-white transition">Clarkston</a></li>
+                        <li><a href=/handyman/farmington-hills class="hover:text-white transition">Farmington Hills</a></li>
+                        <li><a href=/handyman/novi class="hover:text-white transition">Novi</a></li>
+                        <li><a href=/handyman/southfield class="hover:text-white transition">Southfield</a></li>
+                        <li><a href=/handyman/franklin class="hover:text-white transition">Franklin</a></li>
+                        <li><a href=/handyman/orchard-lake class="hover:text-white transition">Orchard Lake</a></li>
                     </ul>
-                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    <a href=/service-areas class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden=true></i></a>
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
                 <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services LLC All Rights Reserved. We operate in compliance with Michigan&rsquo;s minor project exemption (MCL 339.2403).<br>Locally Serving Oakland County, MI.</p>
                 <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
-                    <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
-                    <span class="text-gray-600">|</span>
-                    <a href="/terms" class="hover:text-white transition">Terms of Service</a>
+                    <a href=/privacy class="hover:text-white transition">Privacy Policy</a>
+                    <span class=text-gray-600>|</span>
+                    <a href=/terms class="hover:text-white transition">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <noscript>
-        <a href="tel:+12483853432" class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services LLC Now" aria-label="Call AAA Handyman Services LLC Now">
-            <i class="fas fa-phone" aria-hidden="true"></i>
+        <a href=tel:+12483853432 class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services LLC Now" aria-label="Call AAA Handyman Services LLC Now">
+            <i class="fas fa-phone" aria-hidden=true></i>
             <span class="hidden md:inline">Call Now! <span class="hidden lg:inline">(248) 385-3432</span></span>
         </a>
     </noscript>
 
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
+    <button id=back-to-top type=button aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden=true></i></button>
 
     <script src="/js/site.js?v=20260814e" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
-    <script>
-      // Registered after load so it never competes with the first render.
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/sw.js').catch(function () {});
-        });
-      }
-    </script>
-</body>
-</html>
+    <script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})})</script>
+
+

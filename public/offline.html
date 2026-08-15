@@ -1,134 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang=en>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset=UTF-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
     <title>You're offline | AAA Handyman Services LLC</title>
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="theme-color" content="#A61F2E">
-    <link rel="manifest" href="/manifest.webmanifest">
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <!-- Styles are inlined so this page renders even when nothing else is cached. -->
-    <style>
-        *, *::before, *::after { box-sizing: border-box; }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            background: linear-gradient(135deg, #101b31, #1b2a4a);
-            color: #e8edf5;
-            font: 400 16px/1.6 "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
-            text-align: center;
-        }
-
-        .card {
-            width: 100%;
-            max-width: 30rem;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 24px;
-            padding: 40px 28px;
-            box-shadow: 0 18px 44px rgb(8 15 28 / 45%);
-        }
-
-        img {
-            width: 88px;
-            height: 88px;
-            border-radius: 50%;
-            border: 3px solid #a61f2e;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            margin: 0 0 12px;
-            font-family: "Archivo", "Roboto", system-ui, sans-serif;
-            font-size: clamp(1.6rem, 5vw, 2.1rem);
-            font-weight: 800;
-            letter-spacing: -0.01em;
-            color: #fff;
-        }
-
-        p { margin: 0 0 14px; color: #c4cfe2; }
-
-        .actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            margin-top: 28px;
-        }
-
-        a.btn, button.btn {
-            appearance: none;
-            border: 2px solid transparent;
-            border-radius: 9999px;
-            padding: 14px 26px;
-            font: 700 16px/1 "Roboto", system-ui, sans-serif;
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
-            transition: transform 150ms ease, background 150ms ease;
-        }
-
-        a.btn:hover, button.btn:hover { transform: translateY(-2px); }
-
-        a.btn:focus-visible, button.btn:focus-visible {
-            outline: 3px solid #9fb1ca;
-            outline-offset: 3px;
-        }
-
-        /* Brand green, matching green-600/700 in tailwind.config.cjs. The
-           lighter #16a34a this used to carry is Tailwind's stock green-600, and
-           bold white on it measures 3.29:1 -- short of the 4.5:1 that 16px text
-           needs. #166534 holds 7.13:1 and matches the green buttons on the rest
-           of the site, which the crimson pair below already did. */
-        .call { background: #166534; }
-        .call:hover { background: #14532d; }
-        .retry { background: #a61f2e; }
-        .retry:hover { background: #7f1723; }
-
-        .phone {
-            display: block;
-            margin-top: 26px;
-            font-family: "Archivo", "Roboto", system-ui, sans-serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        small { color: #93a3bd; }
-
-        @media (prefers-reduced-motion: reduce) {
-            a.btn, button.btn { transition: none; }
-            a.btn:hover, button.btn:hover { transform: none; }
-        }
-    </style>
+    <meta name=robots content="noindex, nofollow">
+    <meta name=theme-color content=#A61F2E>
+    <link rel=manifest href=/manifest.webmanifest>
+    <link rel=icon href=/favicon.ico sizes=any>
+    <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+    
+    <style>*,::after,::before{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(135deg,#101b31,#1b2a4a);color:#e8edf5;font:400 16px/1.6 Roboto,system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center}.card{width:100%;max-width:30rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:40px 28px;box-shadow:0 18px 44px rgb(8 15 28 / 45%)}img{width:88px;height:88px;border-radius:50%;border:3px solid #a61f2e;margin-bottom:20px}h1{margin:0 0 12px;font-family:Archivo,Roboto,system-ui,sans-serif;font-size:clamp(1.6rem,5vw,2.1rem);font-weight:800;letter-spacing:-.01em;color:#fff}p{margin:0 0 14px;color:#c4cfe2}.actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}a.btn,button.btn{appearance:none;border:2px solid transparent;border-radius:9999px;padding:14px 26px;font:700 16px/1 Roboto,system-ui,sans-serif;color:#fff;text-decoration:none;cursor:pointer;transition:transform 150ms ease,background 150ms ease}a.btn:hover,button.btn:hover{transform:translateY(-2px)}a.btn:focus-visible,button.btn:focus-visible{outline:3px solid #9fb1ca;outline-offset:3px}.call{background:#166534}.call:hover{background:#14532d}.retry{background:#a61f2e}.retry:hover{background:#7f1723}.phone{display:block;margin-top:26px;font-family:Archivo,Roboto,system-ui,sans-serif;font-size:1.05rem;font-weight:700;color:#fff;text-decoration:none}small{color:#93a3bd}@media (prefers-reduced-motion:reduce){a.btn,button.btn{transition:none}a.btn:hover,button.btn:hover{transform:none}}</style>
 </head>
 <body>
-    <main id="main-content" class="card">
-        <img src="/icons/icon-192.png" width="88" height="88" alt="AAA Handyman Services LLC logo">
+    <main id=main-content class=card>
+        <img src=/icons/icon-192.png width=88 height=88 alt="AAA Handyman Services LLC logo">
         <h1>You're offline</h1>
         <p>Pages you've already visited will still open &mdash; reconnect to load the rest.</p>
         <p>Or give us a call and we'll help right now, no connection needed.</p>
 
-        <div class="actions">
-            <button type="button" class="btn retry" onclick="location.reload()">Try again</button>
-            <a class="btn call" href="tel:+12483853432">Call (248) 385-3432</a>
+        <div class=actions>
+            <button type=button class="btn retry" onclick=location.reload()>Try again</button>
+            <a class="btn call" href=tel:+12483853432>Call (248) 385-3432</a>
         </div>
 
-        <a class="phone" href="mailto:contact@aaahandyman.services">contact@aaahandyman.services</a>
-        <p style="margin-top:22px"><small>&copy; 2026 AAA Handyman Services LLC All Rights Reserved. We operate in compliance with Michigan&rsquo;s minor project exemption (MCL 339.2403).<br>Locally Serving Oakland County, MI.</small></p>
+        <a class=phone href=mailto:contact@aaahandyman.services>contact@aaahandyman.services</a>
+        <p style=margin-top:22px><small>&copy; 2026 AAA Handyman Services LLC All Rights Reserved. We operate in compliance with Michigan&rsquo;s minor project exemption (MCL 339.2403).<br>Locally Serving Oakland County, MI.</small></p>
     </main>
 
-    <script>
-        // Reload automatically the moment the connection comes back.
-        window.addEventListener('online', function () { location.reload(); });
-    </script>
-</body>
-</html>
+    <script>window.addEventListener("online",function(){location.reload()})</script>
+
+

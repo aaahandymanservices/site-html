@@ -1,34 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang=en>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Self-hosted brand fonts + icon subset; @font-face lives in site-theme.css -->
-    <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta charset=UTF-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    
+    <link rel=preload href=/fonts/archivo-latin.woff2 as=font type=font/woff2 crossorigin>
 
 
     <title>Contact Us — Get a Free Quote | AAA Handyman Services LLC</title>
 
-    <meta name="description" content="Contact AAA Handyman Services LLC in Waterford, MI. Call (248) 385-3432, email us, or send the form for a free quote. Open Mon–Fri 9–6, Sat 10–5, with after-hours emergency response 7 days a week ($155 first hour / $100 per hour after).">
-    <meta name="theme-color" content="#A61F2E">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://aaahandyman.services/contact">
+    <meta name=description content="Contact AAA Handyman Services LLC in Waterford, MI. Call (248) 385-3432, email us, or send the form for a free quote. Open Mon–Fri 9–6, Sat 10–5, with after-hours emergency response 7 days a week ($155 first hour / $100 per hour after).">
+    <meta name=theme-color content=#A61F2E>
+    <meta name=robots content="index, follow">
+    <link rel=canonical href=https://aaahandyman.services/contact>
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aaahandyman.services/contact">
-    <meta property="og:site_name" content="AAA Handyman Services LLC">
-    <meta property="og:title" content="Contact Us — Get a Free Quote | AAA Handyman Services LLC">
-    <meta property="og:description" content="Reach AAA Handyman Services LLC for a free quote. Call (248) 385-3432 or email contact@aaahandyman.services. Proudly serving Oakland County, Michigan.">
-    <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
-    <meta property="og:locale" content="en_US">
+    <meta property=og:type content=website>
+    <meta property=og:url content=https://aaahandyman.services/contact>
+    <meta property=og:site_name content="AAA Handyman Services LLC">
+    <meta property=og:title content="Contact Us — Get a Free Quote | AAA Handyman Services LLC">
+    <meta property=og:description content="Reach AAA Handyman Services LLC for a free quote. Call (248) 385-3432 or email contact@aaahandyman.services. Proudly serving Oakland County, Michigan.">
+    <meta property=og:image content=https://aaahandyman.services/logo-banner.jpg>
+    <meta property=og:locale content=en_US>
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://aaahandyman.services/contact">
-    <meta name="twitter:title" content="Contact Us — Get a Free Quote | AAA Handyman Services LLC">
-    <meta name="twitter:description" content="Reach AAA Handyman Services LLC for a free quote. Call (248) 385-3432 or email contact@aaahandyman.services. Proudly serving Oakland County, Michigan.">
-    <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
+    <meta name=twitter:card content=summary_large_image>
+    <meta name=twitter:url content=https://aaahandyman.services/contact>
+    <meta name=twitter:title content="Contact Us — Get a Free Quote | AAA Handyman Services LLC">
+    <meta name=twitter:description content="Reach AAA Handyman Services LLC for a free quote. Call (248) 385-3432 or email contact@aaahandyman.services. Proudly serving Oakland County, Michigan.">
+    <meta name=twitter:image content=https://aaahandyman.services/logo-banner.jpg>
 
-    <script type="application/ld+json">
+    <script type=application/ld+json>
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -39,7 +39,7 @@
     }
     </script>
 
-    <script type="application/ld+json">
+    <script type=application/ld+json>
     {
       "@context": "https://schema.org",
       "@type": "ContactPage",
@@ -98,186 +98,169 @@
     }
     </script>
 
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260814e">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260815a">
-    <link rel="preload" href="/css/icons.css?v=20260815a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260815a"></noscript>
+    <link rel=stylesheet href="/css/tailwind.css?v=20260814e">
+    <link rel=stylesheet href="/css/site-theme.css?v=20260814e">
+    <link rel=preload href="/css/icons.css?v=20260815a" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
+    <noscript><link rel=stylesheet href="/css/icons.css?v=20260815a"></noscript>
 
-    <!-- The first-service gift certificate is one per customer. Visitors who
-         have already claimed it must never see it offered again, so it is hidden
-         here from local storage before first paint rather than after; the
-         deferred /js/gift-certificate.js then confirms against the server. -->
-    <script>(function(){try{var s=JSON.parse(localStorage.getItem('aaa-first-service-gift')||'{}');if(!s||s.firstServiceGiftRedeemed!==true)return;var t=document.createElement('style');t.id='gift-certificate-hidden';t.textContent='[data-gift-certificate]{display:none!important}';document.head.appendChild(t);}catch(e){}})();</script>
+    
+    <script>(()=>{try{var e,t=JSON.parse(localStorage.getItem("aaa-first-service-gift")||"{}");t&&!0===t.firstServiceGiftRedeemed&&((e=document.createElement("style")).id="gift-certificate-hidden",e.textContent="[data-gift-certificate]{display:none!important}",document.head.appendChild(e))}catch(e){}})()</script>
 
-    <style>
-
-        /* #contact-form is linked from the hero button here and from the
-           service pages, and the header is sticky, so the form needs the same
-           offset the sections get or its first field lands underneath the nav. */
-        section[id], header[id], #contact-form {
-            scroll-margin-top: 80px;
-        }
-        @media (max-width: 768px) {
-            section[id], header[id], #contact-form {
-                scroll-margin-top: 100px;
-            }
-        }
-
-    </style>
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/manifest.webmanifest">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="AAA Handyman">
-    <meta name="application-name" content="AAA Handyman">
+    <style>#contact-form,header[id],section[id]{scroll-margin-top:80px}@media (max-width:768px){#contact-form,header[id],section[id]{scroll-margin-top:100px}}</style>
+    <link rel=icon href=/favicon.ico sizes=any>
+    <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+    <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+    <link rel=manifest href=/manifest.webmanifest>
+    <meta name=mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+    <meta name=apple-mobile-web-app-title content="AAA Handyman">
+    <meta name=application-name content="AAA Handyman">
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
 
-    <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
+    <a href=#main-content class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
-<header id="site-header" class="site-header sticky top-0 z-[100] bg-white/95 backdrop-blur-md shadow-md border-b-[3px] border-red-600">
+<header id=site-header class="site-header sticky top-0 z-[100] bg-white/95 backdrop-blur-md shadow-md border-b-[3px] border-red-600">
     <div class="header-container site-nav__bar max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" class="brand site-nav__brand group flex items-center gap-3 min-w-0">
-            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 shadow-sm transition group-hover:scale-105">
+        <a href=/ class="brand site-nav__brand group flex items-center gap-3 min-w-0">
+            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width=48 height=48 decoding=async fetchpriority=high alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 shadow-sm transition group-hover:scale-105">
             <div class="brand-text min-w-0">
                 <p class="brand-title text-base min-[390px]:text-lg sm:text-xl lg:text-xl xl:text-2xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services LLC</p>
                 <p class="brand-tagline text-[10px] sm:text-xs text-gray-500 font-medium">Oakland County, Michigan</p>
             </div>
-            <span class="sr-only">home</span>
+            <span class=sr-only>home</span>
         </a>
 
-        <!-- Desktop Navigation Container -->
+        
         <div class="site-nav__desktop hidden lg:flex items-center">
             <ul class="nav-links site-nav__links flex items-center gap-5 list-none m-0 p-0 text-sm xl:text-base font-medium">
-                <li><a href="/services" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a></li>
-                <li><a href="/service-areas" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a></li>
-                <li><a href="/rates" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Rates</a></li>
-                <li><a href="/guarantee" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Guarantee</a></li>
-                <li><a href="/reviews" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Reviews</a></li>
-                <li><a href="/careers" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Careers</a></li>
-                <li><a href="/contact" class="nav-link py-1 text-red-600 font-bold border-b-2 border-red-600 transition" aria-current="page">Contact</a></li>
+                <li><a href=/services class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a></li>
+                <li><a href=/service-areas class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a></li>
+                <li><a href=/rates class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Rates</a></li>
+                <li><a href=/guarantee class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Guarantee</a></li>
+                <li><a href=/reviews class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Reviews</a></li>
+                <li><a href=/careers class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Careers</a></li>
+                <li><a href=/contact class="nav-link py-1 text-red-600 font-bold border-b-2 border-red-600 transition" aria-current=page>Contact</a></li>
             </ul>
 
-            <!-- Social Media Icons -->
+            
             <div class="social-icons site-nav__social flex items-center gap-3 pl-4 border-l border-gray-200 ml-3">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
             </div>
         </div>
 
-        <!-- Mobile Hamburger Button -->
-        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
-            <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
+        
+        <button id=mobile-menu-btn class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label=Menu aria-expanded=false aria-controls=mobile-menu>
+            <i class="fas fa-bars text-2xl" id=menu-icon aria-hidden=true></i>
         </button>
     </div>
 
-    <!-- Mobile Navigation Drawer / Menu -->
-    <div id="mobile-menu" class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden="true">
-        <div class="space-y-1">
-            <a href="/services" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
-            <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
-            <a href="/rates" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
-            <a href="/guarantee" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Guarantee</a>
-            <a href="/reviews" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Reviews</a>
-            <a href="/careers" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Careers</a>
-            <a href="/contact" class="block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition" aria-current="page">Contact</a>
+    
+    <div id=mobile-menu class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden=true>
+        <div class=space-y-1>
+            <a href=/services class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
+            <a href=/service-areas class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
+            <a href=/rates class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
+            <a href=/guarantee class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Guarantee</a>
+            <a href=/reviews class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Reviews</a>
+            <a href=/careers class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Careers</a>
+            <a href=/contact class="block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition" aria-current=page>Contact</a>
         </div>
 
         <div class="pt-3 border-t border-gray-100 flex flex-col gap-3">
-            <a href="tel:+12483853432" class="flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition text-center">
-                <i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432
+            <a href=tel:+12483853432 class="flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition text-center">
+                <i class="fas fa-phone" aria-hidden=true></i> Call (248) 385-3432
             </a>
             <div class="flex items-center justify-center gap-6 text-2xl pt-1">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
             </div>
         </div>
     </div>
 </header>
 
-<aside id="seasonal-banner" class="seasonal-banner" data-season="summer" aria-label="Seasonal offer">
-    <div class="seasonal-banner__inner">
-        <p class="seasonal-badge">
-            <span class="seasonal-badge__icon" data-banner-icon aria-hidden="true">🌤️</span>
+<aside id=seasonal-banner class=seasonal-banner data-season=summer aria-label="Seasonal offer">
+    <div class=seasonal-banner__inner>
+        <p class=seasonal-badge>
+            <span class=seasonal-badge__icon data-banner-icon aria-hidden=true>🌤️</span>
             <span data-banner-label>Summer Exterior Refresh</span>
         </p>
-        <p class="seasonal-banner__copy">
-            <span class="seasonal-banner__lead"><span data-banner-lead>Book your summer exterior refresh and</span> <strong class="seasonal-banner__save" data-banner-save>save $50</strong></span>
-            <span class="seasonal-banner__note" data-banner-note>Oakland County homeowners · limited summer openings</span>
+        <p class=seasonal-banner__copy>
+            <span class=seasonal-banner__lead><span data-banner-lead>Book your summer exterior refresh and</span> <strong class=seasonal-banner__save data-banner-save>save $50</strong></span>
+            <span class=seasonal-banner__note data-banner-note>Oakland County homeowners · limited summer openings</span>
         </p>
-        <a class="seasonal-banner__cta" href="/#quote" data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+        <a class=seasonal-banner__cta href=/#quote data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width=14 height=14 fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
     </div>
-    <button type="button" class="seasonal-banner__close" data-banner-close aria-label="Dismiss seasonal offer">
-        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"></path></svg>
+    <button type=button class=seasonal-banner__close data-banner-close aria-label="Dismiss seasonal offer">
+        <svg viewBox="0 0 16 16" width=14 height=14 fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round aria-hidden=true><path d="m4 4 8 8M12 4l-8 8"></path></svg>
     </button>
-    <script type="application/json" data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck \u0026 Gutter Prep","lead":"Book your spring deck \u0026 gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
-    <script>(function(){try{var b=document.getElementById('seasonal-banner');if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();</script>
+    <script type=application/json data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck \u0026 Gutter Prep","lead":"Book your spring deck \u0026 gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
+    <script>(()=>{try{var e,a,t,n,l=document.getElementById("seasonal-banner");l&&(a=(e=new Date).getMonth(),t=e.getFullYear(),n=(a<=1||11===a?"winter":a<=4?"spring":a<=7?"summer":"fall")+"-"+(11===a?t+1:t),l.dataset.seasonKey=n,localStorage.getItem("aaa-seasonal-banner")===n)&&(l.hidden=!0)}catch(e){}})()</script>
 </aside>
 
-    <main id="main-content" class="flex-grow bg-blue-950 text-white">
-    <header id="contact-hero" class="ambient-glow-hero relative overflow-hidden border-b-4 border-red-600 bg-blue-950 py-14 sm:py-20">
-        <!-- Decorative wash only; the navy underneath is what carries the text contrast. -->
-        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_80%_at_50%_0%,rgba(245,166,35,0.22),transparent_70%)]" aria-hidden="true"></div>
+    <main id=main-content class="flex-grow bg-blue-950 text-white">
+    <header id=contact-hero class="ambient-glow-hero relative overflow-hidden border-b-4 border-red-600 bg-blue-950 py-14 sm:py-20">
+        
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_80%_at_50%_0%,rgba(245,166,35,0.22),transparent_70%)]" aria-hidden=true></div>
         <div class="relative max-w-3xl mx-auto px-6 text-center reveal-on-scroll">
             <span class="badge-craftsman px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5 mb-3">
-                <i class="fas fa-envelope" aria-hidden="true"></i> Contact AAA Handyman Services LLC
+                <i class="fas fa-envelope" aria-hidden=true></i> Contact AAA Handyman Services LLC
             </span>
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">Get in Touch</h1>
             <p class="mt-5 text-base sm:text-lg leading-relaxed text-blue-200">
                 Whether you need a free quote, have a question about a repair, or want to book a service visit, we would like to hear from you. Call, email, or send the form below and a real person will get back to you.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
-                <a href="tel:+12483853432" class="aaa-btn btn-craftsman font-extrabold px-7 py-3.5 shadow-lg">
-                    <i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432
+                <a href=tel:+12483853432 class="aaa-btn btn-craftsman font-extrabold px-7 py-3.5 shadow-lg">
+                    <i class="fas fa-phone" aria-hidden=true></i> Call (248) 385-3432
                 </a>
-                <a href="#contact-form" class="aaa-btn inline-flex items-center justify-center gap-2.5 rounded-2xl border-2 border-red-500/50 bg-slate-900/80 px-7 py-3.5 font-bold text-white transition hover:border-red-500 hover:bg-slate-900">
-                    <i class="fas fa-paper-plane text-red-300" aria-hidden="true"></i> Send a message
+                <a href=#contact-form class="aaa-btn inline-flex items-center justify-center gap-2.5 rounded-2xl border-2 border-red-500/50 bg-slate-900/80 px-7 py-3.5 font-bold text-white transition hover:border-red-500 hover:bg-slate-900">
+                    <i class="fas fa-paper-plane text-red-300" aria-hidden=true></i> Send a message
                 </a>
             </div>
         </div>
     </header>
 
-    <section id="contact" class="py-12 sm:py-16 bg-blue-950 text-white" aria-labelledby="contact-heading">
-        <h2 id="contact-heading" class="sr-only">Contact details and enquiry form</h2>
+    <section id=contact class="py-12 sm:py-16 bg-blue-950 text-white" aria-labelledby=contact-heading>
+        <h2 id=contact-heading class=sr-only>Contact details and enquiry form</h2>
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
-                <div class="space-y-6">
+                <div class=space-y-6>
                     <div class="rounded-3xl border border-blue-600 bg-blue-900 p-6 sm:p-8">
                         <h3 class="text-2xl sm:text-3xl font-bold text-white">Reach AAA Handyman Services LLC</h3>
                         <p class="mt-2 text-sm sm:text-base text-blue-200">Locally owned and operated in Waterford, Michigan.</p>
                         <ul class="mt-7 space-y-6 list-none p-0 m-0">
                             <li class="flex items-start gap-4">
-                                <i class="fas fa-phone text-2xl sm:text-3xl text-green-400 mt-1 flex-shrink-0 w-8 text-center" aria-hidden="true"></i>
-                                <div class="min-w-0">
-                                    <a href="tel:+12483853432" class="text-xl sm:text-2xl font-bold text-white underline decoration-red-400 decoration-2 underline-offset-4 transition hover:text-red-300">(248) 385-3432</a>
+                                <i class="fas fa-phone text-2xl sm:text-3xl text-green-400 mt-1 flex-shrink-0 w-8 text-center" aria-hidden=true></i>
+                                <div class=min-w-0>
+                                    <a href=tel:+12483853432 class="text-xl sm:text-2xl font-bold text-white underline decoration-red-400 decoration-2 underline-offset-4 transition hover:text-red-300">(248) 385-3432</a>
                                     <p class="mt-1 text-sm text-blue-200">Fastest way to reach us — call or text for immediate assistance.</p>
                                 </div>
                             </li>
                             <li class="flex items-start gap-4">
-                                <i class="fas fa-envelope text-2xl sm:text-3xl text-blue-300 mt-1 flex-shrink-0 w-8 text-center" aria-hidden="true"></i>
-                                <div class="min-w-0">
-                                    <a href="mailto:contact@aaahandyman.services" class="text-base sm:text-xl font-bold text-white underline decoration-red-400 decoration-2 underline-offset-4 transition hover:text-red-300 break-words">contact@aaahandyman.services</a>
+                                <i class="fas fa-envelope text-2xl sm:text-3xl text-blue-300 mt-1 flex-shrink-0 w-8 text-center" aria-hidden=true></i>
+                                <div class=min-w-0>
+                                    <a href=mailto:contact@aaahandyman.services class="text-base sm:text-xl font-bold text-white underline decoration-red-400 decoration-2 underline-offset-4 transition hover:text-red-300 break-words">contact@aaahandyman.services</a>
                                     <p class="mt-1 text-sm text-blue-200">Email us photos or details and we will reply with a quote.</p>
                                 </div>
                             </li>
                             <li class="flex items-start gap-4">
-                                <i class="fas fa-map-marker-alt text-2xl sm:text-3xl text-red-300 mt-1 flex-shrink-0 w-8 text-center" aria-hidden="true"></i>
-                                <div class="min-w-0">
+                                <i class="fas fa-map-marker-alt text-2xl sm:text-3xl text-red-300 mt-1 flex-shrink-0 w-8 text-center" aria-hidden=true></i>
+                                <div class=min-w-0>
                                     <p class="text-lg font-bold text-white">Waterford, Michigan</p>
-                                    <p class="mt-1 text-sm text-blue-200">Proudly serving homeowners across Oakland County. <a href="/service-areas" class="font-semibold text-red-300 underline underline-offset-2 transition hover:text-white">See all service areas</a>.</p>
+                                    <p class="mt-1 text-sm text-blue-200">Proudly serving homeowners across Oakland County. <a href=/service-areas class="font-semibold text-red-300 underline underline-offset-2 transition hover:text-white">See all service areas</a>.</p>
                                 </div>
                             </li>
                         </ul>
                     </div>
 
-                    <div id="hours" class="rounded-3xl border border-blue-600 bg-blue-900 p-6 sm:p-8">
+                    <div id=hours class="rounded-3xl border border-blue-600 bg-blue-900 p-6 sm:p-8">
                         <h3 class="flex items-center gap-3 text-xl sm:text-2xl font-bold text-white">
-                            <i class="fas fa-clock text-red-300" aria-hidden="true"></i> Hours of Operation
+                            <i class="fas fa-clock text-red-300" aria-hidden=true></i> Hours of Operation
                         </h3>
                         <dl class="mt-5 divide-y divide-blue-800 text-sm sm:text-base">
                             <div class="flex items-baseline justify-between gap-4 py-2.5">
@@ -297,23 +280,23 @@
                             Messages left outside these hours are answered the next business morning. Emergencies are answered any time — see below.
                         </p>
                         <p class="mt-3 text-sm leading-relaxed text-blue-200">
-                            Reporting a problem with work we already did? Use our <a href="/customer-care" class="font-semibold text-red-300 underline underline-offset-2 transition hover:text-white">Customer Care &amp; Issue Resolution</a> page instead — those reports get a priority callback.
+                            Reporting a problem with work we already did? Use our <a href=/customer-care class="font-semibold text-red-300 underline underline-offset-2 transition hover:text-white">Customer Care &amp; Issue Resolution</a> page instead — those reports get a priority callback.
                         </p>
                     </div>
 
-                    <a href="/ai-estimate" class="block rounded-3xl border-2 border-red-600 bg-gradient-to-br from-blue-900 to-blue-950 p-6 sm:p-8 hover:from-blue-800 hover:to-blue-950 transition group">
+                    <a href=/ai-estimate class="block rounded-3xl border-2 border-red-600 bg-gradient-to-br from-blue-900 to-blue-950 p-6 sm:p-8 hover:from-blue-800 hover:to-blue-950 transition group">
                         <p class="inline-flex items-center gap-2 rounded-full bg-red-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white">
-                            <i class="fas fa-camera" aria-hidden="true"></i> AI Repair Estimator
+                            <i class="fas fa-camera" aria-hidden=true></i> AI Repair Estimator
                         </p>
                         <h3 class="mt-4 text-xl sm:text-2xl font-bold text-white group-hover:text-red-200 transition">Snap a photo, get a price</h3>
                         <p class="mt-3 text-sm sm:text-base leading-relaxed text-blue-200">
                             Upload a picture of the repair and our AI handyman estimator will identify the issue, list the materials, and give you a preliminary price range in seconds &mdash; then send it straight to our dispatch team. No phone tag required.
                         </p>
-                        <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-red-300 group-hover:text-red-200 transition">Try it now <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                        <span class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-red-300 group-hover:text-red-200 transition">Try it now <i class="fas fa-arrow-right" aria-hidden=true></i></span>
                     </a>
-                    <div id="emergency" class="rounded-3xl border-2 border-red-600 bg-blue-900 p-6 sm:p-8">
+                    <div id=emergency class="rounded-3xl border-2 border-red-600 bg-blue-900 p-6 sm:p-8">
                         <p class="inline-flex items-center gap-2 rounded-full bg-red-600 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white">
-                            <i class="fas fa-triangle-exclamation" aria-hidden="true"></i> After-hours emergency
+                            <i class="fas fa-triangle-exclamation" aria-hidden=true></i> After-hours emergency
                         </p>
                         <h3 class="mt-4 text-xl sm:text-2xl font-bold text-white">Emergency response, 7 days a week</h3>
                         <p class="mt-3 text-sm sm:text-base leading-relaxed text-blue-200">
@@ -332,8 +315,8 @@
                         <p class="mt-4 text-xs leading-relaxed text-blue-200">
                             Emergency rates cover labor only; hardware and materials are billed separately, or supplied by you at no markup.
                         </p>
-                        <a href="tel:+12483853432" class="aaa-btn mt-5 inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-red-600 px-6 py-3.5 font-bold text-white transition hover:bg-red-700">
-                            <i class="fas fa-phone" aria-hidden="true"></i> Call the emergency line
+                        <a href=tel:+12483853432 class="aaa-btn mt-5 inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-red-600 px-6 py-3.5 font-bold text-white transition hover:bg-red-700">
+                            <i class="fas fa-phone" aria-hidden=true></i> Call the emergency line
                         </a>
                     </div>
                 </div>
@@ -346,26 +329,26 @@
 
                     <div class="mb-6 p-4 rounded-2xl bg-blue-950/70 border border-red-500/40 text-blue-100 text-xs sm:text-sm flex flex-col sm:flex-row items-center justify-between gap-3">
                         <div class="flex items-center gap-3">
-                            <span class="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center text-base shrink-0 shadow-sm"><i class="fas fa-camera" aria-hidden="true"></i></span>
+                            <span class="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center text-base shrink-0 shadow-sm"><i class="fas fa-camera" aria-hidden=true></i></span>
                             <div>
                                 <p class="font-bold text-white">Need an instant price estimate right now?</p>
                                 <p class="text-xs text-blue-200">Upload a repair photo to our AI estimator for instant labor &amp; materials pricing.</p>
                             </div>
                         </div>
-                        <a href="/ai-estimate" class="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs transition shadow-md">
+                        <a href=/ai-estimate class="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs transition shadow-md">
                             Try AI Estimator &rarr;
                         </a>
                     </div>
 
-                    <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate class="space-y-6">
+                    <form id=contact-form name=contact method=POST data-netlify=true netlify-honeypot=bot-field novalidate class=space-y-6>
 
-                        <input type="hidden" name="form-name" value="contact" />
+                        <input type=hidden name=form-name value=contact>
 
-                        <p class="hidden">
-                            <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" aria-hidden="true" aria-label="Do not fill out this field" /></label>
+                        <p class=hidden>
+                            <label>Don't fill this out if you're human: <input name=bot-field tabindex=-1 aria-hidden=true aria-label="Do not fill out this field"></label>
                         </p>
 
-                        <div id="first-service-offer" data-gift-certificate class="rounded-2xl border-2 border-red-500 bg-blue-950 p-4 sm:p-5 shadow-lg">
+                        <div id=first-service-offer data-gift-certificate class="rounded-2xl border-2 border-red-500 bg-blue-950 p-4 sm:p-5 shadow-lg">
                             <div class="flex items-center gap-3 sm:gap-4 mb-3 pb-3 border-b border-blue-700">
                                 <div class="bg-red-600 text-white text-2xl sm:text-3xl font-extrabold px-3 py-1.5 rounded-xl leading-none flex-shrink-0 shadow">
                                     $50
@@ -375,38 +358,38 @@
                                     <p class="text-xs sm:text-sm text-blue-100 mt-0.5 leading-snug">Receive a $50 gift certificate toward your first service.</p>
                                 </div>
                             </div>
-                            <label for="first-service-certificate" class="flex cursor-pointer items-start gap-3 p-3 rounded-xl bg-blue-900 border border-blue-600 hover:border-red-400 transition group">
-                                <input id="first-service-certificate" type="checkbox" name="first-service-gift-certificate" value="Requested — customer confirms first service" class="mt-0.5 h-4 w-4 shrink-0 accent-red-600 rounded">
+                            <label for=first-service-certificate class="flex cursor-pointer items-start gap-3 p-3 rounded-xl bg-blue-900 border border-blue-600 hover:border-red-400 transition group">
+                                <input id=first-service-certificate type=checkbox name=first-service-gift-certificate value="Requested — customer confirms first service" class="mt-0.5 h-4 w-4 shrink-0 accent-red-600 rounded">
                                 <span class="text-xs sm:text-sm font-semibold text-white group-hover:text-red-300 transition leading-snug">Yes, I’m a new customer booking my first service!</span>
                             </label>
                         </div>
 
                         <div>
-                            <label for="contact-name" class="block text-sm uppercase tracking-widest mb-2">Your Name <span class="text-red-300" aria-hidden="true">*</span></label>
-                            <input id="contact-name" type="text" name="name" required autocomplete="name" autocapitalize="words" aria-describedby="contact-name-error" placeholder="Jane Doe" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
-                            <p id="contact-name-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
+                            <label for=contact-name class="block text-sm uppercase tracking-widest mb-2">Your Name <span class=text-red-300 aria-hidden=true>*</span></label>
+                            <input id=contact-name name=name required autocomplete=name autocapitalize=words aria-describedby=contact-name-error placeholder="Jane Doe" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
+                            <p id=contact-name-error class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
                         </div>
                         <div>
-                            <label for="contact-email" class="block text-sm uppercase tracking-widest mb-2">Email Address <span class="text-red-300" aria-hidden="true">*</span></label>
-                            <input id="contact-email" type="email" name="email" required autocomplete="email" inputmode="email" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="contact-email-error" placeholder="you@example.com" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
-                            <p id="contact-email-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
+                            <label for=contact-email class="block text-sm uppercase tracking-widest mb-2">Email Address <span class=text-red-300 aria-hidden=true>*</span></label>
+                            <input id=contact-email type=email name=email required autocomplete=email inputmode=email autocapitalize=off autocorrect=off spellcheck=false aria-describedby=contact-email-error placeholder=you@example.com class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
+                            <p id=contact-email-error class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
                         </div>
                         <div>
-                            <label for="contact-phone" class="block text-sm uppercase tracking-widest mb-2">Best Number to Reach You <span class="text-red-300" aria-hidden="true">*</span></label>
-                            <input id="contact-phone" type="tel" name="phone" required autocomplete="tel" inputmode="tel" autocapitalize="off" aria-describedby="contact-phone-error contact-phone-consent" placeholder="(248) 555-0123" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
-                            <p id="contact-phone-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
-                            <p id="contact-phone-consent" class="text-xs text-blue-200 mt-1.5 leading-relaxed">
+                            <label for=contact-phone class="block text-sm uppercase tracking-widest mb-2">Best Number to Reach You <span class=text-red-300 aria-hidden=true>*</span></label>
+                            <input id=contact-phone type=tel name=phone required autocomplete=tel inputmode=tel autocapitalize=off aria-describedby="contact-phone-error contact-phone-consent" placeholder="(248) 555-0123" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
+                            <p id=contact-phone-error class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
+                            <p id=contact-phone-consent class="text-xs text-blue-200 mt-1.5 leading-relaxed">
                                 By providing your phone number, you agree to receive text messages from AAA Handyman Services LLC regarding your service inquiries, quotes, and scheduled appointments. Messaging/data rates may apply. Reply STOP to opt out at any time.
                             </p>
                         </div>
                         <div>
-                            <label for="contact-city" class="block text-sm uppercase tracking-widest mb-2">Your City <span class="text-blue-200 normal-case tracking-normal">(optional)</span></label>
-                            <input id="contact-city" type="text" name="city" autocomplete="address-level2" autocapitalize="words" placeholder="e.g. Troy, MI" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
+                            <label for=contact-city class="block text-sm uppercase tracking-widest mb-2">Your City <span class="text-blue-200 normal-case tracking-normal">(optional)</span></label>
+                            <input id=contact-city name=city autocomplete=address-level2 autocapitalize=words placeholder="e.g. Troy, MI" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white">
                         </div>
                         <div>
-                            <label for="contact-service" class="block text-sm uppercase tracking-widest mb-2">Service Needed <span class="text-red-300" aria-hidden="true">*</span></label>
-                            <div class="relative">
-                                <select id="contact-service" name="service" required aria-describedby="contact-service-error contact-service-help" class="w-full px-5 py-4 pr-14 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white appearance-none">
+                            <label for=contact-service class="block text-sm uppercase tracking-widest mb-2">Service Needed <span class=text-red-300 aria-hidden=true>*</span></label>
+                            <div class=relative>
+                                <select id=contact-service name=service required aria-describedby="contact-service-error contact-service-help" class="w-full px-5 py-4 pr-14 bg-blue-950 border-2 border-blue-400 rounded-2xl focus:border-red-400 text-lg text-white appearance-none">
                                     <option value="" disabled selected>Select a service…</option>
                                     <option value="Maintenance Membership">Maintenance Membership ($49/mo)</option>
                                     <option value="Seasonal Prep Package">Seasonal Prep Package ($265)</option>
@@ -426,50 +409,47 @@
                                     <option value="Energy Efficiency Menu">Energy Efficiency Menu (Good/Better/Best)</option>
                                     <option value="Storm &amp; Water Defense Menu">Storm &amp; Water Defense Menu (Good/Better/Best)</option>
                                     <option value="Carpentry &amp; Trim">Carpentry &amp; Trim</option>
-                                    <option value="Doors">Doors</option>
-                                    <option value="Plumbing">Plumbing</option>
-                                    <option value="Drywall">Drywall</option>
-                                    <option value="Electrical">Electrical</option>
-                                    <option value="Flooring">Flooring</option>
-                                    <option value="Painting">Painting</option>
+                                    <option value=Doors>Doors</option>
+                                    <option value=Plumbing>Plumbing</option>
+                                    <option value=Drywall>Drywall</option>
+                                    <option value=Electrical>Electrical</option>
+                                    <option value=Flooring>Flooring</option>
+                                    <option value=Painting>Painting</option>
                                     <option value="Decks &amp; Fences">Decks &amp; Fences</option>
                                     <option value="Maintenance &amp; Cleaning">Maintenance</option>
-                                    <option value="Other">Other (specify in details below)</option>
+                                    <option value=Other>Other (specify in details below)</option>
                                 </select>
                                 <div class="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none text-blue-200">
-                                    <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                                    <i class="fas fa-chevron-down" aria-hidden=true></i>
                                 </div>
                             </div>
-                            <p id="contact-service-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
-                            <p id="contact-service-help" class="mt-2 text-xs text-blue-200 leading-relaxed">Every rate, package, and menu price covers installation and service labor only. Hardware and materials are not included and are billed separately, unless you supply them yourself at no markup.</p>
-                            <div id="service-package-info" class="hidden mt-3 p-4 bg-blue-950 border border-blue-600 rounded-2xl text-xs sm:text-sm text-blue-100"></div>
+                            <p id=contact-service-error class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
+                            <p id=contact-service-help class="mt-2 text-xs text-blue-200 leading-relaxed">Every rate, package, and menu price covers installation and service labor only. Hardware and materials are not included and are billed separately, unless you supply them yourself at no markup.</p>
+                            <div id=service-package-info class="hidden mt-3 p-4 bg-blue-950 border border-blue-600 rounded-2xl text-xs sm:text-sm text-blue-100"></div>
                         </div>
                         <div>
-                            <label for="contact-message" class="block text-sm uppercase tracking-widest mb-2">What Can We Fix? <span class="text-red-300" aria-hidden="true">*</span></label>
-                            <textarea id="contact-message" name="message" rows="6" required aria-describedby="contact-message-error contact-message-help" placeholder="e.g. Leaky kitchen faucet and a door that won't latch" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-3xl focus:border-red-400 text-lg text-white resize-y"></textarea>
-                            <p id="contact-message-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
-                            <!-- Guidance that used to live in the placeholder, where it
-                                 vanished the moment anyone started typing. -->
-                            <p id="contact-message-help" class="mt-2 text-xs text-blue-200 leading-relaxed">Roughly when you'd like it done, and anything else that helps us quote accurately.</p>
+                            <label for=contact-message class="block text-sm uppercase tracking-widest mb-2">What Can We Fix? <span class=text-red-300 aria-hidden=true>*</span></label>
+                            <textarea id=contact-message name=message rows=6 required aria-describedby="contact-message-error contact-message-help" placeholder="e.g. Leaky kitchen faucet and a door that won't latch" class="w-full px-5 py-4 bg-blue-950 border-2 border-blue-400 rounded-3xl focus:border-red-400 text-lg text-white resize-y"></textarea>
+                            <p id=contact-message-error class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
+                            
+                            <p id=contact-message-help class="mt-2 text-xs text-blue-200 leading-relaxed">Roughly when you'd like it done, and anything else that helps us quote accurately.</p>
                         </div>
                         <div class="flex items-start gap-3 bg-blue-950 p-4 rounded-2xl border border-blue-600">
-                            <input id="seasonal-opt-in" type="checkbox" name="seasonal-opt-in" class="mt-1 h-5 w-5 accent-red-600 rounded cursor-pointer">
-                            <label for="seasonal-opt-in" class="text-sm text-blue-100 cursor-pointer select-none">
+                            <input id=seasonal-opt-in type=checkbox name=seasonal-opt-in class="mt-1 h-5 w-5 accent-red-600 rounded cursor-pointer">
+                            <label for=seasonal-opt-in class="text-sm text-blue-100 cursor-pointer select-none">
                                 <span class="font-semibold text-white block mb-0.5">Preventative &amp; seasonal reminders</span>
                                 Send me free home maintenance tips &amp; reminders (e.g. spring gutter &amp; deck checks, fall weatherproofing &amp; winterization).
                             </label>
                         </div>
 
-                        <!-- Submission outcome and the "n fields need attention" summary both
-                             land here, so a screen reader hears the result without the field
-                             errors having to be hunted for one at a time. -->
-                        <p id="contact-form-status" class="hidden rounded-2xl border px-4 py-3 text-sm font-semibold" role="status" aria-live="polite"></p>
+                        
+                        <p id=contact-form-status class="hidden rounded-2xl border px-4 py-3 text-sm font-semibold" role=status aria-live=polite></p>
 
-                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-5 text-xl font-bold text-white rounded-3xl transition flex items-center justify-center gap-3">
-                            Send message <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                        <button type=submit class="w-full bg-red-600 hover:bg-red-700 py-5 text-xl font-bold text-white rounded-3xl transition flex items-center justify-center gap-3">
+                            Send message <i class="fas fa-paper-plane" aria-hidden=true></i>
                         </button>
                         <p class="text-center text-xs text-blue-200">
-                            Prefer to talk it through? Call <a href="tel:+12483853432" class="font-semibold text-red-300 underline underline-offset-2 transition hover:text-white">(248) 385-3432</a>.
+                            Prefer to talk it through? Call <a href=tel:+12483853432 class="font-semibold text-red-300 underline underline-offset-2 transition hover:text-white">(248) 385-3432</a>.
                         </p>
                     </form>
                 </div>
@@ -483,40 +463,40 @@
             <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
 
                 <div class="flex flex-col items-center md:items-start">
-                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services LLC Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
+                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width=80 height=80 loading=lazy decoding=async alt="AAA Handyman Services LLC Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable home repairs, maintenance, punch lists, and minor updates for homeowners across Oakland County, Michigan.</p>
                     <div class="mt-4 flex items-center gap-4">
-                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+                        <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel=noopener aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
+                        <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
                     </div>
                 </div>
 
-                <nav aria-label="Footer">
+                <nav aria-label=Footer>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="/services" class="hover:text-white transition">Services</a></li>
-                        <li><a href="/rates" class="hover:text-white transition">Rates &amp; Packages</a></li>
-                        <li><a href="/ai-estimate" class="hover:text-white transition">AI Repair Estimator</a></li>
-                        <li><a href="/pricing-policy" class="hover:text-white transition">Pricing Policies</a></li>
-                        <li><a href="/guarantee" class="hover:text-white transition">Our Guarantee</a></li>
-                        <li><a href="/customer-care" class="hover:text-white transition">Customer Care</a></li>
-                        <li><a href="/reviews" class="hover:text-white transition">Reviews</a></li>
-                        <li><a href="/careers" class="hover:text-white transition">Careers</a></li>
-                        <li><a href="/book" class="hover:text-white transition">Book Online</a></li>
-                        <li><a href="/service-areas" class="hover:text-white transition">Service Areas</a></li>
-                        <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
+                        <li><a href=/services class="hover:text-white transition">Services</a></li>
+                        <li><a href=/rates class="hover:text-white transition">Rates &amp; Packages</a></li>
+                        <li><a href=/ai-estimate class="hover:text-white transition">AI Repair Estimator</a></li>
+                        <li><a href=/pricing-policy class="hover:text-white transition">Pricing Policies</a></li>
+                        <li><a href=/guarantee class="hover:text-white transition">Our Guarantee</a></li>
+                        <li><a href=/customer-care class="hover:text-white transition">Customer Care</a></li>
+                        <li><a href=/reviews class="hover:text-white transition">Reviews</a></li>
+                        <li><a href=/careers class="hover:text-white transition">Careers</a></li>
+                        <li><a href=/book class="hover:text-white transition">Book Online</a></li>
+                        <li><a href=/service-areas class="hover:text-white transition">Service Areas</a></li>
+                        <li><a href=/#faq class="hover:text-white transition">FAQ</a></li>
                     </ul>
                 </nav>
 
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden="true"></i>(248) 385-3432</a></li>
-                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
-                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Waterford, MI &middot; Oakland County</li>
+                        <li><a href=tel:+12483853432 class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden=true></i>(248) 385-3432</a></li>
+                        <li><a href=mailto:contact@aaahandyman.services class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden=true></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden=true></i>Waterford, MI &middot; Oakland County</li>
                     </ul>
-                    <a href="/book" class="aaa-btn mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
+                    <a href=/book class="aaa-btn mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden=true></i>Book Online Now</a>
                 </div>
             </div>
 
@@ -524,63 +504,56 @@
                 <nav aria-label="Popular services">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Popular Services</h3>
                     <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-                        <li><a href="/services/carpentry" class="hover:text-white transition">Carpentry</a></li>
-                        <li><a href="/services/drywall-repair" class="hover:text-white transition">Drywall Repair</a></li>
-                        <li><a href="/services/painting-staining" class="hover:text-white transition">Painting &amp; Staining</a></li>
-                        <li><a href="/services/doors-windows" class="hover:text-white transition">Doors &amp; Windows</a></li>
-                        <li><a href="/services/flooring-solutions" class="hover:text-white transition">Flooring Solutions</a></li>
-                        <li><a href="/services/minor-plumbing" class="hover:text-white transition">Minor Plumbing</a></li>
-                        <li><a href="/services/minor-electrical" class="hover:text-white transition">Minor Electrical</a></li>
-                        <li><a href="/services/decks-fences" class="hover:text-white transition">Decks &amp; Fences</a></li>
-                        <li><a href="/services/gutters" class="hover:text-white transition">Gutters</a></li>
-                        <li><a href="/services/power-washing" class="hover:text-white transition">Power Washing</a></li>
+                        <li><a href=/services/carpentry class="hover:text-white transition">Carpentry</a></li>
+                        <li><a href=/services/drywall-repair class="hover:text-white transition">Drywall Repair</a></li>
+                        <li><a href=/services/painting-staining class="hover:text-white transition">Painting &amp; Staining</a></li>
+                        <li><a href=/services/doors-windows class="hover:text-white transition">Doors &amp; Windows</a></li>
+                        <li><a href=/services/flooring-solutions class="hover:text-white transition">Flooring Solutions</a></li>
+                        <li><a href=/services/minor-plumbing class="hover:text-white transition">Minor Plumbing</a></li>
+                        <li><a href=/services/minor-electrical class="hover:text-white transition">Minor Electrical</a></li>
+                        <li><a href=/services/decks-fences class="hover:text-white transition">Decks &amp; Fences</a></li>
+                        <li><a href=/services/gutters class="hover:text-white transition">Gutters</a></li>
+                        <li><a href=/services/power-washing class="hover:text-white transition">Power Washing</a></li>
                     </ul>
-                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    <a href=/services class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden=true></i></a>
                 </nav>
                 <nav aria-label="Service areas">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Service Areas</h3>
                     <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-                        <li><a href="/handyman/waterford" class="hover:text-white transition">Waterford</a></li>
-                        <li><a href="/handyman/troy" class="hover:text-white transition">Troy</a></li>
-                        <li><a href="/handyman/west-bloomfield" class="hover:text-white transition">West Bloomfield</a></li>
-                        <li><a href="/handyman/rochester-hills" class="hover:text-white transition">Rochester Hills</a></li>
-                        <li><a href="/handyman/royal-oak" class="hover:text-white transition">Royal Oak</a></li>
-                        <li><a href="/handyman/birmingham" class="hover:text-white transition">Birmingham</a></li>
-                        <li><a href="/handyman/clarkston" class="hover:text-white transition">Clarkston</a></li>
-                        <li><a href="/handyman/farmington-hills" class="hover:text-white transition">Farmington Hills</a></li>
-                        <li><a href="/handyman/novi" class="hover:text-white transition">Novi</a></li>
-                        <li><a href="/handyman/southfield" class="hover:text-white transition">Southfield</a></li>
-                        <li><a href="/handyman/franklin" class="hover:text-white transition">Franklin</a></li>
-                        <li><a href="/handyman/orchard-lake" class="hover:text-white transition">Orchard Lake</a></li>
+                        <li><a href=/handyman/waterford class="hover:text-white transition">Waterford</a></li>
+                        <li><a href=/handyman/troy class="hover:text-white transition">Troy</a></li>
+                        <li><a href=/handyman/west-bloomfield class="hover:text-white transition">West Bloomfield</a></li>
+                        <li><a href=/handyman/rochester-hills class="hover:text-white transition">Rochester Hills</a></li>
+                        <li><a href=/handyman/royal-oak class="hover:text-white transition">Royal Oak</a></li>
+                        <li><a href=/handyman/birmingham class="hover:text-white transition">Birmingham</a></li>
+                        <li><a href=/handyman/clarkston class="hover:text-white transition">Clarkston</a></li>
+                        <li><a href=/handyman/farmington-hills class="hover:text-white transition">Farmington Hills</a></li>
+                        <li><a href=/handyman/novi class="hover:text-white transition">Novi</a></li>
+                        <li><a href=/handyman/southfield class="hover:text-white transition">Southfield</a></li>
+                        <li><a href=/handyman/franklin class="hover:text-white transition">Franklin</a></li>
+                        <li><a href=/handyman/orchard-lake class="hover:text-white transition">Orchard Lake</a></li>
                     </ul>
-                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    <a href=/service-areas class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden=true></i></a>
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
                 <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services LLC All Rights Reserved. We operate in compliance with Michigan&rsquo;s minor project exemption (MCL 339.2403).<br>Locally Serving Oakland County, MI.</p>
                 <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
-                    <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
-                    <span class="text-gray-600">|</span>
-                    <a href="/terms" class="hover:text-white transition">Terms of Service</a>
+                    <a href=/privacy class="hover:text-white transition">Privacy Policy</a>
+                    <span class=text-gray-600>|</span>
+                    <a href=/terms class="hover:text-white transition">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
+    <button id=back-to-top type=button aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden=true></i></button>
 
 
     <script src="/js/contact-page.js?v=20260814e" defer></script>
     <script src="/js/site.js?v=20260814e" defer></script>
     <script src="/js/gift-certificate.js?v=20260814e" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
-    <script>
-      // Registered after load so it never competes with the first render.
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/sw.js').catch(function () {});
-        });
-      }
-    </script>
-</body>
-</html>
+    <script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})})</script>
+
+
