@@ -567,7 +567,7 @@
           ? PACKAGE_DESCRIPTIONS[val]
           : null;
       if (desc) {
-          servicePackageInfo.innerHTML = '';
+          servicePackageInfo.replaceChildren();
 
           const p = document.createElement('p');
           p.className = 'leading-relaxed';
@@ -602,7 +602,7 @@
           servicePackageInfo.classList.remove('hidden');
       } else {
           servicePackageInfo.classList.add('hidden');
-          servicePackageInfo.innerHTML = '';
+          servicePackageInfo.replaceChildren();
       }
   };
 
@@ -793,7 +793,18 @@
           const aiLink = document.createElement('a');
           aiLink.href = '/ai-estimate';
           aiLink.className = 'mt-3 flex items-center justify-between gap-2 p-2.5 rounded-lg bg-emerald-900/40 border border-emerald-500/40 text-xs font-semibold text-emerald-200 hover:text-white hover:bg-emerald-900/60 transition';
-          aiLink.innerHTML = '<span><i class="fas fa-wand-magic-sparkles text-emerald-400 mr-1.5" aria-hidden="true"></i>Want an instant estimate right now?</span> <span class="font-bold underline">Try AI Estimator &rarr;</span>';
+
+          const aiPrompt = document.createElement('span');
+          const aiPromptIcon = document.createElement('i');
+          aiPromptIcon.className = 'fas fa-wand-magic-sparkles text-emerald-400 mr-1.5';
+          aiPromptIcon.setAttribute('aria-hidden', 'true');
+          aiPrompt.append(aiPromptIcon, document.createTextNode('Want an instant estimate right now?'));
+
+          const aiAction = document.createElement('span');
+          aiAction.className = 'font-bold underline';
+          aiAction.textContent = 'Try AI Estimator →';
+
+          aiLink.append(aiPrompt, aiAction);
           bookingEstimate.appendChild(aiLink);
       }
 
@@ -1137,7 +1148,10 @@
           }
 
           submitBtn.disabled = true;
-          submitBtn.innerHTML = 'Sending your request… <i class="fas fa-spinner animate-spin" aria-hidden="true"></i>';
+          const sendingIcon = document.createElement('i');
+          sendingIcon.className = 'fas fa-spinner animate-spin';
+          sendingIcon.setAttribute('aria-hidden', 'true');
+          submitBtn.replaceChildren(document.createTextNode('Sending your request… '), sendingIcon);
 
           try {
               const sourcePhoto = bookingPhoto?.files?.[0] || null;
@@ -1241,7 +1255,10 @@
               // The message already says what failed; this adds the way out.
               setBookingError(`${error.message} You can also call (248) 385-3432 and we'll book it over the phone.`);
               submitBtn.disabled = false;
-              submitBtn.innerHTML = 'Request My Booking <i class="fas fa-calendar-check" aria-hidden="true"></i>';
+              const bookingIcon = document.createElement('i');
+              bookingIcon.className = 'fas fa-calendar-check';
+              bookingIcon.setAttribute('aria-hidden', 'true');
+              submitBtn.replaceChildren(document.createTextNode('Request My Booking '), bookingIcon);
           }
       });
   }
