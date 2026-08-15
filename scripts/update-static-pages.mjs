@@ -43,7 +43,7 @@ const ICONS_CSS = '/css/icons.css?v=20260815a';
  * worker keys assets by pathname with ?v= removed, so public/sw.js has its own
  * CACHE_VERSION that has to move with a stylesheet change as well.
  */
-const ASSET_VERSION = '20260815d';
+const ASSET_VERSION = '20260815e';
 const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
 const SCRIPT_VERSIONS = new Map([
   ['site.js', ASSET_VERSION],

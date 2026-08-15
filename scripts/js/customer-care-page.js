@@ -168,6 +168,29 @@
   const MAX_PHOTO_BYTES = 7 * 1024 * 1024;
   const photoInput = document.getElementById('care-photo');
   const photoError = document.getElementById('care-photo-error');
+  const photoEmpty = document.getElementById('care-photo-empty');
+  const photoChosen = document.getElementById('care-photo-chosen');
+  const photoName = document.getElementById('care-photo-name');
+  const photoRemove = document.getElementById('care-photo-remove');
+
+  /*
+   * The photo field is a styled dropzone (a <label> wrapping a hidden
+   * <input type=file>) rather than a bare native file input. The native input's
+   * "Browse..." button text vanishes when the input is placed on a dark
+   * background -- the browser paints the selector button in the input's own
+   * colours, so white-on-navy left the button label invisible. The dropzone
+   * paints its own "Browse Files" pill and a chosen-state row, so the text is
+   * always readable. This mirrors the booking and contact forms.
+   */
+  const renderPhotoState = () => {
+      const file = photoInput && photoInput.files && photoInput.files[0];
+      if (file && photoName) photoName.textContent = file.name || 'Selected photo';
+      if (photoEmpty) photoEmpty.classList.toggle('hidden', Boolean(file));
+      if (photoChosen) {
+          photoChosen.classList.toggle('hidden', !file);
+          photoChosen.classList.toggle('flex', Boolean(file));
+      }
+  };
 
   const showPhotoError = (message) => {
       if (!photoInput) return '';
@@ -199,7 +222,19 @@
       return showPhotoError('');
   };
 
-  if (photoInput) photoInput.addEventListener('change', validatePhoto);
+  if (photoInput) photoInput.addEventListener('change', () => { renderPhotoState(); validatePhoto(); });
+
+  if (photoRemove) {
+      photoRemove.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (photoInput) photoInput.value = '';
+          renderPhotoState();
+          showPhotoError('');
+      });
+  }
+
+  renderPhotoState();
 
   form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -255,6 +290,7 @@
               );
               form.reset();
               FIELDS.forEach(field => showFieldError(field, ''));
+              renderPhotoState();
               showPhotoError('');
           } else {
               setStatus(

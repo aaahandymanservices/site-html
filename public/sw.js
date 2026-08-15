@@ -130,16 +130,17 @@
 // /reviews page with the old script and find the Owner Access button inert.
 // Bumping this version (and the ASSET_VERSION stamp in update-static-
 // pages.mjs) refetches the script for every client.
-// v27 fixes the /contact photo upload: the dropzone is a <div role=button>,
-// not a <label>, so a click on it never opened the file picker -- only
-// drag-and-drop and keyboard activation worked. A click handler is added to
-// the dropzone so tapping "Browse Files" or anywhere on it opens the picker.
-// The fix lives on /js/contact-page.js behind its unchanged pathname, and the
-// asset cache key drops ?v=, so bumping both the contact-page.js stamp in
-// contact.html and this version refetches the script for every client;
-// otherwise a returning visitor holding v26 would keep the old script and the
-// dropzone stays inert on click.
-const CACHE_VERSION = 'v27';
+// v28 fixes the /customer-care photo upload: the native file input was styled
+// with ::file-selector-button pseudo-element classes on a dark background, and
+// the browser painted the "Browse..." button label in the input's own white
+// text on the navy field, so the button text was invisible. The input is now a
+// styled dropzone <label> with its own "Browse Files" pill and a chosen-state
+// row, mirroring the booking and contact forms. The behaviour lives on
+// /js/customer-care-page.js, so bumping this version (and the ASSET_VERSION
+// stamp in update-static-pages.mjs) refetches the script for every client;
+// otherwise a returning visitor holding v27 would keep the old script and the
+// dropzone's chosen-state UI would never render.
+const CACHE_VERSION = 'v28';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
