@@ -1024,7 +1024,9 @@
       }
       if (bookingPhotoPreviewUrl) URL.revokeObjectURL(bookingPhotoPreviewUrl);
       bookingPhotoPreviewUrl = URL.createObjectURL(file);
-      bookingPhotoPreview.src = bookingPhotoPreviewUrl;
+      if (bookingPhotoPreview instanceof HTMLImageElement && bookingPhotoPreviewUrl.startsWith('blob:')) {
+          bookingPhotoPreview.src = bookingPhotoPreviewUrl;
+      }
       bookingPhotoName.textContent = file.name || 'Repair photo';
       bookingPhotoEmpty?.classList.add('hidden');
       bookingPhotoPreviewWrap?.classList.remove('hidden');
