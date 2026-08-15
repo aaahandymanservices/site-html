@@ -1,6 +1,13 @@
 /*
  * Behaviour for /contact: phone formatting, the first-service offer pre-tick,
- * validation, and submission of the enquiry form.
+ * validation, the photo upload widget, and submission of the enquiry form.
+ *
+ * The form posts as multipart/form-data to /api/contact-quote so it can carry
+ * up to five repair photos alongside the text fields. No Content-Type header
+ * is set on the fetch: the browser has to put the multipart boundary in
+ * itself, and a hand-set header would strip it and take the photos with it.
+ * The submission still works without a photo -- the photos are optional, and a
+ * quote with no photo is worth more than no quote at all.
  *
  * Previously an 11kB inline <script>, which is parser-blocking wherever it sits
  * and re-downloaded uncompressed on every visit. External and deferred, it is
@@ -159,6 +166,236 @@
       const link = event.target.closest('a[data-service]');
       if (link) setContactService(link.getAttribute('data-service'));
   });
+
+  /*
+   * Photo upload widget.
+   *
+   * The dropzone is a <label> for a hidden <input type=file multiple>, so a
+   * click anywhere on it opens the file picker without any JS. This block adds
+   * the rest: drag-and-drop, preview thumbnails with file name and size, a
+   * remove button on each thumbnail, client-side type/size/count validation,
+   * and a progress bar that animates while the request is in flight (the
+   * upload itself is one multipart POST, so the bar is an indeterminate
+   * proxy; XHR's progress event is what makes it move).
+   *
+   * Limits mirror the server-side function: up to 5 photos, 10 MB each, JPG /
+   * PNG / HEIC / WebP. The browser downscales nothing here -- the function
+   * rejects anything over the limit, so the visitor is told which file is the
+   * problem while they still have the form in front of them.
+   */
+  const MAX_PHOTOS = 5;
+  const MAX_PHOTO_BYTES = 10 * 1024 * 1024;
+  const ACCEPTED_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif']);
+  const ACCEPTED_EXTENSIONS = /\.(jpe?g|png|webp|heic|heif)$/i;
+  const photoInput = document.getElementById('contact-photo-input');
+  const photoDropzone = document.getElementById('contact-photo-dropzone');
+  const photoEmpty = document.getElementById('contact-photo-empty');
+  const photoPreviews = document.getElementById('contact-photo-previews');
+  const photoError = document.getElementById('contact-photo-error');
+  const photoProgress = document.getElementById('contact-photo-progress');
+  const photoProgressBar = document.getElementById('contact-photo-progress-bar');
+  const photoProgressText = document.getElementById('contact-photo-progress-text');
+
+  // The selected files, in the order they were added. Array, not a FileList,
+  // so we can splice on remove without fighting the read-only DOM collection.
+  let selectedPhotos = [];
+
+  const formatBytes = (bytes) => {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  };
+
+  const showPhotoError = (message) => {
+      if (!photoError) return;
+      if (message) {
+          photoError.textContent = message;
+          photoError.classList.remove('hidden');
+          if (photoInput) photoInput.setAttribute('aria-invalid', 'true');
+      } else {
+          photoError.textContent = '';
+          photoError.classList.add('hidden');
+          if (photoInput) photoInput.removeAttribute('aria-invalid');
+      }
+  };
+
+  const isAcceptedPhoto = (file) =>
+      ACCEPTED_TYPES.has(file.type) || ACCEPTED_EXTENSIONS.test(file.name);
+
+  const renderPreviews = () => {
+      if (!photoPreviews) return;
+      photoPreviews.innerHTML = '';
+      if (selectedPhotos.length === 0) {
+          photoPreviews.classList.add('hidden');
+          if (photoEmpty) photoEmpty.classList.remove('hidden');
+          return;
+      }
+      if (photoEmpty) photoEmpty.classList.add('hidden');
+      photoPreviews.classList.remove('hidden');
+
+      selectedPhotos.forEach((file, index) => {
+          const li = document.createElement('li');
+          li.className = 'relative group rounded-2xl overflow-hidden border border-blue-600 bg-blue-950';
+
+          const img = document.createElement('img');
+          img.alt = `Repair photo ${index + 1}: ${file.name}`;
+          img.className = 'aspect-square w-full object-cover';
+          img.file = file;
+          // Object URL for the thumbnail. Revoked on remove and on page unload
+          // by the browser; the cost of a handful of lingering URLs is nothing.
+          try {
+              img.src = URL.createObjectURL(file);
+          } catch {
+              img.src = '';
+          }
+          li.appendChild(img);
+
+          // File name + size, pinned to the bottom of the thumbnail.
+          const meta = document.createElement('div');
+          meta.className = 'absolute inset-x-0 bottom-0 bg-gradient-to-t from-blue-950/95 to-transparent px-2 py-1.5 pt-3 text-left';
+          const name = document.createElement('p');
+          name.className = 'truncate text-[11px] font-semibold text-white';
+          name.textContent = file.name;
+          const size = document.createElement('p');
+          size.className = 'text-[10px] text-blue-200';
+          size.textContent = formatBytes(file.size);
+          meta.appendChild(name);
+          meta.appendChild(size);
+          li.appendChild(meta);
+
+          // Remove / trash button. `type=button` so it never submits the form.
+          const remove = document.createElement('button');
+          remove.type = 'button';
+          remove.className = 'absolute top-1.5 right-1.5 h-7 w-7 rounded-full bg-black/60 text-white hover:bg-red-600 flex items-center justify-center text-xs transition focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400';
+          remove.setAttribute('aria-label', `Remove photo ${index + 1}`);
+          remove.dataset.photoIndex = String(index);
+          remove.innerHTML = '<i class="fas fa-trash-can" aria-hidden="true"></i>';
+          li.appendChild(remove);
+
+          photoPreviews.appendChild(li);
+      });
+  };
+
+  const addPhotos = (fileList) => {
+      const candidates = Array.from(fileList || []);
+      if (candidates.length === 0) return;
+
+      const errors = [];
+      const accepted = [];
+
+      for (const file of candidates) {
+          if (!isAcceptedPhoto(file)) {
+              errors.push(`"${file.name}" is not a supported format. Please upload a JPG, PNG, HEIC, or WebP image.`);
+              continue;
+          }
+          if (file.size > MAX_PHOTO_BYTES) {
+              errors.push(`"${file.name}" is ${formatBytes(file.size)}, which is over the 10 MB per-photo limit.`);
+              continue;
+          }
+          accepted.push(file);
+      }
+
+      // Enforce the total count cap, keeping the earliest selections.
+      const room = MAX_PHOTOS - selectedPhotos.length;
+      if (room <= 0) {
+          showPhotoError(`You can attach up to ${MAX_PHOTOS} photos. Remove one to add another.`);
+          renderPreviews();
+          return;
+      }
+      if (accepted.length > room) {
+          accepted.splice(room);
+          errors.push(`Only ${room} more photo${room === 1 ? '' : 's'} can be attached (max ${MAX_PHOTOS}). The rest were skipped.`);
+      }
+
+      selectedPhotos = selectedPhotos.concat(accepted);
+
+      if (errors.length) {
+          showPhotoError(errors.join(' '));
+      } else {
+          showPhotoError('');
+      }
+      renderPreviews();
+  };
+
+  if (photoInput) {
+      photoInput.addEventListener('change', (e) => {
+          addPhotos(e.target.files);
+          // Reset the input so the same file can be re-selected after remove.
+          e.target.value = '';
+      });
+  }
+
+  if (photoPreviews) {
+      photoPreviews.addEventListener('click', (e) => {
+          const btn = e.target.closest('button[data-photo-index]');
+          if (!btn) return;
+          const index = Number.parseInt(btn.dataset.photoIndex, 10);
+          if (Number.isInteger(index) && index >= 0 && index < selectedPhotos.length) {
+              selectedPhotos.splice(index, 1);
+              showPhotoError('');
+              renderPreviews();
+          }
+      });
+  }
+
+  if (photoDropzone) {
+      // Keyboard support: the dropzone is a role=button with tabindex=0. Enter
+      // and Space open the file picker, mirroring a native button.
+      photoDropzone.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              if (photoInput) photoInput.click();
+          }
+      });
+
+      // Drag-and-drop. `dragover`/`dragenter` must preventDefault to make the
+      // dropzone a valid drop target; `dragleave` only re-toggles when the
+      // pointer leaves the dropzone entirely (counter hits zero).
+      let dragCounter = 0;
+      photoDropzone.addEventListener('dragenter', (e) => {
+          e.preventDefault();
+          dragCounter += 1;
+          photoDropzone.classList.add('border-red-400', 'bg-blue-900/40');
+      });
+      photoDropzone.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          if (e.dataTransfer) e.dataTransfer.dropEffect = 'copy';
+      });
+      photoDropzone.addEventListener('dragleave', (e) => {
+          e.preventDefault();
+          dragCounter -= 1;
+          if (dragCounter <= 0) {
+              dragCounter = 0;
+              photoDropzone.classList.remove('border-red-400', 'bg-blue-900/40');
+          }
+      });
+      photoDropzone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          dragCounter = 0;
+          photoDropzone.classList.remove('border-red-400', 'bg-blue-900/40');
+          if (e.dataTransfer && e.dataTransfer.files) {
+              addPhotos(e.dataTransfer.files);
+          }
+      });
+
+      // Prevent the browser from opening a dropped file outside the dropzone.
+      ['dragover', 'drop'].forEach((evt) => {
+          window.addEventListener(evt, (e) => {
+              if (e.target === photoDropzone || (photoDropzone && photoDropzone.contains(e.target))) return;
+              e.preventDefault();
+          });
+      });
+  }
+
+  const resetPhotoWidget = () => {
+      selectedPhotos = [];
+      showPhotoError('');
+      renderPreviews();
+      if (photoProgress) photoProgress.classList.add('hidden');
+      if (photoProgressBar) photoProgressBar.style.width = '0%';
+      if (photoProgressText) photoProgressText.textContent = '';
+  };
+
   const form = document.getElementById('contact-form');
   if (form) {
       const submitButton = form.querySelector('button[type="submit"]');
@@ -304,21 +541,69 @@
               submitButton.classList.add('opacity-70', 'cursor-not-allowed');
           }
 
+          // Build the multipart body. The hidden <input name=photo1 multiple> in
+          // the markup is only there to make the dropzone a click target; the
+          // actual files live in our selectedPhotos array so we can manage
+          // order and removal. Strip whatever the input contributed and append
+          // one entry per selected photo as photo1..photoN, which is what the
+          // function reads.
           const formData = new FormData(form);
-          const isSubscribed = document.getElementById('seasonal-opt-in')?.checked;
+          formData.delete('photo1');
+          selectedPhotos.forEach((file, index) => {
+              formData.append(`photo${index + 1}`, file, file.name);
+          });
+
           const email = formData.get('email');
           const name = formData.get('name');
           const certificateBox = document.getElementById('first-service-certificate');
           const claimedCertificate = Boolean(certificateBox && certificateBox.checked && !certificateBox.disabled);
 
+          // Indeterminate-but-moving progress bar. The upload is one multipart
+          // POST, so XHR's upload.progress event is what actually moves the bar;
+          // fetch has no upload progress at all, so XHR is the only way to show
+          // the visitor something is happening while a 9 MB photo leaves their
+          // phone. When there are no photos, the bar stays hidden.
+          const hasPhotos = selectedPhotos.length > 0;
+          if (hasPhotos && photoProgress && photoProgressBar) {
+              photoProgress.classList.remove('hidden');
+              photoProgressBar.style.width = '0%';
+              if (photoProgressText) photoProgressText.textContent = 'Sending your photos…';
+          }
+
           const sendMessage = function() {
-              fetch('/contact.html', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                  body: new URLSearchParams(formData).toString()
-              })
-              .then(response => {
-                  if (response.ok) {
+              const xhr = new XMLHttpRequest();
+              xhr.open('POST', '/api/contact-quote');
+              // No Content-Type header: the browser sets multipart/form-data with
+              // its own boundary, and a hand-set header strips the boundary and
+              // takes the photos with it.
+              if (hasPhotos && photoProgressBar) {
+                  xhr.upload.onprogress = (event) => {
+                      if (!event.lengthComputable) return;
+                      const percent = Math.max(0, Math.min(100, (event.loaded / event.total) * 100));
+                      photoProgressBar.style.width = percent + '%';
+                      if (photoProgressText && percent < 100) {
+                          photoProgressText.textContent = `Sending your photos… ${Math.round(percent)}%`;
+                      }
+                  };
+                  xhr.upload.onload = () => {
+                      if (photoProgressBar) photoProgressBar.style.width = '100%';
+                      if (photoProgressText) photoProgressText.textContent = 'Finalizing your request…';
+                  };
+              }
+
+              xhr.onload = () => {
+                  let responseOk = xhr.status >= 200 && xhr.status < 300;
+                  let serverError = '';
+                  if (!responseOk) {
+                      try {
+                          const data = JSON.parse(xhr.responseText || '{}');
+                          serverError = data.error || '';
+                      } catch {
+                          serverError = '';
+                      }
+                  }
+
+                  if (responseOk) {
                       // The certificate is one per customer, so spend it the
                       // moment the claim lands. This records it against their
                       // email address server-side and stops the offer being
@@ -327,34 +612,47 @@
                           window.AAAGiftCertificate.markRedeemed(email, { name: name, source: 'contact_form' });
                       }
 
-                      if (isSubscribed && email) {
-                          fetch('/api/seasonal-subscription', {
-                              method: 'POST',
-                              headers: { 'Content-Type': 'application/json' },
-                              body: JSON.stringify({ email: email, name: name, source: 'quote_form' })
-                          }).catch(err => console.error('Subscription error:', err));
-                      }
+                      // The function handles the seasonal opt-in itself when the
+                      // box is checked, so there is no second fetch to
+                      // /api/seasonal-subscription here -- it would double-subscribe
+                      // the visitor.
 
                       setStatus('Thank you! Your message is on its way and we will be in touch shortly.', 'success');
                       form.reset();
                       FIELDS.forEach(field => showFieldError(field, ''));
+                      resetPhotoWidget();
                       if (servicePackageInfo) {
                           servicePackageInfo.classList.add('hidden');
                           servicePackageInfo.innerHTML = '';
                       }
                   } else {
-                      setStatus("Sorry — your message didn't go through. Please call us at (248) 385-3432 or email contact@aaahandyman.services and we'll help right away.", 'error');
+                      setStatus(
+                          serverError || "Sorry — your message didn't go through. Please call us at (248) 385-3432 or email contact@aaahandyman.services and we'll help right away.",
+                          'error'
+                      );
+                      // Reset the progress bar on failure so it doesn't look like
+                      // the upload is still going.
+                      if (photoProgress) photoProgress.classList.add('hidden');
+                      if (photoProgressBar) photoProgressBar.style.width = '0%';
+                      if (photoProgressText) photoProgressText.textContent = '';
                   }
-              })
-              .catch(() => {
+              };
+
+              xhr.onerror = () => {
                   setStatus("Sorry — your message didn't go through. Please call us at (248) 385-3432 or email contact@aaahandyman.services and we'll help right away.", 'error');
-              })
-              .finally(() => {
+                  if (photoProgress) photoProgress.classList.add('hidden');
+                  if (photoProgressBar) photoProgressBar.style.width = '0%';
+                  if (photoProgressText) photoProgressText.textContent = '';
+              };
+
+              xhr.onloadend = () => {
                   if (submitButton) {
                       submitButton.disabled = false;
                       submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
                   }
-              });
+              };
+
+              xhr.send(formData);
           };
 
           sendMessage();
