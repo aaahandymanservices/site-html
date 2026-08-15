@@ -115,7 +115,14 @@
 // update-static-pages.mjs and this version refetches the new CSS for every
 // client; otherwise a returning visitor keeps last deploy's stylesheet and the
 // review page's pins and grids keep their old, broken layout.
-const CACHE_VERSION = 'v24';
+// v25 lands the contact form photo upload: the new /api/contact-quote function,
+// the photo-serving /api/contact-quote/photo/:key, and the drag-and-drop widget
+// on /contact. The behaviour and the markup ship together, and contact-page.js
+// keeps its pathname, so a returning visitor holding v24 would otherwise pair
+// the new form with the old script and see the dropzone render inert. Bumping
+// this version (and the contact-page.js stamp above) refetches the script for
+// every client.
+const CACHE_VERSION = 'v25';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

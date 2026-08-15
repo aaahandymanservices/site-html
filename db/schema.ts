@@ -136,5 +136,35 @@ export const giftCertificateRedemptions = pgTable("gift_certificate_redemptions"
   customerName: text("customer_name"),
   // Where it was claimed: 'booking_form', 'contact_form', 'quote_form', or 'manual'.
   source: text("source").default("booking_form").notNull(),
-  redeemedAt: timestamp("redeemed_at", { withTimezone: true }).defaultNow().notNull(),
+  redeemedAt: timestamp("redeemed_at", { withTimeZone: true }).defaultNow().notNull(),
+});
+
+// Quote requests submitted through /contact: the contact form is the site's
+// primary conversion path, so the row captures everything a follow-up call
+// needs -- who to reach, how, what the work is, and up to five photos of the
+// repair so dispatch can see the scope before dialling. Each photo lives in
+// Netlify Blobs under its own key (see netlify/functions/contact-quote.ts) and
+// is served back via /api/contact-quote/photo/:key. The `status` column tracks
+// the request through the owner's workflow: 'pending' on arrival, then
+// whatever the owner moves it to as they work it.
+export const contactRequests = pgTable("contact_requests", {
+  id: serial("id").primaryKey(),
+  customerName: text("customer_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  city: text("city"),
+  service: text("service").notNull(),
+  message: text("message").notNull(),
+  // Up to five repair photos. Nullable so a request with no photos keeps
+  // working, and rows created before any given column was added keep their
+  // existing values. The order matches the slot order on the form.
+  photoKey1: text("photo_key_1"),
+  photoKey2: text("photo_key_2"),
+  photoKey3: text("photo_key_3"),
+  photoKey4: text("photo_key_4"),
+  photoKey5: text("photo_key_5"),
+  seasonalOptIn: boolean("seasonal_opt_in").default(false).notNull(),
+  giftCertificateRequested: boolean("gift_certificate_requested").default(false).notNull(),
+  status: text("status").default("pending").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
