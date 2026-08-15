@@ -1633,5 +1633,5 @@
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
     <script>(()=>{var n,e,r=Array.prototype.slice.call(document.querySelectorAll("details[data-svc-group]"));function o(t,e){var n=(t=>{if(!t||t.length<2)return null;var e;try{e=document.querySelector(t)}catch(t){return null}return e?{target:e,group:e.closest("details[data-svc-group]")}:null})(t);n&&(n.group&&!n.group.open&&(n.group.open=!0),e)&&window.requestAnimationFrame(function(){n.target.scrollIntoView({block:"start"})})}function a(){var t=r.every(function(t){return t.open});n.setAttribute("aria-expanded",t?"true":"false"),e&&(e.textContent=t?"Collapse all":"Expand all")}r.length&&(o(window.location.hash,!0),window.addEventListener("hashchange",function(){o(window.location.hash,!0)}),document.addEventListener("click",function(t){(t=t.target.closest?t.target.closest('a[href^="#"]'):null)&&o(t.getAttribute("href"),!1)}),n=document.querySelector("[data-svc-toggle-all]"),e=document.querySelector("[data-svc-toggle-label]"),n)&&(n.addEventListener("click",function(){var e="true"!==n.getAttribute("aria-expanded");r.forEach(function(t){t.open=e}),a()}),r.forEach(function(t){t.addEventListener("toggle",a)}),a())})()</script>
     <script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})})</script>
-
-
+</body>
+</html>
