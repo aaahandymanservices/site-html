@@ -345,22 +345,12 @@ function page(service) {
 ${jsonLd(service)}
 
     <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
-    <style id="critical-above-the-fold">
-        *, ::before, ::after { box-sizing: border-box; }
-        html { font-family: "Roboto", system-ui, -apple-system, sans-serif; -webkit-text-size-adjust: 100%; }
-        body { margin: 0; background-color: #f4f6fa; color: #1f2937; line-height: 1.6; }
-        header, nav, main, section, footer { display: block; }
-        img { max-width: 100%; height: auto; display: block; }
-        a { color: inherit; text-decoration: none; }
-    </style>
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260810a">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260810a">
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260814e">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260814e">
     <!-- Font Awesome subset (generated, see scripts/build-icon-css.mjs) -->
     <link rel="preload" href="/css/icons.css?v=20260815a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260815a"></noscript>
 
-    <style>
-    </style>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -625,7 +615,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
 
     <!-- Back to top -->
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
-    <script src="/js/site.js?v=20260810a" defer></script>
+    <script src="/js/site.js?v=20260814e" defer></script>
 
     <!-- Google tag (gtag.js) -->
     <script>

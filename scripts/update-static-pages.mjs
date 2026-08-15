@@ -96,6 +96,9 @@ function optimizeFontsAndAssets(html) {
   html = html.replace(/[ \t]*<link\s+rel="preload"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"[^>]*>\r?\n/gi, '');
   html = html.replace(/[ \t]*<noscript><link\s+rel="stylesheet"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"><\/noscript>\r?\n/gi, '');
 
+  // Strip standalone service-areas.css link (consolidated in site-theme.css)
+  html = html.replace(/[ \t]*<link\s+rel="stylesheet"\s+href="\/css\/service-areas\.css(?:\?v=[^"]*)?"[^>]*>\r?\n?/gi, '');
+
   // Decorative icons should not compete with the hero image or brand font in
   // the critical window. Their stylesheet and fonts can arrive after the first
   // paint, while noscript keeps the icons available without JavaScript.
