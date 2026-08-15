@@ -67,9 +67,10 @@ const SCRIPT_VERSIONS = new Map([
   // The AI estimator page's upload, ZIP→zone lookup, analyze call, and submit-
   // to-dispatch flow are all inert markup until this runs, so a stale cached
   // copy leaves a visitor's photo going nowhere -- same reason contact-page.js
-  // is versioned here. Its own stamp (20260814a) is independent of ASSET_VERSION
-  // because it shipped in a later deploy than the rest of the scripts.
-  ['ai-estimate-page.js', '20260814a'],
+  // is versioned here. Its own stamp is independent of ASSET_VERSION because it
+  // shipped in a later deploy than the rest of the scripts; this bump carries
+  // the browser-side photo resizing that lets phone pictures upload at all.
+  ['ai-estimate-page.js', '20260815b'],
 ]);
 const ASYNC_ICONS_CSS =
   `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +

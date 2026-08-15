@@ -38,6 +38,20 @@ const contentTypeFor = (key: string) => {
   return "image/jpeg";
 };
 
+// Browsers are not consistent about the MIME type they attach to an upload --
+// some Android pickers hand over an empty string, and a file dragged in from a
+// desktop can arrive as `application/octet-stream`. The filename settles those
+// cases, so a genuine photo is not turned away over a missing header. Returns
+// "" when the upload is not one of the formats the estimator stores.
+const resolvePhotoType = (file: File) => {
+  if (IMAGE_TYPES.has(file.type)) return file.type;
+  const ext = /\.([a-z0-9]+)$/i.exec(file.name || "")?.[1]?.toLowerCase();
+  if (ext === "png") return "image/png";
+  if (ext === "webp") return "image/webp";
+  if (ext === "jpg" || ext === "jpeg") return "image/jpeg";
+  return "";
+};
+
 // ---------------------------------------------------------------------------
 // SYSTEM PROMPT — scopes Gemini as the AAA Handyman Services construction &
 // handyman estimator. It returns a strict JSON object the page renders in the
@@ -91,7 +105,7 @@ export default async (request: Request) => {
     // form sends them as `photo`, `photo2`, `photo3`. Older callers that only
     // send `photo` keep working unchanged.
     const rawPhotos = [formData.get("photo"), formData.get("photo2"), formData.get("photo3")];
-    const photos: File[] = [];
+    const photos: { file: File; type: string }[] = [];
     for (const entry of rawPhotos) {
       if (entry == null) continue;
       // `formData.get` returns a File for file uploads and a string for plain
@@ -101,10 +115,11 @@ export default async (request: Request) => {
       if (entry.size > MAX_IMAGE_SIZE) {
         return errorJson("Each photo must be 5 MB or smaller.", 400);
       }
-      if (!IMAGE_TYPES.has(entry.type)) {
+      const type = resolvePhotoType(entry);
+      if (!type) {
         return errorJson("Upload JPG, PNG, or WebP photos only.", 400);
       }
-      photos.push(entry);
+      photos.push({ file: entry, type });
       if (photos.length > MAX_PHOTOS) {
         return errorJson("You can upload at most 3 photos.", 400);
       }
@@ -146,10 +161,10 @@ export default async (request: Request) => {
     // others are reference angles for dispatch.
     const photoStore = getStore("ai-estimate-photos");
     const storedKeys: string[] = [];
-    const storePhoto = async (file: File) => {
-      const ext = file.type.split("/")[1]?.replace("jpeg", "jpg") ?? "jpg";
+    const storePhoto = async (entry: { file: File; type: string }) => {
+      const ext = entry.type.split("/")[1].replace("jpeg", "jpg");
       const key = `${Date.now()}-${crypto.randomUUID()}.${ext}`;
-      await photoStore.set(key, await file.arrayBuffer());
+      await photoStore.set(key, await entry.file.arrayBuffer());
       storedKeys.push(key);
       return key;
     };
@@ -164,7 +179,7 @@ export default async (request: Request) => {
       Promise.all(storedKeys.map((k) => photoStore.delete(k).catch(() => undefined)));
 
     // Send the primary photo to Gemini for visual analysis.
-    const imageBase64 = Buffer.from(await photo.arrayBuffer()).toString("base64");
+    const imageBase64 = Buffer.from(await photo.file.arrayBuffer()).toString("base64");
     const ai = new GoogleGenAI({});
 
     let modelText = "";

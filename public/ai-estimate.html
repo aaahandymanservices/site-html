@@ -294,13 +294,13 @@
                     <div class="text-center mb-6">
                         <span class="bg-red-600/15 text-red-300 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Step 1</span>
                         <h3 class="text-2xl font-bold text-white mt-3">Upload Repair Photos</h3>
-                        <p class="text-sm text-blue-200 mt-1">Upload up to 3 photos (JPG, PNG, WebP &middot; Max 5MB each)</p>
+                        <p class="text-sm text-blue-200 mt-1">Upload up to 3 photos straight from your phone &mdash; large pictures are resized automatically</p>
                     </div>
 
                     <div id="ai-dropzone" class="dropzone relative border-2 border-dashed border-blue-500/60 rounded-2xl p-6 sm:p-8 text-center cursor-pointer transition hover:border-red-400 hover:bg-blue-800/40" role="button" tabindex="0" aria-label="Upload up to 3 repair photos">
-                        <input type="file" id="ai-photo-input" name="photo" accept="image/jpeg,image/png,image/webp" class="sr-only" aria-describedby="ai-photo-error">
-                        <input type="file" id="ai-photo-input-2" name="photo2" accept="image/jpeg,image/png,image/webp" class="sr-only" aria-hidden="true" tabindex="-1">
-                        <input type="file" id="ai-photo-input-3" name="photo3" accept="image/jpeg,image/png,image/webp" class="sr-only" aria-hidden="true" tabindex="-1">
+                        <input type="file" id="ai-photo-input" name="photo" accept="image/*" class="sr-only" aria-describedby="ai-photo-error">
+                        <input type="file" id="ai-photo-input-2" name="photo2" accept="image/*" class="sr-only" aria-hidden="true" tabindex="-1">
+                        <input type="file" id="ai-photo-input-3" name="photo3" accept="image/*" class="sr-only" aria-hidden="true" tabindex="-1">
 
                         <div id="ai-dropzone-idle">
                             <div class="w-16 h-16 bg-red-600/15 rounded-2xl flex items-center justify-center text-3xl text-red-400 mb-4 mx-auto" aria-hidden="true"><i class="fas fa-images"></i></div>
@@ -499,7 +499,7 @@
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
     <script src="/js/site.js?v=20260814e" defer></script>
-    <script src="/js/ai-estimate-page.js?v=20260815a" defer></script>
+    <script src="/js/ai-estimate-page.js?v=20260815b" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
     <script>
       if ('serviceWorker' in navigator) {
