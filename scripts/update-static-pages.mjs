@@ -43,7 +43,7 @@ const ICONS_CSS = '/css/icons.css?v=20260815a';
  * worker keys assets by pathname with ?v= removed, so public/sw.js has its own
  * CACHE_VERSION that has to move with a stylesheet change as well.
  */
-const ASSET_VERSION = '20260815c';
+const ASSET_VERSION = '20260815d';
 const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
 const SCRIPT_VERSIONS = new Map([
   ['site.js', ASSET_VERSION],
@@ -70,11 +70,11 @@ const SCRIPT_VERSIONS = new Map([
   // is versioned here. Its own stamp is independent of ASSET_VERSION because it
   // shipped in a later deploy than the rest of the scripts; this bump carries
   // the browser-side photo resizing that lets phone pictures upload at all.
-  ['ai-estimate-page.js', '20260815c'],
+  ['ai-estimate-page.js', '20260815d'],
   // Owner access and review deletion now use inline <dialog> elements
   // instead of window.prompt/confirm; a stale cached copy would leave the
   // Owner Access button inert on the new /reviews page.
-  ['reviews-page.js', '20260815c'],
+  ['reviews-page.js', '20260815d'],
 ]);
 const ASYNC_ICONS_CSS =
   `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +

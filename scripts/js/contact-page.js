@@ -170,13 +170,14 @@
   /*
    * Photo upload widget.
    *
-   * The dropzone is a <label> for a hidden <input type=file multiple>, so a
-   * click anywhere on it opens the file picker without any JS. This block adds
-   * the rest: drag-and-drop, preview thumbnails with file name and size, a
-   * remove button on each thumbnail, client-side type/size/count validation,
-   * and a progress bar that animates while the request is in flight (the
-   * upload itself is one multipart POST, so the bar is an indeterminate
-   * proxy; XHR's progress event is what makes it move).
+   * The dropzone is a <div role=button> wrapping a hidden <input type=file
+   * multiple>, so a click anywhere on it has to open the file picker in JS --
+   * a <label> would do it for free, but the markup is a div so this block
+   * wires the click itself. It also adds drag-and-drop, preview thumbnails
+   * with file name and size, a remove button on each thumbnail, client-side
+   * type/size/count validation, and a progress bar that animates while the
+   * request is in flight (the upload itself is one multipart POST, so the bar
+   * is an indeterminate proxy; XHR's progress event is what makes it move).
    *
    * Limits mirror the server-side function: up to 5 photos, 10 MB each, JPG /
    * PNG / HEIC / WebP. The browser downscales nothing here -- the function
@@ -339,6 +340,16 @@
   }
 
   if (photoDropzone) {
+      // Click anywhere on the dropzone opens the file picker. The dropzone is
+      // a <div>, not a <label>, so the click has to be wired in JS. The hidden
+      // input itself sits inside the dropzone; clicking it would re-trigger,
+      // so clicks that originate on the input are left for the input to run
+      // its own file picker.
+      photoDropzone.addEventListener('click', (e) => {
+          if (e.target === photoInput) return;
+          if (photoInput) photoInput.click();
+      });
+
       // Keyboard support: the dropzone is a role=button with tabindex=0. Enter
       // and Space open the file picker, mirroring a native button.
       photoDropzone.addEventListener('keydown', (e) => {
