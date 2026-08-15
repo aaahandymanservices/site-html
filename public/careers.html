@@ -320,7 +320,7 @@
                         <span>We review applications daily and will reach out within 24–48 hours.</span>
                     </div>
 
-                    <form id=careers-form name=careers method=POST data-netlify=true netlify-honeypot=bot-field enctype=multipart/form-data class=space-y-5>
+                    <form id=careers-form name=careers method=POST data-netlify=true data-netlify-recaptcha=true netlify-honeypot=bot-field enctype=multipart/form-data class=space-y-5>
 
                         <input type=hidden name=form-name value=careers>
                         <input type=hidden name=subject value="New craftsman application from %{formName}">
@@ -435,6 +435,7 @@
 
                         <p id=careers-message-status class="hidden text-sm font-semibold"></p>
 
+                        <div data-netlify-recaptcha="true"></div>
                         <button id=careers-submit type=submit class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
                             Send My Application <i class="fas fa-paper-plane" aria-hidden=true></i>
                         </button>
