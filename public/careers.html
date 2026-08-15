@@ -1,34 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang=en>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Self-hosted brand fonts + icon subset; @font-face lives in site-theme.css -->
-    <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta charset=UTF-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    
+    <link rel=preload href=/fonts/archivo-latin.woff2 as=font type=font/woff2 crossorigin>
 
 
     <title>Careers — Join Our Team of Craftsmen | AAA Handyman Services LLC</title>
 
-    <meta name="description" content="Now hiring skilled handymen and tradespeople across Waterford, Troy, West Bloomfield, and Oakland County, MI. Apply to join the AAA Handyman Services LLC team today.">
-    <meta name="theme-color" content="#A61F2E">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://aaahandyman.services/careers">
+    <meta name=description content="Now hiring skilled handymen and tradespeople across Waterford, Troy, West Bloomfield, and Oakland County, MI. Apply to join the AAA Handyman Services LLC team today.">
+    <meta name=theme-color content=#A61F2E>
+    <meta name=robots content="index, follow">
+    <link rel=canonical href=https://aaahandyman.services/careers>
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aaahandyman.services/careers">
-    <meta property="og:site_name" content="AAA Handyman Services LLC">
-    <meta property="og:title" content="Careers — Join Our Team of Craftsmen | AAA Handyman Services LLC">
-    <meta property="og:description" content="AAA Handyman Services LLC is growing across Oakland County, Michigan. Join a locally owned team with competitive pay and flexible scheduling. Apply online today.">
-    <meta property="og:image" content="https://aaahandyman.services/logo-banner.jpg">
-    <meta property="og:locale" content="en_US">
+    <meta property=og:type content=website>
+    <meta property=og:url content=https://aaahandyman.services/careers>
+    <meta property=og:site_name content="AAA Handyman Services LLC">
+    <meta property=og:title content="Careers — Join Our Team of Craftsmen | AAA Handyman Services LLC">
+    <meta property=og:description content="AAA Handyman Services LLC is growing across Oakland County, Michigan. Join a locally owned team with competitive pay and flexible scheduling. Apply online today.">
+    <meta property=og:image content=https://aaahandyman.services/logo-banner.jpg>
+    <meta property=og:locale content=en_US>
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://aaahandyman.services/careers">
-    <meta name="twitter:title" content="Careers — Join Our Team of Craftsmen | AAA Handyman Services LLC">
-    <meta name="twitter:description" content="Now hiring skilled handymen and tradespeople across Oakland County, MI. Locally owned team, competitive pay, flexible scheduling. Apply online today.">
-    <meta name="twitter:image" content="https://aaahandyman.services/logo-banner.jpg">
+    <meta name=twitter:card content=summary_large_image>
+    <meta name=twitter:url content=https://aaahandyman.services/careers>
+    <meta name=twitter:title content="Careers — Join Our Team of Craftsmen | AAA Handyman Services LLC">
+    <meta name=twitter:description content="Now hiring skilled handymen and tradespeople across Oakland County, MI. Locally owned team, competitive pay, flexible scheduling. Apply online today.">
+    <meta name=twitter:image content=https://aaahandyman.services/logo-banner.jpg>
 
-    <script type="application/ld+json">
+    <script type=application/ld+json>
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -39,254 +39,112 @@
     }
     </script>
 
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260814e">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260815a">
-    <link rel="preload" href="/css/icons.css?v=20260815a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260815a"></noscript>
+    <link rel=stylesheet href="/css/tailwind.css?v=20260814e">
+    <link rel=stylesheet href="/css/site-theme.css?v=20260814e">
+    <link rel=preload href="/css/icons.css?v=20260815a" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
+    <noscript><link rel=stylesheet href="/css/icons.css?v=20260815a"></noscript>
 
-    <style>
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translate3d(0, 20px, 0);
-            }
-            to {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
-            }
-        }
-        .careers-card {
-            opacity: 0;
-            will-change: transform, opacity;
-            backface-visibility: hidden;
-            animation: fadeInUp 0.5s ease forwards;
-        }
-
-        section[id], header[id] {
-            scroll-margin-top: 80px;
-        }
-        @media (max-width: 768px) {
-            section[id], header[id] {
-                scroll-margin-top: 100px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-
-            .careers-card { animation: none !important; }
-            .careers-card { opacity: 1 !important; transform: none !important; }
-        }
-
-        /*
-         * The application card is the page's one long-form task, so it reads as
-         * a centred sheet rather than a column pushed against one edge. The
-         * bottom margin is deliberate: the fixed "Call Now" button and the chat
-         * launcher both sit in the bottom-right corner, and without a gap here
-         * they land on top of the submit button and the equal-opportunity fine
-         * print at the scroll position where applicants finish the form.
-         */
-        .careers-form-shell {
-            max-width: 800px;
-            margin: 0 auto 100px;
-        }
-        /* Breathing room under the fine print, inside the card's own padding. */
-        .careers-form-card {
-            padding-bottom: 2.5rem;
-        }
-
-        /*
-         * Form controls are pinned to a light scheme. Left to the user agent,
-         * a visitor whose OS is in dark mode gets dark select boxes, a dark
-         * option popup, and a near-black file input inside this white card --
-         * unreadable against the card and against the labels beside them.
-         */
-        #careers-form {
-            color-scheme: light;
-        }
-
-        /*
-         * Native select chrome is replaced with a drawn chevron so the closed
-         * field matches the text inputs, and both the field and the option list
-         * carry explicit colours instead of inheriting whatever the platform
-         * would paint.
-         */
-        select.careers-select {
-            -webkit-appearance: none;
-            appearance: none;
-            background-color: #f9fafb;
-            color: #111827;
-            font-weight: 500;
-            padding-right: 2.75rem;
-            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%231b2a4a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 8l5 5 5-5'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 0.85rem auto;
-        }
-        select.careers-select:focus {
-            background-color: #ffffff;
-        }
-        /* Nothing chosen yet: dimmer than a real answer, still well past 4.5:1. */
-        select.careers-select:invalid {
-            color: #4b5563;
-            font-weight: 400;
-        }
-        select.careers-select option {
-            background-color: #ffffff;
-            color: #111827;
-            font-weight: 400;
-        }
-        select.careers-select option:disabled {
-            color: #6b7280;
-        }
-
-        /*
-         * Resume upload: a soft dashed drop target in the same greys as the rest
-         * of the fields. The native input fills the box, so files can be dragged
-         * onto it without any JavaScript standing in for the browser.
-         */
-        .careers-upload {
-            border: 2px dashed #cbd5e1;
-            background-color: #f9fafb;
-            border-radius: 1rem;
-            padding: 1rem 1.25rem;
-            transition: border-color 0.16s ease, background-color 0.16s ease;
-        }
-        .careers-upload:hover,
-        .careers-upload:focus-within {
-            border-color: #a61f2e;
-            background-color: #ffffff;
-        }
-        input.careers-upload-input {
-            display: block;
-            width: 100%;
-            padding: 0;
-            border: 0;
-            background-color: transparent;
-            color: #374151;
-            font-size: 0.875rem;
-            cursor: pointer;
-        }
-        input.careers-upload-input:focus {
-            box-shadow: none;
-        }
-        input.careers-upload-input::file-selector-button {
-            margin-right: 0.875rem;
-            padding: 0.5rem 1.125rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 0.75rem;
-            background-color: #ffffff;
-            color: #1b2a4a;
-            font: inherit;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.16s ease, border-color 0.16s ease;
-        }
-        input.careers-upload-input::file-selector-button:hover {
-            background-color: #eef2f7;
-            border-color: #94a3b8;
-        }
-    </style>
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/manifest.webmanifest">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="AAA Handyman">
-    <meta name="application-name" content="AAA Handyman">
+    <style>@keyframes fadeInUp{from{opacity:0;transform:translate3d(0,20px,0)}to{opacity:1;transform:translate3d(0,0,0)}}.careers-card{opacity:0;will-change:transform,opacity;backface-visibility:hidden;animation:fadeInUp .5s ease forwards}header[id],section[id]{scroll-margin-top:80px}@media (max-width:768px){header[id],section[id]{scroll-margin-top:100px}}@media (prefers-reduced-motion:reduce){.careers-card{animation:none!important}.careers-card{opacity:1!important;transform:none!important}}.careers-form-shell{max-width:800px;margin:0 auto 100px}.careers-form-card{padding-bottom:2.5rem}#careers-form{color-scheme:light}select.careers-select{-webkit-appearance:none;appearance:none;background-color:#f9fafb;color:#111827;font-weight:500;padding-right:2.75rem;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%231b2a4a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 8l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;background-size:.85rem auto}select.careers-select:focus{background-color:#fff}select.careers-select:invalid{color:#4b5563;font-weight:400}select.careers-select option{background-color:#fff;color:#111827;font-weight:400}select.careers-select option:disabled{color:#6b7280}.careers-upload{border:2px dashed #cbd5e1;background-color:#f9fafb;border-radius:1rem;padding:1rem 1.25rem;transition:border-color .16s ease,background-color .16s ease}.careers-upload:focus-within,.careers-upload:hover{border-color:#a61f2e;background-color:#fff}input.careers-upload-input{display:block;width:100%;padding:0;border:0;background-color:transparent;color:#374151;font-size:.875rem;cursor:pointer}input.careers-upload-input:focus{box-shadow:none}input.careers-upload-input::file-selector-button{margin-right:.875rem;padding:.5rem 1.125rem;border:1px solid #cbd5e1;border-radius:.75rem;background-color:#fff;color:#1b2a4a;font:inherit;font-weight:600;cursor:pointer;transition:background-color .16s ease,border-color .16s ease}input.careers-upload-input::file-selector-button:hover{background-color:#eef2f7;border-color:#94a3b8}</style>
+    <link rel=icon href=/favicon.ico sizes=any>
+    <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+    <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+    <link rel=manifest href=/manifest.webmanifest>
+    <meta name=mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+    <meta name=apple-mobile-web-app-title content="AAA Handyman">
+    <meta name=application-name content="AAA Handyman">
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
 
-    <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
+    <a href=#main-content class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
-<header id="site-header" class="site-header sticky top-0 z-[100] bg-white/95 backdrop-blur-md shadow-md border-b-[3px] border-red-600">
+<header id=site-header class="site-header sticky top-0 z-[100] bg-white/95 backdrop-blur-md shadow-md border-b-[3px] border-red-600">
     <div class="header-container site-nav__bar max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" class="brand site-nav__brand group flex items-center gap-3 min-w-0">
-            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width="48" height="48" decoding="async" fetchpriority="high" alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 shadow-sm transition group-hover:scale-105">
+        <a href=/ class="brand site-nav__brand group flex items-center gap-3 min-w-0">
+            <img src="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/icon.jpg&amp;w=48&amp;fm=avif&amp;q=80, /.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80 2x" width=48 height=48 decoding=async fetchpriority=high alt="" class="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover flex-shrink-0 border-2 border-red-600 shadow-sm transition group-hover:scale-105">
             <div class="brand-text min-w-0">
                 <p class="brand-title text-base min-[390px]:text-lg sm:text-xl lg:text-xl xl:text-2xl font-bold tracking-tight text-red-600 leading-tight truncate">AAA Handyman Services LLC</p>
                 <p class="brand-tagline text-[10px] sm:text-xs text-gray-500 font-medium">Oakland County, Michigan</p>
             </div>
-            <span class="sr-only">home</span>
+            <span class=sr-only>home</span>
         </a>
 
-        <!-- Desktop Navigation Container -->
+        
         <div class="site-nav__desktop hidden lg:flex items-center">
             <ul class="nav-links site-nav__links flex items-center gap-5 list-none m-0 p-0 text-sm xl:text-base font-medium">
-                <li><a href="/services" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a></li>
-                <li><a href="/service-areas" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a></li>
-                <li><a href="/rates" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Rates</a></li>
-                <li><a href="/guarantee" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Guarantee</a></li>
-                <li><a href="/reviews" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Reviews</a></li>
-                <li><a href="/careers" class="nav-link py-1 text-red-600 font-bold border-b-2 border-red-600 transition" aria-current="page">Careers</a></li>
-                <li><a href="/contact" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Contact</a></li>
+                <li><a href=/services class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a></li>
+                <li><a href=/service-areas class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a></li>
+                <li><a href=/rates class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Rates</a></li>
+                <li><a href=/guarantee class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Guarantee</a></li>
+                <li><a href=/reviews class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Reviews</a></li>
+                <li><a href=/careers class="nav-link py-1 text-red-600 font-bold border-b-2 border-red-600 transition" aria-current=page>Careers</a></li>
+                <li><a href=/contact class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Contact</a></li>
             </ul>
 
-            <!-- Social Media Icons -->
+            
             <div class="social-icons site-nav__social flex items-center gap-3 pl-4 border-l border-gray-200 ml-3">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 text-xl transition p-1"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
             </div>
         </div>
 
-        <!-- Mobile Hamburger Button -->
-        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
-            <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
+        
+        <button id=mobile-menu-btn class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label=Menu aria-expanded=false aria-controls=mobile-menu>
+            <i class="fas fa-bars text-2xl" id=menu-icon aria-hidden=true></i>
         </button>
     </div>
 
-    <!-- Mobile Navigation Drawer / Menu -->
-    <div id="mobile-menu" class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden="true">
-        <div class="space-y-1">
-            <a href="/services" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
-            <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
-            <a href="/rates" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
-            <a href="/guarantee" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Guarantee</a>
-            <a href="/reviews" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Reviews</a>
-            <a href="/careers" class="block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition" aria-current="page">Careers</a>
-            <a href="/contact" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Contact</a>
+    
+    <div id=mobile-menu class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden=true>
+        <div class=space-y-1>
+            <a href=/services class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
+            <a href=/service-areas class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
+            <a href=/rates class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Rates</a>
+            <a href=/guarantee class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Guarantee</a>
+            <a href=/reviews class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Reviews</a>
+            <a href=/careers class="block text-red-600 font-bold py-2.5 px-3 bg-red-50 rounded-xl transition" aria-current=page>Careers</a>
+            <a href=/contact class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Contact</a>
         </div>
 
         <div class="pt-3 border-t border-gray-100 flex flex-col gap-3">
-            <a href="tel:+12483853432" class="flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition text-center">
-                <i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432
+            <a href=tel:+12483853432 class="flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition text-center">
+                <i class="fas fa-phone" aria-hidden=true></i> Call (248) 385-3432
             </a>
             <div class="flex items-center justify-center gap-6 text-2xl pt-1">
-                <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
-                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
+                <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel="noopener noreferrer" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
+                <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
             </div>
         </div>
     </div>
 </header>
 
-<aside id="seasonal-banner" class="seasonal-banner" data-season="summer" aria-label="Seasonal offer">
-    <div class="seasonal-banner__inner">
-        <p class="seasonal-badge">
-            <span class="seasonal-badge__icon" data-banner-icon aria-hidden="true">🌤️</span>
+<aside id=seasonal-banner class=seasonal-banner data-season=summer aria-label="Seasonal offer">
+    <div class=seasonal-banner__inner>
+        <p class=seasonal-badge>
+            <span class=seasonal-badge__icon data-banner-icon aria-hidden=true>🌤️</span>
             <span data-banner-label>Summer Exterior Refresh</span>
         </p>
-        <p class="seasonal-banner__copy">
-            <span class="seasonal-banner__lead"><span data-banner-lead>Book your summer exterior refresh and</span> <strong class="seasonal-banner__save" data-banner-save>save $50</strong></span>
-            <span class="seasonal-banner__note" data-banner-note>Oakland County homeowners · limited summer openings</span>
+        <p class=seasonal-banner__copy>
+            <span class=seasonal-banner__lead><span data-banner-lead>Book your summer exterior refresh and</span> <strong class=seasonal-banner__save data-banner-save>save $50</strong></span>
+            <span class=seasonal-banner__note data-banner-note>Oakland County homeowners · limited summer openings</span>
         </p>
-        <a class="seasonal-banner__cta" href="/#quote" data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+        <a class=seasonal-banner__cta href=/#quote data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width=14 height=14 fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
     </div>
-    <button type="button" class="seasonal-banner__close" data-banner-close aria-label="Dismiss seasonal offer">
-        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"></path></svg>
+    <button type=button class=seasonal-banner__close data-banner-close aria-label="Dismiss seasonal offer">
+        <svg viewBox="0 0 16 16" width=14 height=14 fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round aria-hidden=true><path d="m4 4 8 8M12 4l-8 8"></path></svg>
     </button>
-    <script type="application/json" data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck \u0026 Gutter Prep","lead":"Book your spring deck \u0026 gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
-    <script>(function(){try{var b=document.getElementById('seasonal-banner');if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();</script>
+    <script type=application/json data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck \u0026 Gutter Prep","lead":"Book your spring deck \u0026 gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
+    <script>(()=>{try{var e,a,t,n,l=document.getElementById("seasonal-banner");l&&(a=(e=new Date).getMonth(),t=e.getFullYear(),n=(a<=1||11===a?"winter":a<=4?"spring":a<=7?"summer":"fall")+"-"+(11===a?t+1:t),l.dataset.seasonKey=n,localStorage.getItem("aaa-seasonal-banner")===n)&&(l.hidden=!0)}catch(e){}})()</script>
 </aside>
 
-    <main id="main-content" class="ambient-glow-hero flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
+    <main id=main-content class="ambient-glow-hero flex-grow py-12 sm:py-16 bg-gradient-to-b from-blue-950 to-slate-900 text-white">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16 reveal-on-scroll">
                 <span class="badge-craftsman px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5 mb-3">
-                    <i class="fas fa-user-plus" aria-hidden="true"></i> Now Hiring
+                    <i class="fas fa-user-plus" aria-hidden=true></i> Now Hiring
                 </span>
                 <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Steady Local Work. Great Pay. Weekends Off.</h1>
                 <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
@@ -300,29 +158,29 @@
                     <p class="text-slate-400 text-sm sm:text-base">We place experienced craftsmen based on current skill level and experience. The rates below are honest and upfront — what you see is what you earn.</p>
                 </div>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                    <div class="card-dark-layered careers-card bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col" style="animation-delay: 0ms;">
-                        <div class="w-14 h-14 mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-2xl text-white shadow-md" aria-hidden="true"><i class="fas fa-hammer" aria-hidden="true"></i></div>
+                    <div class="card-dark-layered careers-card bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col" style=animation-delay:0s>
+                        <div class="w-14 h-14 mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-2xl text-white shadow-md" aria-hidden=true><i class="fas fa-hammer" aria-hidden=true></i></div>
                         <h3 class="text-lg font-bold text-white mb-1">Craftsman</h3>
-                        <div class="inline-flex items-center gap-1.5 text-sm font-bold text-red-300 mb-3"><i class="fas fa-tag text-xs" aria-hidden="true"></i>$22–$30/hr</div>
+                        <div class="inline-flex items-center gap-1.5 text-sm font-bold text-red-300 mb-3"><i class="fas fa-tag text-xs" aria-hidden=true></i>$22–$30/hr</div>
                         <p class="text-slate-300 text-sm flex-grow">Deliver quality repairs and installations across a wide range of home projects.</p>
                         <p class="text-xs text-slate-400 mt-4 pt-4 border-t border-white/10"><span class="font-semibold text-slate-200">Best fit:</span> Experienced tradespeople ready to run quality work solo.</p>
                     </div>
-                    <div class="card-dark-layered careers-card bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col" style="animation-delay: 120ms;">
-                        <div class="w-14 h-14 mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-2xl text-white shadow-md" aria-hidden="true"><i class="fas fa-medal" aria-hidden="true"></i></div>
+                    <div class="card-dark-layered careers-card bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col" style=animation-delay:120ms>
+                        <div class="w-14 h-14 mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-2xl text-white shadow-md" aria-hidden=true><i class="fas fa-medal" aria-hidden=true></i></div>
                         <h3 class="text-lg font-bold text-white mb-1">Lead Craftsman</h3>
-                        <div class="inline-flex items-center gap-1.5 text-sm font-bold text-red-300 mb-3"><i class="fas fa-tag text-xs" aria-hidden="true"></i>$32–$40/hr</div>
+                        <div class="inline-flex items-center gap-1.5 text-sm font-bold text-red-300 mb-3"><i class="fas fa-tag text-xs" aria-hidden=true></i>$32–$40/hr</div>
                         <p class="text-slate-300 text-sm flex-grow">Take ownership of complex jobs and mentor newer crew members while you work.</p>
                         <p class="text-xs text-slate-400 mt-4 pt-4 border-t border-white/10"><span class="font-semibold text-slate-200">Best fit:</span> Seasoned pros who run multi-day projects and bring newer crew members up to speed.</p>
                     </div>
-                    <div class="card-dark-layered careers-card bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col" style="animation-delay: 180ms;">
-                        <div class="w-14 h-14 mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-2xl text-white shadow-md" aria-hidden="true"><i class="fas fa-hard-hat" aria-hidden="true"></i></div>
+                    <div class="card-dark-layered careers-card bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col" style=animation-delay:180ms>
+                        <div class="w-14 h-14 mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-2xl text-white shadow-md" aria-hidden=true><i class="fas fa-hard-hat" aria-hidden=true></i></div>
                         <h3 class="text-lg font-bold text-white mb-1">Field Supervisor</h3>
-                        <div class="inline-flex items-center gap-1.5 text-sm font-bold text-red-300 mb-3"><i class="fas fa-tag text-xs" aria-hidden="true"></i>$42–$50/hr</div>
+                        <div class="inline-flex items-center gap-1.5 text-sm font-bold text-red-300 mb-3"><i class="fas fa-tag text-xs" aria-hidden=true></i>$42–$50/hr</div>
                         <p class="text-slate-300 text-sm flex-grow">Coordinate crews, manage schedules, and ensure every job meets our standards.</p>
                         <p class="text-xs text-slate-400 mt-4 pt-4 border-t border-white/10"><span class="font-semibold text-slate-200">Best fit:</span> Trusted crew leadership with the pay to match.</p>
                     </div>
                 </div>
-                <p class="text-center text-xs sm:text-sm text-slate-400 mt-6 max-w-2xl mx-auto"><i class="fas fa-arrow-trend-up text-red-500 mr-1.5" aria-hidden="true"></i>We hire based on the experience and skill you bring today. Your rate is set on day one and matches the role you fill on the crew.</p>
+                <p class="text-center text-xs sm:text-sm text-slate-400 mt-6 max-w-2xl mx-auto"><i class="fas fa-arrow-trend-up text-red-500 mr-1.5" aria-hidden=true></i>We hire based on the experience and skill you bring today. Your rate is set on day one and matches the role you fill on the crew.</p>
             </section>
 
             <section class="mb-12 sm:mb-16">
@@ -331,10 +189,10 @@
                     <p class="text-slate-400 text-sm sm:text-base">No guessing games. Here's exactly how we pay.</p>
                 </div>
                 <div class="max-w-xl mx-auto">
-                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 text-center" style="animation-delay: 0ms;">
-                        <div class="w-12 h-12 mx-auto mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden="true"><i class="fas fa-hand-holding-dollar" aria-hidden="true"></i></div>
+                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 text-center" style=animation-delay:0s>
+                        <div class="w-12 h-12 mx-auto mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden=true><i class="fas fa-hand-holding-dollar" aria-hidden=true></i></div>
                         <h3 class="text-lg font-bold text-white mb-2">Pay Built on Your Skill</h3>
-                        <p class="text-slate-300 text-sm">Rates run <strong class="text-white">$22–$50/hr depending on role and experience</strong>, set on day one. You'll always know exactly what you earn.</p>
+                        <p class="text-slate-300 text-sm">Rates run <strong class=text-white>$22–$50/hr depending on role and experience</strong>, set on day one. You'll always know exactly what you earn.</p>
                     </div>
                 </div>
             </section>
@@ -345,15 +203,15 @@
                     <p class="text-slate-400 text-sm sm:text-base">Do great work and it pays off — literally. Here's what's on the table.</p>
                 </div>
                 <div class="grid sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
-                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style="animation-delay: 0ms;">
-                        <div class="w-12 h-12 mb-4 bg-blue-900 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden="true"><i class="fas fa-sack-dollar" aria-hidden="true"></i></div>
+                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style=animation-delay:0s>
+                        <div class="w-12 h-12 mb-4 bg-blue-900 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden=true><i class="fas fa-sack-dollar" aria-hidden=true></i></div>
                         <h3 class="text-base font-bold text-white mb-2">Performance Bonuses</h3>
                         <p class="text-slate-300 text-sm">Earn bonuses for 5-star customer reviews and an end-of-year bonus for a great year on the crew.</p>
                     </div>
-                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style="animation-delay: 60ms;">
-                        <div class="w-12 h-12 mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden="true"><i class="fas fa-user-plus" aria-hidden="true"></i></div>
+                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style=animation-delay:60ms>
+                        <div class="w-12 h-12 mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden=true><i class="fas fa-user-plus" aria-hidden=true></i></div>
                         <h3 class="text-base font-bold text-white mb-2">Referral Bonus</h3>
-                        <p class="text-slate-300 text-sm">Know a great tradesperson? Refer them and earn <strong class="text-white">$250 once they hit 90 days</strong> on the team.</p>
+                        <p class="text-slate-300 text-sm">Know a great tradesperson? Refer them and earn <strong class=text-white>$250 once they hit 90 days</strong> on the team.</p>
                     </div>
                 </div>
             </section>
@@ -365,23 +223,23 @@
                     <p class="text-slate-400 text-sm sm:text-base">A growing, locally owned team gives you the freedom of going solo without the headaches — and the stability a franchise can't match.</p>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style="animation-delay: 0ms;">
-                        <div class="w-12 h-12 mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden="true"><i class="fas fa-clipboard-check" aria-hidden="true"></i></div>
+                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style=animation-delay:0s>
+                        <div class="w-12 h-12 mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden=true><i class="fas fa-clipboard-check" aria-hidden=true></i></div>
                         <h3 class="text-base font-bold text-white mb-2">No Admin Headaches</h3>
                         <p class="text-slate-300 text-sm">Our back office handles sales, scheduling, customer service, invoicing, and marketing. You focus on building and fixing.</p>
                     </div>
-                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style="animation-delay: 60ms;">
-                        <div class="w-12 h-12 mb-4 bg-blue-900 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden="true"><i class="fas fa-location-dot" aria-hidden="true"></i></div>
+                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style=animation-delay:60ms>
+                        <div class="w-12 h-12 mb-4 bg-blue-900 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden=true><i class="fas fa-location-dot" aria-hidden=true></i></div>
                         <h3 class="text-base font-bold text-white mb-2">Consistent Local Work</h3>
                         <p class="text-slate-300 text-sm">Jobs stay inside Oakland County, so you spend less time driving and more time close to home.</p>
                     </div>
-                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style="animation-delay: 120ms;">
-                        <div class="w-12 h-12 mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden="true"><i class="fas fa-handshake-angle" aria-hidden="true"></i></div>
+                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style=animation-delay:120ms>
+                        <div class="w-12 h-12 mb-4 bg-red-600 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden=true><i class="fas fa-handshake-angle" aria-hidden=true></i></div>
                         <h3 class="text-base font-bold text-white mb-2">Respect &amp; Autonomy</h3>
                         <p class="text-slate-300 text-sm">Experienced craftsmen are trusted to run their own jobs. We hire pros and let them work like pros — no micromanaging.</p>
                     </div>
-                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style="animation-delay: 180ms;">
-                        <div class="w-12 h-12 mb-4 bg-blue-900 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden="true"><i class="fas fa-scale-balanced" aria-hidden="true"></i></div>
+                    <div class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style=animation-delay:180ms>
+                        <div class="w-12 h-12 mb-4 bg-blue-900 rounded-2xl flex items-center justify-center text-xl text-white" aria-hidden=true><i class="fas fa-scale-balanced" aria-hidden=true></i></div>
                         <h3 class="text-base font-bold text-white mb-2">Real Work-Life Balance</h3>
                         <p class="text-slate-300 text-sm">Guaranteed weekends off, no mandatory Sunday shifts, and flexible 4-day workweeks available.</p>
                     </div>
@@ -394,18 +252,18 @@
                     <p class="text-slate-400 text-sm sm:text-base">A few words from the people who show up and do the work every day.</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-5">
-                    <figure class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style="animation-delay: 0ms;">
-                        <i class="fas fa-quote-left text-red-500 text-2xl mb-3" aria-hidden="true"></i>
+                    <figure class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style=animation-delay:0s>
+                        <i class="fas fa-quote-left text-red-500 text-2xl mb-3" aria-hidden=true></i>
                         <blockquote class="text-slate-200 text-sm leading-relaxed">"I get to actually fix things instead of chasing paperwork. The office lines up the work, I show up and do it right. Best move I've made in this trade."</blockquote>
                         <figcaption class="mt-4 text-sm font-semibold text-white">Mike R. <span class="block text-xs font-normal text-slate-400">Lead Craftsman · Waterford</span></figcaption>
                     </figure>
-                    <figure class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style="animation-delay: 60ms;">
-                        <i class="fas fa-quote-left text-red-500 text-2xl mb-3" aria-hidden="true"></i>
+                    <figure class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style=animation-delay:60ms>
+                        <i class="fas fa-quote-left text-red-500 text-2xl mb-3" aria-hidden=true></i>
                         <blockquote class="text-slate-200 text-sm leading-relaxed">"The work is steady and lined up for me every week. I don't have to chase jobs, sell anything, or send invoices — I just show up and do good work."</blockquote>
                         <figcaption class="mt-4 text-sm font-semibold text-white">Dave K. <span class="block text-xs font-normal text-slate-400">Craftsman · Troy</span></figcaption>
                     </figure>
-                    <figure class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style="animation-delay: 120ms;">
-                        <i class="fas fa-quote-left text-red-500 text-2xl mb-3" aria-hidden="true"></i>
+                    <figure class="careers-card bg-white/5 border border-white/10 rounded-3xl p-6" style=animation-delay:120ms>
+                        <i class="fas fa-quote-left text-red-500 text-2xl mb-3" aria-hidden=true></i>
                         <blockquote class="text-slate-200 text-sm leading-relaxed">"Weekends off means I'm home with my family. The work stays local, the pay is honest, and I'm treated like a professional."</blockquote>
                         <figcaption class="mt-4 text-sm font-semibold text-white">Carlos M. <span class="block text-xs font-normal text-slate-400">Field Supervisor · Rochester Hills</span></figcaption>
                     </figure>
@@ -419,97 +277,97 @@
                     <p class="text-slate-400 text-sm sm:text-base">Real work, close to home, with a team that values doing it right.</p>
                 </div>
                 <ul class="grid sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
-                    <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style="animation-delay: 0ms;">
-                        <div class="w-11 h-11 bg-red-600 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden="true"><i class="fas fa-dollar-sign" aria-hidden="true"></i></div>
+                    <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style=animation-delay:0s>
+                        <div class="w-11 h-11 bg-red-600 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden=true><i class="fas fa-dollar-sign" aria-hidden=true></i></div>
                         <div><strong class="block text-white">Transparent pay &amp; bonuses</strong><span class="text-slate-300 text-sm">Clear starting rates, mileage covered, and bonuses for 5-star work.</span></div>
                     </li>
-                    <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style="animation-delay: 60ms;">
-                        <div class="w-11 h-11 bg-blue-900 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden="true"><i class="fas fa-calendar-check" aria-hidden="true"></i></div>
+                    <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style=animation-delay:60ms>
+                        <div class="w-11 h-11 bg-blue-900 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden=true><i class="fas fa-calendar-check" aria-hidden=true></i></div>
                         <div><strong class="block text-white">Weekends off &amp; flexible schedules</strong><span class="text-slate-300 text-sm">No mandatory Sundays; 4-day workweeks and part-time options available.</span></div>
                     </li>
-                    <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style="animation-delay: 120ms;">
-                        <div class="w-11 h-11 bg-red-600 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden="true"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>
+                    <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style=animation-delay:120ms>
+                        <div class="w-11 h-11 bg-red-600 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden=true><i class="fas fa-map-marker-alt" aria-hidden=true></i></div>
                         <div><strong class="block text-white">Work close to home</strong><span class="text-slate-300 text-sm">Serve homeowners right here in your Oakland County community.</span></div>
                     </li>
-                    <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style="animation-delay: 180ms;">
-                        <div class="w-11 h-11 bg-blue-900 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden="true"><i class="fas fa-people-group" aria-hidden="true"></i></div>
+                    <li class="careers-card bg-white/5 border border-white/10 rounded-3xl p-5 flex items-start gap-4" style=animation-delay:180ms>
+                        <div class="w-11 h-11 bg-blue-900 rounded-2xl flex items-center justify-center text-lg text-white flex-shrink-0" aria-hidden=true><i class="fas fa-people-group" aria-hidden=true></i></div>
                         <div><strong class="block text-white">A locally owned team</strong><span class="text-slate-300 text-sm">Grow with a trusted, community-focused business, not a faceless franchise.</span></div>
                     </li>
                 </ul>
                 <div class="mt-5 max-w-4xl mx-auto bg-white/5 border border-white/10 rounded-3xl p-5 text-sm text-slate-300 text-center">
-                    <p class="mb-2"><i class="fas fa-circle-question text-red-500 mr-2" aria-hidden="true"></i>Questions before you apply?</p>
-                    <a href="tel:+12483853432" class="font-semibold text-white hover:text-red-400 transition">Call ‪(248) 385-3432‬</a>
+                    <p class=mb-2><i class="fas fa-circle-question text-red-500 mr-2" aria-hidden=true></i>Questions before you apply?</p>
+                    <a href=tel:+12483853432 class="font-semibold text-white hover:text-red-400 transition">Call ‪(248) 385-3432‬</a>
                     <span class="text-slate-500 mx-2">·</span>
-                    <a href="mailto:contact@aaahandyman.services" class="font-semibold text-white hover:text-red-400 transition break-all">contact@aaahandyman.services</a>
+                    <a href=mailto:contact@aaahandyman.services class="font-semibold text-white hover:text-red-400 transition break-all">contact@aaahandyman.services</a>
                 </div>
             </section>
 
-            <div class="careers-form-shell">
-                <div class="careers-card careers-form-card bg-white text-gray-900 border border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8" style="animation-delay: 120ms;">
+            <div class=careers-form-shell>
+                <div class="careers-card careers-form-card bg-white text-gray-900 border border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8" style=animation-delay:120ms>
                     <h2 class="text-2xl font-bold text-gray-900 mb-2">Craftsman Application</h2>
                     <p class="text-sm text-gray-500 mb-4">Tell us about your trade and experience. All fields are required unless marked optional.</p>
 
                     <div class="mb-5 rounded-2xl bg-blue-50 border border-blue-100 p-4">
-                        <p class="text-sm font-bold text-gray-900 mb-1"><i class="fas fa-bolt text-red-600 mr-1.5" aria-hidden="true"></i>Short on time? Apply in 1 minute.</p>
+                        <p class="text-sm font-bold text-gray-900 mb-1"><i class="fas fa-bolt text-red-600 mr-1.5" aria-hidden=true></i>Short on time? Apply in 1 minute.</p>
                         <p class="text-xs text-gray-600 mb-3">Text or call us your name and trade — you can send a full resume later. No forms required.</p>
                         <div class="flex flex-col sm:flex-row gap-2">
-                            <a href="sms:+12483853432?&body=Hi,%20I'd%20like%20to%20apply.%20Name%20and%20trade:" class="flex-1 inline-flex items-center justify-center gap-2 bg-blue-900 hover:bg-blue-950 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition"><i class="fas fa-comment-sms" aria-hidden="true"></i>Text to Apply</a>
-                            <a href="tel:+12483853432" class="flex-1 inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-blue-900 border border-blue-200 text-sm font-semibold px-4 py-2.5 rounded-xl transition"><i class="fas fa-phone" aria-hidden="true"></i>Call ‪(248) 385-3432‬</a>
+                            <a href="sms:+12483853432?&body=Hi,%20I'd%20like%20to%20apply.%20Name%20and%20trade:" class="flex-1 inline-flex items-center justify-center gap-2 bg-blue-900 hover:bg-blue-950 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition"><i class="fas fa-comment-sms" aria-hidden=true></i>Text to Apply</a>
+                            <a href=tel:+12483853432 class="flex-1 inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-blue-900 border border-blue-200 text-sm font-semibold px-4 py-2.5 rounded-xl transition"><i class="fas fa-phone" aria-hidden=true></i>Call ‪(248) 385-3432‬</a>
                         </div>
                     </div>
 
                     <div class="mb-6 flex items-center gap-2 text-xs font-medium text-green-700 bg-green-50 border border-green-100 rounded-xl px-4 py-2.5">
-                        <i class="fas fa-clock" aria-hidden="true"></i>
+                        <i class="fas fa-clock" aria-hidden=true></i>
                         <span>We review applications daily and will reach out within 24–48 hours.</span>
                     </div>
 
-                    <form id="careers-form" name="careers" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" class="space-y-5">
+                    <form id=careers-form name=careers method=POST data-netlify=true netlify-honeypot=bot-field enctype=multipart/form-data class=space-y-5>
 
-                        <input type="hidden" name="form-name" value="careers" />
-                        <input type="hidden" name="subject" value="New craftsman application from %{formName}" />
+                        <input type=hidden name=form-name value=careers>
+                        <input type=hidden name=subject value="New craftsman application from %{formName}">
 
-                        <p class="hidden">
-                            <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" aria-hidden="true" aria-label="Do not fill out this field" /></label>
+                        <p class=hidden>
+                            <label>Don't fill this out if you're human: <input name=bot-field tabindex=-1 aria-hidden=true aria-label="Do not fill out this field"></label>
                         </p>
 
                         <div class="grid sm:grid-cols-2 gap-5">
                             <div>
-                                <label for="careers-name" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Full Name</label>
-                                <input id="careers-name" name="name" type="text" required maxlength="80" autocomplete="name" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <label for=careers-name class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Full Name</label>
+                                <input id=careers-name name=name required maxlength=80 autocomplete=name class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                             </div>
                             <div>
-                                <label for="careers-phone" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Phone</label>
-                                <input id="careers-phone" name="phone" type="tel" required maxlength="30" autocomplete="tel" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <label for=careers-phone class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Phone</label>
+                                <input id=careers-phone name=phone type=tel required maxlength=30 autocomplete=tel class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                                 <p class="text-[10px] text-gray-500 mt-1 leading-normal">By applying, you agree to receive text messages regarding your application, interview scheduling, and employment. Msg/data rates may apply. Reply STOP to opt out.</p>
                             </div>
                         </div>
 
                         <div>
-                            <label for="careers-email" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Email Address</label>
-                            <input id="careers-email" name="email" type="email" required maxlength="120" autocomplete="email" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                            <label for=careers-email class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Email Address</label>
+                            <input id=careers-email name=email type=email required maxlength=120 autocomplete=email class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                         </div>
 
                         <div class="grid sm:grid-cols-2 gap-5">
                             <div>
-                                <label for="careers-trade" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Primary Trade</label>
-                                <select id="careers-trade" name="trade" required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <label for=careers-trade class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Primary Trade</label>
+                                <select id=careers-trade name=trade required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                                     <option value="" disabled selected>Select a trade...</option>
                                     <option value="General Handyman">General Handyman</option>
                                     <option value="Carpentry & Trim">Carpentry & Trim</option>
-                                    <option value="Doors">Doors</option>
-                                    <option value="Plumbing">Plumbing</option>
-                                    <option value="Drywall">Drywall</option>
-                                    <option value="Electrical">Electrical</option>
-                                    <option value="Flooring">Flooring</option>
-                                    <option value="Painting">Painting</option>
+                                    <option value=Doors>Doors</option>
+                                    <option value=Plumbing>Plumbing</option>
+                                    <option value=Drywall>Drywall</option>
+                                    <option value=Electrical>Electrical</option>
+                                    <option value=Flooring>Flooring</option>
+                                    <option value=Painting>Painting</option>
                                     <option value="Decks & Fences">Decks & Fences</option>
                                     <option value="Maintenance & Cleaning">Maintenance & Cleaning</option>
-                                    <option value="Other">Other</option>
+                                    <option value=Other>Other</option>
                                 </select>
                             </div>
                             <div>
-                                <label for="careers-experience" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Years of Experience</label>
-                                <select id="careers-experience" name="experience" required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <label for=careers-experience class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Years of Experience</label>
+                                <select id=careers-experience name=experience required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                                     <option value="" disabled selected>Select...</option>
                                     <option value="Less than 1 year">Less than 1 year</option>
                                     <option value="1-3 years">1–3 years</option>
@@ -522,24 +380,24 @@
 
                         <div class="grid sm:grid-cols-2 gap-5">
                             <div>
-                                <label for="careers-location" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">City / Area</label>
-                                <input id="careers-location" name="location" type="text" required maxlength="90" placeholder="Waterford, MI" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <label for=careers-location class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">City / Area</label>
+                                <input id=careers-location name=location required maxlength=90 placeholder="Waterford, MI" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                             </div>
                             <div>
-                                <label for="careers-availability" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Availability</label>
-                                <select id="careers-availability" name="availability" required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                                <label for=careers-availability class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Availability</label>
+                                <select id=careers-availability name=availability required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                                     <option value="" disabled selected>Select...</option>
-                                    <option value="Full-time">Full-time</option>
-                                    <option value="Part-time">Part-time</option>
-                                    <option value="Seasonal">Seasonal</option>
+                                    <option value=Full-time>Full-time</option>
+                                    <option value=Part-time>Part-time</option>
+                                    <option value=Seasonal>Seasonal</option>
                                     <option value="Contract / As-needed">Contract / As-needed</option>
                                 </select>
                             </div>
                         </div>
 
                         <div>
-                            <label for="careers-tools" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Own Tools &amp; Reliable Transportation?</label>
-                            <select id="careers-tools" name="toolsAndTransport" required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                            <label for=careers-tools class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Own Tools &amp; Reliable Transportation?</label>
+                            <select id=careers-tools name=toolsAndTransport required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                                 <option value="" disabled selected>Select...</option>
                                 <option value="Yes — both tools and transportation">Yes — both tools and transportation</option>
                                 <option value="Tools only">Tools only</option>
@@ -549,37 +407,37 @@
                         </div>
 
                         <div>
-                            <label for="careers-felony" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Have you been convicted of a felony in the last 5 years?</label>
-                            <select id="careers-felony" name="felonyConviction" required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
+                            <label for=careers-felony class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Have you been convicted of a felony in the last 5 years?</label>
+                            <select id=careers-felony name=felonyConviction required class="careers-select w-full px-4 py-3 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500">
                                 <option value="" disabled selected>Select...</option>
-                                <option value="No">No</option>
-                                <option value="Yes">Yes</option>
+                                <option value=No>No</option>
+                                <option value=Yes>Yes</option>
                             </select>
                             <p class="text-[10px] text-gray-500 mt-1 leading-normal">A conviction is not an automatic bar to employment. Each application is considered individually, taking into account the nature of the offense, how much time has passed, and its relevance to the job.</p>
                         </div>
 
-                        <div id="careers-felony-details-wrap" class="hidden">
-                            <label for="careers-felony-details" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">If yes, please explain <span class="text-gray-500 normal-case tracking-normal font-medium">(optional)</span></label>
-                            <textarea id="careers-felony-details" name="felonyDetails" rows="3" maxlength="1000" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Nature of the offense and any context you'd like us to consider."></textarea>
+                        <div id=careers-felony-details-wrap class=hidden>
+                            <label for=careers-felony-details class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">If yes, please explain <span class="text-gray-500 normal-case tracking-normal font-medium">(optional)</span></label>
+                            <textarea id=careers-felony-details name=felonyDetails rows=3 maxlength=1000 class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Nature of the offense and any context you'd like us to consider."></textarea>
                         </div>
 
                         <div>
-                            <label for="careers-message" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Tell Us About Your Experience</label>
-                            <textarea id="careers-message" name="message" rows="4" required maxlength="1000" class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Describe the work you do best, past projects, and why you'd be a great fit."></textarea>
+                            <label for=careers-message class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Tell Us About Your Experience</label>
+                            <textarea id=careers-message name=message rows=4 required maxlength=1000 class="w-full px-4 py-3 bg-gray-50 border-[2px] border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 resize-none" placeholder="Describe the work you do best, past projects, and why you'd be a great fit."></textarea>
                         </div>
 
                         <div>
-                            <label for="careers-resume" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Resume <span class="text-gray-500 normal-case tracking-normal font-medium">(optional, PDF or image, 8 MB max)</span></label>
-                            <div class="careers-upload">
-                                <input id="careers-resume" name="resume" type="file" accept=".pdf,.doc,.docx,image/*" class="careers-upload-input" aria-describedby="careers-resume-hint">
-                                <p id="careers-resume-hint" class="mt-2 text-xs text-gray-500">Choose a file or drag it here. PDF, DOC, or image, up to 8 MB.</p>
+                            <label for=careers-resume class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Resume <span class="text-gray-500 normal-case tracking-normal font-medium">(optional, PDF or image, 8 MB max)</span></label>
+                            <div class=careers-upload>
+                                <input id=careers-resume name=resume type=file accept=.pdf,.doc,.docx,image/* class=careers-upload-input aria-describedby=careers-resume-hint>
+                                <p id=careers-resume-hint class="mt-2 text-xs text-gray-500">Choose a file or drag it here. PDF, DOC, or image, up to 8 MB.</p>
                             </div>
                         </div>
 
-                        <p id="careers-message-status" class="hidden text-sm font-semibold"></p>
+                        <p id=careers-message-status class="hidden text-sm font-semibold"></p>
 
-                        <button id="careers-submit" type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
-                            Send My Application <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                        <button id=careers-submit type=submit class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
+                            Send My Application <i class="fas fa-paper-plane" aria-hidden=true></i>
                         </button>
                         <p class="text-xs text-gray-500 text-center">By applying, you agree to be contacted about employment opportunities at AAA Handyman Services LLC. AAA Handyman Services LLC is an Equal Opportunity Employer. We do not discriminate on the basis of race, color, religion, sex, national origin, age, disability, genetic information, or any other status protected by applicable law.</p>
                     </form>
@@ -590,7 +448,7 @@
         <div class="max-w-7xl mx-auto px-6 mb-4">
             <div class="availability-banner text-center bg-blue-900 text-white py-12 px-8 sm:py-20 sm:px-16 rounded-3xl">
                 <p class="text-xl sm:text-2xl md:text-3xl font-medium">Available Monday–Friday, 9 a.m.–6 p.m.; Saturday, 10 a.m.–5 p.m.</p>
-                <p class="mt-6 text-base sm:text-lg md:text-xl opacity-90"><span class="flash-siren" aria-hidden="true"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i></span> After-Hours Emergency Services Available—Competitive hourly rates • No job too small!</p>
+                <p class="mt-6 text-base sm:text-lg md:text-xl opacity-90"><span class=flash-siren aria-hidden=true><i class="fas fa-triangle-exclamation" aria-hidden=true></i></span> After-Hours Emergency Services Available—Competitive hourly rates • No job too small!</p>
             </div>
         </div>
     </main>
@@ -600,40 +458,40 @@
             <div class="grid gap-10 md:grid-cols-3 md:gap-8 text-center md:text-left">
 
                 <div class="flex flex-col items-center md:items-start">
-                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80 1x, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width="80" height="80" loading="lazy" decoding="async" alt="AAA Handyman Services LLC Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
+                    <img src="/.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80" srcset="/.netlify/images?url=/logo-circular.png&amp;w=80&amp;fm=avif&amp;q=80, /.netlify/images?url=/logo-circular.png&amp;w=160&amp;fm=avif&amp;q=80 2x" width=80 height=80 loading=lazy decoding=async alt="AAA Handyman Services LLC Circular Logo" class="h-20 w-20 rounded-full object-cover shadow-lg border-2 border-red-600 mb-4">
                     <p class="text-sm max-w-xs">Reliable home repairs, maintenance, punch lists, and minor updates for homeowners across Oakland County, Michigan.</p>
                     <div class="mt-4 flex items-center gap-4">
-                        <a href="https://www.facebook.com/AAAHandymanServices" target="_blank" rel="noopener" aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
-                        <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+                        <a href=https://www.facebook.com/AAAHandymanServices target=_blank rel=noopener aria-label="Follow AAA Handyman Services LLC on Facebook" class="text-2xl text-[#1877F2] hover:opacity-80 transition"><i class="fab fa-facebook" aria-hidden=true></i></a>
+                        <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-2xl text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden=true></i></a>
+                        <a href=https://www.yelp.com/biz/aaa-handyman-services-waterford-township target=_blank rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-2xl text-[#FF1A1A] hover:opacity-80 transition"><i class="fa-brands fa-yelp" aria-hidden=true></i></a>
                     </div>
                 </div>
 
-                <nav aria-label="Footer">
+                <nav aria-label=Footer>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Explore</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="/services" class="hover:text-white transition">Services</a></li>
-                        <li><a href="/rates" class="hover:text-white transition">Rates &amp; Packages</a></li>
-                        <li><a href="/ai-estimate" class="hover:text-white transition">AI Repair Estimator</a></li>
-                        <li><a href="/pricing-policy" class="hover:text-white transition">Pricing Policies</a></li>
-                        <li><a href="/guarantee" class="hover:text-white transition">Our Guarantee</a></li>
-                        <li><a href="/customer-care" class="hover:text-white transition">Customer Care</a></li>
-                        <li><a href="/reviews" class="hover:text-white transition">Reviews</a></li>
-                        <li><a href="/careers" class="hover:text-white transition">Careers</a></li>
-                        <li><a href="/book" class="hover:text-white transition">Book Online</a></li>
-                        <li><a href="/service-areas" class="hover:text-white transition">Service Areas</a></li>
-                        <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
+                        <li><a href=/services class="hover:text-white transition">Services</a></li>
+                        <li><a href=/rates class="hover:text-white transition">Rates &amp; Packages</a></li>
+                        <li><a href=/ai-estimate class="hover:text-white transition">AI Repair Estimator</a></li>
+                        <li><a href=/pricing-policy class="hover:text-white transition">Pricing Policies</a></li>
+                        <li><a href=/guarantee class="hover:text-white transition">Our Guarantee</a></li>
+                        <li><a href=/customer-care class="hover:text-white transition">Customer Care</a></li>
+                        <li><a href=/reviews class="hover:text-white transition">Reviews</a></li>
+                        <li><a href=/careers class="hover:text-white transition">Careers</a></li>
+                        <li><a href=/book class="hover:text-white transition">Book Online</a></li>
+                        <li><a href=/service-areas class="hover:text-white transition">Service Areas</a></li>
+                        <li><a href=/#faq class="hover:text-white transition">FAQ</a></li>
                     </ul>
                 </nav>
 
                 <div>
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Get in Touch</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="tel:+12483853432" class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden="true"></i>(248) 385-3432</a></li>
-                        <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
-                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Waterford, MI &middot; Oakland County</li>
+                        <li><a href=tel:+12483853432 class="inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-phone text-green-500 w-4 text-center" aria-hidden=true></i>(248) 385-3432</a></li>
+                        <li><a href=mailto:contact@aaahandyman.services class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden=true></i>contact@aaahandyman.services</a></li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden=true></i>Waterford, MI &middot; Oakland County</li>
                     </ul>
-                    <a href="/book" class="aaa-btn mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
+                    <a href=/book class="aaa-btn mt-5 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/30"><i class="fas fa-calendar-check" aria-hidden=true></i>Book Online Now</a>
                 </div>
             </div>
 
@@ -641,69 +499,62 @@
                 <nav aria-label="Popular services">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Popular Services</h3>
                     <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-                        <li><a href="/services/carpentry" class="hover:text-white transition">Carpentry</a></li>
-                        <li><a href="/services/drywall-repair" class="hover:text-white transition">Drywall Repair</a></li>
-                        <li><a href="/services/painting-staining" class="hover:text-white transition">Painting &amp; Staining</a></li>
-                        <li><a href="/services/doors-windows" class="hover:text-white transition">Doors &amp; Windows</a></li>
-                        <li><a href="/services/flooring-solutions" class="hover:text-white transition">Flooring Solutions</a></li>
-                        <li><a href="/services/minor-plumbing" class="hover:text-white transition">Minor Plumbing</a></li>
-                        <li><a href="/services/minor-electrical" class="hover:text-white transition">Minor Electrical</a></li>
-                        <li><a href="/services/decks-fences" class="hover:text-white transition">Decks &amp; Fences</a></li>
-                        <li><a href="/services/gutters" class="hover:text-white transition">Gutters</a></li>
-                        <li><a href="/services/power-washing" class="hover:text-white transition">Power Washing</a></li>
+                        <li><a href=/services/carpentry class="hover:text-white transition">Carpentry</a></li>
+                        <li><a href=/services/drywall-repair class="hover:text-white transition">Drywall Repair</a></li>
+                        <li><a href=/services/painting-staining class="hover:text-white transition">Painting &amp; Staining</a></li>
+                        <li><a href=/services/doors-windows class="hover:text-white transition">Doors &amp; Windows</a></li>
+                        <li><a href=/services/flooring-solutions class="hover:text-white transition">Flooring Solutions</a></li>
+                        <li><a href=/services/minor-plumbing class="hover:text-white transition">Minor Plumbing</a></li>
+                        <li><a href=/services/minor-electrical class="hover:text-white transition">Minor Electrical</a></li>
+                        <li><a href=/services/decks-fences class="hover:text-white transition">Decks &amp; Fences</a></li>
+                        <li><a href=/services/gutters class="hover:text-white transition">Gutters</a></li>
+                        <li><a href=/services/power-washing class="hover:text-white transition">Power Washing</a></li>
                     </ul>
-                    <a href="/services" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    <a href=/services class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All services <i class="fas fa-arrow-right text-xs" aria-hidden=true></i></a>
                 </nav>
                 <nav aria-label="Service areas">
                     <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Service Areas</h3>
                     <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-                        <li><a href="/handyman/waterford" class="hover:text-white transition">Waterford</a></li>
-                        <li><a href="/handyman/troy" class="hover:text-white transition">Troy</a></li>
-                        <li><a href="/handyman/west-bloomfield" class="hover:text-white transition">West Bloomfield</a></li>
-                        <li><a href="/handyman/rochester-hills" class="hover:text-white transition">Rochester Hills</a></li>
-                        <li><a href="/handyman/royal-oak" class="hover:text-white transition">Royal Oak</a></li>
-                        <li><a href="/handyman/birmingham" class="hover:text-white transition">Birmingham</a></li>
-                        <li><a href="/handyman/clarkston" class="hover:text-white transition">Clarkston</a></li>
-                        <li><a href="/handyman/farmington-hills" class="hover:text-white transition">Farmington Hills</a></li>
-                        <li><a href="/handyman/novi" class="hover:text-white transition">Novi</a></li>
-                        <li><a href="/handyman/southfield" class="hover:text-white transition">Southfield</a></li>
-                        <li><a href="/handyman/franklin" class="hover:text-white transition">Franklin</a></li>
-                        <li><a href="/handyman/orchard-lake" class="hover:text-white transition">Orchard Lake</a></li>
+                        <li><a href=/handyman/waterford class="hover:text-white transition">Waterford</a></li>
+                        <li><a href=/handyman/troy class="hover:text-white transition">Troy</a></li>
+                        <li><a href=/handyman/west-bloomfield class="hover:text-white transition">West Bloomfield</a></li>
+                        <li><a href=/handyman/rochester-hills class="hover:text-white transition">Rochester Hills</a></li>
+                        <li><a href=/handyman/royal-oak class="hover:text-white transition">Royal Oak</a></li>
+                        <li><a href=/handyman/birmingham class="hover:text-white transition">Birmingham</a></li>
+                        <li><a href=/handyman/clarkston class="hover:text-white transition">Clarkston</a></li>
+                        <li><a href=/handyman/farmington-hills class="hover:text-white transition">Farmington Hills</a></li>
+                        <li><a href=/handyman/novi class="hover:text-white transition">Novi</a></li>
+                        <li><a href=/handyman/southfield class="hover:text-white transition">Southfield</a></li>
+                        <li><a href=/handyman/franklin class="hover:text-white transition">Franklin</a></li>
+                        <li><a href=/handyman/orchard-lake class="hover:text-white transition">Orchard Lake</a></li>
                     </ul>
-                    <a href="/service-areas" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
+                    <a href=/service-areas class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 hover:text-white transition">All service areas <i class="fas fa-arrow-right text-xs" aria-hidden=true></i></a>
                 </nav>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center">
                 <p class="text-xs leading-relaxed">&copy; 2026 AAA Handyman Services LLC All Rights Reserved. We operate in compliance with Michigan&rsquo;s minor project exemption (MCL 339.2403).<br>Locally Serving Oakland County, MI.</p>
                 <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
-                    <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
-                    <span class="text-gray-600">|</span>
-                    <a href="/terms" class="hover:text-white transition">Terms of Service</a>
+                    <a href=/privacy class="hover:text-white transition">Privacy Policy</a>
+                    <span class=text-gray-600>|</span>
+                    <a href=/terms class="hover:text-white transition">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <noscript>
-        <a href="tel:+12483853432" class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services LLC Now" aria-label="Call AAA Handyman Services LLC Now">
-            <i class="fas fa-phone" aria-hidden="true"></i>
+        <a href=tel:+12483853432 class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services LLC Now" aria-label="Call AAA Handyman Services LLC Now">
+            <i class="fas fa-phone" aria-hidden=true></i>
             <span class="hidden md:inline">Call Now! <span class="hidden lg:inline">(248) 385-3432</span></span>
         </a>
     </noscript>
 
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
+    <button id=back-to-top type=button aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden=true></i></button>
 
 
     <script src="/js/careers-page.js?v=20260731a" defer></script>
     <script src="/js/site.js?v=20260814e" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
-    <script>
-      // Registered after load so it never competes with the first render.
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/sw.js').catch(function () {});
-        });
-      }
-    </script>
-</body>
-</html>
+    <script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})})</script>
+
+

@@ -238,8 +238,11 @@ for (const { path, active, removeSectionNav } of STATIC_NAV_PAGES) {
   // getUnifiedNav also emits the seasonal offer bar that sits under the nav, so
   // an existing one has to be part of the match for the same reason the skip
   // link is: replacing only the <nav> would leave last build's bar in place and
-  // stack a second one on top of it.
-  const SEASONAL_BANNER_TAIL = '(?:\\s*<aside[^>]*id="seasonal-banner"[\\s\\S]*?<\\/aside>)?';
+  // stack a second one on top of it. The id may be quoted (`id="seasonal-banner"`)
+  // or unquoted (`id=seasonal-banner`) depending on whether the source file has
+  // been through the minifier, so both forms are matched, and one or more stale
+  // banners are consumed so duplicates never accumulate across builds.
+  const SEASONAL_BANNER_TAIL = '(?:\\s*<aside[^>]*id=(?:"seasonal-banner"|seasonal-banner)[\\s\\S]*?<\\/aside>)*';
   const mainNavRegex = new RegExp(
     '(?:<a[^>]*class="[^"]*skip-link[^"]*"[^>]*>[\\s\\S]*?<\\/a>\\s*)?' +
       '(?:<header[^>]*id="site-header"[\\s\\S]*?<\\/header>' +
