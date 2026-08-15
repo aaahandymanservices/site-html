@@ -109,6 +109,8 @@
 
       form.addEventListener('submit', function (e) {
           e.preventDefault();
+          var error = document.getElementById('quote-error');
+          if (error) error.classList.add('hidden');
           var btn = form.querySelector('button[type="submit"]');
           if (btn) { btn.disabled = true; btn.innerHTML = 'Sending…'; }
 
@@ -137,7 +139,26 @@
               })
               .catch(function () {
                   if (btn) { btn.disabled = false; btn.innerHTML = 'Get My Free Quote <i class="fas fa-arrow-right" aria-hidden="true"></i>'; }
-                  alert('Sorry — there was a problem sending your request. Please call (248) 385-3432 or email contact@aaahandyman.services.');
+                  // Inline status banner keeps the visitor on the page and is
+                  // reachable with the keyboard, where a native alert() is
+                  // blocking, dismissable-only, and flagged by Lighthouse.
+                  var errorMessage = 'Sorry — there was a problem sending your request. Please call <a class="font-bold text-red-700 hover:text-red-900" href="tel:+12483853432">(248) 385-3432</a> or email <a class="font-bold text-red-700 hover:text-red-900" href="mailto:contact@aaahandyman.services">contact@aaahandyman.services</a>.';
+                  var error = document.getElementById('quote-error');
+                  if (error) {
+                      error.innerHTML = errorMessage;
+                      error.classList.remove('hidden');
+                      error.setAttribute('role', 'alert');
+                      error.focus();
+                  } else {
+                      var fallback = document.createElement('p');
+                      fallback.id = 'quote-error';
+                      fallback.setAttribute('role', 'alert');
+                      fallback.tabIndex = -1;
+                      fallback.className = 'bg-red-50 border-2 border-red-300 text-red-800 rounded-2xl p-4 text-sm font-semibold';
+                      fallback.innerHTML = errorMessage;
+                      form.parentNode.insertBefore(fallback, form);
+                      fallback.focus();
+                  }
               });
       });
   })();

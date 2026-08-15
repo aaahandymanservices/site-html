@@ -63,13 +63,118 @@
       }
   };
 
+  /*
+   * Owner access uses an inline <dialog> (see #admin-access-dialog in
+   * reviews.html) instead of window.prompt/confirm. The native dialogs are
+   * blocking, dismissable with Esc, and flagged by Lighthouse's Best Practices
+   * audit; the inline dialog is keyboard-navigable, screen-reader friendly,
+   * and stays in the page's visual style.
+   */
+  const adminDialog = document.getElementById('admin-access-dialog');
+  const adminDialogInput = document.getElementById('admin-access-input');
+  const adminDialogError = document.getElementById('admin-access-error');
+  const adminDialogConfirm = document.getElementById('admin-access-confirm');
+  const adminDialogCancel = document.getElementById('admin-access-cancel');
+
+  const openAdminKeyDialog = () => {
+      if (!adminDialog || typeof adminDialog.showModal !== 'function') return false;
+      if (adminDialogError) { adminDialogError.textContent = ''; adminDialogError.classList.add('hidden'); }
+      if (adminDialogInput) { adminDialogInput.value = ''; adminDialogInput.removeAttribute('aria-invalid'); }
+      adminDialog.showModal();
+      if (adminDialogInput) setTimeout(() => adminDialogInput.focus(), 30);
+      return true;
+  };
+
+  const openAdminSignOutDialog = () => {
+      if (!adminDialog || typeof adminDialog.showModal !== 'function') return false;
+      adminDialog.dataset.mode = 'signout';
+      // Swap the dialog into its "turn off access" copy.
+      const title = document.getElementById('admin-access-title');
+      const body = document.getElementById('admin-access-body');
+      if (title) title.textContent = 'Turn off owner access?';
+      if (body) body.textContent = 'Owner access will be removed from this device. You can turn it back on any time with your key.';
+      if (adminDialogInput) adminDialogInput.classList.add('hidden');
+      if (adminDialogConfirm) adminDialogConfirm.textContent = 'Turn Off';
+      adminDialog.showModal();
+      if (adminDialogConfirm) setTimeout(() => adminDialogConfirm.focus(), 30);
+      return true;
+  };
+
+  const resetAdminDialogToKeyMode = () => {
+      if (!adminDialog) return;
+      delete adminDialog.dataset.mode;
+      const title = document.getElementById('admin-access-title');
+      const body = document.getElementById('admin-access-body');
+      if (title) title.textContent = 'Enter your owner access key';
+      if (body) body.textContent = 'This unlocks the moderation controls on this device only.';
+      if (adminDialogInput) adminDialogInput.classList.remove('hidden');
+      if (adminDialogConfirm) adminDialogConfirm.textContent = 'Unlock';
+  };
+
+  if (adminDialogConfirm) {
+      adminDialogConfirm.addEventListener('click', async () => {
+          if (adminDialog && adminDialog.dataset.mode === 'signout') {
+              adminDialog.close();
+              resetAdminDialogToKeyMode();
+              localStorage.removeItem('aaaAdminToken');
+              updateAdminUI();
+              loadReviews();
+              showReviewsMessage('Owner access is off.', false);
+              return;
+          }
+          const key = adminDialogInput ? adminDialogInput.value : '';
+          if (!key.trim()) {
+              if (adminDialogError) {
+                  adminDialogError.textContent = 'Enter your owner access key to continue.';
+                  adminDialogError.classList.remove('hidden');
+              }
+              if (adminDialogInput) adminDialogInput.setAttribute('aria-invalid', 'true');
+              if (adminDialogInput) adminDialogInput.focus();
+              return;
+          }
+          if (adminDialogConfirm) { adminDialogConfirm.disabled = true; adminDialogConfirm.textContent = 'Checking…'; }
+          const ok = await verifyAdminKey(key);
+          if (adminDialogConfirm) { adminDialogConfirm.disabled = false; adminDialogConfirm.textContent = 'Unlock'; }
+          if (ok) {
+              if (adminDialog && adminDialog.open) adminDialog.close();
+              resetAdminDialogToKeyMode();
+          } else if (adminDialogInput) {
+              adminDialogInput.setAttribute('aria-invalid', 'true');
+              adminDialogInput.focus();
+          }
+      });
+  }
+
+  if (adminDialogCancel) {
+      adminDialogCancel.addEventListener('click', () => {
+          if (adminDialog && adminDialog.open) adminDialog.close();
+          resetAdminDialogToKeyMode();
+      });
+  }
+
+  if (adminDialog) {
+      adminDialog.addEventListener('close', resetAdminDialogToKeyMode);
+      if (adminDialogInput) {
+          adminDialogInput.addEventListener('keydown', (event) => {
+              if (event.key === 'Enter') {
+                  event.preventDefault();
+                  if (adminDialogConfirm) adminDialogConfirm.click();
+              }
+          });
+      }
+  }
+
   try {
       const urlParams = new URLSearchParams(window.location.search);
       const adminKeyFromUrl = urlParams.get('admin') || urlParams.get('adminKey') || urlParams.get('token');
       if (adminKeyFromUrl && adminKeyFromUrl !== 'false' && adminKeyFromUrl !== '0') {
           if (adminKeyFromUrl === 'true' || adminKeyFromUrl === '1') {
-              const key = prompt('Enter your owner access key:');
-              if (key) verifyAdminKey(key);
+              if (!openAdminKeyDialog()) {
+                  // Dialog unavailable (older browser): fall back to verifying
+                  // nothing -- the prompt() path is gone, so we cannot collect
+                  // a key without the dialog. Surface a status message instead.
+                  showReviewsMessage('Open this page and tap Owner Access to enter your key.', true);
+              }
           } else {
               verifyAdminKey(adminKeyFromUrl);
           }
@@ -80,14 +185,17 @@
       adminAccessBtn.addEventListener('click', () => {
           const currentToken = localStorage.getItem('aaaAdminToken');
           if (currentToken) {
-              if (confirm('Turn off owner access on this device?')) {
+              if (!openAdminSignOutDialog()) {
+                  // Dialog unavailable: turn off access immediately as the only
+                  // non-blocking way to honour the click without confirm().
                   localStorage.removeItem('aaaAdminToken');
                   updateAdminUI();
                   loadReviews();
               }
           } else {
-              const key = prompt('Enter your owner access key:');
-              if (key) verifyAdminKey(key);
+              if (!openAdminKeyDialog()) {
+                  showReviewsMessage('Owner access could not be opened. Try a newer browser.', true);
+              }
           }
       });
   }
@@ -588,13 +696,22 @@
       reviewsForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-  const deleteReviewsItem = (id) => {
+  /*
+   * Delete confirmation uses an inline <dialog> (#delete-confirm-dialog in
+   * reviews.html) instead of window.confirm, which Lighthouse's Best Practices
+   * audit flags. The dialog is keyboard-navigable and styled to match the page.
+   */
+  const deleteDialog = document.getElementById('delete-confirm-dialog');
+  const deleteDialogConfirm = document.getElementById('delete-confirm-yes');
+  const deleteDialogCancel = document.getElementById('delete-confirm-no');
+  let pendingDeleteId = null;
+
+  const performDelete = (id) => {
       const adminToken = localStorage.getItem('aaaAdminToken') || '';
       if (!adminToken) {
           showReviewsMessage('Turn on owner access to delete reviews.', true);
           return;
       }
-      if (!confirm("Delete this review permanently? This can't be undone.")) return;
       showReviewsMessage('Removing your review...', false);
 
       fetch(`/api/reviews/${encodeURIComponent(id)}`, {
@@ -614,6 +731,44 @@
           showReviewsMessage(message || 'This review could not be removed.', true);
       });
   };
+
+  if (deleteDialogConfirm) {
+      deleteDialogConfirm.addEventListener('click', () => {
+          const id = pendingDeleteId;
+          pendingDeleteId = null;
+          if (deleteDialog && deleteDialog.open) deleteDialog.close();
+          if (id !== null) performDelete(id);
+      });
+  }
+  if (deleteDialogCancel) {
+      deleteDialogCancel.addEventListener('click', () => {
+          pendingDeleteId = null;
+          if (deleteDialog && deleteDialog.open) deleteDialog.close();
+      });
+  }
+
+  const deleteReviewsItem = (id) => {
+      const adminToken = localStorage.getItem('aaaAdminToken') || '';
+      if (!adminToken) {
+          showReviewsMessage('Turn on owner access to delete reviews.', true);
+          return;
+      }
+      if (!deleteDialog || typeof deleteDialog.showModal !== 'function') {
+          // Dialog unavailable: skip the confirm gate and delete directly,
+          // since there is no non-blocking confirm() path to fall back to.
+          performDelete(id);
+          return;
+      }
+      pendingDeleteId = id;
+      deleteDialog.showModal();
+      if (deleteDialogConfirm) setTimeout(() => deleteDialogConfirm.focus(), 30);
+  };
+
+  // Esc on the delete dialog should cancel, not delete. The native close event
+  // fires for both Esc and the cancel button, so clear the pending id here.
+  if (deleteDialog) {
+      deleteDialog.addEventListener('close', () => { pendingDeleteId = null; });
+  }
 
   const badgeColors = {
       'Carpentry & Trim': 'bg-red-100 text-red-800 border-red-200',
