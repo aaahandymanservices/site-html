@@ -68,6 +68,9 @@ const publicReview = (review: typeof reviews.$inferSelect) => ({
     : [],
   ownerResponse: review.ownerResponse ?? "",
   imageUrl: publicPhotoPath(review.imageKey),
+  imageUrls: [review.imageKey, review.imageKey2, review.imageKey3]
+    .map((key) => publicPhotoPath(key))
+    .filter(Boolean),
   imageAlt: review.imageAlt,
   createdAt: review.createdAt,
 });
@@ -98,6 +101,12 @@ const validateReviewFields = (customerName: string, location: string, projectTyp
 
   return "";
 };
+
+// A review accepts up to three photos. The form sends them as `photo`
+// (primary, required on a new review), `photo2`, and `photo3` -- optional
+// extra angles. Older callers that only send `photo` keep working unchanged.
+const PHOTO_FIELDS = ["photo", "photo2", "photo3"] as const;
+const MAX_PHOTOS = 3;
 
 const validatePhoto = (photo: FormDataEntryValue | null, required: boolean) => {
   if (!(photo instanceof File) || photo.size === 0) {
@@ -190,7 +199,12 @@ const handleReviewsRequest = async (request: Request) => {
     }
 
     await db.delete(reviews).where(eq(reviews.id, id));
-    await photoStore().delete(existing.imageKey);
+    const store = photoStore();
+    await Promise.all(
+      [existing.imageKey, existing.imageKey2, existing.imageKey3]
+        .filter((key): key is string => Boolean(key))
+        .map((key) => store.delete(key).catch(() => undefined)),
+    );
 
     return json({ ok: true });
   }
@@ -208,7 +222,6 @@ const handleReviewsRequest = async (request: Request) => {
   const review = clean(form.get("review"), 700);
   const rating = Number.parseInt(String(form.get("rating") ?? ""), 10);
   const attributes = cleanAttributes(form.get("attributes"));
-  const photo = form.get("photo");
   // Owner responses are only honored on the admin-authorized update path below.
   const ownerResponse = clean(form.get("ownerResponse"), 500);
   const formAdminToken = isUpdate ? clean(form.get("editToken") ?? form.get("adminToken"), 200) : "";
@@ -218,10 +231,48 @@ const handleReviewsRequest = async (request: Request) => {
     return errorJson(fieldError, 400);
   }
 
+  // Collect the primary photo plus up to two optional extra angles. The form
+  // sends them as `photo`, `photo2`, `photo3`. Each is validated the same way
+  // the single photo used to be; the primary is required on a new review.
+  const photoEntries = PHOTO_FIELDS.map((field) => form.get(field));
+  const store = photoStore();
+  // Every blob key written during this request, so a failure after the
+  // writes can clean up every orphan rather than just the primary's.
+  const storedKeys: string[] = [];
+  const photos: File[] = [];
+  for (const entry of photoEntries) {
+    if (entry == null) continue;
+    if (typeof entry === "string") continue;
+    if (entry.size === 0) continue;
+    photos.push(entry);
+    if (photos.length > MAX_PHOTOS) {
+      return errorJson("You can upload at most 3 photos.", 400);
+    }
+  }
+  const photo = photos[0] ?? null;
+
   const photoError = validatePhoto(photo, !isUpdate);
   if (photoError) {
     return errorJson(photoError, 400);
   }
+  for (let i = 1; i < photos.length; i += 1) {
+    const extraError = validatePhoto(photos[i], false);
+    if (extraError) {
+      return errorJson(extraError, 400);
+    }
+  }
+
+  // Store a photo in Netlify Blobs and return the key + content type it should
+  // be recorded under. Keys carry the project slug so the blob is self-
+  // describing in the store.
+  const imageAlt = `${projectType} project photo from ${customerName} in ${location}`;
+  const storePhoto = async (file: File) => {
+    const extension = file.type.split("/")[1]?.replace("jpeg", "jpg") ?? "jpg";
+    const key = `${Date.now()}-${crypto.randomUUID()}-${slug(projectType)}.${extension}`;
+    await store.set(key, await file.arrayBuffer());
+    storedKeys.push(key);
+    return { key, contentType: file.type };
+  };
 
   if (isUpdate) {
     const authError = authorizeAdmin(submittedAdminSecret(request, formAdminToken));
@@ -245,33 +296,53 @@ const handleReviewsRequest = async (request: Request) => {
 
     let imageKey = existing.imageKey;
     let imageContentType = existing.imageContentType;
-    const imageAlt = `${projectType} project photo from ${customerName} in ${location}`;
-    const store = photoStore();
+    let imageKey2 = existing.imageKey2;
+    let imageContentType2 = existing.imageContentType2;
+    let imageKey3 = existing.imageKey3;
+    let imageContentType3 = existing.imageContentType3;
+    // The blob key that each slot used to point at, when that slot is about to
+    // be replaced. Only those are deleted afterwards -- the slots a customer
+    // didn't re-upload keep their current blob.
+    const replacedKeys: string[] = [];
 
-    if (photo instanceof File && photo.size > 0) {
-      const extension = photo.type.split("/")[1]?.replace("jpeg", "jpg") ?? "jpg";
-      imageKey = `${Date.now()}-${crypto.randomUUID()}-${slug(projectType)}.${extension}`;
-      imageContentType = photo.type;
-      await store.set(imageKey, await photo.arrayBuffer());
-      await store.delete(existing.imageKey);
+    if (photos[0]) {
+      if (existing.imageKey) replacedKeys.push(existing.imageKey);
+      const stored = await storePhoto(photos[0]);
+      imageKey = stored.key;
+      imageContentType = stored.contentType;
+    }
+    if (photos[1]) {
+      if (existing.imageKey2) replacedKeys.push(existing.imageKey2);
+      const stored = await storePhoto(photos[1]);
+      imageKey2 = stored.key;
+      imageContentType2 = stored.contentType;
+    }
+    if (photos[2]) {
+      if (existing.imageKey3) replacedKeys.push(existing.imageKey3);
+      const stored = await storePhoto(photos[2]);
+      imageKey3 = stored.key;
+      imageContentType3 = stored.contentType;
     }
 
     const [updated] = await db
       .update(reviews)
-      .set({ customerName, location, projectType, rating, review, attributes, ownerResponse, imageKey, imageContentType, imageAlt })
+      .set({ customerName, location, projectType, rating, review, attributes, ownerResponse, imageKey, imageContentType, imageKey2, imageContentType2, imageKey3, imageContentType3, imageAlt })
       .where(eq(reviews.id, id))
       .returning();
+
+    // Drop the blobs for the slots that were replaced, now that the row points
+    // at the new keys. Best-effort: a failed delete doesn't undo the update.
+    await Promise.all(
+      replacedKeys.map((key) => store.delete(key).catch(() => undefined)),
+    );
 
     return json(publicReview(updated));
   }
 
   const upload = photo as File;
-  const extension = upload.type.split("/")[1]?.replace("jpeg", "jpg") ?? "jpg";
-  const imageKey = `${Date.now()}-${crypto.randomUUID()}-${slug(projectType)}.${extension}`;
-  const imageAlt = `${projectType} project photo from ${customerName} in ${location}`;
-  const store = photoStore();
-
-  await store.set(imageKey, await upload.arrayBuffer());
+  const primary = await storePhoto(upload);
+  const second = photos[1] ? await storePhoto(photos[1]) : null;
+  const third = photos[2] ? await storePhoto(photos[2]) : null;
 
   try {
     const [created] = await db
@@ -283,17 +354,21 @@ const handleReviewsRequest = async (request: Request) => {
         rating,
         review,
         attributes,
-        imageKey,
-        imageContentType: upload.type,
+        imageKey: primary.key,
+        imageContentType: primary.contentType,
+        imageKey2: second?.key ?? null,
+        imageContentType2: second?.contentType ?? null,
+        imageKey3: third?.key ?? null,
+        imageContentType3: third?.contentType ?? null,
         imageAlt,
       })
       .returning();
 
     return json(publicReview(created), { status: 201 });
   } catch (error) {
-    // The photo is already stored but has no row pointing at it. Drop it so a
-    // failed submission doesn't leave an unreachable object behind forever.
-    await store.delete(imageKey).catch(() => undefined);
+    // The photos are already stored but the row never landed. Drop them so a
+    // failed submission doesn't leave unreachable objects behind forever.
+    await Promise.all(storedKeys.map((k) => store.delete(k).catch(() => undefined)));
     throw error;
   }
 };

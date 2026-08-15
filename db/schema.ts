@@ -50,6 +50,13 @@ export const reviews = pgTable("gallery_reviews", {
   imageKey: text("image_key").notNull(),
   imageContentType: text("image_content_type").notNull(),
   imageAlt: text("image_alt").notNull(),
+  // Optional second and third photos the customer may attach to a review,
+  // each stored in Netlify Blobs under its own key (same store as the primary
+  // photo). Nullable so reviews created before this change keep working.
+  imageKey2: text("image_key_2"),
+  imageContentType2: text("image_content_type_2"),
+  imageKey3: text("image_key_3"),
+  imageContentType3: text("image_content_type_3"),
   editToken: text("edit_token"),
   // Comma-separated highlight tags chosen by the customer (e.g. "Punctual,Fair Pricing").
   attributes: text("attributes"),

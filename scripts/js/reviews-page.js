@@ -92,6 +92,9 @@
       });
   }
   const reviewsPhoto = document.getElementById('reviews-photo');
+  const reviewsPhoto2 = document.getElementById('reviews-photo-2');
+  const reviewsPhoto3 = document.getElementById('reviews-photo-3');
+  const photoInputs = [reviewsPhoto, reviewsPhoto2, reviewsPhoto3].filter(Boolean);
   const reviewsDropzone = document.getElementById('reviews-dropzone');
   const reviewsFileName = document.getElementById('reviews-file-name');
   const reviewsEditing = document.getElementById('reviews-editing');
@@ -101,6 +104,16 @@
   const starRatingBtns = document.querySelectorAll('.star-rating-btn');
   const reviewsPreview = document.getElementById('reviews-preview');
   const reviewsPreviewWrap = document.getElementById('reviews-preview-wrap');
+  const reviewsPreviewsGrid = document.getElementById('reviews-previews');
+  // chosenFiles[i] holds the File chosen for slot i (0..2), or null. Slot 0 is
+  // the primary photo and the only one required on a new review. The live
+  // preview grid and the submit handler both read from this array, so the
+  // hidden <input>s are just the pick mechanism -- the array is the source of
+  // truth, which keeps drag-and-drop and the remove buttons consistent with
+  // whatever the file pickers hold.
+  const chosenFiles = [null, null, null];
+  // Object URLs are revoked on swap/remove to avoid leaking the preview.
+  const chosenObjectUrls = [null, null, null];
   const attrChips = document.querySelectorAll('.attr-chip');
   const attributesInput = document.getElementById('reviews-attributes-input');
   const ownerResponseInput = document.getElementById('reviews-owner-response');
@@ -278,9 +291,90 @@
       syncAttributesInput();
   };
 
+  // The dropzone label text adapts to how many photos are chosen so the
+  // customer can tell at a glance whether they still have room. "1 of 3
+  // chosen" rather than the static "Choose up to 3 photos".
+  const updatePhotoDropzoneLabel = () => {
+      const count = chosenFiles.filter(Boolean).length;
+      if (!reviewsFileName) return;
+      if (count === 0) {
+          reviewsFileName.textContent = 'Choose up to 3 photos or drag them here';
+      } else if (count >= 3) {
+          reviewsFileName.textContent = '3 photos chosen — drag a thumbnail to replace one';
+      } else {
+          reviewsFileName.textContent = `${count} of 3 photos chosen — tap to add another`;
+      }
+  };
+
+  // The primary <input> is never marked `required` in the DOM: it is visually
+  // hidden, so a native "required" failure would focus an invisible target
+  // with no message. Validation that at least one photo is chosen is done in
+  // the submit handler instead, where a friendly message can be shown.
+  const syncPhotoRequired = () => {
+      if (reviewsPhoto) reviewsPhoto.required = false;
+  };
+
+  const renderPhotoPreviews = () => {
+      if (!reviewsPreviewsGrid) return;
+      const count = chosenFiles.filter(Boolean).length;
+      if (count === 0) {
+          reviewsPreviewsGrid.classList.add('hidden');
+          reviewsPreviewsGrid.innerHTML = '';
+          if (reviewsPreviewWrap) reviewsPreviewWrap.classList.add('hidden');
+          if (reviewsPreview) reviewsPreview.src = '';
+          updatePhotoDropzoneLabel();
+          return;
+      }
+
+      reviewsPreviewsGrid.classList.remove('hidden');
+      reviewsPreviewsGrid.innerHTML = chosenFiles.map((file, index) => {
+          if (!file) {
+              // An empty slot in the middle is shown as a subtle "add" tile so
+              // the 3-column strip reads as a grid rather than collapsing.
+              return `<button type="button" class="review-slot-add aspect-square rounded-2xl border-[2px] border-dashed border-gray-200 hover:border-red-400 flex items-center justify-center text-gray-400 hover:text-red-500 transition" data-slot="${index}" aria-label="Add photo ${index + 1}">
+                  <i class="fas fa-plus text-xl" aria-hidden="true"></i>
+              </button>`;
+          }
+          const url = chosenObjectUrls[index] || '';
+          return `<div class="review-slot relative aspect-square rounded-2xl overflow-hidden border border-gray-200 shadow-sm group">
+              <img src="${url}" alt="Preview of photo ${index + 1}" class="w-full h-full object-cover">
+              <button type="button" class="review-slot-remove absolute top-1.5 right-1.5 h-7 w-7 rounded-full bg-black/60 text-white hover:bg-red-600 flex items-center justify-center text-xs transition" data-slot="${index}" aria-label="Remove photo ${index + 1}">
+                  <i class="fas fa-xmark" aria-hidden="true"></i>
+              </button>
+              ${index === 0 ? '<span class="absolute bottom-1.5 left-1.5 bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Main</span>' : ''}
+          </div>`;
+      }).join('');
+      updatePhotoDropzoneLabel();
+  };
+
+  // Revoke any object URL held for a slot and clear its array entry. The
+  // hidden <input> is reset too so the browser doesn't keep the stale pick.
+  const clearPhotoSlot = (index) => {
+      if (chosenObjectUrls[index]) {
+          URL.revokeObjectURL(chosenObjectUrls[index]);
+          chosenObjectUrls[index] = null;
+      }
+      chosenFiles[index] = null;
+      const input = photoInputs[index];
+      if (input) input.value = '';
+  };
+
   const clearPhotoPreview = () => {
-      if (reviewsPreview) reviewsPreview.src = '';
-      if (reviewsPreviewWrap) reviewsPreviewWrap.classList.add('hidden');
+      chosenFiles.forEach((_, index) => clearPhotoSlot(index));
+      renderPhotoPreviews();
+      syncPhotoRequired();
+  };
+
+  // Assign a File to the next free slot (or a specific slot), creating an
+  // object URL for the live preview. Returns the slot index it landed in,
+  // or -1 if no slot was free.
+  const assignPhotoToSlot = (file, slot) => {
+      const target = typeof slot === 'number' && slot >= 0 && slot < 3 ? slot : chosenFiles.findIndex((f) => !f);
+      if (target === -1) return -1;
+      clearPhotoSlot(target);
+      chosenFiles[target] = file;
+      chosenObjectUrls[target] = URL.createObjectURL(file);
+      return target;
   };
 
   const escapeHTML = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({
@@ -448,8 +542,8 @@
       updateStarRatingDisplay(5);
       resetAttributeChips([]);
       clearPhotoPreview();
-      if (reviewsPhoto) reviewsPhoto.required = true;
-      if (reviewsFileName) reviewsFileName.textContent = 'Choose a photo or drag it here';
+      if (reviewsPhoto) reviewsPhoto.required = false;
+      if (reviewsFileName) reviewsFileName.textContent = 'Choose up to 3 photos or drag them here';
       if (reviewsEditing) reviewsEditing.classList.add('hidden');
       if (reviewsSubmit) reviewsSubmit.innerHTML = 'Post My Review <i class="fas fa-camera-retro" aria-hidden="true"></i>';
   };
@@ -487,10 +581,10 @@
       if (ownerResponseInput) ownerResponseInput.value = item.ownerResponse || '';
       clearPhotoPreview();
       if (reviewsPhoto) reviewsPhoto.required = false;
-      if (reviewsFileName) reviewsFileName.textContent = 'Keep current photo or choose a replacement';
+      if (reviewsFileName) reviewsFileName.textContent = 'Keep current photos or drop in replacements';
       if (reviewsEditing) reviewsEditing.classList.remove('hidden');
       if (reviewsSubmit) reviewsSubmit.innerHTML = 'Save Changes <i class="fas fa-floppy-disk" aria-hidden="true"></i>';
-      showReviewsMessage('Update the fields below, then save your changes.', false);
+      showReviewsMessage('Update the fields below, then save your changes. Leave the photo slots empty to keep the current photos.', false);
       reviewsForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
@@ -648,6 +742,20 @@
       return url.startsWith(PHOTO_ROUTE) && url.length > PHOTO_ROUTE.length ? url : '';
   };
 
+  // Returns up to three real photo paths for a review. The API now sends an
+  // `imageUrls` array; older responses that only carried `imageUrl` fall back
+  // to that single path so the strip keeps working during the rollout. The
+  // primary path is always first and matches `photoPathOf`.
+  const photoPathsOf = (item) => {
+      const urls = Array.isArray(item?.imageUrls) ? item.imageUrls : [];
+      const paths = urls
+          .map((url) => (typeof url === 'string' ? url.trim() : ''))
+          .filter((url) => url.startsWith(PHOTO_ROUTE) && url.length > PHOTO_ROUTE.length);
+      if (paths.length) return paths.slice(0, 3);
+      const primary = photoPathOf(item);
+      return primary ? [primary] : [];
+  };
+
   const transformedPhoto = (path, width, quality) =>
       `/.netlify/images?url=${encodeURIComponent(path)}&w=${width}&fm=avif&q=${quality}`;
 
@@ -692,7 +800,8 @@
       card.style.animationDelay = `${Math.min(index, 8) * 60}ms`;
       const badgeStyle = badgeColors[item.projectType] || 'bg-gray-100 text-gray-800 border-gray-200';
       const canManage = Boolean(localStorage.getItem('aaaAdminToken'));
-      const photoPath = photoPathOf(item);
+      const photoPaths = photoPathsOf(item);
+      const photoPath = photoPaths[0] || '';
       const thumbUrl = photoPath ? transformedPhoto(photoPath, 800, 80) : '';
       const fullUrl = photoPath ? transformedPhoto(photoPath, 1600, 82) : '';
       const { quote, body } = pullQuoteOf(item.review, item.location);
@@ -702,6 +811,21 @@
                   <img class="review-photo w-full h-full object-cover" src="${escapeHTML(thumbUrl)}" data-original="${escapeHTML(photoPath)}" alt="${escapeHTML(item.imageAlt)}" width="800" height="600" loading="lazy" decoding="async">
                   <span class="pointer-events-none absolute bottom-3 right-3 h-9 w-9 rounded-full bg-black/55 text-white flex items-center justify-center text-sm"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i></span>
               </button>` : photoPlaceholderHtml();
+
+      // Compact 3-column thumbnail strip for the review's photos. The strip
+      // includes the primary photo as its first tile, so a single-photo
+      // review shows one thumbnail and a three-photo review fills the row.
+      // Each tile is a zoom button carrying its own lightbox target.
+      const stripHtml = photoPaths.length > 1
+          ? `<div class="review-strip grid grid-cols-3 gap-1 border-t border-gray-100 bg-gray-50">${photoPaths.map((path, i) => {
+              const tUrl = transformedPhoto(path, 480, 75);
+              const fUrl = transformedPhoto(path, 1600, 82);
+              const alt = i === 0 ? item.imageAlt : `${item.projectType} project photo ${i + 1} from ${item.customerName} in ${item.location}`;
+              return `<button type="button" class="review-zoom relative block aspect-[4/3] overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500/60" data-full="${escapeHTML(fUrl)}" data-original="${escapeHTML(path)}" data-caption="${escapeHTML(item.projectType)} · ${escapeHTML(item.location)}" data-alt="${escapeHTML(alt)}" aria-label="Zoom photo ${i + 1}: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
+                  <img class="review-photo w-full h-full object-cover" src="${escapeHTML(tUrl)}" data-original="${escapeHTML(path)}" alt="${escapeHTML(alt)}" width="480" height="360" loading="lazy" decoding="async">
+              </button>`;
+          }).join('')}</div>`
+          : '';
 
       const actionsHtml = canManage ? `
               <div class="mt-5 grid grid-cols-2 gap-3">
@@ -726,6 +850,7 @@
                   </span>
               </div>
           </div>
+          ${stripHtml}
           <div class="p-6 flex flex-col flex-1">
               <div class="flex items-center justify-between gap-3 mb-4">
                   <div class="text-red-600 text-lg flex gap-1" role="img" aria-label="${escapeHTML(item.rating)} out of 5 stars">
@@ -754,11 +879,15 @@
           </div>
       `;
 
-      attachPhotoFallback(card.querySelector('.review-photo'));
+      // Attach the Image CDN fallback chain to every photo on the card --
+      // the primary hero image and each tile in the 3-column strip.
+      card.querySelectorAll('.review-photo').forEach((img) => attachPhotoFallback(img));
 
-      card.querySelector('.review-zoom')?.addEventListener('click', (event) => {
-          const trigger = event.currentTarget;
-          openLightbox(trigger.dataset.full, trigger.dataset.alt, trigger.dataset.caption, trigger.dataset.original);
+      card.querySelectorAll('.review-zoom').forEach((trigger) => {
+          trigger.addEventListener('click', (event) => {
+              const t = event.currentTarget;
+              openLightbox(t.dataset.full, t.dataset.alt, t.dataset.caption, t.dataset.original);
+          });
       });
 
       if (canManage) {
@@ -1384,24 +1513,70 @@
           });
   };
 
-  if (reviewsPhoto && reviewsFileName) {
-      reviewsPhoto.addEventListener('change', () => {
-          const file = reviewsPhoto.files?.[0];
-          reviewsFileName.textContent = file?.name || 'Choose a photo or drag it here';
-          if (file && file.type.startsWith('image/') && reviewsPreview && reviewsPreviewWrap) {
-              const reader = new FileReader();
-              reader.onload = (event) => {
-                  reviewsPreview.src = String(event.target?.result || '');
-                  reviewsPreviewWrap.classList.remove('hidden');
-              };
-              reader.readAsDataURL(file);
-          } else {
-              clearPhotoPreview();
+  // --- Photo picker wiring ---
+  // Each of the three hidden <input>s fills the next free slot when it
+  // changes; the live preview grid is the source of truth for what's chosen.
+  // A click on the dropzone or an empty tile opens whichever slot is next.
+  const nextFreeSlot = () => chosenFiles.findIndex((f) => !f);
+
+  const openNextSlot = () => {
+      const slot = nextFreeSlot();
+      if (slot === -1) return;
+      photoInputs[slot]?.click();
+  };
+
+  if (reviewsDropzone) {
+      reviewsDropzone.addEventListener('click', (event) => {
+          // Don't hijack clicks on the remove buttons or add tiles -- those
+          // have their own handlers.
+          if (event.target.closest('.review-slot-remove') || event.target.closest('.review-slot-add')) return;
+          openNextSlot();
+      });
+  }
+
+  photoInputs.forEach((input, slot) => {
+      if (!input) return;
+      input.addEventListener('change', () => {
+          const file = input.files?.[0];
+          if (!file) return;
+          if (!file.type.startsWith('image/')) {
+              showReviewsMessage('Please choose an image file (JPG, PNG, WebP, or GIF).', true);
+              input.value = '';
+              return;
+          }
+          assignPhotoToSlot(file, slot);
+          renderPhotoPreviews();
+          syncPhotoRequired();
+      });
+  });
+
+  // Remove buttons and empty add tiles inside the live preview grid both
+  // delegate here.
+  if (reviewsPreviewsGrid) {
+      reviewsPreviewsGrid.addEventListener('click', (event) => {
+          const removeBtn = event.target.closest('.review-slot-remove');
+          if (removeBtn) {
+              event.preventDefault();
+              event.stopPropagation();
+              const slot = Number(removeBtn.dataset.slot);
+              if (Number.isInteger(slot)) {
+                  clearPhotoSlot(slot);
+                  renderPhotoPreviews();
+                  syncPhotoRequired();
+              }
+              return;
+          }
+          const addTile = event.target.closest('.review-slot-add');
+          if (addTile) {
+              event.preventDefault();
+              event.stopPropagation();
+              const slot = Number(addTile.dataset.slot);
+              if (Number.isInteger(slot)) photoInputs[slot]?.click();
           }
       });
   }
 
-  if (reviewsDropzone && reviewsPhoto) {
+  if (reviewsDropzone) {
       ['dragenter', 'dragover'].forEach(eventName => {
           reviewsDropzone.addEventListener(eventName, (event) => {
               event.preventDefault();
@@ -1417,12 +1592,24 @@
       });
 
       reviewsDropzone.addEventListener('drop', (event) => {
-          const file = event.dataTransfer?.files?.[0];
-          if (!file) return;
-          const transfer = new DataTransfer();
-          transfer.items.add(file);
-          reviewsPhoto.files = transfer.files;
-          reviewsPhoto.dispatchEvent(new Event('change'));
+          const files = Array.from(event.dataTransfer?.files || []);
+          if (!files.length) return;
+          // Drop every dragged image into consecutive free slots. Once the
+          // three slots are full, extra files are ignored with a message.
+          let added = 0;
+          for (const file of files) {
+              if (!file.type.startsWith('image/')) continue;
+              if (nextFreeSlot() === -1) break;
+              assignPhotoToSlot(file);
+              added += 1;
+          }
+          if (added) {
+              renderPhotoPreviews();
+              syncPhotoRequired();
+          }
+          if (files.length > added) {
+              showReviewsMessage('You can upload at most 3 photos. Only the first 3 were added.', true);
+          }
       });
   }
 
@@ -1430,19 +1617,32 @@
       reviewsForm.addEventListener('submit', async (event) => {
           event.preventDefault();
           const isEditing = Boolean(reviewsEditId);
-          const sourceFile = reviewsPhoto?.files?.[0] || null;
 
-          if (sourceFile && sourceFile.size > MAX_SOURCE_BYTES) {
-              showReviewsMessage('Photos must be 10 MB or smaller.', true);
+          // A new review needs at least one photo; an edit can keep its
+          // existing photos by sending none.
+          const chosen = chosenFiles.filter(Boolean);
+          if (!isEditing && chosen.length === 0) {
+              showReviewsMessage('Please add at least one project photo.', true);
               return;
+          }
+
+          for (const file of chosen) {
+              if (file.size > MAX_SOURCE_BYTES) {
+                  showReviewsMessage('Photos must be 10 MB or smaller.', true);
+                  return;
+              }
           }
 
           setReviewsSubmitting(true);
           showReviewsMessage(isEditing ? 'Saving your changes...' : 'Uploading your review...', false);
 
-          let uploadFile = sourceFile;
+          // Each chosen photo is downscaled/re-encoded in the browser so the
+          // whole upload stays under the platform's buffered request limit.
+          const prepared = [];
           try {
-              if (sourceFile) uploadFile = await preparePhotoForUpload(sourceFile);
+              for (const file of chosen) {
+                  prepared.push(await preparePhotoForUpload(file));
+              }
           } catch (error) {
               showReviewsMessage(error instanceof Error ? error.message : "We couldn't read that photo. Please try a different JPEG, PNG, WEBP, or GIF image.", true);
               setReviewsSubmitting(false);
@@ -1450,7 +1650,15 @@
           }
 
           const formData = new FormData(reviewsForm);
-          if (uploadFile) formData.set('photo', uploadFile, uploadFile.name);
+          // The form's hidden photo inputs may carry stale picks after a
+          // drag-and-drop; send the prepared files explicitly by field name
+          // so what's on the wire matches the preview exactly.
+          formData.delete('photo');
+          formData.delete('photo2');
+          formData.delete('photo3');
+          prepared.forEach((file, i) => {
+              formData.append(i === 0 ? 'photo' : `photo${i + 1}`, file, file.name);
+          });
 
           const adminToken = localStorage.getItem('aaaAdminToken') || '';
           if (isEditing && !adminToken) {
