@@ -4676,15 +4676,21 @@ header.ambient-glow-hero::after,
   column-gap: 1.25rem;
 }
 
+/*
+ * The Client Projects grid lives in the right-hand column of a `lg:grid-cols-5`
+ * layout, where it spans 3 of 5 tracks -- about 60% of the row, capped at 720px
+ * by `max-w-7xl`. The previous breakpoints turned the masonry into 3 columns at
+ * `min-width: 1024px`, but at that width the cards column is only ~567px and
+ * 3 columns left each card at ~190px; at the max (1280px) the cards column is
+ * 720px and 3 columns still squeezed each card to ~227px, which was too narrow
+ * for the review text and the admin Edit/Delete actions (each button dropped to
+ * ~80px). Capping the masonry at 2 columns keeps every card at least ~350px on
+ * desktop and ~285px on small tablets, which is the readable floor for this
+ * card. Below `sm` it stays a single column.
+ */
 @media (min-width: 640px) {
   .reviews-masonry {
     column-count: 2;
-  }
-}
-
-@media (min-width: 1024px) {
-  .reviews-masonry {
-    column-count: 3;
   }
 }
 
@@ -5090,6 +5096,22 @@ header.ambient-glow-hero::after,
   box-shadow: none;
 }
 
+/*
+ * An active pin -- a city with at least one completed, reviewed project -- has
+ * to read as a crimson pin head with a white checkmark inside it, not as a bare
+ * checkmark floating on the map. `.is-empty` carries the same specificity as
+ * `.is-active` (both are 0,2,0 over `.map-pin__dot`), so the active rule has to
+ * follow the empty one in source order to win the cascade and restore the
+ * full-size crimson dot, white border, and shadow that the empty state muted.
+ */
+.map-pin.is-active .map-pin__dot {
+  height: 26px;
+  width: 26px;
+  background-color: var(--brand-crimson);
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 16px -6px rgba(0, 0, 0, 0.75);
+}
+
 .map-pin__pulse {
   height: 26px;
   width: 26px;
@@ -5133,6 +5155,12 @@ header.ambient-glow-hero::after,
   position: absolute;
   left: 0;
   top: 0;
+  /* The pin element itself is a zero-size point, so the label needs a transform
+     to sit beside it rather than anchored at its top-left corner. The default
+     drops the label just below and horizontally centred on the pin, matching
+     the `data-label="below"` variant; the [data-label] rules below override it
+     for pins whose label has to clear the dot in another direction. */
+  transform: translate(-50%, 15px);
   white-space: nowrap;
   font-size: 11px;
   font-weight: 700;
@@ -5286,6 +5314,60 @@ header.ambient-glow-hero::after,
 .city-tab svg,
 .filter-tab svg {
   flex: none;
+}
+
+/*
+ * The floating AI Chat + Call Now buttons are a fixed, bottom-right cluster
+ * that sits above everything (z-index 40) on every page. On the reviews page
+ * the submission form and the service/city filter rows are full-width below
+ * the `lg` breakpoint, so when a visitor scrolls one of those controls to the
+ * bottom of the viewport the FAB lands on top of its right edge and blocks the
+ * text it holds. Below `lg` the layout is a single column, so we reserve room
+ * on the right of the form fields and filter rows equal to the FAB's footprint
+ * -- 70px on phones (the 54px circular buttons + 16px margin) and 161px on
+ * tablets (the 141px pill buttons + 20px margin). Above `lg` the form lives in
+ * the left sidebar and the FAB is off to the right of it, so no reservation is
+ * needed. `scroll-padding-bottom` lets focus jump a field clear of the cluster
+ * without an extra scroll gesture.
+ *
+ * The reviews page is the only place this matters: it is the only page that
+ * stacks long text fields and filter rows in a single column under the FAB.
+ * Scoping the padding to the reviews form and filter IDs keeps the global FAB
+ * untouched on every other page.
+ */
+@media (max-width: 1023px) {
+  html {
+    scroll-padding-bottom: 160px;
+  }
+
+  #reviews-form {
+    /* The FAB's circular buttons park 70px from the right edge on phones and
+       161px on tablets. The form lives inside page + card padding, so a modest
+       right reservation keeps the right edge of its text fields clear of those
+       buttons when a field is scrolled into the FAB's band. */
+    padding-right: 32px;
+  }
+
+  #reviews-filters,
+  #reviews-cities {
+    /* The filter rows wrap their tabs across the full row width, so without a
+       reservation the rightmost tab on every wrapped row lands under the FAB.
+       48px on phones (54px button + 16px margin, minus the page's 24px gutter)
+       and 140px on tablets (141px pill + 20px margin, minus page + card
+       padding) keeps every tab clickable. */
+    padding-right: 48px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  #reviews-form {
+    padding-right: 110px;
+  }
+
+  #reviews-filters,
+  #reviews-cities {
+    padding-right: 140px;
+  }
 }
 
 #reviews-lightbox {
