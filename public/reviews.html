@@ -696,16 +696,23 @@
                             </div>
 
                             <div>
-                                <label for="reviews-photo" class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Photo</label>
-                                <label id="reviews-dropzone" for="reviews-photo" class="review-dropzone block cursor-pointer border-[2px] border-dashed border-red-200 hover:border-red-500 rounded-3xl p-5 text-center transition">
-                                    <input id="reviews-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif" required class="sr-only">
+                                <span class="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-2">Project Photos <span class="normal-case text-gray-500 font-medium tracking-normal">(up to 3 · at least one required)</span></span>
+                                <div id="reviews-dropzone" class="review-dropzone block cursor-pointer border-[2px] border-dashed border-red-200 hover:border-red-500 rounded-3xl p-5 text-center transition">
+                                    <!-- The three slots share one dropzone: each <input> is hidden, the
+                                         first empty slot accepts the next pick, and a click on the dropzone
+                                         opens whichever slot is next. The slot grid below renders live
+                                         previews and remove buttons once a file lands. -->
+                                    <input id="reviews-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif" class="sr-only pointer-events-none">
+                                    <input id="reviews-photo-2" name="photo2" type="file" accept="image/jpeg,image/png,image/webp,image/gif" class="sr-only pointer-events-none">
+                                    <input id="reviews-photo-3" name="photo3" type="file" accept="image/jpeg,image/png,image/webp,image/gif" class="sr-only pointer-events-none">
+                                    <div id="reviews-previews" class="hidden grid grid-cols-3 gap-3 mb-3"></div>
                                     <div id="reviews-preview-wrap" class="hidden mb-3">
                                         <img id="reviews-preview" src="" alt="Preview of the photo you selected" class="mx-auto max-h-48 w-auto rounded-2xl object-cover shadow-md">
                                     </div>
                                     <i class="fas fa-cloud-arrow-up text-3xl text-red-500 mb-2 block" aria-hidden="true"></i>
-                                    <span id="reviews-file-name" class="block font-semibold text-slate-800">Choose a photo or drag it here</span>
-                                    <span class="text-xs text-gray-500 block mt-1">JPG, PNG, WebP or GIF · 10 MB max</span>
-                                </label>
+                                    <span id="reviews-file-name" class="block font-semibold text-slate-800">Choose up to 3 photos or drag them here</span>
+                                    <span class="text-xs text-gray-500 block mt-1">JPG, PNG, WebP or GIF · 10 MB max each</span>
+                                </div>
                             </div>
 
                             <p id="reviews-message" class="hidden text-sm font-semibold" role="status" aria-live="polite"></p>
