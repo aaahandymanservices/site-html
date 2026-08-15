@@ -4482,3 +4482,49 @@ header.ambient-glow-hero::after,
     animation: none;
   }
 }
+
+/* Availability / Hours Banner (Thinner Vertical Profile) */
+.availability-banner {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 0.25rem !important;
+  padding-top: 1.25rem !important;
+  padding-bottom: 1.25rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.availability-banner > :first-child {
+  margin-top: 0 !important;
+}
+
+.availability-banner > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.availability-banner p {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  line-height: 1.35;
+}
+
+.availability-banner .mt-5,
+.availability-banner .mt-6 {
+  margin-top: 0.25rem !important;
+}
+
+.availability-banner span.inline-flex {
+  margin-bottom: 0.25rem !important;
+}
+
+@media (min-width: 640px) {
+  .availability-banner {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+    gap: 0.35rem !important;
+  }
+}
+
