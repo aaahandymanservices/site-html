@@ -22,7 +22,7 @@
  */
 (function () {
   // Photos are re-encoded in the browser before they are held for upload. A
-  // picture straight off a phone is routinely 5-12 MB and several thousand
+  // picture straight off a phone is routinely several MB and several thousand
   // pixels wide, which the old flow simply refused ("Each photo must be 5 MB or
   // smaller") — and three of them in one multipart request is far more than a
   // function invocation wants to carry, on top of being a slow upload over cell
@@ -32,14 +32,17 @@
   const PHOTO_BUDGET = 1.1 * 1024 * 1024;
   const MAX_DIMENSION = 1600;
   const JPEG_QUALITIES = [0.82, 0.72, 0.62, 0.5];
-  // Guard against decoding something absurd; anything under this is resized.
-  const MAX_SOURCE_SIZE = 40 * 1024 * 1024;
-  // What the endpoint stores. Phones hand over plenty of other things — HEIC
-  // from an iPhone, an occasional empty MIME type from an Android picker — so
-  // anything the browser can decode is converted to JPEG on the way out rather
-  // than rejected.
+  // The site-wide rule -- JPG, PNG, WebP or GIF at 10 MB each -- and the
+  // messages that go with it. See scripts/js/photo-upload.js.
+  const photoRule = window.AAAPhotoUpload;
+  // What the endpoint stores, and what may be passed through untouched. A GIF
+  // is deliberately absent: the estimator analyses one still frame, so a GIF
+  // goes through the encoder below and arrives as a JPEG rather than shipping
+  // its animation to a model that will only look at frame one. Phones also
+  // hand over plenty of other things -- HEIC from an iPhone, an occasional
+  // empty MIME type from an Android picker -- and anything the browser can
+  // decode is likewise converted to JPEG on the way out rather than rejected.
   const UPLOAD_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
-  const IMAGE_EXT = /\.(jpe?g|png|webp|heic|heif|gif|bmp|tiff?|avif)$/i;
   const OAKLAND_ZIP = /^48[0-4]\d{2}$/;
   const MAX_PHOTOS = 3;
 
@@ -123,15 +126,9 @@
     }
   };
 
-  const looksLikeImage = (file) =>
-    (file.type && file.type.indexOf('image/') === 0) || IMAGE_EXT.test(file.name || '');
-
   const validateFile = (file) => {
     if (!file) return 'Please choose a photo to upload.';
-    if (file.size === 0) return 'That photo looks empty. Please choose another.';
-    if (file.size > MAX_SOURCE_SIZE) return 'That file is too large to read. Please choose a photo.';
-    if (!looksLikeImage(file)) return 'Please choose a photo — JPG, PNG, WebP, or a picture from your phone.';
-    return '';
+    return photoRule.rejectionFor(file);
   };
 
   // Decoding is tried the modern way first; the <img> fallback covers browsers
@@ -227,7 +224,7 @@
     // format small enough for the endpoint can still go up untouched.
     if (UPLOAD_TYPES.has(file.type) && file.size <= 4 * 1024 * 1024) return file;
     throw new Error(
-      'We couldn’t read that photo. Please pick it from your photo library, or try a JPG, PNG, or WebP.',
+      'We couldn’t read that photo. Please pick it from your photo library, or try a JPG, PNG, WebP or GIF.',
     );
   };
 

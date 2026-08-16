@@ -114,11 +114,11 @@ const validatePhoto = (photo: FormDataEntryValue | null, required: boolean) => {
   }
 
   if (photo.size > MAX_IMAGE_SIZE) {
-    return "That photo is too large to upload. Please choose one 5 MB or smaller.";
+    return "That photo was too large to upload. Please choose a smaller one.";
   }
 
   if (!IMAGE_TYPES.has(photo.type)) {
-    return "Upload a JPG, PNG, WebP, or GIF photo.";
+    return "Upload a JPG, PNG, WebP or GIF photo.";
   }
 
   return "";

@@ -98,16 +98,56 @@
           offerCheckbox.checked = true;
       }
 
+      /*
+       * The quote form takes photos, so it plays by the same rule as every
+       * other uploader on the site: JPG, PNG, WebP or GIF, 10 MB each. See
+       * scripts/js/photo-upload.js, which this page loads first.
+       *
+       * The post goes to Netlify Forms, which rejects the whole request over
+       * 8 MB, and this input is `multiple` -- so the photos are resized to fit
+       * before they are sent rather than the visitor being held to a smaller
+       * number than the label promises.
+       */
+      var photoRule = window.AAAPhotoUpload;
+      var UPLOAD_SAFE_BYTES = 1.4 * 1024 * 1024;
       var photoInput = document.getElementById('q-photos');
+
+      var showQuoteError = function (message) {
+          var box = document.getElementById('quote-error');
+          if (!box) return;
+          if (message) {
+              box.textContent = message;
+              box.classList.remove('hidden');
+              box.setAttribute('role', 'alert');
+          } else {
+              box.textContent = '';
+              box.classList.add('hidden');
+          }
+      };
+
       if (photoInput) {
           photoInput.addEventListener('change', function () {
               var label = form.querySelector('.quote-photo-label');
-              var n = photoInput.files.length;
+              var files = Array.prototype.slice.call(photoInput.files || []);
+
+              // Report the first file that breaks the rule by name and clear
+              // the selection: a browser file input is all-or-nothing, so
+              // keeping the good ones would mean lying about what is attached.
+              var rejections = files.map(photoRule.rejectionFor).filter(Boolean);
+              if (rejections.length) {
+                  photoInput.value = '';
+                  showQuoteError(rejections[0]);
+                  if (label) label.textContent = 'Add Photos (Optional)';
+                  return;
+              }
+
+              showQuoteError('');
+              var n = files.length;
               if (label) label.textContent = n ? (n + ' photo' + (n > 1 ? 's' : '') + ' attached ✓') : 'Add Photos (Optional)';
           });
       }
 
-      form.addEventListener('submit', function (e) {
+      form.addEventListener('submit', async function (e) {
           e.preventDefault();
           var error = document.getElementById('quote-error');
           if (error) error.classList.add('hidden');
@@ -120,8 +160,29 @@
           var nameField = form.querySelector('input[name="name"]');
           var email = emailField ? emailField.value : '';
 
+          var body = new FormData(form);
+          var chosen = Array.prototype.slice.call((photoInput && photoInput.files) || []);
+          if (chosen.length) {
+              try {
+                  var prepared = [];
+                  for (var i = 0; i < chosen.length; i++) {
+                      prepared.push(await photoRule.prepare(chosen[i], UPLOAD_SAFE_BYTES));
+                  }
+                  // Drop the entries the input contributed before appending the
+                  // resized copies, or the body would carry both.
+                  body.delete('photos');
+                  prepared.forEach(function (file) {
+                      body.append('photos', file, file.name);
+                  });
+              } catch (prepError) {
+                  if (btn) { btn.disabled = false; btn.innerHTML = 'Get My Free Quote <i class="fas fa-arrow-right" aria-hidden="true"></i>'; }
+                  showQuoteError(prepError instanceof Error ? prepError.message : 'One of your photos could not be prepared. Please try a different image.');
+                  return;
+              }
+          }
+
           // File uploads: let the browser set the multipart Content-Type boundary.
-          fetch('/', { method: 'POST', body: new FormData(form) })
+          fetch('/', { method: 'POST', body: body })
               .then(function (res) {
                   if (!res.ok) throw new Error('Bad response');
                   // One certificate per customer. Email is optional on this

@@ -11,6 +11,17 @@ import { resolveServiceLocation } from "../lib/service-area.js";
 const MODEL = "gemini-2.5-flash";
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+/*
+ * The uploader offers the site-wide rule -- JPG, PNG, WebP or GIF at 10 MB each
+ * -- but this set is deliberately narrower than that.
+ *
+ * The estimator analyses a single still frame, so ai-estimate-page.js runs
+ * every pick through a canvas and hands over a downscaled JPEG. A GIF is
+ * converted rather than passed through: shipping an animation to a model that
+ * only reads frame one costs bytes and buys nothing. By the time a photo
+ * reaches here it is already one of the three below and roughly 1 MB, which
+ * also makes MAX_IMAGE_SIZE a backstop rather than a limit anyone meets.
+ */
 const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 // The estimator accepts a primary photo plus up to two optional extra angles
 // (a wide/context shot and an additional angle). Only the primary photo is
@@ -113,11 +124,11 @@ export default async (request: Request) => {
       if (typeof entry === "string") continue;
       if (entry.size === 0) continue;
       if (entry.size > MAX_IMAGE_SIZE) {
-        return errorJson("Each photo must be 5 MB or smaller.", 400);
+        return errorJson("That photo was too large to send. Please choose a smaller one.", 400);
       }
       const type = resolvePhotoType(entry);
       if (!type) {
-        return errorJson("Upload JPG, PNG, or WebP photos only.", 400);
+        return errorJson("Upload a JPG, PNG, WebP or GIF photo.", 400);
       }
       photos.push({ file: entry, type });
       if (photos.length > MAX_PHOTOS) {

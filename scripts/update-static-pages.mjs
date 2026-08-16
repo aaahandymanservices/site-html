@@ -43,11 +43,16 @@ const ICONS_CSS = '/css/icons.css?v=20260815a';
  * worker keys assets by pathname with ?v= removed, so public/sw.js has its own
  * CACHE_VERSION that has to move with a stylesheet change as well.
  */
-const ASSET_VERSION = '20260816b';
+const ASSET_VERSION = '20260816c';
 const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
 const SCRIPT_VERSIONS = new Map([
   ['site.js', ASSET_VERSION],
   ['home.js', ASSET_VERSION],
+  // The one accept list and 10 MB rule that all six photo uploaders read, plus
+  // the resizing that lets a phone picture fit the wire. Every page carrying an
+  // upload loads it ahead of its own script, so a stale copy would take the
+  // whole set of forms out at once -- it moves with ASSET_VERSION always.
+  ['photo-upload.js', ASSET_VERSION],
   ['contact-page.js', ASSET_VERSION],
   // The issue intake form is inert without its script: validation messages, the
   // photo size guard, and the multipart submit all live there, so a stale copy
@@ -67,14 +72,15 @@ const SCRIPT_VERSIONS = new Map([
   // The AI estimator page's upload, ZIP→zone lookup, analyze call, and submit-
   // to-dispatch flow are all inert markup until this runs, so a stale cached
   // copy leaves a visitor's photo going nowhere -- same reason contact-page.js
-  // is versioned here. Its own stamp is independent of ASSET_VERSION because it
-  // shipped in a later deploy than the rest of the scripts; this bump carries
-  // the browser-side photo resizing that lets phone pictures upload at all.
-  ['ai-estimate-page.js', '20260816a'],
-  // Owner access and review deletion now use inline <dialog> elements
-  // instead of window.prompt/confirm; a stale cached copy would leave the
-  // Owner Access button inert on the new /reviews page.
-  ['reviews-page.js', '20260816a'],
+  // is versioned here. It used to carry its own stamp, from a deploy the other
+  // scripts sat out; now that it reads the shared photo rule from
+  // photo-upload.js it has to move whenever that does.
+  ['ai-estimate-page.js', ASSET_VERSION],
+  // Owner access and review deletion use inline <dialog> elements instead of
+  // window.prompt/confirm, and the submitter reads the shared photo rule, so a
+  // stale cached copy would leave the Owner Access button inert and the
+  // uploader out of step with the label beneath it.
+  ['reviews-page.js', ASSET_VERSION],
 ]);
 const ASYNC_ICONS_CSS =
   `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +

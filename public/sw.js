@@ -158,7 +158,16 @@
 // the markup of the affected pages. Cached bytes change behind unchanged
 // pathnames once again, so a returning visitor holding v28 would otherwise
 // pair this deploy's markup with last deploy's stylesheet and stay cut off.
-const CACHE_VERSION = 'v29';
+// v30 gives every photo uploader the same rule -- JPG, PNG, WebP or GIF, 10 MB
+// max each -- where the six forms previously disagreed on both the accepted
+// formats and the ceiling. The shared accept list, validation messages, and
+// browser-side resizing now live on the new /js/photo-upload.js, which every
+// page with an upload loads ahead of its own script, and each of those page
+// scripts changed to read from it. New file plus changed bytes behind unchanged
+// pathnames, so a returning visitor holding v29 would otherwise run last
+// deploy's page scripts against this deploy's labels and be told 7 MB by one
+// form and 10 MB by the next.
+const CACHE_VERSION = 'v30';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -175,6 +184,9 @@ const PRECACHE_URLS = [
   // Everything the precached start_url needs to be interactive offline. The
   // other pages' behaviour files are picked up by the asset cache on first use.
   '/js/home.js',
+  // The home page's quote form takes photos, and home.js validates them
+  // against the rule this file defines.
+  '/js/photo-upload.js',
   '/js/gift-certificate.js',
   '/js/chat-loader.js',
   '/fonts/archivo-latin.woff2',

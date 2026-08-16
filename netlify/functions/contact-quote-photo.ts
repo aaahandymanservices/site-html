@@ -11,6 +11,9 @@ import { getStore } from "@netlify/blobs";
 const contentTypeFor = (key: string) => {
   if (key.endsWith(".png")) return "image/png";
   if (key.endsWith(".webp")) return "image/webp";
+  if (key.endsWith(".gif")) return "image/gif";
+  // The form no longer accepts HEIC, but photos stored while it did are still
+  // referenced by contact_requests rows and have to keep serving correctly.
   if (key.endsWith(".heic")) return "image/heic";
   if (key.endsWith(".heif")) return "image/heif";
   return "image/jpeg";

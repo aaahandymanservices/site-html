@@ -179,15 +179,19 @@
    * request is in flight (the upload itself is one multipart POST, so the bar
    * is an indeterminate proxy; XHR's progress event is what makes it move).
    *
-   * Limits mirror the server-side function: up to 5 photos, 10 MB each, JPG /
-   * PNG / HEIC / WebP. The browser downscales nothing here -- the function
-   * rejects anything over the limit, so the visitor is told which file is the
-   * problem while they still have the form in front of them.
+   * Limits mirror the server-side function: up to 5 photos, and the shared
+   * site rule of JPG / PNG / WebP / GIF at 10 MB each (see photo-upload.js).
+   * The five photos travel in one buffered function request capped at 6 MB, so
+   * anything over the per-photo share of that budget is downscaled in the
+   * browser on submit -- five 10 MB pictures off a phone would not otherwise
+   * fit on the wire at all.
    */
+  const photoRule = window.AAAPhotoUpload;
   const MAX_PHOTOS = 5;
-  const MAX_PHOTO_BYTES = 10 * 1024 * 1024;
-  const ACCEPTED_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif']);
-  const ACCEPTED_EXTENSIONS = /\.(jpe?g|png|webp|heic|heif)$/i;
+  // The wire budget per photo, not what the visitor may pick. Five of these
+  // plus the text fields and multipart overhead stay inside the 6 MB cap.
+  const UPLOAD_SAFE_BYTES = 1 * 1024 * 1024;
+  const formatBytes = photoRule.formatBytes;
   const photoInput = document.getElementById('contact-photo-input');
   const photoDropzone = document.getElementById('contact-photo-dropzone');
   const photoEmpty = document.getElementById('contact-photo-empty');
@@ -201,12 +205,6 @@
   // so we can splice on remove without fighting the read-only DOM collection.
   let selectedPhotos = [];
 
-  const formatBytes = (bytes) => {
-      if (bytes < 1024) return bytes + ' B';
-      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
-      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-  };
-
   const showPhotoError = (message) => {
       if (!photoError) return;
       if (message) {
@@ -219,9 +217,6 @@
           if (photoInput) photoInput.removeAttribute('aria-invalid');
       }
   };
-
-  const isAcceptedPhoto = (file) =>
-      ACCEPTED_TYPES.has(file.type) || ACCEPTED_EXTENSIONS.test(file.name);
 
   const renderPreviews = () => {
       if (!photoPreviews) return;
@@ -285,12 +280,9 @@
       const accepted = [];
 
       for (const file of candidates) {
-          if (!isAcceptedPhoto(file)) {
-              errors.push(`"${file.name}" is not a supported format. Please upload a JPG, PNG, HEIC, or WebP image.`);
-              continue;
-          }
-          if (file.size > MAX_PHOTO_BYTES) {
-              errors.push(`"${file.name}" is ${formatBytes(file.size)}, which is over the 10 MB per-photo limit.`);
+          const rejection = photoRule.rejectionFor(file);
+          if (rejection) {
+              errors.push(rejection);
               continue;
           }
           accepted.push(file);
@@ -526,7 +518,7 @@
           });
       });
 
-      form.addEventListener('submit', function(e) {
+      form.addEventListener('submit', async function(e) {
           e.preventDefault();
           if (submitButton && submitButton.disabled) return;
 
@@ -552,6 +544,35 @@
               submitButton.classList.add('opacity-70', 'cursor-not-allowed');
           }
 
+          // Resize before anything is built. A visitor may pick five 10 MB
+          // pictures, which is legal by the rule on the label but five times
+          // what one function request can carry, so each is re-encoded down to
+          // its share of the budget first. Files already under it pass through
+          // untouched, and an animated GIF is never redrawn -- if one is too
+          // big the helper says so by name and the form stays put.
+          let uploadPhotos = selectedPhotos;
+          if (selectedPhotos.length) {
+              if (photoProgress && photoProgressText) {
+                  photoProgress.classList.remove('hidden');
+                  if (photoProgressBar) photoProgressBar.style.width = '0%';
+                  photoProgressText.textContent = 'Preparing your photos…';
+              }
+              try {
+                  uploadPhotos = [];
+                  for (const file of selectedPhotos) {
+                      uploadPhotos.push(await photoRule.prepare(file, UPLOAD_SAFE_BYTES));
+                  }
+              } catch (error) {
+                  if (photoProgress) photoProgress.classList.add('hidden');
+                  showPhotoError(error instanceof Error ? error.message : 'One of your photos could not be prepared. Please try a different image.');
+                  if (submitButton) {
+                      submitButton.disabled = false;
+                      submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+                  }
+                  return;
+              }
+          }
+
           // Build the multipart body. The hidden <input name=photo1 multiple> in
           // the markup is only there to make the dropzone a click target; the
           // actual files live in our selectedPhotos array so we can manage
@@ -560,7 +581,7 @@
           // function reads.
           const formData = new FormData(form);
           formData.delete('photo1');
-          selectedPhotos.forEach((file, index) => {
+          uploadPhotos.forEach((file, index) => {
               formData.append(`photo${index + 1}`, file, file.name);
           });
 
