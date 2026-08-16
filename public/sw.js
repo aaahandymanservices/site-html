@@ -167,7 +167,20 @@
 // pathnames, so a returning visitor holding v29 would otherwise run last
 // deploy's page scripts against this deploy's labels and be told 7 MB by one
 // form and 10 MB by the next.
-const CACHE_VERSION = 'v30';
+// v31 inlines a critical palette block in every page's <head> (see
+// scripts/update-static-pages.mjs): the body grey, the sticky header's white
+// with its crimson hairline, the seasonal banner's warm gradient, and the
+// booking hero's navy gradient with white text. Tailwind and site-theme.css
+// stay render-blocking on purpose, but ~170kB of minified CSS is several
+// seconds of dead-white first paint on slow mobile, which reads as a broken
+// page -- especially on /book, whose hero is dark navy. The inline block
+// paints the brand palette the moment the HTML parses, so the first frame is
+// the right colours instead of white-on-white. The pages themselves changed
+// behind their unchanged pathnames, and a returning visitor holding v30 would
+// otherwise keep last deploy's HTML (the navigation cache is network-first, so
+// this only matters for the brief window before the revalidation lands). Only
+// this bump evicts the old shell for every client.
+const CACHE_VERSION = 'v31';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

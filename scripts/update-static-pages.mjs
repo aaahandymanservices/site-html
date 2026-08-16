@@ -146,6 +146,41 @@ function optimizeFontsAndAssets(html) {
   );
 
   /*
+   * Inline critical palette block.
+   *
+   * Tailwind and site-theme.css are render-blocking on purpose (see the note
+   * above), and together they are ~170kB minified. On a slow mobile connection
+   * that is several seconds of dead-white first paint, which reads as a broken
+   * page -- especially on /book, whose hero is a dark navy section. The fix is
+   * not to defer the stylesheets (that trades the white screen for a layout
+   * shift the comments above already paid to remove) but to inline a tiny
+   * block that paints the brand palette the moment the HTML is parsed: the
+   * body's pale grey, the sticky header's white with its crimson hairline, the
+   * seasonal banner's warm gradient, and the booking hero's navy gradient with
+   * white text. Tailwind then lands and refines, but the first frame is already
+   * the right colours instead of white-on-white.
+   *
+   * The rules use the same literal hex values the source stylesheets declare,
+   * kept low-specificity so Tailwind's utilities and site-theme's rules win
+   * cleanly once they arrive. `id` selectors are used only because the page's
+   * own markup already carries them. This is idempotent: any prior
+   * #aaa-critical-palette block is stripped first so re-runs never stack.
+   */
+  const CRITICAL_PALETTE =
+    '    <style id="aaa-critical-palette">' +
+    'body{background:#f9fafb;color:#111827;margin:0}' +
+    '#site-header{background:#fff;border-bottom:3px solid #a61f2e;box-shadow:0 6px 22px rgba(27,42,74,.08)}' +
+    '#seasonal-banner{background:linear-gradient(100deg,#fff8ef,#fdeedd 48%,#fff6ec);border-bottom:1px solid rgba(27,42,74,.1)}' +
+    '#booking-section.ambient-glow-hero{background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
+    '#booking-section.ambient-glow-hero h1{color:#fff}' +
+    '</style>';
+  html = html.replace(/[ \t]*<style id="aaa-critical-palette">[\s\S]*?<\/style>\r?\n?/gi, '');
+  html = html.replace(
+    /(<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?\s+as=font[^>]*>\r?\n)/i,
+    `$1${CRITICAL_PALETTE}\n`,
+  );
+
+  /*
    * Defer the Netlify-provided reCAPTCHA v2 script.
    *
    * Forms on this site carry `data-netlify-recaptcha="true"`, and Netlify's
