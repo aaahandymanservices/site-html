@@ -5,6 +5,7 @@ import { db } from "../../db/index.js";
 import { contactRequests, seasonalSubscribers } from "../../db/schema.js";
 import { isCertificateRequested } from "../lib/gift-certificate.js";
 import { WRONG_METHOD_MESSAGE } from "../lib/messages.js";
+import { SPAM_REJECTED_MESSAGE, isSpamSubmission, spamFieldsFromForm } from "../lib/spam-guard.js";
 
 /*
  * Receives the /contact "Request a free quote" form. The form posts as
@@ -72,6 +73,12 @@ export default async (request: Request) => {
 
   try {
     const formData = await request.formData();
+
+    // Before any of the work: the form renders a honeypot and a reCAPTCHA
+    // widget, and until now this function read neither of them.
+    if (await isSpamSubmission(spamFieldsFromForm(formData), request)) {
+      return errorJson(SPAM_REJECTED_MESSAGE, 400);
+    }
 
     const customerName = clean(String(formData.get("name") || ""), 120);
     const email = clean(String(formData.get("email") || ""), 160).toLowerCase();
@@ -214,9 +221,12 @@ export default async (request: Request) => {
         photoUrls,
       },
     }, { status: 201 });
-  } catch (err: any) {
+  } catch (err) {
+    // The thrown message is for the logs, not the visitor: what reaches here is
+    // a Postgres or Blobs failure whose text names our tables and stores.
+    console.error("contact quote submission failed", err);
     return errorJson(
-      err.message || "We couldn't send your message just now. Please try again, or call us at (248) 385-3432 and we'll help right away.",
+      "We couldn't send your message just now. Please try again, or call us at (248) 385-3432 and we'll help right away.",
       500,
     );
   }

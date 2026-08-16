@@ -96,9 +96,10 @@ export default async (request: Request) => {
     });
 
     return json({ message: SIGNED_UP_MESSAGE }, { status: 201 });
-  } catch (err: any) {
+  } catch (err) {
+    console.error("seasonal subscription failed", err);
     return errorJson(
-      err.message || "We couldn't sign you up for seasonal reminders. Please try again in a moment, or call (248) 385-3432.",
+      "We couldn't sign you up for seasonal reminders. Please try again in a moment, or call (248) 385-3432.",
       500,
     );
   }

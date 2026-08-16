@@ -94,8 +94,9 @@ export default async (request: Request) => {
 
     const result = await recordRedemption(email, { customerName: name, source });
     return json(result, { status: result.alreadyRedeemed ? 200 : 201 });
-  } catch (err: any) {
-    return errorJson(err.message || "We couldn't check the gift certificate just now. Please try again in a moment.", 500);
+  } catch (err) {
+    console.error("gift certificate lookup failed", err);
+    return errorJson("We couldn't check the gift certificate just now. Please try again in a moment.", 500);
   }
 };
 

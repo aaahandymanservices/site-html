@@ -22,6 +22,15 @@
  */
 
 import { createHash, pbkdf2Sync, randomBytes, timingSafeEqual } from "node:crypto";
+/*
+ * Re-exported below so this module's public surface is unchanged by the move.
+ * The implementation lives in env.ts because the spam guard needs the same
+ * runtime probing and has no business importing it from the admin credential
+ * code.
+ */
+import { getEnv } from "./env.js";
+
+export { getEnv };
 
 const DIGEST = "sha512";
 const KEY_LENGTH = 64;
@@ -38,21 +47,6 @@ export const DEFAULT_ITERATIONS = 210_000;
 
 /** Longest passcode we will process, so an oversized body cannot force work. */
 export const MAX_PASSCODE_LENGTH = 200;
-
-export const getEnv = (name: string): string => {
-  try {
-    if (typeof Netlify !== "undefined" && Netlify.env) {
-      return Netlify.env.get(name) ?? "";
-    }
-  } catch {}
-  try {
-    const globalProcess = (globalThis as any).process;
-    if (globalProcess && globalProcess.env) {
-      return globalProcess.env[name] ?? "";
-    }
-  } catch {}
-  return "";
-};
 
 /**
  * Builds a `pbkdf2-sha512$iterations$salt$hash` verifier for a passcode. Used by

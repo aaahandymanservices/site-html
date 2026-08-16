@@ -4,6 +4,16 @@ import { db } from "../../db/index.js";
 import { homeCareSubscriptions } from "../../db/schema.js";
 import { WRONG_METHOD_MESSAGE } from "../lib/messages.js";
 import { resolveServiceLocation } from "../lib/service-area.js";
+import {
+  SPAM_REJECTED_MESSAGE,
+  isSpamSubmission,
+  spamFieldsFromForm,
+  spamFieldsFromJson,
+  type SpamFields,
+} from "../lib/spam-guard.js";
+
+/** The name this form gives its honeypot input; see public/services.html. */
+const HONEYPOT_FIELD = "plan-bot-field";
 
 const json = (body: unknown, init?: ResponseInit) =>
   Response.json(body, {
@@ -64,10 +74,13 @@ export default async (request: Request) => {
     let plan = "";
     let billingCycle = "";
     let notes = "";
+    // Filled from whichever body shape arrived, then checked once below.
+    let spamFields: SpamFields;
 
     const contentType = request.headers.get("content-type") || "";
     if (contentType.includes("application/json")) {
       const body = await request.json();
+      spamFields = spamFieldsFromJson(body, HONEYPOT_FIELD);
       customerName = String(body.customerName || body.name || "").trim();
       email = String(body.email || "").trim().toLowerCase();
       phone = String(body.phone || "").trim();
@@ -79,6 +92,7 @@ export default async (request: Request) => {
       notes = String(body.notes || body.message || "").trim();
     } else {
       const formData = await request.formData();
+      spamFields = spamFieldsFromForm(formData, HONEYPOT_FIELD);
       customerName = String(formData.get("customerName") || formData.get("name") || "").trim();
       email = String(formData.get("email") || "").trim().toLowerCase();
       phone = String(formData.get("phone") || "").trim();
@@ -88,6 +102,12 @@ export default async (request: Request) => {
       plan = String(formData.get("plan") || "").trim().toLowerCase();
       billingCycle = String(formData.get("billingCycle") || formData.get("billing-cycle") || "monthly").trim().toLowerCase();
       notes = String(formData.get("notes") || formData.get("message") || "").trim();
+    }
+
+    // Before any of the work: the plans form renders a honeypot and a
+    // reCAPTCHA widget, and until now this function read neither of them.
+    if (await isSpamSubmission(spamFields, request)) {
+      return errorJson(SPAM_REJECTED_MESSAGE, 400);
     }
 
     if (!customerName || !email || !phone || !plan) {
@@ -188,9 +208,10 @@ export default async (request: Request) => {
       },
       { status: 201 },
     );
-  } catch (err: any) {
+  } catch (err) {
+    console.error("home care subscription failed", err);
     return errorJson(
-      err.message || "We couldn't save your plan request just now. Please try again, or call us at (248) 385-3432.",
+      "We couldn't save your plan request just now. Please try again, or call us at (248) 385-3432.",
       500,
     );
   }

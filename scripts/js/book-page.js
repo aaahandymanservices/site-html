@@ -1149,6 +1149,19 @@
               requestData.append('firstServiceGiftCertificate', claimedCertificate ? 'on' : 'off');
               if (uploadPhoto) requestData.append('photo', uploadPhoto, uploadPhoto.name);
 
+              /*
+               * The honeypot and the reCAPTCHA token the widget wrote into the
+               * form. This body is assembled field by field rather than from
+               * `new FormData(bookingForm)`, so neither came along on its own,
+               * and /api/booking had nothing to check. The mirror post to
+               * /book.html below deliberately leaves the token out: it is
+               * single-use, and the API is the one verifying it.
+               */
+              const bookingHoneypot = bookingForm.querySelector('[name="bot-field"]');
+              if (bookingHoneypot) requestData.append('bot-field', bookingHoneypot.value);
+              const bookingCaptcha = bookingForm.querySelector('[name="g-recaptcha-response"]');
+              if (bookingCaptcha) requestData.append('g-recaptcha-response', bookingCaptcha.value);
+
               const response = await fetch('/api/booking', {
                   method: 'POST',
                   body: requestData
