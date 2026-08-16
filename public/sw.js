@@ -139,7 +139,7 @@
 // contact.html and this version refetches the script for every client;
 // otherwise a returning visitor holding v26 would keep the old script and the
 // dropzone stays inert on click.
-const CACHE_VERSION = 'v27';
+const CACHE_VERSION = 'v28';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
