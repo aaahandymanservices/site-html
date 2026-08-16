@@ -149,7 +149,16 @@
 // stamp in update-static-pages.mjs) refetches the script for every client;
 // otherwise a returning visitor holding v27 would keep the old script and the
 // dropzone's chosen-state UI would never render.
-const CACHE_VERSION = 'v28';
+// v29 lands the narrow-phone overflow fixes. The pages were being cut off at
+// the right edge on a 320-360px screen -- the contact, customer care, booking,
+// and service area layouts all had a child whose intrinsic minimum width was
+// wider than the screen, and <body> is `overflow-x: hidden`, so the excess was
+// clipped rather than reachable. The repairs are in /css/site-theme.css, in
+// /js/site.js (which now keeps the fee tooltips inside the viewport), and in
+// the markup of the affected pages. Cached bytes change behind unchanged
+// pathnames once again, so a returning visitor holding v28 would otherwise
+// pair this deploy's markup with last deploy's stylesheet and stay cut off.
+const CACHE_VERSION = 'v29';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
