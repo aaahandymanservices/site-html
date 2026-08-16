@@ -43,7 +43,7 @@ const ICONS_CSS = '/css/icons.css?v=20260815a';
  * worker keys assets by pathname with ?v= removed, so public/sw.js has its own
  * CACHE_VERSION that has to move with a stylesheet change as well.
  */
-const ASSET_VERSION = '20260815e';
+const ASSET_VERSION = '20260816a';
 const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
 const SCRIPT_VERSIONS = new Map([
   ['site.js', ASSET_VERSION],
@@ -70,11 +70,11 @@ const SCRIPT_VERSIONS = new Map([
   // is versioned here. Its own stamp is independent of ASSET_VERSION because it
   // shipped in a later deploy than the rest of the scripts; this bump carries
   // the browser-side photo resizing that lets phone pictures upload at all.
-  ['ai-estimate-page.js', '20260815d'],
+  ['ai-estimate-page.js', '20260816a'],
   // Owner access and review deletion now use inline <dialog> elements
   // instead of window.prompt/confirm; a stale cached copy would leave the
   // Owner Access button inert on the new /reviews page.
-  ['reviews-page.js', '20260815d'],
+  ['reviews-page.js', '20260816a'],
 ]);
 const ASYNC_ICONS_CSS =
   `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +
@@ -107,10 +107,80 @@ function optimizeFontsAndAssets(html) {
   // the critical window. Their stylesheet and fonts can arrive after the first
   // paint, while noscript keeps the icons available without JavaScript.
   html = html.replace(/[ \t]*<link\s+rel="preload"\s+href="\/fonts\/fa-(?:solid-900|brands-400)\.woff2"[^>]*>\r?\n/gi, '');
+
+  /*
+   * Preload the two critical self-hosted body fonts. Archivo is the display
+   * face (headings, brand) and Roboto is the body text -- tailwind-input.css
+   * sets Roboto on <body>, so the first paint blocks on it unless the
+   * browser starts the fetch early. Both are tiny variable-font woff2 files
+   * served immutable for a year, so this is one round trip on a first visit
+   * and free after that. The `crossorigin` attribute is required for fonts
+   * (they fetch with CORS mode) or the preload is wasted and the browser
+   * re-requests the file.
+   *
+   * This is idempotent: any existing preload for either font (with or without
+   * a type attribute) is normalised to exactly one tagged copy so re-runs of
+   * the build never stack duplicates. The attributes are matched quote-agnost-
+   * ically (the unminified source uses `rel=preload`, the minifier writes
+   * `rel="preload"`).
+   */
+  const FONT_PRELOADS =
+    '    <link rel=preload href=/fonts/archivo-latin.woff2 as=font type=font/woff2 crossorigin>\n' +
+    '    <link rel=preload href=/fonts/roboto-latin.woff2 as=font type=font/woff2 crossorigin>';
+  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/archivo-latin\.woff2["']?[^>]*>\r?\n/gi, '');
+  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?[^>]*>\r?\n/gi, '');
   html = html.replace(
-    /[ \t]*<link\s+rel="preload"\s+href="\/fonts\/roboto-latin\.woff2"[^>]*>\r?\n/gi,
-    '',
+    /(<meta\s+name=["']?viewport["']?\s+content=["']?[^"'>]*["']?>\r?\n)/i,
+    `$1${FONT_PRELOADS}\n`,
   );
+
+  /*
+   * Defer the Netlify-provided reCAPTCHA v2 script.
+   *
+   * Forms on this site carry `data-netlify-recaptcha="true"`, and Netlify's
+   * build bot injects `<script src="https://www.google.com/recaptcha/api.js?
+   * ...">` into the page during post-processing -- after this build step
+   * runs. That script is render-blocking and parses ~490ms of reCAPTCHA /
+   * gstatic JavaScript on the main thread before the visitor has even
+   * looked at the form, which is the single biggest Lighthouse performance
+   * bottleneck on '/'.
+   *
+   * The widget is not needed until the visitor interacts with the form, so
+   * this tiny inline shim (runs synchronously in <head>, before any
+   * reCAPTCHA script tag the build bot appends) monkey-patches
+   * `document.createElement` to intercept script elements whose src points
+   * at google.com/recaptcha or gstatic.com/recaptcha. The intercepted
+   * script is held in a queue and only inserted into the DOM when the user
+   * focuses, clicks, or types inside a `[data-netlify-recaptcha]` form, or
+   * as a 6s idle fallback so the widget still renders on its own if the
+   * page is left open. The reCAPTCHA API itself loads asynchronously once
+   * injected, and the widget renders into the existing
+   * `[data-netlify-recaptcha]` div exactly as it would without the shim.
+   *
+   * The guard (`window.__aaaRecaptchaDeferrer`) makes this idempotent: a
+   * re-run of the build that matches the already-injected block leaves a
+   * single copy in place rather than stacking a second one.
+   */
+  const RECAPTCHA_DEFER_MARKER = 'window.__aaaRecaptchaDeferrer';
+  // Strip any prior version of the deferrer (it may have landed before
+  // <meta charset> in an earlier build) so the re-insert below always puts
+  // a single, current copy in the right place.
+  html = html.replace(/[ \t]*<script>[^<]*__aaaRecaptchaDeferrer[^<]*<\/script>\r?\n/gi, '');
+  const RECAPTCHA_DEFER_SCRIPT =
+      '    <script>(()=>{if(window.__aaaRecaptchaDeferrer)return;window.__aaaRecaptchaDeferrer=true;' +
+      'var pending=[],armed=false,origCreate=document.createElement.bind(document);' +
+      'var RE=/^https?:\\/\\/(www\\.)?google\\.com\\/recaptcha\\/|^https?:\\/\\/(www\\.)?gstatic\\.com\\/recaptcha\\//;' +
+      'var ds=Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype,"src"),oset=ds&&ds.set;' +
+      'function flush(){if(armed)return;armed=true;var p=pending;pending=[];p.forEach(function(s){var v=s._aaaRealSrc;if(v){s._aaaRealSrc=null;oset.call(s,v)}})}' +
+      'document.createElement=function(tag){var el=origCreate(tag);if(typeof tag==="string"&&tag.toLowerCase()==="script"&&ds&&oset){' +
+      'Object.defineProperty(el,"src",{get:ds.get,set:function(v){if(typeof v==="string"&&RE.test(v)){el._aaaRealSrc=v;pending.push(el);' +
+      'if(!armed){"requestIdleCallback"in window?requestIdleCallback(function(){setTimeout(flush,6e3)},{timeout:1e4}):setTimeout(flush,6e3);' +
+      '["focusin","click","input","keydown","touchstart"].forEach(function(e){document.addEventListener(e,function h(){flush();document.removeEventListener(e,h,{capture:true})},{once:true,capture:true,passive:true})})}return}oset.call(el,v)},configurable:true,enumerable:true})}return el};' +
+      '})()</script>';
+    html = html.replace(
+      /(href=["']?\/fonts\/roboto-latin\.woff2["']?\s+as=font[^>]*>\r?\n)/i,
+      `$1${RECAPTCHA_DEFER_SCRIPT}\n`,
+    );
   // The lookbehind matters: without it this pattern also matches the icons
   // link *inside* the <noscript> fallback it is meant to write, replacing the
   // fallback's contents with a second async block and leaving the surrounding

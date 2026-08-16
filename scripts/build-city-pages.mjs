@@ -181,6 +181,7 @@ function page(city) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Self-hosted brand fonts; @font-face lives in site-theme.css -->
     <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
 
     <title>${esc(title)}</title>
 
