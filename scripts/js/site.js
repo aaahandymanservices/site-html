@@ -13,6 +13,47 @@
     updateBackToTop();
   }
 
+  // --- Fee tooltips: keep the bubble on screen ---
+  // The bubble is centred on its trigger, and a good number of triggers sit at
+  // the end of a price row, so on a phone the right side of the bubble lands
+  // past the edge of the screen -- where `overflow-x: hidden` on <body> cuts
+  // it off instead of letting the visitor scroll to it. Measuring it as it
+  // opens and nudging it back by however far it sticks out keeps every word
+  // readable while leaving it as close to its trigger as it can be. The
+  // stylesheet reads the offset through `--fee-tip-shift` and centres the
+  // bubble as before when this never runs.
+  const feeTips = document.querySelectorAll('.fee-tip');
+  if (feeTips.length) {
+    const GUTTER = 8;
+
+    const positionBubble = (tip) => {
+      const bubble = tip.querySelector('.fee-tip__bubble');
+      if (!bubble) return;
+
+      // Measure from the centred position, not from wherever the last opening
+      // left it, or each open would compound the one before it.
+      bubble.style.setProperty('--fee-tip-shift', '0px');
+
+      const viewport = document.documentElement.clientWidth;
+      const rect = bubble.getBoundingClientRect();
+      let shift = 0;
+
+      if (rect.right > viewport - GUTTER) shift = viewport - GUTTER - rect.right;
+      // A bubble wider than the screen would otherwise be pushed off the left
+      // edge by the correction it just got on the right; the left edge wins.
+      if (rect.left + shift < GUTTER) shift = GUTTER - rect.left;
+
+      if (shift) bubble.style.setProperty('--fee-tip-shift', `${Math.round(shift)}px`);
+    };
+
+    feeTips.forEach((tip) => {
+      // Both openings the stylesheet recognises: hover, and the focus a tap or
+      // the keyboard puts on the trigger.
+      tip.addEventListener('pointerenter', () => positionBubble(tip));
+      tip.addEventListener('focusin', () => positionBubble(tip));
+    });
+  }
+
   // --- Mobile Navigation Menu ---
   const menuButton = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');

@@ -2420,6 +2420,61 @@ body > header.bg-gradient-to-r::after {
 }
 
 /* ============================================================
+   Narrow phones: keeping intrinsic minimums inside the viewport
+
+   <body> carries `overflow-x: hidden`, so content wider than the screen is not
+   something the visitor can scroll to -- it is cut off at the right edge and
+   gone. That makes an inflated *intrinsic minimum* the more damaging of the
+   two ways to overflow. A grid item defaults to `min-width: auto`, so one
+   child that refuses to shrink raises the floor of the track it sits in, and
+   the column, the card drawn around it, and every sibling in that column all
+   stretch past the screen together -- the contact page's details, hours, and
+   emergency cards were hanging 37px off the right of a 320px viewport because
+   of a single element in the first of them.
+
+   The two rules below are what those children needed. Both are sizing fixes
+   only: neither changes how anything renders once there is room for it.
+   ============================================================ */
+
+/*
+ * Email addresses run 26-28 characters with no space to break at, which is
+ * 235px of unbreakable word. `overflow-wrap: break-word` -- Tailwind's
+ * `break-words`, already on these links -- wraps that address when a line is
+ * too narrow for it, but by definition it does not lower the element's
+ * min-content size, so the address still counts as one 235px word when the
+ * track floor is computed. `anywhere` is the variant that does count, and it
+ * wraps identically wherever the width is there.
+ *
+ * An attribute selector rather than `:where()`: this has to outrank the
+ * `break-words` utility sitting on the same links.
+ */
+a[href^="mailto:"] {
+  overflow-wrap: anywhere;
+}
+
+/*
+ * Form controls come with a UA-supplied intrinsic width, and `1fr` is
+ * shorthand for `minmax(auto, 1fr)` -- a track that can never be narrower
+ * than the widest thing inside it. The booking form's icon-and-field rows are
+ * `grid-cols-[2.25rem_1fr]`, and its `type="date"` field is the widest thing
+ * they hold: Chrome measures the date editor in the input's shadow tree at
+ * 188px, which neither `width: 100%` nor `min-width: 0` on the input can
+ * lower, because it is an intrinsic size rather than an automatic minimum.
+ * That floor put the fieldset 11px past the right edge of a 320px screen.
+ *
+ * Giving the field track a floor of zero lets the row take the width it is
+ * actually offered. Nothing is lost by it: the date editor stays legible down
+ * to about 116px and the track hands it 128px at that screen size.
+ *
+ * Matched on the class substring rather than an escaped `.grid-cols-\[...\]`,
+ * which is unreadable and breaks silently if the arbitrary value is ever
+ * retyped with different spacing.
+ */
+#booking-form [class*="grid-cols-[2.25rem"] {
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+}
+
+/* ============================================================
    1-Year Workmanship Guarantee band
 
    Three columns of very different content share this row: a seal above a
@@ -3223,7 +3278,13 @@ html.bw-open body {
   z-index: 30;
   width: 17rem;
   max-width: 70vw;
-  transform: translateX(-50%);
+  /* Centred on its trigger by default. Several of these triggers sit at the
+     end of a price row, which on a phone puts the right half of a 272px
+     bubble past the edge of the screen -- and <body> is `overflow-x: hidden`,
+     so that half is cut off rather than scrolled to. site.js measures the
+     bubble as it opens and sets `--fee-tip-shift` to however far it needs to
+     come back inside; with no script it stays exactly where it was. */
+  transform: translateX(calc(-50% + var(--fee-tip-shift, 0px)));
   padding: 0.625rem 0.75rem;
   border-radius: 0.625rem;
   border: 1px solid rgba(148, 163, 184, 0.3);
@@ -4823,7 +4884,13 @@ header.ambient-glow-hero::after,
 
 .zone-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  /* `minmax(340px, 1fr)` reads as a preference but behaves as a hard floor:
+     under a 388px viewport the track stays 340px while the container shrinks
+     around it, so both zone cards hang off the right of the screen -- 44px of
+     them at 320px. Wrapping the floor in `min(100%, ...)` keeps the 340px
+     wherever it fits and lets the track fall back to the container width
+     where it does not, which is the same guard the card grids above use. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
   gap: 2rem;
 }
 
