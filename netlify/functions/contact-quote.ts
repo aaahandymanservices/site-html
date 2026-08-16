@@ -13,17 +13,20 @@ import { WRONG_METHOD_MESSAGE } from "../lib/messages.js";
  * key, and the keys are written to the new contact_requests row so the owner
  * can see the scope before calling the customer back.
  *
- * Netlify caps a buffered function request/response at 6 MB. The browser
- * downscales larger source photos before sending them (see contact-page.js),
- * and MAX_IMAGE_SIZE is set below the platform ceiling to leave room for the
- * text fields and the multipart boundaries.
+ * Netlify caps a buffered function request/response at 6 MB. What the visitor
+ * is allowed to pick is the site-wide rule -- JPG, PNG, WebP or GIF at 10 MB
+ * each -- and the browser resizes anything larger before sending it (see
+ * contact-page.js and photo-upload.js). MAX_IMAGE_SIZE below is therefore a
+ * backstop against a request that skipped that step, not the ceiling the
+ * customer was shown, and it sits under the platform limit to leave room for
+ * five photos plus the text fields and the multipart boundaries.
  */
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 const MAX_PHOTOS = 5;
-const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/heic", "image/heif"]);
-// HEIC files often arrive without a recognised MIME type on some browsers, so
-// the extension is the fallback signal that the file is one we accept.
-const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|heic|heif)$/i;
+const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
+// Files dragged from a file manager sometimes arrive without a recognised MIME
+// type, so the extension is the fallback signal that the file is one we accept.
+const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i;
 const MAX_MESSAGE_LENGTH = 8000;
 const MAX_CITY_LENGTH = 80;
 
@@ -47,8 +50,7 @@ const extensionFor = (file: File) => {
   if (fromType === "jpeg") return "jpg";
   if (fromType === "png") return "png";
   if (fromType === "webp") return "webp";
-  if (fromType === "heic") return "heic";
-  if (fromType === "heif") return "heif";
+  if (fromType === "gif") return "gif";
   const match = file.name.match(IMAGE_EXTENSIONS);
   return match ? match[1].replace("jpeg", "jpg").toLowerCase() : "jpg";
 };
@@ -115,10 +117,10 @@ export default async (request: Request) => {
 
     for (const photo of photos) {
       if (photo.size > MAX_IMAGE_SIZE) {
-        return errorJson(`"${photo.name}" is over the 10 MB per-photo limit. Please attach a smaller one, or email it to contact@aaahandyman.services.`, 400);
+        return errorJson(`"${photo.name}" was too large to send. Please attach a smaller one, or email it to contact@aaahandyman.services.`, 400);
       }
       if (!isValidImage(photo)) {
-        return errorJson(`"${photo.name}" is not a supported format. Please upload a JPG, PNG, HEIC, or WebP image.`, 400);
+        return errorJson(`"${photo.name}" is not a supported format. Please upload a JPG, PNG, WebP or GIF image.`, 400);
       }
     }
 

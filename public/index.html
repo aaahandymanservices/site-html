@@ -1185,8 +1185,9 @@
                             <i class="fas fa-camera text-2xl text-red-600" aria-hidden=true></i>
                             <span class="quote-photo-label font-bold text-blue-900">Add Photos (Optional)</span>
                             <span class="text-xs text-gray-600">A quick snap helps us quote faster — no photo needed to send.</span>
+                            <span class="text-xs text-gray-500">JPG, PNG, WebP or GIF · 10 MB max each</span>
                         </label>
-                        <input id=q-photos type=file name=photos accept=image/* multiple capture=environment class=sr-only>
+                        <input id=q-photos type=file name=photos accept=image/jpeg,image/png,image/webp,image/gif multiple capture=environment class=sr-only>
                     </div>
                     <div data-netlify-recaptcha=true></div>
                     <button type=submit class="w-full bg-red-600 hover:bg-red-700 py-5 text-xl font-bold rounded-3xl transition flex items-center justify-center gap-3 text-white">Get My Free Quote <i class="fas fa-arrow-right" aria-hidden=true></i></button>
@@ -1475,6 +1476,7 @@
             </div>
         </div>
     </dialog>
+    <script src="/js/photo-upload.js?v=20260816a" defer></script>
     <script src="/js/home.js?v=20260816a" defer></script>
     <script src="/js/site.js?v=20260816a" defer></script>
     <script src="/js/gift-certificate.js?v=20260816a" defer></script>

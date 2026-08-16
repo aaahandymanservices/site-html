@@ -4,6 +4,7 @@ import { getStore } from "@netlify/blobs";
 const contentTypeFor = (key: string) => {
   if (key.endsWith(".png")) return "image/png";
   if (key.endsWith(".webp")) return "image/webp";
+  if (key.endsWith(".gif")) return "image/gif";
   return "image/jpeg";
 };
 

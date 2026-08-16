@@ -159,13 +159,18 @@
 
   /*
    * Netlify Forms rejects the whole request over 8MB, and a photo straight off
-   * a modern phone can clear that on its own. Catching it here means the
-   * visitor is told which file is the problem while they still have the form in
-   * front of them, instead of losing a filled-in report to an opaque failure.
-   * The ceiling is set below the platform limit to leave room for the text
-   * fields and the multipart boundaries.
+   * a modern phone can clear that on its own. The visitor is still allowed the
+   * site-wide 10 MB (see scripts/js/photo-upload.js) -- anything over the
+   * budget below is resized in the browser on submit, so the ceiling on the
+   * label is the one that applies and the platform limit stays invisible.
+   * Files the browser can't shrink, and files that break the rule outright,
+   * are named while the form is still in front of them instead of losing a
+   * filled-in report to an opaque failure.
    */
-  const MAX_PHOTO_BYTES = 7 * 1024 * 1024;
+  const photoRule = window.AAAPhotoUpload;
+  // The wire budget, set below the platform limit to leave room for the text
+  // fields and the multipart boundaries.
+  const UPLOAD_SAFE_BYTES = 6 * 1024 * 1024;
   const photoInput = document.getElementById('care-photo');
   const photoError = document.getElementById('care-photo-error');
   const photoEmpty = document.getElementById('care-photo-empty');
@@ -213,10 +218,15 @@
   const validatePhoto = () => {
       const file = photoInput && photoInput.files && photoInput.files[0];
       if (!file) return showPhotoError('');
-      if (file.size > MAX_PHOTO_BYTES) {
-          const megabytes = (file.size / (1024 * 1024)).toFixed(1);
+      const rejection = photoRule.rejectionFor(file);
+      if (rejection) {
+          // The email fallback is only advice worth giving when the file is
+          // simply too big; for a wrong format it would be a non-sequitur.
+          const overSize = file.size > photoRule.MAX_BYTES;
           return showPhotoError(
-              `That image is ${megabytes} MB, which is over the 7 MB limit. Please attach a smaller one, or email it to contact@aaahandyman.services.`
+              overSize
+                  ? `${rejection} Please attach a smaller one, or email it to contact@aaahandyman.services.`
+                  : rejection
           );
       }
       return showPhotoError('');
@@ -236,7 +246,7 @@
 
   renderPhotoState();
 
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', async function (e) {
       e.preventDefault();
       if (submitButton && submitButton.disabled) return;
 
@@ -277,10 +287,37 @@
        * url-encoded: the browser has to set multipart/form-data itself so it
        * can put the boundary in, and a hand-set header would strip it and take
        * the photo with it.
+       *
+       * The photo is swapped for a resized copy first when it is over what
+       * Netlify Forms will take. The visitor was promised 10 MB, and the form
+       * post has less room than that once the report text is counted.
        */
+      const body = new FormData(form);
+      const chosenPhoto = photoInput && photoInput.files && photoInput.files[0];
+      if (chosenPhoto) {
+          try {
+              const prepared = await photoRule.prepare(chosenPhoto, UPLOAD_SAFE_BYTES);
+              if (prepared !== chosenPhoto) {
+                  body.set('photo', prepared, prepared.name);
+              }
+          } catch (error) {
+              showPhotoError(error instanceof Error ? error.message : 'That photo could not be prepared. Please choose a different image.');
+              setStatus('Your report is ready to send once that photo is sorted out.', 'error');
+              if (submitButton) {
+                  submitButton.disabled = false;
+                  submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+              }
+              if (photoInput) {
+                  photoInput.focus();
+                  photoInput.scrollIntoView({ block: 'center', behavior: 'smooth' });
+              }
+              return;
+          }
+      }
+
       fetch('/customer-care.html', {
           method: 'POST',
-          body: new FormData(form)
+          body: body
       })
       .then(response => {
           if (response.ok) {

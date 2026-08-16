@@ -992,10 +992,11 @@
   const bookingPhotoName = document.getElementById('booking-photo-name');
   const bookingPhotoRemove = document.getElementById('booking-photo-remove');
   const bookingPhotoError = document.getElementById('booking-photo-error');
-  const MAX_SOURCE_PHOTO_BYTES = 10 * 1024 * 1024;
-  const MAX_UPLOAD_PHOTO_BYTES = 5 * 1024 * 1024;
-  const MAX_PHOTO_DIMENSION = 2000;
-  const BOOKING_PHOTO_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+  const photoRule = window.AAAPhotoUpload;
+  // One photo rides along with the booking's text fields in a single buffered
+  // function request, capped at 6 MB, so this is the budget on the wire --
+  // separate from the 10 MB the visitor is allowed to pick.
+  const MAX_UPLOAD_PHOTO_BYTES = 4.5 * 1024 * 1024;
   /*
    * The photo is optional, and the three ways the browser can fail to downscale
    * one are indistinguishable to whoever picked it -- so they get one message,
@@ -1027,14 +1028,10 @@
           clearBookingPhoto();
           return;
       }
-      if (!BOOKING_PHOTO_TYPES.has(file.type)) {
+      const rejection = photoRule.rejectionFor(file);
+      if (rejection) {
           clearBookingPhoto();
-          showBookingPhotoError('Choose a JPG, PNG, or WebP image.');
-          return;
-      }
-      if (file.size > MAX_SOURCE_PHOTO_BYTES) {
-          clearBookingPhoto();
-          showBookingPhotoError('Choose a photo that is 10 MB or smaller.');
+          showBookingPhotoError(rejection);
           return;
       }
       if (bookingPhotoPreviewUrl) URL.revokeObjectURL(bookingPhotoPreviewUrl);
@@ -1049,40 +1046,14 @@
       showBookingPhotoError();
   };
 
-  const prepareBookingPhoto = (file) => new Promise((resolve, reject) => {
-      if (!(file instanceof File) || file.size <= MAX_UPLOAD_PHOTO_BYTES) {
-          resolve(file);
-          return;
-      }
-      const url = URL.createObjectURL(file);
-      const image = new Image();
-      image.onload = () => {
-          URL.revokeObjectURL(url);
-          const scale = Math.min(1, MAX_PHOTO_DIMENSION / Math.max(image.width, image.height));
-          const canvas = document.createElement('canvas');
-          canvas.width = Math.max(1, Math.round(image.width * scale));
-          canvas.height = Math.max(1, Math.round(image.height * scale));
-          const context = canvas.getContext('2d');
-          if (!context) {
-              reject(new Error(PHOTO_UNREADABLE_MESSAGE));
-              return;
-          }
-          context.drawImage(image, 0, 0, canvas.width, canvas.height);
-          canvas.toBlob((blob) => {
-              if (!blob) {
-                  reject(new Error(PHOTO_UNREADABLE_MESSAGE));
-                  return;
-              }
-              const name = `${(file.name || 'repair-photo').replace(/\.[^.]+$/, '')}.jpg`;
-              resolve(new File([blob], name, { type: 'image/jpeg' }));
-          }, 'image/jpeg', 0.82);
-      };
-      image.onerror = () => {
-          URL.revokeObjectURL(url);
-          reject(new Error(PHOTO_UNREADABLE_MESSAGE));
-      };
-      image.src = url;
-  });
+  const prepareBookingPhoto = (file) =>
+      photoRule.prepare(file, MAX_UPLOAD_PHOTO_BYTES).catch((error) => {
+          // An oversized GIF names its own fix, so that message goes through
+          // as-is. Everything else is one of the interchangeable ways decoding
+          // can fail, and gets the wording that mentions submitting without.
+          if (error && error.code === 'gif-too-large') throw error;
+          throw new Error(PHOTO_UNREADABLE_MESSAGE);
+      });
 
   bookingPhoto?.addEventListener('change', updateBookingPhotoPreview);
   bookingPhotoRemove?.addEventListener('click', (event) => {
@@ -1159,10 +1130,9 @@
 
           try {
               const sourcePhoto = bookingPhoto?.files?.[0] || null;
+              // prepareBookingPhoto either returns a file inside the budget or
+              // throws, so there is nothing left to check on the way out.
               const uploadPhoto = sourcePhoto ? await prepareBookingPhoto(sourcePhoto) : null;
-              if (uploadPhoto && uploadPhoto.size > MAX_UPLOAD_PHOTO_BYTES) {
-                  throw new Error('That photo is too large to send. Please choose one under 5 MB.');
-              }
 
               const requestData = new FormData();
               requestData.append('customerName', name);

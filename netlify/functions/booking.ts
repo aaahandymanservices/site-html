@@ -12,8 +12,12 @@ import {
 import { resolveServiceLocation } from "../lib/service-area.js";
 import { WRONG_METHOD_MESSAGE } from "../lib/messages.js";
 
+// The visitor may pick any photo up to the site-wide 10 MB (see
+// scripts/js/photo-upload.js); book-page.js resizes anything larger before it
+// is sent. This is the transport backstop under Netlify's 6 MB buffered
+// request cap, not the ceiling shown on the form.
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
-const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
 const MAX_ADDRESS_LENGTH = 160;
 const MAX_CITY_LENGTH = 80;
 
@@ -167,11 +171,11 @@ export default async (request: Request) => {
     city = (location?.city || city).slice(0, MAX_CITY_LENGTH);
 
     if (photo && photo.size > MAX_IMAGE_SIZE) {
-      return errorJson("The repair photo must be 5 MB or smaller.", 400);
+      return errorJson("That repair photo was too large to send. Please choose a smaller one, or submit without it.", 400);
     }
 
     if (photo && !IMAGE_TYPES.has(photo.type)) {
-      return errorJson("Upload a JPG, PNG, or WebP repair photo.", 400);
+      return errorJson("Upload a JPG, PNG, WebP or GIF repair photo.", 400);
     }
 
     let photoKey: string | null = null;

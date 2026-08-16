@@ -247,68 +247,17 @@
   let lastFocusedBeforeLightbox = null;
   const prefersReducedMotion = () =>
       Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  const MAX_SOURCE_BYTES = 10 * 1024 * 1024;
-  // A buffered Netlify function request is capped at 6 MB, so the bytes we
-  // actually put on the wire have to stay well under that once multipart
-  // overhead and the text fields are added.
-  const UPLOAD_SAFE_BYTES = 4 * 1024 * 1024;
-  const MAX_IMAGE_DIMENSION = 2000;
-  const PHOTO_TOO_BIG_MESSAGE = 'That photo is too large to upload. Please choose a smaller one, or save it as a JPG first.';
-
-  const loadImageFile = (file) => new Promise((resolve, reject) => {
-      const url = URL.createObjectURL(file);
-      const img = new Image();
-      img.onload = () => {
-          URL.revokeObjectURL(url);
-          resolve(img);
-      };
-      img.onerror = () => {
-          URL.revokeObjectURL(url);
-          reject(new Error('That image could not be processed. Please try a different photo.'));
-      };
-      img.src = url;
-  });
-
-  const canvasToJpeg = (canvas, quality) =>
-      new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', quality));
+  const photoRule = window.AAAPhotoUpload;
+  // A buffered Netlify function request is capped at 6 MB, and this form sends
+  // up to three photos plus the rating and review text in one POST, so the
+  // per-photo budget on the wire has to leave room for the other two.
+  const UPLOAD_SAFE_BYTES = 1.6 * 1024 * 1024;
 
   // Photos straight off a phone routinely outweigh what a single function
-  // request can carry, so anything over the safe size is downscaled and
-  // re-encoded until it fits. Animated GIFs can't survive a canvas
-  // round-trip, so they are only ever passed through as-is.
-  const preparePhotoForUpload = async (file) => {
-      if (!(file instanceof File) || file.size === 0) return file;
-      if (file.size <= UPLOAD_SAFE_BYTES) return file;
-      if (file.type === 'image/gif') throw new Error(PHOTO_TOO_BIG_MESSAGE);
-
-      const img = await loadImageFile(file);
-      let dimension = MAX_IMAGE_DIMENSION;
-      let quality = 0.85;
-
-      // Each pass shrinks harder. A few rounds is plenty to bring any
-      // camera photo under the limit without softening a normal one.
-      for (let attempt = 0; attempt < 5; attempt += 1) {
-          const scale = Math.min(1, dimension / Math.max(img.width, img.height));
-          const canvas = document.createElement('canvas');
-          canvas.width = Math.max(1, Math.round(img.width * scale));
-          canvas.height = Math.max(1, Math.round(img.height * scale));
-          const ctx = canvas.getContext('2d');
-          if (!ctx) throw new Error(PHOTO_TOO_BIG_MESSAGE);
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-          const blob = await canvasToJpeg(canvas, quality);
-          if (!blob) throw new Error(PHOTO_TOO_BIG_MESSAGE);
-          if (blob.size <= UPLOAD_SAFE_BYTES) {
-              const name = `${(file.name || 'photo').replace(/\.[^.]+$/, '')}.jpg`;
-              return new File([blob], name, { type: 'image/jpeg' });
-          }
-
-          dimension = Math.round(dimension * 0.75);
-          quality = Math.max(0.5, quality - 0.1);
-      }
-
-      throw new Error(PHOTO_TOO_BIG_MESSAGE);
-  };
+  // request can carry, so anything over the budget is downscaled and
+  // re-encoded by the shared helper. Animated GIFs can't survive a canvas
+  // round-trip, so it passes those through as-is or refuses them outright.
+  const preparePhotoForUpload = (file) => photoRule.prepare(file, UPLOAD_SAFE_BYTES);
   const ratingLabels = {
       '1': 'Disappointing',
       '2': 'Could be better',
@@ -1694,8 +1643,9 @@
       input.addEventListener('change', () => {
           const file = input.files?.[0];
           if (!file) return;
-          if (!file.type.startsWith('image/')) {
-              showReviewsMessage('Please choose an image file (JPG, PNG, WebP, or GIF).', true);
+          const rejection = photoRule.rejectionFor(file);
+          if (rejection) {
+              showReviewsMessage(rejection, true);
               input.value = '';
               return;
           }
@@ -1752,9 +1702,15 @@
           // Drop every dragged image into consecutive free slots. Once the
           // three slots are full, extra files are ignored with a message.
           let added = 0;
+          let full = false;
+          const rejections = [];
           for (const file of files) {
-              if (!file.type.startsWith('image/')) continue;
-              if (nextFreeSlot() === -1) break;
+              const rejection = photoRule.rejectionFor(file);
+              if (rejection) {
+                  rejections.push(rejection);
+                  continue;
+              }
+              if (nextFreeSlot() === -1) { full = true; break; }
               assignPhotoToSlot(file);
               added += 1;
           }
@@ -1762,8 +1718,12 @@
               renderPhotoPreviews();
               syncPhotoRequired();
           }
-          if (files.length > added) {
-              showReviewsMessage('You can upload at most 3 photos. Only the first 3 were added.', true);
+          // Say which files were turned away and why. Reporting only the count
+          // cap would blame the slot limit for a file that was the wrong
+          // format or over 10 MB.
+          if (full) rejections.push('You can upload at most 3 photos.');
+          if (rejections.length) {
+              showReviewsMessage(rejections.join(' '), true);
           }
       });
   }
@@ -1782,8 +1742,9 @@
           }
 
           for (const file of chosen) {
-              if (file.size > MAX_SOURCE_BYTES) {
-                  showReviewsMessage('Photos must be 10 MB or smaller.', true);
+              const rejection = photoRule.rejectionFor(file);
+              if (rejection) {
+                  showReviewsMessage(rejection, true);
                   return;
               }
           }
@@ -1831,7 +1792,7 @@
           .then(async response => {
               // A payload rejected by the platform never reaches our
               // function, so it answers with a non-JSON error body.
-              if (response.status === 413) throw new Error(PHOTO_TOO_BIG_MESSAGE);
+              if (response.status === 413) throw new Error('Those photos were too large to upload together. Please remove one, or choose smaller images.');
               const payload = await response.json().catch(() => ({}));
               if (!response.ok) throw new Error(payload.error || 'Upload failed.');
               return payload;

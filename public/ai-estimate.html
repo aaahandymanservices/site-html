@@ -218,14 +218,15 @@
                     </div>
 
                     <div id=ai-dropzone class="dropzone relative border-2 border-dashed border-blue-500/60 rounded-2xl p-6 sm:p-8 text-center cursor-pointer transition hover:border-red-400 hover:bg-blue-800/40" role=button tabindex=0 aria-label="Upload up to 3 repair photos">
-                        <input type=file id=ai-photo-input name=photo accept=image/* class=sr-only aria-describedby=ai-photo-error>
-                        <input type=file id=ai-photo-input-2 name=photo2 accept=image/* class=sr-only aria-hidden=true tabindex=-1>
-                        <input type=file id=ai-photo-input-3 name=photo3 accept=image/* class=sr-only aria-hidden=true tabindex=-1>
+                        <input type=file id=ai-photo-input name=photo accept=image/jpeg,image/png,image/webp,image/gif class=sr-only aria-describedby=ai-photo-error>
+                        <input type=file id=ai-photo-input-2 name=photo2 accept=image/jpeg,image/png,image/webp,image/gif class=sr-only aria-hidden=true tabindex=-1>
+                        <input type=file id=ai-photo-input-3 name=photo3 accept=image/jpeg,image/png,image/webp,image/gif class=sr-only aria-hidden=true tabindex=-1>
 
                         <div id=ai-dropzone-idle>
                             <div class="w-16 h-16 bg-red-600/15 rounded-2xl flex items-center justify-center text-3xl text-red-400 mb-4 mx-auto" aria-hidden=true><i class="fas fa-images"></i></div>
                             <p class="text-base font-semibold text-white">Tap to upload or drag photos here</p>
                             <p class="text-xs text-blue-300 mt-1">A clear, well-lit close-up works best &middot; add a wide shot and an extra angle for a better estimate</p>
+                            <p class="text-xs text-blue-300 mt-1">JPG, PNG, WebP or GIF &middot; 10 MB max each</p>
                         </div>
 
                         <div id=ai-dropzone-previews class=hidden>
@@ -418,6 +419,7 @@
     <button id=back-to-top type=button aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden=true></i></button>
 
     <script src="/js/site.js?v=20260816a" defer></script>
+    <script src="/js/photo-upload.js?v=20260816a" defer></script>
     <script src="/js/ai-estimate-page.js?v=20260816a" defer></script>
     <script src="/js/chat-loader.js?v=20260729b" defer></script>
     <script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})})</script>
