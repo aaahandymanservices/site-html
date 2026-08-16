@@ -167,6 +167,18 @@
         notes: form.querySelector('#home-care-notes').value.trim()
       };
 
+      /*
+       * The honeypot and the reCAPTCHA token the widget wrote into the form.
+       * This payload names its fields one by one, so neither travelled on its
+       * own and /api/home-care-subscription had nothing to check. The mirror
+       * post to /services.html below deliberately leaves the token out: it is
+       * single-use, and the API is the one verifying it.
+       */
+      var honeypotField = form.querySelector('[name="plan-bot-field"]');
+      if (honeypotField) payload['plan-bot-field'] = honeypotField.value;
+      var captchaField = form.querySelector('[name="g-recaptcha-response"]');
+      if (captchaField) payload['g-recaptcha-response'] = captchaField.value;
+
       if (!OAKLAND_ZIP.test(payload.zip)) {
         setError('Quarterly plans are Oakland County only. Call (248) 385-3432 if you are just outside it.');
         return;

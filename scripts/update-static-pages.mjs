@@ -68,6 +68,11 @@ const SCRIPT_VERSIONS = new Map([
   // so a stale cached copy is worse than no copy.
   ['booking-widget.js', ASSET_VERSION],
   ['service-zone-selector.js', ASSET_VERSION],
+  // The ZIP/city lookup and the review filters on /service-areas. Its source
+  // only joined scripts/js recently -- before that the served copy was the
+  // only copy, and it carried a stamp of its own that sat out every deploy the
+  // other scripts took part in.
+  ['service-areas-page.js', ASSET_VERSION],
   ['home-care-plans.js', ASSET_VERSION],
   // The AI estimator page's upload, ZIP→zone lookup, analyze call, and submit-
   // to-dispatch flow are all inert markup until this runs, so a stale cached

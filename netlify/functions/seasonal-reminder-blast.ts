@@ -111,8 +111,9 @@ export default async (request: Request) => {
       simulatedSentList: recipients,
       info: "This function executes the Two-Touch Annual Schedule email blast (April for Spring, October for Fall)."
     });
-  } catch (err: any) {
-    return errorJson(err.message || "Failed to execute seasonal blast simulation.", 500);
+  } catch (err) {
+    console.error("seasonal blast simulation failed", err);
+    return errorJson("Failed to execute seasonal blast simulation.", 500);
   }
 };
 

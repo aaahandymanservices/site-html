@@ -11,6 +11,13 @@ import {
 } from "../lib/gift-certificate.js";
 import { resolveServiceLocation } from "../lib/service-area.js";
 import { WRONG_METHOD_MESSAGE } from "../lib/messages.js";
+import {
+  SPAM_REJECTED_MESSAGE,
+  isSpamSubmission,
+  spamFieldsFromForm,
+  spamFieldsFromJson,
+  type SpamFields,
+} from "../lib/spam-guard.js";
 
 // The visitor may pick any photo up to the site-wide 10 MB (see
 // scripts/js/photo-upload.js); book-page.js resizes anything larger before it
@@ -79,11 +86,14 @@ export default async (request: Request) => {
     let optIn = false;
     let giftCertificateRequested = false;
     let photo: File | null = null;
+    // Filled from whichever body shape arrived, then checked once below.
+    let spamFields: SpamFields;
 
     // Handle JSON or URLSearchParams (standard form POST or application/json)
     const contentType = request.headers.get("content-type") || "";
     if (contentType.includes("application/json")) {
       const body = await request.json();
+      spamFields = spamFieldsFromJson(body);
       customerName = String(body.customerName || body.name || "").trim();
       email = String(body.email || "").trim().toLowerCase();
       phone = String(body.phone || "").trim();
@@ -100,6 +110,7 @@ export default async (request: Request) => {
       );
     } else {
       const formData = await request.formData();
+      spamFields = spamFieldsFromForm(formData);
       customerName = String(formData.get("customerName") || formData.get("name") || "").trim();
       email = String(formData.get("email") || "").trim().toLowerCase();
       phone = String(formData.get("phone") || "").trim();
@@ -116,6 +127,12 @@ export default async (request: Request) => {
       );
       const uploadedPhoto = formData.get("photo");
       photo = uploadedPhoto instanceof File && uploadedPhoto.size > 0 ? uploadedPhoto : null;
+    }
+
+    // Before any of the work: the booking form renders a honeypot and a
+    // reCAPTCHA widget, and until now this function read neither of them.
+    if (await isSpamSubmission(spamFields, request)) {
+      return errorJson(SPAM_REJECTED_MESSAGE, 400);
     }
 
     if (!customerName || !email || !phone || !service || !bookingDate || !bookingTime) {
@@ -297,8 +314,9 @@ export default async (request: Request) => {
         redeemedAt: giftStatus.redeemedAt
       }
     }, { status: 201 });
-  } catch (err: any) {
-    return errorJson(err.message || "We couldn't save your booking just now. Please try again, or call us at (248) 385-3432 and we'll book you over the phone.", 500);
+  } catch (err) {
+    console.error("booking submission failed", err);
+    return errorJson("We couldn't save your booking just now. Please try again, or call us at (248) 385-3432 and we'll book you over the phone.", 500);
   }
 };
 
