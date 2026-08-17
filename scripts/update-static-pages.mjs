@@ -43,7 +43,7 @@ const ICONS_CSS = '/css/icons.css?v=20260815a';
  * worker keys assets by pathname with ?v= removed, so public/sw.js has its own
  * CACHE_VERSION that has to move with a stylesheet change as well.
  */
-const ASSET_VERSION = '20260817a';
+const ASSET_VERSION = '20260817b';
 const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
 const SCRIPT_VERSIONS = new Map([
   ['site.js', ASSET_VERSION],
@@ -165,18 +165,44 @@ function optimizeFontsAndAssets(html) {
    * cleanly once they arrive. `id` selectors are used only because the page's
    * own markup already carries them. This is idempotent: any prior
    * #aaa-critical-palette block is stripped first so re-runs never stack.
+   *
+   * The block carries every rule that paints the above-the-fold chrome the
+   * moment the HTML is parsed, before the render-blocking stylesheets' round
+   * trips finish on a first visit: the icon glyph box reservation (so the
+   * async icons.css never re-flows the nav and hero rows), the sticky header,
+   * the seasonal banner's base gradient, and the hero / ambient-glow
+   * backgrounds and headings. Tailwind and site-theme.css stay render-
+   * blocking and refine this skeleton once they land; the block only buys the
+   * first frame on a slow first visit, it never replaces the stylesheets.
    */
   const CRITICAL_PALETTE =
     '    <style id="aaa-critical-palette">' +
-    'body{background:#f9fafb;color:#111827;margin:0}' +
-    '#site-header{background:#fff;border-bottom:3px solid #a61f2e;box-shadow:0 6px 22px rgba(27,42,74,.08)}' +
+    // Element defaults Tailwind's preflight would otherwise supply after the
+    // blocking tailwind.css round trip; the palette block paints first.
+    'html{overflow-x:hidden}' +
+    'body{background:#f9fafb;color:#111827;margin:0;overflow-x:hidden}' +
+    // Reserve a 1em square for every Font Awesome glyph so the async
+    // icons.css cannot cause the nav and hero icon rows to re-flow when it
+    // lands. :where() keeps specificity at zero so .icon-tile / explicit
+    // sizing still wins.
+    ':where(.fa,.fas,.far,.fab,.fa-solid,.fa-regular,.fa-brands){display:inline-block;width:1em;line-height:1;font-style:normal;text-align:center}' +
+    // Sticky header chrome.
+    '#site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:3px solid #a61f2e;box-shadow:0 6px 22px rgba(27,42,74,.08)}' +
+    // Seasonal offer bar base fill (the build-time season tints live in
+    // site-theme.css, but the warm cream fallback here avoids a white flash).
     '#seasonal-banner{background:linear-gradient(100deg,#fff8ef,#fdeedd 48%,#fff6ec);border-bottom:1px solid rgba(27,42,74,.1)}' +
-    '#booking-section.ambient-glow-hero{background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
-    '#booking-section.ambient-glow-hero h1{color:#fff}' +
+    '#seasonal-banner[hidden]{display:none}' +
+    // Dark hero / booking section background so its first frame is navy, not
+    // white. Matches .ambient-glow-hero in scripts/site-theme.css.
+    '.ambient-glow-hero,#booking-section.ambient-glow-hero{position:relative;overflow:hidden;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
+    '.ambient-glow-hero h1,#booking-section.ambient-glow-hero h1{color:#fff}' +
+    // Skip link stays usable before site-theme.css lands.
+    '.skip-link{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}' +
+    '.skip-link:focus,.skip-link:focus-visible{position:fixed!important;top:.75rem!important;left:50%!important;transform:translateX(-50%)!important;z-index:200!important;width:auto!important;height:auto!important;padding:.75rem 1.5rem!important;background:#a61f2e!important;color:#fff!important;font-weight:700!important;border-radius:.75rem!important;clip:auto!important;white-space:normal!important}' +
     '</style>';
   html = html.replace(/[ \t]*<style id="aaa-critical-palette">[\s\S]*?<\/style>\r?\n?/gi, '');
   html = html.replace(
-    /(<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?\s+as=font[^>]*>\r?\n)/i,
+    /(<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
     `$1${CRITICAL_PALETTE}\n`,
   );
 
@@ -224,7 +250,7 @@ function optimizeFontsAndAssets(html) {
       '["focusin","click","input","keydown","touchstart"].forEach(function(e){document.addEventListener(e,function h(){flush();document.removeEventListener(e,h,{capture:true})},{once:true,capture:true,passive:true})})}return}oset.call(el,v)},configurable:true,enumerable:true})}return el};' +
       '})()</script>';
     html = html.replace(
-      /(href=["']?\/fonts\/roboto-latin\.woff2["']?\s+as=font[^>]*>\r?\n)/i,
+      /(href=["']?\/fonts\/roboto-latin\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
       `$1${RECAPTCHA_DEFER_SCRIPT}\n`,
     );
   // The lookbehind matters: without it this pattern also matches the icons
@@ -236,9 +262,27 @@ function optimizeFontsAndAssets(html) {
     /(?<!<noscript>)[ \t]*<link\s+rel="(?:stylesheet|preload)"\s+href="\/css\/icons\.css(?:\?v=[^"]*)?"[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel="stylesheet"\s+href="\/css\/icons\.css(?:\?v=[^"]*)?"><\/noscript>\r?\n?)?/gi,
     `${ASYNC_ICONS_CSS}\n`,
   );
+  /*
+   * site-theme.css stays render-blocking, deliberately.
+   *
+   * It carries the @font-face rules for the self-hosted brand fonts, the icon
+   * glyph box reservations that keep the async icons.css from re-flowing the
+   * nav and hero rows, the seasonal banner tints, and the component skins the
+   * first paint depends on. An earlier pass tried to defer it behind the
+   * inline #aaa-critical-palette block with the media="print" + onload swap,
+   * but that pattern is fragile: if the onload handler does not fire (a cached
+   * response, a content blocker, or a CSP that forbids inline event handlers)
+   * the stylesheet never applies and the page renders unstyled. A render-
+   * blocking link is bulletproof and the file is served immutable for a year,
+   * so it costs one round trip on a first visit and nothing after that.
+   *
+   * This is idempotent and stamp-agnostic: any prior form (a plain render-
+   * blocking link, an async preload swap, or its <noscript> twin) is
+   * normalised to a single current render-blocking link.
+   */
   html = html.replace(
-    /href="\/css\/site-theme\.css(?:\?v=[^"]*)?"/gi,
-    `href="${SITE_THEME_CSS}"`,
+    /(?<!<noscript>)[ \t]*<link\s+rel=["']?(?:stylesheet|preload)["']?\s+href=["']?\/css\/site-theme\.css(?:\?v=[^"'>]*)?["']?[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel=["']?stylesheet["']?\s+href=["']?\/css\/site-theme\.css(?:\?v=[^"'>]*)?["']?[^>]*><\/noscript>\r?\n?)?/gi,
+    `    <link rel="stylesheet" href="${SITE_THEME_CSS}">\n`,
   );
 
   /*

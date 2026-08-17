@@ -32,9 +32,11 @@ if (existsSync(tailwind)) {
  * output: the readable copy with its comments lives in scripts/, and the build
  * emits the minified file that pages actually link.
  *
- * It is render-blocking on every page, so the comments and indentation that
- * make it maintainable were costing roughly 2KB over the wire on the critical
- * path of every first visit.
+ * It is render-blocking on every page because it carries the @font-face rules
+ * for the self-hosted brand fonts and the icon glyph box reservations the
+ * first paint depends on, so the comments and indentation that make it
+ * maintainable were costing roughly 2KB over the wire on the critical path of
+ * every first visit.
  */
 const themeSource = join(ROOT, 'scripts/site-theme.css');
 const themeOutput = join(ROOT, 'public/css/site-theme.css');

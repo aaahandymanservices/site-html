@@ -182,6 +182,7 @@ function page(city) {
     <!-- Self-hosted brand fonts; @font-face lives in site-theme.css -->
     <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <style id="aaa-critical-palette">html{overflow-x:hidden}body{background:#f9fafb;color:#111827;margin:0;overflow-x:hidden}:where(.fa,.fas,.far,.fab,.fa-solid,.fa-regular,.fa-brands){display:inline-block;width:1em;line-height:1;font-style:normal;text-align:center}#site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:3px solid #a61f2e;box-shadow:0 6px 22px rgba(27,42,74,.08)}#seasonal-banner{background:linear-gradient(100deg,#fff8ef,#fdeedd 48%,#fff6ec);border-bottom:1px solid rgba(27,42,74,.1)}#seasonal-banner[hidden]{display:none}.ambient-glow-hero,#booking-section.ambient-glow-hero{position:relative;overflow:hidden;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}.ambient-glow-hero h1,#booking-section.ambient-glow-hero h1{color:#fff}.skip-link{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}.skip-link:focus,.skip-link:focus-visible{position:fixed!important;top:.75rem!important;left:50%!important;transform:translateX(-50%)!important;z-index:200!important;width:auto!important;height:auto!important;padding:.75rem 1.5rem!important;background:#a61f2e!important;color:#fff!important;font-weight:700!important;border-radius:.75rem!important;clip:auto!important;white-space:normal!important}</style>
 
     <title>${esc(title)}</title>
 
@@ -213,8 +214,9 @@ function page(city) {
 ${jsonLd(city)}
 
     <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260817a">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260817a">
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260817b">
+    <!-- Site theme (render-blocking: carries @font-face, icon box reservations, and component skins) -->
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260817b">
     <!-- Font Awesome subset (generated, see scripts/build-icon-css.mjs) -->
     <link rel="preload" href="/css/icons.css?v=20260815a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260815a"></noscript>

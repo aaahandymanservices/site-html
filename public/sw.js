@@ -180,7 +180,21 @@
 // otherwise keep last deploy's HTML (the navigation cache is network-first, so
 // this only matters for the brief window before the revalidation lands). Only
 // this bump evicts the old shell for every client.
-const CACHE_VERSION = 'v32';
+// v32 reserved the icon glyph boxes in site-theme.css so the asynchronous icon
+// stylesheet's arrival did not re-flow the nav and hero rows. v33 expands the
+// inline critical palette block to carry those icon box reservations plus the
+// sticky header, seasonal banner, and hero backgrounds itself (painting the
+// brand palette the moment the HTML parses, before the render-blocking
+// stylesheets' round trips finish on a slow first visit) and purges ~360 lines
+// of dead CSS from site-theme.css. site-theme.css stays render-blocking: a
+// prior pass tried the media="print" + onload async swap, but that pattern is
+// fragile (a cached response or a CSP that forbids inline event handlers
+// leaves the page unstyled), so it was reverted to the bulletproof blocking
+// link. The pages and the stylesheet changed behind unchanged pathnames, and
+// a returning visitor holding v32 would otherwise pair this deploy's HTML
+// with last deploy's stylesheet. This bump evicts the old shell and assets for
+// every client.
+const CACHE_VERSION = 'v33';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
