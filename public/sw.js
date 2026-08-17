@@ -194,13 +194,14 @@
 // a returning visitor holding v32 would otherwise pair this deploy's HTML
 // with last deploy's stylesheet. This bump evicts the old shell and assets for
 // every client.
-// v34 ships the rebranded $50 Preferred Client / WELCOME CREDIT badge across
-// the quote, contact, and booking forms, plus the matching loyalty enrolment
-// checkbox. The markup and site-theme.css both changed behind unchanged
-// pathnames, so a returning visitor holding v33 would pair this deploy's HTML
-// with last deploy's stylesheet and see a broken card. This bump evicts the
-// old shell and assets for every client.
-const CACHE_VERSION = 'v34';
+// v35 ships the revised package and menu pricing — every bundle and
+// Good/Better/Best menu now carries a 10% package discount, replacing the
+// previous 15% and 20% tiers. The booking widget, book-page, and contact-page
+// scripts all carry the new prices behind unchanged pathnames, so a returning
+// visitor holding v34 would pair this deploy's HTML with last deploy's
+// scripts and quote stale prices. This bump evicts the old shell and assets
+// for every client.
+const CACHE_VERSION = 'v35';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

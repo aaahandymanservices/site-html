@@ -42,7 +42,7 @@
           link: "/rates#packages"
       },
       "6-Hour Handyman Package": {
-          text: "6 Productive hours for a longer punch list with room for repairs, maintenance, and light improvement projects. Save $67!",
+          text: "6 Productive hours for a longer punch list with room for repairs, maintenance, and light improvement projects. Save $45!",
           link: "/rates#packages"
       },
       "Home Safety Audit": {
@@ -62,15 +62,15 @@
           link: "/rates#audits"
       },
       "Home Safety Menu": {
-          text: "Standardized package safety menus: Good ($185 - Standard checks), Better ($323 - Upgraded safety additions), Best ($444 - Deluxe coverage). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
+          text: "Standardized package safety menus: Good ($185 - Standard checks), Better ($342 - Upgraded safety additions), Best ($500 - Deluxe coverage). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
           link: "/rates#menus"
       },
       "Energy Efficiency Menu": {
-          text: "Standardized package energy menus: Good ($153 - Draft checks & standard sweeps), Better ($353 - Enhanced seals & hatch insulation), Best ($472 - Maximum thermal sealing). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
+          text: "Standardized package energy menus: Good ($153 - Draft checks & standard sweeps), Better ($374 - Enhanced seals & hatch insulation), Best ($531 - Maximum thermal sealing). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
           link: "/rates#menus"
       },
       "Storm & Water Defense Menu": {
-          text: "Standardized package storm/water menus: Good ($153 - Basic checks & spot caulking), Better ($279 - Gutter tune-up & pump checks), Best ($383 - Full perimeter sealing & defense). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
+          text: "Standardized package storm/water menus: Good ($153 - Basic checks & spot caulking), Better ($279 - Gutter tune-up & pump checks), Best ($405 - Full perimeter sealing & defense). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
           link: "/rates#menus"
       },
       "Fall Home Prep Package": {

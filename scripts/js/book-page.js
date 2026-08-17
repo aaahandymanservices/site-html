@@ -549,7 +549,7 @@
           link: "/rates#packages"
       },
       "6-Hour Handyman Package": {
-          text: "6 Productive hours for a longer punch list with room for repairs, maintenance, and light improvement projects. Save $67!",
+          text: "6 Productive hours for a longer punch list with room for repairs, maintenance, and light improvement projects. Save $45!",
           link: "/rates#packages"
       }
   };
@@ -633,9 +633,9 @@
       'Fixture or Outlet Replacement (1.5 Hours)': { hours: 1.5 },
       'Carpentry & Installation (2 Hours)': { hours: 2 },
       '4-Hour Handyman Package': { hours: 4, price: 279 },
-      '6-Hour Handyman Package': { hours: 6, price: 383 },
-      'Seasonal Prep Package': { hours: 4.5, price: 293 },
-      'Move-In / Move-Out Bundle': { hours: 5, price: 323 },
+      '6-Hour Handyman Package': { hours: 6, price: 405 },
+      'Seasonal Prep Package': { hours: 4.5, price: 311 },
+      'Move-In / Move-Out Bundle': { hours: 5, price: 342 },
       'Senior Safety & Accessibility Package': { hours: 4, price: 279 },
       'Maintenance Membership': { membership: true },
       'General Estimate / Quote': { quote: true }
