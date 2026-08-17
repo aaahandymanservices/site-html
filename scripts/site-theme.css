@@ -552,20 +552,12 @@ textarea:autofill:focus {
   box-shadow: 0 0 0 1000px var(--field-bg) inset, 0 0 0 4px var(--field-ring);
 }
 
-/* Form Container Card & Labels */
-.form-card,
-.contact-form-card,
-.book-form-card,
-.career-form-card {
-  background: #ffffff;
-  border: 1px solid rgba(216, 222, 232, 0.9);
-  border-radius: 1.25rem;
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-  box-shadow: 0 20px 40px -15px rgba(27, 42, 74, 0.08);
-}
-
-form label,
-.form-label {
+/* Form field labels — the universal selector keeps every <label> inside a
+   <form> consistent without a per-element class. The old .form-label /
+   .contact-form-card / .book-form-card / .career-form-card helper classes
+   were never applied to any element in the markup or templates, so they
+   have been dropped. */
+form label {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.9rem;
@@ -581,140 +573,6 @@ form label,
   gap: 0.2rem;
   font-size: 1.15rem;
   filter: drop-shadow(0 1px 2px rgba(245, 158, 11, 0.25));
-}
-
-/* Utility Badges & Pills */
-.badge-crimson {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  background: var(--brand-crimson-soft);
-  color: var(--brand-crimson-dark);
-  border: 1px solid rgba(166, 31, 46, 0.22);
-  border-radius: 9999px;
-  padding: 0.3rem 0.85rem;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  box-shadow: 0 2px 6px rgba(166, 31, 46, 0.08);
-}
-
-.badge-navy {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  background: #e8edf5;
-  color: var(--brand-navy);
-  border: 1px solid rgba(27, 42, 74, 0.2);
-  border-radius: 9999px;
-  padding: 0.3rem 0.85rem;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  box-shadow: 0 2px 6px rgba(27, 42, 74, 0.06);
-}
-
-.pill-tab {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  padding: 0.5rem 1.1rem;
-  border-radius: 9999px;
-  font-family: var(--font-display);
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--brand-muted);
-  background: #ffffff;
-  border: 1.5px solid #d8dee8;
-  transition: all 0.22s var(--ease);
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.pill-tab:hover {
-  color: var(--brand-crimson);
-  border-color: rgba(166, 31, 46, 0.35);
-  background: var(--brand-crimson-soft);
-  transform: translateY(-1px);
-}
-
-.pill-tab.active,
-.pill-tab[aria-selected="true"] {
-  color: #ffffff;
-  background: var(--grad-crimson);
-  border-color: transparent;
-  box-shadow: var(--shadow-crimson);
-}
-
-/* Glassmorphism & Modern Card Blocks */
-.glass-card {
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(216, 222, 232, 0.8);
-  border-radius: 1.25rem;
-  backdrop-filter: blur(12px) saturate(140%);
-  -webkit-backdrop-filter: blur(12px) saturate(140%);
-  box-shadow: var(--shadow-md);
-  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
-}
-
-.glass-card:hover {
-  border-color: rgba(166, 31, 46, 0.28);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-3px);
-}
-
-.stat-card {
-  position: relative;
-  overflow: hidden;
-  background: #ffffff;
-  border: 1px solid rgba(216, 222, 232, 0.85);
-  border-radius: 1.25rem;
-  padding: 1.5rem;
-  box-shadow: var(--shadow-md);
-  transition: all var(--dur) var(--ease);
-}
-
-.stat-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: var(--grad-crimson);
-  opacity: 0.85;
-}
-
-.stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-/* Modern Form Controls & File Dropzones */
-.file-dropzone {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1.5rem;
-  border: 2px dashed #cbd5e1;
-  border-radius: 1rem;
-  background: #f8fafc;
-  cursor: pointer;
-  transition: all 0.2s var(--ease);
-  text-align: center;
-}
-
-.file-dropzone:hover,
-.file-dropzone.dragover {
-  border-color: var(--brand-crimson);
-  background: var(--brand-crimson-soft);
 }
 
 /* Primary call-to-action buttons — one cohesive crimson treatment site-wide */
@@ -800,18 +658,18 @@ form label,
    ============================================================
 
    The site has several button classes (.cta-button, .btn-craftsman,
-   .btn-primary, .btn-crimson, .btn-vivid-cta, .pulse-btn), an inline
-   "Book Online Now" link rendered from the footer templates, and a set of
-   form submit buttons that are styled purely with Tailwind utilities
-   (`bg-red-600 rounded-2xl py-4`). Each had drifted to its own padding,
-   font-size, and corner radius, so the same label changed height, weight,
-   and shape from one page to the next. This block pins every primary and
-   secondary action button on the site to one proportionate desktop size:
-   a 14px / 28px padding pair, 15px text at weight 600, and a 7px corner
-   radius. The selectors below are kept at class specificity so the existing
-   colour and hover overrides (which use `!important` for the crimson/navy
-   gradient treatments further down the file) keep winning the visual
-   properties; only the box geometry and typography are normalised here.
+   .aaa-btn), an inline "Book Online Now" link rendered from the footer
+   templates, and a set of form submit buttons that are styled purely with
+   Tailwind utilities (`bg-red-600 rounded-2xl py-4`). Each had drifted to
+   its own padding, font-size, and corner radius, so the same label changed
+   height, weight, and shape from one page to the next. This block pins
+   every primary and secondary action button on the site to one
+   proportionate desktop size: a 14px / 28px padding pair, 15px text at
+   weight 600, and a 7px corner radius. The selectors below are kept at
+   class specificity so the existing colour and hover overrides (which use
+   `!important` for the crimson/navy gradient treatments further down the
+   file) keep winning the visual properties; only the box geometry and
+   typography are normalised here.
 
    Forms keep their `width: 100%` submit buttons full-width on desktop
    (they sit alone in a card and have nothing beside them), so the
@@ -820,12 +678,6 @@ form label,
    ============================================================ */
 .cta-button,
 .btn-craftsman,
-.btn-primary,
-.btn-crimson,
-a.btn-crimson,
-button.btn-crimson,
-.btn-vivid-cta,
-.pulse-btn,
 .aaa-btn,
 form button[type="submit"] {
   padding: 14px 28px;
@@ -874,12 +726,6 @@ header.bg-gradient-to-r .aaa-btn {
 @media (max-width: 768px) {
   .cta-button,
   .btn-craftsman,
-  .btn-primary,
-  .btn-crimson,
-  a.btn-crimson,
-  button.btn-crimson,
-  .btn-vivid-cta,
-  .pulse-btn,
   .aaa-btn {
     width: 100%;
     padding: 14px 20px;
@@ -1679,15 +1525,6 @@ body > footer a {
   transform: rotate(-3deg);
 }
 
-.legal-eyebrow {
-  border-color: rgb(255 255 255 / 24%);
-  background: rgb(255 255 255 / 10%);
-  color: #fff;
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 10%);
-}
-
 .legal-hero .legal-title {
   margin-inline: auto;
   color: #fff;
@@ -2472,148 +2309,6 @@ a[href^="mailto:"] {
  */
 #booking-form [class*="grid-cols-[2.25rem"] {
   grid-template-columns: 2.25rem minmax(0, 1fr);
-}
-
-/* ============================================================
-   1-Year Workmanship Guarantee band
-
-   Three columns of very different content share this row: a seal above a
-   single-line eyebrow, a heading with a paragraph of copy, and two buttons
-   whose labels are long ("Book Guaranteed Repair"). Splitting the row into
-   twelfths sized every track by the same arbitrary unit, so between 1024px
-   and 1279px the call-to-action column landed near 200px and its labels broke
-   after "Guaranteed" -- one word stranded per line -- while the copy beside
-   it had width to spare.
-
-   The tracks below are sized from what each column actually needs instead:
-   the seal takes its intrinsic width, the buttons get a floor wide enough to
-   hold the longest label on one line, and the copy absorbs everything left
-   over. Nothing here depends on a magic number matching the text, so a longer
-   label costs the copy some width rather than breaking mid-phrase.
-   ============================================================ */
-.guarantee-band__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.guarantee-band__seal {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-/* Four words that read as one label; broken across lines it looks like an
-   error. Kept on one line, and the track it sits in is sized to fit it. */
-.guarantee-band__eyebrow {
-  white-space: nowrap;
-}
-
-.guarantee-band__copy {
-  min-width: 0;
-  text-align: center;
-}
-
-/* No width cap: the grid track is the only thing that should decide how wide
-   this copy runs. `pretty` keeps the browser from stranding the last word of
-   a paragraph on a line of its own. */
-.guarantee-band__copy > :where(h2, p) {
-  max-width: none;
-  margin-inline: 0;
-  word-break: normal;
-  overflow-wrap: break-word;
-  hyphens: manual;
-  text-wrap: pretty;
-}
-
-.guarantee-band__copy > p {
-  margin-top: 0.875rem;
-}
-
-.guarantee-band__points {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.625rem 1.25rem;
-  margin-top: 1.25rem;
-}
-
-.guarantee-band__actions {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.75rem;
-  width: 100%;
-  min-width: 0;
-}
-
-.guarantee-band__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  width: 100%;
-  min-width: 0;
-  padding: 0.875rem 1rem;
-  line-height: 1.375;
-  text-align: center;
-  /* Below the desktop layout the track width is not guaranteed, so a label may
-     still need two lines -- but it may only ever break between words. */
-  word-break: normal;
-  overflow-wrap: break-word;
-  hyphens: manual;
-}
-
-/* From 640px the row is still stacked, but there is width for the two buttons
-   to sit beside each other instead of running the band tall. */
-@media (min-width: 640px) {
-  .guarantee-band__actions {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .guarantee-band__copy > p {
-    margin-top: 1rem;
-  }
-
-  .guarantee-band__points {
-    margin-top: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  /* seal (intrinsic) | copy (everything left) | actions (label-width floor) */
-  .guarantee-band__grid {
-    grid-template-columns: max-content minmax(0, 1fr) minmax(16.5rem, 18rem);
-    gap: 2rem;
-  }
-
-  .guarantee-band__copy {
-    text-align: left;
-  }
-
-  .guarantee-band__points {
-    justify-content: flex-start;
-  }
-
-  /* Back to a stack. Two buttons sharing an 18rem track would put the labels
-     right back into the column this layout exists to give them room out of. */
-  .guarantee-band__actions {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  /* The track floor above guarantees the longest label fits, so both buttons
-     read as one line and end up the same height as each other. */
-  .guarantee-band__cta {
-    white-space: nowrap;
-  }
-}
-
-/* "1-Year" is a single term; a break after the hyphen reads as a typo. */
-#guarantee-highlight .no-break {
-  white-space: nowrap;
 }
 
 /* ==========================================================================
@@ -3832,13 +3527,7 @@ html.bw-open body {
 
 /* Primary CTAs stay on the brand crimson gradient with a soft outer glow. */
 .cta-button,
-.pulse-btn,
-.btn-primary,
-.btn-crimson,
-a.btn-crimson,
-button.btn-crimson,
-.aaa-chat-launch,
-.btn-vivid-cta {
+.aaa-chat-launch {
   background: var(--grad-crimson) !important;
   color: #fff !important;
   box-shadow: 0 8px 24px var(--crimson-glow) !important;
@@ -3870,48 +3559,15 @@ button.btn-crimson,
 }
 
 .cta-button:hover,
-.pulse-btn:hover,
-.btn-primary:hover,
-.btn-crimson:hover,
-a.btn-crimson:hover,
-button.btn-crimson:hover,
-.aaa-chat-launch:hover,
-.btn-vivid-cta:hover {
+.aaa-chat-launch:hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 12px 32px var(--crimson-glow-hover), var(--shadow-crimson) !important;
   filter: saturate(1.05) brightness(1.03);
 }
 
-.cta-button:active,
-.pulse-btn:active,
-.btn-primary:active,
-.btn-crimson:active,
-a.btn-crimson:active,
-button.btn-crimson:active {
+.cta-button:active {
   transform: translateY(0) !important;
   filter: none;
-}
-
-/* Glassmorphism only on intentionally dark / glass surfaces — never on
-   light badges, pill tabs, or white form cards. */
-.glass-card,
-.glass-premium,
-.glass-panel,
-.hero-pill {
-  background: rgba(255, 255, 255, 0.06) !important;
-  backdrop-filter: blur(12px) saturate(140%) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
-}
-
-.glass-card:hover,
-.glass-premium:hover,
-.glass-panel:hover,
-.hero-pill:hover {
-  border-color: rgb(166 31 46 / 45%) !important;
-  transform: translateY(-3px) !important;
-  box-shadow: 0 14px 30px -10px rgb(16 27 49 / 45%), 0 0 14px rgb(166 31 46 / 18%) !important;
 }
 
 .service-card,
@@ -3923,16 +3579,12 @@ button.btn-crimson:active {
 }
 
 /* Metallic headlines only on dark surfaces where white→slate reads clearly. */
-.title-metallic,
 .hero-title,
-.headline-metallic,
 .legal-hero .legal-title,
 .bw-pane__title,
 body > footer :where(h1, h2, h3),
 header.bg-gradient-to-r h1,
 header.ambient-glow-hero h1,
-section.bg-brand-navy h1,
-section.bg-navy-deep h1,
 section.bg-blue-900 h1,
 section.bg-blue-950 h1 {
   background: linear-gradient(180deg, #ffffff 0%, #cbd6e6 100%);
@@ -3994,9 +3646,7 @@ section.bg-blue-950 h1 {
 .hero::before,
 #pricing-hero::before,
 body > header.bg-gradient-to-r::before,
-header.ambient-glow-hero::after,
-.callout-ambient::before,
-.dark-ambience-bg::before {
+header.ambient-glow-hero::after {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -4008,30 +3658,24 @@ header.ambient-glow-hero::after,
     radial-gradient(32rem 24rem at 50% 0%, rgb(166 31 46 / 10%), transparent 50%);
 }
 
-.callout-ambient,
-.dark-ambience-bg {
+/*
+ * Soft pulse on floating brand actions.
+ *
+ * Only transform and opacity are animated. Both are compositor-only
+ * properties, so the pulse runs entirely off the main thread and never
+ * triggers layout or paint. The earlier version animated box-shadow,
+ * which forces a full repaint of the button and its surrounding region
+ * on every frame; Lighthouse flags that as a non-composited animation.
+ *
+ * The expanding crimson halo is now a static ::before ring that scales
+ * up and fades out, mirroring the pulse-attention-green-ring pattern
+ * already used by .pulse-btn-green. The base box-shadow stays on the
+ * element itself and never animates.
+ */
+.aaa-fab-btn,
+.aaa-chat-launch,
+.aaa-call {
   position: relative;
-  isolation: isolate;
-}
-
-.callout-ambient > *,
-.dark-ambience-bg > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Soft pulse on floating brand actions. */
-@keyframes soft-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgb(166 31 46 / 35%), 0 12px 28px -6px rgb(16 27 49 / 35%);
-  }
-
-  50% {
-    transform: scale(1.04);
-    box-shadow: 0 0 0 12px rgb(166 31 46 / 0%), 0 16px 34px -6px rgb(16 27 49 / 45%);
-  }
 }
 
 .aaa-fab-btn,
@@ -4039,6 +3683,47 @@ header.ambient-glow-hero::after,
 .aaa-call,
 #back-to-top {
   animation: soft-pulse 2.4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.aaa-fab-btn::before,
+.aaa-chat-launch::before,
+.aaa-call::before,
+#back-to-top::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgb(166 31 46 / 35%);
+  pointer-events: none;
+  animation: soft-pulse-ring 2.4s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.04);
+    opacity: 0.92;
+  }
+}
+
+@keyframes soft-pulse-ring {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
 }
 
 .aaa-fab-btn:hover,
@@ -4048,11 +3733,25 @@ header.ambient-glow-hero::after,
   animation-play-state: paused;
 }
 
+.aaa-fab-btn:hover::before,
+.aaa-chat-launch:hover::before,
+.aaa-call:hover::before,
+#back-to-top:hover::before {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .aaa-fab-btn,
   .aaa-chat-launch,
   .aaa-call,
   #back-to-top {
+    animation: none !important;
+  }
+
+  .aaa-fab-btn::before,
+  .aaa-chat-launch::before,
+  .aaa-call::before,
+  #back-to-top::before {
     animation: none !important;
   }
 }
@@ -4345,23 +4044,9 @@ header.ambient-glow-hero::after,
   }
 }
 
-.reveal-delay-100 { transition-delay: 100ms; }
-.reveal-delay-200 { transition-delay: 200ms; }
-.reveal-delay-300 { transition-delay: 300ms; }
-.reveal-delay-400 { transition-delay: 400ms; }
-
 /* ============================================================
    Interactive Service Filter Chips
    ============================================================ */
-.service-filter-chips {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-}
-
 .svc-filter-chip {
   display: inline-flex;
   align-items: center;
@@ -4401,18 +4086,6 @@ header.ambient-glow-hero::after,
 .svc-filter-chip[aria-pressed="true"] i,
 .svc-filter-chip.active i {
   color: #ffffff;
-}
-
-.svc-card-animated {
-  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out), height 0.3s ease;
-  will-change: opacity, transform;
-}
-
-.svc-card-animated.is-filtered-out {
-  opacity: 0;
-  transform: scale(0.95);
-  pointer-events: none;
-  display: none !important;
 }
 
 /* ==========================================================================
@@ -5078,37 +4751,6 @@ header.ambient-glow-hero::after,
 
 .scenario-table td {
   color: #4b5563;
-}
-
-.scenario-table .step-cell {
-  font-weight: 700;
-  color: #a61f2e;
-  white-space: nowrap;
-  width: 1%;
-}
-
-.scenario-table .badge-party {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.2rem 0.55rem;
-  border-radius: 9999px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-
-.scenario-table .badge-customer {
-  background-color: #1b2a4a;
-  color: #fff;
-  border: 1px solid #1b2a4a;
-}
-
-.scenario-table .badge-aaa {
-  background-color: rgba(166, 31, 46, 0.12);
-  color: #a61f2e;
-  border: 1px solid rgba(166, 31, 46, 0.4);
 }
 
 @media (max-width: 760px) {
