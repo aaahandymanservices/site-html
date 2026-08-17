@@ -308,7 +308,98 @@
                 </div>
             </section>
 
-            <div class="max-w-3xl mx-auto mb-12 sm:mb-16 reveal-on-scroll">
+            <div class="space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <h2 class="text-2xl font-bold text-white">Client Projects</h2>
+                            <p class="text-slate-400 text-sm">Verified local projects submitted by customers across Oakland County, MI.</p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <button id=admin-access-btn type=button class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md">
+                                <i class="fas fa-user-shield" aria-hidden=true></i> <span id=admin-access-label>Owner Access</span>
+                            </button>
+                            <button id=reviews-refresh type=button class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md hover:shadow-green-600/30">
+                                <i class="fas fa-arrows-rotate" aria-hidden=true></i> Refresh Reviews
+                            </button>
+                        </div>
+                    </div>
+
+                    
+                    <div class=space-y-4>
+                        <div id=reviews-service-filter class=hidden>
+                            <span id=reviews-filter-label class="block text-[11px] uppercase tracking-widest font-bold text-slate-400 mb-2.5">Filter by service</span>
+                            <div id=reviews-filters class="flex flex-wrap gap-2" role=group aria-labelledby=reviews-filter-label>
+                                <button type=button class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter=all aria-pressed=true>
+                                    <svg width=15 height=15 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><rect x=3.5 y=3.5 width=7 height=7 rx=1.5 /><rect x=13.5 y=3.5 width=7 height=7 rx=1.5 /><rect x=3.5 y=13.5 width=7 height=7 rx=1.5 /><rect x=13.5 y=13.5 width=7 height=7 rx=1.5 /></svg>
+                                    All Projects
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span id=reviews-city-label class="block text-[11px] uppercase tracking-widest font-bold text-slate-400 mb-2.5">Filter by city</span>
+                            <div id=reviews-cities class="flex flex-wrap gap-2" role=group aria-labelledby=reviews-city-label>
+                                <button type=button class="city-tab inline-flex items-center gap-1.5 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=all aria-pressed=true>
+                                    <svg width=13 height=13 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><circle cx=12 cy=12 r=9.2 /><path d="M2.8 12h18.4M12 2.8c2.4 2.5 3.7 5.7 3.7 9.2s-1.3 6.7-3.7 9.2c-2.4-2.5-3.7-5.7-3.7-9.2S9.6 5.3 12 2.8Z"/></svg>
+                                    All Cities
+                                </button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Waterford aria-pressed=false>Waterford</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Birmingham aria-pressed=false>Birmingham</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Troy aria-pressed=false>Troy</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Rochester Hills" aria-pressed=false>Rochester Hills</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Clarkston aria-pressed=false>Clarkston</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Southfield aria-pressed=false>Southfield</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Auburn Hills" aria-pressed=false>Auburn Hills</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Commerce aria-pressed=false>Commerce</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Highland aria-pressed=false>Highland</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="White Lake" aria-pressed=false>White Lake</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Bloomfield aria-pressed=false>Bloomfield</button>
+                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="West Bloomfield" aria-pressed=false>West Bloomfield</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id=reviews-list class=reviews-masonry aria-live=polite></div>
+
+                    <div id=reviews-filter-empty class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
+                        <i class="fas fa-filter-circle-xmark text-4xl text-slate-500 mb-3 block" aria-hidden=true></i>
+                        <h3 class="text-xl font-bold text-white mb-2">No projects match these filters yet</h3>
+                        <p class=text-sm id=reviews-filter-empty-copy>Try another service or city — or clear the filters to see every Oakland County project.</p>
+                        <button id=reviews-clear-filters type=button class="mt-5 inline-flex items-center gap-2 bg-white text-blue-950 hover:bg-slate-100 font-bold px-5 py-2.5 rounded-full text-sm transition">
+                            <svg width=15 height=15 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M3 5h18M6.5 12h11M10 19h4"/></svg>
+                            Clear all filters
+                        </button>
+                    </div>
+
+                    <div id=reviews-empty class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
+                        <i class="fas fa-comment-slash text-4xl text-slate-500 mb-3 block" aria-hidden=true></i>
+                        <h3 class="text-xl font-bold text-white mb-2">No customer reviews yet</h3>
+                        <p class=text-sm>Be the first to share your experience with AAA Handyman Services LLC!</p>
+                    </div>
+
+                    <div id=reviews-loading class=reviews-masonry role=status aria-label="Loading customer projects">
+                        
+                        <div class="review-card skeleton-card skeleton-card--on-navy" style=opacity:1 aria-hidden=true>
+                            <div class=skeleton-card__thumb></div>
+                            <div class=skeleton-card__body>
+                                <div class="skeleton-card__line skeleton-card__line--title"></div>
+                                <div class="skeleton-card__line skeleton-card__line--long"></div>
+                                <div class="skeleton-card__line skeleton-card__line--medium"></div>
+                                <div class="skeleton-card__line skeleton-card__line--short"></div>
+                            </div>
+                        </div>
+                        <div class="review-card skeleton-card skeleton-card--on-navy" style=opacity:1 aria-hidden=true>
+                            <div class=skeleton-card__thumb></div>
+                            <div class=skeleton-card__body>
+                                <div class="skeleton-card__line skeleton-card__line--title"></div>
+                                <div class="skeleton-card__line skeleton-card__line--long"></div>
+                                <div class="skeleton-card__line skeleton-card__line--short"></div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="mb-12 sm:mb-16 reveal-on-scroll">
                 <div class="bg-white text-gray-900 border border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8">
                         <div class="flex items-center gap-3 mb-2">
                             <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-red-100 text-red-600 text-xl"><i class="fas fa-pen-nib" aria-hidden=true></i></span>
@@ -412,104 +503,13 @@
                                 </div>
                             </div>
 
-                            <button id=reviews-submit type=submit class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
+                            <button id=reviews-submit type=submit class="aaa-btn w-full bg-red-600 hover:bg-red-700 text-white font-semibold transition inline-flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
                                 Post My Review <i class="fas fa-camera-retro" aria-hidden=true></i>
                             </button>
                             <p class="text-center text-sm font-semibold text-red-600 flex items-center justify-center gap-2"><i class="fas fa-heart" aria-hidden=true></i> Thank you for supporting a local, family-owned business in Oakland County!</p>
                             <p class="text-xs text-gray-500 text-center">By submitting, you confirm this review reflects your genuine experience and agree that your first name, city, rating, review, and photo may be published publicly on this website.</p>
                         </form>
                 </div>
-            </div>
-
-            <div class="space-y-6">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div>
-                            <h2 class="text-2xl font-bold text-white">Client Projects</h2>
-                            <p class="text-slate-400 text-sm">Verified local projects submitted by customers across Oakland County, MI.</p>
-                        </div>
-                        <div class="flex flex-wrap items-center gap-3">
-                            <button id=admin-access-btn type=button class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md">
-                                <i class="fas fa-user-shield" aria-hidden=true></i> <span id=admin-access-label>Owner Access</span>
-                            </button>
-                            <button id=reviews-refresh type=button class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-2xl font-semibold transition inline-flex items-center gap-2 text-sm shadow-md hover:shadow-green-600/30">
-                                <i class="fas fa-arrows-rotate" aria-hidden=true></i> Refresh Reviews
-                            </button>
-                        </div>
-                    </div>
-
-                    
-                    <div class=space-y-4>
-                        <div id=reviews-service-filter class=hidden>
-                            <span id=reviews-filter-label class="block text-[11px] uppercase tracking-widest font-bold text-slate-400 mb-2.5">Filter by service</span>
-                            <div id=reviews-filters class="flex flex-wrap gap-2" role=group aria-labelledby=reviews-filter-label>
-                                <button type=button class="filter-tab inline-flex items-center gap-2 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-4 py-2 text-sm font-semibold" data-filter=all aria-pressed=true>
-                                    <svg width=15 height=15 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><rect x=3.5 y=3.5 width=7 height=7 rx=1.5 /><rect x=13.5 y=3.5 width=7 height=7 rx=1.5 /><rect x=3.5 y=13.5 width=7 height=7 rx=1.5 /><rect x=13.5 y=13.5 width=7 height=7 rx=1.5 /></svg>
-                                    All Projects
-                                </button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <span id=reviews-city-label class="block text-[11px] uppercase tracking-widest font-bold text-slate-400 mb-2.5">Filter by city</span>
-                            <div id=reviews-cities class="flex flex-wrap gap-2" role=group aria-labelledby=reviews-city-label>
-                                <button type=button class="city-tab inline-flex items-center gap-1.5 bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=all aria-pressed=true>
-                                    <svg width=13 height=13 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><circle cx=12 cy=12 r=9.2 /><path d="M2.8 12h18.4M12 2.8c2.4 2.5 3.7 5.7 3.7 9.2s-1.3 6.7-3.7 9.2c-2.4-2.5-3.7-5.7-3.7-9.2S9.6 5.3 12 2.8Z"/></svg>
-                                    All Cities
-                                </button>
-                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Waterford aria-pressed=false>Waterford</button>
-                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Birmingham aria-pressed=false>Birmingham</button>
-                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Troy aria-pressed=false>Troy</button>
-                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Rochester Hills" aria-pressed=false>Rochester Hills</button>
-                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Clarkston aria-pressed=false>Clarkston</button>
-                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Southfield aria-pressed=false>Southfield</button>
-                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="Auburn Hills" aria-pressed=false>Auburn Hills</button>
-                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Commerce aria-pressed=false>Commerce</button>
-                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Highland aria-pressed=false>Highland</button>
-                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="White Lake" aria-pressed=false>White Lake</button>
-                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city=Bloomfield aria-pressed=false>Bloomfield</button>
-                                <button type=button class="city-tab bg-white/5 border border-white/20 text-slate-200 hover:bg-white/10 rounded-full px-3.5 py-1.5 text-[13px] font-semibold" data-city="West Bloomfield" aria-pressed=false>West Bloomfield</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id=reviews-list class=reviews-masonry aria-live=polite></div>
-
-                    <div id=reviews-filter-empty class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
-                        <i class="fas fa-filter-circle-xmark text-4xl text-slate-500 mb-3 block" aria-hidden=true></i>
-                        <h3 class="text-xl font-bold text-white mb-2">No projects match these filters yet</h3>
-                        <p class=text-sm id=reviews-filter-empty-copy>Try another service or city — or clear the filters to see every Oakland County project.</p>
-                        <button id=reviews-clear-filters type=button class="mt-5 inline-flex items-center gap-2 bg-white text-blue-950 hover:bg-slate-100 font-bold px-5 py-2.5 rounded-full text-sm transition">
-                            <svg width=15 height=15 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M3 5h18M6.5 12h11M10 19h4"/></svg>
-                            Clear all filters
-                        </button>
-                    </div>
-
-                    <div id=reviews-empty class="hidden bg-white/5 border-[2px] border-white/15 rounded-3xl p-8 text-center text-slate-300">
-                        <i class="fas fa-comment-slash text-4xl text-slate-500 mb-3 block" aria-hidden=true></i>
-                        <h3 class="text-xl font-bold text-white mb-2">No customer reviews yet</h3>
-                        <p class=text-sm>Be the first to share your experience with AAA Handyman Services LLC!</p>
-                    </div>
-
-                    <div id=reviews-loading class=reviews-masonry role=status aria-label="Loading customer projects">
-                        
-                        <div class="review-card skeleton-card skeleton-card--on-navy" style=opacity:1 aria-hidden=true>
-                            <div class=skeleton-card__thumb></div>
-                            <div class=skeleton-card__body>
-                                <div class="skeleton-card__line skeleton-card__line--title"></div>
-                                <div class="skeleton-card__line skeleton-card__line--long"></div>
-                                <div class="skeleton-card__line skeleton-card__line--medium"></div>
-                                <div class="skeleton-card__line skeleton-card__line--short"></div>
-                            </div>
-                        </div>
-                        <div class="review-card skeleton-card skeleton-card--on-navy" style=opacity:1 aria-hidden=true>
-                            <div class=skeleton-card__thumb></div>
-                            <div class=skeleton-card__body>
-                                <div class="skeleton-card__line skeleton-card__line--title"></div>
-                                <div class="skeleton-card__line skeleton-card__line--long"></div>
-                                <div class="skeleton-card__line skeleton-card__line--short"></div>
-                            </div>
-                        </div>
-                    </div>
             </div>
         </div>
 
