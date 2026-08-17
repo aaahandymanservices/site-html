@@ -1147,6 +1147,10 @@
               requestData.append('message', message);
               requestData.append('seasonal-opt-in', optIn ? 'on' : 'off');
               requestData.append('firstServiceGiftCertificate', claimedCertificate ? 'on' : 'off');
+              // The on-page checkbox is now named preferred_client_discount, so
+              // mirror it under that name too -- the API accepts either spelling
+              // and the Netlify Forms notification uses this field name.
+              requestData.append('preferred_client_discount', claimedCertificate ? 'yes' : 'off');
               if (uploadPhoto) requestData.append('photo', uploadPhoto, uploadPhoto.name);
 
               /*
@@ -1215,9 +1219,9 @@
               // Tell the owner which bookings actually carry the $50 discount,
               // and flag a repeat claim so it can be explained rather than honoured twice.
               if (giftCertificate.applied) {
-                  netlifyFormData.append('first-service-gift-certificate', 'Applied — $50 first-service gift certificate');
+                  netlifyFormData.append('preferred_client_discount', 'Applied — $50 Preferred Client follow-up discount');
               } else if (claimedCertificate) {
-                  netlifyFormData.append('first-service-gift-certificate', 'Not applied — already redeemed on an earlier service');
+                  netlifyFormData.append('preferred_client_discount', 'Not applied — already redeemed on an earlier service');
               }
               if (data.booking?.photoUrl) {
                   // Resolve against this origin and forward it only when it
