@@ -6504,6 +6504,203 @@ header.hero.ambient-glow-hero::before {
   content: none;
 }
 
+/*
+ * Preferred Client gift certificate badge + loyalty opt-in checkbox.
+ *
+ * The site's one-time $50 first-service gift certificate is advertised on the
+ * quote, contact, and booking forms, and was previously rendered as a one-off
+ * Tailwind card per page. The badge + checkbox pair below gives the offer a
+ * single, reusable skin so the four placements read as the same component, and
+ * so the `data-gift-certificate` gating in public/js/gift-certificate.js
+ * (which hides every element carrying that attribute once a visitor has spent
+ * their certificate) keeps working without per-page hooks.
+ *
+ * The badge itself is decorative: the checkbox is the only field the form
+ * submits, and its `name=preferred_client_discount` is what the booking and
+ * contact-quote functions read. The badge is a sibling of the checkbox inside
+ * the same `data-gift-certificate` wrapper, so hiding the wrapper hides both.
+ *
+ * Colours track the brand tokens in :root above so the badge reads as a
+ * crimson seal on navy regardless of which form's background it sits on: the
+ * outer card uses the deep-navy surface, the amount tile the crimson gradient,
+ * and the checkmark the same crimson on white. The custom checkmark is what
+ * makes the opt-in read as a loyalty enrolment instead of a bare native
+ * checkbox, which is the cue the copy ("Enroll me for the $50 Preferred Client
+ * follow-up discount") asked for.
+ */
+
+.gift-certificate-badge {
+  display: flex;
+  align-items: stretch;
+  gap: 0.875rem;
+  padding: 1rem 1.125rem;
+  border-radius: 1rem;
+  border: 2px solid var(--brand-crimson);
+  background: var(--brand-navy-deep);
+  box-shadow: 0 12px 30px -18px rgba(27, 42, 74, 0.55);
+}
+
+.gift-certificate-badge .amount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.75rem;
+  background: var(--grad-crimson);
+  color: #fff;
+  font-family: "Archivo", sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+  box-shadow: 0 8px 18px -10px rgba(166, 31, 46, 0.65);
+}
+
+.gift-certificate-badge .details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  gap: 0.2rem;
+}
+
+.gift-certificate-badge .badge-title {
+  color: var(--brand-crimson-on-navy-strong);
+  font-family: "Archivo", sans-serif;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.gift-certificate-badge .badge-subtitle {
+  color: #e7edf6;
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+/*
+ * Loyalty enrolment checkbox. The `.checkbox-container` wrapper is the label
+ * itself so the entire row is clickable, and the visually-hidden native input
+ * drives the `.checkmark` visual. Keyboard focus is drawn on the wrapper via
+ * :focus-within so the tab stop is the input but the ring sits on the row.
+ */
+.checkbox-container {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.7rem 0.85rem;
+  margin-top: 0.6rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(166, 31, 46, 0.35);
+  background: rgba(16, 27, 49, 0.65);
+  cursor: pointer;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.checkbox-container:hover {
+  border-color: var(--brand-crimson);
+  background: rgba(38, 57, 90, 0.65);
+}
+
+.checkbox-container:focus-within {
+  outline: 2px solid var(--brand-crimson);
+  outline-offset: 2px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  top: 0.7rem;
+  left: 0.85rem;
+  cursor: pointer;
+}
+
+.checkbox-container .checkmark {
+  position: relative;
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.05rem;
+  border-radius: 0.35rem;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.06);
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.checkbox-container input[type="checkbox"]:focus-visible + .checkmark {
+  box-shadow: 0 0 0 3px rgba(166, 31, 46, 0.45);
+}
+
+.checkbox-container input[type="checkbox"]:checked + .checkmark {
+  background: var(--brand-crimson);
+  border-color: var(--brand-crimson);
+}
+
+.checkbox-container .checkmark::after {
+  content: "";
+  position: absolute;
+  left: 0.34rem;
+  top: 0.1rem;
+  width: 0.32rem;
+  height: 0.62rem;
+  border: solid #fff;
+  border-width: 0 0.18rem 0.18rem 0;
+  transform: rotate(45deg) scale(0.6);
+  opacity: 0;
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+.checkbox-container input[type="checkbox"]:checked + .checkmark::after {
+  opacity: 1;
+  transform: rotate(45deg) scale(1);
+}
+
+.checkbox-container .label-text {
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* On the light-background quote form the badge sits on white, so the same
+ * component picks up a thin crimson hairline instead of the navy fill, and the
+ * subtitle uses the brand ink for contrast. */
+.gift-certificate-badge--on-light {
+  background: #fff;
+  border-color: var(--brand-crimson);
+  box-shadow: 0 12px 26px -20px rgba(166, 31, 46, 0.4);
+}
+
+.gift-certificate-badge--on-light .badge-subtitle {
+  color: var(--brand-ink);
+}
+
+.checkbox-container--on-light {
+  background: #f4f6fa;
+  border-color: rgba(166, 31, 46, 0.25);
+}
+
+.checkbox-container--on-light:hover {
+  background: #ecf0f6;
+}
+
+.checkbox-container--on-light .checkmark {
+  border-color: rgba(27, 42, 74, 0.45);
+  background: #fff;
+}
+
+.checkbox-container--on-light .label-text {
+  color: var(--brand-ink);
+}
+
 
 
 

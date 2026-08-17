@@ -88,7 +88,7 @@ export default async (request: Request) => {
     const message = clean(String(formData.get("message") || ""), MAX_MESSAGE_LENGTH);
     const seasonalOptIn = formData.get("seasonal-opt-in") === "on" || formData.get("seasonal-opt-in") === "true";
     const giftCertificateRequested = isCertificateRequested(
-      formData.get("firstServiceGiftCertificate") ?? formData.get("first-service-gift-certificate"),
+      formData.get("firstServiceGiftCertificate") ?? formData.get("first-service-gift-certificate") ?? formData.get("preferredClientDiscount") ?? formData.get("preferred_client_discount"),
     );
 
     if (!customerName || !email || !phone || !service || !message) {

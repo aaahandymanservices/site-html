@@ -327,19 +327,18 @@
                             <label>Don't fill this out if you're human: <input name=bot-field tabindex=-1 aria-hidden=true aria-label="Do not fill out this field"></label>
                         </p>
 
-                        <div id=first-service-offer data-gift-certificate class="rounded-2xl border-2 border-red-500 bg-blue-950 p-4 sm:p-5 shadow-lg">
-                            <div class="flex items-center gap-3 sm:gap-4 mb-3 pb-3 border-b border-blue-700">
-                                <div class="bg-red-600 text-white text-2xl sm:text-3xl font-extrabold px-3 py-1.5 rounded-xl leading-none flex-shrink-0 shadow">
-                                    $50
-                                </div>
-                                <div>
-                                    <p class="text-xs font-bold uppercase tracking-wider text-red-300">First-service gift certificate</p>
-                                    <p class="text-xs sm:text-sm text-blue-100 mt-0.5 leading-snug">Receive a $50 gift certificate toward your first service.</p>
+                        <div id=first-service-offer data-gift-certificate class="rounded-2xl p-1">
+                            <div class=gift-certificate-badge>
+                                <span class=amount>$50</span>
+                                <div class=details>
+                                    <div class=badge-title>WELCOME CREDIT</div>
+                                    <div class=badge-subtitle>Start your project today and lock in $50 off your next service call.</div>
                                 </div>
                             </div>
-                            <label for=first-service-certificate class="flex cursor-pointer items-start gap-3 p-3 rounded-xl bg-blue-900 border border-blue-600 hover:border-red-400 transition group">
-                                <input id=first-service-certificate type=checkbox name=first-service-gift-certificate value="Requested — customer confirms first service" class="mt-0.5 h-4 w-4 shrink-0 accent-red-600 rounded">
-                                <span class="text-xs sm:text-sm font-semibold text-white group-hover:text-red-300 transition leading-snug">Yes, I’m a new customer booking my first service!</span>
+                            <label class="checkbox-container loyalty-checkbox" for=first-service-certificate>
+                                <input id=first-service-certificate type=checkbox name=preferred_client_discount value=yes checked>
+                                <span class=checkmark></span>
+                                <span class=label-text>Enroll me for the $50 Preferred Client follow-up discount</span>
                             </label>
                         </div>
 
