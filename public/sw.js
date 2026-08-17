@@ -180,7 +180,7 @@
 // otherwise keep last deploy's HTML (the navigation cache is network-first, so
 // this only matters for the brief window before the revalidation lands). Only
 // this bump evicts the old shell for every client.
-const CACHE_VERSION = 'v31';
+const CACHE_VERSION = 'v32';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
