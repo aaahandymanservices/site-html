@@ -50,7 +50,7 @@
       label: 'Seasonal Prep',
       icon: 'fa-leaf',
       hours: 4.5,
-      price: 293,
+      price: 311,
       discount: '10%',
       blurb: 'Gutter clean, weatherstripping, window sash checks, and a deck inspection.'
     },
@@ -59,7 +59,7 @@
       label: 'Move-In / Move-Out',
       icon: 'fa-boxes-packing',
       hours: 5,
-      price: 323,
+      price: 342,
       discount: '10%',
       blurb: 'TV mounting, wall patching, paint touch-ups, and lock upgrades.'
     },
