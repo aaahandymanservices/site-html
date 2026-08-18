@@ -132,7 +132,6 @@ export function getUnifiedNav(activePage = 'none') {
                 <li><a href="/service-areas" class="${linkCls(isServiceAreas)}"${ariaCurrent(isServiceAreas)}>Service Areas</a></li>
                 <li><a href="/rates" class="${linkCls(isRates)}"${ariaCurrent(isRates)}>Rates</a></li>
                 <li><a href="/guarantee" class="${linkCls(isGuarantee)}"${ariaCurrent(isGuarantee)}>Guarantee</a></li>
-                <li><a href="/reviews" class="${linkCls(isReviews)}"${ariaCurrent(isReviews)}>Reviews</a></li>
                 <li><a href="/careers" class="${linkCls(isCareers)}"${ariaCurrent(isCareers)}>Careers</a></li>
                 <li><a href="/contact" class="${linkCls(isContact)}"${ariaCurrent(isContact)}>Contact</a></li>
             </ul>
