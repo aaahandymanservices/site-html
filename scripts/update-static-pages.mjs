@@ -263,26 +263,32 @@ function optimizeFontsAndAssets(html) {
     `${ASYNC_ICONS_CSS}\n`,
   );
   /*
-   * site-theme.css stays render-blocking, deliberately.
+   * site-theme.css loads async via the preload swap.
    *
    * It carries the @font-face rules for the self-hosted brand fonts, the icon
    * glyph box reservations that keep the async icons.css from re-flowing the
    * nav and hero rows, the seasonal banner tints, and the component skins the
-   * first paint depends on. An earlier pass tried to defer it behind the
-   * inline #aaa-critical-palette block with the media="print" + onload swap,
-   * but that pattern is fragile: if the onload handler does not fire (a cached
-   * response, a content blocker, or a CSP that forbids inline event handlers)
-   * the stylesheet never applies and the page renders unstyled. A render-
-   * blocking link is bulletproof and the file is served immutable for a year,
-   * so it costs one round trip on a first visit and nothing after that.
+   * first paint depends on. An earlier pass kept it render-blocking on the
+   * grounds that a deferred stylesheet is fragile if the onload handler never
+   * fires, but the inline #aaa-critical-palette block above already paints
+   * the brand palette the moment the HTML is parsed, so a deferred
+   * site-theme.css no longer trades a white screen for a layout shift -- the
+   * first frame is the right colours, and site-theme.css refines once it lands.
+   * The <noscript> twin keeps the stylesheet available without JavaScript, so
+   * a cached response or a content blocker that drops the onload handler does
+   * not leave the page unstyled. The file is served immutable for a year, so
+   * the preload costs one round trip on a first visit and nothing after that.
    *
    * This is idempotent and stamp-agnostic: any prior form (a plain render-
    * blocking link, an async preload swap, or its <noscript> twin) is
-   * normalised to a single current render-blocking link.
+   * normalised to a single current async preload pair.
    */
+  const ASYNC_SITE_THEME_CSS =
+    `    <link rel="preload" href="${SITE_THEME_CSS}" as="style" onload="this.onload=null;this.rel='stylesheet'">\n` +
+    `    <noscript><link rel="stylesheet" href="${SITE_THEME_CSS}"></noscript>`;
   html = html.replace(
     /(?<!<noscript>)[ \t]*<link\s+rel=["']?(?:stylesheet|preload)["']?\s+href=["']?\/css\/site-theme\.css(?:\?v=[^"'>]*)?["']?[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel=["']?stylesheet["']?\s+href=["']?\/css\/site-theme\.css(?:\?v=[^"'>]*)?["']?[^>]*><\/noscript>\r?\n?)?/gi,
-    `    <link rel="stylesheet" href="${SITE_THEME_CSS}">\n`,
+    `${ASYNC_SITE_THEME_CSS}\n`,
   );
 
   /*

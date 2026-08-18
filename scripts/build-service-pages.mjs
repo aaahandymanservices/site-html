@@ -349,8 +349,9 @@ ${jsonLd(service)}
 
     <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
     <link rel="stylesheet" href="/css/tailwind.css?v=20260817b">
-    <!-- Site theme (render-blocking: carries @font-face, icon box reservations, and component skins) -->
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260817b">
+    <!-- Site theme (async via preload swap; palette block above paints first frame) -->
+    <link rel="preload" href="/css/site-theme.css?v=20260817b" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260817b"></noscript>
     <!-- Font Awesome subset (generated, see scripts/build-icon-css.mjs) -->
     <link rel="preload" href="/css/icons.css?v=20260815a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=20260815a"></noscript>
