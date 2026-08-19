@@ -210,7 +210,12 @@
 // one. It is precached here, so a returning visitor holding v35 would keep the
 // old loader and its frozen widget URL indefinitely. This bump evicts the old
 // shell and assets for every client.
-const CACHE_VERSION = 'v36';
+// v37 ships the new-customer promotion banner across every page except the
+// Terms and Privacy pages. The banner lives in the navigation shell markup,
+// so a returning visitor holding v36 would keep the prior, banner-less shell
+// cached and never see the offer until they reloaded. This bump evicts the old
+// shell for every client.
+const CACHE_VERSION = 'v37';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
