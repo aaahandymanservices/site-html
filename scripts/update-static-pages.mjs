@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { getUnifiedNav } from './unified-nav.mjs';
+import { ASSET_VERSION, ICONS_CSS_VERSION } from './asset-version.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -30,20 +31,7 @@ const STATIC_NAV_PAGES = [
  * the local subset instead. See scripts/site-theme.css for the @font-face
  * rules and scripts/build-icon-css.mjs for the icon stylesheet.
  */
-const ICONS_CSS = '/css/icons.css?v=20260815a';
-/*
- * Bump this whenever the theme stylesheet or a versioned script changes.
- * netlify.toml serves /css/* and /js/* as `immutable, max-age=31536000`, so the
- * stamp in the URL is the only thing that can retire a cached copy: a
- * stylesheet fix shipped without a bump reaches new visitors and no one else,
- * which is how the previous pass at the dark form fields appeared to land and
- * then not to.
- *
- * Note that this stamp alone is not enough for a returning visitor: the service
- * worker keys assets by pathname with ?v= removed, so public/sw.js has its own
- * CACHE_VERSION that has to move with a stylesheet change as well.
- */
-const ASSET_VERSION = '20260817d';
+const ICONS_CSS = `/css/icons.css?v=${ICONS_CSS_VERSION}`;
 const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
 const SCRIPT_VERSIONS = new Map([
   ['site.js', ASSET_VERSION],
@@ -86,6 +74,20 @@ const SCRIPT_VERSIONS = new Map([
   // stale cached copy would leave the Owner Access button inert and the
   // uploader out of step with the label beneath it.
   ['reviews-page.js', ASSET_VERSION],
+  /*
+   * The last three used to sit outside this map, each frozen on a stamp from
+   * whichever deploy last touched it by hand. /js/* is served `immutable,
+   * max-age=31536000`, so an unmanaged stamp means an edit to the file reaches
+   * new visitors and no one else for a year -- the same trap the comment above
+   * ASSET_VERSION describes, just harder to notice because nothing points at
+   * these three from anywhere else.
+   */
+  ['careers-page.js', ASSET_VERSION],
+  ['quote-calculator.js', ASSET_VERSION],
+  // chat-loader.js runs on all 90 pages, and chat-widget.js now inherits
+  // whatever stamp the loader was requested with (see scripts/js/chat-loader.js),
+  // so moving this one carries the widget along with it.
+  ['chat-loader.js', ASSET_VERSION],
 ]);
 const ASYNC_ICONS_CSS =
   `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +

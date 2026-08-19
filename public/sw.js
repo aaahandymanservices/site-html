@@ -201,7 +201,16 @@
 // visitor holding v34 would pair this deploy's HTML with last deploy's
 // scripts and quote stale prices. This bump evicts the old shell and assets
 // for every client.
-const CACHE_VERSION = 'v35';
+// v36 unifies the ?v= stamps on the shared stylesheets and scripts. The three
+// page builders each carried their own literal, so tailwind.css, site-theme.css,
+// and site.js were requested under two different URLs depending on which
+// section of the site a visitor landed in, and a stamp bump only ever retired
+// half of them. chat-loader.js also changed behind an unchanged pathname: it
+// now reads its own stamp and passes it to chat-widget.js instead of hardcoding
+// one. It is precached here, so a returning visitor holding v35 would keep the
+// old loader and its frozen widget URL indefinitely. This bump evicts the old
+// shell and assets for every client.
+const CACHE_VERSION = 'v36';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
