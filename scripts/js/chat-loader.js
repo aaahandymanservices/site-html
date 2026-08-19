@@ -8,6 +8,26 @@
 
   window.__aaaChatLoaderReady = true;
 
+  /*
+   * chat-widget.js is requested from inside loadChat() rather than from a
+   * <script> tag, so its ?v= stamp is invisible to the rewrite in
+   * scripts/update-static-pages.mjs that keeps every other script's stamp
+   * current. It used to be hardcoded here, which meant the widget could keep
+   * being served from a year-long immutable cache entry after the loader that
+   * asks for it had already been retired.
+   *
+   * Reading the stamp off this file's own URL keeps the pair in step for free:
+   * both files move with ASSET_VERSION, so whatever stamp got us here is the
+   * one the widget should be asked for. currentScript is read at top level,
+   * while it still refers to this script -- by the time loadChat() runs on a
+   * click it would be null. A copy served by the service worker under its
+   * unversioned precache name yields an empty stamp, which is exactly the key
+   * the worker stores the widget under too.
+   */
+  var ownSrc = (document.currentScript && document.currentScript.src) || "";
+  var queryIndex = ownSrc.indexOf("?");
+  var assetStamp = queryIndex === -1 ? "" : ownSrc.slice(queryIndex);
+
   function initChatFab() {
     if (document.getElementById("aaa-chat-loader")) return;
 
@@ -67,7 +87,7 @@
 
     loadPromise = new Promise(function (resolve, reject) {
       var script = document.createElement("script");
-      script.src = "/js/chat-widget.js?v=20260729b";
+      script.src = "/js/chat-widget.js" + assetStamp;
       script.onload = resolve;
       script.onerror = reject;
       document.head.appendChild(script);

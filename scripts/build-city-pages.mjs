@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { getUnifiedNav } from './unified-nav.mjs';
 import { escapeHtml as esc, jsonLdScript } from './html-escape.mjs';
+import { ASSET_VERSION, ICONS_CSS_VERSION } from './asset-version.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -214,14 +215,23 @@ function page(city) {
     <!-- Structured Data (JSON-LD) -->
 ${jsonLd(city)}
 
+    <!--
+      The analytics tag is injected on first interaction or after an idle
+      timeout, whichever comes first, so a preconnect socket would idle out
+      before it is ever used. Resolving the name up front is the part that
+      still pays: the lookup is cached well past the deferral, so the request
+      that eventually goes out skips a DNS round trip.
+    -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
     <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260817b">
+    <link rel="stylesheet" href="/css/tailwind.css?v=${ASSET_VERSION}">
     <!-- Site theme (async via preload swap; palette block above paints first frame) -->
-    <link rel="preload" href="/css/site-theme.css?v=20260817b" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260817b"></noscript>
+    <link rel="preload" href="/css/site-theme.css?v=${ASSET_VERSION}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=${ASSET_VERSION}"></noscript>
     <!-- Font Awesome subset (generated, see scripts/build-icon-css.mjs) -->
-    <link rel="preload" href="/css/icons.css?v=20260815a" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/icons.css?v=20260815a"></noscript>
+    <link rel="preload" href="/css/icons.css?v=${ICONS_CSS_VERSION}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/icons.css?v=${ICONS_CSS_VERSION}"></noscript>
 
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -453,7 +463,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
 
     <!-- Back to top -->
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
-    <script src="/js/site.js?v=20260814e" defer></script>
+    <script src="/js/site.js?v=${ASSET_VERSION}" defer></script>
 
     <!-- Google tag (gtag.js) -->
     <script>
@@ -505,7 +515,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
     </script>
 
     <!-- AI chat assistant widget -->
-    <script src="/js/chat-loader.js?v=20260729b" defer></script>
+    <script src="/js/chat-loader.js?v=${ASSET_VERSION}" defer></script>
 
     <script>
       // Registered after load so it never competes with the first render.
