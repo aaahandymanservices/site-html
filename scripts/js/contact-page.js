@@ -156,7 +156,7 @@
           contactCity.value = requestedCity;
       }
       const offer = params.get('offer');
-      const offerCheckbox = document.getElementById('first-service-certificate');
+      const offerCheckbox = document.getElementById('loyalty-credit') || document.getElementById('first-service-certificate');
       if (offer === 'first-service' && offerCheckbox) {
           offerCheckbox.checked = true;
       }
@@ -587,7 +587,7 @@
 
           const email = formData.get('email');
           const name = formData.get('name');
-          const certificateBox = document.getElementById('first-service-certificate');
+          const certificateBox = document.getElementById('loyalty-credit') || document.getElementById('first-service-certificate');
           const claimedCertificate = Boolean(certificateBox && certificateBox.checked && !certificateBox.disabled);
 
           // Indeterminate-but-moving progress bar. The upload is one multipart
