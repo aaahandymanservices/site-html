@@ -425,7 +425,7 @@
                 </div>
             </div>
             <div id=first-service-offer-promo data-gift-certificate class="mt-10 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-center">
-                <p class=text-gray-700><span class="font-bold text-red-600">New customer?</span> Receive a $50 gift certificate toward your first service.</p>
+                <p class=text-gray-700><span class="font-bold text-red-600">New customer?</span> Receive a $50 gift certificate toward your next service.</p>
                 <a href="/contact?offer=first-service#contact-form" class="inline-flex items-center gap-2 font-bold text-red-600 hover:text-red-700 transition" aria-label="Claim the $50 first-service gift certificate">
                     Claim the offer <i class="fas fa-arrow-right text-sm" aria-hidden=true></i>
                 </a>
@@ -1195,18 +1195,20 @@
                     <input type=hidden name=form-name value=quote>
                     <input type=hidden name=subject value="New quote request from aaahandyman.services">
                     <p class=hidden><label>Don't fill this out if you're human: <input name=bot-field tabindex=-1 aria-hidden=true aria-label="Do not fill out this field"></label></p>
-                    <div id=first-service-offer-quote data-gift-certificate class="p-1">
-                        <div class=gift-certificate-badge>
-                            <span class=amount>$50</span>
-                            <div class=details>
-                                <div class=badge-title>WELCOME CREDIT</div>
-                                <div class=badge-subtitle>Start your project today and lock in $50 off your next service call.</div>
+                    <div id=first-service-offer-quote data-gift-certificate class="loyalty-callout-card loyalty-callout-card--on-light">
+                        <div class=loyalty-badge-header>
+                            <div class=loyalty-badge-pill>
+                                <i class="fas fa-award" aria-hidden=true></i>
+                                <span>$50 LOYALTY CREDIT</span>
                             </div>
                         </div>
-                        <label class="checkbox-container loyalty-checkbox" for=quote-first-service-certificate>
-                            <input id=quote-first-service-certificate type=checkbox name=preferred_client_discount value=yes checked>
-                            <span class=checkmark></span>
-                            <span class=label-text>Enroll me for the $50 Preferred Client follow-up discount</span>
+                        <p class=loyalty-description>
+                            Complete your first service and receive a $50 credit applied directly toward your second visit or seasonal project.
+                        </p>
+                        <label class="loyalty-checkbox-label loyalty-checkbox" for=quote-first-service-certificate>
+                            <input id=quote-first-service-certificate type=checkbox name=loyalty_credit value=yes>
+                            <span class=loyalty-custom-checkbox aria-hidden=true></span>
+                            <span class=loyalty-checkbox-text>Claim my $50 Loyalty Credit for my follow-up service</span>
                         </label>
                     </div>
                     <div class="grid sm:grid-cols-2 gap-5">

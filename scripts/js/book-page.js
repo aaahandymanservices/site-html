@@ -12,7 +12,7 @@
   (function() {
       var params = new URLSearchParams(window.location.search);
       var offer = params.get('offer');
-      var bookingOfferCheckbox = document.getElementById('booking-first-service-certificate');
+      var bookingOfferCheckbox = document.getElementById('booking-loyalty-credit') || document.getElementById('loyalty-credit') || document.getElementById('booking-first-service-certificate');
       if (offer === 'first-service' && bookingOfferCheckbox) {
           bookingOfferCheckbox.checked = true;
       }
@@ -1101,7 +1101,7 @@
           const bookingTime = hiddenTimeInput.value;
           const message = document.getElementById('booking-message').value.trim();
           const optIn = document.getElementById('seasonal-opt-in').checked;
-          const certificateBox = document.getElementById('booking-first-service-certificate');
+          const certificateBox = document.getElementById('booking-loyalty-credit') || document.getElementById('loyalty-credit') || document.getElementById('booking-first-service-certificate');
           const claimedCertificate = Boolean(certificateBox && certificateBox.checked && !certificateBox.disabled);
 
           setBookingError();

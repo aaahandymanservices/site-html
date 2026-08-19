@@ -71,13 +71,13 @@ export default async (request: Request) => {
       name = String(body.name || body.customerName || "").trim();
       source = body.source;
       // Absent means "yes" -- posting to this endpoint at all is the claim.
-      requested = body.firstServiceGiftCertificate ?? body["first-service-gift-certificate"] ?? body.preferredClientDiscount ?? body["preferred_client_discount"] ?? true;
+      requested = body.loyalty_credit ?? body["loyalty-credit"] ?? body.loyaltyCredit ?? body.firstServiceGiftCertificate ?? body["first-service-gift-certificate"] ?? body.preferredClientDiscount ?? body["preferred_client_discount"] ?? true;
     } else {
       const formData = await request.formData();
       email = normalizeEmail(formData.get("email"));
       name = String(formData.get("name") || formData.get("customerName") || "").trim();
       source = formData.get("source");
-      requested = formData.get("firstServiceGiftCertificate") ?? formData.get("first-service-gift-certificate") ?? formData.get("preferredClientDiscount") ?? formData.get("preferred_client_discount") ?? true;
+      requested = formData.get("loyalty_credit") ?? formData.get("loyalty-credit") ?? formData.get("loyaltyCredit") ?? formData.get("firstServiceGiftCertificate") ?? formData.get("first-service-gift-certificate") ?? formData.get("preferredClientDiscount") ?? formData.get("preferred_client_discount") ?? true;
     }
 
     if (!email) {

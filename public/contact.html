@@ -329,18 +329,20 @@
                             <label>Don't fill this out if you're human: <input name=bot-field tabindex=-1 aria-hidden=true aria-label="Do not fill out this field"></label>
                         </p>
 
-                        <div id=first-service-offer data-gift-certificate class="rounded-2xl p-1">
-                            <div class=gift-certificate-badge>
-                                <span class=amount>$50</span>
-                                <div class=details>
-                                    <div class=badge-title>WELCOME CREDIT</div>
-                                    <div class=badge-subtitle>Start your project today and lock in $50 off your next service call.</div>
+                        <div id=first-service-offer data-gift-certificate class="loyalty-callout-card">
+                            <div class=loyalty-badge-header>
+                                <div class=loyalty-badge-pill>
+                                    <i class="fas fa-award" aria-hidden=true></i>
+                                    <span>$50 LOYALTY CREDIT</span>
                                 </div>
                             </div>
-                            <label class="checkbox-container loyalty-checkbox" for=first-service-certificate>
-                                <input id=first-service-certificate type=checkbox name=preferred_client_discount value=yes checked>
-                                <span class=checkmark></span>
-                                <span class=label-text>Enroll me for the $50 Preferred Client follow-up discount</span>
+                            <p class=loyalty-description>
+                                Complete your first service and receive a $50 credit applied directly toward your second visit or seasonal project.
+                            </p>
+                            <label class="loyalty-checkbox-label loyalty-checkbox" for=loyalty-credit>
+                                <input id=loyalty-credit type=checkbox name=loyalty_credit value=yes>
+                                <span class=loyalty-custom-checkbox aria-hidden=true></span>
+                                <span class=loyalty-checkbox-text>Claim my $50 Loyalty Credit for my follow-up service</span>
                             </label>
                         </div>
 

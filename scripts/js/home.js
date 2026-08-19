@@ -93,7 +93,7 @@
 
       var params = new URLSearchParams(window.location.search);
       var offer = params.get('offer');
-      var offerCheckbox = document.getElementById('quote-first-service-certificate');
+      var offerCheckbox = document.getElementById('loyalty-credit') || document.getElementById('quote-first-service-certificate');
       if (offer === 'first-service' && offerCheckbox) {
           offerCheckbox.checked = true;
       }
@@ -154,7 +154,7 @@
           var btn = form.querySelector('button[type="submit"]');
           if (btn) { btn.disabled = true; btn.innerHTML = 'Sending…'; }
 
-          var certificateBox = document.getElementById('quote-first-service-certificate');
+          var certificateBox = document.getElementById('loyalty-credit') || document.getElementById('quote-first-service-certificate');
           var claimedCertificate = Boolean(certificateBox && certificateBox.checked && !certificateBox.disabled);
           var emailField = form.querySelector('input[name="email"]');
           var nameField = form.querySelector('input[name="name"]');

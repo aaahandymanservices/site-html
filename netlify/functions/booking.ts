@@ -106,7 +106,7 @@ export default async (request: Request) => {
       zip = String(body.zip || body.zipCode || "").trim();
       optIn = Boolean(body.optIn || body["seasonal-opt-in"] || false);
       giftCertificateRequested = isCertificateRequested(
-        body.firstServiceGiftCertificate ?? body["first-service-gift-certificate"] ?? body.preferredClientDiscount ?? body["preferred_client_discount"],
+        body.loyalty_credit ?? body["loyalty-credit"] ?? body.loyaltyCredit ?? body.firstServiceGiftCertificate ?? body["first-service-gift-certificate"] ?? body.preferredClientDiscount ?? body["preferred_client_discount"],
       );
     } else {
       const formData = await request.formData();
@@ -123,7 +123,7 @@ export default async (request: Request) => {
       zip = String(formData.get("zip") || formData.get("zipCode") || "").trim();
       optIn = formData.get("seasonal-opt-in") === "on" || formData.get("seasonal-opt-in") === "true";
       giftCertificateRequested = isCertificateRequested(
-        formData.get("firstServiceGiftCertificate") ?? formData.get("first-service-gift-certificate") ?? formData.get("preferredClientDiscount") ?? formData.get("preferred_client_discount"),
+        formData.get("loyalty_credit") ?? formData.get("loyalty-credit") ?? formData.get("loyaltyCredit") ?? formData.get("firstServiceGiftCertificate") ?? formData.get("first-service-gift-certificate") ?? formData.get("preferredClientDiscount") ?? formData.get("preferred_client_discount"),
       );
       const uploadedPhoto = formData.get("photo");
       photo = uploadedPhoto instanceof File && uploadedPhoto.size > 0 ? uploadedPhoto : null;
