@@ -259,6 +259,18 @@
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
     <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
+<aside id="new-customer-banner" class="new-customer-banner" aria-label="New customer special offer">
+    <style>.new-customer-banner{background:#1b2a4a;color:#fff;border-bottom:3px solid #a61f2e}.new-customer-banner__inner{max-width:80rem;margin-inline:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.5rem 1.25rem;padding:.7rem 1.25rem}.new-customer-banner__copy{display:flex;align-items:center;gap:.6rem;margin:0;text-align:center;font-size:.95rem;font-weight:600;line-height:1.35}.new-customer-banner__icon{font-size:1.15rem;line-height:1}.new-customer-banner__lead{color:#fca5a5;font-weight:800;letter-spacing:.01em}.new-customer-banner__amount{color:#fff;font-weight:800}.new-customer-banner__cta{display:inline-flex;align-items:center;gap:.45rem;min-height:2.75rem;padding:.5rem 1.15rem;border-radius:.7rem;background:linear-gradient(100deg,#c2262f,#a61f2e);color:#fff;font-weight:800;font-size:.875rem;white-space:nowrap;text-decoration:none;box-shadow:0 6px 16px #78192542;transition:transform .2s ease,box-shadow .2s ease}.new-customer-banner__cta:hover{filter:brightness(1.05);box-shadow:0 10px 22px #78192557;transform:translateY(-1px)}.new-customer-banner__cta svg{flex:0 0 auto}@media(max-width:640px){.new-customer-banner__copy{font-size:.85rem}.new-customer-banner__cta{font-size:.8rem}}</style>
+    <div class="new-customer-banner__inner">
+        <p class="new-customer-banner__copy">
+            <span class="new-customer-banner__icon" aria-hidden="true">🎁</span>
+            <span><strong class="new-customer-banner__lead">New Customer Special:</strong> Receive a <strong class="new-customer-banner__amount">$50 gift certificate</strong> toward your next service!</span>
+        </p>
+        <a class="new-customer-banner__cta" href="#quote" data-ncb-cta>Claim My $50 Gift<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+    </div>
+    <script>(function(){var b=document.getElementById('new-customer-banner');if(!b)return;var c=b.querySelector('[data-ncb-cta]');if(!c)return;c.addEventListener('click',function(e){var h=c.getAttribute('href')||'';if(h.indexOf('#')!==0)return;var t=document.querySelector(h);if(!t)return;e.preventDefault();var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});if(window.history&&window.history.replaceState)window.history.replaceState(null,'',h);var f=t.querySelector('input:not([type=hidden]),select,textarea');if(f)window.setTimeout(function(){f.focus({preventScroll:true})},reduce?0:520)});})()</script>
+</aside>
+
 <header id="site-header" class="site-header sticky top-0 z-[100] bg-white/95 backdrop-blur-md shadow-md border-b-[3px] border-red-600">
     <div class="header-container site-nav__bar max-w-7xl mx-auto flex items-center justify-between">
         <a href="/" class="brand site-nav__brand group flex items-center gap-3 min-w-0">
@@ -322,24 +334,6 @@
     </div>
 </header>
 
-<aside id="seasonal-banner" class="seasonal-banner" data-season="summer" aria-label="Seasonal offer">
-    <div class="seasonal-banner__inner">
-        <p class="seasonal-badge">
-            <span class="seasonal-badge__icon" data-banner-icon aria-hidden="true">🌤️</span>
-            <span data-banner-label>Summer Exterior Refresh</span>
-        </p>
-        <p class="seasonal-banner__copy">
-            <span class="seasonal-banner__lead"><span data-banner-lead>Book your summer exterior refresh and</span> <strong class="seasonal-banner__save" data-banner-save>save $50</strong></span>
-            <span class="seasonal-banner__note" data-banner-note>Oakland County homeowners · limited summer openings</span>
-        </p>
-        <a class="seasonal-banner__cta" href="/#quote" data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
-    </div>
-    <button type="button" class="seasonal-banner__close" data-banner-close aria-label="Dismiss seasonal offer">
-        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"></path></svg>
-    </button>
-    <script type="application/json" data-banner-seasons>{"spring":{"icon":"☀️","label":"Spring Deck \u0026 Gutter Prep","lead":"Book your spring deck \u0026 gutter prep and","save":"save $50","note":"Oakland County homeowners · limited spring openings"},"summer":{"icon":"🌤️","label":"Summer Exterior Refresh","lead":"Book your summer exterior refresh and","save":"save $50","note":"Oakland County homeowners · limited summer openings"},"fall":{"icon":"🍂","label":"Fall Maintenance Special","lead":"Book your seasonal tune-up today and","save":"save $50","note":"Oakland County homeowners · limited fall openings"},"winter":{"icon":"❄️","label":"Winter Weatherproofing Special","lead":"Book your winter weatherproofing and","save":"save $50","note":"Oakland County homeowners · limited winter openings"}}</script>
-    <script>(function(){try{var b=document.getElementById('seasonal-banner');if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();</script>
-</aside>
 
     <noscript>
         <a href=tel:+12483853432 class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded-full font-bold items-center justify-center gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services LLC Now" aria-label="Call AAA Handyman Services LLC Now">
@@ -377,6 +371,10 @@
                     <i class="fas fa-phone text-xl" aria-hidden=true></i> Call: (248) 385-3432
                 </a>
             </div>
+            <p class="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-600/15 border border-red-400/40 text-red-100 text-sm sm:text-base font-semibold shadow-sm backdrop-blur-sm">
+                <i class="fas fa-gift text-red-300" aria-hidden=true></i>
+                <span>New customers get a <strong class="text-white font-extrabold">$50 gift certificate</strong> toward their first service</span>
+            </p>
             <div class="hero-trust mt-6" aria-label="Fast response, emergency availability, flat-rate pricing, and a one-year guarantee">
                 <span class=hero-trust-item><i class="fas fa-bolt text-red-300" aria-hidden=true></i> Response Under 1 Hour</span>
                 <span class=hero-trust-item><i class="fas fa-shield-halved text-red-300" aria-hidden=true></i> 24 Hour Emergency Services</span>
@@ -1248,6 +1246,10 @@
                     <button type=submit class="w-full bg-red-600 hover:bg-red-700 py-5 text-xl font-bold rounded-3xl transition flex items-center justify-center gap-3 text-white">Get My Free Quote <i class="fas fa-arrow-right" aria-hidden=true></i></button>
                     <p class="text-center text-xs text-gray-600"><i class="fas fa-lock" aria-hidden=true></i> No spam, ever. We only use this to get back to you about your project.</p>
                 </form>
+                <p class="new-customer-terms mt-5 text-center text-xs leading-relaxed text-gray-600" data-gift-certificate-terms>
+                    <i class="fas fa-circle-info text-red-500 mr-1" aria-hidden=true></i>
+                    <strong class="text-gray-700">$50 New Customer Gift Certificate:</strong> Valid for first-time customers only. Applied toward labor on qualifying services. Hardware and materials are not included. One offer per household; cannot be combined with other discounts.
+                </p>
                 <div id=quote-success class="hidden text-center py-8">
                     <i class="fas fa-circle-check icon-tile w-16 h-16 bg-green-100 rounded-full text-3xl text-green-600 mx-auto mb-4" aria-hidden=true></i>
                     <h3 class="text-2xl font-bold text-blue-900 mb-2">Got it — thanks!</h3>
