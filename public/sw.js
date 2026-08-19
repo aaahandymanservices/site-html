@@ -215,7 +215,14 @@
 // so a returning visitor holding v36 would keep the prior, banner-less shell
 // cached and never see the offer until they reloaded. This bump evicts the old
 // shell for every client.
-const CACHE_VERSION = 'v37';
+// v38 swaps the offline page's logo image for the new round logo
+// (/logo-round-nbg.png) and adds it to the precache list so the offline page
+// renders with the new mark even on a fully cold start. The offline page is
+// served from the shell cache and its HTML changed behind its unchanged
+// pathname, so a returning visitor holding v37 would keep the old page with its
+// reference to /icons/icon-192.png. This bump evicts the old shell for every
+// client.
+const CACHE_VERSION = 'v38';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -243,6 +250,7 @@ const PRECACHE_URLS = [
   // Two glyphs' worth of brand icons, and every page preloads it.
   '/fonts/fa-brands-400.woff2',
   '/icons/icon-192.png',
+  '/logo-round-nbg.png',
   '/manifest.webmanifest',
 ];
 
