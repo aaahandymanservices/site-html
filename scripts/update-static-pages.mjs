@@ -8,21 +8,25 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 
 const STATIC_NAV_PAGES = [
-  { path: 'public/index.html', active: 'none' },
-  { path: 'public/services.html', active: 'services' },
-  { path: 'public/service-areas.html', active: 'service-areas' },
-  { path: 'public/rates.html', active: 'rates', removeSectionNav: false },
-  { path: 'public/guarantee.html', active: 'guarantee' },
-  { path: 'public/reviews.html', active: 'reviews' },
-  { path: 'public/careers.html', active: 'careers' },
-  { path: 'public/contact.html', active: 'contact' },
-  { path: 'public/ai-estimate.html', active: 'ai-estimate' },
-  { path: 'public/customer-care.html', active: 'none' },
-  { path: 'public/pricing-policy.html', active: 'none' },
-  { path: 'public/book.html', active: 'none' },
-  { path: 'public/privacy.html', active: 'none' },
-  { path: 'public/terms.html', active: 'none' },
-  { path: 'public/services/aging-in-place-guide.html', active: 'services' }
+  // promoCtaHref points the new-customer banner CTA at the closest booking/
+  // quote form on the page so the button scrolls in-page instead of navigating
+  // away. promoBanner:false keeps the promo off the legal pages (Terms/Privacy),
+  // which intentionally carry no marketing banners.
+  { path: 'public/index.html', active: 'none', promoCtaHref: '#quote' },
+  { path: 'public/services.html', active: 'services', promoCtaHref: '/book#booking-form' },
+  { path: 'public/service-areas.html', active: 'service-areas', promoCtaHref: '/book#booking-form' },
+  { path: 'public/rates.html', active: 'rates', removeSectionNav: false, promoCtaHref: '/book#booking-form' },
+  { path: 'public/guarantee.html', active: 'guarantee', promoCtaHref: '/book#booking-form' },
+  { path: 'public/reviews.html', active: 'reviews', promoCtaHref: '/book#booking-form' },
+  { path: 'public/careers.html', active: 'careers', promoCtaHref: '/book#booking-form' },
+  { path: 'public/contact.html', active: 'contact', promoCtaHref: '#contact-form' },
+  { path: 'public/ai-estimate.html', active: 'ai-estimate', promoCtaHref: '/book#booking-form' },
+  { path: 'public/customer-care.html', active: 'none', promoCtaHref: '/book#booking-form' },
+  { path: 'public/pricing-policy.html', active: 'none', promoCtaHref: '/book#booking-form' },
+  { path: 'public/book.html', active: 'none', promoCtaHref: '#booking-form' },
+  { path: 'public/privacy.html', active: 'none', promoBanner: false },
+  { path: 'public/terms.html', active: 'none', promoBanner: false },
+  { path: 'public/services/aging-in-place-guide.html', active: 'services', promoCtaHref: '/book#booking-form' }
 ];
 
 /**
@@ -397,7 +401,7 @@ function optimizeFontsAndAssets(html) {
 }
 
 // 1. Update Navigation on key static pages
-for (const { path, active, removeSectionNav } of STATIC_NAV_PAGES) {
+for (const { path, active, removeSectionNav, promoBanner = true, promoCtaHref } of STATIC_NAV_PAGES) {
   const fullPath = join(ROOT, path);
   let content = readFileSync(fullPath, 'utf8');
 
@@ -410,16 +414,23 @@ for (const { path, active, removeSectionNav } of STATIC_NAV_PAGES) {
   // buttons and icons between the bar and the page content.
   const ORPHAN_DRAWER_TAIL =
     '(?:(?:\\s*<div class="pt-[23] border-t border-gray-100(?:[^<]|<(?!\\/div>))*<\\/div>)+\\s*<\\/div>\\s*<\\/nav>)?';
-  // getUnifiedNav also emits the seasonal offer bar that sits under the nav, so
-  // an existing one has to be part of the match for the same reason the skip
-  // link is: replacing only the <nav> would leave last build's bar in place and
-  // stack a second one on top of it. The id may be quoted (`id="seasonal-banner"`)
-  // or unquoted (`id=seasonal-banner`) depending on whether the source file has
-  // been through the minifier, so both forms are matched, and one or more stale
-  // banners are consumed so duplicates never accumulate across builds.
+  // getUnifiedNav emits the new-customer promo bar above the header and used to
+  // emit a seasonal offer bar below it. Both have to be part of the match for
+  // the same reason the skip link is: replacing only the <header> would leave a
+  // previous build's banner in place and stack a second one beside it. The ids
+  // may be quoted (`id="seasonal-banner"`) or unquoted (`id=seasonal-banner`)
+  // depending on whether the source file has been through the minifier, so both
+  // forms are matched, and one or more stale banners of either kind are consumed
+  // so duplicates never accumulate across builds.
+  const NEW_CUSTOMER_BANNER_HEAD = '(?:\\s*<aside[^>]*id=(?:"new-customer-banner"|new-customer-banner)[\\s\\S]*?<\\/aside>)*';
   const SEASONAL_BANNER_TAIL = '(?:\\s*<aside[^>]*id=(?:"seasonal-banner"|seasonal-banner)[\\s\\S]*?<\\/aside>)*';
   const mainNavRegex = new RegExp(
-    '(?:<a[^>]*class="[^"]*skip-link[^"]*"[^>]*>[\\s\\S]*?<\\/a>\\s*)?' +
+    // Optional leading whitespace + skip-link: getUnifiedNav emits its own
+    // skip-link, so an existing one has to be consumed or every build
+    // duplicates it.
+    '\\s*(?:<a[^>]*class="[^"]*skip-link[^"]*"[^>]*>[\\s\\S]*?<\\/a>\\s*)?' +
+      NEW_CUSTOMER_BANNER_HEAD +
+      '\\s*' +
       '(?:<header[^>]*id="site-header"[\\s\\S]*?<\\/header>' +
       '|<header[^>]*class="[^"]*site-header[^"]*"[\\s\\S]*?<\\/header>' +
       '|<header[^>]*class="sticky top-0 z-50 bg-white[\\s\\S]*?<\\/header>' +
@@ -432,7 +443,7 @@ for (const { path, active, removeSectionNav } of STATIC_NAV_PAGES) {
     if (/<\/nav>[\s\S]*<\/nav>/.test(matched)) {
       console.log(`  Removed orphaned drawer markup after the nav in ${path}`);
     }
-    const unifiedNavHtml = getUnifiedNav(active);
+    const unifiedNavHtml = getUnifiedNav(active, { promoBanner, promoCtaHref });
     content = content.replace(mainNavRegex, unifiedNavHtml);
   } else {
     console.warn(`Main nav regex did not match in ${path}`);
