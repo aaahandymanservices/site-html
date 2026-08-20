@@ -126,10 +126,18 @@
 
   /* Signature gradients */
   --grad-crimson: linear-gradient(135deg, #ef4444, #dc2626 55%, #991b1b);
+  --grad-crimson-vivid: var(--grad-crimson);
   --grad-emerald: linear-gradient(135deg, #22c55e, #16a34a 55%, #15803d);
   --grad-navy: linear-gradient(145deg, #1e293b, #0f172a 60%, #0b0f19);
   --grad-craftsman: linear-gradient(135deg, #ef4444, #dc2626 60%, #991b1b);
   --grad-card: linear-gradient(145deg, #182235, #131b2a);
+
+  /* Crimson glow tokens for CTAs and accents — unified on the brand crimson
+     #dc2626 so every glow reads the same colour. An earlier layer used the
+     brick-red #a61f2e here, which read as a different, browner glow on the
+     primary CTAs than on the rest of the site. */
+  --crimson-glow: rgba(220, 38, 38, 0.32);
+  --crimson-glow-hover: rgba(220, 38, 38, 0.48);
 
   --font-display: "Archivo", "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
 
@@ -156,8 +164,9 @@ body {
   overflow-x: hidden;
   box-sizing: border-box;
   background:
-    radial-gradient(circle at 10% 0%, rgba(220, 38, 38, 0.08), transparent 35rem),
+    radial-gradient(circle at 10% 0%, rgba(220, 38, 38, 0.09), transparent 35rem),
     radial-gradient(circle at 90% 10%, rgba(30, 41, 59, 0.5), transparent 40rem),
+    radial-gradient(circle at 50% 100%, rgba(15, 23, 42, 0.6), transparent 50rem),
     #0b0f19;
   color: var(--brand-muted);
   line-height: 1.6;
@@ -197,7 +206,7 @@ main, section, header, footer, nav {
 
 /* Refined, brand-tinted scrollbar */
 * {
-  scrollbar-color: rgb(166 31 46 / 55%) transparent;
+  scrollbar-color: rgb(220 38 38 / 55%) transparent;
 }
 
 ::-webkit-scrollbar {
@@ -213,7 +222,7 @@ main, section, header, footer, nav {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(166 31 46 / 65%);
+  background: rgb(220 38 38 / 65%);
   background-clip: content-box;
 }
 
@@ -261,7 +270,7 @@ div[id] {
 }
 
 :where(a, button, input, select, textarea, summary):focus-visible {
-  outline: 3px solid rgb(166 31 46 / 45%);
+  outline: 3px solid rgb(220 38 38 / 55%);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -269,7 +278,7 @@ div[id] {
 /* Anything given an explicit widget role is keyboard-reachable and therefore
    needs the same visible ring as a native control. */
 :where([role="radio"], [role="button"], [role="tab"], [tabindex]):focus-visible {
-  outline: 3px solid rgb(166 31 46 / 45%);
+  outline: 3px solid rgb(220 38 38 / 55%);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -742,6 +751,7 @@ nav.sticky,
 }
 
 .brand,
+.nav-brand,
 .site-nav__brand,
 #site-nav .site-nav__brand {
   display: flex;
@@ -749,6 +759,36 @@ nav.sticky,
   align-items: center;
   gap: 0.75rem;
   min-width: 0;
+}
+
+/*
+ * The brand lockup is a three-part unit: the mark, the name with its "LLC"
+ * suffix on one line, and the service area under it. The suffix and the
+ * location are inline elements, so the column behaviour is spelled out here
+ * rather than left to the utility classes -- the header has to hold its shape
+ * on the first paint, before the Tailwind sheet is guaranteed to have landed,
+ * or the name and the location reflow into each other and the row shifts.
+ */
+.brand-text-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.brand-title {
+  display: block;
+  min-width: 0;
+}
+
+.brand-name,
+.brand-suffix {
+  white-space: nowrap;
+}
+
+.brand-location {
+  display: block;
+  white-space: nowrap;
 }
 
 .site-nav__desktop {
@@ -790,6 +830,92 @@ nav.sticky,
   border-left: 1px solid #e5e7eb;
 }
 
+/*
+ * Social badges.
+ *
+ * The links used to be bare glyphs tinted with each platform's colour, which
+ * left several of them fighting the near-black header and footer for contrast
+ * and gave them no real hit area. They are filled circles now: the platform
+ * colour does the recognising and the glyph is knocked out in white.
+ *
+ * The size is fixed in pixels rather than ems because these sit in three
+ * different type contexts (the desktop header row, the mobile drawer, the
+ * footer column) and the row of circles has to stay the same row of circles in
+ * all three. Reserving the box in the stylesheet also means the header keeps
+ * its height from the first paint, before the icon font arrives.
+ */
+.social-icon-btn {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 1.125rem;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), filter var(--dur) var(--ease);
+}
+
+.social-icon-btn i,
+.social-icon-btn svg {
+  line-height: 1;
+}
+
+.social-icon-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgb(0 0 0 / 35%);
+}
+
+/* The tinted glyphs used to rely on the surrounding utility classes for their
+   focus treatment; a filled circle needs a ring that reads against both the
+   platform colour inside it and the dark surface behind it. */
+.social-icon-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.social-icon-btn.facebook {
+  background-color: #1877f2;
+}
+
+.social-icon-btn.instagram {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+}
+
+.social-icon-btn.youtube {
+  background-color: #ff0000;
+}
+
+.social-icon-btn.nextdoor {
+  background-color: #00b246;
+}
+
+.social-icon-btn.yelp {
+  background-color: #ff1a1a;
+}
+
+/* Google's mark is four colours by brand rule and cannot be knocked out to a
+   white silhouette the way a single-colour glyph can, so its badge inverts:
+   white circle, mark left in its own colours. */
+.social-icon-btn.google {
+  background-color: #ffffff;
+  color: #4285f4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-icon-btn {
+    transition: none;
+  }
+
+  .social-icon-btn:hover {
+    transform: none;
+  }
+}
+
 /* The hamburger is the one control on the row that must never be squeezed or
    clipped, whatever the brand next to it is doing. */
 #mobile-menu-btn,
@@ -802,6 +928,8 @@ nav.sticky,
 }
 
 .brand img,
+.brand-logo,
+.nav-brand .brand-logo,
 .site-nav__brand img,
 #site-nav .site-nav__brand img {
   border-color: var(--brand-crimson);
@@ -890,7 +1018,9 @@ nav.sticky,
   }
 
   .brand .brand-tagline,
-  .site-nav__brand .brand-tagline {
+  .brand .brand-location,
+  .site-nav__brand .brand-tagline,
+  .site-nav__brand .brand-location {
     font-size: 0.625rem;
   }
 
@@ -934,7 +1064,9 @@ nav.sticky,
   }
 
   .brand .brand-tagline,
+  .brand .brand-location,
   .site-nav__brand .brand-tagline,
+  .site-nav__brand .brand-location,
   .brand p:last-child,
   .site-nav__brand p:last-child {
     font-size: 0.6875rem;
@@ -1027,7 +1159,14 @@ nav.sticky,
   padding: 0.5rem 0.85rem;
   border: 1px solid transparent;
   border-radius: 0.7rem;
-  color: var(--brand-muted);
+  /* The pills sit on the light frosted-glass shell (.section-nav-shell uses
+     white at 72% over the dark canvas), so the resting label needs a dark
+     ink to stay legible. --brand-muted (#94a3b8) was tuned for the dark
+     canvas and measured ~2.3:1 against the glass; --brand-navy (#0f172a)
+     clears 12:1 on the same surface and matches the lead text the seasonal
+     banner already uses there. The hover and active states keep their own
+     colours below. */
+  color: var(--brand-navy);
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1;
@@ -3450,13 +3589,10 @@ html.bw-open body {
    metallic text onto light surfaces, which washed out badges, form cards,
    and every main h1. CTAs, glows, and dark-surface treatments now stay on
    --brand-crimson / --brand-navy, and light UI keeps its original tokens.
+   The crimson glow tokens that used to live in a separate :root block here
+   are now declared once with the main brand tokens above, unified on
+   #dc2626 instead of the off-brand brick-red #a61f2e.
    ========================================================================== */
-
-:root {
-  --grad-crimson-vivid: var(--grad-crimson);
-  --crimson-glow: rgb(166 31 46 / 32%);
-  --crimson-glow-hover: rgb(166 31 46 / 48%);
-}
 
 /* Primary CTAs stay on the brand crimson gradient with a soft outer glow. */
 .cta-button,
@@ -6266,22 +6402,9 @@ input.careers-upload-input::file-selector-button:hover {
   text-decoration: underline;
 }
 
-.pulse-btn {
-  position: relative;
-  animation: none !important;
-  background-color: var(--brand-crimson);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.pulse-btn:hover {
-  background-color: #781925;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.pulse-btn::before {
-  display: none !important;
-}
+/* `.pulse-btn` is defined once above with the green-ring pulse component and
+   is the canonical definition. An earlier draft of this file repeated it here
+   as a bare duplicate; that copy has been removed. */
 
 .faq-group {
   border: 1px solid rgb(203 213 225 / 0.8);
@@ -6872,6 +6995,26 @@ h1, h2, h3, h4, h5, h6,
   color: #94a3b8 !important;
 }
 
+/* The homepage's owner quote is the one callout still on a `bg-red-50` panel.
+   That shade is not in the near-white list section 2 repaints dark, so the box
+   legitimately stays pale -- but the hierarchy rule directly above forces
+   `text-gray-800` and `text-blue-900` to white on the assumption that anything
+   wearing them sits on the dark canvas. The two met on this element and the
+   quote rendered white on #fdf2f2, about 1.1:1.
+
+   Only the colour is corrected, back to the values the markup asks for, plus
+   the heading weight and tracking the same rule applied to what is running
+   text. The panel, spacing, border and type sizes are untouched. */
+.bg-red-50.text-gray-800 {
+  color: #1f2937 !important;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.bg-red-50 .text-blue-900 {
+  color: #1e3a8a !important;
+}
+
 p strong, li strong, span strong, div strong {
   color: #ffffff !important;
 }
@@ -6896,7 +7039,7 @@ p strong, li strong, span strong, div strong {
 .bg-white:not(header):not(#site-header):not(.site-header):not(#new-customer-banner):not(.site-nav__bar):not(.aaa-avatar):not(img),
 .bg-gray-50:not(body):not(header):not(#site-header),
 .bg-slate-50:not(body):not(header):not(#site-header) {
-  background: #151e2e !important;
+  background: linear-gradient(160deg, #182338 0%, #131b2a 100%) !important;
   background-color: #151e2e !important;
   border: 1px solid rgba(255, 255, 255, 0.09) !important;
   border-radius: 1.5rem !important; /* 24px */
@@ -6918,7 +7061,7 @@ p strong, li strong, span strong, div strong {
 .feature-card:hover {
   transform: translateY(-4px) !important;
   border-color: rgba(220, 38, 38, 0.45) !important;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(220, 38, 38, 0.15) !important;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(220, 38, 38, 0.18) !important;
 }
 
 /* Secondary nested sub-cards */
@@ -7083,8 +7226,15 @@ a:not(.btn-craftsman):not(.btn-crimson):not(.btn-emerald):not(.aaa-btn):not(.nav
   font-weight: 800 !important;
 }
 
+#site-header .brand-title .brand-suffix,
+.site-header .brand-title .brand-suffix {
+  color: #ef4444 !important;
+}
+
 #site-header .brand-tagline,
-.site-header .brand-tagline {
+#site-header .brand-location,
+.site-header .brand-tagline,
+.site-header .brand-location {
   color: #94a3b8 !important;
 }
 
@@ -7316,6 +7466,26 @@ footer a:hover,
 #site-footer a:hover,
 .site-footer a:hover {
   color: #ffffff !important;
+}
+
+/* The blanket footer link colour above would repaint the knocked-out glyphs
+   inside the social badges, so they opt back out of it. */
+footer .social-icon-btn,
+#site-footer .social-icon-btn,
+.site-footer .social-icon-btn,
+footer .social-icon-btn:hover,
+#site-footer .social-icon-btn:hover,
+.site-footer .social-icon-btn:hover {
+  color: #ffffff !important;
+}
+
+footer .social-icon-btn.google,
+#site-footer .social-icon-btn.google,
+.site-footer .social-icon-btn.google,
+footer .social-icon-btn.google:hover,
+#site-footer .social-icon-btn.google:hover,
+.site-footer .social-icon-btn.google:hover {
+  color: #4285f4 !important;
 }
 
 footer .border-gray-800,

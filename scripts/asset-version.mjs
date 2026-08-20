@@ -26,7 +26,7 @@
  * worker keys assets by pathname with ?v= removed, so public/sw.js has its own
  * CACHE_VERSION that has to move with a stylesheet change as well.
  */
-export const ASSET_VERSION = '20260817d';
+export const ASSET_VERSION = '20260820b';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use

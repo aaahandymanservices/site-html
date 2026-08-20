@@ -222,7 +222,7 @@
 // pathname, so a returning visitor holding v37 would keep the old page with its
 // reference to /icons/icon-192.png. This bump evicts the old shell for every
 // client.
-const CACHE_VERSION = 'v38';
+const CACHE_VERSION = 'v40';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
