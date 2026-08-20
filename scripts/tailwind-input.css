@@ -9,6 +9,9 @@
     overflow-x: hidden;
     box-sizing: border-box;
     scroll-behavior: smooth;
+    background-color: #0b0f19;
+    color: #ffffff;
+    color-scheme: dark;
   }
 
   body {
@@ -21,6 +24,8 @@
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
     text-rendering: optimizeLegibility;
+    background-color: #0b0f19;
+    color: #94a3b8;
   }
 
   *, ::before, ::after {
@@ -35,21 +40,17 @@
     max-width: 100%;
   }
 
-  /* A legible fallback pair for any field that states neither colour itself.
-     Background and text colour must stay together: a `bg-*` utility outranks
-     this element-level rule and would otherwise leave the text colour below
-     stranded on a background it was never meant for. `:where()` keeps the
-     specificity at element level so `bg-gray-800 text-white` still wins. */
   input:where(:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="button"]):not([type="submit"]):not([type="reset"])),
   select,
   textarea {
-    background-color: #fff;
-    color: #1f2937;
+    background-color: #0f172a;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   input::placeholder, textarea::placeholder {
-    color: currentColor;
-    opacity: .7;
+    color: #64748b;
+    opacity: .85;
   }
 }
 
