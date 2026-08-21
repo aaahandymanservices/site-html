@@ -229,7 +229,7 @@
 // guard only checked the banner's own dismissal key) and keep seeing the offer
 // bar after they spent the certificate. This bump evicts the old shell and
 // assets for every client.
-const CACHE_VERSION = 'v39';
+const CACHE_VERSION = 'v40';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
