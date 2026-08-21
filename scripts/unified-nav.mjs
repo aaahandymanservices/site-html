@@ -112,7 +112,14 @@ export function getNewCustomerBanner({ ctaHref = '/book#booking-form' } = {}) {
   // rotation, and a returning visitor who already claimed it should not be
   // re-pitched on every page they open.
   const STORAGE_KEY = 'aaa-new-customer-banner';
-  const dismissGuard = "(function(){try{if(localStorage.getItem('" + STORAGE_KEY + "')==='dismissed'){var b=document.getElementById('new-customer-banner');if(b)b.hidden=true;}}catch(e){}})();";
+  // The banner also disappears for a visitor who has already spent their $50
+  // first-service gift certificate. That redemption state lives in a separate
+  // storage key (aaa-first-service-gift, written by gift-certificate.js and the
+  // booking flow), so the prepaint guard here checks both before first paint:
+  // the CTA dismissal is per-browser convenience, the redemption is permanent,
+  // and either one should keep the offer bar off the top of the page.
+  const GIFT_KEY = 'aaa-first-service-gift';
+  const dismissGuard = "(function(){try{var b=document.getElementById('new-customer-banner');if(!b)return;var dismissed=localStorage.getItem('" + STORAGE_KEY + "')==='dismissed';if(!dismissed){try{var g=JSON.parse(localStorage.getItem('" + GIFT_KEY + "')||'{}');if(g&&g.firstServiceGiftRedeemed===true)dismissed=true}catch(e){}}if(dismissed)b.hidden=true;}catch(e){}})();";
   return `<aside id="new-customer-banner" class="new-customer-banner" aria-label="New customer special offer">
     <style>.new-customer-banner{background:#1b2a4a;color:#fff;border-bottom:3px solid #a61f2e;transition:height .35s ease,opacity .25s ease,margin .35s ease,padding .35s ease;overflow:hidden}.new-customer-banner__inner{max-width:80rem;margin-inline:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.5rem 1.25rem;padding:.7rem 1.25rem}.new-customer-banner__copy{display:flex;align-items:center;gap:.6rem;margin:0;text-align:center;font-size:.95rem;font-weight:600;line-height:1.35}.new-customer-banner__icon{font-size:1.15rem;line-height:1}.new-customer-banner__lead{color:#fca5a5;font-weight:800;letter-spacing:.01em}.new-customer-banner__amount{color:#fff;font-weight:800}.new-customer-banner__cta{display:inline-flex;align-items:center;gap:.45rem;min-height:2.75rem;padding:.5rem 1.15rem;border-radius:.7rem;background:linear-gradient(100deg,#c2262f,#a61f2e);color:#fff;font-weight:800;font-size:.875rem;white-space:nowrap;text-decoration:none;box-shadow:0 6px 16px #78192542;transition:transform .2s ease,box-shadow .2s ease}.new-customer-banner__cta:hover{filter:brightness(1.05);box-shadow:0 10px 22px #78192557;transform:translateY(-1px)}.new-customer-banner__cta svg{flex:0 0 auto}#new-customer-banner[hidden]{display:none}#new-customer-banner.is-dismissing{opacity:0;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;height:0}@media(max-width:640px){.new-customer-banner__copy{font-size:.85rem}.new-customer-banner__cta{font-size:.8rem}}@media(prefers-reduced-motion:reduce){#new-customer-banner.is-dismissing{transition:none}}</style>
     <script>${dismissGuard}</script>

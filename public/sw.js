@@ -222,7 +222,14 @@
 // pathname, so a returning visitor holding v37 would keep the old page with its
 // reference to /icons/icon-192.png. This bump evicts the old shell for every
 // client.
-const CACHE_VERSION = 'v38';
+// v39 hides the new-customer banner once the $50 first-service gift
+// certificate has been redeemed. The banner ships in the navigation shell
+// markup, and the redemption state is read in a prepaint guard inside that same
+// shell, so a returning visitor holding v38 would keep the prior shell (whose
+// guard only checked the banner's own dismissal key) and keep seeing the offer
+// bar after they spent the certificate. This bump evicts the old shell and
+// assets for every client.
+const CACHE_VERSION = 'v39';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
