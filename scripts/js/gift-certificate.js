@@ -31,6 +31,12 @@
   var STORAGE_KEY = 'aaa-first-service-gift';
   var STYLE_ID = 'gift-certificate-hidden';
   var BLOCK_SELECTOR = '[data-gift-certificate]';
+  // The top-of-page promo bar carries the same offer as the gated callouts, so
+  // it disappears for a redeemed visitor alongside them. It has its own
+  // dismissal key (aaa-new-customer-banner) and its own prepaint guard, so we
+  // only touch it once redemption is known here -- the CTA-click dismissal path
+  // does not run through this script.
+  var BANNER_ID = 'new-customer-banner';
   var ENDPOINT = '/api/gift-certificate';
   var EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -124,9 +130,38 @@
     });
   }
 
+  function hideBanner() {
+    var banner = document.getElementById(BANNER_ID);
+    if (banner) banner.hidden = true;
+  }
+
+  function showBanner() {
+    var banner = document.getElementById(BANNER_ID);
+    if (!banner) return;
+    // Respect the banner's own dismissal: a visitor who clicked the CTA set
+    // aaa-new-customer-banner=dismissed, and re-showing it here (when the email
+    // check comes back "not redeemed") would override that choice. Redemption
+    // state is ours to manage; the CTA dismissal is not.
+    var dismissed = false;
+    try {
+      dismissed = localStorage.getItem('aaa-new-customer-banner') === 'dismissed';
+    } catch (err) {
+      dismissed = false;
+    }
+    if (!isRedeemed() && !dismissed) banner.hidden = false;
+  }
+
   function apply(redeemed) {
-    if (redeemed) hide();
-    else show();
+    if (redeemed) {
+      hide();
+      hideBanner();
+    } else {
+      show();
+      // Do not force the bar back on if the visitor dismissed it themselves;
+      // the banner's own prepaint guard already hid it, and re-showing would
+      // override that dismissal. Only the redemption state is ours to manage.
+      showBanner();
+    }
   }
 
   function fetchStatus(email) {
@@ -236,7 +271,10 @@
     });
   }
 
-  if (isRedeemed()) hide();
+  if (isRedeemed()) {
+    hide();
+    hideBanner();
+  }
   watchEmailFields();
 
   window.AAAGiftCertificate = {
