@@ -73,5 +73,12 @@
   .generated-service-card {
     overflow: visible !important;
   }
+
+  /* Update your header brand / site title selector */
+  .navbar-brand,
+  .site-title,
+  .header-logo a span:not(.accent) {
+    color: #111827 !important; /* Set to dark text so it contrasts with the white navbar */
+  }
 }
 
