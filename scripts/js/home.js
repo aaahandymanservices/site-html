@@ -538,8 +538,8 @@
           bulletsUl.innerHTML = '';
           data.bullets.forEach(b => {
               const li = document.createElement('li');
-              li.className = 'flex items-start gap-2 aaa-check-item';
-              li.innerHTML = `<i class="fas fa-check aaa-check aaa-check--red mt-1" aria-hidden="true"></i><span>${b}</span>`;
+              li.className = 'flex items-start gap-2';
+              li.innerHTML = `<i class="fas fa-check-circle text-red-600 mt-1 shrink-0" aria-hidden="true"></i><span>${b}</span>`;
               bulletsUl.appendChild(li);
           });
 
