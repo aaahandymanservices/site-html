@@ -1,4 +1,11 @@
 module.exports = {
+  /*
+   * The site has one theme and it is the light one. Nothing renders a `dark`
+   * class on `html`, so this setting emits no dark variants at all -- which is
+   * the point of keeping it. The alternative, Tailwind's `media` default, would
+   * hand any stray `dark:` utility straight to the visitor's OS preference and
+   * quietly reintroduce a second theme nobody designed or reviewed.
+   */
   darkMode: 'class',
   content: [
     './public/**/*.html',

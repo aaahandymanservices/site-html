@@ -83,40 +83,35 @@
 }
 
 :root {
-  --brand-navy: #0f172a;
-  --brand-navy-deep: #0b0f19;
-  --brand-navy-soft: #1e293b;
-  --brand-crimson: #dc2626;
-  --brand-crimson-bright: #ef4444;
-  --brand-crimson-dark: #991b1b;
-  --brand-crimson-soft: rgba(220, 38, 38, 0.15);
-  /* Accent scale for crimson sitting on dark surfaces */
-  --brand-crimson-on-navy: #fca5a5;
-  --brand-crimson-on-navy-strong: #ef4444;
-  --brand-crimson-soft-glow: rgba(220, 38, 38, 0.15);
-  --brand-crimson-glow: rgba(220, 38, 38, 0.35);
-  --brand-emerald: #16a34a;
-  --brand-emerald-bright: #22c55e;
-  --brand-emerald-dark: #15803d;
-  --brand-emerald-soft: rgba(22, 163, 74, 0.15);
-  --brand-ink: #ffffff;
-  --brand-muted: #94a3b8;
-  --brand-muted-light: #cbd5e1;
-  --brand-line: rgba(255, 255, 255, 0.08);
-  --brand-line-strong: rgba(255, 255, 255, 0.15);
-  --brand-surface: #151e2e;
-  --brand-surface-raised: #1e293b;
-  --brand-surface-hover: #223048;
-  --brand-canvas: #0b0f19;
+  --brand-navy: #1b2a4a;
+  --brand-navy-deep: #101b31;
+  --brand-navy-soft: #26395a;
+  --brand-crimson: #a61f2e;
+  --brand-crimson-bright: #c62839;
+  --brand-crimson-dark: #781925;
+  --brand-crimson-soft: #f8e9eb;
+  /* Accent scale for crimson sitting on the navy surfaces. Brand crimson is
+     dark enough that on #1b2a4a it reads as a smudge rather than an accent, so
+     dark-surface icons, hairlines, and badge text step up to these lighter
+     tints instead. They are the same hue, just lifted far enough to clear the
+     background. */
+  --brand-crimson-on-navy: #df929c;
+  --brand-crimson-on-navy-strong: #c95160;
+  --brand-crimson-soft-glow: rgb(166 31 46 / 15%);
+  --brand-crimson-glow: rgb(166 31 46 / 35%);
+  --brand-ink: #1f2937;
+  --brand-muted: #526174;
+  --brand-line: #d8dee8;
+  --brand-surface: #ffffff;
+  --brand-canvas: #f4f6fa;
 
   /* Layered shadow scale for consistent depth across the site */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.45), 0 0 15px rgba(255, 255, 255, 0.03);
-  --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(220, 38, 38, 0.1);
-  --shadow-crimson: 0 12px 28px -4px rgba(220, 38, 38, 0.45);
-  --shadow-emerald: 0 12px 28px -4px rgba(22, 163, 74, 0.45);
-  --shadow-accent: var(--shadow-crimson);
-  --shadow-layered-dark: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(220, 38, 38, 0.12);
+  --shadow-sm: 0 1px 2px rgb(16 27 49 / 6%), 0 2px 6px rgb(16 27 49 / 6%);
+  --shadow-md: 0 8px 24px rgb(27 42 74 / 8%);
+  --shadow-lg: 0 18px 44px rgb(27 42 74 / 12%);
+  --shadow-crimson: 0 12px 26px rgb(120 25 37 / 26%);
+  --shadow-accent: 0 12px 28px -4px rgb(166 31 46 / 32%);
+  --shadow-layered-dark: 0 20px 40px -10px rgb(0 0 0 / 45%), 0 0 20px rgb(166 31 46 / 12%);
   --brand-shadow: var(--shadow-lg);
 
   /* Motion + shape tokens */
@@ -125,15 +120,25 @@
   --dur: 200ms;
 
   /* Signature gradients */
-  --grad-crimson: linear-gradient(135deg, #ef4444, #dc2626 55%, #991b1b);
-  --grad-emerald: linear-gradient(135deg, #22c55e, #16a34a 55%, #15803d);
-  --grad-navy: linear-gradient(145deg, #1e293b, #0f172a 60%, #0b0f19);
-  --grad-craftsman: linear-gradient(135deg, #ef4444, #dc2626 60%, #991b1b);
-  --grad-card: linear-gradient(145deg, #182235, #131b2a);
+  --grad-crimson: linear-gradient(135deg, var(--brand-crimson-bright), var(--brand-crimson) 55%, var(--brand-crimson-dark));
+  --grad-navy: linear-gradient(135deg, var(--brand-navy-deep), var(--brand-navy));
+  --grad-craftsman: linear-gradient(135deg, var(--brand-crimson-bright), var(--brand-crimson) 60%, var(--brand-crimson-dark));
 
   --font-display: "Archivo", "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  /* Sticky-header geometry */
+  /* Sticky-header geometry.
+   *
+   * Four separate places have to know how tall the top bar is: the bar's own
+   * min-height, the pricing page's jump-link strip that parks under it, the
+   * mobile drawer's scroll cap, and the scroll-margin that keeps an anchored
+   * heading from landing behind it. Those were four hand-typed numbers that
+   * had already drifted apart -- 4.75rem, 70px, 6rem, and an inline 60px on
+   * the rates page -- so a change to the bar's height silently broke the
+   * other three. They all read these tokens now.
+   *
+   * --nav-h is the bar's box; --nav-offset adds the crimson rule beneath it,
+   * which is the line the page content actually has to clear.
+   */
   --nav-h: 4.75rem;
   --nav-border: 3px;
   --nav-offset: calc(var(--nav-h) + var(--nav-border));
@@ -146,7 +151,6 @@ html {
   box-sizing: border-box;
   color: var(--brand-ink);
   background: var(--brand-canvas);
-  color-scheme: dark;
 }
 
 body {
@@ -156,10 +160,10 @@ body {
   overflow-x: hidden;
   box-sizing: border-box;
   background:
-    radial-gradient(circle at 10% 0%, rgba(220, 38, 38, 0.08), transparent 35rem),
-    radial-gradient(circle at 90% 10%, rgba(30, 41, 59, 0.5), transparent 40rem),
-    #0b0f19;
-  color: var(--brand-muted);
+    radial-gradient(circle at 8% -2%, rgb(166 31 46 / 5%), transparent 30rem),
+    radial-gradient(circle at 100% 0%, rgb(27 42 74 / 5%), transparent 34rem),
+    linear-gradient(180deg, #f8fafc 0%, var(--brand-canvas) 26rem);
+  color: var(--brand-ink);
   line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: subpixel-antialiased;
@@ -353,57 +357,120 @@ textarea {
 input:where(:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="button"]):not([type="submit"]):not([type="reset"])),
 select,
 textarea {
-  background-color: #0f172a;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: #f8fafc;
+  color: var(--brand-ink);
+  border: 2px solid #cbd5e1;
   border-radius: 0.75rem;
   padding: 0.75rem 1rem;
-  /* 16px threshold to prevent iOS Safari auto-zoom */
+  /* 16px is a threshold, not a taste call: iOS Safari zooms the viewport in on
+   * a focused field whose text is any smaller, and it does not zoom back out
+   * when the field is left. Fields that state their own size (contact, book,
+   * the home quote form) already clear it; the careers and reviews fields
+   * state none and inherit this, so anything under 1rem here means every tap
+   * into those forms leaves the visitor scrolled sideways on a phone. */
   font-size: 1rem;
   font-weight: 500;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
+/* The focused half of the pair above, and it has to obey the same two rules.
+ *
+ * `:focus` written bare is a pseudo-class, worth as much as a class, so
+ * `input:focus` outranks a `bg-gray-800` utility while the plain `input`
+ * selector above does not. That is how the dark contact and book fields turned
+ * white the moment they were clicked into, with `text-white` still winning the
+ * colour -- white letters on a white field, for exactly as long as someone was
+ * typing in it. Wrapping the pseudo-class in `:where()` drops it back to
+ * element-level specificity: it still beats the unfocused rule by source order
+ * on pages that state no field colour, and now loses to a page's own `bg-*`
+ * the same way the unfocused rule does.
+ *
+ * Colour travels with the background here for the same reason it does above --
+ * either both land or neither does. */
 input:where(:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="button"]):not([type="submit"]):not([type="reset"])):where(:focus),
 select:where(:focus),
 textarea:where(:focus) {
   outline: none;
-  background-color: #151e2e;
-  color: #ffffff;
-  border-color: #ef4444;
-  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.25);
+  background-color: #ffffff;
+  color: var(--brand-ink);
+  border-color: var(--brand-crimson);
+  box-shadow: 0 0 0 4px rgba(166, 31, 46, 0.22);
 }
 
+/* Derived from whatever colour actually won above, so a placeholder can never
+   come out the same shade as the field it sits in. */
 input::placeholder, textarea::placeholder {
   color: #64748b;
   opacity: .85;
 }
 
+/* Autofilled fields.
+ *
+ * This is the one field state no author declaration reaches. When Chrome or
+ * Safari fills a saved name, email, phone, or city, it paints its own pale
+ * background over the field -- `background-color` cannot override it -- while
+ * still honouring the author's `color`. On the light forms that is merely off
+ * palette. On the dark contact, book, and guide fields it is `text-white` on
+ * near-white: the visitor's own name and email land in the field invisibly,
+ * and they only find out something is there when they try to type over it.
+ *
+ * The two properties that do reach the state are an inset box-shadow, which
+ * covers the UA background with a spread larger than any field, and
+ * `-webkit-text-fill-color`, which outranks `color` on the filled text. Both
+ * read the pair of variables below, so a form declares its field colours once
+ * and every autofill state follows -- rather than this rule hard-coding a
+ * light pair that would repeat the same white-on-white bug the moment a dark
+ * form was added.
+ */
 :root {
-  --field-bg: #0f172a;
-  --field-ink: #ffffff;
-  --field-ring: rgba(220, 38, 38, 0.25);
-  --label-ink: #cbd5e1;
+  --field-bg: #ffffff;
+  --field-ink: var(--brand-ink);
+  --field-ring: rgba(166, 31, 46, 0.22);
+  /* The label colour joins the field pair for the same reason the autofill
+   * colours did: a form's chrome has to be declared in one place or the halves
+   * drift apart. `form label` below is two element names deep, so it beats
+   * nothing a page can write except plain inheritance -- which is exactly the
+   * case it caught on contact, where the labels carry layout classes
+   * (`block text-sm uppercase tracking-widest`) and no colour, and so took this
+   * navy onto a `bg-gray-900` section and disappeared. A label that does state
+   * a `text-*` class (all of book's) is a class selector and still wins. */
+  --label-ink: var(--brand-navy);
 }
 
+/* The dark forms. Named here rather than in each page's own <style> block so
+ * that the generated service and city pages, which are rewritten from a
+ * template on every build, cannot drift away from the hand-edited ones.
+ * `color-scheme` is part of the same fix: it is what tells the browser to draw
+ * the caret, the date picker's calendar indicator, and the select option popup
+ * in light-on-dark. Left at its default those native bits are painted dark and
+ * effectively vanish against a `bg-gray-800` field -- careers already pins the
+ * opposite value for the same reason. */
 #contact-form,
 #booking-form,
-#lead-magnet-form,
-#review-submission-form,
-#careers-form {
+#lead-magnet-form {
   color-scheme: dark;
-  --field-bg: #0f172a;
   --field-ink: #ffffff;
-  --field-ring: rgba(220, 38, 38, 0.25);
-  --label-ink: #cbd5e1;
+  --field-ring: rgba(248, 113, 113, 0.35);
+  /* Slate-400. Deliberately dimmer than the field text it sits above -- a label
+   * that matched the typed value at full white would compete with it -- while
+   * still clearing AA on every dark canvas in play here: 5.6:1 on the brand
+   * navy (#1b2a4a) card the contact labels sit on, 6.7:1 against the blue-950
+   * the contact fields themselves are filled with, and 5.7:1 against booking's
+   * gray-800 field, so a label moved onto one stays legible. */
+  --label-ink: #94a3b8;
 }
 
 #booking-form {
-  --field-bg: #151e2e;
+  /* Matches the `bg-gray-800` the fields themselves carry. */
+  --field-bg: #1f2937;
 }
 
 #contact-form {
-  --field-bg: #0f172a;
+  /* Matches the `bg-blue-950` the contact fields carry. The page moved off the
+   * neutral grays onto the brand navy, and this variable is what the autofill
+   * inset shadow paints -- left at gray-800 a filled name or email would sit in
+   * a visibly different colour from the field around it. */
+  --field-bg: #101b31;
 }
 
 /* The site-wide placeholder grey is slate-500, which clears AA against the pale
@@ -3798,47 +3865,36 @@ header.ambient-glow-hero::after {
 /* ============================================================
    Layered Card UI Containers
    ============================================================ */
-.card-layered,
-.card-container,
-.pricing-card,
-.service-card,
-.generated-service-card,
-.process-step-card,
-.review-card,
-.promise-card,
-.careers-card,
-.header-card,
-.city-card,
-.faq-card,
-article.card-layered,
-aside.card-layered,
-.bg-white:not(header):not(#site-header):not(.site-header):not(#new-customer-banner),
-.bg-gray-50:not(body):not(header):not(#site-header),
-.card-dark-layered {
+.card-layered {
   position: relative;
-  background: var(--brand-surface, #151e2e) !important;
-  border: 1px solid var(--brand-line, rgba(255, 255, 255, 0.08)) !important;
-  border-radius: 1.5rem !important;
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.04) !important;
-  color: var(--brand-muted, #94a3b8) !important;
-  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s ease, background-color 0.3s ease !important;
+  background: #ffffff;
+  border: 1px solid rgb(0 0 0 / 8%);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px -5px rgb(27 42 74 / 8%), 0 4px 12px rgb(0 0 0 / 3%);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s ease;
 }
 
-.card-layered:hover,
-.card-container:hover,
-.pricing-card:hover,
-.service-card:hover,
-.generated-service-card:hover,
-.process-step-card:hover,
-.review-card:hover,
-.promise-card:hover,
-.careers-card:hover,
-.header-card:hover,
-.city-card:hover,
+.card-layered:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -8px rgb(27 42 74 / 14%), 0 0 20px rgb(166 31 46 / 12%);
+  border-color: rgb(166 31 46 / 35%);
+}
+
+.card-dark-layered {
+  position: relative;
+  background: linear-gradient(145deg, rgb(38 57 90 / 96%), rgb(16 27 49 / 98%));
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-top: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-layered-dark);
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s ease;
+}
+
 .card-dark-layered:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(220, 38, 38, 0.15) !important;
-  border-color: rgba(239, 68, 68, 0.4) !important;
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 55%), 0 0 25px rgb(166 31 46 / 25%);
+  border-color: rgb(201 81 96 / 50%);
 }
 
 .card-dark-layered::before {
@@ -3848,21 +3904,29 @@ aside.card-layered,
   left: 10%;
   right: 10%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.45), transparent);
+  background: linear-gradient(90deg, transparent, rgb(201 81 96 / 45%), transparent);
   pointer-events: none;
 }
 
 /* ============================================================
-   Ambient Gradient Glows (Hero & Section Cards)
+   Ambient Gradient Glows (Hero & Pricing Sections)
    ============================================================ */
-.ambient-glow-hero,
-#booking-section.ambient-glow-hero,
-header.ambient-glow-hero {
+/* A solid brand-navy background plus the brand gradient is declared here so
+   the hero is never a blank white block. The city landing pages paint their
+   dark background with Tailwind utilities (`bg-gradient-to-r from-blue-950
+   via-blue-900 to-slate-950`), which depend on the `--tw-gradient-stops`
+   custom-property chain and on the Tailwind stylesheet having parsed. If that
+   stylesheet is still loading, is stripped by a content blocker, or the
+   custom properties are reset, the utilities contribute nothing and the hero
+   would fall back to the page's white background with white text on top --
+   rendering as a tall empty white gap. Declaring the same navy gradient here
+   in plain CSS makes the hero readable in every one of those cases. The
+   Tailwind gradient layers on top once its stylesheet is parsed. */
+.ambient-glow-hero {
   position: relative;
   overflow: hidden;
-  background-color: #0b0f19;
-  background-image: linear-gradient(135deg, #0b0f19 0%, #151e2e 50%, #0f172a 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #1b2a4a;
+  background-image: linear-gradient(to right, #101b31 0%, #1b2a4a 50%, #020617 100%);
 }
 
 .ambient-glow-hero::before {
@@ -3874,7 +3938,7 @@ header.ambient-glow-hero {
   width: 90%;
   max-width: 1100px;
   height: 80%;
-  background: radial-gradient(ellipse at center, rgba(220, 38, 38, 0.22) 0%, rgba(30, 41, 59, 0.4) 45%, transparent 75%);
+  background: radial-gradient(ellipse at center, rgb(166 31 46 / 22%) 0%, rgb(27 42 74 / 30%) 45%, transparent 75%);
   pointer-events: none;
   z-index: 0;
   filter: blur(40px);
@@ -3893,7 +3957,7 @@ header.ambient-glow-hero {
   transform: translateX(-50%);
   width: 85%;
   height: 70%;
-  background: radial-gradient(ellipse at center, rgba(220, 38, 38, 0.15) 0%, rgba(30, 41, 59, 0.3) 50%, transparent 80%);
+  background: radial-gradient(ellipse at center, rgb(166 31 46 / 12%) 0%, rgb(27 42 74 / 12%) 50%, transparent 80%);
   pointer-events: none;
   z-index: 0;
   filter: blur(35px);
@@ -6794,557 +6858,34 @@ header.hero.ambient-glow-hero::before {
  * component picks up a thin crimson hairline instead of the navy fill, and the
  * subtitle uses the brand ink for contrast. */
 .gift-certificate-badge--on-light {
-  background: var(--brand-surface, #151e2e);
+  background: #fff;
   border-color: var(--brand-crimson);
   box-shadow: 0 12px 26px -20px rgba(166, 31, 46, 0.4);
 }
 
 .gift-certificate-badge--on-light .badge-subtitle {
-  color: var(--brand-muted-light, #cbd5e1);
+  color: var(--brand-ink);
 }
 
 .checkbox-container--on-light {
-  background: rgba(15, 23, 42, 0.7);
-  border-color: rgba(220, 38, 38, 0.35);
+  background: #f4f6fa;
+  border-color: rgba(166, 31, 46, 0.25);
 }
 
 .checkbox-container--on-light:hover {
-  background: rgba(30, 41, 59, 0.8);
+  background: #ecf0f6;
 }
 
 .checkbox-container--on-light .checkmark {
-  border-color: rgba(255, 255, 255, 0.4);
-  background: #0f172a;
+  border-color: rgba(27, 42, 74, 0.45);
+  background: #fff;
 }
 
 .checkbox-container--on-light .label-text {
-  color: #ffffff;
+  color: var(--brand-ink);
 }
 
-/* ==========================================================================
-   Modern Dark-Mode-First System-Wide Scaffolding & Component Scaffolding
-   ========================================================================== */
 
-/* 1. Global Scaffolding & Canvas Container Defaults */
-body {
-  background-color: #0b0f19 !important;
-  color: #94a3b8 !important;
-  font-family: var(--font-display);
-}
-
-main, section, article {
-  color: #94a3b8;
-}
-
-/* Section vertical breathing room */
-section, .py-12, .py-14, .py-16 {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-
-@media (min-width: 768px) {
-  section, .py-16, .py-20, .py-24 {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-}
-
-/* Typography Hierarchy */
-h1, h2, h3, h4, h5, h6,
-.text-gray-900,
-.text-gray-800,
-.text-blue-900,
-.text-blue-950,
-.text-slate-900,
-.text-slate-800 {
-  color: #ffffff !important;
-  font-weight: 800;
-  letter-spacing: -0.025em;
-}
-
-.text-gray-600,
-.text-gray-700,
-.text-gray-500,
-.text-slate-600,
-.text-slate-500,
-.prose p,
-.prose li {
-  color: #94a3b8 !important;
-}
-
-p strong, li strong, span strong, div strong {
-  color: #ffffff !important;
-}
-
-/* 2. Elevated Dark Slate Card Containers (20px-28px radius + 1px subtle outlines) */
-.card-container,
-.pricing-card,
-.service-card,
-.generated-service-card,
-.process-step-card,
-.review-card,
-.promise-card,
-.careers-card,
-.header-card,
-.city-card,
-.faq-card,
-.legal-sections > section,
-.pricing-summary-card,
-.svc-group,
-.quote-task-card,
-.feature-card,
-.bg-white:not(header):not(#site-header):not(.site-header):not(#new-customer-banner):not(.site-nav__bar):not(.aaa-avatar):not(img),
-.bg-gray-50:not(body):not(header):not(#site-header),
-.bg-slate-50:not(body):not(header):not(#site-header) {
-  background: #151e2e !important;
-  background-color: #151e2e !important;
-  border: 1px solid rgba(255, 255, 255, 0.09) !important;
-  border-radius: 1.5rem !important; /* 24px */
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.04) !important;
-  color: #94a3b8 !important;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease !important;
-}
-
-.card-container:hover,
-.pricing-card:hover,
-.service-card:hover,
-.generated-service-card:hover,
-.process-step-card:hover,
-.review-card:hover,
-.promise-card:hover,
-.careers-card:hover,
-.city-card:hover,
-.quote-task-card:hover,
-.feature-card:hover {
-  transform: translateY(-4px) !important;
-  border-color: rgba(220, 38, 38, 0.45) !important;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(220, 38, 38, 0.15) !important;
-}
-
-/* Secondary nested sub-cards */
-.bg-gray-50 .bg-gray-50,
-.bg-white .bg-gray-50,
-.bg-white .bg-slate-50,
-.card-layered .bg-gray-50,
-.card-layered .bg-blue-50,
-.card-layered .bg-slate-50 {
-  background: #1e293b !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 1rem !important;
-  color: #cbd5e1 !important;
-}
-
-/* 3. Badges & Tags (Rounded pill badges with uppercase text and thin borders) */
-.badge-craftsman,
-.pill-badge,
-[class*="badge-"]:not(.badge-card-topper),
-.hero-trust-item,
-.svc-filter-chip,
-.service-zone-pill,
-span[class*="badge"],
-.bg-blue-100.rounded-full,
-.bg-emerald-100.rounded-full,
-.bg-green-100.rounded-full,
-.bg-red-100.rounded-full {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 0.5rem !important;
-  padding: 0.35rem 0.85rem !important;
-  border-radius: 9999px !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  background: rgba(21, 30, 46, 0.95) !important;
-  color: #ffffff !important;
-  font-size: 0.75rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.08em !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-.badge-craftsman i,
-.pill-badge i,
-.hero-trust-item i {
-  color: #ef4444 !important;
-}
-
-/* 4. Icon Tiles & Feature Callouts */
-/* Card category icons -- the tile in the top-left corner of every service,
-   category, and process card. Tailwind still writes `bg-red-100`/`bg-blue-100`
-   into the markup for these, which paints a near-white fill on a dark card, so
-   the tile treatment is settled here instead: one crimson-tinted rounded square
-   at a single size, whatever utility combination the page happens to use. The
-   glyph sizing is pinned too, because the same tiles carry `text-3xl` inline. */
-.icon-tile,
-.w-16.h-16.rounded-2xl,
-.w-14.h-14.rounded-2xl,
-.w-12.h-12.rounded-2xl,
-.w-12.h-12.rounded-xl,
-.w-10.h-10.rounded-xl,
-.w-9.h-9.rounded-xl,
-.svc-group__icon,
-.service-card-icon {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: rgba(220, 38, 38, 0.15) !important;
-  background-color: rgba(220, 38, 38, 0.15) !important;
-  color: #ef4444 !important;
-  border: 1px solid rgba(220, 38, 38, 0.3) !important;
-  box-shadow: none !important;
-}
-
-.icon-tile,
-.w-16.h-16.rounded-2xl,
-.w-14.h-14.rounded-2xl,
-.w-12.h-12.rounded-2xl,
-.svc-group__icon,
-.service-card-icon {
-  --fa-display: inline-flex;
-
-  flex: 0 0 auto !important;
-  width: 48px !important;
-  height: 48px !important;
-  min-width: 48px !important;
-  border-radius: 12px !important;
-  font-size: 1.25rem !important;
-  line-height: 1 !important;
-}
-
-.icon-tile i,
-.w-16.h-16.rounded-2xl i,
-.w-14.h-14.rounded-2xl i,
-.w-12.h-12.rounded-2xl i,
-.w-12.h-12.rounded-xl i,
-.w-10.h-10.rounded-xl i,
-.w-9.h-9.rounded-xl i,
-.svc-group__icon i {
-  background: transparent !important;
-  color: #ef4444 !important;
-  font-size: 1.25rem !important;
-  line-height: 1 !important;
-}
-
-/* Emerald variant for specific feature icons */
-.bg-emerald-100 .fas,
-.bg-green-100 .fas,
-.text-emerald-700 i,
-.text-emerald-800 i,
-.text-green-600 i {
-  color: #22c55e !important;
-}
-
-.feature-check,
-.inline-check,
-ul li i.fa-check,
-ul li i.fa-circle-check,
-ul li i.fa-shield-halved,
-ul li i.fa-tag,
-ul li i.fa-clock {
-  color: #ef4444 !important;
-}
-
-ul li i.fa-phone,
-.cta-call-icon,
-.text-green-500,
-.text-green-600,
-.text-emerald-500,
-.text-emerald-600 {
-  color: #22c55e !important;
-}
-
-/* Links inside cards and sections */
-a:not(.btn-craftsman):not(.btn-crimson):not(.btn-emerald):not(.aaa-btn):not(.nav-link):not(.aaa-fab-btn):not(.cta-button) {
-  color: #fca5a5;
-  transition: color 0.2s ease;
-}
-
-a:not(.btn-craftsman):not(.btn-crimson):not(.btn-emerald):not(.aaa-btn):not(.nav-link):not(.aaa-fab-btn):not(.cta-button):hover {
-  color: #ffffff;
-}
-
-/* 5. Navigation Scaffolding (Sticky dark navbar with red accents) */
-#site-header,
-.site-header {
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 100 !important;
-  background: rgba(11, 15, 25, 0.95) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  backdrop-filter: blur(16px) !important;
-  border-bottom: 3px solid #dc2626 !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7) !important;
-}
-
-#site-header .brand-title,
-.site-header .brand-title {
-  color: #ffffff !important;
-  font-weight: 800 !important;
-}
-
-#site-header .brand-tagline,
-.site-header .brand-tagline {
-  color: #94a3b8 !important;
-}
-
-#site-header .nav-link,
-.site-header .nav-link {
-  color: #cbd5e1 !important;
-  font-weight: 600 !important;
-  transition: color 0.2s ease, border-color 0.2s ease !important;
-}
-
-#site-header .nav-link:hover,
-.site-header .nav-link:hover {
-  color: #ffffff !important;
-}
-
-#site-header .nav-link.text-red-600,
-#site-header .nav-link.text-red-500,
-#site-header .nav-link[aria-current="page"],
-.site-header .nav-link[aria-current="page"] {
-  color: #ef4444 !important;
-  border-bottom: 2px solid #ef4444 !important;
-  font-weight: 700 !important;
-}
-
-#mobile-menu {
-  background: rgba(15, 23, 42, 0.98) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  backdrop-filter: blur(16px) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8) !important;
-}
-
-#mobile-menu a {
-  color: #cbd5e1 !important;
-}
-
-#mobile-menu a:hover {
-  color: #ffffff !important;
-  background-color: rgba(30, 41, 59, 0.8) !important;
-}
-
-#mobile-menu a[aria-current="page"] {
-  color: #ef4444 !important;
-  background-color: rgba(220, 38, 38, 0.15) !important;
-  border: 1px solid rgba(220, 38, 38, 0.3) !important;
-}
-
-/* 6. Action Buttons & CTAs */
-.btn-craftsman,
-.btn-crimson,
-.aaa-btn-primary,
-a.bg-red-600,
-button.bg-red-600,
-.bg-red-600 {
-  background: linear-gradient(135deg, #ef4444, #dc2626 60%, #991b1b) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 0.75rem !important;
-  font-weight: 700 !important;
-  box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.45) !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease !important;
-}
-
-.btn-craftsman:hover,
-.btn-crimson:hover,
-.aaa-btn-primary:hover,
-a.bg-red-600:hover,
-button.bg-red-600:hover {
-  transform: translateY(-2px) !important;
-  filter: brightness(1.08) !important;
-  box-shadow: 0 14px 28px -4px rgba(220, 38, 38, 0.6) !important;
-}
-
-/* Emerald Green Call / Action CTAs */
-.btn-emerald,
-.aaa-call,
-a.bg-emerald-600,
-a.bg-green-600,
-button.bg-emerald-600,
-button.bg-green-600,
-.bg-emerald-600,
-.bg-green-600 {
-  background: linear-gradient(135deg, #22c55e, #16a34a 60%, #15803d) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 0.75rem !important;
-  font-weight: 700 !important;
-  box-shadow: 0 10px 25px -5px rgba(22, 163, 74, 0.45) !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease !important;
-}
-
-.btn-emerald:hover,
-.aaa-call:hover,
-a.bg-emerald-600:hover,
-a.bg-green-600:hover,
-button.bg-emerald-600:hover,
-button.bg-green-600:hover {
-  transform: translateY(-2px) !important;
-  filter: brightness(1.08) !important;
-  box-shadow: 0 14px 28px -4px rgba(22, 163, 74, 0.6) !important;
-}
-
-/* Secondary dark ghost buttons */
-.btn-secondary,
-.btn-dark,
-.aaa-btn-secondary,
-a.bg-slate-900,
-a.bg-slate-950,
-button.bg-slate-900 {
-  background: #1e293b !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 0.75rem !important;
-  font-weight: 700 !important;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3) !important;
-  transition: transform 0.2s ease, background-color 0.2s ease !important;
-}
-
-.btn-secondary:hover,
-.btn-dark:hover,
-.aaa-btn-secondary:hover,
-a.bg-slate-900:hover,
-a.bg-slate-950:hover {
-  transform: translateY(-2px) !important;
-  background: #27354f !important;
-  border-color: rgba(220, 38, 38, 0.4) !important;
-}
-
-/* 7. Floating Action Buttons (FAB - Fixed bottom-right stacked pill buttons) */
-.aaa-fab {
-  position: fixed !important;
-  bottom: 20px !important;
-  right: 20px !important;
-  z-index: 140 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 12px !important;
-  align-items: flex-end !important;
-}
-
-.aaa-fab .aaa-fab-btn {
-  min-width: 130px !important;
-  height: 54px !important;
-  padding: 0 20px !important;
-  border-radius: 9999px !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 10px !important;
-  box-sizing: border-box !important;
-  font-family: var(--font-display) !important;
-  font-weight: 700 !important;
-  font-size: 0.9rem !important;
-  white-space: nowrap !important;
-  color: #ffffff !important;
-  cursor: pointer !important;
-  text-decoration: none !important;
-  box-shadow: 0 12px 28px -5px rgba(0, 0, 0, 0.6) !important;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease !important;
-}
-
-.aaa-fab .aaa-fab-btn:hover {
-  transform: translateY(-3px) scale(1.02) !important;
-  filter: brightness(1.1) !important;
-  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.75) !important;
-}
-
-.aaa-chat-launch {
-  background: linear-gradient(135deg, #ef4444, #dc2626 60%, #991b1b) !important;
-  box-shadow: 0 12px 28px -5px rgba(220, 38, 38, 0.5) !important;
-}
-
-.aaa-call {
-  background: linear-gradient(135deg, #22c55e, #16a34a 60%, #15803d) !important;
-  box-shadow: 0 12px 28px -5px rgba(22, 163, 74, 0.5) !important;
-}
-
-@media (max-width: 767px) {
-  .aaa-fab {
-    right: max(16px, env(safe-area-inset-right, 0px)) !important;
-    bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
-    gap: 10px !important;
-  }
-  .aaa-fab .aaa-fab-btn {
-    min-width: 0 !important;
-    width: 52px !important;
-    height: 52px !important;
-    padding: 0 !important;
-    border-radius: 50% !important;
-    gap: 0 !important;
-    flex: 0 0 52px !important;
-  }
-  .aaa-fab .aaa-fab-label {
-    display: none !important;
-  }
-}
-
-/* 8. Footer (Deep dark slate black background, bold uppercase headers, muted links) */
-footer,
-#site-footer,
-.site-footer {
-  background: #080c14 !important;
-  background-color: #080c14 !important;
-  color: #94a3b8 !important;
-  border-top: 3px solid #dc2626 !important;
-  padding-top: 3.5rem !important;
-  padding-bottom: 2.5rem !important;
-}
-
-footer h3,
-#site-footer h3,
-.site-footer h3 {
-  color: #ffffff !important;
-  font-weight: 800 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.1em !important;
-  font-size: 0.85rem !important;
-}
-
-footer a,
-#site-footer a,
-.site-footer a {
-  color: #94a3b8 !important;
-  transition: color 0.2s ease !important;
-}
-
-footer a:hover,
-#site-footer a:hover,
-.site-footer a:hover {
-  color: #ffffff !important;
-}
-
-footer .border-gray-800,
-footer .border-slate-800,
-footer .border-t {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-}
-
-/* 9. Hero Sections & Scaffolding Containers */
-.hero-section,
-.hero-card,
-.ambient-glow-hero {
-  border-radius: 1.75rem; /* 28px */
-}
-
-/* 10. Forms, Selects & Modals */
-select option {
-  background-color: #0f172a !important;
-  color: #ffffff !important;
-}
-
-.modal-dialog,
-.dialog-box,
-[role="dialog"] {
-  background-color: #151e2e !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  color: #cbd5e1 !important;
-  border-radius: 1.5rem !important;
-}
 
 
 
@@ -7353,157 +6894,3 @@ select option {
 
 
 
-
-
-
-/* 11. Service Card Details -- price pills, check bullets, list copy
-   ==========================================================================
-   These three pieces all sat on Tailwind utilities that were written for the
-   old light theme and read as defects on the dark canvas: `bg-gray-100` pills
-   whose `text-blue-900` label the typography rules repaint white (white on
-   near-white), and `fa-check-circle`, whose solid glyph is a filled disc with
-   the tick knocked *out* of it -- so the tick takes the colour of whatever is
-   behind the icon, not white, and a `text-blue-900` bullet renders as a plain
-   white blob. The markup now carries `aaa-price-pill` and `aaa-check` instead,
-   which is why these are real components rather than more utility overrides. */
-
-/* Price badge in the top-right corner of a category or service card. The name
-   deliberately avoids the substring "badge": the pill rules in section 3 match
-   `span[class*="badge"]` and would force uppercase micro-type over this. */
-.aaa-price-pill {
-  display: inline-flex;
-  flex: 0 0 auto;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.32rem 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #f8fafc;
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-
-/* Bullet checkmark: a solid accent disc with a crisp white tick. Built from the
-   plain `fa-check` glyph -- a tick with no disc around it -- so the disc is a
-   background this stylesheet controls and the tick itself can be white. */
-.aaa-check {
-  --fa-display: inline-flex;
-
-  display: inline-flex;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-  width: 1.15rem;
-  height: 1.15rem;
-  min-width: 1.15rem;
-  border: 0;
-  border-radius: 9999px;
-  background: #dc2626;
-  box-shadow: none;
-  color: #ffffff;
-  font-size: 0.6rem;
-  line-height: 1;
-}
-
-.aaa-check--red {
-  background: #dc2626;
-}
-
-.aaa-check--emerald {
-  background: #16a34a;
-}
-
-/* The colour utilities left on neighbouring icons are broad enough to repaint
-   the tick, so the white is restated at a specificity they cannot reach. */
-ul li i.aaa-check,
-li i.aaa-check,
-.aaa-check-item i.aaa-check {
-  background-color: #dc2626;
-  color: #ffffff !important;
-}
-
-ul li i.aaa-check.aaa-check--red,
-li i.aaa-check.aaa-check--red {
-  background-color: #dc2626;
-}
-
-ul li i.aaa-check.aaa-check--emerald,
-li i.aaa-check.aaa-check--emerald {
-  background-color: #16a34a;
-}
-
-/* Card list copy: light slate rather than the muted body grey, so a five-item
-   feature list stays readable at 12-14px on an elevated dark card. */
-.aaa-check-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  color: #e2e8f0 !important;
-  line-height: 1.6;
-}
-
-.aaa-check-item + .aaa-check-item {
-  margin-top: 0.5rem;
-}
-
-.aaa-check-item strong,
-.aaa-check-item span {
-  color: #e2e8f0;
-}
-
-/* Feature checks on the generated service pages: same disc, expressed as its
-   own chip because the markup wraps the glyph in a sizing span. */
-.aaa-check-chip {
-  display: inline-flex !important;
-  flex: 0 0 auto !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 2rem !important;
-  height: 2rem !important;
-  border: 0 !important;
-  border-radius: 9999px !important;
-  background: #dc2626 !important;
-  box-shadow: none !important;
-  color: #ffffff !important;
-}
-
-.aaa-check-chip i {
-  background: transparent !important;
-  color: #ffffff !important;
-  font-size: 0.8rem !important;
-}
-
-/* "Open this category" and every other `.cta-button`: these are anchors, and
-   the generic in-card link colour above was tinting their labels light red on
-   a red gradient. The exclusion in that selector keeps the label white; this
-   covers the trailing arrow glyph as well. */
-.cta-button,
-.cta-button:hover,
-.cta-button:focus,
-.cta-button i,
-.cta-button span {
-  color: #ffffff !important;
-}
-
-/* Same defect, other pills: any remaining `bg-gray-100`/`bg-gray-200` pill is a
-   near-white chip whose label the typography rules above repaint light, so it
-   gets the dark treatment rather than being rewritten in every page. */
-.bg-gray-100.rounded-full,
-.bg-gray-200.rounded-full,
-.bg-slate-100.rounded-full {
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: #f8fafc !important;
-}
-
-/* The homepage's service band is the one section still carrying `bg-gray-100`,
-   which paints a light strip straight through the dark canvas behind the
-   category cards. The pill rule above needs the class to stay, so the section
-   is returned to the canvas colour here rather than in the markup. */
-section.bg-gray-100 {
-  background: var(--brand-canvas) !important;
-  background-color: var(--brand-canvas) !important;
-}
