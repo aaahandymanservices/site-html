@@ -82,18 +82,24 @@
                 '<i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432</a>' +
             '</div>' +
           '</div>' +
-          '<p class="text-xs text-gray-500 leading-relaxed mt-4">Estimates use our standard flat-rate menu and are not a binding quote. Every menu price is calculated straight from our published labor rate &mdash; a $100 Zone A service call covering travel, diagnosis, and the first hour, plus $70 for each additional hour (Zone B adds a flat $45 extended-travel differential). Booking several tasks in one visit usually costs <strong>less</strong> than the total shown, because you only pay one trip charge. Every price shown is for installation and service labor only &mdash; <strong>hardware and materials are not included</strong> and are billed separately, unless you supply them yourself at no markup. Your final price is always confirmed free, upfront.</p>' +
+          '<p class="text-xs text-gray-500 leading-relaxed mt-4">Estimates use our standard flat-rate menu and are not a binding quote. Booking several tasks in one visit usually costs <strong>less</strong> than the total shown, because you only pay one trip charge. Labor only &mdash; materials billed separately. Your final price is always confirmed free, upfront.</p>' +
         '</div>' +
       '</div>';
   };
 
   const renderTasks = () => {
     const wrap = root.querySelector('#quote-tasks');
-    wrap.innerHTML = state.catalog.map((cat) =>
-      '<fieldset>' +
-        '<legend class="flex items-center gap-2 text-sm font-black text-gray-950 uppercase tracking-wide mb-3 pb-2 border-b-2 border-red-600/20 w-full">' +
-          '<i class="fas ' + cat.icon + ' text-red-600" aria-hidden="true"></i> ' + cat.label +
-        '</legend>' +
+    wrap.innerHTML = state.catalog.map((cat, idx) =>
+      // Collapsible accordions keep the long task list compact: only the
+      // first category is open by default, so the page no longer scrolls
+      // past every task in every category to reach the summary.
+      '<details class="quote-cat"' + (idx === 0 ? ' open' : '') + '>' +
+        '<summary class="quote-cat-summary">' +
+          '<span class="flex items-center gap-2 text-sm font-black text-gray-950 uppercase tracking-wide">' +
+            '<i class="fas ' + cat.icon + ' text-red-600" aria-hidden="true"></i> ' + cat.label +
+          '</span>' +
+          '<i class="fas fa-chevron-down quote-cat-chevron" aria-hidden="true"></i>' +
+        '</summary>' +
         // Two columns once this column is wide enough (see the container query
         // in rates.html); each category keeps its own full-width heading.
         '<div class="quote-task-grid">' +
@@ -103,13 +109,13 @@
               '<span class="flex-1 min-w-0">' +
                 '<span class="block font-bold text-gray-900 text-sm">' + t.name + '</span>' +
                 '<span class="block text-gray-500 text-xs">' + t.desc + '</span>' +
-                (t.hours ? '<span class="block text-blue-900 text-[11px] font-semibold mt-0.5">' + t.hours + ' labor hours &middot; materials not included</span>' : '') +
+                (t.hours ? '<span class="block text-blue-900 text-[11px] font-semibold mt-0.5">' + t.hours + ' labor hours</span>' : '') +
               '</span>' +
               '<span class="quote-price text-right font-extrabold text-gray-900 whitespace-nowrap" data-a="' + t.a + '" data-b="' + t.b + '">' + money(t.a) + '</span>' +
             '</label>'
           ).join('') +
         '</div>' +
-      '</fieldset>'
+      '</details>'
     ).join('');
   };
 

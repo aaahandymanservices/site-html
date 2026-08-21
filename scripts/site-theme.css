@@ -6016,6 +6016,62 @@ header#policy-hero.ambient-glow-hero::before {
   gap: 0.5rem;
 }
 
+/*
+ * Collapsible task-category accordions in the quote calculator. Native
+ * <details>/<summary> keeps the long task list compact so the page no longer
+ * scrolls past every category to reach the running total. Only the marker
+ * box on <summary> is hidden; the clickable area and keyboard focus stay.
+ */
+.quote-cat {
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  background: #fff;
+  overflow: hidden;
+}
+
+.quote-cat + .quote-cat {
+  margin-top: 0.625rem;
+}
+
+.quote-cat-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.quote-cat-summary::-webkit-details-marker {
+  display: none;
+}
+
+.quote-cat-summary:focus-visible {
+  outline: 2px solid #dc2626;
+  outline-offset: -2px;
+}
+
+.quote-cat-chevron {
+  color: #dc2626;
+  font-size: 0.85rem;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.quote-cat[open] > .quote-cat-summary {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.quote-cat[open] > .quote-cat-summary .quote-cat-chevron {
+  transform: rotate(180deg);
+}
+
+.quote-cat[open] > .quote-task-grid {
+  padding: 0.625rem 1rem 1rem;
+}
+
 [data-accordion-toggle][aria-expanded="true"] .aaa-accordion-icon {
   transform: rotate(180deg);
 }
