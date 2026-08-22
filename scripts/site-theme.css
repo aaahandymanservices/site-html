@@ -1344,55 +1344,6 @@ body > header.bg-gradient-to-r > * {
   transform: translateY(-6px) translateZ(0);
 }
 
-/*
- * The floating call button pulses on every page for as long as the page is
- * open, so the animation is kept to transform and opacity -- the only two
- * properties the compositor can animate without waking the main thread. The
- * halo used to be an animated box-shadow spread, which forced a repaint of the
- * button and the region around it 60 times a second; it is now a fixed ring on
- * a pseudo-element that scales up and fades out instead.
- */
-@keyframes pulse-attention-green {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.035);
-  }
-}
-
-@keyframes pulse-attention-green-ring {
-  0%,
-  100% {
-    opacity: 0.55;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0;
-    transform: scale(1.16);
-  }
-}
-
-.pulse-btn-green {
-  position: relative;
-  animation: pulse-attention-green 2s ease-in-out infinite;
-}
-
-/* An outer box-shadow is clipped to outside the border box, so the ring never
-   paints over the button's own background or label. */
-.pulse-btn-green::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: 0 0 0 5px rgb(22 163 74 / 55%);
-  pointer-events: none;
-  animation: pulse-attention-green-ring 2s ease-in-out infinite;
-}
-
 /* Primary call-to-action button styling — static without pulse animation or glowing ring */
 .pulse-btn {
   position: relative;
@@ -3328,11 +3279,6 @@ html.bw-open body {
   .seasonal-banner {
     animation: none;
   }
-
-  .pulse-btn-green,
-  .pulse-btn-green::before {
-    animation: none;
-  }
 }
 
 /*
@@ -3658,6 +3604,25 @@ header.ambient-glow-hero::after {
     radial-gradient(32rem 24rem at 50% 0%, rgb(166 31 46 / 10%), transparent 50%);
 }
 
+/* ============================================================
+   Footer clearance for the floating chat launcher
+
+   The AI Chat launcher is fixed to the bottom-left corner, so once a visitor
+   reaches the end of a page it paints over whatever the footer ends with. The
+   button is 56px tall and sits 20px above the viewport edge (54px/16px under
+   768px), and the footer's last row -- the copyright line and the privacy and
+   terms links -- is centred, so on narrow screens it lands directly underneath
+   the button and stops being tappable.
+
+   Reserving the launcher's height below the footer keeps that row reachable.
+   The selector carries an attribute qualifier so it outranks the pb-10 utility
+   on the footer element itself rather than depending on stylesheet order, and
+   the safe-area inset covers notched devices where the button is pushed up.
+   ============================================================ */
+footer[class] {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+}
+
 /*
  * Soft pulse on floating brand actions.
  *
@@ -3667,20 +3632,17 @@ header.ambient-glow-hero::after {
  * which forces a full repaint of the button and its surrounding region
  * on every frame; Lighthouse flags that as a non-composited animation.
  *
- * The expanding crimson halo is now a static ::before ring that scales
- * up and fades out, mirroring the pulse-attention-green-ring pattern
- * already used by .pulse-btn-green. The base box-shadow stays on the
- * element itself and never animates.
+ * The expanding crimson halo is a static ::before ring that scales up
+ * and fades out. The base box-shadow stays on the element itself and
+ * never animates.
  */
 .aaa-fab-btn,
-.aaa-chat-launch,
-.aaa-call {
+.aaa-chat-launch {
   position: relative;
 }
 
 .aaa-fab-btn,
 .aaa-chat-launch,
-.aaa-call,
 #back-to-top {
   animation: soft-pulse 2.4s ease-in-out infinite;
   will-change: transform;
@@ -3688,7 +3650,6 @@ header.ambient-glow-hero::after {
 
 .aaa-fab-btn::before,
 .aaa-chat-launch::before,
-.aaa-call::before,
 #back-to-top::before {
   content: "";
   position: absolute;
@@ -3728,14 +3689,12 @@ header.ambient-glow-hero::after {
 
 .aaa-fab-btn:hover,
 .aaa-chat-launch:hover,
-.aaa-call:hover,
 #back-to-top:hover {
   animation-play-state: paused;
 }
 
 .aaa-fab-btn:hover::before,
 .aaa-chat-launch:hover::before,
-.aaa-call:hover::before,
 #back-to-top:hover::before {
   animation-play-state: paused;
 }
@@ -3743,14 +3702,12 @@ header.ambient-glow-hero::after {
 @media (prefers-reduced-motion: reduce) {
   .aaa-fab-btn,
   .aaa-chat-launch,
-  .aaa-call,
   #back-to-top {
     animation: none !important;
   }
 
   .aaa-fab-btn::before,
   .aaa-chat-launch::before,
-  .aaa-call::before,
   #back-to-top::before {
     animation: none !important;
   }

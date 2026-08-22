@@ -380,14 +380,6 @@ ${jsonLd(service)}
     <!-- Navbar -->
 ${getUnifiedNav('services')}
 
-    <!-- Floating Call Action -->
-    <noscript>
-        <a href="tel:${PHONE_TEL}" class="fixed bottom-5 right-5 z-50 hidden md:flex bg-green-600 hover:bg-green-700 text-white w-14 h-14 md:w-auto md:h-auto p-0 md:px-6 md:py-3 rounded-full font-bold items-center justify-center gap-2 md:gap-3 transition pulse-btn-green shadow-2xl focus:outline-none focus:ring-4 focus:ring-green-300" title="Call AAA Handyman Services LLC Now" aria-label="Call AAA Handyman Services LLC Now">
-            <i class="fas fa-phone" aria-hidden="true"></i>
-            <span class="hidden md:inline">Call Now! <span class="hidden lg:inline">${PHONE_DISPLAY}</span></span>
-        </a>
-    </noscript>
-
     <!-- Header / Hero -->
     <header class="ambient-glow-hero bg-gradient-to-r from-blue-950 via-blue-900 to-slate-950 text-white py-16 sm:py-20 relative overflow-hidden">
         <div class="absolute inset-0 opacity-5">
@@ -630,7 +622,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
     </footer>
 
     <!-- Back to top -->
-    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
     <script src="/js/site.js?v=${ASSET_VERSION}" defer></script>
 
     <!-- Google tag (gtag.js) -->
