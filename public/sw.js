@@ -237,7 +237,14 @@
 // the call button's styles are gone and the footer now reserves room for the
 // launcher -- and the city and service pages no longer ship the button in
 // their markup. This bump evicts the old shell and assets for every client.
-const CACHE_VERSION = 'v41';
+// v42 scales the chat widget's in-panel buttons down for mobile so the
+// emoji trigger, send button, emoji bar, suggestion chips, and header
+// controls no longer read as oversized on phones. The chat widget CSS lives
+// in chat-widget.js, which the loader pulls after ASSET_VERSION, and the
+// loader is precached here, so a returning visitor holding v41 would keep
+// the old widget and its oversized mobile buttons. site-theme.css did not
+// change this time. This bump evicts the old assets for every client.
+const CACHE_VERSION = 'v42';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
