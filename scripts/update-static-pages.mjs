@@ -200,8 +200,9 @@ function optimizeFontsAndAssets(html) {
     '#seasonal-banner[hidden]{display:none}' +
     // Dark hero / booking section background so its first frame is navy, not
     // white. Matches .ambient-glow-hero in scripts/site-theme.css.
-    '.ambient-glow-hero,#booking-section.ambient-glow-hero{position:relative;overflow:hidden;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
+    '.ambient-glow-hero,#booking-section.ambient-glow-hero{position:relative;overflow:hidden;min-height:18rem;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
     '.ambient-glow-hero h1,#booking-section.ambient-glow-hero h1{color:#fff}' +
+    '#top.hero.ambient-glow-hero{min-height:22rem}' +
     // Skip link stays usable before site-theme.css lands.
     '.skip-link{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}' +
     '.skip-link:focus,.skip-link:focus-visible{position:fixed!important;top:.75rem!important;left:50%!important;transform:translateX(-50%)!important;z-index:200!important;width:auto!important;height:auto!important;padding:.75rem 1.5rem!important;background:#a61f2e!important;color:#fff!important;font-weight:700!important;border-radius:.75rem!important;clip:auto!important;white-space:normal!important}' +
