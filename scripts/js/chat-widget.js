@@ -11,17 +11,15 @@
   var conversationVersion = 0;
   var style = document.createElement("style");
   style.textContent = [
-    ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:40;display:flex;flex-direction:column;gap:12px;align-items:flex-end}",
-    ".aaa-fab .aaa-fab-btn{min-width:130px;height:56px;padding:0 22px;border-radius:9999px;border:2px solid rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;gap:10px;box-sizing:border-box;font:700 15px/1 'Archivo','Roboto',system-ui,-apple-system,sans-serif;white-space:nowrap;color:#ffffff;cursor:pointer;text-decoration:none;box-shadow:0 12px 28px -5px rgba(15,23,42,0.3);transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s ease,box-shadow .2s ease;will-change:transform}",
+    ".aaa-fab{position:fixed;bottom:20px;left:20px;z-index:40;display:flex;flex-direction:column;gap:12px;align-items:flex-start}",
+    ".aaa-fab .aaa-fab-btn{min-width:130px;height:56px;padding:0 22px;border-radius:9999px;border:2px solid rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:flex-start;gap:10px;box-sizing:border-box;font:700 15px/1 'Archivo','Roboto',system-ui,-apple-system,sans-serif;white-space:nowrap;color:#ffffff;cursor:pointer;text-decoration:none;box-shadow:0 12px 28px -5px rgba(15,23,42,0.3);transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s ease,box-shadow .2s ease;will-change:transform}",
     ".aaa-fab .aaa-fab-btn i{font-size:19px;line-height:1;flex-shrink:0}",
     ".aaa-fab .aaa-fab-btn:hover{transform:translateY(-3px) scale(1.04)}",
     ".aaa-fab .aaa-fab-btn:focus-visible{outline:3px solid #9fb1ca;outline-offset:2px}",
     ".aaa-fab .aaa-chat-launch:focus,.aaa-fab .aaa-chat-launch:focus-visible{outline:none !important;box-shadow:0 0 0 4px " + CRIMSON + " !important}",
     ".aaa-chat-launch{background:linear-gradient(135deg, #c62839, #a61f2e 60%, #781925);box-shadow:0 12px 28px -4px rgba(166,31,46,0.45)}",
     ".aaa-chat-launch:hover{background:linear-gradient(135deg, #c62839, #a61f2e 55%, #781925);box-shadow:0 16px 32px -4px rgba(166,31,46,0.55)}",
-    ".aaa-call{background:linear-gradient(135deg, #10b981, #059669);box-shadow:0 12px 28px -4px rgba(16,185,129,0.4)}",
-    ".aaa-call:hover{background:linear-gradient(135deg, #059669, #047857);box-shadow:0 16px 32px -4px rgba(16,185,129,0.5)}",
-    ".aaa-chat-panel{position:fixed;bottom:92px;right:20px;z-index:2147483000;width:390px;max-width:calc(100vw - 32px);height:590px;max-height:calc(100vh - 120px);background:#ffffff;border:1px solid rgba(203,213,225,0.9);box-shadow:0 25px 50px -12px rgba(15,23,42,0.35),0 0 20px rgba(0,0,0,0.06);border-radius:24px;display:none;flex-direction:column;overflow:hidden;font-family:'Roboto','Archivo',system-ui,-apple-system,sans-serif}",
+    ".aaa-chat-panel{position:fixed;bottom:92px;left:20px;z-index:2147483000;width:390px;max-width:calc(100vw - 32px);height:590px;max-height:calc(100vh - 120px);background:#ffffff;border:1px solid rgba(203,213,225,0.9);box-shadow:0 25px 50px -12px rgba(15,23,42,0.35),0 0 20px rgba(0,0,0,0.06);border-radius:24px;display:none;flex-direction:column;overflow:hidden;font-family:'Roboto','Archivo',system-ui,-apple-system,sans-serif}",
     ".aaa-chat-panel.aaa-open{display:flex;animation:aaa-pop .22s cubic-bezier(.16,1,.3,1)}",
     "@keyframes aaa-pop{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}",
     ".aaa-chat-header{background:" + NAVY + ";color:#ffffff;padding:16px 18px;display:flex;align-items:center;gap:12px;border-bottom:3px solid " + CRIMSON + ";box-shadow:0 4px 12px rgba(0,0,0,0.15)}",
@@ -106,7 +104,7 @@
     ".dark .aaa-chat-disclaimer{background:#0f172a;color:#94a3b8}",
     ".dark .aaa-chat-log::-webkit-scrollbar-thumb{background:#334155}",
     ".dark .aaa-chat-log::-webkit-scrollbar-thumb:hover{background:" + CRIMSON + "}",
-    "@media(max-width:767px){.aaa-fab{right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));flex-direction:column;gap:12px;align-items:flex-end}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}.aaa-fab-btn.aaa-chat-launch,.aaa-fab-btn.aaa-call{display:flex!important}.aaa-chat-panel{position:fixed;top:0;left:0;right:0;bottom:0;width:100%!important;max-width:100%!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important;border:none!important;z-index:2147483005}.aaa-chat-header{padding:calc(16px + env(safe-area-inset-top,0px)) 18px 16px!important}.aaa-chat-disclaimer{padding:0 12px calc(10px + env(safe-area-inset-bottom,0px))!important}}",
+    "@media(max-width:767px){.aaa-fab{left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));flex-direction:column;gap:12px;align-items:flex-start}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}.aaa-fab-btn.aaa-chat-launch{display:flex!important}.aaa-chat-panel{position:fixed;top:0;left:0;right:0;bottom:0;width:100%!important;max-width:100%!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important;border:none!important;z-index:2147483005}.aaa-chat-header{padding:calc(16px + env(safe-area-inset-top,0px)) 18px 16px!important}.aaa-chat-disclaimer{padding:0 12px calc(10px + env(safe-area-inset-bottom,0px))!important}}",
     "@media(max-width:359px){.aaa-fab .aaa-fab-btn{width:50px;height:50px;flex-basis:50px}.aaa-fab{gap:10px}}"
   ].join("");
   document.head.appendChild(style);
@@ -121,15 +119,7 @@
   launch.setAttribute("aria-controls", "aaa-chat-panel");
   launch.innerHTML = '<i class="fas fa-comments" aria-hidden="true"></i><span class="aaa-fab-label">AI Chat</span>';
 
-  var callBtn = document.createElement("a");
-  callBtn.className = "aaa-fab-btn aaa-call";
-  callBtn.href = "tel:+12483853432";
-  callBtn.title = "Call AAA Handyman Services LLC";
-  callBtn.setAttribute("aria-label", "Call AAA Handyman Services LLC at (248) 385-3432");
-  callBtn.innerHTML = '<i class="fas fa-phone" aria-hidden="true"></i><span class="aaa-fab-label">Call Now!</span>';
-
   group.appendChild(launch);
-  group.appendChild(callBtn);
 
   var panel = document.createElement("div");
   panel.className = "aaa-chat-panel";
@@ -190,7 +180,7 @@
 
   var GREETING = "Hi! 👋 I'm the AAA Handyman Services LLC assistant. Ask me about our services, the areas we cover, or how to get a quote.";
   function hideExistingFloating() {
-    // Hide static (noscript) floating "Call Now" CTAs baked into the markup.
+    // Hide static (noscript) floating CTAs baked into the markup.
     var els = document.querySelectorAll(".fixed.bottom-5.right-5, [class*='fixed'][class*='bottom-5'][class*='right-5']");
     for (var i = 0; i < els.length; i++) {
       var el = els[i];
@@ -198,7 +188,7 @@
       el.style.setProperty("display", "none", "important");
     }
     // Remove any other floating action-button group (e.g. the lightweight
-    // chat-loader FAB) so only this widget's Call Now + Chat buttons remain.
+    // chat-loader FAB) so only this widget's chat button remains.
     // This makes the widget the single source of truth and guarantees the
     // page never shows two CTAs of the same function at once.
     var fabs = document.querySelectorAll(".aaa-fab");

@@ -34,17 +34,15 @@
     var style = document.createElement("style");
     style.id = "aaa-chat-loader-style";
     style.textContent = [
-      ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:40;display:flex;flex-direction:column;gap:12px;align-items:flex-end}",
-      ".aaa-fab .aaa-fab-btn{min-width:130px;height:56px;padding:0 22px;border-radius:9999px;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;gap:10px;box-sizing:border-box;font:700 15px/1 'Roboto','Archivo',system-ui,-apple-system,sans-serif;white-space:nowrap;color:#ffffff;cursor:pointer;text-decoration:none;box-shadow:0 10px 25px -5px rgba(15,23,42,0.25);transition:transform .18s cubic-bezier(.16,1,.3,1),background .18s ease,box-shadow .18s ease;will-change:transform}",
+      ".aaa-fab{position:fixed;bottom:20px;left:20px;z-index:40;display:flex;flex-direction:column;gap:12px;align-items:flex-start}",
+      ".aaa-fab .aaa-fab-btn{min-width:130px;height:56px;padding:0 22px;border-radius:9999px;border:2px solid #ffffff;display:flex;align-items:center;justify-content:flex-start;gap:10px;box-sizing:border-box;font:700 15px/1 'Roboto','Archivo',system-ui,-apple-system,sans-serif;white-space:nowrap;color:#ffffff;cursor:pointer;text-decoration:none;box-shadow:0 10px 25px -5px rgba(15,23,42,0.25);transition:transform .18s cubic-bezier(.16,1,.3,1),background .18s ease,box-shadow .18s ease;will-change:transform}",
       ".aaa-fab .aaa-fab-btn i{font-size:19px;line-height:1;flex-shrink:0}",
       ".aaa-fab .aaa-fab-btn:hover{transform:translateY(-2px) scale(1.03)}",
       ".aaa-fab .aaa-fab-btn:focus-visible{outline:3px solid #9fb1ca;outline-offset:2px}",
       ".aaa-chat-launch{background:#A61F2E;box-shadow:0 10px 25px -5px rgba(166,31,46,0.35)}",
       ".aaa-chat-launch:hover{background:#781925;box-shadow:0 14px 28px -4px rgba(166,31,46,0.45)}",
       ".aaa-chat-launch[aria-busy='true']{cursor:progress;opacity:.8}",
-      ".aaa-call{background:#16a34a;box-shadow:0 10px 25px -5px rgba(22,163,74,0.35)}",
-      ".aaa-call:hover{background:#15803d;box-shadow:0 14px 28px -4px rgba(22,163,74,0.45)}",
-      "@media(max-width:767px){.aaa-fab{right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));gap:12px}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}}"
+      "@media(max-width:767px){.aaa-fab{left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));gap:12px}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}}"
     ].join("");
     document.head.appendChild(style);
 
@@ -58,15 +56,7 @@
     launch.setAttribute("aria-label", "Open chat with AAA Handyman Services LLC");
     launch.innerHTML = '<i class="fas fa-comments" aria-hidden="true"></i><span class="aaa-fab-label">AI Chat</span>';
 
-    var callButton = document.createElement("a");
-    callButton.className = "aaa-fab-btn aaa-call";
-    callButton.href = "tel:+12483853432";
-    callButton.title = "Call AAA Handyman Services LLC";
-    callButton.setAttribute("aria-label", "Call AAA Handyman Services LLC at (248) 385-3432");
-    callButton.innerHTML = '<i class="fas fa-phone" aria-hidden="true"></i><span class="aaa-fab-label">Call Now!</span>';
-
     group.appendChild(launch);
-    group.appendChild(callButton);
     document.body.appendChild(group);
 
     launch.addEventListener("click", openChat);
