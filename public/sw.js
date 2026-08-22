@@ -229,7 +229,15 @@
 // guard only checked the banner's own dismissal key) and keep seeing the offer
 // bar after they spent the certificate. This bump evicts the old shell and
 // assets for every client.
-const CACHE_VERSION = 'v40';
+// v41 retires the floating "Call Now!" button and moves the AI Chat launcher to
+// the bottom-left corner. The launcher and its panel live in chat-loader.js and
+// chat-widget.js, and the loader is precached here, so a returning visitor
+// holding v40 would keep the old loader and go on seeing the retired call
+// button beside a right-hand chat launcher. site-theme.css also changed --
+// the call button's styles are gone and the footer now reserves room for the
+// launcher -- and the city and service pages no longer ship the button in
+// their markup. This bump evicts the old shell and assets for every client.
+const CACHE_VERSION = 'v41';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
