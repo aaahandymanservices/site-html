@@ -1345,23 +1345,6 @@ body > header.bg-gradient-to-r > * {
 }
 
 /* Primary call-to-action button styling — static without pulse animation or glowing ring */
-.pulse-btn {
-  position: relative;
-  animation: none !important;
-  background-color: var(--brand-crimson, #a61f2e);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.pulse-btn:hover {
-  background-color: var(--brand-crimson-dark, #781925);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.pulse-btn::before {
-  display: none !important;
-}
-
 form :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
   border-width: 1px;
   border-color: #b8c2d0;
@@ -3826,13 +3809,28 @@ footer[class] {
   border: 1px solid rgb(0 0 0 / 8%);
   border-radius: 1.5rem;
   box-shadow: 0 10px 30px -5px rgb(27 42 74 / 8%), 0 4px 12px rgb(0 0 0 / 3%);
-  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s ease;
+  transition: transform 0.3s var(--ease-out);
+  will-change: transform;
+}
+
+.card-layered::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgb(166 31 46 / 35%);
+  box-shadow: 0 20px 40px -8px rgb(27 42 74 / 14%), 0 0 20px rgb(166 31 46 / 12%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease-out);
 }
 
 .card-layered:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px -8px rgb(27 42 74 / 14%), 0 0 20px rgb(166 31 46 / 12%);
-  border-color: rgb(166 31 46 / 35%);
+}
+
+.card-layered:hover::after {
+  opacity: 1;
 }
 
 .card-dark-layered {
@@ -3843,13 +3841,27 @@ footer[class] {
   border-radius: 1.5rem;
   box-shadow: var(--shadow-layered-dark);
   backdrop-filter: blur(12px);
-  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s ease;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.card-dark-layered::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgb(201 81 96 / 50%);
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 55%), 0 0 25px rgb(166 31 46 / 25%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease-out);
 }
 
 .card-dark-layered:hover {
   transform: translateY(-5px);
-  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 55%), 0 0 25px rgb(166 31 46 / 25%);
-  border-color: rgb(201 81 96 / 50%);
+}
+
+.card-dark-layered:hover::after {
+  opacity: 1;
 }
 
 .card-dark-layered::before {
@@ -3880,8 +3892,23 @@ footer[class] {
 .ambient-glow-hero {
   position: relative;
   overflow: hidden;
+  min-height: 18rem;
   background-color: #1b2a4a;
   background-image: linear-gradient(to right, #101b31 0%, #1b2a4a 50%, #020617 100%);
+}
+
+/* Reserve space for the hero so the layout is stable before fonts and
+   async CSS arrive. The hero holds the headline, rating badge, and trust
+   row; without a floor the section collapses to near-zero while the
+   font swap settles, which is the single biggest CLS contributor. */
+#top.hero.ambient-glow-hero {
+  min-height: 22rem;
+}
+
+@media (min-width: 768px) {
+  #top.hero.ambient-glow-hero {
+    min-height: 26rem;
+  }
 }
 
 .ambient-glow-hero::before {
@@ -6179,6 +6206,7 @@ input.careers-upload-input::file-selector-button:hover {
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
+  min-height: 2.5rem;
   color: #fff;
   font-size: 0.8125rem;
   font-weight: 700;
@@ -6190,6 +6218,7 @@ input.careers-upload-input::file-selector-button:hover {
 }
 
 .hero-rating-badge {
+  position: relative;
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
@@ -6205,15 +6234,30 @@ input.careers-upload-input::file-selector-button:hover {
   text-decoration: none;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(6px);
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition: transform 0.2s ease;
+}
+
+.hero-rating-badge::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
 }
 
 .hero-rating-badge:focus-visible,
 .hero-rating-badge:hover {
-  background: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.45);
   transform: translateY(-1px);
   text-decoration: none;
+}
+
+.hero-rating-badge:focus-visible::after,
+.hero-rating-badge:hover::after {
+  opacity: 1;
 }
 
 .hero-rating-stars {
@@ -6339,23 +6383,6 @@ input.careers-upload-input::file-selector-button:hover {
 
 .pricing-disclaimer__link:hover {
   text-decoration: underline;
-}
-
-.pulse-btn {
-  position: relative;
-  animation: none !important;
-  background-color: var(--brand-crimson);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.pulse-btn:hover {
-  background-color: #781925;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.pulse-btn::before {
-  display: none !important;
 }
 
 .faq-group {
