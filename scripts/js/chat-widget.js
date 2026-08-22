@@ -158,8 +158,8 @@
       '<button type="button" class="aaa-chat-emoji" data-emoji="🎨" aria-label="Painting">🎨</button>' +
     '</div>' +
     '<form class="aaa-chat-form" id="aaa-chat-form">' +
-      '<button type="button" class="aaa-chat-emoji-trigger" id="aaa-chat-emoji-trigger" title="Add an emoji" aria-label="Add an emoji" aria-expanded="false" aria-controls="aaa-chat-emoji-bar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg></button>' +
       '<textarea id="aaa-chat-input" rows="1" placeholder="Type your question…" aria-label="Your message"></textarea>' +
+      '<button type="button" class="aaa-chat-emoji-trigger" id="aaa-chat-emoji-trigger" title="Add an emoji" aria-label="Add an emoji" aria-expanded="false" aria-controls="aaa-chat-emoji-bar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg></button>' +
       '<button type="submit" class="aaa-chat-send" id="aaa-chat-send" aria-label="Send message"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>' +
     '</form>' +
     '<div class="aaa-chat-disclaimer">Automated assistant. For instant estimates <a href="/ai-estimate" class="text-red-400 underline font-semibold">try our AI Estimator</a> or call (248) 385-3432.</div>';
