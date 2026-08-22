@@ -237,7 +237,18 @@
 // the call button's styles are gone and the footer now reserves room for the
 // launcher -- and the city and service pages no longer ship the button in
 // their markup. This bump evicts the old shell and assets for every client.
-const CACHE_VERSION = 'v41';
+// v43 fixes a sizing bug on the chat composer's emoji-trigger button. It
+// carried a 2px border while the adjacent send button had none, and both
+// used default content-box sizing, so the emoji trigger rendered at 46px
+// square while the send button stayed at 42px -- the mismatch read as a
+// distorted, oversized button between the emoji and send controls. Both
+// buttons now use box-sizing:border-box so their declared 42px includes the
+// border, and the emoji trigger and send button are exactly the same size.
+// The chat widget CSS lives in chat-widget.js, which the loader pulls after
+// ASSET_VERSION, and the loader is precached here, so a returning visitor
+// holding v42 would keep the old widget and the oversized emoji button.
+// This bump evicts the old assets for every client.
+const CACHE_VERSION = 'v43';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
