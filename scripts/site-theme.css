@@ -1699,9 +1699,7 @@ body > footer a {
   }
 
   #back-to-top {
-    right: auto;
     bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
-    left: 1.5rem;
   }
 }
 
