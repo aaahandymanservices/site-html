@@ -1,97 +1,15 @@
 /*
- * Seasonal offer bar, rendered directly under the top nav on every page.
+ * The shared top-of-page chrome: the skip link, the new-customer promo bar,
+ * and the sticky header with its desktop nav and mobile drawer. Every page
+ * builder renders its nav from here so the 91 pages cannot drift apart.
  *
- * The copy turns over four times a year while the pages themselves are static,
- * so the season is resolved twice. Once here, at build time -- that is what a
- * visitor without JavaScript and what a crawler that doesn't run it will read.
- * Then again in the browser by js/site.js, so a deploy that predates the
- * equinox never leaves the site advertising the wrong season. Both readings
- * come from this one table: it travels to the browser as JSON inside the
- * banner rather than being copied into the script, where the two would drift.
+ * A seasonal offer bar used to be rendered here as well, with a four-season
+ * copy table resolved once at build time and again in the browser. The bar was
+ * retired; the table, the season helper, the stylesheet block, and the browser
+ * half in scripts/js/site.js have all been removed with it.
  */
 
-import { escapeHtml, jsonForScript } from './html-escape.mjs';
-
-export const SEASONAL_OFFERS = {
-  spring: {
-    icon: '☀️',
-    label: 'Spring Deck & Gutter Prep',
-    lead: 'Book your spring deck & gutter prep and',
-    save: 'save $50',
-    note: 'Oakland County homeowners · limited spring openings',
-  },
-  summer: {
-    icon: '🌤️',
-    label: 'Summer Exterior Refresh',
-    lead: 'Book your summer exterior refresh and',
-    save: 'save $50',
-    note: 'Oakland County homeowners · limited summer openings',
-  },
-  fall: {
-    icon: '🍂',
-    label: 'Fall Maintenance Special',
-    lead: 'Book your seasonal tune-up today and',
-    save: 'save $50',
-    note: 'Oakland County homeowners · limited fall openings',
-  },
-  winter: {
-    icon: '❄️',
-    label: 'Winter Weatherproofing Special',
-    lead: 'Book your winter weatherproofing and',
-    save: 'save $50',
-    note: 'Oakland County homeowners · limited winter openings',
-  },
-};
-
-/** Meteorological seasons, which is how a Michigan homeowner thinks about the
- *  work: winter runs December through February, not from the solstice. */
-export function currentSeason(date = new Date()) {
-  const month = date.getMonth();
-  if (month <= 1 || month === 11) return 'winter';
-  if (month <= 4) return 'spring';
-  if (month <= 7) return 'summer';
-  return 'fall';
-}
-
-export function getSeasonalBanner() {
-  const season = currentSeason();
-  const offer = SEASONAL_OFFERS[season];
-
-  // Nothing in the table contains `<` today, but JSON sitting inside a document
-  // has to survive the HTML parser whatever the copy is edited to later, and a
-  // stray `</script>` in it would end the block early.
-  const seasons = jsonForScript(SEASONAL_OFFERS, 0);
-
-  // Dismissal is read back before the first paint rather than in the deferred
-  // site.js, so a visitor who closed the bar never sees it flash in and
-  // collapse again on every page they open. It re-derives the season key
-  // instead of importing one -- the few bytes of duplication buy the whole
-  // no-flash behaviour, and site.js re-checks the same key straight after.
-  const dismissGuard = "(function(){try{var b=document.getElementById('seasonal-banner');"
-    + 'if(!b)return;var d=new Date(),m=d.getMonth(),y=d.getFullYear();'
-    + "var s=(m<=1||m===11)?'winter':m<=4?'spring':m<=7?'summer':'fall';"
-    + "var k=s+'-'+(m===11?y+1:y);b.dataset.seasonKey=k;"
-    + "if(localStorage.getItem('aaa-seasonal-banner')===k)b.hidden=true;}catch(e){}})();";
-
-  return `<aside id="seasonal-banner" class="seasonal-banner" data-season="${season}" aria-label="Seasonal offer">
-    <div class="seasonal-banner__inner">
-        <p class="seasonal-badge">
-            <span class="seasonal-badge__icon" data-banner-icon aria-hidden="true">${offer.icon}</span>
-            <span data-banner-label>${escapeHtml(offer.label)}</span>
-        </p>
-        <p class="seasonal-banner__copy">
-            <span class="seasonal-banner__lead"><span data-banner-lead>${escapeHtml(offer.lead)}</span> <strong class="seasonal-banner__save" data-banner-save>${escapeHtml(offer.save)}</strong></span>
-            <span class="seasonal-banner__note" data-banner-note>${escapeHtml(offer.note)}</span>
-        </p>
-        <a class="seasonal-banner__cta" href="/#quote" data-banner-cta>Claim Seasonal Offer<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
-    </div>
-    <button type="button" class="seasonal-banner__close" data-banner-close aria-label="Dismiss seasonal offer">
-        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"></path></svg>
-    </button>
-    <script type="application/json" data-banner-seasons>${seasons}</script>
-    <script>${dismissGuard}</script>
-</aside>`;
-}
+import { escapeHtml } from './html-escape.mjs';
 
 /*
  * New customer promotion banner, rendered at the very top of the page (above
@@ -99,10 +17,11 @@ export function getSeasonalBanner() {
  *
  * The offer is a $50 gift certificate toward a new customer's next service. The
  * CTA scrolls to the booking form on the current page when it is present, or
- * navigates to /book#booking-form otherwise. The banner ships its own inline
- * <style> so it paints with the first frame regardless of when site-theme.css
- * lands, and a tiny inline script wires the smooth-scroll behaviour so the CTA
- * works without waiting for the deferred behaviour scripts.
+ * navigates to /book#booking-form otherwise. Its stylesheet lives in
+ * scripts/tailwind-input.css, which is render-blocking, so the bar paints with
+ * the first frame; the dismiss/scroll behaviour lives in
+ * scripts/js/page-boot.js. Only the prepaint hide guard below stays inline,
+ * because a deferred script cannot hide the bar before it has been painted.
  */
 export function getNewCustomerBanner({ ctaHref = '/book#booking-form' } = {}) {
   const href = escapeHtml(ctaHref);
@@ -121,7 +40,6 @@ export function getNewCustomerBanner({ ctaHref = '/book#booking-form' } = {}) {
   const GIFT_KEY = 'aaa-first-service-gift';
   const dismissGuard = "(function(){try{var b=document.getElementById('new-customer-banner');if(!b)return;var dismissed=localStorage.getItem('" + STORAGE_KEY + "')==='dismissed';if(!dismissed){try{var g=JSON.parse(localStorage.getItem('" + GIFT_KEY + "')||'{}');if(g&&g.firstServiceGiftRedeemed===true)dismissed=true}catch(e){}}if(dismissed)b.hidden=true;}catch(e){}})();";
   return `<aside id="new-customer-banner" class="new-customer-banner" aria-label="New customer special offer">
-    <style>.new-customer-banner{background:#1b2a4a;color:#fff;border-bottom:3px solid #a61f2e;min-height:2.75rem;transition:height .35s ease,opacity .25s ease,margin .35s ease,padding .35s ease;overflow:hidden}.new-customer-banner__inner{max-width:80rem;margin-inline:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.5rem 1.25rem;padding:.7rem 1.25rem}.new-customer-banner__copy{display:flex;align-items:center;gap:.6rem;margin:0;text-align:center;font-size:.95rem;font-weight:600;line-height:1.35}.new-customer-banner__icon{font-size:1.15rem;line-height:1}.new-customer-banner__lead{color:#fca5a5;font-weight:800;letter-spacing:.01em}.new-customer-banner__amount{color:#fff;font-weight:800}.new-customer-banner__cta{display:inline-flex;align-items:center;gap:.45rem;min-height:2.75rem;padding:.5rem 1.15rem;border-radius:.7rem;background:linear-gradient(100deg,#c2262f,#a61f2e);color:#fff;font-weight:800;font-size:.875rem;white-space:nowrap;text-decoration:none;box-shadow:0 6px 16px #78192542;transition:transform .2s ease,box-shadow .2s ease}.new-customer-banner__cta:hover{filter:brightness(1.05);box-shadow:0 10px 22px #78192557;transform:translateY(-1px)}.new-customer-banner__cta svg{flex:0 0 auto}#new-customer-banner[hidden]{display:none}#new-customer-banner.is-dismissing{opacity:0;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;height:0;min-height:0}@media(max-width:640px){.new-customer-banner__copy{font-size:.85rem}.new-customer-banner__cta{font-size:.8rem}}@media(prefers-reduced-motion:reduce){#new-customer-banner.is-dismissing{transition:none}}</style>
     <script>${dismissGuard}</script>
     <div class="new-customer-banner__inner">
         <p class="new-customer-banner__copy">
@@ -130,7 +48,6 @@ export function getNewCustomerBanner({ ctaHref = '/book#booking-form' } = {}) {
         </p>
         <a class="new-customer-banner__cta" href="${href}" data-ncb-cta>Claim My $50 Gift<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
     </div>
-    <script>(function(){var b=document.getElementById('new-customer-banner');if(!b)return;var c=b.querySelector('[data-ncb-cta]');if(!c)return;var KEY='${STORAGE_KEY}';var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;function dismiss(){try{localStorage.setItem(KEY,'dismissed')}catch(e){}if(reduce){b.hidden=true;return}b.style.height=b.offsetHeight+'px';b.classList.add('is-dismissing');var done=function(){window.clearTimeout(t);b.removeEventListener('transitionend',onEnd);b.hidden=true;b.classList.remove('is-dismissing');b.style.height=''};var onEnd=function(e){if(e.target===b&&e.propertyName==='height')done()};b.addEventListener('transitionend',onEnd);var t=window.setTimeout(done,650);requestAnimationFrame(function(){b.style.height='0px'})}c.addEventListener('click',function(e){dismiss();var h=c.getAttribute('href')||'';if(h.indexOf('#')!==0)return;var t=document.querySelector(h);if(!t)return;e.preventDefault();t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});if(window.history&&window.history.replaceState)window.history.replaceState(null,'',h);var f=t.querySelector('input:not([type=hidden]),select,textarea');if(f)window.setTimeout(function(){f.focus({preventScroll:true})},reduce?0:520)})})()</script>
 </aside>`;
 }
 

@@ -623,68 +623,13 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
 
     <!-- Back to top -->
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
+    <!-- Service worker, analytics, and the promo bar dismiss all live in one
+         deferred module rather than three inline blocks per page. -->
+    <script src="/js/page-boot.js?v=${ASSET_VERSION}" defer></script>
     <script src="/js/site.js?v=${ASSET_VERSION}" defer></script>
-
-    <!-- Google tag (gtag.js) -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-VRMCPNEQC3');
-
-      // gtag.js is deferred until user interaction (pointer/touch/keydown) or
-      // 5 seconds post-load on idle, removing ~178 KiB third-party script from
-      // the initial page render window.
-      (function () {
-        var injected = false;
-
-        function inject() {
-          if (injected) return;
-          injected = true;
-          window.__gtagLoaded = true;
-          var s = document.createElement('script');
-          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3';
-          s.async = true;
-          document.head.appendChild(s);
-        }
-
-        function trigger() {
-          if (document.readyState === 'complete') {
-            if ('requestIdleCallback' in window) {
-              requestIdleCallback(function () { setTimeout(inject, 5000); }, { timeout: 10000 });
-            } else {
-              setTimeout(inject, 6000);
-            }
-          } else {
-            window.addEventListener('load', function () {
-              if ('requestIdleCallback' in window) {
-                requestIdleCallback(function () { setTimeout(inject, 5000); }, { timeout: 10000 });
-              } else {
-                setTimeout(inject, 6000);
-              }
-            }, { once: true });
-          }
-        }
-
-        ['pointerdown', 'keydown', 'touchstart'].forEach(function (e) {
-          window.addEventListener(e, inject, { once: true, passive: true });
-        });
-
-        trigger();
-      })();
-    </script>
 
     <!-- AI chat assistant widget -->
     <script src="/js/chat-loader.js?v=${ASSET_VERSION}" defer></script>
-
-    <script>
-      // Registered after load so it never competes with the first render.
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/sw.js').catch(function () {});
-        });
-      }
-    </script>
 </body>
 </html>
 `;

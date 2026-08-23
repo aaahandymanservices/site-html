@@ -135,10 +135,6 @@
     });
   }
 
-  function titleCase(s) {
-    return String(s).replace(/\w\S*/g, function (t) { return t.charAt(0).toUpperCase() + t.slice(1); });
-  }
-
   // ---- Lookup widget ----
   function initLookup() {
     var input = document.getElementById("service-area-checker");

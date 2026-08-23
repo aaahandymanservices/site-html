@@ -241,7 +241,12 @@
 // directly alongside the textarea, followed cleanly by the send button.
 // This resolves the layout where the input box was positioned between the emoji
 // and send controls or separating the buttons.
-const CACHE_VERSION = 'v44';
+// v45 follows the cleanup pass: site-theme.css lost the retired seasonal offer
+// bar and a batch of dead and duplicated rules, tailwind.css gained the promo
+// bar's styles that used to be inlined in every page, and the per-page inline
+// service-worker/analytics/promo scripts became /js/page-boot.js. Clients
+// holding v44 would keep the old stylesheets and never fetch the new module.
+const CACHE_VERSION = 'v45';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -254,6 +259,9 @@ const PRECACHE_URLS = [
   '/css/tailwind.css',
   '/css/site-theme.css',
   '/css/icons.css',
+  // Registers this worker, boots analytics, and wires the promo bar dismiss --
+  // every page loads it, so it belongs in the shell alongside site.js.
+  '/js/page-boot.js',
   '/js/site.js',
   // Everything the precached start_url needs to be interactive offline. The
   // other pages' behaviour files are picked up by the asset cache on first use.

@@ -144,41 +144,23 @@
   --nav-offset: calc(var(--nav-h) + var(--nav-border));
 }
 
+/* Only what this stylesheet adds on top of the `@layer base` resets in
+   scripts/tailwind-input.css. The box-sizing, overflow-x, width, min-width,
+   text-rendering, and font-smoothing declarations that used to be restated
+   here were byte-identical to the ones tailwind.css already ships, and
+   tailwind.css is render-blocking so it is always in the cascade first. */
 html {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  box-sizing: border-box;
   color: var(--brand-ink);
   background: var(--brand-canvas);
 }
 
 body {
-  width: 100%;
-  max-width: 100%;
-  min-width: 320px;
-  overflow-x: hidden;
-  box-sizing: border-box;
   background:
     radial-gradient(circle at 8% -2%, rgb(166 31 46 / 5%), transparent 30rem),
     radial-gradient(circle at 100% 0%, rgb(27 42 74 / 5%), transparent 34rem),
     linear-gradient(180deg, #f8fafc 0%, var(--brand-canvas) 26rem);
   color: var(--brand-ink);
   line-height: 1.6;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-
-*, ::before, ::after {
-  box-sizing: border-box;
-}
-
-img, video, canvas, svg, iframe, embed, object {
-  max-width: 100%;
-}
-
-main, section, header, footer, nav {
-  max-width: 100%;
 }
 
 @supports (content-visibility: auto) {
@@ -514,7 +496,6 @@ select:-webkit-autofill,
 textarea:-webkit-autofill {
   -webkit-text-fill-color: var(--field-ink);
   caret-color: var(--field-ink);
-  -webkit-box-shadow: 0 0 0 1000px var(--field-bg) inset;
   box-shadow: 0 0 0 1000px var(--field-bg) inset;
 }
 
@@ -527,7 +508,6 @@ select:autofill,
 textarea:autofill {
   -webkit-text-fill-color: var(--field-ink);
   caret-color: var(--field-ink);
-  -webkit-box-shadow: 0 0 0 1000px var(--field-bg) inset;
   box-shadow: 0 0 0 1000px var(--field-bg) inset;
 }
 
@@ -541,14 +521,12 @@ textarea:autofill {
 input:-webkit-autofill:focus,
 select:-webkit-autofill:focus,
 textarea:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px var(--field-bg) inset, 0 0 0 4px var(--field-ring);
   box-shadow: 0 0 0 1000px var(--field-bg) inset, 0 0 0 4px var(--field-ring);
 }
 
 input:autofill:focus,
 select:autofill:focus,
 textarea:autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px var(--field-bg) inset, 0 0 0 4px var(--field-ring);
   box-shadow: 0 0 0 1000px var(--field-bg) inset, 0 0 0 4px var(--field-ring);
 }
 
@@ -564,15 +542,6 @@ form label {
   color: var(--label-ink);
   margin-bottom: 0.35rem;
   display: block;
-}
-
-/* Star rating component */
-.rating-stars {
-  color: #a16207;
-  display: inline-flex;
-  gap: 0.2rem;
-  font-size: 1.15rem;
-  filter: drop-shadow(0 1px 2px rgba(245, 158, 11, 0.25));
 }
 
 /* Primary call-to-action buttons — one cohesive crimson treatment site-wide */
@@ -593,21 +562,9 @@ form label {
   line-height: 1.25;
   letter-spacing: 0.01em;
   text-decoration: none;
-  box-shadow: var(--shadow-sm);
-  /* `filter` is set on hover but not animated: a transitioned filter forces the
-     whole button -- gradient, label, and sheen -- through a fresh raster pass on
-     every frame, and pages carry a dozen of these. The shadow has to stay in the
-     list because the sheen needs `overflow: hidden`, which would clip an outer
-     shadow off a pseudo-element layer. */
-  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
-}
-
-.cta-button.bg-emerald-700 {
-  background: #047857;
-}
-
-.cta-button.bg-emerald-700:hover {
-  background: #065f46;
+  /* Colour, shadow, and transition are set once in the "Premium polish"
+     block further down, which uses `!important` and would override
+     anything restated here. */
 }
 
 /* A full-width call to action already spans its card, so the generous inline
@@ -617,14 +574,6 @@ form label {
 .cta-button.w-full,
 .btn-craftsman.w-full {
   padding-inline: 20px;
-}
-
-.cta-button.bg-blue-900 {
-  background: var(--grad-navy);
-}
-
-.cta-button.bg-blue-900:hover {
-  background: var(--brand-navy-deep);
 }
 
 /* Moving sheen on hover for a tactile, polished feel */
@@ -638,19 +587,8 @@ form label {
   pointer-events: none;
 }
 
-.cta-button:hover {
-  filter: saturate(1.05) brightness(1.03);
-  box-shadow: var(--shadow-crimson);
-  transform: translateY(-2px);
-}
-
 .cta-button:hover::after {
   transform: translateX(120%);
-}
-
-.cta-button:active {
-  transform: translateY(0);
-  box-shadow: var(--shadow-sm);
 }
 
 /* ============================================================
@@ -1228,27 +1166,12 @@ nav.sticky,
   word-break: normal;
 }
 
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-position: center;
-  background-size: cover;
-}
-
 /* Pricing-policy hero: center all children both axes with centered text */
 #policy-hero {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-}
-
-/* Truly fluid hero headline — scales continuously instead of in breakpoint steps */
-.hero-title {
-  font-size: clamp(2.25rem, 6.2vw + 0.5rem, 3.9rem);
-  line-height: 1.04;
 }
 
 body > header.bg-gradient-to-r {
@@ -1290,14 +1213,11 @@ body > header.bg-gradient-to-r > * {
   justify-content: center;
 }
 
-.card-container, 
-.pricing-card,
+/* Badges and the ::after shadow layer overflow the card box and must not
+   be clipped. Compositor promotion lives in the rule below. */
 .service-card,
 .generated-service-card {
-  overflow: visible !important; /* Prevent clipping floating absolute elements */
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  will-change: transform;
+  overflow: visible !important;
 }
 
 .service-card,
@@ -1312,7 +1232,6 @@ body > header.bg-gradient-to-r > * {
      lives on a `::after` layer that only changes opacity (see below). */
   transition: transform 260ms var(--ease), border-color 260ms var(--ease);
   backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   will-change: transform;
   transform: translateZ(0);
 }
@@ -1720,8 +1639,15 @@ body::after {
   align-items: center;
   justify-content: center;
   text-align: center;
+  min-height: min(640px, calc(100vh - 5rem));
+  background: radial-gradient(ellipse at top, rgba(27, 42, 74, 0.72) 0, rgba(3, 7, 11, 0.85) 100%),
+    linear-gradient(rgba(3, 7, 11, 0.65), rgba(3, 7, 11, 0.75)),
+    url("/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=65") center/cover;
 }
 
+/* The dot grid drifts on the aurora keyframes. An earlier pair of radial
+   gradients used to paint here too; the grid replaced them and nothing else
+   ever removed the dead declaration. */
 .hero::after {
   position: absolute;
   inset: 0;
@@ -1729,14 +1655,19 @@ body::after {
   content: "";
   pointer-events: none;
   mix-blend-mode: screen;
-  background:
-    radial-gradient(38rem 34rem at 12% 6%, rgb(166 31 46 / 20%), transparent 62%),
-    radial-gradient(34rem 34rem at 92% 104%, rgb(61 89 133 / 35%), transparent 60%);
+  opacity: 0.2;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
   animation: aurora-drift 19s var(--ease) infinite alternate;
 }
 
 /* Give the hero headline a subtle metallic depth */
 .hero-title {
+  max-width: 22ch;
+  margin-inline: auto;
+  font-size: clamp(2.25rem, 6.2vw + 0.5rem, 3.9rem);
+  line-height: 1.04;
+  text-wrap: balance;
   text-shadow: 0 1px 0 rgb(0 0 0 / 18%), 0 12px 40px rgb(0 0 0 / 35%);
 }
 
@@ -1811,263 +1742,6 @@ body > header.bg-gradient-to-r::after {
 .js-reveal .reveal-child.reveal-shown {
   transform: translate3d(0, 0, 0);
 }
-
-/* ============================================================
-   Seasonal offer bar
-   Sits directly under the sticky nav on every page: the season's
-   badge, one line of copy, and the button that drops the visitor
-   straight onto the quote form. Dismissible, and it stays dismissed.
-   ============================================================ */
-
-/* Each season retints the same bar rather than restyling it, so the
-   palette is four custom properties deep and nothing below has to know
-   which season it is rendering. The fall values double as the fallback
-   if the data-season attribute is ever missing. */
-.seasonal-banner {
-  --season-a: #fff8ef;
-  --season-b: #fdeedd;
-  --season-c: #fff6ec;
-  --season-glow: rgb(200 106 26 / 20%);
-  --season-ring: rgb(180 96 24 / 28%);
-  --season-ink: #8a4712;
-
-  position: relative;
-  overflow: hidden;
-  border-bottom: 1px solid rgb(27 42 74 / 10%);
-  background:
-    radial-gradient(26rem 12rem at 14% -40%, var(--season-glow), transparent 72%),
-    linear-gradient(100deg, var(--season-a), var(--season-b) 48%, var(--season-c));
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 70%);
-  animation: seasonal-banner-in 0.5s var(--ease-out) both;
-}
-
-.seasonal-banner[data-season="winter"] {
-  --season-a: #f5f9ff;
-  --season-b: #e8f1fb;
-  --season-c: #f7fbff;
-  --season-glow: rgb(46 106 170 / 18%);
-  --season-ring: rgb(46 106 170 / 26%);
-  --season-ink: #1f4d7a;
-}
-
-.seasonal-banner[data-season="spring"] {
-  --season-a: #f7fdf5;
-  --season-b: #eaf7e8;
-  --season-c: #f8fdf7;
-  --season-glow: rgb(46 138 62 / 17%);
-  --season-ring: rgb(46 138 62 / 26%);
-  --season-ink: #24632f;
-}
-
-.seasonal-banner[data-season="summer"] {
-  --season-a: #fffbf0;
-  --season-b: #fff4d9;
-  --season-c: #fffaf0;
-  --season-glow: rgb(206 148 20 / 20%);
-  --season-ring: rgb(186 132 16 / 30%);
-  --season-ink: #7e5906;
-}
-
-/* Belt and braces alongside the UA stylesheet's own [hidden] rule: nothing
-   here sets `display` on the bar, but a later layout change might, and the
-   dismissed state must win over it. */
-.seasonal-banner[hidden] {
-  display: none;
-}
-
-/* A slow highlight drifts across the fill every few seconds -- enough
-   movement to catch the eye on arrival, transform-only so it never costs
-   a repaint. */
-.seasonal-banner::before {
-  position: absolute;
-  inset: -50% -20%;
-  content: "";
-  pointer-events: none;
-  background: linear-gradient(104deg, transparent 44%, rgb(255 255 255 / 62%) 50%, transparent 56%);
-  transform: translateX(-55%);
-  animation: seasonal-sheen 11s var(--ease) infinite;
-}
-
-@keyframes seasonal-sheen {
-  0%,
-  55% {
-    transform: translateX(-55%);
-  }
-
-  100% {
-    transform: translateX(55%);
-  }
-}
-
-@keyframes seasonal-banner-in {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.seasonal-banner__inner {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem 1.15rem;
-  max-width: 80rem;
-  margin-inline: auto;
-  /* Symmetric gutters so the row still reads as centred with the close
-     button occupying the right one. */
-  padding: 0.55rem 3.5rem;
-}
-
-.seasonal-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0.25rem 0.75rem 0.25rem 0.3rem;
-  border-radius: 999px;
-  background: rgb(255 255 255 / 88%);
-  box-shadow:
-    inset 0 0 0 1px var(--season-ring),
-    0 1px 2px rgb(27 42 74 / 8%);
-  color: var(--season-ink);
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  line-height: 1.25;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.seasonal-badge__icon {
-  display: inline-flex;
-  flex: 0 0 1.55rem;
-  align-items: center;
-  justify-content: center;
-  width: 1.55rem;
-  height: 1.55rem;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 1px 3px rgb(27 42 74 / 14%);
-  font-size: 0.9rem;
-  line-height: 1;
-}
-
-.seasonal-banner__copy {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-  min-width: 0;
-  margin: 0;
-  text-align: center;
-}
-
-.seasonal-banner__lead {
-  color: var(--brand-navy);
-  font-size: 0.95rem;
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-.seasonal-banner__save {
-  color: var(--brand-crimson);
-  font-weight: 800;
-  white-space: nowrap;
-}
-
-.seasonal-banner__note {
-  color: var(--brand-muted);
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.seasonal-banner__cta {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  min-height: 2.75rem;
-  padding: 0.5rem 1.15rem;
-  overflow: hidden;
-  border-radius: 0.7rem;
-  background: var(--grad-crimson);
-  color: #fff;
-  font-family: var(--font-display);
-  font-size: 0.875rem;
-  font-weight: 800;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-  text-decoration: none;
-  box-shadow: 0 6px 16px rgb(120 25 37 / 26%);
-  transition:
-    transform var(--dur) var(--ease),
-    box-shadow var(--dur) var(--ease);
-}
-
-.seasonal-banner__cta::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  pointer-events: none;
-  background: linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 30%) 50%, transparent 70%);
-  transform: translateX(-120%);
-  transition: transform 0.62s var(--ease-out);
-}
-
-.seasonal-banner__cta:hover {
-  filter: brightness(1.04);
-  box-shadow: 0 10px 22px rgb(120 25 37 / 34%);
-  transform: translateY(-1px);
-}
-
-.seasonal-banner__cta:hover::after {
-  transform: translateX(120%);
-}
-
-.seasonal-banner__cta:active {
-  transform: translateY(0);
-}
-
-.seasonal-banner__cta svg {
-  position: relative;
-  flex: 0 0 auto;
-  transition: transform var(--dur) var(--ease);
-}
-
-.seasonal-banner__cta:hover svg {
-  transform: translateX(2px);
-}
-
-.seasonal-banner__close {
-  position: absolute;
-  top: 50%;
-  /* Far enough in that the bar's own `overflow: hidden` -- which is there to
-     clip the sheen -- doesn't crop the focus ring off this button. */
-  right: 0.5rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  min-height: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  color: var(--brand-muted);
-  cursor: pointer;
-  transform: translateY(-50%);
-  transition: color var(--dur) var(--ease);
-}
-
 /* WCAG AA safeguards for utility combinations shared across generated pages. */
 .bg-green-600.text-white {
   background-color: #166534;
@@ -2094,75 +1768,6 @@ body > header.bg-gradient-to-r::after {
    contrast. Amber is no longer part of the palette -- those accents are brand
    crimson now, and `red-600` (#a61f2e) already clears AA on white -- so the
    rule had nothing left to match and is gone. */
-
-/* The touch target is deliberately larger than the mark should look, so
-   the hover state is drawn on an inset circle instead of the button box. */
-.seasonal-banner__close::before {
-  position: absolute;
-  inset: 0.5rem;
-  content: "";
-  border-radius: 50%;
-  background: transparent;
-  transition: background-color var(--dur) var(--ease);
-}
-
-.seasonal-banner__close:hover {
-  color: var(--brand-navy);
-}
-
-.seasonal-banner__close:hover::before {
-  background: rgb(27 42 74 / 8%);
-}
-
-.seasonal-banner__close svg {
-  position: relative;
-}
-
-/* Dismissal collapses the bar rather than snapping it out, so the page
-   below settles instead of jumping. js/site.js pins the current height
-   first; the entrance animation has to be cleared or its retained final
-   state would outrank the fade. */
-.seasonal-banner.is-dismissing {
-  height: 0;
-  opacity: 0;
-  animation: none;
-  transition:
-    height 0.32s var(--ease),
-    opacity 0.22s var(--ease);
-}
-
-@media (max-width: 767px) {
-  .seasonal-banner__inner {
-    gap: 0.45rem 0.75rem;
-    /* The right gutter clears the corner close button outright, so a wrapped
-       badge can never run underneath it on a 320px screen. */
-    padding: 0.7rem 3rem 0.8rem;
-  }
-
-  /* Stacked layout leaves no vertically centred row to sit against, so
-     the close button moves to the corner. */
-  .seasonal-banner__close {
-    top: 0.45rem;
-    right: 0.45rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    transform: none;
-  }
-
-  .seasonal-badge {
-    white-space: normal;
-  }
-
-  .seasonal-banner__lead {
-    font-size: 0.9rem;
-  }
-
-  .seasonal-banner__cta {
-    width: 100%;
-    max-width: 21rem;
-    justify-content: center;
-  }
-}
 
 /* ============================================================
    Content card grids: a floor on how narrow a column may get
@@ -3105,7 +2710,15 @@ html.bw-open body {
   border-radius: 1rem;
 }
 
-.plan-card__summary::-webkit-details-marker {
+/* Every <summary> on the site draws its own chevron, so the UA marker is off
+   everywhere. Safari still needs the pseudo-element form. */
+.plan-card__summary::-webkit-details-marker,
+.pp-faq > summary::-webkit-details-marker,
+.booking-faq summary::-webkit-details-marker,
+.svc-group__summary::-webkit-details-marker,
+.quote-cat-summary::-webkit-details-marker,
+.faq-group > summary::-webkit-details-marker,
+.faq-item > summary::-webkit-details-marker {
   display: none;
 }
 
@@ -3190,10 +2803,6 @@ html.bw-open body {
     padding: 1.5rem;
   }
 
-  .plan-card-row--accordion .plan-card--accordion[open] {
-    /* summary marker stays hidden; body always shows */
-  }
-
   /* Keep the native disclosure open on desktop by styling the summary as a
      static header. (The <details> elements are given the `open` attribute in
      the markup for Complete; the script below mirrors that to the others so
@@ -3232,9 +2841,7 @@ html.bw-open body {
 
   .cta-button::after,
   .service-card::before,
-  .generated-service-card::before,
-  .seasonal-banner::before,
-  .seasonal-banner__cta::after {
+  .generated-service-card::before {
     display: none;
   }
 
@@ -3248,17 +2855,11 @@ html.bw-open body {
   .legal-sections > section:hover,
   .cta-button:hover,
   .nav-link:hover,
-  .seasonal-banner__cta:hover,
-  .seasonal-banner__cta:hover svg,
   .bw-tile:hover,
   .plan-card:hover,
   .zone-card:hover,
   #back-to-top:hover {
     transform: none;
-  }
-
-  .seasonal-banner {
-    animation: none;
   }
 }
 
@@ -3318,7 +2919,6 @@ html.bw-open body {
   background-color: rgba(30, 86, 49, 0.06);
   border-bottom: 1px solid rgba(30, 86, 49, 0.2);
 }
-.zone-card-a .zone-title,
 .zone-card-a .zone-icon,
 .zone-card-a .zone-accent-text {
   color: #1e5631;
@@ -3366,7 +2966,6 @@ html.bw-open body {
   background-color: rgba(212, 175, 55, 0.12);
   border-bottom: 1px solid rgba(212, 175, 55, 0.35);
 }
-.zone-card-b .zone-title,
 .zone-card-b .zone-icon {
   color: #8a6508;
 }
@@ -3968,7 +3567,6 @@ footer[class] {
    Micro-Interactions & Card Transitions
    ============================================================ */
 .service-card,
-.pricing-card,
 .svc-group,
 .process-step-card,
 .generated-service-card {
@@ -3976,7 +3574,6 @@ footer[class] {
 }
 
 .service-card:hover,
-.pricing-card:hover,
 .process-step-card:hover,
 .generated-service-card:hover {
   transform: translateY(-4px) !important;
@@ -4658,12 +4255,6 @@ footer[class] {
   color: #166534 !important;
 }
 
-.checklist-item.checked .check-circle {
-  background-color: #166534 !important;
-  border-color: #166534 !important;
-  color: #fff !important;
-}
-
 /* Pricing policy tables & anchor stubs */
 .anchor-stub {
   scroll-margin-top: 120px;
@@ -5206,10 +4797,6 @@ footer[class] {
   line-height: 1.45;
 }
 
-.pp-faq > summary::-webkit-details-marker {
-  display: none;
-}
-
 .pp-faq > summary:hover {
   color: var(--brand-crimson);
   background: #f9fafb;
@@ -5377,10 +4964,6 @@ header#policy-hero.ambient-glow-hero::before {
 
 .booking-faq details[open] .booking-faq__chevron {
   transform: rotate(180deg);
-}
-
-.booking-faq summary::-webkit-details-marker {
-  display: none;
 }
 
 .booking-faq summary {
@@ -5840,10 +5423,6 @@ header#policy-hero.ambient-glow-hero::before {
   transition: background-color 0.2s ease;
 }
 
-.svc-group__summary::-webkit-details-marker {
-  display: none;
-}
-
 .svc-group__summary:hover {
   background: #f9fafb;
 }
@@ -5985,7 +5564,6 @@ header#policy-hero.ambient-glow-hero::before {
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
@@ -6026,10 +5604,6 @@ header#policy-hero.ambient-glow-hero::before {
   user-select: none;
 }
 
-.quote-cat-summary::-webkit-details-marker {
-  display: none;
-}
-
 .quote-cat-summary:focus-visible {
   outline: 2px solid #dc2626;
   outline-offset: -2px;
@@ -6054,10 +5628,6 @@ header#policy-hero.ambient-glow-hero::before {
   padding: 0.625rem 1rem 1rem;
 }
 
-[data-accordion-toggle][aria-expanded="true"] .aaa-accordion-icon {
-  transform: rotate(180deg);
-}
-
 /* Careers Page Form Components */
 .careers-form-shell {
   max-width: 800px;
@@ -6073,7 +5643,6 @@ header#policy-hero.ambient-glow-hero::before {
 }
 
 select.careers-select {
-  -webkit-appearance: none;
   appearance: none;
   background-color: #f9fafb;
   color: #111827;
@@ -6152,24 +5721,6 @@ input.careers-upload-input::file-selector-button:hover {
 }
 
 /* Homepage Hero, Rating Badges, Trust Grid & Accordions */
-.hero {
-  background: radial-gradient(ellipse at top, rgba(27, 42, 74, 0.72) 0, rgba(3, 7, 11, 0.85) 100%),
-    linear-gradient(rgba(3, 7, 11, 0.65), rgba(3, 7, 11, 0.75)),
-    url("/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=65") center/cover;
-  min-height: min(640px, calc(100vh - 5rem));
-  position: relative;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 24px 24px;
-  pointer-events: none;
-  opacity: 0.2;
-}
-
 @media (min-width: 768px) and (max-width: 1439px) {
   .hero {
     background: radial-gradient(ellipse at top, rgba(27, 42, 74, 0.72) 0, rgba(3, 7, 11, 0.85) 100%),
@@ -6185,15 +5736,6 @@ input.careers-upload-input::file-selector-button:hover {
       linear-gradient(rgba(3, 7, 11, 0.75), rgba(3, 7, 11, 0.75)),
       url("/.netlify/images?url=/logo-banner.jpg&w=640&fm=avif&q=65") center/cover;
   }
-  .hero-title {
-    max-width: none;
-  }
-}
-
-.hero-title {
-  max-width: 22ch;
-  margin-inline: auto;
-  text-wrap: balance;
 }
 
 .hero-locale {
@@ -6413,10 +5955,6 @@ input.careers-upload-input::file-selector-button:hover {
   transition: color var(--dur, 0.2s) ease, background-color var(--dur, 0.2s) ease;
 }
 
-.faq-group > summary::-webkit-details-marker {
-  display: none;
-}
-
 .faq-group > summary:hover {
   background: #f9fafb;
 }
@@ -6489,10 +6027,6 @@ input.careers-upload-input::file-selector-button:hover {
   font-weight: 700;
   color: var(--brand-navy);
   transition: color var(--dur, 0.2s) ease;
-}
-
-.faq-item > summary::-webkit-details-marker {
-  display: none;
 }
 
 .faq-item > summary:hover {
@@ -6750,185 +6284,3 @@ header.hero.ambient-glow-hero::before {
 .loyalty-callout-card--on-light .loyalty-checkbox-text {
   color: var(--brand-navy-deep);
 }
-
-.gift-certificate-badge {
-  display: flex;
-  align-items: stretch;
-  gap: 0.875rem;
-  padding: 1rem 1.125rem;
-  border-radius: 1rem;
-  border: 2px solid var(--brand-crimson);
-  background: var(--brand-navy-deep);
-  box-shadow: 0 12px 30px -18px rgba(27, 42, 74, 0.55);
-}
-
-.gift-certificate-badge .amount {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 3.5rem;
-  padding: 0.35rem 0.75rem;
-  border-radius: 0.75rem;
-  background: var(--grad-crimson);
-  color: #fff;
-  font-family: "Archivo", sans-serif;
-  font-weight: 800;
-  font-size: 1.6rem;
-  line-height: 1;
-  letter-spacing: -0.01em;
-  flex-shrink: 0;
-  box-shadow: 0 8px 18px -10px rgba(166, 31, 46, 0.65);
-}
-
-.gift-certificate-badge .details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 0;
-  gap: 0.2rem;
-}
-
-.gift-certificate-badge .badge-title {
-  color: var(--brand-crimson-on-navy-strong);
-  font-family: "Archivo", sans-serif;
-  font-weight: 800;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  line-height: 1.1;
-}
-
-.gift-certificate-badge .badge-subtitle {
-  color: #e7edf6;
-  font-size: 0.86rem;
-  line-height: 1.35;
-}
-
-/*
- * Loyalty enrolment checkbox. The `.checkbox-container` wrapper is the label
- * itself so the entire row is clickable, and the visually-hidden native input
- * drives the `.checkmark` visual. Keyboard focus is drawn on the wrapper via
- * :focus-within so the tab stop is the input but the ring sits on the row.
- */
-.checkbox-container {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.7rem;
-  padding: 0.7rem 0.85rem;
-  margin-top: 0.6rem;
-  border-radius: 0.85rem;
-  border: 1px solid rgba(166, 31, 46, 0.35);
-  background: rgba(16, 27, 49, 0.65);
-  cursor: pointer;
-  transition: border-color 0.18s ease, background-color 0.18s ease;
-}
-
-.checkbox-container:hover {
-  border-color: var(--brand-crimson);
-  background: rgba(38, 57, 90, 0.65);
-}
-
-.checkbox-container:focus-within {
-  outline: 2px solid var(--brand-crimson);
-  outline-offset: 2px;
-}
-
-.checkbox-container input[type="checkbox"] {
-  position: absolute;
-  opacity: 0;
-  width: 1.25rem;
-  height: 1.25rem;
-  margin: 0;
-  top: 0.7rem;
-  left: 0.85rem;
-  cursor: pointer;
-}
-
-.checkbox-container .checkmark {
-  position: relative;
-  flex-shrink: 0;
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-top: 0.05rem;
-  border-radius: 0.35rem;
-  border: 2px solid rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.06);
-  transition: background-color 0.18s ease, border-color 0.18s ease;
-}
-
-.checkbox-container input[type="checkbox"]:focus-visible + .checkmark {
-  box-shadow: 0 0 0 3px rgba(166, 31, 46, 0.45);
-}
-
-.checkbox-container input[type="checkbox"]:checked + .checkmark {
-  background: var(--brand-crimson);
-  border-color: var(--brand-crimson);
-}
-
-.checkbox-container .checkmark::after {
-  content: "";
-  position: absolute;
-  left: 0.34rem;
-  top: 0.1rem;
-  width: 0.32rem;
-  height: 0.62rem;
-  border: solid #fff;
-  border-width: 0 0.18rem 0.18rem 0;
-  transform: rotate(45deg) scale(0.6);
-  opacity: 0;
-  transition: opacity 0.12s ease, transform 0.12s ease;
-}
-
-.checkbox-container input[type="checkbox"]:checked + .checkmark::after {
-  opacity: 1;
-  transform: rotate(45deg) scale(1);
-}
-
-.checkbox-container .label-text {
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1.35;
-}
-
-/* On the light-background quote form the badge sits on white, so the same
- * component picks up a thin crimson hairline instead of the navy fill, and the
- * subtitle uses the brand ink for contrast. */
-.gift-certificate-badge--on-light {
-  background: #fff;
-  border-color: var(--brand-crimson);
-  box-shadow: 0 12px 26px -20px rgba(166, 31, 46, 0.4);
-}
-
-.gift-certificate-badge--on-light .badge-subtitle {
-  color: var(--brand-ink);
-}
-
-.checkbox-container--on-light {
-  background: #f4f6fa;
-  border-color: rgba(166, 31, 46, 0.25);
-}
-
-.checkbox-container--on-light:hover {
-  background: #ecf0f6;
-}
-
-.checkbox-container--on-light .checkmark {
-  border-color: rgba(27, 42, 74, 0.45);
-  background: #fff;
-}
-
-.checkbox-container--on-light .label-text {
-  color: var(--brand-ink);
-}
-
-
-
-
-
-
-
-
-
-
