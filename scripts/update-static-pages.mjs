@@ -38,6 +38,11 @@ const STATIC_NAV_PAGES = [
 const ICONS_CSS = `/css/icons.css?v=${ICONS_CSS_VERSION}`;
 const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
 const SCRIPT_VERSIONS = new Map([
+  // Service worker registration, the gtag.js bootstrap, and the promo bar's
+  // dismiss handler all live here now instead of in three inline blocks per
+  // page, so this file is on the critical path of every page's analytics and
+  // offline support -- a stale copy is worse than no copy.
+  ['page-boot.js', ASSET_VERSION],
   ['site.js', ASSET_VERSION],
   ['home.js', ASSET_VERSION],
   // The one accept list and 10 MB rule that all six photo uploaders read, plus
@@ -161,10 +166,10 @@ function optimizeFontsAndAssets(html) {
    * not to defer the stylesheets (that trades the white screen for a layout
    * shift the comments above already paid to remove) but to inline a tiny
    * block that paints the brand palette the moment the HTML is parsed: the
-   * body's pale grey, the sticky header's white with its crimson hairline, the
-   * seasonal banner's warm gradient, and the booking hero's navy gradient with
-   * white text. Tailwind then lands and refines, but the first frame is already
-   * the right colours instead of white-on-white.
+   * body's pale grey, the sticky header's white with its crimson hairline, and
+   * the booking hero's navy gradient with white text. Tailwind then lands and
+   * refines, but the first frame is already the right colours instead of
+   * white-on-white.
    *
    * The rules use the same literal hex values the source stylesheets declare,
    * kept low-specificity so Tailwind's utilities and site-theme's rules win
@@ -176,8 +181,10 @@ function optimizeFontsAndAssets(html) {
    * moment the HTML is parsed, before the render-blocking stylesheets' round
    * trips finish on a first visit: the icon glyph box reservation (so the
    * async icons.css never re-flows the nav and hero rows), the sticky header,
-   * the seasonal banner's base gradient, and the hero / ambient-glow
-   * backgrounds and headings. Tailwind and site-theme.css stay render-
+   * and the hero / ambient-glow backgrounds and headings. The promo bar is not
+   * in here: its own stylesheet ships inside the render-blocking tailwind.css,
+   * so it is already painted by the time the parser reaches the banner.
+   * Tailwind and site-theme.css stay render-
    * blocking and refine this skeleton once they land; the block only buys the
    * first frame on a slow first visit, it never replaces the stylesheets.
    */
@@ -194,10 +201,6 @@ function optimizeFontsAndAssets(html) {
     ':where(.fa,.fas,.far,.fab,.fa-solid,.fa-regular,.fa-brands){display:inline-block;width:1em;line-height:1;font-style:normal;text-align:center}' +
     // Sticky header chrome.
     '#site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:3px solid #a61f2e;box-shadow:0 6px 22px rgba(27,42,74,.08)}' +
-    // Seasonal offer bar base fill (the build-time season tints live in
-    // site-theme.css, but the warm cream fallback here avoids a white flash).
-    '#seasonal-banner{background:linear-gradient(100deg,#fff8ef,#fdeedd 48%,#fff6ec);border-bottom:1px solid rgba(27,42,74,.1)}' +
-    '#seasonal-banner[hidden]{display:none}' +
     // Dark hero / booking section background so its first frame is navy, not
     // white. Matches .ambient-glow-hero in scripts/site-theme.css.
     '.ambient-glow-hero,#booking-section.ambient-glow-hero{position:relative;overflow:hidden;min-height:18rem;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
@@ -274,8 +277,7 @@ function optimizeFontsAndAssets(html) {
    *
    * It carries the @font-face rules for the self-hosted brand fonts, the icon
    * glyph box reservations that keep the async icons.css from re-flowing the
-   * nav and hero rows, the seasonal banner tints, and the component skins the
-   * first paint depends on. An earlier pass kept it render-blocking on the
+   * nav and hero rows, and the component skins the first paint depends on. An earlier pass kept it render-blocking on the
    * grounds that a deferred stylesheet is fragile if the onload handler never
    * fires, but the inline #aaa-critical-palette block above already paints
    * the brand palette the moment the HTML is parsed, so a deferred
@@ -356,47 +358,56 @@ function optimizeFontsAndAssets(html) {
     return version ? `src="/js/${fileName}?v=${version}"` : match;
   });
 
-  // Defer GTM script until user interaction or 5s idle post-load
-  const oldGtmPattern = /\(function\s*\(\)\s*\{\s*var\s+injected\s*=\s*false,\s*armed\s*=\s*false;[\s\S]*?\['pointerdown',\s*'keydown',\s*'scroll',\s*'touchstart'\][\s\S]*?\}\)\(\);/gi;
-  const newGtmCode = `(function () {
-        var injected = false;
+  /*
+   * Fold the per-page inline scripts into the one deferred module.
+   *
+   * Every page used to carry three inline blocks: a service-worker
+   * registration and a gtag.js bootstrap at the end of <body>, plus the promo
+   * bar's dismiss handler nested inside its <aside>. Together that is ~2.4kB
+   * of JavaScript parsed on the main thread during HTML parsing, repeated in
+   * every one of the 90 documents and re-downloaded on every navigation
+   * because HTML is served network-first. scripts/js/page-boot.js is the same three behaviours in one
+   * `defer` script that is cached immutable for a year, so it parses after the
+   * document instead of interrupting it and is fetched once per visitor rather
+   * than once per page view. The gtag bootstrap keeps its interaction/idle gate
+   * (see scripts/js/page-boot.js) -- deferring the block does not start loading
+   * googletagmanager.com any earlier.
+   *
+   * The strips are anchored on markers unique to each block and stop at the
+   * first `</script>`, so no neighbouring inline script can be swallowed. The
+   * banner's prepaint hide guard is deliberately not matched: it has to run
+   * during parsing or a dismissed banner flashes before the deferred module
+   * gets a chance to hide it.
+   */
+  const INLINE_BLOCK = (marker) =>
+    new RegExp(`[ \\t]*<script>(?:(?!<\\/script>)[\\s\\S])*?${marker}(?:(?!<\\/script>)[\\s\\S])*?<\\/script>\\r?\\n?`, 'gi');
 
-        function inject() {
-          if (injected) return;
-          injected = true;
-          window.__gtagLoaded = true;
-          var s = document.createElement('script');
-          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-VRMCPNEQC3';
-          s.async = true;
-          document.head.appendChild(s);
-        }
+  html = html.replace(INLINE_BLOCK('navigator\\.serviceWorker\\.register'), '');
+  html = html.replace(INLINE_BLOCK('G-VRMCPNEQC3'), '');
+  html = html.replace(INLINE_BLOCK("is-dismissing"), '');
 
-        function trigger() {
-          if (document.readyState === 'complete') {
-            if ('requestIdleCallback' in window) {
-              requestIdleCallback(function () { setTimeout(inject, 5000); }, { timeout: 10000 });
-            } else {
-              setTimeout(inject, 6000);
-            }
-          } else {
-            window.addEventListener('load', function () {
-              if ('requestIdleCallback' in window) {
-                requestIdleCallback(function () { setTimeout(inject, 5000); }, { timeout: 10000 });
-              } else {
-                setTimeout(inject, 6000);
-              }
-            }, { once: true });
-          }
-        }
+  /*
+   * The promo bar's styles moved out of the banner markup and into
+   * scripts/tailwind-input.css, which ships in the render-blocking
+   * tailwind.css. The inline copy was 1.5kB repeated in 88 documents for rules
+   * the browser already had by the time it reached the banner. Matching only
+   * attribute-free <style> tags keeps the #aaa-critical-palette block above
+   * out of range.
+   */
+  html = html.replace(
+    /[ \t]*<style>(?:(?!<\/style>)[\s\S])*?\.new-customer-banner\{(?:(?!<\/style>)[\s\S])*?<\/style>\r?\n?/gi,
+    '',
+  );
 
-        ['pointerdown', 'keydown', 'touchstart'].forEach(function (e) {
-          window.addEventListener(e, inject, { once: true, passive: true });
-        });
-
-        trigger();
-      })();`;
-
-  html = html.replace(oldGtmPattern, newGtmCode);
+  // One tag, inserted ahead of site.js and only when the page does not already
+  // carry it, so repeat builds never stack a second copy. offline.html has no
+  // site.js and gets nothing -- it is a cache fallback, not a tracked page.
+  if (!/src=["']?\/js\/page-boot\.js/i.test(html)) {
+    html = html.replace(
+      /([ \t]*)<script\s+src=["']?\/js\/site\.js(?:\?v=[^"'\s>]*)?["']?(\s+defer)?><\/script>/i,
+      `$1<script src="/js/page-boot.js?v=${ASSET_VERSION}" defer></script>\n$&`,
+    );
+  }
 
   return html;
 }

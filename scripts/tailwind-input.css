@@ -66,11 +66,130 @@
      memory and per-layer rasterisation spent on elements whose only animations
      are `hover:shadow-*` and a border colour change -- neither of which needs
      a layer, and neither of which was any smoother for having one. */
-  .card-container,
-  .pricing-card,
   .service-card,
   .generated-service-card {
     overflow: visible !important;
   }
 }
 
+/*
+ * New-customer promo bar.
+ *
+ * Declared here rather than in scripts/site-theme.css because site-theme.css
+ * is loaded with the preload/onload swap and so is not guaranteed to be in the
+ * cascade at first paint, while this bar is the very first element in <body>.
+ * tailwind.css is render-blocking, so the bar paints with the first frame.
+ *
+ * It used to ship as an inline <style> inside the <aside> itself, emitted by
+ * scripts/unified-nav.mjs -- 1.5kB repeated verbatim in every one of the 88
+ * documents that carry the bar, on every request, none of it cacheable.
+ *
+ * Deliberately at the top level of this file rather than inside
+ * `@layer components`. A component layer is purged against the `content` globs
+ * in tailwind.config.cjs, and the only file in those globs that spells these
+ * class names is scripts/unified-nav.mjs, which is also the only place the
+ * markup is generated -- so the bar's styles would vanish the moment that
+ * module was refactored to build its class strings any less literally. Top
+ * level is emitted verbatim and cannot be purged.
+ */
+.new-customer-banner {
+  background: #1b2a4a;
+  color: #fff;
+  border-bottom: 3px solid #a61f2e;
+  overflow: hidden;
+  transition: height .35s ease, opacity .25s ease, margin .35s ease, padding .35s ease;
+}
+
+.new-customer-banner__inner {
+  max-width: 80rem;
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem 1.25rem;
+  padding: .7rem 1.25rem;
+}
+
+.new-customer-banner__copy {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin: 0;
+  text-align: center;
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.new-customer-banner__icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.new-customer-banner__lead {
+  color: #fca5a5;
+  font-weight: 800;
+  letter-spacing: .01em;
+}
+
+.new-customer-banner__amount {
+  color: #fff;
+  font-weight: 800;
+}
+
+.new-customer-banner__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  min-height: 2.75rem;
+  padding: .5rem 1.15rem;
+  border-radius: .7rem;
+  background: linear-gradient(100deg, #c2262f, #a61f2e);
+  color: #fff;
+  font-weight: 800;
+  font-size: .875rem;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: 0 6px 16px #78192542;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.new-customer-banner__cta:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 10px 22px #78192557;
+  transform: translateY(-1px);
+}
+
+.new-customer-banner__cta svg {
+  flex: 0 0 auto;
+}
+
+#new-customer-banner[hidden] {
+  display: none;
+}
+
+#new-customer-banner.is-dismissing {
+  opacity: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 0;
+}
+
+@media (max-width: 640px) {
+  .new-customer-banner__copy {
+    font-size: .85rem;
+  }
+
+  .new-customer-banner__cta {
+    font-size: .8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #new-customer-banner.is-dismissing {
+    transition: none;
+  }
+}
