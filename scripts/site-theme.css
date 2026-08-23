@@ -5738,8 +5738,19 @@ input.careers-upload-input::file-selector-button:hover {
   }
 }
 
+/*
+ * Crimson letter outline on the hero subtitle badge.
+ *
+ * Same treatment as the headline above but at 1px so the smaller subtitle
+ * weight stays legible. The legacy dark text-shadow is dropped in favour of
+ * the stroke so the edge reads cleanly against the navy gradient.
+ */
 .hero-locale {
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  -webkit-text-stroke: 1px #B91C1C;
+  paint-order: stroke fill;
+  text-shadow: none;
 }
 
 .hero-trust {
@@ -6064,10 +6075,25 @@ input.careers-upload-input::file-selector-button:hover {
   text-decoration: underline;
 }
 
+/*
+ * Crimson letter outline on the hero headline.
+ *
+ * The hero <h1> sits on the deep-navy ambient-glow header, and the base
+ * .hero-title rule above carries a dark drop-shadow for depth. That shadow
+ * paints below the stroke and would muddy the thin crimson edge, so it is
+ * reset to none here -- the 1.5px outline is the only edge treatment. The fill
+ * stays solid white (-webkit-text-fill-color) so paint-order: stroke fill
+ * lays the crimson down first and draws the white interior on top, leaving a
+ * crisp 1.5px ring around each glyph. The legacy background-clip gradient and
+ * drop-shadow filter are cleared so nothing competes with the outline.
+ */
 header.hero.ambient-glow-hero h1.hero-title {
   background: 0 0;
   -webkit-text-fill-color: #fff;
   color: #fff;
+  -webkit-text-stroke: 1.5px #B91C1C;
+  paint-order: stroke fill;
+  text-shadow: none;
   filter: none;
 }
 

@@ -246,7 +246,7 @@
 // bar's styles that used to be inlined in every page, and the per-page inline
 // service-worker/analytics/promo scripts became /js/page-boot.js. Clients
 // holding v44 would keep the old stylesheets and never fetch the new module.
-const CACHE_VERSION = 'v45';
+const CACHE_VERSION = 'v46';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
