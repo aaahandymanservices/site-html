@@ -246,7 +246,16 @@
 // bar's styles that used to be inlined in every page, and the per-page inline
 // service-worker/analytics/promo scripts became /js/page-boot.js. Clients
 // holding v44 would keep the old stylesheets and never fetch the new module.
-const CACHE_VERSION = 'v46';
+// holding v44 would keep the old stylesheets and never fetch the new module.
+// v46 follows the asset-version bump to 20260823b.
+// v47 ships the centered chat launcher icon on mobile: chat-loader.js's
+// mobile media query now sets justify-content/align-items to center so the
+// fa-comments glyph sits in the middle of the 54px round FAB instead of
+// pinned to the top-left, which happened because the base rule kept
+// justify-content:flex-start for the desktop pill with its visible label.
+// The loader is precached here, so a returning visitor holding v46 would
+// keep serving the off-center icon until the next deploy.
+const CACHE_VERSION = 'v47';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
