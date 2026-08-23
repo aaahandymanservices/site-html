@@ -42,7 +42,7 @@
       ".aaa-chat-launch{background:#A61F2E;box-shadow:0 10px 25px -5px rgba(166,31,46,0.35)}",
       ".aaa-chat-launch:hover{background:#781925;box-shadow:0 14px 28px -4px rgba(166,31,46,0.45)}",
       ".aaa-chat-launch[aria-busy='true']{cursor:progress;opacity:.8}",
-      "@media(max-width:767px){.aaa-fab{left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));gap:12px}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}}"
+      "@media(max-width:767px){.aaa-fab{left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));gap:12px}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px;justify-content:center;align-items:center}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}}"
     ].join("");
     document.head.appendChild(style);
 
