@@ -1,7 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { copyFileSync, existsSync, mkdirSync, statSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -53,6 +53,30 @@ if (existsSync(esbuild)) {
     { cwd: ROOT, stdio: 'inherit' },
   );
 
+  /*
+   * Purge unused CSS rules from the minified theme stylesheet.
+   *
+   * The theme source carries rules for every component the site has ever
+   * shipped, but not every component appears on every page -- and not every
+   * rule still has matching markup at all. Rather than prune the source by
+   * hand (fragile, and easy to miss a class that only a JS module adds), the
+   * build collects every class name the live site actually uses -- from every
+   * HTML file under public/, every browser script under scripts/js/, and
+   * every build module under scripts/*.mjs that generates markup -- and drops
+   * any minified rule whose selector is built entirely from classes that never
+   * appear in that set. @font-face, @keyframes, @media, element, and pseudo-
+   * element rules are kept regardless: they do not carry class selectors that
+   * can go stale, and the purge only ever removes a rule whose class selectors
+   * are all un referenced.
+   */
+  const beforePurge = statSync(themeOutput).size;
+  const purged = purgeThemeCss(themeOutput);
+  if (purged !== null) {
+    writeFileSync(themeOutput, purged, 'utf8');
+    const afterPurge = statSync(themeOutput).size;
+    console.log(`Purged ${beforePurge - afterPurge} bytes of unused CSS from ${themeOutput}`);
+  }
+
   const saved = statSync(themeSource).size - statSync(themeOutput).size;
   console.log(`Wrote ${themeOutput} (${saved} bytes smaller than source)`);
 } else {
@@ -61,4 +85,121 @@ if (existsSync(esbuild)) {
   copyFileSync(themeSource, themeOutput);
   console.log('esbuild unavailable; copied theme stylesheet unminified to', themeOutput);
 }
+
+/*
+ * Purge implementation.
+ *
+ * Walks the minified CSS, collecting the set of class names the live site
+ * uses, then removes top-level rules (and rules inside @media blocks) whose
+ * selector contains at least one class and whose *every* class is un
+ * referenced. A selector with a used class is kept even if it also lists an
+ * unused one, so a compound `.a .b` where `.a` is live stays. @-rules,
+ * element selectors, and selector lists without a class are always kept.
+ */
+function collectUsedClassNames() {
+  const names = new Set();
+  const scanDir = (dir) => {
+    let r = [];
+    try { for (const f of readdirSync(dir)) { const p = join(dir, f); const s = statSync(p); if (s.isDirectory()) r = r.concat(scanDir(p)); else r.push(p); } } catch {}
+    return r;
+  };
+  // Collect class names from `class="a b c"`, `class='a b c'`, and unquoted
+  // `class=a` attributes. The quoted forms can carry several classes separated
+  // by spaces, so the whole attribute value is captured before splitting.
+  const addClassesFromString = (text) => {
+    for (const m of text.matchAll(/class=(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g)) {
+      const val = m[1] ?? m[2] ?? m[3] ?? '';
+      for (const cls of val.split(/\s+/)) if (cls) names.add(cls);
+    }
+  };
+  const htmlFiles = scanDir(join(ROOT, 'public')).filter((f) => f.endsWith('.html'));
+  for (const f of htmlFiles) {
+    const c = readFileSync(f, 'utf8');
+    addClassesFromString(c);
+  }
+  const jsDirs = [join(ROOT, 'public/js'), join(ROOT, 'scripts/js')];
+  for (const dir of jsDirs) {
+    for (const f of scanDir(dir).filter((f) => f.endsWith('.js'))) {
+      const c = readFileSync(f, 'utf8');
+      for (const m of c.matchAll(/classList\.(?:add|toggle|remove|contains)\(["'`]([^"'`]+)["'`]/g)) names.add(m[1]);
+      for (const m of c.matchAll(/className\s*=\s*["'`]([^"'`]+)["'`]/g)) for (const cls of m[1].split(/\s+/)) if (cls) names.add(cls);
+      addClassesFromString(c);
+    }
+  }
+  const mjsFiles = readdirSync(join(ROOT, 'scripts')).filter((f) => f.endsWith('.mjs'));
+  for (const f of mjsFiles) {
+    const c = readFileSync(join(ROOT, 'scripts', f), 'utf8');
+    addClassesFromString(c);
+  }
+  return names;
+}
+
+function purgeThemeCss(filePath) {
+  let css = readFileSync(filePath, 'utf8');
+  const used = collectUsedClassNames();
+
+  // Parse the minified CSS into top-level blocks, tracking @media groups so
+  // rules inside them are purged too. A block is kept unless its selector is
+  // a class-only rule whose every class is unused.
+  const isUnused = (selector) => {
+    const classes = [...selector.matchAll(/\.([a-zA-Z_][\w-]*)/g)].map((m) => m[1]);
+    if (classes.length === 0) return false;
+    return classes.every((c) => !used.has(c));
+  };
+
+  let out = '';
+  let i = 0;
+  while (i < css.length) {
+    // skip whitespace
+    while (i < css.length && /\s/.test(css[i])) { out += css[i]; i++; }
+    if (i >= css.length) break;
+    // find the next selector boundary
+    const brace = css.indexOf('{', i);
+    if (brace === -1) { out += css.slice(i); break; }
+    const selector = css.slice(i, brace).trim();
+    // find the matching close brace
+    let depth = 1, j = brace + 1;
+    while (j < css.length && depth > 0) {
+      if (css[j] === '{') depth++;
+      else if (css[j] === '}') depth--;
+      j++;
+    }
+    if (selector.startsWith('@media') || selector.startsWith('@supports')) {
+      // recurse into the media query body
+      const inner = css.slice(brace + 1, j - 1);
+      let innerOut = '';
+      let k = 0;
+      while (k < inner.length) {
+        while (k < inner.length && /\s/.test(inner[k])) { innerOut += inner[k]; k++; }
+        if (k >= inner.length) break;
+        const ib = inner.indexOf('{', k);
+        if (ib === -1) { innerOut += inner.slice(k); break; }
+        const isel = inner.slice(k, ib).trim();
+        let d2 = 1, l2 = ib + 1;
+        while (l2 < inner.length && d2 > 0) { if (inner[l2] === '{') d2++; else if (inner[l2] === '}') d2--; l2++; }
+        if (!isel.startsWith('@') && isUnused(isel)) {
+          // drop the rule
+        } else {
+          innerOut += inner.slice(k, l2);
+        }
+        k = l2;
+      }
+      if (innerOut.trim()) {
+        out += css.slice(i, brace + 1) + innerOut + '}';
+      }
+    } else if (selector.startsWith('@')) {
+      // @font-face, @keyframes, @charset, @layer -- keep verbatim
+      out += css.slice(i, j);
+    } else {
+      if (isUnused(selector)) {
+        // drop the rule
+      } else {
+        out += css.slice(i, j);
+      }
+    }
+    i = j;
+  }
+  return out;
+}
+
 
