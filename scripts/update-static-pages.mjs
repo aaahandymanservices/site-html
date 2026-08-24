@@ -113,13 +113,13 @@ function optimizeFontsAndAssets(html) {
   html = html.replace(/[ \t]*<noscript><link\s+rel="stylesheet"\s+href="https:\/\/fonts\.googleapis\.com\/[^"]*"><\/noscript>\r?\n/gi, '');
   html = html.replace(/[ \t]*@import\s+url\(['"]?https:\/\/fonts\.googleapis\.com\/[^)]*\);\r?\n/gi, '');
 
-  // Font Awesome from cdnjs -> generated local subset.
+  // Font Awesome from cdnjs -> generated local subset (preserve on pages that explicitly link FA 6.5.1 all.min.css).
   html = html.replace(/[ \t]*<!-- FontAwesome icons -->\r?\n/gi, '');
   html = html.replace(
-    /[ \t]*<link\s+rel="stylesheet"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"[^>]*>\r?\n/gi,
+    /[ \t]*<link\s+rel="stylesheet"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/(?!6\.5\.1\/css\/all\.min\.css)[^"]*"[^>]*>\r?\n/gi,
     `    <link rel="stylesheet" href="${ICONS_CSS}">\n`,
   );
-  html = html.replace(/[ \t]*<link\s+rel="preload"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"[^>]*>\r?\n/gi, '');
+  html = html.replace(/[ \t]*<link\s+rel="preload"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/(?!6\.5\.1\/css\/all\.min\.css)[^"]*"[^>]*>\r?\n/gi, '');
   html = html.replace(/[ \t]*<noscript><link\s+rel="stylesheet"\s+href="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome\/[^"]*"><\/noscript>\r?\n/gi, '');
 
   // Strip standalone service-areas.css link (consolidated in site-theme.css)

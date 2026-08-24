@@ -75,7 +75,7 @@
         h.className = "absolute top-1.5 right-1.5 h-7 w-7 rounded-full bg-black/60 text-white hover:bg-red-600 flex items-center justify-center text-xs transition focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400";
         h.setAttribute("aria-label", "Remove photo " + (e + 1));
         h.dataset.photoIndex = String(e);
-        h.innerHTML = '<i class="fas fa-trash-can" aria-hidden="true"></i>';
+        h.innerHTML = '<i class="fa-solid fa-trash-can" aria-hidden="true"></i>';
         n.appendChild(h);
         k.appendChild(n);
       });
