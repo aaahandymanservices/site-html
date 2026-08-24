@@ -2968,6 +2968,47 @@ html.bw-open body {
 }
 
 /*
+ * Zone card header layout.
+ *
+ * The header carries the badge row and the price block. An earlier revision
+ * wrapped both in an extra <div class="flex flex-wrap items-center justify-
+ * between gap-3"> and a <p class="mt-5 flex flex-wrap items-baseline ...">, which
+ * added two layout-only layers below .zone-header and pushed the deepest leaf
+ * (the badge <i>) to depth 15 on a page whose <body> already carries the nav,
+ * promo bar, sticky header, and a wrapping section. The rules below fold the
+ * flex layout directly onto .zone-header and .zone-price-row so the markup can
+ * drop both wrappers, flattening the card by two levels.
+ */
+.zone-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.zone-header > .zone-price-row {
+  flex-basis: 100%;
+}
+
+.zone-price-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.zone-header > p {
+  flex-basis: 100%;
+  margin-top: 0.5rem;
+}
+
+.zone-header > .zone-diff-badge {
+  margin-top: 0.75rem;
+}
+
+/*
  * Zone A -- Standard, within 20 miles. Deep forest green.
  *
  * Green is dark enough that the fill, the text on the fill, and the accent as
