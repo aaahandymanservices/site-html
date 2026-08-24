@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 249 icon names in use.
+ * Generated subset - 246 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -76,7 +76,6 @@
 .fa-cloud-arrow-up:before,.fa-cloud-upload-alt:before,.fa-cloud-upload:before{content:"\f0ee"}
 .fa-seedling:before,.fa-sprout:before{content:"\f4d8"}
 .fa-boxes-packing:before{content:"\e4c7"}
-.fa-cloud-bolt:before,.fa-thunderstorm:before{content:"\f76c"}
 .fa-arrows-rotate:before,.fa-refresh:before,.fa-sync:before{content:"\f021"}
 .fa-shield-alt:before,.fa-shield-halved:before{content:"\f3ed"}
 .fa-layer-group:before{content:"\f5fd"}
@@ -95,7 +94,6 @@
 .fa-chart-line:before,.fa-line-chart:before{content:"\f201"}
 .fa-arrow-right:before{content:"\f061"}
 .fa-screwdriver-wrench:before,.fa-tools:before{content:"\f7d9"}
-.fa-plug-circle-bolt:before{content:"\e55b"}
 .fa-heart:before{content:"\f004"}
 .fa-kitchen-set:before{content:"\e51a"}
 .fa-wallet:before{content:"\f555"}
