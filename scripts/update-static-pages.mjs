@@ -157,6 +157,25 @@ function optimizeFontsAndAssets(html) {
   );
 
   /*
+   * Preload the nav logo. Every page's sticky header carries the same 48px
+   * /icon.jpg via the .netlify/images AVIF transform, and the <img> already
+   * carries fetchpriority=high. A <link rel=preload> for the exact same URL
+   * lets the browser start that fetch during HTML parsing instead of waiting
+   * for the <img> element to be constructed, which keeps the logo (and the
+   * header row it sizes) off the CLS budget on a first visit. The URL matches
+   * the 1x srcset entry the <img> uses, so the preload and the element share a
+   * single network response. This is idempotent: any existing preload for the
+   * icon.jpg transform is stripped first so re-runs never stack duplicates.
+   */
+  const ICON_PRELOAD =
+    '    <link rel=preload as=image href="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" fetchpriority=high>';
+  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?\/\.netlify\/images\?url=\/icon\.jpg[^>]*>\r?\n/gi, '');
+  html = html.replace(
+    /(<link\s+rel=["']?preload["']?\s+as=["']?font["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?[^>]*>\r?\n)/i,
+    `$1${ICON_PRELOAD}\n`,
+  );
+
+  /*
    * Inline critical palette block.
    *
    * Tailwind and site-theme.css are render-blocking on purpose (see the note
@@ -206,6 +225,28 @@ function optimizeFontsAndAssets(html) {
     '.ambient-glow-hero,#booking-section.ambient-glow-hero{position:relative;overflow:hidden;min-height:18rem;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
     '.ambient-glow-hero h1,#booking-section.ambient-glow-hero h1{color:#fff}' +
     '#top.hero.ambient-glow-hero{min-height:22rem}' +
+    // Reserve the hero's inner stack height so the webfont swap and the icon
+    // glyph boxes in .hero-trust / .hero-rating-bar cannot push the trust
+    // badges down after first paint. The hero is the LCP element on '/', and a
+    // 0.222 CLS came from its title, locale, rating badge, and trust row
+    // reflowing as Archivo and the Font Awesome glyphs landed. These
+    // min-heights hold the space open during that swap without altering the
+    // flow, so the margins the elements already carry keep doing the spacing.
+    '#top.hero .max-w-5xl{min-height:20rem}' +
+    '#top.hero .hero-rating-bar{min-height:2.4rem}' +
+    '#top.hero .hero-trust{min-height:2.5rem;flex-wrap:wrap}' +
+    // Promo bar: hold its full painted height during the brief window before
+    // tailwind.css lands so the sticky header below it does not jump up when the
+    // bar's font and padding resolve. The dismissed state collapses to 0 height
+    // via the inline prepaint guard, so reserving space only applies while the
+    // bar is shown.
+    '.new-customer-banner[hidden]{display:none}' +
+    '.new-customer-banner:not([hidden]){display:block;min-height:2.85rem;background:#1b2a4a;border-bottom:3px solid #a61f2e;overflow:hidden}' +
+    // Brand row: pin the logo icon's box so the late icon glyph swap and the
+    // Archivo title swap cannot resize the <img> slot or reflow the tagline.
+    '.site-nav__brand{align-items:center;gap:.75rem}' +
+    '.site-nav__brand img{width:2.25rem;height:2.25rem;flex:0 0 auto}' +
+    '@media(min-width:640px){.site-nav__brand img{width:2.75rem;height:2.75rem}}' +
     // Skip link stays usable before site-theme.css lands.
     '.skip-link{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}' +
     '.skip-link:focus,.skip-link:focus-visible{position:fixed!important;top:.75rem!important;left:50%!important;transform:translateX(-50%)!important;z-index:200!important;width:auto!important;height:auto!important;padding:.75rem 1.5rem!important;background:#a61f2e!important;color:#fff!important;font-weight:700!important;border-radius:.75rem!important;clip:auto!important;white-space:normal!important}' +
