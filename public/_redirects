@@ -14,6 +14,8 @@
 /customer-care /customer-care.html 200
 /pricing-policy /pricing-policy.html 200
 /ai-estimate /ai-estimate.html 200
+/emergency.html /emergency        301!
+/emergency  /emergency.html 200
 
 /handyman/  /service-areas   301!
 /handyman/* /handyman/:splat.html 200

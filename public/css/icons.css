@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 243 icon names in use.
+ * Generated subset - 249 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -76,6 +76,7 @@
 .fa-cloud-arrow-up:before,.fa-cloud-upload-alt:before,.fa-cloud-upload:before{content:"\f0ee"}
 .fa-seedling:before,.fa-sprout:before{content:"\f4d8"}
 .fa-boxes-packing:before{content:"\e4c7"}
+.fa-cloud-bolt:before,.fa-thunderstorm:before{content:"\f76c"}
 .fa-arrows-rotate:before,.fa-refresh:before,.fa-sync:before{content:"\f021"}
 .fa-shield-alt:before,.fa-shield-halved:before{content:"\f3ed"}
 .fa-layer-group:before{content:"\f5fd"}
@@ -94,6 +95,7 @@
 .fa-chart-line:before,.fa-line-chart:before{content:"\f201"}
 .fa-arrow-right:before{content:"\f061"}
 .fa-screwdriver-wrench:before,.fa-tools:before{content:"\f7d9"}
+.fa-plug-circle-bolt:before{content:"\e55b"}
 .fa-heart:before{content:"\f004"}
 .fa-kitchen-set:before{content:"\e51a"}
 .fa-wallet:before{content:"\f555"}
@@ -115,6 +117,7 @@
 .fa-shield-virus:before{content:"\e06c"}
 .fa-arrow-left:before{content:"\f060"}
 .fa-file-pdf:before{content:"\f1c1"}
+.fa-phone-volume:before,.fa-volume-control-phone:before{content:"\f2a0"}
 .fa-tag:before{content:"\f02b"}
 .fa-envelope:before{content:"\f0e0"}
 .fa-circle-info:before,.fa-info-circle:before{content:"\f05a"}
@@ -180,6 +183,7 @@
 .fa-comment-sms:before,.fa-sms:before{content:"\f7cd"}
 .fa-user-plus:before{content:"\f234"}
 .fa-check:before{content:"\f00c"}
+.fa-house-circle-check:before{content:"\e509"}
 .fa-exclamation-triangle:before,.fa-triangle-exclamation:before,.fa-warning:before{content:"\f071"}
 .fa-paper-plane:before{content:"\f1d8"}
 .fa-calendar-day:before{content:"\f783"}
