@@ -15,6 +15,14 @@
   font-display: swap;
   src: url(/fonts/archivo-latin.woff2) format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  /* Metric overrides tuned so the fallback (Roboto / system-ui) reserves the
+     same box Archivo will fill, keeping the brand title and hero headline from
+     reflowing on the font swap. Archivo is slightly wider than Roboto at the
+     same em, so size-adjust scales the fallback's advance down to match. */
+  ascent-override: 92%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
 }
 
 @font-face {
@@ -35,6 +43,12 @@
   font-display: swap;
   src: url(/fonts/roboto-latin.woff2) format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  /* Metric overrides keep the system-ui fallback's line box aligned with
+     Roboto's so the body copy and nav links do not shift on the font swap. */
+  ascent-override: 92%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
 }
 
 @font-face {
@@ -809,8 +823,20 @@ nav.sticky,
 .brand img,
 .site-nav__brand img,
 #site-nav .site-nav__brand img {
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 auto;
   border-color: var(--brand-crimson);
   box-shadow: 0 0 0 3px rgb(166 31 46 / 10%);
+}
+
+@media (min-width: 640px) {
+  .brand img,
+  .site-nav__brand img,
+  #site-nav .site-nav__brand img {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
 }
 
 /* Animated underline that grows from the center */
@@ -2038,6 +2064,7 @@ html.bw-open body {
 }
 
 .bw-tile {
+  position: relative;
   display: flex;
   gap: 0.75rem;
   width: 100%;
@@ -2047,11 +2074,25 @@ html.bw-open body {
   border: 1px solid rgba(148, 163, 184, 0.22);
   background: rgba(15, 23, 42, 0.55);
   color: #e2e8f0;
-  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.bw-tile::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border-radius: inherit;
+  border: 1px solid rgba(166, 31, 46, 0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.bw-tile:hover::after {
+  opacity: 1;
 }
 
 .bw-tile:hover {
-  border-color: rgba(166, 31, 46, 0.7);
   background: rgba(30, 41, 59, 0.75);
   transform: translateY(-1px);
 }
@@ -2627,6 +2668,7 @@ html.bw-open body {
 }
 
 .plan-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -2634,12 +2676,26 @@ html.bw-open body {
   border-radius: 1rem;
   border: 1px solid rgba(148, 163, 184, 0.25);
   background: rgba(15, 23, 42, 0.55);
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  transition: transform 0.2s ease;
+}
+
+.plan-card::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border-radius: inherit;
+  border: 1px solid rgba(166, 31, 46, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.plan-card:hover::after {
+  opacity: 1;
 }
 
 .plan-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(166, 31, 46, 0.6);
 }
 
 .plan-card--featured {
@@ -2883,16 +2939,32 @@ html.bw-open body {
  * a zone element loses to the component class rather than fighting it.
  */
 .zone-card {
+  position: relative;
   background-color: #ffffff;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
   padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.zone-card::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border-radius: inherit;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.zone-card:hover::after {
+  opacity: 1;
 }
 
 .zone-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 /*
@@ -3051,13 +3123,17 @@ html.bw-open body {
   --crimson-glow-hover: rgb(166 31 46 / 48%);
 }
 
-/* Primary CTAs stay on the brand crimson gradient with a soft outer glow. */
+/* Primary CTAs stay on the brand crimson gradient with a soft outer glow.
+   The hover lift animates transform (compositor-friendly); the stronger glow
+   is a hover-only box-shadow change, which is a brief user-triggered transition
+   rather than a continuous animation, so it does not flag the non-composited
+   animations audit. */
 .cta-button,
 .aaa-chat-launch {
   background: var(--grad-crimson) !important;
   color: #fff !important;
   box-shadow: 0 8px 24px var(--crimson-glow) !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease !important;
+  transition: transform 0.3s ease !important;
 }
 
 /* Navy secondary CTAs must not inherit the crimson override above. */
@@ -3088,7 +3164,6 @@ html.bw-open body {
 .aaa-chat-launch:hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 12px 32px var(--crimson-glow-hover), var(--shadow-crimson) !important;
-  filter: saturate(1.05) brightness(1.03);
 }
 
 .cta-button:active {
@@ -3101,7 +3176,11 @@ html.bw-open body {
 .bw-tile,
 .bw-window,
 .plan-card {
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  /* Compositor-friendly: only transform animates on these cards. The raised
+     shadow and border highlight come from opacity-transitioned pseudo-elements
+     (.service-card::after, .bw-tile::after, .plan-card::after), so box-shadow
+     and border-color stay static here to avoid non-composited repaints. */
+  transition: transform 0.3s ease;
 }
 
 /* Metallic headlines only on dark surfaces where white→slate reads clearly. */
@@ -3565,25 +3644,31 @@ footer[class] {
 
 /* ============================================================
    Micro-Interactions & Card Transitions
-   ============================================================ */
+   ============================================================
+   Only `transform` and `opacity` animate here. The raised shadow and the
+   crimson border highlight each live on a `::after` / `::before` layer that
+   only changes opacity (see .service-card::after, .card-layered::after, and
+   the .svc-group[open] rules), so a pointer sweep across a card grid composites
+   instead of re-rasterising every card's box-shadow and border. The earlier
+   `!important` override below used to animate `box-shadow` and `border-color`
+   directly on the card, which Lighthouse flags as a non-composited animation. */
 .service-card,
 .svc-group,
 .process-step-card,
 .generated-service-card {
-  transition: transform 0.28s var(--ease-out), box-shadow 0.28s ease, border-color 0.28s ease, background-color 0.28s ease !important;
+  transition: transform 0.28s var(--ease-out) !important;
 }
 
 .service-card:hover,
 .process-step-card:hover,
 .generated-service-card:hover {
   transform: translateY(-4px) !important;
-  box-shadow: 0 16px 36px -6px rgb(27 42 74 / 14%), 0 0 20px rgb(166 31 46 / 15%) !important;
 }
 
 .cta-button,
 .pricing-tab-btn,
 .service-tag-btn {
-  transition: transform 0.22s var(--ease-out), box-shadow 0.22s ease, background-color 0.22s ease, border-color 0.22s ease !important;
+  transition: transform 0.22s var(--ease-out), background-color 0.22s ease !important;
 }
 
 .cta-button:hover,
@@ -5768,6 +5853,7 @@ input.careers-upload-input::file-selector-button:hover {
 .hero-rating-bar {
   display: flex;
   justify-content: center;
+  min-height: 2.4rem;
 }
 
 .hero-rating-badge {

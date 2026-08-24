@@ -97,6 +97,11 @@
   color: #fff;
   border-bottom: 3px solid #a61f2e;
   overflow: hidden;
+  /* Reserve the banner's painted height so the webfont swap on the CTA and
+     amount text cannot reflow the sticky header below it. The CTA button's
+     own min-height plus the inner padding drives this value; dismissed
+     banners collapse via [hidden] / .is-dismissing below. */
+  min-height: 2.85rem;
   transition: height .35s ease, opacity .25s ease, margin .35s ease, padding .35s ease;
 }
 
