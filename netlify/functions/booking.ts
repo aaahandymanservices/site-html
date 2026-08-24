@@ -152,12 +152,12 @@ export default async (request: Request) => {
     }
 
     if (!/^\d{4}-\d{2}-\d{2}$/.test(bookingDate)) {
-      return errorJson("Please provide a valid booking date.", 400);
+      return errorJson("Please enter the date in YYYY-MM-DD format.", 400);
     }
 
     const parsedBookingDate = new Date(`${bookingDate}T12:00:00Z`);
     if (Number.isNaN(parsedBookingDate.getTime()) || parsedBookingDate.toISOString().slice(0, 10) !== bookingDate) {
-      return errorJson("Please provide a valid booking date.", 400);
+      return errorJson("That isn't a real calendar date — please check the day and try again.", 400);
     }
 
     if (bookingDate < getTomorrowInDetroit()) {

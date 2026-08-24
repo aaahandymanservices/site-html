@@ -612,7 +612,7 @@
     }
     if (weekdayOf(date) === 0) {
       els.dayNote.className = 'bw-note bw-note--warn';
-      els.dayNote.textContent = 'We are closed Sundays. Please choose a Monday through Saturday date.';
+      els.dayNote.textContent = "We're closed Sundays — pick a Monday–Saturday date.";
       return;
     }
     var pieces = [];
@@ -770,7 +770,7 @@
     }
     if (step === 2) {
       if (!state.date) return 'Pick the day that suits you.';
-      if (weekdayOf(state.date) === 0) return 'We are closed Sundays. Please choose a Monday through Saturday date.';
+      if (weekdayOf(state.date) === 0) return "We're closed Sundays — pick a Monday–Saturday date.";
       if (state.date < els.date.min) return 'Booking requests need at least one day of notice.';
       if (state.date > els.date.max) return 'We book up to three weeks ahead. Call us for anything further out.';
       if (!state.time) return 'Choose an arrival window.';
