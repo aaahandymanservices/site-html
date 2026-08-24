@@ -2512,28 +2512,34 @@ html.bw-open body {
 }
 
 .fee-tip__trigger {
+  position: relative;
   display: inline-grid;
   place-items: center;
   width: 1.125rem;
   height: 1.125rem;
   border-radius: 9999px;
   line-height: 1;
-  opacity: 0.75;
   cursor: help;
 }
 
 /*
- * Sized off the button rather than the font, so the icon keeps its circle
- * even before the brand webfonts settle and no baseline gap opens under it.
+ * The trigger's dim rest state lives on the icon, not the button: the bubble
+ * is a child of the button now (the wrapper `<span>` was flattened out), and
+ * `opacity` on the button would compound with the bubble's own open/closed
+ * opacity and dim the tooltip text. Keeping it on the icon leaves the bubble
+ * at full opacity. The icon is sized off the button rather than the font, so
+ * it keeps its circle even before the brand webfonts settle and no baseline
+ * gap opens under it.
  */
 .fee-tip__icon {
   display: block;
   width: 100%;
   height: 100%;
+  opacity: 0.75;
 }
 
-.fee-tip__trigger:hover,
-.fee-tip__trigger:focus-visible {
+.fee-tip__trigger:hover .fee-tip__icon,
+.fee-tip__trigger:focus-visible .fee-tip__icon {
   opacity: 1;
 }
 

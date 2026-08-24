@@ -480,7 +480,7 @@
                                     <input id=reviews-photo-3 name=photo3 type=file accept=image/jpeg,image/png,image/webp,image/gif class="sr-only pointer-events-none">
                                     <div id=reviews-previews class="hidden grid grid-cols-3 gap-3 mb-3"></div>
                                     <div id=reviews-preview-wrap class="hidden mb-3">
-                                        <img id=reviews-preview src="" alt="Preview of the photo you selected" class="mx-auto max-h-48 w-auto rounded-2xl object-cover shadow-md">
+                                        <img id=reviews-preview src="" width=384 height=192 decoding=async alt="Preview of the photo you selected" class="mx-auto max-h-48 w-auto rounded-2xl object-cover shadow-md">
                                     </div>
                                     <i class="fas fa-cloud-arrow-up text-3xl text-red-500 mb-2 block" aria-hidden=true></i>
                                     <span id=reviews-file-name class="block font-semibold text-slate-800">Choose up to 3 photos or drag them here</span>
@@ -618,7 +618,7 @@
             <i class="fas fa-xmark" aria-hidden=true></i>
         </button>
         <figure class="max-w-4xl w-full text-center">
-            <img id=reviews-lightbox-img src="" alt="" class="mx-auto max-h-[80vh] w-auto rounded-2xl shadow-2xl object-contain">
+            <img id=reviews-lightbox-img src="" width=1024 height=768 decoding=async alt="" class="mx-auto max-h-[80vh] w-auto rounded-2xl shadow-2xl object-contain">
             <figcaption id=reviews-lightbox-caption class="mt-4 text-slate-200 text-sm font-medium"></figcaption>
         </figure>
     </div>

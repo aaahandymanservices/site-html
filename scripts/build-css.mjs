@@ -116,6 +116,19 @@ function collectUsedClassNames() {
   for (const f of htmlFiles) {
     const c = readFileSync(f, 'utf8');
     addClassesFromString(c);
+    // Inline <script> blocks in HTML carry class names the purge also needs to
+    // see: `className="web-checkbox ..."` and `classList.add("checked")` in
+    // the aging-in-place guide's checklist, and the same patterns in every
+    // other page-embedded script. The HTML class-attribute scan above only
+    // matches `class=`, not `className=` or `classList.*`, so the same JS
+    // patterns used for standalone scripts are run against the HTML text too.
+    for (const m of c.matchAll(/classList\.(?:add|toggle|remove|contains)\(["'`]([^"'`]+)["'`]/g)) names.add(m[1]);
+    for (const m of c.matchAll(/className\s*=\s*["'`]([^"'`]+)["'`]/g)) for (const cls of m[1].split(/\s+/)) if (cls) names.add(cls);
+    for (const m of c.matchAll(/["'`]([^"'`]{1,120})["'`]/g)) {
+      const s = m[1];
+      for (const cm of s.matchAll(/\.([a-zA-Z_][\w-]*(?:\\:[\w-]*)*)/g)) names.add(cm[1].replace(/\\:/g, ':'));
+      if (/^[a-zA-Z_][\w-]*(?:\s+[a-zA-Z_][\w-]*)*$/.test(s)) for (const cls of s.split(/\s+/)) if (cls) names.add(cls);
+    }
   }
   const jsDirs = [join(ROOT, 'public/js'), join(ROOT, 'scripts/js')];
   for (const dir of jsDirs) {
@@ -123,6 +136,22 @@ function collectUsedClassNames() {
       const c = readFileSync(f, 'utf8');
       for (const m of c.matchAll(/classList\.(?:add|toggle|remove|contains)\(["'`]([^"'`]+)["'`]/g)) names.add(m[1]);
       for (const m of c.matchAll(/className\s*=\s*["'`]([^"'`]+)["'`]/g)) for (const cls of m[1].split(/\s+/)) if (cls) names.add(cls);
+      // Class names that only appear inside quoted strings in JS are not
+      // caught by the patterns above: `querySelectorAll('.svc-filter-chip')`
+      // carries the class behind a dot in a selector string, and a ternary
+      // like `el.className = ok ? 'a' : 'a b'` assigns a bare class name
+      // (no dot, no className= match because of the ternary). Both shapes
+      // are common in the booking widget (the `bw-window__status--taken`
+      // variant) and the service-area filter (`svc-filter-chip`). Collect
+      // every dotted token inside a quoted string (the selector-string case)
+      // and every space-separated token of a quoted string that matches a
+      // class name the CSS already declares (the bare-name assignment case),
+      // so rules that are live only through JS injection are kept.
+      for (const m of c.matchAll(/["'`]([^"'`]{1,120})["'`]/g)) {
+        const s = m[1];
+        for (const cm of s.matchAll(/\.([a-zA-Z_][\w-]*(?:\\:[\w-]*)*)/g)) names.add(cm[1].replace(/\\:/g, ':'));
+        if (/^[a-zA-Z_][\w-]*(?:\s+[a-zA-Z_][\w-]*)*$/.test(s)) for (const cls of s.split(/\s+/)) if (cls) names.add(cls);
+      }
       addClassesFromString(c);
     }
   }
@@ -142,7 +171,16 @@ function purgeThemeCss(filePath) {
   // rules inside them are purged too. A block is kept unless its selector is
   // a class-only rule whose every class is unused.
   const isUnused = (selector) => {
-    const classes = [...selector.matchAll(/\.([a-zA-Z_][\w-]*)/g)].map((m) => m[1]);
+    // Tailwind utility classes escape the variant colon in CSS as `\:` (e.g.
+    // `.focus\:outline-none:hover`). The class names collected from HTML/JS
+    // carry the literal colon (`focus:outline-none`), so the class-name
+    // pattern has to keep the escaped colon in the match and then unescape
+    // it for the lookup -- a bare `:` in the selector is a CSS pseudo
+    // separator (`:hover`, `:after`), not part of the class name, so it has
+    // to stay as the boundary it is. Without this, every Tailwind variant
+    // rule reads as a single un-prefixed class (e.g. `focus`) that is never
+    // in the used set, and rules that are live get purged.
+    const classes = [...selector.matchAll(/\.([a-zA-Z_][\w-]*(?:\\:[a-zA-Z_][\w-]*)*)/g)].map((m) => m[1].replace(/\\:/g, ':'));
     if (classes.length === 0) return false;
     return classes.every((c) => !used.has(c));
   };
