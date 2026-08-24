@@ -82,10 +82,10 @@
     if (!file) return '';
     var name = file.name ? '"' + file.name + '"' : 'That file';
     if (!isAccepted(file)) {
-      return name + ' is not a supported format. Please choose a JPG, PNG, WebP or GIF image.';
+      return name + ' isn\'t a supported format. Please choose a JPG, PNG, WebP or GIF image.';
     }
     if (file.size === 0) {
-      return name + ' looks empty. Please choose a different photo.';
+      return name + ' looks empty. Please pick a different photo.';
     }
     if (file.size > MAX_BYTES) {
       // Rounded up on purpose. A file one byte over the limit is 10.000001 MB,
