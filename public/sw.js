@@ -255,7 +255,7 @@
 // justify-content:flex-start for the desktop pill with its visible label.
 // The loader is precached here, so a returning visitor holding v46 would
 // keep serving the off-center icon until the next deploy.
-const CACHE_VERSION = 'v49';
+const CACHE_VERSION = 'v50';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
