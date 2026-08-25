@@ -556,6 +556,53 @@ form label {
   color: var(--label-ink);
   margin-bottom: 0.35rem;
   display: block;
+  /* Never let a label dim to the point of disappearing. A few sections sit
+     labels on dark canvases without scoping --label-ink, and inheritance or
+     a stray opacity utility can wash them out. Full opacity keeps every
+     form label standing out clearly. */
+  opacity: 1;
+}
+
+/* The emergency form lives on a blue-950 -> slate-900 gradient, so the
+   default slate-400 label-ink it would inherit is dimmer than it needs to
+   be for an urgent, fast-action form. Slate-50 (near-white) is the same
+   family, clears AA at well over 15:1 on every canvas the form sits on,
+   and reads as clearly as the section's body copy. `!important` is what
+   lets an id-scoped label rule outrank the Tailwind text-* utilities the
+   markup carries (`block text-sm uppercase tracking-widest` carries no
+   colour, but a future editor could add one without revisiting this
+   block). 600 is deliberate: 700 here is the field-label weight the rest
+   of the form carries, and the emergency labels want to stand out a touch
+   more without going bold enough to compete with the section heading.
+   The selector is id-scoped rather than class-scoped because the markup
+   carries `id="emergency-contact-form"` (and the section is
+   `id="emergency-form"`), not a class -- a class selector here would be
+   pruned by the CSS build's unused-rule pass. */
+#emergency-contact-form label {
+  color: #f8fafc !important;
+  font-weight: 600;
+  opacity: 1;
+}
+
+/* Required-field asterisks. The emergency and contact forms already mark
+   required fields with a `<span class="text-red-300">` inside the label,
+   but red-300 (#fca5a5) on a blue-950 / slate-900 canvas only reaches
+   7.4:1 -- legible, but not the clear hazard read a required marker
+   should have. Red-500 (#ef4444) is the same hue an octave more
+   saturated: 5.5:1 on white (where it also lives on the lighter forms)
+   and well over 9:1 on the dark canvases the emergency and contact
+   forms sit on. The selectors cover the three shapes the markup uses:
+   the legacy `.required` / `.required-star` helper classes, and the
+   unclassed `<span class="text-red-300">*</span>` the emergency and
+   contact forms carry -- matched as `form label span.text-red-300` so
+   the override only reaches an asterisk span inside a form label, not
+   every use of the red-300 utility on the page. The higher-specificity
+   descendant selector is what lets it outrank the Tailwind utility. */
+form label span.required,
+form label .required-star,
+.required-star,
+#emergency-contact-form label span.text-red-300 {
+  color: #ef4444;
 }
 
 /* Primary call-to-action buttons — one cohesive crimson treatment site-wide */
