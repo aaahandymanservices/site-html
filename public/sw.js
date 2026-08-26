@@ -255,7 +255,16 @@
 // justify-content:flex-start for the desktop pill with its visible label.
 // The loader is precached here, so a returning visitor holding v46 would
 // keep serving the off-center icon until the next deploy.
-const CACHE_VERSION = 'v50';
+// v51 clears the crimson letter outline from the hero headline
+// (header.hero.ambient-glow-hero h1.hero-title): site-theme.css used to paint a
+// 1.5px red -webkit-text-stroke around the white headline glyphs, and the
+// headline now renders solid pure white with no stroke, no text shadow, and no
+// drop-shadow filter. The rule lives on site-theme.css behind its unchanged
+// pathname, and the asset cache key drops ?v=, so a returning visitor holding
+// v50 would keep last deploy's stylesheet and keep seeing the red outline.
+// Bumping both the site-theme.css stamp (ASSET_VERSION) and this version
+// refetches the stylesheet for every client.
+const CACHE_VERSION = 'v51';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

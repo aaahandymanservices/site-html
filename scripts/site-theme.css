@@ -6260,6 +6260,15 @@ a.hero-trust-item:focus-visible {
   text-decoration: underline;
 }
 
+header.hero.ambient-glow-hero h1.hero-title {
+  background: 0 0;
+  -webkit-text-fill-color: #fff;
+  color: #fff;
+  -webkit-text-stroke: none;
+  text-shadow: none;
+  filter: none;
+}
+
 header.hero.ambient-glow-hero::after,
 header.hero.ambient-glow-hero::before {
   content: none;
