@@ -86,7 +86,7 @@ ${promoBannerHtml}
         </a>
 
         <!-- Desktop Navigation Container -->
-        <div class="site-nav__desktop hidden lg:flex items-center">
+        <nav class="site-nav__desktop hidden lg:flex items-center" aria-label="Main">
             <ul class="nav-links site-nav__links flex items-center gap-5 list-none m-0 p-0 text-sm xl:text-base font-medium">
                 <li><a href="/services" class="${linkCls(isServices)}"${ariaCurrent(isServices)}>Services</a></li>
                 <li><a href="/service-areas" class="${linkCls(isServiceAreas)}"${ariaCurrent(isServiceAreas)}>Service Areas</a></li>
@@ -103,16 +103,16 @@ ${promoBannerHtml}
                 <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
                 <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
             </div>
-        </div>
+        </nav>
 
         <!-- Mobile Hamburger Button -->
-        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Main menu" aria-expanded="false" aria-controls="mobile-menu">
             <i class="fas fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
         </button>
     </div>
 
     <!-- Mobile Navigation Drawer / Menu -->
-    <div id="mobile-menu" class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden="true">
+    <nav id="mobile-menu" class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden="true" aria-label="Main menu">
         <div class="space-y-1">
             <a href="/services" class="${mobileLinkCls(isServices)}"${ariaCurrent(isServices)}>Services</a>
             <a href="/service-areas" class="${mobileLinkCls(isServiceAreas)}"${ariaCurrent(isServiceAreas)}>Service Areas</a>
@@ -134,6 +134,6 @@ ${promoBannerHtml}
                 <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
             </div>
         </div>
-    </div>
+    </nav>
 </header>`;
 }

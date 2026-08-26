@@ -129,7 +129,7 @@
             </div>
             <span class="sr-only">home</span>
         </a>
-        <div class="site-nav__desktop hidden lg:flex items-center">
+        <nav class="site-nav__desktop hidden lg:flex items-center" aria-label="Main">
             <ul class="nav-links site-nav__links flex items-center gap-5 list-none m-0 p-0 text-sm xl:text-base font-medium">
                 <li><a href="/services" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Services</a></li>
                 <li><a href="/service-areas" class="nav-link py-1 text-gray-700 hover:text-red-600 border-b-2 border-transparent transition">Service Areas</a></li>
@@ -144,12 +144,12 @@
                 <a href="https://www.yelp.com/biz/aaa-handyman-services-waterford-township" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Yelp" class="text-[#FF1A1A] hover:opacity-80 text-lg transition p-1"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
                 <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 text-lg transition p-1"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
             </div>
-        </div>
-        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+        </nav>
+        <button id="mobile-menu-btn" class="flex lg:hidden hamburger-menu site-nav__toggle items-center justify-center text-gray-700 hover:text-red-600 focus:outline-none p-2 rounded-xl transition border border-gray-200 hover:border-gray-300" aria-label="Main menu" aria-expanded="false" aria-controls="mobile-menu">
             <i class="fa-solid fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
         </button>
     </div>
-    <div id="mobile-menu" class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden="true">
+    <nav id="mobile-menu" class="hidden bg-white/98 backdrop-blur-lg border-t border-gray-200 px-4 py-4 space-y-3 shadow-xl" hidden aria-hidden="true" aria-label="Main menu">
         <div class="space-y-1">
             <a href="/services" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Services</a>
             <a href="/service-areas" class="block text-gray-800 font-medium py-2.5 px-3 hover:bg-gray-50 hover:text-red-600 rounded-xl transition">Service Areas</a>
@@ -170,7 +170,7 @@
                 <a href="https://nextdoor.com/page/aaa-handyman-services-waterford-township-mi?utm_campaign=1784179755732&share_action_id=49fd140e-0f23-4ef9-a33d-ffef9c6b6960" target="_blank" rel="noopener noreferrer" aria-label="Find AAA Handyman Services LLC on Nextdoor" class="text-[#00B24F] hover:opacity-80 transition"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></a>
             </div>
         </div>
-    </div>
+    </nav>
 </header>
 
 <main id=main-content class="flex-grow">
@@ -422,7 +422,7 @@
                         <p id="emergency-message-error" class="contact-error hidden mt-2 text-sm font-semibold text-red-300"></p>
                     </div>
                     <div>
-                        <label class="block text-sm uppercase tracking-widest mb-2">Photo Upload <span class="text-blue-200 normal-case tracking-normal">(optional, up to 5)</span></label>
+                        <label for="emergency-photo-input" class="block text-sm uppercase tracking-widest mb-2">Photo Upload <span class="text-blue-200 normal-case tracking-normal">(optional, up to 5)</span></label>
                         <p class="mb-3 text-xs text-blue-200 leading-relaxed">A quick snap helps us see the scope and bring the right materials. No photo needed to send.</p>
                         <div id="emergency-photo-dropzone" class="group relative cursor-pointer rounded-2xl border-2 border-dashed border-blue-400 bg-blue-950/60 p-5 text-center transition hover:border-red-400 hover:bg-blue-900/40 focus-within:border-red-400" role="button" tabindex="0" aria-label="Drag photos here or tap to browse — up to 5 photos, JPG, PNG, WebP or GIF, 10 MB max each">
                             <input id="emergency-photo-input" type="file" name="photo1" accept="image/jpeg,image/png,image/webp,image/gif" multiple capture="environment" class="sr-only" aria-describedby="emergency-photo-error emergency-photo-help">
