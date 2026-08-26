@@ -306,14 +306,14 @@
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden"><a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
-<aside id="new-customer-banner" class="new-customer-banner" aria-label="New customer special offer">
+<aside id="new-customer-banner" class="new-customer-banner" aria-label="Loyalty Credit offer">
     <script>(function(){try{var b=document.getElementById('new-customer-banner');if(!b)return;var dismissed=localStorage.getItem('aaa-new-customer-banner')==='dismissed';if(!dismissed){try{var g=JSON.parse(localStorage.getItem('aaa-first-service-gift')||'{}');if(g&&g.firstServiceGiftRedeemed===true)dismissed=true}catch(e){}}if(dismissed)b.hidden=true;}catch(e){}})();</script>
     <div class="new-customer-banner__inner">
         <p class="new-customer-banner__copy">
             <span class="new-customer-banner__icon" aria-hidden="true">🎁</span>
-            <span><strong class="new-customer-banner__lead">New Customer Special:</strong> Receive a <strong class="new-customer-banner__amount">$50 gift certificate</strong> toward your next service!</span>
+            <span><strong class="new-customer-banner__lead">Loyalty Credit:</strong> Receive a <strong class="new-customer-banner__amount">$50 Loyalty Credit</strong> applied toward a follow-up service call!</span>
         </p>
-        <a class="new-customer-banner__cta" href="#quote" data-ncb-cta>Claim My $50 Gift<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+        <a class="new-customer-banner__cta" href="#quote" data-ncb-cta>Claim My $50 Loyalty Credit<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
     </div>
 </aside>
 
@@ -459,8 +459,8 @@
                 </a>
             </div>
             <div id=first-service-offer-promo data-gift-certificate class="mt-10 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-center">
-                <p class=text-gray-700><span class="font-bold text-red-600">New customer?</span> Receive a $50 gift certificate toward your next service.</p>
-                <a href="/contact?offer=first-service#contact-form" class="inline-flex items-center gap-2 font-bold text-red-600 hover:text-red-700 transition" aria-label="Claim the $50 first-service gift certificate">
+                <p class=text-gray-700><span class="font-bold text-red-600">First service?</span> Receive a $50 Loyalty Credit applied toward a follow-up service call.</p>
+                <a href="/contact?offer=first-service#contact-form" class="inline-flex items-center gap-2 font-bold text-red-600 hover:text-red-700 transition" aria-label="Claim the $50 Loyalty Credit">
                     Claim the offer <i class="fas fa-arrow-right text-sm" aria-hidden=true></i>
                 </a>
             </div>
@@ -1228,7 +1228,7 @@
                             </div>
                         </div>
                         <p class=loyalty-description>
-                            Complete your first service and receive a $50 credit applied directly toward your second visit or seasonal project.
+                            Complete your first service and receive a $50 Loyalty Credit applied directly toward a follow-up service call.
                         </p>
                         <label class="loyalty-checkbox-label loyalty-checkbox" for=quote-first-service-certificate>
                             <input id=quote-first-service-certificate type=checkbox name=loyalty_credit value=yes>
