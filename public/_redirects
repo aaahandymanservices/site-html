@@ -1,6 +1,24 @@
+# Canonical routing. Every internal link, canonical tag and sitemap entry on
+# this site uses the extensionless URL, so the .html form is only ever reached
+# from outside. The 301! rules below fold it back onto the canonical URL; the
+# matching 200 rules serve the file behind that URL in one hop, with no
+# redirect.
+#
+# The force flag (!) matters and so does its absence. Without it a rule is
+# shadowed by a real file, so it never fires for a page that exists on disk.
+# With it the rule wins -- for every method, including POST. That is why no
+# page whose form posts back to its own .html path may carry a 301! (see the
+# note on /book.html below).
+
+/index.html /                    301!
+
 /privacy.html /privacy            301!
 /privacy    /privacy.html    200
-/book.html  /book             301!
+# /book.html deliberately has no 301! rule: public/js/book-page.js posts the
+# booking form back to /book.html, and a forced redirect answers that POST with
+# a 301 before Netlify Forms ever sees it. fetch() then follows the redirect as
+# a GET, the submission is discarded, and nothing surfaces the failure. The
+# canonical tag on book.html is what points crawlers at /book instead.
 /book       /book.html       200
 /terms.html /terms            301!
 /terms      /terms.html      200
