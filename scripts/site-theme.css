@@ -1704,7 +1704,15 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
 }
 
-/* --- Homepage hero: drifting aurora glow without delaying LCP content --- */
+/* --- Homepage hero -------------------------------------------------------
+   A flat brand-navy panel: the same solid colour plus left-to-right brand
+   gradient the inline critical block paints, so the first frame and the
+   final frame are identical and the hero contributes no layout shift. The
+   hero carries no ambient glow layer of its own -- no blurred radial
+   ellipse, no drifting dot grid, no crimson bloom -- so the headline, the
+   rating badge, the trust row, and the CTAs read against an even
+   background at every width. Below 1440px the two media queries further
+   down layer the banner photograph in, where its detail still reads. */
 .hero {
   position: relative;
   isolation: isolate;
@@ -1712,26 +1720,9 @@ body::after {
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: min(640px, calc(100vh - 5rem));
-  background: radial-gradient(ellipse at top, rgba(27, 42, 74, 0.72) 0, rgba(3, 7, 11, 0.85) 100%),
-    linear-gradient(rgba(3, 7, 11, 0.65), rgba(3, 7, 11, 0.75)),
-    url("/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=65") center/cover;
-}
-
-/* The dot grid drifts on the aurora keyframes. An earlier pair of radial
-   gradients used to paint here too; the grid replaced them and nothing else
-   ever removed the dead declaration. */
-.hero::after {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  content: "";
-  pointer-events: none;
-  mix-blend-mode: screen;
-  opacity: 0.2;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 24px 24px;
-  animation: aurora-drift 19s var(--ease) infinite alternate;
+  min-height: 22rem;
+  background-color: #1b2a4a;
+  background-image: linear-gradient(to right, #101b31 0%, #1b2a4a 50%, #020617 100%);
 }
 
 /* Give the hero headline a subtle metallic depth */
@@ -2954,7 +2945,6 @@ html.bw-open body {
     display: none;
   }
 
-  .hero::after,
   body > header.bg-gradient-to-r::after {
     animation: none;
   }
@@ -3341,11 +3331,12 @@ section.bg-blue-950 h1 {
   }
 }
 
-/* Ambient brand glows on dark heroes — crimson + navy, not tomato red. */
-.hero::before,
+/* Ambient brand glows on dark heroes — crimson + navy, not tomato red.
+   The homepage hero (#top.hero) and the .ambient-glow-hero page headers are
+   deliberately not in this list: their glow layers have been removed, and
+   they paint a flat navy background instead. */
 #pricing-hero::before,
-body > header.bg-gradient-to-r::before,
-header.ambient-glow-hero::after {
+body > header.bg-gradient-to-r::before {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -3648,7 +3639,7 @@ footer[class] {
 }
 
 /* ============================================================
-   Ambient Gradient Glows (Hero & Pricing Sections)
+   Dark Hero Backgrounds & Pricing Glow
    ============================================================ */
 /* A solid brand-navy background plus the brand gradient is declared here so
    the hero is never a blank white block. The city landing pages paint their
@@ -3660,7 +3651,12 @@ footer[class] {
    would fall back to the page's white background with white text on top --
    rendering as a tall empty white gap. Declaring the same navy gradient here
    in plain CSS makes the hero readable in every one of those cases. The
-   Tailwind gradient layers on top once its stylesheet is parsed. */
+   Tailwind gradient layers on top once its stylesheet is parsed.
+
+   The class name is historical: it no longer paints an ambient glow. The
+   blurred crimson/navy ellipse that used to sit on ::before was removed, so
+   what is left here is exactly the flat navy background fallback described
+   above. */
 .ambient-glow-hero {
   position: relative;
   overflow: hidden;
@@ -3673,30 +3669,14 @@ footer[class] {
    async CSS arrive. The hero holds the headline, rating badge, and trust
    row; without a floor the section collapses to near-zero while the
    font swap settles, which is the single biggest CLS contributor. */
-#top.hero.ambient-glow-hero {
+#top.hero {
   min-height: 22rem;
 }
 
 @media (min-width: 768px) {
-  #top.hero.ambient-glow-hero {
+  #top.hero {
     min-height: 26rem;
   }
-}
-
-.ambient-glow-hero::before {
-  content: "";
-  position: absolute;
-  top: -15%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 1100px;
-  height: 80%;
-  background: radial-gradient(ellipse at center, rgb(166 31 46 / 22%) 0%, rgb(27 42 74 / 30%) 45%, transparent 75%);
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(40px);
-  opacity: 0.9;
 }
 
 .ambient-glow-pricing {
@@ -5036,11 +5016,6 @@ header#policy-hero.ambient-glow-hero h1 {
   filter: none;
 }
 
-header#policy-hero.ambient-glow-hero::after,
-header#policy-hero.ambient-glow-hero::before {
-  content: none;
-}
-
 /* Booking Flow & Service Tiles */
 .time-slot-btn:focus-visible {
   outline: 3px solid rgba(248, 113, 113, 0.5);
@@ -5905,6 +5880,7 @@ input.careers-upload-input::file-selector-button:hover {
     background: radial-gradient(ellipse at top, rgba(27, 42, 74, 0.72) 0, rgba(3, 7, 11, 0.85) 100%),
       linear-gradient(rgba(3, 7, 11, 0.65), rgba(3, 7, 11, 0.75)),
       url("/.netlify/images?url=/logo-banner.jpg&w=1440&fm=avif&q=65") center/cover;
+    background-color: #1b2a4a;
   }
 }
 
@@ -5914,6 +5890,7 @@ input.careers-upload-input::file-selector-button:hover {
     background: radial-gradient(ellipse at top, rgba(27, 42, 74, 0.8) 0, rgba(3, 7, 11, 0.9) 100%),
       linear-gradient(rgba(3, 7, 11, 0.75), rgba(3, 7, 11, 0.75)),
       url("/.netlify/images?url=/logo-banner.jpg&w=640&fm=avif&q=65") center/cover;
+    background-color: #1b2a4a;
   }
 }
 
@@ -6260,18 +6237,15 @@ a.hero-trust-item:focus-visible {
   text-decoration: underline;
 }
 
-header.hero.ambient-glow-hero h1.hero-title {
+/* The homepage hero headline stays a solid white on the navy panel: no
+   metallic text gradient, and no drop-shadow bloom around the glyphs. */
+header#top.hero h1.hero-title {
   background: 0 0;
   -webkit-text-fill-color: #fff;
   color: #fff;
   -webkit-text-stroke: none;
   text-shadow: none;
   filter: none;
-}
-
-header.hero.ambient-glow-hero::after,
-header.hero.ambient-glow-hero::before {
-  content: none;
 }
 
 /*
