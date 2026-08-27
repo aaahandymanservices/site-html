@@ -264,7 +264,16 @@
 // v50 would keep last deploy's stylesheet and keep seeing the red outline.
 // Bumping both the site-theme.css stamp (ASSET_VERSION) and this version
 // refetches the stylesheet for every client.
-const CACHE_VERSION = 'v51';
+// v52 completes the floating-control swap: the Back to Top button now sits at
+// bottom-left and the chat launcher at bottom-right. The button's position
+// moved in the pages' markup, but the launcher's position lives in
+// /js/chat-loader.js -- which is precached in the shell above -- and the shell
+// cache is keyed on CACHE_VERSION alone. A returning visitor holding v51 would
+// pair this deploy's markup with last deploy's loader, putting both controls at
+// bottom-left with the Back to Top button covering the chat button. Bumping
+// this version (and the ASSET_VERSION stamp to 20260827a, since /js/* is served
+// immutable) refetches the loader and the widget for every client.
+const CACHE_VERSION = 'v52';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
