@@ -229,8 +229,11 @@ function optimizeFontsAndAssets(html) {
     // Dark hero / booking section background so its first frame is navy, not
     // white. Matches .ambient-glow-hero in scripts/site-theme.css.
     '.ambient-glow-hero,#booking-section.ambient-glow-hero{position:relative;overflow:hidden;min-height:18rem;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
-    '.ambient-glow-hero h1,#booking-section.ambient-glow-hero h1{color:#fff}' +
-    '#top.hero.ambient-glow-hero{min-height:22rem}' +
+    '.ambient-glow-hero h1,#booking-section.ambient-glow-hero h1,#top.hero h1{color:#fff}' +
+    // Homepage hero: the flat navy panel and its reserved height. It carries
+    // no ambient glow layer, so the values here are the whole of what
+    // .hero paints in site-theme.css and the first frame matches the last.
+    '#top.hero{position:relative;min-height:22rem;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
     // Reserve the hero's inner stack height so the webfont swap and the icon
     // glyph boxes in .hero-trust / .hero-rating-bar cannot push the trust
     // badges down after first paint. The hero is the LCP element on '/', and a

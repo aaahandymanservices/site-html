@@ -283,7 +283,17 @@
 // picking a photo would throw instead of showing a thumbnail. Bumping this
 // version (and ASSET_VERSION to 20260827b, since /js/* is served immutable)
 // refetches the whole set together.
-const CACHE_VERSION = 'v53';
+// v54 drops the ambient glow from the home page hero banner. The header no
+// longer carries the ambient-glow-hero class, and site-theme.css no longer
+// paints the blurred crimson ellipse, the crimson radial bloom, or the
+// drifting dot grid over any hero -- the panel is a flat brand navy instead.
+// The markup ships with the page, but the glow itself lives in site-theme.css,
+// which is precached in the shell above and keyed on CACHE_VERSION alone with
+// ?v= dropped from the asset cache key. A returning visitor holding v53 would
+// pair this deploy's markup with last deploy's stylesheet and keep seeing the
+// glow. Bumping this version (and ASSET_VERSION to 20260827c) refetches the
+// stylesheet for every client.
+const CACHE_VERSION = 'v54';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
