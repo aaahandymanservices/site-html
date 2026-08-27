@@ -66,51 +66,85 @@
   [headers.values]
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.googletagmanager.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.google-analytics.com https://*.g.doubleclick.net https://www.google.com; manifest-src 'self'; worker-src 'self'; frame-src 'self' https://maps.google.com https://www.google.com https://www.google.com/recaptcha/ https://recaptcha.google.com/; frame-ancestors 'self' https://app.netlify.com https://create.netlify.com;"
 
-# The service worker controls every navigation, so it must never be served from
-# a stale cache -- otherwise a bad version would be pinned for its max-age.
+# The service worker controls every navigation, so a browser must never hold a
+# stale copy -- otherwise a bad version would be pinned for its max-age. The
+# browser directive below is what guarantees that. The edge needs no override:
+# a deploy invalidates the edge copy on its own (see the caching note below).
 [[headers]]
   for = "/sw.js"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
-    Netlify-CDN-Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/manifest.webmanifest"
   [headers.values]
     Content-Type = "application/manifest+json; charset=utf-8"
     Cache-Control = "public, max-age=3600"
-    Netlify-CDN-Cache-Control = "public, max-age=3600"
 
 # ---------------------------------------------------------------------------
 # Static caching policy
 #
-# Everything below sorts into one of two tiers, decided by a single question:
-# does the URL change when the bytes change?
+# Every response on this site comes from a file in public/, so it can only
+# change when a deploy changes it -- and Netlify invalidates the whole edge
+# cache for a deploy context on every deploy. That single fact decides the
+# policy below, and it is why nothing here shortens the edge TTL.
+#
+# Two tiers, split by whether the URL changes when the bytes change:
 #
 #   Versioned assets -- stylesheets and scripts are always linked with a ?v=
 #   stamp, and fonts, icons, and photography are added under a new name rather
 #   than edited in place. A year of browser cache plus `immutable` is safe for
 #   these, and it saves returning visitors a revalidation round trip per file
-#   on a page that links a dozen of them. The CDN is given the same year so
-#   repeat traffic is answered at the edge instead of from the origin.
+#   on a page that links a dozen of them.
 #
 #   Content -- pages, the JSON the quote calculator and service-area checker
 #   fetch, the sitemap, and robots.txt all keep their URL across edits, so a
-#   long max-age would pin stale content in browsers with no way to recall it.
-#   These revalidate with the origin every time while the CDN answers straight
-#   from cache and refreshes in the background, which keeps the response fast
-#   without delaying a price change or a new service area.
+#   long browser max-age would pin stale content with no way to recall it.
+#   These carry `max-age=0, must-revalidate`, which costs a browser
+#   revalidation but keeps a price change one deploy away from every visitor.
+#
+# Note that `max-age=0` is a *browser* instruction. It is deliberately not
+# mirrored into Netlify-CDN-Cache-Control: doing so makes the edge treat the
+# object as stale on arrival and revalidate against the origin on every single
+# request, which was measurably slower on the main document (a cold edge node
+# had to fetch from origin before it could answer, and constant revalidation
+# occasionally served the uncompressed variant of a 172 KB page). Left alone,
+# the edge holds these files for its default year and a deploy clears them,
+# so a content change still ships immediately without an origin round trip on
+# the critical path.
+#
+# One caveat this relies on: nothing here may be edited in the backing store
+# outside a deploy. Every file under public/ is either committed or generated
+# by the build command, so that holds today.
+#
+# Header rules match the *request* path, not the path a rewrite resolves to.
+# /rates is served from rates.html, but a rule for "/*.html" does not see it --
+# the clean URL inherits Netlify's static-asset default instead, which is the
+# identical `public, max-age=0, must-revalidate` set explicitly below. The
+# rules here therefore pin the intent for the paths they name rather than
+# changing behavior, and the clean URLs stay correct by default.
 # ---------------------------------------------------------------------------
 
 [[headers]]
   for = "/"
   [headers.values]
-    Netlify-CDN-Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/*.html"
   [headers.values]
-    Netlify-CDN-Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Generated service pages and city pages, addressed by their clean URLs.
+[[headers]]
+  for = "/services/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/handyman/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 # Site data read at runtime by the quote calculator and service-area checker.
 # It is fetched without a version stamp, so it has to behave like content.
@@ -118,7 +152,6 @@
   for = "/data/*.json"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
-    Netlify-CDN-Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
 
 # Crawler-facing files: a new service page should be discoverable on the next
 # crawl, not after a day-long browser cache expires.
@@ -126,13 +159,11 @@
   for = "/sitemap.xml"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
-    Netlify-CDN-Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
 
 [[headers]]
   for = "/robots.txt"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
-    Netlify-CDN-Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
 
 [[headers]]
   for = "/*.jpg"
