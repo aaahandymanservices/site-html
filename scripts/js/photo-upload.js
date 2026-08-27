@@ -98,6 +98,79 @@
     return '';
   }
 
+  /*
+   * The MIME type a picked photo's preview may be served under. It comes from
+   * TYPES rather than from the file, because a file's own type is only ever a
+   * claim: pictures dragged out of a file manager routinely arrive with an
+   * empty one, and nothing stops a file named photo.png from announcing
+   * text/html. The extension is the same fallback isAccepted() already treats
+   * as equal to the type, so a file that passes the accept gate has a type
+   * here too.
+   */
+  var TYPE_BY_EXTENSION = {
+    jpg: 'image/jpeg',
+    jpeg: 'image/jpeg',
+    png: 'image/png',
+    webp: 'image/webp',
+    gif: 'image/gif',
+  };
+
+  function previewType(file) {
+    if (!file) return '';
+    if (TYPES.indexOf(String(file.type).toLowerCase()) !== -1) {
+      return String(file.type).toLowerCase();
+    }
+    var extension = EXTENSIONS.exec(file.name || '');
+    if (!extension) return '';
+    return TYPE_BY_EXTENSION[extension[1].toLowerCase()] || '';
+  }
+
+  /*
+   * The object URL behind a thumbnail, or '' when the file is not one of the
+   * four types the forms accept. Every uploader on the site shows the visitor
+   * what they picked before it is sent, and each one used to call
+   * URL.createObjectURL(file) inline and assign the result straight to an
+   * <img src>. Two things happen here that the inline call did not do, and
+   * both of them matter at that assignment:
+   *
+   *   The blob is re-labelled with a type from TYPES. A blob URL is served on
+   *   this site's own origin under whatever type its blob carries, so a file
+   *   claiming text/html or image/svg+xml is markup rather than a picture to
+   *   anything that opens the URL directly. slice() re-labels the same bytes
+   *   without copying them, so re-typing a 10 MB phone photo costs nothing.
+   *
+   *   The URL is handed back with a scheme this file supplies. What a browser
+   *   does with a string in a src attribute is decided by that string's
+   *   scheme -- javascript: and data:text/html both run there, blob: shows the
+   *   picture the page just made -- and an object URL is only ever the third.
+   *   Parsing the result and rebuilding it as 'blob:' + pathname keeps the one
+   *   string that reaches src spelled from here rather than from whatever came
+   *   back, which is the difference between assuming that and knowing it. It is
+   *   also what CodeQL's js/xss-through-dom asks for: it reports a URL written
+   *   to src whenever the scheme could have come from the page's input, and a
+   *   scheme check alone does not answer it.
+   */
+  function previewUrl(file) {
+    var type = previewType(file);
+    if (!type || !file || typeof file.slice !== 'function') return '';
+    try {
+      var created = URL.createObjectURL(file.slice(0, file.size, type));
+      var parsed = new URL(created);
+      if (parsed.protocol !== 'blob:') {
+        URL.revokeObjectURL(created);
+        return '';
+      }
+      // Rebuilt from the scheme spelled out here rather than returned as it
+      // came back. For an object URL the two are the same string -- pathname
+      // holds the whole `<origin>/<uuid>` body -- and revoke() still matches.
+      return 'blob:' + parsed.pathname;
+    } catch (err) {
+      // A browser that will not hand out an object URL leaves the caller with
+      // an empty thumbnail, which is the same outcome a failed decode had.
+      return '';
+    }
+  }
+
   function loadImage(file) {
     return new Promise(function (resolve, reject) {
       var url = URL.createObjectURL(file);
@@ -195,6 +268,7 @@
     formatBytes: formatBytes,
     isAccepted: isAccepted,
     rejectionFor: rejectionFor,
+    previewUrl: previewUrl,
     prepare: prepare,
   };
 })();

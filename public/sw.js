@@ -273,7 +273,17 @@
 // bottom-left with the Back to Top button covering the chat button. Bumping
 // this version (and the ASSET_VERSION stamp to 20260827a, since /js/* is served
 // immutable) refetches the loader and the widget for every client.
-const CACHE_VERSION = 'v52';
+// v53 carries the photo-preview fix on the /contact, /book and /emergency
+// uploaders. The URL behind each thumbnail is now built by
+// /js/photo-upload.js -- precached in the shell above -- and read from there
+// by contact-page.js, book-page.js and emergency-page.js. The shell cache is
+// keyed on CACHE_VERSION alone and the asset cache drops ?v=, so a returning
+// visitor holding v52 would pair this deploy's page scripts with last
+// deploy's photo-upload.js, which has no previewUrl for them to call, and
+// picking a photo would throw instead of showing a thumbnail. Bumping this
+// version (and ASSET_VERSION to 20260827b, since /js/* is served immutable)
+// refetches the whole set together.
+const CACHE_VERSION = 'v53';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
