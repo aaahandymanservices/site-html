@@ -1035,9 +1035,13 @@
           return;
       }
       if (bookingPhotoPreviewUrl) URL.revokeObjectURL(bookingPhotoPreviewUrl);
-      bookingPhotoPreviewUrl = URL.createObjectURL(file);
-      if (bookingPhotoPreview instanceof HTMLImageElement && bookingPhotoPreviewUrl.startsWith('blob:')) {
-          bookingPhotoPreview.src = bookingPhotoPreviewUrl;
+      // The shared helper labels the blob with one of the four accepted image
+      // types and checks the scheme, so what lands on src is a URL this page
+      // made rather than a string that came out of the file picker.
+      bookingPhotoPreviewUrl = photoRule.previewUrl(file);
+      if (bookingPhotoPreview) {
+          if (bookingPhotoPreviewUrl) bookingPhotoPreview.src = bookingPhotoPreviewUrl;
+          else bookingPhotoPreview.removeAttribute('src');
       }
       bookingPhotoName.textContent = file.name || 'Repair photo';
       bookingPhotoEmpty?.classList.add('hidden');

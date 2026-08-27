@@ -57,7 +57,8 @@
         a.alt = "Emergency photo " + (e + 1) + ": " + t.name;
         a.className = "aspect-square w-full object-cover";
         a.file = t;
-        try { a.src = URL.createObjectURL(t); } catch { a.src = ""; }
+        var previewUrl = A.previewUrl(t);
+        if (previewUrl) a.src = previewUrl;
         n.appendChild(a);
         var o = document.createElement("div");
         o.className = "absolute inset-x-0 bottom-0 bg-gradient-to-t from-blue-950/95 to-transparent px-2 py-1.5 pt-3 text-left";

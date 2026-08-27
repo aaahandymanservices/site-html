@@ -93,6 +93,12 @@ const SCRIPT_VERSIONS = new Map([
    */
   ['careers-page.js', ASSET_VERSION],
   ['quote-calculator.js', ASSET_VERSION],
+  // The emergency intake form is the fourth of these: its photo previews,
+  // phone formatting and submit all live in emergency-page.js, and until now
+  // the page asked for it under a literal stamp of its own, frozen on
+  // whichever deploy last edited the file by hand. /js/* is immutable for a
+  // year, so an edit under an unchanged stamp reaches new visitors only.
+  ['emergency-page.js', ASSET_VERSION],
   // chat-loader.js runs on all 90 pages, and chat-widget.js now inherits
   // whatever stamp the loader was requested with (see scripts/js/chat-loader.js),
   // so moving this one carries the widget along with it.

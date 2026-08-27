@@ -237,13 +237,12 @@
           img.alt = `Repair photo ${index + 1}: ${file.name}`;
           img.className = 'aspect-square w-full object-cover';
           img.file = file;
-          // Object URL for the thumbnail. Revoked on remove and on page unload
-          // by the browser; the cost of a handful of lingering URLs is nothing.
-          try {
-              img.src = URL.createObjectURL(file);
-          } catch {
-              img.src = '';
-          }
+          // Object URL for the thumbnail, built by the shared helper so the blob
+          // is labelled with one of the four accepted image types and the scheme
+          // is checked before it reaches src. Revoked on remove and on page
+          // unload by the browser; a handful of lingering URLs costs nothing.
+          const previewUrl = photoRule.previewUrl(file);
+          if (previewUrl) img.src = previewUrl;
           li.appendChild(img);
 
           // File name + size, pinned to the bottom of the thumbnail.
