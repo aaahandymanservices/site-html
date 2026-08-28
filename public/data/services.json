@@ -1,6 +1,7 @@
 {
   "type": "ServicesData",
-  "note": "Single source of truth for AAA Handyman Services LLC service offerings. Consumed by the per-service landing-page generator (scripts/build-service-pages.mjs), which writes public/services/<slug>.html. Clean URLs (/services/<slug>) are handled by the splat rule in public/_redirects. Categories are used to group services and to auto-pick related services shown on each page.",
+  "type": "ServicesData",
+  "note": "Single source of truth for AAA Handyman Services LLC service offerings. Consumed by the per-service landing-page generator (scripts/build-service-pages.mjs), which writes public/services/<slug>.html. Clean URLs (/services/<slug>) are handled by the splat rule in public/_redirects. Categories are used to group services and to auto-pick related services shown on each page. Every standalone page under public/services/ except aging-in-place-guide (a static guide page, listed directly in scripts/build-sitemap.mjs) must have an entry here so the generated pages, the catalog, and sitemap.xml stay in sync.",
   "categories": {
     "interior": "Interior Repairs & Finishes",
     "doors-efficiency": "Doors, Windows & Efficiency",
@@ -518,6 +519,116 @@
       "faq": {
         "q": "Do you work with property managers and small businesses?",
         "a": "Yes. We provide dependable interior and exterior handyman services for offices, storefronts, and small commercial properties, and can work around your operating hours."
+      }
+    },
+    {
+      "name": "Cabinet Hardware & Adjustments",
+      "slug": "cabinet-hardware",
+      "icon": "fa-grip-lines",
+      "category": "interior",
+      "formService": "General Estimate / Quote",
+      "tagline": "Doors that line up, hardware that lasts. We swap knobs and pulls, upgrade to soft-close hinges, and re-align sagging doors and sticky drawers for a like-new kitchen or bath.",
+      "intro": [
+        "Doors that line up, hardware that lasts. We swap knobs and pulls, upgrade to soft-close hinges, and re-align sagging doors and sticky drawers for a like-new kitchen or bath.",
+        "From a quick handle refresh to a full set of soft-close conversions, every cabinet is left plumb, aligned, and consistent — no mismatched heights or crooked pulls."
+      ],
+      "features": [
+        "Knob, handle, and pull installation & swaps",
+        "Soft-close hinge upgrades for doors and drawers",
+        "Re-alignment of sagging doors & drawer slides",
+        "Consistent, plumb, level hardware placement"
+      ],
+      "faq": {
+        "q": "Can you reuse my existing cabinet hardware, or do I need to buy new?",
+        "a": "Both work. We can clean and re-install your existing knobs and pulls, or upgrade to new hardware and soft-close hinges you supply. Supply them yourself at no markup, or we pick them up at cost plus a 20% supply sourcing fee."
+      }
+    },
+    {
+      "name": "Minor Kitchen Appliance Replacement",
+      "slug": "kitchen-appliances",
+      "icon": "fa-blender",
+      "category": "plumbing",
+      "formService": "Plumbing",
+      "tagline": "Out with the old, in with the working. We safely swap under-cabinet microwaves, range hoods, and standard garbage disposals — clean disconnect, secure mount, and a tidy power and plumbing handoff.",
+      "intro": [
+        "Out with the old, in with the working. We safely swap under-cabinet microwaves, range hoods, and standard garbage disposals — clean disconnect, secure mount, and a tidy power and plumbing handoff.",
+        "Each swap is anchored, sealed, and tested so the new unit sits level, vents or drains correctly, and ties cleanly into your existing wiring and plumbing. For anything requiring new circuits, dedicated lines, or major electrical or plumbing scope, we coordinate with a licensed pro."
+      ],
+      "features": [
+        "Under-cabinet microwave swaps & re-mounting",
+        "Range hood replacement and venting check",
+        "Standard garbage disposal replacement",
+        "Clean electrical and plumbing handoff"
+      ],
+      "faq": {
+        "q": "Do you handle the electrical and plumbing, or do I need separate contractors?",
+        "a": "We handle the standard disconnect/reconnect that comes with a like-for-like appliance swap. If the job needs a new dedicated circuit, a relocated outlet, or new drain and supply lines, we coordinate with a licensed electrician or plumber for that scope."
+      }
+    },
+    {
+      "name": "Screen Repair & Replacement",
+      "slug": "screen-repair",
+      "icon": "fa-window-restore",
+      "category": "interior",
+      "formService": "General Estimate / Quote",
+      "tagline": "Let the breeze in, keep the bugs out. Torn, sagging, or ill-fitting screens are an easy fix — we rescreen windows and patio doors and custom-build frames that fit like new.",
+      "intro": [
+        "Let the breeze in, keep the bugs out. Torn, sagging, or ill-fitting screens are an easy fix — we rescreen windows and patio doors and custom-build frames that fit like new.",
+        "We use fresh, tight spline work so screens sit flat with no ripples or gaps, and we hand-fit replacement frames when the originals are bent, missing, or beyond repair."
+      ],
+      "features": [
+        "Re-screening of damaged or worn window screens",
+        "Sliding patio door screen rescreening & roller check",
+        "Custom frame building & replacement fitting",
+        "Tight, gap-free spline work with no ripples"
+      ],
+      "faq": {
+        "q": "Can you build a screen frame if mine is missing or broken?",
+        "a": "Yes. We measure the opening and custom-build an aluminum frame to fit, then install fresh mesh with tight spline work so the new screen drops in and seals cleanly."
+      }
+    },
+    {
+      "name": "Specialty & Seasonal Installs",
+      "slug": "seasonal-installs",
+      "icon": "fa-snowflake",
+      "category": "maintenance",
+      "formService": "Maintenance & Cleaning",
+      "tagline": "The jobs that come around once a year — handled safely, so you do not have to climb a ladder. From holiday lighting to exhaust fans and attic hatch upgrades, we keep your home comfortable and ready for every season.",
+      "intro": [
+        "The jobs that come around once a year — handled safely, so you do not have to climb a ladder. From holiday lighting to exhaust fans and attic hatch upgrades, we keep your home comfortable and ready for every season.",
+        "We install and take down seasonal exterior lights and decor, replace noisy or failed bathroom and attic exhaust fans, and tighten up attic hatches with insulation and draft-stop upgrades that cut heat loss and stop moisture problems before they start."
+      ],
+      "features": [
+        "Holiday & seasonal exterior light and decor install/removal",
+        "Bathroom & attic exhaust fan replacement",
+        "Attic hatch insulation & draft-stop upgrades",
+        "Safe, ladder-friendly seasonal work"
+      ],
+      "faq": {
+        "q": "Do you also take the lights down after the season?",
+        "a": "Yes. We handle both installation and takedown, and we can store nothing on site — you keep the lights and decor and we put them up and take them down on the schedule you set."
+      }
+    },
+    {
+      "name": "Window Coverings & Heavy Wall Hanging",
+      "slug": "window-coverings",
+      "icon": "fa-sign-hanging",
+      "category": "installation",
+      "formService": "General Estimate / Quote",
+      "tagline": "Hung level, anchored solid, ready to enjoy. From blinds and drapery hardware to heavy mirrors and gallery walls, we mount it securely into studs — no tilting, no bowing, no surprises.",
+      "intro": [
+        "Hung level, anchored solid, ready to enjoy. From blinds and drapery hardware to heavy mirrors and gallery walls, we mount it securely into studs — no tilting, no bowing, no surprises.",
+        "We use the right anchors for the wall and the weight: stud-anchored for heavy mirrors and framed art, proper drywall anchors for lighter window hardware, and a level, evenly-spaced layout for multi-piece gallery walls."
+      ],
+      "features": [
+        "Blinds, shades, and curtain & drape hardware installation",
+        "Stud-anchored mounting for heavy mirrors & large artwork",
+        "Multi-piece gallery walls, leveled and evenly spaced",
+        "Right anchors matched to wall type and weight"
+      ],
+      "faq": {
+        "q": "How do you keep heavy mirrors and artwork from pulling out of the wall?",
+        "a": "We locate studs and anchor into them whenever possible, and use appropriately rated heavy-duty anchors when a stud is not in the right spot. Every hanging is matched to the weight of the piece and the type of wall, so it stays put."
       }
     }
   ]

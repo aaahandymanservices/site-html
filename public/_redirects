@@ -8,24 +8,48 @@
 # shadowed by a real file, so it never fires for a page that exists on disk.
 # With it the rule wins -- for every method, including POST. That is why no
 # page whose form posts back to its own .html path may carry a 301! (see the
-# note on /book.html below).
+# notes on /book.html and /commercial.html below).
+#
+# Trailing slashes need no rules of their own: Netlify normalizes the request
+# path at the edge before redirect rules run, so /privacy/ matches the
+# /privacy rule and every clean URL is served identically with or without the
+# slash. Rules that try to flip a slash on or off would loop forever, so the
+# only directory-form rules here are the two that point a directory-style path
+# at a genuinely different page (see the notes on /handyman/ and /services/).
 
 /index.html /                    301!
 
+# /404.html is a real page (Netlify serves it automatically with a 404 status
+# for any path that matches nothing), but its .html form still folds onto the
+# clean URL like every other page.
+/404.html   /404           301!
+/404        /404.html      200
+
 /privacy.html /privacy            301!
 /privacy    /privacy.html    200
-# /book.html deliberately has no 301! rule: public/js/book-page.js posts the
-# booking form back to /book.html, and a forced redirect answers that POST with
-# a 301 before Netlify Forms ever sees it. fetch() then follows the redirect as
-# a GET, the submission is discarded, and nothing surfaces the failure. The
-# canonical tag on book.html is what points crawlers at /book instead.
+# /book.html deliberately has no 301! rule: public/js/book-page.js and
+# public/js/booking-widget.js post the booking form back to /book.html, and a
+# forced redirect answers that POST with a 301 before Netlify Forms ever sees
+# it. fetch() then follows the redirect as a GET, the submission is discarded,
+# and nothing surfaces the failure. The canonical tag on book.html is what
+# points crawlers at /book instead.
 /book       /book.html       200
 /terms.html /terms            301!
 /terms      /terms.html      200
 /reviews    /reviews.html    200
+# /careers.html and /customer-care.html deliberately have no 301! rules:
+# public/js/careers-page.js and public/js/customer-care-page.js each post their
+# form back to their own .html path, so a forced redirect would swallow the
+# submission the same way it would on /book.html. Their canonical tags point
+# crawlers at the clean URLs.
 /careers    /careers.html    200
 /rates      /rates.html      200
 /guarantee  /guarantee.html  200
+# /services.html deliberately has no 301! rule: public/js/home-care-plans.js
+# posts the home-care subscription to /services.html as a mirror of its API
+# submission, and a forced redirect would discard it exactly as described for
+# /book.html above. The canonical tag on services.html points crawlers at
+# /services.
 /services   /services.html   200
 /service-areas /service-areas.html 200
 /contact    /contact.html    200
@@ -34,6 +58,20 @@
 /ai-estimate /ai-estimate.html 200
 /emergency.html /emergency        301!
 /emergency  /emergency.html 200
+
+# /commercial has no on-disk file at its clean URL -- only commercial.html
+# exists -- so this rewrite is what serves /commercial at all. It must never
+# carry a 301! : commercial.html's own Netlify Form posts back to the page in
+# place (no action attribute, so the browser resubmits to whatever URL it was
+# served from), and /commercial.html is left unforced for the same
+# POST-shadowing reason as /book.html above. The canonical tag on
+# commercial.html points crawlers at /commercial.
+/commercial /commercial.html 200
+
+# /offline is the service worker's fallback for navigations that fail with no
+# cached copy (see OFFLINE_URL in public/sw.js). Rewritten with a 200 so the
+# URL stays /offline, matching the sitemap entry.
+/offline    /offline.html    200
 
 /handyman/  /service-areas   301!
 /handyman/* /handyman/:splat.html 200
