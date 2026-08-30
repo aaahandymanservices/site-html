@@ -4311,6 +4311,104 @@ footer[class] {
   gap: 0.5rem;
 }
 
+/*
+ * Compact city list inside a zone card.
+ *
+ * /service-areas used to render every city three times over -- as an
+ * interactive chip in the zone card, and again as a full card with a zone
+ * pill in a second accordion list -- each link labelled "Zone A & $100" /
+ * "Zone B & $145". The zone card itself already states the price once, so the
+ * consolidated list carries the city name alone: one <li> per city, the link
+ * to its page, and the map-fly pin. Six columns on desktop keeps the whole
+ * 47-city set scannable without the accordion; two on a phone. "City · pin"
+ * flows as one inline unit so wrapping never splits the name from its pin.
+ */
+.zone-city-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 480px) {
+  .zone-city-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .zone-city-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .zone-city-list {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+.city-cell {
+  display: flex;
+  min-width: 0;
+}
+
+.city-cell__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  min-width: 0;
+  width: 100%;
+  padding: 0.5rem 0.4rem;
+  border-radius: 0.6rem;
+  border: 1px solid transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
+}
+
+.city-cell__link:hover,
+.city-cell__link:focus-visible {
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.zone-card-a .city-cell__link:hover,
+.zone-card-a .city-cell__link:focus-visible {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+.zone-card-b .city-cell__link:hover,
+.zone-card-b .city-cell__link:focus-visible {
+  background: #fff7ed;
+  color: #9a3412;
+  border-color: #fed7aa;
+}
+
+/* The tiny pin that flies the map to this city. Shares the text colour so
+   hover/focus recolours both in one rule; shrinks the hit area so the pin
+   itself is not a second tap target beside the link. */
+.city-cell__pin {
+  flex: 0 0 auto;
+  font-size: 0.62em;
+  opacity: 0.45;
+  pointer-events: none;
+  transition: color 0.15s ease, transform 0.12s ease;
+}
+
+.city-cell__link:hover .city-cell__pin,
+.city-cell__link:focus-visible .city-cell__pin {
+  transform: translateY(-1px);
+}
+
 @media (min-width: 480px) {
   .zone-chip-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));

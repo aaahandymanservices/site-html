@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 246 icon names in use.
+ * Generated subset - 248 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -54,6 +54,7 @@
 .fa-stairs:before{content:"\e289"}
 .fa-magic-wand-sparkles:before,.fa-wand-magic-sparkles:before{content:"\e2ca"}
 .fa-key:before{content:"\f084"}
+.fa-location-arrow:before{content:"\f124"}
 .fa-ban:before,.fa-cancel:before{content:"\f05e"}
 .fa-air-freshener:before,.fa-spray-can-sparkles:before{content:"\f5d0"}
 .fa-star:before{content:"\f005"}
@@ -96,6 +97,7 @@
 .fa-screwdriver-wrench:before,.fa-tools:before{content:"\f7d9"}
 .fa-heart:before{content:"\f004"}
 .fa-kitchen-set:before{content:"\e51a"}
+.fa-circle:before{content:"\f111"}
 .fa-wallet:before{content:"\f555"}
 .fa-clipboard-check:before{content:"\f46c"}
 .fa-wrench:before{content:"\f0ad"}
