@@ -240,8 +240,8 @@
 
     <link rel=dns-prefetch href=https://www.googletagmanager.com>
     <link rel=stylesheet href="/css/tailwind.css?v=20260817d">
-    <link rel="preload" href="/css/site-theme.css?v=20260827a" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260827a"></noscript>
+    <link rel="preload" href="/css/site-theme.css?v=20260827c" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260827c"></noscript>
     <link rel=preload href="/css/icons.css?v=20260825b" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
     <noscript><link rel=stylesheet href="/css/icons.css?v=20260825b"></noscript>
 
@@ -257,14 +257,14 @@
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden"><a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
-<aside id="new-customer-banner" class="new-customer-banner" aria-label="Loyalty Credit offer">
+<aside id="new-customer-banner" class="new-customer-banner" aria-label="New customer special offer">
     <script>(function(){try{var b=document.getElementById('new-customer-banner');if(!b)return;var dismissed=localStorage.getItem('aaa-new-customer-banner')==='dismissed';if(!dismissed){try{var g=JSON.parse(localStorage.getItem('aaa-first-service-gift')||'{}');if(g&&g.firstServiceGiftRedeemed===true)dismissed=true}catch(e){}}if(dismissed)b.hidden=true;}catch(e){}})();</script>
     <div class="new-customer-banner__inner">
         <p class="new-customer-banner__copy">
             <span class="new-customer-banner__icon" aria-hidden="true">🎁</span>
-            <span><strong class="new-customer-banner__lead">Loyalty Credit:</strong> Receive a <strong class="new-customer-banner__amount">$50 Loyalty Credit</strong> applied toward a follow-up service call!</span>
+            <span><strong class="new-customer-banner__lead">New Customer Special:</strong> Receive a <strong class="new-customer-banner__amount">$50 gift certificate</strong> toward your next service!</span>
         </p>
-        <a class="new-customer-banner__cta" href="/book#booking-form" data-ncb-cta>Claim My $50 Loyalty Credit<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+        <a class="new-customer-banner__cta" href="/book#booking-form" data-ncb-cta>Claim My $50 Gift<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
     </div>
 </aside>
 
@@ -1608,12 +1608,12 @@
 
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
-    <script src="/js/page-boot.js?v=20260827a" defer></script>
-    <script src="/js/site.js?v=20260827a" defer></script>
-    <script src="/js/booking-widget.js?v=20260827a" defer></script>
-    <script src="/js/service-zone-selector.js?v=20260827a" defer></script>
-    <script src="/js/home-care-plans.js?v=20260827a" defer></script>
-    <script src="/js/chat-loader.js?v=20260827a" defer></script>
+    <script src="/js/page-boot.js?v=20260827c" defer></script>
+    <script src="/js/site.js?v=20260827c" defer></script>
+    <script src="/js/booking-widget.js?v=20260827c" defer></script>
+    <script src="/js/service-zone-selector.js?v=20260827c" defer></script>
+    <script src="/js/home-care-plans.js?v=20260827c" defer></script>
+    <script src="/js/chat-loader.js?v=20260827c" defer></script>
     <script>(()=>{var n,e,r=Array.prototype.slice.call(document.querySelectorAll("details[data-svc-group]"));function o(t,e){var n=(t=>{if(!t||t.length<2)return null;var e;try{e=document.querySelector(t)}catch(t){return null}return e?{target:e,group:e.closest("details[data-svc-group]")}:null})(t);n&&(n.group&&!n.group.open&&(n.group.open=!0),e)&&window.requestAnimationFrame(function(){n.target.scrollIntoView({block:"start"})})}function a(){var t=r.every(function(t){return t.open});n.setAttribute("aria-expanded",t?"true":"false"),e&&(e.textContent=t?"Collapse all":"Expand all")}r.length&&(o(window.location.hash,!0),window.addEventListener("hashchange",function(){o(window.location.hash,!0)}),document.addEventListener("click",function(t){(t=t.target.closest?t.target.closest('a[href^="#"]'):null)&&o(t.getAttribute("href"),!1)}),n=document.querySelector("[data-svc-toggle-all]"),e=document.querySelector("[data-svc-toggle-label]"),n)&&(n.addEventListener("click",function(){var e="true"!==n.getAttribute("aria-expanded");r.forEach(function(t){t.open=e}),a()}),r.forEach(function(t){t.addEventListener("toggle",a)}),a())})()</script>
 
 

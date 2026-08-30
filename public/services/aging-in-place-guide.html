@@ -57,8 +57,8 @@
 
     <link rel=dns-prefetch href=https://www.googletagmanager.com>
     <link rel=stylesheet href="/css/tailwind.css?v=20260817d">
-    <link rel="preload" href="/css/site-theme.css?v=20260827a" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260827a"></noscript>
+    <link rel="preload" href="/css/site-theme.css?v=20260827c" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260827c"></noscript>
 
     <link rel=preload href="/css/icons.css?v=20260825b" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
     <noscript><link rel=stylesheet href="/css/icons.css?v=20260825b"></noscript>
@@ -75,14 +75,14 @@
 </head>
 <body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen overflow-x-hidden"><a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
 
-<aside id="new-customer-banner" class="new-customer-banner" aria-label="Loyalty Credit offer">
+<aside id="new-customer-banner" class="new-customer-banner" aria-label="New customer special offer">
     <script>(function(){try{var b=document.getElementById('new-customer-banner');if(!b)return;var dismissed=localStorage.getItem('aaa-new-customer-banner')==='dismissed';if(!dismissed){try{var g=JSON.parse(localStorage.getItem('aaa-first-service-gift')||'{}');if(g&&g.firstServiceGiftRedeemed===true)dismissed=true}catch(e){}}if(dismissed)b.hidden=true;}catch(e){}})();</script>
     <div class="new-customer-banner__inner">
         <p class="new-customer-banner__copy">
             <span class="new-customer-banner__icon" aria-hidden="true">🎁</span>
-            <span><strong class="new-customer-banner__lead">Loyalty Credit:</strong> Receive a <strong class="new-customer-banner__amount">$50 Loyalty Credit</strong> applied toward a follow-up service call!</span>
+            <span><strong class="new-customer-banner__lead">New Customer Special:</strong> Receive a <strong class="new-customer-banner__amount">$50 gift certificate</strong> toward your next service!</span>
         </p>
-        <a class="new-customer-banner__cta" href="/book#booking-form" data-ncb-cta>Claim My $50 Loyalty Credit<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+        <a class="new-customer-banner__cta" href="/book#booking-form" data-ncb-cta>Claim My $50 Gift<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
     </div>
 </aside>
 
@@ -661,8 +661,8 @@
         </form>
     </dialog>
     <script>(()=>{var r=document.querySelectorAll(".checklist-item"),s=document.getElementById("progress-text"),i=document.getElementById("progress-percent"),c=document.getElementById("progress-bar"),e=document.getElementById("reset-checklist");if(r.length){var a={};try{a=JSON.parse(localStorage.getItem("aging_in_place_checklist")||"{}")}catch(e){console.error("Failed to read checklist state",e)}r.forEach(function(n,e){var r="item_"+e,t=(n.querySelector("h4")||n.querySelector("p"),n.style.display="flex",n.style.alignItems="flex-start",n.style.gap="14px",document.createElement("div"));for(t.className="flex-1";n.firstChild;)t.appendChild(n.firstChild);(e=document.createElement("div")).className="flex-shrink-0 mt-1 flex items-center justify-center";var s=document.createElement("div"),i=(s.className="web-checkbox w-6 h-6 rounded-lg border-2 border-gray-300 flex items-center justify-center transition-all bg-white text-transparent",s.innerHTML='<i class="fas fa-check text-xs" aria-hidden="true"></i>',document.createElement("div"));i.className="print-checkbox hidden",e.appendChild(s),e.appendChild(i),n.appendChild(e),n.appendChild(t),a[r]&&(n.classList.add("checked"),s.classList.add("bg-green-600","border-green-600","text-white"),s.classList.remove("border-gray-300","bg-white","text-transparent")),n.addEventListener("click",function(e){if("A"!==e.target.tagName&&!e.target.closest("a")){var t=n.classList.toggle("checked");a[r]=t;try{localStorage.setItem("aging_in_place_checklist",JSON.stringify(a))}catch(e){}t?(s.classList.add("bg-green-600","border-green-600","text-white"),s.classList.remove("border-gray-300","bg-white","text-transparent")):(s.classList.remove("bg-green-600","border-green-600","text-white"),s.classList.add("border-gray-300","bg-white","text-transparent")),d()}})}),e&&e.addEventListener("click",function(){var e;window.__resetDlg&&"function"==typeof window.__resetDlg.showModal?(window.__resetDlg.showModal(),(e=document.getElementById("reset-checklist-confirm"))&&setTimeout(function(){e.focus()},30)):window.__doReset()}),d()}function d(){var n=0,e=(r.forEach(function(e,t){e.classList.contains("checked")&&n++}),r.length),t=Math.round(n/e*100);s&&(s.innerText=n+" of "+e+" items checked"),i&&(i.innerText=t+"%"),c&&(c.style.width=t+"%")}})(),(()=>{var e=document.getElementById("reset-checklist-dialog"),t=document.getElementById("reset-checklist-confirm"),n=document.getElementById("reset-checklist-cancel");window.__resetDlg=e,window.__doReset=function(){c={};try{localStorage.removeItem("aging_in_place_checklist")}catch(e){}r.forEach(function(e){e.classList.remove("checked");e=e.querySelector(".web-checkbox");e&&(e.classList.remove("bg-green-600","border-green-600","text-white"),e.classList.add("border-gray-300","bg-white","text-transparent"))}),d()},t&&t.addEventListener("click",function(){e.close(),window.__doReset()}),n&&n.addEventListener("click",function(){e.close()})})();var leadForm=document.getElementById("lead-magnet-form"),successMsg=document.getElementById("lead-success-msg"),errorMsg=document.getElementById("lead-error-msg"),submitBtn=document.getElementById("lead-submit-btn"),printBtn=document.getElementById("print-assessment-btn");function printAssessmentKit(){window.requestAnimationFrame(function(){window.requestAnimationFrame(function(){window.print()})})}printBtn&&printBtn.addEventListener("click",printAssessmentKit),leadForm&&leadForm.addEventListener("submit",function(e){e.preventDefault(),errorMsg.classList.add("hidden"),submitBtn&&(submitBtn.disabled=!0,submitBtn.innerHTML='<i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i> Preparing Your Kit...');var e=document.getElementById("lead-name").value,t=document.getElementById("lead-email").value;fetch("/api/seasonal-subscription",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:e,email:t,source:"aging_in_place_pdf"})}).then(function(t){return t.json().then(function(e){if(t.ok)return e;throw new Error(e.error||"Failed to submit subscription.")})}).then(function(e){leadForm.classList.add("hidden"),successMsg.classList.remove("hidden"),printAssessmentKit()}).catch(function(e){errorMsg.innerText=e.message||"An error occurred. Please try again.",errorMsg.classList.remove("hidden"),submitBtn&&(submitBtn.disabled=!1,submitBtn.innerHTML='<i class="fas fa-file-pdf" aria-hidden="true"></i> Get Checklist &amp; Print')})})</script>
-    <script src="/js/page-boot.js?v=20260827a" defer></script>
-    <script src="/js/site.js?v=20260827a" defer></script>
-    <script src="/js/chat-loader.js?v=20260827a" defer></script>
+    <script src="/js/page-boot.js?v=20260827c" defer></script>
+    <script src="/js/site.js?v=20260827c" defer></script>
+    <script src="/js/chat-loader.js?v=20260827c" defer></script>
 
 
