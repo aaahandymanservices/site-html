@@ -289,7 +289,14 @@
 // visitor holding v54 would pair the new zone-list markup with the old
 // stylesheet and render the cities unstyled. Bumping this version (and
 // ASSET_VERSION to 20260830a) refetches the stylesheet for every client.
-const CACHE_VERSION = 'v55';
+// v56 wires the city chips on '/' to the embedded map: /js/service-areas-page.js
+// now binds to any [data-city][data-lat][data-lng] chip instead of only the
+// links on /service-areas, and site-theme.css adds the pin hover states that
+// advertise the behaviour. Both files moved behind unchanged pathnames (the
+// asset cache drops ?v=), so a returning visitor holding v55 would keep the
+// old script and stylesheet for another year. Bumping this version (and
+// ASSET_VERSION to 20260830b) refetches them for every client.
+const CACHE_VERSION = 'v56';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

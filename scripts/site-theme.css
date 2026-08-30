@@ -4393,6 +4393,21 @@ footer[class] {
   border-color: #fed7aa;
 }
 
+/* The pin doubles as the affordance for the map fly: hover/focus lifts and
+   recolors it in step with the link, so "this chip also drives the map up
+   top" is visible without a second label. */
+.zone-card-a .city-cell__link:hover .city-cell__pin,
+.zone-card-a .city-cell__link:focus-visible .city-cell__pin {
+  opacity: 0.9;
+  color: #059669;
+}
+
+.zone-card-b .city-cell__link:hover .city-cell__pin,
+.zone-card-b .city-cell__link:focus-visible .city-cell__pin {
+  opacity: 0.9;
+  color: #ea580c;
+}
+
 /* The tiny pin that flies the map to this city. Shares the text colour so
    hover/focus recolours both in one rule; shrinks the hit area so the pin
    itself is not a second tap target beside the link. */
