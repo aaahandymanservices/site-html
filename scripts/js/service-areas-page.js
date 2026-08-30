@@ -218,14 +218,15 @@
     }
   }
 
-  // ---- Zone A/B city chip -> map wiring ----
-  // Every city button in the Zone A and Zone B cards carries data-city,
-  // data-lat, and data-lng. Clicking one scrolls up to #service-area-map (the
-  // embedded Google Map) and pans the map to those coordinates at zoom 13,
-  // surfacing the city's marker info card (the embed's analogue of
+  // ---- Zone A/B city link -> map wiring ----
+  // Every city link in the consolidated Zone A / Zone B lists carries
+  // data-city, data-lat, and data-lng. Clicking one follows its normal
+  // navigation to the city page, but first scrolls up to #service-area-map
+  // (the embedded Google Map) and pans the map to those coordinates at zoom
+  // 13, surfacing the city's marker info card (the embed's analogue of
   // infoWindow.open(map, marker)).
   function initCityChips() {
-    var chips = document.querySelectorAll(".zone-chip[data-city][data-lat][data-lng]");
+    var chips = document.querySelectorAll(".city-cell__link[data-city][data-lat][data-lng]");
     if (!chips.length) return;
     var mapAnchor = document.getElementById("service-area-map");
     chips.forEach(function (chip) {

@@ -81,8 +81,8 @@
 
     <link rel=dns-prefetch href=https://www.googletagmanager.com>
     <link rel=stylesheet href="/css/tailwind.css?v=20260817d">
-    <link rel="preload" href="/css/site-theme.css?v=20260827c" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260827c"></noscript>
+    <link rel="preload" href="/css/site-theme.css?v=20260830a" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260830a"></noscript>
     <link rel=preload href="/css/icons.css?v=20260825b" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
     <noscript><link rel=stylesheet href="/css/icons.css?v=20260825b"></noscript>
 
@@ -212,26 +212,44 @@
                 <div class="text-center mb-8 sm:mb-12">
                     <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm sm:text-base">Service Area Coverage</div>
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">Oakland County Handyman Service Area</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">We proudly serve Oakland County, Michigan. Every city sits in one of two travel zones, and your zone sets the minimum service call for the visit.</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">Based in Waterford, Michigan, we work every corner of Oakland County in two travel zones. Check the map, run the coverage checker, or browse the city list below &mdash; every city links to its own page.</p>
                 </div>
 
-                
-                <div id=service-area-map class="max-w-5xl mx-auto mb-8 sm:mb-12">
-                    <div class="rounded-3xl overflow-hidden shadow-lg ring-1 ring-gray-300 border-[2px] border-gray-200 bg-white">
-                        <div class="zone-gmap__bar flex flex-wrap items-center justify-between gap-2 px-5 sm:px-6 py-3 bg-slate-900 text-white">
-                            <span class="inline-flex items-center gap-2 text-sm font-bold tracking-wide">
-                                <i class="fas fa-street-view text-red-300" aria-hidden=true></i>
-                                Explore the service area
-                            </span>
-                            <span id=zone-gmap-label class="text-xs sm:text-sm text-slate-300 font-semibold">Waterford, MI &middot; Oakland County</span>
+                <!-- Map + coverage checker: the two fastest ways to answer "do you serve me?" -->
+                <div class="grid gap-8 lg:grid-cols-3 lg:gap-10 max-w-7xl items-start">
+                    <div id=service-area-map class="lg:col-span-2">
+                        <div class="rounded-3xl overflow-hidden shadow-lg ring-1 ring-gray-300 border-[2px] border-gray-200 bg-white">
+                            <div class="zone-gmap__bar flex flex-wrap items-center justify-between gap-2 px-5 sm:px-6 py-3 bg-slate-900 text-white">
+                                <span class="inline-flex items-center gap-2 text-sm font-bold tracking-wide">
+                                    <i class="fas fa-street-view text-red-300" aria-hidden=true></i>
+                                    Explore the service area
+                                </span>
+                                <span id=zone-gmap-label class="text-xs sm:text-sm text-slate-300 font-semibold">Waterford, MI &middot; Oakland County</span>
+                            </div>
+                            <iframe id=zone-gmap class=zone-gmap__frame title="Interactive Google Map of the AAA Handyman Services Oakland County service area" src="https://maps.google.com/maps?q=Waterford+Township,+MI&amp;z=10&amp;output=embed" loading=lazy referrerpolicy=no-referrer-when-downgrade allowfullscreen></iframe>
                         </div>
-                        <iframe id=zone-gmap class=zone-gmap__frame title="Interactive Google Map of the AAA Handyman Services Oakland County service area" src="https://maps.google.com/maps?q=Waterford+Township,+MI&amp;z=10&amp;output=embed" loading=lazy referrerpolicy=no-referrer-when-downgrade allowfullscreen></iframe>
+                        <p class="text-center text-xs sm:text-sm text-gray-500 mt-3">Drag to pan, pinch or scroll to zoom &mdash; and tap the pin beside any city below to fly the map there.</p>
                     </div>
-                    <p class="text-center text-xs sm:text-sm text-gray-500 mt-3">Drag to pan, pinch or scroll to zoom, and tap a city chip below to fly the map to that city.</p>
+
+                    <div id=service-area-search class="bg-white border-[2px] border-red-600 p-6 sm:p-8 rounded-3xl shadow-lg">
+                        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2 text-center">Are you in our service area?</h3>
+                        <p class="text-center text-gray-600 mb-5 text-sm sm:text-base">Enter your city or ZIP code to check coverage instantly.</p>
+
+                        <div class="max-w-md w-full mx-auto mb-2">
+                            <div class=relative>
+                                <input id=service-area-checker aria-label="Enter your city or ZIP code to check if we serve your area" placeholder="Enter your city or ZIP code — e.g. Troy or 48329" autocapitalize=words autocomplete=off class="w-full px-5 py-4 pl-12 bg-gray-50 border-[2px] border-gray-300 rounded-2xl focus:outline-none focus:border-red-600 focus:bg-white text-base transition text-gray-900 font-medium">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400">
+                                    <i class="fas fa-search-location text-lg" aria-hidden=true></i>
+                                </div>
+                            </div>
+                            <div id=checker-result class="zone-lookup-result hidden" aria-live=polite role=status hidden></div>
+                        </div>
+                        <p class="text-center text-xs text-gray-500 mt-3">Type to see your zone instantly &mdash; Zone A ($100), Zone B ($145), or outside Oakland County.</p>
+                    </div>
                 </div>
 
-                
-                <div class="zone-cards-grid max-w-5xl mx-auto">
+                <!-- Consolidated zone lists: pricing stated once per zone; every city is a single link. -->
+                <div class="zone-cards-grid max-w-7xl mx-auto mt-12 sm:mt-16">
 
                     <article class="zone-card zone-card-a h-full flex flex-col">
                         <div class="zone-header px-6 sm:px-8 py-6">
@@ -244,45 +262,45 @@
                         </div>
 
                         <div class="p-6 sm:p-8 flex-1">
-                            <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">Cities in this zone</p>
-                            <div class=zone-chip-grid>
-                                <button type=button class=zone-chip data-city="Auburn Hills" data-lat=42.6875 data-lng=-83.2341>Auburn Hills</button>
-                                <button type=button class=zone-chip data-city=Berkley data-lat=42.5031 data-lng=-83.1838>Berkley</button>
-                                <button type=button class=zone-chip data-city="Beverly Hills" data-lat=42.525 data-lng=-83.2388>Beverly Hills</button>
-                                <button type=button class=zone-chip data-city=Birmingham data-lat=42.5467 data-lng=-83.2113>Birmingham</button>
-                                <button type=button class=zone-chip data-city="Bloomfield Hills" data-lat=42.5836 data-lng=-83.2455>Bloomfield Hills</button>
-                                <button type=button class=zone-chip data-city=Clarkston data-lat=42.7356 data-lng=-83.4183>Clarkston</button>
-                                <button type=button class=zone-chip data-city=Clawson data-lat=42.5334 data-lng=-83.1463>Clawson</button>
-                                <button type=button class=zone-chip data-city=Commerce data-lat=42.5867 data-lng=-83.4897>Commerce</button>
-                                <button type=button class=zone-chip data-city=Davisburg data-lat=42.7534 data-lng=-83.5349>Davisburg</button>
-                                <button type=button class=zone-chip data-city="Farmington Hills" data-lat=42.4853 data-lng=-83.3772>Farmington Hills</button>
-                                <button type=button class=zone-chip data-city=Ferndale data-lat=42.4606 data-lng=-83.1346>Ferndale</button>
-                                <button type=button class=zone-chip data-city=Franklin data-lat=42.5223 data-lng=-83.3038>Franklin</button>
-                                <button type=button class=zone-chip data-city="Hazel Park" data-lat=42.4631 data-lng=-83.1022>Hazel Park</button>
-                                <button type=button class=zone-chip data-city=Highland data-lat=42.6389 data-lng=-83.618>Highland</button>
-                                <button type=button class=zone-chip data-city="Independence Twp." data-lat=42.7481 data-lng=-83.4038>Independence Twp.</button>
-                                <button type=button class=zone-chip data-city="Lake Orion" data-lat=42.7842 data-lng=-83.2399>Lake Orion</button>
-                                <button type=button class=zone-chip data-city="Madison Heights" data-lat=42.4859 data-lng=-83.1052>Madison Heights</button>
-                                <button type=button class=zone-chip data-city=Milford data-lat=42.5861 data-lng=-83.5999>Milford</button>
-                                <button type=button class=zone-chip data-city=Novi data-lat=42.4806 data-lng=-83.4755>Novi</button>
-                                <button type=button class=zone-chip data-city="Oak Park" data-lat=42.4595 data-lng=-83.1819>Oak Park</button>
-                                <button type=button class=zone-chip data-city="Oakland Twp." data-lat=42.7661 data-lng=-83.1613>Oakland Twp.</button>
-                                <button type=button class=zone-chip data-city="Orchard Lake" data-lat=42.5831 data-lng=-83.3577>Orchard Lake</button>
-                                <button type=button class=zone-chip data-city="Orion Twp." data-lat=42.7711 data-lng=-83.256>Orion Twp.</button>
-                                <button type=button class=zone-chip data-city=Oxford data-lat=42.8242 data-lng=-83.2499>Oxford</button>
-                                <button type=button class=zone-chip data-city="Pleasant Ridge" data-lat=42.4711 data-lng=-83.1408>Pleasant Ridge</button>
-                                <button type=button class=zone-chip data-city=Pontiac data-lat=42.6389 data-lng=-83.291>Pontiac</button>
-                                <button type=button class=zone-chip data-city=Rochester data-lat=42.6806 data-lng=-83.1338>Rochester</button>
-                                <button type=button class=zone-chip data-city="Rochester Hills" data-lat=42.6584 data-lng=-83.1499>Rochester Hills</button>
-                                <button type=button class=zone-chip data-city=Troy data-lat=42.5803 data-lng=-83.1499>Troy</button>
-                                <button type=button class=zone-chip data-city="Union Lake" data-lat=42.6178 data-lng=-83.438>Union Lake</button>
-                                <button type=button class=zone-chip data-city=Utica data-lat=42.6273 data-lng=-83.0299>Utica</button>
-                                <button type=button class=zone-chip data-city="Walled Lake" data-lat=42.5375 data-lng=-83.4838>Walled Lake</button>
-                                <button type=button class=zone-chip data-city=Waterford data-lat=42.6656 data-lng=-83.4005>Waterford</button>
-                                <button type=button class=zone-chip data-city="West Bloomfield" data-lat=42.5642 data-lng=-83.3591>West Bloomfield</button>
-                                <button type=button class=zone-chip data-city="White Lake" data-lat=42.6534 data-lng=-83.5133>White Lake</button>
-                                <button type=button class=zone-chip data-city=Wixom data-lat=42.5245 data-lng=-83.5363>Wixom</button>
-                            </div>
+                            <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">36 cities &middot; tap a pin to locate on the map</p>
+                            <ul class=zone-city-list>
+                                <li class="city-cell"><a href=/handyman/auburn-hills class="city-cell__link" data-city="Auburn Hills" data-lat=42.6875 data-lng=-83.2341>Auburn Hills<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/berkley class="city-cell__link" data-city="Berkley" data-lat=42.5031 data-lng=-83.1838>Berkley<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/beverly-hills class="city-cell__link" data-city="Beverly Hills" data-lat=42.525 data-lng=-83.2388>Beverly Hills<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/birmingham class="city-cell__link" data-city="Birmingham" data-lat=42.5467 data-lng=-83.2113>Birmingham<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/bloomfield-hills class="city-cell__link" data-city="Bloomfield Hills" data-lat=42.5836 data-lng=-83.2455>Bloomfield Hills<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/clarkston class="city-cell__link" data-city="Clarkston" data-lat=42.7356 data-lng=-83.4183>Clarkston<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/clawson class="city-cell__link" data-city="Clawson" data-lat=42.5334 data-lng=-83.1463>Clawson<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/commerce class="city-cell__link" data-city="Commerce" data-lat=42.5867 data-lng=-83.4897>Commerce<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/davisburg class="city-cell__link" data-city="Davisburg" data-lat=42.7534 data-lng=-83.5349>Davisburg<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/farmington-hills class="city-cell__link" data-city="Farmington Hills" data-lat=42.4853 data-lng=-83.3772>Farmington Hills<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/ferndale class="city-cell__link" data-city="Ferndale" data-lat=42.4606 data-lng=-83.1346>Ferndale<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/franklin class="city-cell__link" data-city="Franklin" data-lat=42.5223 data-lng=-83.3038>Franklin<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/hazel-park class="city-cell__link" data-city="Hazel Park" data-lat=42.4631 data-lng=-83.1022>Hazel Park<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/highland class="city-cell__link" data-city="Highland" data-lat=42.6389 data-lng=-83.618>Highland<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/independence-twp class="city-cell__link" data-city="Independence Twp." data-lat=42.7481 data-lng=-83.4038>Independence Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/lake-orion class="city-cell__link" data-city="Lake Orion" data-lat=42.7842 data-lng=-83.2399>Lake Orion<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/madison-heights class="city-cell__link" data-city="Madison Heights" data-lat=42.4859 data-lng=-83.1052>Madison Heights<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/milford class="city-cell__link" data-city="Milford" data-lat=42.5861 data-lng=-83.5999>Milford<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/novi class="city-cell__link" data-city="Novi" data-lat=42.4806 data-lng=-83.4755>Novi<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/oak-park class="city-cell__link" data-city="Oak Park" data-lat=42.4595 data-lng=-83.1819>Oak Park<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/oakland-twp class="city-cell__link" data-city="Oakland Twp." data-lat=42.7661 data-lng=-83.1613>Oakland Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/orchard-lake class="city-cell__link" data-city="Orchard Lake" data-lat=42.5831 data-lng=-83.3577>Orchard Lake<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/orion-twp class="city-cell__link" data-city="Orion Twp." data-lat=42.7711 data-lng=-83.256>Orion Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/oxford class="city-cell__link" data-city="Oxford" data-lat=42.8242 data-lng=-83.2499>Oxford<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/pleasant-ridge class="city-cell__link" data-city="Pleasant Ridge" data-lat=42.4711 data-lng=-83.1408>Pleasant Ridge<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/pontiac class="city-cell__link" data-city="Pontiac" data-lat=42.6389 data-lng=-83.291>Pontiac<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/rochester class="city-cell__link" data-city="Rochester" data-lat=42.6806 data-lng=-83.1338>Rochester<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/rochester-hills class="city-cell__link" data-city="Rochester Hills" data-lat=42.6584 data-lng=-83.1499>Rochester Hills<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/troy class="city-cell__link" data-city="Troy" data-lat=42.5803 data-lng=-83.1499>Troy<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/union-lake class="city-cell__link" data-city="Union Lake" data-lat=42.6178 data-lng=-83.438>Union Lake<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/utica class="city-cell__link" data-city="Utica" data-lat=42.6273 data-lng=-83.0299>Utica<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/walled-lake class="city-cell__link" data-city="Walled Lake" data-lat=42.5375 data-lng=-83.4838>Walled Lake<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/waterford class="city-cell__link" data-city="Waterford" data-lat=42.6656 data-lng=-83.4005>Waterford<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/west-bloomfield class="city-cell__link" data-city="West Bloomfield" data-lat=42.5642 data-lng=-83.3591>West Bloomfield<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/white-lake class="city-cell__link" data-city="White Lake" data-lat=42.6534 data-lng=-83.5133>White Lake<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/wixom class="city-cell__link" data-city="Wixom" data-lat=42.5245 data-lng=-83.5363>Wixom<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                            </ul>
                         </div>
                     </article>
 
@@ -298,20 +316,20 @@
                         </div>
 
                         <div class="p-6 sm:p-8 flex-1">
-                            <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">Cities in this zone</p>
-                            <div class=zone-chip-grid>
-                                <button type=button class=zone-chip data-city="Addison Twp." data-lat=42.8525 data-lng=-83.1205>Addison Twp.</button>
-                                <button type=button class=zone-chip data-city="Brandon Twp." data-lat=42.8464 data-lng=-83.4219>Brandon Twp.</button>
-                                <button type=button class=zone-chip data-city="Groveland Twp." data-lat=42.8253 data-lng=-83.5383>Groveland Twp.</button>
-                                <button type=button class=zone-chip data-city=Holly data-lat=42.7919 data-lng=-83.6272>Holly</button>
-                                <button type=button class=zone-chip data-city="Huntington Woods" data-lat=42.4764 data-lng=-83.1633>Huntington Woods</button>
-                                <button type=button class=zone-chip data-city=Leonard data-lat=42.8647 data-lng=-83.1444>Leonard</button>
-                                <button type=button class=zone-chip data-city="Lyon Twp." data-lat=42.4981 data-lng=-83.6238>Lyon Twp.</button>
-                                <button type=button class=zone-chip data-city=Ortonville data-lat=42.8531 data-lng=-83.443>Ortonville</button>
-                                <button type=button class=zone-chip data-city="Royal Oak" data-lat=42.4895 data-lng=-83.1446>Royal Oak</button>
-                                <button type=button class=zone-chip data-city=Southfield data-lat=42.4734 data-lng=-83.2219>Southfield</button>
-                                <button type=button class=zone-chip data-city="South Lyon" data-lat=42.4606 data-lng=-83.6519>South Lyon</button>
-                            </div>
+                            <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">11 cities &middot; tap a pin to locate on the map</p>
+                            <ul class=zone-city-list>
+                                <li class="city-cell"><a href=/handyman/addison-twp class="city-cell__link" data-city="Addison Twp." data-lat=42.8525 data-lng=-83.1205>Addison Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/brandon-twp class="city-cell__link" data-city="Brandon Twp." data-lat=42.8464 data-lng=-83.4219>Brandon Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/groveland-twp class="city-cell__link" data-city="Groveland Twp." data-lat=42.8253 data-lng=-83.5383>Groveland Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/holly class="city-cell__link" data-city="Holly" data-lat=42.7919 data-lng=-83.6272>Holly<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/huntington-woods class="city-cell__link" data-city="Huntington Woods" data-lat=42.4764 data-lng=-83.1633>Huntington Woods<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/leonard class="city-cell__link" data-city="Leonard" data-lat=42.8647 data-lng=-83.1444>Leonard<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/lyon-twp class="city-cell__link" data-city="Lyon Twp." data-lat=42.4981 data-lng=-83.6238>Lyon Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/ortonville class="city-cell__link" data-city="Ortonville" data-lat=42.8531 data-lng=-83.443>Ortonville<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/royal-oak class="city-cell__link" data-city="Royal Oak" data-lat=42.4895 data-lng=-83.1446>Royal Oak<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/south-lyon class="city-cell__link" data-city="South Lyon" data-lat=42.4606 data-lng=-83.6519>South Lyon<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                                <li class="city-cell"><a href=/handyman/southfield class="city-cell__link" data-city="Southfield" data-lat=42.4734 data-lng=-83.2219>Southfield<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
+                            </ul>
 
                             <p class="zone-note mt-6 flex items-start gap-2 p-4 text-sm text-gray-600">
                                 <i class="zone-icon fas fa-circle-info mt-0.5" aria-hidden=true></i>
@@ -321,428 +339,48 @@
                     </article>
                 </div>
 
-<p class="max-w-3xl mx-auto mt-8 text-center text-sm sm:text-base text-gray-600">
+                <p class="max-w-3xl mx-auto mt-8 text-center text-sm sm:text-base text-gray-600">
                     Your zone sets only the Minimum Service Call, which covers travel, diagnostics, and up to the first hour of labor. Continuous labor after the first hour is billed at a flat <strong>$70/hour</strong> in quarter-hour increments. See the <a href=/rates class="text-red-600 font-semibold underline underline-offset-2 hover:text-red-700">full rates &amp; packages</a> for details.
                 </p>
 
+                <!-- Customer reviews -->
                 <div class="max-w-5xl mx-auto mt-12 sm:mt-16">
                     <div class="text-center mb-6">
-                        <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm">City Pages</div>
-                        <h3 class="text-2xl sm:text-3xl font-bold text-blue-900 mt-2">Browse Handyman Service by City</h3>
-                        <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Open a dedicated page for your community to see local coverage, pricing zone, and the services we provide there.</p>
-                        <ul class="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 list-none m-0 p-0 text-xs font-semibold text-gray-600">
-                            <li class="flex items-center gap-2"><span class="zone-dot h-2.5 w-2.5 rounded-full" aria-hidden=true></span>Zone A &mdash; $100 minimum</li>
-                            <li class="flex items-center gap-2"><span class="zone-dot zone-dot-b h-2.5 w-2.5 rounded-full" aria-hidden=true></span>Zone B &mdash; $145 minimum</li>
-                        </ul>
-                    </div>
-                    <div class="city-accordion-row space-y-4">
-                    <details class="zone-accordion" data-zone="A">
-                        <summary class="zone-accordion__summary">
-                            <span class="zone-accordion__heading">
-                                <span class="zone-accordion__badge zone-tag inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-wider">Zone A &amp; $100</span>
-                                <span class="zone-accordion__count">36 cities &middot; within 20 miles of Waterford</span>
-                            </span>
-                            <span class="zone-accordion__chevron" aria-hidden=true><i class="fas fa-chevron-down"></i></span>
-                        </summary>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-                            <a href=/handyman/auburn-hills class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Auburn Hills</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/berkley class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Berkley</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/beverly-hills class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Beverly Hills</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/birmingham class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Birmingham</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/bloomfield-hills class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Bloomfield Hills</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/clarkston class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Clarkston</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/clawson class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Clawson</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/commerce class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Commerce</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/davisburg class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Davisburg</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/farmington-hills class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Farmington Hills</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/ferndale class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Ferndale</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/franklin class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Franklin</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/hazel-park class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Hazel Park</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/highland class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Highland</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/independence-twp class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Independence Twp.</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/lake-orion class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Lake Orion</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/madison-heights class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Madison Heights</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/milford class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Milford</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/novi class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Novi</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/oak-park class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Oak Park</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/oakland-twp class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Oakland Twp.</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/orchard-lake class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Orchard Lake</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/orion-twp class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Orion Twp.</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/oxford class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Oxford</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/pleasant-ridge class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Pleasant Ridge</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/pontiac class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Pontiac</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/rochester class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Rochester</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/rochester-hills class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Rochester Hills</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/troy class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Troy</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/union-lake class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Union Lake</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/utica class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Utica</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/walled-lake class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Walled Lake</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/waterford class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Waterford</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/west-bloomfield class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">West Bloomfield</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/white-lake class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">White Lake</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                            <a href=/handyman/wixom class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Wixom</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone A & $100</span>
-                            </a>
-                        </div>
-                    </details>
-                    <details class="zone-accordion zone-accordion--b" data-zone="B">
-                        <summary class="zone-accordion__summary">
-                            <span class="zone-accordion__heading">
-                                <span class="zone-accordion__badge zone-tag zone-tag-b inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-wider">Zone B &amp; $145</span>
-                                <span class="zone-accordion__count">11 cities &middot; extended travel / 20+ miles</span>
-                            </span>
-                            <span class="zone-accordion__chevron" aria-hidden=true><i class="fas fa-chevron-down"></i></span>
-                        </summary>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-                            <a href=/handyman/addison-twp class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Addison Twp.</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag zone-tag-b inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone B & $145</span>
-                            </a>
-                            <a href=/handyman/brandon-twp class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Brandon Twp.</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag zone-tag-b inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone B & $145</span>
-                            </a>
-                            <a href=/handyman/groveland-twp class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Groveland Twp.</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag zone-tag-b inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone B & $145</span>
-                            </a>
-                            <a href=/handyman/holly class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Holly</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag zone-tag-b inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone B & $145</span>
-                            </a>
-                            <a href=/handyman/huntington-woods class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Huntington Woods</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag zone-tag-b inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone B & $145</span>
-                            </a>
-                            <a href=/handyman/leonard class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Leonard</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag zone-tag-b inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone B & $145</span>
-                            </a>
-                            <a href=/handyman/lyon-twp class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Lyon Twp.</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag zone-tag-b inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone B & $145</span>
-                            </a>
-                            <a href=/handyman/ortonville class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Ortonville</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag zone-tag-b inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone B & $145</span>
-                            </a>
-                            <a href=/handyman/royal-oak class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Royal Oak</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag zone-tag-b inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone B & $145</span>
-                            </a>
-                            <a href=/handyman/south-lyon class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">South Lyon</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag zone-tag-b inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone B & $145</span>
-                            </a>
-                            <a href=/handyman/southfield class="city-card group flex flex-col justify-between gap-3 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-red-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-                            <span class="flex items-start justify-between gap-2">
-                            <span class="font-bold text-gray-900 leading-snug group-hover:text-red-600">Southfield</span>
-                            <i class="fas fa-arrow-right text-xs text-gray-300 mt-1 group-hover:text-red-600" aria-hidden=true></i>
-                            </span>
-                            <span class="zone-tag zone-tag-b inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider">Zone B & $145</span>
-                            </a>
-                        </div>
-                    </details>
-                </div>
-                </div>
-
-                <div id=service-area-search class="max-w-5xl mx-auto mt-12 sm:mt-16 bg-white border-[2px] border-red-600 p-8 rounded-3xl shadow-lg">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Are you in our service area?</h3>
-                    <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">We provide top-rated handyman services across all major cities and townships in Oakland County, MI. Enter your city or ZIP code below to check coverage:</p>
-
-                    <div class="max-w-md mx-auto mb-2">
-                        <div class=relative>
-                            <input id=service-area-checker aria-label="Enter your city or ZIP code to check if we serve your area" placeholder="Enter your city or ZIP code — e.g. Troy or 48329" autocapitalize=words autocomplete=off class="w-full px-5 py-4 pl-12 bg-gray-50 border-[2px] border-gray-300 rounded-2xl focus:outline-none focus:border-red-600 focus:bg-white text-base transition text-gray-900 font-medium">
-                            <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400">
-                                <i class="fas fa-search-location text-lg" aria-hidden=true></i>
-                            </div>
-                        </div>
-                        <div id=checker-result class="zone-lookup-result hidden" aria-live=polite role=status hidden></div>
-                    </div>
-                    <p class="text-center text-xs text-gray-500 mt-3">Type to see your zone instantly &mdash; Zone A ($100), Zone B ($145), or outside Oakland County.</p>
-                    <div class=mt-10>
-
-                        <div class="text-center mb-5">
-                            <h3 class="text-xl sm:text-2xl font-bold text-blue-900"><a href=/reviews class="hover:text-red-600 transition underline decoration-red-600/40 hover:decoration-red-600 underline-offset-4">What Customers in Your Area Are Saying</a></h3>
-                            <p class="text-sm text-gray-600 mt-1">Filter by zone or service type to find stories from your neighborhood.</p>
-                            <div class="sa-review-filters mt-4" role=group aria-label="Filter customer reviews">
+                        <h3 class="text-xl sm:text-2xl font-bold text-blue-900"><a href=/reviews class="hover:text-red-600 transition underline decoration-red-600/40 hover:decoration-red-600 underline-offset-4">What Customers in Your Area Are Saying</a></h3>
+                        <p class="text-sm text-gray-600 mt-1">Filter by zone or service type to find stories from your neighborhood.</p>
+                        <div class="sa-review-filters mt-4" role=group aria-label="Filter customer reviews">
                             <button type=button class=sa-review-filter data-filter=all aria-pressed=true>All</button>
                             <button type=button class=sa-review-filter data-filter=zone-a aria-pressed=false>Zone A</button>
                             <button type=button class=sa-review-filter data-filter=zone-b aria-pressed=false>Zone B</button>
                             <button type=button class=sa-review-filter data-filter=drywall aria-pressed=false>Drywall</button>
                             <button type=button class=sa-review-filter data-filter=deck aria-pressed=false>Deck Repair</button>
                         </div>
-                        </div>
-
-                        <div class="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
-                            <div class="sa-review-card bg-gray-50 p-5 rounded-2xl border border-gray-150 flex-1 shadow-sm" data-city="Troy, MI" data-tag="Drywall, Deck Repair">
-                                <div class="flex items-center gap-1 text-yellow-500 mb-2" role=img aria-label="Rated 5 out of 5 stars">
-                                    <i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i>
-                                    <span class="text-xs font-bold text-gray-500 ml-2">Verified Customer</span>
-                                </div>
-                                <p class="text-sm text-gray-700 italic">"This team is fantastic! They repaired our drywall and deck quickly, professionally, and stayed exactly within the initial quote. Absolute lifesaver."</p>
-                                <p class="text-xs font-bold text-gray-600 mt-2">&mdash; Sarah K., Troy, MI</p>
-                            </div>
-                            <div class="sa-review-card bg-gray-50 p-5 rounded-2xl border border-gray-150 flex-1 shadow-sm" data-city="Waterford, MI" data-tag="General Repair">
-                                <div class="flex items-center gap-1 text-yellow-500 mb-2" role=img aria-label="Rated 5 out of 5 stars">
-                                    <i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i>
-                                    <span class="text-xs font-bold text-gray-500 ml-2">Verified Customer</span>
-                                </div>
-                                <p class="text-sm text-gray-700 italic">"Clean work, honest pricing, and friendly service. Having a dependable craftsman in our community is wonderful."</p>
-                                <p class="text-xs font-bold text-gray-600 mt-2">&mdash; Robert M., Waterford, MI</p>
-                            </div>
-                        </div>
-                        <p class="text-center mt-6 text-sm sm:text-base">
-                            <a href=/reviews class="inline-flex items-center gap-2 font-semibold text-red-600 hover:text-red-700 transition">
-                                View all customer reviews
-                                <i class="fas fa-arrow-right text-xs" aria-hidden=true></i>
-                            </a>
-                        </p>
                     </div>
+
+                    <div class="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
+                        <div class="sa-review-card bg-gray-50 p-5 rounded-2xl border border-gray-150 flex-1 shadow-sm" data-city="Troy, MI" data-tag="Drywall, Deck Repair">
+                            <div class="flex items-center gap-1 text-yellow-500 mb-2" role=img aria-label="Rated 5 out of 5 stars">
+                                <i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i>
+                                <span class="text-xs font-bold text-gray-500 ml-2">Verified Customer</span>
+                            </div>
+                            <p class="text-sm text-gray-700 italic">&ldquo;This team is fantastic! They repaired our drywall and deck quickly, professionally, and stayed exactly within the initial quote. Absolute lifesaver.&rdquo;</p>
+                            <p class="text-xs font-bold text-gray-600 mt-2">&mdash; Sarah K., Troy, MI</p>
+                        </div>
+                        <div class="sa-review-card bg-gray-50 p-5 rounded-2xl border border-gray-150 flex-1 shadow-sm" data-city="Waterford, MI" data-tag="General Repair">
+                            <div class="flex items-center gap-1 text-yellow-500 mb-2" role=img aria-label="Rated 5 out of 5 stars">
+                                <i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i><i class="fas fa-star" aria-hidden=true></i>
+                                <span class="text-xs font-bold text-gray-500 ml-2">Verified Customer</span>
+                            </div>
+                            <p class="text-sm text-gray-700 italic">&ldquo;Clean work, honest pricing, and friendly service. Having a dependable craftsman in our community is wonderful.&rdquo;</p>
+                            <p class="text-xs font-bold text-gray-600 mt-2">&mdash; Robert M., Waterford, MI</p>
+                        </div>
+                    </div>
+                    <p class="text-center mt-6 text-sm sm:text-base">
+                        <a href=/reviews class="inline-flex items-center gap-2 font-semibold text-red-600 hover:text-red-700 transition">
+                            View all customer reviews
+                            <i class="fas fa-arrow-right text-xs" aria-hidden=true></i>
+                        </a>
+                    </p>
                 </div>
 
                 <div class="mt-12 sm:mt-16 text-center bg-blue-900 text-white py-12 px-8 sm:py-16 sm:px-16 rounded-3xl max-w-5xl mx-auto">
@@ -853,11 +491,11 @@
 
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
-    <script src="/js/service-areas-page.js?v=20260827c" defer></script>
+    <script src="/js/service-areas-page.js?v=20260830a" defer></script>
 
-    <script src="/js/page-boot.js?v=20260827c" defer></script>
-    <script src="/js/site.js?v=20260827c" defer></script>
-    <script src="/js/booking-widget.js?v=20260827c" defer></script>
-    <script src="/js/chat-loader.js?v=20260827c" defer></script>
+    <script src="/js/page-boot.js?v=20260830a" defer></script>
+    <script src="/js/site.js?v=20260830a" defer></script>
+    <script src="/js/booking-widget.js?v=20260830a" defer></script>
+    <script src="/js/chat-loader.js?v=20260830a" defer></script>
 
 

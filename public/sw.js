@@ -283,17 +283,13 @@
 // picking a photo would throw instead of showing a thumbnail. Bumping this
 // version (and ASSET_VERSION to 20260827b, since /js/* is served immutable)
 // refetches the whole set together.
-// v54 drops the ambient glow from the home page hero banner. The header no
-// longer carries the ambient-glow-hero class, and site-theme.css no longer
-// paints the blurred crimson ellipse, the crimson radial bloom, or the
-// drifting dot grid over any hero -- the panel is a flat brand navy instead.
-// The markup ships with the page, but the glow itself lives in site-theme.css,
-// which is precached in the shell above and keyed on CACHE_VERSION alone with
-// ?v= dropped from the asset cache key. A returning visitor holding v53 would
-// pair this deploy's markup with last deploy's stylesheet and keep seeing the
-// glow. Bumping this version (and ASSET_VERSION to 20260827c) refetches the
-// stylesheet for every client.
-const CACHE_VERSION = 'v54';
+// v55 consolidates the /service-areas zone lists into one city list per zone
+// (map/checker up top, reviews after) and reworks the list styles inside
+// site-theme.css. Markup and stylesheet ship together here: a returning
+// visitor holding v54 would pair the new zone-list markup with the old
+// stylesheet and render the cities unstyled. Bumping this version (and
+// ASSET_VERSION to 20260830a) refetches the stylesheet for every client.
+const CACHE_VERSION = 'v55';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
