@@ -230,10 +230,27 @@ function optimizeFontsAndAssets(html) {
     // white. Matches .ambient-glow-hero in scripts/site-theme.css.
     '.ambient-glow-hero,#booking-section.ambient-glow-hero{position:relative;overflow:hidden;min-height:18rem;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
     '.ambient-glow-hero h1,#booking-section.ambient-glow-hero h1,#top.hero h1{color:#fff}' +
-    // Homepage hero: the flat navy panel and its reserved height. It carries
-    // no ambient glow layer, so the values here are the whole of what
-    // .hero paints in site-theme.css and the first frame matches the last.
-    '#top.hero{position:relative;min-height:22rem;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
+    // Homepage hero: the flat navy panel and its reserved height. The banner
+    // photograph layers in on top of this gradient once the breakpoint CSS and
+    // the image arrive, and the navy scrim toward the bottom keeps the first
+    // frame, the pre-photo frame, and the final frame reading as the same
+    // panel. It carries no ambient glow layer, so the base values here are
+    // what .hero paints in site-theme.css before the photo loads.
+    //
+    // The split below is load-bearing, not stylistic. The hero's reserved
+    // height and text colour are ID-scoped because the markup already carries
+    // `id=top`, but the background CANNOT be: site-theme.css layers the banner
+    // photograph on `.hero` (0,1,0) at three breakpoints, and an
+    // `#top.hero{background-image:...}` rule here (1,1,0) outranks all three no
+    // matter where the stylesheet sits in the cascade. That is exactly what
+    // silently hid the banner -- the three fetchpriority=high preloads still
+    // downloaded the image, the stylesheet still declared it, and the ID rule
+    // in this block painted bare gradients over it at every viewport width.
+    // Keeping the background on a bare `.hero` selector leaves the pre-photo
+    // navy as the first frame and lets site-theme.css win on source order, so
+    // the photo actually lands. Do not fold these back into one ID rule.
+    '#top.hero{position:relative;min-height:22rem;color:#fff}' +
+    '.hero{background-color:#1b2a4a;background-image:radial-gradient(ellipse at top,rgba(27,42,74,.72) 0,rgba(3,7,11,.85) 100%),linear-gradient(rgba(3,7,11,.55),rgba(3,7,11,.65)),linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%)}' +
     // Reserve the hero's inner stack height so the webfont swap and the icon
     // glyph boxes in .hero-trust / .hero-rating-bar cannot push the trust
     // badges down after first paint. The hero is the LCP element on '/', and a

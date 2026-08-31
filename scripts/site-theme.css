@@ -1705,14 +1705,15 @@ body::after {
 }
 
 /* --- Homepage hero -------------------------------------------------------
-   A flat brand-navy panel: the same solid colour plus left-to-right brand
-   gradient the inline critical block paints, so the first frame and the
-   final frame are identical and the hero contributes no layout shift. The
-   hero carries no ambient glow layer of its own -- no blurred radial
-   ellipse, no drifting dot grid, no crimson bloom -- so the headline, the
-   rating badge, the trust row, and the CTAs read against an even
-   background at every width. Below 1440px the two media queries further
-   down layer the banner photograph in, where its detail still reads. */
+   The banner photograph sits behind the headline, rating badge, trust row,
+   and CTAs at every width, under the same navy wash the inline critical
+   block paints: a radial + linear scrim toward the bottom keeps the white
+   type readable over the photo while the photo loads late, the flat brand
+   gradient (already painted by the critical palette and the base rule
+   below) stays underneath, so the first frame, the pre-photo frame, and
+   the final frame all read as the same navy panel and the hero contributes
+   no layout shift. The photo is sized per breakpoint by the three media
+   queries further down. */
 .hero {
   position: relative;
   isolation: isolate;
@@ -1722,7 +1723,10 @@ body::after {
   text-align: center;
   min-height: 22rem;
   background-color: #1b2a4a;
-  background-image: linear-gradient(to right, #101b31 0%, #1b2a4a 50%, #020617 100%);
+  background:
+    radial-gradient(ellipse at top, rgba(27, 42, 74, 0.72) 0, rgba(3, 7, 11, 0.85) 100%),
+    linear-gradient(rgba(3, 7, 11, 0.65), rgba(3, 7, 11, 0.75)),
+    #1b2a4a url("/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=65") center/cover no-repeat;
 }
 
 /* Give the hero headline a subtle metallic depth */
@@ -6024,20 +6028,20 @@ input.careers-upload-input::file-selector-button:hover {
 /* Homepage Hero, Rating Badges, Trust Grid & Accordions */
 @media (min-width: 768px) and (max-width: 1439px) {
   .hero {
-    background: radial-gradient(ellipse at top, rgba(27, 42, 74, 0.72) 0, rgba(3, 7, 11, 0.85) 100%),
+    background:
+      radial-gradient(ellipse at top, rgba(27, 42, 74, 0.72) 0, rgba(3, 7, 11, 0.85) 100%),
       linear-gradient(rgba(3, 7, 11, 0.65), rgba(3, 7, 11, 0.75)),
-      url("/.netlify/images?url=/logo-banner.jpg&w=1440&fm=avif&q=65") center/cover;
-    background-color: #1b2a4a;
+      #1b2a4a url("/.netlify/images?url=/logo-banner.jpg&w=1440&fm=avif&q=65") center/cover no-repeat;
   }
 }
 
 @media (max-width: 767px) {
   .hero {
     min-height: auto;
-    background: radial-gradient(ellipse at top, rgba(27, 42, 74, 0.8) 0, rgba(3, 7, 11, 0.9) 100%),
+    background:
+      radial-gradient(ellipse at top, rgba(27, 42, 74, 0.8) 0, rgba(3, 7, 11, 0.9) 100%),
       linear-gradient(rgba(3, 7, 11, 0.75), rgba(3, 7, 11, 0.75)),
-      url("/.netlify/images?url=/logo-banner.jpg&w=640&fm=avif&q=65") center/cover;
-    background-color: #1b2a4a;
+      #1b2a4a url("/.netlify/images?url=/logo-banner.jpg&w=640&fm=avif&q=65") center/cover no-repeat;
   }
 }
 
