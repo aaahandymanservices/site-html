@@ -239,11 +239,11 @@
     </script>
 
     <link rel=dns-prefetch href=https://www.googletagmanager.com>
-    <link rel=stylesheet href="/css/tailwind.css?v=20260817d">
-    <link rel="preload" href="/css/site-theme.css?v=20260831a" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260831a"></noscript>
-    <link rel=preload href="/css/icons.css?v=20260825b" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
-    <noscript><link rel=stylesheet href="/css/icons.css?v=20260825b"></noscript>
+    <link rel=stylesheet href="/css/tailwind.css?v=20260831b">
+    <link rel="preload" href="/css/site-theme.css?v=20260831b" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260831b"></noscript>
+    <link rel=preload href="/css/icons.css?v=20260815a" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
+    <noscript><link rel=stylesheet href="/css/icons.css?v=20260815a"></noscript>
 
     <link rel=icon href=/favicon.ico sizes=any>
     <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
@@ -1460,11 +1460,11 @@
 
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
-    <script src="/js/page-boot.js?v=20260831a" defer></script>
-    <script src="/js/site.js?v=20260831a" defer></script>
-    <script src="/js/booking-widget.js?v=20260831a" defer></script>
-    <script src="/js/home-care-plans.js?v=20260831a" defer></script>
-    <script src="/js/chat-loader.js?v=20260831a" defer></script>
+    <script src="/js/page-boot.js?v=20260831b" defer></script>
+    <script src="/js/site.js?v=20260831b" defer></script>
+    <script src="/js/booking-widget.js?v=20260831b" defer></script>
+    <script src="/js/home-care-plans.js?v=20260831b" defer></script>
+    <script src="/js/chat-loader.js?v=20260831b" defer></script>
     <script>(()=>{var n,e,r=Array.prototype.slice.call(document.querySelectorAll("details[data-svc-group]"));function o(t,e){var n=(t=>{if(!t||t.length<2)return null;var e;try{e=document.querySelector(t)}catch(t){return null}return e?{target:e,group:e.closest("details[data-svc-group]")}:null})(t);n&&(n.group&&!n.group.open&&(n.group.open=!0),e)&&window.requestAnimationFrame(function(){n.target.scrollIntoView({block:"start"})})}function a(){var t=r.every(function(t){return t.open});n.setAttribute("aria-expanded",t?"true":"false"),e&&(e.textContent=t?"Collapse all":"Expand all")}r.length&&(o(window.location.hash,!0),window.addEventListener("hashchange",function(){o(window.location.hash,!0)}),document.addEventListener("click",function(t){(t=t.target.closest?t.target.closest('a[href^="#"]'):null)&&o(t.getAttribute("href"),!1)}),n=document.querySelector("[data-svc-toggle-all]"),e=document.querySelector("[data-svc-toggle-label]"),n)&&(n.addEventListener("click",function(){var e="true"!==n.getAttribute("aria-expanded");r.forEach(function(t){t.open=e}),a()}),r.forEach(function(t){t.addEventListener("toggle",a)}),a())})()</script>
     <script>(()=>{var t=Array.prototype.slice.call(document.querySelectorAll("[data-bundle-tab]")),p={packages:document.getElementById("bundle-panel-packages"),memberships:document.getElementById("bundle-panel-memberships")};if(t.length&&p.packages&&p.memberships){function s(n){t.forEach(function(e){var a=e.getAttribute("data-bundle-tab")===n;e.setAttribute("aria-pressed",a?"true":"false")}),Object.keys(p).forEach(function(e){p[e].hidden=e!==n})}t.forEach(function(n){n.addEventListener("click",function(){s(n.getAttribute("data-bundle-tab"))})}),window.addEventListener("hashchange",function(){var n=window.location.hash;n==="#memberships"&&s("memberships")}),window.location.hash==="#memberships"&&s("memberships")}})()</script>
 

@@ -177,9 +177,38 @@ function optimizeFontsAndAssets(html) {
     '    <link rel=preload as=image href="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" fetchpriority=high>';
   html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?\/\.netlify\/images\?url=\/icon\.jpg[^>]*>\r?\n/gi, '');
   html = html.replace(
-    /(<link\s+rel=["']?preload["']?\s+as=["']?font["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?[^>]*>\r?\n)/i,
+    /(<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
     `$1${ICON_PRELOAD}\n`,
   );
+
+  /*
+   * Preload the home hero's banner photograph on '/'.
+   *
+   * The hero background is the LCP image on the home page, and it lives in
+   * CSS, where browsers cannot discover it early. These media-scoped preloads
+   * (identical in shape to the icon preload above) hand the browser the right
+   * width's rendition during HTML parsing: 640px wide on phones, 1440px on
+   * tablets and small laptops, and 1760px on large screens. Each width paints
+   * exactly the rendition its own preload fetched (see the #top.hero rules in
+   * the critical palette below), so the preloaded response is always reused
+   * and no second copy of the photo is requested. fetchpriority=high keeps it
+   * ahead of everything except the two brand fonts. This is idempotent: any
+   * existing banner preloads are stripped first so re-runs never stack
+   * duplicates.
+   */
+  const BANNER_PRELOADS =
+    '    <link rel=preload as=image href="/.netlify/images?url=/logo-banner.jpg&amp;w=640&amp;fm=avif&amp;q=65" media="(max-width: 767px)" fetchpriority=high>\n' +
+    '    <link rel=preload as=image href="/.netlify/images?url=/logo-banner.jpg&amp;w=1440&amp;fm=avif&amp;q=65" media="(min-width: 768px) and (max-width: 1439px)" fetchpriority=high>\n' +
+    '    <link rel=preload as=image href="/.netlify/images?url=/logo-banner.jpg&amp;w=1760&amp;fm=avif&amp;q=65" media="(min-width: 1440px)" fetchpriority=high>\n';
+  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?\/\.netlify\/images\?url=\/logo-banner\.jpg[^>]*>\r?\n/gi, '');
+  // index.html alone carries the banner hero; on other pages the three links
+  // must not be added.
+  if (/(<main\s+id=["']?main-content["']?[\s\S]{0,80}?<header\s+id=["']?top["']?\s+class=["']?[^"'>]*\bhero\b[^"'>]*>?)/i.test(html)) {
+    html = html.replace(
+      /(<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?\/\.netlify\/images\?url=\/icon\.jpg["']?[^>]*>\r?\n)/i,
+      `$1${BANNER_PRELOADS}`,
+    );
+  }
 
   /*
    * Inline critical palette block.
@@ -230,10 +259,18 @@ function optimizeFontsAndAssets(html) {
     // white. Matches .ambient-glow-hero in scripts/site-theme.css.
     '.ambient-glow-hero,#booking-section.ambient-glow-hero{position:relative;overflow:hidden;min-height:18rem;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
     '.ambient-glow-hero h1,#booking-section.ambient-glow-hero h1,#top.hero h1{color:#fff}' +
-    // Homepage hero: the flat navy panel and its reserved height. It carries
-    // no ambient glow layer, so the values here are the whole of what
-    // .hero paints in site-theme.css and the first frame matches the last.
-    '#top.hero{position:relative;min-height:22rem;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
+    // Homepage hero: paint the banner photo (not a flat navy gradient) in the
+    // first frame, mirroring the .hero media rules in site-theme.css. The
+    // gradient stays as the fallback colour layer; the image loads via the
+    // high-priority rel=preload links in the page head. A single flat
+    // translucent veil keeps white text readable over every part of the photo,
+    // matching the last frame so the hero never repaints after stylesheets
+    // arrive.
+    '#top.hero{position:relative;min-height:22rem;background-color:#1b2a4a;background-image:linear-gradient(rgba(3,7,11,.62),rgba(3,7,11,.62)),url(/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=65);background-size:cover;background-position:center;color:#fff}' +
+    // Each width paints exactly the rendition its rel=preload link already
+    // fetched (640 phones / 1440 tablets+small laptops), so no second copy of
+    // the photo is ever requested.
+    '@media(min-width:768px) and (max-width:1439px){#top.hero{background-image:linear-gradient(rgba(3,7,11,.62),rgba(3,7,11,.62)),url(/.netlify/images?url=/logo-banner.jpg&w=1440&fm=avif&q=65)}}' +
     // Reserve the hero's inner stack height so the webfont swap and the icon
     // glyph boxes in .hero-trust / .hero-rating-bar cannot push the trust
     // badges down after first paint. The hero is the LCP element on '/', and a
@@ -382,7 +419,7 @@ function optimizeFontsAndAssets(html) {
   // The old async pattern, plus the <noscript> twin that would otherwise
   // become a second copy of the stylesheet.
   html = html.replace(
-    /[ \t]*<link\s+rel="preload"\s+href="\/css\/tailwind\.css(?:\?v=[^"]*)?"\s+as="style"[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel="stylesheet"\s+href="\/css\/tailwind\.css(?:\?v=[^"]*)?"><\/noscript>\r?\n?)?/gi,
+    /[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/css\/tailwind\.css(?:\?v=[^\s">]*)?["']?\s+as=["']?style["']?[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel=["']?stylesheet["']?\s+href=["']?\/css\/tailwind\.css(?:\?v=[^\s">]*)?["']?><\/noscript>\r?\n?)?/gi,
     `    <link rel="stylesheet" href="${TAILWIND_CSS}">\n`,
   );
 
@@ -399,7 +436,7 @@ function optimizeFontsAndAssets(html) {
 
   // Keep the stamp current on whichever link survived the two passes above.
   html = html.replace(
-    /<link\s+rel="stylesheet"\s+href="\/css\/tailwind\.css(?:\?v=[^"]*)?">/gi,
+    /<link\s+rel=["']?stylesheet["']?\s+href=["']?\/css\/tailwind\.css(?:\?v=[^\s">]*)?["']?>/gi,
     `<link rel="stylesheet" href="${TAILWIND_CSS}">`,
   );
 

@@ -305,14 +305,22 @@
 // a returning visitor holding v56 would pair the new chips with the old
 // stylesheet and the old matcher. Bumping this version (and ASSET_VERSION to
 // 20260831a) refetches the set for every client.
-// v58 repairs form notifications: /book, /services, /contact and /emergency
-// mirror their submissions into Netlify Forms now, and the bookings,
-// home-care-plans and emergency forms dropped data-netlify-recaptcha so those
-// mirrors can succeed. /js/book-page.js, /js/home-care-plans.js,
-// /js/contact-page.js and /js/emergency-page.js all changed; /js/* is served
-// immutable and the asset cache keys drop ?v=, so a returning visitor holding
-// v57 would keep the old scripts for a year. Bumping this version (and
-// ASSET_VERSION to 20260831b) refetches them for every client.
+// v58 combines two changes from this branch and the latest changes from the
+// main project: (1) the home hero is painted with the new banner photo
+// (public/logo-banner.jpg) from the first frame — the inline critical block on
+// '/' now lays the image under its translucent veil instead of the flat navy
+// gradient, and the page preloads the same AVIF renditions it always pointed
+// at; the hero markup and inline block changed behind the unchanged '/'
+// pathname, so a returning visitor holding v57 would keep last deploy's
+// flat-navy hero. (2) form notifications were repaired: /book, /services,
+// /contact and /emergency mirror their submissions into Netlify Forms now, and
+// the bookings, home-care-plans and emergency forms dropped
+// data-netlify-recaptcha so those mirrors can succeed. /js/book-page.js,
+// /js/home-care-plans.js, /js/contact-page.js and /js/emergency-page.js all
+// changed; /js/* is served immutable and the asset cache keys drop ?v=, so a
+// returning visitor holding v57 would keep the old scripts for a year. Both
+// changes share this single bump so every client refetches the new shell and
+// the new scripts together.
 const CACHE_VERSION = 'v58';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
