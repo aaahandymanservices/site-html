@@ -1705,14 +1705,16 @@ body::after {
 }
 
 /* --- Homepage hero -------------------------------------------------------
-   A flat brand-navy panel: the same solid colour plus left-to-right brand
-   gradient the inline critical block paints, so the first frame and the
-   final frame are identical and the hero contributes no layout shift. The
-   hero carries no ambient glow layer of its own -- no blurred radial
+   The banner photograph sits under a translucent dark veil at every width:
+   a flat navy gradient kept only as the instant-paint fallback for the first
+   frame while the image loads. Below 1440px two media queries further down
+   layer in width-appropriate renditions of the photo; at 1440px and up the
+   inline critical block already paints the 1440px rendition, and the
+   stylesheet layers the same photo stack so the veil matches everywhere.
+   The hero carries no ambient glow layer of its own -- no blurred radial
    ellipse, no drifting dot grid, no crimson bloom -- so the headline, the
    rating badge, the trust row, and the CTAs read against an even
-   background at every width. Below 1440px the two media queries further
-   down layer the banner photograph in, where its detail still reads. */
+   background at every width. */
 .hero {
   position: relative;
   isolation: isolate;
@@ -1722,7 +1724,8 @@ body::after {
   text-align: center;
   min-height: 22rem;
   background-color: #1b2a4a;
-  background-image: linear-gradient(to right, #101b31 0%, #1b2a4a 50%, #020617 100%);
+  background-image: linear-gradient(rgba(3, 7, 11, 0.62), rgba(3, 7, 11, 0.62)),
+    url("/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=65") center/cover;
 }
 
 /* Give the hero headline a subtle metallic depth */
@@ -6024,8 +6027,7 @@ input.careers-upload-input::file-selector-button:hover {
 /* Homepage Hero, Rating Badges, Trust Grid & Accordions */
 @media (min-width: 768px) and (max-width: 1439px) {
   .hero {
-    background: radial-gradient(ellipse at top, rgba(27, 42, 74, 0.72) 0, rgba(3, 7, 11, 0.85) 100%),
-      linear-gradient(rgba(3, 7, 11, 0.65), rgba(3, 7, 11, 0.75)),
+    background: linear-gradient(rgba(3, 7, 11, 0.62), rgba(3, 7, 11, 0.62)),
       url("/.netlify/images?url=/logo-banner.jpg&w=1440&fm=avif&q=65") center/cover;
     background-color: #1b2a4a;
   }
@@ -6034,8 +6036,7 @@ input.careers-upload-input::file-selector-button:hover {
 @media (max-width: 767px) {
   .hero {
     min-height: auto;
-    background: radial-gradient(ellipse at top, rgba(27, 42, 74, 0.8) 0, rgba(3, 7, 11, 0.9) 100%),
-      linear-gradient(rgba(3, 7, 11, 0.75), rgba(3, 7, 11, 0.75)),
+    background: linear-gradient(rgba(3, 7, 11, 0.62), rgba(3, 7, 11, 0.62)),
       url("/.netlify/images?url=/logo-banner.jpg&w=640&fm=avif&q=65") center/cover;
     background-color: #1b2a4a;
   }
