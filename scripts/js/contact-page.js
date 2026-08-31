@@ -602,6 +602,43 @@
           }
 
           const sendMessage = function() {
+              // The quote is saved by /api/contact-quote; once it succeeds, a
+              // text-only copy is mirrored into Netlify Forms so it reaches
+              // the owner's inbox like every other form. The mirror is only
+              // sent from the success branch below, so a submission the API
+              // rejects (validation, honeypot) never reaches the inbox.
+              // Photos stay out of it -- they are stored in Blobs and the
+              // function returns their links, which ride along in the
+              // message. The reCAPTCHA token stays out too: it is single-use
+              // and the API is the one verifying it, so this post relies on
+              // the form not requiring a token. Netlify answers a rejected
+              // mirror with a 4xx that still resolves, so a network-level
+              // .catch() alone never fires; response.ok is the real signal.
+              const mirror = new URLSearchParams();
+              mirror.append('form-name', 'contact');
+              mirror.append('name', formData.get('name') || '');
+              mirror.append('email', formData.get('email') || '');
+              mirror.append('phone', formData.get('phone') || '');
+              mirror.append('city', formData.get('city') || '');
+              mirror.append('service', formData.get('service') || '');
+              mirror.append('message', formData.get('message') || '');
+              mirror.append('seasonal-opt-in', formData.get('seasonal-opt-in') === 'on' ? 'on' : 'off');
+              mirror.append('loyalty_credit', claimedCertificate ? 'yes' : 'no');
+
+              const mirrorToNetlifyForms = function() {
+                  fetch('/contact.html', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                      body: mirror.toString()
+                  }).then(function (response) {
+                      if (!response.ok) {
+                          console.error('Netlify Form mirror rejected the quote request:', response.status);
+                      }
+                  }).catch(function (err) {
+                      console.error('Netlify Form submission failed:', err);
+                  });
+              };
+
               const xhr = new XMLHttpRequest();
               xhr.open('POST', '/api/contact-quote');
               // No Content-Type header: the browser sets multipart/form-data with
@@ -635,6 +672,12 @@
                   }
 
                   if (responseOk) {
+                      // A text-only copy of the quote rides to the owner's
+                      // inbox now that the API accepted the submission. The
+                      // customer-facing UI is unaffected either way: the row
+                      // is already saved and this copy only feeds Forms.
+                      mirrorToNetlifyForms();
+
                       // The certificate is one per customer, so spend it the
                       // moment the claim lands. This records it against their
                       // email address server-side and stops the offer being

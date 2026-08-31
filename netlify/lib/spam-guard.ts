@@ -1,25 +1,29 @@
 /*
  * Spam protection for the forms that submit to our own functions.
  *
- * Every public form on the site carries `data-netlify="true"`,
- * `data-netlify-recaptcha="true"` and a `netlify-honeypot` field, and Netlify's
- * build bot renders a reCAPTCHA widget into each one. Netlify only checks any
- * of that on submissions that reach Netlify Forms, though -- the honeypot and
- * the reCAPTCHA token are evaluated by the Forms endpoint, not by the page.
- * Three forms never reach it:
+ * Every public form on the site carries `data-netlify="true"` and a
+ * `netlify-honeypot` field. The ones that post straight to Netlify Forms --
+ * / , /careers and /customer-care -- also render a reCAPTCHA widget
+ * (`data-netlify-recaptcha="true"`), whose token the Forms endpoint checks on
+ * every submission, so they are already covered.
  *
- *   /contact       -> /api/contact-quote        (XHR, no Forms post at all)
- *   /book          -> /api/booking              (Forms post is a second copy)
- *   /services      -> /api/home-care-subscription  (likewise)
+ * Four forms never reach Netlify's checks first, though. They submit through
+ * JavaScript to our functions and then mirror a copy into Netlify Forms, so
+ * the honeypot and the token have to be evaluated here, on the path that
+ * writes to the database:
  *
- * So the visitor solved a challenge, the browser sent the token along inside
- * the FormData, and the function dropped it on the floor and wrote the row.
- * A bot posting straight at the endpoint met nothing at all. This module is
- * what those three functions call so the controls the markup advertises are
- * actually enforced on the path that writes to the database.
+ *   /contact       -> /api/contact-quote        (XHR, mirror mirrors a copy)
+ *   /emergency     -> /api/contact-quote        (likewise)
+ *   /book          -> /api/booking              (page form + booking modal)
+ *   /services      -> /api/home-care-subscription
  *
- * The other three forms (/ , /careers, /customer-care) post to Netlify Forms
- * and are already covered by it; they do not call this.
+ * The /book and /services forms and the booking modal dropped
+ * `data-netlify-recaptcha`: the modal is built in JavaScript and has no widget
+ * to read a token from, so a required challenge kept the mirror posts (and
+ * with them the owner's email notification) from ever succeeding. The
+ * honeypot and this module's server-side token check still apply -- set
+ * SITE_RECAPTCHA_KEY and SITE_RECAPTCHA_SECRET and /api/* verifies the token
+ * the /contact and /emergency widgets write into their submissions.
  */
 import { getEnv } from "./env.js";
 import { PHONE } from "./messages.js";
@@ -159,10 +163,10 @@ export const verifyCaptcha = async (token: unknown, remoteIp?: string): Promise<
  * tripped.
  *
  * One caveat for anyone extending this: a reCAPTCHA token is single-use, and
- * verifying it here consumes it. Booking and the home care plans also mirror
- * their submission into Netlify Forms so it reaches the owner's inbox; those
- * mirror posts deliberately do not carry the token, because Netlify would try
- * to verify the same one and fail. Send the token to exactly one verifier.
+ * verifying it here consumes it. The forms that render a widget and mirror a
+ * copy into Netlify Forms deliberately leave the token out of the mirror post,
+ * because Netlify would try to verify the same one and fail. Send the token to
+ * exactly one verifier.
  */
 export const isSpamSubmission = async (fields: SpamFields, request: Request): Promise<boolean> => {
   if (honeypotFilled(fields.honeypot)) {

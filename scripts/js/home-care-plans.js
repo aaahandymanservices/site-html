@@ -168,16 +168,16 @@
       };
 
       /*
-       * The honeypot and the reCAPTCHA token the widget wrote into the form.
-       * This payload names its fields one by one, so neither travelled on its
-       * own and /api/home-care-subscription had nothing to check. The mirror
-       * post to /services.html below deliberately leaves the token out: it is
-       * single-use, and the API is the one verifying it.
+       * The honeypot the widget-free form still carries. This payload names
+       * its fields one by one, so it did not travel on its own and
+       * /api/home-care-subscription checks it along with the reCAPTCHA token
+       * when one is configured. The form no longer renders a reCAPTCHA
+       * widget, so no token is forwarded; the mirror post to /services.html
+       * below likewise leaves any token out: it is single-use, and the API
+       * is the one verifying it.
        */
       var honeypotField = form.querySelector('[name="plan-bot-field"]');
       if (honeypotField) payload['plan-bot-field'] = honeypotField.value;
-      var captchaField = form.querySelector('[name="g-recaptcha-response"]');
-      if (captchaField) payload['g-recaptcha-response'] = captchaField.value;
 
       if (!OAKLAND_ZIP.test(payload.zip)) {
         setError('Quarterly plans are Oakland County only. Call (248) 385-3432 if you are just outside it.');
@@ -211,10 +211,25 @@
           mirror.append('billingCycle', payload.billingCycle);
           mirror.append('address', payload.address + ', ' + payload.city + ' ' + payload.zip);
           mirror.append('notes', payload.notes);
+          /*
+           * Fire-and-forget mirror: the subscription is already saved by
+           * /api/home-care-subscription, this copy only feeds the owner's
+           * inbox and the dashboard. Netlify answers a rejected submission
+           * with a 4xx that still resolves, so a network-level .catch() alone
+           * never fired and the failure stayed invisible -- check response.ok
+           * too. The form no longer requires a reCAPTCHA token (the API
+           * verified the honeypot and, when configured, the token
+           * server-side), so this post now satisfies everything
+           * /services.html asks for.
+           */
           fetch('/services.html', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: mirror.toString()
+          }).then(function (response) {
+            if (!response.ok) {
+              console.error('Netlify Form mirror rejected the plan request:', response.status);
+            }
           }).catch(function (err) {
             console.error('Netlify Form submission failed:', err);
           });
