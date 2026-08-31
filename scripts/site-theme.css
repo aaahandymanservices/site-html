@@ -3159,9 +3159,47 @@ html.bw-open body {
 }
 
 /* City and township pills inside a card. */
+/*
+ * City chips in the zone cards — pill-shaped buttons that fly the embedded
+ * map to that city on click (scripts/js/service-areas-page.js).
+ *
+ * /service-areas used to render its zone lists as anchor tags to the city
+ * landing pages, which meant the requested "tap a chip to fly the map"
+ * behaviour never actually ran on the page that promises it: the click
+ * navigated away before the script could pan anything. Both pages now render
+ * the chips as <button type="button"> so the click stays on the page, and the
+ * pill treatment below (crimson selected state, navy Zone A hover) reads as
+ * one interactive control on either page.
+ */
 .zone-card .zone-chip {
-  border-radius: 0.5rem;
+  border-radius: 9999px;
   color: #1f2937;
+  background: #fff;
+  border-color: #e5e7eb;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 6%);
+}
+
+/* The chip the map is currently flown to. Crimson — the brand's action
+   colour — so the selected pill stands out against the navy map header
+   without introducing a third accent. */
+.zone-card .zone-chip.is-active {
+  background: var(--brand-crimson);
+  border-color: var(--brand-crimson);
+  color: #fff;
+}
+
+.zone-card-a .zone-chip:hover,
+.zone-card-a .zone-chip:focus-visible {
+  background: #eef2ff;
+  color: #1e3a8a;
+  border-color: #b6c3f5;
+}
+
+.zone-card-b .zone-chip:hover,
+.zone-card-b .zone-chip:focus-visible {
+  background: #fff7ed;
+  color: #9a3412;
+  border-color: #fed7aa;
 }
 
 /* The tinted footnote box, e.g. Zone B's extended-travel differential. */
@@ -4314,14 +4352,10 @@ footer[class] {
 /*
  * Compact city list inside a zone card.
  *
- * /service-areas used to render every city three times over -- as an
- * interactive chip in the zone card, and again as a full card with a zone
- * pill in a second accordion list -- each link labelled "Zone A & $100" /
- * "Zone B & $145". The zone card itself already states the price once, so the
- * consolidated list carries the city name alone: one <li> per city, the link
- * to its page, and the map-fly pin. Six columns on desktop keeps the whole
- * 47-city set scannable without the accordion; two on a phone. "City · pin"
- * flows as one inline unit so wrapping never splits the name from its pin.
+ * Superseded on /service-areas: the zone cards there now render the cities as
+ * interactive .zone-chip pills (see the block below), matching the home page.
+ * These rules stay for the .zone-city-list markup that older cached pages and
+ * any future text-style list still reference.
  */
 .zone-city-list {
   display: grid;
@@ -4409,7 +4443,7 @@ footer[class] {
 }
 
 /* The tiny pin that flies the map to this city. Shares the text colour so
-   hover/focus recolours both in one rule; shrinks the hit area so the pin
+   hover/focus recolors both in one rule; shrinks the hit area so the pin
    itself is not a second tap target beside the link. */
 .city-cell__pin {
   flex: 0 0 auto;
@@ -4434,7 +4468,7 @@ footer[class] {
   display: block;
   width: 100%;
   text-align: center;
-  border-radius: 0.6rem;
+  border-radius: 9999px;
   padding: 0.5rem 0.4rem;
   font-size: 0.82rem;
   font-weight: 600;
