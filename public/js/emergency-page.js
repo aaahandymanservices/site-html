@@ -213,7 +213,30 @@
       x.onload = function () {
         var E = x.status >= 200 && x.status < 300, w = "";
         if (!E) try { w = JSON.parse(x.responseText || "{}").error || ""; } catch { w = ""; }
-        E ? (o("Thank you! Your emergency request is on its way. For the fastest response, please also call (248) 385-3432.", "success"), S.reset(), c.forEach(function (z) { h(z, ""); }), q()) : (o(w || "Sorry — your request didn't go through. Please call us right away at (248) 385-3432 and we'll help immediately.", "error"), p && p.classList.add("hidden"), d && (d.style.width = "0%"), l && (l.textContent = ""));
+        if (E) {
+          o("Thank you! Your emergency request is on its way. For the fastest response, please also call (248) 385-3432.", "success");
+          S.reset();
+          c.forEach(function (z) { h(z, ""); });
+          q();
+          // The request is saved by /api/contact-quote; this text-only copy
+          // mirrors into Netlify Forms so it reaches the owner's inbox like
+          // every other form. It is sent only on success, so a submission the
+          // API rejects (honeypot, validation) never reaches Forms. The
+          // reCAPTCHA token stays out -- single-use, and the API verifies it
+          // -- along with the photo blobs the text URL body cannot carry.
+          // response.ok is the real failure signal: a rejected mirror answers
+          // 4xx without throwing.
+          var M = new URLSearchParams();
+          y.forEach(function (v, k) { typeof v === "string" && k !== "g-recaptcha-response" && M.append(k, v); });
+          fetch("/emergency.html", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: M.toString() })
+            .then(function (n) { n.ok || console.error("Netlify Form mirror rejected the emergency request:", n.status); })
+            .catch(function (n) { console.error("Netlify Form submission failed:", n); });
+        } else {
+          o(w || "Sorry — your request didn't go through. Please call us right away at (248) 385-3432 and we'll help immediately.", "error");
+          p && p.classList.add("hidden");
+          d && (d.style.width = "0%");
+          l && (l.textContent = "");
+        }
       };
       x.onerror = function () {
         o("Sorry — your request didn't go through. Please call us right away at (248) 385-3432 and we'll help immediately.", "error");

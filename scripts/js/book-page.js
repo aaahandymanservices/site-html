@@ -1158,17 +1158,17 @@
               if (uploadPhoto) requestData.append('photo', uploadPhoto, uploadPhoto.name);
 
               /*
-               * The honeypot and the reCAPTCHA token the widget wrote into the
-               * form. This body is assembled field by field rather than from
-               * `new FormData(bookingForm)`, so neither came along on its own,
-               * and /api/booking had nothing to check. The mirror post to
-               * /book.html below deliberately leaves the token out: it is
+               * The honeypot the widget-free form still carries. This body is
+               * assembled field by field rather than from
+               * `new FormData(bookingForm)`, so it did not come along on its
+               * own, and /api/booking checks it along with the reCAPTCHA
+               * token when one is configured. The form no longer renders a
+               * reCAPTCHA widget, so no token is forwarded; the mirror post
+               * to /book.html below likewise leaves any token out: it is
                * single-use, and the API is the one verifying it.
                */
               const bookingHoneypot = bookingForm.querySelector('[name="bot-field"]');
               if (bookingHoneypot) requestData.append('bot-field', bookingHoneypot.value);
-              const bookingCaptcha = bookingForm.querySelector('[name="g-recaptcha-response"]');
-              if (bookingCaptcha) requestData.append('g-recaptcha-response', bookingCaptcha.value);
 
               const response = await fetch('/api/booking', {
                   method: 'POST',
@@ -1237,11 +1237,31 @@
                   }
               }
 
-              fetch('/book.html', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                  body: netlifyFormData.toString()
-              }).catch(err => console.error('Netlify Form submission failed:', err));
+              /*
+               * Fire-and-forget mirror: the booking is already saved by
+               * /api/booking, this copy only feeds the owner's inbox and the
+               * dashboard. Netlify answers a rejected submission with a 4xx
+               * that still resolves, so a network-level .catch() alone never
+               * fired and the failure stayed invisible -- check response.ok
+               * too. The form no longer requires a reCAPTCHA token (the API
+               * verified the honeypot and, when configured, the token
+               * server-side), so this post now satisfies everything /book.html
+               * asks for.
+               */
+              (async () => {
+                  try {
+                      const mirrorResponse = await fetch('/book.html', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                          body: netlifyFormData.toString()
+                      });
+                      if (!mirrorResponse.ok) {
+                          console.error('Netlify Form mirror rejected the booking:', mirrorResponse.status);
+                      }
+                  } catch (err) {
+                      console.error('Netlify Form submission failed:', err);
+                  }
+              })();
 
               // Toggle States
               bookingForm.classList.add('hidden');

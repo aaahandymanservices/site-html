@@ -305,7 +305,15 @@
 // a returning visitor holding v56 would pair the new chips with the old
 // stylesheet and the old matcher. Bumping this version (and ASSET_VERSION to
 // 20260831a) refetches the set for every client.
-const CACHE_VERSION = 'v57';
+// v58 repairs form notifications: /book, /services, /contact and /emergency
+// mirror their submissions into Netlify Forms now, and the bookings,
+// home-care-plans and emergency forms dropped data-netlify-recaptcha so those
+// mirrors can succeed. /js/book-page.js, /js/home-care-plans.js,
+// /js/contact-page.js and /js/emergency-page.js all changed; /js/* is served
+// immutable and the asset cache keys drop ?v=, so a returning visitor holding
+// v57 would keep the old scripts for a year. Bumping this version (and
+// ASSET_VERSION to 20260831b) refetches them for every client.
+const CACHE_VERSION = 'v58';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

@@ -685,7 +685,7 @@
                     <p class="mt-1 text-sm text-blue-100" data-plan-summary></p>
                     <p class="mt-1 text-xs text-blue-200">Nothing is charged now. Victor calls within one business day to confirm the first visit and set up billing.</p>
 
-                    <form id=home-care-form name=home-care-plans method=POST data-netlify=true data-netlify-recaptcha=true netlify-honeypot=plan-bot-field class="mt-5 grid gap-4">
+                    <form id=home-care-form name=home-care-plans method=POST data-netlify=true netlify-honeypot=plan-bot-field class="mt-5 grid gap-4">
                         <input type=hidden name=form-name value=home-care-plans>
                         <p class=hidden><label>Do not fill this out: <input name=plan-bot-field></label></p>
                         <input type=hidden id=home-care-cycle name=billingCycle value=monthly>
@@ -747,7 +747,6 @@
 
                         <p class="hidden rounded-xl border border-red-400/50 bg-red-900/40 p-3 text-sm text-red-100" data-plan-error role=alert></p>
 
-                        <div data-netlify-recaptcha=true></div>
                         <button type=submit id=home-care-submit class="w-full rounded-xl bg-red-600 px-5 py-3.5 text-base font-extrabold text-white transition hover:bg-red-700 sm:w-auto sm:justify-self-start">
                             Request My Plan <i class="fas fa-arrow-right text-xs" aria-hidden=true></i>
                         </button>

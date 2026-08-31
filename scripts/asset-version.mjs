@@ -25,8 +25,17 @@
  * Note that this stamp alone is not enough for a returning visitor: the service
  * worker keys assets by pathname with ?v= removed, so public/sw.js has its own
  * CACHE_VERSION that has to move with a stylesheet change as well.
+ *
+ * 20260831b — form notification repair: bookings, home care plans, contact and
+ * emergency now mirror into Netlify Forms (contact and emergency for the first
+ * time), and bookings/home-care-plans/emergency dropped
+ * data-netlify-recaptcha so those mirrors can succeed; book-page.js and
+ * home-care-plans.js stopped forwarding a reCAPTCHA token to the API. Scripts
+ * on the /book, /services, /contact and /emergency submission paths changed,
+ * so this bump and the matching CACHE_VERSION move in public/sw.js refetch
+ * them for returning visitors.
  */
-export const ASSET_VERSION = '20260831a';
+export const ASSET_VERSION = '20260831b';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use
