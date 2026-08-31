@@ -305,7 +305,24 @@
 // a returning visitor holding v56 would pair the new chips with the old
 // stylesheet and the old matcher. Bumping this version (and ASSET_VERSION to
 // 20260831a) refetches the set for every client.
-const CACHE_VERSION = 'v57';
+// v58 restores the banner photograph on the home page hero: site-theme.css
+// layers /logo-banner.jpg (resized per breakpoint by the Image CDN) under a
+// navy scrim behind the headline, rating badge, trust row, and CTAs, and the
+// inline critical palette paints the same scrim so the pre-photo and final
+// frames read as the same panel. The photo and its styling live on
+// site-theme.css behind its unchanged pathname, and the asset cache drops
+// ?v=, so a returning visitor holding v57 would keep last deploy's
+// stylesheet and keep the flat navy panel. Bumping this version (and
+// ASSET_VERSION to 20260831b) refetches the stylesheet for every client.
+// v59 ships new banner artwork: public/logo-banner.jpg is replaced with an
+// optimized re-encode of the owner's uploaded banner (1760x440 progressive
+// JPEG, EXIF stripped), which every breakpoint rule, preload, and og:image
+// tag already points at. /jpg/* is served immutable for a year and the Image
+// CDN transforms and asset-cache entries key on the URL, not the file
+// contents, so a returning visitor holding v58 would keep the old artwork
+// cached indefinitely. Bumping this version refetches the transformed banner
+// variants for every client.
+const CACHE_VERSION = 'v59';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
