@@ -81,8 +81,8 @@
 
     <link rel=dns-prefetch href=https://www.googletagmanager.com>
     <link rel=stylesheet href="/css/tailwind.css?v=20260817d">
-    <link rel="preload" href="/css/site-theme.css?v=20260830b" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260830b"></noscript>
+    <link rel="preload" href="/css/site-theme.css?v=20260831a" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260831a"></noscript>
     <link rel=preload href="/css/icons.css?v=20260825b" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
     <noscript><link rel=stylesheet href="/css/icons.css?v=20260825b"></noscript>
 
@@ -221,14 +221,14 @@
                         <div class="rounded-3xl overflow-hidden shadow-lg ring-1 ring-gray-300 border-[2px] border-gray-200 bg-white">
                             <div class="zone-gmap__bar flex flex-wrap items-center justify-between gap-2 px-5 sm:px-6 py-3 bg-slate-900 text-white">
                                 <span class="inline-flex items-center gap-2 text-sm font-bold tracking-wide">
-                                    <i class="fas fa-street-view text-red-300" aria-hidden=true></i>
+                                    <i class="fas fa-map-marker-alt text-red-300" aria-hidden=true></i>
                                     Explore the service area
                                 </span>
-                                <span id=zone-gmap-label class="text-xs sm:text-sm text-slate-300 font-semibold">Waterford, MI &middot; Oakland County</span>
+                                <span id=zone-gmap-label class="text-xs sm:text-sm text-slate-300 font-semibold" role=status aria-live=polite>Waterford, MI &middot; Zone A</span>
                             </div>
-                            <iframe id=zone-gmap class=zone-gmap__frame title="Interactive Google Map of the AAA Handyman Services Oakland County service area" src="https://maps.google.com/maps?q=Waterford+Township,+MI&amp;z=10&amp;output=embed" loading=lazy referrerpolicy=no-referrer-when-downgrade allowfullscreen></iframe>
+                            <iframe id=zone-gmap class=zone-gmap__frame title="Interactive Google Map of the AAA Handyman Services Oakland County service area" src="https://maps.google.com/maps?q=42.6656,-83.4005&amp;z=11&amp;output=embed" loading=lazy referrerpolicy=no-referrer-when-downgrade allowfullscreen></iframe>
                         </div>
-                        <p class="text-center text-xs sm:text-sm text-gray-500 mt-3">Drag to pan, pinch or scroll to zoom &mdash; and tap the pin beside any city below to fly the map there.</p>
+                        <p class="text-center text-xs sm:text-sm text-gray-500 mt-3">Drag to pan, pinch or scroll to zoom, and tap a city chip below to fly the map to that city.</p>
                     </div>
 
                     <div id=service-area-search class="bg-white border-[2px] border-red-600 p-6 sm:p-8 rounded-3xl shadow-lg">
@@ -262,45 +262,45 @@
                         </div>
 
                         <div class="p-6 sm:p-8 flex-1">
-                            <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">36 cities &middot; tap a pin to locate on the map</p>
-                            <ul class=zone-city-list>
-                                <li class="city-cell"><a href=/handyman/auburn-hills class="city-cell__link" data-city="Auburn Hills" data-lat=42.6875 data-lng=-83.2341>Auburn Hills<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/berkley class="city-cell__link" data-city="Berkley" data-lat=42.5031 data-lng=-83.1838>Berkley<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/beverly-hills class="city-cell__link" data-city="Beverly Hills" data-lat=42.525 data-lng=-83.2388>Beverly Hills<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/birmingham class="city-cell__link" data-city="Birmingham" data-lat=42.5467 data-lng=-83.2113>Birmingham<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/bloomfield-hills class="city-cell__link" data-city="Bloomfield Hills" data-lat=42.5836 data-lng=-83.2455>Bloomfield Hills<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/clarkston class="city-cell__link" data-city="Clarkston" data-lat=42.7356 data-lng=-83.4183>Clarkston<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/clawson class="city-cell__link" data-city="Clawson" data-lat=42.5334 data-lng=-83.1463>Clawson<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/commerce class="city-cell__link" data-city="Commerce" data-lat=42.5867 data-lng=-83.4897>Commerce<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/davisburg class="city-cell__link" data-city="Davisburg" data-lat=42.7534 data-lng=-83.5349>Davisburg<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/farmington-hills class="city-cell__link" data-city="Farmington Hills" data-lat=42.4853 data-lng=-83.3772>Farmington Hills<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/ferndale class="city-cell__link" data-city="Ferndale" data-lat=42.4606 data-lng=-83.1346>Ferndale<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/franklin class="city-cell__link" data-city="Franklin" data-lat=42.5223 data-lng=-83.3038>Franklin<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/hazel-park class="city-cell__link" data-city="Hazel Park" data-lat=42.4631 data-lng=-83.1022>Hazel Park<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/highland class="city-cell__link" data-city="Highland" data-lat=42.6389 data-lng=-83.618>Highland<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/independence-twp class="city-cell__link" data-city="Independence Twp." data-lat=42.7481 data-lng=-83.4038>Independence Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/lake-orion class="city-cell__link" data-city="Lake Orion" data-lat=42.7842 data-lng=-83.2399>Lake Orion<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/madison-heights class="city-cell__link" data-city="Madison Heights" data-lat=42.4859 data-lng=-83.1052>Madison Heights<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/milford class="city-cell__link" data-city="Milford" data-lat=42.5861 data-lng=-83.5999>Milford<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/novi class="city-cell__link" data-city="Novi" data-lat=42.4806 data-lng=-83.4755>Novi<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/oak-park class="city-cell__link" data-city="Oak Park" data-lat=42.4595 data-lng=-83.1819>Oak Park<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/oakland-twp class="city-cell__link" data-city="Oakland Twp." data-lat=42.7661 data-lng=-83.1613>Oakland Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/orchard-lake class="city-cell__link" data-city="Orchard Lake" data-lat=42.5831 data-lng=-83.3577>Orchard Lake<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/orion-twp class="city-cell__link" data-city="Orion Twp." data-lat=42.7711 data-lng=-83.256>Orion Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/oxford class="city-cell__link" data-city="Oxford" data-lat=42.8242 data-lng=-83.2499>Oxford<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/pleasant-ridge class="city-cell__link" data-city="Pleasant Ridge" data-lat=42.4711 data-lng=-83.1408>Pleasant Ridge<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/pontiac class="city-cell__link" data-city="Pontiac" data-lat=42.6389 data-lng=-83.291>Pontiac<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/rochester class="city-cell__link" data-city="Rochester" data-lat=42.6806 data-lng=-83.1338>Rochester<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/rochester-hills class="city-cell__link" data-city="Rochester Hills" data-lat=42.6584 data-lng=-83.1499>Rochester Hills<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/troy class="city-cell__link" data-city="Troy" data-lat=42.5803 data-lng=-83.1499>Troy<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/union-lake class="city-cell__link" data-city="Union Lake" data-lat=42.6178 data-lng=-83.438>Union Lake<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/utica class="city-cell__link" data-city="Utica" data-lat=42.6273 data-lng=-83.0299>Utica<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/walled-lake class="city-cell__link" data-city="Walled Lake" data-lat=42.5375 data-lng=-83.4838>Walled Lake<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/waterford class="city-cell__link" data-city="Waterford" data-lat=42.6656 data-lng=-83.4005>Waterford<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/west-bloomfield class="city-cell__link" data-city="West Bloomfield" data-lat=42.5642 data-lng=-83.3591>West Bloomfield<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/white-lake class="city-cell__link" data-city="White Lake" data-lat=42.6534 data-lng=-83.5133>White Lake<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/wixom class="city-cell__link" data-city="Wixom" data-lat=42.5245 data-lng=-83.5363>Wixom<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                            </ul>
+                            <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">36 cities &middot; tap a chip to fly the map there</p>
+                            <div class=zone-chip-grid>
+                                <button type=button class=zone-chip data-city="Auburn Hills" data-lat=42.6875 data-lng=-83.2341>Auburn Hills</button>
+                                <button type=button class=zone-chip data-city=Berkley data-lat=42.5031 data-lng=-83.1838>Berkley</button>
+                                <button type=button class=zone-chip data-city="Beverly Hills" data-lat=42.525 data-lng=-83.2388>Beverly Hills</button>
+                                <button type=button class=zone-chip data-city=Birmingham data-lat=42.5467 data-lng=-83.2113>Birmingham</button>
+                                <button type=button class=zone-chip data-city="Bloomfield Hills" data-lat=42.5836 data-lng=-83.2455>Bloomfield Hills</button>
+                                <button type=button class=zone-chip data-city=Clarkston data-lat=42.7356 data-lng=-83.4183>Clarkston</button>
+                                <button type=button class=zone-chip data-city=Clawson data-lat=42.5334 data-lng=-83.1463>Clawson</button>
+                                <button type=button class=zone-chip data-city=Commerce data-lat=42.5867 data-lng=-83.4897>Commerce</button>
+                                <button type=button class=zone-chip data-city=Davisburg data-lat=42.7534 data-lng=-83.5349>Davisburg</button>
+                                <button type=button class=zone-chip data-city="Farmington Hills" data-lat=42.4853 data-lng=-83.3772>Farmington Hills</button>
+                                <button type=button class=zone-chip data-city=Ferndale data-lat=42.4606 data-lng=-83.1346>Ferndale</button>
+                                <button type=button class=zone-chip data-city=Franklin data-lat=42.5223 data-lng=-83.3038>Franklin</button>
+                                <button type=button class=zone-chip data-city="Hazel Park" data-lat=42.4631 data-lng=-83.1022>Hazel Park</button>
+                                <button type=button class=zone-chip data-city=Highland data-lat=42.6389 data-lng=-83.618>Highland</button>
+                                <button type=button class=zone-chip data-city="Independence Twp." data-lat=42.7481 data-lng=-83.4038>Independence Twp.</button>
+                                <button type=button class=zone-chip data-city="Lake Orion" data-lat=42.7842 data-lng=-83.2399>Lake Orion</button>
+                                <button type=button class=zone-chip data-city="Madison Heights" data-lat=42.4859 data-lng=-83.1052>Madison Heights</button>
+                                <button type=button class=zone-chip data-city=Milford data-lat=42.5861 data-lng=-83.5999>Milford</button>
+                                <button type=button class=zone-chip data-city=Novi data-lat=42.4806 data-lng=-83.4755>Novi</button>
+                                <button type=button class=zone-chip data-city="Oak Park" data-lat=42.4595 data-lng=-83.1819>Oak Park</button>
+                                <button type=button class=zone-chip data-city="Oakland Twp." data-lat=42.7661 data-lng=-83.1613>Oakland Twp.</button>
+                                <button type=button class=zone-chip data-city="Orchard Lake" data-lat=42.5831 data-lng=-83.3577>Orchard Lake</button>
+                                <button type=button class=zone-chip data-city="Orion Twp." data-lat=42.7711 data-lng=-83.256>Orion Twp.</button>
+                                <button type=button class=zone-chip data-city=Oxford data-lat=42.8242 data-lng=-83.2499>Oxford</button>
+                                <button type=button class=zone-chip data-city="Pleasant Ridge" data-lat=42.4711 data-lng=-83.1408>Pleasant Ridge</button>
+                                <button type=button class=zone-chip data-city=Pontiac data-lat=42.6389 data-lng=-83.291>Pontiac</button>
+                                <button type=button class=zone-chip data-city=Rochester data-lat=42.6806 data-lng=-83.1338>Rochester</button>
+                                <button type=button class=zone-chip data-city="Rochester Hills" data-lat=42.6584 data-lng=-83.1499>Rochester Hills</button>
+                                <button type=button class=zone-chip data-city=Troy data-lat=42.5803 data-lng=-83.1499>Troy</button>
+                                <button type=button class=zone-chip data-city="Union Lake" data-lat=42.6178 data-lng=-83.438>Union Lake</button>
+                                <button type=button class=zone-chip data-city=Utica data-lat=42.6273 data-lng=-83.0299>Utica</button>
+                                <button type=button class=zone-chip data-city="Walled Lake" data-lat=42.5375 data-lng=-83.4838>Walled Lake</button>
+                                <button type=button class=zone-chip data-city=Waterford data-lat=42.6656 data-lng=-83.4005>Waterford</button>
+                                <button type=button class=zone-chip data-city="West Bloomfield" data-lat=42.5642 data-lng=-83.3591>West Bloomfield</button>
+                                <button type=button class=zone-chip data-city="White Lake" data-lat=42.6534 data-lng=-83.5133>White Lake</button>
+                                <button type=button class=zone-chip data-city=Wixom data-lat=42.5245 data-lng=-83.5363>Wixom</button>
+                            </div>
                         </div>
                     </article>
 
@@ -316,20 +316,20 @@
                         </div>
 
                         <div class="p-6 sm:p-8 flex-1">
-                            <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">11 cities &middot; tap a pin to locate on the map</p>
-                            <ul class=zone-city-list>
-                                <li class="city-cell"><a href=/handyman/addison-twp class="city-cell__link" data-city="Addison Twp." data-lat=42.8525 data-lng=-83.1205>Addison Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/brandon-twp class="city-cell__link" data-city="Brandon Twp." data-lat=42.8464 data-lng=-83.4219>Brandon Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/groveland-twp class="city-cell__link" data-city="Groveland Twp." data-lat=42.8253 data-lng=-83.5383>Groveland Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/holly class="city-cell__link" data-city="Holly" data-lat=42.7919 data-lng=-83.6272>Holly<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/huntington-woods class="city-cell__link" data-city="Huntington Woods" data-lat=42.4764 data-lng=-83.1633>Huntington Woods<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/leonard class="city-cell__link" data-city="Leonard" data-lat=42.8647 data-lng=-83.1444>Leonard<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/lyon-twp class="city-cell__link" data-city="Lyon Twp." data-lat=42.4981 data-lng=-83.6238>Lyon Twp.<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/ortonville class="city-cell__link" data-city="Ortonville" data-lat=42.8531 data-lng=-83.443>Ortonville<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/royal-oak class="city-cell__link" data-city="Royal Oak" data-lat=42.4895 data-lng=-83.1446>Royal Oak<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/south-lyon class="city-cell__link" data-city="South Lyon" data-lat=42.4606 data-lng=-83.6519>South Lyon<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                                <li class="city-cell"><a href=/handyman/southfield class="city-cell__link" data-city="Southfield" data-lat=42.4734 data-lng=-83.2219>Southfield<i class="fas fa-location-arrow city-cell__pin" aria-hidden=true></i></a></li>
-                            </ul>
+                            <p class="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">11 cities &middot; tap a chip to fly the map there</p>
+                            <div class=zone-chip-grid>
+                                <button type=button class=zone-chip data-city="Addison Twp." data-lat=42.8525 data-lng=-83.1205>Addison Twp.</button>
+                                <button type=button class=zone-chip data-city="Brandon Twp." data-lat=42.8464 data-lng=-83.4219>Brandon Twp.</button>
+                                <button type=button class=zone-chip data-city="Groveland Twp." data-lat=42.8253 data-lng=-83.5383>Groveland Twp.</button>
+                                <button type=button class=zone-chip data-city=Holly data-lat=42.7919 data-lng=-83.6272>Holly</button>
+                                <button type=button class=zone-chip data-city="Huntington Woods" data-lat=42.4764 data-lng=-83.1633>Huntington Woods</button>
+                                <button type=button class=zone-chip data-city=Leonard data-lat=42.8647 data-lng=-83.1444>Leonard</button>
+                                <button type=button class=zone-chip data-city="Lyon Twp." data-lat=42.4981 data-lng=-83.6238>Lyon Twp.</button>
+                                <button type=button class=zone-chip data-city=Ortonville data-lat=42.8531 data-lng=-83.443>Ortonville</button>
+                                <button type=button class=zone-chip data-city="Royal Oak" data-lat=42.4895 data-lng=-83.1446>Royal Oak</button>
+                                <button type=button class=zone-chip data-city=Southfield data-lat=42.4734 data-lng=-83.2219>Southfield</button>
+                                <button type=button class=zone-chip data-city="South Lyon" data-lat=42.4606 data-lng=-83.6519>South Lyon</button>
+                            </div>
 
                             <p class="zone-note mt-6 flex items-start gap-2 p-4 text-sm text-gray-600">
                                 <i class="zone-icon fas fa-circle-info mt-0.5" aria-hidden=true></i>
@@ -455,11 +455,11 @@
 
     <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
-    <script src="/js/service-areas-page.js?v=20260830b" defer></script>
+    <script src="/js/service-areas-page.js?v=20260831a" defer></script>
 
-    <script src="/js/page-boot.js?v=20260830b" defer></script>
-    <script src="/js/site.js?v=20260830b" defer></script>
-    <script src="/js/booking-widget.js?v=20260830b" defer></script>
-    <script src="/js/chat-loader.js?v=20260830b" defer></script>
+    <script src="/js/page-boot.js?v=20260831a" defer></script>
+    <script src="/js/site.js?v=20260831a" defer></script>
+    <script src="/js/booking-widget.js?v=20260831a" defer></script>
+    <script src="/js/chat-loader.js?v=20260831a" defer></script>
 
 

@@ -296,7 +296,16 @@
 // asset cache drops ?v=), so a returning visitor holding v55 would keep the
 // old script and stylesheet for another year. Bumping this version (and
 // ASSET_VERSION to 20260830b) refetches them for every client.
-const CACHE_VERSION = 'v56';
+// v57 finishes the interactive map: /service-areas renders its zone lists as
+// pill buttons instead of navigation links, so the fly-to actually runs there,
+// the header label carries the zone ("Waterford, MI · Zone A"), the checker
+// fixes its city matching (exact name before prefix: "rochester hills" no
+// longer lands on Rochester), and site-theme.css restyles the pills with a
+// crimson selected state. Markup, script and stylesheet ship together here --
+// a returning visitor holding v56 would pair the new chips with the old
+// stylesheet and the old matcher. Bumping this version (and ASSET_VERSION to
+// 20260831a) refetches the set for every client.
+const CACHE_VERSION = 'v57';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

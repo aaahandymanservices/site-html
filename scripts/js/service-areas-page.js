@@ -99,21 +99,34 @@
   function findMatch(query) {
     var q = String(query || "").trim();
     if (!q) return null;
-    // ZIP code lookup
-    if (/^\d{3,5}$/.test(q)) {
+    // ZIP code lookup. A 5-digit number resolves to a served city, an
+    // unserved-but-Oakland ZIP, or "out". A 3-4 digit partial is only ever a
+    // prefix — "4832" is Waterford for us but the leading half of plenty of
+    // ZIPs we do not serve — so an unknown prefix answers nothing rather than
+    // "outside" while the visitor is still typing. Same for the first one or
+    // two digits.
+    if (/^\d+$/.test(q)) {
+      if (q.length < 3) return null;
       var zipMatch = CITIES.find(function (c) { return c.zips.some(function (z) { return z.indexOf(q) === 0; }); });
       if (zipMatch) return zipMatch;
-      if (q.length === 5 && isOaklandZip(q)) {
-        return { zone: "unknown-oakland", name: "your ZIP" };
+      if (q.length === 5) {
+        if (isOaklandZip(q)) return { zone: "unknown-oakland", name: "your ZIP" };
+        return { zone: "out", name: q };
       }
-      return { zone: "out", name: q };
+      return null;
     }
     if (q.length < 2) return null;
     var nq = normalize(q);
-    var city = CITIES.find(function (c) {
-      var names = [c.name.toLowerCase()].concat(c.aliases.map(function (a) { return a.toLowerCase(); }));
-      return names.some(function (nm) { return nm === nq || nm.indexOf(nq) === 0 || nq.indexOf(nm) === 0; });
-    });
+    // Exact match first, so typing "Rochester Hills" cannot be captured by
+    // "Rochester" (listed ahead of it) through the looser rules below. Then a
+    // query that opens with a full name ("troy mi" -> Troy), then a typeahead
+    // prefix ("west b" -> West Bloomfield).
+    var namesOf = function (c) {
+      return [c.name.toLowerCase()].concat(c.aliases.map(function (a) { return a.toLowerCase(); }));
+    };
+    var city = CITIES.find(function (c) { return namesOf(c).some(function (nm) { return nm === nq; }); });
+    if (!city) city = CITIES.find(function (c) { return namesOf(c).some(function (nm) { return nq.indexOf(nm) === 0; }); });
+    if (!city) city = CITIES.find(function (c) { return namesOf(c).some(function (nm) { return nm.indexOf(nq) === 0; }); });
     if (city) return city;
     return { zone: "out", name: q };
   }
@@ -195,7 +208,6 @@
   // clicked city, mirroring marker.addListener("click", () =>
   // infoWindow.open(map, marker)): the embed shows the city's pin + info card
   // and the visitor keeps full pan/zoom/street-view interactivity.
-
   // Recenter the embedded map on a city, optionally at explicit lat/lng + zoom.
   // The no-key `output=embed` endpoint accepts a `q=lat,lng` query (centered with
   // a marker + info card — the embed equivalent of opening an InfoWindow on a
@@ -218,13 +230,14 @@
     }
   }
 
-  // ---- Zone A/B city link -> map wiring ----
+  // ---- Zone A/B city chip -> map wiring ----
   // Every city chip in the consolidated Zone A / Zone B lists carries
-  // data-city, data-lat, and data-lng. On /service-areas these are links:
-  // clicking one follows its normal navigation to the city page, but first
-  // scrolls up to #service-area-map (the embedded Google Map) and pans the
-  // map to those coordinates at zoom 13, surfacing the city's marker info
-  // card (the embed's analogue of infoWindow.open(map, marker)).
+  // data-city, data-lat, and data-lng. /service-areas renders them as buttons
+  // so a click flies the embedded Google Map to that city and flips the
+  // header's dynamic label — the page keeps the visitor, and the zone cards
+  // stay the one place all cities are listed. (City landing pages still exist
+  // at /handyman/<slug>; the sitemap and the checker's book links cover them.)
+  // On the home page the chips already were buttons, so nothing changes there.
   function initCityChips() {
     var chips = document.querySelectorAll("[data-city][data-lat][data-lng]");
     if (!chips.length) return;
@@ -241,6 +254,12 @@
         // no-key embed renders a dropped pin with an info card at that point,
         // reproducing infoWindow.open(map, marker).
         focusGmapAt(city, lat, lng, zoneLabel, 13);
+        // The three-second highlight shows which chip the map is on without
+        // relying on hover, and clears itself so the pill returns to rest.
+        chips.forEach(function (c) { c.classList.remove("is-active"); });
+        chip.classList.add("is-active");
+        window.clearTimeout(chip.__aaaChipTimer);
+        chip.__aaaChipTimer = window.setTimeout(function () { chip.classList.remove("is-active"); }, 3000);
         if (mapAnchor && "scrollIntoView" in mapAnchor) {
           mapAnchor.scrollIntoView({ behavior: "smooth", block: "start" });
         }
