@@ -84,6 +84,14 @@ const SCRIPT_VERSIONS = new Map([
   // uploader out of step with the label beneath it.
   ['reviews-page.js', ASSET_VERSION],
   /*
+   * The /gallery grid and its lightbox are inert markup until this script
+   * renders the tiles: the grid is an empty <ul> and the lightbox a hidden
+   * overlay in the page source. A stale cached copy therefore leaves the page
+   * visibly broken, not just stale, so it moves with the shared stamp like the
+   * other page scripts.
+   */
+  ['gallery-page.js', ASSET_VERSION],
+  /*
    * The last three used to sit outside this map, each frozen on a stamp from
    * whichever deploy last touched it by hand. /js/* is served `immutable,
    * max-age=31536000`, so an unmanaged stamp means an edit to the file reaches

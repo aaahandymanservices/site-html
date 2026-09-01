@@ -46,6 +46,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aaahandyman.services/gallery</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://aaahandyman.services/careers</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
