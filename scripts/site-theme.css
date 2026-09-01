@@ -767,6 +767,28 @@ nav.sticky {
   z-index: 100;
 }
 
+/* ============================================================
+   Commercial quote CTA
+   ============================================================
+
+   The "Request a Commercial Quote" actions that route visitors to
+   /commercial carry this class. It is kept as an explicit named skin
+   rather than ad-hoc Tailwind utilities so the colour pair ships in
+   one place: the project palette's primary accent red #B91C1C with
+   white text. Tailwind's own bg-* utility would lose to .aaa-btn's
+   later rules, so this block is a standalone top-level rule that
+   sits after the normalization block above and wins on both
+   properties.
+   ============================================================ */
+.commercial-quote-btn {
+  background-color: #b91c1c;
+  color: #ffffff;
+}
+
+.commercial-quote-btn:hover {
+  background-color: #991b1b;
+}
+
 /* ---------------------------------------------------------------------------
  * Primary navigation bar.
  *

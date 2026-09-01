@@ -321,7 +321,17 @@
 // returning visitor holding v57 would keep the old scripts for a year. Both
 // changes share this single bump so every client refetches the new shell and
 // the new scripts together.
-const CACHE_VERSION = 'v58';
+// v59 retints the commercial quote CTAs: the "Request a Commercial Quote"
+// buttons on /rates and /commercial moved to a named .commercial-quote-btn
+// skin (#B91C1C with white text) that lives on site-theme.css behind its
+// unchanged pathname. On /rates the button had also been relying on
+// bg-[#b91c1c] and hover:bg-[#991b1b] utilities that the shipped
+// tailwind.css never contained, so it was silently falling back to the
+// default .aaa-btn gradient; the retint fixes that too. The asset cache key
+// drops ?v=, so a returning visitor holding v58 would keep last deploy's
+// stylesheet. Bumping this version (and ASSET_VERSION to 20260901a) refetches
+// the stylesheet for every client.
+const CACHE_VERSION = 'v59';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

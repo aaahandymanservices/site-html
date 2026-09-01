@@ -34,8 +34,17 @@
  * on the /book, /services, /contact and /emergency submission paths changed,
  * so this bump and the matching CACHE_VERSION move in public/sw.js refetch
  * them for returning visitors.
+ *
+ * 20260901a — commercial quote button skin: the "Request a Commercial Quote"
+ * CTAs moved to a named .commercial-quote-btn class (#B91C1C on white) that
+ * lives in site-theme.css, replacing the ad-hoc bg-[#b91c1c] utility on the
+ * rates page (a utility the previously shipped tailwind.css never contained,
+ * so that button silently fell back to the default .aaa-btn gradient) and the
+ * red-600 pair on the commercial page. site-theme.css changed behind its
+ * unchanged pathname, so this bump and the matching CACHE_VERSION in
+ * public/sw.js refetch the stylesheet for every client.
  */
-export const ASSET_VERSION = '20260831b';
+export const ASSET_VERSION = '20260901a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use
