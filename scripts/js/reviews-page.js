@@ -236,15 +236,10 @@
   const mapSummary = document.getElementById('map-summary');
   const citiesServedCount = document.querySelector('[data-cities-served-count]');
   const citiesServedRange = document.querySelector('[data-cities-served-range]');
-  const lightbox = document.getElementById('reviews-lightbox');
-  const lightboxImg = document.getElementById('reviews-lightbox-img');
-  const lightboxCaption = document.getElementById('reviews-lightbox-caption');
-  const lightboxClose = document.getElementById('reviews-lightbox-close');
   let reviewsEditId = null;
   let allReviews = [];
   let activeFilter = 'all';
   let activeCity = 'all';
-  let lastFocusedBeforeLightbox = null;
   const prefersReducedMotion = () =>
       Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const photoRule = window.AAAPhotoUpload;
@@ -841,6 +836,20 @@
   // treated as "no photo" instead of becoming a dead <img>.
   const PHOTO_ROUTE = '/api/reviews/photo/';
 
+  // The /gallery page is the site's photo-first showcase of the same reviews.
+  // Its own script reads the ?photo= parameter, confirms the id matches a real
+  // review record, and opens that photo in its lightbox on arrival; without a
+  // match (a deleted review, a stale link, a hand-typed URL) the gallery simply
+  // opens at its grid, so the link can never dead-end.
+  const GALLERY_ROUTE = '/gallery';
+
+  const galleryUrlOf = (item, index) => {
+      const paths = photoPathsOf(item);
+      if (!paths.length) return GALLERY_ROUTE;
+      const photo = paths[Math.min(Math.max(index, 0), paths.length - 1)];
+      return `${GALLERY_ROUTE}?photo=${encodeURIComponent(item.id)}&index=${index}`;
+  };
+
   const photoPathOf = (item) => {
       const url = typeof item?.imageUrl === 'string' ? item.imageUrl.trim() : '';
       return url.startsWith(PHOTO_ROUTE) && url.length > PHOTO_ROUTE.length ? url : '';
@@ -907,27 +916,25 @@
       const photoPaths = photoPathsOf(item);
       const photoPath = photoPaths[0] || '';
       const thumbUrl = photoPath ? transformedPhoto(photoPath, 800, 80) : '';
-      const fullUrl = photoPath ? transformedPhoto(photoPath, 1600, 82) : '';
       const { quote, body } = pullQuoteOf(item.review, item.location);
 
       const previewHtml = photoPath ? `
-              <button type="button" class="review-zoom block w-full h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50" data-full="${escapeHTML(fullUrl)}" data-original="${escapeHTML(photoPath)}" data-caption="${escapeHTML(item.projectType)} · ${escapeHTML(item.location)}" data-alt="${escapeHTML(item.imageAlt)}" aria-label="Zoom photo: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
+              <a class="review-gallery-link block w-full h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50" href="${escapeHTML(galleryUrlOf(item, 0))}" aria-label="Open photo in gallery: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
                   <img class="review-photo w-full h-full object-cover" src="${escapeHTML(thumbUrl)}" data-original="${escapeHTML(photoPath)}" alt="${escapeHTML(item.imageAlt)}" width="800" height="600" loading="lazy" decoding="async">
-                  <span class="pointer-events-none absolute bottom-3 right-3 h-9 w-9 rounded-full bg-black/55 text-white flex items-center justify-center text-sm"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i></span>
-              </button>` : photoPlaceholderHtml();
+                  <span class="pointer-events-none absolute bottom-3 right-3 h-9 w-9 rounded-full bg-black/55 text-white flex items-center justify-center text-sm"><i class="fas fa-expand" aria-hidden="true"></i></span>
+              </a>` : photoPlaceholderHtml();
 
       // Compact 3-column thumbnail strip for the review's photos. The strip
       // includes the primary photo as its first tile, so a single-photo
       // review shows one thumbnail and a three-photo review fills the row.
-      // Each tile is a zoom button carrying its own lightbox target.
+      // Each tile is a link to that photo in the /gallery showcase.
       const stripHtml = photoPaths.length > 1
           ? `<div class="review-strip grid grid-cols-3 gap-1 border-t border-gray-100 bg-gray-50">${photoPaths.map((path, i) => {
               const tUrl = transformedPhoto(path, 480, 75);
-              const fUrl = transformedPhoto(path, 1600, 82);
               const alt = i === 0 ? item.imageAlt : `${item.projectType} project photo ${i + 1} from ${item.customerName} in ${item.location}`;
-              return `<button type="button" class="review-zoom relative block aspect-[4/3] overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500/60" data-full="${escapeHTML(fUrl)}" data-original="${escapeHTML(path)}" data-caption="${escapeHTML(item.projectType)} · ${escapeHTML(item.location)}" data-alt="${escapeHTML(alt)}" aria-label="Zoom photo ${i + 1}: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
+              return `<a class="review-gallery-link relative block aspect-[4/3] overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500/60" href="${escapeHTML(galleryUrlOf(item, i))}" aria-label="Open photo ${i + 1} in gallery: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
                   <img class="review-photo w-full h-full object-cover" src="${escapeHTML(tUrl)}" data-original="${escapeHTML(path)}" alt="${escapeHTML(alt)}" width="480" height="360" loading="lazy" decoding="async">
-              </button>`;
+              </a>`;
           }).join('')}</div>`
           : '';
 
@@ -986,13 +993,6 @@
       // Attach the Image CDN fallback chain to every photo on the card --
       // the primary hero image and each tile in the 3-column strip.
       card.querySelectorAll('.review-photo').forEach((img) => attachPhotoFallback(img));
-
-      card.querySelectorAll('.review-zoom').forEach((trigger) => {
-          trigger.addEventListener('click', (event) => {
-              const t = event.currentTarget;
-              openLightbox(t.dataset.full, t.dataset.alt, t.dataset.caption, t.dataset.original);
-          });
-      });
 
       if (canManage) {
           card.querySelector('.review-edit-btn')?.addEventListener('click', () => startReviewsEdit(item));
@@ -1527,67 +1527,11 @@
       });
   }
 
-  // --- Lightbox ---
-  const openLightbox = (src, alt, caption, original) => {
-      if (!lightbox || !lightboxImg) return;
-      lastFocusedBeforeLightbox = document.activeElement;
-      // Same reasoning as the card thumbnails: if the transformed image
-      // fails, show the original blob rather than a broken icon.
-      lightboxImg.dataset.original = original || '';
-      lightboxImg.dataset.triedOriginal = 'false';
-      lightboxImg.src = src || original || '';
-      lightboxImg.alt = alt || caption || 'Project photo preview';
-      if (lightboxCaption) lightboxCaption.textContent = caption || '';
-      lightbox.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-      lightboxClose?.focus();
-  };
-
-  const closeLightbox = () => {
-      if (!lightbox) return;
-      lightbox.classList.add('hidden');
-      if (lightboxImg) lightboxImg.src = '';
-      document.body.style.overflow = '';
-      if (lastFocusedBeforeLightbox && typeof lastFocusedBeforeLightbox.focus === 'function') {
-          lastFocusedBeforeLightbox.focus();
-      }
-  };
-
-  if (lightbox) {
-      lightboxImg?.addEventListener('error', () => {
-          const original = lightboxImg.dataset.original || '';
-          if (original && lightboxImg.dataset.triedOriginal !== 'true') {
-              lightboxImg.dataset.triedOriginal = 'true';
-              lightboxImg.src = original;
-          }
-      });
-      lightboxClose?.addEventListener('click', closeLightbox);
-      lightbox.addEventListener('click', (event) => {
-          if (event.target === lightbox) closeLightbox();
-      });
-      document.addEventListener('keydown', (event) => {
-          if (event.key === 'Escape' && !lightbox.classList.contains('hidden')) closeLightbox();
-      });
-
-      // The overlay claims the whole viewport, so keyboard focus must stay
-      // inside it — otherwise Tab walks invisibly through the page behind.
-      lightbox.addEventListener('keydown', (event) => {
-          if (event.key !== 'Tab' || lightbox.classList.contains('hidden')) return;
-          const focusables = Array.from(
-              lightbox.querySelectorAll('a[href], button:not([disabled])')
-          ).filter((el) => el.offsetParent !== null);
-          if (!focusables.length) return;
-          const first = focusables[0];
-          const last = focusables[focusables.length - 1];
-          if (event.shiftKey && document.activeElement === first) {
-              event.preventDefault();
-              last.focus();
-          } else if (!event.shiftKey && document.activeElement === last) {
-              event.preventDefault();
-              first.focus();
-          }
-      });
-  }
+  // --- Photo viewing now happens on /gallery ---
+  // The card photos are direct links to the photo's spot in the /gallery
+  // showcase (see galleryUrlOf above), which opens its own lightbox there.
+  // The page-level lightbox this file used to carry was removed with that
+  // change; the `lastFocusedBeforeLightbox` bookkeeping went with it.
 
   const loadReviews = () => {
       if (!reviewsList || !reviewsLoading || !reviewsEmpty) return;

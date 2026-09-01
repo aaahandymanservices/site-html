@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 246 icon names in use.
+ * Generated subset - 247 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -153,6 +153,7 @@
 .fa-wind:before{content:"\f72e"}
 .fa-shipping-fast:before,.fa-truck-fast:before{content:"\f48b"}
 .fa-add:before,.fa-plus:before{content:"\2b"}
+.fa-expand:before{content:"\f065"}
 .fa-close:before,.fa-multiply:before,.fa-remove:before,.fa-times:before,.fa-xmark:before{content:"\f00d"}
 .fa-quote-left-alt:before,.fa-quote-left:before{content:"\f10d"}
 .fa-ruler-combined:before{content:"\f546"}
@@ -161,6 +162,8 @@
 .fa-store:before{content:"\f54e"}
 .fa-arrow-trend-up:before{content:"\e098"}
 .fa-sign-hanging:before,.fa-sign:before{content:"\f4d9"}
+.fa-chevron-left:before{content:"\f053"}
+.fa-chevron-right:before{content:"\f054"}
 .fa-face-smile:before,.fa-smile:before{content:"\f118"}
 .fa-hammer:before{content:"\f6e3"}
 .fa-spinner:before{content:"\f110"}
@@ -186,7 +189,6 @@
 .fa-paper-plane:before{content:"\f1d8"}
 .fa-calendar-day:before{content:"\f783"}
 .fa-circle-xmark:before,.fa-times-circle:before,.fa-xmark-circle:before{content:"\f057"}
-.fa-magnifying-glass-plus:before,.fa-search-plus:before{content:"\f00e"}
 .fa-cloud-sun:before{content:"\f6c4"}
 .fa-print:before{content:"\f02f"}
 .fa-dollar-sign:before,.fa-dollar:before,.fa-usd:before{content:"\24"}
