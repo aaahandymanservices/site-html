@@ -271,6 +271,7 @@ function optimizeFontsAndAssets(html) {
     // fetched (640 phones / 1440 tablets+small laptops), so no second copy of
     // the photo is ever requested.
     '@media(min-width:768px) and (max-width:1439px){#top.hero{background-image:linear-gradient(rgba(3,7,11,.62),rgba(3,7,11,.62)),url(/.netlify/images?url=/logo-banner.jpg&w=1440&fm=avif&q=65)}}' +
+    '@media(max-width:767px){#top.hero{background-image:linear-gradient(rgba(3,7,11,.62),rgba(3,7,11,.62)),url(/.netlify/images?url=/logo-banner.jpg&w=640&fm=avif&q=65)}}' +
     // Reserve the hero's inner stack height so the webfont swap and the icon
     // glyph boxes in .hero-trust / .hero-rating-bar cannot push the trust
     // badges down after first paint. The hero is the LCP element on '/', and a
