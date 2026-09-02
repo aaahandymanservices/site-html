@@ -360,7 +360,12 @@
 // page's footer markup changed, so a returning visitor holding v63 would
 // keep last deploy's footers in the shell cache. This bump evicts the old
 // shell for every client.
-const CACHE_VERSION = 'v64';
+// v65 raises the Google Calendar booking iframe on /book from 600px to 900px
+// so the full scheduler renders without an internal vertical scrollbar. The
+// page's markup changed, so a returning visitor holding v64 would keep last
+// deploy's booking page in the shell cache. This bump evicts the old shell
+// for every client.
+const CACHE_VERSION = 'v65';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
