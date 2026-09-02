@@ -84,14 +84,6 @@ const SCRIPT_VERSIONS = new Map([
   // uploader out of step with the label beneath it.
   ['reviews-page.js', ASSET_VERSION],
   /*
-   * The /gallery grid and its lightbox are inert markup until this script
-   * renders the tiles: the grid is an empty <ul> and the lightbox a hidden
-   * overlay in the page source. A stale cached copy therefore leaves the page
-   * visibly broken, not just stale, so it moves with the shared stamp like the
-   * other page scripts.
-   */
-  ['gallery-page.js', ASSET_VERSION],
-  /*
    * The last three used to sit outside this map, each frozen on a stamp from
    * whichever deploy last touched it by hand. /js/* is served `immutable,
    * max-age=31536000`, so an unmanaged stamp means an edit to the file reaches
@@ -306,7 +298,11 @@ function optimizeFontsAndAssets(html) {
     '.skip-link{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}' +
     '.skip-link:focus,.skip-link:focus-visible{position:fixed!important;top:.75rem!important;left:50%!important;transform:translateX(-50%)!important;z-index:200!important;width:auto!important;height:auto!important;padding:.75rem 1.5rem!important;background:#a61f2e!important;color:#fff!important;font-weight:700!important;border-radius:.75rem!important;clip:auto!important;white-space:normal!important}' +
     '</style>';
-  html = html.replace(/[ \t]*<style id="aaa-critical-palette">[\s\S]*?<\/style>\r?\n?/gi, '');
+  // Matches both the quoted form this script writes (`id="aaa-critical-
+  // palette"`) and the minified unquoted form (`id=aaa-critical-palette`)
+  // that committed copies of the pages carry, so re-runs never stack a
+  // second block alongside an already-minified one.
+  html = html.replace(/[ \t]*<style\s+id=["']?aaa-critical-palette["']?>[\s\S]*?<\/style>\r?\n?/gi, '');
   html = html.replace(
     /(<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
     `$1${CRITICAL_PALETTE}\n`,

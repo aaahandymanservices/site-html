@@ -250,13 +250,11 @@
 # ---------------------------------------------------------------------------
 # Netlify Image CDN -- remote image allowlist
 #
-# The /gallery page sources its sample photos from picsum.photos and loads
-# every one of them through the /.netlify/images transform endpoint. Remote
-# sources are only transformed when their host is listed here, so the gallery's
-# grid and lightbox both depend on this entry. The pattern is a regex: the
-# double backslash escapes the dots, and .* covers picsum's id-based paths
-# (https://picsum.photos/id/<n>/<w>/<h>) as well as its seed URLs.
+# The site does not transform any remote-hosted images: everything the Image
+# CDN touches (the logo, hero banner, review photos streamed by
+# /api/reviews/photo/:key) is served from this site. This section is kept as a
+# documented anchor for the day a remote image host is added again.
 # ---------------------------------------------------------------------------
 [images]
-  remote_images = ["https://picsum\\.photos/.*"]
+  remote_images = []
 

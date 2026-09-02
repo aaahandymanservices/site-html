@@ -19,6 +19,11 @@
 
 /index.html /                    301!
 
+# /gallery was removed from the site; its URL folds onto the reviews page,
+# which now carries the customer photos in a lightbox of its own.
+/gallery.html /reviews           301!
+/gallery     /reviews           301!
+
 # /404.html is a real page (Netlify serves it automatically with a 404 status
 # for any path that matches nothing), but its .html form still folds onto the
 # clean URL like every other page.

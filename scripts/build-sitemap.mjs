@@ -19,7 +19,6 @@ const staticPages = [
   { path: 'service-areas', priority: '0.8', changefreq: 'monthly' },
   { path: 'guarantee', priority: '0.8', changefreq: 'monthly' },
   { path: 'reviews', priority: '0.8', changefreq: 'weekly' },
-  { path: 'gallery', priority: '0.7', changefreq: 'monthly' },
   { path: 'careers', priority: '0.7', changefreq: 'monthly' },
   { path: 'book', priority: '0.9', changefreq: 'monthly' },
   { path: 'contact', priority: '0.9', changefreq: 'monthly' },

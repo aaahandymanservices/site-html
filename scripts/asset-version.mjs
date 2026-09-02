@@ -41,10 +41,24 @@
  * rates page (a utility the previously shipped tailwind.css never contained,
  * so that button silently fell back to the default .aaa-btn gradient) and the
  * red-600 pair on the commercial page. site-theme.css changed behind its
- * unchanged pathname, so this bump and the matching CACHE_VERSION in
+ * unchanged pathname, so this bump and the matching CACHE_VERSION move in
  * public/sw.js refetch the stylesheet for every client.
+ *
+ * 20260901b — the /gallery page rendered real customer photos from
+ * /api/reviews instead of stock placeholders, and its lightbox linked back to
+ * the review on /reviews; reviews-page.js gained the matching deep-link
+ * scroll for /reviews#review-<id>. gallery-page.js and reviews-page.js both
+ * changed behind their unchanged pathnames, so this bump and the matching
+ * CACHE_VERSION move in public/sw.js refetch them for returning visitors.
+ *
+ * 20260901c — the /gallery page was removed entirely. Its footer links are
+ * gone from every page, the sitemap entry is dropped, and the review photos
+ * that used to deep-link to /gallery now open in a lightbox on /reviews
+ * itself (reviews-page.js changed behind its unchanged pathname). This bump
+ * and the matching CACHE_VERSION move in public/sw.js refetch that script
+ * and every page's updated markup for returning visitors.
  */
-export const ASSET_VERSION = '20260901a';
+export const ASSET_VERSION = '20260901c';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use

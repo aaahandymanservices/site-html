@@ -1,6 +1,6 @@
 /*
- * The customer gallery on /reviews: submission form, listing, and the owner's
- * moderation controls.
+ * The customer reviews page on /reviews: submission form, listing, and the
+ * owner's moderation controls.
  *
  * This was a single 39kB inline <script> in public/reviews.html -- nearly half
  * the page's HTML, re-downloaded uncompressed on every visit and blocking the
@@ -836,20 +836,6 @@
   // treated as "no photo" instead of becoming a dead <img>.
   const PHOTO_ROUTE = '/api/reviews/photo/';
 
-  // The /gallery page is the site's photo-first showcase of the same reviews.
-  // Its own script reads the ?photo= parameter, confirms the id matches a real
-  // review record, and opens that photo in its lightbox on arrival; without a
-  // match (a deleted review, a stale link, a hand-typed URL) the gallery simply
-  // opens at its grid, so the link can never dead-end.
-  const GALLERY_ROUTE = '/gallery';
-
-  const galleryUrlOf = (item, index) => {
-      const paths = photoPathsOf(item);
-      if (!paths.length) return GALLERY_ROUTE;
-      const photo = paths[Math.min(Math.max(index, 0), paths.length - 1)];
-      return `${GALLERY_ROUTE}?photo=${encodeURIComponent(item.id)}&index=${index}`;
-  };
-
   const photoPathOf = (item) => {
       const url = typeof item?.imageUrl === 'string' ? item.imageUrl.trim() : '';
       return url.startsWith(PHOTO_ROUTE) && url.length > PHOTO_ROUTE.length ? url : '';
@@ -919,22 +905,22 @@
       const { quote, body } = pullQuoteOf(item.review, item.location);
 
       const previewHtml = photoPath ? `
-              <a class="review-gallery-link block w-full h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50" href="${escapeHTML(galleryUrlOf(item, 0))}" aria-label="Open photo in gallery: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
+              <button type="button" class="review-photo-open block w-full h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50" data-index="0" aria-label="View photo: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
                   <img class="review-photo w-full h-full object-cover" src="${escapeHTML(thumbUrl)}" data-original="${escapeHTML(photoPath)}" alt="${escapeHTML(item.imageAlt)}" width="800" height="600" loading="lazy" decoding="async">
                   <span class="pointer-events-none absolute bottom-3 right-3 h-9 w-9 rounded-full bg-black/55 text-white flex items-center justify-center text-sm"><i class="fas fa-expand" aria-hidden="true"></i></span>
-              </a>` : photoPlaceholderHtml();
+              </button>` : photoPlaceholderHtml();
 
       // Compact 3-column thumbnail strip for the review's photos. The strip
       // includes the primary photo as its first tile, so a single-photo
       // review shows one thumbnail and a three-photo review fills the row.
-      // Each tile is a link to that photo in the /gallery showcase.
+      // Each tile opens that photo in the page's lightbox.
       const stripHtml = photoPaths.length > 1
           ? `<div class="review-strip grid grid-cols-3 gap-1 border-t border-gray-100 bg-gray-50">${photoPaths.map((path, i) => {
               const tUrl = transformedPhoto(path, 480, 75);
               const alt = i === 0 ? item.imageAlt : `${item.projectType} project photo ${i + 1} from ${item.customerName} in ${item.location}`;
-              return `<a class="review-gallery-link relative block aspect-[4/3] overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500/60" href="${escapeHTML(galleryUrlOf(item, i))}" aria-label="Open photo ${i + 1} in gallery: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
+              return `<button type="button" class="review-photo-open relative block aspect-[4/3] overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500/60" data-index="${i}" aria-label="View photo ${i + 1} of ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
                   <img class="review-photo w-full h-full object-cover" src="${escapeHTML(tUrl)}" data-original="${escapeHTML(path)}" alt="${escapeHTML(alt)}" width="480" height="360" loading="lazy" decoding="async">
-              </a>`;
+              </button>`;
           }).join('')}</div>`
           : '';
 
@@ -1054,7 +1040,7 @@
   };
 
   /*
-   * The service row is generated from the gallery rather than hard-coded.
+   * The service row is generated from the reviews rather than hard-coded.
    *
    * It used to be eight pills written into the HTML, which drifted from the
    * submission form in both directions at once: it offered Plumbing and
@@ -1527,11 +1513,138 @@
       });
   }
 
-  // --- Photo viewing now happens on /gallery ---
-  // The card photos are direct links to the photo's spot in the /gallery
-  // showcase (see galleryUrlOf above), which opens its own lightbox there.
-  // The page-level lightbox this file used to carry was removed with that
-  // change; the `lastFocusedBeforeLightbox` bookkeeping went with it.
+  // --- Photo lightbox ---
+  // Card photos open in a full-screen overlay on this page: the photo is
+  // streamed by /api/reviews/photo/:key and optimized by the Image CDN, with
+  // prev/next arrows walking that review's other photos when it has more
+  // than one. The overlay's markup is injected on first use, so pages
+  // without a photo carry nothing extra in their HTML.
+  let lightboxEl = null;
+  let lightboxImg = null;
+  let lightboxCaption = null;
+  let lightboxPrev = null;
+  let lightboxNext = null;
+  let lightboxClose = null;
+  let lightboxItems = [];
+  let lightboxIndex = 0;
+  let lightboxOpen = false;
+  let lastFocusedBeforeLightbox = null;
+
+  const ensureLightbox = () => {
+      if (lightboxEl) return;
+      lightboxEl = document.createElement('div');
+      lightboxEl.className = 'hidden fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4';
+      lightboxEl.setAttribute('role', 'dialog');
+      lightboxEl.setAttribute('aria-modal', 'true');
+      lightboxEl.setAttribute('aria-label', 'Review photo viewer');
+      lightboxEl.innerHTML = `
+          <button type="button" class="review-lightbox-close absolute top-5 right-5 h-11 w-11 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-xl transition focus:outline-none focus:ring-4 focus:ring-white/40" aria-label="Close photo viewer"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+          <button type="button" class="review-lightbox-prev absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 h-12 w-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl transition focus:outline-none focus:ring-4 focus:ring-white/40" aria-label="Previous photo"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+          <button type="button" class="review-lightbox-next absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 h-12 w-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl transition focus:outline-none focus:ring-4 focus:ring-white/40" aria-label="Next photo"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+          <figure class="max-w-4xl w-full text-center">
+              <img class="review-lightbox-img mx-auto max-h-[78vh] w-auto rounded-2xl shadow-2xl object-contain" width="1600" height="1200" decoding="async" alt="">
+              <figcaption class="review-lightbox-caption mt-4 text-slate-200 text-sm font-medium"></figcaption>
+          </figure>`;
+      document.body.appendChild(lightboxEl);
+      lightboxImg = lightboxEl.querySelector('.review-lightbox-img');
+      lightboxCaption = lightboxEl.querySelector('.review-lightbox-caption');
+      lightboxPrev = lightboxEl.querySelector('.review-lightbox-prev');
+      lightboxNext = lightboxEl.querySelector('.review-lightbox-next');
+      lightboxClose = lightboxEl.querySelector('.review-lightbox-close');
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightboxPrev.addEventListener('click', () => lightboxStep(-1));
+      lightboxNext.addEventListener('click', () => lightboxStep(1));
+      lightboxEl.addEventListener('click', (event) => {
+          if (event.target === lightboxEl) closeLightbox();
+      });
+      document.addEventListener('keydown', (event) => {
+          if (!lightboxOpen) return;
+          if (event.key === 'ArrowLeft') lightboxStep(-1);
+          else if (event.key === 'ArrowRight') lightboxStep(1);
+          else if (event.key === 'Escape') closeLightbox();
+      });
+      // The overlay claims the whole viewport, so keyboard focus must stay
+      // inside it -- otherwise Tab walks invisibly through the page behind.
+      lightboxEl.addEventListener('keydown', (event) => {
+          if (event.key !== 'Tab' || lightboxEl.classList.contains('hidden')) return;
+          const focusables = Array.from(
+              lightboxEl.querySelectorAll('button:not([disabled])')
+          );
+          if (!focusables.length) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (event.shiftKey && document.activeElement === first) {
+              event.preventDefault();
+              last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+              event.preventDefault();
+              first.focus();
+          }
+      });
+  };
+
+  const lightboxShow = (i) => {
+      if (!lightboxImg) return;
+      const item = lightboxItems[i];
+      if (!item) return;
+      lightboxIndex = i;
+      lightboxImg.src = transformedPhoto(item.path, 1600, 82);
+      lightboxImg.alt = item.alt || 'Review project photo';
+      if (lightboxCaption) {
+          lightboxCaption.textContent = item.caption || '';
+          lightboxCaption.hidden = !item.caption;
+      }
+      if (lightboxPrev) lightboxPrev.classList.toggle('hidden', lightboxItems.length < 2);
+      if (lightboxNext) lightboxNext.classList.toggle('hidden', lightboxItems.length < 2);
+  };
+
+  const lightboxStep = (delta) => {
+      const total = lightboxItems.length;
+      if (!total) return;
+      lightboxShow((lightboxIndex + delta + total) % total);
+  };
+
+  const openLightbox = (items, start) => {
+      if (!items.length) return;
+      ensureLightbox();
+      lightboxItems = items;
+      lastFocusedBeforeLightbox = document.activeElement;
+      lightboxShow(Math.min(Math.max(start, 0), items.length - 1));
+      lightboxEl.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      lightboxOpen = true;
+      lightboxClose.focus();
+  };
+
+  const closeLightbox = () => {
+      if (!lightboxEl) return;
+      lightboxEl.classList.add('hidden');
+      if (lightboxImg) lightboxImg.src = '';
+      document.body.style.overflow = '';
+      lightboxOpen = false;
+      if (lastFocusedBeforeLightbox && typeof lastFocusedBeforeLightbox.focus === 'function') {
+          lastFocusedBeforeLightbox.focus();
+      }
+  };
+
+  document.addEventListener('click', (event) => {
+      const btn = event.target instanceof Element ? event.target.closest('.review-photo-open') : null;
+      if (!btn) return;
+      const card = btn.closest('.review-card');
+      const review = allReviews.find((entry) => card && String(entry.id) === card.id.replace('review-', ''));
+      if (!review) return;
+      const paths = photoPathsOf(review);
+      if (!paths.length) return;
+      openLightbox(
+          paths.map((path, i) => ({
+              path,
+              alt: i === 0 ? review.imageAlt : `${review.projectType} project photo ${i + 1} from ${review.customerName} in ${review.location}`,
+              caption: `${review.projectType || 'Reviewed project'} in ${review.location || 'Oakland County'} — reviewed by ${review.customerName || 'a verified customer'}${paths.length > 1 ? ` (photo ${i + 1} of ${paths.length})` : ''}`,
+          })),
+          Number(btn.dataset.index) || 0,
+      );
+  });
 
   const loadReviews = () => {
       if (!reviewsList || !reviewsLoading || !reviewsEmpty) return;
@@ -1769,4 +1882,27 @@
 
   updateAdminUI();
   loadReviews();
+
+  // --- Deep link to a review card ---
+  // /reviews#review-<id> scrolls to and highlights that review's card. The
+  // card is rendered by the fetch inside loadReviews above, so this polls
+  // briefly for the element before giving up (a deleted review or a stale
+  // link simply lands on the grid). Once it exists, jumpToReview does the
+  // rest: clears filters if the card is hidden, scrolls it into view, moves
+  // focus, and flashes the is-targeted outline -- the exact behavior the map
+  // pins already rely on.
+  if (window.location.hash.startsWith('#review-')) {
+      const deepId = window.location.hash.slice('#review-'.length);
+      let deepTries = 0;
+      const deepFind = () => {
+          const deepCard = document.getElementById(`review-${deepId}`);
+          if (deepCard) {
+              jumpToReview(deepId);
+              return;
+          }
+          deepTries += 1;
+          if (deepTries <= 40) window.setTimeout(deepFind, 150);
+      };
+      deepFind();
+  }
 })();
