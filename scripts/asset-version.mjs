@@ -65,8 +65,16 @@
  * old form. page-boot.js changed behind its unchanged pathname, so this bump
  * and the matching CACHE_VERSION move in public/sw.js refetch it for
  * returning visitors.
+ *
+ * 20260902b — the footer "Book Online Now" link stopped being a solid red
+ * button: it now renders as a plain text link matching the other links in
+ * the footer lists, with its /book destination unchanged. Every page's
+ * footer markup changed and page-boot.js learned to leave footer booking
+ * links (marked data-plain-booking-link) out of the Google scheduling-button
+ * conversion, so this bump and the matching CACHE_VERSION move in
+ * public/sw.js refetch both for returning visitors.
  */
-export const ASSET_VERSION = '20260902a';
+export const ASSET_VERSION = '20260902b';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use

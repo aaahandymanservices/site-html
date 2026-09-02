@@ -170,6 +170,14 @@
     var SCRIPT_ID = 'aaa-gcal-scheduling-script';
     var pendingTargets = [];
 
+    // Footer booking links are plain text links, not CTAs. The data attribute
+    // below is how they opt out of the scheduling-button conversion so they
+    // keep rendering as an ordinary underlined-on-hover link alongside the
+    // other footer links.
+    function isPlainBookingLink(link) {
+      return link.hasAttribute('data-plain-booking-link');
+    }
+
     function flushPending() {
       var calendar = window.calendar;
       if (!calendar || !calendar.schedulingButton) return;
@@ -213,6 +221,7 @@
     var bookingLinks = document.querySelectorAll('a[href^="/book"]');
     for (var i = 0; i < bookingLinks.length; i += 1) {
       var link = bookingLinks[i];
+      if (isPlainBookingLink(link)) continue;
       var wrapper = document.createElement('span');
       wrapper.className = 'gcal-cta';
       link.replaceWith(wrapper);
@@ -237,6 +246,7 @@
           }
           for (var c = 0; c < candidates.length; c += 1) {
             var dynLink = candidates[c];
+            if (isPlainBookingLink(dynLink)) continue;
             if (dynLink.parentElement && dynLink.parentElement.closest('.gcal-cta')) continue;
             var dynWrap = document.createElement('span');
             dynWrap.className = 'gcal-cta';
