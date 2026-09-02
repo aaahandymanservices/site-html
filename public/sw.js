@@ -346,7 +346,14 @@
 // cache key, so a returning visitor holding v61 would keep the old script
 // (which still navigated /book links to the removed form). Bumping this
 // version (and ASSET_VERSION to 20260902a) refetches it for every client.
-const CACHE_VERSION = 'v62';
+// v63 demotes the footer "Book Online Now" button: every page's footer now
+// ships it as a plain text link (data-plain-booking-link) instead of the
+// solid red button classes, and page-boot.js skips those links when it
+// converts booking CTAs into the Google Calendar scheduling button. Every
+// page's markup and page-boot.js changed, so a returning visitor holding
+// v62 would keep the old script and button markup. Bumping this version
+// (and ASSET_VERSION to 20260902b) refetches them for every client.
+const CACHE_VERSION = 'v63';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
