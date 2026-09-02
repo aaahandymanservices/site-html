@@ -556,7 +556,6 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
                         <li><a href="/pricing-policy" class="hover:text-white transition">Pricing Policies</a></li>
                         <li><a href="/customer-care" class="hover:text-white transition">Customer Care</a></li>
                         <li><a href="/reviews" class="hover:text-white transition">Reviews</a></li>
-                        <li><a href="/gallery" class="hover:text-white transition">Photo Gallery</a></li>
                         <li><a href="/book" class="hover:text-white transition">Book Online</a></li>
                         <li><a href="/#faq" class="hover:text-white transition">FAQ</a></li>
                     </ul>

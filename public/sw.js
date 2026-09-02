@@ -331,7 +331,14 @@
 // drops ?v=, so a returning visitor holding v58 would keep last deploy's
 // stylesheet. Bumping this version (and ASSET_VERSION to 20260901a) refetches
 // the stylesheet for every client.
-const CACHE_VERSION = 'v59';
+// v61 removes the /gallery page: its footer links are gone from every page,
+// the sitemap entry is dropped, and the review photos that used to deep-link
+// to /gallery now open in a lightbox on /reviews itself. reviews-page.js
+// changed behind its unchanged pathname and /js/* is served immutable with
+// ?v= dropped from the asset cache key, so a returning visitor holding v60
+// would keep the old script for a year. Bumping this version (and
+// ASSET_VERSION to 20260901c) refetches it for every client.
+const CACHE_VERSION = 'v61';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
