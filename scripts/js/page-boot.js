@@ -152,4 +152,104 @@
       }
     });
   })();
+
+  // --- Google Calendar booking CTAs ----------------------------------------
+  // Every booking CTA on the site is a plain link to /book. Bookings now run
+  // through Google Calendar Appointment Scheduling, so each of those links is
+  // wrapped and converted in place into a Google "Book an appointment"
+  // scheduling button: the styled, accessible button Google's script renders
+  // keeps the surrounding button skin (the anchor stays in the DOM inside a
+  // wrapper, hidden by the stylesheet), and the iframe flow opens in a Google
+  // hosted window. The scheduler assets are injected once, on first use, and
+  // a single load() call drains the whole queue so every CTA on the page is
+  // bound together.
+  (function initGoogleSchedulingButtons() {
+    var SCHEDULE_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2PQiyPqkFAPQnWdMC3jwuicLPQKJyDsd9dhHzU_bz3uMipGzpQiEE_lT-KIQd29P_yfAwSg4ac?gv=true';
+    var BUTTON_COLOR = '#b91c1c';
+    var CSS_ID = 'aaa-gcal-scheduling-css';
+    var SCRIPT_ID = 'aaa-gcal-scheduling-script';
+    var pendingTargets = [];
+
+    function flushPending() {
+      var calendar = window.calendar;
+      if (!calendar || !calendar.schedulingButton) return;
+      while (pendingTargets.length) {
+        calendar.schedulingButton.load({
+          url: SCHEDULE_URL,
+          color: BUTTON_COLOR,
+          label: 'Book an appointment',
+          target: pendingTargets.shift(),
+        });
+      }
+    }
+
+    function requestScheduler(target) {
+      pendingTargets.push(target);
+
+      if (!document.getElementById(CSS_ID)) {
+        var css = document.createElement('link');
+        css.id = CSS_ID;
+        css.rel = 'stylesheet';
+        css.href = 'https://calendar.google.com/calendar/scheduling-button-script.css';
+        document.head.appendChild(css);
+      }
+
+      var script = document.getElementById(SCRIPT_ID);
+      if (!script) {
+        script = document.createElement('script');
+        script.id = SCRIPT_ID;
+        script.src = 'https://calendar.google.com/calendar/scheduling-button-script.js';
+        script.async = true;
+        script.onload = flushPending;
+        document.head.appendChild(script);
+      } else if (script.onload === null) {
+        // The library is already cached and executed; load() again directly.
+        flushPending();
+      } else {
+        flushPending();
+      }
+    }
+
+    var bookingLinks = document.querySelectorAll('a[href^="/book"]');
+    for (var i = 0; i < bookingLinks.length; i += 1) {
+      var link = bookingLinks[i];
+      var wrapper = document.createElement('span');
+      wrapper.className = 'gcal-cta';
+      link.replaceWith(wrapper);
+      wrapper.appendChild(link);
+      requestScheduler(wrapper);
+    }
+
+
+    // Booking CTAs are also rendered after load by the zone lookup and the
+    // quote calculator, so the same conversion runs for nodes added later.
+    var linkObserver = new MutationObserver(function (mutations) {
+      for (var m = 0; m < mutations.length; m += 1) {
+        var added = mutations[m].addedNodes;
+        for (var n = 0; n < added.length; n += 1) {
+          var node = added[n];
+          if (node.nodeType !== 1) continue;
+          var candidates = [];
+          if (node.matches && node.matches('a[href^="/book"]')) candidates.push(node);
+          if (node.querySelectorAll) {
+            var found = node.querySelectorAll('a[href^="/book"]');
+            for (var f = 0; f < found.length; f += 1) candidates.push(found[f]);
+          }
+          for (var c = 0; c < candidates.length; c += 1) {
+            var dynLink = candidates[c];
+            if (dynLink.parentElement && dynLink.parentElement.closest('.gcal-cta')) continue;
+            var dynWrap = document.createElement('span');
+            dynWrap.className = 'gcal-cta';
+            dynLink.replaceWith(dynWrap);
+            dynWrap.appendChild(dynLink);
+            requestScheduler(dynWrap);
+          }
+        }
+      }
+    });
+    linkObserver.observe(document.body, { childList: true, subtree: true });
+
+    var explicitTarget = document.getElementById('gcal-scheduling-button');
+    if (explicitTarget) requestScheduler(explicitTarget);
+  })();
 })();

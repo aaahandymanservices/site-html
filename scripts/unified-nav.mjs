@@ -17,13 +17,13 @@ import { escapeHtml } from './html-escape.mjs';
  *
  * The offer is a $50 gift certificate toward a new customer's next service. The
  * CTA scrolls to the booking form on the current page when it is present, or
- * navigates to /book#booking-form otherwise. Its stylesheet lives in
+ * navigates to /book otherwise. Its stylesheet lives in
  * scripts/tailwind-input.css, which is render-blocking, so the bar paints with
  * the first frame; the dismiss/scroll behaviour lives in
  * scripts/js/page-boot.js. Only the prepaint hide guard below stays inline,
  * because a deferred script cannot hide the bar before it has been painted.
  */
-export function getNewCustomerBanner({ ctaHref = '/book#booking-form' } = {}) {
+export function getNewCustomerBanner({ ctaHref = '/book' } = {}) {
   const href = escapeHtml(ctaHref);
   // The banner disappears the moment a visitor clicks the CTA, and the
   // dismissal is persisted so the bar never chases them across pages. The key
@@ -51,7 +51,7 @@ export function getNewCustomerBanner({ ctaHref = '/book#booking-form' } = {}) {
 </aside>`;
 }
 
-export function getUnifiedNav(activePage = 'none', { promoBanner = true, promoCtaHref = '/book#booking-form' } = {}) {
+export function getUnifiedNav(activePage = 'none', { promoBanner = true, promoCtaHref = '/book' } = {}) {
   const isServices = activePage === 'services';
   const isServiceAreas = activePage === 'service-areas';
   const isRates = activePage === 'rates';
