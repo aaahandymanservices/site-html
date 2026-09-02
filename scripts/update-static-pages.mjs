@@ -13,20 +13,20 @@ const STATIC_NAV_PAGES = [
   // away. promoBanner:false keeps the promo off the legal pages (Terms/Privacy),
   // which intentionally carry no marketing banners.
   { path: 'public/index.html', active: 'none', promoCtaHref: '#quote' },
-  { path: 'public/services.html', active: 'services', promoCtaHref: '/book#booking-form' },
-  { path: 'public/service-areas.html', active: 'service-areas', promoCtaHref: '/book#booking-form' },
-  { path: 'public/rates.html', active: 'rates', removeSectionNav: false, promoCtaHref: '/book#booking-form' },
-  { path: 'public/guarantee.html', active: 'guarantee', promoCtaHref: '/book#booking-form' },
-  { path: 'public/reviews.html', active: 'reviews', promoCtaHref: '/book#booking-form' },
-  { path: 'public/careers.html', active: 'careers', promoCtaHref: '/book#booking-form' },
+  { path: 'public/services.html', active: 'services', promoCtaHref: '/book' },
+  { path: 'public/service-areas.html', active: 'service-areas', promoCtaHref: '/book' },
+  { path: 'public/rates.html', active: 'rates', removeSectionNav: false, promoCtaHref: '/book' },
+  { path: 'public/guarantee.html', active: 'guarantee', promoCtaHref: '/book' },
+  { path: 'public/reviews.html', active: 'reviews', promoCtaHref: '/book' },
+  { path: 'public/careers.html', active: 'careers', promoCtaHref: '/book' },
   { path: 'public/contact.html', active: 'contact', promoCtaHref: '#contact-form' },
-  { path: 'public/ai-estimate.html', active: 'ai-estimate', promoCtaHref: '/book#booking-form' },
-  { path: 'public/customer-care.html', active: 'none', promoCtaHref: '/book#booking-form' },
-  { path: 'public/pricing-policy.html', active: 'none', promoCtaHref: '/book#booking-form' },
-  { path: 'public/book.html', active: 'none', promoCtaHref: '#booking-form' },
+  { path: 'public/ai-estimate.html', active: 'ai-estimate', promoCtaHref: '/book' },
+  { path: 'public/customer-care.html', active: 'none', promoCtaHref: '/book' },
+  { path: 'public/pricing-policy.html', active: 'none', promoCtaHref: '/book' },
+  { path: 'public/book.html', active: 'none', promoCtaHref: '/book' },
   { path: 'public/privacy.html', active: 'none', promoBanner: false },
   { path: 'public/terms.html', active: 'none', promoBanner: false },
-  { path: 'public/services/aging-in-place-guide.html', active: 'services', promoCtaHref: '/book#booking-form' }
+  { path: 'public/services/aging-in-place-guide.html', active: 'services', promoCtaHref: '/book' }
 ];
 
 /**
@@ -56,14 +56,9 @@ const SCRIPT_VERSIONS = new Map([
   // would leave a visitor's report going nowhere.
   ['customer-care-page.js', ASSET_VERSION],
   ['gift-certificate.js', ASSET_VERSION],
-  // The booking page's markup and its behaviour ship as a pair -- the progress
-  // rail, quick-pick tiles, estimator, and availability badge are all inert
-  // markup until this file runs -- so its stamp has to move with the rest.
-  ['book-page.js', ASSET_VERSION],
-  // The booking modal, the route-day banner, and the home care plan cards are
-  // the same deal: the markup that triggers them is inert without the script,
-  // so a stale cached copy is worse than no copy.
-  ['booking-widget.js', ASSET_VERSION],
+  // The ZIP/city lookup used by the /book route-day card. The booking form
+  // itself is gone -- bookings run through Google Calendar now -- so
+  // book-page.js and booking-widget.js are no longer requested by any page.
   ['service-zone-selector.js', ASSET_VERSION],
   // The ZIP/city lookup and the review filters on /service-areas. Its source
   // only joined scripts/js recently -- before that the served copy was the

@@ -6626,3 +6626,29 @@ header#top.hero h1.hero-title {
 .loyalty-callout-card--on-light .loyalty-checkbox-text {
   color: var(--brand-navy-deep);
 }
+
+/* ---------------------------------------------------------------------------
+ * Google Calendar booking CTAs
+ *
+ * page-boot.js wraps every booking link in a span.gcal-cta and renders
+ * Google's "Book an appointment" scheduling button inside it. The original
+ * anchor stays in the wrapper (keyboard focus and any analytics listeners
+ * follow it), but is visually hidden so only the Google button shows. The
+ * wrapper is inline so the CTA keeps its place inside flex button rows.
+ * ------------------------------------------------------------------------ */
+span.gcal-cta {
+  display: inline-block;
+  max-width: 100%;
+}
+
+span.gcal-cta > a {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

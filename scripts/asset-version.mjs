@@ -57,8 +57,16 @@
  * itself (reviews-page.js changed behind its unchanged pathname). This bump
  * and the matching CACHE_VERSION move in public/sw.js refetch that script
  * and every page's updated markup for returning visitors.
+ *
+ * 20260902a — bookings switched to Google Calendar Appointment Scheduling: the
+ * multi-step booking form on /book was replaced by the Google Calendar
+ * scheduling iframe, and every booking CTA across the site now renders a
+ * Google Calendar scheduling button via page-boot.js instead of opening the
+ * old form. page-boot.js changed behind its unchanged pathname, so this bump
+ * and the matching CACHE_VERSION move in public/sw.js refetch it for
+ * returning visitors.
  */
-export const ASSET_VERSION = '20260901c';
+export const ASSET_VERSION = '20260902a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use

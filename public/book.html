@@ -77,9 +77,9 @@
     </script>
 
     <link rel=dns-prefetch href=https://www.googletagmanager.com>
-    <link rel=stylesheet href="/css/tailwind.css?v=20260901b">
-    <link rel=preload href="/css/site-theme.css?v=20260901b" as=style onload='this.onload=null,this.rel="stylesheet"'>
-    <noscript><link rel=stylesheet href="/css/site-theme.css?v=20260901b"></noscript>
+    <link rel=stylesheet href="/css/tailwind.css?v=20260902a">
+    <link rel=preload href="/css/site-theme.css?v=20260902a" as=style onload='this.onload=null,this.rel="stylesheet"'>
+    <noscript><link rel=stylesheet href="/css/site-theme.css?v=20260902a"></noscript>
     <link rel=preload href="/css/icons.css?v=20260815a" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
     <noscript><link rel=stylesheet href="/css/icons.css?v=20260815a"></noscript>
 
@@ -105,7 +105,7 @@
             <span class=new-customer-banner__icon aria-hidden=true>🎁</span>
             <span><strong class=new-customer-banner__lead>New Customer Special:</strong> Receive a <strong class=new-customer-banner__amount>$50 gift certificate</strong> toward your next service!</span>
         </p>
-        <a class=new-customer-banner__cta href=#booking-form data-ncb-cta>Claim My $50 Gift<svg viewBox="0 0 16 16" width=14 height=14 fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+        <a class=new-customer-banner__cta href=/book data-ncb-cta>Claim My $50 Gift<svg viewBox="0 0 16 16" width=14 height=14 fill=none stroke=currentColor stroke-width=2.2 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
     </div>
 </aside>
 
@@ -184,7 +184,7 @@
                     </span>
                     <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Book Your Handyman Online</h1>
                     <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
-                        Reserve your preferred date and time slot in under a minute. No upfront deposit required for labor-only bookings. We'll contact you shortly to confirm the details.
+                        Pick a date and time that works for you in under a minute. No upfront deposit required for labor-only bookings. We'll contact you shortly to confirm the details.
                     </p>
                 </div>
 
@@ -320,275 +320,20 @@
 
                     
                     <div class="lg:col-span-7 min-w-0">
-                        <div class="bg-gray-800/30 rounded-3xl p-6 sm:p-8 border border-gray-800/80 shadow-2xl relative">
+                        <div class="bg-gray-800/30 rounded-3xl p-4 sm:p-6 border border-gray-800/80 shadow-2xl relative">
                             
                             
-                            <form id=booking-form name=bookings method=POST enctype=multipart/form-data data-netlify=true netlify-honeypot=bot-field class=space-y-6>
-                                <input type=hidden name=form-name value=bookings>
-                                <input type=hidden name=photoUrl>
-                                <p class=hidden>
-                                    <label>Don't fill this out if you're human: <input name=bot-field tabindex=-1 aria-hidden=true aria-label="Do not fill out this field"></label>
-                                </p>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Schedule Your Service</h2>
+                            <p class="mb-6 text-sm leading-relaxed text-gray-400">Pick a project, date, and arrival window below. Your appointment remains a request until our team confirms it with you.</p>
 
-                                
-                                <ol id=booking-progress class="m-0 grid list-none grid-cols-3 gap-2 p-0 sm:gap-3" aria-label="Booking progress">
-                                    <li class=booking-progress__step data-step=1 data-state=active>
-                                        <div class="flex items-center gap-2.5 rounded-2xl border border-gray-700 bg-gray-900/50 px-3 py-2.5">
-                                            <span class="booking-progress__dot flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-gray-600 bg-gray-800 text-xs font-bold text-gray-300">1</span>
-                                            <span class="booking-progress__label text-[11px] font-bold uppercase leading-tight tracking-wide text-gray-400 sm:text-xs">Select Service</span>
-                                        </div>
-                                    </li>
-                                    <li class=booking-progress__step data-step=2 data-state=todo>
-                                        <div class="flex items-center gap-2.5 rounded-2xl border border-gray-700 bg-gray-900/50 px-3 py-2.5">
-                                            <span class="booking-progress__dot flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-gray-600 bg-gray-800 text-xs font-bold text-gray-300">2</span>
-                                            <span class="booking-progress__label text-[11px] font-bold uppercase leading-tight tracking-wide text-gray-400 sm:text-xs">Date &amp; Time</span>
-                                        </div>
-                                    </li>
-                                    <li class=booking-progress__step data-step=3 data-state=todo>
-                                        <div class="flex items-center gap-2.5 rounded-2xl border border-gray-700 bg-gray-900/50 px-3 py-2.5">
-                                            <span class="booking-progress__dot flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-gray-600 bg-gray-800 text-xs font-bold text-gray-300">3</span>
-                                            <span class="booking-progress__label text-[11px] font-bold uppercase leading-tight tracking-wide text-gray-400 sm:text-xs">Your Details</span>
-                                        </div>
-                                    </li>
-                                </ol>
-                                <p id=booking-progress-status class=sr-only aria-live=polite></p>
+                            
+                            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2PQiyPqkFAPQnWdMC3jwuicLPQKJyDsd9dhHzU_bz3uMipGzpQiEE_lT-KIQd29P_yfAwSg4ac?gv=true" style=border:0 width=100% height=600 loading=lazy title="Book an appointment with AAA Handyman Services LLC"></iframe>
+                            
 
-                                <div id=first-service-offer-booking data-gift-certificate class=loyalty-callout-card>
-                                    <div class=loyalty-badge-header>
-                                        <div class=loyalty-badge-pill>
-                                            <i class="fas fa-award" aria-hidden=true></i>
-                                            <span>$50 LOYALTY CREDIT</span>
-                                        </div>
-                                    </div>
-                                    <p class=loyalty-description>
-                                        Complete your first service and receive a $50 Loyalty Credit applied directly toward a follow-up service call.
-                                    </p>
-                                    <label class="loyalty-checkbox-label loyalty-checkbox" for=booking-first-service-certificate>
-                                        <input id=booking-first-service-certificate type=checkbox name=loyalty_credit value=yes>
-                                        <span class=loyalty-custom-checkbox aria-hidden=true></span>
-                                        <span class=loyalty-checkbox-text>Claim my $50 Loyalty Credit for my follow-up service</span>
-                                    </label>
-                                </div>
-                                
-                                <fieldset class="rounded-2xl border border-gray-700 bg-gray-900/45 p-5 sm:p-6">
-                                    <legend class="px-3 text-lg sm:text-xl font-bold text-white">Schedule Your Service</legend>
-                                    <p class="mb-6 text-sm leading-relaxed text-gray-400">Choose a project, date, and arrival window. Your appointment remains a request until our team confirms it with you.</p>
-
-                                    <div class=space-y-6>
-                                        <div class="grid grid-cols-[2.25rem_1fr] gap-4 items-start">
-                                            <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden=true>1</span>
-                                            <div>
-                                                <label for=booking-service class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Select Service Package or Project *</label>
-
-                                                
-                                                <div id=service-quick-picks class="mb-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3" role=group aria-label="Popular services">
-                                                    <button type=button class=service-tile data-service="Carpentry & Trim" aria-pressed=false>
-                                                        <span class=service-tile__icon><i class="fas fa-hammer" aria-hidden=true></i></span>
-                                                        <span>Carpentry &amp; Trim</span>
-                                                    </button>
-                                                    <button type=button class=service-tile data-service="Minor Electrical" aria-pressed=false>
-                                                        <span class=service-tile__icon><i class="fas fa-bolt" aria-hidden=true></i></span>
-                                                        <span>Minor Electrical</span>
-                                                    </button>
-                                                    <button type=button class=service-tile data-service="Doors & Windows" aria-pressed=false>
-                                                        <span class=service-tile__icon><i class="fas fa-door-open" aria-hidden=true></i></span>
-                                                        <span>Doors &amp; Windows</span>
-                                                    </button>
-                                                    <button type=button class=service-tile data-service="Drywall Repair" aria-pressed=false>
-                                                        <span class=service-tile__icon><i class="fas fa-paint-roller" aria-hidden=true></i></span>
-                                                        <span>Drywall Repair</span>
-                                                    </button>
-                                                    <button type=button class=service-tile data-service="Installation & Mounting" aria-pressed=false>
-                                                        <span class=service-tile__icon><i class="fas fa-screwdriver-wrench" aria-hidden=true></i></span>
-                                                        <span>Install &amp; Mounting</span>
-                                                    </button>
-                                                    <button type=button class=service-tile data-service="4-Hour Handyman Package" aria-pressed=false>
-                                                        <span class=service-tile__icon><i class="fas fa-box-open" aria-hidden=true></i></span>
-                                                        <span>4-Hour Package</span>
-                                                    </button>
-                                                </div>
-                                                <p class="mb-2 text-[11px] text-gray-500">Something else? Pick from the full list of packages and projects below.</p>
-
-                                                <div class=relative>
-                                                    <select id=booking-service name=service required aria-describedby=booking-service-help class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white appearance-none">
-                                                        <option value="" disabled selected class="bg-gray-800 text-gray-400">Choose a package or project...</option>
-                                                        <option value="Minor Repair & Upkeep (1 Hour)" class="bg-gray-800 text-white">Minor Repair &amp; Upkeep (1 Hour)</option>
-                                                        <option value="Carpentry & Installation (2 Hours)" class="bg-gray-800 text-white">Carpentry &amp; Installation (2 Hours)</option>
-                                                        <option value="Fixture or Outlet Replacement (1.5 Hours)" class="bg-gray-800 text-white">Fixture or Outlet Replacement (1.5 Hours)</option>
-                                                        <option value="Seasonal Prep Package" class="bg-gray-800 text-white">Seasonal Prep Package ($311)</option>
-                                                        <option value="Move-In / Move-Out Bundle" class="bg-gray-800 text-white">Move-In / Move-Out Bundle ($342)</option>
-                                                        <option value="Senior Safety & Accessibility Package" class="bg-gray-800 text-white">Senior Safety &amp; Accessibility Package ($279)</option>
-                                                        <option value="General Estimate / Quote" class="bg-gray-800 text-white">General Estimate / Quote</option>
-                                                        <option value="Maintenance Membership" class="bg-gray-800 text-white font-bold text-emerald-400">Maintenance Membership ($49/mo)</option>
-                                                        <option value="4-Hour Handyman Package" class="bg-gray-800 text-white">4-Hour Handyman Package ($279)</option>
-                                                        <option value="6-Hour Handyman Package" class="bg-gray-800 text-white">6-Hour Handyman Package ($405)</option>
-                                                        <option value="Carpentry & Trim" class="bg-gray-800 text-white">Carpentry &amp; Trim</option>
-                                                        <option value="Doors & Windows" class="bg-gray-800 text-white">Doors &amp; Windows</option>
-                                                        <option value="Drywall Repair" class="bg-gray-800 text-white">Drywall Repair</option>
-                                                        <option value="Painting & Staining" class="bg-gray-800 text-white">Painting &amp; Staining</option>
-                                                        <option value="Flooring Solutions" class="bg-gray-800 text-white">Flooring Solutions</option>
-                                                        <option value="Minor Plumbing" class="bg-gray-800 text-white">Minor Plumbing</option>
-                                                        <option value="Minor Electrical" class="bg-gray-800 text-white">Minor Electrical</option>
-                                                        <option value="Installation & Mounting" class="bg-gray-800 text-white">Installation &amp; Mounting</option>
-                                                        <option value="Decks & Fences" class="bg-gray-800 text-white">Decks &amp; Fences</option>
-                                                        <option value=Gutters class="bg-gray-800 text-white">Gutters</option>
-                                                        <option value="Other / Custom Project" class="bg-gray-800 text-white">Other (Specify below)</option>
-                                                    </select>
-                                                    <div class="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none text-gray-400"><i class="fas fa-chevron-down" aria-hidden=true></i></div>
-                                                </div>
-                                                <p id=booking-service-help class="mt-2 text-xs text-gray-400">All prices and packages cover installation and service labor only. Hardware and materials are not included and are billed separately, unless you supply them yourself at no markup.</p>
-                                                <div id=service-package-info class="hidden mt-3 p-4 bg-gray-950/60 border border-gray-700 rounded-xl text-xs sm:text-sm text-gray-300"></div>
-                                                
-                                                <div id=booking-estimate class="hidden mt-3 rounded-xl border border-emerald-600/30 bg-emerald-950/25 p-4" aria-live=polite></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="grid grid-cols-[2.25rem_1fr] gap-4 items-start">
-                                            <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden=true>2</span>
-                                            <div>
-                                                <label for=booking-date class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Choose a Date *</label>
-                                                <input id=booking-date type=date name=bookingDate required aria-describedby="booking-date-help booking-availability booking-error" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
-                                                
-                                                <p id=booking-availability class="mt-2 hidden items-center gap-2 rounded-lg border border-emerald-500/25 bg-emerald-500/10 px-3 py-2 text-xs font-semibold text-emerald-300" aria-live=polite></p>
-                                                <p id=booking-date-help class="mt-2 text-xs text-gray-400">The earliest available date is tomorrow. We book Monday–Saturday.</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="grid grid-cols-[2.25rem_1fr] gap-4 items-start">
-                                            <span class="booking-step-number flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white" aria-hidden=true>3</span>
-                                            <div>
-                                                <span id=time-slot-label class="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-2">Select Arrival Window *</span>
-                                                <input type=hidden id=booking-time name=bookingTime required>
-                                                <div id=time-slots-container class="grid sm:grid-cols-3 gap-3" role=group aria-labelledby=time-slot-label></div>
-                                                <p id=time-slot-note class="mt-2 hidden text-xs text-gray-400"></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <div class="flex items-center gap-3 pt-1" aria-hidden=true>
-                                    <span class="h-px flex-1 bg-gray-700"></span>
-                                    <span class="text-xs font-bold uppercase tracking-[0.18em] text-gray-400">Contact Details</span>
-                                    <span class="h-px flex-1 bg-gray-700"></span>
-                                </div>
-
-                                <div class="grid sm:grid-cols-2 gap-6">
-                                    <div>
-                                        <label for=booking-name class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Your Name *</label>
-                                        <input id=booking-name name=name required autocomplete=name autocapitalize=words class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
-                                    </div>
-                                    <div>
-                                        <label for=booking-email class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Email Address *</label>
-                                        <input id=booking-email type=email name=email required autocomplete=email inputmode=email autocapitalize=off autocorrect=off class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label for=booking-phone class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Phone Number *</label>
-                                    <input id=booking-phone type=tel name=phone required autocomplete=tel inputmode=tel autocapitalize=off placeholder="(248) 385-3432" class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
-                                </div>
-
-                                
-                                <div>
-                                    <label for=booking-address class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Service Address *</label>
-                                    <input id=booking-address name=address required autocomplete=street-address maxlength=160 placeholder="123 Maple St." class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
-                                </div>
-
-                                <div class="grid sm:grid-cols-2 gap-6">
-                                    <div>
-                                        <label for=booking-city class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">City</label>
-                                        <input id=booking-city name=city autocomplete=address-level2 maxlength=80 class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
-                                    </div>
-                                    <div>
-                                        <label for=booking-zip class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">ZIP Code *</label>
-                                        <input id=booking-zip name=zip required autocomplete=postal-code inputmode=numeric maxlength=5 pattern=\d{5} placeholder=48328 aria-describedby=booking-zip-note class="booking-control w-full px-5 py-3.5 bg-gray-800 border-[2px] border-gray-700 rounded-xl focus:outline-none text-base text-white">
-                                        <p id=booking-zip-note class="mt-2 text-xs text-gray-400" role=status aria-live=polite>Oakland County only. We fill in the city and your service days for you.</p>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label for=booking-message class="block text-xs uppercase tracking-wider font-semibold text-gray-400 mb-2">Project Details & Special Notes <span class="text-gray-500 lowercase font-normal">(optional)</span></label>
-                                    <textarea id=booking-message name=message rows=4 placeholder="Tell us what needs fixing, installing, or looking at…" class="w-full px-5 py-4 bg-gray-800 border-[2px] border-gray-700 rounded-2xl focus:outline-none focus:border-red-500 text-base text-white resize-none"></textarea>
-                                </div>
-
-                                <div>
-                                    <div class="flex items-end justify-between gap-4 mb-2">
-                                        <label for=booking-photo class="block text-xs uppercase tracking-wider font-semibold text-gray-400">Repair Photo <span class="text-gray-500 lowercase font-normal">(optional)</span></label>
-                                        <span class="text-[11px] text-gray-500">JPG, PNG, WebP or GIF · 10 MB max each</span>
-                                    </div>
-                                    <p class="mb-2 flex items-start gap-2.5 rounded-xl border border-red-500/25 bg-red-500/10 px-3.5 py-2.5 text-xs leading-relaxed text-red-100">
-                                        <i class="fas fa-wand-magic-sparkles mt-0.5 shrink-0 text-red-400" aria-hidden=true></i>
-                                        <span><strong class="font-bold text-white">Snap a quick photo with your phone</strong> and we can size up the job, price it more accurately, and bring the right materials on the first visit. Want an instant preliminary price range? <a href=/ai-estimate class="font-bold text-red-300 underline underline-offset-2 hover:text-white">Try our AI Repair Estimator &rarr;</a></span>
-                                    </p>
-                                    <label id=booking-photo-dropzone for=booking-photo class="group block cursor-pointer rounded-2xl border-2 border-dashed border-gray-700 bg-gray-900/45 p-4 transition hover:border-red-500/80 hover:bg-gray-900/70 focus-within:border-red-500">
-                                        <input id=booking-photo name=photo type=file accept=image/jpeg,image/png,image/webp,image/gif capture=environment class=sr-only>
-                                        <div id=booking-photo-empty class="flex items-center gap-4">
-                                            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-600/15 text-xl text-red-400 transition group-hover:bg-red-600 group-hover:text-white"><i class="fas fa-camera" aria-hidden=true></i></span>
-                                            <span>
-                                                <span class="block font-bold text-white">Snap or upload the repair</span>
-                                                <span class="mt-1 block text-sm leading-relaxed text-gray-400">A clear photo helps us diagnose the issue and prepare materials before your visit.</span>
-                                            </span>
-                                        </div>
-                                        <div id=booking-photo-preview-wrap class="hidden items-center gap-4">
-                                            <img id=booking-photo-preview width=96 height=80 decoding=async class="h-20 w-24 shrink-0 rounded-xl border border-gray-700 object-cover" alt="Selected repair preview">
-                                            <span class="min-w-0 flex-1">
-                                                <span id=booking-photo-name class="block truncate font-bold text-white"></span>
-                                                <span class="mt-1 block text-sm text-green-400"><i class="fas fa-check-circle mr-1" aria-hidden=true></i>Ready to upload</span>
-                                            </span>
-                                            <button id=booking-photo-remove type=button class="rounded-lg border border-gray-700 px-3 py-2 text-sm font-semibold text-gray-300 transition hover:border-red-500 hover:text-white">Remove</button>
-                                        </div>
-                                    </label>
-                                    <p id=booking-photo-error class="mt-2 hidden text-sm font-semibold text-red-300" role=alert></p>
-                                </div>
-
-                                <div class="flex items-start gap-3 bg-gray-900/50 p-4 rounded-xl border border-gray-800">
-                                    <input id=seasonal-opt-in type=checkbox name=seasonal-opt-in class="mt-1 h-5 w-5 accent-red-600 rounded cursor-pointer">
-                                    <label for=seasonal-opt-in class="text-sm text-gray-300 cursor-pointer select-none">
-                                        <span class="font-semibold text-white block mb-0.5">Free Preventative & Seasonal Reminders</span>
-                                        Send me free home maintenance tips (e.g. spring gutter checks, winter weatherproofing). Unsubscribe anytime.
-                                    </label>
-                                </div>
-
-                                
-                                <div class="rounded-xl border border-gray-700 bg-gray-900/60 p-4 text-xs leading-relaxed text-gray-300 space-y-2">
-                                    <p class="text-[11px] font-extrabold uppercase tracking-[0.14em] text-gray-400">Before you submit</p>
-                                    <p><i class="fas fa-screwdriver-wrench mr-1.5 text-red-400" aria-hidden=true></i><strong class=text-white>Labor only.</strong> Materials and hardware are billed separately at cost plus a <strong class=text-white>20% supply sourcing fee</strong> when we shop for them. Supply your own and we add nothing. <a href=/pricing-policy#materials-options class="font-semibold text-red-400 underline decoration-red-500/40 underline-offset-2 hover:text-red-300">How materials are priced</a></p>
-                                    <p><i class="fas fa-credit-card mr-1.5 text-red-400" aria-hidden=true></i>Cash, check, Zelle&reg;, Venmo&reg;, and Cash App accepted. A <strong class=text-white>5% processing fee</strong> applies to all non-cash payments.</p>
-                                    <p><i class="fas fa-triangle-exclamation mr-1.5 text-red-400" aria-hidden=true></i><strong class=text-white>Hidden conditions.</strong> Concealed issues found after opening a wall or fixture &mdash; rot, mold, damaged wiring, code violations &mdash; sit outside the quoted scope. We stop, show you, and only continue once you approve a <strong class=text-white>written change order</strong>. <a href=/pricing-policy#no-surprise-guarantee class="font-semibold text-red-400 underline decoration-red-500/40 underline-offset-2 hover:text-red-300">How this works</a></p>
-                                </div>
-
-                                <p id=booking-error class="hidden rounded-xl border border-red-500/30 bg-red-950/40 px-4 py-3 text-sm text-red-200" role=alert aria-live=polite></p>
-
-                                <button type=submit id=submit-btn disabled class="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-600 disabled:text-gray-300 disabled:shadow-none disabled:cursor-not-allowed py-4 text-lg font-bold rounded-2xl transition flex items-center justify-center gap-3 shadow-lg shadow-red-600/30">
-                                    Request My Booking <i class="fas fa-calendar-check" aria-hidden=true></i>
-                                </button>
-                                <p class="-mt-2 text-center text-xs leading-relaxed text-gray-400">
-                                    <i class="fas fa-lock mr-1 text-gray-500" aria-hidden=true></i>
-                                    No payment today · If we supply materials, a deposit is due before work starts · We confirm your window by call or text
-                                </p>
-                            </form>
-                            <p class="new-customer-terms mt-5 text-center text-xs leading-relaxed text-gray-400" data-gift-certificate-terms>
-                                <i class="fas fa-circle-info text-red-400 mr-1" aria-hidden=true></i>
-                                <strong class=text-white>$50 Loyalty Credit:</strong> Valid on qualifying labor toward a follow-up service call. Materials/hardware excluded. One per household; cannot be combined with other discounts.
+                            <p class="new-customer-terms mt-5 text-center text-xs leading-relaxed text-gray-400">
+                                <i class="fas fa-lock mr-1 text-gray-500" aria-hidden=true></i>
+                                No payment today · If we supply materials, a deposit is due before work starts · We confirm your window by call or text
                             </p>
-
-                            
-                            <div id=success-state class="hidden text-center py-12 px-4 space-y-6">
-                                <div class="w-20 h-20 bg-green-600/10 border border-green-500/20 text-green-500 rounded-full flex items-center justify-center text-4xl mx-auto animate-bounce">
-                                    <i class="fas fa-check-circle" aria-hidden=true></i>
-                                </div>
-                                <h2 class="text-2xl sm:text-3xl font-bold text-white">Booking Request Received!</h2>
-                                <p class="text-gray-300 max-w-md mx-auto leading-relaxed text-sm sm:text-base">
-                                    Thank you! Your booking for <span id=summary-service class="font-bold text-white">gutter maintenance</span> on <span id=summary-date class="font-bold text-white">July 22nd</span> is reserved.
-                                </p>
-                                <p class="text-gray-400 text-xs max-w-sm mx-auto leading-relaxed">
-                                    Victor or a team member will reach out within one business day to confirm your project scope and coordinate timing.
-                                </p>
-                                <div class="pt-4 flex flex-col sm:flex-row justify-center gap-4">
-                                    <a href=/ class="px-6 py-3 bg-red-600 hover:bg-red-700 font-bold rounded-xl text-sm transition shadow-md hover:shadow-red-600/30 text-white">Back to Home</a>
-                                    <a href=/services class="px-6 py-3 bg-green-600 hover:bg-green-700 font-bold rounded-xl text-sm transition text-white shadow-md hover:shadow-green-600/30">View Services</a>
-                                </div>
-                            </div>
 
                         </div>
                     </div>
@@ -696,13 +441,9 @@
     <button id=back-to-top type=button aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden=true></i></button>
 
 
-    <script src="/js/photo-upload.js?v=20260901b" defer></script>
-    <script src="/js/book-page.js?v=20260901b" defer></script>
-    <script src="/js/service-zone-selector.js?v=20260901b" defer></script>
-    <script src="/js/page-boot.js?v=20260901b" defer></script>
-    <script src="/js/site.js?v=20260901b" defer></script>
-    <script src="/js/gift-certificate.js?v=20260901b" defer></script>
-    <script src="/js/chat-loader.js?v=20260901b" defer></script>
+    <script src="/js/page-boot.js?v=20260902a" defer></script>
+    <script src="/js/site.js?v=20260902a" defer></script>
+    <script src="/js/chat-loader.js?v=20260902a" defer></script>
 
 
 

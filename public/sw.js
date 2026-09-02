@@ -338,7 +338,15 @@
 // ?v= dropped from the asset cache key, so a returning visitor holding v60
 // would keep the old script for a year. Bumping this version (and
 // ASSET_VERSION to 20260901c) refetches it for every client.
-const CACHE_VERSION = 'v61';
+// v62 swaps booking over to Google Calendar Appointment Scheduling: the
+// multi-step form on /book was replaced by the Google Calendar iframe and
+// every booking CTA now opens the Google scheduler via a button that
+// /js/page-boot.js renders. page-boot.js changed behind its unchanged
+// pathname and /js/* is served immutable with ?v= dropped from the asset
+// cache key, so a returning visitor holding v61 would keep the old script
+// (which still navigated /book links to the removed form). Bumping this
+// version (and ASSET_VERSION to 20260902a) refetches it for every client.
+const CACHE_VERSION = 'v62';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
