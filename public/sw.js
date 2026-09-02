@@ -353,7 +353,14 @@
 // page's markup and page-boot.js changed, so a returning visitor holding
 // v62 would keep the old script and button markup. Bumping this version
 // (and ASSET_VERSION to 20260902b) refetches them for every client.
-const CACHE_VERSION = 'v63';
+// v64 marks the Explore menu's "Book Online" footer link as a plain booking
+// link (data-plain-booking-link) on every page, so page-boot.js leaves it as
+// an ordinary text link beside the other footer links instead of converting
+// it into the Google Calendar scheduling button like the page CTAs. Every
+// page's footer markup changed, so a returning visitor holding v63 would
+// keep last deploy's footers in the shell cache. This bump evicts the old
+// shell for every client.
+const CACHE_VERSION = 'v64';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
