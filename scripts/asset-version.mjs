@@ -82,12 +82,9 @@
  * move in public/sw.js refetch them for returning visitors.
  *
  * 20260903b — Google Calendar booking cleanup: the retired booking form's
- * scripts (book-page.js, booking-widget.js) and their site-theme.css blocks
- * are gone, and service-zone-selector.js now scrolls to the embedded Calendar
- * scheduler instead of the removed form. site-theme.css and
- * service-zone-selector.js changed behind their unchanged pathnames, so this
- * bump and the matching CACHE_VERSION move in public/sw.js refetch them for
- * returning visitors.
+ * scripts and their site-theme.css blocks are gone. site-theme.css changed
+ * behind its unchanged pathname, so this bump and the matching CACHE_VERSION
+ * move in public/sw.js refetch it for returning visitors.
  *
  * 20260903c — contrast and CSS-delivery fixes: the home page's "Read All
  * Reviews" CTA carries a solid navy fill (white text no longer samples
@@ -119,8 +116,15 @@
  * the touched page markup changed behind unchanged pathnames, so this bump
  * and the matching CACHE_VERSION move in public/sw.js refetch them for
  * returning visitors.
+ *
+ * 20260904a — dead-code cleanup: the retired booking endpoints (/api/booking,
+ * /api/booking/availability, /api/booking/photo/:key, /api/seasonal-reminder-blast)
+ * and the client-side availability selector were removed with no callers left.
+ * Shared scripts and the theme stylesheet changed behind unchanged pathnames,
+ * so this bump and the matching CACHE_VERSION move in public/sw.js refetch
+ * them for returning visitors.
  */
-export const ASSET_VERSION = '20260903e';
+export const ASSET_VERSION = '20260904a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use

@@ -378,13 +378,14 @@
 // returning visitor holding v66 would keep last deploy's stylesheet and
 // script behind unchanged cache keys. This bump evicts the old shell and
 // asset caches for every client.
-// v70 ships the accessibility audit fixes: dialog focus traps and the ARIA
-// tabs on /services (home.js, services.html), the injected reviews lightbox
-// and its styles, labelled tooltip buttons and photo inputs, and the map-pin
-// focus ring (site-theme.css). Shared scripts, the theme stylesheet and
-// several pages' markup changed behind unchanged pathnames, so this bump
-// evicts the old shell and asset caches for every client.
-const CACHE_VERSION = 'v70';
+// v71 drops the retired booking endpoints from the site: /api/booking,
+// /api/booking/availability, /api/booking/photo/:key, /api/seasonal-reminder-blast
+// and the client-side availability code had no callers left (bookings run
+// through Google Calendar), so the functions, their scripts and this cache
+// bump all move together. Shared scripts and the theme stylesheet changed
+// behind unchanged pathnames, so this bump also evicts the old shell and
+// asset caches for every client.
+const CACHE_VERSION = 'v71';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -407,7 +408,6 @@ const PRECACHE_URLS = [
   // The home page's quote form takes photos, and home.js validates them
   // against the rule this file defines.
   '/js/photo-upload.js',
-  '/js/gift-certificate.js',
   '/js/chat-loader.js',
   '/fonts/archivo-latin.woff2',
   '/fonts/roboto-latin.woff2',
