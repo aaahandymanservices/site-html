@@ -372,7 +372,13 @@
 // assetCacheKey). A returning visitor holding v65 would keep last deploy's
 // markup and stylesheets behind unchanged cache keys. This bump evicts the
 // old shell and asset caches for every client.
-const CACHE_VERSION = 'v66';
+// v67 lands the Google Calendar booking cleanup: site-theme.css dropped the
+// retired booking form's styles and service-zone-selector.js changed behind
+// its unchanged pathname, while the asset stamp moved to 20260903b. A
+// returning visitor holding v66 would keep last deploy's stylesheet and
+// script behind unchanged cache keys. This bump evicts the old shell and
+// asset caches for every client.
+const CACHE_VERSION = 'v67';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

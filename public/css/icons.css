@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 247 icon names in use.
+ * Generated subset - 242 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -102,7 +102,6 @@
 .fa-wrench:before{content:"\f0ad"}
 .fa-circle-question:before,.fa-question-circle:before{content:"\f059"}
 .fa-route:before{content:"\f4d7"}
-.fa-clipboard-question:before{content:"\e4e3"}
 .fa-tags:before{content:"\f02c"}
 .fa-faucet-drip:before{content:"\e006"}
 .fa-home-lg:before,.fa-house-chimney:before{content:"\e3af"}
@@ -111,10 +110,8 @@
 .fa-hand-holding-dollar:before,.fa-hand-holding-usd:before{content:"\f4c0"}
 .fa-biohazard:before{content:"\f780"}
 .fa-phone:before{content:"\f095"}
-.fa-calendar-times:before,.fa-calendar-xmark:before{content:"\f273"}
 .fa-door-closed:before{content:"\f52a"}
 .fa-shield-virus:before{content:"\e06c"}
-.fa-arrow-left:before{content:"\f060"}
 .fa-file-pdf:before{content:"\f1c1"}
 .fa-phone-volume:before,.fa-volume-control-phone:before{content:"\f2a0"}
 .fa-tag:before{content:"\f02b"}
@@ -192,6 +189,5 @@
 .fa-cloud-sun:before{content:"\f6c4"}
 .fa-print:before{content:"\f02f"}
 .fa-dollar-sign:before,.fa-dollar:before,.fa-usd:before{content:"\24"}
-.fa-trowel:before{content:"\e589"}
 .fa-yelp:before{content:"\f1e9"}
 .fa-facebook:before{content:"\f09a"}

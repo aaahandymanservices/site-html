@@ -84,6 +84,11 @@
 # build rather than a gate on audit noise: the local static server cannot
 # answer the platform-only /.netlify/images and /api/* requests the page makes,
 # which holds the local Best Practices number at 92 regardless of the site.
+# On top of that, the booking page now embeds the Google Calendar Appointment
+# Scheduling iframe, and in the headless audit that third-party scheduler logs
+# its own browser console errors (blocked third-party storage/resource noise
+# from Google's origin) that the site cannot suppress, capping the local
+# Best Practices number at 83. Its threshold therefore sits just under that.
 # ---------------------------------------------------------------------------
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
@@ -94,7 +99,7 @@
   [plugins.inputs.thresholds]
     performance = 0.85
     accessibility = 0.9
-    best-practices = 0.9
+    best-practices = 0.8
     seo = 0.9
     pwa = 0.85
 

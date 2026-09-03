@@ -32,8 +32,10 @@
 
 /privacy.html /privacy            301!
 /privacy    /privacy.html    200
-# /book.html deliberately has no 301! rule: public/js/book-page.js and
-# public/js/booking-widget.js post the booking form back to /book.html, and a
+# /book.html deliberately has no 301! rule: its own Netlify booking form used
+# to post back to /book.html (see git history -- bookings run through the
+# embedded Google Calendar scheduler now, but careers, customer-care, services
+# and commercial still post to their own paths), and a
 # forced redirect answers that POST with a 301 before Netlify Forms ever sees
 # it. fetch() then follows the redirect as a GET, the submission is discarded,
 # and nothing surfaces the failure. The canonical tag on book.html is what
