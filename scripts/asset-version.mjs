@@ -82,8 +82,16 @@
  * preconnects for those font origins. Page markup changed on all pages and
  * netlify.toml changed, so this bump and the matching CACHE_VERSION move in
  * public/sw.js refetch them for returning visitors.
+ *
+ * 20260903b — Google Calendar booking cleanup: the retired booking form's
+ * scripts (book-page.js, booking-widget.js) and their site-theme.css blocks
+ * are gone, and service-zone-selector.js now scrolls to the embedded Calendar
+ * scheduler instead of the removed form. site-theme.css and
+ * service-zone-selector.js changed behind their unchanged pathnames, so this
+ * bump and the matching CACHE_VERSION move in public/sw.js refetch them for
+ * returning visitors.
  */
-export const ASSET_VERSION = '20260903a';
+export const ASSET_VERSION = '20260903b';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use

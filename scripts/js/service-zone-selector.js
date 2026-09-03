@@ -177,17 +177,10 @@
     var actions = document.createElement('p');
     actions.className = 'mt-3 flex flex-wrap gap-3';
 
+    // Bookings run through the Google Calendar embed inside #booking-section
+    // now (the old #booking-form is gone), so the button scrolls to it.
     var book = document.createElement('a');
-    // On the booking page itself the modal script is not loaded and /book is
-    // the page we are already on, so the button scrolls to the form instead of
-    // reloading. Everywhere else it opens the shared booking dialog.
-    var bookingForm = document.getElementById('booking-form');
-    if (bookingForm) {
-      book.href = '#booking-form';
-    } else {
-      book.href = '/book';
-      book.setAttribute('data-booking-widget', '');
-    }
+    book.href = '#booking-section';
     book.className =
       'inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-extrabold text-white transition-colors hover:bg-red-700';
     book.textContent = 'Book a ' + (route ? firstDayName(route) : 'visit') + ' slot ';
