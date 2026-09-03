@@ -37,6 +37,13 @@ const STATIC_NAV_PAGES = [
  */
 const ICONS_CSS = `/css/icons.css?v=${ICONS_CSS_VERSION}`;
 const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
+const TAILWIND_CSS = `/css/tailwind.css?v=${ASSET_VERSION}`;
+const ICON_IMAGE = '/images/icon-96.webp';
+const BANNER_IMAGE = {
+  mobile: '/images/logo-banner-640.webp',
+  tablet: '/images/logo-banner-1440.webp',
+  desktop: '/images/logo-banner-1760.webp',
+};
 const SCRIPT_VERSIONS = new Map([
   // Service worker registration, the gtag.js bootstrap, and the promo bar's
   // dismiss handler all live here now instead of in three inline blocks per
@@ -100,10 +107,11 @@ const SCRIPT_VERSIONS = new Map([
   ['chat-loader.js', ASSET_VERSION],
 ]);
 const ASYNC_ICONS_CSS =
-  `    <link rel="preload" href="${ICONS_CSS}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">\n` +
+  `    <link rel="stylesheet" href="${ICONS_CSS}" media="print" data-deferred-style>\n` +
   `    <noscript><link rel="stylesheet" href="${ICONS_CSS}"></noscript>`;
 
 function optimizeFontsAndAssets(html) {
+  const canActivateDeferredStyles = /src=["']?\/js\/(?:page-boot|site)\.js/i.test(html);
   // Resource hints for origins the site no longer contacts.
   // (fonts.googleapis.com / fonts.gstatic.com preconnects are re-emitted below
   // alongside the font preloads -- the Google Calendar scheduling button that
@@ -154,7 +162,7 @@ function optimizeFontsAndAssets(html) {
   const FONT_PRELOADS =
     '    <link rel=preload href=/fonts/archivo-latin.woff2 as=font type=font/woff2 crossorigin>\n' +
     '    <link rel=preload href=/fonts/roboto-latin.woff2 as=font type=font/woff2 crossorigin>\n' +
-    '    <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
+    '    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>\n' +
     '    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
   html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/archivo-latin\.woff2["']?[^>]*>\r?\n/gi, '');
   html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?[^>]*>\r?\n/gi, '');
@@ -166,7 +174,7 @@ function optimizeFontsAndAssets(html) {
 
   /*
    * Preload the nav logo. Every page's sticky header carries the same 48px
-   * /icon.jpg via the .netlify/images AVIF transform, and the <img> already
+   * optimized local WebP, and the <img> already
    * carries fetchpriority=high. A <link rel=preload> for the exact same URL
    * lets the browser start that fetch during HTML parsing instead of waiting
    * for the <img> element to be constructed, which keeps the logo (and the
@@ -176,8 +184,8 @@ function optimizeFontsAndAssets(html) {
    * icon.jpg transform is stripped first so re-runs never stack duplicates.
    */
   const ICON_PRELOAD =
-    '    <link rel=preload as=image href="/.netlify/images?url=/icon.jpg&amp;w=96&amp;fm=avif&amp;q=80" fetchpriority=high>';
-  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?\/\.netlify\/images\?url=\/icon\.jpg[^>]*>\r?\n/gi, '');
+    `    <link rel=preload as=image href="${ICON_IMAGE}" type=image/webp fetchpriority=high>`;
+  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?(?:\/\.netlify\/images\?url=\/icon\.jpg|\/images\/icon-96\.webp)[^>]*>\r?\n/gi, '');
   html = html.replace(
     /(<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
     `$1${ICON_PRELOAD}\n`,
@@ -199,10 +207,10 @@ function optimizeFontsAndAssets(html) {
    * duplicates.
    */
   const BANNER_PRELOADS =
-    '    <link rel=preload as=image href="/.netlify/images?url=/logo-banner.jpg&amp;w=640&amp;fm=avif&amp;q=65" media="(max-width: 767px)" fetchpriority=high>\n' +
-    '    <link rel=preload as=image href="/.netlify/images?url=/logo-banner.jpg&amp;w=1440&amp;fm=avif&amp;q=65" media="(min-width: 768px) and (max-width: 1439px)" fetchpriority=high>\n' +
-    '    <link rel=preload as=image href="/.netlify/images?url=/logo-banner.jpg&amp;w=1760&amp;fm=avif&amp;q=65" media="(min-width: 1440px)" fetchpriority=high>\n';
-  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?\/\.netlify\/images\?url=\/logo-banner\.jpg[^>]*>\r?\n/gi, '');
+    `    <link rel=preload as=image href="${BANNER_IMAGE.mobile}" type=image/webp media="(max-width: 767px)" fetchpriority=high>\n` +
+    `    <link rel=preload as=image href="${BANNER_IMAGE.tablet}" type=image/webp media="(min-width: 768px) and (max-width: 1439px)" fetchpriority=high>\n` +
+    `    <link rel=preload as=image href="${BANNER_IMAGE.desktop}" type=image/webp media="(min-width: 1440px)" fetchpriority=high>\n`;
+  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?(?:\/\.netlify\/images\?url=\/logo-banner\.jpg|\/images\/logo-banner-(?:640|1440|1760)\.webp)[^>]*>\r?\n/gi, '');
   // index.html alone carries the banner hero; on other pages the three links
   // must not be added.
   if (/(<main\s+id=["']?main-content["']?[\s\S]{0,80}?<header\s+id=["']?top["']?\s+class=["']?[^"'>]*\bhero\b[^"'>]*>?)/i.test(html)) {
@@ -268,12 +276,27 @@ function optimizeFontsAndAssets(html) {
     // translucent veil keeps white text readable over every part of the photo,
     // matching the last frame so the hero never repaints after stylesheets
     // arrive.
-    '#top.hero{position:relative;min-height:22rem;background-color:#1b2a4a;background-image:linear-gradient(rgba(3,7,11,.62),rgba(3,7,11,.62)),url(/.netlify/images?url=/logo-banner.jpg&w=1760&fm=avif&q=65);background-size:cover;background-position:center;color:#fff}' +
+    `#top.hero{position:relative;min-height:22rem;background-color:#1b2a4a;background-image:linear-gradient(rgba(3,7,11,.62),rgba(3,7,11,.62)),url(${BANNER_IMAGE.desktop});background-size:cover;background-position:center;color:#fff}` +
     // Each width paints exactly the rendition its rel=preload link already
     // fetched (640 phones / 1440 tablets+small laptops), so no second copy of
     // the photo is ever requested.
-    '@media(min-width:768px) and (max-width:1439px){#top.hero{background-image:linear-gradient(rgba(3,7,11,.62),rgba(3,7,11,.62)),url(/.netlify/images?url=/logo-banner.jpg&w=1440&fm=avif&q=65)}}' +
-    '@media(max-width:767px){#top.hero{background-image:linear-gradient(rgba(3,7,11,.62),rgba(3,7,11,.62)),url(/.netlify/images?url=/logo-banner.jpg&w=640&fm=avif&q=65)}}' +
+    `@media(min-width:768px) and (max-width:1439px){#top.hero{background-image:linear-gradient(rgba(3,7,11,.62),rgba(3,7,11,.62)),url(${BANNER_IMAGE.tablet})}}` +
+    `@media(max-width:767px){#top.hero{background-image:linear-gradient(rgba(3,7,11,.62),rgba(3,7,11,.62)),url(${BANNER_IMAGE.mobile})}}` +
+    // Minimal layout utilities used by the shared header and first viewport.
+    // They prevent a flash of stacked navigation while both full stylesheets
+    // load without blocking the initial render.
+    '*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid}' +
+    'html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:Roboto,system-ui,-apple-system,"Segoe UI",sans-serif}' +
+    'body{font-family:Roboto,system-ui,-apple-system,"Segoe UI",sans-serif}' +
+    'img,svg{display:block;max-width:100%}button,a{font:inherit}a{color:inherit;text-decoration:inherit}' +
+    '.hidden{display:none}.relative{position:relative}.absolute{position:absolute}.sticky{position:sticky}.top-0{top:0}.z-50{z-index:50}' +
+    '.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.items-center{align-items:center}.justify-between{justify-content:space-between}.justify-center{justify-content:center}.flex-shrink-0{flex-shrink:0}.flex-wrap{flex-wrap:wrap}' +
+    '.mx-auto{margin-left:auto;margin-right:auto}.w-full{width:100%}.max-w-7xl{max-width:80rem}.min-w-0{min-width:0}.overflow-hidden{overflow:hidden}' +
+    '.px-4{padding-left:1rem;padding-right:1rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.p-4{padding:1rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}' +
+    '.text-white{color:#fff}.text-gray-900{color:#111827}.bg-white{background:#fff}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.text-center{text-align:center}' +
+    '.rounded-full{border-radius:9999px}.object-cover{object-fit:cover}' +
+    '@media(min-width:640px){.sm\\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\\:h-11{height:2.75rem}.sm\\:w-11{width:2.75rem}}' +
+    '@media(min-width:1024px){.lg\\:flex{display:flex}.lg\\:hidden{display:none}.lg\\:px-8{padding-left:2rem;padding-right:2rem}}' +
     // Reserve the hero's inner stack height so the webfont swap and the icon
     // glyph boxes in .hero-trust / .hero-rating-bar cannot push the trust
     // badges down after first paint. The hero is the LCP element on '/', and a
@@ -364,7 +387,7 @@ function optimizeFontsAndAssets(html) {
   // was enough to nest the block inside its own fallback.
   html = html.replace(
     /(?<!<noscript>)[ \t]*<link\s+rel="(?:stylesheet|preload)"\s+href="\/css\/icons\.css(?:\?v=[^"]*)?"[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel="stylesheet"\s+href="\/css\/icons\.css(?:\?v=[^"]*)?"><\/noscript>\r?\n?)?/gi,
-    `${ASYNC_ICONS_CSS}\n`,
+    `${canActivateDeferredStyles ? ASYNC_ICONS_CSS : `    <link rel="stylesheet" href="${ICONS_CSS}">`}\n`,
   );
   /*
    * site-theme.css loads async via the preload swap.
@@ -387,47 +410,24 @@ function optimizeFontsAndAssets(html) {
    * normalised to a single current async preload pair.
    */
   const ASYNC_SITE_THEME_CSS =
-    `    <link rel="preload" href="${SITE_THEME_CSS}" as="style" onload="this.onload=null;this.rel='stylesheet'">\n` +
+    `    <link rel="stylesheet" href="${SITE_THEME_CSS}" media="print" data-deferred-style>\n` +
     `    <noscript><link rel="stylesheet" href="${SITE_THEME_CSS}"></noscript>`;
   html = html.replace(
     /(?<!<noscript>)[ \t]*<link\s+rel=["']?(?:stylesheet|preload)["']?\s+href=["']?\/css\/site-theme\.css(?:\?v=[^"'>]*)?["']?[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel=["']?stylesheet["']?\s+href=["']?\/css\/site-theme\.css(?:\?v=[^"'>]*)?["']?[^>]*><\/noscript>\r?\n?)?/gi,
-    `${ASYNC_SITE_THEME_CSS}\n`,
+    `${canActivateDeferredStyles ? ASYNC_SITE_THEME_CSS : `    <link rel="stylesheet" href="${SITE_THEME_CSS}">`}\n`,
   );
 
   /*
-   * Tailwind is render-blocking, deliberately.
-   *
-   * It used to be loaded with the `rel="preload" ... onload="this.rel='style-
-   * sheet'"` trick behind a six-rule inline "critical" block. That wins the
-   * render-blocking-resources diagnostic, which is worth nothing, and loses
-   * Cumulative Layout Shift, which is worth a quarter of the performance
-   * score.
-   *
-   * Every above-the-fold element on this site is laid out by Tailwind
-   * utilities -- `sticky top-0 z-50` on the nav bar, `flex justify-between
-   * items-center` on its inner row, `h-10 w-10` on the logo, and `hidden
-   * lg:flex` on both the desktop link row and the mobile drawer. Painting
-   * before that stylesheet arrives does not paint an approximation of the
-   * page, it paints a single unstyled column with the drawer and the desktop
-   * nav stacked on top of each other, because `hidden` does not exist yet.
-   * Tailwind then lands and every element on the page moves.
-   *
-   * The stylesheet is 11kB over the wire (64kB minified, but Brotli likes
-   * utility CSS) and is pinned in cache for a year, so blocking on it costs
-   * one round trip on a first visit and nothing after that. That is a far
-   * cheaper way to buy a correct first paint than a hand-maintained critical
-   * block could ever be.
-   *
-   * All three rewrites below are stamp-agnostic and idempotent, so a cache
-   * bust cannot silently switch them off.
+   * Tailwind loads without blocking rendering. The critical block above owns
+   * the shared header and hero layout until page-boot.js activates this link.
+   * A noscript copy preserves the complete experience when JavaScript is off.
    */
-  const TAILWIND_CSS = `/css/tailwind.css?v=${ASSET_VERSION}`;
-
-  // The old async pattern, plus the <noscript> twin that would otherwise
-  // become a second copy of the stylesheet.
   html = html.replace(
-    /[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/css\/tailwind\.css(?:\?v=[^\s">]*)?["']?\s+as=["']?style["']?[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel=["']?stylesheet["']?\s+href=["']?\/css\/tailwind\.css(?:\?v=[^\s">]*)?["']?><\/noscript>\r?\n?)?/gi,
-    `    <link rel="stylesheet" href="${TAILWIND_CSS}">\n`,
+    /(?<!<noscript>)[ \t]*<link\s+rel=["']?(?:stylesheet|preload)["']?\s+href=["']?\/css\/tailwind\.css(?:\?v=[^"'>]*)?["']?[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel=["']?stylesheet["']?\s+href=["']?\/css\/tailwind\.css(?:\?v=[^"'>]*)?["']?[^>]*><\/noscript>\r?\n?)?/gi,
+    canActivateDeferredStyles
+      ? `    <link rel="stylesheet" href="${TAILWIND_CSS}" media="print" data-deferred-style>\n` +
+        `    <noscript><link rel="stylesheet" href="${TAILWIND_CSS}"></noscript>\n`
+      : `    <link rel="stylesheet" href="${TAILWIND_CSS}">\n`,
   );
 
   /*
@@ -440,12 +440,6 @@ function optimizeFontsAndAssets(html) {
    * rule in tailwind-input.css.
    */
   html = html.replace(/[ \t]*<style id="critical-above-the-fold">[\s\S]*?<\/style>\r?\n?/gi, '');
-
-  // Keep the stamp current on whichever link survived the two passes above.
-  html = html.replace(
-    /<link\s+rel=["']?stylesheet["']?\s+href=["']?\/css\/tailwind\.css(?:\?v=[^\s">]*)?["']?>/gi,
-    `<link rel="stylesheet" href="${TAILWIND_CSS}">`,
-  );
 
   html = html.replace(/src="\/js\/([^"?]+\.js)(?:\?v=[^"]*)?"/gi, (match, fileName) => {
     const version = SCRIPT_VERSIONS.get(fileName);
