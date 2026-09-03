@@ -61,10 +61,47 @@
     skipPatterns = ["fragment-redirect", ".netlify/images", "public/services/index.html"]
     todoPatterns = ["self-signed certificate"]
 
+# ---------------------------------------------------------------------------
+# Lighthouse
+#
+# The plugin is also installed from the Netlify UI; declaring it here is how
+# its inputs get set. Its default mode runs on the onSuccess event against the
+# deploy URL, and every deploy-specific URL for this site 404s at the edge --
+# http://main.aaahandyman.services (the site's deploy_url), the
+# <deploy-id>--aaahandymanservicesllc.netlify.app permalinks, and the
+# main--aaahandymanservicesllc.netlify.app branch alias all answer Netlify's
+# plain "Not Found" while https://aaahandyman.services serves the site. Every
+# audit therefore aborted with "Lighthouse was unable to reliably load the
+# page you requested... (Status code: 404)" and the deploy record showed no
+# scores at all.
+#
+# fail_deploy_on_score_thresholds switches the plugin to the onPostBuild event,
+# where it serves the finished public/ directory over a local Express server
+# and audits http://localhost:5100 -- no deploy URL involved, so scores are
+# recorded on every build. Thresholds are set generously below today's
+# local-audit numbers (performance 92-95, accessibility 98-100, best-practices
+# 92, SEO 100, PWA 100) so the audit acts as a tripwire for a genuinely broken
+# build rather than a gate on audit noise: the local static server cannot
+# answer the platform-only /.netlify/images and /api/* requests the page makes,
+# which holds the local Best Practices number at 92 regardless of the site.
+# ---------------------------------------------------------------------------
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+  [plugins.inputs]
+    fail_deploy_on_score_thresholds = "true"
+
+  [plugins.inputs.thresholds]
+    performance = 0.85
+    accessibility = 0.9
+    best-practices = 0.9
+    seo = 0.9
+    pwa = 0.85
+
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.googletagmanager.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://calendar.google.com; style-src 'self' 'unsafe-inline' https://calendar.google.com; font-src 'self'; img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.google-analytics.com https://*.g.doubleclick.net https://www.google.com https://calendar.google.com; manifest-src 'self'; worker-src 'self'; frame-src 'self' https://maps.google.com https://www.google.com https://www.google.com/recaptcha/ https://recaptcha.google.com/ https://calendar.google.com; frame-ancestors 'self' https://app.netlify.com https://create.netlify.com;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.googletagmanager.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://calendar.google.com; style-src 'self' 'unsafe-inline' https://calendar.google.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.google-analytics.com https://*.g.doubleclick.net https://www.google.com https://calendar.google.com; manifest-src 'self'; worker-src 'self'; frame-src 'self' https://maps.google.com https://www.google.com https://www.google.com/recaptcha/ https://recaptcha.google.com/ https://calendar.google.com; frame-ancestors 'self' https://app.netlify.com https://create.netlify.com;"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"

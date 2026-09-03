@@ -365,7 +365,14 @@
 // page's markup changed, so a returning visitor holding v64 would keep last
 // deploy's booking page in the shell cache. This bump evicts the old shell
 // for every client.
-const CACHE_VERSION = 'v65';
+// v66 lands the Lighthouse scoring repair: every page's <head> changed (new
+// preconnects for the Google Fonts origins the Calendar scheduling button
+// loads its skin from) and every page's shared assets moved to the 20260903a
+// stamp, while the asset cache is keyed on the URL minus ?v= (see
+// assetCacheKey). A returning visitor holding v65 would keep last deploy's
+// markup and stylesheets behind unchanged cache keys. This bump evicts the
+// old shell and asset caches for every client.
+const CACHE_VERSION = 'v66';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
