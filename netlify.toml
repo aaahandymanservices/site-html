@@ -5,6 +5,75 @@
 [build.environment]
   NETLIFY_SKIP_GATSBY_BUILD_PLUGIN = "true"
 
+# ---------------------------------------------------------------------------
+# Lighthouse
+#
+# The plugin is installed from the Netlify UI (see .netlify/plugins), which
+# passes it no inputs. Declaring it here is how its inputs get set, and
+# without these inputs it runs on its defaults -- which cannot produce a
+# score on this site at all:
+#
+#   On defaults the plugin registers onSuccess and audits process.env
+#   DEPLOY_URL. Every deploy-specific hostname for this site answers the
+#   edge's plain "Not Found": the site's deploy_url (main.aaahandyman.services,
+#   which is also every production deploy's deploy_ssl_url), the
+#   <branch>.aaahandyman.services branch hosts, and the deploy permalinks.
+#   Only the canonical https://aaahandyman.services and the
+#   aaahandymanservicesllc.netlify.app default domain serve the site. So the
+#   audit aborted with "Lighthouse was unable to reliably load the page you
+#   requested... (Status code: 404)" and no deploy recorded any scores.
+#
+# Pointing the audit at the canonical URL is not enough on its own, because
+# in onSuccess mode the plugin overwrites each audit's url with DEPLOY_URL
+# (get-configuration/index.js forces `url: deployUrl` whenever a deploy URL is
+# present). The audit url below is only honoured on the onPostBuild event, and
+# fail_deploy_on_score_thresholds is the plugin's only switch for that event --
+# hence its use here. Scores are then recorded on every build, before deploy.
+#
+# Auditing the live site instead of the local static copy. onPostBuild would
+# otherwise serve public/ over a bare Express static server, and that server
+# can only answer files. Two things the home page needs are not files:
+# /api/reviews, which home.js fetches on idle to populate the review cards,
+# and the response headers themselves -- above all the Content-Security-Policy
+# set below, which express.static never sends. On the local server that fetch
+# answered 404 and landed in the browser console (failing errors-in-console)
+# and the report read "No CSP found in enforcement mode", even though the
+# production origin answers the fetch with a 200 and serves the policy on
+# every response. Naming an absolute url makes the plugin skip the local
+# server entirely (get-server returns a stub whose url is this one), so the
+# platform routes and headers are exercised exactly as visitors see them.
+# public/ is still built first, so a genuinely broken build still fails before
+# the audit runs.
+#
+# This MUST stay an array of tables ([[...]], not [...]). The plugin gates the
+# whole input on Array.isArray and silently discards a plain table, falling
+# back to serving public/ locally -- which is how the phantom 404s and the
+# missing-CSP finding got into an earlier report.
+#
+# Thresholds sit generously below the numbers this site records (performance
+# 92-95, accessibility 98-100, best-practices 92, SEO 100, PWA 100) so the
+# audit acts as a tripwire for a genuinely broken build rather than a gate on
+# audit noise. Best practices carries the most headroom because the audited
+# page loads third-party Google scripts (reCAPTCHA on the quote form, the
+# analytics tag) whose own console output this site cannot suppress, and
+# errors-in-console is scored under that category.
+# ---------------------------------------------------------------------------
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+  [plugins.inputs]
+    fail_deploy_on_score_thresholds = "true"
+
+  [[plugins.inputs.audits]]
+    url = "https://aaahandyman.services"
+
+  [plugins.inputs.thresholds]
+    performance = 0.85
+    accessibility = 0.9
+    best-practices = 0.8
+    seo = 0.9
+    pwa = 0.85
+
 [[headers]]
   for = "/*"
   [headers.values]
