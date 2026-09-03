@@ -168,6 +168,7 @@
     var BUTTON_COLOR = '#b91c1c';
     var CSS_ID = 'aaa-gcal-scheduling-css';
     var SCRIPT_ID = 'aaa-gcal-scheduling-script';
+    var FONT_SWAP_ID = 'aaa-gcal-font-swap';
     var pendingTargets = [];
 
     // Footer booking links are plain text links, not CTAs. The data attribute
@@ -200,6 +201,21 @@
         css.rel = 'stylesheet';
         css.href = 'https://calendar.google.com/calendar/scheduling-button-script.css';
         document.head.appendChild(css);
+      }
+
+      // The scheduler's stylesheet pulls Google Sans and Material Icons from
+      // fonts.googleapis.com. Without &display=swap the returned @font-face
+      // rules carry no font-display, so browsers hold the button's label
+      // invisible (font-display: block behaviour) while those faces load --
+      // exactly what Lighthouse's font-display audit flags. Appending the
+      // query rewrites those requests so every face swaps instead. Idempotent:
+      // a copy carrying the parameter short-circuits the guard below.
+      if (!document.getElementById(FONT_SWAP_ID)) {
+        var swap = document.createElement('link');
+        swap.id = FONT_SWAP_ID;
+        swap.rel = 'stylesheet';
+        swap.href = 'https://fonts.googleapis.com/css?family=Google+Sans:400,500|Material+Icons&display=swap';
+        document.head.appendChild(swap);
       }
 
       var script = document.getElementById(SCRIPT_ID);

@@ -90,8 +90,21 @@
  * service-zone-selector.js changed behind their unchanged pathnames, so this
  * bump and the matching CACHE_VERSION move in public/sw.js refetch them for
  * returning visitors.
+ *
+ * 20260903c — Lighthouse report fixes: the home page's "Read All Reviews" CTA
+ * carries a solid navy fill (white text no longer samples against the light
+ * section behind the reviews panel), the #services section background
+ * darkened one step for the same sampling reason, the services page's
+ * tracking badges moved to red-200 and the plan toggle to an opaque slate-800
+ * fill with slate-200 labels, page-boot.js requests the Google Calendar
+ * scheduler's fonts with &display=swap, and the printable-assessment styles
+ * moved out of site-theme.css into print-assessment.css linked only by the
+ * aging-in-place guide. site-theme.css, tailwind-input.css (via the purge
+ * scan), page-boot.js and every page's markup changed behind their unchanged
+ * pathnames, so this bump and the matching CACHE_VERSION move in public/sw.js
+ * refetch them for returning visitors.
  */
-export const ASSET_VERSION = '20260903b';
+export const ASSET_VERSION = '20260903c';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use
