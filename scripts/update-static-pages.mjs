@@ -105,6 +105,10 @@ const ASYNC_ICONS_CSS =
 
 function optimizeFontsAndAssets(html) {
   // Resource hints for origins the site no longer contacts.
+  // (fonts.googleapis.com / fonts.gstatic.com preconnects are re-emitted below
+  // alongside the font preloads -- the Google Calendar scheduling button that
+  // page-boot.js renders on every booking CTA loads Google Sans and Material
+  // Icons from those origins, which the CSP's style-src/font-src now allow.)
   html = html.replace(/[ \t]*<link\s+rel="preconnect"\s+href="https:\/\/fonts\.(?:googleapis|gstatic)\.com"[^>]*>\r?\n/gi, '');
   html = html.replace(/[ \t]*<link\s+rel="preconnect"\s+href="https:\/\/cdnjs\.cloudflare\.com"[^>]*>\r?\n/gi, '');
 
@@ -149,9 +153,12 @@ function optimizeFontsAndAssets(html) {
    */
   const FONT_PRELOADS =
     '    <link rel=preload href=/fonts/archivo-latin.woff2 as=font type=font/woff2 crossorigin>\n' +
-    '    <link rel=preload href=/fonts/roboto-latin.woff2 as=font type=font/woff2 crossorigin>';
+    '    <link rel=preload href=/fonts/roboto-latin.woff2 as=font type=font/woff2 crossorigin>\n' +
+    '    <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
+    '    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
   html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/archivo-latin\.woff2["']?[^>]*>\r?\n/gi, '');
   html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?[^>]*>\r?\n/gi, '');
+  html = html.replace(/[ \t]*<link\s+rel=["']?preconnect["']?\s+href=["']?https:\/\/fonts\.(?:googleapis|gstatic)\.com["']?[^>]*>\r?\n/gi, '');
   html = html.replace(
     /(<meta\s+name=["']?viewport["']?\s+content=["']?[^"'>]*["']?>\r?\n)/i,
     `$1${FONT_PRELOADS}\n`,

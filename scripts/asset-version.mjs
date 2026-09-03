@@ -73,8 +73,17 @@
  * links (marked data-plain-booking-link) out of the Google scheduling-button
  * conversion, so this bump and the matching CACHE_VERSION move in
  * public/sw.js refetch both for returning visitors.
+ *
+ * 20260903a — Lighthouse scoring repair: the Lighthouse build plugin moved to
+ * the onPostBuild event (it had been auditing a deploy URL that 404s, so no
+ * deploy ever recorded scores), the CSP now allows the Google Fonts origins
+ * that the Calendar scheduling button loads its skin from (that request was
+ * being blocked in every visitor's console), and every page gained
+ * preconnects for those font origins. Page markup changed on all pages and
+ * netlify.toml changed, so this bump and the matching CACHE_VERSION move in
+ * public/sw.js refetch them for returning visitors.
  */
-export const ASSET_VERSION = '20260902b';
+export const ASSET_VERSION = '20260903a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use
