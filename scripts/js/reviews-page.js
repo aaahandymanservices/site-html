@@ -906,7 +906,7 @@
 
       const previewHtml = photoPath ? `
               <button type="button" class="review-photo-open block w-full h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50" data-index="0" aria-label="View photo: ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
-                  <img class="review-photo w-full h-full object-cover" src="${escapeHTML(thumbUrl)}" data-original="${escapeHTML(photoPath)}" alt="${escapeHTML(item.imageAlt)}" width="800" height="600" loading="lazy" decoding="async">
+                  <img class="review-photo w-full h-full object-cover" src="${escapeHTML(thumbUrl)}" data-original="${escapeHTML(photoPath)}" alt="${escapeHTML(item.imageAlt || `${item.projectType} project photo from ${item.customerName} in ${item.location}`)}" width="800" height="600" loading="lazy" decoding="async">
                   <span class="pointer-events-none absolute bottom-3 right-3 h-9 w-9 rounded-full bg-black/55 text-white flex items-center justify-center text-sm"><i class="fas fa-expand" aria-hidden="true"></i></span>
               </button>` : photoPlaceholderHtml();
 
@@ -917,7 +917,9 @@
       const stripHtml = photoPaths.length > 1
           ? `<div class="review-strip grid grid-cols-3 gap-1 border-t border-gray-100 bg-gray-50">${photoPaths.map((path, i) => {
               const tUrl = transformedPhoto(path, 480, 75);
-              const alt = i === 0 ? item.imageAlt : `${item.projectType} project photo ${i + 1} from ${item.customerName} in ${item.location}`;
+              const alt = i === 0
+                  ? (item.imageAlt || `${item.projectType} project photo from ${item.customerName} in ${item.location}`)
+                  : `${item.projectType} project photo ${i + 1} from ${item.customerName} in ${item.location}`;
               return `<button type="button" class="review-photo-open relative block aspect-[4/3] overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500/60" data-index="${i}" aria-label="View photo ${i + 1} of ${escapeHTML(item.projectType)} in ${escapeHTML(item.location)}">
                   <img class="review-photo w-full h-full object-cover" src="${escapeHTML(tUrl)}" data-original="${escapeHTML(path)}" alt="${escapeHTML(alt)}" width="480" height="360" loading="lazy" decoding="async">
               </button>`;
@@ -1533,7 +1535,7 @@
   const ensureLightbox = () => {
       if (lightboxEl) return;
       lightboxEl = document.createElement('div');
-      lightboxEl.className = 'hidden fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4';
+      lightboxEl.className = 'review-lightbox hidden fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4';
       lightboxEl.setAttribute('role', 'dialog');
       lightboxEl.setAttribute('aria-modal', 'true');
       lightboxEl.setAttribute('aria-label', 'Review photo viewer');
@@ -1639,7 +1641,9 @@
       openLightbox(
           paths.map((path, i) => ({
               path,
-              alt: i === 0 ? review.imageAlt : `${review.projectType} project photo ${i + 1} from ${review.customerName} in ${review.location}`,
+              alt: i === 0
+                  ? (review.imageAlt || `${review.projectType} project photo from ${review.customerName} in ${review.location}`)
+                  : `${review.projectType} project photo ${i + 1} from ${review.customerName} in ${review.location}`,
               caption: `${review.projectType || 'Reviewed project'} in ${review.location || 'Oakland County'} — reviewed by ${review.customerName || 'a verified customer'}${paths.length > 1 ? ` (photo ${i + 1} of ${paths.length})` : ''}`,
           })),
           Number(btn.dataset.index) || 0,

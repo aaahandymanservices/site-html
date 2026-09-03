@@ -2051,6 +2051,18 @@ a[href^="mailto:"] {
 }
 
 /*
+ * The services page's One-Time Packages / Quarterly Plans toggle is an ARIA
+ * tab pair (role=tablist), so its active state is carried by aria-selected
+ * rather than aria-pressed. The class the tab script toggles mirrors the
+ * pressed-state styling so the visuals do not depend on which attribute a
+ * given toggle uses.
+ */
+.plan-toggle__btn--active {
+  background: #a61f2e;
+  color: #fff;
+}
+
+/*
  * Pricing and plan cards sit in one horizontal row on desktop, each taking an
  * equal share of the row's width, and stack in a single column on phones.
  *
@@ -4098,6 +4110,17 @@ footer[class] {
   outline: 0;
 }
 
+/* The pin's clickable hit area is the dot it renders, so keyboard focus is
+   ringed on the dot rather than on the zero-size button box. */
+.map-pin:focus-visible {
+  outline: 0;
+}
+
+.map-pin:focus-visible .map-pin__dot {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
 .map-pin__dot,
 .map-pin__pulse {
   position: absolute;
@@ -4431,6 +4454,20 @@ footer[class] {
   }
 }
 
+/* The photo lightbox that ships with reviews-page.js */
+.review-lightbox {
+  transition: opacity 0.25s ease;
+}
+
+.review-lightbox.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.review-lightbox img {
+  animation: lightboxIn 0.25s ease;
+}
+
 .review-dropzone {
   transition: all 0.2s ease;
 }
@@ -4444,6 +4481,8 @@ footer[class] {
 @media (prefers-reduced-motion: reduce) {
   #reviews-lightbox,
   #reviews-lightbox img,
+  .review-lightbox,
+  .review-lightbox img,
   .review-zoom img {
     transition: none !important;
     animation: none !important;

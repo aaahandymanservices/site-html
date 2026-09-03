@@ -378,7 +378,13 @@
 // returning visitor holding v66 would keep last deploy's stylesheet and
 // script behind unchanged cache keys. This bump evicts the old shell and
 // asset caches for every client.
-const CACHE_VERSION = 'v69';
+// v70 ships the accessibility audit fixes: dialog focus traps and the ARIA
+// tabs on /services (home.js, services.html), the injected reviews lightbox
+// and its styles, labelled tooltip buttons and photo inputs, and the map-pin
+// focus ring (site-theme.css). Shared scripts, the theme stylesheet and
+// several pages' markup changed behind unchanged pathnames, so this bump
+// evicts the old shell and asset caches for every client.
+const CACHE_VERSION = 'v70';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
