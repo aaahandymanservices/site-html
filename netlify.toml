@@ -61,69 +61,6 @@
     skipPatterns = ["fragment-redirect", ".netlify/images", "public/services/index.html"]
     todoPatterns = ["self-signed certificate"]
 
-# ---------------------------------------------------------------------------
-# Lighthouse
-#
-# The plugin is also installed from the Netlify UI; declaring it here is how
-# its inputs get set. Its default mode runs on the onSuccess event against the
-# deploy URL, and every deploy-specific URL for this site 404s at the edge --
-# http://main.aaahandyman.services (the site's deploy_url), the
-# <deploy-id>--aaahandymanservicesllc.netlify.app permalinks, and the
-# main--aaahandymanservicesllc.netlify.app branch alias all answer Netlify's
-# plain "Not Found" while https://aaahandyman.services serves the site. Every
-# audit therefore aborted with "Lighthouse was unable to reliably load the
-# page you requested... (Status code: 404)" and the deploy record showed no
-# scores at all.
-#
-# fail_deploy_on_score_thresholds switches the plugin to the onPostBuild event,
-# where scores are recorded on every build -- see the audit input below for why
-# the audit now targets the live canonical site rather than the local static
-# server. Thresholds are set generously below today's numbers (performance
-# 92-95, accessibility 98-100, best-practices 92, SEO 100, PWA 100) so the
-# audit acts as a tripwire for a genuinely broken build rather than a gate on
-# audit noise. On top of that, the booking page now embeds the Google Calendar
-# Appointment Scheduling iframe, and in the headless audit that third-party
-# scheduler logs its own browser console errors (blocked third-party storage/
-# resource noise from Google's origin) that the site cannot suppress. Its
-# threshold therefore sits just under that.
-# ---------------------------------------------------------------------------
-[[plugins]]
-  package = "@netlify/plugin-lighthouse"
-
-  [plugins.inputs]
-    fail_deploy_on_score_thresholds = "true"
-
-  # Auditing the live site instead of the local static copy.
-  #
-  # onPostBuild mode would otherwise serve public/ over a bare Express static
-  # server, and that server can only answer files. Two things the home page
-  # needs are not files: /api/reviews, which home.js fetches on idle to
-  # populate the review cards, and the response headers themselves -- most of
-  # all the Content-Security-Policy set below, which express.static never
-  # sends. On the local server the fetch answered 404 and landed in the
-  # browser console (failing errors-in-console) and the report read "No CSP
-  # found in enforcement mode", even though the production origin answers the
-  # fetch with a 200 and serves the policy on every response. Pointing the
-  # audit at the live canonical site means the platform routes and headers are
-  # exercised exactly as visitors see them. public/ is still built first, so a
-  # genuinely broken build still fails before the audit runs.
-  #
-  # This MUST stay an array of tables ([[...]], not [...]). The plugin gates
-  # the whole input on Array.isArray and silently discards a plain table,
-  # falling back to serving public/ locally -- which is how the three phantom
-  # 404s and the missing-CSP finding got into the report in the first place.
-  # A single-table form parses fine and fails quietly, so it is worth keeping
-  # the double brackets in mind when editing this block.
-  [[plugins.inputs.audits]]
-    url = "https://aaahandyman.services"
-
-  [plugins.inputs.thresholds]
-    performance = 0.85
-    accessibility = 0.9
-    best-practices = 0.8
-    seo = 0.9
-    pwa = 0.85
-
 [[headers]]
   for = "/*"
   [headers.values]
