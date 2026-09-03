@@ -202,7 +202,7 @@
                   if (btn) { btn.disabled = false; btn.innerHTML = 'Get My Free Quote <i class="fas fa-arrow-right" aria-hidden="true"></i>'; }
                   // Inline status banner keeps the visitor on the page and is
                   // reachable with the keyboard, where a native alert() is
-                  // blocking, dismissable-only, and flagged by Lighthouse.
+                  // blocking and dismissable-only.
                   var errorMessage = 'Sorry — there was a problem sending your request. Please call <a class="font-bold text-red-700 hover:text-red-900" href="tel:+12483853432">(248) 385-3432</a> or email <a class="font-bold text-red-700 hover:text-red-900" href="mailto:contact@aaahandyman.services">contact@aaahandyman.services</a>.';
                   var error = document.getElementById('quote-error');
                   if (error) {

@@ -86,8 +86,8 @@
    still win. The site uses no stacking (`fa-stack`) or size (`fa-2x`) utilities
    that would fight a fixed width.
 
-   Layout shift is a quarter of the Lighthouse performance score, which is the
-   same reasoning that keeps Tailwind render-blocking rather than deferred. */
+   Avoiding layout shift is the same reasoning that keeps Tailwind
+   render-blocking rather than deferred. */
 :where(.fa, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands) {
   display: inline-block;
   width: 1em;
@@ -2812,7 +2812,7 @@ footer[class] {
  * properties, so the pulse runs entirely off the main thread and never
  * triggers layout or paint. The earlier version animated box-shadow,
  * which forces a full repaint of the button and its surrounding region
- * on every frame; Lighthouse flags that as a non-composited animation.
+ * on every frame, which makes it a non-composited animation.
  *
  * The expanding crimson halo is a static ::before ring that scales up
  * and fades out. The base box-shadow stays on the element itself and
@@ -3163,7 +3163,7 @@ footer[class] {
    the .svc-group[open] rules), so a pointer sweep across a card grid composites
    instead of re-rasterising every card's box-shadow and border. The earlier
    `!important` override below used to animate `box-shadow` and `border-color`
-   directly on the card, which Lighthouse flags as a non-composited animation. */
+   directly on the card, making it a non-composited animation. */
 .service-card,
 .svc-group,
 .process-step-card,
