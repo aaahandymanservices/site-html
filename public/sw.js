@@ -378,7 +378,7 @@
 // returning visitor holding v66 would keep last deploy's stylesheet and
 // script behind unchanged cache keys. This bump evicts the old shell and
 // asset caches for every client.
-const CACHE_VERSION = 'v67';
+const CACHE_VERSION = 'v68';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

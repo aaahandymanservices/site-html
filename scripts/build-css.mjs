@@ -40,6 +40,11 @@ if (existsSync(tailwind)) {
  */
 const themeSource = join(ROOT, 'scripts/site-theme.css');
 const themeOutput = join(ROOT, 'public/css/site-theme.css');
+// The printable aging-in-place assessment's styles live in their own source
+// file and are linked only by that one page, so the @media print rules no
+// longer count as unused CSS on the other 89 documents.
+const printSource = join(ROOT, 'scripts/print-assessment.css');
+const printOutput = join(ROOT, 'public/css/print-assessment.css');
 const esbuild = join(ROOT, 'node_modules/.bin/esbuild');
 
 if (!existsSync(themeSource)) {
@@ -79,11 +84,23 @@ if (existsSync(esbuild)) {
 
   const saved = statSync(themeSource).size - statSync(themeOutput).size;
   console.log(`Wrote ${themeOutput} (${saved} bytes smaller than source)`);
+
+  if (existsSync(printSource)) {
+    execFileSync(
+      esbuild,
+      [printSource, '--minify', `--outfile=${printOutput}`, '--log-level=warning'],
+      { cwd: ROOT, stdio: 'inherit' },
+    );
+    console.log('Wrote', printOutput);
+  } else {
+    throw new Error(`Print stylesheet source is missing at ${printSource}.`);
+  }
 } else {
   // Serving the unminified source is a size regression, not a broken page, so
   // a missing minifier must not fail the build.
   copyFileSync(themeSource, themeOutput);
   console.log('esbuild unavailable; copied theme stylesheet unminified to', themeOutput);
+  if (existsSync(printSource)) copyFileSync(printSource, printOutput);
 }
 
 /*

@@ -76,25 +76,38 @@
 # scores at all.
 #
 # fail_deploy_on_score_thresholds switches the plugin to the onPostBuild event,
-# where it serves the finished public/ directory over a local Express server
-# and audits http://localhost:5100 -- no deploy URL involved, so scores are
-# recorded on every build. Thresholds are set generously below today's
-# local-audit numbers (performance 92-95, accessibility 98-100, best-practices
-# 92, SEO 100, PWA 100) so the audit acts as a tripwire for a genuinely broken
-# build rather than a gate on audit noise: the local static server cannot
-# answer the platform-only /.netlify/images and /api/* requests the page makes,
-# which holds the local Best Practices number at 92 regardless of the site.
-# On top of that, the booking page now embeds the Google Calendar Appointment
-# Scheduling iframe, and in the headless audit that third-party scheduler logs
-# its own browser console errors (blocked third-party storage/resource noise
-# from Google's origin) that the site cannot suppress, capping the local
-# Best Practices number at 83. Its threshold therefore sits just under that.
+# where scores are recorded on every build -- see the audit input below for why
+# the audit now targets the live canonical site rather than the local static
+# server. Thresholds are set generously below today's numbers (performance
+# 92-95, accessibility 98-100, best-practices 92, SEO 100, PWA 100) so the
+# audit acts as a tripwire for a genuinely broken build rather than a gate on
+# audit noise. On top of that, the booking page now embeds the Google Calendar
+# Appointment Scheduling iframe, and in the headless audit that third-party
+# scheduler logs its own browser console errors (blocked third-party storage/
+# resource noise from Google's origin) that the site cannot suppress. Its
+# threshold therefore sits just under that.
 # ---------------------------------------------------------------------------
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
 
   [plugins.inputs]
     fail_deploy_on_score_thresholds = "true"
+
+  # Auditing the live site instead of the local static copy.
+  #
+  # onPostBuild mode would otherwise serve public/ over a bare Express static
+  # server, and that server can only answer files. Three things the home page
+  # requests are not files: the /.netlify/images Image CDN transforms (the nav
+  # logo and the hero banner preloads) and /api/reviews, which home.js fetches
+  # on idle to populate the review cards. Each answered 404 on the local
+  # server and landed in the browser console, which read as three broken
+  # requests in every Lighthouse report even though the production origins
+  # answer all three with a 200. Pointing the audit at the live canonical site
+  # means the platform routes are exercised exactly as visitors see them.
+  # public/ is still built first, so a genuinely broken build still fails
+  # before the audit runs.
+  [plugins.inputs.audits]
+    url = "https://aaahandyman.services"
 
   [plugins.inputs.thresholds]
     performance = 0.85
