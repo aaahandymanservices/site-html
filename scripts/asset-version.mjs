@@ -123,8 +123,16 @@
  * Shared scripts and the theme stylesheet changed behind unchanged pathnames,
  * so this bump and the matching CACHE_VERSION move in public/sw.js refetch
  * them for returning visitors.
+ *
+ * 20260904b — new hero banner artwork: the uploaded replacement banner went in
+ * as public/logo-banner.jpg, and the three responsive hero renditions moved to
+ * versioned names (logo-banner-640-2026 / -1440-2026 / -1760-2026.webp) per
+ * the immutable-caching policy for /images/* and /*.jpg. site-theme.css and
+ * every page's inline critical-palette block now point at the new files behind
+ * unchanged pathnames, so this bump and the matching CACHE_VERSION move in
+ * public/sw.js refetch them for returning visitors.
  */
-export const ASSET_VERSION = '20260904a';
+export const ASSET_VERSION = '20260904b';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use

@@ -40,9 +40,9 @@ const SITE_THEME_CSS = `/css/site-theme.css?v=${ASSET_VERSION}`;
 const TAILWIND_CSS = `/css/tailwind.css?v=${ASSET_VERSION}`;
 const ICON_IMAGE = '/images/icon-96.webp';
 const BANNER_IMAGE = {
-  mobile: '/images/logo-banner-640.webp',
-  tablet: '/images/logo-banner-1440.webp',
-  desktop: '/images/logo-banner-1760.webp',
+  mobile: '/images/logo-banner-640-2026.webp',
+  tablet: '/images/logo-banner-1440-2026.webp',
+  desktop: '/images/logo-banner-1760-2026.webp',
 };
 const SCRIPT_VERSIONS = new Map([
   // Service worker registration, the gtag.js bootstrap, and the promo bar's
@@ -206,12 +206,12 @@ function optimizeFontsAndAssets(html) {
     `    <link rel=preload as=image href="${BANNER_IMAGE.mobile}" type=image/webp media="(max-width: 767px)" fetchpriority=high>\n` +
     `    <link rel=preload as=image href="${BANNER_IMAGE.tablet}" type=image/webp media="(min-width: 768px) and (max-width: 1439px)" fetchpriority=high>\n` +
     `    <link rel=preload as=image href="${BANNER_IMAGE.desktop}" type=image/webp media="(min-width: 1440px)" fetchpriority=high>\n`;
-  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?(?:\/\.netlify\/images\?url=\/logo-banner\.jpg|\/images\/logo-banner-(?:640|1440|1760)\.webp)[^>]*>\r?\n/gi, '');
+  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?(?:\/\.netlify\/images\?url=\/logo-banner\.jpg|\/images\/logo-banner-(?:640|1440|1760)(?:-2026)?\.webp)[^>]*>\r?\n/gi, '');
   // index.html alone carries the banner hero; on other pages the three links
   // must not be added.
   if (/(<main\s+id=["']?main-content["']?[\s\S]{0,80}?<header\s+id=["']?top["']?\s+class=["']?[^"'>]*\bhero\b[^"'>]*>?)/i.test(html)) {
     html = html.replace(
-      /(<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?\/\.netlify\/images\?url=\/icon\.jpg["']?[^>]*>\r?\n)/i,
+      /(<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?(?:\/\.netlify\/images\?url=\/icon\.jpg|\/images\/icon-96\.webp)["']?[^>]*>\r?\n)/i,
       `$1${BANNER_PRELOADS}`,
     );
   }
