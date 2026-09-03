@@ -1737,7 +1737,7 @@ body::after {
   min-height: 22rem;
   background-color: #1b2a4a;
   background-image: linear-gradient(rgba(3, 7, 11, 0.62), rgba(3, 7, 11, 0.62)),
-    url("/images/logo-banner-1760.webp") center/cover;
+    url("/images/logo-banner-1760-2026.webp") center/cover;
 }
 
 /* Give the hero headline a subtle metallic depth */
@@ -4954,7 +4954,7 @@ input.careers-upload-input::file-selector-button:hover {
 @media (min-width: 768px) and (max-width: 1439px) {
   .hero {
     background: linear-gradient(rgba(3, 7, 11, 0.62), rgba(3, 7, 11, 0.62)),
-      url("/images/logo-banner-1440.webp") center/cover;
+      url("/images/logo-banner-1440-2026.webp") center/cover;
     background-color: #1b2a4a;
   }
 }
@@ -4963,7 +4963,7 @@ input.careers-upload-input::file-selector-button:hover {
   .hero {
     min-height: auto;
     background: linear-gradient(rgba(3, 7, 11, 0.62), rgba(3, 7, 11, 0.62)),
-      url("/images/logo-banner-640.webp") center/cover;
+      url("/images/logo-banner-640-2026.webp") center/cover;
     background-color: #1b2a4a;
   }
 }

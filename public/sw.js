@@ -385,7 +385,15 @@
 // bump all move together. Shared scripts and the theme stylesheet changed
 // behind unchanged pathnames, so this bump also evicts the old shell and
 // asset caches for every client.
-const CACHE_VERSION = 'v71';
+// v72 swaps in the new hero banner artwork: the uploaded replacement went in
+// as public/logo-banner.jpg and the three responsive hero renditions moved to
+// versioned names (logo-banner-640-2026/-1440-2026/-1760-2026.webp) per the
+// immutable-caching policy for /images/* and /*.jpg, while site-theme.css and
+// every page's inline critical-palette block now point at the new files behind
+// unchanged pathnames. A returning visitor holding v71 would keep last
+// deploy's stylesheet and home page. This bump evicts the old shell and asset
+// caches for every client.
+const CACHE_VERSION = 'v72';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
