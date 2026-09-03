@@ -17,6 +17,11 @@
 # only directory-form rules here are the two that point a directory-style path
 # at a genuinely different page (see the notes on /handyman/ and /services/).
 
+# Keep the public reviews collection endpoint stable even when function path
+# configuration is not applied by a local or plugin-hosted Netlify runtime.
+# Detail and photo routes keep their more-specific function path declarations.
+/api/reviews /.netlify/functions/reviews 200
+
 /index.html /                    301!
 
 # /gallery was removed from the site; its URL folds onto the reviews page,

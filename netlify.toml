@@ -1,6 +1,6 @@
 [build]
   publish = "public"
-  command = "node scripts/build-css.mjs && node scripts/build-js.mjs && node scripts/update-static-pages.mjs && node scripts/build-service-pages.mjs && node scripts/build-city-pages.mjs && node scripts/build-icon-css.mjs && node scripts/build-chat-knowledge.mjs && node scripts/build-service-zones.mjs && node scripts/build-sitemap.mjs"
+  command = "node scripts/build-js.mjs && node scripts/build-service-pages.mjs && node scripts/build-city-pages.mjs && node scripts/update-static-pages.mjs && node scripts/build-css.mjs && node scripts/build-icon-css.mjs && node scripts/build-chat-knowledge.mjs && node scripts/build-service-zones.mjs && node scripts/build-sitemap.mjs"
 
 [build.environment]
   NETLIFY_SKIP_GATSBY_BUILD_PLUGIN = "true"
@@ -119,7 +119,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.googletagmanager.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://calendar.google.com; style-src 'self' 'unsafe-inline' https://calendar.google.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.google-analytics.com https://*.g.doubleclick.net https://www.google.com https://calendar.google.com; manifest-src 'self'; worker-src 'self'; frame-src 'self' https://maps.google.com https://www.google.com https://www.google.com/recaptcha/ https://recaptcha.google.com/ https://calendar.google.com; frame-ancestors 'self' https://app.netlify.com https://create.netlify.com;"
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.googletagmanager.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.google-analytics.com https://*.g.doubleclick.net https://www.google.com; manifest-src 'self'; worker-src 'self'; frame-src 'self' https://maps.google.com https://www.google.com https://www.google.com/recaptcha/ https://recaptcha.google.com/ https://calendar.google.com; frame-ancestors 'self' https://app.netlify.com https://create.netlify.com; upgrade-insecure-requests;"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
@@ -312,4 +312,3 @@
 # ---------------------------------------------------------------------------
 [images]
   remote_images = []
-

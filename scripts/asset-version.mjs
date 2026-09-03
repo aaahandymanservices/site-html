@@ -103,8 +103,13 @@
  * scan), page-boot.js and every page's markup changed behind their unchanged
  * pathnames, so this bump and the matching CACHE_VERSION move in public/sw.js
  * refetch them for returning visitors.
+ *
+ * 20260903d — Lighthouse delivery fixes: brand images moved to optimized local
+ * variants, both main stylesheets became non-blocking behind inline critical
+ * layout, and third-party Calendar button assets were removed from shared page
+ * startup. The shared asset stamp and service-worker cache move together.
  */
-export const ASSET_VERSION = '20260903c';
+export const ASSET_VERSION = '20260903d';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use
