@@ -1,15 +1,13 @@
 /**
  * Shared verification for the owner's admin passcode.
  *
- * Three functions gate privileged work behind this passcode: `admin-auth`
- * confirms it before the reviews page reveals its management controls,
- * `reviews` requires it for every edit and delete, and
- * `seasonal-reminder-blast` requires it before returning the subscriber list.
- * They each used to compare the submitted value against the raw
- * `ADMIN_API_TOKEN` string, which meant the live credential sat in plaintext in
- * the environment and, in two of the three, was compared with a hand-rolled
- * loop that returned early on a length mismatch and so leaked the secret's
- * length one request at a time.
+ * Two functions gate privileged work behind this passcode: `admin-auth`
+ * confirms it before the reviews page reveals its management controls, and
+ * `reviews` requires it for every edit and delete. They each used to compare
+ * the submitted value against the raw `ADMIN_API_TOKEN` string, which meant
+ * the live credential sat in plaintext in the environment and was compared
+ * with a hand-rolled loop that returned early on a length mismatch and so
+ * leaked the secret's length one request at a time.
  *
  * The preferred setup is now `ADMIN_API_TOKEN_HASH`: a salted PBKDF2-SHA512
  * verifier that the server can check but that cannot be replayed as a

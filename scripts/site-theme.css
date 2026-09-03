@@ -521,11 +521,7 @@ textarea:autofill {
 
 /* The focus ring has to be restated alongside the fill, because the inset
  * shadow occupies the same property the ring is drawn with -- a focused
- * autofilled field would otherwise lose one or the other. Two pseudo-classes
- * on an element selector also puts this above the page-level
- * `.booking-control:focus-visible` rule, which sets its own box-shadow and
- * would otherwise uncover the pale UA background exactly while someone was
- * looking at the field. */
+ * autofilled field would otherwise lose one or the other. */
 input:-webkit-autofill:focus,
 select:-webkit-autofill:focus,
 textarea:-webkit-autofill:focus {
@@ -2610,29 +2606,6 @@ a[href^="mailto:"] {
   border-radius: 1rem;
 }
 
-/*
- * Standalone zone pill, used outside the cards themselves -- the city grid
- * tiles and the legend above it -- so a customer sees their tier in the same
- * colour wherever it appears.
- */
-.zone-tag {
-  background-color: rgba(30, 86, 49, 0.06);
-  border: 1px solid rgba(30, 86, 49, 0.2);
-  color: #1e5631;
-}
-.zone-tag-b {
-  background-color: rgba(212, 175, 55, 0.12);
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  color: #8a6508;
-}
-
-.zone-dot {
-  background-color: #1e5631;
-}
-.zone-dot-b {
-  background-color: #d4af37;
-}
-
 /* ==========================================================================
    Premium polish — scoped to brand navy + crimson
 
@@ -3519,43 +3492,6 @@ footer[class] {
   pointer-events: none;
 }
 
-/* City navigation card hover states */
-.city-card {
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.city-card i,
-.city-card span {
-  transition: color 0.2s ease;
-}
-
-.city-card:hover {
-  transform: translateY(-2px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .city-card:hover {
-    transform: none !important;
-  }
-}
-
-/* Interactive Time-Slot selection buttons */
-.time-slot-btn {
-  transition: all 0.2s ease-in-out;
-}
-
-.time-slot-btn.selected {
-  background-color: var(--brand-crimson);
-  border-color: var(--brand-crimson);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(166, 31, 46, 0.3);
-}
-
-.time-slot-btn:hover:not(.selected) {
-  border-color: var(--brand-crimson);
-  color: var(--brand-crimson);
-}
-
 /* AI Estimate drag-and-drop & shimmer skeleton */
 .dropzone--dragging {
   border-color: var(--brand-crimson) !important;
@@ -3747,115 +3683,6 @@ footer[class] {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.5rem;
-}
-
-/*
- * Compact city list inside a zone card.
- *
- * Superseded on /service-areas: the zone cards there now render the cities as
- * interactive .zone-chip pills (see the block below), matching the home page.
- * These rules stay for the .zone-city-list markup that older cached pages and
- * any future text-style list still reference.
- */
-.zone-city-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.4rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-@media (min-width: 480px) {
-  .zone-city-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 768px) {
-  .zone-city-list {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .zone-city-list {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-}
-
-.city-cell {
-  display: flex;
-  min-width: 0;
-}
-
-.city-cell__link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-  min-width: 0;
-  width: 100%;
-  padding: 0.5rem 0.4rem;
-  border-radius: 0.6rem;
-  border: 1px solid transparent;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: inherit;
-  text-decoration: none;
-  text-align: center;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
-}
-
-.city-cell__link:hover,
-.city-cell__link:focus-visible {
-  outline: none;
-  transform: translateY(-1px);
-}
-
-.zone-card-a .city-cell__link:hover,
-.zone-card-a .city-cell__link:focus-visible {
-  background: #ecfdf5;
-  color: #065f46;
-  border-color: #a7f3d0;
-}
-
-.zone-card-b .city-cell__link:hover,
-.zone-card-b .city-cell__link:focus-visible {
-  background: #fff7ed;
-  color: #9a3412;
-  border-color: #fed7aa;
-}
-
-/* The pin doubles as the affordance for the map fly: hover/focus lifts and
-   recolors it in step with the link, so "this chip also drives the map up
-   top" is visible without a second label. */
-.zone-card-a .city-cell__link:hover .city-cell__pin,
-.zone-card-a .city-cell__link:focus-visible .city-cell__pin {
-  opacity: 0.9;
-  color: #059669;
-}
-
-.zone-card-b .city-cell__link:hover .city-cell__pin,
-.zone-card-b .city-cell__link:focus-visible .city-cell__pin {
-  opacity: 0.9;
-  color: #ea580c;
-}
-
-/* The tiny pin that flies the map to this city. Shares the text colour so
-   hover/focus recolors both in one rule; shrinks the hit area so the pin
-   itself is not a second tap target beside the link. */
-.city-cell__pin {
-  flex: 0 0 auto;
-  font-size: 0.62em;
-  opacity: 0.45;
-  pointer-events: none;
-  transition: color 0.15s ease, transform 0.12s ease;
-}
-
-.city-cell__link:hover .city-cell__pin,
-.city-cell__link:focus-visible .city-cell__pin {
-  transform: translateY(-1px);
 }
 
 @media (min-width: 480px) {
@@ -4339,19 +4166,6 @@ footer[class] {
   color: #fff;
 }
 
-.review-zoom {
-  cursor: zoom-in;
-}
-
-.review-zoom img {
-  transition: transform 0.4s ease;
-}
-
-.review-zoom:focus-visible img,
-.review-zoom:hover img {
-  transform: scale(1.07);
-}
-
 .city-tab,
 .filter-tab {
   transition: all 0.2s ease;
@@ -4430,17 +4244,13 @@ footer[class] {
   }
 }
 
-#reviews-lightbox {
+.review-lightbox {
   transition: opacity 0.25s ease;
 }
 
-#reviews-lightbox.hidden {
+.review-lightbox.hidden {
   opacity: 0;
   pointer-events: none;
-}
-
-#reviews-lightbox img {
-  animation: lightboxIn 0.25s ease;
 }
 
 @keyframes lightboxIn {
@@ -4479,11 +4289,8 @@ footer[class] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #reviews-lightbox,
-  #reviews-lightbox img,
   .review-lightbox,
-  .review-lightbox img,
-  .review-zoom img {
+  .review-lightbox img {
     transition: none !important;
     animation: none !important;
   }
@@ -4588,106 +4395,6 @@ header#policy-hero.ambient-glow-hero h1 {
   -webkit-text-fill-color: #fff;
   color: #fff;
   filter: none;
-}
-
-/* Booking Flow & Service Tiles */
-.time-slot-btn:focus-visible {
-  outline: 3px solid rgba(248, 113, 113, 0.5);
-  outline-offset: 3px;
-}
-
-.booking-step-number {
-  background: var(--brand-crimson);
-  box-shadow: 0 0 0 5px rgba(166, 31, 46, 0.16);
-}
-
-.booking-control:focus-visible {
-  border-color: #f87171;
-  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.16);
-}
-
-.time-slot-btn[disabled] {
-  opacity: 0.45;
-  cursor: not-allowed;
-  text-decoration: line-through;
-}
-
-.time-slot-btn[disabled]:hover {
-  border-color: #374151;
-}
-
-.time-slot-btn[disabled] span {
-  text-decoration: none;
-}
-
-.service-tile {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.7rem 0.85rem;
-  border: 2px solid #374151;
-  border-radius: 0.85rem;
-  background-color: #1f2937;
-  color: #e5e7eb;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  line-height: 1.2;
-  text-align: left;
-  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
-}
-
-.service-tile:hover {
-  border-color: #6b7280;
-  color: #fff;
-}
-
-.service-tile:focus-visible {
-  outline: 3px solid rgba(248, 113, 113, 0.5);
-  outline-offset: 2px;
-}
-
-.service-tile[aria-pressed="true"] {
-  border-color: var(--brand-crimson);
-  background-color: rgba(166, 31, 46, 0.18);
-  color: #fff;
-}
-
-.service-tile__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.85rem;
-  height: 1.85rem;
-  flex-shrink: 0;
-  border-radius: 0.6rem;
-  background-color: rgba(166, 31, 46, 0.16);
-  color: #f87171;
-}
-
-.service-tile[aria-pressed="true"] .service-tile__icon {
-  background-color: var(--brand-crimson);
-  color: #fff;
-}
-
-.booking-progress__step[data-state="active"] .booking-progress__dot {
-  background-color: var(--brand-crimson);
-  border-color: var(--brand-crimson);
-  color: #fff;
-  box-shadow: 0 0 0 4px rgba(166, 31, 46, 0.18);
-}
-
-.booking-progress__step[data-state="active"] .booking-progress__label {
-  color: #fff;
-}
-
-.booking-progress__step[data-state="done"] .booking-progress__dot {
-  background-color: #047857;
-  border-color: #047857;
-  color: #fff;
-}
-
-.booking-progress__step[data-state="done"] .booking-progress__label {
-  color: #6ee7b7;
 }
 
 .booking-faq details[open] .booking-faq__chevron {

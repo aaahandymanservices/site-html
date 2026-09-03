@@ -63,10 +63,6 @@ const SCRIPT_VERSIONS = new Map([
   // would leave a visitor's report going nowhere.
   ['customer-care-page.js', ASSET_VERSION],
   ['gift-certificate.js', ASSET_VERSION],
-  // The ZIP/city lookup used by the /book route-day card. The booking form
-  // itself is gone -- bookings run through Google Calendar now -- so
-  // book-page.js and booking-widget.js are no longer requested by any page.
-  ['service-zone-selector.js', ASSET_VERSION],
   // The ZIP/city lookup and the review filters on /service-areas. Its source
   // only joined scripts/js recently -- before that the served copy was the
   // only copy, and it carried a stamp of its own that sat out every deploy the
