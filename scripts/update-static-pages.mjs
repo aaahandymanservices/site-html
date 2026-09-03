@@ -390,40 +390,43 @@ function optimizeFontsAndAssets(html) {
    *
    * It carries the @font-face rules for the self-hosted brand fonts, the icon
    * glyph box reservations that keep the async icons.css from re-flowing the
-   * nav and hero rows, and the component skins the first paint depends on. An earlier pass kept it render-blocking on the
-   * grounds that a deferred stylesheet is fragile if the onload handler never
-   * fires, but the inline #aaa-critical-palette block above already paints
-   * the brand palette the moment the HTML is parsed, so a deferred
-   * site-theme.css no longer trades a white screen for a layout shift -- the
-   * first frame is the right colours, and site-theme.css refines once it lands.
-   * The <noscript> twin keeps the stylesheet available without JavaScript, so
-   * a cached response or a content blocker that drops the onload handler does
-   * not leave the page unstyled. The file is served immutable for a year, so
-   * the preload costs one round trip on a first visit and nothing after that.
+   * nav and hero rows, and the component skins the first paint depends on.
+   *
+   * It is render-blocking, and so is tailwind.css below. A prior pass shipped
+   * both as `media="print" data-deferred-style` links that the deferred
+   * page-boot.js flipped to `media="all"`, on the theory that the inline
+   * #aaa-critical-palette block could carry the first frame. It cannot: the
+   * inline block is a few hundred bytes of palette and header geometry, while
+   * the real layout of every section below the hero lives in these two files.
+   * Deferring them meant every navigation painted once in
+   * critical-palette-only form and then repainted fully styled a moment later,
+   * and because browsers hold the previous page's pixels until the incoming
+   * page paints, that read as the *old* page lingering and a half-styled frame
+   * flashing before the real one -- the "ghost page" between renders. It also
+   * left the page permanently half-styled whenever page-boot.js was blocked,
+   * cached oddly, or slow, since nothing else ever flips the media attribute.
+   *
+   * Blocking costs one round trip on a cold first visit and nothing after
+   * that: both files are `immutable, max-age=31536000` (see netlify.toml) and
+   * both sit in the service worker's precache. That is the right trade for a
+   * single clean paint per navigation and no layout shift.
+   *
+   * icons.css stays deferred on purpose -- it is decorative, and the inline
+   * block already reserves every glyph's box, so its arrival cannot shift
+   * layout.
    *
    * This is idempotent and stamp-agnostic: any prior form (a plain render-
-   * blocking link, an async preload swap, or its <noscript> twin) is
-   * normalised to a single current async preload pair.
+   * blocking link, an async preload swap, a media="print" pair, or a
+   * <noscript> twin) is normalised to one current blocking link.
    */
-  const ASYNC_SITE_THEME_CSS =
-    `    <link rel="stylesheet" href="${SITE_THEME_CSS}" media="print" data-deferred-style>\n` +
-    `    <noscript><link rel="stylesheet" href="${SITE_THEME_CSS}"></noscript>`;
   html = html.replace(
     /(?<!<noscript>)[ \t]*<link\s+rel=["']?(?:stylesheet|preload)["']?\s+href=["']?\/css\/site-theme\.css(?:\?v=[^"'>]*)?["']?[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel=["']?stylesheet["']?\s+href=["']?\/css\/site-theme\.css(?:\?v=[^"'>]*)?["']?[^>]*><\/noscript>\r?\n?)?/gi,
-    `${canActivateDeferredStyles ? ASYNC_SITE_THEME_CSS : `    <link rel="stylesheet" href="${SITE_THEME_CSS}">`}\n`,
+    `    <link rel="stylesheet" href="${SITE_THEME_CSS}">\n`,
   );
 
-  /*
-   * Tailwind loads without blocking rendering. The critical block above owns
-   * the shared header and hero layout until page-boot.js activates this link.
-   * A noscript copy preserves the complete experience when JavaScript is off.
-   */
   html = html.replace(
     /(?<!<noscript>)[ \t]*<link\s+rel=["']?(?:stylesheet|preload)["']?\s+href=["']?\/css\/tailwind\.css(?:\?v=[^"'>]*)?["']?[^>]*>\r?\n?(?:[ \t]*<noscript><link\s+rel=["']?stylesheet["']?\s+href=["']?\/css\/tailwind\.css(?:\?v=[^"'>]*)?["']?[^>]*><\/noscript>\r?\n?)?/gi,
-    canActivateDeferredStyles
-      ? `    <link rel="stylesheet" href="${TAILWIND_CSS}" media="print" data-deferred-style>\n` +
-        `    <noscript><link rel="stylesheet" href="${TAILWIND_CSS}"></noscript>\n`
-      : `    <link rel="stylesheet" href="${TAILWIND_CSS}">\n`,
+    `    <link rel="stylesheet" href="${TAILWIND_CSS}">\n`,
   );
 
   /*

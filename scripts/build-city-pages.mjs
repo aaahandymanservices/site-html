@@ -228,9 +228,10 @@ ${jsonLd(city)}
 
     <!-- Tailwind CSS (precompiled, see scripts/build-css.mjs) -->
     <link rel="stylesheet" href="/css/tailwind.css?v=${ASSET_VERSION}">
-    <!-- Site theme (async via preload swap; palette block above paints first frame) -->
-    <link rel="preload" href="/css/site-theme.css?v=${ASSET_VERSION}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=${ASSET_VERSION}"></noscript>
+    <!-- Site theme (render-blocking on purpose: it carries the layout for every
+         section below the hero, and deferring it repaints the whole page after
+         first paint -- see the note in scripts/update-static-pages.mjs) -->
+    <link rel="stylesheet" href="/css/site-theme.css?v=${ASSET_VERSION}">
     <!-- Font Awesome subset (generated, see scripts/build-icon-css.mjs) -->
     <link rel="preload" href="/css/icons.css?v=${ICONS_CSS_VERSION}" as="style" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/icons.css?v=${ICONS_CSS_VERSION}"></noscript>

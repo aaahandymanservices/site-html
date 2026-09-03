@@ -16,9 +16,15 @@
  * frame.
  */
 (function () {
-  // Activate low-priority stylesheets after HTML parsing. Critical header and
-  // hero rules are already inline, so these full bundles no longer block the
-  // first paint or create a stylesheet request chain.
+  // Activate deferred stylesheets after HTML parsing.
+  //
+  // Only icons.css ships this way now. tailwind.css and site-theme.css were
+  // briefly deferred here too and are deliberately render-blocking again: they
+  // carry the layout for everything below the hero, so flipping them on after
+  // first paint repainted the entire document a moment after it rendered,
+  // which showed up as a stale/half-styled frame between navigations. Icons are
+  // decorative and their glyph boxes are reserved in the inline critical block,
+  // so this swap cannot shift layout. See scripts/update-static-pages.mjs.
   var deferredStyles = document.querySelectorAll('link[data-deferred-style]');
   for (var styleIndex = 0; styleIndex < deferredStyles.length; styleIndex += 1) {
     deferredStyles[styleIndex].media = 'all';
@@ -28,9 +34,37 @@
   // Registered on `load` rather than immediately: the install fetches the
   // precache list, and doing that while the page is still laying itself out
   // competes with the resources the visitor is actually waiting for.
+  //
+  // `updateViaCache: 'none'` keeps the browser's HTTP cache out of the update
+  // check for the worker script itself, so a new sw.js is always seen on the
+  // next load. netlify.toml already serves /sw.js as `max-age=0,
+  // must-revalidate`; this makes the guarantee independent of the header.
+  //
+  // Any *other* worker registered on this origin is then unregistered. A
+  // service worker outlives the code that installed it, so a script left over
+  // from an earlier setup under a different filename would keep control of
+  // navigations indefinitely -- serving whatever its own cache held, from a
+  // file no longer in this repository. Only registrations that are not the
+  // current /sw.js are removed, so the site's own worker (offline page,
+  // precache, installable app) is untouched.
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('/sw.js').catch(function () {});
+      navigator.serviceWorker
+        .register('/sw.js', { updateViaCache: 'none' })
+        .catch(function () {});
+
+      if (!navigator.serviceWorker.getRegistrations) return;
+      navigator.serviceWorker
+        .getRegistrations()
+        .then(function (registrations) {
+          var currentUrl = new URL('/sw.js', window.location.origin).href;
+          registrations.forEach(function (registration) {
+            var worker = registration.active || registration.installing || registration.waiting;
+            if (!worker || worker.scriptURL === currentUrl) return;
+            registration.unregister().catch(function () {});
+          });
+        })
+        .catch(function () {});
     });
   }
 

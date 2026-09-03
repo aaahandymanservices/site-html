@@ -393,7 +393,14 @@
 // unchanged pathnames. A returning visitor holding v71 would keep last
 // deploy's stylesheet and home page. This bump evicts the old shell and asset
 // caches for every client.
-const CACHE_VERSION = 'v72';
+// v73 changes how this file caches assets, so the old caches have to go: the
+// asset cache key now keeps the ?v= stamp instead of deleting it (see
+// assetCacheKey), which means every entry written under the old stripped-key
+// scheme is unreachable and has to be evicted once. This is also the last
+// mandatory bump for a stylesheet or script change -- from here a stamp move in
+// scripts/asset-version.mjs is itself a guaranteed cache miss, and this version
+// only needs to move when sw.js or PRECACHE_URLS changes.
+const CACHE_VERSION = 'v73';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -482,19 +489,67 @@ function matchIgnoringQuery(request) {
 }
 
 /*
- * Cache key for an asset request.
+ * Cache key for an asset request: the full URL, ?v= stamp included.
  *
- * Only the ?v= cache-buster is dropped, so a version bump still lines up with
- * the copy stored by the precache. The rest of the query has to survive: every
- * Netlify Image CDN request shares the pathname /.netlify/images and identifies
- * the image entirely through its query, so discarding it would collapse all of
- * them onto one entry and serve a single picture for the logo, the banner, the
- * icons, and every review photo.
+ * This used to delete the ?v= parameter so that a stamped request would line
+ * up with the stampless copy stored by the precache. That one line was the
+ * source of a whole class of visual glitch, because it made the cache-buster
+ * unreachable: /css/site-theme.css?v=A and ?v=B shared a single entry, assets
+ * are served stale-while-revalidate, and so the first page view after a deploy
+ * paired the new HTML with the *previous* deploy's stylesheets and scripts.
+ * Sections rendered unstyled or half-styled, then snapped into place once the
+ * background revalidation landed. The only escape was to hand-bump
+ * CACHE_VERSION on every single deploy -- which is what the changelog above is
+ * a record of, and what got missed whenever a stylesheet shipped without one.
+ *
+ * Keeping the stamp makes the URL the cache key it was always meant to be: a
+ * stamp bump is a guaranteed miss and a fresh fetch, with no CACHE_VERSION
+ * move required. Stampless precache entries stay reachable offline through
+ * stamplessAssetKey below.
+ *
+ * The rest of the query was always preserved and still is: every Netlify Image
+ * CDN request shares the pathname /.netlify/images and identifies the image
+ * entirely through its query, so discarding it would collapse all of them onto
+ * one entry and serve a single picture for the logo, the banner, the icons, and
+ * every review photo.
  */
 function assetCacheKey(request) {
+  return request.url;
+}
+
+/*
+ * The same URL without its ?v= stamp -- the shape PRECACHE_URLS are stored
+ * under. Used only as an offline fallback, so a visitor with no network still
+ * gets the precached stylesheet for a stamped request.
+ */
+function stamplessAssetKey(request) {
   const url = new URL(request.url);
   url.searchParams.delete('v');
   return url.href;
+}
+
+/*
+ * Drop older stamped copies of the same file once a new one is stored, so the
+ * asset cache does not accumulate a full copy of every past deploy's CSS and
+ * JS. Only entries differing from the new key purely by their ?v= are removed.
+ */
+async function pruneSupersededStamps(cache, request) {
+  const stampless = stamplessAssetKey(request);
+  const keys = await cache.keys();
+  await Promise.all(
+    keys.map(async (cachedRequest) => {
+      if (cachedRequest.url === request.url) return;
+      let candidate;
+      try {
+        candidate = new URL(cachedRequest.url);
+      } catch (error) {
+        return;
+      }
+      if (!candidate.searchParams.has('v')) return;
+      candidate.searchParams.delete('v');
+      if (candidate.href === stampless) await cache.delete(cachedRequest);
+    }),
+  );
 }
 
 async function handleNavigation(request) {
@@ -534,6 +589,7 @@ async function handleAsset(event) {
       if (response.ok && response.type !== 'opaque') {
         const cache = await caches.open(ASSET_CACHE);
         await cache.put(key, response.clone()).catch(() => undefined);
+        await pruneSupersededStamps(cache, request).catch(() => undefined);
       }
       return response;
     })
@@ -542,12 +598,20 @@ async function handleAsset(event) {
   if (cached) {
     // Refresh in the background; the visitor gets the cached copy immediately.
     // waitUntil keeps the worker alive long enough for that write to land.
+    // Safe now that the stamp is part of the key: a hit is this exact version
+    // of the file, never a previous deploy's.
     event.waitUntil(network);
     return cached;
   }
 
   const response = await network;
   if (response) return response;
+
+  // Offline on a stamp never fetched before. The precache holds the shared
+  // stylesheets and scripts under their stampless URLs, so fall back to those
+  // rather than failing the request outright.
+  const precached = await caches.match(stamplessAssetKey(request), { ignoreVary: true });
+  if (precached) return precached;
 
   throw new Error(`Unable to fetch ${request.url}`);
 }

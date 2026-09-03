@@ -151,6 +151,17 @@
   // The initial hidden state lives behind the `.js-reveal` class, which is only
   // added here — so if this never runs (no JS, reduced motion, older browser)
   // every section stays fully visible.
+  //
+  // The one rule this function must never break: content that the browser has
+  // already painted may not be hidden again. This runs from an idle callback,
+  // well after first paint, so adding `.js-reveal` + `.reveal-block` to a
+  // section that is already on screen drops it from opacity:1 to opacity:0 and
+  // fades it back in on a later frame — a visible blink of the page going
+  // blank and rebuilding itself right after it finished rendering. Every
+  // element that is already within (or above) the viewport is therefore marked
+  // `reveal-shown` in the same synchronous block that adds the hidden-state
+  // class, so the browser never gets a frame in which it is transparent. Only
+  // content below the fold — which has never been painted — actually animates.
   function initScrollReveal() {
     const root = document.documentElement;
     const prefersReduced = window.matchMedia
@@ -160,13 +171,21 @@
     try {
       root.classList.add('js-reveal');
 
+      // Anything whose top edge is above the bottom of the viewport is on
+      // screen (or scrolled past) and has already been painted.
+      const viewportBottom = window.innerHeight || root.clientHeight || 0;
+      const isAlreadyPainted = (el) => el.getBoundingClientRect().top < viewportBottom;
+
       const units = [];
+      const paintedUnits = [];
 
       document.querySelectorAll('section').forEach((section) => {
         // Skip content that isn't laid out yet (modals, JS-populated blocks);
         // hiding it here could strand it invisible if it never intersects.
         if (section.closest('dialog, [role="dialog"]')) return;
         if (section.classList.contains('hidden') || section.hasAttribute('hidden')) return;
+
+        const painted = isAlreadyPainted(section);
 
         section.classList.add('reveal-block');
 
@@ -184,13 +203,19 @@
           });
         }
 
-        units.push({ el: section, children });
+        const unit = { el: section, children };
+        if (painted) paintedUnits.push(unit);
+        else units.push(unit);
       });
 
       const reveal = (unit) => {
         unit.el.classList.add('reveal-shown');
         unit.children.forEach((child) => child.classList.add('reveal-shown'));
       };
+
+      // Same task, before the browser can lay out or paint the hidden state.
+      // These sections keep their pixels exactly as they were rendered.
+      paintedUnits.forEach(reveal);
 
       if (units.length) {
         const observer = new IntersectionObserver((entries, obs) => {
@@ -221,7 +246,12 @@
             }
           });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        explicitReveals.forEach((el) => revealObs.observe(el));
+        explicitReveals.forEach((el) => {
+          // Already painted: mark it visible now rather than letting the
+          // observer do it a frame later, for the same reason as above.
+          if (isAlreadyPainted(el)) el.classList.add('is-visible');
+          else revealObs.observe(el);
+        });
       }
 
       // Safety net: never leave content hidden, even if the observer misbehaves
@@ -229,6 +259,7 @@
       // section units and the explicit reveal-on-scroll elements.
       const revealEverything = () => {
         units.forEach(reveal);
+        paintedUnits.forEach(reveal);
         explicitReveals.forEach((el) => el.classList.add('is-visible'));
       };
       window.setTimeout(revealEverything, 4500);

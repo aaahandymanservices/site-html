@@ -131,8 +131,26 @@
  * every page's inline critical-palette block now point at the new files behind
  * unchanged pathnames, so this bump and the matching CACHE_VERSION move in
  * public/sw.js refetch them for returning visitors.
+ *
+ * 20260904c — render-flash repair. Three separate causes of a stale/half-drawn
+ * frame appearing between navigations were fixed: tailwind.css and
+ * site-theme.css are render-blocking again (20260903d had deferred them behind
+ * page-boot.js, so every page painted once in inline-palette-only form and
+ * then repainted fully styled); site.js no longer hides sections that have
+ * already been painted when it installs the scroll-reveal animation; and
+ * public/sw.js now keeps the ?v= stamp in its asset cache key, which is what
+ * previously let a returning visitor pair fresh HTML with the previous
+ * deploy's CSS and JS. page-boot.js also unregisters foreign service workers
+ * and pins `updateViaCache: 'none'`. Every page's <head>, site-theme.css's
+ * delivery, page-boot.js and site.js changed, so this bump and the CACHE_VERSION
+ * move in public/sw.js refetch them for returning visitors.
+ *
+ * Note: with the service worker keying on ?v=, this stamp alone is now
+ * sufficient for stylesheet and script changes -- a bump here is a guaranteed
+ * cache miss. CACHE_VERSION only needs to move when sw.js itself or the
+ * precache list changes.
  */
-export const ASSET_VERSION = '20260904b';
+export const ASSET_VERSION = '20260904c';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use
