@@ -96,17 +96,25 @@
   # Auditing the live site instead of the local static copy.
   #
   # onPostBuild mode would otherwise serve public/ over a bare Express static
-  # server, and that server can only answer files. Three things the home page
-  # requests are not files: the /.netlify/images Image CDN transforms (the nav
-  # logo and the hero banner preloads) and /api/reviews, which home.js fetches
-  # on idle to populate the review cards. Each answered 404 on the local
-  # server and landed in the browser console, which read as three broken
-  # requests in every Lighthouse report even though the production origins
-  # answer all three with a 200. Pointing the audit at the live canonical site
-  # means the platform routes are exercised exactly as visitors see them.
-  # public/ is still built first, so a genuinely broken build still fails
-  # before the audit runs.
-  [plugins.inputs.audits]
+  # server, and that server can only answer files. Two things the home page
+  # needs are not files: /api/reviews, which home.js fetches on idle to
+  # populate the review cards, and the response headers themselves -- most of
+  # all the Content-Security-Policy set below, which express.static never
+  # sends. On the local server the fetch answered 404 and landed in the
+  # browser console (failing errors-in-console) and the report read "No CSP
+  # found in enforcement mode", even though the production origin answers the
+  # fetch with a 200 and serves the policy on every response. Pointing the
+  # audit at the live canonical site means the platform routes and headers are
+  # exercised exactly as visitors see them. public/ is still built first, so a
+  # genuinely broken build still fails before the audit runs.
+  #
+  # This MUST stay an array of tables ([[...]], not [...]). The plugin gates
+  # the whole input on Array.isArray and silently discards a plain table,
+  # falling back to serving public/ locally -- which is how the three phantom
+  # 404s and the missing-CSP finding got into the report in the first place.
+  # A single-table form parses fine and fails quietly, so it is worth keeping
+  # the double brackets in mind when editing this block.
+  [[plugins.inputs.audits]]
     url = "https://aaahandyman.services"
 
   [plugins.inputs.thresholds]
