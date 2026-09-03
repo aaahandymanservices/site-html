@@ -369,27 +369,63 @@
 })();
 
 /* ---- Maintenance membership dialog ---- */
+/*
+ * A shared focus trap for the home page's <dialog> modals. Native
+ * showModal() keeps browser focus inside a dialog while the user tabs, but
+ * only in browsers that implement it -- and the two dialogs here also open
+ * with a body-scroll lock that survives a fallback open path (setAttribute).
+ * The trap keeps Tab cycling through the dialog's own focusable elements in
+ * every browser and returns focus to the opener on close, so keyboard users
+ * are never stranded behind the overlay.
+ *
+ * Defined at file scope so both the membership and quick-view dialog blocks
+ * below can wire it to their modal.
+ */
+function trapDialogFocus(modal) {
+    if (!modal) return;
+    modal.addEventListener('keydown', function (event) {
+      if (event.key !== 'Tab' || !modal.open) return;
+      const focusables = Array.from(
+        modal.querySelectorAll('a[href], button:not([disabled]), input:not([type="hidden"]):not([tabindex="-1"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')
+      ).filter((el) => el.offsetParent !== null || el === document.activeElement);
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+}
+
 (function () {
-  (function () {
-      const modal = document.getElementById('membership-modal');
-      if (!modal || typeof modal.showModal !== 'function') return;
-      const openers = document.querySelectorAll('[data-membership-open]');
-      const closers = modal.querySelectorAll('[data-membership-close]');
+    const modal = document.getElementById('membership-modal');
+    if (!modal) return;
+    let membershipOpener = null;
+    if (typeof modal.showModal !== 'function') return;
+    const openers = document.querySelectorAll('[data-membership-open]');
+    const closers = modal.querySelectorAll('[data-membership-close]');
 
-      openers.forEach((btn) => btn.addEventListener('click', () => {
-          modal.showModal();
-          document.body.style.overflow = 'hidden';
-      }));
-      closers.forEach((btn) => btn.addEventListener('click', () => modal.close()));
+    openers.forEach((btn) => btn.addEventListener('click', () => {
+        membershipOpener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+        modal.showModal();
+        document.body.style.overflow = 'hidden';
+    }));
+    closers.forEach((btn) => btn.addEventListener('click', () => modal.close()));
 
-      // Close when the backdrop (area outside the card) is clicked.
-      modal.addEventListener('click', (event) => {
-          if (event.target === modal) modal.close();
-      });
-      modal.addEventListener('close', () => {
-          document.body.style.overflow = '';
-      });
-  })();
+    // Close when the backdrop (area outside the card) is clicked.
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) modal.close();
+    });
+    modal.addEventListener('close', () => {
+        document.body.style.overflow = '';
+        if (membershipOpener && membershipOpener.isConnected) membershipOpener.focus();
+        membershipOpener = null;
+    });
+    trapDialogFocus(modal);
 })();
 
 /* ---- Service quick-view dialog ---- */
@@ -573,5 +609,6 @@
               quickViewOpener = null;
           });
       }
+      trapDialogFocus(modal);
   })();
 })();

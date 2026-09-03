@@ -108,8 +108,21 @@
  * variants, both main stylesheets became non-blocking behind inline critical
  * layout, and third-party Calendar button assets were removed from shared page
  * startup. The shared asset stamp and service-worker cache move together.
+ *
+ * 20260903e — accessibility audit fixes: the home page's membership and
+ * quick-view dialogs gained a keyboard focus trap and opener focus restore,
+ * the services page's One-Time Packages / Quarterly Plans toggle became a
+ * proper ARIA tab pair with arrow-key support, the reviews page's dead static
+ * lightbox markup was removed in favour of the script-injected one (which now
+ * carries the lightbox animation styles), the materials-fee tooltip buttons
+ * gained accessible names, the AI estimator's hidden second and third photo
+ * inputs gained labels, the map popup got a role/label, and map pins show a
+ * visible keyboard focus ring. site-theme.css, home.js, reviews-page.js and
+ * the touched page markup changed behind unchanged pathnames, so this bump
+ * and the matching CACHE_VERSION move in public/sw.js refetch them for
+ * returning visitors.
  */
-export const ASSET_VERSION = '20260903d';
+export const ASSET_VERSION = '20260903e';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use
