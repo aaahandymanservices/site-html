@@ -365,7 +365,7 @@
 // page's markup changed, so a returning visitor holding v64 would keep last
 // deploy's booking page in the shell cache. This bump evicts the old shell
 // for every client.
-// v66 lands the Lighthouse scoring repair: every page's <head> changed (new
+// v66 lands the font-origin CSP fix: every page's <head> changed (new
 // preconnects for the Google Fonts origins the Calendar scheduling button
 // loads its skin from) and every page's shared assets moved to the 20260903a
 // stamp, while the asset cache is keyed on the URL minus ?v= (see

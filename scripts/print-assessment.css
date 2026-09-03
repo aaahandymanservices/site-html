@@ -2,9 +2,9 @@
 
    Lives in its own stylesheet, linked only by the aging-in-place guide (the
    one page that carries #printable-assessment), so the ~3.6kB of @media print
-   rules no longer ride along in site-theme.css on every page -- where
-   Lighthouse's unused-CSS audit counted them against every one of the 90
-   documents. Edit this file; build-css.mjs minifies it to
+   rules no longer ride along in site-theme.css on every page -- where they
+   counted as unused CSS against every one of the 90 documents. Edit this
+   file; build-css.mjs minifies it to
    public/css/print-assessment.css exactly like the theme. */
 .print-footer,
 .print-header {

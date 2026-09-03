@@ -74,14 +74,12 @@
  * conversion, so this bump and the matching CACHE_VERSION move in
  * public/sw.js refetch both for returning visitors.
  *
- * 20260903a — Lighthouse scoring repair: the Lighthouse build plugin moved to
- * the onPostBuild event (it had been auditing a deploy URL that 404s, so no
- * deploy ever recorded scores), the CSP now allows the Google Fonts origins
- * that the Calendar scheduling button loads its skin from (that request was
- * being blocked in every visitor's console), and every page gained
- * preconnects for those font origins. Page markup changed on all pages and
- * netlify.toml changed, so this bump and the matching CACHE_VERSION move in
- * public/sw.js refetch them for returning visitors.
+ * 20260903a — font-origin CSP fix: the CSP now allows the Google Fonts
+ * origins that the Calendar scheduling button loads its skin from (that
+ * request was being blocked in every visitor's console), and every page
+ * gained preconnects for those font origins. Page markup changed on all
+ * pages and netlify.toml changed, so this bump and the matching CACHE_VERSION
+ * move in public/sw.js refetch them for returning visitors.
  *
  * 20260903b — Google Calendar booking cleanup: the retired booking form's
  * scripts (book-page.js, booking-widget.js) and their site-theme.css blocks
@@ -91,10 +89,10 @@
  * bump and the matching CACHE_VERSION move in public/sw.js refetch them for
  * returning visitors.
  *
- * 20260903c — Lighthouse report fixes: the home page's "Read All Reviews" CTA
- * carries a solid navy fill (white text no longer samples against the light
- * section behind the reviews panel), the #services section background
- * darkened one step for the same sampling reason, the services page's
+ * 20260903c — contrast and CSS-delivery fixes: the home page's "Read All
+ * Reviews" CTA carries a solid navy fill (white text no longer samples
+ * against the light section behind the reviews panel), the #services section
+ * background darkened one step for the same sampling reason, the services page's
  * tracking badges moved to red-200 and the plan toggle to an opaque slate-800
  * fill with slate-200 labels, page-boot.js requests the Google Calendar
  * scheduler's fonts with &display=swap, and the printable-assessment styles
@@ -104,7 +102,7 @@
  * pathnames, so this bump and the matching CACHE_VERSION move in public/sw.js
  * refetch them for returning visitors.
  *
- * 20260903d — Lighthouse delivery fixes: brand images moved to optimized local
+ * 20260903d — asset delivery fixes: brand images moved to optimized local
  * variants, both main stylesheets became non-blocking behind inline critical
  * layout, and third-party Calendar button assets were removed from shared page
  * startup. The shared asset stamp and service-worker cache move together.

@@ -341,8 +341,8 @@ function optimizeFontsAndAssets(html) {
    * ...">` into the page during post-processing -- after this build step
    * runs. That script is render-blocking and parses ~490ms of reCAPTCHA /
    * gstatic JavaScript on the main thread before the visitor has even
-   * looked at the form, which is the single biggest Lighthouse performance
-   * bottleneck on '/'.
+   * looked at the form, which is the single biggest performance bottleneck
+   * on '/'.
    *
    * The widget is not needed until the visitor interacts with the form, so
    * this tiny inline shim (runs synchronously in <head>, before any

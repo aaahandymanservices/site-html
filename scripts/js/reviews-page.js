@@ -66,8 +66,8 @@
   /*
    * Owner access uses an inline <dialog> (see #admin-access-dialog in
    * reviews.html) instead of window.prompt/confirm. The native dialogs are
-   * blocking, dismissable with Esc, and flagged by Lighthouse's Best Practices
-   * audit; the inline dialog is keyboard-navigable, screen-reader friendly,
+   * blocking and dismissable only with Esc; the inline dialog is
+   * keyboard-navigable, screen-reader friendly,
    * and stays in the page's visual style.
    */
   const adminDialog = document.getElementById('admin-access-dialog');
@@ -642,8 +642,8 @@
 
   /*
    * Delete confirmation uses an inline <dialog> (#delete-confirm-dialog in
-   * reviews.html) instead of window.confirm, which Lighthouse's Best Practices
-   * audit flags. The dialog is keyboard-navigable and styled to match the page.
+   * reviews.html) instead of window.confirm, which is blocking and cannot be
+   * styled. The dialog is keyboard-navigable and matches the page.
    */
   const deleteDialog = document.getElementById('delete-confirm-dialog');
   const deleteDialogConfirm = document.getElementById('delete-confirm-yes');
