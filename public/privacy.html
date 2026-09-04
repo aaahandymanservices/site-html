@@ -56,10 +56,8 @@
     <meta name=application-name content="AAA Handyman">
 
     <link rel=dns-prefetch href=https://www.googletagmanager.com>
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260904a" media="print" data-deferred-style>
-    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260904a"></noscript>
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260904a" media="print" data-deferred-style>
-    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260904a"></noscript>
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260904c">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260904c">
     <link rel=preload href="/css/icons.css?v=20260815a" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
     <noscript><link rel=stylesheet href="/css/icons.css?v=20260815a"></noscript>
 
@@ -137,7 +135,7 @@
                 <i class="fas fa-user-shield" aria-hidden=true></i> Legal Documentation
             </span>
             <h1 class="legal-title text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-4">Privacy Policy</h1>
-            <p class="legal-effective text-sm md:text-base text-gray-500 italic">Effective Date: August 30, 2026</p>
+            <p class="legal-effective text-sm md:text-base text-gray-500 italic">Effective Date: September 4, 2026</p>
             <div class="w-24 h-1.5 bg-red-600 mx-auto mt-6 rounded-full shadow-sm"></div>
         </div>
 
@@ -172,11 +170,23 @@
                             </li>
                             <li class="flex items-start gap-2">
                                 <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden=true></i>
-                                <span>Payment details processed securely</span>
+                                <span>Details you submit through our quote, contact, emergency, commercial, review, careers, and warranty forms, including any photos you attach</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden=true></i>
+                                <span>Details you enter in the Google Calendar booking tool, which handles scheduling on our behalf under Google&rsquo;s own privacy terms</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden=true></i>
+                                <span>Payment details, processed securely — we never receive or store full card numbers</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden=true></i>
                                 <span>Communication records, including messages you send through our on-site chat assistant, and project photos</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden=true></i>
+                                <span>Photos, optional contact details, and location details you submit to our AI Repair Estimator, along with the estimate it generates for you</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden=true></i>
@@ -198,6 +208,10 @@
                             <li class="flex items-start gap-2">
                                 <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden=true></i>
                                 <span>Device specifications and operating system information</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-red-600 mt-1 flex-shrink-0" aria-hidden=true></i>
+                                <span>Basic spam-prevention checks (including Google reCAPTCHA on some forms), which may share IP address and browsing data with Google</span>
                             </li>
                         </ul>
                     </div>
@@ -229,6 +243,10 @@
                     <li class="flex items-start gap-3">
                         <i class="fas fa-comments text-red-600 mt-1.5 flex-shrink-0" aria-hidden=true></i>
                         <span>To answer questions you ask through our on-site chat assistant.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-wand-magic-sparkles text-red-600 mt-1.5 flex-shrink-0" aria-hidden=true></i>
+                        <span>To analyze the photos you submit to our AI Repair Estimator, generate a preliminary price range, and — only if you submit the estimate — share those details with our dispatch team to follow up.</span>
                     </li>
                     <li class="flex items-start gap-3">
                         <i class="fas fa-star text-red-600 mt-1.5 flex-shrink-0" aria-hidden=true></i>
@@ -273,6 +291,14 @@
                         <span>With the third-party AI provider that powers our on-site chat assistant, which processes the messages you send in order to generate replies.</span>
                     </li>
                     <li class="flex items-start gap-3">
+                        <i class="fas fa-camera text-red-600 mt-1.5 flex-shrink-0" aria-hidden=true></i>
+                        <span>With the third-party AI provider that analyzes photos submitted to our AI Repair Estimator. Uploaded photos stay stored on our hosting platform, and only a submitted estimate&rsquo;s details are shared with our dispatch team.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-server text-red-600 mt-1.5 flex-shrink-0" aria-hidden=true></i>
+                        <span>With Netlify, which hosts our website, forms, and secure photo and data storage used to process the requests described in this policy.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
                         <i class="fas fa-gavel text-red-600 mt-1.5 flex-shrink-0" aria-hidden=true></i>
                         <span>When required by law or to protect the safety and rights of our customers and team.</span>
                     </li>
@@ -281,7 +307,7 @@
                     <p class="font-semibold flex items-center gap-2 mb-1">
                         <i class="fas fa-star" aria-hidden=true></i> Reviews You Submit Are Public
                     </p>
-                    When you submit a review, the first name, city, rating, written review, and photo you provide may be published publicly on our website. Please share only what you are comfortable making public. You can request an update or removal at any time using the contact details below.
+                    When you submit a review, the name, city, rating, written review, and photo you provide may be published publicly on our website. Please share only what you are comfortable making public. You can request an update or removal at any time using the contact details below.
                 </div>
             </section>
 
@@ -291,7 +317,7 @@
                     Cookies and Tracking
                 </h2>
                 <p class="text-gray-600 leading-relaxed">
-                    Our website uses essential cookies for functionality and basic analytics (e.g., Google Analytics) to understand visitor behavior and improve our site. These cookies do not identify you personally. You can disable cookies through your browser settings, though this may affect site functionality.
+                    Our website uses essential cookies for functionality and basic analytics (e.g., Google Analytics) to understand visitor behavior and improve our site. These cookies do not identify you personally. Some forms also use Google reCAPTCHA to help block spam, which may set its own cookies. You can disable cookies through your browser settings, though this may affect site functionality.
                 </p>
             </section>
 
@@ -311,6 +337,34 @@
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">6</span>
+                    How We Store Your Information
+                </h2>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Form submissions, booking requests, and estimates are stored securely on our hosting platform and used only for the purposes described in this policy. Photos you upload are stored with the related request and are viewable only by our team. Details to keep in mind:
+                </p>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-camera text-red-600 mt-1.5 flex-shrink-0" aria-hidden=true></i>
+                        <span>Photos submitted to the AI Repair Estimator are kept with your estimate and are viewable only by our team; they are used for follow-up only if you submit the estimate, and you can ask us to delete them at any time.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-comment-slash text-red-600 mt-1.5 flex-shrink-0" aria-hidden=true></i>
+                        <span>Chat assistant conversations are used to answer your questions and are not used to build individual profiles.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-clock-rotate-left text-red-600 mt-1.5 flex-shrink-0" aria-hidden=true></i>
+                        <span>We keep project records for as long as needed to provide your services, honor warranties, meet tax and legal requirements, and resolve disputes — then delete or anonymize them.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-envelope text-red-600 mt-1.5 flex-shrink-0" aria-hidden=true></i>
+                        <span>Seasonal maintenance reminders continue until you unsubscribe using the link in our messages or by contacting us.</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
+                <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">7</span>
                     Your Rights and Choices
                 </h2>
                 <p class="text-gray-600 leading-relaxed">
@@ -320,7 +374,7 @@
 
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">7</span>
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">8</span>
                     Children's Privacy
                 </h2>
                 <p class="text-gray-600 leading-relaxed">
@@ -330,7 +384,7 @@
 
             <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 transition hover:shadow-md">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">8</span>
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-gray-900 text-sm font-bold">9</span>
                     Changes to This Policy
                 </h2>
                 <p class="text-gray-600 leading-relaxed">
@@ -420,9 +474,9 @@
 
     <button id=back-to-top type=button aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden=true></i></button>
 
-    <script src="/js/page-boot.js?v=20260904a" defer></script>
-    <script src="/js/site.js?v=20260904a" defer></script>
-    <script src="/js/chat-loader.js?v=20260904a" defer></script>
+    <script src="/js/page-boot.js?v=20260904c" defer></script>
+    <script src="/js/site.js?v=20260904c" defer></script>
+    <script src="/js/chat-loader.js?v=20260904c" defer></script>
 
 
 
