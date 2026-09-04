@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 242 icon names in use.
+ * Generated subset - 244 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -58,6 +58,7 @@
 .fa-air-freshener:before,.fa-spray-can-sparkles:before{content:"\f5d0"}
 .fa-star:before{content:"\f005"}
 .fa-file-invoice-dollar:before{content:"\f571"}
+.fa-server:before{content:"\f233"}
 .fa-microchip:before{content:"\f2db"}
 .fa-wheelchair:before{content:"\f193"}
 .fa-fire:before{content:"\f06d"}
@@ -168,6 +169,7 @@
 .fa-warehouse:before{content:"\f494"}
 .fa-award:before{content:"\f559"}
 .fa-building:before{content:"\f1ad"}
+.fa-clock-rotate-left:before,.fa-history:before{content:"\f1da"}
 .fa-house-medical:before{content:"\e3b2"}
 .fa-pen-nib:before{content:"\f5ad"}
 .fa-dog:before{content:"\f6d3"}
@@ -184,7 +186,6 @@
 .fa-house-circle-check:before{content:"\e509"}
 .fa-exclamation-triangle:before,.fa-triangle-exclamation:before,.fa-warning:before{content:"\f071"}
 .fa-paper-plane:before{content:"\f1d8"}
-.fa-calendar-day:before{content:"\f783"}
 .fa-circle-xmark:before,.fa-times-circle:before,.fa-xmark-circle:before{content:"\f057"}
 .fa-cloud-sun:before{content:"\f6c4"}
 .fa-print:before{content:"\f02f"}

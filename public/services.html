@@ -242,10 +242,8 @@
     </script>
 
     <link rel=dns-prefetch href=https://www.googletagmanager.com>
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260904a" media="print" data-deferred-style>
-    <noscript><link rel="stylesheet" href="/css/tailwind.css?v=20260904a"></noscript>
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260904a" media="print" data-deferred-style>
-    <noscript><link rel="stylesheet" href="/css/site-theme.css?v=20260904a"></noscript>
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260904c">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260904c">
     <link rel=preload href="/css/icons.css?v=20260815a" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
     <noscript><link rel=stylesheet href="/css/icons.css?v=20260815a"></noscript>
 
@@ -1464,10 +1462,10 @@
 
     <button id=back-to-top type=button aria-label="Back to top" class="fixed bottom-6 left-6 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:bg-red-700 transition"><i class="fas fa-arrow-up" aria-hidden=true></i></button>
 
-    <script src="/js/page-boot.js?v=20260904a" defer></script>
-    <script src="/js/site.js?v=20260904a" defer></script>
-        <script src="/js/home-care-plans.js?v=20260904a" defer></script>
-    <script src="/js/chat-loader.js?v=20260904a" defer></script>
+    <script src="/js/page-boot.js?v=20260904c" defer></script>
+    <script src="/js/site.js?v=20260904c" defer></script>
+        <script src="/js/home-care-plans.js?v=20260904c" defer></script>
+    <script src="/js/chat-loader.js?v=20260904c" defer></script>
     <script>(()=>{var n,e,r=Array.prototype.slice.call(document.querySelectorAll("details[data-svc-group]"));function o(t,e){var n=(t=>{if(!t||t.length<2)return null;var e;try{e=document.querySelector(t)}catch(t){return null}return e?{target:e,group:e.closest("details[data-svc-group]")}:null})(t);n&&(n.group&&!n.group.open&&(n.group.open=!0),e)&&window.requestAnimationFrame(function(){n.target.scrollIntoView({block:"start"})})}function a(){var t=r.every(function(t){return t.open});n.setAttribute("aria-expanded",t?"true":"false"),e&&(e.textContent=t?"Collapse all":"Expand all")}r.length&&(o(window.location.hash,!0),window.addEventListener("hashchange",function(){o(window.location.hash,!0)}),document.addEventListener("click",function(t){(t=t.target.closest?t.target.closest('a[href^="#"]'):null)&&o(t.getAttribute("href"),!1)}),n=document.querySelector("[data-svc-toggle-all]"),e=document.querySelector("[data-svc-toggle-label]"),n)&&(n.addEventListener("click",function(){var e="true"!==n.getAttribute("aria-expanded");r.forEach(function(t){t.open=e}),a()}),r.forEach(function(t){t.addEventListener("toggle",a)}),a())})()</script>
     <script>(()=>{var e=Array.prototype.slice.call(document.querySelectorAll("[data-bundle-tab]")),t={packages:document.getElementById("bundle-panel-packages"),memberships:document.getElementById("bundle-panel-memberships")};function n(n,i){e.forEach(function(e){var t=e.getAttribute("data-bundle-tab")===n;e.setAttribute("aria-selected",t?"true":"false"),e.setAttribute("tabindex",t?"0":"-1"),e.classList.toggle("plan-toggle__btn--active",t),e.setAttribute("aria-pressed",t?"true":"false")}),Object.keys(t).forEach(function(e){t[e].hidden=e!==n}),i&&e.forEach(function(e){e.getAttribute("data-bundle-tab")===n&&e.focus({preventScroll:!0})})}if(e.length&&t.packages&&t.memberships){e.forEach(function(e){e.addEventListener("click",function(){n(e.getAttribute("data-bundle-tab"))})}),e.forEach(function(r,s){r.addEventListener("keydown",function(t){var i=s;"ArrowRight"!==t.key&&"ArrowDown"!==t.key||(i=(s+1)%e.length),"ArrowLeft"!==t.key&&"ArrowUp"!==t.key||(i=(s-1+e.length)%e.length),"Home"===t.key?i=0:"End"===t.key&&(i=e.length-1),("ArrowRight"===t.key||"ArrowDown"===t.key||"ArrowLeft"===t.key||"ArrowUp"===t.key||"Home"===t.key||"End"===t.key)&&(t.preventDefault(),n(e[i].getAttribute("data-bundle-tab"),!0))})}),window.addEventListener("hashchange",function(){"#memberships"===window.location.hash&&n("memberships")}),"#memberships"===window.location.hash&&n("memberships")}})()</script>
 
