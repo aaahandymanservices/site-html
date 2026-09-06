@@ -405,7 +405,12 @@
 // /js/home-quick-view.js, and /js/service-areas-page.js now loads on idle
 // instead of at parse time. Both joined the precache list so the offline
 // shell stays fully interactive, which changes PRECACHE_URLS.
-const CACHE_VERSION = 'v74';
+// v75 removes the Pre-Scoped Packages (Good/Better/Best menus) section from
+// the rates page and the three menu options from the contact form. The rates
+// page HTML and contact-page.js changed behind unchanged pathnames, so a
+// returning visitor holding v74 would otherwise keep quoting the removed
+// menu prices. This bump evicts the old shell and assets for every client.
+const CACHE_VERSION = 'v75';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

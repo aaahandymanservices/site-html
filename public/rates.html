@@ -219,8 +219,8 @@
     </script>
 
     <link rel=dns-prefetch href=https://www.googletagmanager.com>
-    <link rel="stylesheet" href="/css/tailwind.css?v=20260905a">
-    <link rel="stylesheet" href="/css/site-theme.css?v=20260905a">
+    <link rel="stylesheet" href="/css/tailwind.css?v=20260905b">
+    <link rel="stylesheet" href="/css/site-theme.css?v=20260905b">
     <link rel=preload href="/css/icons.css?v=20260815a" as=style fetchpriority=low onload='this.onload=null,this.rel="stylesheet"'>
     <noscript><link rel=stylesheet href="/css/icons.css?v=20260815a"></noscript>
 
@@ -330,9 +330,6 @@
                 <li><a href=#home-audits class=section-nav-link>
                     <svg viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=1.8 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
                     Home Audits</a></li>
-                <li><a href=#service-packages-section class=section-nav-link>
-                    <svg viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=1.8 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="m3.75 16.5 8.25 4.5 8.25-4.5M3.75 12 12 16.5 20.25 12M12 3 3.75 7.5 12 12l8.25-4.5L12 3Z"/></svg>
-                    Service Packages</a></li>
                 <li><a href=#pricing-policies class=section-nav-link>
                     <svg viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=1.8 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
                     Fine Print &amp; FAQ</a></li>
@@ -938,30 +935,6 @@
             </div>
         </section>
 
-        <span id=service-packages class=nav-anchor-alias aria-hidden=true></span>
-        <span id=menus class=nav-anchor-alias aria-hidden=true></span>
-        <section id=service-packages-section class="py-12 sm:py-16 bg-white border-t border-gray-100">
-            <div class="max-w-5xl mx-auto px-6">
-                <div class="rounded-3xl border-2 border-red-600 bg-gradient-to-br from-gray-50 to-white p-8 sm:p-12 shadow-lg text-center">
-                    <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Pre-Scoped Packages</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-gray-950 mt-3">Good / Better / Best Menus</h2>
-                    <p class="text-gray-600 mt-3 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">The fixes we recommend most often &mdash; for home safety, energy efficiency, and storm defense &mdash; packaged into three clear tiers with upfront, no-haggle pricing. Each tier bundles a defined list of work so we can quote on the spot, and every package earns a <strong>10% bundle discount</strong> off our standard labor rate.</p>
-                    <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-                        <a href=/services/home-security class="aaa-btn inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3.5 rounded-xl transition shadow-lg hover:shadow-red-600/30 hover:-translate-y-0.5">
-                            <i class="fas fa-shield-heart" aria-hidden=true></i> Home Safety Packages
-                        </a>
-                        <a href=/services/energy-efficiency class="aaa-btn inline-flex items-center justify-center gap-2 bg-blue-950 hover:bg-slate-900 text-white font-bold px-6 py-3.5 rounded-xl transition shadow-lg hover:-translate-y-0.5">
-                            <i class="fas fa-wind" aria-hidden=true></i> Energy Efficiency Packages
-                        </a>
-                        <a href=/services/preventative-maintenance class="aaa-btn inline-flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 text-white font-bold px-6 py-3.5 rounded-xl transition shadow-lg hover:-translate-y-0.5">
-                            <i class="fas fa-house-flood-water" aria-hidden=true></i> Storm Defense Packages
-                        </a>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-5">Not sure which fits? <a href=/ai-estimate class="font-bold text-red-600 underline underline-offset-2 hover:text-red-700">Snap a photo for an instant AI estimate</a>, or <a href=/contact class="font-bold text-red-600 underline underline-offset-2 hover:text-red-700">ask us</a> &mdash; we'll match you to the right tier.</p>
-                </div>
-            </div>
-        </section>
-
     <section id=pricing-policies class="py-12 sm:py-14 bg-white border-t border-gray-100">
         <div class="max-w-5xl mx-auto px-6">
             <div class="text-center mb-6">
@@ -1137,9 +1110,9 @@
 
     <script>(()=>{var o,l,n=document.getElementById("site-header"),i=document.getElementById("mobile-menu"),r=document.getElementById("section-nav"),e=Array.prototype.slice.call(document.querySelectorAll(".section-nav-link"));function d(){var e=n?n.getBoundingClientRect().height:0,t=(e&&i&&!i.hidden&&(e-=i.getBoundingClientRect().height),r.getBoundingClientRect().height);return{navH:e,total:e+t}}function t(){var e=d();e.navH&&(r.style.top=e.navH+"px"),document.documentElement.style.setProperty("--sticky-offset",e.total+16+"px")}function c(){for(var i,e=d().total+24,t=o[0].id,n=0;n<o.length;n++)o[n].el.getBoundingClientRect().top-e<=0&&(t=o[n].id);(i=t)!==l&&(l=i,o.forEach(function(e){var t,n=e.id===i;e.link.classList.toggle("active-section",n),n&&(n=e.link.parentNode.parentNode,e=e.link.getBoundingClientRect(),t=n.getBoundingClientRect(),e.left<t.left||e.right>t.right)&&(n.scrollLeft+=e.left-t.left-(t.width-e.width)/2)}))}r&&e.length&&(o=e.map(function(e){var t=e.getAttribute("href").slice(1);return{id:t,link:e,el:document.getElementById(t)}}).filter(function(e){return e.el}),l=null,t(),c(),window.addEventListener("scroll",c,{passive:!0}),window.addEventListener("resize",function(){t(),c()}),window.addEventListener("load",function(){t(),c()}),window.ResizeObserver)&&(e=new ResizeObserver(function(){t(),c()}),n&&e.observe(n),e.observe(r))})()</script>
 
-    <script src="/js/page-boot.js?v=20260905a" defer></script>
-    <script src="/js/site.js?v=20260905a" defer></script>
-    <script src="/js/quote-calculator.js?v=20260905a" defer></script>
-    <script src="/js/chat-loader.js?v=20260905a" defer></script>
+    <script src="/js/page-boot.js?v=20260905b" defer></script>
+    <script src="/js/site.js?v=20260905b" defer></script>
+    <script src="/js/quote-calculator.js?v=20260905b" defer></script>
+    <script src="/js/chat-loader.js?v=20260905b" defer></script>
 
 
