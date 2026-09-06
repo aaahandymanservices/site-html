@@ -61,18 +61,6 @@
           text: "Get all three specialized audits (Safety, Energy, Storm-Prep) in a single visit with a unified punch list. Save $84!",
           link: "/rates#audits"
       },
-      "Home Safety Menu": {
-          text: "Standardized package safety menus: Good ($185 - Standard checks), Better ($342 - Upgraded safety additions), Best ($500 - Deluxe coverage). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
-          link: "/rates#menus"
-      },
-      "Energy Efficiency Menu": {
-          text: "Standardized package energy menus: Good ($153 - Draft checks & standard sweeps), Better ($374 - Enhanced seals & hatch insulation), Best ($531 - Maximum thermal sealing). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
-          link: "/rates#menus"
-      },
-      "Storm & Water Defense Menu": {
-          text: "Standardized package storm/water menus: Good ($153 - Basic checks & spot caulking), Better ($279 - Gutter tune-up & pump checks), Best ($405 - Full perimeter sealing & defense). Menu prices are labor only — hardware and materials are billed separately or supplied by you.",
-          link: "/rates#menus"
-      },
       "Fall Home Prep Package": {
           text: "A comprehensive seasonal package detailing gutter clean-out, water spigot winterization, draft sealing, and leaf checks.",
           link: "/rates"

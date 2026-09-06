@@ -158,8 +158,15 @@
  * public/index.html and the precache list changed, so this bump (plus the
  * matching CACHE_VERSION move in public/sw.js, which picked up the two new
  * precache entries) refetches them for returning visitors.
+ *
+ * 20260905b — the Pre-Scoped Packages (Good/Better/Best menus) section came
+ * off the rates page, and the three menu options left the contact form along
+ * with their info-box entries in contact-page.js. The rates page markup and
+ * contact-page.js changed behind unchanged pathnames, so this bump and the
+ * matching CACHE_VERSION move in public/sw.js refetch them for returning
+ * visitors.
  */
-export const ASSET_VERSION = '20260905a';
+export const ASSET_VERSION = '20260905b';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use
