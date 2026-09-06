@@ -325,7 +325,11 @@
                             
                             
                             <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Schedule Your Service</h2>
-                            <p class="mb-6 text-sm leading-relaxed text-white">Pick a project, date, and arrival window below. Your appointment remains a request until our team confirms it with you.</p>
+                            <p class="mb-4 text-sm leading-relaxed text-white">Pick a project, date, and arrival window below. Your appointment remains a request until our team confirms it with you.</p>
+                            <div class="mb-6 flex items-start gap-3 rounded-2xl border border-yellow-500/40 bg-yellow-500/10 p-4 text-sm text-yellow-100">
+                                <i class="fas fa-circle-info mt-0.5 text-yellow-400" aria-hidden=true></i>
+                                <p class="leading-relaxed"><strong class="text-white">Consultation fee:</strong> an <strong class="text-white">$80 consultation fee</strong> applies in Zone A (<strong class="text-white">$120 in Zone B</strong>, 20+ miles). The fee is <strong class="text-white">fully credited toward your service costs</strong> if AAA Handyman Services LLC is hired for the work.</p>
+                            </div>
 
                             
                             <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2PQiyPqkFAPQnWdMC3jwuicLPQKJyDsd9dhHzU_bz3uMipGzpQiEE_lT-KIQd29P_yfAwSg4ac?gv=true" style=border:0;background-color:#fff;border-radius:8px width=100% height=780 loading=lazy credentialless referrerpolicy=no-referrer title="Book an appointment with AAA Handyman Services LLC"></iframe>
@@ -351,6 +355,16 @@
                 </div>
 
                 <div class=space-y-3>
+                    <details class="group rounded-2xl border border-gray-800 bg-gray-900/60 px-5 open:border-red-500/40">
+                        <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 text-left text-base font-bold text-white">
+                            Is there a consultation fee?
+                            <i class="booking-faq__chevron fas fa-chevron-down shrink-0 text-sm text-red-500 transition" aria-hidden=true></i>
+                        </summary>
+                        <p class="pb-5 text-sm leading-relaxed text-gray-400">
+                            Yes — a consultation fee of <strong class="text-white">$80 in Zone A</strong> (within ~20 miles) or <strong class="text-white">$120 in Zone B</strong> (20+ miles) applies to each visit. If you hire AAA Handyman Services LLC for the work, the full consultation fee is deducted from your service costs — so it costs you nothing if we do the job. See the <a href=/rates class="font-semibold text-red-400 hover:text-red-300">rates page</a> for details.
+                        </p>
+                    </details>
+
                     <details class="group rounded-2xl border border-gray-800 bg-gray-900/60 px-5 open:border-red-500/40">
                         <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 text-left text-base font-bold text-white">
                             What if I need to reschedule?
