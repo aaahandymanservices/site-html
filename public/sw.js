@@ -400,7 +400,12 @@
 // mandatory bump for a stylesheet or script change -- from here a stamp move in
 // scripts/asset-version.mjs is itself a guaranteed cache miss, and this version
 // only needs to move when sw.js or PRECACHE_URLS changes.
-const CACHE_VERSION = 'v73';
+// v74 moves the home page's below-the-fold behaviour off its critical path:
+// the service quick-view catalog split out of home.js into
+// /js/home-quick-view.js, and /js/service-areas-page.js now loads on idle
+// instead of at parse time. Both joined the precache list so the offline
+// shell stays fully interactive, which changes PRECACHE_URLS.
+const CACHE_VERSION = 'v74';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -420,6 +425,13 @@ const PRECACHE_URLS = [
   // Everything the precached start_url needs to be interactive offline. The
   // other pages' behaviour files are picked up by the asset cache on first use.
   '/js/home.js',
+  // The home page's service quick-view dialog, injected on demand by the
+  // loader inside home.js. Precaching it keeps the offline shell fully
+  // interactive; the loader's unversioned request matches this cache key.
+  '/js/home-quick-view.js',
+  // The home page's ZIP checker and map chips, injected on idle by home.js
+  // rather than parsed up front. Precaching keeps offline start_url working.
+  '/js/service-areas-page.js',
   // The home page's quote form takes photos, and home.js validates them
   // against the rule this file defines.
   '/js/photo-upload.js',

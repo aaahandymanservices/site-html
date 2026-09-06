@@ -149,8 +149,17 @@
  * sufficient for stylesheet and script changes -- a bump here is a guaranteed
  * cache miss. CACHE_VERSION only needs to move when sw.js itself or the
  * precache list changes.
+ *
+ * 20260905a — home page main-thread diet. The service quick-view catalog
+ * moved out of home.js into /js/home-quick-view.js, fetched on first tap of
+ * a quick-view button (or during idle time), and /js/service-areas-page.js
+ * no longer loads eagerly on the home page -- home.js injects it on idle
+ * instead, while /service-areas keeps its normal defer tag. home.js,
+ * public/index.html and the precache list changed, so this bump (plus the
+ * matching CACHE_VERSION move in public/sw.js, which picked up the two new
+ * precache entries) refetches them for returning visitors.
  */
-export const ASSET_VERSION = '20260904c';
+export const ASSET_VERSION = '20260905a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use

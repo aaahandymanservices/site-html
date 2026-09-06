@@ -428,187 +428,84 @@ function trapDialogFocus(modal) {
     trapDialogFocus(modal);
 })();
 
-/* ---- Service quick-view dialog ---- */
+/* ---- Service quick-view dialog: lazy loader ----
+ *
+ * The quick-view catalog (eight services' copy, prices, and bullet lists) is
+ * only needed when a visitor taps one of the quick-view buttons below the
+ * fold, so its behaviour lives in /js/home-quick-view.js and is fetched on
+ * demand. Until it arrives a stub stands in for the inline onclick handlers:
+ * the first tap injects the script (cached immutable for a year, so it is
+ * one fetch per visitor ever) and re-issues the call once it lands. The stub
+ * is also replaced during idle time as a fallback, so keyboard users who
+ * reach a button without a preceding click are covered too.
+ */
 (function () {
-  (function() {
-      const servicesData = {
-          'tv-mounting': {
-              title: 'TV Wall Mounting',
-              category: 'Installation & Mounting',
-              price: '$170',
-              icon: 'fa-tv',
-              description: 'Professional TV wall mounting up to 65" securely anchored into wood or metal studs. Covers leveling, wire management options, and a stud and anchor safety check.',
-              bullets: [
-                  'Wall stud locator & safety anchor check',
-                  'TV bracket installation & precision leveling',
-                  'Cable routing & surface wire concealment',
-                  'Soundbar & streaming box mounting options'
-              ],
-              link: '/services/installation',
-              formService: 'TV Wall Mounting'
-          },
-          'drywall': {
-              title: 'Drywall Repair & Patching',
-              category: 'Interior Finishes',
-              price: '$100',
-              icon: 'fa-border-all',
-              description: 'Seamless wall and ceiling repairs for doorknob dings, cracks, water stains, and drywall cutouts. Meticulously sanded and prepared paint-ready.',
-              bullets: [
-                  'Doorknob holes, crack & water damage patching',
-                  'Mesh backing & joint compound application',
-                  'Texture matching & paint-ready smooth sanding',
-                  'Clean job site with contained dust management'
-              ],
-              link: '/services/drywall-repair',
-              formService: 'Drywall Repair'
-          },
-          'doors': {
-              title: 'Door Alignment & Repair',
-              category: 'Doors & Windows',
-              price: '$100',
-              icon: 'fa-door-open',
-              description: 'Expert adjustment for doors that stick, rub, or won\'t latch properly. Alignment, hinge shimming, strike plate adjustment, and draft weatherstripping.',
-              bullets: [
-                  'Entry & interior door alignment and planing',
-                  'Strike plate, latch & deadbolt adjustments',
-                  'Hinge tightening, shimming & pin replacement',
-                  'Weatherstripping & sweep replacement to stop drafts'
-              ],
-              link: '/services/doors-windows',
-              formService: 'Doors'
-          },
-          'plumbing': {
-              title: 'Minor Plumbing & Fixture Swap',
-              category: 'Plumbing Services',
-              price: '$135',
-              icon: 'fa-faucet-drip',
-              description: 'Fast, clean replacement of kitchen & bathroom faucets, toilet rebuilds, supply line swaps, and garbage disposal installs.',
-              bullets: [
-                  'Kitchen & bathroom faucet replacement',
-                  'Toilet flapper, fill valve & wax ring rebuilds',
-                  'Showerhead & handheld wand installations',
-                  'Garbage disposal & sink drain replacements'
-              ],
-              link: '/services/minor-plumbing',
-              formService: 'Minor Plumbing'
-          },
-          'electrical': {
-              title: 'Minor Electrical & Light Swaps',
-              category: 'Electrical & Smart Home',
-              price: '$135',
-              icon: 'fa-lightbulb',
-              description: 'Safe replacement of ceiling fans, light fixtures, wall switches, dimmers, outlets, and smart video doorbells.',
-              bullets: [
-                  'Interior & exterior light fixture replacements',
-                  'Ceiling fan swap & balancing on existing box',
-                  'Wall outlet, GFCI & dimmer switch upgrades',
-                  'Smart doorbell & security sensor installation'
-              ],
-              link: '/services/minor-electrical',
-              formService: 'Minor Electrical'
-          },
-          'carpentry': {
-              title: 'Carpentry & Trim Work',
-              category: 'Interior & Exterior',
-              price: '$100',
-              icon: 'fa-hammer',
-              description: 'Precision finish carpentry including baseboards, crown molding, door casings, window trim, and exterior wood rot repairs.',
-              bullets: [
-                  'Baseboards, crown molding & interior trim',
-                  'Door/window casings & decorative millwork',
-                  'Exterior wood rot, fascia & trim repair',
-                  'Custom shelving & closet system mounting'
-              ],
-              link: '/services/carpentry',
-              formService: 'Carpentry & Trim'
-          },
-          'gutters': {
-              title: 'Gutter Cleaning & Repairs',
-              category: 'Exterior Maintenance',
-              price: '$100',
-              icon: 'fa-droplet',
-              description: 'Full clearing of leaves and roof debris, downspout flushing, bracket re-securing, and gutter guard installation.',
-              bullets: [
-                  'Full gutter & downspout clearing',
-                  'Water flow testing & blockage removal',
-                  'Loose spike & bracket re-securing',
-                  'Gutter guard & leaf screen installations'
-              ],
-              link: '/services/gutters',
-              formService: 'Gutter Maintenance'
-          },
-          'locks': {
-              title: 'Smart Locks & Hardware',
-              category: 'Home Security',
-              price: '$135',
-              icon: 'fa-lock',
-              description: 'Upgrade your entry security with keyless electronic smart locks, deadbolts, handlesets, and heavy-duty strike plates.',
-              bullets: [
-                  'Keyless smart lock & keypad installation',
-                  'Deadbolt & handleset replacement',
-                  'Reinforced security strike plate installation',
-                  'Smooth latching & jamb clearance adjustment'
-              ],
-              link: '/services/doors-windows',
-              formService: 'Home Security'
-          }
-      };
+    var quickViewLoaded = false;
+    var quickViewPendingKey = null;
 
-      const modal = document.getElementById('quick-view-modal');
-      let quickViewOpener = null;
+    function loadQuickView() {
+        if (quickViewLoaded) return Promise.resolve();
+        if (!loadQuickView.promise) {
+            loadQuickView.promise = new Promise(function (resolve, reject) {
+                var script = document.createElement('script');
+                script.src = '/js/home-quick-view.js';
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            }).then(function () { quickViewLoaded = true; });
+        }
+        return loadQuickView.promise;
+    }
 
-      window.openServiceQuickView = function(key) {
-          const data = servicesData[key];
-          if (!data || !modal) return;
-          quickViewOpener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    // The ?v= stamp is deliberately absent: the service worker keys its asset
+    // cache on the URL with ?v= removed, and the loader's request must match
+    // the precached name so a returning visitor gets the cached copy. The
+    // real implementation (installed by home-quick-view.js) replaces this
+    // stub, so the guard below only replays the tap while the stub is live.
+    window.openServiceQuickView = function (key) {
+        quickViewPendingKey = key;
+        var stub = window.openServiceQuickView;
+        loadQuickView().then(function () {
+            if (quickViewPendingKey === key && window.openServiceQuickView === stub) return;
+            if (quickViewPendingKey === key && typeof window.openServiceQuickView === 'function') {
+                window.openServiceQuickView(key);
+            }
+        }).catch(function () {
+            // Fall back to the matching service page rather than a dead button.
+            window.location.href = '/services.html';
+        });
+    };
 
-          document.getElementById('quick-view-title').textContent = data.title;
-          document.getElementById('quick-view-category').textContent = data.category;
-          document.getElementById('quick-view-price').innerHTML = `Starting at <strong class="text-white text-base font-extrabold">${data.price}</strong> (Zone A) &middot; labor only, materials not included`;
-          document.getElementById('quick-view-description').textContent = data.description;
-          document.getElementById('quick-view-icon').className = `fas ${data.icon}`;
-          document.getElementById('quick-view-page-link').href = data.link;
-          document.getElementById('quick-view-book-btn').href = `/book?service=${encodeURIComponent(data.formService)}`;
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(function () { setTimeout(loadQuickView, 4000); }, { timeout: 8000 });
+    } else {
+        setTimeout(loadQuickView, 5000);
+    }
+})();
 
-          const bulletsUl = document.getElementById('quick-view-bullets');
-          bulletsUl.innerHTML = '';
-          data.bullets.forEach(b => {
-              const li = document.createElement('li');
-              li.className = 'flex items-start gap-2';
-              li.innerHTML = `<i class="fas fa-check-circle text-red-600 mt-1 shrink-0" aria-hidden="true"></i><span>${b}</span>`;
-              bulletsUl.appendChild(li);
-          });
-
-          if (typeof modal.showModal === 'function') {
-              modal.showModal();
-              document.body.style.overflow = 'hidden';
-          } else {
-              modal.setAttribute('open', 'true');
-          }
-      };
-
-      window.closeServiceQuickView = function() {
-          if (!modal) return;
-          if (typeof modal.close === 'function') {
-              modal.close();
-          } else {
-              modal.removeAttribute('open');
-          }
-          document.body.style.overflow = '';
-      };
-
-      if (modal) {
-          modal.addEventListener('click', function(e) {
-              if (e.target === modal) {
-                  window.closeServiceQuickView();
-              }
-          });
-          modal.addEventListener('close', function() {
-              document.body.style.overflow = '';
-              if (quickViewOpener && quickViewOpener.isConnected) quickViewOpener.focus();
-              quickViewOpener = null;
-          });
-      }
-      trapDialogFocus(modal);
-  })();
+/* ---- Service-area ZIP checker + map chips: lazy loader ----
+ *
+ * The ZIP/city lookup, the zone chips that fly the embedded map, and their
+ * city/zone tables sit in /js/service-areas-page.js. All of it is below the
+ * fold and none of it runs until a visitor types a ZIP or taps a chip, so the
+ * home page no longer parses that file up front with the other deferred
+ * scripts -- it is injected here once the page has gone idle. /service-areas,
+ * which needs it for its first paint of interactivity, still loads it with a
+ * plain defer tag.
+ */
+(function () {
+    var saLoaded = false;
+    function loadServiceAreas() {
+        if (saLoaded) return;
+        saLoaded = true;
+        var script = document.createElement('script');
+        script.src = '/js/service-areas-page.js';
+        script.async = true;
+        document.head.appendChild(script);
+    }
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(function () { setTimeout(loadServiceAreas, 3000); }, { timeout: 6000 });
+    } else {
+        setTimeout(loadServiceAreas, 4000);
+    }
 })();

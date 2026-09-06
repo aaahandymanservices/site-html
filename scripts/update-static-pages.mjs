@@ -52,6 +52,10 @@ const SCRIPT_VERSIONS = new Map([
   ['page-boot.js', ASSET_VERSION],
   ['site.js', ASSET_VERSION],
   ['home.js', ASSET_VERSION],
+  // The home page's service quick-view catalog, split out of home.js and
+  // fetched on demand by the loader home.js installs. It carries the shared
+  // stamp so an edit behind the immutable cache still reaches visitors.
+  ['home-quick-view.js', ASSET_VERSION],
   // The one accept list and 10 MB rule that all six photo uploaders read, plus
   // the resizing that lets a phone picture fit the wire. Every page carrying an
   // upload loads it ahead of its own script, so a stale copy would take the
