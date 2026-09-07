@@ -61,13 +61,17 @@
           text: "Get all three specialized audits (Safety, Energy, Storm-Prep) in a single visit with a unified punch list. Save $84!",
           link: "/rates#audits"
       },
-      "Fall Home Prep Package": {
-          text: "A comprehensive seasonal package detailing gutter clean-out, water spigot winterization, draft sealing, and leaf checks.",
-          link: "/rates"
+      "Seasonal Prep Package": {
+          text: "A comprehensive seasonal package covering gutter clean-out, draft-stopping weatherstripping, window sash checks, and deck inspection. $311 in Zone A (about 4½ labor hours, save $34).",
+          link: "/services#bundles"
       },
-      "Spring Home Refresh Package": {
-          text: "A seasonal tune-up package including deck checks, screen washing, exterior caulk refreshes, and gutter flow checks.",
-          link: "/rates"
+      "Move-In / Move-Out Bundle": {
+          text: "Settle in or prep for sale: TV wall mounting, drywall patching, paint touch-ups, and deadbolt or smart lock upgrades. $342 in Zone A (about 5 labor hours, save $38).",
+          link: "/services#bundles"
+      },
+      "Senior Safety & Accessibility Package": {
+          text: "Independent living made secure: grab bar anchoring, easy-lever handle conversions, and trip-hazard elimination. $279 in Zone A (4 labor hours, 10% off).",
+          link: "/services#bundles"
       },
       "Priority / After-Hours Service": {
           text: "7-Day priority response service for urgent repairs that affect immediate home safety, plumbing leaks, or door/window security ($155 first hour / $100 per hour after).",

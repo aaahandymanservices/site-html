@@ -188,7 +188,7 @@ export default async (request: Request) => {
 
     return json(
       {
-        message: `You're on the list for the ${PLANS[plan].name} plan. Victor will call within one business day to confirm your first quarterly visit and set up billing — nothing is charged until you say go.`,
+        message: `You're on the list for the ${PLANS[plan].name} plan. We will call within one business day to confirm your first quarterly visit and set up billing — nothing is charged until you say go.`,
         subscription: {
           id: subscription.id,
           plan: subscription.plan,

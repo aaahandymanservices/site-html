@@ -225,7 +225,7 @@
           const overSize = file.size > photoRule.MAX_BYTES;
           return showPhotoError(
               overSize
-                  ? `${rejection} Please attach a smaller one, or email it to contact@aaahandyman.services.`
+                  ? `${rejection} Please attach a smaller one, or email it to customer-care@aaahandyman.services.`
                   : rejection
           );
       }
@@ -331,14 +331,14 @@
               showPhotoError('');
           } else {
               setStatus(
-                  "Sorry — your request didn't go through. Please call us at (248) 385-3432 or email contact@aaahandyman.services and we'll pick it up right away.",
+                  "Sorry — your request didn't go through. Please call us at (248) 385-3432 or email customer-care@aaahandyman.services and we'll pick it up right away.",
                   'error'
               );
           }
       })
       .catch(() => {
           setStatus(
-              "Sorry — your report didn't go through. Please call us at (248) 385-3432 or email contact@aaahandyman.services and we'll pick it up right away.",
+              "Sorry — your report didn't go through. Please call us at (248) 385-3432 or email customer-care@aaahandyman.services and we'll pick it up right away.",
               'error'
           );
       })
