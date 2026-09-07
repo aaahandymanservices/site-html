@@ -1,6 +1,6 @@
 {
   "type": "ServiceAreasData",
-  "note": "Single source of truth for AAA Handyman Services LLC coverage. Consumed by the browser service-area checker (/js/service-area-checker.js), the booking widget (/js/booking-widget.js), the booking page (/js/book-page.js), and the city landing-page generator (scripts/build-city-pages.mjs). Zone A = $100 minimum service call (within ~20 miles of Waterford). Zone B = $145 minimum service call (extended county / 20+ miles).",
+  "note": "Single source of truth for AAA Handyman Services LLC coverage. Consumed by the browser service-area checker, the booking widget, the booking page, and the city landing-page generator (scripts/build-city-pages.mjs). All Oakland County cities listed stay served and bookable; only entries with landing:true get a /handyman/<slug> page (12 primary service areas). Zone A = $100 minimum service call (within ~20 miles of Waterford). Zone B = $145 minimum service call (extended county / 20+ miles).",
   "zones": {
     "A": {
       "label": "Zone A (Within 20 Miles)",
@@ -56,32 +56,52 @@
       ],
       "zone": "A",
       "route": "north-lakes",
-      "region": "North & West Metro",
-      "blurb": "As our home base, Waterford is where AAA Handyman Services LLC got its start. From the lakes area to the neighborhoods off Dixie Highway, we know these homes and turn up fast for home repairs, maintenance, punch lists, and minor updates.",
+      "region": "Waterford Township",
+      "blurb": "Waterford Township is our home base and the community we've served longest — from the caretaker cottages along Crescent and Van Norman lakes to the neighborhoods off Dixie Highway and the newer builds near the Drayton Plains area. Our shop is minutes away, so we turn up fast for punch lists, repairs, and seasonal upkeep.",
       "nearby": [
         "pontiac",
         "west-bloomfield",
-        "clarkston"
-      ]
+        "white-lake"
+      ],
+      "landing": true,
+      "housing": "Waterford's housing stock is dominated by 1960s–70s ranches and Cape Cods around its two dozen lakes, with original oak trim, plaster-and-lath walls in the older lakeside cottages, and aluminum or vinyl siding that takes a beating off the water.",
+      "landmark": "between the Elizabeth Lake Road corridor and the boat launches at Pontiac Lake",
+      "jobs": [
+        "re-caulking a tub surround in a lakeside cottage before weekend guests",
+        "replacing rotted porch decking that faces the water",
+        "re-hanging interior doors in a ranch that has shifted with the frost line"
+      ],
+      "closer": "Because our shop sits right here in Waterford, same-week visits and quick return trips for follow-up work are the norm — many neighbors see us three or four times a year.",
+      "bridge": "From a single stubborn repair to a whole-season punch list, Waterford gets the same standard: careful work, a clean site, and a clear plan before we start. Drywall, doors, trim, gutters, and the small plumbing and electrical jobs that keep a lakes-area home tight.",
+      "metaHint": "Serving the lakes area, Dixie Highway corridor, and Crescent Lake neighborhoods."
     },
     {
-      "name": "Pontiac",
-      "slug": "pontiac",
+      "name": "Keego Harbor",
+      "slug": "keego-harbor",
       "aliases": [],
       "zips": [
-        "48341",
-        "48342",
-        "48343"
+        "48320"
       ],
       "zone": "A",
-      "route": "north-lakes",
-      "region": "North & West Metro",
-      "blurb": "Pontiac's mix of historic and updated homes keeps our handyman busy with everything from drywall and door repairs to painting and preventative upkeep. We're just minutes away in neighboring Waterford.",
+      "route": "west-corridor",
+      "region": "Greater West Bloomfield",
+      "landing": true,
+      "blurb": "Keego Harbor's compact lakeside lots and older cottages around Cass Lake keep us hopping. Tight access, waterfront weathering, and homes where every square foot counts — dock boxes, seawall-adjacent stairs, compact bathroom updates — we know these blocks well.",
+      "housing": "Keego Harbor packs older lake cottages and post-war bungalows onto tight streets around Cass Lake — narrow lots, shared drives, second-story decks over the water, and stairways that need rail work more than paint.",
+      "landmark": "around Cass Lake and the downtown strip along Orchard Lake Road",
+      "jobs": [
+        "rebuilding a lake-facing stairway railing to code height",
+        "replacing a rotted balcony deck over a boathouse",
+        "fitting shelving into a cottage where nothing is square"
+      ],
       "nearby": [
+        "west-bloomfield",
         "waterford",
-        "birmingham",
-        "clarkston"
-      ]
+        "farmington-hills"
+      ],
+      "closer": "Short runs down Orchard Lake Road mean Keego Harbor calls often land on our West Corridor days with little lead time, and cottage-season work gets scheduled around your weekends at the lake.",
+      "bridge": "Cottage repairs, year-round upkeep, or a punch list that has been waiting all winter — Keego Harbor jobs get the same careful treatment, sized to a compact home where every inch matters. Drywall, trim, doors, railings, and the small plumbing and electrical work that keeps a lake house sound.",
+      "metaHint": "Serving the Cass Lake cottages and the Orchard Lake Road strip."
     },
     {
       "name": "West Bloomfield",
@@ -96,93 +116,24 @@
       ],
       "zone": "A",
       "route": "west-corridor",
-      "region": "North & West Metro",
-      "blurb": "West Bloomfield homeowners count on us for careful carpentry and finish work that matches the quality of the neighborhood, plus the everyday repairs that keep a busy household running.",
+      "region": "Greater West Bloomfield",
+      "blurb": "West Bloomfield's estate-style homes and lake properties keep us busy. We work around your property manager's schedule when needed and handle the larger-scale punch lists these homes accumulate — deck boards, heavy wall-mounted items, door hardware, and seasonal maintenance.",
       "nearby": [
         "waterford",
-        "orchard-lake",
-        "farmington-hills"
-      ]
-    },
-    {
-      "name": "Clarkston",
-      "slug": "clarkston",
-      "aliases": [
-        "independence township"
+        "farmington-hills",
+        "birmingham"
       ],
-      "zips": [
-        "48346",
-        "48347",
-        "48348"
+      "landing": true,
+      "housing": "West Bloomfield runs large — colonials and contemporaries on half-acre-plus lots around Orchard, Walnut, and Cass lakes, with two-story foyers, 8-foot solid-core doors, and builder-grade finishes from the 80s and 90s ready for steady upgrades.",
+      "landmark": "around the Orchard Lake and Walnut Lake shorelines",
+      "jobs": [
+        "mounting a 60-inch TV and soundbar on a masonry fireplace wall",
+        "rebuilding rotted deck boards around a pool",
+        "adjusting interior doors in a two-story colonial after a season of humidity swings"
       ],
-      "zone": "A",
-      "route": "north-lakes",
-      "region": "North & East Metro",
-      "blurb": "From downtown Clarkston to the surrounding subdivisions of Independence Township, we handle deck and fence work, gutters, interior repairs, and seasonal maintenance with honest, upfront pricing.",
-      "nearby": [
-        "waterford",
-        "lake-orion",
-        "oxford"
-      ]
-    },
-    {
-      "name": "Birmingham",
-      "slug": "birmingham",
-      "aliases": [],
-      "zips": [
-        "48009",
-        "48012"
-      ],
-      "zone": "A",
-      "route": "east-metro",
-      "region": "South & Southeast Metro",
-      "blurb": "Birmingham's established homes deserve detail-obsessed work. We deliver crisp painting, trim carpentry, drywall, and the reliable small repairs that protect the value of a premium property.",
-      "nearby": [
-        "royal-oak",
-        "beverly-hills",
-        "troy"
-      ]
-    },
-    {
-      "name": "Troy",
-      "slug": "troy",
-      "aliases": [],
-      "zips": [
-        "48007",
-        "48083",
-        "48084",
-        "48085",
-        "48098"
-      ],
-      "zone": "A",
-      "route": "east-metro",
-      "region": "Northeast & East",
-      "blurb": "Troy homeowners rely on us for dependable handyman help, from TV mounting and fixture swaps to drywall, flooring, and full seasonal maintenance, all backed by our workmanship guarantee.",
-      "nearby": [
-        "rochester-hills",
-        "birmingham",
-        "royal-oak"
-      ]
-    },
-    {
-      "name": "Rochester Hills",
-      "slug": "rochester-hills",
-      "aliases": [],
-      "zips": [
-        "48306",
-        "48307",
-        "48308",
-        "48309"
-      ],
-      "zone": "A",
-      "route": "east-metro",
-      "region": "Northeast & East",
-      "blurb": "In Rochester Hills and Rochester, we tackle the growing list every homeowner keeps, including door and window adjustments, caulking, minor plumbing, and exterior upkeep, so your weekends stay yours.",
-      "nearby": [
-        "troy",
-        "lake-orion",
-        "oxford"
-      ]
+      "closer": "Long drives between estate lots are built into our West Corridor route, so a multi-item punch list in West Bloomfield is planned in one efficient visit rather than three.",
+      "bridge": "Big homes accumulate long lists, so we work through West Bloomfield projects in planned passes — exterior repairs while the weather holds, interior trim and drywall when it turns. Doors, flooring, hardware, decks, and the seasonal maintenance a larger property quietly demands.",
+      "metaHint": "Serving the estate neighborhoods around Orchard, Walnut, and Cass lakes."
     },
     {
       "name": "Farmington Hills",
@@ -200,13 +151,271 @@
       ],
       "zone": "A",
       "route": "west-corridor",
-      "region": "South & Southeast Metro",
-      "blurb": "Farmington Hills and Farmington families trust us for safe, code-conscious installs and repairs, including smart-home devices, grab bars, lighting, and the everyday fixes that keep a home comfortable.",
+      "region": "Southwest Oakland",
+      "blurb": "One of our most requested areas. Farmington Hills mixes 1960s–80s subdivisions with quiet wooded lots, and the work we do there runs the gamut — drywall texture repair, interior trim, door and cabinet hardware, and gutter tune-ups before the fall leaf drop.",
       "nearby": [
         "west-bloomfield",
-        "novi",
-        "southfield"
-      ]
+        "birmingham",
+        "keego-harbor"
+      ],
+      "landing": true,
+      "housing": "Farmington Hills is mostly 60s–80s subdivision colonials and split-levels off Orchard Lake and 14 Mile Roads, with cathedral ceilings that make fan and fixture work interesting and oak cabinets worth keeping with the right hardware.",
+      "landmark": "along the 14 Mile and Orchard Lake Road corridors",
+      "jobs": [
+        "blending a ceiling drywall patch into a sprayed texture",
+        "replacing a cracked garage-door weatherstrip",
+        "re-grouting two bathroom walls before a listing photo shoot"
+      ],
+      "closer": "Farmington Hills sits squarely on our West Corridor days, which is why recurring clients there see the same crew each season — familiar faces who know the house.",
+      "bridge": "One repair or a whole spring checklist — Farmington Hills homes get careful work, a tidy site, and straight answers. Drywall texture blending, trim, doors, gutters before the maples let go, and the minor plumbing and electrical fixes that keep an 80s colonial current.",
+      "metaHint": "Serving the 60s-80s subdivisions off Orchard Lake and 14 Mile Roads."
+    },
+    {
+      "name": "Birmingham",
+      "slug": "birmingham",
+      "aliases": [],
+      "zips": [
+        "48009",
+        "48012"
+      ],
+      "zone": "A",
+      "route": "east-metro",
+      "region": "South & Southeast Metro",
+      "blurb": "Birmingham homes get our careful side — finished trim, precise paint lines, and hardware that matches the neighborhood's standards. We coordinate with homeowners and contractors on Peabody and around Shain Park who need small jobs done to a high finish, quietly and on time.",
+      "nearby": [
+        "troy",
+        "west-bloomfield",
+        "rochester-hills"
+      ],
+      "landing": true,
+      "housing": "Birmingham mixes restored 1920s colonials and tudors near downtown with high-end post-war builds farther out — expectations run to crisp trim, stained woodwork matched on-site, and fixtures set plumb and tight.",
+      "landmark": "in the neighborhoods around Shain Park and the Peabody Street neighborhood",
+      "jobs": [
+        "scribing and re-staining a pocket door that binds in a tudor",
+        "installing a designer closet system with piano-hinge doors",
+        "touching up painted trim to match a 90-year-old enamel profile"
+      ],
+      "closer": "Birmingham jobs get first-priority scheduling on our East & South Metro route, with work timed around the city's permit rules and tight neighborhood parking.",
+      "bridge": "Trim scribed and stained to match ninety-year-old profiles, doors set plumb in old frames, hardware that fits the neighborhood's standards — Birmingham jobs run to detail work, and we plan the time accordingly, whatever the punch list holds.",
+      "metaHint": "Serving the historic colonials and tudors near Shain Park and Peabody."
+    },
+    {
+      "name": "Troy",
+      "slug": "troy",
+      "aliases": [],
+      "zips": [
+        "48007",
+        "48083",
+        "48084",
+        "48085",
+        "48098"
+      ],
+      "zone": "A",
+      "route": "east-metro",
+      "region": "Northeast & East",
+      "blurb": "Troy's mid-century ranches and splits are our bread and butter: solid houses with original oak trim and stairs that deserve real repair. We're in Troy most weeks — drywall patches, door swaps, trim carpentry, and the small electrical and plumbing jobs that keep a ranch current.",
+      "nearby": [
+        "birmingham",
+        "rochester-hills",
+        "auburn-hills"
+      ],
+      "landing": true,
+      "housing": "Troy is the classic mid-century city — 1950s–60s ranches and tri-levels off Livernois, John R, and Coolidge with solid oak floors, original interior oak trim, and basements that stay dry but show their age at the panel seams.",
+      "landmark": "off the Livernois and John R corridors, a short run from the Somerset Collection",
+      "jobs": [
+        "replacing a rotted threshold and storm door on a tri-level",
+        "adding a pet door through a brick exterior wall",
+        "re-attaching loose oak stair treads before they squeak loose again"
+      ],
+      "closer": "Troy anchors our East & South Metro route, so visits land on predictable weekdays — handy for multi-job punch lists spread across a week or two.",
+      "bridge": "Drywall patches, oak trim repairs, door swaps, and the seasonal list every mid-century ranch carries — Troy jobs get craftsmanship first, with clean job sites and clear communication from estimate to walkthrough.",
+      "metaHint": "Serving the mid-century ranches and tri-levels off Livernois and John R."
+    },
+    {
+      "name": "Rochester Hills",
+      "slug": "rochester-hills",
+      "aliases": [],
+      "zips": [
+        "48306",
+        "48307",
+        "48308",
+        "48309"
+      ],
+      "zone": "A",
+      "route": "east-metro",
+      "region": "Northeast & East",
+      "blurb": "From the older subdivisions near Downtown Rochester to the 80s–90s builds off Adams Road, Rochester Hills homes get steady use from us — deck and fence repair, interior trim, painting prep, and seasonal installs. The Bloomer Park–Adams corridor is a regular route.",
+      "nearby": [
+        "troy",
+        "auburn-hills",
+        "lake-orion"
+      ],
+      "landing": true,
+      "housing": "Rochester Hills spans 70s–90s colonials and ranches off Adams and Rochester Roads, many on wooded lots with walk-out basements, wrap decks, and the occasional two-story great room that needs tall-ladder work.",
+      "landmark": "along the Adams Road corridor near the Clinton River and Bloomer Park",
+      "jobs": [
+        "power-washing and sealing a wraparound deck before a graduation party",
+        "repairing a wrought-iron railing anchor set into brick",
+        "replacing failed pull-down attic stairs above a garage"
+      ],
+      "closer": "Our East & South Metro route ends in Rochester Hills, giving us the flexibility to pair indoor repairs with longer outdoor projects like deck restoration in a single visit.",
+      "bridge": "Deck sealing in the spring, interior trim in the winter, gutters after the leaves — Rochester Hills homes get year-round attention planned around how the house is actually used, from drywall and doors to flooring and minor plumbing or electrical.",
+      "metaHint": "Serving the wooded-lot colonials along the Adams Road corridor."
+    },
+    {
+      "name": "Auburn Hills",
+      "slug": "auburn-hills",
+      "aliases": [],
+      "zips": [
+        "48326"
+      ],
+      "zone": "A",
+      "route": "east-metro",
+      "region": "Northeast & East",
+      "blurb": "Auburn Hills mixes university-area rentals with long-settled subdivisions, and we serve both — turnover punch lists for landlords and owners alike, plus the routine repairs that keep older homes ahead of Michigan winters. We're in and out of the area around the universities weekly.",
+      "nearby": [
+        "troy",
+        "pontiac",
+        "rochester-hills"
+      ],
+      "landing": true,
+      "housing": "Auburn Hills holds 70s–80s colonials and ranches near the Oakland University campus and the wooded subdivisions off Squirrel Road, plus a rental segment that needs durable, quick-turn repairs between tenants.",
+      "landmark": "near the Oakland University campus and the Squirrel Road corridor",
+      "jobs": [
+        "turnover punch lists between leases — patching, painting, re-hanging doors",
+        "swapping failed GFCI outlets in older kitchens and baths",
+        "refitting a loose handrail on a basement stairway"
+      ],
+      "closer": "Auburn Hills sits minutes from our Waterford base along the M-24 and I-75 corridors, so last-minute repairs and quick turnaround punch lists are easy to fit in.",
+      "bridge": "Turnover punch lists, pre-winter checkups, and the small repairs that keep a busy household running — Auburn Hills calls are handled with the same clean-site standard we bring everywhere, from drywall and doors to minor plumbing and electrical work.",
+      "metaHint": "Serving the neighborhoods near Oakland University and Squirrel Road."
+    },
+    {
+      "name": "Pontiac",
+      "slug": "pontiac",
+      "aliases": [],
+      "zips": [
+        "48341",
+        "48342",
+        "48343"
+      ],
+      "zone": "A",
+      "route": "north-lakes",
+      "region": "Central Oakland",
+      "blurb": "We're in Pontiac regularly — the city's historic neighborhoods around the Woodward Loop are full of early-1900s colonials and bungalows that reward careful, old-house repair. Fast access from Waterford down Telegraph or Perry Street keeps travel short and scheduling flexible.",
+      "nearby": [
+        "waterford",
+        "auburn-hills",
+        "lake-orion"
+      ],
+      "landing": true,
+      "housing": "Pontiac's older neighborhoods — hold early-1900s colonials, bungalows, and foursquares with plaster walls, original hardwood, and heavy five-panel doors that are worth repairing rather than replacing.",
+      "landmark": "in the neighborhoods around the historic downtown and the Woodward Loop",
+      "jobs": [
+        "stabilizing a sagging plaster ceiling in a foursquare before repainting",
+        "rebuilding a back porch step that has heaved",
+        "swapping failed hardware on original storm windows"
+      ],
+      "closer": "Pontiac is five minutes from our door via Telegraph Road, which makes it easy to split bigger jobs into short visits that fit a working household's schedule.",
+      "bridge": "Older homes reward patient repair: plaster stabilized properly, hardwood preserved, doors planed and re-hung rather than replaced. Whatever the list — drywall, trim, painting, minor plumbing or electrical — Pontiac jobs get that same old-house care.",
+      "metaHint": "Serving the early-1900s colonials and bungalows around downtown."
+    },
+    {
+      "name": "Clarkston",
+      "slug": "clarkston",
+      "aliases": [
+        "independence township"
+      ],
+      "zips": [
+        "48346",
+        "48347",
+        "48348"
+      ],
+      "zone": "A",
+      "route": "north-lakes",
+      "region": "North & East Metro",
+      "blurb": "Clarkston's village historic district and its rolling outer subdivisions each need a different touch. We repair older village homes with period-appropriate details and handle deck, gate, and interior work in the newer builds around Depot Road and the Clinton River — always with the historic mill and Main Street's standards in mind.",
+      "nearby": [
+        "lake-orion",
+        "pontiac",
+        "waterford"
+      ],
+      "landing": true,
+      "housing": "Historic Clarkston village holds mid-1800s greek revivals and storybook cottages near the mill pond, while the outer roads carry 90s–2000s colonials on wooded lots — two very different toolkits, both in the van.",
+      "landmark": "around the historic village mill pond and Main Street",
+      "jobs": [
+        "repairing original wood windows in a village home without losing the sash",
+        "rebuilding a cedar gate on a sloped lot",
+        "tightening up a screened porch ahead of summer"
+      ],
+      "closer": "Clarkston sits at the north end of our North & Lakes route, so village appointments cluster on Mondays and Thursdays — easy to plan around, and worth grouping with neighbors.",
+      "bridge": "Village homes need period-sensitive hands; newer builds need crisp, modern finishes. Either way, the list gets done — drywall, doors, decks, painting, and the minor plumbing and electrical work that keeps a home current.",
+      "metaHint": "Serving the historic village mill pond area and the outer wooded subdivisions."
+    },
+    {
+      "name": "Lake Orion",
+      "slug": "lake-orion",
+      "aliases": [
+        "orion township"
+      ],
+      "zips": [
+        "48359",
+        "48360",
+        "48361",
+        "48362"
+      ],
+      "zone": "A",
+      "route": "north-lakes",
+      "region": "North & East Metro",
+      "blurb": "Lake Orion lake homes and village properties see more weather than most, and we handle the results — dock-adjacent deck boards, screen walls, gutters after the oaks drop, and the small repairs that keep a lake cottage rental-ready. Downtown Orion and the lake's east shore are a regular stop on our North & Lakes route.",
+      "nearby": [
+        "clarkston",
+        "rochester-hills",
+        "pontiac"
+      ],
+      "landing": true,
+      "housing": "Lake Orion mixes village cottages near the downtown flats with year-round homes on the lake's east shore — aluminum-wrapped trim that hides rot until it doesn't, and decks that live half their life in the spray zone.",
+      "landmark": "on the North & Lakes route, near Bald Mountain and the downtown village",
+      "jobs": [
+        "replacing soft deck boards a dozen feet off the water",
+        "re-screening a porch after a summer hailstorm",
+        "swapping failed gutter spikes for hidden hangers before winter"
+      ],
+      "closer": "Lake Orion shares the North & Lakes route with Clarkston and White Lake, so lake-home projects get sequenced with weather in mind — sealing before Memorial Day, gutters after the oaks drop.",
+      "bridge": "Water is hard on houses: decks, screens, gutters, and trim take the brunt. Lake Orion lists get worked with the season in mind — exterior repairs early, interior punch lists through the winter — from drywall and doors to minor plumbing and electrical.",
+      "metaHint": "Serving the village downtown and the lake's east-shore homes."
+    },
+    {
+      "name": "White Lake",
+      "slug": "white-lake",
+      "aliases": [
+        "white lake township"
+      ],
+      "zips": [
+        "48327",
+        "48383",
+        "48386"
+      ],
+      "zone": "A",
+      "route": "north-lakes",
+      "region": "North & Lakes",
+      "blurb": "White Lake properties — from homes on Oxbow and Pleasant lakes to the subdivisions off Highland and Williams Lake Roads — get our full attention on the North & Lakes route. Fishing-line dinged siding, dock-adjacent deck boards, and lake-effect gutters are all in a day's work here.",
+      "nearby": [
+        "waterford",
+        "clarkston",
+        "keego-harbor"
+      ],
+      "landing": true,
+      "housing": "White Lake homes sit on and around its namesake lakes — 70s ranches and A-frames with lakeside decks, wood siding that the water weathers fast, and long driveways with gates and fence lines to match.",
+      "landmark": "on the North & Lakes route, between Oxbow Lake and the Williams Lake Road corridor",
+      "jobs": [
+        "replacing warped wood siding panels on a lake-facing wall",
+        "re-flashing a door threshold that takes wave spray",
+        "re-staining a dock-adjacent deck ahead of back-to-back summers"
+      ],
+      "closer": "White Lake rounds out the North & Lakes route, and lake-season timing matters here: deck and dock-adjacent work books out fastest between Memorial Day and Labor Day.",
+      "bridge": "Lake-facing walls, spray-zone decks, and gutter runs full of oak tassels — White Lake punch lists get sequenced with the weather, then finished with the same clean-site standard we bring to every home, inside and out.",
+      "metaHint": "Serving the homes on Oxbow, Pleasant, and Williams Lake roads."
     },
     {
       "name": "Royal Oak",
@@ -341,28 +550,6 @@
       ]
     },
     {
-      "name": "Lake Orion",
-      "slug": "lake-orion",
-      "aliases": [
-        "orion township"
-      ],
-      "zips": [
-        "48359",
-        "48360",
-        "48361",
-        "48362"
-      ],
-      "zone": "A",
-      "route": "north-lakes",
-      "region": "Northeast & East",
-      "blurb": "From the lake to Orion Township's neighborhoods, we help homeowners with deck restoration, staining, gutters, and the repairs that keep a home ready for every Michigan season.",
-      "nearby": [
-        "clarkston",
-        "oxford",
-        "rochester-hills"
-      ]
-    },
-    {
       "name": "Oxford",
       "slug": "oxford",
       "aliases": [
@@ -380,27 +567,6 @@
         "lake-orion",
         "clarkston",
         "rochester-hills"
-      ]
-    },
-    {
-      "name": "White Lake",
-      "slug": "white-lake",
-      "aliases": [
-        "white lake township"
-      ],
-      "zips": [
-        "48327",
-        "48383",
-        "48386"
-      ],
-      "zone": "A",
-      "route": "north-lakes",
-      "region": "North & Lakes",
-      "blurb": "White Lake homeowners call us for deck and fence upkeep, gutters, drywall, and the seasonal repairs that come with lakeside and rural living, all with honest upfront pricing.",
-      "nearby": [
-        "waterford",
-        "highland",
-        "commerce"
       ]
     },
     {
@@ -757,23 +923,6 @@
         "west-bloomfield",
         "birmingham",
         "orchard-lake"
-      ]
-    },
-    {
-      "name": "Auburn Hills",
-      "slug": "auburn-hills",
-      "aliases": [],
-      "zips": [
-        "48326"
-      ],
-      "zone": "A",
-      "route": "east-metro",
-      "region": "East & South Metro",
-      "blurb": "Auburn Hills homeowners rely on us for dependable handyman help, from TV mounting and fixture swaps to drywall, flooring, and full seasonal maintenance.",
-      "nearby": [
-        "troy",
-        "rochester-hills",
-        "pontiac"
       ]
     },
     {
