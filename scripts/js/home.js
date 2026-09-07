@@ -175,7 +175,7 @@
                       body.append('photos', file, file.name);
                   });
               } catch (prepError) {
-                  if (btn) { btn.disabled = false; btn.innerHTML = 'Get My Free Quote <i class="fas fa-arrow-right" aria-hidden="true"></i>'; }
+                  if (btn) { btn.disabled = false; btn.innerHTML = 'Get My Free Estimate <i class="fas fa-arrow-right" aria-hidden="true"></i>'; }
                   showQuoteError(prepError instanceof Error ? prepError.message : 'One of your photos could not be prepared. Please try a different image.');
                   return;
               }
@@ -199,7 +199,7 @@
                   if (success) success.classList.remove('hidden');
               })
               .catch(function () {
-                  if (btn) { btn.disabled = false; btn.innerHTML = 'Get My Free Quote <i class="fas fa-arrow-right" aria-hidden="true"></i>'; }
+                  if (btn) { btn.disabled = false; btn.innerHTML = 'Get My Free Estimate <i class="fas fa-arrow-right" aria-hidden="true"></i>'; }
                   // Inline status banner keeps the visitor on the page and is
                   // reachable with the keyboard, where a native alert() is
                   // blocking and dismissable-only.

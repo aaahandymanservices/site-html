@@ -173,7 +173,7 @@ function costGuideSection(service) {
                 <div class="text-center mb-8">
                     <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm">Cost Guide</div>
                     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">Understanding Gutter Cleaning Costs in Southeast Michigan</h2>
-                    <p class="mt-3 text-gray-600 max-w-3xl mx-auto">Gutter cleaning is priced a few different ways across the metro Detroit area. Here is how the common models compare so you know what a fair quote looks like, and how our own <a href="/rates" class="text-red-600 font-semibold underline underline-offset-2">transparent flat rates</a> stack up.</p>
+                    <p class="mt-3 text-gray-600 max-w-3xl mx-auto">Gutter cleaning is priced a few different ways across the metro Detroit area. Here is how the common models compare so you know what a fair estimate looks like, and how our own <a href="/rates" class="text-red-600 font-semibold underline underline-offset-2">transparent flat rates</a> stack up.</p>
                 </div>
 
                 <!-- Linear foot pricing model -->
@@ -221,7 +221,7 @@ function costGuideSection(service) {
                             <p class="text-sm text-gray-600">Mesh or surface-tension guards that must be unscrewed and re-secured to clean underneath add labor time, and usually increase the cost.</p>
                         </div>
                     </div>
-                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: rather than charging by the foot, we quote a flat rate up front, then bill continuous labor at <strong>$70/hour</strong> in quarter-hour increments for anything beyond a standard clean. You will always know the price before we start. Prefer an instant quote? <a href="/ai-estimate" class="text-red-600 font-semibold underline underline-offset-2">Try our AI Repair Estimator</a>.</p>
+                    <p class="mt-5 text-sm text-gray-500 text-center max-w-3xl mx-auto"><i class="fas fa-circle-info text-red-600 mr-1" aria-hidden="true"></i> AAA Handyman keeps it simple: rather than charging by the foot, we estimate a flat rate up front, then bill continuous labor at <strong>$70/hour</strong> in quarter-hour increments for anything beyond a standard clean. You will always know the price before we start. Prefer an instant estimate? <a href="/ai-estimate" class="text-red-600 font-semibold underline underline-offset-2">Try our AI Repair Estimator</a>.</p>
                 </div>
             </div>
 `;
@@ -236,7 +236,7 @@ function powerWashingCostGuide() {
                 <div class="text-center mb-8">
                     <div class="uppercase text-blue-600 font-semibold tracking-widest text-sm">Cost Guide</div>
                     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-blue-900">Understanding Power Washing Costs in Southeast Michigan</h2>
-                    <p class="mt-3 text-gray-600 max-w-3xl mx-auto">Power washing is priced a few different ways across the metro Detroit area, and most pros quote by the square foot. Here is how the common models compare so you know what a fair quote looks like, and how our own <a href="/rates" class="text-red-600 font-semibold underline underline-offset-2">transparent flat rates</a> stack up.</p>
+                    <p class="mt-3 text-gray-600 max-w-3xl mx-auto">Power washing is priced a few different ways across the metro Detroit area, and most pros estimate by the square foot. Here is how the common models compare so you know what a fair estimate looks like, and how our own <a href="/rates" class="text-red-600 font-semibold underline underline-offset-2">transparent flat rates</a> stack up.</p>
                 </div>
 
                 <!-- Per-square-foot pricing model -->
@@ -406,7 +406,7 @@ ${getUnifiedNav('services')}
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="/book?service=${enc(service.formService)}" class="btn-craftsman text-base px-6 py-3.5 rounded-xl shadow-lg">
-                    <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Get a Free Quote
+                    <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Get a Free Estimate
                 </a>
                 <a href="tel:${PHONE_TEL}" class="aaa-btn bg-slate-900/90 hover:bg-slate-900 text-white font-bold text-base px-6 py-3.5 rounded-xl border border-red-500/40 hover:border-red-500 shadow-lg transition flex items-center justify-center gap-2">
                     <i class="fas fa-phone text-emerald-400" aria-hidden="true"></i> Call Now! ${PHONE_DISPLAY}
@@ -520,7 +520,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
             <!-- CTA band -->
             <div class="max-w-5xl mx-auto mt-14 sm:mt-20 text-center bg-blue-900 text-white py-12 px-8 sm:py-16 sm:px-16 rounded-3xl">
                 <p class="text-xl sm:text-2xl md:text-3xl font-medium">Ready for ${esc(displayName.toLowerCase())}?</p>
-                <p class="mt-4 text-base sm:text-lg opacity-90">Call for availability and same-week scheduling, or request a free quote online. No job too small.</p>
+                <p class="mt-4 text-base sm:text-lg opacity-90">Call for availability and same-week scheduling, or request a free estimate online. No job too small.</p>
                 <div class="mt-8 flex flex-wrap justify-center gap-4">
                     <a href="tel:${PHONE_TEL}" class="aaa-btn inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-green-600/30">
                         <i class="fas fa-phone" aria-hidden="true"></i> ${PHONE_DISPLAY}

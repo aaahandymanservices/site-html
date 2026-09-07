@@ -165,8 +165,16 @@
  * contact-page.js changed behind unchanged pathnames, so this bump and the
  * matching CACHE_VERSION move in public/sw.js refetch them for returning
  * visitors.
+ *
+ * 20260906a — word swap: visitor-facing copy now says "estimate" instead of
+ * "quote" on every page, in the shared scripts' error/status messages, in the
+ * quote-tasks data file's chat prompts, and in the chat assistant's system
+ * prompt (the generated site-knowledge module). Page markup and scripts
+ * changed behind unchanged pathnames, so this bump (plus the matching
+ * CACHE_VERSION move in public/sw.js, which also changed here) refetches them
+ * for returning visitors.
  */
-export const ASSET_VERSION = '20260905b';
+export const ASSET_VERSION = '20260906a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use

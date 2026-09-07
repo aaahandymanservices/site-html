@@ -239,7 +239,7 @@
       "slug": "installation",
       "icon": "fa-screwdriver-wrench",
       "category": "installation",
-      "formService": "General Estimate / Quote",
+      "formService": "General Estimate",
       "tagline": "Mounted, anchored, and ready to go, with clean, code-conscious installs.",
       "intro": [
         "Mounted, anchored, and ready to go. Whatever needs putting up or putting in, we handle it with clean, code-conscious installation you can rely on.",
@@ -261,7 +261,7 @@
       "slug": "furniture-assembly",
       "icon": "fa-couch",
       "category": "installation",
-      "formService": "General Estimate / Quote",
+      "formService": "General Estimate",
       "tagline": "Flat-pack, brand-name, and outdoor pieces built sturdy and ready to use.",
       "intro": [
         "Assembled right, the first time. Skip the confusing instructions and leftover parts. We put together flat-pack, brand-name, and outdoor pieces so they are sturdy, safe, and ready to use.",
@@ -283,7 +283,7 @@
       "slug": "garage-storage",
       "icon": "fa-warehouse",
       "category": "installation",
-      "formService": "General Estimate / Quote",
+      "formService": "General Estimate",
       "tagline": "Turn a cluttered garage into organized, usable square footage.",
       "intro": [
         "Reclaim your space. Turn a cluttered garage into organized, usable square footage. We install shelving, overhead racks, and wall storage so everything has its place, and you get your floor back.",
@@ -372,7 +372,7 @@
       "slug": "projects-for-pets",
       "icon": "fa-dog",
       "category": "exterior",
-      "formService": "General Estimate / Quote",
+      "formService": "General Estimate",
       "tagline": "Safe, convenient spaces for your four-legged family members.",
       "intro": [
         "Thoughtful projects for your whole family, pets included. From secure fencing to dog doors and trim repair, we create safe, convenient spaces for your four-legged friends.",
@@ -394,7 +394,7 @@
       "slug": "home-repair-upkeep",
       "icon": "fa-house-chimney",
       "category": "maintenance",
-      "formService": "General Estimate / Quote",
+      "formService": "General Estimate",
       "tagline": "Ongoing repairs and upkeep that protect your home's comfort and value.",
       "intro": [
         "Keep every room in peak condition. From the laundry room to the kitchen, bath, and exterior, we tackle the ongoing repairs and upkeep that protect your home's comfort and value.",
@@ -482,7 +482,7 @@
       "slug": "home-security",
       "icon": "fa-shield-halved",
       "category": "electrical",
-      "formService": "General Estimate / Quote",
+      "formService": "General Estimate",
       "tagline": "Peace of mind, professionally installed, day and night.",
       "intro": [
         "Peace of mind, professionally installed. From smart devices to security hardware, we set up the products that make your home safer and more convenient, day and night.",
@@ -504,7 +504,7 @@
       "slug": "commercial",
       "icon": "fa-building",
       "category": "commercial",
-      "formService": "General Estimate / Quote",
+      "formService": "General Estimate",
       "tagline": "Reliable interior and exterior help that keeps your business running smoothly.",
       "intro": [
         "Reliable help for your business, too. We keep commercial properties looking sharp and running smoothly with dependable interior and exterior services.",
@@ -526,7 +526,7 @@
       "slug": "cabinet-hardware",
       "icon": "fa-grip-lines",
       "category": "interior",
-      "formService": "General Estimate / Quote",
+      "formService": "General Estimate",
       "tagline": "Doors that line up, hardware that lasts. We swap knobs and pulls, upgrade to soft-close hinges, and re-align sagging doors and sticky drawers for a like-new kitchen or bath.",
       "intro": [
         "Doors that line up, hardware that lasts. We swap knobs and pulls, upgrade to soft-close hinges, and re-align sagging doors and sticky drawers for a like-new kitchen or bath.",
@@ -570,7 +570,7 @@
       "slug": "screen-repair",
       "icon": "fa-window-restore",
       "category": "interior",
-      "formService": "General Estimate / Quote",
+      "formService": "General Estimate",
       "tagline": "Let the breeze in, keep the bugs out. Torn, sagging, or ill-fitting screens are an easy fix — we rescreen windows and patio doors and custom-build frames that fit like new.",
       "intro": [
         "Let the breeze in, keep the bugs out. Torn, sagging, or ill-fitting screens are an easy fix — we rescreen windows and patio doors and custom-build frames that fit like new.",
@@ -614,7 +614,7 @@
       "slug": "window-coverings",
       "icon": "fa-sign-hanging",
       "category": "installation",
-      "formService": "General Estimate / Quote",
+      "formService": "General Estimate",
       "tagline": "Hung level, anchored solid, ready to enjoy. From blinds and drapery hardware to heavy mirrors and gallery walls, we mount it securely into studs — no tilting, no bowing, no surprises.",
       "intro": [
         "Hung level, anchored solid, ready to enjoy. From blinds and drapery hardware to heavy mirrors and gallery walls, we mount it securely into studs — no tilting, no bowing, no surprises.",
