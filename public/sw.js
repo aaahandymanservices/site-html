@@ -410,7 +410,13 @@
 // page HTML and contact-page.js changed behind unchanged pathnames, so a
 // returning visitor holding v74 would otherwise keep quoting the removed
 // menu prices. This bump evicts the old shell and assets for every client.
-const CACHE_VERSION = 'v75';
+// v76 swaps the word "quote" for "estimate" in visitor-facing copy across
+// every page, script, data file, and the chat assistant's system prompt.
+// Every page's HTML and four shared scripts changed behind unchanged
+// pathnames. A stamp move in scripts/asset-version.mjs alone would cover the
+// scripts, but sw.js itself changed here, so this bump evicts the old shell
+// and assets for every client.
+const CACHE_VERSION = 'v76';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

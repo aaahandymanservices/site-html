@@ -74,7 +74,7 @@
             '</div>' +
             '<ul id="quote-lines" class="mt-5 space-y-2 text-sm border-t border-white/15 pt-4 hidden"></ul>' +
             '<div class="mt-6 space-y-3">' +
-              '<a id="quote-book" href="/book?service=General%20Estimate%20%2F%20Quote" class="aaa-btn flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3.5 rounded-xl transition shadow-lg">' +
+              '<a id="quote-book" href="/book?service=General%20Estimate" class="aaa-btn flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3.5 rounded-xl transition shadow-lg">' +
                 '<i class="fas fa-calendar-check" aria-hidden="true"></i> Book these tasks</a>' +
               '<a href="/ai-estimate" class="aaa-btn flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 border border-red-500/40 text-white font-bold px-5 py-3 rounded-xl transition shadow-md">' +
                 '<i class="fas fa-camera text-red-400" aria-hidden="true"></i> Snap photo for AI estimate</a>' +
@@ -82,7 +82,7 @@
                 '<i class="fas fa-phone" aria-hidden="true"></i> Call (248) 385-3432</a>' +
             '</div>' +
           '</div>' +
-          '<p class="text-xs text-gray-500 leading-relaxed mt-4">Estimates use our standard flat-rate menu and are not a binding quote. Booking several tasks in one visit usually costs <strong>less</strong> than the total shown, because you only pay one trip charge. Labor only &mdash; materials billed separately. Your final price is always confirmed free, upfront.</p>' +
+          '<p class="text-xs text-gray-500 leading-relaxed mt-4">Estimates use our standard flat-rate menu and are not a binding estimate. Booking several tasks in one visit usually costs <strong>less</strong> than the total shown, because you only pay one trip charge. Labor only &mdash; materials billed separately. Your final price is always confirmed free, upfront.</p>' +
         '</div>' +
       '</div>';
   };
@@ -183,9 +183,9 @@
     // Update the booking deep-link with the selected tasks as notes.
     const bookLink = root.querySelector('#quote-book');
     const params = new URLSearchParams();
-    params.set('service', 'General Estimate / Quote');
+    params.set('service', 'General Estimate');
     if (chosen.length) {
-      const notes = 'Instant quote request (' + state.zoneLabels[state.zone] + '):\n' +
+      const notes = 'Instant estimate request (' + state.zoneLabels[state.zone] + '):\n' +
         chosen.map((t) => '- ' + t.name + ' (' + money(priceFor(t)) + ')').join('\n') +
         '\nEstimated total: ' + money(total);
       params.set('notes', notes);

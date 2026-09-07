@@ -2,7 +2,7 @@
   "id": "/",
   "name": "AAA Handyman Services LLC",
   "short_name": "AAA Handyman",
-  "description": "Trusted local handyman and home repair services across Waterford and Oakland County, Michigan. Book a visit, check rates, or get an instant quote estimate.",
+  "description": "Trusted local handyman and home repair services across Waterford and Oakland County, Michigan. Book a visit, check rates, or get an instant estimate.",
   "lang": "en-US",
   "dir": "ltr",
   "start_url": "/",
@@ -48,7 +48,7 @@
       "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
-      "name": "Rates & instant quote",
+      "name": "Rates & instant estimate",
       "short_name": "Rates",
       "description": "See hourly rates and estimate a job",
       "url": "/rates",

@@ -632,7 +632,7 @@
       '<p class="text-sm text-blue-200 mt-1">' +
         escapeHtml(
           estimate.customerNextStep ||
-            'Click "Submit Quote" below to send this AI assessment to our human dispatch team for final confirmation, or call us at (248) 385-3432.',
+            'Click "Submit Estimate" below to send this AI assessment to our human dispatch team for final confirmation, or call us at (248) 385-3432.',
         ) +
         '</p>',
     );
@@ -767,7 +767,7 @@
 
         const res = await fetch('/api/ai-estimate', { method: 'POST', body: fd });
         const data = await readJson(res);
-        if (!res.ok || !data) throw requestFailure(res, data, 'We couldn’t send your quote.');
+        if (!res.ok || !data) throw requestFailure(res, data, 'We couldn’t send your estimate.');
 
         submitSuccess.classList.remove('hidden');
         submitSuccess.innerHTML =
@@ -777,7 +777,7 @@
         submitBtn.removeAttribute('aria-busy');
         submitSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } catch (err) {
-        showSubmitError(err.message || 'Something went wrong sending your quote.');
+        showSubmitError(err.message || 'Something went wrong sending your estimate.');
         submitBtn.disabled = false;
         submitBtn.removeAttribute('aria-busy');
       }

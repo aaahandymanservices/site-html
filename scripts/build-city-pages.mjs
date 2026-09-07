@@ -59,7 +59,7 @@ const POPULAR_SERVICES = [
 
 const bySlug = Object.fromEntries(DATA.cities.map((c) => [c.slug, c]));
 const enc = (s) => encodeURIComponent(s);
-const quoteHref = (city) => `/contact?service=General+Estimate+%2F+Quote&amp;city=${enc(city)}`;
+const quoteHref = (city) => `/contact?service=General+Estimate&amp;city=${enc(city)}`;
 const cleanHtml = (html) => html.replace(/<!--[\s\S]*?-->/g, '').replace(/\n\s*\n/g, '\n');
 
 function cityFaq(city) {
@@ -271,8 +271,8 @@ ${getUnifiedNav('service-areas')}
                 Trusted, locally owned home repair and maintenance for ${esc(city.name)} homeowners. No job too small &mdash; backed by our 1-Year Workmanship Guarantee and honest, upfront pricing.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="/book?service=General+Estimate+%2F+Quote&amp;city=${enc(city.name)}" class="btn-craftsman text-base px-6 py-3.5 rounded-xl shadow-lg">
-                    <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Get a Free Quote
+                <a href="/book?service=General+Estimate&amp;city=${enc(city.name)}" class="btn-craftsman text-base px-6 py-3.5 rounded-xl shadow-lg">
+                    <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online / Get a Free Estimate
                 </a>
                 <a href="tel:${PHONE_TEL}" class="aaa-btn bg-slate-900/90 hover:bg-slate-900 text-white font-bold text-base px-6 py-3.5 rounded-xl border border-red-500/40 hover:border-red-500 shadow-lg transition flex items-center justify-center gap-2">
                     <i class="fas fa-phone text-emerald-400" aria-hidden="true"></i> Call Now! ${PHONE_DISPLAY}
@@ -352,12 +352,12 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
             <!-- CTA band -->
             <div class="max-w-5xl mx-auto mt-14 sm:mt-20 text-center bg-blue-900 text-white py-12 px-8 sm:py-16 sm:px-16 rounded-3xl">
                 <p class="text-xl sm:text-2xl md:text-3xl font-medium">Need a handyman in ${esc(city.name)}?</p>
-                <p class="mt-4 text-base sm:text-lg opacity-90">Call for availability and same-week scheduling, or request a free quote online. No job too small.</p>
+                <p class="mt-4 text-base sm:text-lg opacity-90">Call for availability and same-week scheduling, or request a free estimate online. No job too small.</p>
                 <div class="mt-8 flex flex-wrap justify-center gap-4">
                     <a href="tel:${PHONE_TEL}" class="aaa-btn inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-green-600/30">
                         <i class="fas fa-phone" aria-hidden="true"></i> ${PHONE_DISPLAY}
                     </a>
-                    <a href="/book?service=General+Estimate+%2F+Quote&amp;city=${enc(city.name)}" class="aaa-btn inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/30">
+                    <a href="/book?service=General+Estimate&amp;city=${enc(city.name)}" class="aaa-btn inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/30">
                         <i class="fas fa-calendar-check" aria-hidden="true"></i> Book Online Now
                     </a>
                     <a href="/ai-estimate" class="aaa-btn inline-flex items-center gap-2 bg-slate-950/90 hover:bg-slate-900 border border-red-500/50 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg hover:shadow-red-600/20">
@@ -402,7 +402,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
                         <li><a href="mailto:contact@aaahandyman.services" class="inline-flex items-center gap-3 hover:text-white transition break-all"><i class="fas fa-envelope text-blue-500 w-4 text-center" aria-hidden="true"></i>contact@aaahandyman.services</a></li>
                         <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-red-500 w-4 text-center" aria-hidden="true"></i>Serving ${esc(city.name)} &middot; Oakland County, MI</li>
                     </ul>
-                    <a href="/book?service=General+Estimate+%2F+Quote&amp;city=${enc(city.name)}" data-plain-booking-link class="mt-5 inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
+                    <a href="/book?service=General+Estimate&amp;city=${enc(city.name)}" data-plain-booking-link class="mt-5 inline-flex items-center gap-3 hover:text-white transition"><i class="fas fa-calendar-check" aria-hidden="true"></i>Book Online Now</a>
                 </div>
             </div>
 

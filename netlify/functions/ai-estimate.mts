@@ -356,7 +356,7 @@ function renderEstimateText(input: {
   lines.push("**Customer Next Step:**");
   lines.push(
     customerNextStep ||
-      "Click \"Submit Quote\" to send this AI assessment to our human dispatch team for final confirmation, or call us at (248) 385-3432.",
+      "Click \"Submit Estimate\" to send this AI assessment to our human dispatch team for final confirmation, or call us at (248) 385-3432.",
   );
 
   return lines.join("\n");

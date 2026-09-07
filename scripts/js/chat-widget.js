@@ -145,7 +145,7 @@
         '<button type="button" class="aaa-chat-prompt" data-question="What handyman services do you offer?">What services do you offer?</button>' +
         '<button type="button" class="aaa-chat-prompt" data-question="How can I get an instant AI estimate?">How do I get an AI estimate?</button>' +
         '<button type="button" class="aaa-chat-prompt" data-question="Do you serve my area?">Do you serve my area?</button>' +
-        '<button type="button" class="aaa-chat-prompt" data-question="How can I get a quote for my project?">How do I get a quote?</button>' +
+        '<button type="button" class="aaa-chat-prompt" data-question="How can I get an estimate for my project?">How do I get an estimate?</button>' +
       '</div>' +
     '</div>' +
     '<div class="aaa-chat-emoji-bar" id="aaa-chat-emoji-bar" hidden aria-label="Handyman emojis">' +
@@ -183,7 +183,7 @@
   var promptList = panel.querySelector(".aaa-chat-prompts-list");
   var promptButtons = panel.querySelectorAll(".aaa-chat-prompt");
 
-  var GREETING = "Hi! 👋 I'm the AAA Handyman Services LLC assistant. Ask me about our services, the areas we cover, or how to get a quote.";
+  var GREETING = "Hi! 👋 I'm the AAA Handyman Services LLC assistant. Ask me about our services, the areas we cover, or how to get an estimate.";
   function hideExistingFloating() {
     // Hide static (noscript) floating CTAs baked into the markup.
     var els = document.querySelectorAll(".fixed.bottom-5.right-5, [class*='fixed'][class*='bottom-5'][class*='right-5']");
