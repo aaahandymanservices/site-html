@@ -173,8 +173,15 @@
  * changed behind unchanged pathnames, so this bump (plus the matching
  * CACHE_VERSION move in public/sw.js, which also changed here) refetches them
  * for returning visitors.
+ *
+ * 20260907a — city page architecture: 35 thin /handyman/* pages pruned with
+ * 301 redirects to /service-areas, 12 primary-area pages rewritten with
+ * original local content, and crawlable city indexes added to the home and
+ * service-areas pages. Page markup changed site-wide (new index blocks and
+ * the city-page template refresh), so this bump and the matching
+ * CACHE_VERSION move in public/sw.js refetch them for returning visitors.
  */
-export const ASSET_VERSION = '20260906a';
+export const ASSET_VERSION = '20260907a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use

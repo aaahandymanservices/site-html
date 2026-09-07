@@ -416,7 +416,7 @@
 // pathnames. A stamp move in scripts/asset-version.mjs alone would cover the
 // scripts, but sw.js itself changed here, so this bump evicts the old shell
 // and assets for every client.
-const CACHE_VERSION = 'v76';
+const CACHE_VERSION = 'v77';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

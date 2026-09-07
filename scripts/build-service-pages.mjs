@@ -144,19 +144,40 @@ function relatedCard(s) {
                 </a>`;
 }
 
+// Only the primary service areas carry landing pages; every other community
+// we serve has no /handyman/<slug> URL (it 301s to /service-areas), so the
+// link list and the contextual sentence must draw from the flagged subset.
+let serviceIndex = 0;
+
 function serviceAreasSection(service) {
-  if (!CITIES_LIST.length) return '';
-  const links = CITIES_LIST
+  const landingCities = CITIES_LIST.filter((c) => c.landing === true);
+  if (!landingCities.length) return '';
+  // Rotate the highlighted trio by service so each page links a slightly
+  // different mix of city pages, with our home base always first.
+  const offset = serviceIndex % landingCities.length;
+  const [first, second, third] = [
+    landingCities[0],
+    landingCities[1 + (offset % (landingCities.length - 1))],
+    landingCities[1 + ((offset + 4) % (landingCities.length - 1))]
+  ];
+  const serviceName = service.name.toLowerCase();
+  const contextualLinks = [
+    `<a href="/handyman/${esc(first.slug)}" class="text-red-600 font-semibold underline underline-offset-2 hover:text-red-700">${esc(serviceName)} in ${esc(first.name)}</a>`,
+    `<a href="/handyman/${esc(second.slug)}" class="text-red-600 font-semibold underline underline-offset-2 hover:text-red-700">${esc(serviceName)} in ${esc(second.name)}</a>`,
+    `<a href="/handyman/${esc(third.slug)}" class="text-red-600 font-semibold underline underline-offset-2 hover:text-red-700">${esc(serviceName)} in ${esc(third.name)}</a>`
+  ].join(', ');
+  const links = landingCities
     .map((c) => `<a href="/handyman/${esc(c.slug)}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-xl transition border border-gray-200 text-sm font-semibold text-gray-800"><i class="fas fa-map-marker-alt text-red-500 text-xs" aria-hidden="true"></i> ${esc(c.name)}</a>`)
     .join('\n                    ');
   return `
             <!-- Service Area locations: internal links for discovery + local SEO -->
             <div class="max-w-5xl mx-auto mt-12 sm:mt-16 border-t border-gray-200 pt-10">
                 <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 text-center mb-6">Our ${esc(service.name)} Service Area</h2>
-                <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">We provide expert ${esc(service.name.toLowerCase())} in the following Oakland County, Michigan communities:</p>
+                <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">We provide expert ${esc(service.name.toLowerCase())} across Oakland County, Michigan &mdash; including ${contextualLinks}. Explore every primary community we serve:</p>
                 <div class="flex flex-wrap justify-center gap-2.5">
                     ${links}
                 </div>
+                <p class="text-center text-sm text-gray-500 mt-6">We serve all of Oakland County &mdash; see the <a href="/service-areas" class="text-red-600 font-semibold underline underline-offset-2 hover:text-red-700">full list of covered cities and ZIP codes</a>.</p>
             </div>`;
 }
 
@@ -602,6 +623,7 @@ ${faqs.map((f) => `                    <article class="bg-white border border-sl
 mkdirSync(OUT_DIR, { recursive: true });
 let count = 0;
 for (const service of SERVICES) {
+  serviceIndex += 1;
   const html = cleanHtml(page(service));
   writeFileSync(join(OUT_DIR, `${esc(service.slug)}.html`), html, 'utf8');
   count += 1;

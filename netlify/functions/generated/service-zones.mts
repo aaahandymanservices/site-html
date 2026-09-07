@@ -226,6 +226,12 @@ export const SERVED_ZIPS: Record<string, ServedZip> = {
     "zone": "A",
     "route": "west-corridor"
   },
+  "48320": {
+    "city": "Keego Harbor",
+    "slug": "keego-harbor",
+    "zone": "A",
+    "route": "west-corridor"
+  },
   "48322": {
     "city": "West Bloomfield",
     "slug": "west-bloomfield",

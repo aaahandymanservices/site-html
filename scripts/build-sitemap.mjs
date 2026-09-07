@@ -55,7 +55,10 @@ for (const page of staticPages) {
   </url>`);
 }
 
-for (const city of citiesData.cities) {
+// Only cities with their own landing page are indexable URLs. Every other
+// community in the data file stays served/bookable but has no page of its own;
+// its /handyman/<slug> URL 301s to /service-areas and must not be in the map.
+for (const city of citiesData.cities.filter((c) => c.landing === true)) {
   urls.push(`  <url>
     <loc>${SITE}/handyman/${escapeXml(city.slug)}</loc>
     <lastmod>${currentDate}</lastmod>
