@@ -20,9 +20,9 @@
    * that means a day or a month.
    */
   const CAREERS_SENT_MESSAGE =
-      "Thanks! We've got your application. Victor reviews these personally and will call or email within a few business days.";
+      "Thanks! We've got your application. The owner reviews these personally and will call or email within a few business days.";
   const CAREERS_FAILED_MESSAGE =
-      "Your application didn't go through. Call (248) 385-3432 or email contact@aaahandyman.services and we'll take it down directly.";
+      "Your application didn't go through. Call (248) 385-3432 or email careers@aaahandyman.services and we'll take it down directly.";
 
   if (careersForm) {
       const setCareersStatus = (text, isError) => {
