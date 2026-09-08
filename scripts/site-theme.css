@@ -779,6 +779,16 @@ nav.sticky {
   background-color: #991b1b;
 }
 
+/*
+ * Secondary, neutral outline style for "Try AI Estimator" tool buttons:
+ * transparent background with a 1px current-color border so they read as
+ * tertiary actions next to the solid crimson primary CTAs.
+ */
+.aaa-btn-outline {
+  border: 1px solid currentColor;
+  background: transparent;
+}
+
 /* ---------------------------------------------------------------------------
  * Primary navigation bar.
  *
@@ -2111,6 +2121,31 @@ a[href^="mailto:"] {
   }
 }
 
+/*
+ * The 4-Hour and 6-Hour package cards on the home page share one two-column
+ * grid on tablet+ screens so they read as a single side-by-side block instead
+ * of two stacked sections. The wide variant (the combined "Best value" card,
+ * when present) spans the full row.
+ */
+.pricing-card-row--packages {
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.pricing-card-row--packages .service-card {
+  height: 100%;
+}
+
+@media (min-width: 640px) {
+  .pricing-card-row--packages {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pricing-card-row--packages .service-card--wide {
+    grid-column: 1 / -1;
+  }
+}
+
 .plan-card {
   position: relative;
   display: flex;
@@ -2599,6 +2634,124 @@ a[href^="mailto:"] {
   background: #fff7ed;
   color: #9a3412;
   border-color: #fed7aa;
+}
+
+/*
+ * "View all Zone B extended travel cities" accordion. A native <details>
+ * element styled to match the gold-tinted Zone B card; the summary row keeps
+ * the site-standard crimson focus ring.
+ */
+.zone-cities-accordion {
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  background-color: rgba(212, 175, 55, 0.12);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.zone-cities-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #7c5a08;
+}
+
+.zone-cities-summary::-webkit-details-marker {
+  display: none;
+}
+
+.zone-cities-summary__chevron {
+  flex-shrink: 0;
+  color: #8a6508;
+  transition: transform 0.2s ease;
+}
+
+.zone-cities-accordion[open] .zone-cities-summary__chevron {
+  transform: rotate(180deg);
+}
+
+.zone-cities-summary:hover {
+  background-color: rgba(212, 175, 55, 0.18);
+}
+
+.zone-cities-summary:focus-visible {
+  outline: 2px solid var(--brand-crimson);
+  outline-offset: 2px;
+}
+
+/*
+ * "Handyman Services in Your City" jump menu. The native <select> navigates
+ * on change (site.js), so the visual field wraps the control plus a crimson
+ * Go button that keeps the form usable without JS-driven navigation.
+ */
+.city-jump-form {
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+.city-jump-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.45rem 0.45rem 0.45rem 1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 1rem;
+  background: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.city-jump-field:focus-within {
+  border-color: var(--brand-crimson);
+}
+
+.city-jump-select {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: #1f2937;
+  padding: 0.5rem 0.25rem;
+  cursor: pointer;
+}
+
+.city-jump-select:focus {
+  outline: none;
+}
+
+.city-jump-select:focus-visible {
+  outline: 2px solid var(--brand-crimson);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+.city-jump-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.65rem;
+  background: #b91c1c;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.city-jump-btn:hover {
+  background: #991b1b;
 }
 
 /* The tinted footnote box, e.g. Zone B's extended-travel differential. */

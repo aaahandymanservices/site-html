@@ -345,4 +345,25 @@
     }, 100));
   }
 
+  // --- City jump menu: navigate on change or on Go ---
+  // The 12 city links under "Handyman Services in Your City" collapse into a
+  // single native <select>. Navigation fires on change so no submit round-trip
+  // is needed; the Go button (type=submit) covers keyboard users whose browsers
+  // don't fire change before Enter, and the submit handler prevents the actual
+  // page reload.
+  const cityJumpSelect = document.getElementById('city-jump-select');
+  if (cityJumpSelect) {
+    cityJumpSelect.addEventListener('change', function () {
+      const target = cityJumpSelect.value;
+      if (target) window.location.href = target;
+    });
+    const jumpForm = cityJumpSelect.closest('form');
+    if (jumpForm) {
+      jumpForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (cityJumpSelect.value) window.location.href = cityJumpSelect.value;
+      });
+    }
+  }
+
 })();

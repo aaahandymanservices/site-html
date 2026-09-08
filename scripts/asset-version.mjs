@@ -180,8 +180,17 @@
  * service-areas pages. Page markup changed site-wide (new index blocks and
  * the city-page template refresh), so this bump and the matching
  * CACHE_VERSION move in public/sw.js refetch them for returning visitors.
+ *
+ * 20260908a — homepage UX pass: the 4-Hour and 6-Hour package cards share one
+ * two-column grid, the Zone B city list moved into a native <details>
+ * accordion, and the 12 city links under "Handyman Services in Your City"
+ * collapsed into a single <select> jump menu wired through site.js. Home page
+ * markup and the theme stylesheet changed (new zone-accordion, city-jump, and
+ * outline-button rules; new --packages grid variant), so this bump and the
+ * matching CACHE_VERSION move in public/sw.js refetch them for returning
+ * visitors.
  */
-export const ASSET_VERSION = '20260907a';
+export const ASSET_VERSION = '20260908a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use

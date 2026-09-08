@@ -416,7 +416,12 @@
 // pathnames. A stamp move in scripts/asset-version.mjs alone would cover the
 // scripts, but sw.js itself changed here, so this bump evicts the old shell
 // and assets for every client.
-const CACHE_VERSION = 'v77';
+// v77 — homepage UX pass: the 4-Hour/6-Hour package cards share one grid, the
+// Zone B city list folded into a <details> accordion, the 12 city links
+// collapsed into a single <select> jump menu, and the contact form lost its
+// city field. Home page markup, the theme stylesheet, and site.js all changed,
+// so this bump evicts the old shell and assets for every client.
+const CACHE_VERSION = 'v78';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
