@@ -15,7 +15,7 @@ import { escapeHtml } from './html-escape.mjs';
  * New customer promotion banner, rendered at the very top of the page (above
  * the sticky header) on every page except the legal pages (Terms and Privacy).
  *
- * The offer is a $50 gift certificate toward a new customer's next service. The
+ * The offer is a $50 loyalty credit applicable toward a follow-up service call. The
  * CTA scrolls to the booking form on the current page when it is present, or
  * navigates to /book otherwise. Its stylesheet lives in
  * scripts/tailwind-input.css, which is render-blocking, so the bar paints with
@@ -44,9 +44,9 @@ export function getNewCustomerBanner({ ctaHref = '/book' } = {}) {
     <div class="new-customer-banner__inner">
         <p class="new-customer-banner__copy">
             <span class="new-customer-banner__icon" aria-hidden="true">🎁</span>
-            <span><strong class="new-customer-banner__lead">New Customer Special:</strong> Receive a <strong class="new-customer-banner__amount">$50 gift certificate</strong> toward your next service!</span>
+            <span><strong class="new-customer-banner__lead">New Customer Special:</strong> Receive a <strong class="new-customer-banner__amount">$50 loyalty credit</strong> applicable toward a follow-up service call!</span>
         </p>
-        <a class="new-customer-banner__cta" href="${href}" data-ncb-cta>Claim My $50 Gift<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
+        <a class="new-customer-banner__cta" href="${href}" data-ncb-cta>Claim My $50 Loyalty Credit<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"></path></svg></a>
     </div>
 </aside>`;
 }
