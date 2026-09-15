@@ -166,10 +166,10 @@
         {
           "id": "gutter-cleaning",
           "name": "Gutter Cleaning",
-          "desc": "Debris removal, downspout clearing, and flow testing (up to 145 linear feet, single-story).",
+          "desc": "Debris removal, downspout clearing, and flow testing (per 100 linear feet, single-story).",
           "hours": 1.5,
-          "a": 135,
-          "b": 180
+          "a": 175,
+          "b": 220
         },
         {
           "id": "power-washing",
