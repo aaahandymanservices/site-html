@@ -189,8 +189,17 @@
  * outline-button rules; new --packages grid variant), so this bump and the
  * matching CACHE_VERSION move in public/sw.js refetch them for returning
  * visitors.
+ *
+ * 20260909a — pricing packages row relaid out as flexbox: the home page's
+ * three pricing cards (4-Hour, 6-Hour, Maintenance Membership) now share one
+ * non-wrapping flex row on desktop (equal widths, equal heights, consistent
+ * 1.5rem gap) and a single stacked column on mobile, replacing the
+ * --packages two-column grid variant whose flex-wrap baseline wrapped the
+ * three cards onto multiple lines. The unused .service-card--wide span
+ * override left with it. site-theme.css changed behind its unchanged
+ * pathname, so this bump refetches the stylesheet for returning visitors.
  */
-export const ASSET_VERSION = '20260908a';
+export const ASSET_VERSION = '20260909a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use

@@ -421,7 +421,13 @@
 // collapsed into a single <select> jump menu, and the contact form lost its
 // city field. Home page markup, the theme stylesheet, and site.js all changed,
 // so this bump evicts the old shell and assets for every client.
-const CACHE_VERSION = 'v78';
+// v79 — the home page's three pricing cards (4-Hour, 6-Hour, Maintenance
+// Membership) now share one non-wrapping flex row on desktop and a single
+// stacked column on mobile. The theme stylesheet changed behind its unchanged
+// pathname, so a returning visitor holding v78 would keep last deploy's
+// stylesheet for another year. This bump evicts the old shell and asset
+// caches for every client.
+const CACHE_VERSION = 'v79';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

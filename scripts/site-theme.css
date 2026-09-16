@@ -2122,27 +2122,52 @@ a[href^="mailto:"] {
 }
 
 /*
- * The 4-Hour and 6-Hour package cards on the home page share one two-column
- * grid on tablet+ screens so they read as a single side-by-side block instead
- * of two stacked sections. The wide variant (the combined "Best value" card,
- * when present) spans the full row.
+ * The 4-Hour and 6-Hour package cards on the home page (the
+ * `pricing-card-row--packages` variant) sit side by side in a single flex row
+ * on desktop screens. Unlike the general `.pricing-card-row`, this row always
+ * holds exactly three cards, so a flex row is simpler than a grid: `nowrap`
+ * keeps them all on one line, `flex: 1 1 0` gives every card an equal share of
+ * the row regardless of its content, and `align-items: stretch` (the flex
+ * default) makes the three cards equal in height so their call-to-action
+ * blocks, pinned with `mt-auto` inside each card, line up across the row.
+ *
+ * Mobile reverses to a single stacked column: `flex-direction: column` and
+ * `flex: 1 1 auto` on the cards let each one grow back to its natural content
+ * height, so the widest card no longer drags the other two to that width
+ * (the wrap-and-squeeze problem the retired 2-column tablet grid caused).
+ *
+ * `min-width: 0` mirrors the general row's override of the flex item's
+ * automatic minimum size, so a long unbroken price line or button label
+ * cannot push a card past its equal share and spill the row sideways.
+ *
+ * The retired two-column variant's `.service-card--wide` override (a "best
+ * value" card spanning the full row) is gone with it; no card carries that
+ * class and a flex row has nothing for it to span.
  */
 .pricing-card-row--packages {
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: stretch;
 }
 
-.pricing-card-row--packages .service-card {
-  height: 100%;
+.pricing-card-row--packages > * {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
-@media (min-width: 640px) {
+/* Desktop screens: the three package cards side by side in one row,
+   equal in height, with one consistent gap between them. */
+@media (min-width: 768px) {
   .pricing-card-row--packages {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
   }
 
-  .pricing-card-row--packages .service-card--wide {
-    grid-column: 1 / -1;
+  .pricing-card-row--packages > * {
+    flex: 1 1 0;
+    height: 100%;
   }
 }
 
