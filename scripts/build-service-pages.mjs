@@ -218,7 +218,7 @@ function costGuideSection(service) {
                     </div>
                     <div class="mt-5 flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-2xl p-4">
                         <i class="fas fa-calculator text-blue-600 mt-1" aria-hidden="true"></i>
-                        <p class="text-sm text-gray-700"><strong>Example:</strong> Cleaning 150 linear feet of gutters on a single-story ranch usually runs about <strong>$140 to $185</strong> under this model &mdash; right in line with AAA Handyman's flat <strong>$135 (Zone A) / $180 (Zone B)</strong> gutter-cleaning rate for a comparable home.</p>
+                        <p class="text-sm text-gray-700"><strong>Example:</strong> Cleaning 150 linear feet of gutters on a single-story ranch usually runs about <strong>$140 to $185</strong> under this model &mdash; right in line with AAA Handyman's flat <strong>$170 (Zone A) / $215 (Zone B)</strong> gutter-cleaning rate for a comparable home.</p>
                     </div>
                 </div>
 

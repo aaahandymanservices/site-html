@@ -57,7 +57,7 @@ function aaaTrapDialogFocus(modal) {
           'drywall': {
               title: 'Drywall Repair & Patching',
               category: 'Interior Finishes',
-              price: '$100',
+              price: '$170',
               icon: 'fa-border-all',
               description: 'Seamless wall and ceiling repairs for doorknob dings, cracks, water stains, and drywall cutouts. Meticulously sanded and prepared paint-ready.',
               bullets: [
@@ -72,7 +72,7 @@ function aaaTrapDialogFocus(modal) {
           'doors': {
               title: 'Door Alignment & Repair',
               category: 'Doors & Windows',
-              price: '$100',
+              price: '$170',
               icon: 'fa-door-open',
               description: 'Expert adjustment for doors that stick, rub, or won\'t latch properly. Alignment, hinge shimming, strike plate adjustment, and draft weatherstripping.',
               bullets: [
@@ -87,7 +87,7 @@ function aaaTrapDialogFocus(modal) {
           'plumbing': {
               title: 'Minor Plumbing & Fixture Swap',
               category: 'Plumbing Services',
-              price: '$135',
+              price: '$170',
               icon: 'fa-faucet-drip',
               description: 'Fast, clean replacement of kitchen & bathroom faucets, toilet rebuilds, supply line swaps, and garbage disposal installs.',
               bullets: [
@@ -102,7 +102,7 @@ function aaaTrapDialogFocus(modal) {
           'electrical': {
               title: 'Minor Electrical & Light Swaps',
               category: 'Electrical & Smart Home',
-              price: '$135',
+              price: '$170',
               icon: 'fa-lightbulb',
               description: 'Safe replacement of ceiling fans, light fixtures, wall switches, dimmers, outlets, and smart video doorbells.',
               bullets: [
@@ -117,7 +117,7 @@ function aaaTrapDialogFocus(modal) {
           'carpentry': {
               title: 'Carpentry & Trim Work',
               category: 'Interior & Exterior',
-              price: '$100',
+              price: '$170',
               icon: 'fa-hammer',
               description: 'Precision finish carpentry including baseboards, crown molding, door casings, window trim, and exterior wood rot repairs.',
               bullets: [
@@ -132,7 +132,7 @@ function aaaTrapDialogFocus(modal) {
           'gutters': {
               title: 'Gutter Cleaning & Repairs',
               category: 'Exterior Maintenance',
-              price: '$100',
+              price: '$170',
               icon: 'fa-droplet',
               description: 'Full clearing of leaves and roof debris, downspout flushing, bracket re-securing, and gutter guard installation.',
               bullets: [
@@ -147,7 +147,7 @@ function aaaTrapDialogFocus(modal) {
           'locks': {
               title: 'Smart Locks & Hardware',
               category: 'Home Security',
-              price: '$135',
+              price: '$170',
               icon: 'fa-lock',
               description: 'Upgrade your entry security with keyless electronic smart locks, deadbolts, handlesets, and heavy-duty strike plates.',
               bullets: [
