@@ -190,7 +190,7 @@
         {
           "id": "gutter-guards",
           "name": "Gutter Guard Installation",
-          "desc": "Fitting leaf-guard gutter protection, typically paired with a cleaning (up to 145 linear feet).",
+          "desc": "Fitting leaf-guard gutter protection, typically paired with a cleaning (per 100 linear feet).",
           "hours": 2.5,
           "a": 205,
           "b": 250
