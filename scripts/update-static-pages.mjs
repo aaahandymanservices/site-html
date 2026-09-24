@@ -265,10 +265,10 @@ function optimizeFontsAndAssets(html) {
     ':where(.fa,.fas,.far,.fab,.fa-solid,.fa-regular,.fa-brands){display:inline-block;width:1em;line-height:1;font-style:normal;text-align:center}' +
     // Sticky header chrome.
     '#site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:3px solid #a61f2e;box-shadow:0 6px 22px rgba(27,42,74,.08)}' +
-    // Dark hero / booking section background so its first frame is navy, not
-    // white. Matches .ambient-glow-hero in scripts/site-theme.css.
-    '.ambient-glow-hero,#booking-section.ambient-glow-hero{position:relative;overflow:hidden;min-height:18rem;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
-    '.ambient-glow-hero h1,#booking-section.ambient-glow-hero h1,#top.hero h1{color:#fff}' +
+    // Dark hero background so its first frame is navy, not white.
+    // Matches .ambient-glow-hero in scripts/site-theme.css.
+    '.ambient-glow-hero{position:relative;overflow:hidden;min-height:18rem;background-color:#1b2a4a;background-image:linear-gradient(to right,#101b31 0%,#1b2a4a 50%,#020617 100%);color:#fff}' +
+    '.ambient-glow-hero h1,#top.hero h1{color:#fff}' +
     // Homepage hero: paint the banner photo (not a flat navy gradient) in the
     // first frame, mirroring the .hero media rules in site-theme.css. The
     // gradient stays as the fallback colour layer; the image loads via the
