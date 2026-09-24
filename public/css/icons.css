@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 244 icon names in use.
+ * Generated subset - 246 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -49,6 +49,7 @@
 .fa-tree:before{content:"\f1bb"}
 .fa-sack-dollar:before{content:"\f81d"}
 .fa-edit:before,.fa-pen-to-square:before{content:"\f044"}
+.fa-hourglass-2:before,.fa-hourglass-half:before{content:"\f252"}
 .fa-hand-paper:before,.fa-hand:before{content:"\f256"}
 .fa-plug:before{content:"\f1e6"}
 .fa-stairs:before{content:"\e289"}
