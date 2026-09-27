@@ -5,7 +5,13 @@ import { siteKnowledge } from "./generated/site-knowledge.mjs";
 // Gemini model served through Netlify AI Gateway. The gateway injects the
 // GEMINI_API_KEY / GOOGLE_GEMINI_BASE_URL env vars automatically, so the SDK
 // needs no API key — the default constructor picks everything up at runtime.
-const MODEL = "gemini-3.5-flash";
+//
+// Model choice matters here: the gateway buffers a model's whole answer before
+// relaying it, so the visitor's typing indicator runs until the model finishes
+// generating. gemini-3.5-flash produced 17–21s first-byte times on this site's
+// typical questions; gemini-3.1-flash-lite answers the same prompt set in
+// 1–3s and follows the system prompt's pricing rules just as closely.
+const MODEL = "gemini-3.1-flash-lite";
 
 // Only the most recent messages are forwarded to the model. Trimming the
 // history keeps token usage (and cost) predictable on long conversations.
@@ -202,8 +208,20 @@ export default async (req: Request) => {
             pendingText += text;
             if (pendingText.length > REDACTION_BUFFER_LENGTH) {
               const redacted = redactPersonalName(pendingText);
-              const safeText = redacted.slice(0, -REDACTION_BUFFER_LENGTH);
-              pendingText = redacted.slice(-REDACTION_BUFFER_LENGTH);
+              // Keep at least REDACTION_BUFFER_LENGTH characters buffered, and
+              // never split a surrogate pair at the flush boundary: a lone
+              // high surrogate JSON-escapes as an invalid half (\ud83d) and
+              // renders as garbage in the chat panel.
+              let emitLength = redacted.length - REDACTION_BUFFER_LENGTH;
+              while (
+                emitLength > 0 &&
+                redacted.charCodeAt(emitLength - 1) >= 0xd800 &&
+                redacted.charCodeAt(emitLength - 1) <= 0xdbff
+              ) {
+                emitLength -= 1;
+              }
+              const safeText = redacted.slice(0, emitLength);
+              pendingText = redacted.slice(emitLength);
               if (safeText) {
                 controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text: safeText })}\n\n`));
               }
