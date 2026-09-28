@@ -9,8 +9,8 @@
  * immutable ?v= stamp: fetched once, parsed once, and reused across the whole
  * site.
  *
- * Loaded with `defer`, so none of it competes with the first paint. What could
- * not move is still inline and still has to be: the reCAPTCHA createElement
+ * Loaded after the first paint (see scripts/after-paint.mjs), so none of it
+ * competes with it. What could not move is still inline and still has to be: the reCAPTCHA createElement
  * shim (it has to run before Netlify's injected api.js tag) and the two
  * prepaint guards that hide the promo bar and the gift badge before the first
  * frame.
@@ -25,6 +25,11 @@
   // which showed up as a stale/half-styled frame between navigations. Icons are
   // decorative and their glyph boxes are reserved in the inline critical block,
   // so this swap cannot shift layout. See scripts/update-static-pages.mjs.
+  //
+  // On pages that load this file, scripts/after-paint.mjs now drops that link
+  // and adds icons.css from its <noscript> fallback after the first paint, so
+  // this normally finds nothing. It stays as a fallback for a page that still
+  // ships the media="print" form.
   var deferredStyles = document.querySelectorAll('link[data-deferred-style]');
   for (var styleIndex = 0; styleIndex < deferredStyles.length; styleIndex += 1) {
     deferredStyles[styleIndex].media = 'all';
