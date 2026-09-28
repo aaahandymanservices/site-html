@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { getUnifiedNav } from './unified-nav.mjs';
 import { ASSET_VERSION, ICONS_CSS_VERSION } from './asset-version.mjs';
+import { deferUntilFirstPaint } from './after-paint.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -263,6 +264,22 @@ function optimizeFontsAndAssets(html) {
     // lands. :where() keeps specificity at zero so .icon-tile / explicit
     // sizing still wins.
     ':where(.fa,.fas,.far,.fab,.fa-solid,.fa-regular,.fa-brands){display:inline-block;width:1em;line-height:1;font-style:normal;text-align:center}' +
+    // ...and a line's worth of height. An empty inline-block is zero pixels
+    // tall, so until icons.css supplies the glyph a row made only of icons
+    // (the hero's five rating stars) collapses, and the hero -- whose content
+    // is centred vertically -- moved every line in it when the stars filled
+    // in. A no-break space gives each box one line of height up front;
+    // icons.css replaces it with the glyph (its `.fa-*::before` rules outrank
+    // :where()), so nothing moves when it lands after the first paint.
+    ':where(.fa,.fas,.far,.fab,.fa-solid,.fa-regular,.fa-brands)::before{content:"\\00a0"}' +
+    // The section straight under the hero is always inside the render margin,
+    // so skipping it with content-visibility (site-theme.css) saves nothing --
+    // but on the first layout it stands in at its 48rem guess rather than its
+    // real ~116rem on a phone. That pulled everything below it about 1100px
+    // nearer the viewport, close enough to start the About section's lazy
+    // 800px logo during the load, where Lighthouse counts it against LCP.
+    // Laying it out for real puts the lazy images below it where they are.
+    ':where(body,main)>#how-it-works{content-visibility:visible}' +
     // Sticky header chrome.
     '#site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:3px solid #a61f2e;box-shadow:0 6px 22px rgba(27,42,74,.08)}' +
     // Dark hero background so its first frame is navy, not white.
@@ -500,7 +517,10 @@ function optimizeFontsAndAssets(html) {
     );
   }
 
-  return html;
+  // Last, so it sees every script tag and the icon link in their final form.
+  // Page scripts and icons.css then load after the first paint instead of
+  // alongside it; see scripts/after-paint.mjs for why that matters to LCP.
+  return deferUntilFirstPaint(html);
 }
 
 // 1. Update Navigation on key static pages
