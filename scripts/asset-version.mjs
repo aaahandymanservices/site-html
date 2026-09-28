@@ -198,8 +198,16 @@
  * three cards onto multiple lines. The unused .service-card--wide span
  * override left with it. site-theme.css changed behind its unchanged
  * pathname, so this bump refetches the stylesheet for returning visitors.
+ *
+ * 20260928a — brand webfonts re-cut for the critical path: the four Archivo
+ * and Roboto woff2 files were instanced to the 400-900 weight range the site
+ * actually uses and stripped of TrueType hinting, and now ship under new
+ * *-2026.woff2 names (the two preloaded files fell from 78kB to 61kB).
+ * site-theme.css's @font-face rules point at the new files behind an
+ * unchanged pathname, so this bump and the matching CACHE_VERSION move in
+ * public/sw.js refetch it for returning visitors.
  */
-export const ASSET_VERSION = '20260909a';
+export const ASSET_VERSION = '20260928a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use

@@ -162,10 +162,10 @@ function optimizeFontsAndAssets(html) {
    * `rel="preload"`).
    */
   const FONT_PRELOADS =
-    '    <link rel=preload href=/fonts/archivo-latin.woff2 as=font type=font/woff2 crossorigin>\n' +
-    '    <link rel=preload href=/fonts/roboto-latin.woff2 as=font type=font/woff2 crossorigin>';
-  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/archivo-latin\.woff2["']?[^>]*>\r?\n/gi, '');
-  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?[^>]*>\r?\n/gi, '');
+    '    <link rel=preload href=/fonts/archivo-latin-2026.woff2 as=font type=font/woff2 crossorigin>\n' +
+    '    <link rel=preload href=/fonts/roboto-latin-2026.woff2 as=font type=font/woff2 crossorigin>';
+  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/archivo-latin(?:-2026)?\.woff2["']?[^>]*>\r?\n/gi, '');
+  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin(?:-2026)?\.woff2["']?[^>]*>\r?\n/gi, '');
   html = html.replace(/[ \t]*<link\s+rel=["']?preconnect["']?\s+href=["']?https:\/\/fonts\.(?:googleapis|gstatic)\.com["']?[^>]*>\r?\n/gi, '');
   html = html.replace(
     /(<meta\s+name=["']?viewport["']?\s+content=["']?[^"'>]*["']?>\r?\n)/i,
@@ -187,7 +187,7 @@ function optimizeFontsAndAssets(html) {
     `    <link rel=preload as=image href="${ICON_IMAGE}" type=image/webp fetchpriority=high>`;
   html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?(?:\/\.netlify\/images\?url=\/icon\.jpg|\/images\/icon-96\.webp)[^>]*>\r?\n/gi, '');
   html = html.replace(
-    /(<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
+    /(<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin(?:-2026)?\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
     `$1${ICON_PRELOAD}\n`,
   );
 
@@ -329,7 +329,7 @@ function optimizeFontsAndAssets(html) {
   // second block alongside an already-minified one.
   html = html.replace(/[ \t]*<style\s+id=["']?aaa-critical-palette["']?>[\s\S]*?<\/style>\r?\n?/gi, '');
   html = html.replace(
-    /(<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
+    /(<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin(?:-2026)?\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
     `$1${CRITICAL_PALETTE}\n`,
   );
 
@@ -377,7 +377,7 @@ function optimizeFontsAndAssets(html) {
       '["focusin","click","input","keydown","touchstart"].forEach(function(e){document.addEventListener(e,function h(){flush();document.removeEventListener(e,h,{capture:true})},{once:true,capture:true,passive:true})})}return}oset.call(el,v)},configurable:true,enumerable:true})}return el};' +
       '})()</script>';
     html = html.replace(
-      /(href=["']?\/fonts\/roboto-latin\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
+      /(href=["']?\/fonts\/roboto-latin(?:-2026)?\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
       `$1${RECAPTCHA_DEFER_SCRIPT}\n`,
     );
   // The lookbehind matters: without it this pattern also matches the icons

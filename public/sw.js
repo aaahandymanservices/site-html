@@ -427,7 +427,11 @@
 // pathname, so a returning visitor holding v78 would keep last deploy's
 // stylesheet for another year. This bump evicts the old shell and asset
 // caches for every client.
-const CACHE_VERSION = 'v79';
+// v80 — the brand webfonts moved to smaller *-2026.woff2 files (weight axis
+// instanced to 400-900, hinting removed), which changes PRECACHE_URLS and the
+// @font-face rules in site-theme.css. This bump evicts the old fonts and
+// stylesheet from every client's cache.
+const CACHE_VERSION = 'v80';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -458,8 +462,8 @@ const PRECACHE_URLS = [
   // against the rule this file defines.
   '/js/photo-upload.js',
   '/js/chat-loader.js',
-  '/fonts/archivo-latin.woff2',
-  '/fonts/roboto-latin.woff2',
+  '/fonts/archivo-latin-2026.woff2',
+  '/fonts/roboto-latin-2026.woff2',
   '/fonts/fa-solid-900.woff2',
   // Two glyphs' worth of brand icons, and every page preloads it.
   '/fonts/fa-brands-400.woff2',
