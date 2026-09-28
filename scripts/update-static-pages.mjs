@@ -112,11 +112,13 @@ const ASYNC_ICONS_CSS =
 
 function optimizeFontsAndAssets(html) {
   const canActivateDeferredStyles = /src=["']?\/js\/(?:page-boot|site)\.js/i.test(html);
-  // Resource hints for origins the site no longer contacts.
-  // (fonts.googleapis.com / fonts.gstatic.com preconnects are re-emitted below
-  // alongside the font preloads -- the Google Calendar scheduling button that
-  // page-boot.js renders on every booking CTA loads Google Sans and Material
-  // Icons from those origins, which the CSP's style-src/font-src now allow.)
+  // Resource hints for origins the site no longer contacts. The Google Fonts
+  // preconnects briefly came back for the Google Calendar scheduling button
+  // page-boot.js used to render on booking CTAs; that button is gone (the only
+  // Calendar embed left is the /book iframe, which fetches its own fonts in
+  // its own browsing context), so no page requests either origin. Lighthouse
+  // flags an unused preconnect, and each one spends a DNS + TCP + TLS
+  // handshake in the window where the LCP image and self-hosted fonts load.
   html = html.replace(/[ \t]*<link\s+rel="preconnect"\s+href="https:\/\/fonts\.(?:googleapis|gstatic)\.com"[^>]*>\r?\n/gi, '');
   html = html.replace(/[ \t]*<link\s+rel="preconnect"\s+href="https:\/\/cdnjs\.cloudflare\.com"[^>]*>\r?\n/gi, '');
 
@@ -161,9 +163,7 @@ function optimizeFontsAndAssets(html) {
    */
   const FONT_PRELOADS =
     '    <link rel=preload href=/fonts/archivo-latin.woff2 as=font type=font/woff2 crossorigin>\n' +
-    '    <link rel=preload href=/fonts/roboto-latin.woff2 as=font type=font/woff2 crossorigin>\n' +
-    '    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>\n' +
-    '    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+    '    <link rel=preload href=/fonts/roboto-latin.woff2 as=font type=font/woff2 crossorigin>';
   html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/archivo-latin\.woff2["']?[^>]*>\r?\n/gi, '');
   html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin\.woff2["']?[^>]*>\r?\n/gi, '');
   html = html.replace(/[ \t]*<link\s+rel=["']?preconnect["']?\s+href=["']?https:\/\/fonts\.(?:googleapis|gstatic)\.com["']?[^>]*>\r?\n/gi, '');
