@@ -168,13 +168,8 @@
       };
 
       /*
-       * The honeypot the widget-free form still carries. This payload names
-       * its fields one by one, so it did not travel on its own and
-       * /api/home-care-subscription checks it along with the reCAPTCHA token
-       * when one is configured. The form no longer renders a reCAPTCHA
-       * widget, so no token is forwarded; the mirror post to /services.html
-       * below likewise leaves any token out: it is single-use, and the API
-       * is the one verifying it.
+       * The form's honeypot. This payload names its fields one by one, so it
+       * does not travel on its own; /api/home-care-subscription checks it.
        */
       var honeypotField = form.querySelector('[name="plan-bot-field"]');
       if (honeypotField) payload['plan-bot-field'] = honeypotField.value;
@@ -217,10 +212,8 @@
            * inbox and the dashboard. Netlify answers a rejected submission
            * with a 4xx that still resolves, so a network-level .catch() alone
            * never fired and the failure stayed invisible -- check response.ok
-           * too. The form no longer requires a reCAPTCHA token (the API
-           * verified the honeypot and, when configured, the token
-           * server-side), so this post now satisfies everything
-           * /services.html asks for.
+           * too. The API already checked the honeypot, and Netlify's spam
+           * filter screens this copy on its way into Forms.
            */
           fetch('/services.html', {
             method: 'POST',

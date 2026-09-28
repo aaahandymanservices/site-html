@@ -10,10 +10,8 @@
  * site.
  *
  * Loaded with `defer`, so none of it competes with the first paint. What could
- * not move is still inline and still has to be: the reCAPTCHA createElement
- * shim (it has to run before Netlify's injected api.js tag) and the two
- * prepaint guards that hide the promo bar and the gift badge before the first
- * frame.
+ * not move is still inline and still has to be: the two prepaint guards that
+ * hide the promo bar and the gift badge before the first frame.
  */
 (function () {
   // Activate deferred stylesheets after HTML parsing.

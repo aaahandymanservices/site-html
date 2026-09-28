@@ -104,9 +104,8 @@ export default async (request: Request) => {
       notes = String(formData.get("notes") || formData.get("message") || "").trim();
     }
 
-    // Before any of the work: the plans form renders a honeypot and a
-    // reCAPTCHA widget, and until now this function read neither of them.
-    if (await isSpamSubmission(spamFields, request)) {
+    // Before any of the work: reject submissions that filled the honeypot.
+    if (isSpamSubmission(spamFields)) {
       return errorJson(SPAM_REJECTED_MESSAGE, 400);
     }
 

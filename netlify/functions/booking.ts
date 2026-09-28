@@ -129,9 +129,8 @@ export default async (request: Request) => {
       photo = uploadedPhoto instanceof File && uploadedPhoto.size > 0 ? uploadedPhoto : null;
     }
 
-    // Before any of the work: the booking form renders a honeypot and a
-    // reCAPTCHA widget, and until now this function read neither of them.
-    if (await isSpamSubmission(spamFields, request)) {
+    // Before any of the work: reject submissions that filled the honeypot.
+    if (isSpamSubmission(spamFields)) {
       return errorJson(SPAM_REJECTED_MESSAGE, 400);
     }
 
