@@ -74,9 +74,8 @@ export default async (request: Request) => {
   try {
     const formData = await request.formData();
 
-    // Before any of the work: the form renders a honeypot and a reCAPTCHA
-    // widget, and until now this function read neither of them.
-    if (await isSpamSubmission(spamFieldsFromForm(formData), request)) {
+    // Before any of the work: reject submissions that filled the honeypot.
+    if (isSpamSubmission(spamFieldsFromForm(formData))) {
       return errorJson(SPAM_REJECTED_MESSAGE, 400);
     }
 

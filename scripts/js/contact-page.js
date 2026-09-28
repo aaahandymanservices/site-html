@@ -601,9 +601,7 @@
               // rejects (validation, honeypot) never reaches the inbox.
               // Photos stay out of it -- they are stored in Blobs and the
               // function returns their links, which ride along in the
-              // message. The reCAPTCHA token stays out too: it is single-use
-              // and the API is the one verifying it, so this post relies on
-              // the form not requiring a token. Netlify answers a rejected
+              // message. Netlify answers a rejected
               // mirror with a 4xx that still resolves, so a network-level
               // .catch() alone never fires; response.ok is the real signal.
               const mirror = new URLSearchParams();

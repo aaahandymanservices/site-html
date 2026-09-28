@@ -222,12 +222,11 @@
           // mirrors into Netlify Forms so it reaches the owner's inbox like
           // every other form. It is sent only on success, so a submission the
           // API rejects (honeypot, validation) never reaches Forms. The
-          // reCAPTCHA token stays out -- single-use, and the API verifies it
-          // -- along with the photo blobs the text URL body cannot carry.
+          // photo blobs stay out -- the text URL body cannot carry them.
           // response.ok is the real failure signal: a rejected mirror answers
           // 4xx without throwing.
           var M = new URLSearchParams();
-          y.forEach(function (v, k) { typeof v === "string" && k !== "g-recaptcha-response" && M.append(k, v); });
+          y.forEach(function (v, k) { typeof v === "string" && M.append(k, v); });
           fetch("/emergency.html", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: M.toString() })
             .then(function (n) { n.ok || console.error("Netlify Form mirror rejected the emergency request:", n.status); })
             .catch(function (n) { console.error("Netlify Form submission failed:", n); });
