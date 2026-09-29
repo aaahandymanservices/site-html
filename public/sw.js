@@ -431,7 +431,10 @@
 // instanced to 400-900, hinting removed), which changes PRECACHE_URLS and the
 // @font-face rules in site-theme.css. This bump evicts the old fonts and
 // stylesheet from every client's cache.
-const CACHE_VERSION = 'v80';
+// v81 — the footer's "Book Online Now" link now matches the typography of the
+// contact items above it via a new override in site-theme.css. This bump
+// evicts the old stylesheet and page shells from every client's cache.
+const CACHE_VERSION = 'v81';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
