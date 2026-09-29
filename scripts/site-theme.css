@@ -1412,6 +1412,36 @@ body > footer a {
   transition: color var(--dur) var(--ease), opacity var(--dur) var(--ease);
 }
 
+/* "Book Online Now" under the footer's Get in Touch column sits outside the
+ * contact <ul>, so it can't inherit that list's text-sm, and global button or
+ * link skins (.aaa-btn, .cta-button, the old gcal wrapper) can restyle it.
+ * Pin it to the same typography as the phone, email, and location items above
+ * it. The Explore menu's "Book Online" is inside an <li>, so this selector
+ * skips it. */
+body > footer div > a[data-plain-booking-link] {
+  font-family: inherit !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  text-decoration: none !important;
+}
+
+body > footer div > a[data-plain-booking-link]:hover,
+body > footer div > a[data-plain-booking-link]:focus-visible {
+  color: #fff !important;
+}
+
 /* Branded document treatment for the Terms and Privacy pages. */
 .legal-page {
   background:

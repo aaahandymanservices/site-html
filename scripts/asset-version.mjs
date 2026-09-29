@@ -206,8 +206,14 @@
  * site-theme.css's @font-face rules point at the new files behind an
  * unchanged pathname, so this bump and the matching CACHE_VERSION move in
  * public/sw.js refetch it for returning visitors.
+ *
+ * 20260929a — the footer's "Book Online Now" link under Get in Touch is pinned
+ * to the same font family, size, weight, and color as the contact items above
+ * it, overriding any global button or link skin. site-theme.css changed behind
+ * its unchanged pathname, so this bump and the matching CACHE_VERSION move in
+ * public/sw.js refetch it for returning visitors.
  */
-export const ASSET_VERSION = '20260928a';
+export const ASSET_VERSION = '20260929a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use
