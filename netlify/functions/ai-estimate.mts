@@ -1,13 +1,13 @@
 import type { Config } from "@netlify/functions";
-import { GoogleGenAI, createPartFromBase64 } from "@google/genai";
+import { createPartFromBase64 } from "@google/genai";
+import { createGeminiClient } from "../lib/gemini.js";
 import { getStore } from "@netlify/blobs";
 import { db } from "../../db/index.js";
 import { aiEstimates } from "../../db/schema.js";
 import { resolveServiceLocation } from "../lib/service-area.js";
 
-// Gemini model served through Netlify AI Gateway. The gateway injects
-// GEMINI_API_KEY / GOOGLE_GEMINI_BASE_URL automatically, so the default
-// constructor needs no key at runtime.
+// Gemini model served through Netlify AI Gateway. The client is built from the
+// gateway's credentials in netlify/lib/gemini.ts, so no API key is configured.
 const MODEL = "gemini-2.5-flash";
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
@@ -191,10 +191,11 @@ export default async (request: Request) => {
 
     // Send the primary photo to Gemini for visual analysis.
     const imageBase64 = Buffer.from(await photo.file.arrayBuffer()).toString("base64");
-    const ai = new GoogleGenAI({});
+    const ai = createGeminiClient();
 
     let modelText = "";
     try {
+      if (!ai) throw new Error("AI Gateway credentials are unavailable.");
       const response = await ai.models.generateContent({
         model: MODEL,
         contents: [
