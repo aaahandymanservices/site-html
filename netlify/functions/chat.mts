@@ -1,10 +1,9 @@
 import type { Config } from "@netlify/functions";
-import { GoogleGenAI } from "@google/genai";
+import { createGeminiClient } from "../lib/gemini.js";
 import { siteKnowledge } from "./generated/site-knowledge.mjs";
 
-// Gemini model served through Netlify AI Gateway. The gateway injects the
-// GEMINI_API_KEY / GOOGLE_GEMINI_BASE_URL env vars automatically, so the SDK
-// needs no API key — the default constructor picks everything up at runtime.
+// Gemini model served through Netlify AI Gateway. The client is built from the
+// gateway's credentials in netlify/lib/gemini.ts, so no API key is configured.
 //
 // Model choice matters here: the gateway buffers a model's whole answer before
 // relaying it, so the visitor's typing indicator runs until the model finishes
@@ -180,7 +179,10 @@ export default async (req: Request) => {
     parts: [{ text: m.content }],
   }));
 
-  const ai = new GoogleGenAI({});
+  const ai = createGeminiClient();
+  if (!ai) {
+    return Response.json({ error: "The assistant is unavailable right now." }, { status: 503 });
+  }
   const knowledgeContext = buildKnowledgeContext(messages, normalizePath(body.page));
 
   let modelStream: AsyncIterable<{ text?: string }>;
