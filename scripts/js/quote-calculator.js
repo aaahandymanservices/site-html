@@ -109,7 +109,7 @@
               '<span class="flex-1 min-w-0">' +
                 '<span class="block font-bold text-gray-900 text-sm">' + t.name + '</span>' +
                 '<span class="block text-gray-500 text-xs">' + t.desc + '</span>' +
-                (t.hours ? '<span class="block text-blue-900 text-[11px] font-semibold mt-0.5">' + t.hours + ' labor hours</span>' : '') +
+                (t.hours ? '<span class="block text-blue-900 text-[11px] font-semibold mt-0.5">' + t.hours + (t.hours === 1 ? ' labor hour' : ' labor hours') + '</span>' : '') +
               '</span>' +
               '<span class="quote-price text-right font-extrabold text-gray-900 whitespace-nowrap" data-a="' + t.a + '" data-b="' + t.b + '">' + money(t.a) + '</span>' +
             '</label>'
