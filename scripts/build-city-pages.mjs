@@ -23,7 +23,20 @@ const PHONE_TEL = '+12483853432';
 const LANDINGS = DATA.cities.filter((c) => c.landing === true);
 const enc = (s) => encodeURIComponent(s);
 const quoteHref = (city) => `/contact?service=General+Estimate&amp;city=${enc(city)}`;
-const cleanHtml = (html) => html.replace(/<!--[\s\S]*?-->/g, '').replace(/\n\s*\n/g, '\n');
+/*
+ * Comment/blank-line cleanup. Removing an HTML comment with a single pass can
+ * re-form new comment tokens out of the remaining text (CodeQL: "incomplete
+ * multi-character sanitization"), so the replacement runs until the string
+ * stops changing. The blank-line squeeze after it is single-pass by design.
+ */
+const cleanHtml = (html) => {
+  let previous;
+  do {
+    previous = html;
+    html = html.replace(/<!--[\s\S]*?-->/g, '');
+  } while (html !== previous);
+  return html.replace(/\n\s*\n/g, '\n');
+};
 if (LANDINGS.length === 0) {
   throw new Error('No cities flagged landing:true in service-areas.json.');
 }

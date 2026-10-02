@@ -19,7 +19,20 @@ const SERVICES = DATA.services;
 
 const enc = (s) => encodeURIComponent(s);
 const quoteHref = (service) => `/contact?service=${enc(service)}`;
-const cleanHtml = (html) => html.replace(/<!--[\s\S]*?-->/g, '').replace(/\n\s*\n/g, '\n');
+/*
+ * Comment/blank-line cleanup. Removing an HTML comment with a single pass can
+ * re-form new comment tokens out of the remaining text (CodeQL: "incomplete
+ * multi-character sanitization"), so the replacement runs until the string
+ * stops changing. The blank-line squeeze after it is single-pass by design.
+ */
+const cleanHtml = (html) => {
+  let previous;
+  do {
+    previous = html;
+    html = html.replace(/<!--[\s\S]*?-->/g, '');
+  } while (html !== previous);
+  return html.replace(/\n\s*\n/g, '\n');
+};
 
 // Up to three related services: prefer the same category, then fall back to the
 // next services in the catalog so every page has a full "related" row.

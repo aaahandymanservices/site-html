@@ -434,7 +434,12 @@
 // v81 — the footer's "Book Online Now" link now matches the typography of the
 // contact items above it via a new override in site-theme.css. This bump
 // evicts the old stylesheet and page shells from every client's cache.
-const CACHE_VERSION = 'v81';
+// v82 — the home page's city jump menu now validates its DOM-sourced option
+// value and escapes HTML meta-characters before assigning
+// window.location.href (CodeQL security pass). site.js changed behind its
+// unchanged pathname, and the asset cache drops ?v=, so this bump refetches
+// it for returning visitors.
+const CACHE_VERSION = 'v82';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

@@ -327,7 +327,16 @@ function optimizeFontsAndAssets(html) {
   // palette"`) and the minified unquoted form (`id=aaa-critical-palette`)
   // that committed copies of the pages carry, so re-runs never stack a
   // second block alongside an already-minified one.
-  html = html.replace(/[ \t]*<style\s+id=["']?aaa-critical-palette["']?>[\s\S]*?<\/style>\r?\n?/gi, '');
+  //
+  // Removing a whole <style> block in a single pass can leave partial markup
+  // that re-forms a new `<style` token out of adjacent text (CodeQL:
+  // "incomplete multi-character sanitization"), so the replacement repeats
+  // until the string stops changing.
+  let previous;
+  do {
+    previous = html;
+    html = html.replace(/[ \t]*<style\s+id=["']?aaa-critical-palette["']?>[\s\S]*?<\/style>\r?\n?/gi, '');
+  } while (html !== previous);
   html = html.replace(
     /(<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin(?:-2026)?\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
     `$1${CRITICAL_PALETTE}\n`,
