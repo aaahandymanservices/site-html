@@ -353,15 +353,35 @@
   // page reload.
   const cityJumpSelect = document.getElementById('city-jump-select');
   if (cityJumpSelect) {
+    // The option values come from the DOM, so they are treated as untrusted:
+    // location.href accepts javascript: URLs and would execute them, so the
+    // destination is only honored when it is a path- or query-relative
+    // same-site URL. Anything else (or a non-string) is ignored and leaves the
+    // current page open. The options are built as /handyman/<slug> and
+    // /contact?...&city=<encoded>, which both satisfy the allowlist.
+    const isSameSiteUrl = (value) =>
+      typeof value === 'string' &&
+      value.length > 0 &&
+      /^[/?#](?!\/)[^<>"'`]*$/.test(value);
+    const jumpTo = (value) => {
+      if (isSameSiteUrl(value)) {
+        // Escape any HTML meta-character the allowlist could still have let
+        // through; for the values it accepts this is a no-op.
+        window.location.href = value
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+    };
     cityJumpSelect.addEventListener('change', function () {
-      const target = cityJumpSelect.value;
-      if (target) window.location.href = target;
+      jumpTo(cityJumpSelect.value);
     });
     const jumpForm = cityJumpSelect.closest('form');
     if (jumpForm) {
       jumpForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        if (cityJumpSelect.value) window.location.href = cityJumpSelect.value;
+        jumpTo(cityJumpSelect.value);
       });
     }
   }

@@ -212,8 +212,15 @@
  * it, overriding any global button or link skin. site-theme.css changed behind
  * its unchanged pathname, so this bump and the matching CACHE_VERSION move in
  * public/sw.js refetch it for returning visitors.
+ *
+ * 20261002a — CodeQL security pass: the home page's city jump menu now
+ * validates its DOM-sourced option value against a same-site URL allowlist and
+ * escapes HTML meta-characters before assigning window.location.href, so a
+ * tampered option value can no longer inject a javascript: URL. site.js
+ * changed behind its unchanged pathname, so this bump and the matching
+ * CACHE_VERSION move in public/sw.js refetch it for returning visitors.
  */
-export const ASSET_VERSION = '20260929a';
+export const ASSET_VERSION = '20261002a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use
