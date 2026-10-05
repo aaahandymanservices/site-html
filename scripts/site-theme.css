@@ -2692,54 +2692,6 @@ a[href^="mailto:"] {
 }
 
 /*
- * "View all Zone B extended travel cities" accordion. A native <details>
- * element styled to match the gold-tinted Zone B card; the summary row keeps
- * the site-standard crimson focus ring.
- */
-.zone-cities-accordion {
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  background-color: rgba(212, 175, 55, 0.12);
-  border-radius: 1rem;
-  overflow: hidden;
-}
-
-.zone-cities-summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  cursor: pointer;
-  list-style: none;
-  font-weight: 700;
-  font-size: 0.9rem;
-  color: #7c5a08;
-}
-
-.zone-cities-summary::-webkit-details-marker {
-  display: none;
-}
-
-.zone-cities-summary__chevron {
-  flex-shrink: 0;
-  color: #8a6508;
-  transition: transform 0.2s ease;
-}
-
-.zone-cities-accordion[open] .zone-cities-summary__chevron {
-  transform: rotate(180deg);
-}
-
-.zone-cities-summary:hover {
-  background-color: rgba(212, 175, 55, 0.18);
-}
-
-.zone-cities-summary:focus-visible {
-  outline: 2px solid var(--brand-crimson);
-  outline-offset: 2px;
-}
-
-/*
  * "Handyman Services in Your City" jump menu. The native <select> navigates
  * on change (site.js), so the visual field wraps the control plus a crimson
  * Go button that keeps the form usable without JS-driven navigation.
