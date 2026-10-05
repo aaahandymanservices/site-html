@@ -80,7 +80,7 @@
         {
           "@type": "Offer",
           "name": "Continuous labor after the first hour",
-          "description": "Billed in transparent quarter-hour increments at a flat rate. Labor rates cover installation and service only. Hardware and materials are not included and are billed separately; supply them yourself at no markup, or have us source them with a standard 20% supply markup.",
+          "description": "Flat hourly rate after the first hour. Labor only \u2014 hardware and materials are not included and are billed separately.",
           "priceCurrency": "USD",
           "price": "70",
           "priceSpecification": {
@@ -126,14 +126,14 @@
         {
           "@type": "Offer",
           "name": "4-Hour Handyman Time Package",
-          "description": "Four reserved hours of labor. Four hours at standard rates ($310) less a 10% package discount. Labor only; hardware and materials are not included. Zone A price; Zone B adds a $45 extended-travel differential.",
+          "description": "Four reserved hours of labor. Four hours at standard rates ($310) less a 10% package discount. Labor only; hardware and materials are not included. Zone A price.",
           "priceCurrency": "USD",
           "price": "279"
         },
         {
           "@type": "Offer",
           "name": "6-Hour Handyman Time Package",
-          "description": "Six reserved hours of labor. Six hours at standard rates ($450) less a 10% package discount. Labor only; hardware and materials are not included. Zone A price; Zone B adds a $45 extended-travel differential.",
+          "description": "Six reserved hours of labor. Six hours at standard rates ($450) less a 10% package discount. Labor only; hardware and materials are not included. Zone A price.",
           "priceCurrency": "USD",
           "price": "405"
         },
@@ -168,7 +168,7 @@
           "name": "What does the $100 service call include?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The $100 Zone A minimum service call ($145 in Zone B, 20+ miles) covers travel, diagnosis, and up to your first full hour of labor on site. There is no separate trip or diagnostic fee."
+            "text": "Travel, diagnosis, and up to a full hour of labor on site, with no separate trip or diagnostic fee. Homes farther out pay a $145 service call."
           }
         },
         {
@@ -176,7 +176,7 @@
           "name": "Are materials included in the price?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No — every rate is labor only. Supply your own parts at no markup, or have us source them for our standard 20% supply fee. If we are supplying materials, a deposit is collected before work begins."
+            "text": "No — every rate is labor only. Supply your own parts, or let us source them for you. Our Pricing Policy page explains how materials are billed."
           }
         },
         {
@@ -200,7 +200,7 @@
           "name": "What if I need to cancel or reschedule?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Cancel or reschedule at least 24 hours ahead at no charge. Late cancellations or no-shows may be charged the applicable minimum service call ($100 Zone A / $145 Zone B)."
+            "text": "Cancel or reschedule at least 24 hours ahead at no charge. Full cancellation terms are in our Terms of Service."
           }
         },
         {
@@ -329,7 +329,7 @@
                     Home Audits</a></li>
                 <li><a href=#pricing-policies class=section-nav-link>
                     <svg viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=1.8 stroke-linecap=round stroke-linejoin=round aria-hidden=true><path d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
-                    Fine Print &amp; FAQ</a></li>
+                    Policies &amp; FAQ</a></li>
             </ul>
         </div>
     </nav>
@@ -345,7 +345,7 @@
                         <i class="fas fa-shield-halved text-red-400" aria-hidden=true></i> Simple Oakland County Pricing
                     </div>
                     <h1 class="text-3xl sm:text-4xl lg:text-[clamp(2.25rem,3.2vw,3.25rem)] font-black tracking-tight text-white leading-[1.08] [text-shadow:_0_2px_12px_rgba(0,0,0,0.85)]">Simple rates. No surprises.</h1>
-                    <p class="text-slate-100 text-base sm:text-lg lg:text-xl leading-relaxed mt-5 sm:mt-6 [text-shadow:_0_1px_8px_rgba(0,0,0,0.75)]"><strong>$100</strong> gets a craftsman to your door with travel, diagnosis, and a full hour of work included. After that it&rsquo;s one flat <strong>$70/hour</strong>, billed by the quarter hour.</p>
+                    <p class="text-slate-100 text-base sm:text-lg lg:text-xl leading-relaxed mt-5 sm:mt-6 [text-shadow:_0_1px_8px_rgba(0,0,0,0.75)]"><strong>$100</strong> gets a craftsman to your door with travel, diagnosis, and a full hour of work included. After that it&rsquo;s one flat <strong>$70/hour</strong>.</p>
                     <div class="mt-8 flex flex-wrap items-center gap-3">
                         <a href=/book class="aaa-btn inline-flex items-center justify-center gap-2.5 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3.5 rounded-xl transition duration-200 shadow-lg hover:shadow-red-600/30 hover:-translate-y-0.5"><i class="fas fa-calendar-check" aria-hidden=true></i> Book Online / Get a Free Estimate</a>
                         <a href=/ai-estimate class="aaa-btn inline-flex items-center justify-center gap-2.5 bg-slate-900/90 hover:bg-slate-900 border border-red-500/50 text-white font-bold px-5 py-3.5 rounded-xl transition duration-200 shadow-lg hover:shadow-red-600/20 hover:-translate-y-0.5"><i class="fas fa-camera text-red-400" aria-hidden=true></i> Instant AI Estimate</a>
@@ -358,12 +358,12 @@
                         <div class="pricing-card-header text-xs uppercase tracking-widest text-green-700 font-bold whitespace-nowrap">Zone A</div>
                         <div class="pricing-card-amount text-4xl sm:text-5xl font-black mt-2 mb-1.5 leading-none">$100</div>
                         <p class="pricing-card-desc text-xs sm:text-sm text-gray-600 leading-snug">First hour included</p>
-                        <p class="text-[11px] sm:text-xs text-gray-500 mt-1 leading-snug">(Extended travel fee applies for locations 20+ miles out)</p>
+                        <p class="text-[11px] sm:text-xs text-gray-500 mt-1 leading-snug">Zone B: $145 &middot; <a href=/pricing-policy#travel-zones class="font-semibold text-red-700 underline underline-offset-2 hover:text-red-800">Travel zones</a></p>
                     </div>
                     <div class="col-span-2 rounded-3xl border border-white/15 bg-white/10 backdrop-blur p-6 sm:p-8 flex flex-col items-center justify-center text-center min-h-[9rem]">
                         <div class="text-xs uppercase tracking-widest text-blue-200 font-bold whitespace-nowrap">After the first hour</div>
                         <div class="flex items-end justify-center gap-2 mt-2 text-center"><span class="text-5xl sm:text-6xl font-black leading-none">$70</span><span class="text-slate-300">/ hour</span></div>
-                        <p class="text-sm text-slate-300 mt-2 text-center">That is $17.50 per 15 minutes.</p>
+                        <p class="text-sm text-slate-300 mt-2 text-center"><a href=/pricing-policy#service-calls class="underline underline-offset-2 hover:text-white">How billing works</a></p>
                     </div>
                 </div>
             </div>
@@ -372,7 +372,7 @@
         <div class="max-w-7xl mx-auto px-6 mt-6">
             <div class="rounded-2xl border border-yellow-400/40 bg-yellow-50 px-5 py-3.5 flex items-start gap-3 text-sm text-yellow-900">
                 <i class="fas fa-circle-info text-yellow-500 text-lg shrink-0 mt-0.5" aria-hidden=true></i>
-                <p class="font-medium leading-snug"><strong>Labor only.</strong> Every price on this page covers installation and service labor. Hardware and materials are not included and are billed separately. <a href=#pricing-policies class="font-bold text-red-700 underline underline-offset-2 hover:text-red-800">See billing details &amp; fees &rarr;</a></p>
+                <p class="font-medium leading-snug"><strong>Labor only.</strong> Hardware and materials billed separately. <a href=/pricing-policy class="font-bold text-red-700 underline underline-offset-2 hover:text-red-800">See Pricing Policy</a></p>
             </div>
         </div>
 
@@ -447,9 +447,9 @@
                     <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-5">
                         <h3 class="font-bold text-gray-900 text-sm flex items-center gap-2 mb-3"><i class="fas fa-triangle-exclamation text-yellow-600" aria-hidden=true></i> May cost extra</h3>
                         <ul class="space-y-2 text-sm text-gray-700">
-                            <li class="flex items-start gap-2"><i class="fas fa-circle text-[5px] text-yellow-600 mt-1.5" aria-hidden=true></i> <span><strong>Materials &amp; hardware</strong> &mdash; billed separately; supply your own at no markup</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-circle text-[5px] text-yellow-600 mt-1.5" aria-hidden=true></i> <span><strong>Materials &amp; hardware</strong> &mdash; billed separately</span></li>
                             <li class="flex items-start gap-2"><i class="fas fa-circle text-[5px] text-yellow-600 mt-1 text-xs" aria-hidden=true></i> <span><strong>After-hours emergency visits</strong> &mdash; $155 first hour / $100 per hour after</span></li>
-                            <li class="flex items-start gap-2"><i class="fas fa-circle text-[5px] text-yellow-600 mt-1 text-xs" aria-hidden=true></i> <span><strong>Travel &amp; payment fees</strong> &mdash; see <a href=#pricing-policies class="font-bold text-red-700 underline underline-offset-2 hover:text-red-800">Billing &amp; Policies</a></span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-circle text-[5px] text-yellow-600 mt-1 text-xs" aria-hidden=true></i> <span><strong>Travel &amp; payment fees</strong> &mdash; see <a href=/pricing-policy class="font-bold text-red-700 underline underline-offset-2 hover:text-red-800">Pricing Policy</a></span></li>
                         </ul>
                     </div>
                 </div>
@@ -516,7 +516,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <p class="text-xs text-gray-500 px-5 py-3 border-t border-gray-100 bg-slate-50">Labor only; hardware and materials are billed separately. <strong>Zone B</strong> covers locations 20+ miles out.</p>
+                        <p class="text-xs text-gray-500 px-5 py-3 border-t border-gray-100 bg-slate-50">Labor only. Hardware and materials billed separately. <a href=/pricing-policy class="font-bold text-red-700 underline underline-offset-2 hover:text-red-800">See Pricing Policy</a></p>
                     </div>
 
                     <div class="rounded-3xl border-2 border-[#0a192f] overflow-hidden bg-white shadow-sm">
@@ -544,7 +544,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <p class="text-xs text-gray-500 px-5 py-3 border-t border-gray-100 bg-slate-50">Zone A pricing; Zone B adds the extended-travel differential. Multi-property schedules are estimated per contract.</p>
+                        <p class="text-xs text-gray-500 px-5 py-3 border-t border-gray-100 bg-slate-50">Zone A pricing shown. Multi-property schedules are estimated per contract. <a href=/pricing-policy#travel-zones class="font-bold text-red-700 underline underline-offset-2 hover:text-red-800">Travel zones</a></p>
                     </div>
                 </div>
 
@@ -563,7 +563,7 @@
                 <div class="text-center max-w-3xl mx-auto mb-10">
                     <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Upfront Pricing Menu</span>
                     <h2 class="text-3xl sm:text-4xl font-black text-gray-950 mt-4">Flat-Rate Menu</h2>
-                    <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">Fixed prices for common, straightforward repairs and installs &mdash; know the exact labor cost before we start. Every price below covers installation and service labor only; hardware and materials are billed separately. <strong>Zone A</strong> prices are shown first; <strong>Zone B</strong> includes an extended-travel fee. Tap any category to browse its tasks.</p>
+                    <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">Fixed prices for common, straightforward repairs and installs &mdash; know the exact labor cost before we start. Labor only &mdash; hardware and materials billed separately. Tap any category to browse its tasks.</p>
                     <p class="mt-4 text-sm"><i class="fas fa-calculator text-red-600 mr-1" aria-hidden=true></i> Want a total for several tasks? <a href=#quote-calculator class="font-bold text-red-600 underline underline-offset-2 hover:text-red-700">Use the instant estimate calculator below</a> &mdash; it pulls from this same menu.</p>
                 </div>
 
@@ -870,7 +870,7 @@
                         <a href="/contact?service=Maintenance+Membership#contact-form" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 px-4 rounded-xl transition text-center text-sm shadow-md hover:shadow-emerald-700/30">Ask About Membership</a>
                     </div>
                 </div>
-                <p class="text-center text-xs text-slate-600 mt-5 max-w-2xl mx-auto">Time packages cover general labor (drywall patches, door adjustments, hanging blinds, minor carpentry). Standardized Flat-Rate Menu items have fixed pricing and are excluded. <strong>Zone B</strong> prices include a $45 extended-travel differential.</p>
+                <p class="text-center text-xs text-slate-600 mt-5 max-w-2xl mx-auto">Labor only. Hardware and materials billed separately. <a href=/pricing-policy#packages-policy class="font-bold text-red-700 underline underline-offset-2 hover:text-red-800">See Pricing Policy</a></p>
             </div>
         </section>
 
@@ -924,38 +924,24 @@
                         <a href="/contact?service=Whole-Home+Assessment" class="mt-3 inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2.5 rounded-xl transition shadow-lg shadow-red-600/30 text-sm">Book All Three &rarr;</a>
                     </div>
                 </div>
-                <p class="text-center text-xs text-gray-500 mt-6 max-w-2xl mx-auto"><i class="fas fa-location-dot text-red-500 mr-1" aria-hidden=true></i> Audit fees shown are Zone A; Zone B adds our standard $45 extended-travel differential. The audit fee is credited toward same-day repairs totaling $250 or more.</p>
+                <p class="text-center text-xs text-gray-500 mt-6 max-w-2xl mx-auto"><i class="fas fa-location-dot text-red-500 mr-1" aria-hidden=true></i> Zone A pricing shown. <a href=/pricing-policy#travel-zones class="font-bold text-red-700 underline underline-offset-2 hover:text-red-800">See Pricing Policy</a></p>
             </div>
         </section>
 
     <section id=pricing-policies class="py-12 sm:py-14 bg-white border-t border-gray-100">
         <div class="max-w-5xl mx-auto px-6">
             <div class="text-center mb-6">
-                <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">The Fine Print</span>
-                <h2 class="text-2xl sm:text-3xl font-black text-gray-950 mt-3">Billing &amp; Policies at a Glance</h2>
+                <span class="bg-red-100 text-red-600 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">Policies</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-gray-950 mt-3">Billing &amp; Policies</h2>
+                <p class="text-gray-600 mt-3 text-sm sm:text-base max-w-2xl mx-auto">Every billing rule is written out in plain language on one page, so nothing on your invoice is a surprise.</p>
             </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5">
-                    <h3 class="font-bold text-gray-900 text-sm flex items-center gap-2 mb-2"><i class="fas fa-wallet text-blue-900" aria-hidden=true></i> Payment Methods</h3>
-                    <p class="text-xs text-gray-600 leading-relaxed">We accept cash, checks, Zelle, Venmo, and Cash App. A <strong>5% fee applies to all non-cash payments</strong>.</p>
-                </div>
-                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5">
-                    <h3 class="font-bold text-gray-900 text-sm flex items-center gap-2 mb-2"><span class=flash-siren aria-hidden=true><i class="fas fa-triangle-exclamation text-red-600" aria-hidden=true></i></span> Emergency Rates</h3>
-                    <p class="text-xs text-gray-600 leading-relaxed">After-hours emergency service, 7 days a week: <strong>$155 first hour / $100 each hour after</strong>. Subject to craftsman availability.</p>
-                </div>
-                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5">
-                    <h3 class="font-bold text-gray-900 text-sm flex items-center gap-2 mb-2"><i class="fas fa-route text-blue-900" aria-hidden=true></i> Extended Travel (Zone B)</h3>
-                    <p class="text-xs text-gray-600 leading-relaxed">Locations 20+ miles out are in Zone B, which adds a flat <strong>$45 travel fee</strong> ($145 first-hour service call). <a href=/service-areas#service-area-search class="font-bold text-red-600 underline underline-offset-2 hover:text-red-700">Find your zone &rarr;</a></p>
-                </div>
-                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5">
-                    <h3 class="font-bold text-gray-900 text-sm flex items-center gap-2 mb-2"><i class="fas fa-screwdriver-wrench text-blue-900" aria-hidden=true></i> Materials &amp; Hardware</h3>
-                    <p class="text-xs text-gray-600 leading-relaxed">All rates are labor only. Supply your own parts at no markup, or we source them for a <strong>20% material supply fee</strong>. A deposit is collected before work begins when we supply materials.</p>
-                </div>
-                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5">
-                    <h3 class="font-bold text-gray-900 text-sm flex items-center gap-2 mb-2"><i class="fas fa-file-invoice-dollar text-red-600" aria-hidden=true></i> Pricing Policies</h3>
-                    <p class="text-xs text-gray-600 leading-relaxed">Materials markup, supply runs, and concealed-condition handling are spelled out in plain language. <a href=/pricing-policy class="font-bold text-red-600 underline underline-offset-2 hover:text-red-700">Read full policies &rarr;</a></p>
-                </div>
-            </div>
+            <ul class="flex flex-wrap justify-center gap-3 list-none m-0 p-0">
+                <li><a href=/pricing-policy#service-calls class="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 hover:border-red-600/40 hover:bg-white px-4 py-2.5 text-sm font-bold text-gray-800 hover:text-red-700 transition"><i class="fas fa-clock text-blue-900" aria-hidden=true></i> Service calls &amp; hourly billing</a></li>
+                <li><a href=/pricing-policy#travel-zones class="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 hover:border-red-600/40 hover:bg-white px-4 py-2.5 text-sm font-bold text-gray-800 hover:text-red-700 transition"><i class="fas fa-route text-blue-900" aria-hidden=true></i> Travel zones</a></li>
+                <li><a href=/pricing-policy#materials-options class="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 hover:border-red-600/40 hover:bg-white px-4 py-2.5 text-sm font-bold text-gray-800 hover:text-red-700 transition"><i class="fas fa-screwdriver-wrench text-blue-900" aria-hidden=true></i> Materials &amp; hardware</a></li>
+                <li><a href=/pricing-policy#payments class="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 hover:border-red-600/40 hover:bg-white px-4 py-2.5 text-sm font-bold text-gray-800 hover:text-red-700 transition"><i class="fas fa-wallet text-blue-900" aria-hidden=true></i> Payments &amp; deposits</a></li>
+                <li><a href=/pricing-policy#consultations class="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 hover:border-red-600/40 hover:bg-white px-4 py-2.5 text-sm font-bold text-gray-800 hover:text-red-700 transition"><i class="fas fa-clipboard-check text-blue-900" aria-hidden=true></i> Consultations</a></li>
+            </ul>
             <div class="mt-5 text-center bg-blue-900 text-white rounded-2xl py-6 px-6">
                 <p class="text-base sm:text-lg font-medium">Available Monday–Friday, 9 a.m.–6 p.m.; Saturday, 10 a.m.–5 p.m.</p>
                 <p class="mt-2 text-sm opacity-90"><span class=flash-siren aria-hidden=true><i class="fas fa-triangle-exclamation" aria-hidden=true></i></span> After-hours emergency services available &mdash; no job too small!</p>
@@ -968,11 +954,11 @@
             <div class="space-y-3 max-w-3xl mx-auto">
                 <details class=faq-item>
                     <summary><span>What does the $100 service call include?</span><i class="faq-item__chevron fas fa-chevron-down text-sm shrink-0" aria-hidden=true></i></summary>
-                    <div class=faq-item__answer>Travel, diagnosis, and up to a full hour of labor on site &mdash; all for the $100 Zone A minimum. Locations 20+ miles out (Zone B) add a flat $45 extended-travel fee, for a $145 service call. There is no separate diagnostic fee.</div>
+                    <div class=faq-item__answer>Travel, diagnosis, and up to a full hour of labor on site &mdash; with no separate trip or diagnostic fee. Homes farther out pay a $145 service call. <a href=/pricing-policy#service-calls class="font-bold text-red-700 underline underline-offset-2 hover:text-red-800">See Pricing Policy</a></div>
                 </details>
                 <details class=faq-item>
                     <summary><span>Are materials included?</span><i class="faq-item__chevron fas fa-chevron-down text-sm shrink-0" aria-hidden=true></i></summary>
-                    <div class=faq-item__answer>No &mdash; every rate is labor only. Supply your own parts at no markup, or have us source them for our standard 20% supply fee. If we&rsquo;re supplying materials, a deposit is collected before work begins.</div>
+                    <div class=faq-item__answer>No &mdash; every rate is labor only. Supply your own parts, or let us source them for you. <a href=/pricing-policy#materials-options class="font-bold text-red-700 underline underline-offset-2 hover:text-red-800">See how materials are billed</a></div>
                 </details>
                 <details class=faq-item>
                     <summary><span>Do you give free estimates?</span><i class="faq-item__chevron fas fa-chevron-down text-sm shrink-0" aria-hidden=true></i></summary>
@@ -984,7 +970,7 @@
                 </details>
                 <details class=faq-item>
                     <summary><span>What if I need to cancel or reschedule?</span><i class="faq-item__chevron fas fa-chevron-down text-sm shrink-0" aria-hidden=true></i></summary>
-                    <div class=faq-item__answer>Cancel or reschedule at least 24 hours ahead at no charge. Late cancellations or no-shows may be charged the applicable minimum service call ($100 Zone A / $145 Zone B).</div>
+                    <div class=faq-item__answer>Cancel or reschedule at least 24 hours ahead at no charge. <a href=/terms#cancellations class="font-bold text-red-700 underline underline-offset-2 hover:text-red-800">See cancellation terms</a></div>
                 </details>
                 <details class=faq-item>
                     <summary><span>How do I pay, and is there a fee?</span><i class="faq-item__chevron fas fa-chevron-down text-sm shrink-0" aria-hidden=true></i></summary>
@@ -1029,7 +1015,7 @@
                         <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0" aria-hidden=true></i> Members book at a discounted hourly labor rate on any additional service call or project.</li>
                         <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0" aria-hidden=true></i> Priority scheduling &mdash; members go to the front of the calendar, including seasonal rushes.</li>
                         <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0" aria-hidden=true></i> The standard trip charge is waived within Zone A on covered visits.</li>
-                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0" aria-hidden=true></i> Materials stay at our everyday pricing &mdash; supply your own at no markup, or we source them at our standard 20% supply fee.</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-600 mt-1 shrink-0" aria-hidden=true></i> Materials stay at our everyday pricing.</li>
                     </ul>
                 </section>
 
