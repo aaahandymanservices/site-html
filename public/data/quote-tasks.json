@@ -129,9 +129,9 @@
           "id": "tv-mount",
           "name": "TV Wall Mounting",
           "desc": "Up to 65\" TV on standard wood or metal studs (bracket not included).",
-          "hours": 1,
-          "a": 100,
-          "b": 145
+          "hours": 2,
+          "a": 170,
+          "b": 215
         },
         {
           "id": "picture-hanging",
