@@ -70,8 +70,8 @@
           "name": "Garbage Disposal Replacement",
           "desc": "Swapping out existing disposal with a customer-supplied unit.",
           "hours": 1,
-          "a": 100,
-          "b": 145
+          "a": 170,
+          "b": 215
         },
         {
           "id": "toilet-rebuild",
