@@ -246,7 +246,7 @@ const handleReviewsRequest = async (request: Request) => {
     if (entry.size === 0) continue;
     photos.push(entry);
     if (photos.length > MAX_PHOTOS) {
-      return errorJson("You can upload at most 3 photos.", 400);
+      return errorJson("Please upload up to 3 photos — remove one to add another.", 400);
     }
   }
   const photo = photos[0] ?? null;

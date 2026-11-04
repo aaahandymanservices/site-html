@@ -96,7 +96,7 @@ export default async (request: Request) => {
     return json(result, { status: result.alreadyRedeemed ? 200 : 201 });
   } catch (err) {
     console.error("gift certificate lookup failed", err);
-    return errorJson("We couldn't check the gift certificate just now. Please try again in a moment.", 500);
+    return errorJson("We couldn't check the gift certificate just now. Please try again, or call us at (248) 385-3432 and we'll look it up for you.", 500);
   }
 };
 
