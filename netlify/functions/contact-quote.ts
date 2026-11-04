@@ -212,7 +212,7 @@ export default async (request: Request) => {
     const photoUrls = photoKeys.filter(Boolean).map((key) => `/api/contact-quote/photo/${encodeURIComponent(key!)}`);
 
     return json({
-      message: "Thank you! Your message is on its way and we will be in touch shortly.",
+      message: "Thank you! Your message is on its way — we'll get back to you within one business day.",
       request: {
         id: newRequest.id,
         customerName: newRequest.customerName,

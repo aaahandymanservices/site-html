@@ -302,7 +302,7 @@
               }
           } catch (error) {
               showPhotoError(error instanceof Error ? error.message : 'That photo could not be prepared. Please choose a different image.');
-              setStatus('Your report is ready to send once that photo is sorted out.', 'error');
+              setStatus('Your report is ready to send — please replace or remove that photo first.', 'error');
               if (submitButton) {
                   submitButton.disabled = false;
                   submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
@@ -322,7 +322,7 @@
       .then(response => {
           if (response.ok) {
               setStatus(
-                  'Thank you — your request has been received. It will be reviewed during regular business hours, and we will follow up with what we found and what comes next.',
+                  'Thank you — we received your request. We review these during regular business hours and will follow up with what we found and what happens next.',
                   'success'
               );
               form.reset();

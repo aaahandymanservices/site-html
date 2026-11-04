@@ -47,8 +47,8 @@
           if (!response.ok) {
               const payload = await response.json().catch(() => ({}));
               const message = payload.error || (response.status === 401
-                  ? "We don't recognize that owner key. Check it and try again."
-                  : "We couldn't verify that owner key right now. Please try again in a moment.");
+                  ? "We don't recognize that owner password. Check it and try again."
+                  : "We couldn't verify that password. Please try again, or call (248) 385-3432.");
               showReviewsMessage(message, true);
               return false;
           }
@@ -105,7 +105,7 @@
       delete adminDialog.dataset.mode;
       const title = document.getElementById('admin-access-title');
       const body = document.getElementById('admin-access-body');
-      if (title) title.textContent = 'Enter your owner access key';
+      if (title) title.textContent = 'Enter your owner password';
       if (body) body.textContent = 'This unlocks the moderation controls on this device only.';
       if (adminDialogInput) adminDialogInput.classList.remove('hidden');
       if (adminDialogConfirm) adminDialogConfirm.textContent = 'Unlock';
@@ -125,7 +125,7 @@
           const key = adminDialogInput ? adminDialogInput.value : '';
           if (!key.trim()) {
               if (adminDialogError) {
-                  adminDialogError.textContent = 'Enter your owner access key to continue.';
+                  adminDialogError.textContent = 'Enter your owner password to continue.';
                   adminDialogError.classList.remove('hidden');
               }
               if (adminDialogInput) adminDialogInput.setAttribute('aria-invalid', 'true');
@@ -1782,7 +1782,7 @@
           // Say which files were turned away and why. Reporting only the count
           // cap would blame the slot limit for a file that was the wrong
           // format or over 10 MB.
-          if (full) rejections.push('You can upload at most 3 photos.');
+          if (full) rejections.push('Please upload up to 3 photos — remove one to add another.');
           if (rejections.length) {
               showReviewsMessage(rejections.join(' '), true);
           }

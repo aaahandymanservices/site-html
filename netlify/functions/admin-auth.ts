@@ -40,9 +40,9 @@ const handleAuthRequest = async (request: Request) => {
   }
 
   if (result.status === "rejected") {
-    // "Owner key" is what the control that collects it is called on the reviews
-    // page; "access key" appeared nowhere the owner can see it.
-    return json({ error: "We don't recognize that owner key. Check it and try again." }, { status: 401 });
+    // "Owner password" is what the control that collects it is called on the
+    // reviews page; "access key" appeared nowhere the owner can see it.
+    return json({ error: "We don't recognize that owner password. Check it and try again." }, { status: 401 });
   }
 
   return json({ ok: true });

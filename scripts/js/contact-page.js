@@ -681,7 +681,7 @@
                       // /api/seasonal-subscription here -- it would double-subscribe
                       // the visitor.
 
-                      setStatus('Thank you! Your message is on its way and we will be in touch shortly.', 'success');
+                      setStatus("Thank you! Your message is on its way — we'll get back to you within one business day.", 'success');
                       form.reset();
                       FIELDS.forEach(field => showFieldError(field, ''));
                       resetPhotoWidget();

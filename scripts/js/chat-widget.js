@@ -183,7 +183,7 @@
   var promptList = panel.querySelector(".aaa-chat-prompts-list");
   var promptButtons = panel.querySelectorAll(".aaa-chat-prompt");
 
-  var GREETING = "Hi! 👋 I'm the AAA Handyman Services LLC assistant. Ask me about our services, the areas we cover, or how to get an estimate.";
+  var GREETING = "Hi! 👋 I'm the AAA Handyman Services LLC assistant. Ask me about our services, service area, or getting an estimate.";
   function hideExistingFloating() {
     // Hide static (noscript) floating CTAs baked into the markup.
     var els = document.querySelectorAll(".fixed.bottom-5.right-5, [class*='fixed'][class*='bottom-5'][class*='right-5']");

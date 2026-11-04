@@ -349,7 +349,7 @@
     // tap on the dropzone itself) falls through to the next free slot.
     const slot = preferSlot == null ? nextEmptySlot() : preferSlot;
     if (slot === -1) {
-      showPhotoError('You can upload at most 3 photos. Remove one first.');
+      showPhotoError('Please upload up to 3 photos — remove one to add another.');
       return false;
     }
 
@@ -632,7 +632,7 @@
       '<p class="text-sm text-blue-200 mt-1">' +
         escapeHtml(
           estimate.customerNextStep ||
-            'Click "Submit Estimate" below to send this AI assessment to our human dispatch team for final confirmation, or call us at (248) 385-3432.',
+            'Send the estimate below and our dispatch team will confirm your final price — or call (248) 385-3432.',
         ) +
         '</p>',
     );
@@ -646,11 +646,11 @@
       if (analyzeBtn.disabled) return;
 
       if (busySlots.some(Boolean)) {
-        showPhotoError('Still preparing your photos — try again in a second.');
+        showPhotoError('Your photos are still uploading — please wait a moment and try again.');
         return;
       }
       if (!chosenFiles[0]) {
-        showPhotoError('Please upload at least one close-up photo to analyze.');
+        showPhotoError('Please upload at least one close-up photo so we can assess the repair.');
         openPickerForSlot(0);
         return;
       }
@@ -741,11 +741,11 @@
       }
 
       if (busySlots.some(Boolean)) {
-        showSubmitError('Still preparing your photos — try again in a second.');
+        showSubmitError('Your photos are still uploading — please wait a moment and try again.');
         return;
       }
       if (!chosenFiles[0]) {
-        showSubmitError('Your primary photo is missing. Please upload one above and get a new estimate first.');
+        showSubmitError('Please add your main repair photo above, then request a new estimate.');
         return;
       }
 
