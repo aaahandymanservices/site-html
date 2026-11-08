@@ -121,6 +121,7 @@ ${promoBannerHtml}
             <a href="/reviews" class="${mobileLinkCls(isReviews)}"${ariaCurrent(isReviews)}>Reviews</a>
             <a href="/careers" class="${mobileLinkCls(isCareers)}"${ariaCurrent(isCareers)}>Careers</a>
             <a href="/contact" class="${mobileLinkCls(isContact)}"${ariaCurrent(isContact)}>Contact</a>
+            <button type="button" class="w-full text-left flex items-center gap-2.5 text-gray-800 font-medium py-2.5 px-3 hover:bg-red-50 hover:text-red-600 rounded-xl transition cursor-pointer" onclick="if(window.__aaaOpenChat){window.__aaaOpenChat();}"><i class="fas fa-comments text-red-600 text-lg" aria-hidden="true"></i><span>AI Chat Assistant</span></button>
         </div>
 
         <div class="pt-3 border-t border-gray-100 flex flex-col gap-3">

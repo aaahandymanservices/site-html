@@ -147,13 +147,36 @@ const buildKnowledgeContext = (
 // Coerce the incoming OpenAI-style messages into a clean, bounded list.
 const sanitizeMessages = (input: unknown): { role: "user" | "assistant"; content: string }[] => {
   if (!Array.isArray(input)) return [];
-  return input
+  const raw = input
     .map((m: ChatMessage) => ({
-      role: m?.role === "assistant" ? "assistant" : "user",
+      role: m?.role === "assistant" ? ("assistant" as const) : ("user" as const),
       content: typeof m?.content === "string" ? m.content.trim() : "",
     }))
     .filter((m) => m.content.length > 0)
-    .slice(-MAX_HISTORY) as { role: "user" | "assistant"; content: string }[];
+    .slice(-MAX_HISTORY);
+
+  // Gemini requires strictly alternating user and model turns, beginning and
+  // ending with user turns. Consolidate consecutive same-role turns so a retried
+  // or previously interrupted mobile interaction never causes a 400 Bad Request.
+  const alternating: { role: "user" | "assistant"; content: string }[] = [];
+  for (const m of raw) {
+    if (alternating.length === 0) {
+      if (m.role === "user") alternating.push(m);
+    } else {
+      const prev = alternating[alternating.length - 1];
+      if (prev.role === m.role) {
+        prev.content += "\n\n" + m.content;
+      } else {
+        alternating.push(m);
+      }
+    }
+  }
+
+  while (alternating.length > 0 && alternating[alternating.length - 1].role !== "user") {
+    alternating.pop();
+  }
+
+  return alternating;
 };
 
 export default async (req: Request) => {

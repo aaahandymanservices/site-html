@@ -21,8 +21,8 @@ export const createGeminiClient = (): GoogleGenAI | null => {
   const apiKey = providerKey || getEnv("NETLIFY_AI_GATEWAY_KEY");
   const baseUrl = (
     providerKey
-      ? getEnv("GOOGLE_GEMINI_BASE_URL") || getEnv("NETLIFY_AI_GATEWAY_BASE_URL")
-      : getEnv("NETLIFY_AI_GATEWAY_BASE_URL")
+      ? getEnv("GOOGLE_GEMINI_BASE_URL") || getEnv("NETLIFY_AI_GATEWAY_URL") || getEnv("NETLIFY_AI_GATEWAY_BASE_URL")
+      : getEnv("NETLIFY_AI_GATEWAY_URL") || getEnv("NETLIFY_AI_GATEWAY_BASE_URL")
   ).replace(/\/$/, "");
 
   if (!apiKey) {

@@ -439,7 +439,11 @@
 // window.location.href (CodeQL security pass). site.js changed behind its
 // unchanged pathname, and the asset cache drops ?v=, so this bump refetches
 // it for returning visitors.
-const CACHE_VERSION = 'v82';
+// v83 — mobile AI chat repair: precaches /js/chat-widget.js so the widget is
+// always available offline and on mobile networks; fixes AI gateway base URL
+// fallback; adds iOS Safari zoom prevention (16px textarea) and keyboard/viewport
+// stability for mobile chat panel; centers FAB icon; and adds drawer chat launcher.
+const CACHE_VERSION = 'v83';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -470,6 +474,7 @@ const PRECACHE_URLS = [
   // against the rule this file defines.
   '/js/photo-upload.js',
   '/js/chat-loader.js',
+  '/js/chat-widget.js',
   '/fonts/archivo-latin-2026.woff2',
   '/fonts/roboto-latin-2026.woff2',
   '/fonts/fa-solid-900.woff2',

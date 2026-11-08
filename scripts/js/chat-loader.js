@@ -27,6 +27,13 @@
   var ownSrc = (document.currentScript && document.currentScript.src) || "";
   var queryIndex = ownSrc.indexOf("?");
   var assetStamp = queryIndex === -1 ? "" : ownSrc.slice(queryIndex);
+  if (!assetStamp) {
+    var loaderEl = document.querySelector('script[src*="chat-loader.js"]');
+    if (loaderEl && loaderEl.src) {
+      var qi = loaderEl.src.indexOf("?");
+      if (qi !== -1) assetStamp = loaderEl.src.slice(qi);
+    }
+  }
 
   function initChatFab() {
     if (document.getElementById("aaa-chat-loader")) return;
@@ -34,7 +41,7 @@
     var style = document.createElement("style");
     style.id = "aaa-chat-loader-style";
     style.textContent = [
-      ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:40;display:flex;flex-direction:column;gap:12px;align-items:flex-end}",
+      ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:90;display:flex;flex-direction:column;gap:12px;align-items:flex-end}",
       ".aaa-fab .aaa-fab-btn{min-width:130px;height:56px;padding:0 22px;border-radius:9999px;border:2px solid #ffffff;display:flex;align-items:center;justify-content:flex-start;gap:10px;box-sizing:border-box;font:700 15px/1 'Roboto','Archivo',system-ui,-apple-system,sans-serif;white-space:nowrap;color:#ffffff;cursor:pointer;text-decoration:none;box-shadow:0 10px 25px -5px rgba(15,23,42,0.25);transition:transform .18s cubic-bezier(.16,1,.3,1),background .18s ease,box-shadow .18s ease;will-change:transform}",
       ".aaa-fab .aaa-fab-btn i{font-size:19px;line-height:1;flex-shrink:0}",
       ".aaa-fab .aaa-fab-btn:hover{transform:translateY(-2px) scale(1.03)}",
@@ -79,20 +86,23 @@
       var script = document.createElement("script");
       script.src = "/js/chat-widget.js" + assetStamp;
       script.onload = resolve;
-      script.onerror = reject;
+      script.onerror = function (err) {
+        script.remove();
+        reject(err);
+      };
       document.head.appendChild(script);
     }).then(function () {
       var group = document.getElementById("aaa-chat-loader");
       var style = document.getElementById("aaa-chat-loader-style");
       if (group) group.remove();
       if (style) style.remove();
-    }).catch(function () {
+    }).catch(function (err) {
       loadPromise = null;
       if (launch) {
         launch.disabled = false;
         launch.removeAttribute("aria-busy");
       }
-      throw new Error("Unable to load chat");
+      throw err || new Error("Unable to load chat");
     });
 
     return loadPromise;
@@ -102,27 +112,23 @@
     return loadChat().then(function () {
       if (window.__aaaOpenChat !== openChat) window.__aaaOpenChat();
     }).catch(function () {
-      window.location.href = "/contact.html";
+      var launch = document.querySelector(".aaa-chat-launch");
+      if (launch) {
+        launch.disabled = false;
+        launch.removeAttribute("aria-busy");
+      }
     });
   }
 
   window.__aaaOpenChat = openChat;
 
-  function scheduleInit() {
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(function () { setTimeout(initChatFab, 2000); }, { timeout: 5000 });
-    } else {
-      setTimeout(initChatFab, 2500);
-    }
-  }
-
-  if (document.readyState === 'complete') {
-    scheduleInit();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initChatFab, { once: true });
   } else {
-    window.addEventListener('load', scheduleInit, { once: true });
+    initChatFab();
   }
 
-  ['pointerdown', 'keydown', 'touchstart'].forEach(function (e) {
+  ["pointerdown", "keydown", "touchstart"].forEach(function (e) {
     window.addEventListener(e, function () {
       initChatFab();
     }, { once: true, passive: true });

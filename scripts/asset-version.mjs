@@ -219,8 +219,15 @@
  * tampered option value can no longer inject a javascript: URL. site.js
  * changed behind its unchanged pathname, so this bump and the matching
  * CACHE_VERSION move in public/sw.js refetch it for returning visitors.
+ *
+ * 20261108a — mobile AI chat repair: chat-loader.js initializes immediately on
+ * ready without multi-second idle delays and avoids redirecting to /contact on
+ * error; chat-widget.js fixes iOS Safari auto-zoom with 16px textarea, centers
+ * FAB icon, adds replaceChildren fallback for mobile WebKit, and avoids forcing
+ * keyboard focus on mobile; netlify/lib/gemini.ts restores proper AI gateway
+ * URL fallback; and chat.mts strictly sanitizes multi-turn message roles.
  */
-export const ASSET_VERSION = '20261002a';
+export const ASSET_VERSION = '20261108a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use
