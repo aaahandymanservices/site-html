@@ -89,7 +89,7 @@
     };
 
     menuButton.addEventListener('click', () => setMenuOpen(!isOpen()));
-    mobileMenu.querySelectorAll('a').forEach((link) => {
+    mobileMenu.querySelectorAll('a, button').forEach((link) => {
       link.addEventListener('click', () => setMenuOpen(false));
     });
 

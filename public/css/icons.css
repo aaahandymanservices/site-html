@@ -3,7 +3,7 @@
  * License - https://fontawesome.com/license/free
  * (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  *
- * Generated subset - 246 icon names in use.
+ * Generated subset - 244 icon names in use.
  * Do not edit by hand; run scripts/build-icon-css.mjs instead.
  */
 .fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}
@@ -154,7 +154,6 @@
 .fa-add:before,.fa-plus:before{content:"\2b"}
 .fa-expand:before{content:"\f065"}
 .fa-close:before,.fa-multiply:before,.fa-remove:before,.fa-times:before,.fa-xmark:before{content:"\f00d"}
-.fa-quote-left-alt:before,.fa-quote-left:before{content:"\f10d"}
 .fa-ruler-combined:before{content:"\f546"}
 .fa-blender:before{content:"\f517"}
 .fa-map:before{content:"\f279"}

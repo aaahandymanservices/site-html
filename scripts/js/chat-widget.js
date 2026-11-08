@@ -11,7 +11,7 @@
   var conversationVersion = 0;
   var style = document.createElement("style");
   style.textContent = [
-    ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:40;display:flex;flex-direction:column;gap:12px;align-items:flex-end}",
+    ".aaa-fab{position:fixed;bottom:20px;right:20px;z-index:90;display:flex;flex-direction:column;gap:12px;align-items:flex-end}",
     ".aaa-fab .aaa-fab-btn{min-width:130px;height:56px;padding:0 22px;border-radius:9999px;border:2px solid rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:flex-start;gap:10px;box-sizing:border-box;font:700 15px/1 'Archivo','Roboto',system-ui,-apple-system,sans-serif;white-space:nowrap;color:#ffffff;cursor:pointer;text-decoration:none;box-shadow:0 12px 28px -5px rgba(15,23,42,0.3);transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s ease,box-shadow .2s ease;will-change:transform}",
     ".aaa-fab .aaa-fab-btn i{font-size:19px;line-height:1;flex-shrink:0}",
     ".aaa-fab .aaa-fab-btn:hover{transform:translateY(-3px) scale(1.04)}",
@@ -107,8 +107,8 @@
     ".dark .aaa-chat-disclaimer{background:#0f172a;color:#94a3b8}",
     ".dark .aaa-chat-log::-webkit-scrollbar-thumb{background:#334155}",
     ".dark .aaa-chat-log::-webkit-scrollbar-thumb:hover{background:" + CRIMSON + "}",
-    "@media(max-width:767px){.aaa-fab{right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));flex-direction:column;gap:12px;align-items:flex-end}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}.aaa-fab-btn.aaa-chat-launch{display:flex!important}.aaa-chat-panel{position:fixed;top:0;left:0;right:0;bottom:0;width:100%!important;max-width:100%!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important;border:none!important;z-index:2147483005}.aaa-chat-header{padding:calc(14px + env(safe-area-inset-top,0px)) 14px 12px!important;gap:10px}.aaa-chat-header .aaa-avatar{width:38px;height:38px;flex:0 0 38px}.aaa-chat-header h2{font-size:14px}.aaa-chat-header p{font-size:11px}.aaa-chat-control-btn{font-size:15px;padding:5px}.aaa-chat-control-btn svg{width:16px;height:16px}.aaa-chat-close{font-size:20px}.aaa-chat-log{padding:12px 14px;gap:10px}.aaa-msg{padding:10px 14px;font-size:13.5px}.aaa-msg-avatar{width:24px;height:24px;flex:0 0 24px}.aaa-chat-prompts{padding:8px 12px 6px}.aaa-chat-prompts-label{font-size:9px;margin-bottom:5px}.aaa-chat-prompt{padding:6px 11px;font-size:11.5px}.aaa-chat-emoji-bar{padding:6px 10px}.aaa-chat-emoji{width:30px;height:30px;font-size:16px}.aaa-chat-form{padding:8px 12px;gap:8px}.aaa-chat-input-box{min-height:40px;padding:2px 4px 2px 12px;border-radius:16px}.aaa-chat-form textarea{padding:7px 4px 7px 0;font-size:13.5px}.aaa-chat-emoji-trigger{width:32px;height:32px;margin-bottom:2px}.aaa-chat-emoji-trigger svg{width:17px;height:17px}.aaa-chat-send{flex:0 0 40px;width:40px;height:40px;border-radius:50%;font-size:14px}.aaa-chat-disclaimer{font-size:9px;padding:0 12px calc(8px + env(safe-area-inset-bottom,0px))!important}}",
-    "@media(max-width:359px){.aaa-fab .aaa-fab-btn{width:50px;height:50px;flex-basis:50px}.aaa-fab{gap:10px}.aaa-chat-emoji{width:28px;height:28px;font-size:15px}.aaa-chat-form{padding:6px 8px;gap:6px}.aaa-chat-input-box{min-height:36px;padding:1px 3px 1px 10px;border-radius:14px}.aaa-chat-form textarea{padding:6px 3px 6px 0;font-size:13px}.aaa-chat-emoji-trigger{width:28px;height:28px;margin-bottom:2px}.aaa-chat-send{flex:0 0 36px;width:36px;height:36px;font-size:13px;border-radius:50%}}",
+    "@media(max-width:767px){.aaa-fab{right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));flex-direction:column;gap:12px;align-items:flex-end}.aaa-fab .aaa-fab-btn{min-width:0;width:54px;height:54px;padding:0;border-radius:50%;gap:0;flex:0 0 54px;justify-content:center;align-items:center}.aaa-fab .aaa-fab-btn i{font-size:21px;line-height:1}.aaa-fab .aaa-fab-label{display:none!important}.aaa-fab-btn.aaa-chat-launch{display:flex!important}.aaa-chat-panel{position:fixed;top:0;left:0;right:0;bottom:0;width:100%!important;max-width:100%!important;height:100%!important;height:100dvh!important;max-height:100%!important;max-height:100dvh!important;border-radius:0!important;border:none!important;z-index:2147483005;box-sizing:border-box}.aaa-chat-header{padding:calc(14px + env(safe-area-inset-top,0px)) 14px 12px!important;gap:10px}.aaa-chat-header .aaa-avatar{width:38px;height:38px;flex:0 0 38px}.aaa-chat-header h2{font-size:14px}.aaa-chat-header p{font-size:11px}.aaa-chat-control-btn{font-size:15px;padding:5px}.aaa-chat-control-btn svg{width:16px;height:16px}.aaa-chat-close{font-size:20px}.aaa-chat-log{padding:12px 14px;gap:10px;-webkit-overflow-scrolling:touch}.aaa-msg{padding:10px 14px;font-size:13.5px}.aaa-msg-avatar{width:24px;height:24px;flex:0 0 24px}.aaa-chat-prompts{padding:8px 12px 6px}.aaa-chat-prompts-label{font-size:9px;margin-bottom:5px}.aaa-chat-prompt{padding:6px 11px;font-size:11.5px}.aaa-chat-emoji-bar{padding:6px 10px}.aaa-chat-emoji{width:30px;height:30px;font-size:16px}.aaa-chat-form{padding:8px 12px;gap:8px}.aaa-chat-input-box{min-height:40px;padding:2px 4px 2px 12px;border-radius:16px}.aaa-chat-form textarea{padding:7px 4px 7px 0;font-size:16px!important}.aaa-chat-emoji-trigger{width:32px;height:32px;margin-bottom:2px}.aaa-chat-emoji-trigger svg{width:17px;height:17px}.aaa-chat-send{flex:0 0 40px;width:40px;height:40px;border-radius:50%;font-size:14px}.aaa-chat-disclaimer{font-size:9px;padding:0 12px calc(8px + env(safe-area-inset-bottom,0px))!important}}",
+    "@media(max-width:359px){.aaa-fab .aaa-fab-btn{width:50px;height:50px;flex-basis:50px}.aaa-fab{gap:10px}.aaa-chat-emoji{width:28px;height:28px;font-size:15px}.aaa-chat-form{padding:6px 8px;gap:6px}.aaa-chat-input-box{min-height:36px;padding:1px 3px 1px 10px;border-radius:14px}.aaa-chat-form textarea{padding:6px 3px 6px 0;font-size:16px!important}.aaa-chat-emoji-trigger{width:28px;height:28px;margin-bottom:2px}.aaa-chat-send{flex:0 0 36px;width:36px;height:36px;font-size:13px;border-radius:50%}}",
   ].join("");
   document.head.appendChild(style);
   var group = document.createElement("div");
@@ -235,7 +235,12 @@
       fragment.appendChild(document.createTextNode(source.slice(lastIndex)));
     }
 
-    el.replaceChildren(fragment);
+    if (typeof el.replaceChildren === "function") {
+      el.replaceChildren(fragment);
+    } else {
+      while (el.firstChild) el.removeChild(el.firstChild);
+      el.appendChild(fragment);
+    }
     scrollToBottom();
   }
 
@@ -310,8 +315,9 @@
     }
     if (window.innerWidth < 768) {
       document.body.style.overflow = "hidden";
+    } else {
+      setTimeout(function () { input.focus(); }, 50);
     }
-    setTimeout(function () { input.focus(); }, 50);
   }
 
   function closePanel() {
@@ -439,6 +445,9 @@
       messages.push({ role: "assistant", content: full });
     } catch (err) {
       if (err.name === "AbortError" || requestVersion !== conversationVersion) return;
+      if (messages.length > 0 && messages[messages.length - 1].role === "user") {
+        messages.pop();
+      }
       renderBot(
         botEl,
         "Sorry, I couldn't reach the assistant just now. Please call us at (248) 385-3432 or email contact@aaahandyman.services."
@@ -449,7 +458,9 @@
         streaming = false;
         sendBtn.disabled = false;
         setPromptButtonsDisabled(false);
-        input.focus();
+        if (window.innerWidth >= 768) {
+          input.focus();
+        }
       }
     }
   }
@@ -498,7 +509,11 @@
   input.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      form.requestSubmit();
+      if (typeof form.requestSubmit === "function") {
+        form.requestSubmit();
+      } else {
+        form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+      }
     }
   });
 
