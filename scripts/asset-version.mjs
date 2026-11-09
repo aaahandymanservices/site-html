@@ -226,8 +226,12 @@
  * FAB icon, adds replaceChildren fallback for mobile WebKit, and avoids forcing
  * keyboard focus on mobile; netlify/lib/gemini.ts restores proper AI gateway
  * URL fallback; and chat.mts strictly sanitizes multi-turn message roles.
+ *
+ * 20261109a — performance pass: chat-widget.js draws its header and message
+ * avatars from the 1.8 KB /images/icon-96.webp every page already preloads,
+ * instead of the 172 KB /logo-circular.png, and gives them explicit sizes.
  */
-export const ASSET_VERSION = '20261108a';
+export const ASSET_VERSION = '20261109a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use
