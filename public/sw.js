@@ -443,7 +443,11 @@
 // always available offline and on mobile networks; fixes AI gateway base URL
 // fallback; adds iOS Safari zoom prevention (16px textarea) and keyboard/viewport
 // stability for mobile chat panel; centers FAB icon; and adds drawer chat launcher.
-const CACHE_VERSION = 'v83';
+// v84 — performance pass: the chat widget's avatars now use the 1.8 KB
+// /images/icon-96.webp (already preloaded on every page) instead of the 172 KB
+// /logo-circular.png. chat-widget.js changed behind its unchanged pathname, so
+// this bump refetches it for returning visitors.
+const CACHE_VERSION = 'v84';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';

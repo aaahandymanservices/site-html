@@ -192,6 +192,22 @@ function optimizeFontsAndAssets(html) {
   );
 
   /*
+   * Point every header logo at the preloaded file. Pages outside
+   * STATIC_NAV_PAGES (404, emergency, commercial) keep their own header markup,
+   * which still requested the older icon.jpg Image CDN transform. The preload
+   * above is added to every page, so those pages fetched the logo twice: once
+   * as the preloaded WebP that nothing used, and again as the AVIF the <img>
+   * asked for. The 96px WebP is already sized for 2x screens at the logo's
+   * 48px box, so swapping the src alone lets the image reuse the preloaded
+   * response. Width, height and classes stay as they are, so the layout does
+   * not change.
+   */
+  html = html.replace(
+    /<img\s+src=["']?\/\.netlify\/images\?url=\/icon\.jpg[^"'\s>]*["']?\s+srcset="[^"]*"/gi,
+    `<img src="${ICON_IMAGE}"`,
+  );
+
+  /*
    * Preload the home hero's banner photograph on '/'.
    *
    * The hero background is the LCP image on the home page, and it lives in
