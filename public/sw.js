@@ -447,7 +447,13 @@
 // /images/icon-96.webp (already preloaded on every page) instead of the 172 KB
 // /logo-circular.png. chat-widget.js changed behind its unchanged pathname, so
 // this bump refetches it for returning visitors.
-const CACHE_VERSION = 'v84';
+// v85 — Lighthouse 100 pass: the brand webfonts moved to *-latin-2027.woff2
+// subsets (19.4 kB / 15.6 kB against 33.1 kB / 28.4 kB) and their @font-face
+// rules switched to font-display: optional so a slow first visit paints the
+// hero headline once instead of repainting it when the fonts land. The font
+// paths in PRECACHE_URLS and the stylesheet changed, so this bump evicts the
+// old fonts and stylesheet from every client's cache.
+const CACHE_VERSION = 'v85';
 const SHELL_CACHE = `aaa-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `aaa-assets-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -479,8 +485,8 @@ const PRECACHE_URLS = [
   '/js/photo-upload.js',
   '/js/chat-loader.js',
   '/js/chat-widget.js',
-  '/fonts/archivo-latin-2026.woff2',
-  '/fonts/roboto-latin-2026.woff2',
+  '/fonts/archivo-latin-2027.woff2',
+  '/fonts/roboto-latin-2027.woff2',
   '/fonts/fa-solid-900.woff2',
   // Two glyphs' worth of brand icons, and every page preloads it.
   '/fonts/fa-brands-400.woff2',
