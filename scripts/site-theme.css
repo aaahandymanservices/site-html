@@ -12,9 +12,20 @@
   font-style: normal;
   font-weight: 400 900;
   font-stretch: 100%;
-  font-display: swap;
-  src: url(/fonts/archivo-latin-2026.woff2) format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  /* optional instead of swap: the font gets a ~100ms block window, and if the
+     wire cannot deliver it in time the system fallback carries the whole visit.
+     That trade is deliberate. With swap, every late font re-renders every text
+     node, and that repaint is what the largest-contentful-paint clock waits on
+     -- the hero headline (the LCP element) lands at font-arrival time rather
+     than first-paint time. optional pins LCP to the first paint, and the metric
+     overrides below keep the fallback's box identical to Archivo's, so the
+     late-connection visit looks right without ever paying the reflow. */
+  font-display: optional;
+  src: url(/fonts/archivo-latin-2027.woff2) format("woff2");
+  /* Matched to the 2027 re-cut: the file carries exactly these codepoints
+     (ASCII plus the punctuation and symbols the site actually renders), so the
+     range keeps unused glyph lookups from ever reaching for the fallback. */
+  unicode-range: U+0020-007E, U+00A0, U+00B7, U+2013, U+2014, U+2018, U+2019, U+201C, U+201D, U+2022, U+2026, U+202A, U+202C, U+2605;
   /* Metric overrides tuned so the fallback (Roboto / system-ui) reserves the
      same box Archivo will fill, keeping the brand title and hero headline from
      reflowing on the font swap. Archivo is slightly wider than Roboto at the
@@ -40,9 +51,13 @@
   font-style: normal;
   font-weight: 400 900;
   font-stretch: 100%;
-  font-display: swap;
-  src: url(/fonts/roboto-latin-2026.woff2) format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  /* See the Archivo block above: optional pins LCP to the first paint instead
+     of the font-swap repaint, and the overrides below keep the fallback's box
+     aligned with Roboto's so no text moves when either font is in play. */
+  font-display: optional;
+  src: url(/fonts/roboto-latin-2027.woff2) format("woff2");
+  /* Matched to the 2027 re-cut's codepoint set. */
+  unicode-range: U+0020-007E, U+00A0, U+00B7, U+2013, U+2014, U+2018, U+2019, U+201C, U+201D, U+2022, U+2026, U+202A, U+202C, U+2605;
   /* Metric overrides keep the system-ui fallback's line box aligned with
      Roboto's so the body copy and nav links do not shift on the font swap. */
   ascent-override: 92%;

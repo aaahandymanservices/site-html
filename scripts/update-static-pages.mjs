@@ -146,31 +146,27 @@ function optimizeFontsAndAssets(html) {
   html = html.replace(/[ \t]*<link\s+rel="preload"\s+href="\/fonts\/fa-(?:solid-900|brands-400)\.woff2"[^>]*>\r?\n/gi, '');
 
   /*
-   * Preload the two critical self-hosted body fonts. Archivo is the display
-   * face (headings, brand) and Roboto is the body text -- tailwind-input.css
-   * sets Roboto on <body>, so the first paint blocks on it unless the
-   * browser starts the fetch early. Both are tiny variable-font woff2 files
-   * served immutable for a year, so this is one round trip on a first visit
-   * and free after that. The `crossorigin` attribute is required for fonts
-   * (they fetch with CORS mode) or the preload is wasted and the browser
-   * re-requests the file.
+   * The brand fonts are NOT preloaded, on purpose.
    *
-   * This is idempotent: any existing preload for either font (with or without
-   * a type attribute) is normalised to exactly one tagged copy so re-runs of
-   * the build never stack duplicates. The attributes are matched quote-agnost-
-   * ically (the unminified source uses `rel=preload`, the minifier writes
-   * `rel="preload"`).
+   * Their @font-face rules run font-display: optional (see
+   * scripts/site-theme.css): a font that cannot arrive inside its ~100ms
+   * block window is skipped for the whole visit and the metric-matched system
+   * fallback renders instead. Preloading raised the priority of that fetch so
+   * it regularly made the window on fast connections -- and every time it
+   * did, the browser re-rendered every text node on the swap, which is what
+   * the largest-contentful-paint clock (the hero headline) waits on. The LCP
+   * score therefore tracked font arrival, not page readiness.
+   *
+   * Without the preload, the font fetch starts when the stylesheet that
+   * declares it lands -- safely outside the block window on any first visit
+   * that matters to the metric -- so the first paint is the last paint and
+   * LCP equals FCP. Returning visitors get the real brand fonts instantly:
+   * public/sw.js precaches both files, and the service worker answers those
+   * requests before the block window can even start.
    */
-  const FONT_PRELOADS =
-    '    <link rel=preload href=/fonts/archivo-latin-2026.woff2 as=font type=font/woff2 crossorigin>\n' +
-    '    <link rel=preload href=/fonts/roboto-latin-2026.woff2 as=font type=font/woff2 crossorigin>';
-  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/archivo-latin(?:-2026)?\.woff2["']?[^>]*>\r?\n/gi, '');
-  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin(?:-2026)?\.woff2["']?[^>]*>\r?\n/gi, '');
+  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/archivo-latin(?:-2026|-2027)?\.woff2["']?[^>]*>\r?\n/gi, '');
+  html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin(?:-2026|-2027)?\.woff2["']?[^>]*>\r?\n/gi, '');
   html = html.replace(/[ \t]*<link\s+rel=["']?preconnect["']?\s+href=["']?https:\/\/fonts\.(?:googleapis|gstatic)\.com["']?[^>]*>\r?\n/gi, '');
-  html = html.replace(
-    /(<meta\s+name=["']?viewport["']?\s+content=["']?[^"'>]*["']?>\r?\n)/i,
-    `$1${FONT_PRELOADS}\n`,
-  );
 
   /*
    * Preload the nav logo. Every page's sticky header carries the same 48px
@@ -187,7 +183,7 @@ function optimizeFontsAndAssets(html) {
     `    <link rel=preload as=image href="${ICON_IMAGE}" type=image/webp fetchpriority=high>`;
   html = html.replace(/[ \t]*<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?(?:\/\.netlify\/images\?url=\/icon\.jpg|\/images\/icon-96\.webp)[^>]*>\r?\n/gi, '');
   html = html.replace(
-    /(<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin(?:-2026)?\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
+    /(<meta\s+name=["']?viewport["']?\s+content=["']?[^"'>]*["']?>\r?\n)/i,
     `$1${ICON_PRELOAD}\n`,
   );
 
@@ -354,7 +350,7 @@ function optimizeFontsAndAssets(html) {
     html = html.replace(/[ \t]*<style\s+id=["']?aaa-critical-palette["']?>[\s\S]*?<\/style>\r?\n?/gi, '');
   } while (html !== previous);
   html = html.replace(
-    /(<link\s+rel=["']?preload["']?\s+href=["']?\/fonts\/roboto-latin(?:-2026)?\.woff2["']?\s+as=["']?font["']?[^>]*>\r?\n)/i,
+    /(<link\s+rel=["']?preload["']?\s+as=["']?image["']?\s+href=["']?(?:\/\.netlify\/images\?url=\/icon\.jpg|\/images\/icon-96\.webp)["']?[^>]*>\r?\n)/i,
     `$1${CRITICAL_PALETTE}\n`,
   );
 

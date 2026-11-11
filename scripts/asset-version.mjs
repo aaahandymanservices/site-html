@@ -230,8 +230,17 @@
  * 20261109a — performance pass: chat-widget.js draws its header and message
  * avatars from the 1.8 KB /images/icon-96.webp every page already preloads,
  * instead of the 172 KB /logo-circular.png, and gives them explicit sizes.
+ *
+ * 20261111a — Lighthouse 100 pass: the two brand webfonts moved to
+ * *-latin-2027.woff2 subsets (ASCII plus the site's punctuation, 19.4 kB and
+ * 15.6 kB against 33.1 kB and 28.4 kB) and their @font-face rules switched
+ * from swap to optional so a slow first visit never repaints the hero
+ * headline on a font swap. site-theme.css changed behind its unchanged
+ * pathname and the preload links changed filenames, so this bump and the
+ * matching CACHE_VERSION move in public/sw.js refetch both for returning
+ * visitors.
  */
-export const ASSET_VERSION = '20261109a';
+export const ASSET_VERSION = '20261111a';
 
 /*
  * The icon stylesheet is generated from the glyphs the pages actually use
